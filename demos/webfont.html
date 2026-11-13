@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>웹폰트 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .ui-btn--sm { min-height: 34px; padding: 7px 12px; font-size: 13px; }
+  .shift { color: var(--danger); font-weight: 700; }
+  .noshift { color: #1f8a4c; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>웹폰트</b>
+  <button type="button" class="ui-btn ui-btn--ghost ui-btn--sm" id="go">느린 폰트 받아 보기</button>
+  <span style="font-size:13px;color:var(--fg-muted)" id="state">기다리는 중</span>
+</div>
+
+<div class="pad">
+  <div class="fo-stage">
+    <div class="fo-box" id="b1">
+      <b>font-display: block — 글이 안 보인다(FOIT)</b>
+      <p id="p1">정산 요청이 승인되면 영업일 기준 2일 안에 입금됩니다.</p>
+      <p class="fo-meter" id="m1" style="margin-top:6px"></p>
+    </div>
+    <div class="fo-box" id="b2">
+      <b>font-display: swap — 먼저 보이고 바뀐다(FOUT)</b>
+      <p id="p2">정산 요청이 승인되면 영업일 기준 2일 안에 입금됩니다.</p>
+      <p class="fo-meter" id="m2" style="margin-top:6px"></p>
+    </div>
+  </div>
+</div>
+
+<p class="hint">
+  웹폰트는 <b>받아 오는 동안 글이 어떻게 보일지</b>를 정해야 합니다. 두 가지 중 하나입니다 —
+  <b>FOIT</b>(안 보이다가 한 번에 뜸)와 <b>FOUT</b>(기본 글꼴로 먼저 보이고 바뀜).<br>
+  버튼을 눌러 보세요. 위 칸은 <b>글이 아예 안 보이고</b>, 아래 칸은 <b>보이다가 모양이 바뀝니다.</b>
+  바뀔 때 글줄 길이가 달라져 <b>레이아웃이 밀리는 것</b>도 재서 알려 줍니다.<br>
+  요즘은 <code>font-display: swap</code>(먼저 보여 주기)을 기본으로 씁니다. 글을 못 읽는 시간이 없는 쪽이 낫고,
+  밀림은 <b>대체 글꼴의 크기를 맞춰</b>(<code>size-adjust</code>) 줄일 수 있습니다.<br>
+  <b>한글 폰트는 파일이 큽니다.</b> 영문은 수백 글자지만 한글은 완성형만 1만 1172자라, 그대로 받으면
+  몇 MB 가 됩니다 — <b>쪼개서 필요한 조각만</b> 받는 방식(서브셋 · unicode-range)이 거의 필수입니다.
+</p>
+
+<script>
+(function () {
+  var b1 = document.getElementById('b1'), b2 = document.getElementById('b2');
+  var p1 = document.getElementById('p1'), p2 = document.getElementById('p2');
+  var m1 = document.getElementById('m1'), m2 = document.getElementById('m2');
+  var state = document.getElementById('state');
+  var t0 = 0, w2before = 0;
+
+  function report() {
+    m1.innerHTML = '보이기까지 <b>' + ((performance.now() - t0) / 1000).toFixed(1) + '초</b> — 그동안 아무것도 못 읽습니다';
+    var w2 = p2.getBoundingClientRect().width;
+    var h2 = p2.getBoundingClientRect().height;
+    m2.innerHTML = '글줄 높이 ' + Math.round(h2) + 'px · 바뀌며 밀린 폭 ' +
+      (Math.abs(w2 - w2before) < 1
+        ? '<span class="noshift">0px</span>'
+        : '<span class="shift">' + Math.abs(w2 - w2before).toFixed(1) + 'px</span>');
+  }
+
+  document.getElementById('go').addEventListener('click', function () {
+    t0 = performance.now();
+    state.textContent = '받는 중…';
+    b1.classList.add('is-foit');      // FOIT — 글을 숨긴다
+    b2.classList.add('is-fout');      // FOUT — 대체 글꼴로 먼저 보인다
+    w2before = p2.getBoundingClientRect().width;
+    m1.textContent = '…'; m2.textContent = '…';
+    setTimeout(function () {
+      b1.classList.remove('is-foit');
+      b2.classList.remove('is-fout');
+      state.textContent = '다 받았습니다';
+      requestAnimationFrame(report);
+    }, 2200);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>말줄임 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .cap { font-size: 11.5px; color: var(--fg-muted); display: block; margin-top: 6px; }
+  .cap b { color: var(--fg); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .row { display: flex; gap: var(--s4); flex-wrap: wrap; align-items: flex-start; }
+  .meter { font-family: var(--mono); font-size: 12px; color: var(--fg-muted); }
+  .meter b { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>말줄임</b>
+  <label>줄 수 <input type="range" id="n" class="sld" min="1" max="4" value="2" style="width:90px"><output id="no">2</output></label>
+</div>
+
+<div class="pad">
+  <div class="row">
+    <div>
+      <div class="tr-box is-one" id="one" title="환불 확인 요청 — 카드 승인 취소가 늦어져 고객이 두 번 문의했고 담당자가 바뀌면서 한 번 더 늦어진 건입니다">환불 확인 요청 — 카드 승인 취소가 늦어져 고객이 두 번 문의했고 담당자가 바뀌면서 한 번 더 늦어진 건입니다</div>
+      <span class="cap"><b>한 줄</b> · <code>text-overflow: ellipsis</code><br>마우스를 올리면 전체가 뜹니다(<code>title</code>)</span>
+    </div>
+    <div>
+      <div class="tr-box is-clamp" id="clamp">환불 확인 요청 — 카드 승인 취소가 늦어져 고객이 두 번 문의했고 담당자가 바뀌면서 한 번 더 늦어진 건입니다. 지금은 은행 점검 시간이라 확인이 더 늦어지고 있습니다.</div>
+      <span class="cap"><b>여러 줄</b> · <code>-webkit-line-clamp</code><br>끝에 <code>…</code>이 붙습니다</span>
+    </div>
+    <div>
+      <div class="tr-box is-fade">환불 확인 요청 — 카드 승인 취소가 늦어져 고객이 두 번 문의했고 담당자가 바뀌면서 한 번 더 늦어진 건입니다. 지금은 은행 점검 시간이라 확인이 더 늦어지고 있습니다.</div>
+      <span class="cap"><b>흐려서 끊기</b> · 그라데이션<br><code>…</code>이 없어 <b>더 있다</b>는 느낌만 준다</span>
+    </div>
+  </div>
+
+  <div class="ty">
+    <span class="ty__tag">잘린 것을 어떻게 알려 주나</span>
+    <p class="meter" id="meter"></p>
+  </div>
+</div>
+
+<p class="hint">
+  말줄임은 <b>정보를 지우는 일</b>입니다. 그래서 '어디서 자를지'보다 <b>'전체를 어떻게 보게 할지'</b>가 먼저입니다 —
+  <code>title</code> 속성, 툴팁, 상세 화면 중 하나는 있어야 합니다.<br>
+  한 줄은 <code>text-overflow: ellipsis</code> 세 줄짜리 세트로, 여러 줄은 <code>-webkit-line-clamp</code>로 합니다.
+  줄 수 막대를 움직여 보세요.<br>
+  <b>잘렸는지 아닌지를 코드로 알 수 있습니다</b> — <code>scrollWidth &gt; clientWidth</code>(한 줄),
+  <code>scrollHeight &gt; clientHeight</code>(여러 줄). 그래서 <b>잘렸을 때만</b> 툴팁을 붙이는 것이 가능합니다.
+  안 잘렸는데 툴팁이 뜨면 거슬립니다.
+</p>
+
+<script>
+(function () {
+  var clamp = document.getElementById('clamp'), one = document.getElementById('one');
+  var meter = document.getElementById('meter');
+
+  function draw() {
+    var n = +document.getElementById('n').value;
+    document.getElementById('no').textContent = n;
+    clamp.style.webkitLineClamp = String(n);
+    requestAnimationFrame(function () {
+      var oneCut = one.scrollWidth > one.clientWidth + 1;
+      var clampCut = clamp.scrollHeight > clamp.clientHeight + 1;
+      meter.innerHTML =
+        '한 줄 — scrollWidth <b>' + one.scrollWidth + '</b> / clientWidth <b>' + one.clientWidth + '</b> → ' +
+        (oneCut ? '잘림 <b>툴팁을 붙인다</b>' : '안 잘림 툴팁 없음') + '<br>' +
+        '여러 줄 — scrollHeight <b>' + clamp.scrollHeight + '</b> / clientHeight <b>' + clamp.clientHeight + '</b> → ' +
+        (clampCut ? '잘림 <b>더 보기를 붙인다</b>' : '안 잘림 그대로 둔다');
+    });
+  }
+  document.getElementById('n').addEventListener('input', draw);
+  window.addEventListener('resize', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자간 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .meter { font-family: var(--mono); font-size: 12px; color: var(--fg-muted); }
+  .meter b { color: var(--accent); }
+  .bad { color: var(--danger); font-weight: 700; }
+  .good { color: #1f8a4c; font-weight: 700; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>자간</b>
+  <label>letter-spacing <input type="range" id="ls" class="sld" min="-60" max="120" value="0" style="width:150px"><output id="lso">0</output>em/1000</label>
+</div>
+
+<div class="pad">
+  <div class="ty">
+    <span class="ty__tag">큰 제목 · 28px</span>
+    <p id="big" style="font-size:28px;font-weight:800;line-height:1.3">정산이 확정되었습니다</p>
+  </div>
+  <div class="ty">
+    <span class="ty__tag">본문 · 15px</span>
+    <p id="body" style="font-size:15px;line-height:1.8">자간은 글자와 글자 사이의 거리입니다. 본문에서는 거의 건드리지 않는 것이 맞습니다.</p>
+  </div>
+  <div class="ty">
+    <span class="ty__tag">작은 라벨 · 11px 대문자</span>
+    <p id="label" style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--fg-muted)">THIS WEEK REVENUE</p>
+  </div>
+  <p class="meter" id="meter"></p>
+</div>
+
+<p class="hint">
+  자간은 <b>본문에서 거의 건드리지 않는 것</b>이 맞습니다. 글꼴 디자이너가 이미 맞춰 둔 값이고,
+  한글은 특히 조금만 벌려도 <b>글자가 흩어져</b> 읽기 힘들어집니다.<br>
+  <b>손대는 자리는 둘뿐입니다.</b> ① 아주 큰 제목은 조금 좁혀서(<code>-0.02em</code>) 덩어리로 보이게 하고,
+  ② 작은 대문자 라벨은 조금 벌려서(<code>0.05em</code>) 글자가 붙어 보이지 않게 합니다.<br>
+  막대를 양 끝으로 밀어 보세요. 음수로 가면 <b>글자가 서로 닿고</b>, 양수로 가면 낱글자로 흩어집니다.
+  단위는 <code>em</code>을 씁니다 — 글자 크기가 바뀌면 자간도 같이 따라와야 하기 때문입니다.
+</p>
+
+<script>
+(function () {
+  var meter = document.getElementById('meter');
+  function draw() {
+    var v = +document.getElementById('ls').value / 1000;
+    document.getElementById('lso').textContent = (v * 1000).toFixed(0);
+    ['big', 'body', 'label'].forEach(function (id) {
+      document.getElementById(id).style.letterSpacing = v + 'em';
+    });
+    requestAnimationFrame(function () {
+      var w = document.getElementById('body').getBoundingClientRect().width;
+      var tip = v < -0.03 ? '<span class="bad">너무 좁습니다 — 글자가 닿습니다</span>'
+              : v > 0.06 ? '<span class="bad">너무 넓습니다 — 낱글자로 흩어집니다</span>'
+              : Math.abs(v) < 0.005 ? '<span class="good">기본값 — 본문은 이대로가 맞습니다</span>'
+              : '<span style="color:var(--warn);font-weight:700">제목·라벨에만 쓰는 범위</span>';
+      meter.innerHTML = 'letter-spacing <b>' + v.toFixed(3) + 'em</b> · ' + tip;
+    });
+  }
+  document.getElementById('ls').addEventListener('input', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

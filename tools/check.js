@@ -212,6 +212,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     '2부': ['color', 'dark', 'typescale', 'spacing', 'elevation', 'zindex'],
     '5부': ['card', 'listitem', 'avatar', 'badge', 'chip', 'stat', 'timeline', 'rating'],
     '6부': ['modal', 'dialog', 'sheet', 'drawer', 'popover', 'tooltip', 'toast'],
+    '3부': ['weight', 'lineheight', 'letterspacing', 'hangul', 'numerals', 'truncate', 'webfont', 'hierarchy'],
     '4부': ['field', 'select', 'combobox', 'checkbox', 'radio', 'switch', 'segmented', 'slider'],
     '7부': ['appbar', 'sidebar', 'tabs', 'breadcrumb', 'pagination', 'infinite', 'bottomnav'],
     '8부': ['spinner', 'skeleton', 'progress', 'optimistic', 'empty', 'error'],
@@ -1033,6 +1034,86 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   if (!(await page.$eval('#bottom', e => parseFloat(getComputedStyle(e).paddingBottom)) > 15))
     fail.push('세이프: 적용해도 탭바가 안 올라온다');
   if (!(await page.textContent('#res')).includes('안전한 자리')) fail.push('세이프: 안전해졌다고 안 알려 준다');
+  await page.close();
+
+  // 3부 글자 데모 여덟 장
+  // 한글 조판 — keep-all 은 어절을 지키고, break-all 은 쪼갠다
+  page = await demo('hangul', 900, 860);
+  if (await page.$eval('.kr--keep', e => getComputedStyle(e).wordBreak) !== 'keep-all') fail.push('한글: keep-all 이 아니다');
+  await page.locator('#w').fill('150'); await page.dispatchEvent('#w', 'input'); await page.waitForTimeout(300);
+  if (!(await page.textContent('#r2')).includes('안 쪼개짐')) fail.push('한글: keep-all 인데 어절이 쪼개진다');
+  if (!(await page.textContent('#r3')).includes('군데 쪼개짐')) fail.push('한글: break-all 인데 안 쪼개진다 (보여주려는 결과)');
+  if (!(await page.textContent('#r4')).includes('넘침')) fail.push('한글: keep-all 만으로 긴 영문이 안 넘친다 (보여주려는 결과)');
+  if (!(await page.textContent('#r5')).includes('안 넘침')) fail.push('한글: overflow-wrap 을 함께 써도 넘친다');
+  await page.close();
+
+  // 행간 — 배수라 글자가 커지면 따라 커진다
+  page = await demo('lineheight', 900, 760);
+  const lhOf = () => page.$eval('#p', e => parseFloat(getComputedStyle(e).lineHeight));
+  const lh0 = await lhOf();
+  await page.locator('#fs').fill('24'); await page.dispatchEvent('#fs', 'input'); await page.waitForTimeout(150);
+  if (!(await lhOf() > lh0 + 5)) fail.push('행간: 배수인데 글자를 키워도 줄 높이가 그대로다');
+  await page.locator('#lh').fill('110'); await page.dispatchEvent('#lh', 'input'); await page.waitForTimeout(150);
+  if (!(await page.textContent('#meter')).includes('너무 좁습니다')) fail.push('행간: 좁다고 안 알려 준다');
+  await page.locator('#lh').fill('175'); await page.dispatchEvent('#lh', 'input'); await page.waitForTimeout(150);
+  if (!(await page.textContent('#meter')).includes('본문에 알맞습니다')) fail.push('행간: 본문 범위를 안 알려 준다');
+  await page.close();
+
+  // 글자 굵기 — 실제로 다른 단이 몇 개인지 센다
+  page = await demo('weight', 900, 760);
+  if (await page.locator('.wt-row').count() !== 3) fail.push('굵기: 쓰는 굵기가 셋이 아니다');
+  await page.locator('#only3').uncheck(); await page.waitForTimeout(300);
+  if (await page.locator('.wt-row').count() !== 9) fail.push('굵기: 전체가 아홉이 아니다');
+  if (!/실제로 다른 것은 \d+개/.test(await page.textContent('#note'))) fail.push('굵기: 진짜 단 수를 안 센다');
+  await page.close();
+
+  // 숫자 꼴 — 글꼴마다 tabular-nums 가 먹는지 재서 보여 준다
+  page = await demo('numerals', 900, 860);
+  if (await page.locator('#ftab tbody tr').count() !== 3) fail.push('숫자: 글꼴 셋을 안 잰다');
+  const vs = await page.$$eval('#ftab tbody tr td:last-child', els => els.map(e => e.textContent));
+  if (!vs.some(v => v.includes('기능 없음'))) fail.push('숫자: 기능 없는 글꼴을 못 가려낸다');
+  if (!vs.some(v => v.includes('고름'))) fail.push('숫자: 고른 글꼴을 못 가려낸다');
+  await page.selectOption('#font', 'var(--mono)'); await page.waitForTimeout(2600);
+  if (!(await page.textContent('#meter')).includes('안 떨립니다')) fail.push('숫자: 등폭 글꼴인데 떨린다');
+  await page.close();
+
+  // 자간 — 범위를 판정해 준다
+  page = await demo('letterspacing', 900, 760);
+  if (!(await page.textContent('#meter')).includes('기본값')) fail.push('자간: 0 을 기본값이라고 안 알려 준다');
+  await page.locator('#ls').fill('100'); await page.dispatchEvent('#ls', 'input'); await page.waitForTimeout(150);
+  if (!(await page.textContent('#meter')).includes('너무 넓습니다')) fail.push('자간: 넓다고 안 알려 준다');
+  if (!(await page.$eval('#body', e => parseFloat(getComputedStyle(e).letterSpacing)) > 0.5)) fail.push('자간: 실제로 안 벌어진다');
+  await page.close();
+
+  // 말줄임 — 잘렸는지 재서 알려 준다
+  page = await demo('truncate', 900, 820);
+  if (!await page.$eval('#one', e => e.scrollWidth > e.clientWidth + 1)) fail.push('말줄임: 한 줄이 안 잘린다');
+  if (!await page.getAttribute('#one', 'title')) fail.push('말줄임: 잘린 글에 title 이 없다');
+  if (!await page.$eval('#clamp', e => e.scrollHeight > e.clientHeight + 1)) fail.push('말줄임: 여러 줄이 안 잘린다');
+  const ch2 = await page.$eval('#clamp', e => e.clientHeight);
+  await page.locator('#n').fill('4'); await page.dispatchEvent('#n', 'input'); await page.waitForTimeout(200);
+  if (!(await page.$eval('#clamp', e => e.clientHeight) > ch2)) fail.push('말줄임: 줄 수를 늘려도 안 높아진다');
+  await page.close();
+
+  // 웹폰트 — FOIT 와 FOUT 를 둘 다 보여 준다
+  page = await demo('webfont', 900, 760);
+  await page.locator('#go').click(); await page.waitForTimeout(500);
+  if (await page.$eval('#p1', e => getComputedStyle(e).visibility) !== 'hidden') fail.push('웹폰트: FOIT 인데 글이 보인다');
+  if (!await page.$eval('#p2', e => getComputedStyle(e).fontFamily.includes('Georgia'))) fail.push('웹폰트: FOUT 인데 대체 글꼴이 아니다');
+  await page.waitForTimeout(2400);
+  if (await page.$eval('#p1', e => getComputedStyle(e).visibility) !== 'visible') fail.push('웹폰트: 다 받았는데 글이 안 보인다');
+  if (!(await page.textContent('#m1')).includes('초')) fail.push('웹폰트: 못 읽은 시간을 안 잰다');
+  await page.close();
+
+  // 글자 위계 — 도구를 빼면 층이 줄어든다
+  page = await demo('hierarchy', 900, 760);
+  const layers = async () => +(await page.textContent('#meter')).match(/구별되는 층 (\d+)/)[1];
+  const L0 = await layers();
+  if (!(L0 >= 5)) fail.push(`위계: 셋을 다 써도 층이 ${L0}개뿐이다`);
+  await page.locator('#color').uncheck(); await page.waitForTimeout(200);
+  if (!(await layers() < L0)) fail.push('위계: 색을 꺼도 층이 안 줄어든다');
+  await page.locator('#color').check(); await page.locator('#flat').check(); await page.waitForTimeout(200);
+  if (await layers() !== 1) fail.push('위계: 전부 같게 했는데 층이 하나가 아니다');
   await page.close();
 
   await browser.close();

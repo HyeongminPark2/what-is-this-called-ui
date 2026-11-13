@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>행간 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .meter { font-family: var(--mono); font-size: 12px; }
+  .meter b { color: var(--accent); }
+  .bad { color: var(--danger); font-weight: 700; }
+  .good { color: #1f8a4c; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>행간</b>
+  <label>line-height <input type="range" id="lh" class="sld" min="100" max="240" value="175" style="width:140px"><output id="lho">1.75</output></label>
+  <label>글자 크기 <input type="range" id="fs" class="sld" min="12" max="30" value="15" style="width:100px"><output id="fso">15</output>px</label>
+  <label><input type="checkbox" id="grid"> 줄 격자 보기</label>
+</div>
+
+<div class="pad">
+  <div class="ty lh-mark" id="mark">
+    <p id="p">행간은 글줄 사이의 거리입니다. 너무 좁으면 윗줄과 아랫줄이 엉켜 글이 한 덩어리로 보이고,
+    너무 넓으면 줄들이 따로 놀아 한 문단으로 안 읽힙니다. 한글은 받침이 있어 글자가 아래로 길기 때문에
+    영문과 같은 값을 쓰면 답답해 보입니다. 그래서 같은 크기라도 한글 쪽을 조금 더 넓게 잡습니다.</p>
+  </div>
+  <p class="meter" id="meter"></p>
+</div>
+
+<p class="hint">
+  행간은 <b>배수</b>로 적습니다 — <code>line-height: 1.75</code>처럼 단위 없이 쓰면
+  글자 크기가 바뀌어도 비율이 따라옵니다. <code>28px</code>처럼 못 박으면 글자만 커졌을 때 줄이 겹칩니다.
+  글자 크기 막대를 움직여 보세요.<br>
+  <b>큰 글자는 좁게, 작은 글자는 넓게</b>가 원칙입니다. 제목 1.2~1.3, 본문 1.6~1.8쯤입니다 —
+  한글은 받침 때문에 글자가 아래로 길어서 <b>영문 기준보다 한 단계 넓게</b> 봅니다.<br>
+  <b>줄 격자 보기</b>를 켜면 줄이 어디에 앉는지 보입니다. 행간이 글자 크기보다 작아지면(1.0 아래)
+  윗줄과 아랫줄이 실제로 <b>겹칩니다</b>.
+</p>
+
+<script>
+(function () {
+  var p = document.getElementById('p'), mark = document.getElementById('mark'), meter = document.getElementById('meter');
+
+  function draw() {
+    var lh = +document.getElementById('lh').value / 100;
+    var fs = +document.getElementById('fs').value;
+    document.getElementById('lho').textContent = lh.toFixed(2);
+    document.getElementById('fso').textContent = fs;
+    p.style.fontSize = fs + 'px';
+    p.style.lineHeight = String(lh);
+    mark.style.setProperty('--lh', (fs * lh) + 'px');
+    mark.classList.toggle('is-grid', document.getElementById('grid').checked);
+
+    requestAnimationFrame(function () {
+      var gapPx = fs * lh - fs;      // 글자 높이를 뺀 실제 틈
+      var ok = lh >= 1.5 && lh <= 1.9;
+      meter.innerHTML = '줄 높이 <b>' + Math.round(fs * lh) + 'px</b> · 글자 사이 틈 <b>' +
+        Math.round(gapPx) + 'px</b> · ' +
+        (lh < 1.2 ? '<span class="bad">너무 좁습니다 — 줄이 엉깁니다</span>'
+         : lh > 2.1 ? '<span class="bad">너무 넓습니다 — 한 문단으로 안 읽힙니다</span>'
+         : ok ? '<span class="good">본문에 알맞습니다</span>'
+         : '<span style="color:var(--warn);font-weight:700">제목에 알맞은 범위</span>');
+    });
+  }
+  ['lh', 'fs'].forEach(function (id) { document.getElementById(id).addEventListener('input', draw); });
+  document.getElementById('grid').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

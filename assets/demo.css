@@ -1070,3 +1070,62 @@ body > .hint, body > .log, body > .ratio {
 .safe.is-safe .safe__bar--top { padding-top: 30px; }
 .safe.is-safe .safe__bar--bottom { padding-bottom: 24px; }
 .safe__body { position: absolute; left: 0; right: 0; top: 0; bottom: 0; padding: 36px 10px; font-size: 10.5px; color: var(--fg-muted); line-height: 1.9; }
+
+/* ══ 3부 글자 ══════════════════════════════════════════ */
+
+.ty { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: var(--s4); }
+.ty p { margin: 0; max-width: none; word-break: keep-all; }
+.ty + .ty { margin-top: var(--s3); }
+.ty__tag { font-family: var(--mono); font-size: 11px; color: var(--accent); display: block; margin-bottom: 6px; }
+
+/* 굵기 */
+.wt-row { display: flex; align-items: baseline; gap: var(--s4); padding: 8px 0; border-bottom: 1px solid var(--line); }
+.wt-row .n { font-family: var(--mono); font-size: 11.5px; color: var(--fg-muted); width: 86px; flex: none; }
+.wt-row .s { flex: 1; min-width: 0; font-size: 17px; }
+.wt-row .u { font-size: 11.5px; color: var(--fg-faint); flex: none; }
+
+/* 행간 · 자간 */
+.lh-demo p { font-size: 15px; }
+.lh-mark { position: relative; }
+.lh-mark.is-grid { background-image: repeating-linear-gradient(to bottom, color-mix(in srgb, var(--accent) 16%, transparent) 0 1px, transparent 1px var(--lh, 26px)); }
+
+/* 한글 조판 */
+.kr { font-size: 15px; line-height: 1.8; }
+.kr--break { word-break: break-all; }
+.kr--keep { word-break: keep-all; }
+.kr--normal { word-break: normal; overflow-wrap: anywhere; }
+.kr-box { width: 100%; max-width: 230px; border: 1px dashed var(--line-strong); border-radius: var(--r1); padding: var(--s3); background: var(--surface); }
+
+/* 숫자 꼴 */
+.num-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.num-table th, .num-table td { padding: 5px 8px; border-bottom: 1px solid var(--line); text-align: right; }
+.num-table th:first-child, .num-table td:first-child { text-align: left; color: var(--fg-muted); font-weight: 500; }
+.num-table.is-tab td, .num-table.is-tab th { font-variant-numeric: tabular-nums; }
+.num-table th { font-size: 11.5px; color: var(--fg-muted); font-weight: 600; }
+
+/* 말줄임 */
+.tr-box { width: 100%; max-width: 240px; border: 1px solid var(--line); border-radius: var(--r1); background: var(--surface); padding: 9px 11px; font-size: 13.5px; line-height: 1.7; }
+.tr-box.is-one { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.tr-box.is-clamp { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.tr-box.is-fade { position: relative; max-height: 48px; overflow: hidden; }
+.tr-box.is-fade::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22px; background: linear-gradient(transparent, var(--surface)); }
+
+/* 웹폰트 */
+.fo-stage { display: grid; gap: var(--s3); }
+.fo-box { border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); padding: var(--s3); position: relative; overflow: hidden; }
+.fo-box b { display: block; font-size: 12px; margin-bottom: 5px; }
+.fo-box p { margin: 0; font-size: 15px; line-height: 1.7; max-width: none; }
+.fo-box.is-foit p { visibility: hidden; }
+.fo-box.is-fout p { font-family: Georgia, "Times New Roman", serif; letter-spacing: .01em; }
+.fo-meter { font-family: var(--mono); font-size: 11.5px; color: var(--fg-muted); }
+.fo-meter b { color: var(--accent); }
+
+/* 글자 위계 */
+.hi { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: var(--s4); display: grid; gap: 5px; }
+.hi .t { font-size: 19px; font-weight: 800; line-height: 1.3; }
+.hi .s { font-size: 13.5px; color: var(--fg-muted); }
+.hi .b { font-size: 14px; line-height: 1.75; }
+.hi .m { font-size: 11.5px; color: var(--fg-faint); letter-spacing: .04em; }
+.hi.is-flat .t, .hi.is-flat .s, .hi.is-flat .b, .hi.is-flat .m {
+  font-size: 14px; font-weight: 500; color: var(--fg); letter-spacing: normal;
+}

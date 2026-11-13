@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>숫자 꼴 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .live { font-size: 24px; font-weight: 800; }
+  .live.is-tab { font-variant-numeric: tabular-nums; }
+  .meter { font-family: var(--mono); font-size: 12px; color: var(--fg-muted); }
+  .meter b { color: var(--accent); }
+  .bad { color: var(--danger); font-weight: 700; }
+  .good { color: #1f8a4c; font-weight: 700; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .ftab { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .ftab th, .ftab td { padding: 6px 8px; border-bottom: 1px solid var(--line); text-align: right; }
+  .ftab th:first-child, .ftab td:first-child { text-align: left; }
+  .ftab th { font-size: 11.5px; color: var(--fg-muted); font-weight: 600; }
+  .ftab td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>숫자 꼴</b>
+  <label>글꼴
+    <select class="sel" id="font" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+      <option value="">본문 글꼴</option>
+      <option value='Georgia, "Times New Roman", serif' selected>세리프 글꼴</option>
+      <option value="var(--mono)">등폭 글꼴</option>
+    </select></label>
+  <label><input type="checkbox" id="tab" checked> <code>tabular-nums</code></label>
+</div>
+
+<div class="pad">
+  <div class="ty">
+    <span class="ty__tag">1초마다 바뀌는 숫자</span>
+    <div class="live is-tab" id="live">₩1,284,000</div>
+    <p class="meter" id="meter" style="margin-top:6px"></p>
+  </div>
+
+  <div class="ty">
+    <span class="ty__tag">글꼴마다 재 본 결과 — 같은 자릿수 다섯 값의 너비 차이</span>
+    <table class="ftab" id="ftab">
+      <thead><tr><th>글꼴</th><th>기본</th><th>tabular-nums</th><th>판정</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <div class="ty">
+    <span class="ty__tag">표 안에서</span>
+    <table class="num-table is-tab" id="tbl">
+      <thead><tr><th>가맹점</th><th>매출</th><th>수수료</th></tr></thead>
+      <tbody>
+        <tr><td>모란상회</td><td>1,284,000</td><td>38,520</td></tr>
+        <tr><td>한빛아웃도어</td><td>9,827,500</td><td>294,825</td></tr>
+        <tr><td>새벽상사</td><td>1,111,100</td><td>33,333</td></tr>
+        <tr><td>가온마켓</td><td>7,777,777</td><td>233,333</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<p class="hint">
+  세로로 쌓이는 표나 1초마다 바뀌는 숫자에서는 <b>자릿수가 흔들리면</b> 읽을 수가 없습니다.
+  막는 방법이 <code>font-variant-numeric: tabular-nums</code>입니다.<br>
+  <b>그런데 이 속성은 글꼴에 그 기능이 있을 때만 먹습니다.</b> 위 표가 글꼴마다 직접 재서
+  '켜도 안 바뀜'인지 '켜니 고르게 됨'인지 알려 줍니다 — 세리프 계열에는 대개 그 기능이 없어
+  <b>켜도 아무 일이 안 일어납니다.</b><br>
+  그래서 금액·시간·카운트다운에는 둘 중 하나입니다 — <b>그 기능이 있는 글꼴을 쓰거나</b>,
+  숫자만 <b>등폭 글꼴</b>로 바꾸거나. 한글 글꼴은 이 기능이 없는 경우가 많으니 <b>반드시 재 보고</b> 정하세요.
+</p>
+
+<script>
+(function () {
+  var live = document.getElementById('live'), meter = document.getElementById('meter');
+  var VALUES = ['₩1,284,000', '₩9,827,500', '₩1,111,111', '₩7,777,777', '₩4,011,100'];
+  var i = 0, maxJitter = 0, lastW = null;
+
+  function textW(el) {
+    var r = document.createRange(); r.selectNodeContents(el);
+    return r.getBoundingClientRect().width;   // 블록이 아니라 글자가 찬 너비
+  }
+
+  function tick() {
+    live.textContent = VALUES[i % VALUES.length]; i++;
+    requestAnimationFrame(function () {
+      var w = textW(live);
+      if (lastW !== null) maxJitter = Math.max(maxJitter, Math.abs(w - lastW));
+      lastW = w;
+      meter.innerHTML = '글자 너비 <b>' + w.toFixed(1) + 'px</b> · 지금까지 흔들린 폭 ' +
+        (maxJitter < 0.5
+          ? '<span class="good">0px — 안 떨립니다</span>'
+          : '<span class="bad">' + maxJitter.toFixed(1) + 'px</span>');
+    });
+  }
+  setInterval(tick, 900); tick();
+
+  function apply() {
+    var f = document.getElementById('font').value;
+    live.style.fontFamily = f;
+    live.classList.toggle('is-tab', document.getElementById('tab').checked);
+    document.getElementById('tbl').classList.toggle('is-tab', document.getElementById('tab').checked);
+    maxJitter = 0; lastW = null;
+  }
+  document.getElementById('tab').addEventListener('change', apply);
+  document.getElementById('font').addEventListener('change', apply);
+  apply();
+
+  // 글꼴마다 '기능이 실제로 있는지'를 재서 표로 보여 준다
+  (function () {
+    var FONTS = [
+      ['본문 글꼴', ''],
+      ['세리프 글꼴', 'Georgia, "Times New Roman", serif'],
+      ['등폭 글꼴', 'ui-monospace, SFMono-Regular, Menlo, Consolas, monospace']
+    ];
+    var probe = document.createElement('span');
+    probe.style.cssText = 'position:absolute;visibility:hidden;font-size:40px;white-space:pre';
+    document.body.appendChild(probe);
+
+    function spread(family, tabular) {
+      probe.style.fontFamily = family;
+      probe.style.fontVariantNumeric = tabular ? 'tabular-nums' : 'normal';
+      var ws = VALUES.map(function (v) { probe.textContent = v; return probe.getBoundingClientRect().width; });
+      return Math.max.apply(null, ws) - Math.min.apply(null, ws);
+    }
+
+    document.querySelector('#ftab tbody').innerHTML = FONTS.map(function (f) {
+      var off = spread(f[1], false), on = spread(f[1], true);
+      var verdict = on < 0.5
+        ? (off < 0.5 ? '<span class="good">원래 고름</span>' : '<span class="good">켜니 고르게 됨</span>')
+        : '<span class="bad">켜도 안 바뀜 — 기능 없음</span>';
+      return '<tr><td>' + f[0] + '</td><td class="n">' + off.toFixed(1) + 'px</td>' +
+             '<td class="n">' + on.toFixed(1) + 'px</td><td>' + verdict + '</td></tr>';
+    }).join('');
+    probe.remove();
+  })();
+})();
+</script>
+</body>
+</html>

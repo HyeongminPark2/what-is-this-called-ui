@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>글자 굵기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .warn { color: var(--danger); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>글자 굵기</b>
+  <label><input type="checkbox" id="only3" checked> 쓰는 굵기만 보기(400·500·700)</label>
+</div>
+
+<div class="pad">
+  <div id="rows"></div>
+  <p class="bx-ruler" id="note" style="margin-top:var(--s4)"></p>
+</div>
+
+<p class="hint">
+  굵기는 100부터 900까지 아홉 단이 있지만, <b>실제로 받아 온 파일이 없으면 브라우저가 흉내</b>를 냅니다 —
+  가짜 굵게(synthetic bold)라고 하고, 글자가 뭉개지거나 단마다 차이가 안 납니다.
+  위에서 <b>실제로 다르게 보이는 단이 몇 개인지</b> 재서 알려 줍니다.<br>
+  <b>세 단이면 거의 충분합니다</b> — 본문 400, 살짝 강조 500, 제목·버튼 700.
+  굵기를 하나 늘리면 <b>폰트 파일이 한 벌 더</b> 따라오니 공짜가 아닙니다.<br>
+  <b>굵기는 크기보다 조용한 강조</b>입니다. 같은 크기에서 400 → 700으로만 바꿔도 위계가 생기고,
+  줄 높이가 안 바뀌어서 레이아웃이 흔들리지 않습니다.
+</p>
+
+<script>
+(function () {
+  var ALL = [
+    [100, 'Thin'], [200, 'ExtraLight'], [300, 'Light'], [400, 'Regular'],
+    [500, 'Medium'], [600, 'SemiBold'], [700, 'Bold'], [800, 'ExtraBold'], [900, 'Black']
+  ];
+  var USED = [400, 500, 700];
+  var rows = document.getElementById('rows'), note = document.getElementById('note');
+
+  function draw() {
+    var only = document.getElementById('only3').checked;
+    var list = only ? ALL.filter(function (w) { return USED.indexOf(w[0]) >= 0; }) : ALL;
+    rows.innerHTML = list.map(function (w) {
+      return '<div class="wt-row"><span class="n">' + w[0] + ' · ' + w[1] + '</span>' +
+        '<span class="s" style="font-weight:' + w[0] + '" data-w="' + w[0] + '">정산이 확정되었습니다 Settled</span>' +
+        '<span class="u" data-u="' + w[0] + '"></span></div>';
+    }).join('');
+
+    requestAnimationFrame(function () {
+      // 실제로 너비가 다른지 재서 '진짜 굵기'를 가려낸다
+      var seen = {}, distinct = 0;
+      var range = document.createRange();
+      rows.querySelectorAll('[data-w]').forEach(function (el) {
+        // 상자가 아니라 글자가 실제로 차지한 너비를 잰다(.s 는 flex:1 이라 상자가 다 같다)
+        range.selectNodeContents(el);
+        var w = Math.round(range.getBoundingClientRect().width * 10) / 10;
+        if (seen[w] === undefined) { seen[w] = el.dataset.w; distinct++; el.nextElementSibling.textContent = ''; }
+        else el.nextElementSibling.textContent = '≒ ' + seen[w] + ' 과 같음';
+      });
+      note.innerHTML = '보이는 단 ' + list.length + '개 중 <b>실제로 다른 것은 ' + distinct + '개</b>' +
+        (distinct < list.length ? ' <span class="warn">— 나머지는 브라우저가 흉내 낸 것</span>' : '');
+    });
+  }
+  document.getElementById('only3').addEventListener('change', draw);
+  draw();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+})();
+</script>
+</body>
+</html>
