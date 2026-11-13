@@ -16,7 +16,7 @@
 .mapfig__lines line { stroke: var(--accent); stroke-width: 1.5; }
 .mapfig__lines circle { fill: var(--accent); }
 
-.mapfig__screen { overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 16px; }
+.mapfig__screen { overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 24px; }   /* 바깥으로 뺀 번호(최대 22px)가 들어갈 자리 */
 
 .mapfig__list {
   list-style: none; margin: var(--s3) 0 0; padding: 0;
@@ -85,6 +85,8 @@
 .appmock--pc   .pc__side   { border-radius: 0 0 0 9px; }
 .appmock--shop .shop__top  { border-radius: 9px 9px 0 0; }
 .appmock--shop .shop__foot { border-radius: 0 0 9px 9px; }
+.appmock--ott  .ott__top   { border-radius: 9px 9px 0 0; }
+.appmock--set  .set__save  { border-radius: 0 0 9px 9px; }
 .appmock--mk   .mk__prog   { border-radius: 9px 9px 0 0; }
 .appmock--mk   .mk__band   { border-radius: 0 0 9px 9px; }
 .appmock--doc  .doc__top    { border-radius: 9px 9px 0 0; }
@@ -95,7 +97,8 @@
 
 @media (max-width: 899px) {
   /* 폰에서 데스크톱 화면은 다 안 들어간다. 줄여서 못 읽게 하느니 옆으로 밀어 보게 한다. */
-  .appmock--pc, .appmock--shop, .appmock--mk, .appmock--doc { width: 700px; }
+  .appmock--pc, .appmock--shop, .appmock--ott,
+  .appmock--mk, .appmock--set, .appmock--doc { width: 700px; }
   .pan-hint { display: block; }
   .mapfig__lines { display: none; }   /* 좁은 화면에서는 번호로만 잇는다 */
 }
@@ -702,3 +705,229 @@
   display: grid; place-items: center; font-size: 12px;
   box-shadow: var(--e1);
 }
+
+/* ── OTT · 스트리밍 ─────────────────── */
+/* 이 화면만 어둡다. 같은 부품이 다크 UI 에서 어떻게 보이는지 같이 보게 된다. */
+.appmock--ott {
+  --o-bg: #0c0e13; --o-fg: #f1f3f8; --o-mut: #9aa3b4; --o-line: #262b35;
+  --o-hot: #e23b3b;
+  background: var(--o-bg); color: var(--o-fg); border-color: #2a2f3a;
+}
+.appmock--ott .mut { color: var(--o-mut); }
+
+.ott__top {
+  position: absolute; left: 0; right: 0; top: 0; z-index: 3;
+  display: flex; align-items: center; gap: 16px;
+  padding: 10px 16px;
+  background: linear-gradient(180deg, rgba(8,9,13,.92), rgba(8,9,13,0));
+}
+.ott__logo { font-weight: 900; font-size: 14px; letter-spacing: -0.04em; color: var(--o-hot); }
+.ott__top nav { display: flex; gap: 13px; font-size: 11px; color: #cdd3de; }
+.ott__top nav i { font-style: normal; }
+.ott__top nav i.on { font-weight: 800; color: #fff; }
+.ott__top .r { margin-left: auto; display: flex; align-items: center; gap: 12px; font-size: 11px; color: #cdd3de; }
+.ott__prof { display: flex; align-items: center; gap: 5px; }
+.ott__prof .av { width: 21px; height: 21px; border-radius: 5px; background: linear-gradient(140deg,#6f9bff,#2f6df6); }
+.ott__prof .cv { font-size: 8px; color: var(--o-mut); }
+
+.ott__bill { position: relative; height: 228px; }   /* overflow:hidden 은 번호 배지를 자른다. art·fade 는 inset:0 이라 넘치지 않는다 */
+.ott__bill .art {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(70% 90% at 72% 18%, #4a2b6b 0%, transparent 58%),
+    radial-gradient(60% 80% at 92% 70%, #7a2130 0%, transparent 60%),
+    linear-gradient(100deg, #0c0e13 36%, #1b2436 70%, #3b2a4d);
+}
+.ott__bill .fade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(12,14,19,.95) 18%, rgba(12,14,19,.2) 62%, transparent); }
+.ott__billin { position: absolute; left: 16px; bottom: 46px; width: 54%; }
+.ott__kicker { display: flex; align-items: center; gap: 6px; font-size: 9.5px; color: var(--o-mut); margin-bottom: 6px; }
+.ott__kicker .n { color: var(--o-hot); font-weight: 900; }
+.ott__billin h5 { font-size: 24px; font-weight: 900; letter-spacing: -0.05em; margin: 0 0 6px; line-height: 1.12; }
+.ott__billin p { font-size: 10.5px; color: #c6ccd8; margin: 0 0 10px; line-height: 1.65; max-width: none; }
+.ott__acts { display: flex; align-items: center; gap: 7px; }
+.ott__acts .play { display: inline-flex; align-items: center; gap: 5px; padding: 7px 15px; border-radius: 5px; background: #fff; color: #11131a; font-size: 11px; font-weight: 800; }
+.ott__acts .info { display: inline-flex; align-items: center; gap: 5px; padding: 7px 14px; border-radius: 5px; background: rgba(170,180,200,.28); color: #fff; font-size: 11px; font-weight: 700; }
+.ott__rate {
+  padding: 2px 7px; border-left: 2px solid #fff;
+  background: rgba(0,0,0,.42); color: #fff;
+  font-size: 9.5px; font-weight: 700;
+}
+.ott__mute {
+  position: absolute; right: 16px; bottom: 54px; z-index: 2;
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.5); color: #fff;
+  display: grid; place-items: center; font-size: 11px;
+}
+
+.ott__ctrl {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 2;
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 16px 10px;
+  background: linear-gradient(0deg, rgba(8,9,13,.92), transparent);
+  font-size: 10px; color: #d7dce6;
+}
+.ott__scrub { flex: 1; height: 3px; border-radius: 99px; background: rgba(255,255,255,.26); position: relative; }
+.ott__scrub i { position: absolute; left: 0; top: 0; bottom: 0; width: 42%; border-radius: 99px; background: var(--o-hot); }
+.ott__scrub b { position: absolute; left: 42%; top: 50%; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px; border-radius: 50%; background: var(--o-hot); }
+.ott__ctrl .ico { font-size: 11px; }
+.ott__ctrl .t { font-variant-numeric: tabular-nums; font-size: 9.5px; color: var(--o-mut); }
+.ott__cc { padding: 1px 5px; border: 1px solid rgba(255,255,255,.45); border-radius: 3px; font-size: 8.5px; font-weight: 800; }
+
+.ott__row { padding: 12px 0 4px; position: relative; }
+.ott__row:last-child { padding-bottom: 84px; }   /* 떠 있는 프리뷰 카드가 앉을 자리 */
+.ott__row > h6 { font-size: 12px; font-weight: 800; margin: 0 0 7px; padding: 0 16px; letter-spacing: -0.02em; }
+.ott__strip { display: flex; gap: 8px; padding: 0 16px; }
+.ott__tile {
+  position: relative; flex: none;
+  width: 124px; border-radius: 4px;
+  background: linear-gradient(145deg, #27303f, #161b24);
+}
+.ott__tile .pane { display: block; height: 70px; }   /* span 이라 블록으로 안 바꾸면 납작해진다 */
+.ott__tile .nm { position: absolute; left: 7px; right: 7px; bottom: 11px; font-size: 9.5px; font-weight: 700; }
+.ott__prog { position: absolute; left: 7px; right: 7px; bottom: 5px; height: 3px; border-radius: 99px; background: rgba(255,255,255,.22); }
+.ott__prog i { display: block; height: 100%; border-radius: 99px; background: var(--o-hot); }
+.ott__arrow {
+  position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  width: 22px; height: 56px; z-index: 2;
+  background: rgba(8,9,13,.72); color: #fff;
+  display: grid; place-items: center; font-size: 13px;
+  border-radius: 4px 0 0 4px;
+}
+.ott__rank { display: flex; align-items: flex-end; gap: 2px; }
+.ott__rank .num { font-size: 42px; font-weight: 900; line-height: .78; color: #2b3342; letter-spacing: -0.08em; }
+
+.ott__peek {
+  position: absolute; z-index: 5;
+  left: 148px; top: 18px; width: 186px;
+  background: #171c25; border-radius: 6px;
+  box-shadow: 0 18px 42px rgba(0,0,0,.6);
+}
+.ott__peek .pane { display: block; height: 86px; border-radius: 6px 6px 0 0; background: linear-gradient(145deg, #3a2a52, #1d2230); }
+.ott__peek .body { padding: 8px 9px 10px; }
+.ott__peek .btns { display: flex; align-items: center; gap: 5px; margin-bottom: 6px; }
+.ott__peek .btns .c { width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-size: 10px; }
+.ott__peek .btns .c.p { background: #fff; color: #11131a; }
+.ott__peek .btns .c--gap { margin-left: 18px; }   /* 바깥으로 뺀 번호가 앉을 자리 */
+.ott__peek .btns .c.o { border: 1px solid rgba(255,255,255,.45); color: #fff; }
+.ott__peek .btns .c.r { margin-left: auto; border: 1px solid rgba(255,255,255,.45); color: #fff; }
+.ott__peek .meta { display: flex; align-items: center; gap: 6px; font-size: 9px; color: var(--o-mut); margin-bottom: 4px; }
+.ott__peek .meta .m { color: #4ad07d; font-weight: 800; }
+.ott__peek .tags { font-size: 9px; color: #c6ccd8; }
+
+/* ── 설정 화면 ──────────────────────── */
+.set__top { padding: 12px 16px 0; }
+.set__top h5 { font-size: 17px; font-weight: 800; letter-spacing: -0.03em; margin: 0 0 9px; }
+.set__tabs { display: flex; gap: 16px; border-bottom: 1px solid var(--line); }
+.set__tabs i {
+  font-style: normal; font-size: 11.5px; font-weight: 600;
+  color: var(--fg-muted); padding: 0 1px 7px; margin-bottom: -1px;
+}
+.set__tabs i.on { color: var(--accent); font-weight: 800; border-bottom: 2px solid var(--accent); }
+
+.set__wrap { padding: 14px 16px 76px; display: grid; gap: 14px; }
+.set__sec { border: 1px solid var(--line); border-radius: var(--r2); padding: 13px; background: var(--surface); }
+.set__h { font-size: 12.5px; font-weight: 800; margin: 0 0 2px; letter-spacing: -0.02em; }
+.set__h + .d { font-size: 10.5px; color: var(--fg-muted); margin: 0 0 11px; }
+
+.set__ava { display: flex; align-items: center; gap: 11px; margin-bottom: 12px; }
+.set__ava .pic {
+  width: 44px; height: 44px; border-radius: var(--r-full); flex: none;
+  background: linear-gradient(140deg,#6f9bff,#2f6df6); color: #fff;
+  display: grid; place-items: center; font-size: 15px; font-weight: 800;
+}
+.set__ava .up { display: flex; gap: 6px; }
+.set__ava .up i { font-style: normal; padding: 5px 11px; border-radius: var(--r1); border: 1px solid var(--line-strong); font-size: 10.5px; font-weight: 700; }
+.set__ava .up i.d { color: var(--danger); border-color: transparent; }
+.set__ava .hint { font-size: 9.5px; color: var(--fg-muted); display: block; margin-top: 4px; }
+
+.set__f { margin-bottom: 11px; }
+.set__f .lb { display: block; font-size: 11px; font-weight: 700; margin-bottom: 4px; }
+.set__f .lb em { font-style: normal; color: var(--danger); }
+.set__in {
+  display: block; width: 100%;
+  padding: 7px 10px; border-radius: var(--r1);
+  border: 1px solid var(--line-strong); background: var(--surface);
+  font-size: 11.5px; color: var(--fg);
+}
+.set__in.ph { color: var(--fg-faint); }
+.set__in.err { border-color: var(--danger); box-shadow: 0 0 0 2px color-mix(in srgb, var(--danger) 18%, transparent); }
+.set__hp { font-size: 10px; color: var(--fg-muted); margin-top: 4px; }
+.set__er { font-size: 10px; color: var(--danger); margin-top: 4px; font-weight: 600; }
+.set__ta { min-height: 46px; }
+.set__cnt { display: block; text-align: right; font-size: 9.5px; color: var(--fg-muted); margin-top: 3px; }
+
+.set__sw { display: flex; align-items: flex-start; gap: 11px; padding: 8px 0; border-top: 1px solid var(--line); }
+.set__sw:first-of-type { border-top: 0; }
+.set__sw .tx { flex: 1; min-width: 0; }
+.set__sw .tx b { display: block; font-size: 11.5px; }
+.set__sw .tx span { font-size: 10px; color: var(--fg-muted); }
+.set__knob {
+  flex: none; width: 34px; height: 20px; border-radius: 99px;
+  background: var(--line-strong); position: relative;
+}
+.set__knob::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: var(--e1); }
+.set__knob.on { background: var(--accent); }
+.set__knob.on::after { left: 16px; }
+
+.set__radio { display: grid; gap: 7px; margin-top: 4px; padding-left: 10px; }   /* 번호가 라디오를 덮지 않게 */
+.set__radio label { display: flex; align-items: flex-start; gap: 8px; font-size: 11px; }
+.set__dot {
+  flex: none; width: 15px; height: 15px; border-radius: 50%;
+  border: 1.5px solid var(--line-strong); margin-top: 1px; position: relative;
+}
+.set__dot.on { border-color: var(--accent); }
+.set__dot.on::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; background: var(--accent); }
+.set__radio span em { font-style: normal; display: block; font-size: 9.5px; color: var(--fg-muted); }
+
+.set__two { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+.set__sel {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 7px 10px; border-radius: var(--r1);
+  border: 1px solid var(--line-strong); background: var(--surface);
+  font-size: 11.5px;
+}
+.set__sel i { font-style: normal; color: var(--fg-muted); font-size: 9px; }
+.set__slider { display: block; padding: 9px 2px 2px; }   /* span 이라 블록으로 안 바꾸면 폭이 0 */
+.set__track { display: block; height: 4px; border-radius: 99px; background: var(--line); position: relative; }
+.set__track i { position: absolute; left: 0; top: 0; bottom: 0; width: 58%; border-radius: 99px; background: var(--accent); }
+.set__track b { position: absolute; left: 58%; top: 50%; width: 15px; height: 15px; margin: -7.5px 0 0 -7.5px; border-radius: 50%; background: var(--surface); border: 2px solid var(--accent); box-shadow: var(--e1); }
+.set__ticks { display: flex; justify-content: space-between; font-size: 9px; color: var(--fg-muted); margin-top: 7px; }
+
+.set__chk { display: flex; align-items: flex-start; gap: 8px; font-size: 11px; margin-top: 11px; }
+.set__box {
+  flex: none; width: 15px; height: 15px; border-radius: 4px;
+  border: 1.5px solid var(--line-strong); margin-top: 1px; position: relative;
+}
+.set__box.on { background: var(--accent); border-color: var(--accent); }
+.set__box.on::after { content: "✓"; position: absolute; inset: 0; color: #fff; font-size: 10px; line-height: 12px; text-align: center; font-weight: 800; }
+
+.set__danger {
+  border: 1px solid color-mix(in srgb, var(--danger) 45%, transparent);
+  border-radius: var(--r2); padding: 13px;
+  background: color-mix(in srgb, var(--danger) 7%, var(--surface));
+}
+.set__danger .set__h { color: var(--danger); }
+.set__danger .row { display: flex; align-items: center; gap: 11px; margin-top: 9px; }
+.set__danger .row .tx { flex: 1; min-width: 0; font-size: 10.5px; color: var(--fg-muted); }
+.set__danger .btn.off { opacity: .42; }
+.set__danger .btn {
+  padding: 6px 13px; border-radius: var(--r1);
+  border: 1px solid var(--danger); color: var(--danger);
+  font-size: 10.5px; font-weight: 700; white-space: nowrap;
+}
+
+.set__save {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  display: flex; align-items: center; gap: 11px;
+  padding: 11px 16px;
+  border-top: 1px solid var(--line);
+  background: color-mix(in srgb, var(--surface) 92%, var(--bg));
+  box-shadow: 0 -6px 18px rgba(20,22,26,.07);
+}
+.set__save .tx { font-size: 11px; font-weight: 700; }
+.set__save .tx span { display: block; font-size: 9.5px; font-weight: 500; color: var(--fg-muted); }
+.set__save .r { margin-left: auto; display: flex; gap: 7px; }
+.set__save .r i { font-style: normal; padding: 7px 15px; border-radius: var(--r1); font-size: 11px; font-weight: 700; }
+.set__save .r i.g { border: 1px solid var(--line-strong); color: var(--fg); }
+.set__save .r i.p { background: var(--accent); color: #fff; }
+.set__save .r i.off { background: var(--accent); color: #fff; opacity: .4; }

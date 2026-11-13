@@ -61,6 +61,18 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
         }
       });
 
+      // span 을 블록으로 안 바꾸면 높이·너비가 먹지 않아 납작해진다.
+      // 글자 없는 빈 칸(이미지 자리, 띠)이 inline 이면 거의 틀림없이 이 실수다.
+      fig.querySelectorAll('.appmock *').forEach(el => {
+        if (el.tagName === 'BR') return;
+        if (el.textContent.trim() || el.children.length) return;
+        if (getComputedStyle(el).display !== 'inline') return;
+        const r = el.getBoundingClientRect();
+        if (r.height < 4 || r.width < 4) {
+          bad.push(`${name}: 빈 '${(el.className || el.tagName).toString().split(' ').pop()}'가 inline 이라 납작함 (${Math.round(r.width)}×${Math.round(r.height)})`);
+        }
+      });
+
       // 번호끼리 겹치면 하나가 안 보인다
       const ns = [...fig.querySelectorAll('.partno')];
       ns.forEach((a, i) => ns.slice(i + 1).forEach(b2 => {
@@ -91,7 +103,9 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
 
       // 떠 있는 부품이 목업 밖으로 새지 않는가
       const mock = fig.querySelector('.appmock'), mr = mock.getBoundingClientRect();
-      mock.querySelectorAll('.pc__menu, .pc__toast, .ph__fab, .ph__sheet, .ph__tabs').forEach(el => {
+      mock.querySelectorAll('*').forEach(el => {
+        if (getComputedStyle(el).position !== 'absolute') return;
+        if (el.classList.contains('partno')) return;   // 번호는 일부러 바깥에 둔다
         const r = el.getBoundingClientRect();
         if (r.top < mr.top - 1 || r.bottom > mr.bottom + 1 || r.left < mr.left - 1 || r.right > mr.right + 1) {
           bad.push(`${name}: ${el.className.split(' ')[0]}가 목업 밖에 있음`);
