@@ -207,7 +207,12 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   await page.close();
 
   // ── 2. 항목 카드 — 일곱 장 모두 같은 틀인지 ──
-  const ITEMS = ['modal', 'dialog', 'sheet', 'drawer', 'popover', 'tooltip', 'toast'];
+  const PARTS = {
+    '6부': ['modal', 'dialog', 'sheet', 'drawer', 'popover', 'tooltip', 'toast'],
+    '8부': ['spinner', 'skeleton', 'progress', 'optimistic', 'empty', 'error'],
+  };
+  const ITEMS = Object.values(PARTS).flat();
+  const partOf = s => Object.keys(PARTS).find(k => PARTS[k].includes(s));
 
   for (const slug of ITEMS) {
     page = await browser.newPage({ viewport: { width: 1280, height: 1000 }, deviceScaleFactor: 1 });
@@ -263,6 +268,27 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
         });
       });
 
+      // 해부도 번호가 잘리거나 겹치지 않는가
+      const nos = [...document.querySelectorAll('.anat .pinno')];
+      nos.forEach(n => {
+        const q = n.getBoundingClientRect();
+        if (q.width < 14 || q.height < 14) bad.push(`해부도 ${n.textContent}번이 찌그러짐 (${Math.round(q.width)}×${Math.round(q.height)})`);
+        for (let el = n.parentElement; el && el !== document.body; el = el.parentElement) {
+          if (getComputedStyle(el).overflow === 'visible') continue;
+          const b2 = el.getBoundingClientRect();
+          if (q.left < b2.left - 0.5 || q.top < b2.top - 0.5 || q.right > b2.right + 0.5 || q.bottom > b2.bottom + 0.5) {
+            bad.push(`해부도 ${n.textContent}번이 '${(el.className || el.tagName).toString().split(' ')[0]}'에 잘림`);
+            break;
+          }
+        }
+      });
+      nos.forEach((a, i) => nos.slice(i + 1).forEach(b2 => {
+        const q = a.getBoundingClientRect(), w = b2.getBoundingClientRect();
+        if (q.right > w.left + 1 && q.left < w.right - 1 && q.bottom > w.top + 1 && q.top < w.bottom - 1) {
+          bad.push(`해부도 ${a.textContent}번과 ${b2.textContent}번이 겹침`);
+        }
+      }));
+
       // 페이지 안 이동 링크가 실제로 가리키는 곳이 있는가
       document.querySelectorAll('.jump a').forEach(a => {
         if (!document.querySelector(a.getAttribute('href'))) bad.push(`이동 링크가 가리키는 곳 없음: ${a.getAttribute('href')}`);
@@ -274,10 +300,13 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     });
     r.forEach(x => fail.push(`${slug}: ${x}`));
 
-    // 형제 링크가 일곱 중 자기를 뺀 여섯을 가리키는가
-    const sib = await page.$$eval('.siblings a[href$=".html"]', as => as.map(a => a.getAttribute('href')));
-    if (sib.length !== 6) fail.push(`${slug}: 형제 링크가 ${sib.length}개 (6 기대)`);
-    if (sib.includes(slug + '.html')) fail.push(`${slug}: 형제 목록에 자기 자신이 있음`);
+    // 형제 링크 = 같은 부의 항목에서 자기만 뺀 것
+    const want = PARTS[partOf(slug)].filter(x => x !== slug).map(x => x + '.html').sort();
+    const sib = await page.$$eval('.siblings ol:first-of-type a[href$=".html"]',
+      as => as.map(a => a.getAttribute('href')).sort());
+    if (JSON.stringify(sib) !== JSON.stringify(want)) {
+      fail.push(`${slug}: 형제 링크가 [${sib}] (기대 [${want}])`);
+    }
 
     // ①칸 폭 토글
     await page.locator(`.seg[data-seg="${slug}"] button[data-w="768"]`).click();
@@ -416,6 +445,87 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   if (await page.evaluate(() => document.getElementById('p1').closest('[inert]') !== null)) fail.push('다이얼로그: 비모달인데 뒤가 막혔다');
   await page.locator('#conf').click(); await page.waitForTimeout(250);
   if (!await page.locator('#leave').evaluate(el => el.matches(':modal'))) fail.push('다이얼로그: showModal() 인데 모달이 아니다');
+  await page.close();
+
+
+  // ── 8부 데모 ──
+  // 스피너 — 짧은 일에는 안 뜨고, 긴 일에는 뜬다
+  page = await demo('spinner');
+  await page.locator('[data-ms="180"]').click(); await page.waitForTimeout(260);
+  if (await page.locator('.spn').count() !== 0) fail.push('스피너: 0.3초 안에 끝나는데 떴다');
+  await page.waitForTimeout(400);
+  if (!(await page.locator('#log').textContent()).includes('안 띄웠습니다')) fail.push('스피너: 짧은 경우 기록이 틀리다');
+  await page.locator('[data-ms="1400"]').click(); await page.waitForTimeout(500);
+  if (await page.locator('.spn').count() !== 1) fail.push('스피너: 긴 일인데 안 떴다');
+  await page.waitForTimeout(1600);
+  if (await page.locator('.spn').count() !== 0) fail.push('스피너: 끝났는데 안 사라졌다');
+  await page.close();
+
+  // 스켈레톤 — 덜컥거림이 0 이고, 스피너로 바꾸면 덜컥거린다
+  page = await demo('skeleton');
+  await page.locator('#skl').click(); await page.waitForTimeout(300);
+  if (await page.locator('.skl').count() < 4) fail.push('스켈레톤: 자리를 안 잡았다');
+  await page.waitForTimeout(1600);
+  let sh2 = await page.locator('#shift').textContent();
+  if (!sh2.includes('덜컥거림 없음')) fail.push(`스켈레톤: 덜컥거렸다 (${sh2.trim()})`);
+  await page.locator('#spn').click(); await page.waitForTimeout(1900);
+  sh2 = await page.locator('#shift').textContent();
+  if (!sh2.includes('px 덜컥거림')) fail.push('스피너 비교: 덜컥거림이 안 잡혔다');
+  await page.close();
+
+  // 프로그레스 — 결정형 → 비결정형 → 실패 후 다시 시도
+  page = await demo('progress', 900, 820);
+  await page.locator('#go').click(); await page.waitForTimeout(700);
+  const pv = await page.locator('.prg').first().getAttribute('aria-valuenow');
+  if (!pv || +pv <= 0) fail.push('프로그레스: 퍼센트가 안 올라간다');
+  await page.waitForTimeout(1800);
+  if (await page.locator('.prg--ind').count() !== 1) fail.push('프로그레스: 비결정형으로 안 바뀐다');
+  if (await page.locator('.prg--ind').getAttribute('aria-valuenow') !== null) fail.push('프로그레스: 비결정형인데 값이 남아 있다');
+  if (await page.locator('.prg--err').count() !== 1) fail.push('프로그레스: 실패한 것이 빨개지지 않는다');
+  if (await page.locator('.st.no .ui-btn').count() !== 1) fail.push('프로그레스: 실패 자리에 다시 시도가 없다');
+  await page.waitForTimeout(2400);
+  if (await page.locator('.st.ok').count() !== 2) fail.push('프로그레스: 성공 표시가 둘이 아니다');
+  await page.close();
+
+  // 낙관적 UI — 기다리지 않고 바뀌고, 거절당하면 되돌아간다
+  page = await demo('optimistic');
+  const star = page.locator('.star').first();
+  await star.click(); await page.waitForTimeout(60);
+  if (await star.getAttribute('aria-pressed') !== 'true') fail.push('낙관적: 즉시 안 바뀐다');
+  if (await page.locator('.spn').count() !== 0) fail.push('낙관적: 스피너가 떴다 (기다림이 보이면 안 된다)');
+  const badStar = page.locator('.star[data-fail]');
+  await badStar.click(); await page.waitForTimeout(60);
+  if (await badStar.getAttribute('aria-pressed') !== 'true') fail.push('낙관적: 실패할 것도 일단 바뀌어야 한다');
+  await page.waitForTimeout(900);
+  if (await badStar.getAttribute('aria-pressed') !== 'false') fail.push('낙관적: 거절당했는데 안 되돌아간다');
+  if (await page.locator('.tst').count() !== 1) fail.push('낙관적: 되돌린 이유를 안 알려 준다');
+  await page.close();
+
+  // 빈 상태 — 세 가지가 서로 다른 말을 한다
+  page = await demo('empty', 900, 700);
+  const says = [];
+  for (const k of ['first', 'search', 'cleared']) {
+    await page.locator(`.seg2 button[data-k="${k}"]`).click();
+    await page.waitForTimeout(150);
+    if (await page.locator('.empty h3').count() !== 1) fail.push(`빈 상태(${k}): 제목이 없다`);
+    says.push(await page.locator('.empty').textContent());
+  }
+  if (new Set(says).size !== 3) fail.push('빈 상태: 세 가지가 같은 말을 한다');
+  if (!says[0].includes('만들기')) fail.push('빈 상태(처음): 첫 걸음이 없다');
+  if (!says[1].includes('조건')) fail.push('빈 상태(검색): 조건을 풀 길이 없다');
+  await page.close();
+
+  // 에러 — 네 단계가 각각 다른 자리에 붙는다
+  page = await demo('error', 900, 760);
+  if (await page.locator('.field-err').count() !== 1) fail.push('에러(칸): 칸 아래 설명이 없다');
+  if (await page.locator('#b').getAttribute('aria-invalid') !== 'true') fail.push('에러(칸): aria-invalid 가 없다');
+  await page.locator('.seg2 button[data-k="form"]').click(); await page.waitForTimeout(150);
+  if (await page.locator('.alert[role="alert"]').count() !== 1) fail.push('에러(폼): 폼 위 경고가 없다');
+  await page.locator('.seg2 button[data-k="page"]').click(); await page.waitForTimeout(150);
+  if (await page.locator('.err-page .code').count() !== 1) fail.push('에러(화면): 오류 화면이 아니다');
+  await page.locator('.seg2 button[data-k="offline"]').click(); await page.waitForTimeout(150);
+  if (await page.locator('.offline').count() !== 1) fail.push('에러(연결): 꼭대기 띠가 없다');
+  if (await page.locator('.ui-btn[disabled]').count() !== 1) fail.push('에러(연결): 보내기가 비활성이 아니다');
   await page.close();
 
   await browser.close();

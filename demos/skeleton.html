@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>스켈레톤 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; }
+  .bar { display: flex; align-items: center; gap: var(--s2); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar .ui-btn { min-height: 36px; padding: 8px 13px; font-size: 13px; }
+  .panel { min-height: 268px; border-bottom: 1px solid var(--line); }
+  /* 줄 높이를 고정해야 스켈레톤과 실제 줄이 딱 맞는다 — 안 맞으면 바꿔 끼울 때 덜컥거린다 */
+  .row { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); height: 72px; }
+  .row .av { width: 36px; height: 36px; border-radius: 50%; background: var(--accent-soft); flex: none; }
+  .row .meta { flex: 1; min-width: 0; }
+  .row .meta b { display: block; font-size: 14px; }
+  .row .meta span { font-size: 12.5px; color: var(--fg-muted); }
+  .row .amt { font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); }
+  .shift { padding: 0 var(--s4) var(--s4); font-size: 12.5px; color: var(--danger); font-weight: 700; min-height: 1.5em; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>거래 내역</b>
+  <button class="ui-btn" id="skl">스켈레톤으로 불러오기</button>
+  <button class="ui-btn ui-btn--ghost" id="spn">스피너로 불러오기</button>
+</div>
+
+<div class="panel" id="panel">
+  <div class="row"><span class="av"></span><span class="meta"><b>모란상회</b><span>카드 · 14:02</span></span><span class="amt">₩48,000</span></div>
+  <div class="row"><span class="av"></span><span class="meta"><b>블루보틀 성수</b><span>계좌 · 13:58</span></span><span class="amt">₩7,500</span></div>
+  <div class="row"><span class="av"></span><span class="meta"><b>교보문고 광화문</b><span>카드 · 13:55</span></span><span class="amt">₩132,000</span></div>
+  <div class="row"><span class="av"></span><span class="meta"><b>세븐일레븐 삼성점</b><span>카드 · 13:51</span></span><span class="amt">₩3,200</span></div>
+</div>
+
+<p class="shift" id="shift">&nbsp;</p>
+
+<p class="hint">
+  두 버튼을 번갈아 눌러 보세요. <b>스켈레톤</b>은 들어올 줄 수와 크기를 미리 알고 자리를 잡아 둡니다.
+  <b>스피너</b>는 모르기 때문에, 내용이 들어오는 순간 화면이 <b>덜컥</b>합니다 —
+  이 덜컥거림을 <b>레이아웃 시프트</b>(layout shift)라 부르고, 아래에 얼마나 흔들렸는지 적어 둡니다.
+</p>
+
+<script>
+(function () {
+  var panel = document.getElementById('panel');
+  var shift = document.getElementById('shift');
+  var saved = panel.innerHTML;
+
+  function sklRow() {
+    return '<div class="row"><span class="skl skl--circle"></span>' +
+      '<span class="meta" style="display:grid;gap:7px"><span class="skl skl--line skl--w60"></span><span class="skl skl--line skl--w40"></span></span>' +
+      '<span class="skl skl--line" style="width:64px"></span></div>';
+  }
+
+  function run(mode) {
+    var before = panel.getBoundingClientRect().height;
+    panel.setAttribute('aria-busy', 'true');
+    shift.innerHTML = '&nbsp;';
+    panel.innerHTML = mode === 'skl'
+      ? sklRow() + sklRow() + sklRow() + sklRow()
+      : '<div class="spn-box"><span class="spn spn--lg" role="status" aria-label="불러오는 중"></span>불러오는 중…</div>';
+    var during = panel.getBoundingClientRect().height;
+
+    setTimeout(function () {
+      panel.innerHTML = saved;
+      panel.removeAttribute('aria-busy');
+      var after = panel.getBoundingClientRect().height;
+      var d = Math.abs(after - during);
+      shift.textContent = d < 2
+        ? '✓ 덜컥거림 없음 — 자리를 미리 잡아 뒀습니다'
+        : '⚠ ' + Math.round(d) + 'px 덜컥거림 — 내용이 들어오면서 화면이 밀렸습니다';
+      shift.style.color = d < 2 ? '#1f8a4c' : 'var(--danger)';
+    }, 1500);
+  }
+
+  document.getElementById('skl').addEventListener('click', function () { run('skl'); });
+  document.getElementById('spn').addEventListener('click', function () { run('spn'); });
+})();
+</script>
+</body>
+</html>

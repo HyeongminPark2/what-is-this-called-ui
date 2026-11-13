@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>에러 상태 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; }
+  .bar { display: flex; align-items: center; gap: var(--s2); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .seg2 { display: inline-flex; padding: 3px; gap: 2px; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-full); flex-wrap: wrap; }
+  .seg2 button { appearance: none; border: 0; background: transparent; cursor: pointer; font: inherit; font-size: 13px; font-weight: 600; color: var(--fg-muted); padding: 5px 12px; border-radius: var(--r-full); }
+  .seg2 button[aria-pressed="true"] { background: var(--surface); color: var(--fg); box-shadow: var(--e1); }
+  .panel { min-height: 304px; padding: var(--s4); }
+  .form { max-width: 420px; display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>정산 계좌 등록</b>
+  <div class="seg2" role="group" aria-label="에러 단계">
+    <button type="button" data-k="field" aria-pressed="true">칸 하나</button>
+    <button type="button" data-k="form" aria-pressed="false">폼 전체</button>
+    <button type="button" data-k="page" aria-pressed="false">화면 전체</button>
+    <button type="button" data-k="offline" aria-pressed="false">연결 끊김</button>
+  </div>
+</div>
+
+<div id="offline-slot"></div>
+<div class="panel" id="panel"></div>
+
+<p class="hint">
+  에러는 <b>고칠 수 있는 가장 가까운 자리</b>에 붙입니다. 칸 하나가 틀렸으면 그 칸 아래에,
+  보내기 자체가 실패했으면 폼 위에, 화면을 아예 못 그리면 화면 전체에, 연결이 끊겼으면 앱 꼭대기 띠에.
+  <b>단계를 올릴수록 사용자가 할 수 있는 일이 줄어듭니다.</b> 그래서 올릴 이유가 없으면 올리지 않습니다.
+</p>
+
+<script>
+(function () {
+  var panel = document.getElementById('panel');
+  var slot = document.getElementById('offline-slot');
+
+  var FORM = function (err) {
+    return '<div class="form">' +
+      (err || '') +
+      '<div><label class="ui-label" for="a">예금주</label>' +
+      '<input class="ui-input" id="a" value="박형민"></div>' +
+      '<div><label class="ui-label" for="b">계좌번호</label>' +
+      '<input class="ui-input' + (err === null ? ' is-bad' : '') + '" id="b" value="110-123-45678"></div>' +
+      '<button class="ui-btn">등록하기</button></div>';
+  };
+
+  var VIEWS = {
+    field: function () {
+      slot.innerHTML = '';
+      panel.innerHTML = '<div class="form">' +
+        '<div><label class="ui-label" for="a">예금주</label><input class="ui-input" id="a" value="박형민"></div>' +
+        '<div><label class="ui-label" for="b">계좌번호</label>' +
+        '<input class="ui-input" id="b" value="110-123-4567" aria-invalid="true" aria-describedby="e1" style="border-color:var(--danger);box-shadow:0 0 0 3px color-mix(in srgb,var(--danger) 18%,transparent)">' +
+        '<p class="field-err" id="e1">자릿수가 모자랍니다. 신한은행 계좌는 11~12자리입니다.</p></div>' +
+        '<button class="ui-btn">등록하기</button></div>';
+    },
+    form: function () {
+      slot.innerHTML = '';
+      panel.innerHTML = '<div class="form">' +
+        '<div class="alert" role="alert"><span class="ic">!</span><span class="bd">' +
+        '<b>등록하지 못했습니다</b><p>은행 점검 시간(02:00~04:00)에는 계좌를 확인할 수 없습니다. 잠시 뒤 다시 해 주세요.</p>' +
+        '<span class="acts"><button class="ui-btn" style="min-height:32px;padding:6px 12px;font-size:13px">다시 시도</button>' +
+        '<button class="ui-btn ui-btn--ghost" style="min-height:32px;padding:6px 12px;font-size:13px">나중에 하기</button></span>' +
+        '</span></div>' +
+        '<div><label class="ui-label" for="a">예금주</label><input class="ui-input" id="a" value="박형민"></div>' +
+        '<div><label class="ui-label" for="b">계좌번호</label><input class="ui-input" id="b" value="110-123-45678"></div>' +
+        '<button class="ui-btn">등록하기</button></div>';
+    },
+    page: function () {
+      slot.innerHTML = '';
+      panel.innerHTML = '<div class="err-page">' +
+        '<div class="code">500</div><h3>화면을 열지 못했습니다</h3>' +
+        '<p>잠시 뒤 다시 시도해 주세요. 계속 이러면 오류 번호 <b>a4f21c</b>를 알려 주세요.</p>' +
+        '<div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">' +
+        '<button class="ui-btn">다시 불러오기</button>' +
+        '<button class="ui-btn ui-btn--ghost">목록으로</button></div></div>';
+    },
+    offline: function () {
+      slot.innerHTML = '<div class="offline" role="status"><span class="dot"></span>' +
+        '연결이 끊겼습니다. 바뀐 내용은 저장해 뒀다가 연결되면 보냅니다.' +
+        '<span class="sp">다시 시도 중…</span></div>';
+      panel.innerHTML = '<div class="form" style="opacity:.6">' +
+        '<div><label class="ui-label" for="a">예금주</label><input class="ui-input" id="a" value="박형민" readonly></div>' +
+        '<div><label class="ui-label" for="b">계좌번호</label><input class="ui-input" id="b" value="110-123-45678" readonly></div>' +
+        '<button class="ui-btn" disabled>등록하기</button></div>';
+    }
+  };
+
+  document.querySelector('.seg2').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-k]');
+    if (!b) return;
+    document.querySelectorAll('.seg2 button').forEach(function (x) {
+      x.setAttribute('aria-pressed', String(x === b));
+    });
+    VIEWS[b.dataset.k]();
+  });
+  VIEWS.field();
+})();
+</script>
+</body>
+</html>

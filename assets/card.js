@@ -33,3 +33,40 @@
     report();
   });
 })();
+
+/* 해부도 번호. ::before 로 그리면 겹쳐도 비켜 줄 수가 없고,
+   빈 태그나 변형된 요소에서는 아예 안 그려진다. 실제 요소로 넣고 겹치면 옆으로 민다. */
+(function () {
+  document.querySelectorAll('.anat').forEach(function (anat) {
+    var targets = Array.prototype.slice.call(anat.querySelectorAll('[data-pin]'));
+    if (!targets.length) return;
+    var badges = targets.map(function (t) {
+      t.insertAdjacentHTML('beforeend', '<span class="pinno" aria-hidden="true">' + t.dataset.pin + '</span>');
+      return t.lastElementChild;
+    });
+
+    function spread() {
+      var placed = [];
+      badges.forEach(function (n) {
+        n.style.top = ''; n.style.transform = '';
+        for (var k = 0; k < 4; k++) {
+          var r = n.getBoundingClientRect();
+          var hit = placed.some(function (p) {
+            var q = p.getBoundingClientRect();
+            return r.right > q.left - 3 && r.left < q.right + 3 &&
+                   r.bottom > q.top - 3 && r.top < q.bottom + 3;
+          });
+          if (!hit) break;
+          // 옆으로 밀면 판 밖으로 나가기 쉽다. 아래로 비킨다.
+          n.style.top = (parseFloat(getComputedStyle(n).top) + 24) + 'px';
+          n.style.transform = 'none';
+        }
+        placed.push(n);
+      });
+    }
+    spread();
+    window.addEventListener('resize', spread);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(spread);
+    window.addEventListener('load', spread);
+  });
+})();

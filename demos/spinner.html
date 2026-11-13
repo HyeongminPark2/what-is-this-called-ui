@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>스피너 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; }
+  .bar { display: flex; align-items: center; gap: var(--s2); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar .ui-btn { min-height: 36px; padding: 8px 13px; font-size: 13px; }
+  .panel { min-height: 232px; border-bottom: 1px solid var(--line); }
+  .row { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .row .av { width: 34px; height: 34px; border-radius: 50%; background: var(--accent-soft); flex: none; }
+  .row .meta b { display: block; font-size: 14px; }
+  .row .meta span { font-size: 12.5px; color: var(--fg-muted); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); }
+  .log { padding: 0 var(--s4) var(--s4); font-size: 12.5px; color: var(--fg-muted); font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>거래 내역</b>
+  <button class="ui-btn ui-btn--ghost" data-ms="180">빠르게 (0.18초)</button>
+  <button class="ui-btn ui-btn--ghost" data-ms="1400">느리게 (1.4초)</button>
+</div>
+
+<div class="panel" id="panel">
+  <div class="row"><span class="av"></span><span class="meta"><b>모란상회</b><span>₩48,000 · 14:02</span></span></div>
+  <div class="row"><span class="av"></span><span class="meta"><b>블루보틀 성수</b><span>₩7,500 · 13:58</span></span></div>
+  <div class="row"><span class="av"></span><span class="meta"><b>교보문고 광화문</b><span>₩132,000 · 13:55</span></span></div>
+</div>
+
+<p class="log" id="log">아직 안 불러왔습니다.</p>
+
+<p class="hint">
+  두 버튼을 번갈아 눌러 보세요. <b>빠르게</b>는 스피너가 <b>아예 안 뜹니다</b> —
+  0.3초 안에 끝나는 일에 스피너를 띄우면 깜빡임만 남기고 사라져서 더 느리게 느껴집니다.
+  <b>느리게</b>는 0.3초를 넘기므로 띄우고, 한번 띄우면 최소 0.5초는 유지합니다.
+</p>
+
+<script>
+(function () {
+  var panel = document.getElementById('panel');
+  var log = document.getElementById('log');
+  var saved = panel.innerHTML;
+  var SHOW_AFTER = 300, MIN_SHOW = 500;
+
+  document.querySelectorAll('[data-ms]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var ms = +btn.dataset.ms, t0 = Date.now();
+      var shown = false, shownAt = 0;
+      panel.setAttribute('aria-busy', 'true');
+      log.textContent = '불러오는 중… (' + ms + 'ms 걸릴 예정)';
+
+      // 0.3초를 넘길 때만 띄운다
+      var showTimer = setTimeout(function () {
+        shown = true; shownAt = Date.now();
+        panel.innerHTML = '<div class="spn-box"><span class="spn spn--lg" role="status" aria-label="불러오는 중"></span>불러오는 중…</div>';
+      }, SHOW_AFTER);
+
+      setTimeout(function () {
+        clearTimeout(showTimer);
+        var done = function () {
+          panel.innerHTML = saved;
+          panel.removeAttribute('aria-busy');
+          log.textContent = ms + 'ms 만에 끝났습니다 · 스피너는 ' + (shown ? '띄웠습니다' : '안 띄웠습니다 (0.3초 안에 끝남)');
+        };
+        if (!shown) return done();
+        // 한번 띄웠으면 최소 0.5초는 둔다 — 깜빡임 방지
+        var left = MIN_SHOW - (Date.now() - shownAt);
+        left > 0 ? setTimeout(done, left) : done();
+      }, ms);
+    });
+  });
+})();
+</script>
+</body>
+</html>

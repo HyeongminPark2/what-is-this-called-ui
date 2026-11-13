@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>프로그레스 바 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; }
+  .bar { display: flex; align-items: center; gap: var(--s2); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar .ui-btn { min-height: 36px; padding: 8px 13px; font-size: 13px; }
+  .files { padding: var(--s4); display: grid; gap: var(--s4); min-height: 210px; }
+  .file { border: 1px solid var(--line); border-radius: var(--r2); padding: var(--s3) var(--s4); }
+  .file .top { display: flex; align-items: center; gap: var(--s3); margin-bottom: var(--s2); }
+  .file .nm { flex: 1; min-width: 0; font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .file .pc { font-size: 13px; color: var(--fg-muted); font-variant-numeric: tabular-nums; }
+  .file .x { appearance: none; border: 0; background: transparent; cursor: pointer; color: var(--fg-muted); font-size: 15px; width: 30px; height: 30px; border-radius: var(--r1); }
+  .file .x:hover { background: var(--bg); }
+  .file .st { font-size: 12.5px; color: var(--fg-muted); margin-top: 6px; }
+  .file .st.ok { color: #1f8a4c; font-weight: 700; }
+  .file .st.no { color: var(--danger); font-weight: 700; }
+  .hint { padding: 0 var(--s4) var(--s5); font-size: 13px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="bar"><b>파일 올리기</b><button class="ui-btn" id="go">세 개 올리기</button></div>
+
+<div class="files" id="files">
+  <p style="color:var(--fg-muted);font-size:14px;margin:0">올릴 파일이 없습니다.</p>
+</div>
+
+<p class="hint">
+  <b>끝나는 때를 아는 것</b>(결정형)과 <b>모르는 것</b>(비결정형)은 다른 부품입니다.
+  바이트 수를 아는 업로드는 퍼센트가 찬 막대로, 서버가 뒤에서 얼마나 걸릴지 모르는 변환은
+  왔다 갔다 하는 막대로 보여 줍니다. 세 번째 파일은 일부러 실패합니다 —
+  <b>막대가 빨개지고 그 자리에 다시 시도가 붙습니다.</b>
+</p>
+
+<script>
+(function () {
+  var wrap = document.getElementById('files');
+  var FILES = [
+    { nm: '거래내역_2026_11.csv', ms: 2600, fail: false, convert: false },
+    { nm: '정산보고서.pdf',       ms: 2000, fail: false, convert: true  },
+    { nm: '영수증_모음.zip',       ms: 1500, fail: true,  convert: false }
+  ];
+
+  document.getElementById('go').addEventListener('click', function () {
+    wrap.innerHTML = '';
+    FILES.forEach(function (f) { start(f); });
+  });
+
+  function start(f) {
+    var el = document.createElement('div');
+    el.className = 'file';
+    el.innerHTML =
+      '<div class="top"><span class="nm"></span><span class="pc">0%</span>' +
+      '<button class="x" aria-label="취소">&times;</button></div>' +
+      '<span class="prg" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i style="width:0%"></i></span>' +
+      '<p class="st">올리는 중…</p>';
+    el.querySelector('.nm').textContent = f.nm;
+    wrap.appendChild(el);
+
+    var prg = el.querySelector('.prg'), fill = el.querySelector('.prg > i');
+    var pc = el.querySelector('.pc'), st = el.querySelector('.st'), x = el.querySelector('.x');
+    var p = 0, t = null, cancelled = false;
+
+    x.addEventListener('click', function () {
+      cancelled = true; clearInterval(t);
+      el.remove();
+    });
+
+    t = setInterval(function () {
+      if (cancelled) return;
+      p += 100 / (f.ms / 120);
+      if (p >= 100) {
+        p = 100; clearInterval(t);
+        if (f.fail) {
+          prg.classList.add('prg--err');
+          st.className = 'st no';
+          st.innerHTML = '올리지 못했습니다 · 연결이 끊겼습니다 ';
+          var again = document.createElement('button');
+          again.className = 'ui-btn ui-btn--ghost';
+          again.style.cssText = 'min-height:30px;padding:5px 11px;font-size:12px;margin-left:6px';
+          again.textContent = '다시 시도';
+          again.addEventListener('click', function () { el.remove(); start(Object.assign({}, f, { fail: false })); });
+          st.appendChild(again);
+          x.remove();
+          return;
+        }
+        if (f.convert) {
+          // 끝나는 때를 모르는 단계 — 비결정형으로 바꾼다
+          prg.classList.add('prg--ind');
+          fill.style.width = '';
+          prg.removeAttribute('aria-valuenow');
+          pc.textContent = '';
+          st.textContent = '서버에서 변환하는 중… (얼마나 걸릴지 모릅니다)';
+          setTimeout(function () {
+            prg.classList.remove('prg--ind');
+            fill.style.width = '100%';
+            prg.setAttribute('aria-valuenow', '100');
+            st.className = 'st ok'; st.textContent = '✓ 끝났습니다';
+            pc.textContent = '100%'; x.remove();
+          }, 2200);
+          return;
+        }
+        st.className = 'st ok'; st.textContent = '✓ 끝났습니다';
+        pc.textContent = '100%'; x.remove();
+        return;
+      }
+      fill.style.width = p + '%';
+      pc.textContent = Math.round(p) + '%';
+      prg.setAttribute('aria-valuenow', String(Math.round(p)));
+    }, 120);
+  }
+})();
+</script>
+</body>
+</html>

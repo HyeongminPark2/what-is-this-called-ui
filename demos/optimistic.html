@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>낙관적 UI 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; }
+  .bar { display: flex; align-items: center; gap: var(--s2); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .row { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .row .meta { flex: 1; min-width: 0; }
+  .row .meta b { display: block; font-size: 14px; }
+  .row .meta span { font-size: 12.5px; color: var(--fg-muted); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>즐겨찾기</b>
+  <label><input type="checkbox" id="slow"> 서버를 느리게 (1.5초)</label>
+</div>
+
+<div class="row"><span class="meta"><b>결제 서버 마이그레이션</b><span>멤버 4명</span></span><button class="star" aria-pressed="false" aria-label="즐겨찾기">★</button></div>
+<div class="row"><span class="meta"><b>사내 대시보드</b><span>멤버 2명</span></span><button class="star" aria-pressed="false" aria-label="즐겨찾기">★</button></div>
+<div class="row"><span class="meta"><b>알림 파이프라인</b><span>멤버 7명 · 권한 없음</span></span><button class="star" aria-pressed="false" aria-label="즐겨찾기" data-fail="1">★</button></div>
+<div class="row"><span class="meta"><b>이미지 리사이저</b><span>멤버 1명</span></span><button class="star" aria-pressed="false" aria-label="즐겨찾기">★</button></div>
+
+<p class="hint">
+  별을 눌러 보세요. <b>서버 응답을 기다리지 않고 바로 칠해집니다.</b> 스피너가 없습니다.
+  '서버를 느리게'를 켜고 다시 눌러도 느낌은 똑같습니다 — 기다림이 사용자 쪽에서 사라졌기 때문입니다.<br>
+  <b>세 번째 줄(권한 없음)은 서버가 거절합니다.</b> 그러면 별이 원래대로 <b>되돌아가고</b> 이유를 알려 줍니다.
+  이 되돌림이 낙관적 UI의 핵심이자, 쓸 수 있는 자리를 가르는 기준입니다.
+</p>
+
+<div class="tst-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var slow = document.getElementById('slow');
+  var wrap = document.getElementById('toasts');
+
+  document.querySelectorAll('.star').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var was = btn.getAttribute('aria-pressed') === 'true';
+      // 1) 먼저 화면을 바꾼다 — 서버는 아직 모른다
+      btn.setAttribute('aria-pressed', String(!was));
+      btn.classList.add('is-pop', 'is-pending');
+      setTimeout(function () { btn.classList.remove('is-pop'); }, 130);
+
+      // 2) 서버에 보낸다
+      setTimeout(function () {
+        btn.classList.remove('is-pending');
+        if (!btn.dataset.fail) return;           // 성공 — 할 일이 없다
+        // 3) 거절당하면 되돌린다
+        btn.setAttribute('aria-pressed', String(was));
+        btn.classList.add('is-rollback');
+        setTimeout(function () { btn.classList.remove('is-rollback'); }, 320);
+        toast('권한이 없어 되돌렸습니다');
+      }, slow.checked ? 1500 : 450);
+    });
+  });
+
+  function toast(msg) {
+    var el = document.createElement('div');
+    el.className = 'tst';
+    el.innerHTML = '<span class="tst__msg"></span><button class="tst__x" aria-label="닫기">&times;</button>';
+    el.querySelector('.tst__msg').textContent = msg;
+    el.querySelector('.tst__x').addEventListener('click', function () { el.remove(); });
+    wrap.appendChild(el);
+    setTimeout(function () { el.classList.add('is-out'); setTimeout(function () { el.remove(); }, 200); }, 3200);
+  }
+})();
+</script>
+</body>
+</html>
