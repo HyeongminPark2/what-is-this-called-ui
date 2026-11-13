@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>타입 스케일 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>타입 스케일</b>
+  <label>비율
+    <select class="sel" id="r" style="width:auto;min-height:34px;padding:6px 30px 6px 10px;font-size:13px">
+      <option value="1.125">1.125 — 촘촘하게</option>
+      <option value="1.25" selected>1.25 — 보통</option>
+      <option value="1.333">1.333 — 시원하게</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="chaos"> 규칙 없이 (제각각)</label>
+</div>
+
+<div class="pad" id="rows"></div>
+
+<p class="hint">
+  비율을 바꿔 보세요. 기준 크기 <b>16px</b>에 비율을 거듭 곱해 단계를 만듭니다 —
+  그래서 어느 두 단계를 나란히 놓아도 <b>관계가 일정</b>합니다.<br>
+  <b>규칙 없이</b>를 켜면 실무에서 흔히 보는 모습이 됩니다. 17·19·23처럼 제각각인 값들은
+  나란히 놓았을 때 <b>크고 작은 차이가 들쭉날쭉</b>해서, 무엇이 더 중요한지가 안 읽힙니다.
+</p>
+
+<script>
+(function () {
+  var STEPS = [
+    ['text-xs',  -2], ['text-sm',  -1], ['text-base', 0],
+    ['text-lg',   1], ['text-xl',   2], ['text-2xl',  3], ['text-3xl', 4]
+  ];
+  var CHAOS = { 'text-xs': 11, 'text-sm': 13, 'text-base': 15, 'text-lg': 17, 'text-xl': 23, 'text-2xl': 26, 'text-3xl': 41 };
+  var SAMPLE = '정산이 확정되었습니다';
+  var rows = document.getElementById('rows');
+
+  function draw() {
+    var r = +document.getElementById('r').value;
+    var chaos = document.getElementById('chaos').checked;
+    rows.innerHTML = STEPS.map(function (s) {
+      var px = chaos ? CHAOS[s[0]] : Math.round(16 * Math.pow(r, s[1]) * 100) / 100;
+      return '<div class="scale-row"><span class="nm">' + s[0] + '</span>' +
+        '<span class="px">' + px + 'px</span>' +
+        '<span class="sample" style="font-size:' + px + 'px">' + SAMPLE + '</span></div>';
+    }).join('');
+    document.getElementById('r').disabled = chaos;
+  }
+  document.getElementById('r').addEventListener('change', draw);
+  document.getElementById('chaos').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

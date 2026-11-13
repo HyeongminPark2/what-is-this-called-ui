@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>z-index 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .ladder { list-style: none; padding: 0; margin: var(--s4) 0 0; font-size: 13px; display: grid; gap: 4px; }
+  .ladder li { display: flex; gap: 8px; align-items: baseline; }
+  .ladder .n { font-family: var(--mono); color: var(--accent); width: 44px; flex: none; text-align: right; }
+  .bad { color: var(--danger); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>z-index</b>
+  <label><input type="checkbox" id="chaos"> 아무 값이나 쓰기(9999)</label>
+</div>
+
+<div class="pad">
+  <div class="z-stage" id="stage">
+    <div class="z-layer z-page">본문 — 정산 목록<span class="z-badge">z: auto</span></div>
+    <div class="z-layer z-head">상단 바<span class="z-badge" id="b-head">z: 100</span></div>
+    <div class="z-layer z-drop">계정 메뉴<span class="z-badge" id="b-drop">z: 300</span></div>
+    <div class="z-layer z-scrim" id="scrim"><span class="z-badge" id="b-scrim" style="color:#fff">z: 500</span></div>
+    <div class="z-layer z-modal" id="modal"><b>정산을 확정할까요?</b><span class="z-badge" id="b-modal">z: 600</span></div>
+    <div class="z-layer z-toast" id="toast">확정했습니다<span class="z-badge" id="b-toast" style="color:#cfd6e4">z: 800</span></div>
+  </div>
+
+  <ul class="ladder">
+    <li><span class="n">100</span><span>붙박이 머리말·꼬리말</span></li>
+    <li><span class="n">300</span><span>드롭다운·팝오버·툴팁</span></li>
+    <li><span class="n">500</span><span>가림막(scrim)</span></li>
+    <li><span class="n">600</span><span>모달·시트</span></li>
+    <li><span class="n">800</span><span>토스트 — 모달 위에도 떠야 한다</span></li>
+  </ul>
+</div>
+
+<p class="hint">
+  z-index는 <b>아무 숫자나 쓰는 칸이 아니라 정해 둔 사다리</b>입니다. 100·300·500처럼
+  사이를 띄워 두면 나중에 한 층을 끼워 넣을 자리가 남습니다.<br>
+  <b>아무 값이나 쓰기</b>를 켜 보세요. 토스트가 9999면 당장은 맨 위로 옵니다. 그런데
+  다음 사람도 9999를 쓰고, 그다음 사람은 99999를 씁니다 — 결국 <b>아무도 순서를 설명할 수 없게</b>
+  됩니다. 여기서는 모달이 가림막에 덮여 글자가 안 읽히는 것으로 보여 줍니다.<br>
+  주의: z-index는 <b>같은 쌓임 맥락 안에서만</b> 비교됩니다. 부모에 <code>transform</code>이나
+  <code>opacity: .99</code>가 걸려 있으면 새 맥락이 생겨, 자식의 z-index가 아무리 커도
+  그 부모를 넘어가지 못합니다.
+</p>
+
+<script>
+(function () {
+  var map = { 'scrim': ['z-scrim', 500, 9999], 'modal': ['z-modal', 600, 500], 'toast': ['z-toast', 800, 9999] };
+  document.getElementById('chaos').addEventListener('change', function () {
+    var on = this.checked;
+    Object.keys(map).forEach(function (id) {
+      var v = on ? map[id][2] : map[id][1];
+      document.getElementById(id).style.zIndex = v;
+      var b = document.getElementById('b-' + id);
+      b.textContent = 'z: ' + v;
+      b.classList.toggle('bad', on && v === 9999);
+    });
+  });
+})();
+</script>
+</body>
+</html>

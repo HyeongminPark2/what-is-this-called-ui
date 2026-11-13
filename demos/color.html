@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>색 토큰 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); }
+  h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--fg-muted); margin: var(--s5) 0 var(--s2); }
+  h4:first-child { margin-top: 0; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .warn { margin: var(--s4); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>색 토큰 3단</b>
+  <label><input type="checkbox" id="dark"> 어두운 화면으로</label>
+</div>
+
+<div class="pad" id="box">
+  <h4>1단 — 원시 토큰 (raw · primitive)</h4>
+  <div class="tok">
+    <div class="tok__row"><span class="tok__chip" style="background:#2f6df6"></span><span class="tok__name">blue-500</span><span class="tok__val">#2f6df6</span></div>
+    <div class="tok__row"><span class="tok__chip" style="background:#c0342b"></span><span class="tok__name">red-500</span><span class="tok__val">#c0342b</span></div>
+    <div class="tok__row"><span class="tok__chip" style="background:#14161a"></span><span class="tok__name">gray-900</span><span class="tok__val">#14161a</span></div>
+  </div>
+
+  <h4>2단 — 시맨틱 토큰 (semantic) · <b style="color:var(--accent)">여기만 보고 쓴다</b></h4>
+  <div class="tok">
+    <div class="tok__row"><span class="tok__chip" id="c-acc"></span><span class="tok__name"><b>--accent</b></span><span class="tok__arrow">←</span><span class="tok__val" id="v-acc"></span></div>
+    <div class="tok__row"><span class="tok__chip" id="c-dan"></span><span class="tok__name"><b>--danger</b></span><span class="tok__arrow">←</span><span class="tok__val" id="v-dan"></span></div>
+    <div class="tok__row"><span class="tok__chip" id="c-fg"></span><span class="tok__name"><b>--fg</b></span><span class="tok__arrow">←</span><span class="tok__val" id="v-fg"></span></div>
+  </div>
+
+  <h4>3단 — 컴포넌트 토큰 (component)</h4>
+  <div class="tok">
+    <div class="tok__row"><span class="tok__chip" id="c-btn"></span><span class="tok__name">button-bg</span><span class="tok__arrow">←</span><span class="tok__val">--accent</span></div>
+    <div class="tok__row"><span class="tok__chip" id="c-err"></span><span class="tok__name">field-border-error</span><span class="tok__arrow">←</span><span class="tok__val">--danger</span></div>
+  </div>
+</div>
+
+<div class="alert alert--warn warn" role="note">
+  <span class="ic">!</span>
+  <span class="bd"><b>왜 3단인가</b>
+  <p><b>원시</b>는 색 그 자체(blue-500)이고 <b>시맨틱</b>은 쓰임(--accent)입니다.
+  화면에서는 <b>시맨틱만</b> 씁니다. 그래야 어두운 화면에서 2단의 연결만 바꾸면 되고,
+  브랜드 색이 바뀌어도 1단만 고치면 됩니다. 화면이 <code>#2f6df6</code>을 직접 쓰면 그 두 가지가 다 막힙니다.</p></span>
+</div>
+
+<p class="hint">
+  <b>어두운 화면으로</b>를 켜 보세요. 1단(원시)은 그대로이고 <b>2단의 연결만 바뀝니다</b> —
+  <code>--accent</code>가 <code>blue-500</code>에서 <code>blue-300</code>을 가리키게 됩니다.
+  화면 코드는 한 줄도 안 고쳤습니다.
+</p>
+
+<script>
+(function () {
+  var LIGHT = { accent: ['blue-500', '#2f6df6'], danger: ['red-500', '#c0342b'], fg: ['gray-900', '#14161a'] };
+  var DARK  = { accent: ['blue-300', '#6f9bff'], danger: ['red-300', '#ef7a72'], fg: ['gray-050', '#e8ebf0'] };
+
+  function paint(on) {
+    var T = on ? DARK : LIGHT;
+    [['acc', 'accent'], ['dan', 'danger'], ['fg', 'fg']].forEach(function (p) {
+      document.getElementById('c-' + p[0]).style.background = T[p[1]][1];
+      document.getElementById('v-' + p[0]).textContent = T[p[1]][0];
+    });
+    document.getElementById('c-btn').style.background = T.accent[1];
+    document.getElementById('c-err').style.background = T.danger[1];
+    document.getElementById('box').style.background = on ? '#101216' : '';
+    document.getElementById('box').style.color = on ? '#e8ebf0' : '';
+  }
+  document.getElementById('dark').addEventListener('change', function (e) { paint(e.target.checked); });
+  paint(false);
+})();
+</script>
+</body>
+</html>

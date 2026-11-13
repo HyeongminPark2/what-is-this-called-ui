@@ -208,6 +208,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
 
   // ── 2. 항목 카드 — 일곱 장 모두 같은 틀인지 ──
   const PARTS = {
+    '2부': ['color', 'dark', 'typescale', 'spacing', 'elevation', 'zindex'],
     '6부': ['modal', 'dialog', 'sheet', 'drawer', 'popover', 'tooltip', 'toast'],
     '4부': ['field', 'select', 'combobox', 'checkbox', 'radio', 'switch', 'segmented', 'slider'],
     '7부': ['appbar', 'sidebar', 'tabs', 'breadcrumb', 'pagination', 'infinite', 'bottomnav'],
@@ -691,6 +692,103 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   if (await page.locator('#body').evaluate(e => e.scrollTop) !== 200) fail.push('바텀 탭바: 탭마다 스크롤을 안 기억한다');
   await page.locator('.nav-bottom [data-k=tx]').click(); await page.waitForTimeout(600);
   if (await page.locator('#body').evaluate(e => e.scrollTop) > 5) fail.push('바텀 탭바: 같은 탭을 다시 눌러도 맨 위로 안 간다');
+  await page.close();
+
+  // 2부 디자인 토큰 데모 여섯 장
+  // 색 토큰 — 2단만 갈아 끼우면 3단이 따라온다
+  page = await demo('color', 900, 820);
+  const accL = await page.locator('#c-acc').evaluate(e => getComputedStyle(e).backgroundColor);
+  if (await page.locator('#c-btn').evaluate(e => getComputedStyle(e).backgroundColor) !== accL)
+    fail.push('색 토큰: 3단이 2단을 안 따른다');
+  if (await page.locator('#v-acc').textContent() !== 'blue-500') fail.push('색 토큰: 밝은 쪽 연결이 blue-500 이 아니다');
+  await page.locator('#dark').check(); await page.waitForTimeout(120);
+  if (await page.locator('#v-acc').textContent() !== 'blue-300') fail.push('색 토큰: 어두운 쪽에서 연결이 안 바뀐다');
+  const accD = await page.locator('#c-acc').evaluate(e => getComputedStyle(e).backgroundColor);
+  if (accD === accL) fail.push('색 토큰: 2단 색이 그대로다');
+  if (await page.locator('#c-btn').evaluate(e => getComputedStyle(e).backgroundColor) !== accD)
+    fail.push('색 토큰: 3단을 안 건드렸는데 따라오지 않는다');
+  if (await page.locator('.tok .tok__val').first().textContent() !== '#2f6df6') fail.push('색 토큰: 1단 원시 값이 바뀌었다');
+  await page.close();
+
+  // 다크 모드 — 토큰을 쓴 것만 따라오고, 대비비를 다시 잰다
+  page = await demo('dark', 900, 900);
+  const bgL = await page.locator('#fake').evaluate(e => getComputedStyle(e).backgroundColor);
+  const hardL = await page.locator('#fake .hard').evaluate(e => getComputedStyle(e).backgroundColor);
+  if (await page.locator('#toggle').getAttribute('aria-pressed') !== 'false') fail.push('다크 모드: aria-pressed 초기값이 false 가 아니다');
+  await page.locator('#toggle').click();
+  await page.waitForTimeout(300);          // 바탕색에 transition 이 걸려 있다 — 다 바뀐 뒤에 읽는다
+  if (await page.locator('#toggle').getAttribute('aria-pressed') !== 'true') fail.push('다크 모드: aria-pressed 가 안 바뀐다');
+  if (await page.locator('#fake').evaluate(e => getComputedStyle(e).backgroundColor) === bgL)
+    fail.push('다크 모드: 토큰을 쓴 바탕이 안 어두워진다');
+  if (await page.locator('#fake .hard').evaluate(e => getComputedStyle(e).backgroundColor) !== hardL)
+    fail.push('다크 모드: 색을 박아 둔 카드가 따라왔다 (보여주려는 실패가 사라졌다)');
+  const ratio = parseFloat(await page.locator('#r1').textContent());
+  if (!(ratio >= 4.5)) fail.push(`다크 모드: 어두운 쪽 본문 대비비가 AA 미달 (${ratio})`);
+  if (await page.locator('#s1').textContent() !== '통과') fail.push('다크 모드: 대비 판정이 통과로 안 뜬다');
+  await page.close();
+
+  // 타입 스케일 — 이웃한 단의 비가 일정하고, 규칙을 끄면 들쭉날쭉해진다
+  page = await demo('typescale', 900, 760);
+  const sizesOf = () => page.$$eval('.scale-row .sample', els => els.map(e => parseFloat(getComputedStyle(e).fontSize)));
+  const sz = await sizesOf();
+  if (sz.length !== 7) fail.push(`타입 스케일: 단이 ${sz.length}개 (7 기대)`);
+  if (!sz.every((v, i) => i === 0 || v > sz[i - 1])) fail.push('타입 스케일: 아래로 갈수록 안 커진다');
+  if (Math.abs(sz[2] - 16) > 0.5) fail.push(`타입 스케일: 기준이 16px 이 아니다 (${sz[2]})`);
+  const rs = sz.slice(1).map((v, i) => v / sz[i]);
+  if (!rs.every(r => Math.abs(r - 1.25) < 0.04)) fail.push('타입 스케일: 이웃한 단의 비가 1.25 가 아니다');
+  await page.locator('#chaos').check(); await page.waitForTimeout(120);
+  const sc = await sizesOf();
+  const rr = sc.slice(1).map((v, i) => v / sc[i]);
+  if (Math.max(...rr) - Math.min(...rr) < 0.1) fail.push('타입 스케일: 규칙을 꺼도 비가 그대로다 (보여주려는 실패가 안 보인다)');
+  if (!await page.locator('#r').isDisabled()) fail.push('타입 스케일: 규칙을 껐는데 비율을 고를 수 있다');
+  await page.close();
+
+  // 간격 체계 — 기본은 8의 배수, 눈대중을 켜면 어긋난다
+  page = await demo('spacing', 900, 820);
+  const padsOf = () => page.$$eval('.sp-card', els => els.map(e => parseFloat(getComputedStyle(e).paddingTop)));
+  if (!(await padsOf()).every(v => v % 8 === 0)) fail.push('간격 체계: 기본 여백이 8의 배수가 아니다');
+  await page.locator('#grid').check(); await page.waitForTimeout(100);
+  if (await page.locator('#demo').evaluate(e => getComputedStyle(e).backgroundImage) === 'none')
+    fail.push('간격 체계: 격자가 안 그려진다');
+  await page.locator('#odd').check(); await page.waitForTimeout(100);
+  if ((await padsOf()).some(v => v % 8 === 0)) fail.push('간격 체계: 눈대중 값인데 8의 배수다');
+  if (!(await page.locator('#ruler').textContent()).includes('8의 배수가 아님')) fail.push('간격 체계: 어긋났다고 안 알려 준다');
+  await page.close();
+
+  // 고도 — 단이 올라갈수록 번짐이 커진다(진해지는 게 아니다)
+  page = await demo('elevation', 900, 700);
+  const blur = await page.$$eval('.elev', els => els.map(e => {
+    const m = getComputedStyle(e).boxShadow.match(/(-?[\d.]+)px (-?[\d.]+)px ([\d.]+)px/);
+    return m ? parseFloat(m[3]) : 0;
+  }));
+  if (blur.length !== 5) fail.push(`고도: 단이 ${blur.length}개 (5 기대)`);
+  if (blur[0] !== 0) fail.push('고도: 0단에 그림자가 있다');
+  if (!blur.every((v, i) => i === 0 || v > blur[i - 1])) fail.push(`고도: 단이 올라가는데 번짐이 안 커진다 (${blur.join('/')})`);
+  await page.locator('#flat').check(); await page.waitForTimeout(120);
+  if (!await page.$$eval('.elev', els => els.every(e => getComputedStyle(e).boxShadow === 'none')))
+    fail.push('고도: 테두리로 바꿨는데 그림자가 남아 있다');
+  if (!await page.$$eval('.elev', els => els.every(e => parseFloat(getComputedStyle(e).borderTopWidth) > 0)))
+    fail.push('고도: 그림자를 껐는데 테두리가 없다');
+  await page.close();
+
+  // z-index — 사다리대로 쌓이고, 아무 값이나 쓰면 모달이 가림막에 덮인다
+  page = await demo('zindex', 900, 860);
+  for (const [sel, want] of [['.z-head', '100'], ['.z-drop', '300'], ['#scrim', '500'], ['#modal', '600'], ['#toast', '800']]) {
+    const got = await page.locator(sel).evaluate(e => getComputedStyle(e).zIndex);
+    if (got !== want) fail.push(`z-index: ${sel} 가 ${got} (${want} 기대)`);
+  }
+  const topLayer = sel => page.evaluate(s => {
+    const r = document.querySelector(s).getBoundingClientRect();
+    const el = document.elementFromPoint(r.left + r.width / 2, r.top + r.height / 2);
+    const l = el && el.closest('.z-layer');
+    return l ? l.className : '(없음)';
+  }, sel);
+  if (!(await topLayer('#modal')).includes('z-modal')) fail.push('z-index: 모달 한가운데를 찍었는데 모달이 안 잡힌다');
+  await page.locator('#chaos').check(); await page.waitForTimeout(120);
+  if (await page.locator('#toast').evaluate(e => getComputedStyle(e).zIndex) !== '9999')
+    fail.push('z-index: 아무 값이나 쓰기에서 9999 가 안 된다');
+  if (!(await topLayer('#modal')).includes('z-scrim')) fail.push('z-index: 모달이 가림막에 안 덮인다 (보여주려는 실패가 안 보인다)');
+  if (!await page.locator('#b-toast').evaluate(e => e.classList.contains('bad'))) fail.push('z-index: 9999 가 빨갛게 표시되지 않는다');
   await page.close();
 
   await browser.close();

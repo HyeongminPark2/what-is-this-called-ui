@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>간격 체계 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s5) var(--s4); }
+  .sp-card + .sp-card { margin-top: 16px; }
+  .sp-card .meta { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+  .av { width: 28px; height: 28px; border-radius: var(--r-full); background: var(--accent-soft); flex: none; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  code { font-size: 12px; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>간격 체계</b>
+  <label><input type="checkbox" id="grid"> 8px 격자 보기</label>
+  <label><input type="checkbox" id="odd"> 눈대중 값으로 (7·13·19…)</label>
+</div>
+
+<div class="pad">
+  <div class="sp-demo" id="demo">
+    <div class="sp-card" id="c1" style="padding:16px">
+      <h4>정산 요청 #4821</h4>
+      <p>11월 1일 ~ 11월 7일 · 매출 ₩1,284,000</p>
+      <div class="meta"><span class="av"></span><span style="font-size:13px;color:var(--fg-muted)">박형민 · 2시간 전</span></div>
+    </div>
+    <div class="sp-card" id="c2" style="padding:16px">
+      <h4>정산 요청 #4820</h4>
+      <p>10월 25일 ~ 10월 31일 · 매출 ₩982,500</p>
+      <div class="meta"><span class="av"></span><span style="font-size:13px;color:var(--fg-muted)">박형민 · 어제</span></div>
+    </div>
+  </div>
+  <p class="sp-ruler" id="ruler" style="margin-top:14px"></p>
+</div>
+
+<p class="hint">
+  <b>8px 격자 보기</b>를 켜면 가로줄이 8px마다 그어집니다. 모든 여백이 8의 배수(8·16·24)라서
+  글줄과 테두리가 줄에 딱 떨어집니다.<br>
+  <b>눈대중 값으로</b>를 켜 보세요. 7·13·19처럼 그때그때 고른 값을 쓰면 한 화면 안에서도
+  여백이 미세하게 어긋나, 뭐라 집어 말하긴 어려운데 <b>어수선해 보입니다.</b>
+  간격 체계는 고르는 일을 줄이려는 것이 아니라 <b>이 어긋남을 없애려는 것</b>입니다.
+</p>
+
+<script>
+(function () {
+  var demo = document.getElementById('demo'), ruler = document.getElementById('ruler');
+  var c1 = document.getElementById('c1'), c2 = document.getElementById('c2');
+  var metas = document.querySelectorAll('.meta');
+
+  function draw() {
+    var odd = document.getElementById('odd').checked;
+    var pad = odd ? 13 : 16, gap = odd ? 19 : 16, inner = odd ? 7 : 8, mg = odd ? 11 : 8;
+    [c1, c2].forEach(function (c) { c.style.padding = pad + 'px'; });
+    c2.style.marginTop = gap + 'px';
+    document.querySelectorAll('.sp-card p').forEach(function (p) { p.style.marginTop = inner + 'px'; });
+    metas.forEach(function (m) { m.style.marginTop = mg + 'px'; m.style.gap = inner + 'px'; });
+    ruler.textContent = odd
+      ? '패딩 ' + pad + ' · 카드 사이 ' + gap + ' · 줄 사이 ' + inner + '/' + mg + '  (8의 배수가 아님)'
+      : '패딩 ' + pad + ' · 카드 사이 ' + gap + ' · 줄 사이 ' + inner + '/' + mg + '  (모두 8의 배수)';
+  }
+  document.getElementById('grid').addEventListener('change', function () {
+    demo.classList.toggle('is-grid', this.checked);
+  });
+  document.getElementById('odd').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

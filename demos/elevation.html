@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>고도 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--bg); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); background: var(--surface); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s5) var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); background: var(--surface); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>고도(elevation)</b>
+  <label><input type="checkbox" id="flat"> 그림자 대신 테두리로</label>
+</div>
+
+<div class="pad" id="pad">
+  <div class="elev-grid">
+    <div class="elev elev-0"><b>0단</b><span>배경에 붙은 것 — 표, 목록</span></div>
+    <div class="elev elev-1"><b>1단</b><span>살짝 뜬 것 — 카드</span></div>
+    <div class="elev elev-2"><b>2단</b><span>눌러서 연 것 — 드롭다운, 팝오버</span></div>
+    <div class="elev elev-3"><b>3단</b><span>화면을 가로막은 것 — 모달, 시트</span></div>
+    <div class="elev elev-4"><b>4단</b><span>가장 위 — 토스트, 드래그 중인 것</span></div>
+  </div>
+</div>
+
+<p class="hint">
+  그림자는 장식이 아니라 <b>높이를 읽게 하는 신호</b>입니다. 높이가 올라갈수록
+  그림자는 <b>더 멀리, 더 흐리게</b> 퍼집니다 — 진해지는 게 아닙니다.
+  빛이 한 곳(위)에서 온다고 치고 만들기 때문에, 단마다 <code>y</code>값과 번짐만 커집니다.<br>
+  <b>그림자 대신 테두리로</b>를 켜 보세요. 테두리만으로도 구역은 나뉘지만
+  <b>무엇이 위에 있는지</b>는 안 읽힙니다. 다크 모드에서는 그림자가 잘 안 보여서
+  보통 이렇게 테두리나 더 밝은 배경을 함께 씁니다.
+</p>
+
+<script>
+document.getElementById('flat').addEventListener('change', function () {
+  document.getElementById('pad').classList.toggle('elev-flat', this.checked);
+});
+</script>
+</body>
+</html>

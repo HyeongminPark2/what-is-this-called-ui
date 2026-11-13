@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>다크 모드 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .stage { padding: var(--s4); }
+  .fake {
+    --f-bg: #ffffff; --f-fg: #14161a; --f-mut: #697180; --f-line: #e4e8ee; --f-acc: #2f6df6;
+    background: var(--f-bg); color: var(--f-fg);
+    border: 1px solid var(--f-line); border-radius: var(--r2); padding: var(--s4);
+    transition: background .18s, color .18s;
+  }
+  .fake.is-dark { --f-bg: #15181e; --f-fg: #e8ebf0; --f-mut: #9aa3b2; --f-line: #272c35; --f-acc: #6f9bff; }
+  .fake h3 { font-size: 16px; margin-bottom: 4px; }
+  .fake p { font-size: 13.5px; color: var(--f-mut); margin: 0 0 var(--s3); }
+  .fake .card { border: 1px solid var(--f-line); border-radius: var(--r1); padding: var(--s3); margin-bottom: var(--s3); }
+  .fake .btn { display: inline-block; background: var(--f-acc); color: #fff; border-radius: var(--r1); padding: 7px 14px; font-size: 13px; font-weight: 700; }
+  .fake .hard { background: #ffffff; color: #14161a; border: 1px solid #e4e8ee; }
+  .fake .cap { font-size: 12px; margin-top: 5px; }
+  .ratio { display: flex; gap: var(--s4); padding: 0 var(--s4) var(--s4); font-size: 13px; flex-wrap: wrap; }
+  .ratio span b { font-variant-numeric: tabular-nums; }
+  .ok { color: #1f8a4c; font-weight: 700; }
+  .no { color: var(--danger); font-weight: 700; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>다크 모드</b>
+  <button class="ui-btn ui-btn--ghost" id="toggle" style="min-height:36px;padding:8px 13px;font-size:13px" aria-pressed="false">어둡게 켜기</button>
+  <span style="font-size:13px;color:var(--fg-muted)" id="mode">지금: 밝게</span>
+</div>
+
+<div class="stage">
+  <div class="fake" id="fake">
+    <h3>정산 요약</h3>
+    <p>이 카드는 <b>토큰만</b> 씁니다. 모드가 바뀌면 같이 바뀝니다.</p>
+    <div class="card">
+      <b>이번 주 ₩1,284,000</b>
+      <div class="cap" style="color:var(--f-mut)">토큰으로 칠한 카드 — 잘 따라옵니다</div>
+    </div>
+    <div class="card hard">
+      <b>이번 주 ₩1,284,000</b>
+      <div class="cap" style="color:#697180">색을 <b>직접 박아 둔</b> 카드 — 안 따라옵니다</div>
+    </div>
+    <span class="btn">정산 내역 보기</span>
+  </div>
+</div>
+
+<p class="ratio">
+  <span>본문 대비비 <b id="r1"></b> <span id="s1"></span></span>
+  <span>보조 글 대비비 <b id="r2"></b> <span id="s2"></span></span>
+  <span style="color:var(--fg-muted)">AA 기준 4.5:1</span>
+</p>
+
+<p class="hint">
+  <b>어둡게 켜기</b>를 눌러 보세요. 위 카드는 토큰을 써서 같이 바뀌고,
+  아래 카드는 <code>#ffffff</code>를 <b>직접 박아 둬서</b> 어두운 화면에서 혼자 하얗게 남습니다 —
+  다크 모드가 깨지는 거의 모든 경우가 이것입니다.<br>
+  다크 모드는 <b>색을 뒤집는 것이 아닙니다.</b> 순수한 검정(#000)은 눈이 아프고, 밝은 모드의 색을 그대로 쓰면
+  대비가 모자랍니다. 그래서 <b>두 벌의 값</b>을 따로 정합니다.
+</p>
+
+<script>
+(function () {
+  var fake = document.getElementById('fake'), btn = document.getElementById('toggle');
+  var mode = document.getElementById('mode');
+
+  function lum(hex) {
+    var n = parseInt(hex.slice(1), 16);
+    var c = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map(function (v) {
+      v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+  function ratio(a, b) {
+    var x = lum(a), y = lum(b);
+    return ((Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05));
+  }
+  function show(on) {
+    var bg = on ? '#15181e' : '#ffffff';
+    var fg = on ? '#e8ebf0' : '#14161a';
+    var mut = on ? '#9aa3b2' : '#697180';
+    [['r1', 's1', ratio(bg, fg)], ['r2', 's2', ratio(bg, mut)]].forEach(function (p) {
+      var v = p[2];
+      document.getElementById(p[0]).textContent = v.toFixed(2) + ':1';
+      var s = document.getElementById(p[1]);
+      s.textContent = v >= 4.5 ? '통과' : '모자람';
+      s.className = v >= 4.5 ? 'ok' : 'no';
+    });
+    mode.textContent = '지금: ' + (on ? '어둡게' : '밝게');
+    btn.textContent = on ? '밝게 켜기' : '어둡게 켜기';
+    btn.setAttribute('aria-pressed', String(on));
+  }
+
+  btn.addEventListener('click', function () {
+    var on = fake.classList.toggle('is-dark');
+    show(on);
+  });
+  show(false);
+})();
+</script>
+</body>
+</html>
