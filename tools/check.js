@@ -209,6 +209,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   // ── 2. 항목 카드 — 일곱 장 모두 같은 틀인지 ──
   const PARTS = {
     '6부': ['modal', 'dialog', 'sheet', 'drawer', 'popover', 'tooltip', 'toast'],
+    '4부': ['field', 'select', 'combobox', 'checkbox', 'radio', 'switch', 'segmented', 'slider'],
     '8부': ['spinner', 'skeleton', 'progress', 'optimistic', 'empty', 'error'],
   };
   const ITEMS = Object.values(PARTS).flat();
@@ -526,6 +527,102 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   await page.locator('.seg2 button[data-k="offline"]').click(); await page.waitForTimeout(150);
   if (await page.locator('.offline').count() !== 1) fail.push('에러(연결): 꼭대기 띠가 없다');
   if (await page.locator('.ui-btn[disabled]').count() !== 1) fail.push('에러(연결): 보내기가 비활성이 아니다');
+  await page.close();
+
+
+  // ── 4부 데모 ──
+  // 텍스트 필드 — 첫 틀린 칸으로 포커스, 고치는 즉시 풀림
+  page = await demo('field');
+  await page.locator('button[type=submit]').click(); await page.waitForTimeout(200);
+  if (await page.locator('.f__err').count() !== 2) fail.push('필드: 에러가 두 개가 아니다');
+  if (!await page.locator('#nm').evaluate(e => e === document.activeElement)) fail.push('필드: 첫 틀린 칸으로 포커스가 안 간다');
+  if (await page.locator('#nm').getAttribute('aria-invalid') !== 'true') fail.push('필드: aria-invalid 가 없다');
+  await page.locator('#nm').fill('박형민'); await page.waitForTimeout(150);
+  if (await page.locator('#nm-e').count() !== 0) fail.push('필드: 고쳐도 에러가 안 풀린다');
+  await page.locator('#memo').fill('가'.repeat(12)); await page.waitForTimeout(100);
+  if (!(await page.locator('#memo-c').textContent()).startsWith('12')) fail.push('필드: 글자 수가 안 센다');
+  await page.close();
+
+  // 셀렉트 — 묶음과 229개
+  page = await demo('select');
+  if (await page.locator('#bank optgroup').count() !== 2) fail.push('셀렉트: 묶음(optgroup)이 없다');
+  if (await page.locator('#city option').count() !== 229) fail.push('셀렉트: 229개가 아니다');
+  await page.selectOption('#bank', '하나'); await page.waitForTimeout(120);
+  if (!(await page.locator('#out').textContent()).includes('하나')) fail.push('셀렉트: 고른 값이 안 반영된다');
+  await page.close();
+
+  // 콤보박스 — 걸러짐, 키보드, 없는 값 허용
+  page = await demo('combobox');
+  await page.locator('#q').click(); await page.waitForTimeout(150);
+  if (await page.locator('#q').getAttribute('aria-expanded') !== 'true') fail.push('콤보박스: aria-expanded 가 없다');
+  await page.locator('#q').fill('광화문 7호'); await page.waitForTimeout(200);
+  const nOpt = await page.locator('.cb__opt').count();
+  if (nOpt === 0 || nOpt > 4) fail.push(`콤보박스: 타이핑으로 안 걸러진다 (${nOpt}개)`);
+  if (await page.locator('.cb__opt mark').count() === 0) fail.push('콤보박스: 맞은 글자가 강조되지 않는다');
+  await page.keyboard.press('ArrowDown'); await page.keyboard.press('Enter'); await page.waitForTimeout(200);
+  if (!(await page.locator('#out').textContent()).includes('광화문 7호')) fail.push('콤보박스: 키보드로 못 고른다');
+  await page.locator('#q').fill('없는가게'); await page.waitForTimeout(200);
+  await page.keyboard.press('Enter'); await page.waitForTimeout(150);
+  if ((await page.locator('#out').textContent()).includes('없는가게')) fail.push('콤보박스: 자유 입력이 꺼졌는데 받아들였다');
+  await page.locator('#free').check();
+  await page.locator('#q').fill('없는가게'); await page.waitForTimeout(200);
+  await page.keyboard.press('Enter'); await page.waitForTimeout(150);
+  if (!(await page.locator('#out').textContent()).includes('없는가게')) fail.push('콤보박스: 자유 입력을 켰는데 안 받는다');
+  await page.close();
+
+  // 체크박스 — 중간 상태, 비활성 제외
+  page = await demo('checkbox');
+  if (!await page.locator('#all').evaluate(e => e.indeterminate)) fail.push('체크박스: 중간 상태가 아니다');
+  await page.locator('#all').click(); await page.waitForTimeout(150);
+  if (await page.locator('.kid:checked').count() !== 4) fail.push('체크박스: 전체 선택이 전부를 안 켠다');
+  await page.locator('#all').click(); await page.waitForTimeout(150);
+  if (await page.locator('.kid:checked').count() !== 1) fail.push('체크박스: 비활성 항목까지 껐다');
+  await page.locator('button[type=submit]').click(); await page.waitForTimeout(150);
+  if (await page.locator('#err').isHidden()) fail.push('체크박스: 필수 동의 검사가 안 된다');
+  await page.close();
+
+  // 라디오 — 하나만, 화살표 이동
+  page = await demo('radio');
+  await page.locator('button[type=submit]').click(); await page.waitForTimeout(150);
+  if (await page.locator('#err').isHidden()) fail.push('라디오: 안 고르고 저장했는데 안 막는다');
+  await page.locator('[name=cycle]').first().check(); await page.waitForTimeout(100);
+  await page.keyboard.press('ArrowDown'); await page.waitForTimeout(150);
+  if (await page.locator('[name=cycle]:checked').getAttribute('value') !== '주 1회') fail.push('라디오: 화살표로 안 옮겨진다');
+  if (await page.locator('[name=cycle]:checked').count() !== 1) fail.push('라디오: 둘 이상 골라진다');
+  await page.close();
+
+  // 스위치 — 즉시 적용 + 되돌림
+  page = await demo('switch');
+  await page.locator('#s2').click(); await page.waitForTimeout(80);
+  if (await page.locator('#s2').getAttribute('aria-checked') !== 'true') fail.push('스위치: 즉시 안 바뀐다');
+  if ((await page.locator('[data-for=s2]').textContent()) !== '켬') fail.push('스위치: 글자 표시가 안 따라간다');
+  await page.locator('#s3').click(); await page.waitForTimeout(900);
+  if (await page.locator('#s3').getAttribute('aria-checked') !== 'false') fail.push('스위치: 거절당했는데 안 되돌아간다');
+  if (await page.locator('.tst').count() !== 1) fail.push('스위치: 되돌린 이유를 안 알려 준다');
+  await page.close();
+
+  // 세그먼티드 — 목록을 거른다 / 탭은 화면을 바꾼다
+  page = await demo('segmented');
+  if (await page.locator('#rows .row').count() !== 5) fail.push('세그먼티드: 처음 목록이 5줄이 아니다');
+  await page.locator('#seg [data-v=계좌]').click(); await page.waitForTimeout(150);
+  if (await page.locator('#rows .row').count() !== 2) fail.push('세그먼티드: 걸러지지 않는다');
+  await page.locator('#seg [data-v=계좌]').focus();
+  await page.keyboard.press('ArrowRight'); await page.waitForTimeout(150);
+  if (await page.locator('#seg [data-v=전체]').getAttribute('aria-checked') !== 'true') fail.push('세그먼티드: 화살표로 안 옮겨진다');
+  await page.locator('#t2').click(); await page.waitForTimeout(150);
+  if (await page.locator('#p1').isVisible() || await page.locator('#p2').isHidden()) fail.push('탭: 화면이 안 바뀐다');
+  await page.close();
+
+  // 슬라이더 — 숫자 칸과 양방향, 눈금 붙기
+  page = await demo('slider');
+  await page.locator('#amt').fill('500000'); await page.waitForTimeout(150);
+  if (await page.locator('#amtn').inputValue() !== '500,000') fail.push('슬라이더: 숫자 칸이 안 따라간다');
+  await page.locator('#amtn').fill('123456'); await page.waitForTimeout(150);
+  if (await page.locator('#amt').inputValue() !== '120000') fail.push('슬라이더: 눈금에 안 붙는다');
+  await page.locator('#days').focus();
+  const d0 = await page.locator('#days').inputValue();
+  await page.keyboard.press('ArrowRight'); await page.waitForTimeout(120);
+  if (await page.locator('#days').inputValue() === d0) fail.push('슬라이더: 화살표로 안 움직인다');
   await page.close();
 
   await browser.close();

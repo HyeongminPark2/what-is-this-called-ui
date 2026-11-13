@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>체크박스 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .pad { padding: var(--s4); }
+  .out { font-size: 13.5px; color: var(--fg-muted); padding: 0 var(--s4) var(--s3); }
+  .out b { color: var(--fg); }
+  .hint { padding: 0 var(--s4) var(--s5); font-size: 13px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="bar"><b>알림 받을 항목</b></div>
+
+<form class="pad" id="form" novalidate>
+  <fieldset class="grp">
+    <legend>정산 알림</legend>
+    <p class="hint" style="padding:0;margin:0 0 8px">여러 개를 고를 수 있습니다. <b>저장을 눌러야</b> 적용됩니다.</p>
+
+    <label class="ck">
+      <input type="checkbox" id="all">
+      <span class="tx"><b>전체 선택</b><span>아래를 한 번에 켜고 끕니다</span></span>
+    </label>
+
+    <div class="ck-tree">
+      <label class="ck"><input type="checkbox" class="kid" checked><span class="tx"><b>정산 확정</b><span>매주 월요일</span></span></label>
+      <label class="ck"><input type="checkbox" class="kid"><span class="tx"><b>입금 완료</b><span>입금될 때마다</span></span></label>
+      <label class="ck"><input type="checkbox" class="kid"><span class="tx"><b>환불 발생</b><span>환불이 생길 때마다</span></span></label>
+      <label class="ck"><input type="checkbox" class="kid" disabled checked><span class="tx"><b>보안 경고</b><span>끌 수 없습니다</span></span></label>
+    </div>
+  </fieldset>
+
+  <fieldset class="grp">
+    <legend>약관</legend>
+    <label class="ck ck--boxed">
+      <input type="checkbox" id="tos" required>
+      <span class="tx"><b>이용약관에 동의합니다 <span style="color:var(--danger)">*</span></b><span>동의해야 저장할 수 있습니다</span></span>
+    </label>
+    <label class="ck ck--boxed">
+      <input type="checkbox">
+      <span class="tx"><b>마케팅 수신에 동의합니다</b><span>선택 사항입니다</span></span>
+    </label>
+  </fieldset>
+
+  <button class="ui-btn" type="submit">저장</button>
+  <p class="f__err" id="err" hidden>이용약관에 동의해야 저장할 수 있습니다.</p>
+</form>
+
+<p class="out" id="out"></p>
+
+<p class="hint">
+  <b>전체 선택</b>을 보세요. 일부만 켜져 있을 때는 체크도 빈칸도 아닌 <b>세 번째 모습</b>이 됩니다 —
+  이걸 <b>중간 상태</b>(indeterminate)라 부르고, 체크박스에만 있는 상태입니다.<br>
+  글자 아무 데나 눌러도 켜집니다. 라벨과 칸이 이어져 있기 때문입니다 — 손가락으로 쓸 때 큰 차이가 납니다.
+</p>
+
+<script>
+(function () {
+  var all = document.getElementById('all');
+  var kids = [].slice.call(document.querySelectorAll('.kid'));
+  var out = document.getElementById('out'), err = document.getElementById('err');
+
+  function sync() {
+    var on = kids.filter(function (k) { return k.checked; }).length;
+    all.checked = on === kids.length;
+    all.indeterminate = on > 0 && on < kids.length;   // 세 번째 상태
+    out.innerHTML = '켜진 항목 <b>' + on + ' / ' + kids.length + '</b>' +
+      (all.indeterminate ? ' · 전체 선택은 <b>중간 상태</b>' : '');
+  }
+  all.addEventListener('change', function () {
+    kids.forEach(function (k) { if (!k.disabled) k.checked = all.checked; });
+    sync();
+  });
+  kids.forEach(function (k) { k.addEventListener('change', sync); });
+
+  document.getElementById('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var tos = document.getElementById('tos');
+    err.hidden = tos.checked;
+    if (!tos.checked) { tos.focus(); return; }
+    alert('저장했습니다 (데모)');
+  });
+  sync();
+})();
+</script>
+</body>
+</html>

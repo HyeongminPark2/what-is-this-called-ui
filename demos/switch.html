@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>스위치 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .pad { padding: var(--s4); }
+  h4 { font-size: 13px; color: var(--fg-muted); margin: var(--s5) 0 var(--s2); text-transform: uppercase; letter-spacing: .06em; }
+  h4:first-child { margin-top: 0; }
+  .box { border: 1px solid var(--line); border-radius: var(--r2); padding: var(--s2) var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="bar"><b>알림 설정</b></div>
+
+<div class="pad">
+  <h4>스위치 — 누르는 즉시 적용</h4>
+  <div class="box">
+    <div class="sw">
+      <span class="tx"><b>멘션과 답글</b><span>누가 나를 부르면 바로 알립니다</span></span>
+      <span class="sw__state" data-for="s1">켬</span>
+      <button class="sw__btn" id="s1" role="switch" aria-checked="true" aria-label="멘션과 답글 알림"></button>
+    </div>
+    <div class="sw">
+      <span class="tx"><b>주간 요약</b><span>월요일 아침에 보냅니다</span></span>
+      <span class="sw__state" data-for="s2">끔</span>
+      <button class="sw__btn" id="s2" role="switch" aria-checked="false" aria-label="주간 요약"></button>
+    </div>
+    <div class="sw">
+      <span class="tx"><b>제품 소식</b><span>이 줄은 서버가 거절합니다 — 되돌아갑니다</span></span>
+      <span class="sw__state" data-for="s3">끔</span>
+      <button class="sw__btn" id="s3" role="switch" aria-checked="false" data-fail="1" aria-label="제품 소식"></button>
+    </div>
+    <div class="sw">
+      <span class="tx"><b>보안 경고</b><span>끌 수 없습니다</span></span>
+      <span class="sw__state">켬</span>
+      <button class="sw__btn" role="switch" aria-checked="true" disabled aria-label="보안 경고"></button>
+    </div>
+  </div>
+
+  <h4>체크박스 — 저장을 눌러야 적용</h4>
+  <form class="box" id="cform" style="padding-bottom:var(--s4)">
+    <label class="ck"><input type="checkbox" checked><span class="tx"><b>멘션과 답글</b></span></label>
+    <label class="ck"><input type="checkbox"><span class="tx"><b>주간 요약</b></span></label>
+    <button class="ui-btn" style="margin-top:var(--s2);min-height:38px;padding:9px 14px;font-size:13px">저장</button>
+    <span id="csaved" style="margin-left:10px;font-size:13px;color:#1f8a4c;font-weight:700" hidden>저장했습니다</span>
+  </form>
+</div>
+
+<p class="hint">
+  <b>같은 설정을 두 방식으로 뒀습니다.</b> 위는 누르는 즉시 적용되고 저장 버튼이 없습니다.
+  아래는 바꿔도 아무 일이 안 일어나고 <b>저장</b>을 눌러야 합니다.
+  둘을 한 화면에 섞으면 사용자는 무엇이 저장됐는지 알 수 없습니다 — 그래서 <b>하나만 고르는 것</b>이 규칙입니다.<br>
+  세 번째 스위치는 서버가 거절합니다. <b>되돌아가고 이유를 알려 줍니다</b> — 즉시 적용의 값은 여기서 치릅니다.
+</p>
+
+<div class="tst-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var wrap = document.getElementById('toasts');
+
+  document.querySelectorAll('.sw__btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (btn.disabled) return;
+      var was = btn.getAttribute('aria-checked') === 'true';
+      btn.setAttribute('aria-checked', String(!was));   // 바로 바뀐다
+      btn.classList.add('is-pending');
+      label(btn);
+
+      setTimeout(function () {
+        btn.classList.remove('is-pending');
+        if (!btn.dataset.fail) return;
+        btn.setAttribute('aria-checked', String(was));  // 거절당하면 되돌린다
+        label(btn);
+        toast('바꾸지 못해 되돌렸습니다');
+      }, 600);
+    });
+    // 스페이스·엔터는 button 이라 공짜로 된다
+  });
+
+  function label(btn) {
+    var s = document.querySelector('[data-for="' + btn.id + '"]');
+    if (s) s.textContent = btn.getAttribute('aria-checked') === 'true' ? '켬' : '끔';
+  }
+
+  var cform = document.getElementById('cform'), saved = document.getElementById('csaved');
+  cform.addEventListener('submit', function (e) {
+    e.preventDefault(); saved.hidden = false;
+    setTimeout(function () { saved.hidden = true; }, 1800);
+  });
+  cform.addEventListener('change', function () { saved.hidden = true; });
+
+  function toast(msg) {
+    var el = document.createElement('div');
+    el.className = 'tst';
+    el.innerHTML = '<span class="tst__msg"></span><button class="tst__x" aria-label="닫기">&times;</button>';
+    el.querySelector('.tst__msg').textContent = msg;
+    el.querySelector('.tst__x').addEventListener('click', function () { el.remove(); });
+    wrap.appendChild(el);
+    setTimeout(function () { el.classList.add('is-out'); setTimeout(function () { el.remove(); }, 200); }, 3000);
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>세그먼티드 컨트롤 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .pad { padding: var(--s4); }
+  h4 { font-size: 13px; color: var(--fg-muted); margin: var(--s5) 0 var(--s3); text-transform: uppercase; letter-spacing: .06em; }
+  h4:first-child { margin-top: 0; }
+  .rows { border: 1px solid var(--line); border-radius: var(--r2); margin-top: var(--s3); overflow: hidden; }
+  .row { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-top: 1px solid var(--line); font-size: 14px; }
+  .row:first-child { border-top: 0; }
+  .row .amt { margin-left: auto; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .tabs { display: flex; gap: var(--s5); border-bottom: 1px solid var(--line); }
+  .tabs button { appearance: none; border: 0; background: transparent; cursor: pointer; font: inherit; font-size: 14.5px; font-weight: 600; color: var(--fg-muted); padding: 10px 2px; margin-bottom: -1px; }
+  .tabs button[aria-selected="true"] { color: var(--accent); font-weight: 800; border-bottom: 2px solid var(--accent); }
+  .panel { padding: var(--s4) 2px; font-size: 14px; color: var(--fg-muted); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="bar"><b>거래 내역</b></div>
+
+<div class="pad">
+  <h4>세그먼티드 컨트롤 — 같은 목록을 거른다</h4>
+  <div class="segc" id="seg" role="radiogroup" aria-label="결제 수단">
+    <button type="button" role="radio" aria-checked="true" data-v="전체">전체</button>
+    <button type="button" role="radio" aria-checked="false" data-v="카드">카드</button>
+    <button type="button" role="radio" aria-checked="false" data-v="계좌">계좌</button>
+  </div>
+  <div class="rows" id="rows"></div>
+
+  <h4>탭 — 내용 묶음 자체를 바꾼다</h4>
+  <div class="tabs" role="tablist" aria-label="화면">
+    <button role="tab" aria-selected="true" aria-controls="p1" id="t1">거래</button>
+    <button role="tab" aria-selected="false" aria-controls="p2" id="t2">정산</button>
+    <button role="tab" aria-selected="false" aria-controls="p3" id="t3">가맹점</button>
+  </div>
+  <div class="panel" id="p1" role="tabpanel" aria-labelledby="t1">거래 목록과 필터가 있는 화면입니다.</div>
+  <div class="panel" id="p2" role="tabpanel" aria-labelledby="t2" hidden>정산 주기와 입금 내역이 있는 <b>다른 화면</b>입니다.</div>
+  <div class="panel" id="p3" role="tabpanel" aria-labelledby="t3" hidden>가맹점 목록과 등록 양식이 있는 <b>또 다른 화면</b>입니다.</div>
+</div>
+
+<p class="hint">
+  생김새는 닮았지만 하는 일이 다릅니다. <b>세그먼티드는 값 하나를 고르는 것</b>이라 아래 목록이 걸러질 뿐,
+  화면은 그대로입니다 — 라디오 버튼의 다른 모양이라고 보면 맞습니다.
+  <b>탭은 내용 묶음 자체를 바꿉니다</b> — 거래와 정산은 아예 다른 화면입니다.<br>
+  선택지가 둘셋이고 <b>늘 다 보여야</b> 할 때 세그먼티드를 씁니다. 다섯을 넘기면 셀렉트가 낫습니다.
+</p>
+
+<script>
+(function () {
+  var DATA = [
+    { nm: '모란상회', pay: '카드', amt: '₩48,000' },
+    { nm: '하나로마트 역삼', pay: '카드', amt: '₩12,900' },
+    { nm: '블루보틀 성수', pay: '계좌', amt: '₩7,500' },
+    { nm: '교보문고 광화문', pay: '카드', amt: '₩132,000' },
+    { nm: '세븐일레븐 삼성점', pay: '계좌', amt: '₩3,200' }
+  ];
+  var seg = document.getElementById('seg'), rows = document.getElementById('rows');
+
+  function draw(v) {
+    var list = v === '전체' ? DATA : DATA.filter(function (d) { return d.pay === v; });
+    rows.innerHTML = list.length
+      ? list.map(function (d) { return '<div class="row">' + d.nm + ' <span style="color:var(--fg-muted);font-size:12.5px">' + d.pay + '</span><span class="amt">' + d.amt + '</span></div>'; }).join('')
+      : '<div class="row" style="color:var(--fg-muted)">맞는 거래가 없습니다</div>';
+  }
+
+  seg.addEventListener('click', function (e) {
+    var b = e.target.closest('[role=radio]');
+    if (!b) return;
+    seg.querySelectorAll('[role=radio]').forEach(function (x) { x.setAttribute('aria-checked', String(x === b)); });
+    draw(b.dataset.v);
+  });
+  // 화살표로 옮긴다 — 라디오 그룹과 같은 규칙
+  seg.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    e.preventDefault();
+    var bs = [].slice.call(seg.querySelectorAll('[role=radio]'));
+    var i = bs.findIndex(function (x) { return x.getAttribute('aria-checked') === 'true'; });
+    var n = (i + (e.key === 'ArrowRight' ? 1 : -1) + bs.length) % bs.length;
+    bs[n].click(); bs[n].focus();
+  });
+
+  var tabs = document.querySelectorAll('[role=tab]');
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (x) {
+        x.setAttribute('aria-selected', String(x === t));
+        document.getElementById(x.getAttribute('aria-controls')).hidden = x !== t;
+      });
+    });
+  });
+
+  draw('전체');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>텍스트 필드 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); }
+  .hint { padding: 0 var(--s4) var(--s5); font-size: 13px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>정산 담당자 등록</b>
+  <label><input type="checkbox" id="nolabel"> 라벨을 지우고 자리글만 남기기</label>
+</div>
+
+<form class="pad" id="form" novalidate>
+  <div class="f">
+    <label class="f__lb" for="nm">이름 <span class="req" aria-hidden="true">*</span></label>
+    <input class="f__in" id="nm" name="nm" required aria-describedby="nm-h" placeholder="예: 박형민">
+    <p class="f__help" id="nm-h">세금계산서에 찍히는 이름과 같아야 합니다.</p>
+  </div>
+
+  <div class="f">
+    <label class="f__lb" for="em">업무용 메일 <span class="req" aria-hidden="true">*</span></label>
+    <input class="f__in" id="em" name="em" type="email" required aria-describedby="em-h" placeholder="name@company.com">
+    <p class="f__help" id="em-h">정산 안내를 이 주소로 보냅니다.</p>
+  </div>
+
+  <div class="f">
+    <label class="f__lb" for="ph">연락처 <span class="opt">(선택)</span></label>
+    <input class="f__in" id="ph" name="ph" inputmode="numeric" aria-describedby="ph-h" placeholder="010-0000-0000">
+    <p class="f__help" id="ph-h">숫자만 넣어도 자동으로 끊어 줍니다.</p>
+  </div>
+
+  <div class="f">
+    <label class="f__lb" for="memo">메모 <span class="opt">(선택)</span></label>
+    <textarea class="f__in" id="memo" maxlength="80" aria-describedby="memo-c" placeholder="전달할 말이 있으면 적어 주세요"></textarea>
+    <span class="f__cnt" id="memo-c">0 / 80</span>
+  </div>
+
+  <div class="f">
+    <label class="f__lb" for="biz">사업자번호</label>
+    <input class="f__in" id="biz" value="123-45-67890" readonly aria-describedby="biz-h">
+    <p class="f__help" id="biz-h">읽기 전용입니다. 바꾸려면 관리자에게 요청하세요.</p>
+  </div>
+
+  <button class="ui-btn" type="submit">등록하기</button>
+</form>
+
+<p class="hint">
+  빈칸으로 <b>등록하기</b>를 눌러 보세요. <b>첫 번째 틀린 칸으로 포커스가 갑니다.</b>
+  고치기 시작하면 에러가 <b>보내기 전에</b> 풀립니다 — 다시 눌러야만 풀리면 답답합니다.<br>
+  위의 체크를 켜면 라벨이 사라지고 자리글만 남습니다. <b>입력을 시작하는 순간 무슨 칸이었는지 사라집니다.</b>
+  자리글은 라벨을 대신할 수 없습니다.
+</p>
+
+<script>
+(function () {
+  var form = document.getElementById('form');
+  var memo = document.getElementById('memo'), cnt = document.getElementById('memo-c');
+
+  memo.addEventListener('input', function () {
+    cnt.textContent = memo.value.length + ' / 80';
+    cnt.classList.toggle('over', memo.value.length >= 80);
+  });
+
+  function setErr(el, msg) {
+    clearErr(el);
+    el.setAttribute('aria-invalid', 'true');
+    var p = document.createElement('p');
+    p.className = 'f__err';
+    p.id = el.id + '-e';
+    p.textContent = msg;
+    el.closest('.f').appendChild(p);
+    el.setAttribute('aria-describedby', (el.dataset.help || '') + ' ' + p.id);
+  }
+  function clearErr(el) {
+    el.removeAttribute('aria-invalid');
+    var p = document.getElementById(el.id + '-e');
+    if (p) p.remove();
+    if (el.dataset.help) el.setAttribute('aria-describedby', el.dataset.help);
+  }
+
+  ['nm', 'em'].forEach(function (id) {
+    var el = document.getElementById(id);
+    el.dataset.help = el.getAttribute('aria-describedby');
+    // 보내기를 기다리지 말고 고쳐지는 즉시 풀어 준다
+    el.addEventListener('input', function () { if (check(el) === null) clearErr(el); });
+  });
+
+  function check(el) {
+    if (!el.value.trim()) return el.id === 'nm' ? '이름을 적어 주세요.' : '메일 주소를 적어 주세요.';
+    if (el.id === 'em' && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value)) return '메일 주소 형태가 아닙니다. 예: name@company.com';
+    return null;
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var first = null;
+    ['nm', 'em'].forEach(function (id) {
+      var el = document.getElementById(id), msg = check(el);
+      if (msg) { setErr(el, msg); if (!first) first = el; } else clearErr(el);
+    });
+    if (first) { first.focus(); return; }   // 첫 번째 틀린 칸으로
+    alert('등록했습니다 (데모)');
+  });
+
+  // 라벨을 지우고 자리글만 — 하면 안 되는 쪽을 직접 보여 준다
+  document.getElementById('nolabel').addEventListener('change', function (e) {
+    document.querySelectorAll('#form .f__lb').forEach(function (lb) {
+      lb.style.display = e.target.checked ? 'none' : '';
+    });
+  });
+})();
+</script>
+</body>
+</html>

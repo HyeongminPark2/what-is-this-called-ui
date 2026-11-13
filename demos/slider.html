@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>슬라이더 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .pad { padding: var(--s4); }
+  .hint { padding: 0 var(--s4) var(--s5); font-size: 13px; color: var(--fg-muted); }
+  .out { font-size: 13.5px; color: var(--fg-muted); padding: 0 var(--s4) var(--s3); }
+  .out b { color: var(--fg); }
+</style>
+</head>
+<body>
+
+<div class="bar"><b>알림 조건</b></div>
+
+<div class="pad">
+  <div class="f sld">
+    <label class="f__lb" for="amt">이 금액을 넘으면 알림</label>
+    <div class="sld__row">
+      <input type="range" id="amt" min="0" max="1000000" step="10000" value="300000"
+             aria-describedby="amt-h">
+      <input class="num" id="amtn" inputmode="numeric" value="300,000" aria-label="금액 직접 입력">
+    </div>
+    <div class="sld__ticks"><span>0</span><span>50만</span><span>100만</span></div>
+    <p class="f__help" id="amt-h">끌어서 대충 맞추고, 정확한 값은 오른쪽 칸에 적습니다.
+      <b>슬라이더만 두면 정확한 값을 못 넣습니다.</b> 다만 눈금(step)이 1만 원이라
+      123,456을 적어도 <b>120,000으로 붙습니다</b> — 눈금을 정하는 순간 그 사이 값은 못 고르게 됩니다.</p>
+  </div>
+
+  <div class="f sld">
+    <label class="f__lb" for="days">보관 기간</label>
+    <input type="range" id="days" min="7" max="365" step="1" value="90" aria-describedby="days-h">
+    <div class="sld__ticks"><span>7일</span><span class="sld__val" id="daysv" style="font-size:14px">90일</span><span>365일</span></div>
+    <p class="f__help" id="days-h">범위가 넓고 눈금이 촘촘하면 손으로 맞추기 어렵습니다. 이럴 때는 숫자 칸이 더 낫습니다.</p>
+  </div>
+
+  <div class="f sld">
+    <label class="f__lb" for="size">글자 크기</label>
+    <input type="range" id="size" min="0" max="2" step="1" value="1" list="sizes" aria-describedby="size-h">
+    <datalist id="sizes"><option value="0"></option><option value="1"></option><option value="2"></option></datalist>
+    <div class="sld__ticks"><span>작게</span><span>보통</span><span>크게</span></div>
+    <p class="f__help" id="size-h">칸이 셋뿐이면 <b>세그먼티드 컨트롤</b>이 더 분명합니다 — 지금 어디인지 글자로 보입니다.</p>
+  </div>
+</div>
+
+<p class="out" id="out"></p>
+
+<p class="hint">
+  손잡이를 잡고 <kbd>←</kbd><kbd>→</kbd>를 눌러 보세요. 한 칸씩 움직이고, <kbd>Home</kbd>·<kbd>End</kbd>로 양 끝까지 갑니다.
+  <b>슬라이더는 값이 숫자로 보이지 않으면 쓸 수 없습니다</b> — 그래서 지금 값을 늘 옆에 적습니다.
+</p>
+
+<script>
+(function () {
+  var amt = document.getElementById('amt'), amtn = document.getElementById('amtn');
+  var days = document.getElementById('days'), daysv = document.getElementById('daysv');
+  var size = document.getElementById('size'), out = document.getElementById('out');
+  var SIZES = ['작게', '보통', '크게'];
+
+  function won(n) { return (+n).toLocaleString('ko-KR'); }
+
+  function show() {
+    out.innerHTML = '지금 값 — 금액 <b>₩' + won(amt.value) + '</b> · 보관 <b>' + days.value + '일</b> · 글자 <b>' + SIZES[size.value] + '</b>';
+  }
+  amt.addEventListener('input', function () { amtn.value = won(amt.value); show(); });
+  amtn.addEventListener('input', function () {
+    var v = +amtn.value.replace(/[^0-9]/g, '');
+    if (!isNaN(v)) { amt.value = Math.min(+amt.max, Math.max(+amt.min, v)); show(); }
+  });
+  amtn.addEventListener('blur', function () { amtn.value = won(amt.value); });
+  days.addEventListener('input', function () { daysv.textContent = days.value + '일'; show(); });
+  size.addEventListener('input', show);
+  show();
+})();
+</script>
+</body>
+</html>

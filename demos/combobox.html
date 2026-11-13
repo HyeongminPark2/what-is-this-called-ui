@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>콤보박스 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); min-height: 270px; }
+  .out { font-size: 13.5px; color: var(--fg-muted); padding: 0 var(--s4) var(--s3); }
+  .out b { color: var(--fg); }
+  .hint { padding: 0 var(--s4) var(--s5); font-size: 13px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>가맹점 찾기</b>
+  <label><input type="checkbox" id="free"> 목록에 없는 값도 받기</label>
+</div>
+
+<div class="pad">
+  <div class="f cb">
+    <label class="f__lb" for="q">가맹점</label>
+    <input class="f__in" id="q" role="combobox" aria-expanded="false" aria-controls="list"
+           aria-autocomplete="list" autocomplete="off" aria-describedby="q-h"
+           placeholder="이름을 입력하면 걸러집니다">
+    <ul class="cb__list" id="list" role="listbox" aria-label="가맹점" hidden></ul>
+    <p class="f__help" id="q-h">선택지가 229개라 열어서 찾기 어렵습니다. <b>타이핑으로 좁히는 것</b>이 콤보박스의 존재 이유입니다.</p>
+  </div>
+</div>
+
+<p class="out" id="out">아직 고르지 않았습니다.</p>
+
+<p class="hint">
+  <kbd>↓</kbd><kbd>↑</kbd>로 옮기고 <kbd>Enter</kbd>로 고르고 <kbd>Esc</kbd>로 닫습니다 — 손을 키보드에서 떼지 않아도 됩니다.<br>
+  위의 체크를 켜면 <b>목록에 없는 값도</b> 받습니다. 끄면 목록 안에서만 고를 수 있습니다.
+  이 하나가 "검색하는 셀렉트"와 "자동완성이 붙은 입력칸"을 가릅니다.
+</p>
+
+<script>
+(function () {
+  var q = document.getElementById('q'), list = document.getElementById('list');
+  var out = document.getElementById('out'), free = document.getElementById('free');
+  var names = ['모란상회','모란김밥','하나로마트 역삼','하나로마트 논현','블루보틀 성수','블루보틀 삼청',
+    '교보문고 광화문','교보문고 강남','세븐일레븐 삼성점','세븐일레븐 역삼점','스타벅스 선릉',
+    '올리브영 강남','다이소 역삼','메가커피 삼성','투썸플레이스 논현'];
+  var DATA = [];
+  for (var i = 0; i < 229; i++) DATA.push({ nm: names[i % names.length] + ' ' + (i + 1) + '호', id: 'M' + (1000 + i) });
+  var open = false, at = -1, shown = [];
+
+  function esc(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+  function render() {
+    var term = q.value.trim();
+    shown = term ? DATA.filter(function (d) { return d.nm.indexOf(term) >= 0; }).slice(0, 30) : DATA.slice(0, 30);
+    if (!shown.length) {
+      list.innerHTML = free.checked
+        ? '<li class="cb__none">목록에 없습니다. <b>“' + term + '”</b> 그대로 쓰려면 Enter.</li>'
+        : '<li class="cb__none">맞는 가맹점이 없습니다. 철자를 확인해 보세요.</li>';
+      at = -1;
+    } else {
+      list.innerHTML = shown.map(function (d, i) {
+        var nm = term ? d.nm.replace(new RegExp(esc(term), 'g'), '<mark>$&</mark>') : d.nm;
+        return '<li class="cb__opt" role="option" id="o' + i + '" aria-selected="false">' +
+               '<span>' + nm + '</span><span class="sub">' + d.id + '</span></li>';
+      }).join('');
+      at = 0; mark();
+    }
+  }
+
+  function mark() {
+    list.querySelectorAll('.cb__opt').forEach(function (el, i) {
+      el.setAttribute('aria-selected', String(i === at));
+      if (i === at) { q.setAttribute('aria-activedescendant', el.id); el.scrollIntoView({ block: 'nearest' }); }
+    });
+  }
+
+  function show() { open = true; list.hidden = false; q.setAttribute('aria-expanded', 'true'); render(); }
+  function hide() { open = false; list.hidden = true; q.setAttribute('aria-expanded', 'false'); q.removeAttribute('aria-activedescendant'); }
+
+  function pick(i) {
+    if (i < 0 || !shown[i]) return;
+    q.value = shown[i].nm;
+    out.innerHTML = '고른 값 — <b>' + shown[i].nm + '</b> (' + shown[i].id + ')';
+    hide(); q.focus();
+  }
+
+  q.addEventListener('focus', show);
+  q.addEventListener('input', function () { if (!open) show(); else render(); });
+  q.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (!open) return show();
+      if (!shown.length) return;
+      at = (at + (e.key === 'ArrowDown' ? 1 : -1) + shown.length) % shown.length;
+      mark();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (shown.length) return pick(at);
+      if (free.checked && q.value.trim()) {       // 목록에 없는 값도 받는 모드
+        out.innerHTML = '고른 값 — <b>' + q.value.trim() + '</b> (새로 적은 값)';
+        hide();
+      }
+    } else if (e.key === 'Escape') { hide(); }
+  });
+  list.addEventListener('mousedown', function (e) {
+    var li = e.target.closest('.cb__opt');
+    if (li) { e.preventDefault(); pick([].indexOf.call(list.children, li)); }
+  });
+  document.addEventListener('click', function (e) { if (!e.target.closest('.cb')) hide(); });
+})();
+</script>
+</body>
+</html>
