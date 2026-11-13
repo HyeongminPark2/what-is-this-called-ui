@@ -19,11 +19,108 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   await page.goto(url('index.html'));
   const modalLinks = await page.locator('a[href="items/modal.html"]').count();
   if (modalLinks < 2) fail.push(`index: 모달 링크 ${modalLinks}개 (지도+혼동쌍+목차 기대)`);
+  await page.waitForTimeout(500);
+
+  // ── 화면 지도 ──
+  const mapWide = await page.evaluate(() => {
+    const bad = [];
+    document.querySelectorAll('.mapfig').forEach(fig => {
+      const name = fig.dataset.map;
+      const labels = [...fig.querySelectorAll('.lbl[data-t]')];
+      const seen = new Set();
+
+      labels.forEach(lbl => {
+        const t = fig.querySelector('[data-p="' + lbl.dataset.t + '"]');
+        if (!t) { bad.push(`${name}: 이름표 '${lbl.dataset.t}'가 가리킬 대상이 없음`); return; }
+        if (seen.has(lbl.dataset.t)) bad.push(`${name}: data-p="${lbl.dataset.t}" 중복`);
+        seen.add(lbl.dataset.t);
+        if (!t.getBoundingClientRect().width) bad.push(`${name}: '${lbl.dataset.t}' 대상이 안 보임`);
+      });
+
+      const gs = [...fig.querySelectorAll('.mapfig__lines g')];
+      if (gs.length !== labels.length) bad.push(`${name}: 지시선 ${gs.length}개 / 이름표 ${labels.length}개`);
+
+      // 선 끝점이 정말 그 부분에 닿는가
+      const box = fig.querySelector('.mapfig__lines').getBoundingClientRect();
+      gs.forEach((g, i) => {
+        const lbl = labels[i]; if (!lbl) return;
+        const t = fig.querySelector('[data-p="' + lbl.dataset.t + '"]'); if (!t) return;
+        const r = t.getBoundingClientRect();
+        const x = parseFloat(g.querySelector('line').getAttribute('x2')) + box.left;
+        const y = parseFloat(g.querySelector('line').getAttribute('y2')) + box.top;
+        if (x < r.left - 3 || x > r.right + 3 || y < r.top - 3 || y > r.bottom + 3) {
+          bad.push(`${name}: '${lbl.dataset.t}' 지시선 끝이 대상 밖 (${Math.round(x)},${Math.round(y)})`);
+        }
+      });
+
+      // 떠 있는 부품이 목업 밖으로 새지 않는가
+      const mock = fig.querySelector('.appmock');
+      const mr = mock.getBoundingClientRect();
+      mock.querySelectorAll('.pc__menu, .pc__toast, .ph__fab, .ph__sheet, .ph__tabs').forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < mr.top - 1 || r.bottom > mr.bottom + 1 || r.left < mr.left - 1 || r.right > mr.right + 1) {
+          bad.push(`${name}: ${el.className.split(' ')[0]}가 목업 밖에 있음`);
+        }
+      });
+    });
+
+    // FAB 가 바텀시트에 가리면 이름을 붙일 수 없다
+    const fab = document.querySelector('.ph__fab'), sheet = document.querySelector('.ph__sheet');
+    if (fab && sheet && fab.getBoundingClientRect().bottom > sheet.getBoundingClientRect().top) {
+      bad.push('폰: FAB가 바텀시트에 가림');
+    }
+    return bad.slice(0, 6);
+  });
+  if (mapWide.length) fail.push(...mapWide);
+
+  // 이름표에 마우스를 올리면 해당 부분이 밝아지는가
+  const firstLbl = page.locator('.mapfig[data-map="pc"] .lbl').first();
+  await firstLbl.hover();
+  await page.waitForTimeout(120);
+  const lit = await page.evaluate(() => {
+    const t = document.querySelector('.mapfig[data-map="pc"] [data-p]');
+    return document.querySelectorAll('.mapfig [data-p].is-on').length > 0;
+  });
+  if (!lit) fail.push('이름표에 올려도 해당 부분이 안 밝아짐');
+
   await page.screenshot({ path: '/tmp/uicheck/1-index-pc.png', fullPage: true });
 
   await page.setViewportSize({ width: 390, height: 844 });
   const hScroll = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   if (hScroll > 2) fail.push(`index 390px: 가로 넘침 ${hScroll}px`);
+  // 좁은 화면: 선 대신 번호로 잇는다
+  const mapNarrow = await page.evaluate(() => {
+    const bad = [];
+    document.querySelectorAll('.mapfig').forEach(fig => {
+      const name = fig.dataset.map;
+      if (getComputedStyle(fig.querySelector('.mapfig__lines')).display !== 'none') {
+        bad.push(`${name}: 좁은 화면인데 지시선이 보임`);
+      }
+      const labels = [...fig.querySelectorAll('.lbl[data-t]')];
+      const nos = [...fig.querySelectorAll('.partno')];
+      if (nos.length !== labels.length) bad.push(`${name}: 번호 배지 ${nos.length}개 / 이름표 ${labels.length}개`);
+      if (nos.length && getComputedStyle(nos[0]).display === 'none') bad.push(`${name}: 번호 배지가 안 보임`);
+      // 배지가 스크롤 상자에 잘리지 않는가
+      const sc = fig.querySelector('.mapfig__screen').getBoundingClientRect();
+      nos.forEach(n => {
+        const r = n.getBoundingClientRect();
+        if (r.left < sc.left - 0.5 || r.top < sc.top - 0.5) {
+          bad.push(`${name}: ${n.textContent}번 배지가 가장자리에 잘림`);
+        }
+      });
+
+      labels.forEach((lbl, i) => {
+        const a = lbl.querySelector('.no'), t = fig.querySelector('[data-p="' + lbl.dataset.t + '"]');
+        const bnum = t && t.querySelector(':scope > .partno');
+        if (!a || !bnum || a.textContent !== bnum.textContent) {
+          bad.push(`${name}: ${i + 1}번 이름표와 배지 번호가 안 맞음`);
+        }
+      });
+    });
+    return bad.slice(0, 6);
+  });
+  if (mapNarrow.length) fail.push(...mapNarrow);
+
   await page.screenshot({ path: '/tmp/uicheck/2-index-mobile.png', fullPage: true });
   await page.close();
 

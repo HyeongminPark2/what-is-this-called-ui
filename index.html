@@ -7,6 +7,7 @@
 <meta name="description" content="프론트엔드 UI/UX 구성요소와 용어를 실물 그림으로 찾아보는 도감. 이름을 몰라도 모양으로 찾아 들어갈 수 있게 만들었습니다.">
 <link rel="stylesheet" href="assets/base.css">
 <link rel="stylesheet" href="assets/card.css">
+<link rel="stylesheet" href="assets/map.css">
 <style>
   .hero { padding: var(--s7) 0 var(--s6); }
   .hero h1 { margin-bottom: var(--s4); }
@@ -22,54 +23,9 @@
   section.band > .sub { color: var(--fg-muted); max-width: var(--read); margin-bottom: var(--s5); }
 
   /* ── 화면 지도 ── */
-  .maps { display: grid; gap: var(--s5); }
-  @media (min-width: 900px) { .maps { grid-template-columns: minmax(0,1.55fr) minmax(0,1fr); align-items: start; } }
-
-  .map {
-    background: var(--surface); border: 1px solid var(--line);
-    border-radius: var(--r3); padding: var(--s4); box-shadow: var(--e1);
-  }
-  .map > h3 { margin-bottom: var(--s1); }
-  .map > p { font-size: 13px; color: var(--fg-muted); margin-bottom: var(--s4); }
-
-  .wf { position: relative; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r2); padding: 9px; }
-  .wf--pc { padding-bottom: 54px; }   /* 토스트가 앉을 자리 */
-  .wf-row { display: flex; gap: 7px; margin-bottom: 7px; }
-  .wf-row:last-child { margin-bottom: 0; }
-  .wf-col { display: flex; flex-direction: column; gap: 7px; }
-
-  /* 지도 위의 용어 블록 — 쓴 항목은 링크, 안 쓴 항목은 회색 */
-  .t, a.t {
-    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
-    padding: 6px 7px; border-radius: 5px;
-    border: 1px dashed var(--line-strong);
-    background: var(--surface);
-    font-size: 11px; font-weight: 650; line-height: 1.3;
-    color: var(--fg-muted); text-decoration: none;
-    min-height: 30px;
-  }
-  a.t { border-style: solid; border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
-  a.t:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .t em { display: block; font-style: normal; font-weight: 500; font-size: 10px; opacity: .82; margin-top: 2px; }
-  .t.tall { min-height: 74px; }
-  .t.xtall { min-height: 150px; justify-content: flex-start; }
-  .t.lead { background: var(--bg); border-style: solid; }
-
-  /* 지도 위에 떠 있는 것 */
-  .wf .float {
-    position: absolute; z-index: 3;
-    box-shadow: var(--e2);
-  }
-  .wf .float--modal { left: 50%; top: 56%; transform: translate(-50%,-50%); width: 46%; }
-  .wf .float--toast { right: 12px; bottom: 11px; width: 37%; }
-  .wf .float--sheet { left: 9px; right: 9px; bottom: 46px; }
-  .wf .float--fab { right: 12px; bottom: 58px; width: 42px; height: 42px; border-radius: 50%; min-height: 0; padding: 0; }
-
-  .legend { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s4); font-size: 12px; color: var(--fg-muted); }
-  .legend span { display: inline-flex; align-items: center; gap: 6px; }
-  .legend i { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
-  .legend i.on { background: var(--accent-soft); border: 1px solid var(--accent); }
-  .legend i.off { background: var(--surface); border: 1px dashed var(--line-strong); }
+  .maps { display: grid; gap: var(--s8); }
+  .map > h3 { margin-bottom: 2px; }
+  .map > p.cap { font-size: 13.5px; color: var(--fg-muted); margin-bottom: var(--s5); max-width: var(--read); }
 
   /* ── 목차 ── */
   .toc { display: grid; gap: var(--s3); }
@@ -121,81 +77,200 @@
   <!-- 화면 지도 -->
   <section class="band" id="map">
     <h2>화면 지도</h2>
-    <p class="sub">궁금한 자리를 누르세요. PC 화면과 폰 화면을 따로 뒀습니다 — 같은 역할인데 플랫폼마다 이름이 다른 것이 많아서입니다.</p>
+    <p class="sub">진짜 앱처럼 만든 화면입니다. 둘레의 이름표가 각 부분을 가리킵니다 —
+      이름표에 마우스를 올리면 어디를 말하는지 화면에서 밝아집니다.
+      좁은 화면에서는 선 대신 번호로 잇습니다.</p>
 
     <div class="maps">
 
-      <!-- PC -->
+      <!-- ── PC ── -->
       <div class="map">
-        <h3>PC · 관리 화면</h3>
-        <p>목록과 표가 중심인 전형적인 내부 도구 화면</p>
-        <div class="wf wf--pc">
-          <div class="wf-row">
-            <span class="t lead" style="flex:1">앱바 · 헤더</span>
-            <span class="t" style="width:62px">검색 입력</span>
-            <span class="t" style="width:52px">아바타</span>
+        <h3>PC · 관리 도구</h3>
+        <p class="cap">결제 관리자의 거래 내역 화면. 목록과 표가 중심인 내부 도구에서 거의 그대로 반복되는 짜임입니다.</p>
+
+        <div class="mapfig" data-map="pc">
+          <svg class="mapfig__lines" aria-hidden="true"></svg>
+
+          <div class="mapfig__col mapfig__col--l">
+            <span class="lbl" data-t="appbar"><span>앱바 · 헤더<em>app bar / header</em></span></span>
+            <span class="lbl" data-t="crumb"><span>브레드크럼<em>breadcrumb</em></span></span>
+            <span class="lbl" data-t="nav"><span>사이드바 내비게이션<em>sidebar nav</em></span></span>
+            <span class="lbl" data-t="stat"><span>스탯 타일<em>stat tile / KPI card</em></span></span>
+            <span class="lbl" data-t="chip"><span>필터 칩<em>filter chip</em></span></span>
+            <span class="lbl" data-t="table"><span>데이터 테이블<em>data table</em></span></span>
+            <span class="lbl" data-t="page"><span>페이지네이션<em>pagination</em></span></span>
           </div>
-          <div class="wf-row">
-            <div class="wf-col" style="width:110px">
-              <span class="t xtall">사이드바<br>내비게이션</span>
-              <span class="t">접기 버튼</span>
-            </div>
-            <div class="wf-col" style="flex:1">
-              <div class="wf-row">
-                <span class="t" style="flex:1">브레드크럼</span>
-                <span class="t" style="width:74px">프라이머리<br>버튼</span>
+
+          <div class="mapfig__screen">
+            <div class="appmock appmock--pc" role="img" aria-label="결제 관리자의 거래 내역 화면을 흉내 낸 그림. 둘레 이름표가 각 부분을 가리킨다.">
+              <div class="pc__bar" data-p="appbar">
+                <span class="pc__logo">Pay<i>gate</i></span>
+                <span class="pc__search" data-p="search">⌕ 거래 ID, 가맹점 검색</span>
+                <span class="pc__spacer"></span>
+                <span class="pc__bell" data-p="badge">🔔<span class="dot num">3</span></span>
+                <span class="pc__avatar" data-p="avatar">박</span>
               </div>
-              <div class="wf-row">
-                <span class="t" style="flex:1">스탯 타일</span>
-                <span class="t" style="flex:1">스탯 타일</span>
-                <span class="t" style="flex:1">스탯 타일</span>
+
+              <div class="pc__body">
+                <nav class="pc__side" data-p="nav">
+                  <a><span class="ic"></span>대시보드</a>
+                  <a class="on"><span class="ic"></span>거래 내역</a>
+                  <a><span class="ic"></span>정산</a>
+                  <a><span class="ic"></span>가맹점</a>
+                  <hr>
+                  <a><span class="ic"></span>설정</a>
+                </nav>
+
+                <main class="pc__main">
+                  <div class="pc__crumb" data-p="crumb">결제 › 거래 내역</div>
+                  <div class="pc__head">
+                    <h4>거래 내역</h4>
+                    <span class="pc__btn pc__btn--ghost">필터 저장</span>
+                    <span class="pc__btn" data-p="primary">내보내기</span>
+                  </div>
+
+                  <div class="pc__stats">
+                    <div class="pc__stat" data-p="stat"><span>오늘 거래액</span><b class="num">₩12,480,000</b><i class="up">▲ 8.2%</i></div>
+                    <div class="pc__stat"><span>승인률</span><b class="num">98.4%</b><i class="up">▲ 0.3%</i></div>
+                    <div class="pc__stat"><span>환불</span><b class="num">12건</b><i class="down">▼ 4</i></div>
+                  </div>
+
+                  <div class="pc__tools">
+                    <span class="pc__chip on" data-p="chip">상태 · 전체 ✕</span>
+                    <span class="pc__chip">오늘 ✕</span>
+                    <span class="pc__seg" data-p="seg"><i class="on">전체</i><i>카드</i><i>계좌</i></span>
+                    <span class="pc__kebab">⋯</span>
+                    <div class="pc__menu" data-p="menu">
+                      <i class="hot">열 고르기</i>
+                      <i>CSV로 내려받기</i>
+                      <i>영수증 모아 보내기</i>
+                      <hr>
+                      <i class="danger">선택 1건 환불</i>
+                    </div>
+                  </div>
+
+                  <table class="pc__table" data-p="table">
+                    <thead><tr>
+                      <th style="width:22px"><span class="pc__box on"></span></th>
+                      <th>거래 ID</th><th>가맹점</th>
+                      <th style="text-align:right">금액</th>
+                      <th>상태</th><th class="sort">승인 시각 ▾</th>
+                    </tr></thead>
+                    <tbody>
+                      <tr class="sel"><td><span class="pc__box on"></span></td><td class="num">TX-8812</td><td>모란상회</td><td class="num" style="text-align:right">₩48,000</td><td><span class="pc__badge pc__badge--ok">승인</span></td><td class="num mut">14:02:11</td></tr>
+                      <tr><td><span class="pc__box"></span></td><td class="num">TX-8811</td><td>하나로마트 역삼</td><td class="num" style="text-align:right">₩12,900</td><td><span class="pc__badge pc__badge--no">실패</span></td><td class="num mut">14:01:47</td></tr>
+                      <tr><td><span class="pc__box"></span></td><td class="num">TX-8810</td><td>블루보틀 성수</td><td class="num" style="text-align:right">₩7,500</td><td><span class="pc__badge pc__badge--ok">승인</span></td><td class="num mut">13:58:02</td></tr>
+                      <tr><td><span class="pc__box"></span></td><td class="num">TX-8809</td><td>교보문고 광화문</td><td class="num" style="text-align:right">₩132,000</td><td><span class="pc__badge pc__badge--wait">대기</span></td><td class="num mut">13:55:30</td></tr>
+                      <tr><td><span class="pc__box"></span></td><td class="num">TX-8808</td><td>세븐일레븐 삼성점</td><td class="num" style="text-align:right">₩3,200</td><td><span class="pc__badge pc__badge--ok" data-p="sbadge">승인</span></td><td class="num mut">13:51:09</td></tr>
+                    </tbody>
+                  </table>
+
+                  <div class="pc__page" data-p="page">
+                    <i>‹</i><i class="on">1</i><i>2</i><i>3</i><i>…</i><i>12</i><i>›</i>
+                    <span class="rows mut">쪽당 50줄 · 전체 584건</span>
+                  </div>
+                </main>
               </div>
-              <div class="wf-row">
-                <span class="t" style="flex:1">필터 · 패싯</span>
-                <span class="t" style="width:70px">세그먼티드<br>컨트롤</span>
-              </div>
-              <div class="wf-row"><span class="t xtall" style="flex:1">데이터 테이블<em>정렬 헤더 · 행 선택 · 배지 · 고정 열</em></span></div>
-              <div class="wf-row">
-                <span class="t" style="flex:1">페이지네이션</span>
-                <span class="t" style="width:74px">드롭다운<br>메뉴</span>
-              </div>
+
+              <div class="pc__toast" data-p="toast">거래 1건을 환불했습니다 <b>되돌리기</b></div>
             </div>
           </div>
-          <a class="t float float--modal" href="items/modal.html">모달 →</a>
-          <span class="t float float--toast">토스트</span>
-        </div>
-        <div class="legend">
-          <span><i class="on"></i> 항목이 있음</span>
-          <span><i class="off"></i> 아직 안 씀</span>
+
+          <p class="pan-hint">화면을 옆으로 밀면 오른쪽까지 볼 수 있습니다 →  번호는 아래 목록과 이어집니다.</p>
+
+          <div class="mapfig__col mapfig__col--r">
+            <span class="lbl" data-t="search"><span>검색 입력<em>search field</em></span></span>
+            <span class="lbl" data-t="badge"><span>배지<em>badge · 숫자 알림</em></span></span>
+            <span class="lbl" data-t="avatar"><span>아바타<em>avatar</em></span></span>
+            <span class="lbl" data-t="primary"><span>프라이머리 버튼<em>primary button</em></span></span>
+            <span class="lbl" data-t="seg"><span>세그먼티드 컨트롤<em>segmented control</em></span></span>
+            <span class="lbl" data-t="menu"><span>드롭다운 메뉴<em>dropdown menu</em></span></span>
+            <span class="lbl" data-t="sbadge"><span>상태 배지<em>status badge</em></span></span>
+            <span class="lbl" data-t="toast"><span>토스트<em>toast · snackbar</em></span></span>
+          </div>
         </div>
       </div>
 
-      <!-- 모바일 -->
+      <!-- ── 폰 ── -->
       <div class="map">
-        <h3>폰 · 목록 화면</h3>
-        <p>같은 역할의 부품이 어떻게 다른 이름으로 바뀌는지</p>
-        <div class="wf">
-          <div class="wf-row"><span class="t lead" style="flex:1;font-size:10px">상태바 · 세이프 에어리어 · 노치</span></div>
-          <div class="wf-row">
-            <span class="t" style="width:42px">백</span>
-            <span class="t" style="flex:1">앱바 타이틀</span>
-            <span class="t" style="width:42px">액션</span>
+        <h3>폰 · 같은 서비스</h3>
+        <p class="cap">같은 역할의 부품이 어떤 이름으로 바뀌는지 보세요. 바텀시트는 좁은 화면에서 모달이 취하는 모습입니다.</p>
+
+        <div class="mapfig" data-map="ph">
+          <svg class="mapfig__lines" aria-hidden="true"></svg>
+
+          <div class="mapfig__col mapfig__col--l">
+            <span class="lbl" data-t="safe"><span>상태바 · 세이프 에어리어<em>status bar / safe area</em></span></span>
+            <span class="lbl" data-t="phbar"><span>앱바 · 백 버튼<em>navigation bar</em></span></span>
+            <span class="lbl" data-t="phsearch"><span>검색 입력<em>search field</em></span></span>
+            <span class="lbl" data-t="phseg"><span>세그먼티드 컨트롤<em>segmented control</em></span></span>
+            <span class="lbl" data-t="phav"><span>아바타<em>avatar</em></span></span>
           </div>
-          <div class="wf-row"><span class="t" style="flex:1">검색 입력</span></div>
-          <div class="wf-row"><span class="t" style="flex:1">세그먼티드 컨트롤 · 탭</span></div>
-          <div class="wf-row"><span class="t tall" style="flex:1">리스트 아이템<em>아바타 · 보조 텍스트 · 셰브런</em></span></div>
-          <div class="wf-row"><span class="t tall" style="flex:1">카드<em>썸네일 · 칩 · 메타</em></span></div>
-          <div class="wf-row"><span class="t lead" style="flex:1">바텀 탭바 · 홈 인디케이터</span></div>
-          <span class="t float float--fab">FAB</span>
-          <a class="t float float--sheet" href="items/modal.html">바텀시트 ← 좁은 폭의 모달</a>
-        </div>
-        <div class="legend">
-          <span><i class="on"></i> 항목이 있음</span>
-          <span><i class="off"></i> 아직 안 씀</span>
+
+          <div class="mapfig__screen">
+            <div class="appmock appmock--ph" role="img" aria-label="같은 서비스의 폰 화면을 흉내 낸 그림. 아래에 바텀시트가 올라와 있다.">
+              <div class="ph__status" data-p="safe">9:41<span class="sp"><span class="bars"><i></i><i></i><i></i><i></i></span><span class="bat"></span></span></div>
+              <div class="ph__bar" data-p="phbar"><span class="back">‹</span><b>거래 내역</b><span class="act">⋯</span></div>
+              <div class="ph__search" data-p="phsearch">⌕ 가맹점 검색</div>
+              <div class="ph__seg" data-p="phseg"><i class="on">전체</i><i>카드</i><i>계좌</i></div>
+
+              <div class="ph__list">
+                <div class="ph__row" data-p="phrow">
+                  <span class="ph__av" data-p="phav" style="background:#2f6df6">모</span>
+                  <span class="meta"><b>모란상회</b><span>14:02 · 카드</span></span>
+                  <span class="amt"><b class="num">₩48,000</b><span class="pc__badge pc__badge--ok">승인</span></span>
+                  <span class="ph__chev">›</span>
+                </div>
+                <div class="ph__row">
+                  <span class="ph__av" style="background:#c0342b">하</span>
+                  <span class="meta"><b>하나로마트</b><span>14:01 · 카드</span></span>
+                  <span class="amt"><b class="num">₩12,900</b><span class="pc__badge pc__badge--no">실패</span></span>
+                  <span class="ph__chev">›</span>
+                </div>
+                <div class="ph__row">
+                  <span class="ph__av" style="background:#1f8a4c">블</span>
+                  <span class="meta"><b>블루보틀 성수</b><span>13:58 · 계좌</span></span>
+                  <span class="amt"><b class="num">₩7,500</b><span class="pc__badge pc__badge--ok">승인</span></span>
+                  <span class="ph__chev">›</span>
+                </div>
+              </div>
+
+              <div class="ph__fab" data-p="fab">＋</div>
+
+              <div class="ph__sheet" data-p="sheet">
+                <div class="grab"></div>
+                <b class="t">모란상회 · ₩48,000</b>
+                <div class="kv"><span>승인 시각</span><b class="num">14:02:11</b></div>
+                <div class="kv"><span>결제 수단</span><b>신한카드 ••42</b></div>
+                <div class="acts"><i class="g">영수증</i><i class="p">환불하기</i></div>
+              </div>
+
+              <div class="ph__tabs" data-p="tabs">
+                <i><span class="ic"></span>홈</i>
+                <i class="on"><span class="ic"></span>거래</i>
+                <i><span class="ic"></span>정산</i>
+                <i><span class="ic"></span>내 정보</i>
+              </div>
+              <span class="ph__home" data-p="home"></span>
+            </div>
+          </div>
+
+          <div class="mapfig__col mapfig__col--r">
+            <span class="lbl" data-t="phrow"><span>리스트 아이템<em>list item · row</em></span></span>
+            <span class="lbl" data-t="fab"><span>FAB<em>floating action button</em></span></span>
+            <a class="lbl lbl--go" data-t="sheet" href="items/modal.html"><span>바텀시트<em>bottom sheet</em><b>모달 항목으로 →</b></span></a>
+            <span class="lbl" data-t="tabs"><span>바텀 탭바<em>tab bar / bottom nav</em></span></span>
+            <span class="lbl" data-t="home"><span>홈 인디케이터<em>home indicator</em></span></span>
+          </div>
         </div>
       </div>
 
     </div>
+
+    <p class="map-legend">
+      <span><b>이름표 자체가 답입니다.</b> 한국어 이름과 영어 이름을 같이 적었습니다.</span>
+      <span>테두리가 파란 이름표는 눌러서 그 항목으로 들어갈 수 있습니다.</span>
+    </p>
   </section>
 
   <!-- 혼동 쌍 -->
@@ -257,5 +332,6 @@
   </p>
 </footer>
 
+<script src="assets/map.js"></script>
 </body>
 </html>
