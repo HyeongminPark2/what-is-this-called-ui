@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>세이프 에어리어 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s5) var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .res { text-align: center; font-size: 12.5px; margin-top: var(--s4); }
+  .res.no { color: var(--danger); font-weight: 700; }
+  .res.ok { color: #1f8a4c; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>세이프 에어리어</b>
+  <label><input type="checkbox" id="safeon"> <code>env(safe-area-inset-*)</code> 적용</label>
+  <label><input type="checkbox" id="show" checked> 못 쓰는 띠 보이기</label>
+</div>
+
+<div class="pad">
+  <div class="safe" id="safe">
+    <div class="safe__screen">
+      <span class="safe__inset safe__inset--top" id="it"></span>
+      <span class="safe__inset safe__inset--bottom" id="ib"></span>
+      <div class="safe__body">정산 목록<br>#4821 · ₩1,245,480<br>#4820 · ₩953,025<br>#4819 · ₩412,000</div>
+      <div class="safe__bar safe__bar--top" id="top">모란상회</div>
+      <div class="safe__bar safe__bar--bottom" id="bottom"><span>홈</span><span>정산</span><span>설정</span></div>
+    </div>
+    <span class="safe__notch"></span>
+    <span class="safe__home"></span>
+  </div>
+  <p class="res" id="res"></p>
+</div>
+
+<p class="hint">
+  <b>세이프 에어리어</b>는 화면에서 <b>무엇을 놓아도 안전한 영역</b>입니다. 그 바깥은 노치(카메라 구멍)와
+  홈 인디케이터(아래 막대)가 차지하고 있어서, 거기에 글자나 버튼을 두면 <b>가려지거나 안 눌립니다.</b><br>
+  빨간 띠가 못 쓰는 자리입니다. 체크를 켜 보세요 — 상단 바의 글자가 노치 아래로 내려오고,
+  탭바가 홈 인디케이터 위로 올라옵니다.<br>
+  웹에서는 <code>env(safe-area-inset-top)</code> 같은 값으로 읽습니다. 다만
+  <b><code>&lt;meta name="viewport" content="…, viewport-fit=cover"&gt;</code>를 적지 않으면 이 값이 늘 0</b>입니다 —
+  "env 가 안 먹어요"의 대부분이 이것입니다.<br>
+  가로로 돌리면 <b>좌우에도</b> 생깁니다. 위아래만 챙기면 가로 화면에서 깨집니다.
+</p>
+
+<script>
+(function () {
+  var safe = document.getElementById('safe'), res = document.getElementById('res');
+  var top = document.getElementById('top'), bottom = document.getElementById('bottom');
+
+  function check() {
+    var on = document.getElementById('safeon').checked;
+    safe.classList.toggle('is-safe', on);
+    document.getElementById('it').style.display = document.getElementById('show').checked ? '' : 'none';
+    document.getElementById('ib').style.display = document.getElementById('show').checked ? '' : 'none';
+    requestAnimationFrame(function () {
+      // 글자 상자가 못 쓰는 띠와 겹치는지 실제로 재 본다
+      var screen = safe.querySelector('.safe__screen').getBoundingClientRect();
+      var t = top.getBoundingClientRect(), b = bottom.getBoundingClientRect();
+      var hitTop = t.top + 4 < screen.top + 26 && !on;
+      var hitBottom = b.bottom - 4 > screen.bottom - 20 && !on;
+      var bad = hitTop || hitBottom;
+      res.className = 'res ' + (bad ? 'no' : 'ok');
+      res.textContent = bad
+        ? '상단 바 글자가 노치에, 탭바가 홈 인디케이터에 겹칩니다'
+        : '겹치는 데가 없습니다 — 안전한 자리 안에 들어왔습니다';
+    });
+  }
+  document.getElementById('safeon').addEventListener('change', check);
+  document.getElementById('show').addEventListener('change', check);
+  check();
+})();
+</script>
+</body>
+</html>

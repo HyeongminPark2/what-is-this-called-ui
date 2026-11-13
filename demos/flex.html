@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>플렉스 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .pad { padding: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar"><b>플렉스</b></div>
+
+<div class="pad lab">
+  <div class="lab__ctrl">
+    <label>flex-direction
+      <select class="sel" id="dir"><option>row</option><option>column</option><option>row-reverse</option></select></label>
+    <label>justify-content
+      <select class="sel" id="jc"><option>flex-start</option><option>center</option><option>space-between</option><option>space-around</option><option>flex-end</option></select></label>
+    <label>align-items
+      <select class="sel" id="ai"><option>stretch</option><option selected>center</option><option>flex-start</option><option>flex-end</option></select></label>
+    <label>gap <input type="range" id="gap" class="sld" min="0" max="24" value="8" style="width:90px"><output id="gapo">8</output>px</label>
+    <label><input type="checkbox" id="wrap"> flex-wrap: wrap</label>
+    <label><input type="checkbox" id="grow"> 가운데 칸에 <code>flex: 1</code></label>
+    <label><input type="checkbox" id="long"> 가운데 칸에 긴 글</label>
+  </div>
+
+  <div class="lab__stage">
+    <div class="lay lay--flex" id="lay">
+      <span>앞</span>
+      <span id="mid">가운데</span>
+      <span>뒤</span>
+    </div>
+  </div>
+
+  <pre class="lab__code" id="code"></pre>
+</div>
+
+<p class="hint">
+  플렉스는 <b>한 줄(또는 한 열)에 늘어놓는</b> 방법입니다. 방향이 하나뿐이라서,
+  <code>justify-content</code>는 <b>그 방향</b>을, <code>align-items</code>는 <b>가로지르는 방향</b>을 맡습니다 —
+  방향을 <code>column</code>으로 바꾸면 둘의 역할이 통째로 뒤집히는 것을 보세요.<br>
+  <b><code>flex: 1</code>을 켜 보세요.</b> 가운데 칸만 남은 자리를 다 먹습니다. 리스트 아이템의 '앞·가운데·뒤' 짜임이 바로 이것입니다.<br>
+  <b>긴 글을 켜 보세요.</b> <code>flex: 1</code>만으로는 칸이 글에 밀려 늘어나고 '뒤'가 쫓겨납니다.
+  플렉스 자식의 최소 너비가 <b>'내용만큼'</b>이기 때문입니다. <code>min-width: 0</code>을 함께 줘야
+  비로소 줄어들고 말줄임이 걸립니다 — 아래 코드에 자동으로 붙습니다.
+</p>
+
+<script>
+(function () {
+  var lay = document.getElementById('lay'), mid = document.getElementById('mid'), code = document.getElementById('code');
+  var SHORT = '가운데', LONG = '가운데 칸에 아주 긴 글이 들어오면 어떻게 되는지 보는 칸입니다. 플렉스 자식의 최소 너비가 내용만큼이라 그냥 두면 옆 칸을 밀어내고, 그래도 모자라면 판 밖으로 비어져 나갑니다. 이 글은 그 차이를 눈으로 보려고 일부러 길게 적어 둔 것입니다.';
+
+  function draw() {
+    var dir = document.getElementById('dir').value;
+    var jc = document.getElementById('jc').value;
+    var ai = document.getElementById('ai').value;
+    var gap = +document.getElementById('gap').value;
+    var wrap = document.getElementById('wrap').checked;
+    var grow = document.getElementById('grow').checked;
+    var long = document.getElementById('long').checked;
+
+    document.getElementById('gapo').textContent = gap;
+    lay.style.flexDirection = dir;
+    lay.style.justifyContent = jc;
+    lay.style.alignItems = ai;
+    lay.style.gap = gap + 'px';
+    lay.style.flexWrap = wrap ? 'wrap' : 'nowrap';
+
+    mid.textContent = long ? LONG : SHORT;
+    mid.className = long ? 'wide' : '';
+    // flex:1 만으로는 안 줄어든다. 플렉스 자식의 최소 너비가 '내용만큼'이라서다.
+    mid.style.flex = grow ? '1' : '';
+    mid.style.minWidth = grow ? '0' : '';
+    // .lay > span 은 grid 라 말줄임이 안 걸린다 — 줄일 때만 블록으로 바꾼다
+    mid.style.display = grow ? 'block' : '';
+    mid.style.textAlign = grow ? 'center' : '';
+    mid.style.overflow = grow ? 'hidden' : '';
+    mid.style.textOverflow = grow ? 'ellipsis' : '';
+    mid.style.whiteSpace = grow ? 'nowrap' : '';
+
+    code.innerHTML =
+      '.box {\n' +
+      '  display: <b>flex</b>;\n' +
+      '  flex-direction: <b>' + dir + '</b>;\n' +
+      '  justify-content: <b>' + jc + '</b>;\n' +
+      '  align-items: <b>' + ai + '</b>;\n' +
+      '  gap: <b>' + gap + 'px</b>;\n' +
+      (wrap ? '  flex-wrap: <b>wrap</b>;\n' : '') +
+      '}' +
+      (grow ? '\n.middle {\n  flex: <b>1</b>;\n  min-width: <b>0</b>;   /* 이게 없으면 글에 밀려 안 줄어든다 */\n}' : '');
+  }
+
+  ['dir', 'jc', 'ai', 'gap', 'wrap', 'grow', 'long'].forEach(function (id) {
+    var el = document.getElementById(id);
+    el.addEventListener(el.type === 'range' ? 'input' : 'change', draw);
+  });
+  draw();
+})();
+</script>
+</body>
+</html>

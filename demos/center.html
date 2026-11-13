@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>가운데 맞추기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .ok { color: #1f8a4c; font-weight: 700; }
+  .no { color: var(--danger); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>가운데 맞추기</b>
+  <label><input type="checkbox" id="two"> 글을 두 줄로 늘리기</label>
+</div>
+
+<div class="pad">
+  <div class="ctr-grid" id="grid">
+    <div class="ctr ctr--grid"><div class="ctr__box"><b>가운데</b></div>
+      <div class="ctr__cap"><code>place-items: center</code><em>그리드 한 줄. 요즘 기본</em><span class="r"></span></div></div>
+    <div class="ctr ctr--flex"><div class="ctr__box"><b>가운데</b></div>
+      <div class="ctr__cap"><code>flex + center ×2</code><em>가장 많이 쓰이는 방법</em><span class="r"></span></div></div>
+    <div class="ctr ctr--abs"><div class="ctr__box"><b>가운데</b></div>
+      <div class="ctr__cap"><code>absolute + translate</code><em>흐름에서 빠진다</em><span class="r"></span></div></div>
+    <div class="ctr ctr--margin"><div class="ctr__box"><b>가운데</b></div>
+      <div class="ctr__cap"><code>margin: auto</code><em>가로만 된다</em><span class="r"></span></div></div>
+    <div class="ctr ctr--text"><div class="ctr__box"><b>가운데</b></div>
+      <div class="ctr__cap"><code>text-align: center</code><em>글에만. 세로는 못 맞춘다</em><span class="r"></span></div></div>
+  </div>
+</div>
+
+<p class="hint">
+  '가운데에 놓기'는 방법이 다섯 가지나 되는데, <b>되는 범위가 다 다릅니다.</b>
+  각 칸 아래에 가로·세로가 맞았는지 재서 표시해 뒀습니다.<br>
+  <b>글을 두 줄로 늘려 보세요.</b> 상자 크기가 바뀌어도 앞의 셋은 계속 가운데에 있지만,
+  <code>margin: auto</code>와 <code>text-align</code>은 <b>세로가 안 따라옵니다</b> —
+  위에서 32px 떨어뜨려 놓은 것뿐이라 그렇습니다.<br>
+  외울 것은 하나입니다 — <b>부모에 <code>display: grid; place-items: center</code></b>.
+  가로·세로가 한 줄로 끝나고 자식이 몇 개든 상관없습니다.
+</p>
+
+<script>
+(function () {
+  function measure() {
+    document.querySelectorAll('.ctr').forEach(function (c) {
+      var box = c.querySelector('.ctr__box'), b = c.querySelector('b');
+      var br = box.getBoundingClientRect(), tr = b.getBoundingClientRect();
+      var dx = Math.abs((tr.left + tr.right) / 2 - (br.left + br.right) / 2);
+      var dy = Math.abs((tr.top + tr.bottom) / 2 - (br.top + br.bottom) / 2);
+      var okx = dx < 2, oky = dy < 2;
+      c.querySelector('.r').innerHTML =
+        '<span class="' + (okx ? 'ok' : 'no') + '">가로 ' + (okx ? '맞음' : Math.round(dx) + 'px 어긋남') + '</span> · ' +
+        '<span class="' + (oky ? 'ok' : 'no') + '">세로 ' + (oky ? '맞음' : Math.round(dy) + 'px 어긋남') + '</span>';
+    });
+  }
+  document.getElementById('two').addEventListener('change', function () {
+    document.querySelectorAll('.ctr__box > b').forEach(function (b) {
+      b.innerHTML = this.checked ? '가운데<br>두 줄' : '가운데';
+      b.style.height = this.checked ? 'auto' : '';
+      b.style.padding = this.checked ? '7px 10px' : '';
+    }, this);
+    requestAnimationFrame(measure);
+  });
+  measure();
+  window.addEventListener('resize', measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+})();
+</script>
+</body>
+</html>

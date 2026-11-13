@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>스티키 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .why { font-size: 12.5px; margin-top: var(--s3); }
+  .why.no { color: var(--danger); font-weight: 700; }
+  .why.ok { color: #1f8a4c; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>스티키</b>
+  <label><input type="checkbox" id="broken"> 안 먹게 만들어 보기</label>
+  <span style="font-size:13px;color:var(--fg-muted)">아래 목록을 굴려 보세요</span>
+</div>
+
+<div class="pad">
+  <div class="stk" id="stk">
+    <div class="stk__head" id="head">정산 목록 — 붙박이 머리말</div>
+    <div class="stk__sec">11월 1주</div>
+    <div class="stk__row">정산 요청 #4821 · ₩1,245,480</div>
+    <div class="stk__row">정산 요청 #4820 · ₩953,025</div>
+    <div class="stk__row">정산 요청 #4819 · ₩412,000</div>
+    <div class="stk__sec">10월 5주</div>
+    <div class="stk__row">정산 요청 #4818 · ₩820,500</div>
+    <div class="stk__row">정산 요청 #4817 · ₩96,000</div>
+    <div class="stk__row">정산 요청 #4816 · ₩1,100,000</div>
+    <div class="stk__sec">10월 4주</div>
+    <div class="stk__row">정산 요청 #4815 · ₩77,400</div>
+    <div class="stk__row">정산 요청 #4814 · ₩640,000</div>
+    <div class="stk__row">정산 요청 #4813 · ₩215,900</div>
+  </div>
+  <p class="why" id="why"></p>
+</div>
+
+<p class="hint">
+  <code>position: sticky</code>는 <b>평소엔 흐름에 있다가 정해진 선에 닿으면 거기 붙는</b> 것입니다.
+  <code>fixed</code>와 달리 <b>자기 부모 안에서만</b> 붙어 있어서, 부모가 지나가면 같이 사라집니다 —
+  위의 '11월 1주' 같은 묶음 머리글이 하나씩 교대하는 것이 그 때문입니다.<br>
+  <b>안 먹는 이유는 거의 셋뿐입니다.</b><br>
+  ① <code>top</code>(또는 <code>bottom</code>)을 안 적었다 — <b>어디에 붙을지를 안 정하면 아무 일도 안 일어납니다.</b><br>
+  ② 스크롤되는 <b>조상에 <code>overflow: hidden/auto</code></b>가 걸려 있다. 이게 가장 찾기 어렵습니다.<br>
+  ③ 부모의 높이가 <b>내용과 똑같아서</b> 붙어 있을 구간이 아예 없다.
+</p>
+
+<script>
+(function () {
+  var stk = document.getElementById('stk'), head = document.getElementById('head'), why = document.getElementById('why');
+
+  function check() {
+    var pos = getComputedStyle(head).position;
+    var ok = pos === 'sticky';
+    why.className = 'why ' + (ok ? 'ok' : 'no');
+    why.textContent = ok
+      ? 'position: sticky · top: 0 — 굴려도 머리말이 붙어 있습니다'
+      : 'position: ' + pos + ' — 붙지 않습니다. 굴리면 머리말이 그냥 올라가 버립니다';
+  }
+  document.getElementById('broken').addEventListener('change', function () {
+    stk.classList.toggle('is-broken', this.checked);
+    stk.scrollTop = 0;
+    check();
+  });
+  check();
+})();
+</script>
+</body>
+</html>

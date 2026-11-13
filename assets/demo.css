@@ -978,3 +978,95 @@ body > .hint, body > .log, body > .ratio {
   max-width: none;
   padding-right: max(var(--s4), calc(100% - 78ch));
 }
+
+/* ══ 1부 뼈대 ══════════════════════════════════════════ */
+
+/* 공통 — 조작 막대와 눈금 */
+.lab { display: grid; gap: var(--s4); }
+/* 그리드 자식의 자동 최소 너비는 '내용만큼'이다 — 이게 없으면 긴 글이 판을 밀어낸다.
+   이 데모들이 가르치는 바로 그 함정에 데모 자신이 걸려 있었다. */
+.lab > * { min-width: 0; }
+.lab__ctrl { display: flex; flex-wrap: wrap; gap: var(--s4) var(--s5); align-items: center; font-size: 13px; color: var(--fg-muted); }
+.lab__ctrl label { display: inline-flex; align-items: center; gap: 6px; }
+.lab__ctrl select { width: auto; min-height: 32px; padding: 5px 28px 5px 9px; font-size: 12.5px; }
+.lab__out { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+.lab__stage { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r2); padding: var(--s4); position: relative; }
+.lab__code { font-family: var(--mono); font-size: 12px; color: var(--fg-muted); white-space: pre-wrap; margin: 0; }
+.lab__code b { color: var(--accent); font-weight: 700; }
+
+/* 박스 모델 */
+.bx { position: relative; display: inline-block; background: color-mix(in srgb, var(--warn) 18%, transparent); }
+.bx__bd { border-style: solid; border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
+.bx__pd { background: color-mix(in srgb, #1f8a4c 16%, transparent); }
+.bx__ct { background: var(--surface); border: 1px dashed var(--line-strong); display: grid; place-items: center; font-size: 12px; min-height: 30px; }
+.bx-key { display: flex; flex-wrap: wrap; gap: var(--s4); font-size: 12px; color: var(--fg-muted); }
+.bx-key i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 5px; vertical-align: -1px; }
+.bx-ruler { font-family: var(--mono); font-size: 11.5px; color: var(--fg-muted); }
+.bx-ruler b { color: var(--fg); }
+
+/* 플렉스 · 그리드 공용 상자 */
+.lay { background: var(--surface); border: 1px dashed var(--line-strong); border-radius: var(--r1); min-height: 92px; }
+.lay > span {
+  display: grid; place-items: center; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); border-radius: var(--r1);
+  font-size: 12.5px; font-weight: 700; padding: 10px 12px;
+}
+.lay > span.wide { background: var(--warn-soft); color: var(--warn); border-color: color-mix(in srgb, var(--warn) 35%, transparent); }
+.lay--flex { display: flex; }
+.lay--grid { display: grid; }
+
+/* 가운데 맞추기 */
+.ctr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(158px, 1fr)); gap: var(--s3); }
+.ctr { border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); overflow: hidden; }
+.ctr__box { height: 96px; background: var(--bg); border-bottom: 1px solid var(--line); position: relative; }
+.ctr__box > b {
+  display: grid; place-items: center; width: 54px; height: 32px; border-radius: var(--r1);
+  background: var(--accent); color: #fff; font-size: 11.5px; font-weight: 700;
+}
+.ctr__cap { padding: var(--s2) var(--s3); font-size: 12px; }
+.ctr__cap code { font-size: 11px; }
+.ctr__cap em { display: block; font-style: normal; color: var(--fg-muted); font-size: 11.5px; margin-top: 2px; }
+.ctr--flex .ctr__box { display: flex; align-items: center; justify-content: center; }
+.ctr--grid .ctr__box { display: grid; place-items: center; }
+.ctr--abs .ctr__box > b { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.ctr--margin .ctr__box { display: flow-root; }
+.ctr--margin .ctr__box > b { margin: 32px auto; }
+.ctr--text .ctr__box { text-align: center; padding-top: 32px; }
+.ctr--text .ctr__box > b { display: inline-grid; }
+
+/* 넘침 */
+.ovf { width: 100%; max-width: 260px; height: 92px; border: 1px solid var(--line-strong); border-radius: var(--r1); background: var(--surface); padding: 9px; font-size: 12.5px; line-height: 1.7; }
+.ovf--visible { overflow: visible; }
+.ovf--hidden { overflow: hidden; }
+.ovf--auto { overflow: auto; }
+.ovf--scroll { overflow: scroll; }
+.ovf--clip { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ovf-wrap { padding: var(--s4) 0; }
+
+/* 스티키 */
+.stk { height: 190px; overflow: auto; border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); }
+.stk__head { position: sticky; top: 0; background: var(--surface); border-bottom: 1px solid var(--line); padding: 8px 11px; font-size: 12.5px; font-weight: 700; z-index: 2; }
+.stk.is-broken .stk__head { position: static; }
+.stk__row { padding: 9px 11px; font-size: 12.5px; border-bottom: 1px solid var(--line); }
+.stk__sec { position: sticky; top: 35px; background: var(--bg); padding: 5px 11px; font-size: 11.5px; font-weight: 700; color: var(--fg-muted); z-index: 1; }
+
+/* 컨테이너와 최대 폭 */
+.cont { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r2); padding: var(--s4); }
+.cont__inner { margin-inline: auto; background: var(--accent-soft); border: 1px dashed var(--accent); border-radius: var(--r1); padding: var(--s3); }
+.cont__inner p { margin: 0; font-size: 13px; line-height: 1.8; max-width: none; }
+.cont-meter { font-family: var(--mono); font-size: 11.5px; color: var(--accent); margin-top: var(--s2); }
+
+/* 세이프 에어리어 */
+.safe { position: relative; width: 190px; height: 330px; margin: 0 auto; border-radius: 30px; background: var(--ink-900); padding: 8px; }
+.safe__screen { position: relative; height: 100%; border-radius: 23px; background: var(--surface); overflow: hidden; }
+.safe__notch { position: absolute; left: 50%; top: 0; transform: translateX(-50%); width: 76px; height: 20px; background: var(--ink-900); border-radius: 0 0 12px 12px; z-index: 5; }
+.safe__home { position: absolute; left: 50%; bottom: 6px; transform: translateX(-50%); width: 74px; height: 4px; border-radius: 99px; background: var(--ink-900); opacity: .35; z-index: 5; }
+.safe__inset { position: absolute; left: 0; right: 0; background: color-mix(in srgb, var(--danger) 16%, transparent); z-index: 1; }
+.safe__inset--top { top: 0; height: 26px; }
+.safe__inset--bottom { bottom: 0; height: 20px; }
+.safe__bar { position: absolute; left: 0; right: 0; background: var(--accent); color: #fff; font-size: 10.5px; font-weight: 700; padding: 7px 10px; z-index: 3; }
+.safe__bar--top { top: 0; }
+.safe__bar--bottom { bottom: 0; display: flex; justify-content: space-around; }
+.safe.is-safe .safe__bar--top { padding-top: 30px; }
+.safe.is-safe .safe__bar--bottom { padding-bottom: 24px; }
+.safe__body { position: absolute; left: 0; right: 0; top: 0; bottom: 0; padding: 36px 10px; font-size: 10.5px; color: var(--fg-muted); line-height: 1.9; }

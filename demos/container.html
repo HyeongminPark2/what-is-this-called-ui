@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>컨테이너와 최대 폭 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .warnline { color: var(--danger); font-weight: 700; }
+  .okline { color: #1f8a4c; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>컨테이너와 최대 폭</b>
+  <label>최대 폭 <input type="range" id="mw" class="sld" min="20" max="100" value="64" style="width:130px"><output id="mwo">64</output>ch</label>
+  <label><input type="checkbox" id="off"> 상한 없애기</label>
+</div>
+
+<div class="pad">
+  <div class="cont">
+    <div class="cont__inner" id="inner">
+      <p>글줄이 너무 길면 눈이 다음 줄의 첫 글자를 못 찾습니다. 한 줄을 다 읽고 왼쪽으로 돌아올 때
+      한 줄 아래가 아니라 같은 줄이나 두 줄 아래로 떨어지는 일이 생기기 때문입니다. 그래서 읽는 글에는
+      가로 길이에 상한을 겁니다. 한글은 한 글자가 영문보다 넓어서 영문 기준보다 조금 짧게 잡습니다.
+      이 글상자의 너비를 바꿔 가며 어디서 읽기가 불편해지는지 직접 보세요.</p>
+    </div>
+    <p class="cont-meter" id="meter"></p>
+  </div>
+</div>
+
+<p class="hint">
+  <b>컨테이너</b>는 '내용이 들어가는 가운데 칸'입니다. 거의 모든 사이트가 같은 두 줄로 만듭니다 —
+  <code>max-width</code>로 상한을 걸고 <code>margin-inline: auto</code>로 가운데에 둡니다.<br>
+  상한을 <b>없애 보세요.</b> 넓은 화면에서 글줄이 끝까지 늘어나 읽기가 힘들어집니다.
+  읽는 글은 <b>한 줄에 45~75자</b>가 편하다고 알려져 있고, 그래서 <code>ch</code>(0 한 글자 폭) 단위로
+  <code>max-width: 65ch</code>처럼 적는 방법이 깔끔합니다.<br>
+  <b>화면을 좁히면</b> 상한은 아무 일도 안 하고 양옆 패딩만 남습니다 — 그게 맞는 동작입니다.
+  <code>width: 1200px</code>으로 못 박으면 좁은 화면에서 <b>가로 스크롤</b>이 생깁니다.
+</p>
+
+<script>
+(function () {
+  var inner = document.getElementById('inner'), meter = document.getElementById('meter');
+  var p = inner.querySelector('p');
+
+  function draw() {
+    var ch = +document.getElementById('mw').value;
+    var off = document.getElementById('off').checked;
+    document.getElementById('mwo').textContent = ch;
+    document.getElementById('mw').disabled = off;
+    inner.style.maxWidth = off ? 'none' : ch + 'ch';
+
+    requestAnimationFrame(function () {
+      // 한 줄에 실제로 몇 글자가 들어가는지 재 본다
+      var w = p.getBoundingClientRect().width;
+      var probe = document.createElement('span');
+      probe.style.cssText = 'position:absolute;visibility:hidden;white-space:pre;font:inherit';
+      probe.textContent = '0';
+      p.appendChild(probe);
+      var cw = probe.getBoundingClientRect().width;
+      probe.remove();
+      var n = Math.round(w / cw);
+      var good = n >= 40 && n <= 80;
+      meter.innerHTML = '글상자 ' + Math.round(w) + 'px · 한 줄에 약 <b>' + n + '자</b> ' +
+        (good ? '<span class="okline">읽기 좋은 범위</span>'
+              : '<span class="warnline">' + (n > 80 ? '너무 깁니다' : '너무 짧습니다') + '</span>');
+    });
+  }
+  document.getElementById('mw').addEventListener('input', draw);
+  document.getElementById('off').addEventListener('change', draw);
+  window.addEventListener('resize', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

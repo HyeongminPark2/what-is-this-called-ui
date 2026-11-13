@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>박스 모델 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .pad { padding: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .sld { width: 110px; }
+  .warnline { color: var(--danger); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>박스 모델</b>
+  <label style="font-size:13px;color:var(--fg-muted);display:inline-flex;align-items:center;gap:6px">
+    <input type="checkbox" id="border-box" checked> <code>box-sizing: border-box</code>
+  </label>
+</div>
+
+<div class="pad lab">
+  <div class="lab__ctrl">
+    <label>width <input type="range" id="w" class="sld" min="120" max="260" value="200"><output id="wo">200</output>px</label>
+    <label>padding <input type="range" id="p" class="sld" min="0" max="32" value="16"><output id="po">16</output>px</label>
+    <label>border <input type="range" id="b" class="sld" min="0" max="12" value="4"><output id="bo">4</output>px</label>
+    <label>margin <input type="range" id="m" class="sld" min="0" max="32" value="12"><output id="mo">12</output>px</label>
+  </div>
+
+  <div class="lab__stage">
+    <div class="bx" id="bx">
+      <div class="bx__bd bx__pd" id="bd">
+        <div class="bx__ct" id="ct">내용</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="bx-key">
+    <span><i style="background:color-mix(in srgb,var(--warn) 30%,transparent)"></i>margin — 바깥 여백</span>
+    <span><i style="background:color-mix(in srgb,var(--accent) 45%,transparent)"></i>border — 테두리</span>
+    <span><i style="background:color-mix(in srgb,#1f8a4c 25%,transparent)"></i>padding — 안쪽 여백</span>
+    <span><i style="background:var(--surface);border:1px dashed var(--line-strong)"></i>content — 내용</span>
+  </p>
+
+  <p class="bx-ruler" id="ruler"></p>
+</div>
+
+<p class="hint">
+  상자 하나는 <b>네 겹</b>입니다 — 내용 · 안쪽 여백 · 테두리 · 바깥 여백.
+  겉에서 차지하는 자리는 이 넷을 다 더한 것입니다.<br>
+  <code>box-sizing</code>을 꺼 보세요. <b><code>width: 200px</code>이라고 적었는데 상자가 200px이 아닙니다.</b>
+  기본값(<code>content-box</code>)에서 width 는 <b>내용만</b>의 너비라, 패딩과 테두리가 바깥으로 더 붙습니다.
+  그래서 거의 모든 프로젝트가 맨 위에 <code>* { box-sizing: border-box }</code> 한 줄을 깔아 둡니다 —
+  그러면 width 가 <b>테두리까지 포함한</b> 너비가 됩니다.<br>
+  <b>margin 은 상자 크기에 안 들어갑니다.</b> border-box 를 켜도 바깥 여백은 따로입니다.
+</p>
+
+<script>
+(function () {
+  var ids = ['w', 'p', 'b', 'm'];
+  var bx = document.getElementById('bx'), bd = document.getElementById('bd');
+  var ct = document.getElementById('ct');
+  var ruler = document.getElementById('ruler');
+
+  function draw() {
+    var v = {};
+    ids.forEach(function (id) {
+      v[id] = +document.getElementById(id).value;
+      document.getElementById(id + 'o').textContent = v[id];
+    });
+    var borderBox = document.getElementById('border-box').checked;
+
+    bx.style.padding = v.m + 'px';   // 주황 띠로 margin 자리를 그린다
+    bd.style.borderWidth = v.b + 'px';
+    bd.style.padding = v.p + 'px';
+    // width 는 '무엇의' 너비인가 — 이 한 줄이 box-sizing 의 전부다
+    bd.style.boxSizing = borderBox ? 'border-box' : 'content-box';
+    bd.style.width = v.w + 'px';
+
+    requestAnimationFrame(function () {
+      var outer = bd.getBoundingClientRect().width;
+      var inner = ct.getBoundingClientRect().width;
+      var total = outer + v.m * 2;
+      ruler.innerHTML =
+        '적은 값 <b>width: ' + v.w + 'px</b> &nbsp;→&nbsp; 테두리까지 <b>' + Math.round(outer) + 'px</b>' +
+        ' &nbsp;·&nbsp; 내용 <b>' + Math.round(inner) + 'px</b>' +
+        ' &nbsp;·&nbsp; 자리 차지 <b>' + Math.round(total) + 'px</b>' +
+        (borderBox ? '' : ' <span class="warnline">← 적은 값보다 ' + Math.round(outer - v.w) + 'px 큼</span>');
+    });
+  }
+
+  ids.forEach(function (id) { document.getElementById(id).addEventListener('input', draw); });
+  document.getElementById('border-box').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

@@ -208,6 +208,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
 
   // ── 2. 항목 카드 — 일곱 장 모두 같은 틀인지 ──
   const PARTS = {
+    '1부': ['box', 'flex', 'grid', 'center', 'overflow', 'sticky', 'container', 'safearea'],
     '2부': ['color', 'dark', 'typescale', 'spacing', 'elevation', 'zindex'],
     '5부': ['card', 'listitem', 'avatar', 'badge', 'chip', 'stat', 'timeline', 'rating'],
     '6부': ['modal', 'dialog', 'sheet', 'drawer', 'popover', 'tooltip', 'toast'],
@@ -924,6 +925,114 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     fail.push('별점: 탭으로 들어오는 자리가 하나가 아니다(로빙 탭인덱스)');
   await page.press('#input [data-v="4"]', 'ArrowRight'); await page.waitForTimeout(80);
   if (await page.locator('#input button.on').count() !== 5) fail.push('별점: → 로 안 올라간다');
+  await page.close();
+
+  // 1부 뼈대 데모 여덟 장
+  // 박스 모델 — box-sizing 으로 '적은 값'의 뜻이 바뀐다
+  page = await demo('box', 900, 820);
+  const W = s2 => page.$eval(s2, e => e.getBoundingClientRect().width);
+  if (Math.abs(await W('#bd') - 200) > 1) fail.push('박스 모델: border-box 인데 200px 이 아니다');
+  await page.locator('#border-box').uncheck(); await page.waitForTimeout(120);
+  if (Math.abs(await W('#bd') - 240) > 1) fail.push('박스 모델: content-box 인데 패딩·테두리가 안 더해진다');
+  if (!(await page.textContent('#ruler')).includes('px 큼')) fail.push('박스 모델: 적은 값보다 커졌다고 안 알려 준다');
+  await page.locator('#border-box').check();
+  await page.locator('#p').fill('32'); await page.dispatchEvent('#p', 'input'); await page.waitForTimeout(120);
+  if (Math.abs(await W('#bd') - 200) > 1) fail.push('박스 모델: border-box 인데 패딩을 키우니 바깥이 커졌다');
+  if (await W('#ct') > 150) fail.push('박스 모델: 패딩을 키웠는데 내용 칸이 안 줄었다');
+  await page.close();
+
+  // 플렉스 — flex:1 과 min-width:0
+  page = await demo('flex', 900, 820);
+  if (await page.$eval('#lay', e => getComputedStyle(e).display) !== 'flex') fail.push('플렉스: display:flex 가 아니다');
+  const mid0 = await page.$eval('#mid', e => e.getBoundingClientRect().width);
+  await page.locator('#grow').check(); await page.waitForTimeout(120);
+  if (!(await page.$eval('#mid', e => e.getBoundingClientRect().width) > mid0 + 50))
+    fail.push('플렉스: flex:1 인데 안 늘어난다');
+  await page.locator('#long').check(); await page.waitForTimeout(180);
+  if (await page.$eval('#lay', e => e.scrollWidth > e.clientWidth + 2)) fail.push('플렉스: min-width:0 인데 판이 터졌다');
+  if (!await page.$eval('#mid', e => e.scrollWidth > e.clientWidth + 1)) fail.push('플렉스: 긴 글이 말줄임되지 않는다');
+  await page.selectOption('#dir', 'column'); await page.waitForTimeout(120);
+  if (await page.$eval('#lay', e => getComputedStyle(e).flexDirection) !== 'column') fail.push('플렉스: 방향이 안 바뀐다');
+  await page.close();
+
+  // 그리드 — 1fr 의 함정과 minmax(0,1fr)
+  page = await demo('grid', 900, 820);
+  const colw = () => page.$eval('#lay', e => {
+    const c = getComputedStyle(e).gridTemplateColumns.split(' ').map(parseFloat).filter(x => !isNaN(x));
+    return Math.round(Math.max(...c) - Math.min(...c));
+  });
+  if (!(await page.$eval('#lay', e => getComputedStyle(e).gridTemplateColumns.split(' ').length) >= 2))
+    fail.push('그리드: auto-fit 이 열을 못 만든다');
+  await page.selectOption('#mode', 'fixed'); await page.waitForTimeout(120);
+  await page.locator('#long').check(); await page.waitForTimeout(180);
+  if (!(await colw() > 2)) fail.push('그리드: 1fr 인데 긴 칸이 옆 칸을 안 빼앗는다 (보여주려는 결과)');
+  if (!(await page.textContent('#ruler')).includes('어긋났')) fail.push('그리드: 어긋났다고 안 알려 준다');
+  await page.locator('#minmax0').check(); await page.waitForTimeout(180);
+  if (await colw() !== 0) fail.push('그리드: minmax(0,1fr) 인데 칸이 안 고르다');
+  await page.selectOption('#mode', 'side'); await page.waitForTimeout(120);
+  if (Math.abs(await page.$eval('#lay > span', e => e.getBoundingClientRect().width) - 240) > 2)
+    fail.push('그리드: 고정 사이드바가 240px 이 아니다');
+  await page.close();
+
+  // 가운데 맞추기 — 되는 범위가 다르다
+  page = await demo('center', 900, 760);
+  const centered = () => page.$$eval('.ctr', els => els.filter(c => {
+    const box = c.querySelector('.ctr__box').getBoundingClientRect();
+    const b = c.querySelector('b').getBoundingClientRect();
+    return Math.abs((b.top + b.bottom) / 2 - (box.top + box.bottom) / 2) < 2;
+  }).length);
+  if (await page.locator('.ctr').count() !== 5) fail.push('가운데: 방법이 다섯이 아니다');
+  if (await centered() !== 5) fail.push('가운데: 처음에 다섯 다 맞아 보이지 않는다');
+  await page.locator('#two').check(); await page.waitForTimeout(250);
+  if (await centered() !== 3) fail.push(`가운데: 두 줄일 때 끝까지 맞는 것이 셋이 아니다 (${await centered()})`);
+  if (!(await page.textContent('.ctr--margin .r')).includes('어긋남')) fail.push('가운데: margin:auto 의 세로 어긋남을 안 잡는다');
+  await page.close();
+
+  // 넘침 — 네 값과 가로 스크롤 범인
+  page = await demo('overflow', 900, 860);
+  if (!await page.$eval('.ovf--auto', e => e.scrollHeight > e.clientHeight)) fail.push('넘침: auto 칸이 안 넘친다');
+  if (await page.$eval('.ovf--scroll', e => e.scrollHeight > e.clientHeight)) fail.push('넘침: scroll 칸이 넘쳐 버렸다');
+  if (await page.$eval('.ovf--scroll', e => getComputedStyle(e).overflow) !== 'scroll') fail.push('넘침: scroll 이 아니다');
+  if (!(await page.textContent('#res')).includes('가로 스크롤이 생겼')) fail.push('넘침: 범인이 있는데 안 넘친다 (보여주려는 결과)');
+  await page.locator('#fixit').check(); await page.waitForTimeout(180);
+  if (!(await page.textContent('#res')).includes('안 넘칩니다')) fail.push('넘침: min-width:0 으로 고쳐도 넘친다');
+  await page.close();
+
+  // 스티키 — 굴려도 붙어 있고, 깨뜨리면 사라진다
+  page = await demo('sticky', 900, 760);
+  if (await page.$eval('#head', e => getComputedStyle(e).position) !== 'sticky') fail.push('스티키: sticky 가 아니다');
+  await page.$eval('#stk', e => { e.scrollTop = 120; }); await page.waitForTimeout(180);
+  const stkTop = await page.$eval('#stk', e => e.getBoundingClientRect().top);
+  if (Math.abs(await page.$eval('#head', e => e.getBoundingClientRect().top) - stkTop) > 2)
+    fail.push('스티키: 굴렸는데 머리말이 안 붙어 있다');
+  await page.locator('#broken').check(); await page.waitForTimeout(150);
+  await page.$eval('#stk', e => { e.scrollTop = 120; }); await page.waitForTimeout(180);
+  if (!(await page.$eval('#head', e => e.getBoundingClientRect().top) < stkTop - 50))
+    fail.push('스티키: 깨뜨렸는데 머리말이 그대로 붙어 있다 (보여주려는 결과)');
+  if (!(await page.textContent('#why')).includes('붙지 않습니다')) fail.push('스티키: 왜 안 되는지 안 알려 준다');
+  await page.close();
+
+  // 컨테이너 — 글줄 길이를 재서 알려 준다
+  page = await demo('container', 900, 760);
+  const innerW = () => page.$eval('#inner', e => e.getBoundingClientRect().width);
+  const w0 = await innerW();
+  if (!(await page.textContent('#meter')).includes('읽기 좋은 범위')) fail.push('컨테이너: 기본값이 읽기 좋은 폭이 아니다');
+  await page.locator('#off').check(); await page.waitForTimeout(180);
+  if (!(await innerW() > w0 + 50)) fail.push('컨테이너: 상한을 없앴는데 안 늘어난다');
+  if (!(await page.textContent('#meter')).includes('너무 깁니다')) fail.push('컨테이너: 너무 길다고 안 알려 준다');
+  if (!await page.isDisabled('#mw')) fail.push('컨테이너: 상한이 없는데 막대가 안 잠긴다');
+  await page.close();
+
+  // 세이프 에어리어 — 켜면 안쪽으로 들어온다
+  page = await demo('safearea', 900, 820);
+  if (!(await page.textContent('#res')).includes('겹칩니다')) fail.push('세이프: 적용 전에 안 겹친다 (보여주려는 결과)');
+  const padT = await page.$eval('#top', e => parseFloat(getComputedStyle(e).paddingTop));
+  await page.locator('#safeon').check(); await page.waitForTimeout(180);
+  if (!(await page.$eval('#top', e => parseFloat(getComputedStyle(e).paddingTop)) > padT + 10))
+    fail.push('세이프: 적용해도 상단 바가 안 내려온다');
+  if (!(await page.$eval('#bottom', e => parseFloat(getComputedStyle(e).paddingBottom)) > 15))
+    fail.push('세이프: 적용해도 탭바가 안 올라온다');
+  if (!(await page.textContent('#res')).includes('안전한 자리')) fail.push('세이프: 안전해졌다고 안 알려 준다');
   await page.close();
 
   await browser.close();

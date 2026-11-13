@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>그리드 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .pad { padding: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar"><b>그리드</b></div>
+
+<div class="pad lab">
+  <div class="lab__ctrl">
+    <label>짜는 법
+      <select class="sel" id="mode">
+        <option value="fixed">열 수를 못 박기 — repeat(3, 1fr)</option>
+        <option value="auto" selected>칸이 알아서 접히기 — auto-fit minmax</option>
+        <option value="side">사이드바 + 본문 — 240px 1fr</option>
+      </select></label>
+    <label id="colwrap">열 수 <input type="range" id="cols" class="sld" min="1" max="5" value="3" style="width:90px"><output id="colso">3</output></label>
+    <label>gap <input type="range" id="gap" class="sld" min="0" max="28" value="12" style="width:90px"><output id="gapo">12</output>px</label>
+    <label><input type="checkbox" id="long"> 긴 글 넣기</label>
+    <label><input type="checkbox" id="minmax0"> <code>minmax(0, 1fr)</code> 로 고치기</label>
+  </div>
+
+  <div class="lab__stage">
+    <div class="lay lay--grid" id="lay"></div>
+  </div>
+
+  <pre class="lab__code" id="code"></pre>
+  <p class="bx-ruler" id="ruler"></p>
+</div>
+
+<p class="hint">
+  그리드는 <b>두 방향으로 칸을 나누는</b> 방법입니다. 플렉스가 '한 줄에 늘어놓기'라면
+  그리드는 '판을 먼저 그리고 거기에 넣기'입니다.<br>
+  <code>1fr</code>은 '남은 자리를 한 몫씩'이라는 뜻입니다. <b>auto-fit minmax</b>는
+  '칸이 최소 150px 아래로 작아지면 열 수를 줄여라'라는 말이라, 브라우저 폭만 바꿔도
+  <b>미디어 쿼리 없이</b> 접힙니다 — 카드 그리드가 거의 다 이것입니다.<br>
+  <b>긴 글 넣기</b>를 켜 보세요. <b>고르던 칸들이 어긋납니다</b> — 긴 칸이 옆 칸의 자리를 빼앗습니다.
+  <code>1fr</code>이 사실은 <code>minmax(<b>auto</b>, 1fr)</code>이고 <b>auto 는 '내용만큼'</b>이라
+  그 칸이 글보다 작아지지 못하기 때문입니다. 글이 더 길면 그때는 판이 통째로 터집니다.
+  <code>minmax(0, 1fr)</code>로 고치면 그제서야 칸이 줄고 글이 잘립니다.
+</p>
+
+<script>
+(function () {
+  var lay = document.getElementById('lay'), code = document.getElementById('code');
+  var ruler = document.getElementById('ruler');
+  var LONG = '아주긴상품명이공백없이계속이어지는경우에는칸을밀어냅니다';
+
+  function draw() {
+    var mode = document.getElementById('mode').value;
+    var cols = +document.getElementById('cols').value;
+    var gap = +document.getElementById('gap').value;
+    var long = document.getElementById('long').checked;
+    var fix = document.getElementById('minmax0').checked;
+    document.getElementById('colso').textContent = cols;
+    document.getElementById('gapo').textContent = gap;
+    document.getElementById('colwrap').style.display = mode === 'fixed' ? '' : 'none';
+
+    var unit = fix ? 'minmax(0, 1fr)' : '1fr';
+    var tpl = mode === 'fixed' ? 'repeat(' + cols + ', ' + unit + ')'
+            : mode === 'auto' ? 'repeat(auto-fit, minmax(150px, ' + unit + '))'
+            : '240px ' + unit;
+
+    lay.style.gridTemplateColumns = tpl;
+    lay.style.gap = gap + 'px';
+
+    var n = mode === 'side' ? 2 : 6;
+    lay.innerHTML = '';
+    for (var i = 0; i < n; i++) {
+      var s = document.createElement('span');
+      var isLong = long && i === 1;
+      s.textContent = mode === 'side' ? (i === 0 ? '사이드바 240px' : '본문 1fr')
+                                      : (isLong ? LONG : '칸 ' + (i + 1));
+      if (isLong) {
+        s.className = 'wide';
+        // overflow:hidden 은 그리드 자식의 자동 최소 너비를 0 으로 만든다.
+        // 고치기 전에는 주면 안 된다 — 안 주는 것이 '1fr 의 함정'을 보여 주는 조건이다.
+        if (fix) { s.style.display = 'block'; s.style.overflow = 'hidden'; s.style.textOverflow = 'ellipsis'; s.style.whiteSpace = 'nowrap'; }
+      }
+      lay.appendChild(s);
+    }
+
+    code.innerHTML = '.grid {\n  display: <b>grid</b>;\n  grid-template-columns: <b>' + tpl + '</b>;\n  gap: <b>' + gap + 'px</b>;\n}';
+
+    requestAnimationFrame(function () {
+      var over = lay.scrollWidth - lay.clientWidth;
+      var cw = getComputedStyle(lay).gridTemplateColumns.split(' ').map(parseFloat).filter(function (x) { return !isNaN(x); });
+      var gap2 = Math.round(Math.max.apply(null, cw) - Math.min.apply(null, cw));
+      if (over > 2) {
+        ruler.innerHTML = '<span style="color:var(--danger);font-weight:700">판이 ' + Math.round(over) + 'px 터졌습니다</span>';
+      } else if (gap2 > 2) {
+        ruler.innerHTML = '<span style="color:var(--danger);font-weight:700">칸 너비가 ' + gap2 + 'px 어긋났습니다</span>' +
+          ' — 1fr 은 minmax(<b>auto</b>, 1fr) 이라 긴 칸이 <b>옆 칸의 자리를 빼앗습니다</b>';
+      } else {
+        ruler.innerHTML = '칸이 고릅니다 · 각 ' + Math.round(cw[0]) + 'px';
+      }
+    });
+  }
+
+  ['mode', 'cols', 'gap', 'long', 'minmax0'].forEach(function (id) {
+    var el = document.getElementById(id);
+    el.addEventListener(el.type === 'range' ? 'input' : 'change', draw);
+  });
+  draw();
+})();
+</script>
+</body>
+</html>

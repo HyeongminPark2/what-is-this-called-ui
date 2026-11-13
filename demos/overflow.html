@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>넘침 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s5); }
+  h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--fg-muted); margin: 0 0 var(--s3); }
+  .row { display: flex; gap: var(--s5); flex-wrap: wrap; align-items: flex-start; }
+  .cap { font-size: 11.5px; color: var(--fg-muted); margin-top: 6px; display: block; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .culprit { border: 1px solid var(--line); border-radius: var(--r2); padding: var(--s3); background: var(--bg); }
+  .culprit__view { max-width: 240px; overflow-x: auto; border: 1px dashed var(--line-strong); border-radius: var(--r1); background: var(--surface); padding: 9px; }
+  .culprit__view > div { display: flex; gap: 8px; }
+  .culprit__view span { flex: none; background: var(--accent-soft); color: var(--accent); border-radius: 5px; padding: 6px 9px; font-size: 12px; white-space: nowrap; }
+  .culprit__view span.bad { background: var(--warn-soft); color: var(--warn); }
+  .res { font-family: var(--mono); font-size: 12px; margin-top: 9px; }
+  .res.no { color: var(--danger); font-weight: 700; }
+  .res.ok { color: #1f8a4c; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar"><b>넘침</b></div>
+
+<div class="pad">
+  <section>
+    <h4>같은 글, 다른 <code>overflow</code></h4>
+    <div class="row" id="boxes">
+      <div><div class="ovf ovf--visible" id="v">상자보다 글이 많으면 어떻게 되는지 보는 칸입니다. 네 가지가 다 다르게 동작하니 눈으로 비교해 보세요. 글이 상자보다 길어졌을 때 무엇을 할지는 고르는 것이지 저절로 정해지지 않습니다.</div><span class="cap"><code>visible</code> — 기본값. <b>밖으로 삐져나온다</b></span></div>
+      <div><div class="ovf ovf--hidden">상자보다 글이 많으면 어떻게 되는지 보는 칸입니다. 네 가지가 다 다르게 동작하니 눈으로 비교해 보세요. 글이 상자보다 길어졌을 때 무엇을 할지는 고르는 것이지 저절로 정해지지 않습니다.</div><span class="cap"><code>hidden</code> — 잘린다. <b>읽을 방법이 없다</b></span></div>
+      <div><div class="ovf ovf--auto">상자보다 글이 많으면 어떻게 되는지 보는 칸입니다. 네 가지가 다 다르게 동작하니 눈으로 비교해 보세요. 글이 상자보다 길어졌을 때 무엇을 할지는 고르는 것이지 저절로 정해지지 않습니다.</div><span class="cap"><code>auto</code> — 넘칠 때만 스크롤바</span></div>
+      <div><div class="ovf ovf--scroll">짧은 글.</div><span class="cap"><code>scroll</code> — 안 넘쳐도 자리를 잡는다</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h4>가로 스크롤 범인 찾기</h4>
+    <div class="culprit">
+      <div class="culprit__view" id="view">
+        <div id="track"></div>
+      </div>
+      <p class="res" id="res"></p>
+      <div class="lab__ctrl" style="margin-top:var(--s3)">
+        <label><input type="checkbox" id="nowrap" checked> 긴 칸 하나가 <code>flex: none</code> 으로 버티는 중</label>
+        <label><input type="checkbox" id="fixit"> <code>min-width: 0</code> + 말줄임으로 고치기</label>
+      </div>
+    </div>
+  </section>
+</div>
+
+<p class="hint">
+  <code>overflow</code>는 <b>넘친 것을 어떻게 할지</b> 정합니다. <code>hidden</code>은 가장 쉬워 보이지만
+  <b>읽을 방법을 없애는</b> 선택이라, 글에는 <code>text-overflow: ellipsis</code>로 '잘렸다'를 알려 주는 편이 낫습니다.<br>
+  <code>scroll</code>은 <b>안 넘쳐도 스크롤바 자리를 잡습니다.</b> 자리가 흔들리지 않아야 하는 데서만 씁니다.<br>
+  <b>가로 스크롤은 거의 늘 '줄어들지 못하는 칸' 하나 때문</b>입니다. 플렉스·그리드 자식의
+  최소 너비가 <b>내용만큼</b>이라서, <code>min-width: 0</code>을 주기 전에는 아무리 좁혀도 안 줄어듭니다.
+  범인을 찾을 때는 개발자 도구에서 <b>폭이 부모보다 큰 요소</b>를 찾으면 됩니다.
+</p>
+
+<script>
+(function () {
+  var track = document.getElementById('track'), view = document.getElementById('view'), res = document.getElementById('res');
+  var LONG = '줄어들지못하는아주긴칸하나';
+
+  function draw() {
+    var hard = document.getElementById('nowrap').checked;
+    var fix = document.getElementById('fixit').checked;
+    track.innerHTML = '';
+    ['앞', hard ? LONG : '가운데', '뒤'].forEach(function (t, i) {
+      var s = document.createElement('span');
+      s.textContent = t;
+      if (i === 1 && hard) {
+        s.className = 'bad';
+        if (fix) { s.style.flex = '1'; s.style.minWidth = '0'; s.style.overflow = 'hidden'; s.style.textOverflow = 'ellipsis'; }
+      }
+      track.appendChild(s);
+    });
+    requestAnimationFrame(function () {
+      var over = view.scrollWidth - view.clientWidth;
+      res.className = 'res ' + (over > 2 ? 'no' : 'ok');
+      res.textContent = over > 2
+        ? 'scrollWidth - clientWidth = ' + Math.round(over) + 'px  → 가로 스크롤이 생겼습니다'
+        : 'scrollWidth - clientWidth = 0  → 안 넘칩니다';
+    });
+  }
+  ['nowrap', 'fixit'].forEach(function (id) { document.getElementById(id).addEventListener('change', draw); });
+  draw();
+})();
+</script>
+</body>
+</html>
