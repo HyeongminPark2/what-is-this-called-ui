@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>토스트 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--surface); z-index: 2; }
+  .bar b { font-size: 15px; }
+  .row { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .row .meta { flex: 1; min-width: 0; }
+  .row .meta b { display: block; font-size: 14px; }
+  .row .meta span { font-size: 12.5px; color: var(--fg-muted); }
+  .row .ui-btn { min-height: 36px; padding: 8px 13px; font-size: 13px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); }
+  .gone { padding: var(--s6) var(--s4); text-align: center; color: var(--fg-muted); font-size: 14px; }
+</style>
+</head>
+<body>
+
+<div class="bar"><b>오늘 할 일</b><span style="margin-left:auto;font-size:12.5px;color:var(--fg-muted)" id="count"></span></div>
+
+<div id="list">
+  <div class="row"><span class="meta"><b>결제 서버 배포 점검</b><span>오후 3시까지</span></span><button class="ui-btn ui-btn--ghost js-del">삭제</button></div>
+  <div class="row"><span class="meta"><b>회고 문서 초안 쓰기</b><span>내일까지</span></span><button class="ui-btn ui-btn--ghost js-del">삭제</button></div>
+  <div class="row"><span class="meta"><b>가맹점 문의 답장</b><span>3건 남음</span></span><button class="ui-btn ui-btn--ghost js-del">삭제</button></div>
+  <div class="row"><span class="meta"><b>온보딩 안내 고치기</b><span>이번 주</span></span><button class="ui-btn ui-btn--ghost js-del">삭제</button></div>
+  <div class="row"><span class="meta"><b>슬랙 알림 규칙 정리</b><span>미정</span></span><button class="ui-btn ui-btn--ghost js-del">삭제</button></div>
+</div>
+
+<p class="hint">
+  삭제를 눌러 보세요. 하던 일을 막지 않고 구석에서 알려 주고, 5초 뒤 저절로 사라집니다.
+  <b>여러 개를 빠르게 지우면 쌓입니다.</b> 토스트에 마우스를 올리면 타이머가 멈추고,
+  <b>되돌리기</b>를 누르면 지운 항목이 돌아옵니다.
+</p>
+
+<!-- 토스트가 쌓이는 자리. 알림이라 라이브 리전으로 읽힌다. -->
+<div class="tst-wrap" id="toasts" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  var list = document.getElementById('list');
+  var wrap = document.getElementById('toasts');
+  var count = document.getElementById('count');
+  var LIFE = 5000;
+
+  function recount() {
+    var n = list.querySelectorAll('.row').length;
+    count.textContent = n ? n + '건 남음' : '';
+    if (!n && !list.querySelector('.gone')) {
+      list.insertAdjacentHTML('beforeend', '<p class="gone">할 일이 없습니다. 되돌리기로 가져올 수 있습니다.</p>');
+    }
+  }
+
+  list.addEventListener('click', function (e) {
+    var btn = e.target.closest('.js-del');
+    if (!btn) return;
+    var row = btn.closest('.row');
+    var next = row.nextElementSibling;
+    var name = row.querySelector('b').textContent;
+    row.remove();
+    var g = list.querySelector('.gone'); if (g && list.querySelectorAll('.row').length) g.remove();
+    recount();
+    toast('“' + name + '”을 지웠습니다', function () {   // 되돌리기
+      if (next && next.parentNode === list) list.insertBefore(row, next);
+      else list.appendChild(row);
+      var gg = list.querySelector('.gone'); if (gg) gg.remove();
+      recount();
+    });
+  });
+
+  function toast(msg, undo) {
+    var el = document.createElement('div');
+    el.className = 'tst';
+    el.innerHTML =
+      '<span class="tst__msg"></span>' +
+      (undo ? '<button class="tst__act">되돌리기</button>' : '') +
+      '<button class="tst__x" aria-label="닫기">&times;</button>' +
+      '<span class="tst__timer"><i></i></span>';
+    el.querySelector('.tst__msg').textContent = msg;
+    wrap.appendChild(el);
+
+    var bar = el.querySelector('.tst__timer i');
+    var started = Date.now(), left = LIFE, timer = null, paused = false;
+
+    function run() {
+      bar.style.transition = 'none';
+      bar.style.transform = 'scaleX(' + (left / LIFE) + ')';
+      void bar.offsetWidth;
+      bar.style.transition = 'transform ' + left + 'ms linear';
+      bar.style.transform = 'scaleX(0)';
+      started = Date.now();
+      timer = setTimeout(close, left);
+    }
+    function pause() {
+      if (paused) return;
+      paused = true;
+      clearTimeout(timer);
+      left -= Date.now() - started;
+      var w = bar.getBoundingClientRect().width / el.getBoundingClientRect().width;
+      bar.style.transition = 'none';
+      bar.style.transform = 'scaleX(' + w + ')';
+    }
+    function resume() { if (!paused) return; paused = false; run(); }
+    function close() {
+      clearTimeout(timer);
+      el.classList.add('is-out');
+      el.addEventListener('animationend', function () { el.remove(); }, { once: true });
+    }
+
+    el.addEventListener('mouseenter', pause);
+    el.addEventListener('mouseleave', resume);
+    el.addEventListener('focusin', pause);
+    el.addEventListener('focusout', resume);
+    el.querySelector('.tst__x').addEventListener('click', close);
+    if (undo) el.querySelector('.tst__act').addEventListener('click', function () { undo(); close(); });
+    run();
+  }
+
+  recount();
+})();
+</script>
+</body>
+</html>

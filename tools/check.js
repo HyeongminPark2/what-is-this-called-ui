@@ -198,164 +198,217 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   await page.screenshot({ path: '/tmp/uicheck/2-index-mobile.png', fullPage: true });
   await page.close();
 
-  // ── 2. 항목 카드 ──────────────────────
-  page = await browser.newPage({ viewport: { width: 1280, height: 1000 }, deviceScaleFactor: 1 });
-  page.on('console', m => { if (m.type() === 'error') errors.push('[modal] ' + m.text()); });
-  page.on('pageerror', e => errors.push('[modal pageerror] ' + e.message));
-  await page.goto(url('items/modal.html'));
-  await page.waitForTimeout(600);
+  // ── 2. 항목 카드 — 일곱 장 모두 같은 틀인지 ──
+  const ITEMS = ['modal', 'dialog', 'sheet', 'drawer', 'popover', 'tooltip', 'toast'];
 
-  // 글자가 세로로 한 줄씩 쌓이는 붕괴를 잡는다 — 좁은데 터무니없이 긴 글 상자
-  const squished = await page.evaluate(() => {
-    const bad = [];
-    document.querySelectorAll('p, span, li, b, td, figcaption').forEach(el => {
-      if (!el.textContent.trim() || el.children.length) return;
-      const r = el.getBoundingClientRect();
-      if (r.width > 0 && r.width < 46 && r.height > 170) {
-        bad.push(`${el.tagName.toLowerCase()}.${(el.className||'').toString().slice(0,24)} ${Math.round(r.width)}x${Math.round(r.height)}`);
-      }
-    });
-    return bad.slice(0, 4);
-  });
-  if (squished.length) fail.push('글이 세로로 쌓임: ' + squished.join(' / '));
+  for (const slug of ITEMS) {
+    page = await browser.newPage({ viewport: { width: 1280, height: 1000 }, deviceScaleFactor: 1 });
+    page.on('console', m => { if (m.type() === 'error') errors.push(`[${slug}] ` + m.text()); });
+    page.on('pageerror', e => errors.push(`[${slug} pageerror] ` + e.message));
+    await page.goto(url('items/' + slug + '.html'));
+    await page.waitForTimeout(600);
 
-  // 그림이 칸보다 넓어 잘리는지
-  const clipped = await page.evaluate(() => {
-    const bad = [];
-    document.querySelectorAll('.shot').forEach(shot => {
-      const sr = shot.getBoundingClientRect();
-      shot.querySelectorAll(':scope > *').forEach(el => {
-        const r = el.getBoundingClientRect();
-        if (r.right > sr.right + 1 || r.left < sr.left - 1) {
-          bad.push(`${(el.className||'').toString().slice(0,18)} ${Math.round(r.width)}px > 칸 ${Math.round(sr.width)}px`);
+    const r = await page.evaluate(() => {
+      const bad = [];
+      const slots = document.querySelectorAll('section.slot').length;
+      if (slots !== 10) bad.push(`칸이 ${slots}개 (10 기대)`);
+
+      // 해부도: 그림의 번호와 목록이 1대1인가
+      const npin = document.querySelectorAll('.anat [data-pin]').length;
+      const nlist = document.querySelectorAll('.pin-list li').length;
+      if (npin !== nlist) bad.push(`해부도 번호 ${npin}개 vs 목록 ${nlist}개`);
+      // 빈 태그(hr·img·input·br)에는 ::before 가 안 그려져 번호가 보이지 않는다
+      document.querySelectorAll('.anat [data-pin]').forEach(el => {
+        if (['HR', 'IMG', 'INPUT', 'BR', 'EMBED'].includes(el.tagName)) {
+          bad.push(`${el.dataset.pin}번이 빈 태그(${el.tagName})라 번호가 안 그려짐`);
         }
       });
+      const nums = [...document.querySelectorAll('.anat [data-pin]')].map(e => +e.dataset.pin).sort((x, y) => x - y);
+      if (nums.some((v, i) => v !== i + 1)) bad.push(`해부도 번호가 1부터 이어지지 않음: ${nums.join(',')}`);
+
+      // 글이 세로로 쌓이는 붕괴
+      document.querySelectorAll('p, span, li, b, td, figcaption').forEach(el => {
+        if (!el.textContent.trim() || el.children.length) return;
+        const q = el.getBoundingClientRect();
+        if (q.width > 0 && q.width < 46 && q.height > 170) bad.push(`글이 세로로 쌓임: ${el.tagName.toLowerCase()}.${(el.className||'').toString().slice(0,20)}`);
+      });
+
+      // 그림이 칸 밖으로 잘리는지
+      document.querySelectorAll('.shot').forEach(shot => {
+        const sr = shot.getBoundingClientRect();
+        shot.querySelectorAll(':scope > *').forEach(el => {
+          const q = el.getBoundingClientRect();
+          if (q.right > sr.right + 1 || q.left < sr.left - 1) bad.push(`그림이 칸 밖으로: ${(el.className||'').toString().slice(0,18)}`);
+        });
+      });
+
+      // 해부도 번호가 가리키는 것을 덮는지 (작은 것만)
+      document.querySelectorAll('.anat [data-pin]').forEach(a => {
+        const ar = a.getBoundingClientRect();
+        document.querySelectorAll('.anat [data-pin]').forEach(b2 => {
+          if (a === b2 || a.contains(b2) || b2.contains(a)) return;
+          const br = b2.getBoundingClientRect();
+          if (br.height >= 30) return;
+          const ov = Math.max(0, Math.min(ar.right, br.right) - Math.max(ar.left, br.left)) *
+                     Math.max(0, Math.min(ar.bottom, br.bottom) - Math.max(ar.top, br.top));
+          if (ov > br.width * br.height * 0.6) bad.push(`해부도 ${a.dataset.pin}번이 ${b2.dataset.pin}번을 덮음`);
+        });
+      });
+
+      // 페이지 안 이동 링크가 실제로 가리키는 곳이 있는가
+      document.querySelectorAll('.jump a').forEach(a => {
+        if (!document.querySelector(a.getAttribute('href'))) bad.push(`이동 링크가 가리키는 곳 없음: ${a.getAttribute('href')}`);
+      });
+
+      const h = document.documentElement.scrollHeight;
+      if (h > 12000) bad.push(`페이지가 비정상적으로 김: ${h}px`);
+      return bad.slice(0, 5);
     });
-    return bad.slice(0, 5);
-  });
-  if (clipped.length) fail.push('그림이 칸 밖으로 잘림: ' + clipped.join(' / '));
+    r.forEach(x => fail.push(`${slug}: ${x}`));
 
-  const pageH = await page.evaluate(() => document.documentElement.scrollHeight);
-  if (pageH > 9000) fail.push(`항목 페이지가 비정상적으로 김: ${pageH}px`);
+    // 형제 링크가 일곱 중 자기를 뺀 여섯을 가리키는가
+    const sib = await page.$$eval('.siblings a[href$=".html"]', as => as.map(a => a.getAttribute('href')));
+    if (sib.length !== 6) fail.push(`${slug}: 형제 링크가 ${sib.length}개 (6 기대)`);
+    if (sib.includes(slug + '.html')) fail.push(`${slug}: 형제 목록에 자기 자신이 있음`);
 
-  const slots = await page.locator('section.slot').count();
-  if (slots !== 10) fail.push(`카드 칸 ${slots}개 (10 기대)`);
+    // ①칸 폭 토글
+    await page.locator(`.seg[data-seg="${slug}"] button[data-w="768"]`).click();
+    await page.waitForTimeout(430);
+    const w = await page.locator('.stage iframe').evaluate(el => Math.round(el.getBoundingClientRect().width));
+    if (Math.abs(w - 768) > 4) fail.push(`${slug}: 폭 토글 768 → 실제 ${w}px`);
+    if (await page.locator('.preview-open').count() !== 1) fail.push(`${slug}: ①칸에 새 탭 링크 없음`);
 
-  const pins = await page.locator('.anat [data-pin]').count();
-  const pinItems = await page.locator('.pin-list li').count();
-  if (pinItems !== 9) fail.push(`해부도 목록 ${pinItems}개 (9 기대)`);
-  if (pins !== pinItems) fail.push(`해부도: 그림 번호 ${pins}개 vs 목록 ${pinItems}개 — 안 맞음`);
+    // 폰 폭에서 가로로 넘치지 않는가
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.waitForTimeout(500);
+    const over = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    if (over > 2) fail.push(`${slug}: 390px 가로 넘침 ${over}px`);
 
-  // 폭 토글
-  const meta = page.locator('[data-meta="modal"]');
-  await page.locator('.seg[data-seg="modal"] button[data-w="768"]').click();
-  await page.waitForTimeout(450);
-  const w768 = await page.locator('.stage iframe').evaluate(el => Math.round(el.getBoundingClientRect().width));
-  if (Math.abs(w768 - 768) > 4) fail.push(`폭 토글 768 → 실제 ${w768}px`);
-  if (!(await meta.textContent()).includes('768')) fail.push('폭 표시가 768을 안 보여줌');
+    await page.close();
+  }
 
-  await page.locator('.seg[data-seg="modal"] button[data-w="390"]').click();
-  await page.waitForTimeout(450);
-  const w390 = await page.locator('.stage iframe').evaluate(el => Math.round(el.getBoundingClientRect().width));
-  if (Math.abs(w390 - 390) > 4) fail.push(`폭 토글 390 → 실제 ${w390}px`);
-  await page.screenshot({ path: '/tmp/uicheck/3-card-390frame.png', fullPage: true });
+  // ── 3. 데모가 실제로 동작하는가 ──
+  const demo = async (f, w, h) => {
+    const pg = await browser.newPage({ viewport: { width: w || 900, height: h || 760 } });
+    pg.on('pageerror', e => errors.push(`[demo ${f}] ` + e.message));
+    pg.on('console', m => { if (m.type() === 'error') errors.push(`[demo ${f}] ` + m.text()); });
+    await pg.goto(url('demos/' + f + '.html'));
+    await pg.waitForTimeout(250);
+    return pg;
+  };
 
-  // 폰 폭에서 모달이 바텀시트가 되는지
-  let fr = page.frameLocator('.stage iframe');
-  await fr.locator('.js-open').first().click();
-  await page.waitForTimeout(400);
-  const sheet = await fr.locator('dialog.mdl').evaluate(el => {
-    const r = el.getBoundingClientRect();
-    const cs = getComputedStyle(el);
-    return { bottom: Math.round(innerHeight - r.bottom), radius: cs.borderBottomLeftRadius, w: Math.round(r.width), vw: innerWidth };
-  });
-  if (sheet.bottom > 2) fail.push(`390px: 모달이 아래에 안 붙음 (아래 여백 ${sheet.bottom}px)`);
-  if (sheet.radius !== '0px') fail.push(`390px: 바텀시트인데 아래 모서리가 ${sheet.radius}`);
-  await page.screenshot({ path: '/tmp/uicheck/4-bottomsheet.png' });
-  await page.keyboard.press('Escape');
-  await page.waitForTimeout(300);
-  if (await fr.locator('dialog.mdl').evaluate(el => el.open)) fail.push('Esc로 안 닫힘');
-
-  // 넓은 폭 — 가운데 뜨는 모달 + 포커스 갇힘 + 포커스 복귀
-  await page.locator('.seg[data-seg="modal"] button[data-w="full"]').click();
-  await page.waitForTimeout(450);
-  fr = page.frameLocator('.stage iframe');
-  await fr.locator('.js-open').first().click();
-  await page.waitForTimeout(400);
-  const centered = await fr.locator('dialog.mdl').evaluate(el => {
-    const r = el.getBoundingClientRect();
-    return { bottomGap: Math.round(innerHeight - r.bottom), radius: getComputedStyle(el).borderBottomLeftRadius };
-  });
-  if (centered.bottomGap < 10) fail.push('넓은 폭인데 모달이 아래에 붙어 있음');
-  if (centered.radius === '0px') fail.push('넓은 폭인데 아래 모서리가 안 깎임');
-  await page.screenshot({ path: '/tmp/uicheck/5-modal-wide.png' });
-
-  await page.keyboard.press('Escape');
-  await page.waitForTimeout(300);
-
-  // ①칸에 '새 탭에서 열기'가 있는지 — iframe에서 못 보는 것을 대신하는 출구
-  if (await page.locator('.preview-open').count() !== 1) fail.push('①칸에 새 탭 링크 없음');
-
-  // 카드 자체를 폰 폭에서
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.waitForTimeout(500);
-  const cardScroll = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-  if (cardScroll > 2) fail.push(`항목 카드 390px: 가로 넘침 ${cardScroll}px`);
-  await page.screenshot({ path: '/tmp/uicheck/6-card-mobile.png', fullPage: true });
-
-  await page.close();
-
-  // ── 3. 데모 페이지를 직접 열어 포커스 검사 (iframe 밖에서만 유효) ──
-  page = await browser.newPage({ viewport: { width: 1100, height: 800 }, deviceScaleFactor: 1 });
-  page.on('pageerror', e => errors.push('[demo pageerror] ' + e.message));
-  await page.goto(url('demos/modal.html'));
+  // 모달 — 포커스 갇힘은 iframe 밖에서만 검사할 수 있다
+  page = await demo('modal', 1100, 800);
   const opener = page.locator('.js-open').first();
-  await opener.click();
-  await page.waitForTimeout(350);
-
+  await opener.click(); await page.waitForTimeout(350);
   const dlg = page.locator('dialog.mdl');
-  if (!await dlg.evaluate(el => el.contains(document.activeElement))) fail.push('열릴 때 포커스가 모달 안으로 안 들어감');
-
-  // 브라우저는 순환 중 문서(body)를 한 칸 거친다. 중요한 건 '배경의 누를 수 있는 것에
-  // 포커스가 닿지 않는가'와 '순환이 모달로 돌아오는가'다.
-  let landedOnBackground = null, cameBack = false;
+  if (!await dlg.evaluate(el => el.contains(document.activeElement))) fail.push('모달: 열릴 때 포커스가 안 들어감');
+  let landed = null, cycled = false;
   for (let i = 0; i < 14; i++) {
     await page.keyboard.press('Tab');
     const where = await dlg.evaluate(el => {
       const a = document.activeElement;
       if (el.contains(a)) return 'in';
       if (!a || a === document.body || a === document.documentElement) return 'doc';
-      return a.tagName.toLowerCase() + '.' + (a.className || '');
+      return a.tagName.toLowerCase();
     });
-    if (where === 'in' && i > 2) cameBack = true;
-    if (where !== 'in' && where !== 'doc') landedOnBackground = where;
+    if (where === 'in' && i > 2) cycled = true;
+    if (where !== 'in' && where !== 'doc') landed = where;
   }
-  if (landedOnBackground) fail.push(`포커스가 배경 요소에 닿음: ${landedOnBackground}`);
-  if (!cameBack) fail.push('포커스 순환이 모달로 돌아오지 않음');
+  if (landed) fail.push(`모달: 포커스가 배경 요소(${landed})에 닿음`);
+  if (!cycled) fail.push('모달: 포커스 순환이 돌아오지 않음');
+  if (!await page.evaluate(() => { const b = document.querySelectorAll('.js-open')[2]; b.focus(); return document.activeElement !== b; }))
+    fail.push('모달: 배경이 비활성(inert)이 아님');
+  if (await page.evaluate(() => getComputedStyle(document.body).overflow) !== 'hidden') fail.push('모달: 배경 스크롤이 안 잠김');
+  await page.keyboard.press('Escape'); await page.waitForTimeout(300);
+  if (await dlg.evaluate(el => el.open)) fail.push('모달: Esc 로 안 닫힘');
+  if (!await opener.evaluate(el => el === document.activeElement)) fail.push('모달: 닫은 뒤 포커스가 안 돌아옴');
+  await page.close();
 
-  // 배경이 정말 비활성인지 — 프로그램으로 포커스를 줘도 안 받아야 한다
-  const inertOk = await page.evaluate(() => {
-    const bg = document.querySelectorAll('.js-open')[2];
-    bg.focus();
-    return document.activeElement !== bg;
+  // 토스트 — 쌓임 · 되돌리기 · 호버로 타이머 정지 · 저절로 사라짐
+  page = await demo('toast');
+  await page.locator('.js-del').first().click(); await page.waitForTimeout(200);
+  if (await page.locator('.tst').count() !== 1) fail.push('토스트: 안 떴다');
+  await page.locator('.js-del').first().click(); await page.waitForTimeout(200);
+  if (await page.locator('.tst').count() !== 2) fail.push('토스트: 두 개가 안 쌓인다');
+  await page.locator('.tst .tst__act').first().click(); await page.waitForTimeout(350);
+  if (await page.locator('.row').count() !== 4) fail.push('토스트: 되돌리기가 안 먹는다');
+  await page.locator('.tst').first().hover();
+  const t1 = await page.locator('.tst__timer i').first().evaluate(e => e.getBoundingClientRect().width);
+  await page.waitForTimeout(700);
+  const t2 = await page.locator('.tst__timer i').first().evaluate(e => e.getBoundingClientRect().width);
+  if (Math.abs(t1 - t2) > 2) fail.push('토스트: 올려도 타이머가 안 멈춘다');
+  await page.mouse.move(5, 5); await page.waitForTimeout(5600);
+  if (await page.locator('.tst').count() !== 0) fail.push('토스트: 저절로 안 사라진다');
+  await page.close();
+
+  // 바텀시트 — 아래에 붙고 배경이 잠기는가
+  page = await demo('sheet', 420, 760);
+  await page.locator('.js-more').first().click(); await page.waitForTimeout(400);
+  const sh = await page.locator('dialog.sheet').evaluate(el => {
+    const q = el.getBoundingClientRect();
+    return { open: el.open, gap: Math.round(innerHeight - q.bottom), radius: getComputedStyle(el).borderBottomLeftRadius };
   });
-  if (!inertOk) fail.push('배경이 비활성(inert)이 아님 — 뒤쪽 버튼에 포커스가 간다');
+  if (!sh.open) fail.push('시트: 안 열린다');
+  if (sh.gap > 2) fail.push('시트: 아래에 안 붙었다');
+  if (sh.radius !== '0px') fail.push('시트: 아래 모서리가 깎여 있다');
+  if (await page.evaluate(() => getComputedStyle(document.body).overflow) !== 'hidden') fail.push('시트: 배경 스크롤이 안 잠긴다');
+  await page.keyboard.press('Escape'); await page.waitForTimeout(250);
+  if (await page.locator('dialog.sheet').evaluate(e => e.open)) fail.push('시트: Esc 로 안 닫힌다');
+  await page.close();
 
-  // 배경 스크롤이 잠기는지
-  if (await page.evaluate(() => getComputedStyle(document.body).overflow) !== 'hidden') fail.push('배경 스크롤이 안 잠김');
+  // 드로어 — 옆에 붙고 높이를 다 쓰는가
+  page = await demo('drawer', 520, 760);
+  await page.locator('#open').click(); await page.waitForTimeout(350);
+  const dr = await page.locator('dialog.drw').evaluate(el => {
+    const q = el.getBoundingClientRect();
+    return { left: Math.round(q.left), full: Math.round(q.height) === Math.round(innerHeight) };
+  });
+  if (dr.left > 2) fail.push('드로어: 왼쪽에 안 붙었다');
+  if (!dr.full) fail.push('드로어: 높이가 화면 전체가 아니다');
+  if (await page.locator('#open').getAttribute('aria-expanded') !== 'true') fail.push('드로어: aria-expanded 가 안 바뀐다');
+  await page.keyboard.press('Escape'); await page.waitForTimeout(250);
+  if (!await page.locator('#open').evaluate(e => e === document.activeElement)) fail.push('드로어: 닫은 뒤 포커스가 안 돌아온다');
+  await page.close();
 
-  await page.keyboard.press('Escape');
-  await page.waitForTimeout(300);
-  if (await dlg.evaluate(el => el.open)) fail.push('데모: Esc로 안 닫힘');
-  if (!await opener.evaluate(el => el === document.activeElement)) fail.push('닫은 뒤 포커스가 부른 버튼으로 안 돌아옴');
-  if (await page.evaluate(() => getComputedStyle(document.body).overflow) === 'hidden') fail.push('닫았는데 배경 스크롤이 계속 잠김');
+  // 팝오버 — 뒤를 안 막고, 가장자리에서 뒤집히는가
+  page = await demo('popover', 900, 620);
+  await page.locator('#b1').click(); await page.waitForTimeout(200);
+  if (await page.locator('#p1').isHidden()) fail.push('팝오버: 안 열린다');
+  if (await page.evaluate(() => document.querySelector('.row').closest('[inert]') !== null)) fail.push('팝오버: 뒤쪽이 막혀 있다');
+  await page.locator('#b2').click(); await page.waitForTimeout(200);
+  if (await page.locator('#p1').isVisible()) fail.push('팝오버: 다른 것을 열어도 이전 게 안 닫힌다');
+  await page.locator('#b3').click(); await page.waitForTimeout(200);
+  const r3 = await page.locator('#p3').evaluate(el => ({ right: el.getBoundingClientRect().right, vw: innerWidth }));
+  if (r3.right > r3.vw + 1) fail.push('팝오버: 오른쪽 것이 화면 밖으로 나간다');
+  await page.keyboard.press('Escape'); await page.waitForTimeout(200);
+  if (await page.locator('#p3').isVisible()) fail.push('팝오버: Esc 로 안 닫힌다');
+  await page.close();
 
-  // 배경(백드롭) 클릭으로 닫히는지
-  await opener.click();
-  await page.waitForTimeout(300);
-  await page.mouse.click(8, 8);
-  await page.waitForTimeout(300);
-  if (await dlg.evaluate(el => el.open)) fail.push('백드롭 클릭으로 안 닫힘');
+  // 툴팁 — 지연 · 못 누름 · 키보드
+  page = await demo('tooltip', 760, 620);
+  await page.locator('.icon-btn').first().hover(); await page.waitForTimeout(150);
+  if (await page.locator('#t1').isVisible()) fail.push('툴팁: 지연 없이 바로 뜬다');
+  await page.waitForTimeout(400);
+  if (await page.locator('#t1').isHidden()) fail.push('툴팁: 머물러도 안 뜬다');
+  if (await page.locator('#t1').evaluate(e => getComputedStyle(e).pointerEvents) !== 'none') fail.push('툴팁: 마우스를 받는다 (설명만 해야 한다)');
+  await page.mouse.move(2, 2); await page.waitForTimeout(200);
+  if (await page.locator('#t1').isVisible()) fail.push('툴팁: 치워도 안 사라진다');
+  await page.locator('.icon-btn').nth(1).focus(); await page.waitForTimeout(120);
+  if (await page.locator('#t2').isHidden()) fail.push('툴팁: 키보드 포커스로 안 뜬다');
+  await page.close();
+
+  // 비모달 다이얼로그 — show() 와 showModal() 이 정말 다른가
+  page = await demo('dialog', 900, 700);
+  await page.locator('#find').click(); await page.waitForTimeout(250);
+  const fd = await page.locator('#finder').evaluate(el => ({ open: el.open, modal: el.matches(':modal') }));
+  if (!fd.open) fail.push('다이얼로그: 안 열린다');
+  if (fd.modal) fail.push('다이얼로그: show() 인데 모달로 열렸다');
+  if (await page.locator('mark').count() < 1) fail.push('다이얼로그: 찾기가 안 된다');
+  if (await page.evaluate(() => document.getElementById('p1').closest('[inert]') !== null)) fail.push('다이얼로그: 비모달인데 뒤가 막혔다');
+  await page.locator('#conf').click(); await page.waitForTimeout(250);
+  if (!await page.locator('#leave').evaluate(el => el.matches(':modal'))) fail.push('다이얼로그: showModal() 인데 모달이 아니다');
+  await page.close();
 
   await browser.close();
 

@@ -184,11 +184,11 @@
             <li><span class="lbl" data-t="stat"><span>스탯 타일<em>stat tile / KPI card</em></span></span></li>
             <li><span class="lbl" data-t="chip"><span>필터 칩<em>filter chip</em></span></span></li>
             <li><span class="lbl" data-t="seg"><span>세그먼티드 컨트롤<em>segmented control</em></span></span></li>
-            <li><span class="lbl" data-t="menu"><span>드롭다운 메뉴<em>dropdown menu</em></span></span></li>
+            <li><a class="lbl lbl--go" data-t="menu" href="items/popover.html"><span>드롭다운 메뉴<em>dropdown menu</em><b>항목 보기 →</b></span></a></li>
             <li><span class="lbl" data-t="table"><span>데이터 테이블<em>data table</em></span></span></li>
             <li><span class="lbl" data-t="sbadge"><span>상태 배지<em>status badge</em></span></span></li>
             <li><span class="lbl" data-t="page"><span>페이지네이션<em>pagination</em></span></span></li>
-            <li><span class="lbl" data-t="toast"><span>토스트<em>toast · snackbar</em></span></span></li>
+            <li><a class="lbl lbl--go" data-t="toast" href="items/toast.html"><span>토스트<em>toast · snackbar</em><b>항목 보기 →</b></span></a></li>
           </ol>
 
 
@@ -843,7 +843,7 @@
             <li><span class="lbl" data-t="phav"><span>아바타<em>avatar</em></span></span></li>
             <li><span class="lbl" data-t="phrow"><span>리스트 아이템<em>list item · row</em></span></span></li>
             <li><span class="lbl" data-t="fab"><span>FAB<em>floating action button</em></span></span></li>
-            <li><a class="lbl lbl--go" data-t="sheet" href="items/modal.html"><span>바텀시트<em>bottom sheet</em><b>모달 항목으로 →</b></span></a></li>
+            <li><a class="lbl lbl--go" data-t="sheet" href="items/sheet.html"><span>바텀시트<em>bottom sheet</em><b>항목 보기 →</b></span></a></li>
             <li><span class="lbl" data-t="tabs"><span>바텀 탭바<em>tab bar / bottom nav</em></span></span></li>
             <li><span class="lbl" data-t="home"><span>홈 인디케이터<em>home indicator</em></span></span></li>
           </ol>
@@ -868,10 +868,10 @@
     <table class="grid pairs">
       <thead><tr><th style="width:17em">짝</th><th>가르는 한 줄</th></tr></thead>
       <tbody>
-        <tr><td><a href="items/modal.html">모달</a> / 비모달</td><td>뒤쪽을 못 만지게 막나</td></tr>
-        <tr><td>다이얼로그 / 시트 / 드로어</td><td>가운데서 뜨나, 아래서 올라오나, 옆에서 밀려오나</td></tr>
-        <tr><td>툴팁 / 팝오버</td><td>설명만인가, 안에 누를 게 있나</td></tr>
-        <tr><td>토스트 / 스낵바 / 배너</td><td>저절로 사라지나, 되돌리기가 붙나, 계속 남나</td></tr>
+        <tr><td><a href="items/modal.html">모달</a> / <a href="items/dialog.html">비모달</a></td><td>뒤쪽을 못 만지게 막나</td></tr>
+        <tr><td><a href="items/dialog.html">다이얼로그</a> / <a href="items/sheet.html">시트</a> / <a href="items/drawer.html">드로어</a></td><td>가운데서 뜨나, 아래서 올라오나, 옆에서 밀려오나</td></tr>
+        <tr><td><a href="items/tooltip.html">툴팁</a> / <a href="items/popover.html">팝오버</a></td><td>설명만인가, 안에 누를 게 있나</td></tr>
+        <tr><td><a href="items/toast.html">토스트 / 스낵바</a> / 배너</td><td>저절로 사라지나, 되돌리기가 붙나, 계속 남나</td></tr>
         <tr><td>셀렉트 / 콤보박스</td><td>타이핑으로 걸러낼 수 있나</td></tr>
         <tr><td>스위치 / 체크박스</td><td>즉시 적용인가, 저장을 눌러야 하나</td></tr>
         <tr><td>배지 / 칩 / 태그</td><td>그냥 표시인가, 지울 수 있나, 눌러서 걸러내나</td></tr>
@@ -896,7 +896,7 @@
       <span class="part"><div class="top"><span class="no">3부</span><h3>글자</h3><span class="cnt">10항목</span></div><p>웨이트 · 행간 · 자간 · 글줄 길이 · 말줄임 · 숫자 폰트 · 한글 조판</p></span>
       <span class="part"><div class="top"><span class="no">4부</span><h3>조작 부품</h3><span class="cnt">22항목</span></div><p>버튼 위계 · 텍스트 필드 · 셀렉트와 콤보박스 · 스위치 · 슬라이더 · 날짜 선택기 · 드롭존</p></span>
       <span class="part"><div class="top"><span class="no">5부</span><h3>표시 부품</h3><span class="cnt">15항목</span></div><p>카드 · 리스트 아이템 · 아바타 · 배지와 칩 · 프로그레스 · 스탯 타일 · 타임라인</p></span>
-      <a class="part part--hot" href="items/modal.html"><div class="top"><span class="no">6부</span><h3>겹치는 것들</h3><span class="cnt">1 / 16항목</span></div><p><b style="color:var(--accent)">모달 ✓</b> · 다이얼로그 · 바텀시트 · 드로어 · 팝오버 · 툴팁 · 토스트 · 커맨드 팔레트</p></a>
+      <a class="part part--hot" href="items/modal.html"><div class="top"><span class="no">6부</span><h3>겹치는 것들</h3><span class="cnt">7 / 16항목</span></div><p style="color:var(--accent);font-weight:600">모달 · 다이얼로그 · 바텀시트 · 드로어 · 팝오버 · 툴팁 · 토스트 ✓<span style="color:var(--fg-muted);font-weight:400"> · 액션 시트 · 배너 · 인라인 얼럿 · 커맨드 팔레트 · 라이트박스…</span></p></a>
       <span class="part"><div class="top"><span class="no">7부</span><h3>길 안내 — 내비게이션</h3><span class="cnt">12항목</span></div><p>앱바 · 사이드바 · 탭 · 브레드크럼 · 페이지네이션과 무한 스크롤 · 바텀 탭바 · 뒤로가기</p></span>
       <span class="part"><div class="top"><span class="no">8부</span><h3>피드백과 상태</h3><span class="cnt">12항목</span></div><p>로딩 4종 · 빈 상태 3종 · 에러 4단 · 되돌리기 · 한 화면의 다섯 가지 얼굴</p></span>
       <span class="part"><div class="top"><span class="no">9부</span><h3>움직임</h3><span class="cnt">10항목</span></div><p>이징 · 지속 시간 기준표 · 진입과 퇴장 · 제스처 · 모션 줄이기</p></span>

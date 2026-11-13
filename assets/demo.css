@@ -213,3 +213,235 @@ dialog.mdl[open]::backdrop { animation: scrim-in .18s ease-out both; }
 .md-dialog__btns { display: flex; gap: 3px; justify-content: flex-end; }
 .md-dialog__btns span { padding: 5px 9px; border-radius: 99px; font-size: 9px; font-weight: 700; color: var(--accent); }
 .md-dialog__btns span.filled { background: var(--accent); color: #fff; }
+
+/* ══ 6부 형제들 ═══════════════════════════════════════════ */
+
+/* ── 토스트 ─────────────────────────── */
+.tst-wrap {
+  position: fixed; right: 16px; bottom: 16px; z-index: 40;
+  display: flex; flex-direction: column-reverse; gap: 8px;
+  max-width: calc(100% - 32px);
+}
+.tst {
+  display: flex; align-items: center; gap: var(--s4);
+  min-width: 260px; max-width: 420px;
+  padding: 12px 14px;
+  border-radius: var(--r1);
+  background: var(--ink-900); color: #fff;
+  box-shadow: var(--e3);
+  font-size: 14px;
+  animation: tst-in .22s cubic-bezier(.2,.9,.3,1) both;
+}
+.tst.is-out { animation: tst-out .18s ease-in both; }
+@keyframes tst-in  { from { opacity: 0; transform: translateY(14px); } }
+@keyframes tst-out { to   { opacity: 0; transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) { .tst, .tst.is-out { animation-duration: .01ms; } }
+.tst__msg { flex: 1; min-width: 0; }
+.tst__act {
+  appearance: none; border: 0; background: transparent; cursor: pointer;
+  font: inherit; font-size: 14px; font-weight: 800; color: #8fc3ff;
+  padding: 4px 6px; border-radius: var(--r1); white-space: nowrap;
+}
+.tst__act:hover { background: rgba(255,255,255,.12); }
+.tst__x {
+  appearance: none; border: 0; background: transparent; cursor: pointer;
+  color: rgba(255,255,255,.65); font-size: 16px; line-height: 1;
+  width: 28px; height: 28px; border-radius: var(--r1); flex: none;
+}
+.tst__x:hover { background: rgba(255,255,255,.12); color: #fff; }
+.tst__timer { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: rgba(255,255,255,.18); }
+.tst__timer i { display: block; height: 100%; background: #8fc3ff; transform-origin: left; }
+.tst { position: relative; overflow: hidden; }
+@media (max-width: 480px) { .tst-wrap { left: 12px; right: 12px; bottom: 12px; } .tst { min-width: 0; } }
+
+/* ── 바텀시트 ───────────────────────── */
+dialog.sheet {
+  width: 100%; max-width: 560px;
+  margin: auto auto 0;
+  padding: 0; border: 0;
+  border-radius: var(--r3) var(--r3) 0 0;
+  background: var(--surface); color: var(--fg);
+  box-shadow: 0 -10px 40px rgba(14,16,20,.28);
+  overflow: hidden;
+}
+dialog.sheet::backdrop { background: rgba(14,16,20,.45); }
+dialog.sheet[open] { animation: sheet-up .26s cubic-bezier(.2,.9,.3,1) both; }
+@keyframes sheet-up { from { transform: translateY(100%); } }
+@media (prefers-reduced-motion: reduce) { dialog.sheet[open] { animation-duration: .01ms; } }
+.sheet__grab {
+  display: block; width: 40px; height: 4px; margin: 10px auto 2px;
+  border-radius: var(--r-full); background: var(--line-strong);
+}
+.sheet__head { padding: var(--s3) var(--s5) var(--s2); }
+.sheet__head h2 { font-size: 17px; font-weight: 750; }
+.sheet__head p { font-size: 13.5px; color: var(--fg-muted); margin: 2px 0 0; }
+.sheet__list { padding: var(--s2) var(--s3) var(--s3); }
+.sheet__item {
+  display: flex; align-items: center; gap: var(--s4); width: 100%;
+  appearance: none; border: 0; background: transparent; cursor: pointer;
+  font: inherit; font-size: 15px; color: var(--fg); text-align: left;
+  padding: 12px var(--s3); border-radius: var(--r1); min-height: 48px;
+}
+.sheet__item:hover { background: var(--bg); }
+.sheet__item .ic {
+  width: 32px; height: 32px; border-radius: var(--r1); flex: none;
+  background: var(--accent-soft); color: var(--accent);
+  display: grid; place-items: center; font-size: 15px;
+}
+.sheet__item.danger { color: var(--danger); }
+.sheet__item.danger .ic { background: color-mix(in srgb, var(--danger) 12%, transparent); color: var(--danger); }
+.sheet__foot { padding: var(--s3) var(--s5) calc(var(--s5) + 8px); border-top: 1px solid var(--line); }
+
+/* ── 드로어 ─────────────────────────── */
+dialog.drw {
+  height: 100%; max-height: 100%;
+  width: 290px; max-width: 86%;
+  margin: 0 auto 0 0;            /* 왼쪽에 붙인다 */
+  padding: 0; border: 0;
+  border-radius: 0 var(--r3) var(--r3) 0;
+  background: var(--surface); color: var(--fg);
+  box-shadow: var(--e3);
+  display: flex; flex-direction: column;
+}
+dialog.drw::backdrop { background: rgba(14,16,20,.45); }
+dialog.drw[open] { animation: drw-in .24s cubic-bezier(.2,.9,.3,1) both; }
+@keyframes drw-in { from { transform: translateX(-100%); } }
+@media (prefers-reduced-motion: reduce) { dialog.drw[open] { animation-duration: .01ms; } }
+.drw__head { display: flex; align-items: center; gap: var(--s3); padding: var(--s4) var(--s4) var(--s3); }
+.drw__head h2 { font-size: 16px; font-weight: 750; flex: 1; }
+.drw__body { flex: 1; overflow-y: auto; padding: 0 var(--s3) var(--s4); }
+.drw__link {
+  display: flex; align-items: center; gap: var(--s3);
+  padding: 11px var(--s3); border-radius: var(--r1);
+  color: var(--fg); text-decoration: none; font-size: 15px; min-height: 44px;
+}
+.drw__link:hover { background: var(--bg); }
+.drw__link[aria-current="page"] { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.drw__link .ic { width: 18px; height: 18px; border-radius: 5px; background: var(--line-strong); flex: none; }
+.drw__link[aria-current="page"] .ic { background: var(--accent); }
+.drw__sep { border: 0; border-top: 1px solid var(--line); margin: var(--s3) var(--s3); }
+
+/* ── 팝오버 ─────────────────────────── */
+.pop-anchor { position: relative; display: inline-block; }
+.pop {
+  position: absolute; z-index: 30;
+  top: calc(100% + 10px); left: 0;
+  width: 248px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r2);
+  box-shadow: var(--e3);
+  padding: var(--s3);
+  animation: pop-in .14s ease-out both;
+}
+.pop[hidden] { display: none; }
+.pop--right { left: auto; right: 0; }          /* 가장자리에서 뒤집힘(flip) */
+@keyframes pop-in { from { opacity: 0; transform: translateY(-4px); } }
+@media (prefers-reduced-motion: reduce) { .pop { animation-duration: .01ms; } }
+.pop__tail {
+  position: absolute; top: -6px; left: 18px;
+  width: 10px; height: 10px; transform: rotate(45deg);
+  background: var(--surface);
+  border-left: 1px solid var(--line); border-top: 1px solid var(--line);
+}
+.pop--right .pop__tail { left: auto; right: 18px; }
+.pop__h { font-size: 12px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: var(--fg-muted); margin: 0 0 var(--s2); }
+.pop__row { display: flex; align-items: center; gap: var(--s2); padding: 7px 4px; font-size: 14px; }
+.pop__row input { width: 16px; height: 16px; accent-color: var(--accent); }
+.pop__foot { display: flex; gap: var(--s2); justify-content: flex-end; margin-top: var(--s2); padding-top: var(--s3); border-top: 1px solid var(--line); }
+
+/* ── 툴팁 ──────────────────────────── */
+.tip-anchor { position: relative; display: inline-flex; }
+.tip {
+  position: absolute; z-index: 30;
+  bottom: calc(100% + 9px); left: 50%; transform: translateX(-50%);
+  padding: 6px 10px; border-radius: var(--r1);
+  background: var(--ink-900); color: #fff;
+  font-size: 12.5px; line-height: 1.45; white-space: nowrap;
+  pointer-events: none;                 /* 툴팁은 못 누른다 — 그게 팝오버와 다른 점 */
+  box-shadow: var(--e2);
+}
+.tip[hidden] { display: none; }
+.tip::after {
+  content: ""; position: absolute; top: 100%; left: 50%;
+  margin-left: -5px; border: 5px solid transparent; border-top-color: var(--ink-900);
+}
+.icon-btn {
+  appearance: none; cursor: pointer;
+  width: 44px; height: 44px; border-radius: var(--r1);
+  border: 1px solid var(--line-strong); background: var(--surface); color: var(--fg);
+  font-size: 16px; display: grid; place-items: center;
+}
+.icon-btn:hover { background: var(--bg); }
+.icon-btn[disabled] { opacity: .45; cursor: not-allowed; }
+
+/* ── 비모달 다이얼로그 ──────────────── */
+dialog.dlg {
+  position: fixed; margin: 0;
+  top: 72px; right: 20px;
+  width: 300px; max-width: calc(100% - 40px);
+  padding: 0; border: 1px solid var(--line);
+  border-radius: var(--r2);
+  background: var(--surface); color: var(--fg);
+  box-shadow: var(--e3);
+}
+dialog.dlg .dlg__head {
+  display: flex; align-items: center; gap: var(--s2);
+  padding: var(--s3) var(--s3) var(--s2) var(--s4);
+  border-bottom: 1px solid var(--line);
+  cursor: move;
+}
+dialog.dlg .dlg__head h2 { font-size: 14px; font-weight: 750; flex: 1; }
+dialog.dlg .dlg__body { padding: var(--s4); }
+dialog.dlg .dlg__row { display: flex; gap: var(--s2); margin-bottom: var(--s2); }
+dialog.dlg .dlg__hit { font-size: 13px; color: var(--fg-muted); }
+
+/* ── 작은 모사 그림 — 6부 형제들용 ──── */
+.mini__toast {
+  position: absolute; right: 5px; bottom: 5px; left: 24px;
+  display: flex; align-items: center; gap: 5px;
+  padding: 4px 6px; border-radius: 3px;
+  background: var(--ink-900); color: #fff; font-size: 8px;
+}
+.mini__toast b { margin-left: auto; color: #8fc3ff; white-space: nowrap; }
+.mini__sheet {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: var(--surface); border-radius: 6px 6px 0 0;
+  box-shadow: 0 -4px 14px rgba(0,0,0,.25);
+  padding: 5px 7px 7px; text-align: left;
+}
+.mini__sheet .grab { display: block; width: 22px; height: 3px; border-radius: 99px; background: var(--line-strong); margin: 0 auto 5px; }
+.mini__sheet b { display: block; font-size: 9px; margin-bottom: 3px; }
+.mini__sheet i { display: block; font-style: normal; font-size: 8.5px; color: var(--fg-muted); padding: 2px 0; }
+.mini__drawer {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 60%;
+  background: var(--surface); box-shadow: 4px 0 14px rgba(0,0,0,.25);
+  padding: 7px; text-align: left; border-radius: 0 6px 6px 0;
+}
+.mini__drawer b { display: block; font-size: 9px; margin-bottom: 4px; }
+.mini__drawer i { display: block; font-style: normal; font-size: 8.5px; color: var(--fg-muted); padding: 2.5px 0; }
+.mini__drawer i.on { color: var(--accent); font-weight: 700; }
+.mini__pop {
+  position: absolute; z-index: 3;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 4px; box-shadow: var(--e2);
+  padding: 5px 6px; text-align: left; font-size: 8.5px;
+}
+.mini__pop .tail {
+  position: absolute; width: 6px; height: 6px; transform: rotate(45deg);
+  background: var(--surface); border-left: 1px solid var(--line); border-top: 1px solid var(--line);
+}
+.mini__pop i { display: block; font-style: normal; color: var(--fg-muted); padding: 1.5px 0; }
+.mini__tip {
+  position: absolute; z-index: 3;
+  padding: 3px 6px; border-radius: 3px;
+  background: var(--ink-900); color: #fff; font-size: 8px; white-space: nowrap;
+}
+.mini__tip::after {
+  content: ""; position: absolute; top: 100%; left: 50%; margin-left: -4px;
+  border: 4px solid transparent; border-top-color: var(--ink-900);
+}
+.mini__trigger {
+  display: inline-block; padding: 3px 7px; border-radius: 3px;
+  border: 1px solid var(--line-strong); font-size: 8.5px; color: var(--fg-muted);
+}

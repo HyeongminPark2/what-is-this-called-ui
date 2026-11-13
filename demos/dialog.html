@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>비모달 다이얼로그 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; }
+  .bar { display: flex; align-items: center; gap: var(--s2); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar .ui-btn { min-height: 36px; padding: 8px 13px; font-size: 13px; }
+  .doc { padding: var(--s5) var(--s4); }
+  .doc h3 { font-size: 18px; margin-bottom: var(--s3); }
+  .doc p { font-size: 14.5px; line-height: 1.85; color: var(--fg-muted); max-width: 62ch; }
+  mark { background: #ffe08a; color: var(--ink-900); border-radius: 2px; }
+  mark.on { background: #f0a500; color: #fff; }
+  .hint { padding: 0 var(--s4) var(--s5); font-size: 13px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>2분기 회고</b>
+  <button class="ui-btn ui-btn--ghost" id="find">찾기 (비모달)</button>
+  <button class="ui-btn ui-btn--ghost" id="conf">나가기 확인 (모달)</button>
+</div>
+
+<div class="doc" id="doc">
+  <h3>2분기 회고</h3>
+  <p id="p1">이번 분기에는 결제 서버를 옮기는 일이 가장 컸다. 이관 자체는 예정보다 이틀 빨리 끝났지만, 장애 대응 절차가 문서로 남아 있지 않아 새벽에 연락이 두 번 더 오갔다.</p>
+  <p id="p2">다음 분기에는 당번표와 복구 절차를 먼저 적어 두기로 했다. 결제 폼도 한 번 더 손봤다. 카드 번호를 네 자리씩 끊어 보여 주고 오류를 입력칸 바로 아래에 띄우도록 바꿨더니 결제 단계에서 빠져나가는 비율이 줄었다.</p>
+  <p id="p3">아쉬운 점은 회고를 분기 끝에 몰아서 했다는 것이다. 다음에는 스프린트마다 짧게 적어 두고, 분기 회고에서는 그것들을 모아 보기만 하자.</p>
+</div>
+
+<p class="hint">
+  <b>찾기</b>를 열어 두고 뒤쪽 글을 그대로 읽어 보세요. 스크롤도 되고 글자도 선택됩니다 — <b>뒤를 막지 않습니다.</b>
+  <code>dialog.show()</code>로 연 것이고, 이것이 <b>비모달 다이얼로그</b>입니다.<br>
+  <b>나가기 확인</b>은 같은 <code>&lt;dialog&gt;</code>를 <code>showModal()</code>로 연 것입니다. 뒤가 막히고 <kbd>Tab</kbd>이 갇힙니다.
+  <b>메서드 한 글자가 모달과 비모달을 가릅니다.</b>
+</p>
+
+<dialog class="dlg" id="finder" aria-labelledby="f-t">
+  <div class="dlg__head">
+    <h2 id="f-t">찾기</h2>
+    <button class="mdl-x" data-close aria-label="닫기" style="width:30px;height:30px;font-size:16px;margin:0">&times;</button>
+  </div>
+  <div class="dlg__body">
+    <div class="dlg__row">
+      <input class="ui-input" id="q" placeholder="찾을 말" style="min-height:38px;font-size:14px" value="결제">
+      <button class="ui-btn" id="next" style="min-height:38px;padding:9px 13px;font-size:13px">다음</button>
+    </div>
+    <p class="dlg__hit" id="hit">입력하면 바로 찾습니다.</p>
+  </div>
+</dialog>
+
+<dialog class="mdl" id="leave" aria-labelledby="l-t">
+  <div class="mdl-head">
+    <h2 id="l-t">저장하지 않고 나갈까요?</h2>
+    <button class="mdl-x" data-close aria-label="닫기">&times;</button>
+  </div>
+  <div class="mdl-body"><p>방금 고친 내용이 사라집니다.</p></div>
+  <div class="mdl-foot">
+    <button class="ui-btn ui-btn--ghost" data-close>계속 쓰기</button>
+    <button class="ui-btn ui-btn--danger" data-close>나가기</button>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  var finder = document.getElementById('finder');
+  var leave  = document.getElementById('leave');
+  var q = document.getElementById('q'), hit = document.getElementById('hit');
+  var doc = document.getElementById('doc');
+  var originals = ['p1','p2','p3'].map(function (id) {
+    var el = document.getElementById(id);
+    return { el: el, text: el.textContent };
+  });
+  var marks = [], at = -1;
+
+  document.getElementById('find').addEventListener('click', function () {
+    if (finder.open) { finder.close(); return; }
+    finder.show();                 // show() — 뒤를 막지 않는다
+    q.focus(); q.select();
+    run();
+  });
+  document.getElementById('conf').addEventListener('click', function () {
+    leave.showModal();             // showModal() — 뒤를 막는다
+  });
+
+  [finder, leave].forEach(function (d) {
+    d.querySelectorAll('[data-close]').forEach(function (b) {
+      b.addEventListener('click', function () { d.close(); });
+    });
+  });
+
+  function esc(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+  function run() {
+    var term = q.value.trim();
+    originals.forEach(function (o) { o.el.textContent = o.text; });
+    marks = []; at = -1;
+    if (!term) { hit.textContent = '입력하면 바로 찾습니다.'; return; }
+    var re = new RegExp(esc(term), 'g');
+    originals.forEach(function (o) {
+      if (!re.test(o.text)) return;
+      o.el.innerHTML = o.text.replace(new RegExp(esc(term), 'g'), '<mark>$&</mark>');
+    });
+    marks = Array.prototype.slice.call(doc.querySelectorAll('mark'));
+    hit.textContent = marks.length ? marks.length + '곳을 찾았습니다.' : '찾는 말이 없습니다.';
+    if (marks.length) step();
+  }
+
+  function step() {
+    if (!marks.length) return;
+    if (at >= 0) marks[at].classList.remove('on');
+    at = (at + 1) % marks.length;
+    marks[at].classList.add('on');
+    marks[at].scrollIntoView({ block: 'center', behavior: 'smooth' });
+    hit.textContent = (at + 1) + ' / ' + marks.length + '곳';
+  }
+
+  q.addEventListener('input', run);
+  document.getElementById('next').addEventListener('click', step);
+  finder.addEventListener('close', function () {
+    originals.forEach(function (o) { o.el.textContent = o.text; });
+  });
+})();
+</script>
+</body>
+</html>

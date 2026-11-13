@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>툴팁 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; }
+  .tools { display: flex; align-items: center; gap: var(--s2); padding: var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .pad { padding: var(--s5) var(--s4); }
+  .ell { max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; border: 1px dashed var(--line-strong); border-radius: var(--r1); padding: 9px 11px; }
+  .hint { padding: 0 var(--s4) var(--s5); font-size: 13px; color: var(--fg-muted); }
+  .touch-note { display: none; }
+  @media (hover: none) { .touch-note { display: block; } .mouse-note { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="tools">
+  <span class="tip-anchor">
+    <button class="icon-btn" aria-describedby="t1">↺</button>
+    <span class="tip" id="t1" role="tooltip" hidden>되돌리기 · Ctrl+Z</span>
+  </span>
+  <span class="tip-anchor">
+    <button class="icon-btn" aria-describedby="t2">↻</button>
+    <span class="tip" id="t2" role="tooltip" hidden>다시 실행 · Ctrl+Shift+Z</span>
+  </span>
+  <span class="tip-anchor">
+    <button class="icon-btn" aria-describedby="t3">⇪</button>
+    <span class="tip" id="t3" role="tooltip" hidden>원본 올리기</span>
+  </span>
+  <span class="tip-anchor">
+    <button class="icon-btn" aria-describedby="t4">⤓</button>
+    <span class="tip" id="t4" role="tooltip" hidden>CSV로 내려받기</span>
+  </span>
+  <span style="width:1px;height:26px;background:var(--line);margin:0 6px"></span>
+  <span class="tip-anchor">
+    <button class="icon-btn" disabled aria-describedby="t5">⇧</button>
+    <span class="tip" id="t5" role="tooltip" hidden>게시하려면 검수가 끝나야 합니다</span>
+  </span>
+</div>
+
+<div class="pad">
+  <p style="font-size:13px;color:var(--fg-muted);margin-bottom:6px">잘려서 안 보이는 글자도 툴팁으로 보여 줍니다.</p>
+  <span class="tip-anchor" style="display:block;max-width:300px">
+    <span class="ell" tabindex="0" aria-describedby="t6">2026년 4분기 결제 서버 마이그레이션 회고 문서 최종본</span>
+    <span class="tip" id="t6" role="tooltip" hidden style="white-space:normal;max-width:260px">2026년 4분기 결제 서버 마이그레이션 회고 문서 최종본</span>
+  </span>
+</div>
+
+<p class="hint mouse-note">
+  아이콘에 마우스를 올려 보세요. <b>0.4초 머물러야</b> 뜹니다 — 지나가기만 할 때 안 뜨게 하는 지연입니다.
+  <kbd>Tab</kbd>으로 옮겨도 뜨고, 이때는 바로 뜹니다. 툴팁은 <b>설명만</b> 하므로 그 안에는 누를 것을 넣지 않습니다.
+  비활성 버튼에도 붙여 두면 <b>왜 못 누르는지</b>를 알려 줄 수 있습니다.
+</p>
+<p class="hint touch-note">
+  <b>지금 보는 기기에는 호버가 없습니다.</b> 손가락은 '올려놓기'를 할 수 없어서 툴팁이 뜰 일이 없습니다.
+  그래서 툴팁에만 담아 둔 정보는 모바일에서 아무도 못 봅니다 — 꼭 필요한 말은 화면에 적어야 합니다.
+</p>
+
+<script>
+(function () {
+  var DELAY = 400, timer = null, open = null;
+
+  function show(tip) { if (open && open !== tip) open.hidden = true; tip.hidden = false; open = tip; }
+  function hide(tip) { clearTimeout(timer); tip.hidden = true; if (open === tip) open = null; }
+
+  document.querySelectorAll('.tip-anchor').forEach(function (a) {
+    var trigger = a.querySelector('[aria-describedby]');
+    var tip = a.querySelector('.tip');
+    if (!trigger || !tip) return;
+
+    // 호버는 지연을 둔다 — 지나가기만 할 때 뜨면 성가시다
+    a.addEventListener('mouseenter', function () { timer = setTimeout(function () { show(tip); }, DELAY); });
+    a.addEventListener('mouseleave', function () { hide(tip); });
+    // 키보드로 왔을 때는 바로 띄운다
+    trigger.addEventListener('focus', function () { show(tip); });
+    trigger.addEventListener('blur', function () { hide(tip); });
+  });
+
+  // Esc 로 닫는다 — 툴팁이 읽으려는 글자를 가릴 때가 있다
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && open) hide(open); });
+})();
+</script>
+</body>
+</html>

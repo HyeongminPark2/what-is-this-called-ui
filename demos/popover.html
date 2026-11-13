@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>팝오버 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; }
+  .tools { display: flex; align-items: center; gap: var(--s2); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .tools .sp { margin-left: auto; }
+  .row { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); font-size: 14px; }
+  .row .tag { font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: var(--r-full); background: var(--accent-soft); color: var(--accent); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="tools">
+  <span class="pop-anchor">
+    <button class="ui-btn ui-btn--ghost" id="b1" aria-expanded="false" aria-controls="p1" style="min-height:40px;padding:9px 14px;font-size:14px">필터 ▾</button>
+    <div class="pop" id="p1" hidden role="dialog" aria-label="필터">
+      <span class="pop__tail"></span>
+      <p class="pop__h">상태</p>
+      <label class="pop__row"><input type="checkbox" checked> 승인</label>
+      <label class="pop__row"><input type="checkbox"> 실패</label>
+      <label class="pop__row"><input type="checkbox"> 대기</label>
+      <div class="pop__foot">
+        <button class="ui-btn ui-btn--ghost" data-close style="min-height:34px;padding:7px 12px;font-size:13px">초기화</button>
+        <button class="ui-btn" data-close style="min-height:34px;padding:7px 12px;font-size:13px">적용</button>
+      </div>
+    </div>
+  </span>
+
+  <span class="pop-anchor">
+    <button class="ui-btn ui-btn--ghost" id="b2" aria-expanded="false" aria-controls="p2" style="min-height:40px;padding:9px 14px;font-size:14px">기간 ▾</button>
+    <div class="pop" id="p2" hidden role="dialog" aria-label="기간">
+      <span class="pop__tail"></span>
+      <p class="pop__h">기간</p>
+      <label class="pop__row"><input type="radio" name="d" checked> 오늘</label>
+      <label class="pop__row"><input type="radio" name="d"> 최근 7일</label>
+      <label class="pop__row"><input type="radio" name="d"> 이번 달</label>
+      <div class="pop__foot"><button class="ui-btn" data-close style="min-height:34px;padding:7px 12px;font-size:13px">적용</button></div>
+    </div>
+  </span>
+
+  <span class="sp"></span>
+
+  <span class="pop-anchor">
+    <button class="ui-btn ui-btn--ghost" id="b3" aria-expanded="false" aria-controls="p3" style="min-height:40px;padding:9px 14px;font-size:14px">내 계정 ▾</button>
+    <div class="pop pop--right" id="p3" hidden role="dialog" aria-label="내 계정">
+      <span class="pop__tail"></span>
+      <p class="pop__h">박형민</p>
+      <div class="pop__row">hmp@example.com</div>
+      <div class="pop__foot"><button class="ui-btn ui-btn--ghost" data-close style="min-height:34px;padding:7px 12px;font-size:13px">로그아웃</button></div>
+    </div>
+  </span>
+</div>
+
+<div class="row"><span class="tag">승인</span> TX-8812 · 모란상회 · ₩48,000</div>
+<div class="row"><span class="tag">승인</span> TX-8810 · 블루보틀 성수 · ₩7,500</div>
+<div class="row"><span class="tag">승인</span> TX-8808 · 세븐일레븐 삼성점 · ₩3,200</div>
+
+<p class="hint">
+  팝오버는 <b>누른 것 옆에 붙어서</b> 뜨고, 뒤쪽은 막지 않습니다. 열어 둔 채로 아래 목록을 그대로 읽을 수 있습니다.
+  안에 <b>누를 것이 들어 있다</b>는 점이 툴팁과 다릅니다.
+  오른쪽 끝 '내 계정'은 화면 밖으로 나가지 않으려고 <b>반대쪽으로 뒤집혀</b> 열립니다.
+  <kbd>Esc</kbd>나 바깥을 누르면 닫히고, 포커스가 누른 버튼으로 돌아옵니다.
+</p>
+
+<script>
+(function () {
+  var pairs = [['b1','p1'], ['b2','p2'], ['b3','p3']].map(function (p) {
+    return { btn: document.getElementById(p[0]), pop: document.getElementById(p[1]) };
+  });
+
+  function closeAll(except) {
+    pairs.forEach(function (p) {
+      if (p === except || p.pop.hidden) return;
+      p.pop.hidden = true;
+      p.btn.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  pairs.forEach(function (p) {
+    p.btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var willOpen = p.pop.hidden;
+      closeAll(p);
+      p.pop.hidden = !willOpen;
+      p.btn.setAttribute('aria-expanded', String(willOpen));
+      if (willOpen) {
+        var f = p.pop.querySelector('input, button');
+        if (f) f.focus();
+      }
+    });
+    p.pop.addEventListener('click', function (e) { e.stopPropagation(); });
+    p.pop.querySelectorAll('[data-close]').forEach(function (b) {
+      b.addEventListener('click', function () { p.pop.hidden = true; p.btn.setAttribute('aria-expanded','false'); p.btn.focus(); });
+    });
+  });
+
+  // 바깥을 누르면 닫힌다 — 팝오버는 스크림이 없어 직접 처리해야 한다
+  document.addEventListener('click', function () { closeAll(null); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    pairs.forEach(function (p) { if (!p.pop.hidden) { p.pop.hidden = true; p.btn.setAttribute('aria-expanded','false'); p.btn.focus(); } });
+  });
+})();
+</script>
+</body>
+</html>

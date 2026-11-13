@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>바텀시트 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .bar b { font-size: 15px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: var(--s2); padding: var(--s3); }
+  .card { border: 1px solid var(--line); border-radius: var(--r2); overflow: hidden; background: var(--bg); }
+  .card .shot { height: 86px; background: linear-gradient(145deg, var(--ink-100), var(--ink-050)); }
+  @media (prefers-color-scheme: dark) { .card .shot { background: linear-gradient(145deg,#2a2f39,#1f242c); } }
+  .card .ft { display: flex; align-items: center; gap: var(--s2); padding: var(--s2) var(--s3) var(--s3); }
+  .card .ft b { flex: 1; min-width: 0; font-size: 13px; font-weight: 600; }
+  .card .ft button { appearance: none; border: 0; background: transparent; cursor: pointer; color: var(--fg-muted); font-size: 16px; width: 32px; height: 32px; border-radius: var(--r1); }
+  .card .ft button:hover { background: var(--line); color: var(--fg); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="bar"><b>사진</b><span style="margin-left:auto;font-size:12.5px;color:var(--fg-muted)">6장</span></div>
+
+<div class="grid" id="grid">
+  <div class="card"><div class="shot"></div><div class="ft"><b>해질녘 공원</b><button class="js-more" aria-label="더 보기">⋯</button></div></div>
+  <div class="card"><div class="shot"></div><div class="ft"><b>주말 시장</b><button class="js-more" aria-label="더 보기">⋯</button></div></div>
+  <div class="card"><div class="shot"></div><div class="ft"><b>비 오는 창</b><button class="js-more" aria-label="더 보기">⋯</button></div></div>
+  <div class="card"><div class="shot"></div><div class="ft"><b>작업실 책상</b><button class="js-more" aria-label="더 보기">⋯</button></div></div>
+  <div class="card"><div class="shot"></div><div class="ft"><b>겨울 바다</b><button class="js-more" aria-label="더 보기">⋯</button></div></div>
+  <div class="card"><div class="shot"></div><div class="ft"><b>밤 산책</b><button class="js-more" aria-label="더 보기">⋯</button></div></div>
+</div>
+
+<p class="hint">
+  <b>⋯</b>을 눌러 보세요. 선택지가 손가락이 닿는 아래쪽에서 올라옵니다.
+  <kbd>Esc</kbd>나 바깥을 눌러 닫을 수 있고, 핸들을 아래로 끌어도 닫힙니다.
+  폭을 넓히면 같은 시트가 가운데로 모입니다.
+</p>
+
+<dialog class="sheet" id="sheet" aria-labelledby="sheet-t">
+  <span class="sheet__grab" id="grab"></span>
+  <div class="sheet__head">
+    <h2 id="sheet-t">해질녘 공원</h2>
+    <p>2026년 11월 2일 · 3.2MB</p>
+  </div>
+  <div class="sheet__list">
+    <button class="sheet__item" data-close><span class="ic">↗</span>공유하기</button>
+    <button class="sheet__item" data-close><span class="ic">⬇</span>원본 내려받기</button>
+    <button class="sheet__item" data-close><span class="ic">★</span>즐겨찾기에 넣기</button>
+    <button class="sheet__item" data-close><span class="ic">✎</span>이름 바꾸기</button>
+    <button class="sheet__item danger" data-close><span class="ic">🗑</span>삭제</button>
+  </div>
+  <div class="sheet__foot">
+    <button class="ui-btn ui-btn--ghost" data-close style="width:100%">취소</button>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  var dlg = document.getElementById('sheet');
+  var title = document.getElementById('sheet-t');
+  var grab = document.getElementById('grab');
+  var opener = null;
+
+  document.getElementById('grid').addEventListener('click', function (e) {
+    var b = e.target.closest('.js-more');
+    if (!b) return;
+    opener = b;
+    title.textContent = b.closest('.card').querySelector('b').textContent;
+    dlg.showModal();
+    document.body.style.overflow = 'hidden';
+  });
+
+  dlg.querySelectorAll('[data-close]').forEach(function (b) {
+    b.addEventListener('click', function () { dlg.close(); });
+  });
+
+  // 바깥(백드롭)을 누르면 닫는다
+  dlg.addEventListener('click', function (e) {
+    var r = dlg.getBoundingClientRect();
+    if (e.clientY < r.top || e.clientX < r.left || e.clientX > r.right) dlg.close();
+  });
+
+  // 핸들을 아래로 끌면 닫힌다 — 시트만의 조작
+  var y0 = null;
+  function down(e) { y0 = (e.touches ? e.touches[0] : e).clientY; dlg.style.transition = 'none'; }
+  function move(e) {
+    if (y0 === null) return;
+    var dy = (e.touches ? e.touches[0] : e).clientY - y0;
+    if (dy > 0) dlg.style.transform = 'translateY(' + dy + 'px)';
+  }
+  function up(e) {
+    if (y0 === null) return;
+    var dy = (e.changedTouches ? e.changedTouches[0] : e).clientY - y0;
+    y0 = null;
+    dlg.style.transition = 'transform .18s ease-out';
+    dlg.style.transform = '';
+    if (dy > 70) dlg.close();
+  }
+  grab.addEventListener('mousedown', down);
+  grab.addEventListener('touchstart', down, { passive: true });
+  window.addEventListener('mousemove', move);
+  window.addEventListener('touchmove', move, { passive: true });
+  window.addEventListener('mouseup', up);
+  window.addEventListener('touchend', up);
+
+  dlg.addEventListener('close', function () {
+    document.body.style.overflow = '';
+    dlg.style.transform = '';
+    if (opener && document.body.contains(opener)) opener.focus();
+  });
+})();
+</script>
+</body>
+</html>
