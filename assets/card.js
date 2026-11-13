@@ -48,8 +48,12 @@
     function spread() {
       var placed = [];
       badges.forEach(function (n) {
-        n.style.top = ''; n.style.transform = '';
-        for (var k = 0; k < 4; k++) {
+        n.style.left = ''; n.style.right = '';
+        // 아래로 비키면 겹치지도 잘리지도 않은 채 '옆 줄을 가리키는' 번호가 된다.
+        // 눈으로도 검사로도 안 잡히던 사고라, 같은 줄에 두고 바깥으로만 민다.
+        var out = n.parentElement.classList.contains('pin-tr') ||
+                  n.parentElement.classList.contains('pin-ring') ? 'right' : 'left';
+        for (var k = 0; k < 3; k++) {
           var r = n.getBoundingClientRect();
           var hit = placed.some(function (p) {
             var q = p.getBoundingClientRect();
@@ -57,9 +61,8 @@
                    r.bottom > q.top - 3 && r.top < q.bottom + 3;
           });
           if (!hit) break;
-          // 옆으로 밀면 판 밖으로 나가기 쉽다. 아래로 비킨다.
-          n.style.top = (parseFloat(getComputedStyle(n).top) + 24) + 'px';
-          n.style.transform = 'none';
+          var cur = parseFloat(getComputedStyle(n)[out]);
+          n.style[out] = (out === 'right' ? cur + 24 : cur - 24) + 'px';
         }
         placed.push(n);
       });

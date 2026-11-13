@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>아바타 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s5); }
+  h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--fg-muted); margin: 0 0 var(--s3); }
+  .row { display: flex; align-items: center; gap: var(--s4); flex-wrap: wrap; }
+  .cap { font-size: 11.5px; color: var(--fg-faint); display: block; text-align: center; margin-top: 5px; }
+  .u { display: grid; justify-items: center; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .more { background: var(--ink-100); color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>아바타</b>
+  <label><input type="checkbox" id="broken"> 사진이 깨진 상태로</label>
+  <label>겹쳐 보일 사람 수
+    <input type="range" id="n" class="sld" min="2" max="9" value="3" style="width:110px">
+    <output id="no">3</output>
+  </label>
+</div>
+
+<div class="pad">
+  <section>
+    <h4>크기</h4>
+    <div class="row">
+      <span class="u"><span class="av av--xs" id="s-xs">길동</span><span class="cap">22px · 목록 안</span></span>
+      <span class="u"><span class="av av--sm">길동</span><span class="cap">28px · 줄 앞</span></span>
+      <span class="u"><span class="av">길동</span><span class="cap">36px · 기본</span></span>
+      <span class="u"><span class="av av--lg">길동</span><span class="cap">56px · 프로필</span></span>
+    </div>
+  </section>
+
+  <section>
+    <h4>갈래</h4>
+    <div class="row">
+      <span class="u"><span class="av av--lg av--img" id="photo"><i></i></span><span class="cap">사진</span></span>
+      <span class="u"><span class="av av--lg">길동</span><span class="cap">이니셜</span></span>
+      <span class="u"><span class="av av--lg av--sq">모란</span><span class="cap">사각 · 조직</span></span>
+      <span class="u"><span class="av-wrap"><span class="av av--lg">철수</span><span class="av-dot" title="접속 중"></span></span><span class="cap">상태 점</span></span>
+    </div>
+  </section>
+
+  <section>
+    <h4>겹쳐 보이기</h4>
+    <div class="av-stack" id="stack" role="img" aria-label=""></div>
+    <p style="font-size:12.5px;color:var(--fg-muted);margin:var(--s3) 0 0" id="who"></p>
+  </section>
+</div>
+
+<p class="hint">
+  아바타는 <b>사람이나 조직 하나를 가리키는 작은 그림</b>입니다. 장식이 아니라 '누구'를 말합니다.<br>
+  <b>사진이 깨진 상태로</b>를 켜 보세요. 사진은 <b>언제든 안 옵니다</b> — 지워졌거나, 느리거나,
+  애초에 올린 적이 없습니다. 그래서 아바타의 기본값은 사진이 아니라 <b>이니셜</b>이고,
+  사진은 그 위에 덮는 것입니다. 깨진 그림 아이콘이 보이면 그 순서가 뒤집힌 것입니다.<br>
+  여럿을 겹칠 때는 <b>세 명쯤까지만</b> 보이고 나머지는 <code>+N</code>으로 줄입니다. 겹친 그림은
+  스크린 리더에 하나씩 읽히면 시끄러우니 <b>묶어서 한 번</b> 읽히게 합니다.
+</p>
+
+<script>
+(function () {
+  var PEOPLE = [
+    { k: '길동', n: '홍길동' }, { k: '철수', n: '김철수' }, { k: '영희', n: '이영희' },
+    { k: 'CJ', n: '최지우' }, { k: 'HM', n: '한민호' }, { k: 'SY', n: '서윤아' },
+    { k: 'JH', n: '정하늘' }, { k: 'OY', n: '오예린' }, { k: 'NW', n: '남우현' }
+  ];
+  var MAX = 3;
+  var stack = document.getElementById('stack'), who = document.getElementById('who');
+  var photo = document.getElementById('photo');
+
+  function drawStack() {
+    var n = +document.getElementById('n').value;
+    document.getElementById('no').textContent = n;
+    var show = PEOPLE.slice(0, Math.min(n, MAX));
+    var rest = n - show.length;
+    stack.innerHTML = show.map(function (p) {
+      return '<span class="av" aria-hidden="true">' + p.k + '</span>';
+    }).join('') + (rest > 0 ? '<span class="av more" aria-hidden="true">+' + rest + '</span>' : '');
+    var names = PEOPLE.slice(0, n).map(function (p) { return p.n; });
+    stack.setAttribute('aria-label', '참여자 ' + n + '명: ' + names.join(', '));
+    who.textContent = '보이는 그림 ' + show.length + '개' + (rest > 0 ? ' + ' + rest : '') +
+      ' · 읽히는 말 "참여자 ' + n + '명"';
+  }
+
+  document.getElementById('broken').addEventListener('change', function () {
+    // 사진은 이니셜 위에 덮는 것이다. 못 받으면 아래의 이니셜이 그대로 보인다.
+    photo.classList.toggle('av--img', !this.checked);
+    photo.textContent = this.checked ? '길동' : '';
+    if (!this.checked) photo.innerHTML = '<i></i>';
+  });
+  document.getElementById('n').addEventListener('input', drawStack);
+  drawStack();
+})();
+</script>
+</body>
+</html>

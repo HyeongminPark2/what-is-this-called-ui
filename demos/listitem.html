@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>리스트 아이템 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--bg); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); background: var(--surface); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); }
+  .log { padding: var(--s3) var(--s4); font-size: 13px; border-top: 1px solid var(--line); background: var(--surface); min-height: 42px; }
+  .log b { color: var(--accent); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); background: var(--surface); }
+  .wrap-on .li__t, .wrap-on .li__s { white-space: normal; overflow: visible; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>리스트 아이템</b>
+  <label>줄 수
+    <select class="sel" id="lines" style="width:auto;min-height:34px;padding:6px 30px 6px 10px;font-size:13px">
+      <option value="one">한 줄</option>
+      <option value="two" selected>두 줄</option>
+      <option value="three">세 줄</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="wrap"> 자르지 말고 접기</label>
+</div>
+
+<div class="pad">
+  <ul class="ui-list" id="list"></ul>
+</div>
+
+<p class="log" id="log" role="status">줄을 눌러 보세요.</p>
+
+<p class="hint">
+  리스트 아이템은 <b>한 줄에 들어가는 한 건</b>입니다. 카드와 담는 내용은 같은데
+  <b>세로로 훑어 비교하기</b> 좋게 줄을 맞춰 둔 것이 다릅니다.<br>
+  자리는 늘 셋입니다 — <b>앞</b>(아바타·아이콘·체크박스), <b>가운데</b>(제목과 보조 글),
+  <b>뒤</b>(값·꺾쇠·스위치). 가운데만 늘어나고 앞뒤는 고정입니다.<br>
+  <b>자르지 말고 접기</b>를 켜 보세요. 글이 다 보이는 대신 줄 높이가 제각각이 됩니다.
+  목록은 보통 <b>자르는 쪽</b>을 고릅니다 — 높이가 일정해야 눈이 세로로 미끄러집니다.
+</p>
+
+<script>
+(function () {
+  var ROWS = [
+    { n: '홍길동', t: '정산 요청 #4821', s: '11월 1일 ~ 11월 7일 · 매출 ₩1,284,000 · 수수료 ₩38,520 공제 후 입금 예정', e: '₩1,245,480', k: '길동' },
+    { n: '김철수', t: '정산 요청 #4820', s: '10월 25일 ~ 10월 31일 · 매출 ₩982,500', e: '₩953,025', k: '철수' },
+    { n: '이영희', t: '환불 확인 요청 — 카드 승인 취소가 늦어져 고객이 두 번 문의했고, 담당자가 바뀌면서 한 번 더 늦어진 건입니다. 제목이 이렇게 길어도 줄을 넘기지 않습니다', s: '주문 TX-99120 · 카드 승인 취소 대기', e: '₩48,000', k: '영희' }
+  ];
+  var list = document.getElementById('list'), log = document.getElementById('log');
+
+  function draw() {
+    var mode = document.getElementById('lines').value;
+    list.className = 'ui-list' + (document.getElementById('wrap').checked ? ' wrap-on' : '');
+    list.innerHTML = '<li class="li-sec">이번 주</li>' + ROWS.map(function (r) {
+      return '<li><button type="button" class="li li--' + mode + '" data-t="' + r.t + '">' +
+        '<span class="av av--sm" aria-hidden="true">' + r.k + '</span>' +
+        '<span class="li__main">' +
+          '<span class="li__t">' + r.t + '</span>' +
+          (mode === 'one' ? '' : '<span class="li__s">' + r.s + '</span>') +
+          (mode === 'three' ? '<span class="li__s">' + r.n + ' · 2시간 전</span>' : '') +
+        '</span>' +
+        '<span class="li__end">' + r.e + '<span class="li__chev" aria-hidden="true">›</span></span>' +
+      '</button></li>';
+    }).join('');
+  }
+
+  list.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-t]');
+    if (b) log.innerHTML = '열기: <b>' + b.dataset.t + '</b>';
+  });
+  document.getElementById('lines').addEventListener('change', draw);
+  document.getElementById('wrap').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>카드 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--bg); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); background: var(--surface); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); max-width: 760px; }
+  .log { padding: var(--s3) var(--s4); font-size: 13px; border-top: 1px solid var(--line); background: var(--surface); min-height: 42px; }
+  .log b { color: var(--accent); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); background: var(--surface); }
+  .long .ui-card__title { white-space: normal; }
+  .clip .ui-card__title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>카드</b>
+  <label><input type="checkbox" id="long"> 제목이 긴 상품 섞기</label>
+  <label><input type="checkbox" id="clip"> 긴 제목을 한 줄로 자르기</label>
+  <label><input type="checkbox" id="row"> 가로형으로</label>
+</div>
+
+<div class="pad">
+  <div class="cardg" id="grid"></div>
+</div>
+
+<p class="log" id="log" role="status">카드나 안의 버튼을 눌러 보세요.</p>
+
+<p class="hint">
+  카드는 <b>한 덩어리로 묶인 정보</b>입니다. 묶는 것이 일이라서, 안에 누를 것이 여럿이면
+  바로 문제가 생깁니다.<br>
+  <b>카드 전체를 누르게 만들면</b> 안의 '장바구니' 버튼을 눌러도 카드 링크가 같이 열립니다.
+  여기서는 버튼이 <code>stopPropagation</code>으로 막고 있어 따로 동작합니다 — 눌러서 확인해 보세요.<br>
+  제목 길이는 <b>데이터가 정합니다.</b> 긴 제목을 섞어 보면 카드 높이가 제각각이 됩니다.
+  한 줄로 자르면 가지런해지지만 <b>뒷말이 사라집니다</b> — 어느 쪽이 나은지는 목록에서 무엇을 찾는지로 정합니다.
+</p>
+
+<script>
+(function () {
+  var ITEMS = [
+    { t: '무선 이어폰 2세대', p: '129,000', s: '모란상회' },
+    { t: '보온 텀블러 500ml', p: '24,900', s: '모란상회' },
+    { t: '접이식 캠핑 의자', p: '58,000', s: '한빛아웃도어' },
+    { t: 'USB-C 충전기 65W', p: '32,000', s: '모란상회' }
+  ];
+  var LONG = { t: '휴대용 블루투스 스피커 방수 IPX7 20시간 재생 야외 캠핑용 그레이', p: '79,000', s: '한빛아웃도어' };
+
+  var grid = document.getElementById('grid'), log = document.getElementById('log');
+
+  function say(msg) { log.innerHTML = msg; }
+
+  function draw() {
+    var list = ITEMS.slice();
+    if (document.getElementById('long').checked) list.splice(1, 0, LONG);
+    var row = document.getElementById('row').checked;
+    grid.className = 'cardg' + (document.getElementById('clip').checked ? ' clip' : ' long');
+    grid.style.gridTemplateColumns = row ? '1fr' : '';
+    grid.innerHTML = list.map(function (it, i) {
+      return '<a class="ui-card' + (row ? ' ui-card--row' : '') + '" href="#" data-t="' + it.t + '">' +
+        '<span class="ui-card__media"><i></i></span>' +
+        '<span class="ui-card__body">' +
+          '<span class="ui-card__title">' + it.t + '</span>' +
+          '<span class="ui-card__meta">' + it.s + ' · ₩' + it.p + '</span>' +
+        '</span>' +
+        '<span class="ui-card__foot">' +
+          '<button type="button" class="ui-btn ui-btn--ghost" data-buy="' + i + '" ' +
+          'style="min-height:30px;padding:5px 10px;font-size:12px">장바구니</button>' +
+        '</span>' +
+      '</a>';
+    }).join('');
+  }
+
+  grid.addEventListener('click', function (e) {
+    var buy = e.target.closest('[data-buy]');
+    if (buy) {
+      e.preventDefault();
+      e.stopPropagation();          // 이게 없으면 카드 링크까지 같이 열린다
+      say('<b>장바구니</b>에 담았습니다 — 카드는 안 열렸습니다');
+      return;
+    }
+    var card = e.target.closest('.ui-card');
+    if (card) { e.preventDefault(); say('상세로 이동: <b>' + card.dataset.t + '</b>'); }
+  });
+
+  ['long', 'clip', 'row'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', draw);
+  });
+  draw();
+})();
+</script>
+</body>
+</html>

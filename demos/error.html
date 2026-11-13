@@ -48,7 +48,7 @@
     return '<div class="form">' +
       (err || '') +
       '<div><label class="ui-label" for="a">예금주</label>' +
-      '<input class="ui-input" id="a" value="박형민"></div>' +
+      '<input class="ui-input" id="a" value="홍길동"></div>' +
       '<div><label class="ui-label" for="b">계좌번호</label>' +
       '<input class="ui-input' + (err === null ? ' is-bad' : '') + '" id="b" value="110-123-45678"></div>' +
       '<button class="ui-btn">등록하기</button></div>';
@@ -58,7 +58,7 @@
     field: function () {
       slot.innerHTML = '';
       panel.innerHTML = '<div class="form">' +
-        '<div><label class="ui-label" for="a">예금주</label><input class="ui-input" id="a" value="박형민"></div>' +
+        '<div><label class="ui-label" for="a">예금주</label><input class="ui-input" id="a" value="홍길동"></div>' +
         '<div><label class="ui-label" for="b">계좌번호</label>' +
         '<input class="ui-input" id="b" value="110-123-4567" aria-invalid="true" aria-describedby="e1" style="border-color:var(--danger);box-shadow:0 0 0 3px color-mix(in srgb,var(--danger) 18%,transparent)">' +
         '<p class="field-err" id="e1">자릿수가 모자랍니다. 신한은행 계좌는 11~12자리입니다.</p></div>' +
@@ -72,7 +72,7 @@
         '<span class="acts"><button class="ui-btn" style="min-height:32px;padding:6px 12px;font-size:13px">다시 시도</button>' +
         '<button class="ui-btn ui-btn--ghost" style="min-height:32px;padding:6px 12px;font-size:13px">나중에 하기</button></span>' +
         '</span></div>' +
-        '<div><label class="ui-label" for="a">예금주</label><input class="ui-input" id="a" value="박형민"></div>' +
+        '<div><label class="ui-label" for="a">예금주</label><input class="ui-input" id="a" value="홍길동"></div>' +
         '<div><label class="ui-label" for="b">계좌번호</label><input class="ui-input" id="b" value="110-123-45678"></div>' +
         '<button class="ui-btn">등록하기</button></div>';
     },
@@ -90,7 +90,7 @@
         '연결이 끊겼습니다. 바뀐 내용은 저장해 뒀다가 연결되면 보냅니다.' +
         '<span class="sp">다시 시도 중…</span></div>';
       panel.innerHTML = '<div class="form" style="opacity:.6">' +
-        '<div><label class="ui-label" for="a">예금주</label><input class="ui-input" id="a" value="박형민" readonly></div>' +
+        '<div><label class="ui-label" for="a">예금주</label><input class="ui-input" id="a" value="홍길동" readonly></div>' +
         '<div><label class="ui-label" for="b">계좌번호</label><input class="ui-input" id="b" value="110-123-45678" readonly></div>' +
         '<button class="ui-btn" disabled>등록하기</button></div>';
     }

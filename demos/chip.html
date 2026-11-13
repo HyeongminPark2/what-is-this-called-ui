@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칩 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s5); }
+  h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--fg-muted); margin: 0 0 var(--s3); }
+  .res { font-size: 13px; color: var(--fg-muted); margin-top: var(--s3); }
+  .res b { color: var(--fg); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .f-in { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; border: 1px solid var(--line-strong); border-radius: var(--r1); padding: 6px; min-height: 44px; }
+  .f-in:focus-within { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .f-in input { border: 0; outline: 0; font: inherit; font-size: 14px; flex: 1; min-width: 90px; padding: 4px; background: none; color: inherit; }
+</style>
+</head>
+<body>
+
+<div class="bar"><b>칩</b></div>
+
+<div class="pad">
+  <section>
+    <h4>필터 칩 — 눌러서 거른다</h4>
+    <div class="chips" id="filters" role="group" aria-label="상태로 거르기">
+      <button type="button" class="chip" aria-pressed="true" data-f="all">전체</button>
+      <button type="button" class="chip" aria-pressed="false" data-f="wait">검토 중</button>
+      <button type="button" class="chip" aria-pressed="false" data-f="ok">승인됨</button>
+      <button type="button" class="chip" aria-pressed="false" data-f="no">거절됨</button>
+    </div>
+    <p class="res" id="res" role="status"></p>
+  </section>
+
+  <section>
+    <h4>입력 칩 — 넣은 것을 떼어 낸다</h4>
+    <label for="tagin" style="font-size:13px;color:var(--fg-muted);display:block;margin-bottom:6px">받는 사람</label>
+    <div class="f-in" id="box">
+      <span class="chips" id="tags"></span>
+      <input id="tagin" placeholder="이름을 쓰고 Enter" aria-describedby="taghelp">
+    </div>
+    <p class="res" id="taghelp">Enter 로 넣고, <kbd>×</kbd> 나 <kbd>Backspace</kbd> 로 뺍니다. <span id="tagcount"></span></p>
+  </section>
+
+  <section>
+    <h4>표시 칩 — 누를 수 없는 것</h4>
+    <div class="chips">
+      <span class="chip chip--static">#정산</span>
+      <span class="chip chip--static">#11월</span>
+      <span class="chip chip--static">#모란상회</span>
+    </div>
+  </section>
+</div>
+
+<p class="hint">
+  칩은 <b>한 낱말짜리 작은 덩어리</b>입니다. 셋이 서로 다른 일을 하는데 생김새가 같아서 가장 많이 헷갈립니다 —
+  <b>필터 칩</b>은 눌러서 켜고 끄고(<code>aria-pressed</code>), <b>입력 칩</b>은 내가 넣은 값이라 뗄 수 있고,
+  <b>표시 칩</b>은 그냥 라벨이라 눌리지 않습니다.<br>
+  칩을 <kbd>×</kbd>로 지워 보세요. <b>포커스가 사라지지 않고</b> 다음 칩(없으면 입력칸)으로 넘어갑니다 —
+  지운 자리에 포커스를 두면 키보드 사용자는 화면 맨 위로 튕깁니다. 삭제 칩에서 가장 흔한 사고입니다.<br>
+  누를 수 없는 칩에 테두리와 호버를 주면 <b>눌러 보게 됩니다.</b> 표시 칩은 더 조용하게 그립니다.
+</p>
+
+<script>
+(function () {
+  var N = { all: 42, wait: 7, ok: 31, no: 4 };
+  var filters = document.getElementById('filters'), res = document.getElementById('res');
+
+  filters.addEventListener('click', function (e) {
+    var c = e.target.closest('.chip'); if (!c) return;
+    filters.querySelectorAll('.chip').forEach(function (x) { x.setAttribute('aria-pressed', String(x === c)); });
+    res.innerHTML = '<b>' + N[c.dataset.f] + '건</b>이 보입니다 — ' + c.textContent;
+  });
+  res.innerHTML = '<b>' + N.all + '건</b>이 보입니다 — 전체';
+
+  var TAGS = ['홍길동', '김철수'];
+  var tags = document.getElementById('tags'), input = document.getElementById('tagin');
+  var count = document.getElementById('tagcount');
+
+  function drawTags() {
+    tags.innerHTML = TAGS.map(function (t, i) {
+      return '<span class="chip" data-i="' + i + '">' + t +
+        '<button type="button" class="chip__x" data-del="' + i + '" aria-label="' + t + ' 빼기">×</button></span>';
+    }).join('');
+    count.textContent = '지금 ' + TAGS.length + '명';
+  }
+
+  tags.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-del]'); if (!b) return;
+    var i = +b.dataset.del;
+    TAGS.splice(i, 1);
+    drawTags();
+    // 지운 자리에 포커스를 두면 안 된다 — 다음 칩, 없으면 입력칸으로 옮긴다
+    var next = tags.querySelectorAll('[data-del]')[Math.min(i, TAGS.length - 1)];
+    (next || input).focus();
+  });
+
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && this.value.trim()) {
+      e.preventDefault();
+      TAGS.push(this.value.trim()); this.value = ''; drawTags();
+    } else if (e.key === 'Backspace' && !this.value && TAGS.length) {
+      TAGS.pop(); drawTags();
+    }
+  });
+  drawTags();
+})();
+</script>
+</body>
+</html>

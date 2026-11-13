@@ -209,6 +209,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   // ── 2. 항목 카드 — 일곱 장 모두 같은 틀인지 ──
   const PARTS = {
     '2부': ['color', 'dark', 'typescale', 'spacing', 'elevation', 'zindex'],
+    '5부': ['card', 'listitem', 'avatar', 'badge', 'chip', 'stat', 'timeline', 'rating'],
     '6부': ['modal', 'dialog', 'sheet', 'drawer', 'popover', 'tooltip', 'toast'],
     '4부': ['field', 'select', 'combobox', 'checkbox', 'radio', 'switch', 'segmented', 'slider'],
     '7부': ['appbar', 'sidebar', 'tabs', 'breadcrumb', 'pagination', 'infinite', 'bottomnav'],
@@ -285,6 +286,18 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
           }
         }
       });
+      // 번호가 자기 부품을 벗어나 다른 줄을 가리키고 있지 않은가.
+      // spread() 가 겹침을 피해 아래로 밀면 겹치지도 잘리지도 않은 채 '한 칸 밀린' 번호가 생긴다.
+      nos.forEach(n => {
+        const t = n.parentElement;
+        const q = n.getBoundingClientRect(), tr = t.getBoundingClientRect();
+        if (!tr.height) return;
+        const cy = q.top + q.height / 2;
+        if (cy < tr.top - 10 || cy > tr.bottom + 10) {
+          bad.push(`해부도 ${n.textContent}번이 가리키는 것 밖으로 밀림 (번호 ${Math.round(cy)}, 부품 ${Math.round(tr.top)}~${Math.round(tr.bottom)})`);
+        }
+      });
+
       nos.forEach((a, i) => nos.slice(i + 1).forEach(b2 => {
         const q = a.getBoundingClientRect(), w = b2.getBoundingClientRect();
         if (q.right > w.left + 1 && q.left < w.right - 1 && q.bottom > w.top + 1 && q.top < w.bottom - 1) {
@@ -539,7 +552,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   if (await page.locator('.f__err').count() !== 2) fail.push('필드: 에러가 두 개가 아니다');
   if (!await page.locator('#nm').evaluate(e => e === document.activeElement)) fail.push('필드: 첫 틀린 칸으로 포커스가 안 간다');
   if (await page.locator('#nm').getAttribute('aria-invalid') !== 'true') fail.push('필드: aria-invalid 가 없다');
-  await page.locator('#nm').fill('박형민'); await page.waitForTimeout(150);
+  await page.locator('#nm').fill('홍길동'); await page.waitForTimeout(150);
   if (await page.locator('#nm-e').count() !== 0) fail.push('필드: 고쳐도 에러가 안 풀린다');
   await page.locator('#memo').fill('가'.repeat(12)); await page.waitForTimeout(100);
   if (!(await page.locator('#memo-c').textContent()).startsWith('12')) fail.push('필드: 글자 수가 안 센다');
@@ -789,6 +802,128 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     fail.push('z-index: 아무 값이나 쓰기에서 9999 가 안 된다');
   if (!(await topLayer('#modal')).includes('z-scrim')) fail.push('z-index: 모달이 가림막에 안 덮인다 (보여주려는 실패가 안 보인다)');
   if (!await page.locator('#b-toast').evaluate(e => e.classList.contains('bad'))) fail.push('z-index: 9999 가 빨갛게 표시되지 않는다');
+  await page.close();
+
+  // 5부 표시 부품 데모 여덟 장
+  // 카드 — 안의 버튼이 카드 링크를 같이 누르지 않는다
+  page = await demo('card', 900, 900);
+  if (await page.locator('.ui-card').count() !== 4) fail.push('카드: 넷이 아니다');
+  await page.locator('[data-buy="0"]').click(); await page.waitForTimeout(80);
+  if (!(await page.textContent('#log')).includes('장바구니')) fail.push('카드: 안의 버튼이 동작하지 않는다');
+  if ((await page.textContent('#log')).includes('상세로')) fail.push('카드: 안의 버튼을 눌렀는데 카드까지 열린다');
+  await page.locator('.ui-card').first().click(); await page.waitForTimeout(80);
+  if (!(await page.textContent('#log')).includes('상세로')) fail.push('카드: 본문을 눌러도 안 열린다');
+  await page.locator('#long').check(); await page.waitForTimeout(100);
+  const hA = await page.$$eval('.ui-card', els => els.map(e => Math.round(e.getBoundingClientRect().height)));
+  if (new Set(hA).size === 1) fail.push('카드: 긴 제목을 섞었는데 높이가 그대로다 (보여주려는 결과)');
+  await page.locator('#clip').check(); await page.waitForTimeout(100);
+  if (!await page.locator('.ui-card__title').nth(1).evaluate(e => e.scrollWidth > e.clientWidth + 1))
+    fail.push('카드: 한 줄로 자르기를 켰는데 안 잘린다');
+  const hB = await page.$$eval('.ui-card', els => els.map(e => Math.round(e.getBoundingClientRect().height)));
+  if (new Set(hB).size !== 1) fail.push('카드: 자른 뒤에도 높이가 제각각이다');
+  await page.close();
+
+  // 리스트 아이템 — 줄 높이가 일정하고 긴 글은 말줄임
+  page = await demo('listitem', 900, 820);
+  const h2 = await page.locator('.li').first().evaluate(e => e.getBoundingClientRect().height);
+  await page.selectOption('#lines', 'three'); await page.waitForTimeout(100);
+  if (!(await page.locator('.li').first().evaluate(e => e.getBoundingClientRect().height) > h2))
+    fail.push('리스트: 세 줄인데 두 줄보다 안 높다');
+  await page.selectOption('#lines', 'two'); await page.waitForTimeout(100);
+  if (!await page.locator('.li__t').nth(2).evaluate(e => e.scrollWidth > e.clientWidth + 1))
+    fail.push('리스트: 긴 제목이 말줄임되지 않는다 (min-width:0 을 빠뜨렸는지 본다)');
+  const lh = await page.$$eval('.li', els => els.map(e => Math.round(e.getBoundingClientRect().height)));
+  if (new Set(lh).size !== 1) fail.push('리스트: 줄 높이가 제각각이다');
+  await page.locator('#wrap').check(); await page.waitForTimeout(100);
+  const lw = await page.$$eval('.li', els => els.map(e => Math.round(e.getBoundingClientRect().height)));
+  if (new Set(lw).size === 1) fail.push('리스트: 접기를 켰는데 높이가 그대로다 (보여주려는 결과)');
+  await page.close();
+
+  // 아바타 — 사진이 깨지면 이니셜이 드러나고, 넘치면 +N
+  page = await demo('avatar', 900, 820);
+  if (await page.locator('#photo i').count() !== 1) fail.push('아바타: 처음에 사진이 없다');
+  await page.locator('#broken').check(); await page.waitForTimeout(100);
+  if (await page.locator('#photo i').count() !== 0) fail.push('아바타: 깨진 상태인데 사진이 남아 있다');
+  if ((await page.textContent('#photo')).trim() !== '길동') fail.push('아바타: 이니셜 바닥이 안 드러난다');
+  if (await page.locator('#stack .av').count() !== 3) fail.push('아바타: 세 명인데 그림이 셋이 아니다');
+  await page.locator('#n').fill('9'); await page.dispatchEvent('#n', 'input'); await page.waitForTimeout(100);
+  if (await page.locator('#stack .av').count() !== 4) fail.push('아바타: 아홉 명인데 그림이 넷으로 안 줄었다');
+  if ((await page.textContent('#stack .more')).trim() !== '+6') fail.push('아바타: 나머지가 +6 이 아니다');
+  if (!(await page.getAttribute('#stack', 'aria-label')).includes('참여자 9명'))
+    fail.push('아바타: 겹친 무리가 아홉 명으로 안 읽힌다');
+  await page.close();
+
+  // 배지 — 99+ 로 줄이고 0이면 사라진다
+  page = await demo('badge', 900, 860);
+  if ((await page.textContent('#b-num')).trim() !== '3') fail.push('배지: 3건인데 3이 아니다');
+  await page.locator('#n').fill('250'); await page.dispatchEvent('#n', 'input'); await page.waitForTimeout(100);
+  if ((await page.textContent('#b-num')).trim() !== '99+') fail.push('배지: 세 자리인데 99+ 로 안 줄인다');
+  if (!(await page.getAttribute('.bdg-anchor', 'aria-label')).includes('250건'))
+    fail.push('배지: 읽히는 말에 원래 수가 없다');
+  if (await page.locator('#b-num').evaluate(e => e.getBoundingClientRect().width) > 40)
+    fail.push('배지: 99+ 인데 배지가 길어졌다');
+  await page.locator('#n').fill('0'); await page.dispatchEvent('#n', 'input'); await page.waitForTimeout(100);
+  if (!await page.locator('#b-num').isHidden()) fail.push('배지: 0건인데 안 사라진다 (hidden 이 display 에 졌는지 본다)');
+  await page.close();
+
+  // 칩 — 필터는 aria-pressed, 입력 칩은 지운 뒤 포커스가 안 날아간다
+  page = await demo('chip', 900, 820);
+  if (await page.getAttribute('.chip[data-f=all]', 'aria-pressed') !== 'true') fail.push('칩: 처음에 전체가 안 켜져 있다');
+  await page.locator('.chip[data-f=wait]').click(); await page.waitForTimeout(80);
+  if (await page.getAttribute('.chip[data-f=wait]', 'aria-pressed') !== 'true') fail.push('칩: 누른 칩이 안 켜진다');
+  if (await page.getAttribute('.chip[data-f=all]', 'aria-pressed') !== 'false') fail.push('칩: 먼저 켜진 칩이 안 꺼진다');
+  if (!(await page.textContent('#res')).includes('7건')) fail.push('칩: 거른 결과가 안 바뀐다');
+  await page.locator('#tags [data-del]').first().click(); await page.waitForTimeout(80);
+  if (await page.locator('#tags .chip').count() !== 1) fail.push('칩: × 를 눌러도 안 빠진다');
+  const af = await page.evaluate(() => document.activeElement.className + '|' + document.activeElement.id);
+  if (!(af.includes('chip__x') || af.includes('tagin'))) fail.push(`칩: 지운 뒤 포커스가 날아갔다 (${af})`);
+  await page.fill('#tagin', '이영희'); await page.press('#tagin', 'Enter'); await page.waitForTimeout(80);
+  if (await page.locator('#tags .chip').count() !== 2) fail.push('칩: Enter 로 안 들어간다');
+  await page.press('#tagin', 'Backspace'); await page.waitForTimeout(80);
+  if (await page.locator('#tags .chip').count() !== 1) fail.push('칩: 빈 칸에서 Backspace 로 안 빠진다');
+  await page.close();
+
+  // 스탯 타일 — 올라가도 나쁜 지표는 색이 뒤집힌다
+  page = await demo('stat', 900, 760);
+  if (await page.locator('.stat').count() !== 4) fail.push('스탯: 타일이 넷이 아니다');
+  if (await page.getAttribute('.stat:nth-child(1)', 'data-tone') !== 'up') fail.push('스탯: 매출 증가가 좋은 쪽이 아니다');
+  if (await page.getAttribute('.stat:nth-child(3)', 'data-dir') !== 'up') fail.push('스탯: 환불액 방향이 올라감이 아니다');
+  if (await page.getAttribute('.stat:nth-child(3)', 'data-tone') !== 'down')
+    fail.push('스탯: 환불액이 올라가는데 색이 안 뒤집혔다 (보여주려는 교훈)');
+  if (await page.locator('.stat__spark').count() !== 4) fail.push('스탯: 추세선이 넷이 아니다');
+  if (await page.$eval('.stat__value', e => getComputedStyle(e).fontVariantNumeric) !== 'tabular-nums')
+    fail.push('스탯: 숫자 자릿수를 안 맞춘다');
+  await page.locator('#bare').check(); await page.waitForTimeout(100);
+  if (!await page.locator('.stat__delta').first().isHidden()) fail.push('스탯: 숫자만 보기인데 비교가 남아 있다');
+  await page.close();
+
+  // 타임라인 — 지금 단계가 하나, 멈추면 그 자리에 이유
+  page = await demo('timeline', 900, 760);
+  if (await page.locator('.tl > li').count() !== 5) fail.push('타임라인: 단계가 다섯이 아니다');
+  if (await page.locator('[aria-current=step]').count() !== 1) fail.push('타임라인: 지금 단계가 하나가 아니다');
+  if (await page.getAttribute('[aria-current=step]', 'data-i') !== '2') fail.push('타임라인: 시작 단계가 세 번째가 아니다');
+  await page.locator('#next').click(); await page.waitForTimeout(80);
+  if (await page.getAttribute('[aria-current=step]', 'data-i') !== '3') fail.push('타임라인: 다음 단계로 안 간다');
+  await page.locator('#fail').click(); await page.waitForTimeout(80);
+  if (await page.locator('.tl__dot.is-bad').count() !== 1) fail.push('타임라인: 멈춘 자리가 안 빨개진다');
+  if (!(await page.textContent('[aria-current=step]')).includes('예금주')) fail.push('타임라인: 멈춘 이유가 그 자리에 없다');
+  if (await page.locator('.tl__dot.is-now').count() !== 0) fail.push('타임라인: 멈췄는데 진행 중 표시가 남아 있다');
+  await page.close();
+
+  // 별점 — 반올림하지 않고, 입력용은 라디오 그룹
+  page = await demo('rating', 900, 860);
+  if (await page.textContent('#num') !== '4.3') fail.push('별점: 평균이 4.3 이 아니다');
+  const fillW = parseFloat(await page.$eval('#fill', e => e.style.width));
+  if (Math.abs(fillW - 86) > 0.2) fail.push(`별점: 4.3 인데 ${fillW}% 를 칠한다 (86% 기대 — 반올림했는지 본다)`);
+  if (!(await page.getAttribute('#stars', 'aria-label')).includes('4.3점')) fail.push('별점: 읽기용에 말이 없다');
+  if (await page.getAttribute('#input', 'role') !== 'radiogroup') fail.push('별점: 입력용이 라디오 그룹이 아니다');
+  await page.locator('#input [data-v="4"]').click(); await page.waitForTimeout(80);
+  if (await page.getAttribute('#input [data-v="4"]', 'aria-checked') !== 'true') fail.push('별점: 누른 별이 안 골라진다');
+  if (await page.locator('#input button.on').count() !== 4) fail.push('별점: 아래까지 안 칠해진다');
+  if (await page.$$eval('#input button', els => els.filter(e => e.tabIndex === 0).length) !== 1)
+    fail.push('별점: 탭으로 들어오는 자리가 하나가 아니다(로빙 탭인덱스)');
+  await page.press('#input [data-v="4"]', 'ArrowRight'); await page.waitForTimeout(80);
+  if (await page.locator('#input button.on').count() !== 5) fail.push('별점: → 로 안 올라간다');
   await page.close();
 
   await browser.close();
