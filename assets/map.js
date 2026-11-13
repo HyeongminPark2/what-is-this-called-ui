@@ -9,6 +9,8 @@
     var labels = Array.prototype.slice.call(fig.querySelectorAll('.lbl[data-t]'));
     if (!svg || !labels.length) return;
 
+    var badges = [];
+
     labels.forEach(function (lbl, i) {
       var target = fig.querySelector('[data-p="' + lbl.dataset.t + '"]');
       if (!target) return;
@@ -25,9 +27,12 @@
       var mr = fig.querySelector('.appmock').getBoundingClientRect();
       if (tr.width < 60 && mr.right - tr.right < 28) {
         target.lastElementChild.classList.add('partno--right');
-      } else if (tr.height < 26) {
+      } else if (tr.height < 26 && tr.width < mr.width - 44) {
+        // 화면 폭을 다 쓰는 띠는 왼쪽에 뺄 자리가 없다 — 모서리에 둔다
         target.lastElementChild.classList.add('partno--out');
       }
+
+      badges.push(target.lastElementChild);
 
       lbl.addEventListener('mouseenter', function () { on(lbl); });
       lbl.addEventListener('mouseleave', off);
@@ -41,6 +46,34 @@
       });
       target.addEventListener('mouseleave', off);
     });
+
+    // 두 부품의 모서리가 같은 자리면 번호끼리 겹쳐 하나가 안 보인다. 겹치면 옆으로 비킨다.
+    function spread() {
+      var placed = [];
+      badges.forEach(function (n) {
+        n.style.left = ''; n.style.right = '';
+        var right = n.classList.contains('partno--right');
+        for (var k = 0; k < 4; k++) {
+          var r = n.getBoundingClientRect();
+          // 아슬아슬하게 비껴간 것도 글꼴·줄높이가 바뀌면 겹친다. 3px 넉넉히 보고 떼어 놓는다.
+          var hit = placed.some(function (p) {
+            var q = p.getBoundingClientRect();
+            return r.right > q.left - 3 && r.left < q.right + 3 &&
+                   r.bottom > q.top - 3 && r.top < q.bottom + 3;
+          });
+          if (!hit) break;
+          var cs = getComputedStyle(n);
+          if (right) n.style.right = (parseFloat(cs.right) + 24) + 'px';
+          else       n.style.left  = (parseFloat(cs.left)  + 24) + 'px';
+        }
+        placed.push(n);
+      });
+    }
+    spread();
+    window.addEventListener('resize', spread);
+    // 글꼴이 자리잡으면 줄 높이가 바뀌어 몇 px 움직인다. 그때 다시 센다.
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(spread);
+    window.addEventListener('load', spread);
 
     function off() {
       fig.querySelectorAll('.is-on').forEach(function (el) { el.classList.remove('is-on'); });

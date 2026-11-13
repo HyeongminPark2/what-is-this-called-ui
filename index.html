@@ -79,9 +79,11 @@
   <!-- 화면 지도 -->
   <section class="band" id="map">
     <h2>화면 지도</h2>
-    <p class="sub">진짜 앱처럼 만든 화면입니다. 화면의 번호가 옆 목록의 번호와 이어집니다.
-      <b>어느 쪽을 짚어도 됩니다</b> — 목록의 이름에 올리면 화면에서 그 부분이 밝아지고,
-      화면의 부품에 올리면 목록에서 이름이 밝아집니다.</p>
+    <p class="sub">서비스 종류가 다르면 쓰는 부품도 다릅니다. 모든 화면이 관리 대시보드처럼
+      생기지는 않아서 <b>여러 종류</b>를 나란히 뒀습니다 — 관리 도구, 쇼핑몰, 기업 소개,
+      글쓰기 도구. 그리고 같은 서비스의 폰 화면 하나.<br>
+      화면의 번호가 아래 목록의 번호와 이어집니다. <b>어느 쪽을 짚어도 됩니다</b> —
+      목록의 이름에 올리면 화면에서 그 부분이 밝아지고, 화면의 부품에 올리면 목록에서 이름이 밝아집니다.</p>
 
     <div class="maps">
 
@@ -190,6 +192,353 @@
           </ol>
 
 
+        </div>
+      </div>
+
+      <!-- ── 쇼핑몰 ── -->
+      <div class="map">
+        <h3>PC · 쇼핑몰</h3>
+        <p class="cap">같은 PC라도 파는 화면은 부품이 전혀 다릅니다. 관리 도구와 겹치는 이름이 거의 없습니다.</p>
+
+        <div class="mapfig" data-map="shop">
+          <svg class="mapfig__lines" aria-hidden="true"></svg>
+          <div class="mapfig__screen">
+            <div class="appmock appmock--shop" role="img" aria-label="PC · 쇼핑몰 화면을 흉내 낸 그림. 부분마다 번호가 붙어 있고 아래 목록과 이어진다.">
+              <div class="shop__top" data-p="gnav">
+                <span class="shop__logo">마루상점</span>
+                <span class="shop__nav"><i class="on">가구</i><i>조명</i><i>주방</i><i>리빙</i><i>세일</i></span>
+                <span class="shop__tools">
+                  <span>⌕ 검색</span><span>로그인</span>
+                  <span class="shop__cart">🛒<span class="cnt num" data-p="cart">2</span></span>
+                </span>
+              </div>
+
+              <div class="shop__mega" data-p="mega">
+                <b>가구</b>
+                <i class="hot">소파</i><i>침대</i><i>책상</i>
+                <i>의자</i><i>수납장</i><i>선반</i>
+                <i>식탁</i><i>협탁</i><i>전체 보기</i>
+              </div>
+
+              <div class="shop__hero" data-p="hero">
+                <h5>가을 거실, 다시 꾸미기</h5>
+                <p>소파와 조명을 함께 사면 추가 10%. 오늘 주문하면 모레 도착합니다.</p>
+                <span class="shop__cta" data-p="cta">기획전 보러 가기</span>
+                <span class="shop__dots" data-p="dots"><i class="on"></i><i></i><i></i><i></i></span>
+              </div>
+
+              <div class="shop__secbar">
+                <h5>지금 많이 담는 것</h5>
+                <span class="mut" style="font-size:10.5px">1,284개</span>
+                <span class="shop__sort" data-p="sort">인기순 ▾</span>
+              </div>
+
+              <div class="shop__grid">
+                <div class="shop__card" data-p="card">
+                  <div class="shop__shot" data-p="thumb">
+                    <span class="shop__ribbon" data-p="ribbon">32%</span>
+                    <span class="shop__heart" data-p="heart">♥</span>
+                  </div>
+                  <div class="shop__meta">
+                    <span class="nm">무드 플로어 램프</span>
+                    <span class="shop__stars" data-p="rating"><span class="s">★★★★</span>☆ 4.3 (512)</span>
+                    <span class="shop__price" data-p="price"><del class="num">129,000</del><b class="num">87,000</b><span class="off">32%</span></span>
+                  </div>
+                </div>
+                <div class="shop__card">
+                  <div class="shop__shot"><span class="shop__heart">♡</span></div>
+                  <div class="shop__meta">
+                    <span class="nm">리넨 3인 소파</span>
+                    <span class="shop__stars"><span class="s">★★★★★</span> 4.8 (1,203)</span>
+                    <span class="shop__price"><b class="num">649,000</b></span>
+                  </div>
+                </div>
+                <div class="shop__card">
+                  <div class="shop__shot"><span class="shop__ribbon">단독</span><span class="shop__heart">♡</span></div>
+                  <div class="shop__meta">
+                    <span class="nm">오크 원형 협탁</span>
+                    <span class="shop__stars"><span class="s">★★★★</span>☆ 4.1 (88)</span>
+                    <span class="shop__price"><b class="num">112,000</b></span>
+                  </div>
+                </div>
+                <div class="shop__card">
+                  <div class="shop__shot"><span class="shop__heart">♡</span></div>
+                  <div class="shop__meta">
+                    <span class="nm">코튼 러그 170×240</span>
+                    <span class="shop__stars"><span class="s">★★★★</span>☆ 4.5 (341)</span>
+                    <span class="shop__price"><del class="num">98,000</del><b class="num">74,000</b><span class="off">24%</span></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="shop__foot" data-p="foot">
+                <span><b>고객센터</b><i>1588-0000</i><i>자주 묻는 질문</i><i>1:1 문의</i></span>
+                <span><b>쇼핑</b><i>베스트</i><i>기획전</i><i>세일</i></span>
+                <span><b>회사</b><i>소개</i><i>채용</i><i>제휴 문의</i></span>
+                <span><b>약관</b><i>이용약관</i><i>개인정보처리방침</i><i>© 2026 마루상점</i></span>
+              </div>
+
+              <div class="shop__cookie" data-p="cookie">
+                쿠키를 써서 장바구니를 기억하고 추천을 고릅니다.
+                <span class="btns"><i class="g">설정</i><i class="p">모두 허용</i></span>
+              </div>
+            </div>
+          </div>
+          <p class="pan-hint">화면을 옆으로 밀면 오른쪽까지 볼 수 있습니다 →  번호는 아래 목록과 이어집니다.</p>
+
+          <ol class="mapfig__list">
+            <li><span class="lbl" data-t="gnav"><span>글로벌 내비게이션<em>global nav</em></span></span></li>
+            <li><span class="lbl" data-t="mega"><span>메가 메뉴<em>mega menu</em></span></span></li>
+            <li><span class="lbl" data-t="cart"><span>카운트 배지<em>count badge</em></span></span></li>
+            <li><span class="lbl" data-t="hero"><span>히어로<em>hero · key visual</em></span></span></li>
+            <li><span class="lbl" data-t="cta"><span>CTA 버튼<em>call to action</em></span></span></li>
+            <li><span class="lbl" data-t="dots"><span>캐러셀 인디케이터<em>carousel dots</em></span></span></li>
+            <li><span class="lbl" data-t="sort"><span>정렬 셀렉트<em>sort select</em></span></span></li>
+            <li><span class="lbl" data-t="card"><span>상품 카드<em>product card</em></span></span></li>
+            <li><span class="lbl" data-t="thumb"><span>썸네일<em>thumbnail</em></span></span></li>
+            <li><span class="lbl" data-t="ribbon"><span>리본<em>ribbon · corner badge</em></span></span></li>
+            <li><span class="lbl" data-t="heart"><span>찜 토글<em>wishlist toggle</em></span></span></li>
+            <li><span class="lbl" data-t="rating"><span>별점<em>rating</em></span></span></li>
+            <li><span class="lbl" data-t="price"><span>취소선 정가<em>strikethrough price</em></span></span></li>
+            <li><span class="lbl" data-t="foot"><span>푸터<em>footer</em></span></span></li>
+            <li><span class="lbl" data-t="cookie"><span>쿠키 배너<em>consent banner</em></span></span></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ── 홍보 사이트 ── -->
+      <div class="map">
+        <h3>PC · 기업 · 서비스 소개</h3>
+        <p class="cap">스크롤을 타고 움직이는 화면. 여기서만 보는 이름이 특히 많습니다 — 진행 표시줄, 패럴랙스, 스크롤 등장, 스티키 섹션. 요금제 카드가 흐린 것은 <b>떠오르는 중간을 멈춰 둔 그림</b>입니다.</p>
+
+        <div class="mapfig" data-map="mk">
+          <svg class="mapfig__lines" aria-hidden="true"></svg>
+          <div class="mapfig__screen">
+            <div class="appmock appmock--mk" role="img" aria-label="기업 소개 사이트를 흉내 낸 그림. 부분마다 번호가 붙어 있고 아래 목록과 이어진다.">
+              <div class="mk__prog" data-p="prog"><i></i></div>
+
+              <div class="mk__head" data-p="mhead">
+                <span class="lg">Orbit</span>
+                <nav><span>제품</span><span>고객 사례</span><span>요금제</span><span>블로그</span></nav>
+                <span class="r"><span>로그인</span><span class="btn">무료로 시작</span></span>
+              </div>
+
+              <div class="mk__hero">
+                <div class="in">
+                  <div class="mk__copy">
+                    <span class="mk__brow" data-p="brow">새로워진 2.0</span>
+                    <h5 class="mk__hl" data-p="hl">흩어진 지표를<br><b>한 화면</b>에서 봅니다</h5>
+                    <p class="mk__sub">연결만 하면 끝. 데이터베이스와 결제, 광고 지표를 한곳에 모아
+                      매일 아침 요약으로 보내 드립니다.</p>
+                    <span class="mk__btns">
+                      <span class="p">14일 무료로 써 보기</span>
+                      <span class="g" data-p="ghost">소개 영상 보기</span>
+                    </span>
+                  </div>
+                  <div class="mk__shotwrap">
+                    <div class="mk__shot">
+                      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                      <span class="panel"></span>
+                    </div>
+                    <div class="mk__float" data-p="parallax">
+                      <span>이번 주 전환</span><b class="num">+18.4%</b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mk__proof">
+                <b>이미 쓰고 있는 곳</b>
+                <span class="mk__logos" data-p="logos">
+                  <i>NOVA</i><i>단비</i><i>Kettle</i><i>하루상사</i><i>Mint&amp;Co</i><i>포레</i>
+                </span>
+                <span class="mk__nums" data-p="counter">
+                  <span><b class="num">1,240+</b><em>연결된 팀</em></span>
+                  <span><b class="num">99.98%</b><em>가동률</em></span>
+                  <span><b class="num">4.9</b><em>평점</em></span>
+                </span>
+              </div>
+
+              <div class="mk__pin" data-p="pinned">
+                <div class="mk__pinleft">
+                  <div class="stuck">
+                    <b>세 단계면 끝납니다</b>
+                    <p>왼쪽 설명은 그대로 붙어 있고 오른쪽만 지나갑니다. 지금은 두 번째 단계입니다.</p>
+                    <span class="steps"><i></i><i class="on"></i><i></i></span>
+                  </div>
+                </div>
+                <div class="mk__pinright">
+                  <div class="mk__slab"><span class="k"></span>1 · 쓰던 도구를 연결합니다</div>
+                  <div class="mk__slab on"><span class="k"></span>2 · 보고 싶은 지표를 고릅니다</div>
+                  <div class="mk__slab"><span class="k"></span>3 · 아침마다 요약을 받습니다</div>
+                </div>
+              </div>
+
+              <div class="mk__reveal" data-p="reveal">
+                <p class="cap">필요한 만큼만</p>
+                <div class="mk__plans" data-p="pricing">
+                  <div class="mk__plan rising">
+                    <span class="nm">무료</span>
+                    <div class="pr">₩0<small> /월</small></div>
+                    <ul><li>지표 3개</li><li>일간 요약</li></ul>
+                  </div>
+                  <div class="mk__plan mid rising">
+                    <span class="mk__best" data-p="best">가장 많이 고릅니다</span>
+                    <span class="nm">팀</span>
+                    <div class="pr">₩39,000<small> /월</small></div>
+                    <ul><li>지표 무제한</li><li>슬랙 알림</li><li>멤버 10명</li></ul>
+                  </div>
+                  <div class="mk__plan rising">
+                    <span class="nm">기업</span>
+                    <div class="pr">문의<small> </small></div>
+                    <ul><li>전용 지원</li><li>감사 로그</li></ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mk__acc" data-p="acc">
+                <p class="cap">자주 묻는 것</p>
+                <div class="mk__q open">
+                  <div class="h">중간에 요금제를 바꿀 수 있나요?<span class="tw">▴</span></div>
+                  <div class="a">언제든 바꿀 수 있고, 남은 기간만큼 다음 달에 정산해 드립니다.</div>
+                </div>
+                <div class="mk__q"><div class="h">데이터는 어디에 저장되나요?<span class="tw">▾</span></div></div>
+                <div class="mk__q"><div class="h">해지하면 지표가 사라지나요?<span class="tw">▾</span></div></div>
+              </div>
+
+              <div class="mk__band" data-p="ctaband">
+                <span><b>오늘 바로 연결해 보세요</b><br><span>카드 등록 없이 14일.</span></span>
+                <span class="btn">무료로 시작하기</span>
+              </div>
+
+              <div class="mk__top" data-p="totop">↑</div>
+              <div class="mk__chat" data-p="chat">💬</div>
+            </div>
+          </div>
+          <p class="pan-hint">화면을 옆으로 밀면 오른쪽까지 볼 수 있습니다 →  번호는 아래 목록과 이어집니다.</p>
+
+          <ol class="mapfig__list">
+            <li><span class="lbl" data-t="prog"><span>스크롤 진행 표시줄<em>scroll progress bar</em></span></span></li>
+            <li><span class="lbl" data-t="mhead"><span>스티키 헤더<em>sticky header</em></span></span></li>
+            <li><span class="lbl" data-t="brow"><span>아이브로<em>eyebrow · kicker</em></span></span></li>
+            <li><span class="lbl" data-t="hl"><span>헤드라인<em>headline</em></span></span></li>
+            <li><span class="lbl" data-t="ghost"><span>고스트 버튼<em>ghost button</em></span></span></li>
+            <li><span class="lbl" data-t="parallax"><span>패럴랙스 레이어<em>parallax layer</em></span></span></li>
+            <li><span class="lbl" data-t="logos"><span>로고 월<em>logo wall · social proof</em></span></span></li>
+            <li><span class="lbl" data-t="counter"><span>숫자 카운터<em>count-up</em></span></span></li>
+            <li><span class="lbl" data-t="pinned"><span>스티키 스크롤 섹션<em>pinned · scrollytelling</em></span></span></li>
+            <li><span class="lbl" data-t="reveal"><span>스크롤 등장<em>scroll reveal · fade-in-up</em></span></span></li>
+            <li><span class="lbl" data-t="pricing"><span>요금제 표<em>pricing table</em></span></span></li>
+            <li><span class="lbl" data-t="best"><span>추천 배지<em>most popular</em></span></span></li>
+            <li><span class="lbl" data-t="acc"><span>아코디언<em>accordion · FAQ</em></span></span></li>
+            <li><span class="lbl" data-t="ctaband"><span>푸터 CTA 밴드<em>CTA band</em></span></span></li>
+            <li><span class="lbl" data-t="chat"><span>플로팅 채팅 버튼<em>floating chat</em></span></span></li>
+            <li><span class="lbl" data-t="totop"><span>맨 위로<em>back to top</em></span></span></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ── 글쓰기 도구 ── -->
+      <div class="map">
+        <h3>PC · 글쓰기 · 협업 도구</h3>
+        <p class="cap">문서를 만드는 화면. 트리뷰·툴바·선택 영역처럼 이 종류에서만 보는 부품이 모여 있습니다.</p>
+
+        <div class="mapfig" data-map="doc">
+          <svg class="mapfig__lines" aria-hidden="true"></svg>
+          <div class="mapfig__screen">
+            <div class="appmock appmock--doc" role="img" aria-label="PC · 글쓰기 · 협업 도구 화면을 흉내 낸 그림. 부분마다 번호가 붙어 있고 아래 목록과 이어진다.">
+              <div class="doc__top">
+                <span class="doc__mark"></span>
+                <span class="doc__title" data-p="dtitle">2분기 회고 초안</span>
+                <span class="mut" style="font-size:10px">· 몇 초 전 저장됨</span>
+                <span class="doc__faces" data-p="faces">
+                  <span style="background:#2f6df6">박</span>
+                  <span style="background:#c0342b">윤</span>
+                  <span style="background:#1f8a4c">조</span>
+                  <span class="more">+4</span>
+                </span>
+                <span class="doc__share">공유</span>
+              </div>
+
+              <div class="doc__toolbar" data-p="toolbar">
+                <span class="pick">본문 ▾</span>
+                <span class="sep"></span>
+                <span class="tb on" data-p="tbtn">B</span>
+                <span class="tb" style="font-style:italic">I</span>
+                <span class="tb" style="text-decoration:underline">U</span>
+                <span class="sep"></span>
+                <span class="tb">≔</span><span class="tb">≡</span><span class="tb">🔗</span>
+                <span class="sep"></span>
+                <span class="tb">“”</span><span class="tb">&lt;/&gt;</span>
+              </div>
+
+              <div class="doc__body">
+                <nav class="doc__tree" data-p="tree">
+                  <span class="n"><i class="tw" data-p="twisty">▸</i><span class="ic"></span>회사 위키</span>
+                  <span class="n"><i class="tw">▾</i><span class="ic"></span>팀 문서</span>
+                  <span class="sub">
+                    <span class="n on"><i class="tw"></i><span class="ic"></span>2분기 회고 초안</span>
+                    <span class="n"><i class="tw"></i><span class="ic"></span>스프린트 기록</span>
+                    <span class="n"><i class="tw"></i><span class="ic"></span>온보딩 안내</span>
+                  </span>
+                  <span class="n"><i class="tw">▸</i><span class="ic"></span>보관함</span>
+                </nav>
+
+                <div class="doc__grip" data-p="grip"></div>
+
+                <div class="doc__page">
+                  <h5>2분기 회고</h5>
+                  <p>이번 분기에는 결제 서버를 옮기는 일이 가장 컸다. 이관 자체는 예정보다
+                  이틀 빨리 끝났지만, <span class="doc__sel" data-p="sel">장애 대응 절차가 문서로 남아 있지 않아</span>
+                  새벽에 연락이 두 번 더 오갔다.</p>
+                  <p>다음 분기에는 당번표와 복구 절차를 먼저 적어 두기로 했다. 숫자로 보면
+                  승인률은 98.4%로 올랐고 평균 응답은 210ms에서 140ms로 줄었다.</p>
+                  <p>프런트 쪽은 결제 폼을 한 번 더 손봤다. 카드 번호를 네 자리씩 끊어 보여 주고
+                  오류를 입력칸 바로 아래에 띄우도록 바꿨더니, 결제 단계에서 빠져나가는 비율이
+                  12%에서 7%로 내려갔다.</p>
+                  <p>아쉬운 점은 회고를 분기 끝에 몰아서 했다는 것이다. 다음에는 스프린트마다
+                  짧게 적어 두고, 분기 회고에서는 그것들을 모아 보기만 하자.</p>
+                  <span class="doc__bubble" data-p="bubble">
+                    <i class="on">B</i><i style="font-style:italic">I</i><i>🔗</i>
+                    <span class="sep"></span><i>💬</i><i>▾</i>
+                  </span>
+                  <span class="doc__pin" data-p="pin" style="top:74px">2</span>
+                </div>
+
+                <aside class="doc__side" data-p="side">
+                  <b>댓글 2</b>
+                  <div class="doc__thread">
+                    <span class="who"><span style="background:#c0342b">윤</span><b>윤서</b><em>2시간</em></span>
+                    <p>이 부분은 당번표 초안 링크를 걸어 두면 좋겠어요.</p>
+                    <span class="reply">답글 1개 · 답글 달기</span>
+                  </div>
+                </aside>
+              </div>
+
+              <div class="doc__status" data-p="status">
+                <span class="ok">● 저장됨</span>
+                <span>3,120자</span>
+                <span>읽는 데 약 6분</span>
+                <span class="right">100%</span>
+              </div>
+            </div>
+          </div>
+          <p class="pan-hint">화면을 옆으로 밀면 오른쪽까지 볼 수 있습니다 →  번호는 아래 목록과 이어집니다.</p>
+
+          <ol class="mapfig__list">
+            <li><span class="lbl" data-t="dtitle"><span>인라인 편집 제목<em>inline edit</em></span></span></li>
+            <li><span class="lbl" data-t="faces"><span>아바타 그룹<em>avatar group · facepile</em></span></span></li>
+            <li><span class="lbl" data-t="toolbar"><span>툴바<em>toolbar</em></span></span></li>
+            <li><span class="lbl" data-t="tbtn"><span>토글 버튼<em>toggle button</em></span></span></li>
+            <li><span class="lbl" data-t="tree"><span>트리뷰<em>tree view</em></span></span></li>
+            <li><span class="lbl" data-t="twisty"><span>디스클로저 삼각형<em>disclosure triangle</em></span></span></li>
+            <li><span class="lbl" data-t="grip"><span>분할 핸들<em>splitter · resize handle</em></span></span></li>
+            <li><span class="lbl" data-t="sel"><span>선택 영역<em>selection</em></span></span></li>
+            <li><span class="lbl" data-t="bubble"><span>플로팅 툴바<em>floating toolbar · bubble menu</em></span></span></li>
+            <li><span class="lbl" data-t="pin"><span>댓글 핀<em>comment anchor</em></span></span></li>
+            <li><span class="lbl" data-t="side"><span>사이드 패널<em>side panel · inspector</em></span></span></li>
+            <li><span class="lbl" data-t="status"><span>상태 표시줄<em>status bar</em></span></span></li>
+          </ol>
         </div>
       </div>
 

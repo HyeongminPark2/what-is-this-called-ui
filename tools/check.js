@@ -46,12 +46,29 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
       const gs = fig.querySelectorAll('.mapfig__lines g').length;
       if (gs !== 0) bad.push(`${name}: 짚지도 않았는데 지시선이 ${gs}개 그려져 있음`);
 
-      // 배지가 잘리지 않는가
-      const sc = fig.querySelector('.mapfig__screen').getBoundingClientRect();
+      // 배지가 조상 어디에서든 잘리지 않는가 (overflow:hidden 인 상자를 모두 거슬러 본다)
       fig.querySelectorAll('.partno').forEach(n => {
         const r = n.getBoundingClientRect();
-        if (r.left < sc.left - 0.5 || r.top < sc.top - 0.5) bad.push(`${name}: ${n.textContent}번 배지가 잘림`);
+        for (let el = n.parentElement; el && el !== document.body; el = el.parentElement) {
+          const ov = getComputedStyle(el).overflow;
+          if (ov === 'visible') continue;
+          const b2 = el.getBoundingClientRect();
+          if (r.left < b2.left - 0.5 || r.top < b2.top - 0.5 ||
+              r.right > b2.right + 0.5 || r.bottom > b2.bottom + 0.5) {
+            bad.push(`${name}: ${n.textContent}번 배지가 '${el.className.split(' ')[0]}'(overflow:${ov})에 잘림`);
+            break;
+          }
+        }
       });
+
+      // 번호끼리 겹치면 하나가 안 보인다
+      const ns = [...fig.querySelectorAll('.partno')];
+      ns.forEach((a, i) => ns.slice(i + 1).forEach(b2 => {
+        const r = a.getBoundingClientRect(), q = b2.getBoundingClientRect();
+        if (r.right > q.left + 1 && r.left < q.right - 1 && r.bottom > q.top + 1 && r.top < q.bottom - 1) {
+          bad.push(`${name}: ${a.textContent}번과 ${b2.textContent}번 배지가 겹침`);
+        }
+      }));
 
       // 번호 배지가 '다른' 부품을 덮지 않는가 (자기 대상과 그 바깥 상자는 괜찮다)
       const targets = [...fig.querySelectorAll('[data-p]')];
