@@ -38,6 +38,7 @@
 
 ```
 index.html          입구 — 화면 지도 · 혼동 쌍 · 목차
+tools/check.js      브라우저 검사 (tools/README.md 참고)
 items/modal.html    항목 카드
 demos/modal.html    ①칸 iframe에 들어가는 실물 예시
 assets/base.css     디자인 토큰과 도감 껍데기
