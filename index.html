@@ -23,7 +23,9 @@
   section.band > .sub { color: var(--fg-muted); max-width: var(--read); margin-bottom: var(--s5); }
 
   /* ── 화면 지도 ── */
-  .maps { display: grid; gap: var(--s8); }
+  /* auto 트랙은 min-content 로 부풀어 700px 목업에 밀린다. 0 으로 내려 스크롤 상자가 제 일을 하게 한다. */
+  .maps { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s8); }
+  .map { min-width: 0; }
   .map > h3 { margin-bottom: 2px; }
   .map > p.cap { font-size: 13.5px; color: var(--fg-muted); margin-bottom: var(--s5); max-width: var(--read); }
 
@@ -77,9 +79,9 @@
   <!-- 화면 지도 -->
   <section class="band" id="map">
     <h2>화면 지도</h2>
-    <p class="sub">진짜 앱처럼 만든 화면입니다. 둘레의 이름표가 각 부분을 가리킵니다 —
-      이름표에 마우스를 올리면 어디를 말하는지 화면에서 밝아집니다.
-      좁은 화면에서는 선 대신 번호로 잇습니다.</p>
+    <p class="sub">진짜 앱처럼 만든 화면입니다. 화면의 번호가 옆 목록의 번호와 이어집니다.
+      <b>어느 쪽을 짚어도 됩니다</b> — 목록의 이름에 올리면 화면에서 그 부분이 밝아지고,
+      화면의 부품에 올리면 목록에서 이름이 밝아집니다.</p>
 
     <div class="maps">
 
@@ -91,15 +93,6 @@
         <div class="mapfig" data-map="pc">
           <svg class="mapfig__lines" aria-hidden="true"></svg>
 
-          <div class="mapfig__col mapfig__col--l">
-            <span class="lbl" data-t="appbar"><span>앱바 · 헤더<em>app bar / header</em></span></span>
-            <span class="lbl" data-t="crumb"><span>브레드크럼<em>breadcrumb</em></span></span>
-            <span class="lbl" data-t="nav"><span>사이드바 내비게이션<em>sidebar nav</em></span></span>
-            <span class="lbl" data-t="stat"><span>스탯 타일<em>stat tile / KPI card</em></span></span>
-            <span class="lbl" data-t="chip"><span>필터 칩<em>filter chip</em></span></span>
-            <span class="lbl" data-t="table"><span>데이터 테이블<em>data table</em></span></span>
-            <span class="lbl" data-t="page"><span>페이지네이션<em>pagination</em></span></span>
-          </div>
 
           <div class="mapfig__screen">
             <div class="appmock appmock--pc" role="img" aria-label="결제 관리자의 거래 내역 화면을 흉내 낸 그림. 둘레 이름표가 각 부분을 가리킨다.">
@@ -178,16 +171,25 @@
 
           <p class="pan-hint">화면을 옆으로 밀면 오른쪽까지 볼 수 있습니다 →  번호는 아래 목록과 이어집니다.</p>
 
-          <div class="mapfig__col mapfig__col--r">
-            <span class="lbl" data-t="search"><span>검색 입력<em>search field</em></span></span>
-            <span class="lbl" data-t="badge"><span>배지<em>badge · 숫자 알림</em></span></span>
-            <span class="lbl" data-t="avatar"><span>아바타<em>avatar</em></span></span>
-            <span class="lbl" data-t="primary"><span>프라이머리 버튼<em>primary button</em></span></span>
-            <span class="lbl" data-t="seg"><span>세그먼티드 컨트롤<em>segmented control</em></span></span>
-            <span class="lbl" data-t="menu"><span>드롭다운 메뉴<em>dropdown menu</em></span></span>
-            <span class="lbl" data-t="sbadge"><span>상태 배지<em>status badge</em></span></span>
-            <span class="lbl" data-t="toast"><span>토스트<em>toast · snackbar</em></span></span>
-          </div>
+          <ol class="mapfig__list">
+            <li><span class="lbl" data-t="appbar"><span>앱바 · 헤더<em>app bar / header</em></span></span></li>
+            <li><span class="lbl" data-t="search"><span>검색 입력<em>search field</em></span></span></li>
+            <li><span class="lbl" data-t="badge"><span>배지<em>badge · 숫자 알림</em></span></span></li>
+            <li><span class="lbl" data-t="avatar"><span>아바타<em>avatar</em></span></span></li>
+            <li><span class="lbl" data-t="nav"><span>사이드바 내비게이션<em>sidebar nav</em></span></span></li>
+            <li><span class="lbl" data-t="crumb"><span>브레드크럼<em>breadcrumb</em></span></span></li>
+            <li><span class="lbl" data-t="primary"><span>프라이머리 버튼<em>primary button</em></span></span></li>
+            <li><span class="lbl" data-t="stat"><span>스탯 타일<em>stat tile / KPI card</em></span></span></li>
+            <li><span class="lbl" data-t="chip"><span>필터 칩<em>filter chip</em></span></span></li>
+            <li><span class="lbl" data-t="seg"><span>세그먼티드 컨트롤<em>segmented control</em></span></span></li>
+            <li><span class="lbl" data-t="menu"><span>드롭다운 메뉴<em>dropdown menu</em></span></span></li>
+            <li><span class="lbl" data-t="table"><span>데이터 테이블<em>data table</em></span></span></li>
+            <li><span class="lbl" data-t="sbadge"><span>상태 배지<em>status badge</em></span></span></li>
+            <li><span class="lbl" data-t="page"><span>페이지네이션<em>pagination</em></span></span></li>
+            <li><span class="lbl" data-t="toast"><span>토스트<em>toast · snackbar</em></span></span></li>
+          </ol>
+
+
         </div>
       </div>
 
@@ -199,13 +201,6 @@
         <div class="mapfig" data-map="ph">
           <svg class="mapfig__lines" aria-hidden="true"></svg>
 
-          <div class="mapfig__col mapfig__col--l">
-            <span class="lbl" data-t="safe"><span>상태바 · 세이프 에어리어<em>status bar / safe area</em></span></span>
-            <span class="lbl" data-t="phbar"><span>앱바 · 백 버튼<em>navigation bar</em></span></span>
-            <span class="lbl" data-t="phsearch"><span>검색 입력<em>search field</em></span></span>
-            <span class="lbl" data-t="phseg"><span>세그먼티드 컨트롤<em>segmented control</em></span></span>
-            <span class="lbl" data-t="phav"><span>아바타<em>avatar</em></span></span>
-          </div>
 
           <div class="mapfig__screen">
             <div class="appmock appmock--ph" role="img" aria-label="같은 서비스의 폰 화면을 흉내 낸 그림. 아래에 바텀시트가 올라와 있다.">
@@ -255,21 +250,28 @@
             </div>
           </div>
 
-          <div class="mapfig__col mapfig__col--r">
-            <span class="lbl" data-t="phrow"><span>리스트 아이템<em>list item · row</em></span></span>
-            <span class="lbl" data-t="fab"><span>FAB<em>floating action button</em></span></span>
-            <a class="lbl lbl--go" data-t="sheet" href="items/modal.html"><span>바텀시트<em>bottom sheet</em><b>모달 항목으로 →</b></span></a>
-            <span class="lbl" data-t="tabs"><span>바텀 탭바<em>tab bar / bottom nav</em></span></span>
-            <span class="lbl" data-t="home"><span>홈 인디케이터<em>home indicator</em></span></span>
-          </div>
+          <ol class="mapfig__list">
+            <li><span class="lbl" data-t="safe"><span>상태바 · 세이프 에어리어<em>status bar / safe area</em></span></span></li>
+            <li><span class="lbl" data-t="phbar"><span>앱바 · 백 버튼<em>navigation bar</em></span></span></li>
+            <li><span class="lbl" data-t="phsearch"><span>검색 입력<em>search field</em></span></span></li>
+            <li><span class="lbl" data-t="phseg"><span>세그먼티드 컨트롤<em>segmented control</em></span></span></li>
+            <li><span class="lbl" data-t="phav"><span>아바타<em>avatar</em></span></span></li>
+            <li><span class="lbl" data-t="phrow"><span>리스트 아이템<em>list item · row</em></span></span></li>
+            <li><span class="lbl" data-t="fab"><span>FAB<em>floating action button</em></span></span></li>
+            <li><a class="lbl lbl--go" data-t="sheet" href="items/modal.html"><span>바텀시트<em>bottom sheet</em><b>모달 항목으로 →</b></span></a></li>
+            <li><span class="lbl" data-t="tabs"><span>바텀 탭바<em>tab bar / bottom nav</em></span></span></li>
+            <li><span class="lbl" data-t="home"><span>홈 인디케이터<em>home indicator</em></span></span></li>
+          </ol>
+
+
         </div>
       </div>
 
     </div>
 
     <p class="map-legend">
-      <span><b>이름표 자체가 답입니다.</b> 한국어 이름과 영어 이름을 같이 적었습니다.</span>
-      <span>테두리가 파란 이름표는 눌러서 그 항목으로 들어갈 수 있습니다.</span>
+      <span><b>목록 자체가 답입니다.</b> 한국어 이름과 영어 이름을 같이 적었습니다.</span>
+      <span>파란 글씨가 붙은 것은 눌러서 그 항목으로 들어갈 수 있습니다.</span>
     </p>
   </section>
 

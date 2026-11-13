@@ -29,33 +29,51 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
       const labels = [...fig.querySelectorAll('.lbl[data-t]')];
       const seen = new Set();
 
-      labels.forEach(lbl => {
+      labels.forEach((lbl, i) => {
         const t = fig.querySelector('[data-p="' + lbl.dataset.t + '"]');
         if (!t) { bad.push(`${name}: 이름표 '${lbl.dataset.t}'가 가리킬 대상이 없음`); return; }
         if (seen.has(lbl.dataset.t)) bad.push(`${name}: data-p="${lbl.dataset.t}" 중복`);
         seen.add(lbl.dataset.t);
         if (!t.getBoundingClientRect().width) bad.push(`${name}: '${lbl.dataset.t}' 대상이 안 보임`);
+        const a = lbl.querySelector('.no'), n = t.querySelector(':scope > .partno');
+        if (!a || !n || a.textContent !== n.textContent || a.textContent !== String(i + 1)) {
+          bad.push(`${name}: ${i + 1}번 이름표와 배지 번호가 안 맞음`);
+        }
+        if (n && getComputedStyle(n).display === 'none') bad.push(`${name}: ${i + 1}번 배지가 안 보임`);
       });
 
-      const gs = [...fig.querySelectorAll('.mapfig__lines g')];
-      if (gs.length !== labels.length) bad.push(`${name}: 지시선 ${gs.length}개 / 이름표 ${labels.length}개`);
+      // 기본 상태에서는 선을 긋지 않는다 — 이게 이번 설계의 요점이다
+      const gs = fig.querySelectorAll('.mapfig__lines g').length;
+      if (gs !== 0) bad.push(`${name}: 짚지도 않았는데 지시선이 ${gs}개 그려져 있음`);
 
-      // 선 끝점이 정말 그 부분에 닿는가
-      const box = fig.querySelector('.mapfig__lines').getBoundingClientRect();
-      gs.forEach((g, i) => {
-        const lbl = labels[i]; if (!lbl) return;
-        const t = fig.querySelector('[data-p="' + lbl.dataset.t + '"]'); if (!t) return;
-        const r = t.getBoundingClientRect();
-        const x = parseFloat(g.querySelector('line').getAttribute('x2')) + box.left;
-        const y = parseFloat(g.querySelector('line').getAttribute('y2')) + box.top;
-        if (x < r.left - 3 || x > r.right + 3 || y < r.top - 3 || y > r.bottom + 3) {
-          bad.push(`${name}: '${lbl.dataset.t}' 지시선 끝이 대상 밖 (${Math.round(x)},${Math.round(y)})`);
-        }
+      // 배지가 잘리지 않는가
+      const sc = fig.querySelector('.mapfig__screen').getBoundingClientRect();
+      fig.querySelectorAll('.partno').forEach(n => {
+        const r = n.getBoundingClientRect();
+        if (r.left < sc.left - 0.5 || r.top < sc.top - 0.5) bad.push(`${name}: ${n.textContent}번 배지가 잘림`);
+      });
+
+      // 번호 배지가 '다른' 부품을 덮지 않는가 (자기 대상과 그 바깥 상자는 괜찮다)
+      const targets = [...fig.querySelectorAll('[data-p]')];
+      fig.querySelectorAll('.partno').forEach(n => {
+        const own = n.parentElement, nr = n.getBoundingClientRect();
+        targets.forEach(t2 => {
+          if (t2 === own || t2.contains(own)) return;
+          const r2 = t2.getBoundingClientRect();
+          // 큰 상자는 빈 곳이 많아 겹쳐도 가리는 게 없다. 작은 조작 부품만 본다.
+          if (r2.height >= 30) return;
+          // 상자가 스치는 것과 내용을 가리는 건 다르다. 그 부품 넓이의 3분의 1을 넘게
+          // 덮을 때만 문제로 본다.
+          const ov = Math.max(0, Math.min(nr.right, r2.right) - Math.max(nr.left, r2.left)) *
+                     Math.max(0, Math.min(nr.bottom, r2.bottom) - Math.max(nr.top, r2.top));
+          if (ov > r2.width * r2.height * 0.35) {
+            bad.push(`${name}: ${n.textContent}번 배지가 '${t2.dataset.p}'를 ${Math.round(ov / (r2.width * r2.height) * 100)}% 덮음`);
+          }
+        });
       });
 
       // 떠 있는 부품이 목업 밖으로 새지 않는가
-      const mock = fig.querySelector('.appmock');
-      const mr = mock.getBoundingClientRect();
+      const mock = fig.querySelector('.appmock'), mr = mock.getBoundingClientRect();
       mock.querySelectorAll('.pc__menu, .pc__toast, .ph__fab, .ph__sheet, .ph__tabs').forEach(el => {
         const r = el.getBoundingClientRect();
         if (r.top < mr.top - 1 || r.bottom > mr.bottom + 1 || r.left < mr.left - 1 || r.right > mr.right + 1) {
@@ -64,7 +82,6 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
       });
     });
 
-    // FAB 가 바텀시트에 가리면 이름을 붙일 수 없다
     const fab = document.querySelector('.ph__fab'), sheet = document.querySelector('.ph__sheet');
     if (fab && sheet && fab.getBoundingClientRect().bottom > sheet.getBoundingClientRect().top) {
       bad.push('폰: FAB가 바텀시트에 가림');
@@ -73,15 +90,41 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   });
   if (mapWide.length) fail.push(...mapWide);
 
-  // 이름표에 마우스를 올리면 해당 부분이 밝아지는가
-  const firstLbl = page.locator('.mapfig[data-map="pc"] .lbl').first();
-  await firstLbl.hover();
-  await page.waitForTimeout(120);
-  const lit = await page.evaluate(() => {
-    const t = document.querySelector('.mapfig[data-map="pc"] [data-p]');
-    return document.querySelectorAll('.mapfig [data-p].is-on').length > 0;
+  // 이름 → 화면: 짚으면 선 하나가 생기고 그 끝이 대상에 닿는가
+  const lbl = page.locator('.mapfig[data-map="pc"] .lbl[data-t="table"]');
+  await lbl.hover();
+  await page.waitForTimeout(150);
+  const hov = await page.evaluate(() => {
+    const fig = document.querySelector('.mapfig[data-map="pc"]');
+    const gs = [...fig.querySelectorAll('.mapfig__lines g')];
+    const t = fig.querySelector('[data-p="table"]');
+    const out = { n: gs.length, lit: t.classList.contains('is-on'), hit: false };
+    if (gs.length === 1) {
+      const box = fig.querySelector('.mapfig__lines').getBoundingClientRect();
+      const r = t.getBoundingClientRect(), ln = gs[0].querySelector('line');
+      const x = parseFloat(ln.getAttribute('x2')) + box.left, y = parseFloat(ln.getAttribute('y2')) + box.top;
+      out.hit = x >= r.left - 3 && x <= r.right + 3 && y >= r.top - 3 && y <= r.bottom + 3;
+    }
+    return out;
   });
-  if (!lit) fail.push('이름표에 올려도 해당 부분이 안 밝아짐');
+  if (hov.n !== 1) fail.push(`이름을 짚었을 때 지시선이 ${hov.n}개 (1 기대)`);
+  if (!hov.lit) fail.push('이름을 짚어도 화면의 부분이 안 밝아짐');
+  if (hov.n === 1 && !hov.hit) fail.push('지시선 끝이 대상 밖에 찍힘');
+
+  // 화면 → 이름: 부품을 짚으면 목록에서 이름이 밝아지는가 (겹친 것은 안쪽이 이긴다)
+  await page.locator('.mapfig[data-map="pc"] [data-p="avatar"]').hover();
+  await page.waitForTimeout(150);
+  const back = await page.evaluate(() => {
+    const on = [...document.querySelectorAll('.mapfig[data-map="pc"] .lbl.is-on')].map(e => e.dataset.t);
+    return on;
+  });
+  if (back.length !== 1 || back[0] !== 'avatar') {
+    fail.push(`부품을 짚었을 때 밝아진 이름이 [${back.join(',')}] (avatar 하나만 기대)`);
+  }
+  await page.mouse.move(2, 2);
+  await page.waitForTimeout(150);
+  const after = await page.evaluate(() => document.querySelectorAll('.mapfig .is-on, .mapfig__lines g').length);
+  if (after !== 0) fail.push('마우스를 치웠는데 강조와 지시선이 남아 있음');
 
   await page.screenshot({ path: '/tmp/uicheck/1-index-pc.png', fullPage: true });
 

@@ -1,94 +1,97 @@
 /* 화면 지도 — 실감나는 가짜 앱 화면에 바깥 이름표를 지시선으로 연결한다.
    넓은 화면: 이름표 두 줄 + SVG 지시선.  좁은 화면: 번호 배지 + 아래 목록. */
 
-.mapfig {
-  position: relative;
-  display: grid;
-  grid-template-columns: 158px minmax(0, 1fr) 158px;
-  gap: var(--s4);
-  align-items: start;
-}
+/* 화면을 위에 크게 두고 번호 목록을 아래에 깐다.
+   좌우로 이름표를 세우면 목록이 세로로 길어져 화면 옆이 텅 빈다.
+   이 짜임은 넓은 화면과 좁은 화면이 열 수만 다르고 같다. */
+.mapfig { position: relative; }
+
+/* 지시선은 기본으로 안 그린다. 짚은 것 하나만 그린다. */
 .mapfig__lines {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   pointer-events: none; z-index: 4;
   overflow: visible;
 }
-.mapfig__lines line { stroke: var(--line-strong); stroke-width: 1; }
-.mapfig__lines circle { fill: var(--line-strong); }
-.mapfig__lines .on line { stroke: var(--accent); stroke-width: 2; }
-.mapfig__lines .on circle { fill: var(--accent); r: 3.5; }
+.mapfig__lines line { stroke: var(--accent); stroke-width: 1.5; }
+.mapfig__lines circle { fill: var(--accent); }
 
-.mapfig__col { display: flex; flex-direction: column; gap: 7px; }
-.mapfig__col--r { text-align: right; }
+.mapfig__screen { overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 16px; }
 
-/* 이름표 */
+.mapfig__list {
+  list-style: none; margin: var(--s3) 0 0; padding: 0;
+  display: grid; gap: 2px;
+  grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
+}
+.mapfig__list > li { min-width: 0; }
+
 .lbl {
-  display: block; text-decoration: none;
-  border: 1px solid var(--line); border-radius: var(--r1);
-  background: var(--surface);
-  padding: 5px 9px;
-  font-size: 12px; font-weight: 700; line-height: 1.35;
-  color: var(--fg);
-  box-shadow: var(--e1);
+  display: flex; align-items: flex-start; gap: 8px;
+  width: 100%;
+  text-decoration: none; color: var(--fg);
+  padding: 5px 8px; border-radius: var(--r1);
+  border: 1px solid transparent;
+  font-size: 12.5px; font-weight: 700; line-height: 1.35;
+}
+.lbl .no {
+  flex: none;
+  width: 18px; height: 18px; border-radius: var(--r-full);
+  background: var(--bg); color: var(--fg-muted);
+  border: 1px solid var(--line-strong);
+  font-size: 10px; font-weight: 800; line-height: 16px; text-align: center;
 }
 .lbl em {
   display: block; font-style: normal; font-weight: 500;
-  font-size: 10.5px; color: var(--fg-muted); letter-spacing: 0;
+  font-size: 10.5px; color: var(--fg-muted);
 }
-.lbl--go { border-color: var(--accent); }
-.lbl--go b { color: var(--accent); font-size: 10.5px; display: block; margin-top: 1px; }
-.lbl.is-on, .lbl:hover { border-color: var(--accent); background: var(--accent-soft); }
+.lbl b { display: block; color: var(--accent); font-size: 10.5px; font-weight: 700; }
+.lbl.is-on, .lbl:hover { background: var(--accent-soft); border-color: var(--accent); }
+.lbl.is-on .no, .lbl:hover .no { background: var(--accent); border-color: var(--accent); color: #fff; }
 .lbl.is-on em, .lbl:hover em { color: var(--accent); }
+.lbl--go { border-color: var(--line-strong); }
 
-/* 가리켜진 부분.
-   번호 배지를 앉히려면 기준 상자가 필요하지만, position 을 여기서 걸면
-   absolute 로 떠 있어야 하는 메뉴·토스트까지 특정도로 눌러 버린다.
-   그래서 static 인 것만 골라 JS 가 건다. */
+/* 화면 위의 번호 배지 — 조용하게 두고, 짚은 것만 파래진다 */
+.mapfig .partno {
+  position: absolute; top: -8px; left: -8px; z-index: 6;
+  display: grid; place-items: center;
+  width: 17px; height: 17px; border-radius: var(--r-full);
+  background: var(--surface); color: var(--fg-muted);
+  border: 1px solid var(--line-strong);
+  font-size: 10px; font-weight: 800; line-height: 1;
+  box-shadow: 0 0 0 2px var(--surface), var(--e1);
+  transition: background .12s, color .12s, transform .12s;
+}
+/* 낮고 작은 부품은 모서리에 붙이면 번호가 그 글자를 덮는다. 옆 바깥으로 뺀다.
+   화면 오른쪽 끝에 붙은 작은 부품(FAB, 아바타)은 왼쪽에도 자리가 없어 오른쪽으로. */
+.mapfig .partno--out   { top: 50%; left: -22px; transform: translateY(-50%); }
+.mapfig .partno--right { top: 50%; left: auto; right: -22px; transform: translateY(-50%); }
+.mapfig [data-p].is-on > .partno {
+  background: var(--accent); color: #fff; border-color: var(--accent);
+  transform: scale(1.15);
+}
+.mapfig [data-p].is-on > .partno--out,
+.mapfig [data-p].is-on > .partno--right { transform: translateY(-50%) scale(1.15); }
 .mapfig [data-p].is-on {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
   border-radius: 4px;
-  z-index: 3;
+  z-index: 5;
 }
 
-/* 좁은 화면용 번호 배지 */
-.mapfig .partno {
-  position: absolute; top: -8px; left: -8px; z-index: 6;
-  display: none; place-items: center;
-  width: 17px; height: 17px; border-radius: var(--r-full);
-  background: var(--accent); color: #fff;
-  font-size: 10px; font-weight: 800; line-height: 1;
-  box-shadow: 0 0 0 2px var(--surface);
-}
-.lbl .no {
-  display: none;
-  width: 17px; height: 17px; border-radius: var(--r-full);
-  background: var(--accent); color: #fff;
-  font-size: 10px; font-weight: 800; line-height: 17px; text-align: center;
-  margin-right: 6px; flex: none;
-}
+/* 목업이 overflow:hidden 이면 가장자리 부품의 번호 배지가 잘린다.
+   그래서 넘침을 열고 모서리는 안쪽 부품이 직접 깎는다. */
+.mapfig .appmock { overflow: visible; }
+.appmock--pc .pc__bar { border-radius: 9px 9px 0 0; }
+.appmock--pc .pc__side { border-radius: 0 0 0 9px; }
+.appmock--ph .ph__status { border-radius: 19px 19px 0 0; }
 
-/* 폰에서 데스크톱 화면은 다 안 들어간다. 줄여서 못 읽게 하느니 옆으로 밀어 보게 한다. */
-.mapfig__screen { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .pan-hint { display: none; font-size: 12px; color: var(--fg-muted); margin: var(--s2) 0 0; }
 
 @media (max-width: 899px) {
-  .mapfig { grid-template-columns: minmax(0, 1fr); gap: var(--s4); }
+  /* 폰에서 데스크톱 화면은 다 안 들어간다. 줄여서 못 읽게 하느니 옆으로 밀어 보게 한다. */
   .appmock--pc { width: 700px; }
   .pan-hint { display: block; }
-  /* 가장자리에 붙은 부분의 번호 배지가 잘리지 않게 — 대신 모서리를 직접 깎아 준다 */
-  .mapfig .appmock { overflow: visible; }
-  .mapfig__screen { padding: 11px; margin: -11px; }   /* 모서리 배지가 잘리지 않을 만큼 */
-  .appmock--pc .pc__bar { border-radius: 9px 9px 0 0; }
-  .appmock--ph .ph__status { border-radius: 19px 19px 0 0; }
-  .mapfig__lines { display: none; }
-  .mapfig__screen { order: -1; }
-  .mapfig__col--r { text-align: left; }
-  .mapfig .partno { display: grid; }
-  .lbl { display: flex; align-items: flex-start; }
-  .lbl .no { display: block; }
-  .lbl span { min-width: 0; }
+  .mapfig__lines { display: none; }   /* 좁은 화면에서는 번호로만 잇는다 */
 }
 
 /* ── 가짜 앱 화면 공통 ───────────────── */
@@ -193,6 +196,7 @@
 }
 .pc__table th .sort { color: var(--accent); }
 .pc__table td { padding: 6px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.pc__table th:nth-child(5), .pc__table td:nth-child(5) { padding-left: 20px; }
 .pc__table tr.sel td { background: var(--accent-soft); }
 .pc__box { width: 11px; height: 11px; border-radius: 3px; border: 1px solid var(--line-strong); display: inline-block; vertical-align: -1px; }
 .pc__box.on { background: var(--accent); border-color: var(--accent); position: relative; }
