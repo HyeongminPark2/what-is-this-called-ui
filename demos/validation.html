@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>입력 검증 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .meter { font-family: var(--mono); font-size: 12px; color: var(--fg-muted); line-height: 1.9; }
+  .meter b { color: var(--accent); }
+  .meter .no { color: var(--danger); font-weight: 700; }
+  .ui-btn--sm { min-height: 36px; padding: 8px 14px; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>입력 검증</b>
+  <label>언제 검사하나
+    <select class="sel" id="when" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+      <option value="blur">칸을 떠날 때 (권장)</option>
+      <option value="input">한 글자마다</option>
+      <option value="submit">제출할 때만</option>
+    </select></label>
+</div>
+
+<div class="pad">
+  <form class="fm" id="fm" novalidate>
+    <div class="fld" data-f="acc">
+      <label for="acc">계좌번호</label>
+      <input class="f" id="acc" inputmode="numeric" aria-describedby="acc-msg" placeholder="- 없이 숫자만">
+      <span class="help" id="acc-msg">숫자만 10~14자리</span>
+    </div>
+    <div class="fld" data-f="email">
+      <label for="email">알림 받을 메일</label>
+      <input class="f" id="email" type="email" aria-describedby="email-msg" placeholder="name@example.com">
+      <span class="help" id="email-msg">정산이 끝나면 여기로 알립니다</span>
+    </div>
+    <div style="display:flex;justify-content:flex-end">
+      <button type="submit" class="ui-btn ui-btn--sm">저장하기</button>
+    </div>
+  </form>
+  <p class="meter" id="log" style="margin-top:var(--s4)" role="status"></p>
+</div>
+
+<p class="hint">
+  <b>언제 검사하느냐</b>가 전부입니다. <b>한 글자마다</b>를 골라 계좌번호를 쳐 보세요 —
+  다 치기도 전에 빨개져서 <b>혼나는 기분</b>이 듭니다. <b>제출할 때만</b>이면 다 쓰고 나서야
+  틀린 걸 알게 됩니다.<br>
+  그래서 기본은 <b>칸을 떠날 때</b>입니다. 한 번 틀린 칸은 그 뒤로 <b>고치는 동안 바로</b> 알려 줘
+  "이제 맞았다"를 즉시 보여 줍니다.<br>
+  메시지는 <b>무엇이 틀렸는지가 아니라 어떻게 고치는지</b>를 적습니다 —
+  '형식이 올바르지 않습니다'가 아니라 <b>'숫자만 10~14자리로 적어 주세요'</b>.<br>
+  제출할 때 틀린 칸이 있으면 <b>첫 번째 틀린 칸으로 포커스</b>를 보냅니다. 에러를 맨 위에만 적어 두면
+  어디를 고쳐야 하는지 찾아 헤매게 됩니다.
+</p>
+
+<script>
+(function () {
+  var fm = document.getElementById('fm'), log = document.getElementById('log');
+  var touched = {}, lines = [];
+
+  var RULES = {
+    acc: function (v) {
+      if (!v) return '계좌번호를 적어 주세요';
+      if (!/^\d+$/.test(v)) return '숫자만 적어 주세요 — 하이픈은 빼고요';
+      if (v.length < 10 || v.length > 14) return '숫자만 10~14자리로 적어 주세요 (지금 ' + v.length + '자리)';
+      return '';
+    },
+    email: function (v) {
+      if (!v) return '';                                   // 선택 항목
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) return 'name@example.com 처럼 적어 주세요';
+      return '';
+    }
+  };
+
+  function note(t, bad) {
+    lines.push(bad ? '<span class="no">' + t + '</span>' : t);
+    if (lines.length > 6) lines.shift();
+    log.innerHTML = lines.join('<br>');
+  }
+
+  function check(name, quiet) {
+    var fld = fm.querySelector('[data-f="' + name + '"]');
+    var input = fld.querySelector('input');
+    var msg = fld.querySelector('[id$="-msg"]');
+    var err = RULES[name](input.value.trim());
+    if (err && !quiet) {
+      fld.classList.add('bad');
+      msg.className = 'err';
+      msg.textContent = err;
+      input.setAttribute('aria-invalid', 'true');
+    } else {
+      fld.classList.remove('bad');
+      msg.className = 'help';
+      msg.textContent = name === 'acc' ? '숫자만 10~14자리' : '정산이 끝나면 여기로 알립니다';
+      input.removeAttribute('aria-invalid');
+    }
+    return err;
+  }
+
+  fm.addEventListener('blur', function (e) {
+    var input = e.target.closest('input'); if (!input) return;
+    touched[input.id] = true;
+    if (document.getElementById('when').value === 'blur') {
+      var err = check(input.id);
+      note('칸을 떠남 — ' + input.id + (err ? ' : ' + err : ' : 통과'), !!err);
+    }
+  }, true);
+
+  fm.addEventListener('input', function (e) {
+    var input = e.target.closest('input'); if (!input) return;
+    var mode = document.getElementById('when').value;
+    // 한 번 틀린 칸은 고치는 동안 바로 알려 준다
+    if (mode === 'input' || (mode === 'blur' && touched[input.id])) check(input.id);
+  });
+
+  fm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var bad = null;
+    ['acc', 'email'].forEach(function (n) { var err = check(n); if (err && !bad) bad = n; });
+    if (bad) {
+      fm.querySelector('#' + bad).focus();     // 첫 번째 틀린 칸으로 보낸다
+      note('제출 막힘 — 첫 번째 틀린 칸(' + bad + ')으로 포커스를 보냄', true);
+    } else {
+      note('저장했습니다');
+    }
+  });
+
+  document.getElementById('when').addEventListener('change', function () {
+    touched = {}; lines = [];
+    ['acc', 'email'].forEach(function (n) { check(n, true); });
+    log.textContent = '검사 시점을 바꿨습니다.';
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>폼 설계 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .meter { font-family: var(--mono); font-size: 12px; color: var(--fg-muted); margin-top: var(--s3); }
+  .meter b { color: var(--accent); }
+  .flat fieldset { border: 0; padding: 0; }
+  .flat legend { display: none; }
+  .flat .row2 { grid-template-columns: 1fr; }
+  .ui-btn--sm { min-height: 36px; padding: 8px 14px; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>폼 설계</b>
+  <label><input type="checkbox" id="flat"> 묶지 않고 한 줄로 늘어놓기</label>
+  <label><input type="checkbox" id="opt"> 선택 항목까지 다 받기</label>
+</div>
+
+<div class="pad">
+  <form class="fm" id="fm" novalidate>
+    <fieldset>
+      <legend>정산 계좌</legend>
+      <div class="fld">
+        <label for="bank">은행</label>
+        <select class="sel" id="bank"><option>모란은행</option><option>한빛은행</option></select>
+      </div>
+      <div class="fld">
+        <label for="acc">계좌번호</label>
+        <input class="f" id="acc" inputmode="numeric" aria-describedby="acc-help" placeholder="- 없이 숫자만">
+        <span class="help" id="acc-help">숫자만 10~14자리</span>
+      </div>
+      <div class="fld">
+        <label for="owner">예금주</label>
+        <input class="f" id="owner" autocomplete="name">
+      </div>
+    </fieldset>
+
+    <fieldset id="optional" hidden>
+      <legend>선택 — 안 써도 됩니다</legend>
+      <div class="row2">
+        <div class="fld"><label for="memo">메모</label><input class="f" id="memo"></div>
+        <div class="fld"><label for="ref">참조 번호</label><input class="f" id="ref"></div>
+      </div>
+    </fieldset>
+
+    <div style="display:flex;gap:var(--s2);justify-content:flex-end">
+      <button type="button" class="ui-btn ui-btn--ghost ui-btn--sm" id="reset">지우기</button>
+      <button type="submit" class="ui-btn ui-btn--sm">저장하기</button>
+    </div>
+  </form>
+  <p class="meter" id="meter"></p>
+</div>
+
+<p class="hint">
+  폼은 <b>묻는 순서와 묶음</b>이 절반입니다. 비슷한 것끼리 <code>&lt;fieldset&gt;</code>으로 묶으면
+  스크린 리더도 '정산 계좌 묶음'이라고 읽어 줍니다 — <b>묶지 않고 늘어놓기</b>를 켜 보면
+  같은 칸인데 훨씬 길고 막막해 보입니다.<br>
+  <b>꼭 필요한 것만 먼저</b> 묻습니다. '선택 항목까지 다 받기'를 켜면 칸이 늘어나는데,
+  <b>칸 하나가 늘 때마다 완료율이 떨어집니다</b> — 나중에 물어도 되는 것은 나중에 묻습니다.<br>
+  라벨은 <b>칸 위에</b> 둡니다(모바일에서 옆에 두면 자리가 모자랍니다).
+  힌트는 <code>aria-describedby</code>로 <b>따로</b> 달아 자리글을 대신하지 않게 합니다.<br>
+  아래 숫자는 <b>칸 수와 필수 칸 수</b>입니다. 폼 설계의 첫 질문은 늘 "이거 꼭 받아야 하나요"입니다.
+</p>
+
+<script>
+(function () {
+  var fm = document.getElementById('fm'), meter = document.getElementById('meter');
+
+  function count() {
+    var fields = fm.querySelectorAll('input:not([type=hidden]), select, textarea');
+    var visible = [].filter.call(fields, function (f) { return f.offsetParent !== null; });
+    var groups = [].filter.call(fm.querySelectorAll('fieldset'), function (f) { return !f.hidden; }).length;
+    meter.innerHTML = '보이는 칸 <b>' + visible.length + '</b>개 · 묶음 <b>' + groups +
+      '</b>개 · 필수 <b>3</b>개' +
+      (visible.length > 3 ? ' <span style="color:var(--warn);font-weight:700">— 칸이 늘수록 완료율이 떨어집니다</span>' : '');
+  }
+
+  document.getElementById('flat').addEventListener('change', function () {
+    fm.classList.toggle('flat', this.checked);
+    count();
+  });
+  document.getElementById('opt').addEventListener('change', function () {
+    document.getElementById('optional').hidden = !this.checked;
+    count();
+  });
+  document.getElementById('reset').addEventListener('click', function () { fm.reset(); count(); });
+  fm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    meter.innerHTML = '제출했습니다 — <b>검증은 다음 항목</b>에서 다룹니다';
+  });
+  count();
+})();
+</script>
+</body>
+</html>

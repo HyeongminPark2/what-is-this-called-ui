@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>일괄 선택 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--bg); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); background: var(--surface); }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s3); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); background: var(--surface); }
+  .log { font-family: var(--mono); font-size: 12px; color: var(--fg-muted); }
+  .log b { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="bar"><b>일괄 선택</b><span style="font-size:13px;color:var(--fg-muted)">머리글 체크박스를 눌러 보세요</span></div>
+
+<div class="pad">
+  <div class="dt-wrap">
+    <div class="bulk-bar" id="bulkbar" hidden>
+      <span id="count"></span>
+      <span id="allhint" style="font-weight:400"></span>
+      <span style="margin-left:auto;display:flex;gap:6px">
+        <button class="ui-btn ui-btn--ghost" id="approve">승인</button>
+        <button class="ui-btn ui-btn--ghost" id="cancel">선택 해제</button>
+      </span>
+    </div>
+    <div class="dt-scroll">
+      <table class="dt">
+        <thead><tr>
+          <th style="width:36px"><input type="checkbox" id="all" aria-label="이 쪽 전체 선택"></th>
+          <th>가맹점</th><th class="num">매출</th><th>상태</th>
+        </tr></thead>
+        <tbody id="body"></tbody>
+      </table>
+    </div>
+    <div class="dt-foot"><span id="page"></span></div>
+  </div>
+  <p class="log" id="log">아직 고른 것이 없습니다.</p>
+</div>
+
+<p class="hint">
+  표에서 여럿을 골라 한꺼번에 처리하는 화면입니다. 여기서 늘 걸리는 것이
+  <b>'전체 선택'이 무엇의 전체인가</b>입니다 — <b>이 쪽의 5건</b>인가, <b>조건에 맞는 전체 128건</b>인가.<br>
+  머리글 체크박스를 눌러 보세요. 이 쪽이 다 골라지면 <b>"조건에 맞는 128건 모두 고르기"</b>가
+  따로 나옵니다. 이 한 줄이 없으면 사용자는 쪽을 넘겨 가며 수동으로 고릅니다.<br>
+  일부만 골랐을 때 머리글 체크박스는 <b>중간 상태</b>(indeterminate)여야 합니다 —
+  체크도 해제도 아닌 줄표 모양입니다.<br>
+  선택 막대는 <b>고른 개수</b>와 <b>할 수 있는 일</b>을 보여 줍니다. 되돌릴 수 없는 일은
+  개수를 확인시키고 물어봅니다 — "128건을 승인할까요?"
+</p>
+
+<script>
+(function () {
+  var ROWS = [
+    { n: '모란상회', a: 1284000, s: '검토 중' },
+    { n: '한빛아웃도어', a: 9827500, s: '검토 중' },
+    { n: '새벽상사', a: 11100, s: '검토 중' },
+    { n: '가온마켓', a: 7777777, s: '검토 중' },
+    { n: '들꽃식품', a: 412000, s: '검토 중' }
+  ];
+  var TOTAL = 128;
+  var picked = new Set(), allMatching = false;
+  var body = document.getElementById('body'), all = document.getElementById('all');
+  var bar = document.getElementById('bulkbar'), log = document.getElementById('log');
+
+  function draw() {
+    body.innerHTML = ROWS.map(function (r, i) {
+      var on = picked.has(i);
+      return '<tr class="' + (on ? 'is-sel' : '') + '">' +
+        '<td><input type="checkbox" data-i="' + i + '"' + (on ? ' checked' : '') +
+        ' aria-label="' + r.n + ' 고르기"></td>' +
+        '<td>' + r.n + '</td><td class="num">' + r.a.toLocaleString('ko-KR') + '</td><td>' + r.s + '</td></tr>';
+    }).join('');
+
+    var n = picked.size;
+    all.checked = n === ROWS.length;
+    all.indeterminate = n > 0 && n < ROWS.length;   // 일부만 고른 상태
+
+    bar.hidden = n === 0;
+    document.getElementById('count').textContent =
+      allMatching ? '조건에 맞는 ' + TOTAL + '건을 모두 골랐습니다' : n + '건 선택됨';
+    document.getElementById('allhint').innerHTML =
+      (n === ROWS.length && !allMatching)
+        ? '· <a href="#" id="pickall">조건에 맞는 ' + TOTAL + '건 모두 고르기</a>'
+        : (allMatching ? '· <a href="#" id="pickpage">이 쪽 ' + ROWS.length + '건만 고르기</a>' : '');
+
+    document.getElementById('page').textContent =
+      '이 쪽 ' + ROWS.length + '건 · 조건에 맞는 것 모두 ' + TOTAL + '건';
+
+    log.innerHTML = n === 0 ? '아직 고른 것이 없습니다.'
+      : '고른 것 <b>' + (allMatching ? TOTAL : n) + '</b>건 · 범위 <b>' +
+        (allMatching ? '조건 전체' : '이 쪽') + '</b>';
+  }
+
+  body.addEventListener('change', function (e) {
+    var cb = e.target.closest('[data-i]'); if (!cb) return;
+    var i = +cb.dataset.i;
+    if (cb.checked) picked.add(i); else picked.delete(i);
+    allMatching = false;
+    draw();
+  });
+  all.addEventListener('change', function () {
+    picked = new Set(this.checked ? ROWS.map(function (_, i) { return i; }) : []);
+    allMatching = false;
+    draw();
+  });
+  document.addEventListener('click', function (e) {
+    if (e.target.id === 'pickall') { e.preventDefault(); allMatching = true; draw(); }
+    if (e.target.id === 'pickpage') { e.preventDefault(); allMatching = false; draw(); }
+  });
+  document.getElementById('cancel').addEventListener('click', function () {
+    picked = new Set(); allMatching = false; draw();
+  });
+  document.getElementById('approve').addEventListener('click', function () {
+    log.innerHTML = '<b>' + (allMatching ? TOTAL : picked.size) + '건을 승인할까요?</b> — 되돌릴 수 없으면 먼저 물어본다';
+  });
+  draw();
+})();
+</script>
+</body>
+</html>

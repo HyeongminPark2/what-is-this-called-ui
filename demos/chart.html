@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>차트 고르기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .q { font-size: 13.5px; }
+  .q b { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>차트 고르기</b>
+  <label>무엇을 보려고 하나
+    <select class="sel" id="q" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+      <option value="compare">항목끼리 비교</option>
+      <option value="trend">시간에 따른 변화</option>
+      <option value="part">전체 중의 비중</option>
+      <option value="rel">두 값의 관계</option>
+    </select></label>
+</div>
+
+<div class="pad">
+  <p class="q" id="qline"></p>
+  <div class="ch-grid" id="grid"></div>
+</div>
+
+<p class="hint">
+  차트는 <b>예뻐서 고르는 것이 아니라 질문에 따라</b> 고릅니다. 위에서 질문을 바꾸면
+  <b>맞는 것과 안 맞는 것</b>이 갈립니다.<br>
+  <b>항목끼리 비교</b>는 막대, <b>시간에 따른 변화</b>는 꺾은선, <b>두 값의 관계</b>는 산점도입니다.
+  <b>전체 중의 비중</b>만 애매한데, 원그래프는 <b>조각이 서넛일 때만</b> 읽히고 그 이상이면
+  <b>가로 막대</b>가 거의 늘 낫습니다.<br>
+  막대는 <b>0에서 시작해야</b> 합니다. 중간부터 그리면 작은 차이가 몇 배로 보입니다 —
+  꺾은선은 0에서 시작하지 않아도 됩니다(변화를 보는 것이므로).<br>
+  <b>숫자가 다섯 개 이하면 차트보다 표</b>가 낫습니다. 정확한 값이 바로 보이니까요.
+</p>
+
+<script>
+(function () {
+  var DATA = [62, 48, 71, 35, 90, 55, 80];
+  var LABELS = ['월', '화', '수', '목', '금', '토', '일'];
+
+  function bars(mute) {
+    var w = 100 / DATA.length;
+    return DATA.map(function (v, i) {
+      var h = v / 100 * 60;
+      return '<rect class="bar' + (mute && i !== 4 ? ' mute' : '') + '" x="' + (i * w + 1.5) + '" y="' + (64 - h) +
+             '" width="' + (w - 3) + '" height="' + h + '" rx="1"/>';
+    }).join('') + '<line class="axis" x1="0" y1="64" x2="100" y2="64"/>';
+  }
+  function line(area) {
+    var pts = DATA.map(function (v, i) {
+      return (i / (DATA.length - 1) * 100).toFixed(1) + ',' + (64 - v / 100 * 60).toFixed(1);
+    });
+    return (area ? '<polygon class="area" points="0,64 ' + pts.join(' ') + ' 100,64"/>' : '') +
+      '<polyline class="lineplot" points="' + pts.join(' ') + '"/>' +
+      '<line class="axis" x1="0" y1="64" x2="100" y2="64"/>';
+  }
+  function pie(n) {
+    var vals = DATA.slice(0, n), sum = vals.reduce(function (a, b) { return a + b; }, 0);
+    var a0 = -Math.PI / 2, out = '';
+    vals.forEach(function (v, i) {
+      var a1 = a0 + v / sum * Math.PI * 2;
+      var x0 = 50 + 28 * Math.cos(a0), y0 = 32 + 28 * Math.sin(a0);
+      var x1 = 50 + 28 * Math.cos(a1), y1 = 32 + 28 * Math.sin(a1);
+      var big = (a1 - a0) > Math.PI ? 1 : 0;
+      out += '<path d="M50,32 L' + x0.toFixed(1) + ',' + y0.toFixed(1) + ' A28,28 0 ' + big + ' 1 ' +
+             x1.toFixed(1) + ',' + y1.toFixed(1) + ' Z" fill="color-mix(in srgb, var(--accent) ' + (90 - i * 13) + '%, white)"/>';
+      a0 = a1;
+    });
+    return out;
+  }
+  function scatter() {
+    return DATA.map(function (v, i) {
+      return '<circle class="dot" cx="' + (10 + i * 13) + '" cy="' + (64 - v / 100 * 55) + '" r="3"/>';
+    }).join('') + '<line class="axis" x1="0" y1="64" x2="100" y2="64"/><line class="axis" x1="2" y1="0" x2="2" y2="64"/>';
+  }
+  function hbar() {
+    return DATA.slice(0, 5).map(function (v, i) {
+      return '<rect class="bar" x="0" y="' + (i * 13 + 2) + '" width="' + (v * 0.95) + '" height="9" rx="1"/>';
+    }).join('');
+  }
+
+  var CHARTS = {
+    compare: [
+      ['막대', bars(), '항목끼리 길이를 바로 견준다', true],
+      ['가로 막대', hbar(), '이름이 길면 가로가 낫다', true],
+      ['꺾은선', line(false), '항목 사이에 순서가 없으면 이어선 안 된다', false],
+      ['원그래프', pie(7), '조각이 많으면 크기를 못 견준다', false]
+    ],
+    trend: [
+      ['꺾은선', line(false), '시간 흐름은 이어서 본다', true],
+      ['영역', line(true), '누적이나 크기를 함께 볼 때', true],
+      ['막대', bars(), '시점이 적으면 막대도 괜찮다', true],
+      ['원그래프', pie(7), '시간을 아예 표현할 수 없다', false]
+    ],
+    part: [
+      ['가로 막대', hbar(), '조각이 넷을 넘으면 거의 늘 이게 낫다', true],
+      ['원그래프', pie(3), '조각이 서넛일 때만', true],
+      ['원그래프 (7조각)', pie(7), '조각이 많아 크기를 못 견준다', false],
+      ['꺾은선', line(false), '비중을 보여 주지 못한다', false]
+    ],
+    rel: [
+      ['산점도', scatter(), '두 값의 관계를 점으로 본다', true],
+      ['꺾은선', line(false), '점들을 이으면 없는 순서를 만든다', false],
+      ['막대', bars(), '관계가 아니라 크기만 보인다', false],
+      ['원그래프', pie(7), '관계와 아무 상관이 없다', false]
+    ]
+  };
+
+  var QLINE = {
+    compare: '가맹점 다섯 곳의 <b>매출을 견주고</b> 싶다',
+    trend: '이번 주 <b>매출이 어떻게 변했는지</b> 보고 싶다',
+    part: '전체 매출에서 <b>각 가맹점이 차지하는 비중</b>을 보고 싶다',
+    rel: '<b>광고비와 매출에 관계가 있는지</b> 보고 싶다'
+  };
+
+  function draw() {
+    var q = document.getElementById('q').value;
+    document.getElementById('qline').innerHTML = '질문 — ' + QLINE[q];
+    document.getElementById('grid').innerHTML = CHARTS[q].map(function (c) {
+      var keepRatio = c[0].indexOf('원그래프') === 0;
+      return '<div class="ch' + (c[3] ? '' : ' is-bad') + '"><h4>' + c[0] + '</h4>' +
+        '<svg viewBox="0 0 100 64" preserveAspectRatio="' + (keepRatio ? 'xMidYMid meet' : 'none') + '" aria-hidden="true">' + c[1] + '</svg>' +
+        '<span class="why">' + c[2] + '</span></div>';
+    }).join('');
+  }
+  document.getElementById('q').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

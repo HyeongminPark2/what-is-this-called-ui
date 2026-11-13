@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>가상 스크롤 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s3); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .no { color: var(--danger); font-weight: 700; }
+  .ok { color: #1f8a4c; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>가상 스크롤</b>
+  <label><input type="checkbox" id="off"> 끄고 전부 그리기</label>
+  <label>건수 <input type="range" id="n" class="sld" min="100" max="20000" step="100" value="10000" style="width:130px"><output id="no">10,000</output></label>
+</div>
+
+<div class="pad">
+  <div class="vs" id="vs"><div class="vs__sizer" id="sizer"></div></div>
+  <p class="vs-meter" id="meter"></p>
+</div>
+
+<p class="hint">
+  <b>가상 스크롤</b>은 <b>보이는 줄만 그리는</b> 방법입니다. 1만 줄을 다 만들면 브라우저가 1만 개의
+  요소를 들고 있어야 하지만, 보이는 것은 어차피 <b>열 줄 남짓</b>입니다.<br>
+  <b>끄고 전부 그리기</b>를 켜고 건수를 올려 보세요 — <b>만드는 데 걸린 시간</b>과 <b>지금 떠 있는 요소 수</b>가
+  재서 나옵니다. 1만 건쯤부터 눈에 띄게 느려집니다.<br>
+  가능한 이유는 <b>줄 높이가 일정</b>해서입니다. 높이가 제각각이면 '지금 몇 번째 줄이 보이는지'를
+  계산할 수 없습니다 — 그래서 목록에서 <a href="truncate.html">말줄임</a>을 쓰고 줄 높이를 못 박는 것입니다.<br>
+  대신 <b>Ctrl+F 로 못 찾고</b>, 스크린 리더가 전체 개수를 모르고, 인쇄하면 보이는 줄만 나옵니다 —
+  그래서 <b>정말 길 때만</b> 씁니다.
+</p>
+
+<script>
+(function () {
+  var ROW_H = 36, BUF = 4;
+  var vs = document.getElementById('vs'), sizer = document.getElementById('sizer');
+  var meter = document.getElementById('meter');
+  var total = 10000, lastMs = 0;
+
+  function label(i) {
+    return '정산 요청 #' + (10000 - i) + ' · ₩' + ((i * 7919) % 9000000 + 10000).toLocaleString('ko-KR');
+  }
+
+  function render() {
+    var off = document.getElementById('off').checked;
+    var t0 = performance.now();
+    sizer.style.height = (total * ROW_H) + 'px';
+
+    if (off) {
+      var html = '';
+      for (var i = 0; i < total; i++) {
+        html += '<div class="vs__row" style="top:' + (i * ROW_H) + 'px;height:' + ROW_H + 'px">' +
+          '<span class="i">' + (i + 1) + '</span>' + label(i) + '</div>';
+      }
+      sizer.innerHTML = html;
+    } else {
+      var start = Math.max(0, Math.floor(vs.scrollTop / ROW_H) - BUF);
+      var end = Math.min(total, Math.ceil((vs.scrollTop + vs.clientHeight) / ROW_H) + BUF);
+      var out = '';
+      for (var j = start; j < end; j++) {
+        out += '<div class="vs__row" style="top:' + (j * ROW_H) + 'px;height:' + ROW_H + 'px">' +
+          '<span class="i">' + (j + 1) + '</span>' + label(j) + '</div>';
+      }
+      sizer.innerHTML = out;
+    }
+    lastMs = performance.now() - t0;
+    report();
+  }
+
+  function report() {
+    var n = sizer.children.length;
+    meter.innerHTML = '모두 <b>' + total.toLocaleString('ko-KR') + '</b>건 · 지금 떠 있는 요소 <b>' + n + '</b>개 · ' +
+      '그리는 데 <b>' + lastMs.toFixed(1) + 'ms</b> ' +
+      (n > 200 ? '<span class="no">— 요소가 너무 많습니다</span>' : '<span class="ok">— 가볍습니다</span>');
+  }
+
+  vs.addEventListener('scroll', function () {
+    if (!document.getElementById('off').checked) render();
+  });
+  document.getElementById('off').addEventListener('change', function () { vs.scrollTop = 0; render(); });
+  document.getElementById('n').addEventListener('input', function () {
+    total = +this.value;
+    document.getElementById('no').textContent = total.toLocaleString('ko-KR');
+    vs.scrollTop = 0; render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

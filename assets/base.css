@@ -66,6 +66,9 @@
 }
 
 * { box-sizing: border-box; }
+/* display 를 주는 클래스가 [hidden] 을 이겨서 '숨겼는데 안 숨는' 사고가 세 번 났다.
+   (.bdg 는 inline-flex, .bulk-bar 는 flex) — 한 줄로 막아 둔다. */
+[hidden] { display: none !important; }
 
 html { -webkit-text-size-adjust: 100%; }
 

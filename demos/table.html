@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>데이터 테이블 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--bg); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); background: var(--surface); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); background: var(--surface); }
+  .wrapmode .dt th, .wrapmode .dt td { white-space: normal; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>데이터 테이블</b>
+  <label><input type="checkbox" id="stick" checked> 첫 열 고정</label>
+  <label><input type="checkbox" id="wrap"> 줄바꿈 허용</label>
+  <span style="font-size:13px;color:var(--fg-muted)">열 이름을 눌러 정렬</span>
+</div>
+
+<div class="pad">
+  <div class="dt-wrap" id="wrapper">
+    <div class="dt-scroll" style="max-height:260px">
+      <table class="dt" id="tbl">
+        <thead><tr id="head"></tr></thead>
+        <tbody id="body"></tbody>
+      </table>
+    </div>
+    <div class="dt-foot">
+      <span id="meta"></span>
+      <span style="margin-left:auto" class="vs-meter" id="url"></span>
+    </div>
+  </div>
+</div>
+
+<p class="hint">
+  표의 일은 <b>여러 값을 세로로 견주는 것</b>입니다. 그래서 줄 높이가 일정해야 하고,
+  숫자는 오른쪽에 자릿수를 맞춰야 합니다 — <b>줄바꿈 허용</b>을 켜 보면 둘 다 깨집니다.<br>
+  열 이름을 누르면 정렬됩니다. 지금 <b>무엇으로 어느 방향</b>인지가 화살표로 보이고
+  <code>aria-sort</code>로도 적힙니다 — 눌러서 바뀌었는데 표시가 없으면 뭘 눌렀는지 알 수 없습니다.<br>
+  <b>첫 열 고정</b>을 끄고 가로로 밀어 보세요. 열이 많아지면 <b>지금 보는 줄이 누구 것인지</b>
+  알 수 없게 됩니다. 그래서 이름 열은 보통 왼쪽에 붙여 둡니다.<br>
+  정렬 상태는 <b>주소에 담습니다</b>(아래 오른쪽). 안 담으면 새로고침·공유에서 날아갑니다.
+</p>
+
+<script>
+(function () {
+  var COLS = [
+    { k: 'name', t: '가맹점', num: false },
+    { k: 'date', t: '기간', num: false },
+    { k: 'amount', t: '매출', num: true },
+    { k: 'fee', t: '수수료', num: true },
+    { k: 'status', t: '상태', num: false }
+  ];
+  var ROWS = [
+    { name: '모란상회', date: '11월 1일 ~ 7일', amount: 1284000, fee: 38520, status: '검토 중' },
+    { name: '한빛아웃도어', date: '11월 1일 ~ 7일', amount: 9827500, fee: 294825, status: '승인됨' },
+    { name: '새벽상사', date: '10월 25일 ~ 31일', amount: 11100, fee: 333, status: '거절됨' },
+    { name: '가온마켓', date: '10월 25일 ~ 31일', amount: 7777777, fee: 233333, status: '승인됨' },
+    { name: '들꽃식품', date: '10월 18일 ~ 24일', amount: 412000, fee: 12360, status: '검토 중' }
+  ];
+  var sort = { k: 'amount', dir: 'desc' };
+
+  function fmt(v) { return typeof v === 'number' ? v.toLocaleString('ko-KR') : v; }
+
+  function draw() {
+    document.getElementById('wrapper').classList.toggle('wrapmode', document.getElementById('wrap').checked);
+    var stick = document.getElementById('stick').checked;
+
+    document.getElementById('head').innerHTML = COLS.map(function (c, i) {
+      var on = sort.k === c.k;
+      var aria = on ? (sort.dir === 'asc' ? 'ascending' : 'descending') : 'none';
+      return '<th class="' + (c.num ? 'num ' : '') + (i === 0 && stick ? 'sticky-l' : '') + '" aria-sort="' + aria + '">' +
+        '<button class="sortbtn" data-k="' + c.k + '">' + c.t +
+        '<span class="arrow' + (on ? '' : ' off') + '">' + (on && sort.dir === 'asc' ? '▲' : '▼') + '</span></button></th>';
+    }).join('');
+
+    var rows = ROWS.slice().sort(function (a, b) {
+      var x = a[sort.k], y = b[sort.k];
+      var r = typeof x === 'number' ? x - y : String(x).localeCompare(String(y), 'ko');
+      return sort.dir === 'asc' ? r : -r;
+    });
+
+    document.getElementById('body').innerHTML = rows.map(function (r) {
+      return '<tr>' + COLS.map(function (c, i) {
+        return '<td class="' + (c.num ? 'num ' : '') + (i === 0 && stick ? 'sticky-l' : '') + '">' + fmt(r[c.k]) + '</td>';
+      }).join('') + '</tr>';
+    }).join('');
+
+    document.getElementById('meta').textContent = '모두 ' + ROWS.length + '건';
+    document.getElementById('url').innerHTML = '?sort=<b>' + sort.k + '</b>&dir=<b>' + sort.dir + '</b>';
+  }
+
+  document.getElementById('head').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-k]'); if (!b) return;
+    if (sort.k === b.dataset.k) sort.dir = sort.dir === 'asc' ? 'desc' : 'asc';
+    else { sort.k = b.dataset.k; sort.dir = 'desc'; }
+    draw();
+  });
+  ['stick', 'wrap'].forEach(function (id) { document.getElementById(id).addEventListener('change', draw); });
+  draw();
+})();
+</script>
+</body>
+</html>

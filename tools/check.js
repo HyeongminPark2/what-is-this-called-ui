@@ -217,6 +217,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     '4부': ['field', 'select', 'combobox', 'checkbox', 'radio', 'switch', 'segmented', 'slider'],
     '7부': ['appbar', 'sidebar', 'tabs', 'breadcrumb', 'pagination', 'infinite', 'bottomnav'],
     '8부': ['spinner', 'skeleton', 'progress', 'optimistic', 'empty', 'error'],
+    '10부': ['table', 'filter', 'search', 'form', 'validation', 'bulk', 'virtual', 'chart'],
   };
   const ITEMS = Object.values(PARTS).flat();
   const partOf = s => Object.keys(PARTS).find(k => PARTS[k].includes(s));
@@ -1208,6 +1209,132 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   await page.locator('#div').check(); await page.waitForTimeout(180);
   if (!(await page.textContent('#tree')).includes('구역이 하나도 없습니다'))
     fail.push('시맨틱: div 로 바꿔도 목록이 남아 있다 (보여주려는 결과)');
+  await page.close();
+
+  // 10부 데이터 다루는 화면 데모 여덟 장
+  // 데이터 테이블 — 정렬·고정 열·줄바꿈
+  page = await demo('table', 900, 820);
+  if (await page.locator('.dt tbody tr').count() !== 5) fail.push('테이블: 줄이 다섯이 아니다');
+  if (await page.getAttribute('.dt th:nth-child(3)', 'aria-sort') !== 'descending')
+    fail.push('테이블: 처음 정렬 상태가 aria-sort 로 안 적힌다');
+  if (!(await page.textContent('.dt tbody tr:first-child td:first-child')).includes('한빛'))
+    fail.push('테이블: 매출 큰 곳이 맨 위가 아니다');
+  await page.locator('.sortbtn[data-k=amount]').click(); await page.waitForTimeout(150);
+  if (await page.getAttribute('.dt th:nth-child(3)', 'aria-sort') !== 'ascending')
+    fail.push('테이블: 다시 눌러도 방향이 안 바뀐다');
+  if (!(await page.textContent('#url')).includes('amount')) fail.push('테이블: 정렬이 주소에 안 담긴다');
+  if (await page.$eval('.dt tbody td:first-child', e => getComputedStyle(e).position) !== 'sticky')
+    fail.push('테이블: 첫 열이 안 고정된다');
+  await page.uncheck('#stick'); await page.waitForTimeout(150);
+  if (await page.$eval('.dt tbody td:first-child', e => getComputedStyle(e).position) !== 'static')
+    fail.push('테이블: 고정을 꺼도 그대로다');
+  await page.check('#wrap'); await page.waitForTimeout(150);
+  if (await page.$eval('.dt tbody td', e => getComputedStyle(e).whiteSpace) !== 'normal')
+    fail.push('테이블: 줄바꿈 허용이 안 먹는다 (보여주려는 결과)');
+  await page.close();
+
+  // 필터 — 같은 갈래는 OR, 다른 갈래는 AND
+  page = await demo('filter', 900, 820);
+  if (await page.locator('.res .r').count() !== 6) fail.push('필터: 조건이 없는데 전부가 아니다');
+  await page.locator('#f-status input[value=ok]').check(); await page.waitForTimeout(180);
+  if (await page.locator('.res .r').count() !== 3) fail.push('필터: 승인됨 셋이 아니다');
+  if (!(await page.textContent('#url')).includes('status=ok')) fail.push('필터: 조건이 주소에 안 담긴다');
+  if (await page.locator('#chips .chip').count() !== 1) fail.push('필터: 켠 조건이 칩으로 안 모인다');
+  await page.locator('#f-status input[value=wait]').check(); await page.waitForTimeout(180);
+  if (await page.locator('.res .r').count() !== 5) fail.push('필터: 같은 갈래가 OR 로 안 더해진다');
+  await page.locator('#f-week input[value=w45]').check(); await page.waitForTimeout(180);
+  if (await page.locator('.res .r').count() !== 2) fail.push('필터: 다른 갈래가 AND 로 안 좁혀진다');
+  await page.locator('#chips .chip').first().click(); await page.waitForTimeout(180);
+  if (await page.locator('#chips .chip').count() !== 2) fail.push('필터: 칩을 눌러도 조건이 안 떨어진다');
+  await page.close();
+
+  // 검색 — 디바운스와 늦게 온 응답 버리기
+  page = await demo('search', 900, 820);
+  await page.fill('#q', '모란'); await page.waitForTimeout(700);
+  if (!(await page.locator('#list li').count() >= 2)) fail.push('검색: 결과가 안 뜬다');
+  if (!(await page.locator('#list mark').count() > 0)) fail.push('검색: 찾은 글자가 강조되지 않는다');
+  if (await page.getAttribute('#q', 'aria-expanded') !== 'true') fail.push('검색: 열렸다고 안 알린다');
+  const sent1 = +((await page.textContent('#meter')).match(/보낸 요청 (\d+)/) || [0, 0])[1];
+  if (sent1 !== 1) fail.push('검색: 디바운스가 켜졌는데 ' + sent1 + '번 보냈다');
+  await page.uncheck('#debounce');
+  await page.fill('#q', ''); await page.type('#q', '모란', { delay: 40 }); await page.waitForTimeout(900);
+  const sent2 = +((await page.textContent('#meter')).match(/보낸 요청 (\d+)/) || [0, 0])[1];
+  if (!(sent2 >= 2)) fail.push('검색: 디바운스를 꺼도 한 번만 보낸다 (보여주려는 결과)');
+  if (!(await page.textContent('#meter')).includes('버린 응답')) fail.push('검색: 늦은 응답을 안 센다');
+  await page.fill('#q', 'zzz'); await page.waitForTimeout(700);
+  if (!(await page.textContent('#empty')).includes('없습니다')) fail.push('검색: 빈 결과 안내가 없다');
+  await page.close();
+
+  // 폼 — 묶으면 짧아 보이고, 칸이 늘면 완료율이 떨어진다
+  page = await demo('form', 900, 820);
+  if (await page.locator('.fm fieldset:not([hidden])').count() !== 1) fail.push('폼: 처음에 묶음이 하나가 아니다');
+  await page.check('#opt'); await page.waitForTimeout(220);
+  if (await page.locator('.fm fieldset:not([hidden])').count() !== 2) fail.push('폼: 선택 묶음이 안 열린다');
+  if (!(await page.textContent('#meter')).includes('완료율')) fail.push('폼: 칸이 늘어도 경고가 없다 (보여주려는 결과)');
+  await page.check('#flat'); await page.waitForTimeout(220);
+  if (await page.$eval('.fm fieldset', e => parseFloat(getComputedStyle(e).borderTopWidth)) !== 0)
+    fail.push('폼: 묶음을 풀어도 테두리가 남는다');
+  await page.close();
+
+  // 검증 — 떠날 때 검사하고, 틀린 뒤에는 고치는 동안 푼다
+  page = await demo('validation', 900, 820);
+  await page.fill('#acc', '123'); await page.locator('#email').focus(); await page.waitForTimeout(220);
+  if (await page.getAttribute('#acc', 'aria-invalid') !== 'true') fail.push('검증: 칸을 떠나도 검사하지 않는다');
+  if (!(await page.textContent('#acc-msg')).includes('10~14자리')) fail.push('검증: 어떻게 고치는지 안 알려 준다');
+  await page.fill('#acc', '1234567890'); await page.waitForTimeout(220);
+  if (await page.getAttribute('#acc', 'aria-invalid')) fail.push('검증: 고쳤는데도 틀린 채로 남는다');
+  await page.selectOption('#when', 'input'); await page.waitForTimeout(180);
+  await page.fill('#acc', '12'); await page.waitForTimeout(220);
+  if (await page.getAttribute('#acc', 'aria-invalid') !== 'true')
+    fail.push('검증: 칠 때마다로 바꿔도 치는 중에 안 빨개진다 (보여주려는 결과)');
+  await page.selectOption('#when', 'submit'); await page.waitForTimeout(180);
+  await page.fill('#acc', '12');
+  await page.locator('.fm button[type=submit]').click(); await page.waitForTimeout(250);
+  if (await page.evaluate(() => document.activeElement.id) !== 'acc')
+    fail.push('검증: 제출해도 첫 틀린 칸으로 포커스가 안 간다');
+  await page.close();
+
+  // 일괄 선택 — 중간 상태와 '이 쪽'·'조건 전체'의 차이
+  page = await demo('bulk', 900, 820);
+  if (!await page.locator('#bulkbar').isHidden()) fail.push('일괄: 안 골랐는데 막대가 보인다');
+  await page.locator('.dt tbody input[data-i="0"]').check(); await page.waitForTimeout(180);
+  if (!await page.$eval('#all', e => e.indeterminate)) fail.push('일괄: 일부만 골랐는데 중간 상태가 아니다');
+  if (!(await page.textContent('#count')).includes('1건')) fail.push('일괄: 고른 개수가 안 나온다');
+  await page.locator('#all').check(); await page.waitForTimeout(180);
+  if (await page.locator('.dt tbody tr.is-sel').count() !== 5) fail.push('일괄: 이 쪽이 전부 안 골라진다');
+  if (await page.$eval('#all', e => e.indeterminate)) fail.push('일괄: 다 골랐는데 중간 상태가 남는다');
+  if (!(await page.textContent('#allhint')).includes('128건 모두')) fail.push('일괄: 조건 전체를 고를 길이 없다');
+  await page.locator('#pickall').click(); await page.waitForTimeout(180);
+  if (!(await page.textContent('#count')).includes('128건')) fail.push('일괄: 조건 전체 128건이 안 잡힌다');
+  await page.locator('#approve').click(); await page.waitForTimeout(180);
+  if (!(await page.textContent('#log')).includes('128건을 승인할까요')) fail.push('일괄: 큰 범위인데 개수를 안 되묻는다');
+  await page.close();
+
+  // 가상 스크롤 — 그리는 수는 그대로, 끄면 전부 만들어진다
+  page = await demo('virtual', 900, 820);
+  const vnodes = () => page.$eval('#sizer', e => e.children.length);
+  if (!(await vnodes() < 40)) fail.push('가상: 1만 건인데 떠 있는 요소가 너무 많다');
+  await page.$eval('#vs', e => { e.scrollTop = 5000; }); await page.waitForTimeout(250);
+  if (!(await vnodes() < 40)) fail.push('가상: 굴리면 요소가 쌓인다');
+  if (!(await page.textContent('#sizer')).includes('#9')) fail.push('가상: 굴린 자리의 줄이 안 그려진다');
+  await page.locator('#n').fill('1000'); await page.dispatchEvent('#n', 'input'); await page.waitForTimeout(250);
+  await page.check('#off'); await page.waitForTimeout(700);
+  if (await vnodes() !== 1000) fail.push('가상: 꺼도 전부 만들어지지 않는다 (보여주려는 결과)');
+  if (!(await page.textContent('#meter')).includes('너무 많습니다')) fail.push('가상: 요소가 많다고 경고하지 않는다');
+  await page.close();
+
+  // 차트 — 질문이 바뀌면 맞는 그림도 바뀐다
+  page = await demo('chart', 900, 820);
+  if (await page.locator('.ch').count() !== 4) fail.push('차트: 네 가지를 견주지 않는다');
+  if (await page.locator('.ch.is-bad').count() !== 2) fail.push('차트: 비교 질문에서 안 맞는 그림이 둘이 아니다');
+  if (!(await page.textContent('.ch:first-child h4')).includes('막대')) fail.push('차트: 비교에 막대가 안 온다');
+  await page.selectOption('#q', 'trend'); await page.waitForTimeout(180);
+  if (!(await page.textContent('.ch:first-child h4')).includes('꺾은선')) fail.push('차트: 변화에 꺾은선이 안 온다');
+  await page.selectOption('#q', 'rel'); await page.waitForTimeout(180);
+  if (!(await page.textContent('.ch:first-child h4')).includes('산점도')) fail.push('차트: 관계에 산점도가 안 온다');
+  if (await page.locator('.ch.is-bad').count() !== 3) fail.push('차트: 관계 질문에서 안 맞는 그림이 셋이 아니다');
+  const pies = await page.$$eval('.ch svg[data-pie]', els => els.map(e => e.getAttribute('preserveAspectRatio')));
+  if (pies.some(v => v === 'none')) fail.push('차트: 파이가 찌그러지게 그려진다');
   await page.close();
 
   await browser.close();

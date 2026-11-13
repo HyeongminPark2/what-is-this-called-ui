@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>필터와 패싯 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .cols { display: grid; grid-template-columns: minmax(0,170px) minmax(0,1fr); gap: var(--s4); align-items: start; }
+  @media (max-width: 560px) { .cols { grid-template-columns: minmax(0,1fr); } }
+  h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--fg-muted); margin: 0 0 var(--s2); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .res { border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); }
+  .res .r { padding: 8px 11px; border-bottom: 1px solid var(--line); font-size: 13px; display: flex; gap: 8px; align-items: center; }
+  .res .r:last-child { border-bottom: 0; }
+  .ui-btn--sm { min-height: 30px; padding: 5px 10px; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<div class="bar"><b>필터와 패싯</b><span style="font-size:13px;color:var(--fg-muted)">조건을 켜고 꺼 보세요</span></div>
+
+<div class="pad">
+  <div class="fl-bar" id="chips"></div>
+
+  <div class="cols">
+    <div>
+      <h4>상태</h4>
+      <div class="fl-facet" id="f-status"></div>
+      <h4 style="margin-top:var(--s4)">기간</h4>
+      <div class="fl-facet" id="f-week"></div>
+    </div>
+    <div>
+      <div class="res" id="res"></div>
+      <p class="fl-url" id="url" style="margin-top:var(--s3)"></p>
+    </div>
+  </div>
+</div>
+
+<p class="hint">
+  <b>패싯</b>은 '조건마다 몇 건인지 미리 세어 보여 주는 것'입니다 — 옆의 숫자가 그것입니다.
+  <b>0건인 조건은 흐리게</b> 둬서 눌러도 빈 결과가 나오는 길을 막습니다.<br>
+  같은 갈래 안(상태끼리)은 <b>OR</b>, 갈래가 다르면(상태 × 기간) <b>AND</b>입니다 —
+  이 규칙을 정해 두지 않으면 "왜 결과가 안 나오죠"가 반복됩니다.<br>
+  켠 조건은 <b>칩으로 위에 모아</b> 보여 줍니다. 지금 무엇으로 걸렀는지가 한눈에 보이고,
+  하나씩 떼어 낼 수 있어야 합니다.<br>
+  조건은 <b>주소에 담습니다</b>(아래). 담아야 새로고침·공유·뒤로가기가 됩니다.
+</p>
+
+<script>
+(function () {
+  var DATA = [
+    { n: '모란상회', s: 'wait', w: 'w45', a: 1284000 },
+    { n: '한빛아웃도어', s: 'ok', w: 'w45', a: 9827500 },
+    { n: '새벽상사', s: 'no', w: 'w44', a: 11100 },
+    { n: '가온마켓', s: 'ok', w: 'w44', a: 7777777 },
+    { n: '들꽃식품', s: 'wait', w: 'w43', a: 412000 },
+    { n: '해든상회', s: 'ok', w: 'w43', a: 95000 }
+  ];
+  var STATUS = [['wait', '검토 중'], ['ok', '승인됨'], ['no', '거절됨']];
+  var WEEK = [['w45', '11월 1주'], ['w44', '10월 5주'], ['w43', '10월 4주']];
+  var on = { s: [], w: [] };
+
+  function match(d, skip) {
+    var okS = skip === 's' || !on.s.length || on.s.indexOf(d.s) >= 0;   // 같은 갈래는 OR
+    var okW = skip === 'w' || !on.w.length || on.w.indexOf(d.w) >= 0;   // 갈래끼리는 AND
+    return okS && okW;
+  }
+
+  function draw() {
+    // 패싯 수 — 자기 갈래는 빼고 센다(그래야 '0건' 이 거짓말이 안 된다)
+    function facet(list, key, skip) {
+      return list.map(function (p) {
+        var n = DATA.filter(function (d) { return d[key] === p[0] && match(d, skip); }).length;
+        var checked = on[key].indexOf(p[0]) >= 0;
+        return '<label class="' + (n === 0 && !checked ? 'zero' : '') + '">' +
+          '<input type="checkbox" data-k="' + key + '" value="' + p[0] + '"' + (checked ? ' checked' : '') +
+          (n === 0 && !checked ? ' disabled' : '') + '>' + p[1] +
+          '<span class="cnt">' + n + '</span></label>';
+      }).join('');
+    }
+    document.getElementById('f-status').innerHTML = facet(STATUS, 's', 's');
+    document.getElementById('f-week').innerHTML = facet(WEEK, 'w', 'w');
+
+    var rows = DATA.filter(function (d) { return match(d); });
+    document.getElementById('res').innerHTML = rows.length
+      ? rows.map(function (d) {
+          return '<div class="r"><span style="flex:1;min-width:0">' + d.n + '</span>' +
+            '<span style="font-variant-numeric:tabular-nums;color:var(--fg-muted)">₩' + d.a.toLocaleString('ko-KR') + '</span></div>';
+        }).join('')
+      : '<div class="r" style="color:var(--fg-muted)">조건에 맞는 것이 없습니다</div>';
+
+    var chips = [];
+    on.s.forEach(function (v) { chips.push(['s', v, STATUS.find(function (p) { return p[0] === v; })[1]]); });
+    on.w.forEach(function (v) { chips.push(['w', v, WEEK.find(function (p) { return p[0] === v; })[1]]); });
+    document.getElementById('chips').innerHTML = chips.length
+      ? chips.map(function (c) {
+          return '<button class="chip" data-del="' + c[0] + ':' + c[1] + '">' + c[2] +
+            '<span class="chip__x" aria-hidden="true">×</span></button>';
+        }).join('') + '<button class="ui-btn ui-btn--ghost ui-btn--sm" id="clear">모두 지우기</button>'
+      : '<span style="font-size:13px;color:var(--fg-muted)">조건 없음 — 모두 ' + DATA.length + '건</span>';
+
+    var q = [];
+    if (on.s.length) q.push('status=' + on.s.join(','));
+    if (on.w.length) q.push('week=' + on.w.join(','));
+    document.getElementById('url').textContent = '/settlements' + (q.length ? '?' + q.join('&') : '');
+  }
+
+  document.addEventListener('change', function (e) {
+    var el = e.target;
+    if (!el.dataset || !el.dataset.k) return;
+    var arr = on[el.dataset.k];
+    var i = arr.indexOf(el.value);
+    if (el.checked && i < 0) arr.push(el.value);
+    if (!el.checked && i >= 0) arr.splice(i, 1);
+    draw();
+  });
+  document.getElementById('chips').addEventListener('click', function (e) {
+    if (e.target.id === 'clear') { on = { s: [], w: [] }; draw(); return; }
+    var b = e.target.closest('[data-del]'); if (!b) return;
+    var p = b.dataset.del.split(':');
+    on[p[0]].splice(on[p[0]].indexOf(p[1]), 1);
+    draw();
+  });
+  draw();
+})();
+</script>
+</body>
+</html>

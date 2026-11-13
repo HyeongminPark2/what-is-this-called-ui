@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>검색 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s3); max-width: 420px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .meter { font-family: var(--mono); font-size: 12px; color: var(--fg-muted); }
+  .meter b { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>검색</b>
+  <label><input type="checkbox" id="debounce" checked> 입력이 멈춘 뒤 보내기(디바운스 250ms)</label>
+</div>
+
+<div class="pad">
+  <div class="sch">
+    <label for="q" style="font-size:13px;color:var(--fg-muted);display:block;margin-bottom:4px">가맹점 검색</label>
+    <input class="f sch__in" id="q" type="search" placeholder="예: 모란" autocomplete="off"
+           role="combobox" aria-expanded="false" aria-controls="list" aria-autocomplete="list">
+    <ul class="sch__list" id="list" role="listbox" hidden></ul>
+    <div id="empty" hidden></div>
+  </div>
+  <p class="meter" id="meter">아직 아무것도 안 보냈습니다.</p>
+</div>
+
+<p class="hint">
+  검색칸은 <b>타이핑할 때마다 서버를 부르면 안 됩니다.</b> '모란상회'를 치면 요청이 네 번 갑니다 —
+  <b>입력이 멈춘 뒤</b>에 한 번만 보내는 것이 디바운스입니다. 체크를 꺼 보고 보낸 횟수를 비교해 보세요.<br>
+  <b>늦게 온 응답이 먼저 온 응답을 덮는</b> 문제도 있습니다('모'의 결과가 '모란'보다 늦게 오는 경우).
+  그래서 보낸 순서를 기억했다가 <b>마지막 것만</b> 씁니다 — 기록에 '버림'으로 표시됩니다.<br>
+  결과가 없을 때는 <b>빈 화면이 아니라 다음 할 일</b>을 줍니다 — 철자 확인, 조건 지우기, 비슷한 말.<br>
+  찾은 글자는 <b>강조</b>해서 왜 걸렸는지 보여 줍니다.
+</p>
+
+<script>
+(function () {
+  var SHOPS = ['모란상회', '모란시장상회', '한빛아웃도어', '새벽상사', '가온마켓', '들꽃식품', '해든상회', '모던키친'];
+  var q = document.getElementById('q'), list = document.getElementById('list');
+  var empty = document.getElementById('empty'), meter = document.getElementById('meter');
+  var timer = null, seq = 0, done = 0, sent = 0, dropped = 0, active = -1;
+
+  function esc(s) { return s.replace(/[&<>]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]; }); }
+
+  function show(items, term) {
+    active = -1;
+    if (!term) { list.hidden = true; empty.hidden = true; q.setAttribute('aria-expanded', 'false'); return; }
+    if (!items.length) {
+      list.hidden = true; empty.hidden = false;
+      empty.className = 'sch__empty';
+      empty.innerHTML = '<b>‘' + esc(term) + '’</b> 에 맞는 가맹점이 없습니다<br>' +
+        '<span style="font-size:12px">철자를 확인하거나 <a href="#" id="clr">조건을 지워</a> 보세요</span>';
+      q.setAttribute('aria-expanded', 'false');
+      return;
+    }
+    empty.hidden = true; list.hidden = false;
+    q.setAttribute('aria-expanded', 'true');
+    list.innerHTML = items.map(function (s, i) {
+      var at = s.indexOf(term);
+      var html = at < 0 ? esc(s)
+        : esc(s.slice(0, at)) + '<mark>' + esc(s.slice(at, at + term.length)) + '</mark>' + esc(s.slice(at + term.length));
+      return '<li role="option" id="opt' + i + '" aria-selected="false">' + html + '</li>';
+    }).join('');
+  }
+
+  function fire(term) {
+    var id = ++seq;
+    sent++;
+    // 늦게 온 응답이 먼저 온 것을 덮지 않게 — 마지막 것만 쓴다
+    var delay = 120 + (term.length === 1 ? 420 : 60);   // 짧은 질의가 일부러 느리게 오게
+    setTimeout(function () {
+      if (id < done) { dropped++; report(term); return; }
+      done = id;
+      var items = SHOPS.filter(function (s) { return s.indexOf(term) >= 0; });
+      show(items, term);
+      report(term, items.length);
+    }, delay);
+    report(term);
+  }
+
+  function report(term, n) {
+    meter.innerHTML = '보낸 요청 <b>' + sent + '</b>회 · 늦게 와서 버린 응답 <b>' + dropped + '</b>회' +
+      (n !== undefined ? ' · 결과 <b>' + n + '</b>건' : '');
+  }
+
+  q.addEventListener('input', function () {
+    var term = this.value.trim();
+    if (!term) { show([], ''); return; }
+    if (document.getElementById('debounce').checked) {
+      clearTimeout(timer);
+      timer = setTimeout(function () { fire(term); }, 250);
+    } else {
+      fire(term);
+    }
+  });
+
+  q.addEventListener('keydown', function (e) {
+    var opts = list.querySelectorAll('li');
+    if (!opts.length) return;
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      active = (active + (e.key === 'ArrowDown' ? 1 : -1) + opts.length) % opts.length;
+      opts.forEach(function (o, i) { o.setAttribute('aria-selected', String(i === active)); });
+      q.setAttribute('aria-activedescendant', opts[active].id);
+    } else if (e.key === 'Enter' && active >= 0) {
+      e.preventDefault();
+      q.value = opts[active].textContent; show([], ''); 
+    } else if (e.key === 'Escape') { show([], ''); }
+  });
+
+  document.addEventListener('click', function (e) {
+    if (e.target.id === 'clr') { e.preventDefault(); q.value = ''; show([], ''); q.focus(); }
+    var li = e.target.closest('#list li');
+    if (li) { q.value = li.textContent; show([], ''); q.focus(); }
+  });
+
+  document.getElementById('debounce').addEventListener('change', function () {
+    sent = 0; dropped = 0; seq = 0; done = 0; report('');
+  });
+})();
+</script>
+</body>
+</html>
