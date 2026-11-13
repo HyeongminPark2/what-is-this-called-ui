@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>무한 스크롤 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .scroll { height: 300px; overflow-y: auto; }
+  .row { display: flex; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); font-size: 14px; }
+  .row .amt { margin-left: auto; font-variant-numeric: tabular-nums; }
+  .foot { padding: var(--s3) var(--s4); border-top: 1px solid var(--line); font-size: 13px; color: var(--fg-muted); display: flex; gap: var(--s3); align-items: center; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>피드</b>
+  <label><input type="checkbox" id="manual"> 저절로 말고 <b>더 보기</b> 버튼으로</label>
+</div>
+
+<div class="scroll" id="scroll">
+  <div id="rows"></div>
+  <div id="tail"></div>
+</div>
+
+<div class="foot">
+  <span id="cnt"></span>
+  <span style="margin-left:auto" id="note"></span>
+</div>
+
+<p class="hint">
+  끝까지 스크롤하면 <b>저절로</b> 더 불러옵니다. 읽기만 하는 피드에는 편하지만,
+  <b>푸터에 닿을 수 없고</b> 전부 몇 건인지도 알 수 없습니다 — 아래 숫자가 계속 늘어날 뿐입니다.<br>
+  위의 체크를 켜면 <b>더 보기</b> 버튼으로 바뀝니다. 사용자가 멈출 자리를 정할 수 있어
+  푸터에 닿을 수 있고, 키보드로도 쓸 수 있습니다. 대부분의 경우 이쪽이 더 안전합니다.
+</p>
+
+<script>
+(function () {
+  var names = ['모란상회', '하나로마트 역삼', '블루보틀 성수', '교보문고 광화문', '세븐일레븐 삼성점'];
+  var TOTAL = 48, loaded = 0, busy = false;
+  var rows = document.getElementById('rows'), tail = document.getElementById('tail');
+  var scroll = document.getElementById('scroll'), cnt = document.getElementById('cnt');
+  var note = document.getElementById('note'), manual = document.getElementById('manual');
+
+  function more() {
+    if (busy || loaded >= TOTAL) return;
+    busy = true;
+    tail.innerHTML = '<div class="nav-more"><span class="spn" role="status" aria-label="더 불러오는 중"></span></div>';
+    setTimeout(function () {
+      var n = Math.min(8, TOTAL - loaded), html = '';
+      for (var i = 0; i < n; i++) {
+        var k = loaded + i;
+        html += '<div class="row"><span style="width:84px;color:var(--fg-muted)">TX-' + (8812 - k) + '</span>' +
+          names[k % 5] + '<span class="amt">₩' + ((k + 2) * 3700).toLocaleString('ko-KR') + '</span></div>';
+      }
+      rows.insertAdjacentHTML('beforeend', html);
+      loaded += n; busy = false; sync();
+    }, 650);
+  }
+
+  function sync() {
+    cnt.textContent = loaded + '건 불러옴' + (loaded < TOTAL ? ' · 전부 몇 건인지는 모름' : ' · 끝');
+    if (loaded >= TOTAL) {
+      tail.innerHTML = '<p class="nav-end">여기까지입니다</p>';
+      note.textContent = '';
+      return;
+    }
+    if (manual.checked) {
+      tail.innerHTML = '<div class="nav-more"><button class="ui-btn ui-btn--ghost" id="moreBtn">더 보기</button></div>';
+      document.getElementById('moreBtn').addEventListener('click', more);
+      note.textContent = '사용자가 멈출 자리를 정한다';
+    } else {
+      tail.innerHTML = '<div class="nav-sentinel" id="sent"></div>';
+      note.textContent = '끝에 닿으면 저절로';
+      watch();
+    }
+  }
+
+  var io = null;
+  function watch() {
+    if (io) io.disconnect();
+    var sent = document.getElementById('sent');
+    if (!sent) return;
+    io = new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting) more();
+    }, { root: scroll, rootMargin: '80px' });
+    io.observe(sent);
+  }
+
+  manual.addEventListener('change', sync);
+  more();
+})();
+</script>
+</body>
+</html>

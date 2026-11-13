@@ -210,6 +210,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   const PARTS = {
     '6부': ['modal', 'dialog', 'sheet', 'drawer', 'popover', 'tooltip', 'toast'],
     '4부': ['field', 'select', 'combobox', 'checkbox', 'radio', 'switch', 'segmented', 'slider'],
+    '7부': ['appbar', 'sidebar', 'tabs', 'breadcrumb', 'pagination', 'infinite', 'bottomnav'],
     '8부': ['spinner', 'skeleton', 'progress', 'optimistic', 'empty', 'error'],
   };
   const ITEMS = Object.values(PARTS).flat();
@@ -623,6 +624,73 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   const d0 = await page.locator('#days').inputValue();
   await page.keyboard.press('ArrowRight'); await page.waitForTimeout(120);
   if (await page.locator('#days').inputValue() === d0) fail.push('슬라이더: 화살표로 안 움직인다');
+  await page.close();
+
+
+  // ── 7부 데모 ──
+  page = await demo('appbar');
+  if (await page.locator('#bar').evaluate(e => getComputedStyle(e).position) !== 'sticky') fail.push('앱바: 스티키가 아니다');
+  await page.locator('#scroll').evaluate(e => e.scrollTop = 260); await page.waitForTimeout(250);
+  if (await page.locator('#bar.is-condensed').count() !== 1) fail.push('앱바: 스크롤해도 안 얇아진다');
+  await page.locator('#scroll').evaluate(e => e.scrollTop = 0); await page.waitForTimeout(250);
+  if (await page.locator('#bar.is-condensed').count() !== 0) fail.push('앱바: 올라와도 안 돌아간다');
+  await page.close();
+
+  page = await demo('sidebar');
+  await page.locator('.nav-side a').nth(2).click(); await page.waitForTimeout(150);
+  if ((await page.locator('#h').textContent()) !== '정산') fail.push('사이드바: 고른 곳이 안 바뀐다');
+  if (await page.locator('.nav-side a[aria-current=page]').count() !== 1) fail.push('사이드바: 현재 위치가 하나가 아니다');
+  await page.locator('#rail').click(); await page.waitForTimeout(200);
+  if (await page.locator('.nav-side.is-rail').count() !== 1) fail.push('사이드바: 레일로 안 바뀐다');
+  if (await page.locator('.nav-side a').first().getAttribute('title') === null) fail.push('사이드바: 레일인데 이름을 알 길이 없다');
+  await page.close();
+
+  page = await demo('tabs');
+  if (await page.locator('[role=tab][tabindex="0"]').count() !== 1) fail.push('탭: Tab 으로 닿는 탭이 하나가 아니다');
+  await page.locator('#t1').focus();
+  await page.keyboard.press('ArrowRight'); await page.waitForTimeout(150);
+  if (await page.locator('#t2').getAttribute('aria-selected') !== 'true') fail.push('탭: 화살표로 안 옮겨진다');
+  if (await page.locator('[role=tabpanel]:not([hidden])').count() !== 1) fail.push('탭: 보이는 패널이 하나가 아니다');
+  await page.close();
+
+  page = await demo('breadcrumb');
+  if (await page.locator('#crumb [aria-current=page]').evaluate(e => e.tagName) === 'A') fail.push('브레드크럼: 마지막이 링크다');
+  await page.locator('[data-d="7"]').click(); await page.waitForTimeout(150);
+  if (await page.locator('#more').count() !== 1) fail.push('브레드크럼: 길어도 안 접힌다');
+  const bcBefore = await page.locator('#crumb a').count();
+  await page.locator('#more').click(); await page.waitForTimeout(150);
+  if (await page.locator('#crumb a').count() <= bcBefore) fail.push('브레드크럼: 펼쳐지지 않는다');
+  await page.close();
+
+  page = await demo('pagination');
+  if (await page.locator('.row').count() !== 8) fail.push('페이지네이션: 쪽당 줄 수가 다르다');
+  if (await page.locator('.nav-page button[disabled]').count() !== 1) fail.push('페이지네이션: 첫 쪽인데 이전이 안 막혔다');
+  await page.locator('.nav-page button[data-go="2"]').first().click(); await page.waitForTimeout(200);
+  if (await page.locator('.nav-page button[aria-current=page]').textContent() !== '2') fail.push('페이지네이션: 쪽이 안 바뀐다');
+  if (!page.url().includes('page=2')) fail.push('페이지네이션: 주소에 쪽이 안 남는다');
+  if (await page.locator('.nav-page .gap').count() === 0) fail.push('페이지네이션: 쪽이 많은데 안 접힌다');
+  await page.close();
+
+  page = await demo('infinite');
+  await page.waitForTimeout(900);
+  const inf0 = await page.locator('.row').count();
+  if (inf0 !== 8) fail.push(`무한 스크롤: 첫 묶음이 ${inf0}건`);
+  await page.locator('#scroll').evaluate(e => e.scrollTop = e.scrollHeight);
+  await page.waitForTimeout(1100);
+  if (await page.locator('.row').count() <= inf0) fail.push('무한 스크롤: 끝에 닿아도 안 불러온다');
+  await page.locator('#manual').check(); await page.waitForTimeout(250);
+  if (await page.locator('#moreBtn').count() !== 1) fail.push('무한 스크롤: 더 보기 버튼으로 안 바뀐다');
+  await page.close();
+
+  page = await demo('bottomnav', 500, 760);
+  if (await page.locator('.nav-bottom a').count() !== 4) fail.push('바텀 탭바: 칸이 4개가 아니다');
+  await page.locator('#body').evaluate(e => e.scrollTop = 200); await page.waitForTimeout(150);
+  await page.locator('.nav-bottom [data-k=settle]').click(); await page.waitForTimeout(200);
+  if (await page.locator('#body').evaluate(e => e.scrollTop) !== 0) fail.push('바텀 탭바: 새 탭이 맨 위에서 안 시작한다');
+  await page.locator('.nav-bottom [data-k=tx]').click(); await page.waitForTimeout(250);
+  if (await page.locator('#body').evaluate(e => e.scrollTop) !== 200) fail.push('바텀 탭바: 탭마다 스크롤을 안 기억한다');
+  await page.locator('.nav-bottom [data-k=tx]').click(); await page.waitForTimeout(600);
+  if (await page.locator('#body').evaluate(e => e.scrollTop) > 5) fail.push('바텀 탭바: 같은 탭을 다시 눌러도 맨 위로 안 간다');
   await page.close();
 
   await browser.close();

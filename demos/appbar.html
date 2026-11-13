@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>앱바 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .scroll { height: 420px; overflow-y: auto; }
+  .big { font-size: 26px; font-weight: 800; letter-spacing: -.04em; padding: var(--s5) var(--s4) var(--s3); }
+  .row { padding: var(--s4); border-bottom: 1px solid var(--line); }
+  .row b { display: block; font-size: 14px; }
+  .row span { font-size: 12.5px; color: var(--fg-muted); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="scroll" id="scroll">
+  <header class="nav-app is-sticky" id="bar">
+    <button class="back" aria-label="뒤로">‹</button>
+    <span class="ttl" id="ttl">거래 내역</span>
+    <span class="act">
+      <button class="icon-btn" style="width:36px;height:36px;font-size:14px" aria-label="검색">⌕</button>
+      <button class="icon-btn" style="width:36px;height:36px;font-size:14px" aria-label="더 보기">⋯</button>
+    </span>
+  </header>
+
+  <h1 class="big" id="big">거래 내역</h1>
+
+  <div id="rows"></div>
+</div>
+
+<p class="hint">
+  <b>목록을 스크롤해 보세요.</b> 큰 제목이 올라가 사라지면 앱바가 <b>얇아지면서 제목을 받아 갑니다</b> —
+  이걸 <b>접히는 앱바</b>(collapsing·large title)라 부릅니다.
+  앱바는 화면 꼭대기에 붙어 있어서(<b>스티키</b>) 어디로 스크롤해도 돌아갈 길이 남습니다.
+</p>
+
+<script>
+(function () {
+  var rows = document.getElementById('rows');
+  var html = '';
+  var names = ['모란상회', '하나로마트 역삼', '블루보틀 성수', '교보문고 광화문', '세븐일레븐 삼성점'];
+  for (var i = 0; i < 18; i++) {
+    html += '<div class="row"><b>' + names[i % 5] + '</b><span>TX-' + (8812 - i) + ' · ₩' + ((i + 3) * 7100).toLocaleString('ko-KR') + '</span></div>';
+  }
+  rows.innerHTML = html;
+
+  var scroll = document.getElementById('scroll');
+  var bar = document.getElementById('bar');
+  var big = document.getElementById('big');
+  var ttl = document.getElementById('ttl');
+
+  function sync() {
+    var gone = scroll.scrollTop > big.offsetTop + big.offsetHeight - bar.offsetHeight - 8;
+    bar.classList.toggle('is-condensed', gone);
+    ttl.style.opacity = gone ? '1' : '0';   // 큰 제목이 보이는 동안에는 앱바 제목을 숨긴다
+  }
+  scroll.addEventListener('scroll', sync);
+  sync();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>탭 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); }
+  .bar b { font-size: 16px; margin-right: auto; }
+  .panel { padding: var(--s4); min-height: 190px; }
+  .panel h3 { font-size: 16px; margin-bottom: var(--s2); }
+  .panel p { font-size: 14px; color: var(--fg-muted); }
+  .row { display: flex; gap: var(--s3); padding: var(--s3) 0; border-top: 1px solid var(--line); font-size: 14px; }
+  .row .amt { margin-left: auto; font-weight: 700; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar"><b>모란상회</b></div>
+
+<div class="nav-tabs" role="tablist" aria-label="가맹점 상세">
+  <button role="tab" id="t1" aria-controls="p1" aria-selected="true" tabindex="0">개요</button>
+  <button role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1">거래</button>
+  <button role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1">정산</button>
+  <button role="tab" id="t4" aria-controls="p4" aria-selected="false" tabindex="-1">문의 3</button>
+  <button role="tab" id="t5" aria-controls="p5" aria-selected="false" tabindex="-1">설정</button>
+</div>
+
+<div class="panel" id="p1" role="tabpanel" aria-labelledby="t1" tabindex="0">
+  <h3>개요</h3><p>사업자 123-45-67890 · 2024년 3월 등록 · 담당자 윤서</p>
+</div>
+<div class="panel" id="p2" role="tabpanel" aria-labelledby="t2" tabindex="0" hidden>
+  <h3>거래</h3>
+  <div class="row">TX-8812 · 14:02<span class="amt">₩48,000</span></div>
+  <div class="row">TX-8795 · 어제<span class="amt">₩12,900</span></div>
+</div>
+<div class="panel" id="p3" role="tabpanel" aria-labelledby="t3" tabindex="0" hidden>
+  <h3>정산</h3><p>주 1회 · 다음 정산 11월 17일 월요일</p>
+</div>
+<div class="panel" id="p4" role="tabpanel" aria-labelledby="t4" tabindex="0" hidden>
+  <h3>문의</h3><p>답하지 않은 문의가 3건 있습니다.</p>
+</div>
+<div class="panel" id="p5" role="tabpanel" aria-labelledby="t5" tabindex="0" hidden>
+  <h3>설정</h3><p>알림과 권한을 바꿉니다.</p>
+</div>
+
+<p class="hint">
+  <kbd>Tab</kbd>으로 탭 줄에 들어온 뒤 <kbd>←</kbd><kbd>→</kbd>로 옮기고, 한 번 더 <kbd>Tab</kbd>을 누르면 <b>내용으로</b> 넘어갑니다 —
+  탭 다섯 개를 Tab 다섯 번으로 지나지 않습니다.<br>
+  탭은 <b>같은 대상의 다른 면</b>을 보여 줍니다. 여기서는 전부 '모란상회' 이야기이고, 위의 가맹점 이름은 안 바뀝니다.
+  이름까지 바뀐다면 그건 탭이 아니라 <b>화면 이동</b>입니다.
+</p>
+
+<script>
+(function () {
+  var tabs = [].slice.call(document.querySelectorAll('[role=tab]'));
+
+  function show(t) {
+    tabs.forEach(function (x) {
+      var on = x === t;
+      x.setAttribute('aria-selected', String(on));
+      x.tabIndex = on ? 0 : -1;                      // 탭 줄 전체가 Tab 한 번
+      document.getElementById(x.getAttribute('aria-controls')).hidden = !on;
+    });
+  }
+
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () { show(t); });
+    t.addEventListener('keydown', function (e) {
+      var i = tabs.indexOf(t), n = null;
+      if (e.key === 'ArrowRight') n = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft') n = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') n = 0;
+      else if (e.key === 'End') n = tabs.length - 1;
+      if (n === null) return;
+      e.preventDefault(); show(tabs[n]); tabs[n].focus();
+    });
+  });
+})();
+</script>
+</body>
+</html>

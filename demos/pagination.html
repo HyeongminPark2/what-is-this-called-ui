@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>페이지네이션 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar .sel { width: auto; min-height: 34px; padding: 6px 30px 6px 10px; font-size: 13px; }
+  .rows { min-height: 236px; }
+  .row { display: flex; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); font-size: 14px; }
+  .row .amt { margin-left: auto; font-variant-numeric: tabular-nums; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>거래 내역</b>
+  <label style="font-size:13px;color:var(--fg-muted)">쪽당
+    <select class="sel" id="per"><option>5</option><option selected>8</option><option>20</option></select>
+  </label>
+</div>
+
+<div class="rows" id="rows"></div>
+
+<nav class="nav-page" id="page" aria-label="쪽 이동"></nav>
+
+<p class="hint">
+  쪽 번호는 <b>지금 어디인지</b>와 <b>전부 몇 쪽인지</b>를 같이 알려 줍니다 —
+  무한 스크롤에는 없는 두 가지입니다. 주소에 쪽 번호가 남으므로 <b>그 쪽을 그대로 공유</b>할 수 있고,
+  뒤로가기로 돌아와도 보던 자리가 남습니다.<br>
+  쪽이 많아지면 가운데를 <b>…</b>로 줄입니다. 처음·끝·지금 주변만 남기는 것이 관례입니다.
+</p>
+
+<script>
+(function () {
+  var DATA = [];
+  var names = ['모란상회', '하나로마트 역삼', '블루보틀 성수', '교보문고 광화문', '세븐일레븐 삼성점', '스타벅스 선릉'];
+  for (var i = 0; i < 137; i++) DATA.push({ id: 'TX-' + (8812 - i), nm: names[i % 6], amt: (i + 2) * 3700 });
+
+  var rows = document.getElementById('rows'), nav = document.getElementById('page');
+  var per = 8, at = 1;
+
+  function pages() { return Math.ceil(DATA.length / per); }
+
+  function drawRows() {
+    var s = (at - 1) * per;
+    rows.innerHTML = DATA.slice(s, s + per).map(function (d) {
+      return '<div class="row"><span style="width:84px;color:var(--fg-muted)">' + d.id + '</span>' + d.nm +
+        '<span class="amt">₩' + d.amt.toLocaleString('ko-KR') + '</span></div>';
+    }).join('');
+  }
+
+  function list() {
+    var n = pages(), out = [];
+    var near = [1, n, at, at - 1, at + 1];
+    for (var p = 1; p <= n; p++) {
+      if (near.indexOf(p) >= 0) out.push(p);
+      else if (out[out.length - 1] !== '…') out.push('…');
+    }
+    return out;
+  }
+
+  function drawNav() {
+    var n = pages();
+    var html = '<button data-go="' + (at - 1) + '"' + (at === 1 ? ' disabled' : '') + ' aria-label="이전 쪽">‹</button>';
+    list().forEach(function (p) {
+      html += p === '…'
+        ? '<span class="gap" aria-hidden="true">…</span>'
+        : '<button data-go="' + p + '"' + (p === at ? ' aria-current="page"' : '') + '>' + p + '</button>';
+    });
+    html += '<button data-go="' + (at + 1) + '"' + (at === n ? ' disabled' : '') + ' aria-label="다음 쪽">›</button>';
+    html += '<span class="total">' + ((at - 1) * per + 1) + '–' + Math.min(at * per, DATA.length) + ' / 전체 ' + DATA.length + '건 · ' + n + '쪽</span>';
+    nav.innerHTML = html;
+  }
+
+  function go(p) {
+    at = Math.min(pages(), Math.max(1, p));
+    drawRows(); drawNav();
+    // 쪽을 바꾸면 주소에도 남긴다 — 공유와 뒤로가기가 공짜가 된다
+    history.replaceState(null, '', '?page=' + at);
+  }
+
+  nav.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-go]');
+    if (b && !b.disabled) go(+b.dataset.go);
+  });
+  document.getElementById('per').addEventListener('change', function (e) {
+    per = +e.target.value; go(1);
+  });
+  go(1);
+})();
+</script>
+</body>
+</html>

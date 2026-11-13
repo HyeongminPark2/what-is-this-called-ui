@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>앱바 · 헤더 — 이름표</title>
+<meta name="description" content="앱바가 무엇이고 사이드바·탭과 어떻게 다른지 실물과 상태와 해부도로 보여주는 항목.">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/card.css">
+<link rel="stylesheet" href="../assets/demo.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로</a>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">이름표<small>화면 속 그게 뭔지 알려주는 도감</small></a>
+  <nav>
+    <a href="../index.html#map">화면 지도</a>
+    <a href="../index.html#pairs">혼동 쌍</a>
+    <a href="../index.html#toc">목차</a>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+
+  <div class="item-head">
+    <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">7부 길 안내</a> › 앱바 · 헤더</p>
+    <h1>앱바 · 헤더</h1>
+    <p class="en">App bar · Header · Top bar</p>
+    <p class="lede" style="margin-top:var(--s3)">화면 <b>꼭대기에 붙어 있는 띠</b>. 지금 어디인지(제목), 어디서 왔는지(뒤로), 여기서 뭘 할 수 있는지(동작)를 한 줄에 담습니다.</p>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+  </div>
+
+  <div class="card-layout">
+    <div>
+
+      <section class="slot" id="s1">
+        <h2 class="slot-label"><span class="n">1</span> 실물 — 직접 만져 보기</h2>
+        <div class="preview-bar">
+          <div class="seg" data-seg="appbar" role="group" aria-label="미리보기 폭">
+            <button type="button" data-w="390" aria-pressed="false">390 폰</button>
+            <button type="button" data-w="768" aria-pressed="false">768 태블릿</button>
+            <button type="button" data-w="full" aria-pressed="true">넓게</button>
+          </div>
+          <span class="preview-meta" data-meta="appbar"></span>
+          <a class="preview-open" href="../demos/appbar.html" target="_blank" rel="noopener">새 탭에서 열기 ↗</a>
+        </div>
+        <div class="stage" data-stage="appbar" data-w="full">
+          <iframe src="../demos/appbar.html" title="앱바 · 헤더 실물 예시"></iframe>
+        </div>
+        <div class="note" style="margin-bottom:0">
+          <p><b>목록을 스크롤해 보세요.</b> 큰 제목이 올라가 사라지면 앱바가 얇아지면서 <b>제목을 받아 갑니다</b> —
+          <b>접히는 앱바</b>(collapsing·large title)라 부릅니다. 꼭대기에 붙어 있어서(<b>스티키</b>)
+          어디까지 내려가도 돌아갈 길이 남습니다.</p>
+        </div>
+      </section>
+
+      <section class="slot" id="s2">
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <div class="scroll-x">
+        <table class="grid">
+          <tbody>
+            <tr><th>한국어</th><td>앱바, 헤더, 상단바, 툴바</td></tr>
+            <tr><th>영어</th><td>app bar, header, top bar, navigation bar, toolbar</td></tr>
+            <tr><th>같이 쓰는 말</th><td>스크롤해도 붙어 있으면 <b>스티키 헤더</b>, 내용 위에 투명하게 떠 있으면 <b>오버레이 헤더</b>, 큰 제목이 접히는 것을 <b>접히는 앱바</b>라 합니다.</td></tr>
+            <tr><th>자주 잘못 부름</th><td><b>내비게이션 바</b> — iOS 에서는 이게 앱바를 뜻하지만, 웹에서는 <b>메뉴 줄</b>로 알아듣기 쉽습니다.<br><b>툴바</b> — 툴바는 <b>동작 버튼만</b> 모은 줄입니다. 제목과 뒤로가기가 있으면 앱바입니다.<br><b>탭</b> — 탭은 같은 화면 안의 전환이고, 앱바는 화면의 틀입니다.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot" id="s3">
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
+        <p>겹쳐 뜨는 부품들은 모양으로는 구별이 안 됩니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <div class="scroll-x">
+        <table class="grid axes">
+          <thead><tr><th></th><th>자리</th><th>데려가는 곳</th><th>지금 위치</th><th>감당하는 개수</th></tr></thead>
+          <tbody>
+            <tr class="me"><td><b>앱바 · 헤더</b></td><td>화면 위</td><td>전역 · 상위</td><td>제목으로</td><td class="none">해당 없음</td></tr>
+            <tr><td>사이드바 내비게이션</td><td>화면 옆</td><td>전역</td><td>강조로</td><td>10~20</td></tr>
+            <tr><td>바텀 탭바</td><td>화면 아래</td><td>전역</td><td>아이콘 강조</td><td><b>3~5</b></td></tr>
+            <tr><td>탭</td><td>내용 위</td><td><b>같은 화면 안</b></td><td>밑줄로</td><td>2~6</td></tr>
+            <tr><td>브레드크럼</td><td>내용 위</td><td>상위로</td><td><b>계층 전체</b></td><td>3~5단계</td></tr>
+            <tr><td>페이지네이션</td><td>목록 아래</td><td>같은 목록의 다른 쪽</td><td>쪽 번호로</td><td>제한 없음</td></tr>
+            <tr><td>무한 스크롤</td><td>목록 끝</td><td>같은 목록 이어서</td><td class="none">안 보여 준다</td><td>제한 없음</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="note" style="margin-bottom:0">
+          <p><b>한 줄로</b> — 앱바는 <b>화면의 틀</b>입니다. 지금 어디인지와 나가는 길을 담되, <b>여기서 가장 자주 하는 일 한둘</b>만 올립니다.</p>
+        </div>
+      </section>
+
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">그림 한 장으로는 못 배운다</span></h2>
+        <div class="states">
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div class="mini mini--tall" role="img" aria-label="기본 앱바"><div class="mini__bg"></div><div style="position:absolute;top:0;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);padding:4px 5px;font-size:7px;font-weight:700">거래 내역</div><div class="mini__bg" style="padding-top:18px"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div></div></div>
+            </div>
+            <figcaption>기본<span>제목과 동작. 가장 흔한 모습</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div class="mini mini--tall" role="img" aria-label="뒤로가 붙은 앱바"><div class="mini__bg"></div><div style="position:absolute;top:0;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);padding:4px 5px;font-size:7px;display:flex;gap:4px"><span style="color:var(--accent)">‹</span><b>거래 내역</b></div><div class="mini__bg" style="padding-top:18px"><div class="mini__bar mini__bar--w80"></div></div></div>
+            </div>
+            <figcaption>뒤로 포함<span>하위 화면. <b>어디서 왔는지</b>를 왼쪽에 둔다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div class="mini mini--tall" role="img" aria-label="접힌 앱바"><div class="mini__bg"></div><div style="position:absolute;top:0;left:0;right:0;background:var(--surface);padding:3px 5px;font-size:6px;font-weight:700;box-shadow:0 1px 3px rgba(0,0,0,.14)">거래 내역</div><div class="mini__bg" style="padding-top:16px"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w40"></div></div></div>
+            </div>
+            <figcaption>접힘<span>스크롤하면 얇아지고 <b>그림자가 생긴다</b> — 아래에 내용이 있다는 신호</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div class="mini mini--tall" role="img" aria-label="투명 오버레이 앱바"><div class="mini__bg"></div><div style="position:absolute;top:0;left:0;right:0;background:linear-gradient(180deg,rgba(0,0,0,.35),transparent);padding:4px 5px;font-size:7px;color:#fff;font-weight:700;z-index:2">사진</div><div style="position:absolute;inset:0;background:linear-gradient(145deg,#3a4a6b,#1d2230)"></div></div>
+            </div>
+            <figcaption>오버레이<span>사진 위에 떠 있다. 글자가 묻히지 않게 <b>그라데이션</b>을 깐다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div class="mini mini--tall" role="img" aria-label="선택 모드 앱바"><div class="mini__bg"></div><div style="position:absolute;top:0;left:0;right:0;background:var(--accent-soft);border-bottom:1px solid var(--accent);padding:4px 5px;font-size:7px;color:var(--accent);font-weight:700;display:flex;gap:4px"><span>✕</span>3건 선택<span style="margin-left:auto">삭제</span></div><div class="mini__bg" style="padding-top:18px"><div class="mini__bar mini__bar--w80"></div></div></div>
+            </div>
+            <figcaption>선택 모드<span>여러 줄을 고르면 앱바가 통째로 바뀐다. <b>나가는 길(✕)</b>을 꼭 둔다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div class="mini mini--tall" role="img" aria-label="검색 모드 앱바"><div class="mini__bg"></div><div style="position:absolute;top:0;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);padding:4px 5px;font-size:7px;display:flex;gap:3px"><span style="flex:1;background:var(--bg);border-radius:99px;padding:1px 4px;color:var(--fg-faint);font-size:6px">⌕ 검색</span><span style="color:var(--accent)">취소</span></div><div class="mini__bg" style="padding-top:18px"><div class="mini__bar mini__bar--w60"></div></div></div>
+            </div>
+            <figcaption>검색 모드<span>검색을 누르면 칸이 앱바를 차지한다. 역시 나가는 길이 필요하다</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <div class="anatomy">
+          <div class="pinboard">
+            <div class="anat" role="img" aria-label="앱바 · 헤더의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:12px">
+                <div class="pin-out" data-pin="1" style="background:var(--surface);border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;gap:40px;padding:14px 26px">
+                  <span data-pin="2" style="font-size:15px;color:var(--accent);line-height:1">‹</span>
+                  <span class="pin-out" data-pin="3" style="flex:1;font-size:12.5px;font-weight:750">거래 내역</span>
+                  <span data-pin="4" style="font-size:12px;color:var(--fg-muted)">⌕</span>
+                  <span class="pin-tr" data-pin="5" style="font-size:12px;color:var(--fg-muted)">⋯</span>
+                </div>
+                <div class="pin-out" data-pin="6" style="border-left:1px solid var(--line);border-right:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:0 0 8px 8px;padding:14px 26px;font-size:11px;color:var(--fg-muted)">아래 내용은 이 띠 밑으로 지나갑니다</div>
+              </div>
+            </div>
+          </div>
+          <ol class="pin-list">
+            <li><b>앱바 <em>app bar</em></b><span>화면 폭을 다 쓰는 띠. 보통 44~64px 높이</span></li>
+            <li><b>뒤로 <em>back</em></b><span><b>왼쪽 첫 자리.</b> 하위 화면이면 거의 언제나 여기 있다</span></li>
+            <li><b>제목 <em>title</em></b><span>지금 어디인지. 길면 말줄임하되 <b>앞쪽</b>을 남긴다</span></li>
+            <li><b>동작 <em>actions</em></b><span>여기서 가장 자주 하는 일. <b>둘까지</b>가 적당하다</span></li>
+            <li><b>더 보기 <em>overflow menu</em></b><span>나머지는 ⋯ 안으로. 자주 안 쓰는 것을 넣는다</span></li>
+            <li><b>아래 내용 <em>content</em></b><span>앱바 <b>밑으로 지나간다</b>. 그래서 스크롤해도 앱바가 남는다</span></li>
+          </ol>
+        </div>
+        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
+          그림에 없는 것이 <b>세이프 에어리어</b>입니다. 폰에서는 앱바 위에 상태바(시계·배터리)가 겹치므로
+          그만큼 위쪽 여백을 더 둬야 합니다 — 안 두면 제목이 시계에 가립니다.</p>
+      </section>
+
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+        <div class="twoup">
+          <div class="do">
+            <h3>이럴 때 쓴다</h3>
+            <ul>
+              <li>화면마다 <b>지금 어디인지</b>를 알려야 할 때</li>
+              <li>뒤로 갈 길이 필요할 때 — 하위 화면에서는 거의 언제나</li>
+              <li>이 화면에서 가장 자주 하는 동작 한둘을 둘 때</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h3>이럴 때는 안 쓴다</h3>
+            <ul>
+              <li>버튼을 넷 이상 올리기 — 좁은 화면에서 먼저 무너집니다</li>
+              <li>제목 없이 아이콘만 두기 — 어디인지 알 수 없습니다</li>
+              <li>스크롤하면 사라지게 두기 — 돌아갈 길까지 같이 사라집니다</li>
+              <li>앱바에 주 내비게이션을 전부 넣기 → 사이드바나 탭바가 할 일입니다</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 화면 사이를 오가면 <a href="sidebar.html">사이드바</a>나 <a href="bottomnav.html">바텀 탭바</a>, 같은 화면의 다른 면이면 <a href="tabs.html">탭</a>, 어디 있는지만 알리면 <a href="breadcrumb.html">브레드크럼</a>.</p>
+      </section>
+
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <div class="cases">
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div class="mini" role="img" aria-label="모바일 앱바 재현"><div class="mini__bg"></div><div style="position:absolute;top:0;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);padding:4px 5px;font-size:7px;display:flex;gap:4px"><span style="color:var(--accent)">‹</span><b style="flex:1">거래 내역</b><span style="color:var(--fg-muted)">⋯</span></div><div class="mini__bg" style="padding-top:18px"><div class="mini__bar mini__bar--w80"></div></div></div>
+            </div>
+            <figcaption><b>모바일</b>뒤로 · 제목 · 더 보기. 가장 엄격한 형태</figcaption>
+          </figure>
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div class="mini" role="img" aria-label="데스크톱 앱바 재현"><div class="mini__bg"></div><div style="position:absolute;top:0;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);padding:4px 5px;font-size:6.5px;display:flex;gap:4px;align-items:center"><b>Paygate</b><span style="flex:1;background:var(--bg);border-radius:99px;padding:1px 4px;color:var(--fg-faint);font-size:5.5px">⌕ 검색</span><span style="width:9px;height:9px;border-radius:50%;background:var(--accent)"></span></div><div class="mini__bg" style="padding-top:18px"><div class="mini__bar mini__bar--w60"></div></div></div>
+            </div>
+            <figcaption><b>데스크톱</b>로고 · 전역 검색 · 계정. 자리가 넓어 더 담는다</figcaption>
+          </figure>
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div class="mini" role="img" aria-label="선택 모드 재현"><div class="mini__bg"></div><div style="position:absolute;top:0;left:0;right:0;background:var(--accent-soft);padding:4px 5px;font-size:6.5px;color:var(--accent);font-weight:700;display:flex;gap:4px"><span>✕</span>3건<span style="margin-left:auto">삭제</span></div><div class="mini__bg" style="padding-top:18px"><div class="mini__bar mini__bar--w80"></div></div></div>
+            </div>
+            <figcaption><b>선택 모드</b>앱바가 통째로 바뀐다. 다른 화면이 아니라 <b>다른 모드</b>다</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slot" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">이 부품의 계약서</span></h2>
+        <p><code>position: sticky</code> 한 줄이 앱바의 절반입니다. 나머지 절반은 <b>무엇을 올리지 않을지</b>입니다.</p>
+<pre class="code">&lt;<span class="t">header</span> <span class="a">class</span>=<span class="s">"nav-app"</span>&gt;
+  &lt;<span class="t">button</span> <span class="a">aria-label</span>=<span class="s">"뒤로"</span>&gt;‹&lt;/<span class="t">button</span>&gt;
+  &lt;<span class="t">h1</span>&gt;거래 내역&lt;/<span class="t">h1</span>&gt;
+  &lt;<span class="t">button</span> <span class="a">aria-label</span>=<span class="s">"검색"</span>&gt;⌕&lt;/<span class="t">button</span>&gt;
+&lt;/<span class="t">header</span>&gt;
+
+<span class="c">/* 꼭대기에 붙인다. 아래 내용이 밑으로 지나간다 */</span>
+.nav-app <span class="a">{</span> <span class="t">position</span>: sticky; <span class="t">top</span>: 0; <span class="t">z-index</span>: 20; <span class="a">}</span>
+
+<span class="c">/* 폰에서는 상태바만큼 위 여백을 더 둔다 */</span>
+<span class="t">padding-top</span>: <span class="a">calc</span>(12px + env(safe-area-inset-top));</pre>
+        <div class="scroll-x">
+        <table class="grid kbd-table">
+          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>Tab</kbd></td><td>페이지의 <b>첫 칸들</b>이다. 그래서 '본문으로 건너뛰기' 링크를 앞에 둔다</td></tr>
+            <tr><td>제목</td><td><code>&lt;h1&gt;</code>으로 두면 스크린 리더의 제목 목록에 잡힌다</td></tr>
+            <tr><td>아이콘 버튼</td><td>글자가 없으면 <code>aria-label</code>이 꼭 필요하다. 툴팁도 같이 두면 좋다</td></tr>
+            <tr><td><kbd>Esc</kbd></td><td>선택 모드·검색 모드에서는 Esc 로 빠져나갈 수 있게 한다</td></tr>
+            <tr><td>스티키</td><td>스크롤해도 포커스가 앱바에 닿을 수 있어야 한다. 화면 밖으로 밀어내지 않는다</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot slot--backend" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <div class="scroll-x">
+        <table class="grid">
+          <tbody>
+            <tr><th>앱바 = 요청 컨텍스트</th><td>제목·뒤로·동작이 전부 <b>지금 보고 있는 리소스</b>에서 나옵니다. 그 리소스가 없으면 앱바도 채울 수 없으니, 로딩 중에는 뼈대로 둡니다.</td></tr>
+            <tr><th>뒤로가기 = 계층 vs 이력</th><td>앱바의 뒤로는 <b>상위 리소스</b>로, 브라우저 뒤로는 <b>이전 화면</b>으로 갑니다. 둘이 다를 수 있다는 걸 모르면 길을 잃는 사용자가 생깁니다.</td></tr>
+            <tr><th>동작 개수 = 권한</th><td>권한에 따라 버튼이 줄어듭니다. 숨길지 비활성할지를 정해야 하고, <b>서버가 무엇을 내려 줄지</b>와 묶입니다.</td></tr>
+            <tr><th>선택 모드 = 일괄 작업</th><td>고른 것들에 한꺼번에 명령합니다. '전부 선택'이 조건인지 ID 목록인지에 따라 요청 모양이 달라집니다.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot" id="s10">
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
+        <p>이 부품은 플랫폼마다 이름이 가장 많이 엇갈립니다.</p>
+        <div class="platforms">
+          <div class="plat">
+            <header><b>웹</b><span>표준 지침 없음</span></header>
+            <div class="shot">
+              <div class="mini mini--tall" role="img" aria-label="웹 헤더 재현"><div class="mini__bg"></div><div style="position:absolute;top:0;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);padding:4px 5px;font-size:6.5px;font-weight:700">Paygate</div><div class="mini__bg" style="padding-top:18px"><div class="mini__bar mini__bar--w80"></div></div></div>
+            </div>
+            <footer><b>헤더</b>(header) · <code>&lt;header&gt;</code> 요소가 있지만 모양 규칙은 없습니다. 로고·전역 내비·검색이 함께 올라가는 일이 많습니다.</footer>
+          </div>
+          <div class="plat">
+            <header><b>iOS</b><span>Apple HIG</span></header>
+            <div class="shot">
+              <div class="phone" role="img" aria-label="iOS 내비게이션 바 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen"><div style="position:absolute;left:0;right:0;top:16px;padding:4px 7px;border-bottom:1px solid var(--line);display:flex;gap:4px;font-size:8px"><span style="color:#0a84ff">‹ 뒤로</span><b style="flex:1;text-align:center">거래</b><span style="color:#0a84ff">⋯</span></div></div></div>
+            </div>
+            <footer><b>내비게이션 바</b>(Navigation bar) · 제목이 <b>가운데</b>이고 뒤로 버튼에 <b>이전 화면 이름</b>이 붙습니다. 큰 제목(Large title)이 접히는 방식이 표준입니다.</footer>
+          </div>
+          <div class="plat">
+            <header><b>안드로이드</b><span>Material 3</span></header>
+            <div class="shot">
+              <div class="phone" role="img" aria-label="안드로이드 톱 앱 바 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen"><div style="position:absolute;left:0;right:0;top:16px;padding:5px 7px;display:flex;gap:5px;font-size:8px"><span>←</span><b style="flex:1">거래</b><span style="color:var(--fg-muted)">⌕</span><span style="color:var(--fg-muted)">⋮</span></div></div></div>
+            </div>
+            <footer><b>톱 앱 바</b>(Top app bar) · 제목이 <b>왼쪽</b>입니다. Small / Medium / Large / Center-aligned 네 가지로 정리돼 있습니다.</footer>
+          </div>
+        </div>
+        <div class="note note--warn" style="margin-bottom:0">
+          <p><b>자주 생기는 사고</b> — 제목 위치가 <b>iOS 는 가운데, 안드로이드는 왼쪽</b>입니다. 같은 시안을 양쪽에 그대로 쓰면 한쪽은 반드시 어색해집니다. 그리고 iOS 의 "내비게이션 바"는 이 앱바를 뜻하지, 웹에서 말하는 메뉴 줄이 아닙니다.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <aside class="siblings">
+      <h2>헷갈리는 형제</h2>
+      <ol>
+        <li><a href="sidebar.html"><b>사이드바 내비게이션</b><em>7부</em></a></li>
+        <li><a href="tabs.html"><b>탭</b><em>7부</em></a></li>
+        <li><a href="breadcrumb.html"><b>브레드크럼</b><em>7부</em></a></li>
+        <li><a href="pagination.html"><b>페이지네이션</b><em>7부</em></a></li>
+        <li><a href="infinite.html"><b>무한 스크롤</b><em>7부</em></a></li>
+        <li><a href="bottomnav.html"><b>바텀 탭바</b><em>7부</em></a></li>
+      </ol>
+      <h2>같이 보면 좋은 것</h2>
+      <ol>
+        <li><a href="../items/drawer.html"><b>드로어</b><em>6부</em></a></li>
+        <li><span class="na"><b>세이프 에어리어</b><em>11부</em></span></li>
+        <li><a href="../items/tooltip.html"><b>툴팁</b><em>6부</em></a></li>
+        <li><span class="na"><b>고도와 z-index</b><em>2부</em></span></li>
+      </ol>
+      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-foot wrap">
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+</footer>
+
+<script src="../assets/card.js"></script>
+</body>
+</html>

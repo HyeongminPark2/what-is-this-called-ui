@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>브레드크럼 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar .ui-btn { min-height: 34px; padding: 7px 12px; font-size: 13px; }
+  h1 { font-size: 22px; padding: 0 var(--s4) var(--s3); }
+  .body { padding: 0 var(--s4) var(--s4); font-size: 14px; color: var(--fg-muted); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>위키</b>
+  <button class="ui-btn ui-btn--ghost" data-d="2">2단계</button>
+  <button class="ui-btn ui-btn--ghost" data-d="4">4단계</button>
+  <button class="ui-btn ui-btn--ghost" data-d="7">7단계 (접힘)</button>
+</div>
+
+<nav class="nav-crumb" id="crumb" aria-label="현재 위치"></nav>
+<h1 id="h"></h1>
+<p class="body">브레드크럼은 <b>내가 지금 어디 있는지</b>와 <b>위로 올라가는 길</b>을 함께 보여 줍니다. 뒤로가기와 다릅니다 — 뒤로가기는 '어떻게 왔는지'이고 브레드크럼은 '어디에 있는지'입니다.</p>
+
+<p class="hint">
+  단계를 바꿔 보세요. <b>7단계</b>에서는 가운데가 <b>…</b>로 접힙니다 —
+  처음과 끝은 늘 남기고 가운데를 줄이는 것이 관례입니다. <b>…</b>를 누르면 펼쳐집니다.<br>
+  마지막 칸은 <b>링크가 아닙니다.</b> 지금 그 화면에 있으니 누를 곳이 없습니다(<code>aria-current="page"</code>).
+</p>
+
+<script>
+(function () {
+  var PATH = ['위키', '팀 문서', '플랫폼', '결제', '마이그레이션', '2026', '회고 초안'];
+  var crumb = document.getElementById('crumb'), h = document.getElementById('h');
+  var expanded = false;
+
+  function draw(d) {
+    var items = PATH.slice(0, d);
+    h.textContent = items[items.length - 1];
+    var parts = [];
+    var fold = items.length > 5 && !expanded;
+    items.forEach(function (nm, i) {
+      var last = i === items.length - 1;
+      if (fold && i === 1) {
+        parts.push('<button class="more" id="more" aria-label="가운데 단계 펼치기">…</button>');
+      }
+      if (fold && i > 0 && i < items.length - 2) return;
+      parts.push(last
+        ? '<span aria-current="page">' + nm + '</span>'
+        : '<a href="#">' + nm + '</a>');
+    });
+    crumb.innerHTML = parts.join('<span class="sep" aria-hidden="true">›</span>');
+    var m = document.getElementById('more');
+    if (m) m.addEventListener('click', function () { expanded = true; draw(d); });
+  }
+
+  document.querySelectorAll('[data-d]').forEach(function (b) {
+    b.addEventListener('click', function () { expanded = false; draw(+b.dataset.d); });
+  });
+  draw(4);
+})();
+</script>
+</body>
+</html>

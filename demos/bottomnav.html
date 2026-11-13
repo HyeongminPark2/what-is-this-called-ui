@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>바텀 탭바 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .phone { max-width: 400px; margin: 0 auto; border-left: 1px solid var(--line); border-right: 1px solid var(--line); min-height: 420px; display: flex; flex-direction: column; }
+  .top { padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); font-size: 15px; font-weight: 700; }
+  .body { flex: 1; overflow-y: auto; }
+  .row { padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); font-size: 14px; }
+  .row b { display: block; }
+  .row span { font-size: 12.5px; color: var(--fg-muted); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .note { padding: var(--s3) var(--s4); font-size: 13px; color: var(--accent); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <div class="top" id="top">거래</div>
+  <div class="body" id="body"></div>
+  <p class="note" id="note"></p>
+  <nav class="nav-bottom" id="nav" aria-label="주 메뉴">
+    <a href="#" data-k="home"><span class="ic"></span>홈</a>
+    <a href="#" data-k="tx" aria-current="page"><span class="ic"></span>거래</a>
+    <a href="#" data-k="settle"><span class="ic"><span class="dot">3</span></span>정산</a>
+    <a href="#" data-k="me"><span class="ic"></span>내 정보</a>
+  </nav>
+</div>
+
+<p class="hint">
+  <b>거래를 여러 번 눌러 보세요.</b> 처음 누르면 그 화면으로 가고, <b>이미 그 화면이면 맨 위로</b> 올라갑니다 —
+  탭바의 숨은 약속입니다.<br>
+  칸은 <b>3~5개</b>까지입니다. 그 이상은 손가락이 닿기 어렵고 글자가 잘립니다.
+  정산 칸의 빨간 숫자는 <b>배지</b>이고, 읽지 않은 것이 몇 건인지 알립니다.
+</p>
+
+<script>
+(function () {
+  var nav = document.getElementById('nav'), body = document.getElementById('body');
+  var top = document.getElementById('top'), note = document.getElementById('note');
+  var NAMES = { home: '홈', tx: '거래', settle: '정산', me: '내 정보' };
+  var at = 'tx';
+
+  function fill(k) {
+    var html = '';
+    for (var i = 0; i < 14; i++) {
+      html += '<div class="row"><b>' + NAMES[k] + ' 항목 ' + (i + 1) + '</b><span>탭마다 제 목록과 제 스크롤 위치를 따로 기억합니다</span></div>';
+    }
+    body.innerHTML = html;
+  }
+
+  var pos = { home: 0, tx: 0, settle: 0, me: 0 };
+
+  nav.addEventListener('click', function (e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    e.preventDefault();
+    var k = a.dataset.k;
+    if (k === at) {                       // 같은 탭을 다시 누르면 맨 위로
+      body.scrollTo({ top: 0, behavior: 'smooth' });
+      note.textContent = '같은 탭을 다시 눌러 맨 위로 올라갔습니다';
+      setTimeout(function () { note.textContent = ''; }, 1800);
+      return;
+    }
+    pos[at] = body.scrollTop;             // 탭마다 스크롤 위치를 기억한다
+    nav.querySelectorAll('a').forEach(function (x) { x.removeAttribute('aria-current'); });
+    a.setAttribute('aria-current', 'page');
+    at = k; top.textContent = NAMES[k];
+    fill(k);
+    body.scrollTop = pos[k];
+    note.textContent = '';
+  });
+
+  fill('tx');
+})();
+</script>
+</body>
+</html>

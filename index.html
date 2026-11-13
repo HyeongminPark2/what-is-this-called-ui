@@ -174,12 +174,12 @@
           <p class="pan-hint">화면을 옆으로 밀면 오른쪽까지 볼 수 있습니다 →  번호는 아래 목록과 이어집니다.</p>
 
           <ol class="mapfig__list">
-            <li><span class="lbl" data-t="appbar"><span>앱바 · 헤더<em>app bar / header</em></span></span></li>
+            <li><a class="lbl lbl--go" data-t="appbar" href="items/appbar.html"><span>앱바 · 헤더<em>app bar / header</em><b>항목 보기 →</b></span></a></li>
             <li><span class="lbl" data-t="search"><span>검색 입력<em>search field</em></span></span></li>
             <li><span class="lbl" data-t="badge"><span>배지<em>badge · 숫자 알림</em></span></span></li>
             <li><span class="lbl" data-t="avatar"><span>아바타<em>avatar</em></span></span></li>
-            <li><span class="lbl" data-t="nav"><span>사이드바 내비게이션<em>sidebar nav</em></span></span></li>
-            <li><span class="lbl" data-t="crumb"><span>브레드크럼<em>breadcrumb</em></span></span></li>
+            <li><a class="lbl lbl--go" data-t="nav" href="items/sidebar.html"><span>사이드바 내비게이션<em>sidebar nav</em><b>항목 보기 →</b></span></a></li>
+            <li><a class="lbl lbl--go" data-t="crumb" href="items/breadcrumb.html"><span>브레드크럼<em>breadcrumb</em><b>항목 보기 →</b></span></a></li>
             <li><span class="lbl" data-t="primary"><span>프라이머리 버튼<em>primary button</em></span></span></li>
             <li><span class="lbl" data-t="stat"><span>스탯 타일<em>stat tile / KPI card</em></span></span></li>
             <li><span class="lbl" data-t="chip"><span>필터 칩<em>filter chip</em></span></span></li>
@@ -187,7 +187,7 @@
             <li><a class="lbl lbl--go" data-t="menu" href="items/popover.html"><span>드롭다운 메뉴<em>dropdown menu</em><b>항목 보기 →</b></span></a></li>
             <li><span class="lbl" data-t="table"><span>데이터 테이블<em>data table</em></span></span></li>
             <li><span class="lbl" data-t="sbadge"><span>상태 배지<em>status badge</em></span></span></li>
-            <li><span class="lbl" data-t="page"><span>페이지네이션<em>pagination</em></span></span></li>
+            <li><a class="lbl lbl--go" data-t="page" href="items/pagination.html"><span>페이지네이션<em>pagination</em><b>항목 보기 →</b></span></a></li>
             <li><a class="lbl lbl--go" data-t="toast" href="items/toast.html"><span>토스트<em>toast · snackbar</em><b>항목 보기 →</b></span></a></li>
           </ol>
 
@@ -971,7 +971,7 @@
             <li><span class="lbl" data-t="phrow"><span>리스트 아이템<em>list item · row</em></span></span></li>
             <li><span class="lbl" data-t="fab"><span>FAB<em>floating action button</em></span></span></li>
             <li><a class="lbl lbl--go" data-t="sheet" href="items/sheet.html"><span>바텀시트<em>bottom sheet</em><b>항목 보기 →</b></span></a></li>
-            <li><span class="lbl" data-t="tabs"><span>바텀 탭바<em>tab bar / bottom nav</em></span></span></li>
+            <li><a class="lbl lbl--go" data-t="tabs" href="items/bottomnav.html"><span>바텀 탭바<em>tab bar / bottom nav</em><b>항목 보기 →</b></span></a></li>
             <li><span class="lbl" data-t="home"><span>홈 인디케이터<em>home indicator</em></span></span></li>
           </ol>
 
@@ -1006,7 +1006,11 @@
         <tr><td><a href="items/slider.html">슬라이더</a> / <a href="items/progress.html">프로그레스 바</a></td><td>사용자가 만질 수 있나</td></tr>
         <tr><td>배지 / 칩 / 태그</td><td>그냥 표시인가, 지울 수 있나, 눌러서 걸러내나</td></tr>
         <tr><td>링크 / 버튼</td><td>이동인가, 동작인가</td></tr>
-        <tr><td>탭 / <a href="items/segmented.html">세그먼티드</a></td><td>내용 묶음 전환인가, 값 고르기인가</td></tr>
+        <tr><td><a href="items/tabs.html">탭</a> / <a href="items/segmented.html">세그먼티드</a></td><td>내용 묶음 전환인가, 값 고르기인가</td></tr>
+        <tr><td><a href="items/tabs.html">탭</a> / <a href="items/bottomnav.html">바텀 탭바</a></td><td>한 화면 안인가, 앱 전체인가</td></tr>
+        <tr><td><a href="items/sidebar.html">사이드바</a> / <a href="items/drawer.html">드로어</a></td><td>늘 보이나, 숨었다 나오나</td></tr>
+        <tr><td><a href="items/pagination.html">페이지네이션</a> / <a href="items/infinite.html">무한 스크롤</a></td><td>돌아올 자리와 끝이 있나</td></tr>
+        <tr><td><a href="items/breadcrumb.html">브레드크럼</a> / 뒤로가기</td><td>어디에 있는지인가, 어떻게 왔는지인가</td></tr>
         <tr><td><a href="items/skeleton.html">스켈레톤</a> / <a href="items/spinner.html">스피너</a></td><td>들어올 레이아웃을 미리 알고 있나</td></tr>
         <tr><td><a href="items/spinner.html">스피너</a> / <a href="items/progress.html">프로그레스 바</a></td><td>끝나는 때를 아나</td></tr>
         <tr><td><a href="items/optimistic.html">낙관적 UI</a> / 비관적</td><td>서버 응답을 기다렸다 바꾸나</td></tr>
@@ -1030,7 +1034,7 @@
       <a class="part part--hot" href="items/field.html"><div class="top"><span class="no">4부</span><h3>조작 부품</h3><span class="cnt">8 / 22항목</span></div><p style="color:var(--accent);font-weight:600">텍스트 필드 · 셀렉트 · 콤보박스 · 체크박스 · 라디오 · 스위치 · 세그먼티드 · 슬라이더 ✓<span style="color:var(--fg-muted);font-weight:400"> · 버튼 위계 · 날짜 선택기 · 드롭존 · 스테퍼…</span></p></a>
       <span class="part"><div class="top"><span class="no">5부</span><h3>표시 부품</h3><span class="cnt">15항목</span></div><p>카드 · 리스트 아이템 · 아바타 · 배지와 칩 · 프로그레스 · 스탯 타일 · 타임라인</p></span>
       <a class="part part--hot" href="items/modal.html"><div class="top"><span class="no">6부</span><h3>겹치는 것들</h3><span class="cnt">7 / 16항목</span></div><p style="color:var(--accent);font-weight:600">모달 · 다이얼로그 · 바텀시트 · 드로어 · 팝오버 · 툴팁 · 토스트 ✓<span style="color:var(--fg-muted);font-weight:400"> · 액션 시트 · 배너 · 인라인 얼럿 · 커맨드 팔레트 · 라이트박스…</span></p></a>
-      <span class="part"><div class="top"><span class="no">7부</span><h3>길 안내 — 내비게이션</h3><span class="cnt">12항목</span></div><p>앱바 · 사이드바 · 탭 · 브레드크럼 · 페이지네이션과 무한 스크롤 · 바텀 탭바 · 뒤로가기</p></span>
+      <a class="part part--hot" href="items/appbar.html"><div class="top"><span class="no">7부</span><h3>길 안내 — 내비게이션</h3><span class="cnt">7 / 12항목</span></div><p style="color:var(--accent);font-weight:600">앱바 · 사이드바 · 탭 · 브레드크럼 · 페이지네이션 · 무한 스크롤 · 바텀 탭바 ✓<span style="color:var(--fg-muted);font-weight:400"> · 스테퍼 · 트리뷰 · 앵커 내비 · 뒤로가기…</span></p></a>
       <a class="part part--hot" href="items/spinner.html"><div class="top"><span class="no">8부</span><h3>피드백과 상태</h3><span class="cnt">6 / 12항목</span></div><p style="color:var(--accent);font-weight:600">스피너 · 스켈레톤 · 프로그레스 바 · 낙관적 UI · 빈 상태 · 에러 상태 ✓<span style="color:var(--fg-muted);font-weight:400"> · 되돌리기 · 부분 로딩 · 성공 확인 · 재시도…</span></p></a>
       <span class="part"><div class="top"><span class="no">9부</span><h3>움직임</h3><span class="cnt">10항목</span></div><p>이징 · 지속 시간 기준표 · 진입과 퇴장 · 제스처 · 모션 줄이기</p></span>
       <span class="part"><div class="top"><span class="no">10부</span><h3>데이터 다루는 화면</h3><span class="cnt">10항목</span></div><p>데이터 테이블 해부 · 필터와 패싯 · 폼 설계 · 가상 스크롤 · 차트 고르기</p></span>
