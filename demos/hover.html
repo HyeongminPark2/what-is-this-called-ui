@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>호버가 없는 세계 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .sys { font-family: var(--mono); font-size: 12px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>호버가 없는 세계</b>
+  <label><input type="checkbox" id="nohover"> 손가락으로 쓰는 기기로 보기</label>
+  <span class="sys" id="sys"></span>
+</div>
+
+<div class="pad">
+  <div class="hv-grid" id="grid"></div>
+  <p class="ruler" id="ruler"></p>
+</div>
+
+<p class="hint">
+  왼쪽 넷은 <b>마우스를 올려야</b> 보이는 정보입니다. 위 체크를 켜면 호버가 없는 기기가 되고,
+  그 순간 <b>영영 볼 수 없는 정보</b>가 됩니다.<br>
+  오른쪽 둘은 같은 정보를 <b>처음부터 보이게</b> 하거나 <b>눌러서</b> 보게 고친 것입니다.
+  호버는 <b>덤</b>이어야 하고, 호버로만 되는 일이 있으면 안 됩니다 —
+  폰뿐 아니라 키보드만 쓰는 사람도 같은 처지가 됩니다.
+</p>
+
+<script>
+(function () {
+  var CARDS = [
+    ['삭제 버튼이 호버에만',      '줄에 올려야 ✕ 가 나온다',       false, '폰에서는 지울 방법이 없다'],
+    ['툴팁에만 있는 설명',        '아이콘 뜻이 툴팁에만 있다',     false, '아이콘 뜻을 영영 모른다'],
+    ['호버로만 열리는 메뉴',      '올리면 하위 메뉴가 펼쳐진다',   false, '하위 메뉴에 못 들어간다'],
+    ['호버로만 보이는 가격',      '카드에 올려야 할인가가 뜬다',   false, '할인가를 못 본다'],
+    ['처음부터 보이게',           '✕ 를 늘 보여 준다',             true,  '어디서나 지울 수 있다'],
+    ['눌러서 펼치게',             '⋯ 를 눌러 메뉴를 연다',         true,  '손가락·키보드 모두 된다']
+  ];
+  var grid = document.getElementById('grid');
+  grid.innerHTML = CARDS.map(function (c, i) {
+    return '<div class="hv' + (c[2] ? ' fixed' : '') + '" data-i="' + i + '" tabindex="0">' +
+      '<h4>' + c[0] + '</h4>' +
+      '<span class="hidden-bit">' + c[1] + '</span>' +
+      '<span class="verdict"></span></div>';
+  }).join('');
+
+  function sync() {
+    var off = document.getElementById('nohover').checked;
+    document.body.classList.toggle('no-hover', off);
+    var lost = 0;
+    [].forEach.call(grid.querySelectorAll('.hv'), function (el, i) {
+      var fixed = CARDS[i][2];
+      var v = el.querySelector('.verdict');
+      if (!off) v.textContent = '마우스를 올리면 보인다';
+      else if (fixed) v.textContent = '✓ ' + CARDS[i][3];
+      else { v.textContent = '✕ ' + CARDS[i][3]; lost++; }
+    });
+    var rl = document.getElementById('ruler');
+    rl.innerHTML = off
+      ? '<span class="warn">호버로만 되던 것 ' + lost + '개가 사라졌다</span> · 고친 것 ' +
+        (CARDS.length - lost) + '개는 그대로 쓸 수 있다'
+      : '마우스가 있는 기기 — <b>여섯 개 모두</b> 쓸 수 있는 것처럼 보인다';
+    rl.dataset.lost = String(lost);
+    document.getElementById('sys').textContent =
+      '이 기기: ' + (matchMedia('(hover: hover)').matches ? 'hover: hover' : 'hover: none') +
+      ' · ' + (matchMedia('(pointer: fine)').matches ? 'pointer: fine' : 'pointer: coarse');
+  }
+  document.getElementById('nohover').addEventListener('change', sync);
+  sync();
+})();
+</script>
+</body>
+</html>

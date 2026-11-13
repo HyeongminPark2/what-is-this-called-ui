@@ -219,6 +219,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     '8부': ['spinner', 'skeleton', 'progress', 'optimistic', 'empty', 'error'],
     '10부': ['table', 'filter', 'search', 'form', 'validation', 'bulk', 'virtual', 'chart'],
     '9부': ['easing', 'duration', 'enterexit', 'cheap', 'spring', 'stagger', 'gesture', 'reducedmotion'],
+    '11부': ['breakpoint', 'touchtarget', 'hover', 'systemback', 'dpr', 'viewport', 'softkeyboard', 'platformdiff'],
   };
   const ITEMS = Object.values(PARTS).flat();
   const partOf = s => Object.keys(PARTS).find(k => PARTS[k].includes(s));
@@ -1453,6 +1454,125 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   await page.waitForTimeout(450);
   if (f1 === await page.$eval('.rm[data-k=fade] .fader', e => +getComputedStyle(e).opacity))
     fail.push('줄이기: 투명도 바뀜까지 꺼졌다 (전부 끄면 변화를 못 읽는다)');
+  await page.close();
+
+  // 11부 플랫폼 데모 여덟 장
+  const setR = async (pg, id, v) => { await pg.locator(id).fill(v); await pg.dispatchEvent(id, 'input'); await pg.waitForTimeout(200); };
+
+  // 브레이크포인트 — 기기 폭으로 끊으면 폰에서 이름이 접힌다
+  page = await demo('breakpoint', 980, 860);
+  if (await page.getAttribute('#ruler', 'data-cols') !== '1') fail.push('분기점: 390px 에서 한 단이 아니다');
+  if (!await page.locator('.stage-w .nav .burger').isVisible()) fail.push('분기점: 좁은데 메뉴가 안 접힌다');
+  await setR(page, '#w', '900');
+  if (await page.getAttribute('#ruler', 'data-cols') !== '3') fail.push('분기점: 900px 에서 세 단이 아니다');
+  if (!await page.locator('.stage-w .nav .item').first().isVisible()) fail.push('분기점: 넓은데 메뉴가 안 펼쳐진다');
+  await setR(page, '#w', '390');
+  await page.check('#bad'); await page.waitForTimeout(220);
+  if (await page.getAttribute('#ruler', 'data-cols') !== '2') fail.push('분기점: 기기 폭 기준인데 390px 이 한 단이다');
+  if (!(+(await page.getAttribute('#ruler', 'data-wrapped')) > 0))
+    fail.push('분기점: 그 폭에서 가게 이름이 안 접힌다 (보여주려는 결과)');
+  await page.close();
+
+  // 터치 타깃 — 보이는 크기는 두고 눌리는 넓이만 키운다
+  page = await demo('touchtarget', 980, 860);
+  if (await page.getAttribute('#ruler', 'data-bad') !== '3') fail.push('터치: 44px 미달이 셋이 아니다 (보여주려는 결과)');
+  await page.check('#pad'); await page.waitForTimeout(280);
+  if (await page.getAttribute('#ruler', 'data-bad') !== '0') fail.push('터치: 넓혀도 미달이 남는다');
+  {
+    const seen = await page.$eval('.tt-wrap .tt', e => e.getBoundingClientRect().width);
+    const hit = await page.$eval('.tt-wrap', e => e.getBoundingClientRect().width);
+    if (!(seen < hit && hit >= 44)) fail.push(`터치: 보이는 크기 ${seen} / 눌리는 넓이 ${hit} — 따로 놀지 않는다`);
+  }
+  await page.uncheck('#finger'); await page.waitForTimeout(160);
+  if (await page.$eval('.tt-wrap .finger', e => getComputedStyle(e).opacity) !== '0') fail.push('터치: 손가락 원을 못 끈다');
+  await page.close();
+
+  // 호버 — 손가락 기기에서는 호버로만 되던 것이 사라진다
+  page = await demo('hover', 980, 860);
+  if (await page.locator('.hv').count() !== 6) fail.push('호버: 여섯 가지가 아니다');
+  await page.check('#nohover'); await page.waitForTimeout(260);
+  if (await page.getAttribute('#ruler', 'data-lost') !== '4') fail.push('호버: 사라지는 것이 넷이 아니다 (보여주려는 결과)');
+  await page.locator('.hv:not(.fixed)').first().hover(); await page.waitForTimeout(200);
+  if (await page.$eval('.hv:not(.fixed) .hidden-bit', e => getComputedStyle(e).opacity) !== '0')
+    fail.push('호버: 손가락 기기를 흉내 냈는데 호버가 먹는다');
+  if (await page.$eval('.hv.fixed .hidden-bit', e => getComputedStyle(e).opacity) !== '1')
+    fail.push('호버: 고친 쪽도 안 보인다');
+  await page.close();
+
+  // 시스템 백 — 기록에 안 넣으면 엉뚱한 화면이 사라진다
+  page = await demo('systemback', 980, 860);
+  if (await page.getAttribute('#histline', 'data-depth') !== '2') fail.push('뒤로: 처음 기록이 둘이 아니다');
+  await page.locator('#open').click(); await page.waitForTimeout(180);
+  if (await page.getAttribute('#histline', 'data-depth') !== '3') fail.push('뒤로: 기록에 넣었는데 안 쌓인다');
+  await page.locator('#back').click(); await page.waitForTimeout(180);
+  if (!(await page.textContent('#log')).includes('시트만 닫혔다')) fail.push('뒤로: 시트만 닫히지 않는다');
+  if (await page.locator('.layer.l3').count() !== 0) fail.push('뒤로: 시트가 화면에 남아 있다');
+  await page.locator('#reset').click(); await page.waitForTimeout(180);
+  await page.uncheck('#push'); await page.waitForTimeout(140);
+  await page.locator('#open').click(); await page.waitForTimeout(180);
+  if (await page.getAttribute('#histline', 'data-depth') !== '2') fail.push('뒤로: 기록에 안 넣었는데 쌓였다');
+  await page.locator('#back').click(); await page.waitForTimeout(180);
+  if (await page.locator('.layer.l3').count() !== 1)
+    fail.push('뒤로: 기록 밖 시트인데 뒤로가 닫아 버린다 (보여주려는 결과)');
+  if (!(await page.textContent('#log')).includes('그 아래 화면이 사라졌다')) fail.push('뒤로: 엉뚱한 것이 사라졌다고 안 알린다');
+  await page.close();
+
+  // 화면 밀도 — 배율을 올리면 1배짜리 그림이 늘어난다
+  page = await demo('dpr', 980, 860);
+  if (await page.locator('.dpr').count() !== 5) fail.push('밀도: 다섯 가지가 아니다');
+  {
+    const w1 = await page.$eval('canvas[data-k=line1]', e => e.width);
+    await setR(page, '#r', '3');
+    const w3 = await page.$eval('canvas[data-k=line1]', e => e.width);
+    if (!(w3 > w1 * 2.5)) fail.push(`밀도: 배율을 올려도 화소 수가 안 는다 (${w1} → ${w3})`);
+  }
+  if (!(await page.textContent('.dpr[data-k=bitmap1] .num')).includes('늘어남'))
+    fail.push('밀도: 1배 그림이 늘어난다고 안 알린다 (보여주려는 결과)');
+  if ((await page.textContent('.dpr[data-k=bitmapN] .num')).includes('늘어남'))
+    fail.push('밀도: 배율만큼 받은 그림까지 늘어났다고 한다');
+  if (!(await page.textContent('.dpr[data-k=hair] .num')).includes('0.33')) fail.push('밀도: 머리카락 선 두께를 안 적는다');
+  await page.close();
+
+  // 뷰포트 단위 — 주소창이 있으면 100vh 만 잘린다
+  page = await demo('viewport', 980, 860);
+  if (!(+(await page.getAttribute('#ruler', 'data-cut')) > 0))
+    fail.push('뷰포트: 주소창이 있는데 100vh 가 안 삐져나간다 (보여주려는 결과)');
+  {
+    const cuts = await page.$$eval('.cap', els => els.map(e => +e.dataset.cut));
+    if (!(cuts[0] > 0 && cuts[1] === 0 && cuts[2] === 0)) fail.push('뷰포트: 잘리는 것이 vh 뿐이 아니다 — ' + JSON.stringify(cuts));
+  }
+  await page.uncheck('#chrome'); await page.waitForTimeout(220);
+  if (await page.getAttribute('#ruler', 'data-cut') !== '0') fail.push('뷰포트: 주소창을 숨겨도 잘린다');
+  {
+    const rows11 = await page.$$eval('#tbl td[data-u]', els => els.map(e => e.textContent));
+    if (!(rows11.length === 4 && rows11.every(t => /px$/.test(t)))) fail.push('뷰포트: 네 단위를 못 잰다 — ' + rows11.join('/'));
+  }
+  if (await page.getAttribute('#tip', 'data-same') !== '1') fail.push('뷰포트: PC 에서 넷이 같다고 안 적는다');
+  await page.close();
+
+  // 폰 키보드 — fixed 로 붙인 것은 키보드 뒤에 깔린다
+  page = await demo('softkeyboard', 980, 860);
+  if (await page.getAttribute('#read', 'data-open') !== '0') fail.push('키보드: 처음부터 올라와 있다');
+  await page.locator('#tap').click(); await page.waitForTimeout(220);
+  if (await page.getAttribute('#read', 'data-open') !== '1') fail.push('키보드: 눌러도 안 올라온다');
+  if (await page.getAttribute('#read', 'data-hidden') !== '1')
+    fail.push('키보드: 저장 버튼이 안 가려진다 (보여주려는 결과)');
+  if (!(+(await page.getAttribute('#log', 'data-buried')) >= 2)) fail.push('키보드: 아래 입력칸들이 안 가려진다');
+  await page.check('#follow'); await page.waitForTimeout(220);
+  if (await page.getAttribute('#read', 'data-hidden') !== '0') fail.push('키보드: 따라 올려도 버튼이 가려진다');
+  await page.close();
+
+  // 플랫폼 차이 — 질문을 바꾸면 세 곳의 답이 바뀐다
+  page = await demo('platformdiff', 980, 860);
+  if (await page.locator('.pf').count() !== 3) fail.push('플랫폼: 세 곳을 안 보여 준다');
+  if (!(await page.textContent('#q')).includes('어떻게 뒤로 가나')) fail.push('플랫폼: 첫 질문이 다르다');
+  {
+    const first = await page.textContent('.pf[data-p=ios] .why');
+    await page.selectOption('#k', 'alert'); await page.waitForTimeout(220);
+    if (!(await page.textContent('.pf[data-p=ios] .why')).includes('취소가 왼쪽')) fail.push('플랫폼: iOS 알림 차례가 틀렸다');
+    if (!(await page.textContent('.pf[data-p=android] .why')).includes('오른쪽 아래')) fail.push('플랫폼: 안드로이드 알림 차례가 틀렸다');
+    if (first === await page.textContent('.pf[data-p=ios] .why')) fail.push('플랫폼: 질문을 바꿔도 내용이 그대로다');
+  }
   await page.close();
 
   await browser.close();

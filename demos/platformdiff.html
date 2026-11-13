@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HIG와 Material의 차이 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .pf .mini .t { position: absolute; font-size: 8px; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>HIG와 Material의 차이</b>
+  <label>무엇을 보나
+    <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+      <option value="nav">뒤로 가는 길</option>
+      <option value="action">주 동작의 자리</option>
+      <option value="toggle">켜고 끄는 부품</option>
+      <option value="alert">알림의 버튼 차례</option>
+      <option value="tab">아래 탭</option>
+    </select></label>
+</div>
+
+<div class="pad">
+  <p class="ruler" id="q"></p>
+  <div class="pf-grid" id="grid"></div>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  같은 화면을 세 곳에서 그리면 <b>자리가 달라집니다.</b> 어느 쪽이 옳은 것이 아니라
+  <b>그 OS 를 쓰는 사람이 이미 배운 자리</b>가 다른 것입니다.<br>
+  한쪽 규격을 그대로 다른 쪽에 옮기면 <b>둘 다에서 어색해집니다</b> —
+  아이폰에 안드로이드식 뒤로가기 버튼을 넣거나, 안드로이드에서 확인·취소 차례를
+  아이폰처럼 두는 식입니다. 웹은 <b>제3의 자리</b>라서, 세 곳을 다 흉내 내기보다
+  <b>웹의 관례</b>를 지키는 편이 보통 낫습니다.
+</p>
+
+<script>
+(function () {
+  function frame(inner) { return '<div class="mini">' + inner + '</div>'; }
+  var ACCENT = 'background:var(--accent);color:#fff';
+
+  var DATA = {
+    nav: ['이 화면에서 <b>어떻게 뒤로 가나</b>', {
+      ios: [frame(
+          '<div style="position:absolute;left:0;right:0;top:0;height:20px;border-bottom:1px solid var(--line);background:var(--surface)"></div>' +
+          '<span class="t" style="left:5px;top:6px;color:var(--accent)">‹ 정산</span>' +
+          '<span class="t" style="left:50%;top:6px;transform:translateX(-50%);font-weight:700">모란상회</span>' +
+          '<span class="t" style="left:4px;top:40px;color:var(--fg-muted)">← 가장자리를 쓸어도 된다</span>'),
+        '<b>왼쪽 위에 ‹ 와 이전 화면 이름.</b> 가장자리 쓸기도 같은 일을 한다'],
+      android: [frame(
+          '<div style="position:absolute;left:0;right:0;top:0;height:20px;border-bottom:1px solid var(--line);background:var(--surface)"></div>' +
+          '<span class="t" style="left:5px;top:6px">←</span>' +
+          '<span class="t" style="left:20px;top:6px;font-weight:700">모란상회</span>' +
+          '<span class="t" style="left:4px;top:40px;color:var(--fg-muted)">양쪽 가장자리 모두 뒤로</span>' +
+          '<div style="position:absolute;left:0;right:0;bottom:0;height:8px;background:var(--bg);border-top:1px solid var(--line)"></div>'),
+        '<b>화살표만.</b> OS 의 뒤로가기가 따로 있어 앱도 그걸 따라야 한다'],
+      web: [frame(
+          '<div style="position:absolute;left:0;right:0;top:0;height:14px;background:var(--bg);border-bottom:1px solid var(--line)"></div>' +
+          '<span class="t" style="left:4px;top:3px">← →  ⟳</span>' +
+          '<span class="t" style="left:4px;top:24px;font-weight:700">모란상회</span>' +
+          '<span class="t" style="left:4px;top:40px;color:var(--fg-muted)">브라우저가 준다 · 브레드크럼도</span>'),
+        '<b>브라우저 ← 가 이미 있다.</b> 화면 안 버튼은 <a href="../items/breadcrumb.html">브레드크럼</a>이 맡는다']
+    }],
+    action: ['<b>주 동작을 어디에 두나</b>', {
+      ios: [frame(
+          '<div style="position:absolute;left:0;right:0;top:0;height:20px;border-bottom:1px solid var(--line);background:var(--surface)"></div>' +
+          '<span class="t" style="right:5px;top:6px;color:var(--accent);font-weight:700">저장</span>' +
+          '<span class="t" style="left:5px;top:6px;color:var(--accent)">취소</span>'),
+        '<b>오른쪽 위.</b> 취소는 왼쪽 위. 글자 버튼이다'],
+      android: [frame(
+          '<span class="t" style="left:5px;top:6px;font-weight:700">가맹점 등록</span>' +
+          '<div style="position:absolute;right:6px;bottom:6px;width:22px;height:22px;border-radius:50%;' + ACCENT + ';display:grid;place-items:center;font-size:11px">+</div>'),
+        '<b>오른쪽 아래 떠 있는 동그란 버튼</b>(FAB). 엄지가 닿는 자리다'],
+      web: [frame(
+          '<span class="t" style="left:5px;top:6px;font-weight:700">가맹점 등록</span>' +
+          '<div style="position:absolute;left:6px;bottom:6px;display:flex;gap:4px">' +
+            '<span style="font-size:8px;padding:3px 8px;border-radius:4px;' + ACCENT + '">저장</span>' +
+            '<span style="font-size:8px;padding:3px 8px;border-radius:4px;border:1px solid var(--line)">취소</span>' +
+          '</div>'),
+        '<b>폼 아래 왼쪽.</b> 주 동작이 먼저, 취소는 약하게 옆에']
+    }],
+    toggle: ['<b>켜고 끄는 것을 무엇으로 그리나</b>', {
+      ios: [frame(
+          '<span class="t" style="left:5px;top:20px">알림 받기</span>' +
+          '<div style="position:absolute;right:6px;top:18px;width:22px;height:13px;border-radius:999px;' + ACCENT + '"><span style="position:absolute;right:1px;top:1px;width:11px;height:11px;border-radius:50%;background:#fff"></span></div>'),
+        '<b>초록 스위치.</b> 누르면 바로 적용되고 저장 버튼이 없다'],
+      android: [frame(
+          '<span class="t" style="left:5px;top:20px">알림 받기</span>' +
+          '<div style="position:absolute;right:6px;top:17px;width:24px;height:14px;border-radius:999px;' + ACCENT + '"><span style="position:absolute;right:1px;top:1px;width:12px;height:12px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:7px;color:var(--accent)">✓</span></div>'),
+        '<b>스위치에 ✓ 가 붙는다.</b> 색만으로 구별하지 않게 한 것'],
+      web: [frame(
+          '<span class="t" style="left:5px;top:20px">☑ 알림 받기</span>' +
+          '<span class="t" style="left:5px;top:36px;color:var(--fg-muted)">[저장] 을 눌러야 적용</span>'),
+        '<b>체크박스도 흔하다.</b> 저장 버튼이 있으면 스위치보다 맞는다']
+    }],
+    alert: ['<b>확인·취소를 어느 쪽에 두나</b>', {
+      ios: [frame(
+          '<div style="position:absolute;left:10px;right:10px;top:16px;bottom:16px;background:var(--surface);border-radius:6px;border:1px solid var(--line)">' +
+          '<span class="t" style="left:6px;top:6px;font-weight:700">지울까요?</span>' +
+          '<div style="position:absolute;left:0;right:0;bottom:0;display:flex;border-top:1px solid var(--line);font-size:8px">' +
+            '<span style="flex:1;text-align:center;padding:3px 0;border-right:1px solid var(--line);color:var(--accent)">취소</span>' +
+            '<span style="flex:1;text-align:center;padding:3px 0;color:var(--danger);font-weight:700">삭제</span>' +
+          '</div></div>'),
+        '<b>취소가 왼쪽, 확인이 오른쪽.</b> 반반으로 나눠 놓는다'],
+      android: [frame(
+          '<div style="position:absolute;left:10px;right:10px;top:16px;bottom:16px;background:var(--surface);border-radius:10px;border:1px solid var(--line)">' +
+          '<span class="t" style="left:6px;top:6px;font-weight:700">지울까요?</span>' +
+          '<div style="position:absolute;right:6px;bottom:5px;display:flex;gap:6px;font-size:8px">' +
+            '<span style="color:var(--accent)">취소</span><span style="color:var(--accent);font-weight:700">삭제</span>' +
+          '</div></div>'),
+        '<b>둘 다 오른쪽 아래</b>에 글자 버튼으로. 취소가 먼저다'],
+      web: [frame(
+          '<div style="position:absolute;left:10px;right:10px;top:16px;bottom:16px;background:var(--surface);border-radius:8px;border:1px solid var(--line);box-shadow:var(--e2)">' +
+          '<span class="t" style="left:6px;top:6px;font-weight:700">지울까요?</span>' +
+          '<div style="position:absolute;right:6px;bottom:5px;display:flex;gap:4px;font-size:8px">' +
+            '<span style="padding:2px 6px;border:1px solid var(--line);border-radius:4px">취소</span>' +
+            '<span style="padding:2px 6px;border-radius:4px;background:var(--danger);color:#fff">삭제</span>' +
+          '</div></div>'),
+        '<b>오른쪽 아래, 확인이 바깥쪽.</b> 위험한 동작은 빨갛게']
+    }],
+    tab: ['<b>아래 탭을 어떻게 그리나</b>', {
+      ios: [frame(
+          '<div style="position:absolute;left:0;right:0;bottom:0;height:22px;border-top:1px solid var(--line);background:var(--surface);display:flex;font-size:7px;text-align:center">' +
+            '<span style="flex:1;color:var(--accent)">◆<br>정산</span><span style="flex:1;color:var(--fg-muted)">◇<br>가맹점</span><span style="flex:1;color:var(--fg-muted)">◇<br>설정</span>' +
+          '</div>'),
+        '<b>아이콘 위, 글자 아래.</b> 고른 것은 색으로만 구별한다'],
+      android: [frame(
+          '<div style="position:absolute;left:0;right:0;bottom:0;height:22px;border-top:1px solid var(--line);background:var(--surface);display:flex;font-size:7px;text-align:center">' +
+            '<span style="flex:1"><span style="display:inline-block;padding:1px 6px;border-radius:999px;' + ACCENT + '">◆</span><br>정산</span>' +
+            '<span style="flex:1;color:var(--fg-muted)">◇<br>가맹점</span><span style="flex:1;color:var(--fg-muted)">◇<br>설정</span>' +
+          '</div>'),
+        '<b>고른 아이콘에 알약 모양 바탕</b>이 깔린다. 색만으로 안 가른다'],
+      web: [frame(
+          '<div style="position:absolute;left:0;right:0;top:0;height:18px;border-bottom:1px solid var(--line);background:var(--surface);display:flex;gap:6px;font-size:7px;padding:0 5px;align-items:center">' +
+            '<span style="color:var(--accent);border-bottom:2px solid var(--accent)">정산</span><span style="color:var(--fg-muted)">가맹점</span><span style="color:var(--fg-muted)">설정</span>' +
+          '</div>'),
+        '<b>아래가 아니라 위.</b> 웹은 <a href="../items/appbar.html">앱바</a>·<a href="../items/tabs.html">탭</a>이 위에 있는 것이 관례다']
+    }]
+  };
+
+  var NOTES = {
+    nav: '웹에서 화면 안에 ← 를 또 두면 <b>브라우저 ← 와 둘이 됩니다.</b> 둘이 다르게 움직이면 바로 혼란이 됩니다.',
+    action: 'FAB 를 웹에 그대로 옮기면 <b>오른쪽 아래가 가려</b> 바닥 글이나 채팅 버튼과 부딪힙니다.',
+    toggle: '<b>스위치는 바로 적용, 체크박스는 저장</b>이라는 약속이 셋 모두 같습니다. 저장 버튼이 있는데 스위치를 쓰면 어디서나 틀립니다.',
+    alert: '확인·취소 차례를 OS 마다 바꾸는 앱이 실제로 있습니다. 웹 하나만 만든다면 <b>오른쪽 아래, 확인이 바깥쪽</b>으로 통일하는 편이 낫습니다.',
+    tab: '아래 탭은 <b>앱의 관례</b>입니다. 웹에 넣으려면 폰 폭에서만 쓰고 PC 에서는 위로 올리는 쪽이 자연스럽습니다.'
+  };
+
+  function draw() {
+    var k = document.getElementById('k').value;
+    var d = DATA[k];
+    document.getElementById('q').innerHTML = '질문 — ' + d[0];
+    var names = [['iOS', 'Apple HIG', 'ios'], ['안드로이드', 'Material 3', 'android'], ['웹', '관례', 'web']];
+    document.getElementById('grid').innerHTML = names.map(function (n) {
+      var cell = d[1][n[2]];
+      return '<div class="pf" data-p="' + n[2] + '"><h4>' + n[0] + ' <em>' + n[1] + '</em></h4>' +
+        cell[0] + '<span class="why">' + cell[1] + '</span></div>';
+    }).join('');
+    document.getElementById('note').innerHTML = NOTES[k];
+  }
+  document.getElementById('k').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

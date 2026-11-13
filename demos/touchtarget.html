@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>터치 타깃 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s5); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .sec h3 { margin: 0 0 var(--s3); font-size: 13px; }
+  .pair { display: inline-flex; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>터치 타깃</b>
+  <label><input type="checkbox" id="finger" checked> 손가락 크기 보이기 (44px)</label>
+  <label><input type="checkbox" id="pad"> 보이는 크기는 두고 누를 넓이만 키우기</label>
+</div>
+
+<div class="pad">
+  <div class="sec">
+    <h3>같은 아이콘, 다른 누를 넓이</h3>
+    <div class="tt-row" id="row"></div>
+  </div>
+  <div class="sec">
+    <h3>붙여 놓으면 더 나빠진다</h3>
+    <div class="tt-row">
+      <div>
+        <span class="pair" id="tight"></span>
+        <p class="tt-note" id="tightnote"></p>
+      </div>
+      <div>
+        <span class="pair" id="loose"></span>
+        <p class="tt-note">간격 8px — 손가락 원이 안 겹친다</p>
+      </div>
+    </div>
+  </div>
+  <p class="ruler" id="ruler"></p>
+</div>
+
+<p class="hint">
+  점선 원이 <b>손가락 끝이 닿는 넓이</b>(약 9mm ≈ 44px)입니다. 네모가 원보다 작으면
+  <b>옆을 누르게 됩니다.</b><br>
+  <b>보이는 크기는 두고 누를 넓이만 키우기</b>를 켜 보세요 — 아이콘은 그대로 24px 인데
+  투명한 여백으로 눌리는 범위만 44px 이 됩니다. 디자인을 안 바꾸고 고치는 방법입니다.<br>
+  크기만큼 <b>간격</b>도 중요합니다. 44px 짜리 둘을 딱 붙여 놓으면 가운데를 누를 때
+  어느 쪽이 눌릴지 알 수 없습니다.
+</p>
+
+<script>
+(function () {
+  var SIZES = [20, 24, 32, 44, 48];
+  var row = document.getElementById('row');
+
+  function build() {
+    var padOn = document.getElementById('pad').checked;
+    row.innerHTML = SIZES.map(function (s) {
+      var hit = padOn ? Math.max(s, 44) : s;
+      var padV = (hit - s) / 2;
+      return '<div><div class="tt-wrap" data-size="' + s + '" data-hit="' + hit + '">' +
+        '<button class="tt" style="width:' + s + 'px;height:' + s + 'px;padding:0;' +
+        'margin:' + padV + 'px;outline-offset:' + padV + 'px">✕</button>' +
+        '<span class="finger"></span></div>' +
+        '<p class="tt-note' + (hit < 44 ? ' bad' : '') + '">보이는 ' + s + 'px · 눌리는 ' + hit + 'px' +
+        (hit < 44 ? ' ✕' : ' ✓') + '</p></div>';
+    }).join('');
+    // 누를 넓이를 키울 때는 바깥 래퍼가 그만큼 커져야 한다
+    [].forEach.call(row.querySelectorAll('.tt-wrap'), function (w) {
+      var hit = +w.dataset.hit;
+      w.style.padding = '0';
+      w.style.width = hit + 'px'; w.style.height = hit + 'px';
+      w.style.display = 'grid'; w.style.placeItems = 'center';
+    });
+    sync();
+  }
+
+  function pairs() {
+    function one(gap) {
+      return '<span class="tt-wrap" style="display:inline-grid;place-items:center;width:44px;height:44px' +
+        (gap ? ';margin-right:' + gap + 'px' : '') + '">' +
+        '<button class="tt" style="width:28px;height:28px;padding:0">●</button><span class="finger"></span></span>';
+    }
+    document.getElementById('tight').innerHTML = one(0) + one(0);
+    document.getElementById('loose').innerHTML = one(8) + one(0);
+    document.getElementById('tightnote').innerHTML = '간격 0px — <b>손가락 원이 겹친다</b>';
+    document.getElementById('tightnote').className = 'tt-note bad';
+  }
+
+  function sync() {
+    var on = document.getElementById('finger').checked;
+    [].forEach.call(document.querySelectorAll('.tt-wrap'), function (w) {
+      w.classList.toggle('show-finger', on);
+    });
+    var bad = [].filter.call(row.querySelectorAll('.tt-wrap'), function (w) { return +w.dataset.hit < 44; }).length;
+    var rl = document.getElementById('ruler');
+    rl.innerHTML = bad
+      ? '<span class="warn">44px 에 못 미치는 것 ' + bad + '개</span> · 손가락 끝은 약 9mm 다'
+      : '모두 <b>44px 이상</b> — 보이는 크기는 그대로인데 눌리는 넓이만 커졌다';
+    rl.dataset.bad = String(bad);
+  }
+
+  document.getElementById('finger').addEventListener('change', sync);
+  document.getElementById('pad').addEventListener('change', build);
+  build(); pairs(); sync();
+})();
+</script>
+</body>
+</html>

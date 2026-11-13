@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>화면 밀도 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 8px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .sys { font-family: var(--mono); font-size: 12px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>화면 밀도</b>
+  <label>기기 배율 <input type="range" id="r" class="ui-range" min="1" max="3" step="1" value="1" style="width:120px"> <span class="ruler" id="rv">1배</span></label>
+  <span class="sys" id="sys"></span>
+</div>
+
+<div class="pad">
+  <div class="dpr-row" id="row"></div>
+  <p class="ruler" id="ruler"></p>
+</div>
+
+<p class="hint">
+  <b>CSS 의 1px 은 길이 단위이지 화소가 아닙니다.</b> 배율 3배 화면에서 <code>1px</code> 선은
+  실제 화소 세 개로 그려집니다 — 그래서 어디서나 같은 굵기로 보입니다.<br>
+  문제는 <b>그림</b>입니다. 100px 자리에 100화소짜리 그림을 넣으면 3배 화면에서 세 배로 늘어나
+  뭉개집니다. 그래서 <code>srcset</code>으로 <b>2배·3배 그림을 따로</b> 주거나 SVG 를 씁니다.<br>
+  반대로 <b>머리카락 선</b>은 배율이 높을수록 가늘게 그릴 수 있습니다 — 3배 화면에서
+  <code>0.33px</code>은 정확히 화소 하나입니다.
+</p>
+
+<script>
+(function () {
+  var CARDS = [
+    ['사진 — 1배짜리',  'bitmap1', '100화소 그림을 늘려 쓴다'],
+    ['사진 — 배율만큼', 'bitmapN', 'srcset 으로 알맞은 것을 받는다'],
+    ['아이콘 — SVG',    'vector',  '배율과 상관없이 선명하다'],
+    ['선 — 1px',        'line1',   '어느 배율에서나 같은 굵기'],
+    ['선 — 머리카락',   'hair',    '화소 하나. 배율이 높을수록 가늘다']
+  ];
+  var row = document.getElementById('row');
+  row.innerHTML = CARDS.map(function (c) {
+    return '<div class="dpr" data-k="' + c[1] + '"><h4>' + c[0] + '</h4>' +
+      '<canvas data-k="' + c[1] + '"></canvas><span class="num"></span>' +
+      '<span class="why" style="font-size:11.5px;color:var(--fg-muted)">' + c[2] + '</span></div>';
+  }).join('');
+
+  function draw() {
+    var r = +document.getElementById('r').value;
+    document.getElementById('rv').textContent = r + '배';
+
+    [].forEach.call(row.querySelectorAll('canvas'), function (cv) {
+      var k = cv.dataset.k;
+      var cssW = cv.clientWidth, cssH = 56;
+      cv.width = Math.round(cssW * r); cv.height = Math.round(cssH * r);
+      var g = cv.getContext('2d');
+      g.setTransform(1, 0, 0, 1, 0, 0);
+      g.clearRect(0, 0, cv.width, cv.height);
+
+      var note = '';
+      if (k === 'bitmap1' || k === 'bitmapN') {
+        // 원본 화소 수를 다르게 해서 같은 자리에 늘려 그린다
+        var src = document.createElement('canvas');
+        var n = (k === 'bitmap1') ? 1 : r;              // 원본 배율
+        src.width = Math.round(40 * n); src.height = Math.round(28 * n);
+        var sg = src.getContext('2d');
+        sg.fillStyle = '#2f6df6';
+        for (var y = 0; y < 7; y++) for (var x = 0; x < 10; x++) {
+          if ((x + y) % 2 === 0) sg.fillRect(x * 4 * n, y * 4 * n, 4 * n, 4 * n);
+        }
+        sg.fillStyle = '#14161a';
+        sg.beginPath(); sg.arc(20 * n, 14 * n, 9 * n, 0, Math.PI * 2); sg.fill();
+        g.imageSmoothingEnabled = true;
+        g.drawImage(src, 0, 0, src.width, src.height,
+                    Math.round((cssW - 120) / 2 * r), 2 * r, 120 * r, 52 * r);
+        note = '원본 ' + src.width + '×' + src.height + '화소 → ' +
+               Math.round(120 * r) + '×' + Math.round(52 * r) + '화소 자리';
+        if (k === 'bitmap1' && r > 1) note += ' · <b style="color:var(--danger)">' + r + '배로 늘어남</b>';
+      } else if (k === 'vector') {
+        g.setTransform(r, 0, 0, r, 0, 0);
+        g.strokeStyle = '#2f6df6'; g.lineWidth = 2; g.lineJoin = 'round';
+        var cx = cssW / 2, cy = 28;
+        g.beginPath();
+        g.moveTo(cx - 16, cy + 8); g.lineTo(cx - 4, cy - 10); g.lineTo(cx + 6, cy + 2); g.lineTo(cx + 16, cy - 12);
+        g.stroke();
+        g.beginPath(); g.arc(cx, cy, 20, 0, Math.PI * 2); g.strokeStyle = '#aeb6c2'; g.lineWidth = 1; g.stroke();
+        note = '그릴 때마다 다시 계산 — 화소 수와 무관';
+      } else {
+        g.setTransform(1, 0, 0, 1, 0, 0);
+        g.fillStyle = '#14161a';
+        var thick = (k === 'line1') ? r : 1;            // 기기 화소 수
+        for (var i = 0; i < 3; i++) {
+          g.fillRect(Math.round(cssW * 0.12 * r), Math.round((14 + i * 14) * r), Math.round(cssW * 0.76 * r), thick);
+        }
+        note = (k === 'line1')
+          ? 'CSS 1px = 기기 화소 <b>' + r + '개</b> — 굵기가 같아 보인다'
+          : '기기 화소 <b>1개</b> = CSS ' + (1 / r).toFixed(2) + 'px — 배율이 높을수록 가늘다';
+      }
+      cv.parentElement.querySelector('.num').innerHTML = note;
+    });
+
+    var rl = document.getElementById('ruler');
+    rl.innerHTML = r === 1
+      ? '배율 <b>1배</b> — CSS 1px 과 기기 화소 하나가 같다. 옛날 모니터'
+      : '배율 <b>' + r + '배</b> — CSS 100px 자리가 기기 화소 <b>' + (100 * r) + '개</b>다. ' +
+        '1배짜리 그림은 ' + r + '배로 늘어나 <span class="warn">뭉개진다</span>';
+    rl.dataset.r = String(r);
+    document.getElementById('sys').textContent = '이 화면의 실제 배율: ' + window.devicePixelRatio;
+  }
+
+  document.getElementById('r').addEventListener('input', draw);
+  window.addEventListener('resize', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

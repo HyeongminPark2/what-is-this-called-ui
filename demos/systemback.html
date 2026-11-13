@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>시스템 백 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .screen { position: relative; height: 180px; border: 1px solid var(--line); border-radius: var(--r2); background: var(--bg); overflow: hidden; }
+  .layer { position: absolute; inset: 0; padding: var(--s3); font-size: 13px; background: var(--surface); }
+  .layer.l2 { left: 10px; top: 14px; border-radius: var(--r2) 0 0 0; box-shadow: var(--e2); }
+  .layer.l3 { left: 0; right: 0; top: 46%; bottom: 0; border-radius: var(--r2) var(--r2) 0 0; border-top: 1px solid var(--line); box-shadow: var(--e2); }
+  .layer h4 { margin: 0 0 4px; font-size: 13px; }
+  .layer p { margin: 0; font-size: 12px; color: var(--fg-muted); }
+  .exit { position: absolute; inset: 0; display: grid; place-items: center; background: var(--ink-900); color: #fff; font-size: 13px; text-align: center; padding: var(--s4); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>시스템 백</b>
+  <label><input type="checkbox" id="push" checked> 모달을 뒤로가기 기록에 넣기</label>
+  <button class="ui-btn" id="open">시트 열기</button>
+  <button class="ui-btn ui-btn--primary" id="back">← 뒤로</button>
+  <button class="ui-btn" id="reset">처음부터</button>
+</div>
+
+<div class="pad">
+  <div class="screen" id="screen"></div>
+  <p class="ruler">기록 <span id="histline"></span></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  폰에는 <b>OS가 주는 뒤로가기</b>가 있습니다. 안드로이드는 버튼·제스처, 아이폰은 가장자리 쓸기,
+  웹은 브라우저의 ← 입니다. 사용자는 <b>이걸로 모달도 닫습니다.</b><br>
+  <b>기록에 넣기</b>를 끄고 시트를 연 뒤 뒤로를 눌러 보세요 — 시트는 그대로 남고
+  <b>앱이 통째로 뒤로 갑니다.</b> 쓰던 화면을 잃는 것이라 사용자가 가장 싫어하는 사고입니다.
+</p>
+
+<script>
+(function () {
+  // 화면에 떠 있는 것: [{name, inHistory}]
+  var layers = [];
+  var left = false;
+  var screen = document.getElementById('screen');
+
+  function has(n) { return layers.some(function (l) { return l.name === n; }); }
+
+  function draw() {
+    if (left) {
+      screen.innerHTML = '<div class="exit">앱을 나갔습니다<br><span style="font-size:11px;opacity:.7">쓰던 화면을 잃었다</span></div>';
+    } else {
+      var h = '';
+      if (has('목록')) h += '<div class="layer l1"><h4>정산 목록</h4><p>128건</p></div>';
+      if (has('상세')) h += '<div class="layer l2"><h4>모란상회</h4><p>1,284,000원</p></div>';
+      if (has('시트')) h += '<div class="layer l3"><h4>내보내기</h4><p>기간을 고르세요</p></div>';
+      screen.innerHTML = h;
+    }
+    var hist = left ? [] : layers.filter(function (l) { return l.inHistory; });
+    document.getElementById('histline').innerHTML =
+      (left ? '<span class="e top">바깥</span>' :
+        hist.map(function (e, i) {
+          return '<span class="e' + (i === hist.length - 1 ? ' top' : '') + '">' + e.name + '</span>';
+        }).join('') +
+        layers.filter(function (l) { return !l.inHistory; })
+          .map(function (e) { return '<span class="e gone">' + e.name + ' (기록 밖)</span>'; }).join(''));
+    document.getElementById('open').disabled = left || has('시트');
+    document.getElementById('histline').dataset.depth = String(hist.length);
+  }
+
+  function log(t) { document.getElementById('log').innerHTML = t; }
+
+  document.getElementById('open').addEventListener('click', function () {
+    var pushed = document.getElementById('push').checked;
+    layers.push({ name: '시트', inHistory: pushed });
+    log(pushed
+      ? '시트를 열며 <b>기록을 하나 쌓았다</b>'
+      : '시트를 열었지만 <span class="warn">기록은 그대로다</span>');
+    draw();
+  });
+
+  document.getElementById('back').addEventListener('click', function () {
+    if (left) { log('이미 나갔다'); return; }
+    // OS 는 화면이 아니라 기록을 하나 뺀다
+    var hist = layers.filter(function (l) { return l.inHistory; });
+    if (hist.length <= 1) {
+      left = true;
+      log(has('시트') && !layers[layers.length - 1].inHistory
+        ? '뒤로 — <span class="warn">시트는 그대로인데 앱을 나갔다</span>'
+        : '뒤로 — 첫 화면이라 <b>앱을 나갔다</b>');
+      draw(); return;
+    }
+    var top = hist[hist.length - 1];
+    layers.splice(layers.indexOf(top), 1);
+    if (top.name === '시트') log('뒤로 — <b>시트만 닫혔다</b>');
+    else if (has('시트')) log('뒤로 — <span class="warn">시트는 그대로인데 그 아래 화면이 사라졌다</span>');
+    else log('뒤로 — 한 화면 전으로');
+    draw();
+  });
+
+  document.getElementById('reset').addEventListener('click', function () {
+    layers = [{ name: '목록', inHistory: true }, { name: '상세', inHistory: true }];
+    left = false; log('처음부터'); draw();
+  });
+
+  layers = [{ name: '목록', inHistory: true }, { name: '상세', inHistory: true }];
+  draw();
+})();
+</script>
+</body>
+</html>

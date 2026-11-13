@@ -1324,3 +1324,74 @@ body > .hint, body > .log, body > .ratio {
 .rm.drop .verdict { color: var(--danger); }
 .rm .mover { position: absolute; width: 26px; height: 26px; border-radius: 6px; background: var(--accent); top: 18px; left: 10px; }
 .rm .fader { position: absolute; inset: 14px; border-radius: var(--r1); background: var(--accent); opacity: .25; }
+
+/* ───────── 11부 플랫폼 ───────── */
+
+/* 폭을 끌어 보는 무대 */
+.stage-w { margin: 0 auto; border: 1px solid var(--line); border-radius: var(--r2); background: var(--bg); padding: var(--s3); transition: width 120ms linear; }
+.stage-w__tag { font-family: var(--mono); font-size: 11.5px; color: var(--fg-muted); text-align: center; margin: 0 0 var(--s2); }
+.bp-grid { display: grid; gap: var(--s2); grid-template-columns: 1fr; }
+.bp-grid .c { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r1); padding: var(--s2) var(--s3); font-size: 12px; }
+.bp-grid .c b { display: block; font-size: 12.5px; }
+.bp-grid .c span { color: var(--fg-muted); font-size: 11px; }
+.stage-w.is-2 .bp-grid { grid-template-columns: 1fr 1fr; }
+.stage-w.is-3 .bp-grid { grid-template-columns: repeat(3, 1fr); }
+.stage-w.is-4 .bp-grid { grid-template-columns: repeat(4, 1fr); }
+.stage-w .nav { display: flex; gap: var(--s2); margin-bottom: var(--s3); font-size: 12px; }
+.stage-w .nav .item { padding: 4px 9px; border-radius: var(--r1); background: var(--surface); border: 1px solid var(--line); }
+.stage-w .nav .burger { display: none; }
+.stage-w.is-1 .nav .item { display: none; }
+.stage-w.is-1 .nav .burger { display: block; }
+
+/* 터치 타깃 */
+.tt-row { display: flex; align-items: center; gap: var(--s4); flex-wrap: wrap; }
+.tt { position: relative; display: inline-grid; place-items: center; background: var(--accent); color: #fff; border: 0; border-radius: var(--r1); font-size: 11px; cursor: pointer; }
+.tt-wrap { position: relative; display: inline-block; }
+.tt-wrap .finger { position: absolute; left: 50%; top: 50%; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; border: 2px dashed var(--danger); pointer-events: none; opacity: 0; }
+.tt-wrap.show-finger .finger { opacity: 1; }
+.tt-note { font-family: var(--mono); font-size: 11px; color: var(--fg-muted); text-align: center; margin-top: 5px; }
+.tt-note.bad { color: var(--danger); font-weight: 700; }
+
+/* 호버가 없는 세계 */
+.hv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: var(--s3); }
+.hv { border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); padding: var(--s3); display: grid; gap: var(--s2); position: relative; }
+.hv h4 { margin: 0; font-size: 12.5px; }
+.hv .hidden-bit { font-size: 11.5px; color: var(--fg-muted); opacity: 0; transition: opacity 140ms linear; }
+.hv:hover .hidden-bit { opacity: 1; }
+.no-hover .hv:hover .hidden-bit { opacity: 0; }
+.no-hover .hv.fixed .hidden-bit { opacity: 1; }
+.hv .verdict { font-size: 11.5px; font-weight: 700; }
+.hv.fixed .verdict { color: var(--accent); }
+.hv:not(.fixed) .verdict { color: var(--danger); }
+
+/* 시스템 백 */
+.hist { display: flex; gap: 5px; flex-wrap: wrap; font-family: var(--mono); font-size: 11px; }
+.hist .e { padding: 3px 8px; border-radius: var(--r1); background: var(--bg); border: 1px solid var(--line); color: var(--fg-muted); }
+.hist .e.top { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; }
+.hist .e.gone { text-decoration: line-through; opacity: .45; }
+
+/* 화면 밀도 */
+.dpr-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: var(--s3); }
+.dpr { border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); padding: var(--s3); display: grid; gap: var(--s2); }
+.dpr h4 { margin: 0; font-size: 12.5px; }
+.dpr canvas { width: 100%; height: 56px; display: block; background: var(--bg); border-radius: var(--r1); image-rendering: pixelated; }
+.dpr .num { font-family: var(--mono); font-size: 11px; color: var(--fg-muted); }
+.dpr .num b { color: var(--accent); }
+
+/* 폰 화면 흉내 — 주소창과 키보드 */
+.sim { width: 190px; margin: 0 auto; border: 2px solid var(--line-strong); border-radius: 18px; background: var(--surface); overflow: hidden; position: relative; height: 300px; }
+.sim__bar { height: 26px; background: var(--bg); border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-size: 9px; color: var(--fg-muted); }
+.sim__body { position: absolute; left: 0; right: 0; bottom: 0; overflow: hidden; }
+.sim__panel { position: absolute; left: 6px; right: 6px; background: var(--accent-soft); border: 1px solid var(--accent); border-radius: var(--r1); font-size: 10px; padding: 5px; color: var(--accent); }
+.sim__kbd { position: absolute; left: 0; right: 0; bottom: 0; height: 44%; background: var(--ink-100); border-top: 1px solid var(--line-strong); display: grid; grid-template-rows: repeat(4, 1fr); gap: 3px; padding: 5px; }
+.sim__kbd i { background: var(--surface); border-radius: 3px; display: block; }
+.sim__field { position: absolute; left: 6px; right: 6px; height: 24px; border: 1px solid var(--line); border-radius: var(--r1); background: var(--surface); font-size: 9px; display: flex; align-items: center; padding: 0 6px; }
+.sim__cta { position: absolute; left: 6px; right: 6px; height: 22px; border-radius: var(--r1); background: var(--accent); color: #fff; font-size: 9px; display: grid; place-items: center; }
+
+/* 세 플랫폼 나란히 */
+.pf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(176px, 1fr)); gap: var(--s3); }
+.pf { border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); padding: var(--s3); display: grid; gap: var(--s2); }
+.pf h4 { margin: 0; font-size: 12.5px; }
+.pf h4 em { font-style: normal; font-weight: 500; color: var(--fg-muted); font-size: 11px; }
+.pf .mini { height: 92px; border-radius: var(--r1); background: var(--bg); border: 1px solid var(--line); position: relative; overflow: hidden; }
+.pf .why { font-size: 11.5px; color: var(--fg-muted); }

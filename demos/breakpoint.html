@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>브레이크포인트 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 8px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .stage-scroll { overflow-x: auto; padding-bottom: 4px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>브레이크포인트</b>
+  <label>화면 폭 <input type="range" id="w" class="ui-range" min="320" max="1280" step="10" value="390" style="width:220px"> <span class="ruler" id="wv">390px</span></label>
+  <label><input type="checkbox" id="bad"> 잘못 잡은 기준으로</label>
+</div>
+
+<div class="pad">
+  <div class="stage-scroll">
+  <div class="stage-w" id="stage" style="width:390px">
+    <p class="stage-w__tag" id="tag"></p>
+    <div class="nav">
+      <span class="item">정산</span><span class="item">가맹점</span><span class="item">설정</span>
+      <span class="burger">☰ 메뉴</span>
+    </div>
+    <div class="bp-grid">
+      <div class="c"><b>모란상회 신길역점</b><span>1,284,000원 · 수수료 38,520원</span></div>
+      <div class="c"><b>한빛아웃도어 영등포타임스퀘어점</b><span>9,827,500원 · 수수료 294,825원</span></div>
+      <div class="c"><b>새벽상사 가산디지털단지점</b><span>11,100원 · 수수료 333원</span></div>
+      <div class="c"><b>대림유통 구로디지털단지본점</b><span>3,402,000원 · 수수료 102,060원</span></div>
+    </div>
+  </div>
+  </div>
+  <p class="ruler" id="ruler"></p>
+</div>
+
+<p class="hint">
+  막대를 끌어 폭을 바꿔 보세요. <b>기기 이름이 아니라 내용이 깨지는 지점</b>에서 단을 바꾸는 것이 기준입니다.<br>
+  <b>잘못 잡은 기준으로</b>를 켜면 흔히 쓰는 '아이폰·아이패드' 폭(375 / 768 / 1024)에 맞춰 끊습니다 —
+  390px 폰에서 벌써 두 단이 되어 <b>가게 이름이 두 줄로 접힙니다.</b>
+  아래 숫자는 짐작이 아니라 <b>실제로 접힌 칸의 수를 센 것</b>입니다.
+  기기는 계속 새로 나오고 창은 아무 폭으로나 열립니다 — 그래서 기준은
+  <b>기기 이름이 아니라 내용이 깨지는 지점</b>이어야 합니다.
+</p>
+
+<script>
+(function () {
+  // [최소폭, 단 수, 이름]
+  var GOOD = [[0, 1, '한 단'], [560, 2, '두 단'], [900, 3, '세 단'], [1180, 4, '네 단']];
+  var BAD  = [[0, 1, '한 단'], [375, 2, '두 단'], [768, 3, '세 단'], [1024, 4, '네 단']];
+
+  function pick(list, w) {
+    var hit = list[0];
+    list.forEach(function (r) { if (w >= r[0]) hit = r; });
+    return hit;
+  }
+
+  function draw() {
+    var w = +document.getElementById('w').value;
+    var useBad = document.getElementById('bad').checked;
+    var r = pick(useBad ? BAD : GOOD, w);
+    var stage = document.getElementById('stage');
+    stage.style.width = w + 'px';
+    stage.className = 'stage-w is-' + r[1];
+    document.getElementById('tag').textContent = w + 'px · ' + r[2];
+
+    // 깨졌는지는 짐작하지 말고 잰다 — 가게 이름이 두 줄로 접히면 깨진 것이다
+    var col = Math.round(stage.querySelector('.bp-grid .c').getBoundingClientRect().width);
+    var wrapped = [].filter.call(stage.querySelectorAll('.bp-grid .c b'), function (b) {
+      var line = parseFloat(getComputedStyle(b).lineHeight) || 16;
+      return b.getBoundingClientRect().height > line * 1.4;
+    }).length;
+
+    var msg = wrapped
+      ? '칸 하나 <span class="warn">' + col + 'px — 가게 이름이 두 줄로 접힌 칸 ' + wrapped + '개</span>'
+      : (col > 420
+        ? '칸 하나 <b>' + col + 'px</b> — 넓다. 한 단 더 넣을 수 있다'
+        : '칸 하나 <b>' + col + 'px</b> — 이름이 한 줄에 들어간다');
+    var rl = document.getElementById('ruler');
+    rl.innerHTML = msg + ' · 기준 ' + (useBad ? '<span class="warn">375 / 768 / 1024 (기기 폭)</span>' : '<b>560 / 900 / 1180 (내용이 깨지는 폭)</b>');
+    rl.dataset.col = String(col);
+    rl.dataset.cols = String(r[1]);
+    rl.dataset.wrapped = String(wrapped);
+  }
+
+  document.getElementById('w').addEventListener('input', function () {
+    document.getElementById('wv').textContent = this.value + 'px'; draw();
+  });
+  document.getElementById('bad').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>뷰포트 단위 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .sims { display: flex; gap: var(--s5); flex-wrap: wrap; justify-content: center; }
+  .cap { text-align: center; font-size: 12px; margin-top: var(--s2); }
+  .cap b { display: block; font-size: 12.5px; }
+  .cap span { display: block; color: var(--fg-muted); font-size: 11.5px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  table.vh { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.vh th, table.vh td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); }
+  table.vh th { font-size: 11.5px; color: var(--fg-muted); }
+  table.vh td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>뷰포트 단위</b>
+  <label><input type="checkbox" id="chrome" checked> 주소창 보이기</label>
+</div>
+
+<div class="pad">
+  <div class="sims" id="sims"></div>
+  <p class="ruler" id="ruler"></p>
+  <table class="vh">
+    <thead><tr><th>단위</th><th>뜻</th><th>이 브라우저에서</th></tr></thead>
+    <tbody id="tbl"></tbody>
+  </table>
+  <p class="ruler" id="tip"></p>
+</div>
+
+<p class="hint">
+  폰 브라우저는 굴릴 때 <b>주소창이 숨었다 나타납니다.</b> 그래서 '화면 높이'가 두 개입니다 —
+  주소창이 있을 때(작은 쪽)와 없을 때(큰 쪽).<br>
+  <code>100vh</code>는 <b>큰 쪽</b>으로 고정입니다. 주소창이 보이는 동안에는 화면 밖으로 삐져나가
+  <b>바닥의 버튼이 안 보입니다.</b> <code>100svh</code>는 작은 쪽, <code>100dvh</code>는
+  <b>지금 보이는 만큼</b>입니다.<br>
+  바닥에 버튼이 붙는 화면이라면 <code>100dvh</code>가 거의 늘 맞습니다.
+</p>
+
+<script>
+(function () {
+  var SIMS = [
+    ['100vh',  'vh',  '주소창이 없을 때의 높이로 고정', '바닥 버튼이 잘린다'],
+    ['100svh', 'svh', '주소창이 있을 때의 높이', '늘 안전하지만 아래가 남는다'],
+    ['100dvh', 'dvh', '지금 보이는 만큼', '바닥에 딱 붙는다']
+  ];
+  var H = 300, BAR = 26;
+
+  function build() {
+    var barOn = document.getElementById('chrome').checked;
+    var seen = barOn ? H - BAR : H;         // 지금 보이는 높이
+    document.getElementById('sims').innerHTML = SIMS.map(function (s) {
+      var panelH = s[1] === 'vh' ? H : (s[1] === 'svh' ? H - BAR : seen);
+      var cut = Math.max(0, panelH - seen);
+      return '<div><div class="sim">' +
+        (barOn ? '<div class="sim__bar">example.com</div>' : '') +
+        '<div class="sim__body" style="top:' + (barOn ? BAR : 0) + 'px">' +
+          '<div class="sim__panel" style="top:6px;height:' + (panelH - 12) + 'px">' +
+            '<span>' + s[0] + ' 짜리 화면</span>' +
+            '<span class="sim__cta" style="left:5px;right:5px;bottom:5px;position:absolute">다음</span>' +
+          '</div>' +
+        '</div></div>' +
+        '<p class="cap" data-k="' + s[1] + '" data-cut="' + cut + '"><b>' + s[0] + '</b><span>' + s[2] + '</span>' +
+        '<span style="color:' + (cut > 0 ? 'var(--danger)' : 'var(--fg-muted)') + '">' +
+        (cut > 0 ? '아래 ' + cut + 'px 가 화면 밖 — ' + s[3] : s[3]) + '</span></p></div>';
+    }).join('');
+
+    var cut = Math.max(0, H - seen);
+    var rl = document.getElementById('ruler');
+    rl.innerHTML = barOn
+      ? '주소창이 보이는 중 — 보이는 높이 <b>' + seen + 'px</b>, ' +
+        '<code>100vh</code>는 <span class="warn">' + H + 'px 라 ' + cut + 'px 가 밖으로 나간다</span>'
+      : '주소창이 숨은 중 — 보이는 높이 <b>' + seen + 'px</b>, 세 단위가 모두 같다';
+    rl.dataset.cut = String(cut);
+  }
+
+  // 이 브라우저에서 각 단위가 실제로 몇 px 인지 잰다
+  function measure() {
+    var units = [['100vh', '화면 높이 — 주소창이 없을 때로 고정'],
+                 ['100svh', '작은 쪽 — 주소창이 있을 때'],
+                 ['100lvh', '큰 쪽 — 주소창이 없을 때'],
+                 ['100dvh', '지금 보이는 만큼 — 굴리면 바뀐다']];
+    var probe = document.createElement('div');
+    probe.style.cssText = 'position:absolute;visibility:hidden;width:1px';
+    document.body.appendChild(probe);
+    var out = units.map(function (u) {
+      probe.style.height = u[0];
+      var px = probe.getBoundingClientRect().height;
+      return '<tr><td class="n">' + u[0] + '</td><td>' + u[1] + '</td><td class="n" data-u="' + u[0] + '">' +
+        (px ? Math.round(px) + 'px' : '지원 안 함') + '</td></tr>';
+    });
+    probe.remove();
+    out.push('<tr><td class="n">innerHeight</td><td>창이 보고하는 높이</td><td class="n">' +
+             window.innerHeight + 'px</td></tr>');
+    document.getElementById('tbl').innerHTML = out.join('');
+
+    // 넷이 같으면 이 브라우저에는 숨는 주소창이 없다는 뜻이다
+    var vals = [].map.call(document.querySelectorAll('#tbl td[data-u]'), function (td) { return td.textContent; });
+    var same = vals.every(function (v) { return v === vals[0]; });
+    var tip = document.getElementById('tip');
+    tip.innerHTML = same
+      ? '이 브라우저에서는 넷이 <b>모두 ' + vals[0] + '</b> — 숨는 주소창이 없어서다. 차이는 <b>폰에서만</b> 드러난다.'
+      : '이 브라우저에서는 값이 갈린다 — 주소창이 숨었다 나타나는 중이다.';
+    tip.dataset.same = same ? '1' : '0';
+  }
+
+  document.getElementById('chrome').addEventListener('change', build);
+  build(); measure();
+  window.addEventListener('resize', measure);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>폰 키보드 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); justify-items: center; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>폰 키보드가 올라올 때</b>
+  <button class="ui-btn ui-btn--primary" id="tap">입력칸 누르기</button>
+  <button class="ui-btn" id="close">키보드 내리기</button>
+  <label><input type="checkbox" id="follow"> visualViewport 로 따라 올리기</label>
+</div>
+
+<div class="pad">
+  <div class="sim" id="sim">
+    <div class="sim__bar">가맹점 등록</div>
+    <div class="sim__body" style="top:26px" id="body">
+      <div class="sim__field" id="f1" style="top:8px">상호</div>
+      <div class="sim__field" id="f2" style="top:44px">사업자번호</div>
+      <div class="sim__field" id="f3" style="top:80px">계좌번호</div>
+      <div class="sim__field" id="f4" style="top:116px">담당자 연락처</div>
+      <div class="sim__field" id="f5" style="top:152px">메모</div>
+      <div class="sim__cta" id="cta" style="bottom:8px">저장</div>
+      <div class="sim__kbd" id="kbd" hidden>
+        <i></i><i></i><i></i><i></i>
+      </div>
+    </div>
+  </div>
+  <p class="drag__read" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  <b>입력칸 누르기</b>를 눌러 키보드를 올려 보세요. 한글 키보드는 자동완성 줄까지 더해
+  <b>화면의 절반</b>을 덮습니다. 아래 칸들이 통째로 키보드 뒤로 들어갑니다.<br>
+  기본 상태에서는 <b>저장 버튼이 키보드 뒤에 숨습니다</b> — 글자는 쳤는데 보낼 수가 없습니다.
+  폰에서 가장 자주 나오는 민원 가운데 하나입니다.<br>
+  <b>visualViewport 로 따라 올리기</b>를 켜면 바닥에 붙은 것이 <b>키보드 위로</b> 올라옵니다.
+  <code>position: fixed</code>는 키보드를 모르기 때문에 직접 올려 줘야 합니다.
+</p>
+
+<script>
+(function () {
+  var KBD = 0.52;                 // 한글 키보드는 자동완성 줄까지 화면의 절반을 덮는다
+  var open = false;
+  var sim = document.getElementById('sim');
+  var kbd = document.getElementById('kbd');
+  var cta = document.getElementById('cta');
+  var fields = ['f1', 'f2', 'f3', 'f4', 'f5'].map(function (id) { return document.getElementById(id); });
+
+  function layout() {
+    var bodyH = sim.clientHeight - 26;
+    var kh = open ? Math.round(bodyH * KBD) : 0;
+    kbd.hidden = !open;
+    kbd.style.height = kh + 'px';
+
+    var follow = document.getElementById('follow').checked;
+    cta.style.bottom = (open && follow ? kh + 8 : 8) + 'px';
+
+    // 가려졌는지 직접 잰다
+    var ctaBox = cta.getBoundingClientRect();
+    var kbdTop = open ? kbd.getBoundingClientRect().top : sim.getBoundingClientRect().bottom;
+    var hidden = ctaBox.bottom > kbdTop + 0.5;
+    var r = document.getElementById('read');
+    r.innerHTML = !open
+      ? '키보드 내려감 — 보이는 높이 <b>' + bodyH + 'px</b>'
+      : '키보드 올라옴 — 보이는 높이 <b>' + (bodyH - kh) + 'px</b> · 저장 버튼 ' +
+        (hidden ? '<span class="warn">가려짐</span>' : '<b>보임</b>');
+    r.dataset.hidden = hidden ? '1' : '0';
+    r.dataset.open = open ? '1' : '0';
+
+    // 입력칸 가운데 몇 개가 키보드 뒤로 들어갔는지 센다
+    var buried = fields.filter(function (f) {
+      return f.getBoundingClientRect().bottom > kbdTop + 0.5;
+    }).length;
+    var lg = document.getElementById('log');
+    lg.innerHTML = !open ? ''
+      : (buried
+        ? '<span class="warn">입력칸 ' + buried + '개가 키보드 뒤에 있다 — 굴려야 보인다</span>'
+        : '다섯 칸 모두 보인다');
+    lg.dataset.buried = String(buried);
+  }
+
+  document.getElementById('tap').addEventListener('click', function () { open = true; layout(); });
+  document.getElementById('close').addEventListener('click', function () { open = false; layout(); });
+  document.getElementById('follow').addEventListener('change', layout);
+  layout();
+})();
+</script>
+</body>
+</html>
