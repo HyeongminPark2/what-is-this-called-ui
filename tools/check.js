@@ -73,6 +73,14 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
         }
       });
 
+      // 회전·확대된 요소에 번호를 붙이면 배지까지 같이 변형되어 안 읽힌다
+      fig.querySelectorAll('[data-p]').forEach(el => {
+        const tr = getComputedStyle(el).transform;
+        if (tr && tr !== 'none' && !tr.startsWith('matrix(1, 0, 0, 1')) {
+          bad.push(`'${el.dataset.p}'가 변형된 요소라 번호까지 같이 돌아감 (${tr.slice(0, 24)})`);
+        }
+      });
+
       // 번호끼리 겹치면 하나가 안 보인다
       const ns = [...fig.querySelectorAll('.partno')];
       ns.forEach((a, i) => ns.slice(i + 1).forEach(b2 => {

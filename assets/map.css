@@ -85,6 +85,8 @@
 .appmock--pc   .pc__side   { border-radius: 0 0 0 9px; }
 .appmock--shop .shop__top  { border-radius: 9px 9px 0 0; }
 .appmock--shop .shop__foot { border-radius: 0 0 9px 9px; }
+.appmock--msg  .msg__head  { border-radius: 0 9px 0 0; }
+.appmock--msg  .msg__side  { border-radius: 9px 0 0 9px; }
 .appmock--ott  .ott__top   { border-radius: 9px 9px 0 0; }
 .appmock--set  .set__save  { border-radius: 0 0 9px 9px; }
 .appmock--mk   .mk__prog   { border-radius: 9px 9px 0 0; }
@@ -97,7 +99,7 @@
 
 @media (max-width: 899px) {
   /* 폰에서 데스크톱 화면은 다 안 들어간다. 줄여서 못 읽게 하느니 옆으로 밀어 보게 한다. */
-  .appmock--pc, .appmock--shop, .appmock--ott,
+  .appmock--pc, .appmock--shop, .appmock--ott, .appmock--msg,
   .appmock--mk, .appmock--set, .appmock--doc { width: 700px; }
   .pan-hint { display: block; }
   .mapfig__lines { display: none; }   /* 좁은 화면에서는 번호로만 잇는다 */
@@ -931,3 +933,128 @@
 .set__save .r i.g { border: 1px solid var(--line-strong); color: var(--fg); }
 .set__save .r i.p { background: var(--accent); color: #fff; }
 .set__save .r i.off { background: var(--accent); color: #fff; opacity: .4; }
+
+/* ── 메신저 ─────────────────────────── */
+.msg__wrap { display: flex; min-height: 392px; }
+
+.msg__side { width: 148px; flex: none; border-right: 1px solid var(--line); background: var(--bg); padding: 9px 7px; }
+.msg__side > b { display: block; font-size: 11px; padding: 0 6px 7px; }
+.msg__ch {
+  display: flex; align-items: center; gap: 7px;
+  padding: 5px 6px; border-radius: var(--r1);
+  font-size: 11px; color: var(--fg-muted);
+}
+.msg__ch.on { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.msg__av {
+  position: relative; width: 20px; height: 20px; border-radius: var(--r-full); flex: none;
+  display: grid; place-items: center; font-size: 9px; font-weight: 800; color: #fff;
+}
+.msg__dot {
+  position: absolute; right: -1px; bottom: -1px;
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #27ae60; box-shadow: 0 0 0 1.5px var(--bg);
+}
+.msg__dot--away { background: #e0a800; }
+.msg__dot--off { background: var(--line-strong); }
+.msg__ch .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.msg__unread {
+  min-width: 15px; height: 15px; padding: 0 4px; flex: none;
+  border-radius: var(--r-full); background: var(--danger); color: #fff;
+  font-size: 9px; font-weight: 800; line-height: 15px; text-align: center;
+}
+
+.msg__main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.msg__head { display: flex; align-items: center; gap: 8px; padding: 8px 13px; border-bottom: 1px solid var(--line); }
+.msg__head b { font-size: 12px; }
+.msg__head span { font-size: 9.5px; color: var(--fg-muted); }
+.msg__feed { flex: 1; padding: 11px 13px; display: flex; flex-direction: column; gap: 9px; }
+
+.msg__sep { display: flex; align-items: center; gap: 9px; font-size: 9px; color: var(--fg-muted); }
+.msg__sep::before, .msg__sep::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.msg__sep--new { color: var(--danger); font-weight: 700; }
+.msg__sep--new::before, .msg__sep--new::after { background: color-mix(in srgb, var(--danger) 45%, transparent); }
+
+.msg__line { display: flex; gap: 8px; align-items: flex-end; }
+.msg__line--me { justify-content: flex-end; }
+.msg__who { font-size: 9.5px; color: var(--fg-muted); margin-bottom: 11px; }   /* 번호가 앉을 자리 */
+.msg__col { max-width: 48%; }
+
+.msg__bubble {
+  position: relative;
+  padding: 7px 11px; border-radius: 12px;
+  background: var(--surface); border: 1px solid var(--line);
+  font-size: 11px; line-height: 1.6;
+}
+.msg__bubble--me { background: var(--accent); color: #fff; border-color: transparent; }
+/* 회전은 안쪽 i 에만 건다. 바깥 상자를 돌리면 번호 배지까지 같이 돌아간다. */
+.msg__tail { position: absolute; left: -4px; bottom: 7px; width: 9px; height: 9px; }
+.msg__tail i {
+  display: block; width: 100%; height: 100%; transform: rotate(45deg);
+  background: var(--surface); border-left: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.msg__bubble--me .msg__tail { left: auto; right: -4px; }
+.msg__bubble--me .msg__tail i { background: var(--accent); border: 0; }
+
+.msg__quote {
+  border-left: 2px solid var(--line-strong); padding: 2px 0 2px 7px;
+  margin-bottom: 5px; font-size: 9.5px; color: var(--fg-muted); line-height: 1.5;
+}
+.msg__quote b { display: block; color: var(--fg); }
+
+.msg__meta { display: flex; align-items: center; gap: 5px; font-size: 8.5px; color: var(--fg-muted); margin-top: 17px; }   /* 꼬리 번호와 안 부딪치게 */
+.msg__line--me .msg__meta { justify-content: flex-end; }
+.msg__read { color: var(--accent); font-weight: 800; }
+
+.msg__react { display: flex; gap: 4px; margin-top: 11px; }
+.msg__react i {
+  font-style: normal; display: inline-flex; align-items: center; gap: 3px;
+  padding: 1px 7px; border-radius: var(--r-full);
+  border: 1px solid var(--line-strong); background: var(--surface);
+  font-size: 9px; color: var(--fg-muted);
+}
+.msg__react i.mine { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+
+.msg__thread {
+  display: inline-flex; align-items: center; gap: 5px; margin-top: 10px;
+  font-size: 9.5px; color: var(--accent); font-weight: 700;
+}
+.msg__thread .faces { display: flex; }
+.msg__thread .faces span {
+  width: 13px; height: 13px; border-radius: 50%; margin-left: -4px;
+  box-shadow: 0 0 0 1.5px var(--surface);
+}
+.msg__thread .faces span:first-child { margin-left: 0; }
+
+.msg__typing { display: flex; align-items: center; gap: 7px; font-size: 9.5px; color: var(--fg-muted); }
+.msg__typing .dots { display: inline-flex; gap: 3px; padding: 6px 9px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
+.msg__typing .dots i { width: 4px; height: 4px; border-radius: 50%; background: var(--fg-faint); }
+.msg__typing .dots i:nth-child(2) { opacity: .65; }
+.msg__typing .dots i:nth-child(3) { opacity: .4; }
+
+.msg__composer {
+  position: relative;
+  display: flex; align-items: center; gap: 8px;
+  margin: 0 13px 12px; padding: 10px 11px;
+  border: 1px solid var(--line-strong); border-radius: var(--r2);
+  background: var(--surface);
+}
+.msg__composer .ico { font-size: 13px; color: var(--fg-muted); flex: none; }
+.msg__composer .txt { flex: 1; min-width: 0; font-size: 11px; }
+.msg__composer .txt .at { background: var(--accent-soft); color: var(--accent); border-radius: 3px; padding: 0 3px; font-weight: 700; }
+.msg__send {
+  width: 26px; height: 26px; border-radius: var(--r1); flex: none;
+  background: var(--accent); color: #fff;
+  display: grid; place-items: center; font-size: 12px;
+}
+.msg__mention {
+  position: absolute; left: 164px; bottom: calc(100% + 9px); z-index: 3;   /* 캐럿 옆. 왼쪽 타이핑 인디케이터를 안 가린다 */
+  width: 168px; padding: 5px;
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r2); box-shadow: var(--e3);
+}
+.msg__mention > b { display: block; font-size: 9px; color: var(--fg-muted); padding: 2px 6px 4px; }
+.msg__mention i {
+  display: flex; align-items: center; gap: 6px; font-style: normal;
+  padding: 4px 6px; border-radius: var(--r1); font-size: 10.5px;
+}
+.msg__mention i.on { background: var(--accent-soft); color: var(--accent); font-weight: 700; }

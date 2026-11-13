@@ -81,7 +81,7 @@
     <h2>화면 지도</h2>
     <p class="sub">서비스 종류가 다르면 쓰는 부품도 다릅니다. 모든 화면이 관리 대시보드처럼
       생기지는 않아서 <b>여러 종류</b>를 나란히 뒀습니다 — 관리 도구, 쇼핑몰, OTT,
-      기업 소개, 설정, 글쓰기 도구. 그리고 폰 화면 하나.<br>
+      기업 소개, 설정, 메신저, 글쓰기 도구. 그리고 폰 화면 하나.<br>
       화면의 번호가 아래 목록의 번호와 이어집니다. <b>어느 쪽을 짚어도 됩니다</b> —
       목록의 이름에 올리면 화면에서 그 부분이 밝아지고, 화면의 부품에 올리면 목록에서 이름이 밝아집니다.</p>
 
@@ -670,6 +670,133 @@
             <li><span class="lbl" data-t="sdanger"><span>위험 구역<em>danger zone</em></span></span></li>
             <li><span class="lbl" data-t="ssave"><span>스티키 저장 바<em>sticky action bar</em></span></span></li>
             <li><span class="lbl" data-t="sdis"><span>비활성 버튼<em>disabled</em></span></span></li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- ── 메신저 ── -->
+      <div class="map">
+        <h3>PC · 메신저</h3>
+        <p class="cap">주고받는 화면. 말풍선·읽음 표시·타이핑 인디케이터처럼 여기 말고는 볼 데가 없는 이름이 모여 있습니다.</p>
+
+        <div class="mapfig" data-map="msg">
+          <svg class="mapfig__lines" aria-hidden="true"></svg>
+          <div class="mapfig__screen">
+            <div class="appmock appmock--msg" role="img" aria-label="메신저 화면을 흉내 낸 그림. 부분마다 번호가 붙어 있고 아래 목록과 이어진다.">
+              <div class="msg__wrap">
+                <nav class="msg__side">
+                  <b>대화</b>
+                  <span class="msg__ch on">
+                    <span class="msg__av" style="background:#2f6df6">윤<span class="msg__dot" data-p="presence"></span></span>
+                    <span class="nm">윤서</span>
+                  </span>
+                  <span class="msg__ch">
+                    <span class="msg__av" style="background:#c0342b">조<span class="msg__dot msg__dot--away"></span></span>
+                    <span class="nm">조은</span><span class="msg__unread num">3</span>
+                  </span>
+                  <span class="msg__ch">
+                    <span class="msg__av" style="background:#1f8a4c">결<span class="msg__dot msg__dot--off"></span></span>
+                    <span class="nm">결제팀</span>
+                  </span>
+                  <span class="msg__ch">
+                    <span class="msg__av" style="background:#6b4fbb">공<span class="msg__dot msg__dot--off"></span></span>
+                    <span class="nm">공지</span>
+                  </span>
+                </nav>
+
+                <div class="msg__main">
+                  <div class="msg__head">
+                    <span class="msg__av" style="background:#2f6df6;width:24px;height:24px;font-size:10px">윤<span class="msg__dot"></span></span>
+                    <b>윤서</b><span>· 접속 중</span>
+                  </div>
+
+                  <div class="msg__feed">
+                    <div class="msg__sep" data-p="datesep">2026년 11월 13일 금요일</div>
+
+                    <div class="msg__line">
+                      <div class="msg__col">
+                        <div class="msg__who">윤서</div>
+                        <div class="msg__bubble" data-p="inbub">
+                          <span class="msg__tail" data-p="tail"><i></i></span>
+                          당번표 초안 올려 뒀어요. 복구 절차는 아직 비어 있어서,
+                          새벽 당번도 같이 정해야 할 것 같습니다.
+                        </div>
+                        <div class="msg__meta"><span data-p="time">오후 2:04</span></div>
+                        <div class="msg__react" data-p="react"><i class="mine">👍 2</i><i>🙏 1</i></div>
+                        <span class="msg__thread" data-p="thread">
+                          <span class="faces"><span style="background:#2f6df6"></span><span style="background:#c0342b"></span><span style="background:#1f8a4c"></span></span>
+                          답글 3개
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="msg__line msg__line--me">
+                      <div class="msg__col">
+                        <div class="msg__bubble msg__bubble--me" data-p="outbub">
+                          <span class="msg__tail"><i></i></span>
+                          <span class="msg__quote" data-p="quote" style="border-left-color:rgba(255,255,255,.5);color:rgba(255,255,255,.8)">
+                            <b style="color:#fff">윤서</b>복구 절차는 아직 비어 있습니다
+                          </span>
+                          제가 오늘 안에 채울게요. 새벽 당번도 같이 정합시다.
+                        </div>
+                        <div class="msg__meta"><span class="msg__read" data-p="receipt">읽음</span><span>오후 2:06</span></div>
+                      </div>
+                    </div>
+
+                    <div class="msg__sep msg__sep--new" data-p="newdiv">여기까지 읽었습니다</div>
+
+                    <div class="msg__line">
+                      <div class="msg__col">
+                        <div class="msg__bubble">
+                          <span class="msg__tail"><i></i></span>
+                          좋아요. 초안에 당번 칸만 만들어 둘게요.
+                        </div>
+                        <div class="msg__meta"><span>오후 2:08</span></div>
+                      </div>
+                    </div>
+
+                    <div class="msg__typing" data-p="typing">
+                      <span class="dots"><i></i><i></i><i></i></span>
+                      윤서가 입력 중…
+                    </div>
+                  </div>
+
+                  <div class="msg__composer" data-p="composer">
+                    <span class="ico" data-p="attach">＋</span>
+                    <span class="txt">복구 절차 <span class="at">@윤서</span></span>
+                    <span class="ico">😊</span>
+                    <span class="msg__send" data-p="send">↑</span>
+
+                    <div class="msg__mention" data-p="mention">
+                      <b>멤버</b>
+                      <i class="on"><span class="msg__av" style="background:#2f6df6;width:15px;height:15px;font-size:7px">윤</span>윤서</i>
+                      <i><span class="msg__av" style="background:#c0342b;width:15px;height:15px;font-size:7px">조</span>조은</i>
+                      <i><span class="msg__av" style="background:#1f8a4c;width:15px;height:15px;font-size:7px">결</span>결제팀 전체</i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="pan-hint">화면을 옆으로 밀면 오른쪽까지 볼 수 있습니다 →  번호는 아래 목록과 이어집니다.</p>
+
+          <ol class="mapfig__list">
+            <li><span class="lbl" data-t="presence"><span>온라인 표시<em>presence · status dot</em></span></span></li>
+            <li><span class="lbl" data-t="datesep"><span>날짜 구분선<em>date separator</em></span></span></li>
+            <li><span class="lbl" data-t="inbub"><span>받은 말풍선<em>incoming bubble</em></span></span></li>
+            <li><span class="lbl" data-t="tail"><span>말풍선 꼬리<em>bubble tail</em></span></span></li>
+            <li><span class="lbl" data-t="react"><span>반응 이모지<em>reaction</em></span></span></li>
+            <li><span class="lbl" data-t="thread"><span>스레드<em>thread · replies</em></span></span></li>
+            <li><span class="lbl" data-t="quote"><span>답장 인용<em>quoted reply</em></span></span></li>
+            <li><span class="lbl" data-t="outbub"><span>보낸 말풍선<em>outgoing bubble</em></span></span></li>
+            <li><span class="lbl" data-t="receipt"><span>읽음 표시<em>read receipt</em></span></span></li>
+            <li><span class="lbl" data-t="time"><span>보낸 시각<em>timestamp</em></span></span></li>
+            <li><span class="lbl" data-t="newdiv"><span>새 메시지 구분선<em>new messages divider</em></span></span></li>
+            <li><span class="lbl" data-t="typing"><span>타이핑 인디케이터<em>typing indicator</em></span></span></li>
+            <li><span class="lbl" data-t="mention"><span>멘션 자동완성<em>mention autocomplete</em></span></span></li>
+            <li><span class="lbl" data-t="composer"><span>입력창<em>composer</em></span></span></li>
+            <li><span class="lbl" data-t="attach"><span>첨부 버튼<em>attachment</em></span></span></li>
+            <li><span class="lbl" data-t="send"><span>전송 버튼<em>send</em></span></span></li>
           </ol>
         </div>
       </div>
