@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>지속 시간 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 8px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  table.dur { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.dur th, table.dur td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  table.dur th { font-size: 11.5px; color: var(--fg-muted); font-weight: 700; }
+  table.dur td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  table.dur tr.now td { background: var(--accent-soft); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>지속 시간</b>
+  <label>길이 <input type="range" id="ms" class="ui-range" min="0" max="1200" step="20" value="200" style="width:190px"> <span class="ruler" id="msv">200ms</span></label>
+  <button class="ui-btn ui-btn--primary" id="run">다시</button>
+</div>
+
+<div class="pad">
+  <div class="trk" id="trk"></div>
+  <p class="ruler" id="verdict"></p>
+  <table class="dur">
+    <thead><tr><th>움직이는 것</th><th>자리 이동</th><th>알맞은 길이</th></tr></thead>
+    <tbody id="tbl"></tbody>
+  </table>
+</div>
+
+<p class="hint">
+  막대를 끌어 길이를 바꿔 보세요. <b>같은 움직임</b>이 길이만으로 완전히 달라 보입니다.<br>
+  <b>0ms</b>는 그냥 순간이동이라 무엇이 어디서 왔는지 모릅니다.
+  <b>100ms 아래</b>는 눈이 못 따라가 깜빡인 것처럼 보이고,
+  <b>400ms 위</b>부터는 기다리게 됩니다 — 한 번은 멋있고 열 번째는 답답합니다.
+  하루에 백 번 보는 움직임일수록 <b>짧아야</b> 합니다.
+</p>
+
+<script>
+(function () {
+  var ROWS = [
+    ['툴팁 · 색 바뀜',   '거의 없음',   '100ms',  80,  140],
+    ['드롭다운 · 토글',  '짧다',        '150ms',  120, 220],
+    ['모달 · 시트 열기', '화면 절반',   '250ms',  200, 320],
+    ['화면 전체 전환',   '화면 하나',   '350ms',  300, 420]
+  ];
+  var trk = document.getElementById('trk');
+  trk.innerHTML = '<div class="trk__row"><span class="trk__name">같은 거리</span>' +
+    '<div class="trk__lane"><div class="trk__ball"></div></div></div>';
+
+  document.getElementById('tbl').innerHTML = ROWS.map(function (r, i) {
+    return '<tr data-i="' + i + '"><td>' + r[0] + '</td><td>' + r[1] + '</td><td class="n">' + r[2] + '</td></tr>';
+  }).join('');
+
+  function run() {
+    var d = +document.getElementById('ms').value;
+    var ball = trk.querySelector('.trk__ball');
+    var far = trk.querySelector('.trk__lane').clientWidth - 28;
+    ball.style.transition = 'none'; ball.style.transform = 'translateX(0px)';
+    void ball.offsetWidth;
+    ball.style.transition = 'transform ' + d + 'ms cubic-bezier(.22,.9,.3,1)';
+    ball.style.transform = 'translateX(' + far + 'px)';
+
+    var v = document.getElementById('verdict'), msg;
+    if (d === 0) msg = '<span class="warn">0ms — 순간이동. 어디서 왔는지 알 수 없다</span>';
+    else if (d < 100) msg = '<span class="warn">' + d + 'ms — 너무 빨라 깜빡인 것처럼 보인다</span>';
+    else if (d <= 400) msg = '<b>' + d + 'ms</b> — 알맞다. 대부분의 UI 가 이 사이에 있다';
+    else if (d <= 700) msg = '<span class="warn">' + d + 'ms — 한 번은 멋있고 열 번째는 답답하다</span>';
+    else msg = '<span class="warn">' + d + 'ms — 기다리게 된다. 애니메이션이 일을 막고 있다</span>';
+    v.innerHTML = msg;
+
+    [].forEach.call(document.querySelectorAll('#tbl tr'), function (tr, i) {
+      tr.classList.toggle('now', d >= ROWS[i][3] && d <= ROWS[i][4]);
+    });
+  }
+  document.getElementById('ms').addEventListener('input', function () {
+    document.getElementById('msv').textContent = this.value + 'ms';
+    run();
+  });
+  document.getElementById('run').addEventListener('click', run);
+  run();
+})();
+</script>
+</body>
+</html>

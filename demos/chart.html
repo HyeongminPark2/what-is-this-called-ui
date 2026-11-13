@@ -132,7 +132,8 @@
     document.getElementById('grid').innerHTML = CHARTS[q].map(function (c) {
       var keepRatio = c[0].indexOf('원그래프') === 0;
       return '<div class="ch' + (c[3] ? '' : ' is-bad') + '"><h4>' + c[0] + '</h4>' +
-        '<svg viewBox="0 0 100 64" preserveAspectRatio="' + (keepRatio ? 'xMidYMid meet' : 'none') + '" aria-hidden="true">' + c[1] + '</svg>' +
+        '<svg viewBox="0 0 100 64"' + (keepRatio ? ' data-pie' : '') +
+        ' preserveAspectRatio="' + (keepRatio ? 'xMidYMid meet' : 'none') + '" aria-hidden="true">' + c[1] + '</svg>' +
         '<span class="why">' + c[2] + '</span></div>';
     }).join('');
   }

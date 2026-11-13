@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>모션 줄이기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .sys { font-size: 12.5px; color: var(--fg-muted); font-family: var(--mono); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>모션 줄이기</b>
+  <label><input type="checkbox" id="rm"> 줄이기를 켠 사람으로 보기</label>
+  <span class="sys" id="sys"></span>
+</div>
+
+<div class="pad">
+  <div class="rm-grid" id="grid"></div>
+  <p class="ruler" id="ruler"></p>
+</div>
+
+<p class="hint">
+  <b>모션 줄이기</b>는 OS 설정입니다. 어지럼증·멀미가 있는 사람이 켜고,
+  브라우저는 <code>prefers-reduced-motion: reduce</code>로 알려 줍니다.<br>
+  <b>전부 끄라는 뜻이 아닙니다.</b> 문제가 되는 것은 <b>큰 거리를 빠르게 지나가는 움직임</b>,
+  <b>확대·축소</b>, <b>시차 스크롤</b>, <b>끝없이 도는 것</b>입니다.
+  자리를 거의 안 옮기는 <b>투명도 바뀜</b>과 <b>색 바뀜</b>은 남겨도 되고, 남겨야 합니다 —
+  전부 꺼 버리면 무엇이 바뀌었는지를 알 길이 없어집니다.
+</p>
+
+<script>
+(function () {
+  var CARDS = [
+    ['화면을 가로지르는 이동', 'mover', 'drop', '큰 거리를 빠르게 — <b>끈다</b>', '자리만 바꾼다'],
+    ['확대하며 열기',          'zoom',  'drop', '화면이 덮쳐 오는 느낌 — <b>끈다</b>', '그냥 나타난다'],
+    ['끝없이 도는 스피너',     'spin',  'drop', '계속 도는 것 — <b>줄인다</b>', '세 점이 차례로 밝아지거나 막대로'],
+    ['투명도만 바뀜',          'fade',  'keep', '자리를 안 옮긴다 — <b>남긴다</b>', '그대로 둔다'],
+    ['색 바뀜 · 테두리',       'tint',  'keep', '움직임이 아니다 — <b>남긴다</b>', '그대로 둔다'],
+    ['짧은 거리 미끄러짐',     'slide', 'keep', '8px 남짓 — <b>남겨도 된다</b>', '거리를 더 줄인다']
+  ];
+  var grid = document.getElementById('grid');
+  grid.innerHTML = CARDS.map(function (c) {
+    var body = c[1] === 'fade' || c[1] === 'tint'
+      ? '<span class="fader" data-k="' + c[1] + '"></span>'
+      : '<span class="mover" data-k="' + c[1] + '"></span>';
+    return '<div class="rm ' + c[2] + '" data-k="' + c[1] + '">' +
+      '<h4>' + c[0] + '</h4><div class="stage">' + body + '</div>' +
+      '<span class="verdict">' + c[3] + '</span>' +
+      '<span class="why" style="font-size:11.5px;color:var(--fg-muted)">줄이기에서 — ' + c[4] + '</span></div>';
+  }).join('');
+
+  var t0 = performance.now();
+  function tick(now) {
+    var reduce = document.getElementById('rm').checked;
+    var t = (now - t0) / 1000;
+    [].forEach.call(grid.querySelectorAll('[data-k]'), function (el) {
+      var k = el.dataset.k;
+      if (!el.classList.contains('mover') && !el.classList.contains('fader')) return;
+      if (k === 'mover') {
+        var w = el.parentElement.clientWidth - 46;
+        el.style.transform = reduce ? 'none' : 'translateX(' + (w * (0.5 + 0.5 * Math.sin(t * 2))).toFixed(1) + 'px)';
+      } else if (k === 'zoom') {
+        el.style.transform = reduce ? 'none' : 'scale(' + (1 + 0.9 * (0.5 + 0.5 * Math.sin(t * 2))).toFixed(2) + ')';
+      } else if (k === 'spin') {
+        el.style.transform = reduce ? 'none' : 'rotate(' + (t * 220).toFixed(0) + 'deg)';
+        el.style.borderRadius = '50%';
+        el.style.borderTop = '3px solid var(--bg)';
+        if (reduce) { el.style.opacity = String(0.4 + 0.6 * Math.abs(Math.sin(t * 1.6))); }
+        else el.style.opacity = '1';
+      } else if (k === 'fade') {
+        el.style.opacity = (0.12 + 0.5 * (0.5 + 0.5 * Math.sin(t * 2))).toFixed(2);
+      } else if (k === 'tint') {
+        el.style.opacity = '1';
+        el.style.background = (Math.sin(t * 2) > 0) ? 'var(--accent)' : 'var(--warn)';
+      } else if (k === 'slide') {
+        var d = reduce ? 2 : 8;
+        el.style.transform = 'translateX(' + (d * Math.sin(t * 2)).toFixed(1) + 'px)';
+      }
+    });
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  function sync() {
+    var on = document.getElementById('rm').checked;
+    document.documentElement.dataset.reduce = on ? '1' : '0';
+    document.getElementById('ruler').innerHTML = on
+      ? '줄이기 <b>켜짐</b> — 끈 것 <b>' + grid.querySelectorAll('.rm.drop').length + '</b>개, 남긴 것 <b>' +
+        grid.querySelectorAll('.rm.keep').length + '</b>개'
+      : '줄이기 <b>꺼짐</b> — 여섯 가지가 모두 움직인다';
+    document.getElementById('sys').textContent =
+      '이 브라우저의 실제 설정: ' +
+      (matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduce' : 'no-preference');
+  }
+  document.getElementById('rm').addEventListener('change', sync);
+  sync();
+})();
+</script>
+</body>
+</html>

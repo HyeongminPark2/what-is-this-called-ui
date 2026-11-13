@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>차례로 들어오기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 8px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>차례로 들어오기</b>
+  <label>간격 <input type="range" id="gap" class="ui-range" min="0" max="160" step="10" value="40" style="width:150px"> <span class="ruler" id="gv">40ms</span></label>
+  <label>줄 수 <input type="range" id="n" class="ui-range" min="4" max="20" step="2" value="8" style="width:110px"> <span class="ruler" id="nv">8줄</span></label>
+  <button class="ui-btn ui-btn--primary" id="run">다시</button>
+</div>
+
+<div class="pad">
+  <div class="stg" id="stg"></div>
+  <p class="ruler" id="ruler"></p>
+</div>
+
+<p class="hint">
+  줄들이 <b>조금씩 늦게</b> 들어옵니다. 간격을 키우면 처음엔 멋있는데,
+  <b>마지막 줄이 보이기까지 걸리는 시간</b>이 함께 늘어납니다.<br>
+  한 줄은 200ms 라도 스무 줄에 간격 160ms 면 <b>마지막 줄은 3초 뒤</b>입니다 —
+  그 사이 사용자는 이미 스크롤하고 있습니다.
+  그래서 간격은 <b>20~50ms</b>로 짧게 두고, 줄이 많으면 <b>앞 몇 줄만</b> 차례로 넣고 나머지는 한꺼번에 띄웁니다.
+</p>
+
+<script>
+(function () {
+  var NAMES = ['모란상회', '한빛아웃도어', '새벽상사', '대림유통', '동진물산', '우리상회', '남산식품', '예진유통',
+               '백두상사', '한결유통', '초록상회', '길벗상사', '다온유통', '늘봄상회', '바른상사', '해든유통',
+               '소망상회', '푸른상사', '온누리유통', '열음상회'];
+  var stg = document.getElementById('stg');
+
+  function build() {
+    var n = +document.getElementById('n').value;
+    stg.innerHTML = NAMES.slice(0, n).map(function (nm, i) {
+      return '<div class="stg__item" data-i="' + i + '"><span class="stg__dot"></span>' + nm + '</div>';
+    }).join('');
+  }
+
+  function run() {
+    build();
+    var gap = +document.getElementById('gap').value;
+    var n = +document.getElementById('n').value;
+    var items = stg.querySelectorAll('.stg__item');
+    [].forEach.call(items, function (el, i) {
+      el.style.transition = 'opacity 200ms ease-out ' + (i * gap) + 'ms, transform 200ms cubic-bezier(.22,.9,.3,1) ' + (i * gap) + 'ms';
+      setTimeout(function () { el.classList.add('in'); }, 20);
+    });
+    var last = (n - 1) * gap + 200;
+    var r = document.getElementById('ruler');
+    r.innerHTML = '마지막 줄이 다 보이기까지 ' +
+      (last > 900 ? '<span class="warn">' + last + 'ms — 기다리게 된다</span>' : '<b>' + last + 'ms</b>') +
+      ' · 한 줄 200ms × 간격 ' + gap + 'ms × ' + n + '줄';
+    r.dataset.last = String(last);
+  }
+
+  document.getElementById('gap').addEventListener('input', function () {
+    document.getElementById('gv').textContent = this.value + 'ms'; run();
+  });
+  document.getElementById('n').addEventListener('input', function () {
+    document.getElementById('nv').textContent = this.value + '줄'; run();
+  });
+  document.getElementById('run').addEventListener('click', run);
+  run();
+})();
+</script>
+</body>
+</html>

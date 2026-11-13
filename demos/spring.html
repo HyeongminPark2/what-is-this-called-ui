@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>스프링 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 8px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .two { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s4); align-items: start; }
+  @media (max-width: 620px) { .two { grid-template-columns: 1fr; } }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>스프링</b>
+  <label>튕김 <input type="range" id="b" class="ui-range" min="0" max="80" step="4" value="28" style="width:150px"> <span class="ruler" id="bv">28</span></label>
+  <button class="ui-btn ui-btn--primary" id="run">던지기</button>
+</div>
+
+<div class="pad">
+  <div class="two">
+    <div class="trk">
+      <div class="trk__row is-ref"><span class="trk__name">ease-out</span><div class="trk__lane"><div class="trk__ball" id="a"></div></div></div>
+      <div class="trk__row"><span class="trk__name">spring</span><div class="trk__lane"><div class="trk__ball" id="s"></div></div></div>
+    </div>
+    <svg class="curve" id="curve" viewBox="0 0 140 120" role="img" aria-label="스프링 곡선"></svg>
+  </div>
+  <p class="ruler" id="ruler"></p>
+</div>
+
+<p class="hint">
+  위는 <b>끝에서 멎는</b> 곡선, 아래는 <b>지나쳤다 돌아오는</b> 스프링입니다.
+  튕김을 0 으로 내리면 둘이 거의 같아집니다.<br>
+  스프링은 <b>손으로 민 것 같은</b> 느낌을 줍니다 — 그래서 끌어서 넘기는 시트·카드에 잘 맞습니다.
+  다만 <b>끝나는 때가 정해져 있지 않아</b> 다음 동작과 이어 붙이기 어렵고,
+  튕김이 크면 <b>글자가 읽히기 전에</b> 다시 움직여 어지럽습니다.
+</p>
+
+<script>
+(function () {
+  var curve = document.getElementById('curve');
+
+  function springPath(bounce) {
+    // 감쇠 진동: x(t) = 1 - e^(-ζωt) cos(ωd t)
+    var z = 1 - bounce / 100;              // 튕김이 클수록 감쇠가 작다
+    var w = 9 + bounce / 6;
+    var d = [];
+    for (var i = 0; i <= 120; i++) {
+      var t = i / 120;
+      var v = 1 - Math.exp(-z * w * t) * Math.cos(w * Math.sqrt(Math.max(1 - z * z, 0)) * t);
+      d.push((i * 140 / 120).toFixed(1) + ',' + (120 - v * 84).toFixed(1));
+    }
+    return 'M ' + d.join(' L ');
+  }
+
+  function draw() {
+    var b = +document.getElementById('b').value;
+    curve.innerHTML =
+      '<line class="grid" x1="0" y1="120" x2="140" y2="120"/>' +
+      '<line class="grid" x1="0" y1="0" x2="0" y2="120"/>' +
+      '<line class="ref" x1="0" y1="36" x2="140" y2="36"/>' +
+      '<path class="path" d="' + springPath(b) + '"/>';
+    document.getElementById('ruler').innerHTML = b === 0
+      ? '튕김 <b>0</b> — 지나치지 않는다. ease-out 과 거의 같다'
+      : (b > 56
+        ? '튕김 <span class="warn">' + b + ' — 글자가 읽히기 전에 또 움직인다</span>'
+        : '튕김 <b>' + b + '</b> — 목표를 지나쳤다 돌아온다');
+  }
+
+  function run() {
+    var b = +document.getElementById('b').value;
+    var lane = document.querySelector('.trk__lane');
+    var far = lane.clientWidth - 28;
+    var a = document.getElementById('a'), s = document.getElementById('s');
+    a.style.transition = 'none'; s.style.transition = 'none';
+    a.style.transform = 'translateX(0px)'; s.style.transform = 'translateX(0px)';
+    void a.offsetWidth;
+    a.style.transition = 'transform 520ms cubic-bezier(.22,.9,.3,1)';
+    a.style.transform = 'translateX(' + far + 'px)';
+
+    var z = 1 - b / 100, w = 9 + b / 6, t0 = performance.now();
+    (function step(now) {
+      var t = Math.min((now - t0) / 900, 1);
+      var v = 1 - Math.exp(-z * w * t) * Math.cos(w * Math.sqrt(Math.max(1 - z * z, 0)) * t);
+      s.style.transform = 'translateX(' + (v * far).toFixed(1) + 'px)';
+      if (t < 1) requestAnimationFrame(step);
+      else s.style.transform = 'translateX(' + far + 'px)';
+    })(t0);
+  }
+
+  document.getElementById('b').addEventListener('input', function () {
+    document.getElementById('bv').textContent = this.value;
+    draw(); run();
+  });
+  document.getElementById('run').addEventListener('click', run);
+  draw();
+  setTimeout(run, 150);
+})();
+</script>
+</body>
+</html>

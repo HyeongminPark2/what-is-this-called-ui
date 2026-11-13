@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이징 곡선 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .two { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s4); align-items: start; }
+  @media (max-width: 620px) { .two { grid-template-columns: 1fr; } }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>이징 곡선</b>
+  <button class="ui-btn ui-btn--primary" id="run">다시 달리기</button>
+  <label><input type="checkbox" id="slow"> 느리게 (2배)</label>
+</div>
+
+<div class="pad">
+  <div class="two">
+    <div class="trk" id="trk"></div>
+    <svg class="curve" id="curve" viewBox="0 0 120 120" role="img" aria-label="고른 이징 곡선"></svg>
+  </div>
+  <p class="ruler" id="ruler"></p>
+</div>
+
+<p class="hint">
+  네 공이 <b>같은 거리를 같은 시간에</b> 달립니다. 다른 것은 <b>속도를 어떻게 나눠 쓰느냐</b>뿐입니다.<br>
+  <code>linear</code>는 처음부터 끝까지 같은 속도라 <b>기계가 미는 것처럼</b> 보입니다.
+  <code>ease-out</code>은 빨리 떠나 천천히 멎습니다 — <b>화면에 들어오는 것</b>에 씁니다.
+  <code>ease-in</code>은 반대라 <b>나가는 것</b>에 쓰고, 들어오는 데 쓰면 굼떠 보입니다.
+  줄 이름을 눌러 보면 오른쪽에 그 곡선이 그려집니다 — <b>가로가 시간, 세로가 간 거리</b>입니다.
+</p>
+
+<script>
+(function () {
+  var EASES = [
+    ['linear',   'linear',                         '0,120 120,0',                        false, '처음부터 끝까지 같은 속도 — 기계 같다'],
+    ['ease',     'ease',                           'C 30,90 42,0 120,0',                 false, '브라우저 기본값. 무난하지만 끝이 길다'],
+    ['ease-out', 'cubic-bezier(.22,.9,.3,1)',      'C 26,12 36,0 120,0',                 true,  '빨리 떠나 천천히 멎는다 — 들어올 때'],
+    ['ease-in',  'cubic-bezier(.7,0,.84,0)',       'C 84,120 94,108 120,0',              false, '천천히 떠나 빨리 사라진다 — 나갈 때']
+  ];
+  var sel = 2;
+  var trk = document.getElementById('trk');
+  trk.innerHTML = EASES.map(function (e, i) {
+    return '<div class="trk__row' + (e[0] === 'linear' ? ' is-ref' : '') + '" data-i="' + i + '">' +
+      '<button class="trk__name" data-i="' + i + '" style="background:none;border:0;padding:0;text-align:left;cursor:pointer;color:inherit;font:inherit">' + e[0] + '</button>' +
+      '<div class="trk__lane"><div class="trk__ball"></div></div></div>';
+  }).join('');
+
+  function dur() { return document.getElementById('slow').checked ? 1200 : 600; }
+
+  function run() {
+    var d = dur();
+    [].forEach.call(trk.querySelectorAll('.trk__row'), function (row, i) {
+      var ball = row.querySelector('.trk__ball');
+      var lane = row.querySelector('.trk__lane');
+      var far = lane.clientWidth - 28;
+      ball.style.transition = 'none';
+      ball.style.transform = 'translateX(0px)';
+      void ball.offsetWidth;
+      ball.style.transition = 'transform ' + d + 'ms ' + EASES[i][1];
+      ball.style.transform = 'translateX(' + far + 'px)';
+    });
+    document.getElementById('ruler').innerHTML =
+      '네 줄 모두 <b>' + d + 'ms</b> · 같은 거리 — 다른 것은 <b>속도를 나눠 쓰는 방식</b>뿐이다';
+  }
+
+  function drawCurve() {
+    var e = EASES[sel];
+    var p = e[2].indexOf('C') === 0 ? 'M 0,120 ' + e[2] : 'M ' + e[2].split(' ').join(' L ');
+    document.getElementById('curve').innerHTML =
+      '<line class="grid" x1="0" y1="120" x2="120" y2="120"/>' +
+      '<line class="grid" x1="0" y1="0" x2="0" y2="120"/>' +
+      '<line class="ref" x1="0" y1="120" x2="120" y2="0"/>' +
+      '<path class="path" d="' + p + '"/>';
+    [].forEach.call(trk.querySelectorAll('.trk__row'), function (row, i) {
+      row.classList.toggle('is-bad', i === sel && !e[3] && e[0] !== 'linear' && e[0] !== 'ease');
+      row.style.fontWeight = i === sel ? '700' : '';
+    });
+    document.getElementById('curve').setAttribute('aria-label', e[0] + ' 곡선 — ' + e[4]);
+  }
+
+  trk.addEventListener('click', function (ev) {
+    var b = ev.target.closest('.trk__name');
+    if (!b) return;
+    sel = +b.dataset.i; drawCurve(); run();
+  });
+  document.getElementById('run').addEventListener('click', run);
+  document.getElementById('slow').addEventListener('change', run);
+  drawCurve();
+  setTimeout(run, 120);
+})();
+</script>
+</body>
+</html>

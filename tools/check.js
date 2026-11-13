@@ -218,6 +218,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     '7부': ['appbar', 'sidebar', 'tabs', 'breadcrumb', 'pagination', 'infinite', 'bottomnav'],
     '8부': ['spinner', 'skeleton', 'progress', 'optimistic', 'empty', 'error'],
     '10부': ['table', 'filter', 'search', 'form', 'validation', 'bulk', 'virtual', 'chart'],
+    '9부': ['easing', 'duration', 'enterexit', 'cheap', 'spring', 'stagger', 'gesture', 'reducedmotion'],
   };
   const ITEMS = Object.values(PARTS).flat();
   const partOf = s => Object.keys(PARTS).find(k => PARTS[k].includes(s));
@@ -1335,6 +1336,123 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   if (await page.locator('.ch.is-bad').count() !== 3) fail.push('차트: 관계 질문에서 안 맞는 그림이 셋이 아니다');
   const pies = await page.$$eval('.ch svg[data-pie]', els => els.map(e => e.getAttribute('preserveAspectRatio')));
   if (pies.some(v => v === 'none')) fail.push('차트: 파이가 찌그러지게 그려진다');
+  await page.close();
+
+  // 9부 움직임 데모 여덟 장
+  // 이징 — 같은 시간, 다른 곡선
+  page = await demo('easing', 900, 820);
+  if (await page.locator('.trk__row').count() !== 4) fail.push('이징: 곡선이 넷이 아니다');
+  if (!(await page.textContent('#ruler')).includes('600ms')) fail.push('이징: 네 줄이 같은 시간이 아니다');
+  if (!(await page.$eval('.trk__row:nth-child(3) .trk__ball', e => getComputedStyle(e).transitionTimingFunction)).includes('cubic-bezier'))
+    fail.push('이징: ease-out 줄이 베지에로 안 달린다');
+  await page.check('#slow'); await page.waitForTimeout(220);
+  if (!(await page.textContent('#ruler')).includes('1200ms')) fail.push('이징: 느리게가 두 배가 아니다');
+  await page.locator('.trk__name').nth(0).click(); await page.waitForTimeout(220);
+  const easeLin = await page.$eval('#curve .path', e => e.getAttribute('d'));
+  await page.locator('.trk__name').nth(2).click(); await page.waitForTimeout(220);
+  if (easeLin === await page.$eval('#curve .path', e => e.getAttribute('d')))
+    fail.push('이징: 줄을 바꿔도 곡선이 그대로다');
+  await page.close();
+
+  // 지속 시간 — 길이만 바꿔도 뜻이 달라진다
+  page = await demo('duration', 900, 820);
+  if (!(await page.textContent('#verdict')).includes('알맞다')) fail.push('길이: 200ms 를 알맞다고 안 한다');
+  await page.locator('#ms').fill('0'); await page.dispatchEvent('#ms', 'input'); await page.waitForTimeout(180);
+  if (!(await page.textContent('#verdict')).includes('순간이동')) fail.push('길이: 0ms 를 순간이동이라 안 한다');
+  await page.locator('#ms').fill('1000'); await page.dispatchEvent('#ms', 'input'); await page.waitForTimeout(180);
+  if (!(await page.textContent('#verdict')).includes('기다리게')) fail.push('길이: 1000ms 를 길다고 안 한다 (보여주려는 결과)');
+  await page.locator('#ms').fill('300'); await page.dispatchEvent('#ms', 'input'); await page.waitForTimeout(180);
+  if (await page.locator('#tbl tr.now').count() !== 2) fail.push('길이: 지금 길이에 맞는 쓰임이 안 밝아진다');
+  await page.close();
+
+  // 진입과 퇴장 — 나가는 쪽이 더 짧다
+  page = await demo('enterexit', 900, 820);
+  if (!(await page.textContent('#ruler')).includes('더 짧다')) fail.push('진퇴: 나갈 때가 더 짧다고 안 적는다');
+  await page.locator('#toggle').click(); await page.waitForTimeout(120);
+  if (!(await page.textContent('#log')).includes('260ms')) fail.push('진퇴: 들어올 때가 260ms 가 아니다');
+  await page.waitForTimeout(380);
+  if (await page.locator('#panel').isHidden()) fail.push('진퇴: 열었는데 안 보인다');
+  await page.locator('#toggle').click(); await page.waitForTimeout(120);
+  if (!(await page.textContent('#log')).includes('180ms')) fail.push('진퇴: 나갈 때가 180ms 가 아니다');
+  await page.waitForTimeout(320);
+  if (!await page.locator('#panel').isHidden()) fail.push('진퇴: 다 나갔는데 안 숨는다');
+  await page.check('#same'); await page.waitForTimeout(180);
+  if (!(await page.textContent('#ruler')).includes('같다')) fail.push('진퇴: 같게 맞춰도 경고가 없다 (보여주려는 결과)');
+  await page.close();
+
+  // 무엇을 움직이나 — 배치를 부르는 속성이 실제로 더 비싸다
+  page = await demo('cheap', 900, 820);
+  if (await page.locator('.cost__row').count() !== 4) fail.push('비용: 네 가지를 안 견준다');
+  if (await page.locator('.cost__row.is-bad').count() !== 2) fail.push('비용: 비싼 쪽 표시가 둘이 아니다');
+  await page.locator('#run').click(); await page.waitForTimeout(6500);
+  const cv = await page.$$eval('.cost__num', els => els.map(e => parseFloat(e.dataset.v || 'NaN')));
+  if (!cv.every(v => v > 0)) fail.push('비용: 시간이 안 재어졌다 — ' + JSON.stringify(cv));
+  else if (!((cv[2] + cv[3]) / 2 > (cv[0] + cv[1]) / 2))
+    fail.push('비용: left · width 가 더 비싸지 않다 (보여주려는 결과) — ' + cv.map(v => v.toFixed(2)).join('/'));
+  if (!(await page.textContent('#verdict')).includes('16.7ms')) fail.push('비용: 한 프레임 예산을 안 적는다');
+  await page.close();
+
+  // 스프링 — 튕김을 바꾸면 곡선도 말도 바뀐다
+  page = await demo('spring', 900, 820);
+  if (!(await page.textContent('#ruler')).includes('지나쳤다')) fail.push('스프링: 기본값이 목표를 안 지나친다');
+  const sp28 = await page.$eval('#curve .path', e => e.getAttribute('d'));
+  await page.locator('#b').fill('0'); await page.dispatchEvent('#b', 'input'); await page.waitForTimeout(220);
+  if (!(await page.textContent('#ruler')).includes('지나치지 않는다')) fail.push('스프링: 튕김 0 인데 지나친다고 한다');
+  if (sp28 === await page.$eval('#curve .path', e => e.getAttribute('d'))) fail.push('스프링: 튕김을 바꿔도 곡선이 그대로다');
+  await page.locator('#b').fill('80'); await page.dispatchEvent('#b', 'input'); await page.waitForTimeout(220);
+  if (!(await page.textContent('#ruler')).includes('읽히기 전에')) fail.push('스프링: 튕김이 커도 경고가 없다 (보여주려는 결과)');
+  await page.close();
+
+  // 차례로 들어오기 — 간격이 커지면 마지막 줄이 늦어진다
+  page = await demo('stagger', 900, 820);
+  if (await page.locator('.stg__item').count() !== 8) fail.push('차례로: 여덟 줄이 아니다');
+  await page.waitForTimeout(800);
+  if (await page.locator('.stg__item.in').count() !== 8) fail.push('차례로: 다 안 들어왔다');
+  const dly = await page.$$eval('.stg__item', els => els.map(e => getComputedStyle(e).transitionDelay));
+  if (dly[0] === dly[7]) fail.push('차례로: 줄마다 간격이 없다');
+  await page.locator('#gap').fill('160'); await page.dispatchEvent('#gap', 'input');
+  await page.locator('#n').fill('20'); await page.dispatchEvent('#n', 'input'); await page.waitForTimeout(350);
+  if (!(+(await page.getAttribute('#ruler', 'data-last')) > 3000))
+    fail.push('차례로: 간격을 키워도 마지막 줄이 안 늦어진다 (보여주려는 결과)');
+  if (!(await page.textContent('#ruler')).includes('기다리게')) fail.push('차례로: 길어져도 경고가 없다');
+  await page.close();
+
+  // 제스처 — 거리와 속도, 그리고 따라가기
+  page = await demo('gesture', 900, 820);
+  {
+    const bb = await page.locator('#sheet').boundingBox();
+    const gx = bb.x + bb.width / 2, gy = bb.y + 16;
+    await page.mouse.move(gx, gy); await page.mouse.down();
+    for (let i = 1; i <= 6; i++) { await page.mouse.move(gx, gy + i * 5); await page.waitForTimeout(40); }
+    await page.mouse.up(); await page.waitForTimeout(380);
+    if (!(await page.textContent('#log')).includes('제자리')) fail.push('제스처: 조금 끌었는데 제자리로 안 온다');
+    await page.mouse.move(gx, gy); await page.mouse.down();
+    for (let i = 1; i <= 10; i++) { await page.mouse.move(gx, gy + i * 11); await page.waitForTimeout(40); }
+    await page.mouse.up(); await page.waitForTimeout(380);
+    if (!(await page.textContent('#log')).includes('닫음')) fail.push('제스처: 절반을 넘겼는데 안 닫힌다');
+    await page.locator('#reset').click(); await page.waitForTimeout(320);
+    await page.uncheck('#follow'); await page.waitForTimeout(120);
+    await page.mouse.move(gx, gy); await page.mouse.down();
+    await page.mouse.move(gx, gy + 40); await page.waitForTimeout(80);
+    const midY = await page.$eval('#sheet', e => e.getBoundingClientRect().top);
+    const baseY = await page.$eval('#stage', e => e.getBoundingClientRect().bottom - 150);
+    if (!(Math.abs(midY - baseY) < 2)) fail.push('제스처: 따라가기를 꺼도 끄는 동안 움직인다 (보여주려는 결과)');
+    await page.mouse.up(); await page.waitForTimeout(320);
+  }
+  await page.close();
+
+  // 모션 줄이기 — 끌 것은 멎고 남길 것은 남는다
+  page = await demo('reducedmotion', 900, 820);
+  if (await page.locator('.rm').count() !== 6) fail.push('줄이기: 여섯 가지를 안 가른다');
+  if (await page.locator('.rm.drop').count() !== 3) fail.push('줄이기: 끄는 것이 셋이 아니다');
+  if (await page.locator('.rm.keep').count() !== 3) fail.push('줄이기: 남기는 것이 셋이 아니다');
+  await page.check('#rm'); await page.waitForTimeout(450);
+  if (await page.$eval('.rm[data-k=mover] .mover', e => getComputedStyle(e).transform) !== 'none')
+    fail.push('줄이기: 켜도 가로지르는 이동이 안 멎는다');
+  const f1 = await page.$eval('.rm[data-k=fade] .fader', e => +getComputedStyle(e).opacity);
+  await page.waitForTimeout(450);
+  if (f1 === await page.$eval('.rm[data-k=fade] .fader', e => +getComputedStyle(e).opacity))
+    fail.push('줄이기: 투명도 바뀜까지 꺼졌다 (전부 끄면 변화를 못 읽는다)');
   await page.close();
 
   await browser.close();

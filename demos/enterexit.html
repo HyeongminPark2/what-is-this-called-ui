@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>진입과 퇴장 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>진입과 퇴장</b>
+  <button class="ui-btn ui-btn--primary" id="toggle">열기</button>
+  <label><input type="checkbox" id="same"> 들어올 때와 나갈 때를 같게</label>
+</div>
+
+<div class="pad">
+  <div class="io" id="io">
+    <div class="io__dim" id="dim" hidden></div>
+    <div class="io__panel" id="panel" hidden>
+      <h4>정산 내보내기</h4>
+      <p>11월 1일 ~ 7일 · 128건</p>
+    </div>
+  </div>
+  <p class="ruler" id="ruler"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  열고 닫기를 되풀이해 보세요. 기본값은 <b>들어올 때 260ms ease-out</b>,
+  <b>나갈 때 180ms ease-in</b>입니다 — 나가는 쪽이 더 짧습니다.<br>
+  들어오는 것은 <b>어디서 왔는지 보여 줘야</b> 하니 시간이 필요하지만,
+  나가는 것은 이미 볼 일이 끝난 것이라 <b>기다릴 이유가 없습니다.</b>
+  둘을 같게 맞추면 닫을 때마다 <b>한 박자 붙잡히는</b> 느낌이 납니다.
+</p>
+
+<script>
+(function () {
+  var IN = { ms: 260, ease: 'cubic-bezier(.22,.9,.3,1)', name: 'ease-out' };
+  var OUT = { ms: 180, ease: 'cubic-bezier(.7,0,.84,0)', name: 'ease-in' };
+  var open = false, busy = false;
+  var panel = document.getElementById('panel'), dim = document.getElementById('dim');
+  var btn = document.getElementById('toggle'), log = document.getElementById('log');
+
+  function spec() {
+    return document.getElementById('same').checked
+      ? { inn: { ms: 260, ease: IN.ease, name: 'ease-out' }, out: { ms: 260, ease: IN.ease, name: 'ease-out' } }
+      : { inn: IN, out: OUT };
+  }
+
+  function show() {
+    var s = spec().inn;
+    panel.hidden = false; dim.hidden = false;
+    panel.style.transition = 'none'; dim.style.transition = 'none';
+    panel.style.transform = 'translateY(100%)'; dim.style.opacity = '0';
+    void panel.offsetWidth;
+    panel.style.transition = 'transform ' + s.ms + 'ms ' + s.ease;
+    dim.style.transition = 'opacity ' + s.ms + 'ms linear';
+    panel.style.transform = 'translateY(0)'; dim.style.opacity = '1';
+    busy = true;
+    setTimeout(function () { busy = false; }, s.ms);
+    log.innerHTML = '들어옴 — <b>' + s.ms + 'ms ' + s.name + '</b>';
+  }
+
+  function hide() {
+    var s = spec().out;
+    panel.style.transition = 'transform ' + s.ms + 'ms ' + s.ease;
+    dim.style.transition = 'opacity ' + s.ms + 'ms linear';
+    panel.style.transform = 'translateY(100%)'; dim.style.opacity = '0';
+    busy = true;
+    setTimeout(function () {
+      panel.hidden = true; dim.hidden = true; busy = false;
+    }, s.ms);
+    log.innerHTML = '나감 — <b>' + s.ms + 'ms ' + s.name + '</b>' +
+      (s.ms >= 260 ? ' <span class="warn">· 닫는데 기다리게 된다</span>' : '');
+  }
+
+  btn.addEventListener('click', function () {
+    open = !open;
+    btn.textContent = open ? '닫기' : '열기';
+    open ? show() : hide();
+  });
+
+  function ruler() {
+    var s = spec();
+    document.getElementById('ruler').innerHTML =
+      '들어올 때 <b>' + s.inn.ms + 'ms ' + s.inn.name + '</b> · 나갈 때 ' +
+      (s.out.ms > s.inn.ms * 0.9
+        ? '<span class="warn">' + s.out.ms + 'ms ' + s.out.name + ' — 같다</span>'
+        : '<b>' + s.out.ms + 'ms ' + s.out.name + '</b> — 더 짧다');
+  }
+  document.getElementById('same').addEventListener('change', ruler);
+  ruler();
+})();
+</script>
+</body>
+</html>

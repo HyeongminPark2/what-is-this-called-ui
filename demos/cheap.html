@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>싼 속성 비싼 속성 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .swarm { position: absolute; inset: 0; overflow: hidden; border-radius: var(--r1); }
+  .swarm i { position: absolute; width: 10px; height: 10px; border-radius: 2px; background: color-mix(in srgb, var(--accent) 55%, transparent); display: block; }
+  .cost__row.is-bad .swarm i { background: color-mix(in srgb, var(--danger) 55%, transparent); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>무엇을 움직이나</b>
+  <button class="ui-btn ui-btn--primary" id="run">네 가지 다 재기</button>
+  <label>상자 <input type="range" id="n" class="ui-range" min="40" max="400" step="40" value="200" style="width:140px"> <span class="ruler" id="nv">200개</span></label>
+</div>
+
+<div class="pad">
+  <div class="cost" id="cost"></div>
+  <p class="ruler" id="verdict">‘네 가지 다 재기’를 누르면 각각 <b>한 프레임을 만드는 데 걸린 시간</b>을 잽니다.</p>
+</div>
+
+<p class="hint">
+  같은 거리를 <b>네 가지 방법</b>으로 움직여 보고, 프레임 하나를 만드는 데 걸린 시간을 잽니다.<br>
+  <code>transform</code>과 <code>opacity</code>는 <b>배치를 다시 계산하지 않습니다</b> — 이미 그려 둔 그림을
+  옮기고 투명도만 바꾸면 되기 때문입니다.
+  <code>left</code>·<code>width</code>는 <b>상자의 자리와 크기</b>를 바꾸므로 그 줄의 배치를 전부 다시 재야 합니다.
+  (<code>box-shadow</code>·<code>filter</code>처럼 자리는 그대로여도 <b>다시 칠해야</b> 하는 것이 중간쯤입니다.)
+  상자 수를 올리면 차이가 벌어집니다 — 그 차이가 <b>버벅임</b>입니다.
+</p>
+
+<script>
+(function () {
+  var PROPS = [
+    ['transform', '옮기기만 — 배치 안 함', false],
+    ['opacity',   '투명도만 — 배치 안 함',  false],
+    ['left',      '자리를 바꾼다 — 배치',   true],
+    ['width',     '크기를 바꾼다 — 배치',   true]
+  ];
+  var cost = document.getElementById('cost');
+  cost.innerHTML = PROPS.map(function (p, i) {
+    return '<div class="cost__row' + (p[2] ? ' is-bad' : '') + '" data-i="' + i + '">' +
+      '<span class="trk__name">' + p[0] + '</span>' +
+      '<div class="cost__lane"><div class="swarm" data-s="' + i + '"></div></div>' +
+      '<span class="cost__num" data-n="' + i + '">—</span></div>';
+  }).join('');
+
+  function fill() {
+    var n = +document.getElementById('n').value;
+    [].forEach.call(cost.querySelectorAll('.swarm'), function (s) {
+      var h = '';
+      for (var k = 0; k < n; k++) {
+        var bl = 4 + (k % 60) * 9;
+        h += '<i data-l="' + bl + '" style="left:' + bl + 'px;top:' + (2 + (k % 3) * 7) + 'px"></i>';
+      }
+      s.innerHTML = h;
+      [].forEach.call(cost.querySelectorAll('.cost__num'), function (e) { e.textContent = '—'; });
+    });
+  }
+
+  function measure(i) {
+    return new Promise(function (done) {
+      var boxes = cost.querySelectorAll('[data-s="' + i + '"] i');
+      var prop = PROPS[i][0], frames = 0, total = 0;
+      function step() {
+        var t = performance.now();
+        var phase = (frames / 50) * Math.PI * 2;
+        for (var k = 0; k < boxes.length; k++) {
+          var v = 10 + 10 * Math.sin(phase + k * 0.1);
+          if (prop === 'transform') boxes[k].style.transform = 'translateX(' + v + 'px)';
+          else if (prop === 'opacity') boxes[k].style.opacity = String(0.3 + v / 40);
+          else if (prop === 'left') boxes[k].style.left = (+boxes[k].dataset.l + v) + 'px';
+          else boxes[k].style.width = (6 + v / 3) + 'px';
+        }
+        // 브라우저가 어차피 그리기 전에 해야 하는 일을 여기서 끝내고 잰다
+        void document.body.offsetHeight;
+        total += performance.now() - t;
+        frames++;
+        if (frames < 50) requestAnimationFrame(step);
+        else {
+          var avg = total / frames;
+          cost.querySelector('[data-n="' + i + '"]').textContent = avg.toFixed(2) + 'ms';
+          cost.querySelector('[data-n="' + i + '"]').dataset.v = avg.toFixed(3);
+          done(avg);
+        }
+      }
+      requestAnimationFrame(step);
+    });
+  }
+
+  document.getElementById('run').addEventListener('click', async function () {
+    this.disabled = true;
+    fill();
+    var got = [];
+    for (var i = 0; i < PROPS.length; i++) got.push(await measure(i));
+    var cheapAvg = (got[0] + got[1]) / 2, dearAvg = (got[2] + got[3]) / 2;
+    document.getElementById('verdict').innerHTML =
+      'transform · opacity <b>' + cheapAvg.toFixed(2) + 'ms</b> · left · width ' +
+      (dearAvg > cheapAvg
+        ? '<span class="warn">' + dearAvg.toFixed(2) + 'ms — ' + (dearAvg / Math.max(cheapAvg, 0.01)).toFixed(1) + '배</span>'
+        : '<b>' + dearAvg.toFixed(2) + 'ms</b>') +
+      ' · 한 프레임에 쓸 수 있는 시간은 <b>16.7ms</b>';
+    this.disabled = false;
+  });
+
+  document.getElementById('n').addEventListener('input', function () {
+    document.getElementById('nv').textContent = this.value + '개';
+    fill();
+  });
+  fill();
+})();
+</script>
+</body>
+</html>

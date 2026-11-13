@@ -1258,3 +1258,69 @@ body > .hint, body > .log, body > .ratio {
 .ch .axis { stroke: var(--line); stroke-width: 1; }
 .ch.is-bad { border-color: color-mix(in srgb, var(--danger) 45%, transparent); }
 .ch.is-bad h4::after { content: " — 안 맞음"; color: var(--danger); font-weight: 700; }
+
+/* ───────── 9부 움직임 ───────── */
+
+/* 달리기 길 — 같은 거리를 여러 곡선으로 달려 보게 한다 */
+.trk { display: grid; gap: var(--s2); }
+.trk__row { display: grid; grid-template-columns: 92px 1fr; align-items: center; gap: var(--s3); }
+.trk__name { font-size: 12.5px; color: var(--fg-muted); font-family: var(--mono); }
+.trk__lane { position: relative; height: 30px; border-radius: var(--r-full); background: var(--bg); border: 1px solid var(--line); }
+.trk__ball { position: absolute; top: 4px; left: 4px; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); }
+.trk__row.is-ref .trk__ball { background: var(--fg-muted); }
+.trk__row.is-bad .trk__name { color: var(--danger); }
+
+/* 곡선 그림 */
+.curve { width: 100%; max-width: 190px; height: auto; display: block; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r1); }
+.curve .grid { stroke: var(--line); stroke-width: 1; }
+.curve .path { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; }
+.curve .ref { fill: none; stroke: var(--line-strong); stroke-width: 1; stroke-dasharray: 3 3; }
+.curve .knob { fill: var(--surface); stroke: var(--accent); stroke-width: 1.5; }
+.curve .arm { stroke: var(--accent); stroke-width: 1; opacity: .45; }
+
+/* 눈금자 — 시간·거리를 숫자로 보여 주는 줄 */
+.ruler { font-family: var(--mono); font-size: 12px; color: var(--fg-muted); }
+.ruler b { color: var(--accent); }
+.ruler .warn { color: var(--danger); }
+
+/* 들고 나는 패널 */
+.io { position: relative; height: 180px; border: 1px solid var(--line); border-radius: var(--r2); background: var(--bg); overflow: hidden; }
+.io__panel { position: absolute; left: 0; right: 0; bottom: 0; background: var(--surface); border-top: 1px solid var(--line); border-radius: var(--r2) var(--r2) 0 0; padding: var(--s3); box-shadow: var(--e2); }
+.io__panel h4 { margin: 0 0 4px; font-size: 13px; }
+.io__panel p { margin: 0; font-size: 12px; color: var(--fg-muted); }
+.io__dim { position: absolute; inset: 0; background: rgba(20, 22, 26, .35); }
+
+/* 싼 속성 비싼 속성 */
+.cost { display: grid; gap: var(--s3); }
+.cost__row { display: grid; grid-template-columns: 112px 1fr 92px; align-items: center; gap: var(--s3); }
+.cost__lane { position: relative; height: 26px; border-radius: var(--r1); background: var(--bg); border: 1px solid var(--line); }
+.cost__box { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 4px; background: var(--accent); }
+.cost__num { font-family: var(--mono); font-size: 12px; text-align: right; font-variant-numeric: tabular-nums; }
+.cost__row.is-bad .cost__num { color: var(--danger); font-weight: 700; }
+.cost__row.is-bad .cost__box { background: var(--danger); }
+
+/* 차례로 들어오기 */
+.stg { display: grid; gap: 6px; }
+.stg__item { display: flex; align-items: center; gap: var(--s3); padding: 7px 10px; border: 1px solid var(--line); border-radius: var(--r1); background: var(--surface); font-size: 13px; opacity: 0; transform: translateY(8px); }
+.stg__item.in { opacity: 1; transform: none; }
+.stg__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; }
+
+/* 끌어 내리는 시트 */
+.drag { position: relative; height: 230px; border: 1px solid var(--line); border-radius: var(--r2); background: var(--bg); overflow: hidden; touch-action: none; }
+.drag__sheet { position: absolute; left: 0; right: 0; bottom: 0; height: 150px; background: var(--surface); border-top: 1px solid var(--line); border-radius: var(--r3) var(--r3) 0 0; box-shadow: var(--e2); padding: var(--s4) var(--s3); cursor: grab; user-select: none; }
+.drag__sheet.is-held { cursor: grabbing; }
+.drag__grip { width: 36px; height: 4px; border-radius: 2px; background: var(--line-strong); margin: 0 auto var(--s3); }
+.drag__read { font-family: var(--mono); font-size: 12px; color: var(--fg-muted); text-align: center; }
+.drag__read b { color: var(--accent); }
+.drag__read .warn { color: var(--danger); }
+
+/* 모션 줄이기 — 남길 것과 끌 것 */
+.rm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(176px, 1fr)); gap: var(--s3); }
+.rm { border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); padding: var(--s3); display: grid; gap: var(--s2); }
+.rm h4 { margin: 0; font-size: 12.5px; }
+.rm .stage { height: 62px; border-radius: var(--r1); background: var(--bg); position: relative; overflow: hidden; }
+.rm .verdict { font-size: 11.5px; font-weight: 700; }
+.rm.keep .verdict { color: var(--accent); }
+.rm.drop .verdict { color: var(--danger); }
+.rm .mover { position: absolute; width: 26px; height: 26px; border-radius: 6px; background: var(--accent); top: 18px; left: 10px; }
+.rm .fader { position: absolute; inset: 14px; border-radius: var(--r1); background: var(--accent); opacity: .25; }

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>제스처 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>제스처</b>
+  <label><input type="checkbox" id="vel" checked> 속도도 본다</label>
+  <label><input type="checkbox" id="follow" checked> 손가락을 따라간다</label>
+  <button class="ui-btn" id="reset">되돌리기</button>
+</div>
+
+<div class="pad">
+  <div class="drag" id="stage">
+    <div class="drag__sheet" id="sheet">
+      <div class="drag__grip"></div>
+      <h4 style="margin:0 0 4px;font-size:13.5px">정산 내보내기</h4>
+      <p style="margin:0;font-size:12.5px;color:var(--fg-muted)">아래로 끌어 내려 닫습니다</p>
+    </div>
+  </div>
+  <p class="drag__read" id="read">끌어 보세요</p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  시트를 아래로 끌어 보세요. 조금 끌었다 놓으면 <b>제자리로 돌아오고</b>,
+  <b>절반 넘게</b> 끌거나 <b>빠르게 튕기면</b> 닫힙니다.<br>
+  <b>속도도 본다</b>를 끄면 거리만으로 판단합니다 — 짧게 탁 튕겨 닫는 동작이 안 먹혀
+  "닫으려면 끝까지 끌어야 하는" 시트가 됩니다.<br>
+  <b>손가락을 따라간다</b>를 끄면 끄는 동안 아무 일도 안 일어나고 놓는 순간에만 움직입니다 —
+  같은 규칙인데도 <b>내가 조작하고 있다는 느낌</b>이 사라집니다.
+</p>
+
+<script>
+(function () {
+  var sheet = document.getElementById('sheet'), stage = document.getElementById('stage');
+  var read = document.getElementById('read'), log = document.getElementById('log');
+  var H = 150, y = 0, startY = 0, lastY = 0, lastT = 0, v = 0, held = false;
+
+  function set(py, anim) {
+    y = Math.max(0, Math.min(py, H));
+    sheet.style.transition = anim ? 'transform 220ms cubic-bezier(.22,.9,.3,1)' : 'none';
+    sheet.style.transform = 'translateY(' + y + 'px)';
+  }
+
+  function show(extra) {
+    var pct = Math.round(y / H * 100);
+    read.innerHTML = '내린 거리 <b>' + pct + '%</b> · 속도 <b>' + v.toFixed(2) + '</b> px/ms' + (extra || '');
+    read.dataset.pct = String(pct);
+  }
+
+  sheet.addEventListener('pointerdown', function (e) {
+    held = true; sheet.setPointerCapture(e.pointerId);
+    sheet.classList.add('is-held');
+    startY = e.clientY - y; lastY = e.clientY; lastT = performance.now(); v = 0;
+    sheet.style.transition = 'none';
+  });
+
+  sheet.addEventListener('pointermove', function (e) {
+    if (!held) return;
+    var now = performance.now(), dt = Math.max(now - lastT, 1);
+    v = (e.clientY - lastY) / dt;
+    lastY = e.clientY; lastT = now;
+    if (document.getElementById('follow').checked) set(e.clientY - startY, false);
+    show();
+  });
+
+  function end(e) {
+    if (!held) return;
+    held = false; sheet.classList.remove('is-held');
+    if (!document.getElementById('follow').checked) set(e.clientY - startY, false);
+    var far = y > H / 2;
+    var fling = document.getElementById('vel').checked && v > 0.5;
+    if (far || fling) {
+      set(H, true);
+      log.innerHTML = '닫음 — ' + (fling && !far ? '<b>빠르게 튕겨서</b>(속도 ' + v.toFixed(2) + ')' : '<b>절반을 넘겨서</b>');
+      show(' → <b>닫힘</b>');
+    } else {
+      set(0, true);
+      log.innerHTML = '제자리로 — ' +
+        (v > 0.5 ? '<span class="warn">빠르게 튕겼는데도 거리만 봐서 안 닫힌다</span>' : '절반을 못 넘겼다');
+      show(' → 제자리');
+    }
+  }
+  sheet.addEventListener('pointerup', end);
+  sheet.addEventListener('pointercancel', end);
+
+  document.getElementById('reset').addEventListener('click', function () {
+    set(0, true); v = 0; show(); log.textContent = '';
+  });
+  set(0, false); show();
+})();
+</script>
+</body>
+</html>
