@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이름표 — 화면 속 그게 뭔지 알려주는 도감</title>
+<meta name="description" content="프론트엔드 UI/UX 구성요소와 용어를 실물 그림으로 찾아보는 도감. 이름을 몰라도 모양으로 찾아 들어갈 수 있게 만들었습니다.">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/card.css">
+<style>
+  .hero { padding: var(--s7) 0 var(--s6); }
+  .hero h1 { margin-bottom: var(--s4); }
+  .hero .why {
+    margin-top: var(--s5); padding: var(--s4) var(--s5);
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--r3);
+    max-width: var(--read); box-shadow: var(--e1);
+  }
+  .hero .why p:last-child { margin-bottom: 0; }
+
+  section.band { padding: var(--s6) 0; border-top: 1px solid var(--line); }
+  section.band > h2 { margin-bottom: var(--s2); }
+  section.band > .sub { color: var(--fg-muted); max-width: var(--read); margin-bottom: var(--s5); }
+
+  /* ── 화면 지도 ── */
+  .maps { display: grid; gap: var(--s5); }
+  @media (min-width: 900px) { .maps { grid-template-columns: minmax(0,1.55fr) minmax(0,1fr); align-items: start; } }
+
+  .map {
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--r3); padding: var(--s4); box-shadow: var(--e1);
+  }
+  .map > h3 { margin-bottom: var(--s1); }
+  .map > p { font-size: 13px; color: var(--fg-muted); margin-bottom: var(--s4); }
+
+  .wf { position: relative; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r2); padding: 9px; }
+  .wf--pc { padding-bottom: 54px; }   /* 토스트가 앉을 자리 */
+  .wf-row { display: flex; gap: 7px; margin-bottom: 7px; }
+  .wf-row:last-child { margin-bottom: 0; }
+  .wf-col { display: flex; flex-direction: column; gap: 7px; }
+
+  /* 지도 위의 용어 블록 — 쓴 항목은 링크, 안 쓴 항목은 회색 */
+  .t, a.t {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    padding: 6px 7px; border-radius: 5px;
+    border: 1px dashed var(--line-strong);
+    background: var(--surface);
+    font-size: 11px; font-weight: 650; line-height: 1.3;
+    color: var(--fg-muted); text-decoration: none;
+    min-height: 30px;
+  }
+  a.t { border-style: solid; border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+  a.t:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .t em { display: block; font-style: normal; font-weight: 500; font-size: 10px; opacity: .82; margin-top: 2px; }
+  .t.tall { min-height: 74px; }
+  .t.xtall { min-height: 150px; justify-content: flex-start; }
+  .t.lead { background: var(--bg); border-style: solid; }
+
+  /* 지도 위에 떠 있는 것 */
+  .wf .float {
+    position: absolute; z-index: 3;
+    box-shadow: var(--e2);
+  }
+  .wf .float--modal { left: 50%; top: 56%; transform: translate(-50%,-50%); width: 46%; }
+  .wf .float--toast { right: 12px; bottom: 11px; width: 37%; }
+  .wf .float--sheet { left: 9px; right: 9px; bottom: 46px; }
+  .wf .float--fab { right: 12px; bottom: 58px; width: 42px; height: 42px; border-radius: 50%; min-height: 0; padding: 0; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s4); font-size: 12px; color: var(--fg-muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend i { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+  .legend i.on { background: var(--accent-soft); border: 1px solid var(--accent); }
+  .legend i.off { background: var(--surface); border: 1px dashed var(--line-strong); }
+
+  /* ── 목차 ── */
+  .toc { display: grid; gap: var(--s3); }
+  @media (min-width: 760px) { .toc { grid-template-columns: 1fr 1fr; } }
+  .part {
+    display: block; text-decoration: none; color: inherit;
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--r2); padding: var(--s4);
+  }
+  .part > .top { display: flex; align-items: baseline; gap: var(--s2); margin-bottom: 5px; }
+  .part .no { font-size: 12px; font-weight: 800; color: var(--accent); letter-spacing: .04em; }
+  .part h3 { font-size: 16px; }
+  .part .cnt { margin-left: auto; font-size: 12px; color: var(--fg-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .part p { font-size: 13.5px; color: var(--fg-muted); margin: 0; max-width: none; }
+  .part--hot { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+
+  .pairs { font-size: 14.5px; }
+</style>
+</head>
+<body>
+<a class="skip" href="#map">본문으로</a>
+
+<header class="topbar">
+  <a class="brand" href="index.html">이름표<small>화면 속 그게 뭔지 알려주는 도감</small></a>
+  <nav>
+    <a href="#map">화면 지도</a>
+    <a href="#pairs">혼동 쌍</a>
+    <a href="#toc">목차</a>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <div class="hero">
+    <h1>이게 뭐라고 부르죠?</h1>
+    <p class="lede">
+      화면에 보이는 것마다 이름이 있습니다. 그 이름을 모르면 디자이너와 말이 안 통하고, 검색도 못 합니다.
+      이 도감은 <b>이름을 몰라도 모양으로 찾아 들어가게</b> 만들었습니다.
+    </p>
+    <div class="why">
+      <p><b>왜 가나다순 색인을 맨 앞에 두지 않았나</b></p>
+      <p style="font-size:15px">
+        이름을 모르는 사람에게 이름순 목록은 쓸모가 없습니다. 그래서 입구에 <b>화면 지도</b>를 뒀습니다.
+        눈에 보이는 자리를 눌러 들어가면 그게 뭐라고 불리는지 나옵니다. 가나다순 색인은 맨 뒤에 있습니다.
+      </p>
+    </div>
+  </div>
+
+  <!-- 화면 지도 -->
+  <section class="band" id="map">
+    <h2>화면 지도</h2>
+    <p class="sub">궁금한 자리를 누르세요. PC 화면과 폰 화면을 따로 뒀습니다 — 같은 역할인데 플랫폼마다 이름이 다른 것이 많아서입니다.</p>
+
+    <div class="maps">
+
+      <!-- PC -->
+      <div class="map">
+        <h3>PC · 관리 화면</h3>
+        <p>목록과 표가 중심인 전형적인 내부 도구 화면</p>
+        <div class="wf wf--pc">
+          <div class="wf-row">
+            <span class="t lead" style="flex:1">앱바 · 헤더</span>
+            <span class="t" style="width:62px">검색 입력</span>
+            <span class="t" style="width:52px">아바타</span>
+          </div>
+          <div class="wf-row">
+            <div class="wf-col" style="width:110px">
+              <span class="t xtall">사이드바<br>내비게이션</span>
+              <span class="t">접기 버튼</span>
+            </div>
+            <div class="wf-col" style="flex:1">
+              <div class="wf-row">
+                <span class="t" style="flex:1">브레드크럼</span>
+                <span class="t" style="width:74px">프라이머리<br>버튼</span>
+              </div>
+              <div class="wf-row">
+                <span class="t" style="flex:1">스탯 타일</span>
+                <span class="t" style="flex:1">스탯 타일</span>
+                <span class="t" style="flex:1">스탯 타일</span>
+              </div>
+              <div class="wf-row">
+                <span class="t" style="flex:1">필터 · 패싯</span>
+                <span class="t" style="width:70px">세그먼티드<br>컨트롤</span>
+              </div>
+              <div class="wf-row"><span class="t xtall" style="flex:1">데이터 테이블<em>정렬 헤더 · 행 선택 · 배지 · 고정 열</em></span></div>
+              <div class="wf-row">
+                <span class="t" style="flex:1">페이지네이션</span>
+                <span class="t" style="width:74px">드롭다운<br>메뉴</span>
+              </div>
+            </div>
+          </div>
+          <a class="t float float--modal" href="items/modal.html">모달 →</a>
+          <span class="t float float--toast">토스트</span>
+        </div>
+        <div class="legend">
+          <span><i class="on"></i> 항목이 있음</span>
+          <span><i class="off"></i> 아직 안 씀</span>
+        </div>
+      </div>
+
+      <!-- 모바일 -->
+      <div class="map">
+        <h3>폰 · 목록 화면</h3>
+        <p>같은 역할의 부품이 어떻게 다른 이름으로 바뀌는지</p>
+        <div class="wf">
+          <div class="wf-row"><span class="t lead" style="flex:1;font-size:10px">상태바 · 세이프 에어리어 · 노치</span></div>
+          <div class="wf-row">
+            <span class="t" style="width:42px">백</span>
+            <span class="t" style="flex:1">앱바 타이틀</span>
+            <span class="t" style="width:42px">액션</span>
+          </div>
+          <div class="wf-row"><span class="t" style="flex:1">검색 입력</span></div>
+          <div class="wf-row"><span class="t" style="flex:1">세그먼티드 컨트롤 · 탭</span></div>
+          <div class="wf-row"><span class="t tall" style="flex:1">리스트 아이템<em>아바타 · 보조 텍스트 · 셰브런</em></span></div>
+          <div class="wf-row"><span class="t tall" style="flex:1">카드<em>썸네일 · 칩 · 메타</em></span></div>
+          <div class="wf-row"><span class="t lead" style="flex:1">바텀 탭바 · 홈 인디케이터</span></div>
+          <span class="t float float--fab">FAB</span>
+          <a class="t float float--sheet" href="items/modal.html">바텀시트 ← 좁은 폭의 모달</a>
+        </div>
+        <div class="legend">
+          <span><i class="on"></i> 항목이 있음</span>
+          <span><i class="off"></i> 아직 안 씀</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 혼동 쌍 -->
+  <section class="band" id="pairs">
+    <h2>헷갈리는 짝</h2>
+    <p class="sub">실제로 막히는 건 '모달이 뭐냐'가 아니라 '모달과 저건 뭐가 다르냐'입니다. 가르는 한 줄만 외우면 됩니다.</p>
+    <div class="scroll-x">
+    <table class="grid pairs">
+      <thead><tr><th style="width:17em">짝</th><th>가르는 한 줄</th></tr></thead>
+      <tbody>
+        <tr><td><a href="items/modal.html">모달</a> / 비모달</td><td>뒤쪽을 못 만지게 막나</td></tr>
+        <tr><td>다이얼로그 / 시트 / 드로어</td><td>가운데서 뜨나, 아래서 올라오나, 옆에서 밀려오나</td></tr>
+        <tr><td>툴팁 / 팝오버</td><td>설명만인가, 안에 누를 게 있나</td></tr>
+        <tr><td>토스트 / 스낵바 / 배너</td><td>저절로 사라지나, 되돌리기가 붙나, 계속 남나</td></tr>
+        <tr><td>셀렉트 / 콤보박스</td><td>타이핑으로 걸러낼 수 있나</td></tr>
+        <tr><td>스위치 / 체크박스</td><td>즉시 적용인가, 저장을 눌러야 하나</td></tr>
+        <tr><td>배지 / 칩 / 태그</td><td>그냥 표시인가, 지울 수 있나, 눌러서 걸러내나</td></tr>
+        <tr><td>링크 / 버튼</td><td>이동인가, 동작인가</td></tr>
+        <tr><td>탭 / 세그먼티드</td><td>내용 묶음 전환인가, 값 고르기인가</td></tr>
+        <tr><td>스켈레톤 / 스피너</td><td>들어올 레이아웃을 미리 알고 있나</td></tr>
+        <tr><td>비활성 / 숨김 / 읽기 전용</td><td>왜 못 누르는지 알려 주나</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <!-- 목차 -->
+  <section class="band" id="toc">
+    <h2>목차</h2>
+    <p class="sub">열다섯 부, 약 185항목. 지금은 6부의 모달 한 항목이 완성형 견본입니다. 항목마다 실물 · 상태 · 해부도 · 플랫폼 띠를 같은 틀로 담습니다.</p>
+
+    <div class="toc">
+      <a class="part" href="#map"><div class="top"><span class="no">0부</span><h3>찾아가는 길</h3><span class="cnt">지도 2장</span></div><p>화면 지도 · 모양으로 찾기 · 1분 요약</p></a>
+      <span class="part"><div class="top"><span class="no">1부</span><h3>뼈대 — 레이아웃과 공간</h3><span class="cnt">14항목</span></div><p>박스 모델 · 플렉스 · 그리드와 거터 · 세이프 에어리어 · 스티키 · 간격 체계 · 여백</p></span>
+      <span class="part"><div class="top"><span class="no">2부</span><h3>꾸미는 규칙 — 디자인 토큰</h3><span class="cnt">12항목</span></div><p>시맨틱 색 · 다크 모드 · 타입 스케일 · 모서리 · 고도와 z-index · 토큰 3단</p></span>
+      <span class="part"><div class="top"><span class="no">3부</span><h3>글자</h3><span class="cnt">10항목</span></div><p>웨이트 · 행간 · 자간 · 글줄 길이 · 말줄임 · 숫자 폰트 · 한글 조판</p></span>
+      <span class="part"><div class="top"><span class="no">4부</span><h3>조작 부품</h3><span class="cnt">22항목</span></div><p>버튼 위계 · 텍스트 필드 · 셀렉트와 콤보박스 · 스위치 · 슬라이더 · 날짜 선택기 · 드롭존</p></span>
+      <span class="part"><div class="top"><span class="no">5부</span><h3>표시 부품</h3><span class="cnt">15항목</span></div><p>카드 · 리스트 아이템 · 아바타 · 배지와 칩 · 프로그레스 · 스탯 타일 · 타임라인</p></span>
+      <a class="part part--hot" href="items/modal.html"><div class="top"><span class="no">6부</span><h3>겹치는 것들</h3><span class="cnt">1 / 16항목</span></div><p><b style="color:var(--accent)">모달 ✓</b> · 다이얼로그 · 바텀시트 · 드로어 · 팝오버 · 툴팁 · 토스트 · 커맨드 팔레트</p></a>
+      <span class="part"><div class="top"><span class="no">7부</span><h3>길 안내 — 내비게이션</h3><span class="cnt">12항목</span></div><p>앱바 · 사이드바 · 탭 · 브레드크럼 · 페이지네이션과 무한 스크롤 · 바텀 탭바 · 뒤로가기</p></span>
+      <span class="part"><div class="top"><span class="no">8부</span><h3>피드백과 상태</h3><span class="cnt">12항목</span></div><p>로딩 4종 · 빈 상태 3종 · 에러 4단 · 되돌리기 · 한 화면의 다섯 가지 얼굴</p></span>
+      <span class="part"><div class="top"><span class="no">9부</span><h3>움직임</h3><span class="cnt">10항목</span></div><p>이징 · 지속 시간 기준표 · 진입과 퇴장 · 제스처 · 모션 줄이기</p></span>
+      <span class="part"><div class="top"><span class="no">10부</span><h3>데이터 다루는 화면</h3><span class="cnt">10항목</span></div><p>데이터 테이블 해부 · 필터와 패싯 · 폼 설계 · 가상 스크롤 · 차트 고르기</p></span>
+      <span class="part"><div class="top"><span class="no">11부</span><h3>플랫폼 — PC와 폰</h3><span class="cnt">14항목</span></div><p>브레이크포인트 · 터치 타깃 · 노치와 세이프 에어리어 · 시스템 백 · 호버가 없는 세계 · HIG와 Material의 차이</p></span>
+      <span class="part"><div class="top"><span class="no">12부</span><h3>접근성</h3><span class="cnt">10항목</span></div><p>포커스 순서 · 포커스 트랩 · 대비비 · 스크린 리더가 읽는 것 · 라이브 리전</p></span>
+      <span class="part"><div class="top"><span class="no">13부</span><h3>화면 단위 패턴</h3><span class="cnt">12항목</span></div><p>로그인 · 온보딩 · 검색 결과 · 설정 · 결제 흐름 · 권한 요청 · 알림 센터</p></span>
+      <span class="part"><div class="top"><span class="no">14부</span><h3>말투 — UX 라이팅</h3><span class="cnt">8항목</span></div><p>버튼 문구 · 에러 메시지 · 빈 상태 문구 · 자리글과 헬퍼 텍스트 · 한국어 UI</p></span>
+      <span class="part"><div class="top"><span class="no">15부</span><h3>현장 용어</h3><span class="cnt">10항목</span></div><p>와이어프레임과 목업과 시안 · 디자인 시스템 · 배리언트 · 오토 레이아웃 · 핸드오프</p></span>
+      <span class="part"><div class="top"><span class="no">부록</span><h3>색인</h3><span class="cnt">4종</span></div><p>가나다순 · 영한 대조 · 플랫폼 3열 대조표 · 자주 틀리는 이름</p></span>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-foot wrap">
+  <p>
+    <b>이름표</b> — 화면 속 그게 뭔지 알려주는 도감.<br>
+    모든 그림은 직접 그린 재현입니다. 특정 제품의 화면 캡처를 쓰지 않았습니다.
+  </p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>모달 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  /* 이 데모 페이지 전용 — 가짜 앱 화면 꾸미기 */
+  body { background: var(--surface); font-size: 15px; }
+  .app-bar {
+    position: sticky; top: 0; z-index: 2;
+    display: flex; align-items: center; gap: var(--s3);
+    padding: var(--s3) var(--s4);
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .app-bar b { font-size: 15px; }
+  .app-bar .sp { margin-left: auto; }
+  .row {
+    display: flex; align-items: center; gap: var(--s3);
+    padding: var(--s3) var(--s4);
+    border-bottom: 1px solid var(--line);
+  }
+  .row .dot { width: 32px; height: 32px; border-radius: var(--r-full); background: var(--accent-soft); flex: none; }
+  .row .meta { flex: 1; min-width: 0; }
+  .row .meta b { display: block; font-size: 14px; }
+  .row .meta span { font-size: 12.5px; color: var(--fg-muted); }
+  .row .ui-btn { min-height: 36px; padding: 8px 13px; font-size: 13px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="app-bar">
+  <b>프로젝트</b>
+  <span class="sp"></span>
+  <button class="ui-btn ui-btn--ghost" style="min-height:36px;padding:8px 13px;font-size:13px">정렬</button>
+</div>
+
+<div class="row">
+  <span class="dot" aria-hidden="true"></span>
+  <span class="meta"><b>결제 서버 마이그레이션</b><span>어제 수정 · 멤버 4명</span></span>
+  <button class="ui-btn ui-btn--ghost js-open" data-name="결제 서버 마이그레이션">삭제</button>
+</div>
+<div class="row">
+  <span class="dot" aria-hidden="true"></span>
+  <span class="meta"><b>사내 대시보드</b><span>3일 전 수정 · 멤버 2명</span></span>
+  <button class="ui-btn ui-btn--ghost js-open" data-name="사내 대시보드">삭제</button>
+</div>
+<div class="row">
+  <span class="dot" aria-hidden="true"></span>
+  <span class="meta"><b>알림 파이프라인</b><span>지난주 수정 · 멤버 7명</span></span>
+  <button class="ui-btn ui-btn--ghost js-open" data-name="알림 파이프라인">삭제</button>
+</div>
+<div class="row">
+  <span class="dot" aria-hidden="true"></span>
+  <span class="meta"><b>이미지 리사이저</b><span>2주 전 수정 · 멤버 1명</span></span>
+  <button class="ui-btn ui-btn--ghost js-open" data-name="이미지 리사이저">삭제</button>
+</div>
+<div class="row">
+  <span class="dot" aria-hidden="true"></span>
+  <span class="meta"><b>검색 색인 재구축</b><span>한 달 전 수정 · 멤버 3명</span></span>
+  <button class="ui-btn ui-btn--ghost js-open" data-name="검색 색인 재구축">삭제</button>
+</div>
+
+<p class="hint">
+  삭제를 눌러 모달을 열고 확인해 보세요 — <kbd>Tab</kbd>이 모달 안에서만 도는지,
+  <kbd>Esc</kbd>로 닫히는지, 닫은 뒤 포커스가 눌렀던 버튼으로 돌아오는지, 뒤쪽 목록이 스크롤되는지.
+  <b>이 페이지를 도감 안의 틀(iframe)로 보고 있다면 Tab은 바깥 페이지로 새어 나갑니다</b> —
+  <code>&lt;dialog&gt;</code>는 자기 문서 안에서만 포커스를 가두기 때문입니다. 새 탭에서 열면 제대로 돕니다.
+</p>
+
+<dialog class="mdl" id="confirm" aria-labelledby="confirm-title">
+  <div class="mdl-head">
+    <h2 id="confirm-title">프로젝트를 삭제할까요?</h2>
+    <button class="mdl-x" data-close aria-label="닫기">&times;</button>
+  </div>
+  <div class="mdl-body">
+    <p><b id="confirm-name">이 프로젝트</b>와 그 안의 기록이 모두 지워집니다. 되돌릴 수 없습니다.</p>
+  </div>
+  <div class="mdl-foot">
+    <button class="ui-btn ui-btn--ghost" data-close>취소</button>
+    <button class="ui-btn ui-btn--danger" id="confirm-ok">삭제</button>
+  </div>
+</dialog>
+
+<script>
+(function () {
+  var dlg = document.getElementById('confirm');
+  var nameEl = document.getElementById('confirm-name');
+  var ok = document.getElementById('confirm-ok');
+  var opener = null;
+
+  document.querySelectorAll('.js-open').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      opener = btn;
+      nameEl.textContent = btn.dataset.name;
+      dlg.showModal();                      // 포커스 갇힘·Esc·배경 비활성이 여기서 따라온다
+      document.body.style.overflow = 'hidden';   // 배경 스크롤 잠금
+    });
+  });
+
+  function close() {
+    if (dlg.open) dlg.close();
+  }
+
+  dlg.querySelectorAll('[data-close]').forEach(function (b) {
+    b.addEventListener('click', close);
+  });
+
+  // 배경(백드롭)을 누르면 닫는다 — dialog 자체 영역 밖 클릭을 가려낸다
+  dlg.addEventListener('click', function (e) {
+    var r = dlg.getBoundingClientRect();
+    var inside = e.clientX >= r.left && e.clientX <= r.right &&
+                 e.clientY >= r.top  && e.clientY <= r.bottom;
+    if (!inside) close();
+  });
+
+  ok.addEventListener('click', function () {
+    ok.classList.add('ui-btn--busy');       // 처리 중 상태
+    setTimeout(function () {
+      ok.classList.remove('ui-btn--busy');
+      close();
+      if (opener) opener.closest('.row').remove();
+    }, 700);
+  });
+
+  // 닫힐 때 — 스크롤 풀고 포커스를 부른 버튼으로 되돌린다
+  dlg.addEventListener('close', function () {
+    document.body.style.overflow = '';
+    if (opener && document.body.contains(opener)) opener.focus();
+  });
+})();
+</script>
+</body>
+</html>

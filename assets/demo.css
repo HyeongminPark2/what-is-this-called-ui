@@ -1,0 +1,215 @@
+/* 실물 예시 안에서 쓰는 UI 부품.
+   도감 껍데기(base/card)와 분리해 둔다 — 여기 것들이 '설명 대상'이다.
+   같은 파일을 iframe 데모와 카드 안의 작은 그림이 함께 쓴다. */
+
+/* ── 버튼 ───────────────────────────── */
+.ui-btn {
+  appearance: none; cursor: pointer;
+  font: inherit; font-weight: 650; font-size: 14px; line-height: 1;
+  padding: 11px 18px; min-height: 44px;   /* 터치 타깃 */
+  border-radius: var(--r1);
+  border: 1px solid transparent;
+  background: var(--accent); color: #fff;
+  transition: background .14s, box-shadow .14s, transform .06s;
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s2);
+}
+.ui-btn:hover, .ui-btn.is-hover { background: color-mix(in srgb, var(--accent) 86%, #000); }
+.ui-btn:active, .ui-btn.is-active { transform: translateY(1px); background: color-mix(in srgb, var(--accent) 74%, #000); }
+.ui-btn.is-focus { outline: 3px solid var(--accent); outline-offset: 2px; }
+.ui-btn[disabled], .ui-btn.is-disabled {
+  cursor: not-allowed; opacity: .45; background: var(--accent); transform: none;
+}
+
+.ui-btn--ghost { background: transparent; color: var(--fg); border-color: var(--line-strong); }
+.ui-btn--ghost:hover, .ui-btn--ghost.is-hover { background: var(--bg); }
+.ui-btn--ghost:active, .ui-btn--ghost.is-active { background: var(--line); }
+.ui-btn--ghost[disabled], .ui-btn--ghost.is-disabled { background: transparent; }
+
+.ui-btn--danger { background: var(--danger); }
+.ui-btn--danger:hover, .ui-btn--danger.is-hover { background: color-mix(in srgb, var(--danger) 85%, #000); }
+.ui-btn--danger:active, .ui-btn--danger.is-active { background: color-mix(in srgb, var(--danger) 72%, #000); }
+
+.ui-btn--busy { position: relative; color: transparent; pointer-events: none; }
+.ui-btn--busy::after {
+  content: ""; position: absolute; width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,.4); border-top-color: #fff;
+  border-radius: 50%; animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .ui-btn--busy::after { animation-duration: 2.4s; } }
+
+/* ── 입력 ───────────────────────────── */
+.ui-label { display: block; font-size: 13px; font-weight: 650; margin-bottom: 5px; }
+.ui-input {
+  width: 100%; font: inherit; font-size: 15px;
+  padding: 10px 12px; min-height: 44px;
+  border: 1px solid var(--line-strong); border-radius: var(--r1);
+  background: var(--surface); color: var(--fg);
+}
+.ui-input::placeholder { color: var(--fg-faint); }
+.ui-help { font-size: 12.5px; color: var(--fg-muted); margin-top: 5px; }
+
+/* ── 모달 ───────────────────────────── */
+/* 데모용 가짜 화면 */
+.screen {
+  position: relative; overflow: hidden;
+  min-height: 100%;
+  background: var(--bg);
+}
+.screen__content { padding: var(--s5); }
+
+/* 네이티브 <dialog> + showModal(). 포커스 갇힘과 Esc가 브라우저에서 따라온다. */
+dialog.mdl {
+  width: calc(100% - 32px); max-width: 420px;
+  padding: 0; border: 0;
+  border-radius: var(--r3);
+  background: var(--surface); color: var(--fg);
+  box-shadow: var(--e3);
+  overflow: hidden;
+}
+dialog.mdl::backdrop { background: rgba(14,16,20,.52); }
+dialog.mdl[open] { animation: mdl-in .22s cubic-bezier(.2,.9,.3,1) both; }
+dialog.mdl[open]::backdrop { animation: scrim-in .18s ease-out both; }
+@keyframes scrim-in { from { opacity: 0; } }
+@keyframes mdl-in { from { opacity: 0; transform: translateY(12px) scale(.97); } }
+@media (prefers-reduced-motion: reduce) {
+  dialog.mdl[open], dialog.mdl[open]::backdrop { animation-duration: .01ms; }
+}
+
+.mdl-head {
+  display: flex; align-items: flex-start; gap: var(--s3);
+  padding: var(--s4) var(--s5) var(--s2);
+}
+.mdl-head h2 { font-size: 18px; font-weight: 750; flex: 1; }
+.mdl-x {
+  appearance: none; cursor: pointer; flex: none;
+  width: 36px; height: 36px; margin: -6px -8px 0 0;
+  border: 0; border-radius: var(--r1);
+  background: transparent; color: var(--fg-muted);
+  font-size: 19px; line-height: 1;
+}
+.mdl-x:hover { background: var(--bg); color: var(--fg); }
+.mdl-body { padding: 0 var(--s5) var(--s4); font-size: 15px; color: var(--fg-muted); }
+.mdl-body > :last-child { margin-bottom: 0; }
+.mdl-body p { max-width: none; }
+.mdl-foot {
+  display: flex; gap: var(--s2); justify-content: flex-end;
+  padding: var(--s4) var(--s5);
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+}
+@media (max-width: 420px) {
+  .mdl-foot { flex-direction: column-reverse; }
+  .mdl-foot .ui-btn { width: 100%; }
+}
+
+/* 폭이 좁으면 바텀시트로 바뀐다 — 폭 토글로 직접 보는 부분 */
+@keyframes sheet-in { from { transform: translateY(100%); } }
+@media (max-width: 480px) {
+  dialog.mdl {
+    width: 100%; max-width: none;
+    margin: auto auto 0;            /* 아래에 붙인다 */
+    border-radius: var(--r3) var(--r3) 0 0;
+  }
+  dialog.mdl[open] { animation-name: sheet-in; }
+  dialog.mdl::before {              /* 그래브 핸들 */
+    content: ""; display: block; width: 40px; height: 4px; margin: var(--s3) auto 0;
+    border-radius: var(--r-full); background: var(--line-strong);
+  }
+  dialog.mdl .mdl-head { padding-top: var(--s3); }
+}
+
+/* ── 작은 모사 그림 (상태 띠·사례·플랫폼 칸에서 씀) ── */
+.mini {
+  --mini: 1;
+  width: 100%; max-width: 158px;
+  border: 1px solid var(--line-strong); border-radius: 7px;
+  background: var(--surface);
+  overflow: hidden; position: relative;
+  font-size: 9px; line-height: 1.45;
+}
+.mini--tall { height: 150px; }
+.mini__bg { padding: 7px; }
+.mini__bar { height: 5px; border-radius: 3px; background: var(--line); margin-bottom: 5px; }
+.mini__bar--w60 { width: 60%; } .mini__bar--w40 { width: 40%; } .mini__bar--w80 { width: 80%; }
+.mini__scrim {
+  position: absolute; inset: 0; background: rgba(14,16,20,.5);
+  display: grid; place-items: center; padding: 8px;
+}
+.mini__card {
+  width: 100%; background: var(--surface);
+  border-radius: 5px; box-shadow: 0 6px 18px rgba(0,0,0,.3);
+  padding: 7px; text-align: left;
+}
+.mini__card b { display: block; font-size: 10px; margin-bottom: 3px; }
+.mini__card p { margin: 0 0 6px; font-size: 9px; color: var(--fg-muted); max-width: none; }
+.mini__btns { display: flex; gap: 4px; justify-content: flex-end; }
+.mini__btn {
+  padding: 3px 7px; border-radius: 3px; font-size: 9px; font-weight: 700;
+  background: var(--accent); color: #fff; white-space: nowrap;
+}
+.mini__btn--ghost { background: transparent; color: var(--fg-muted); box-shadow: inset 0 0 0 1px var(--line-strong); }
+.mini__btn--danger { background: var(--danger); }
+.mini__btn--focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* 상태 띠 안의 버튼 그림은 실제 상태 클래스를 입혀 보여준다 */
+.swatch-btn { font-size: 12px; padding: 8px 14px; min-height: 36px; }
+
+/* ── 폰 테두리 (플랫폼 칸) ───────────── */
+.phone {
+  width: 150px; flex: none; position: relative;
+  border: 2px solid var(--line-strong); border-radius: 16px;
+  background: var(--surface); overflow: hidden;
+  height: 230px; font-size: 9px;
+}
+.phone__notch {
+  position: absolute; top: 5px; left: 50%; transform: translateX(-50%);
+  width: 46px; height: 7px; border-radius: 99px; background: var(--line-strong); z-index: 5;
+}
+.phone__home {
+  position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%);
+  width: 52px; height: 3px; border-radius: 99px; background: var(--line-strong); z-index: 5;
+}
+.phone__screen { position: absolute; inset: 0; padding: 18px 8px 12px; }
+
+/* iOS 얼럿 */
+.ios-alert {
+  position: absolute; inset: 0; background: rgba(0,0,0,.35);
+  display: grid; place-items: center; padding: 14px;
+}
+.ios-alert__box {
+  width: 100%; background: color-mix(in srgb, var(--surface) 92%, var(--bg));
+  border-radius: 13px; overflow: hidden; text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+.ios-alert__box > div:first-child { padding: 10px 9px 9px; }
+.ios-alert__box b { display: block; font-size: 10px; }
+.ios-alert__box p { margin: 2px 0 0; font-size: 9px; color: var(--fg-muted); max-width: none; }
+.ios-alert__btns { display: flex; border-top: 1px solid var(--line); }
+.ios-alert__btns span { flex: 1; padding: 7px 2px; font-size: 10px; color: #0a84ff; font-weight: 500; }
+.ios-alert__btns span + span { border-left: 1px solid var(--line); font-weight: 700; }
+
+/* iOS 액션 시트 */
+.ios-sheet { position: absolute; inset: 0; background: rgba(0,0,0,.3); display: flex; align-items: flex-end; padding: 6px; }
+.ios-sheet__stack { width: 100%; }
+.ios-sheet__group {
+  background: color-mix(in srgb, var(--surface) 92%, var(--bg));
+  border-radius: 11px; overflow: hidden; margin-bottom: 5px;
+}
+.ios-sheet__group span { display: block; padding: 7px; text-align: center; font-size: 10px; color: #0a84ff; }
+.ios-sheet__group span + span { border-top: 1px solid var(--line); }
+.ios-sheet__group span.destructive { color: #ff453a; }
+.ios-sheet__group span.cancel { font-weight: 700; }
+
+/* 안드로이드 다이얼로그 (Material 3) */
+.md-dialog { position: absolute; inset: 0; background: rgba(0,0,0,.4); display: grid; place-items: center; padding: 12px; }
+.md-dialog__box {
+  width: 100%; background: var(--surface);
+  border-radius: 24px; padding: 11px 10px 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+}
+.md-dialog__box b { display: block; font-size: 10px; margin-bottom: 3px; }
+.md-dialog__box p { margin: 0 0 8px; font-size: 9px; color: var(--fg-muted); max-width: none; }
+.md-dialog__btns { display: flex; gap: 3px; justify-content: flex-end; }
+.md-dialog__btns span { padding: 5px 9px; border-radius: 99px; font-size: 9px; font-weight: 700; color: var(--accent); }
+.md-dialog__btns span.filled { background: var(--accent); color: #fff; }
