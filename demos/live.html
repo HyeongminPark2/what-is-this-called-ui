@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>라이브 리전 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .ui-btn--sm { min-height: 34px; padding: 7px 12px; font-size: 13px; }
+  .lv-feed .polite { color: var(--accent); font-weight: 700; }
+  .lv-feed .assertive { color: var(--danger); font-weight: 700; }
+  .lv-feed .none { color: var(--fg-faint); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>라이브 리전</b>
+  <button type="button" class="ui-btn ui-btn--ghost ui-btn--sm" data-go="none">조용히 바꾸기</button>
+  <button type="button" class="ui-btn ui-btn--ghost ui-btn--sm" data-go="polite">status 로 알리기</button>
+  <button type="button" class="ui-btn ui-btn--ghost ui-btn--sm" data-go="assertive">alert 로 끊고 알리기</button>
+</div>
+
+<div class="pad a11y">
+  <div class="a11y__stage" style="display:grid;gap:var(--s3)">
+    <div class="lv-box">
+      <span style="font-size:12px;color:var(--fg-muted)">화면에 보이는 것</span>
+      <div id="visible" style="font-size:14px">정산 42건</div>
+    </div>
+    <div style="font-size:12.5px;color:var(--fg-muted)">
+      <span id="r-none" aria-hidden="true"></span>
+      <span id="r-polite" role="status" aria-live="polite" class="sr-only"></span>
+      <span id="r-assertive" role="alert" aria-live="assertive" class="sr-only"></span>
+    </div>
+  </div>
+
+  <div class="a11y__stage">
+    <span style="font-size:12px;color:var(--fg-muted);display:block;margin-bottom:6px">스크린 리더가 말하는 것</span>
+    <div class="lv-feed" id="feed"><span class="none">아직 아무 말도 안 했습니다.</span></div>
+  </div>
+</div>
+
+<p class="hint">
+  화면이 저절로 바뀌는 것(저장됨, 3건 추가됨, 연결 끊김)은 <b>눈으로는 보이지만 소리로는 안 들립니다.</b>
+  <b>라이브 리전</b>이 그 틈을 메웁니다 — 그 안의 글이 바뀌면 스크린 리더가 <b>읽던 것을 마치고</b> 말해 줍니다.<br>
+  <b>조용히 바꾸기</b>를 눌러 보세요. 화면 숫자는 바뀌는데 아래 기록은 그대로입니다 —
+  화면을 못 보는 사람에게는 <b>아무 일도 일어나지 않은 것</b>입니다.<br>
+  <code>role="status"</code>(= <code>aria-live="polite"</code>)는 <b>하던 말이 끝난 뒤</b>,
+  <code>role="alert"</code>(= <code>assertive</code>)는 <b>말을 끊고</b> 알립니다.
+  끊는 것은 거슬리니 <b>정말 급한 것</b>(오류, 연결 끊김)에만 씁니다.<br>
+  <b>리전은 미리 비워 둔 채로 있어야</b> 합니다. 알릴 때 통째로 새로 만들면 읽지 않습니다 —
+  가장 흔한 실수입니다.
+</p>
+
+<script>
+(function () {
+  var n = 42;
+  var visible = document.getElementById('visible'), feed = document.getElementById('feed');
+  var lines = [];
+
+  function speak(kind, msg) {
+    if (kind === 'none') return;                 // 아무 데도 안 넣으면 아무 말도 안 한다
+    var id = kind === 'polite' ? 'r-polite' : 'r-assertive';
+    document.getElementById(id).textContent = msg;   // 미리 있던 리전의 '내용만' 바꾼다
+    lines.push('<span class="' + kind + '">' + (kind === 'polite' ? '[기다렸다가] ' : '[말을 끊고] ') + msg + '</span>');
+    if (lines.length > 6) lines.shift();
+    feed.innerHTML = lines.join('<br>');
+  }
+
+  document.querySelectorAll('[data-go]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      n += 3;
+      visible.textContent = '정산 ' + n + '건';
+      var kind = b.dataset.go;
+      if (kind === 'none') {
+        document.getElementById('r-none').textContent = '정산 ' + n + '건';
+        lines.push('<span class="none">(아무 말도 안 함 — 화면만 바뀜)</span>');
+        if (lines.length > 6) lines.shift();
+        feed.innerHTML = lines.join('<br>');
+      } else {
+        speak(kind, '정산이 3건 추가되어 모두 ' + n + '건입니다');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

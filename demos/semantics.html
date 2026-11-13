@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>시맨틱 태그 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .land { border: 1px dashed var(--line-strong); border-radius: var(--r1); padding: 7px 9px; font-size: 12px; }
+  .land b { font-family: var(--mono); font-size: 11px; color: var(--accent); display: block; margin-bottom: 2px; }
+  .land.div b { color: var(--danger); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>시맨틱 태그</b>
+  <label><input type="checkbox" id="div"> 전부 div 로 바꾸기</label>
+</div>
+
+<div class="pad a11y">
+  <div class="a11y__stage" style="display:grid;gap:7px" id="page">
+    <div class="land" data-tag="header" data-role="배너"><b>&lt;header&gt;</b>모란상회 · 로고와 검색</div>
+    <div class="land" data-tag="nav" data-role="내비게이션"><b>&lt;nav&gt;</b>홈 · 정산 · 설정</div>
+    <div class="land" data-tag="main" data-role="메인"><b>&lt;main&gt;</b>정산 목록과 상세</div>
+    <div class="land" data-tag="aside" data-role="보조"><b>&lt;aside&gt;</b>이번 주 요약</div>
+    <div class="land" data-tag="footer" data-role="꼬리말"><b>&lt;footer&gt;</b>회사 정보</div>
+  </div>
+
+  <div class="a11y__stage">
+    <span style="font-size:12px;color:var(--fg-muted);display:block;margin-bottom:6px">스크린 리더의 '구역 목록'</span>
+    <div class="sr-tree" id="tree"></div>
+  </div>
+</div>
+
+<p class="hint">
+  스크린 리더 사용자는 <b>구역 목록</b>을 띄워 화면을 훑습니다 — '내비게이션으로', '메인으로' 하고 건너뜁니다.
+  그 목록을 만드는 것이 <code>&lt;header&gt;</code>·<code>&lt;nav&gt;</code>·<code>&lt;main&gt;</code> 같은
+  <b>시맨틱 태그</b>입니다.<br>
+  <b>전부 div 로 바꾸기</b>를 켜 보세요. 화면은 똑같은데 <b>구역 목록이 통째로 비어</b>
+  처음부터 끝까지 순서대로 읽는 수밖에 없게 됩니다.<br>
+  태그 하나하나가 <b>역할 · 키보드 동작 · 상태</b>를 공짜로 줍니다 —
+  <code>&lt;button&gt;</code>은 Enter·Space 가 되고, <code>&lt;ul&gt;</code>은 '항목 12개'라고 알려 주고,
+  <code>&lt;h2&gt;</code>는 제목 목차에 들어갑니다. <b>div 로 만들면 그걸 전부 직접 짜야</b> 하고
+  거의 늘 하나씩 빠집니다.<br>
+  <b>ARIA 의 첫 규칙</b>이 그래서 "<b>ARIA 를 쓰지 않는 것</b>"입니다 — 맞는 태그가 있으면 그걸 씁니다.
+</p>
+
+<script>
+(function () {
+  var page = document.getElementById('page'), tree = document.getElementById('tree');
+
+  function draw() {
+    var asDiv = document.getElementById('div').checked;
+    page.querySelectorAll('.land').forEach(function (el) {
+      el.classList.toggle('div', asDiv);
+      el.querySelector('b').textContent = asDiv ? '&lt;div&gt;'.replace(/&lt;/g,'<').replace(/&gt;/g,'>') : '<' + el.dataset.tag + '>';
+    });
+    if (asDiv) {
+      tree.innerHTML = '<div class="bad">— 구역이 하나도 없습니다. 처음부터 끝까지 읽는 수밖에 없습니다.</div>';
+    } else {
+      tree.innerHTML = [...page.querySelectorAll('.land')].map(function (el) {
+        return '<div>— <span class="role">' + el.dataset.role + '</span> <span class="name">(&lt;' + el.dataset.tag + '&gt;)</span></div>';
+      }).join('');
+    }
+  }
+  document.getElementById('div').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

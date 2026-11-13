@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대비비 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  input[type=color] { width: 36px; height: 28px; padding: 0; border: 1px solid var(--line-strong); border-radius: 5px; background: none; cursor: pointer; }
+  .verdict { font-family: var(--mono); font-size: 12.5px; display: grid; gap: 3px; }
+  .ok { color: #1f8a4c; font-weight: 700; }
+  .no { color: var(--danger); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>대비비</b>
+  <label>글자색 <input type="color" id="fg" value="#8a93a3"></label>
+  <label>바탕색 <input type="color" id="bg" value="#ffffff"></label>
+</div>
+
+<div class="pad">
+  <div class="ct" id="sample" style="border:1px solid var(--line)">
+    <b style="font-size:19px">큰 글자 19px 굵게</b>
+    <span style="font-size:14px">본문 14px — 정산 요청이 승인되면 영업일 기준 2일 안에 입금됩니다.</span>
+    <span style="font-size:11.5px">작은 글자 11.5px</span>
+  </div>
+
+  <div class="verdict" id="verdict"></div>
+
+  <div class="ct-grid">
+    <div class="ct" style="background:#ffffff;color:#14161a;border:1px solid var(--line)"><b>본문</b><span>#14161a / #ffffff</span><span class="ratio" id="r1"></span></div>
+    <div class="ct" style="background:#ffffff;color:#697180;border:1px solid var(--line)"><b>보조 글</b><span>#697180 / #ffffff</span><span class="ratio" id="r2"></span></div>
+    <div class="ct" style="background:#2f6df6;color:#ffffff"><b>주요 버튼</b><span>#ffffff / #2f6df6</span><span class="ratio" id="r3"></span></div>
+    <div class="ct" style="background:#ffffff;color:#aeb6c2;border:1px solid var(--line)"><b>자리글</b><span>#aeb6c2 / #ffffff</span><span class="ratio" id="r4"></span></div>
+  </div>
+</div>
+
+<p class="hint">
+  <b>대비비</b>는 글자색과 바탕색의 밝기 차이를 1~21로 잰 값입니다. 기준은 셋입니다 —
+  <b>본문 4.5:1</b>, <b>큰 글자(18.66px 굵게 또는 24px) 3:1</b>, <b>테두리·아이콘 3:1</b>.<br>
+  색을 바꿔 보면 세 크기가 각각 통과인지 바로 나옵니다. <b>같은 색인데 크기에 따라 판정이 갈리는 것</b>을 보세요 —
+  기준이 하나가 아니라서, "이 회색 써도 되나요"의 답은 <b>"어디에 쓰는데요"</b>입니다.<br>
+  아래 네 칸은 이 도감이 실제로 쓰는 색들입니다. <b>자리글(placeholder)</b>이 유독 아슬아슬한데,
+  흐릴수록 예뻐 보여서 가장 자주 기준을 넘깁니다.<br>
+  대비비는 <b>눈으로 판단하면 안 됩니다.</b> 모니터·밝기·나이에 따라 달라지고, 재면 바로 나옵니다.
+</p>
+
+<script>
+(function () {
+  function lum(hex) {
+    var n = parseInt(hex.slice(1), 16);
+    var c = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map(function (v) {
+      v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+  function ratio(a, b) {
+    var x = lum(a), y = lum(b);
+    return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+  }
+  function tag(v, need) {
+    return v >= need
+      ? '<span class="ok">통과 (' + v.toFixed(2) + ':1 ≥ ' + need + ')</span>'
+      : '<span class="no">미달 (' + v.toFixed(2) + ':1 &lt; ' + need + ')</span>';
+  }
+
+  var sample = document.getElementById('sample'), verdict = document.getElementById('verdict');
+
+  function draw() {
+    var fg = document.getElementById('fg').value, bg = document.getElementById('bg').value;
+    sample.style.color = fg; sample.style.background = bg;
+    var v = ratio(fg, bg);
+    verdict.innerHTML =
+      '대비비 <b>' + v.toFixed(2) + ':1</b><br>' +
+      '큰 글자 19px 굵게 — ' + tag(v, 3) + '<br>' +
+      '본문 14px — ' + tag(v, 4.5) + '<br>' +
+      '작은 글자 11.5px — ' + tag(v, 4.5);
+  }
+  ['fg', 'bg'].forEach(function (id) { document.getElementById(id).addEventListener('input', draw); });
+  draw();
+
+  [['r1', '#14161a', '#ffffff', 4.5], ['r2', '#697180', '#ffffff', 4.5],
+   ['r3', '#ffffff', '#2f6df6', 4.5], ['r4', '#aeb6c2', '#ffffff', 4.5]].forEach(function (p) {
+    var v = ratio(p[1], p[2]);
+    document.getElementById(p[0]).innerHTML = v.toFixed(2) + ':1 ' +
+      (v >= p[3] ? '<span class="ok">통과</span>' : '<span class="no">미달</span>');
+  });
+})();
+</script>
+</body>
+</html>

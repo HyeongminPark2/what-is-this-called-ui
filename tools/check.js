@@ -208,6 +208,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
 
   // ── 2. 항목 카드 — 일곱 장 모두 같은 틀인지 ──
   const PARTS = {
+    '12부': ['focus', 'focustrap', 'keyboard', 'name', 'screenreader', 'live', 'contrast', 'semantics'],
     '1부': ['box', 'flex', 'grid', 'center', 'overflow', 'sticky', 'container', 'safearea'],
     '2부': ['color', 'dark', 'typescale', 'spacing', 'elevation', 'zindex'],
     '5부': ['card', 'listitem', 'avatar', 'badge', 'chip', 'stat', 'timeline', 'rating'],
@@ -1114,6 +1115,99 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   if (!(await layers() < L0)) fail.push('위계: 색을 꺼도 층이 안 줄어든다');
   await page.locator('#color').check(); await page.locator('#flat').check(); await page.waitForTimeout(200);
   if (await layers() !== 1) fail.push('위계: 전부 같게 했는데 층이 하나가 아니다');
+  await page.close();
+
+  // 12부 접근성 데모 여덟 장
+  // 포커스 — 테두리를 지우면 안 보인다
+  page = await demo('focus', 900, 760);
+  await page.locator('.fk').first().focus(); await page.waitForTimeout(120);
+  if (!(await page.textContent('#log')).includes('보임')) fail.push('포커스: 기본에서 테두리가 안 보인다');
+  await page.selectOption('#ring', 'is-noring'); await page.waitForTimeout(150);
+  await page.locator('.fk').nth(1).focus(); await page.waitForTimeout(150);
+  if (!(await page.textContent('#log')).includes('안 보임')) fail.push('포커스: outline:none 을 못 잡는다 (보여주려는 결과)');
+  if (await page.$eval('.fk--fake', e => e.tabIndex) !== -1) fail.push('포커스: 가짜 버튼이 Tab 에 걸린다');
+  if (!await page.$eval('.skip', e => e.getBoundingClientRect().left < -1000)) fail.push('포커스: 건너뛰기 링크가 평소에 보인다');
+  await page.locator('.skip').focus(); await page.waitForTimeout(120);
+  if (!await page.$eval('.skip', e => e.getBoundingClientRect().left > 0)) fail.push('포커스: 건너뛰기 링크가 포커스에도 안 나타난다');
+  await page.close();
+
+  // 포커스 트랩 — showModal 은 가두고 show 는 샌다
+  page = await demo('focustrap', 900, 760);
+  await page.locator('#open').click(); await page.waitForTimeout(250);
+  for (let i = 0; i < 6; i++) { await page.keyboard.press('Tab'); await page.waitForTimeout(60); }
+  if ((await page.textContent('#log')).includes('모달 밖')) fail.push('포커스 트랩: showModal 인데 밖으로 샌다');
+  await page.locator('#cancel').click(); await page.waitForTimeout(200);
+  if (await page.evaluate(() => document.activeElement.id) !== 'open') fail.push('포커스 트랩: 닫은 뒤 부른 버튼으로 안 돌아온다');
+  await page.locator('#broken').check();
+  await page.locator('#open').click(); await page.waitForTimeout(250);
+  for (let i = 0; i < 7; i++) { await page.keyboard.press('Tab'); await page.waitForTimeout(60); }
+  if (!(await page.textContent('#log')).includes('모달 밖')) fail.push('포커스 트랩: show() 인데 안 샌다 (보여주려는 결과)');
+  await page.close();
+
+  // 키보드 — div 는 Tab 도 Enter 도 안 된다
+  page = await demo('keyboard', 900, 760);
+  if (await page.$eval('#fake', e => e.tabIndex) !== -1) fail.push('키보드: div+onclick 이 Tab 에 걸린다');
+  if (await page.$eval('#half', e => e.tabIndex) !== 0) fail.push('키보드: tabindex 를 줬는데 Tab 이 안 간다');
+  await page.locator('#half').focus(); await page.keyboard.press('Enter'); await page.waitForTimeout(180);
+  if (!(await page.textContent('#log')).includes('아무 일도 안 일어남'))
+    fail.push('키보드: tabindex 만으로 Enter 가 먹는다 (보여주려는 결과)');
+  await page.locator('button.kb-fake').focus(); await page.keyboard.press('Enter'); await page.waitForTimeout(180);
+  if (!(await page.textContent('#log')).includes('눌림')) fail.push('키보드: 진짜 button 이 Enter 로 안 눌린다');
+  await page.close();
+
+  // 이름 — 아이콘만 있으면 이름이 없다
+  page = await demo('name', 900, 820);
+  const said = await page.$$eval('.said', els => els.map(e => e.textContent));
+  if (!said[0].includes('저장')) fail.push('이름: 글자가 이름이 안 된다');
+  if (!said[1].includes('이름이 없습니다')) fail.push('이름: 아이콘만인데 이름이 있다고 나온다 (보여주려는 결과)');
+  if (!said[2].includes('지우기')) fail.push('이름: aria-label 이 이름이 안 된다');
+  if (!said[3].includes('이름이 없습니다')) fail.push('이름: 자리글이 이름으로 잡힌다');
+  if (!said[4].includes('계좌번호')) fail.push('이름: label 이 이름이 안 된다');
+  await page.close();
+
+  // 스크린 리더 — 상태가 같이 바뀐다
+  page = await demo('screenreader', 900, 760);
+  if (!(await page.textContent('#tree')).includes('꺼짐')) fail.push('스크린 리더: 처음 상태가 안 나온다');
+  await page.locator('#sw').click(); await page.waitForTimeout(180);
+  if (await page.getAttribute('#sw', 'aria-checked') !== 'true') fail.push('스크린 리더: aria-checked 가 안 바뀐다');
+  if (!(await page.textContent('#tree')).includes('켜짐')) fail.push('스크린 리더: 읽히는 말이 안 바뀐다');
+  await page.locator('#more').click(); await page.waitForTimeout(180);
+  if (await page.getAttribute('#more', 'aria-expanded') !== 'true') fail.push('스크린 리더: aria-expanded 가 안 바뀐다');
+  await page.locator('#strip').check(); await page.waitForTimeout(180);
+  if (!(await page.textContent('#tree')).includes('역할·상태 없음')) fail.push('스크린 리더: 빼고 보기가 안 먹는다');
+  await page.close();
+
+  // 라이브 리전 — 미리 있는 리전의 내용만 바꾼다
+  page = await demo('live', 900, 760);
+  if (await page.getAttribute('#r-polite', 'aria-live') !== 'polite') fail.push('라이브: status 리전이 없다');
+  if (await page.getAttribute('#r-assertive', 'aria-live') !== 'assertive') fail.push('라이브: alert 리전이 없다');
+  await page.locator('[data-go=none]').click(); await page.waitForTimeout(180);
+  if (!(await page.textContent('#feed')).includes('아무 말도 안 함')) fail.push('라이브: 조용히 바꿔도 뭔가 말한다');
+  if (await page.textContent('#r-polite') !== '') fail.push('라이브: 안 알렸는데 리전에 글이 들어갔다');
+  await page.locator('[data-go=polite]').click(); await page.waitForTimeout(180);
+  if (!(await page.textContent('#r-polite')).includes('건입니다')) fail.push('라이브: status 리전이 안 바뀐다');
+  await page.locator('[data-go=assertive]').click(); await page.waitForTimeout(180);
+  if (!(await page.textContent('#feed')).includes('[말을 끊고]')) fail.push('라이브: alert 가 안 끊는다');
+  await page.close();
+
+  // 대비비 — 크기에 따라 판정이 갈린다
+  page = await demo('contrast', 900, 860);
+  const vtxt = await page.textContent('#verdict');
+  if (!vtxt.includes('통과')) fail.push('대비비: 큰 글자도 미달이라고 나온다');
+  if (!vtxt.includes('미달')) fail.push('대비비: 본문 미달을 안 잡는다 (기준이 다름을 보여주려는 결과)');
+  await page.$eval('#fg', e => { e.value = '#14161a'; e.dispatchEvent(new Event('input')); });
+  await page.waitForTimeout(180);
+  if ((await page.textContent('#verdict')).includes('미달')) fail.push('대비비: 진한 색인데 미달이 남아 있다');
+  if (!(await page.textContent('#r4')).includes('미달')) fail.push('대비비: 자리글 회색을 통과로 본다');
+  await page.close();
+
+  // 시맨틱 — div 로 바꾸면 구역 목록이 빈다
+  page = await demo('semantics', 900, 760);
+  if (await page.locator('.land').count() !== 5) fail.push('시맨틱: 구역이 다섯이 아니다');
+  if (!(await page.textContent('#tree')).includes('내비게이션')) fail.push('시맨틱: 구역 목록이 안 나온다');
+  await page.locator('#div').check(); await page.waitForTimeout(180);
+  if (!(await page.textContent('#tree')).includes('구역이 하나도 없습니다'))
+    fail.push('시맨틱: div 로 바꿔도 목록이 남아 있다 (보여주려는 결과)');
   await page.close();
 
   await browser.close();

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>키보드 조작 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: var(--fg-muted); margin: 0 0 var(--s2); }
+  .ok { color: #1f8a4c; font-weight: 700; }
+  .no { color: var(--danger); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar"><b>키보드 조작</b><span style="font-size:13px;color:var(--fg-muted)">마우스를 쓰지 말고 <kbd>Tab</kbd>·<kbd>Enter</kbd>·<kbd>Space</kbd> 로만 해 보세요</span></div>
+
+<div class="pad a11y">
+  <div class="a11y__stage">
+    <h4>같은 모양, 다른 속</h4>
+    <ul class="kb-list">
+      <li><span class="who">진짜 버튼</span>
+        <button class="kb-fake" data-k="button">저장하기</button>
+        <span id="v1" style="font-size:12px;color:var(--fg-muted)"></span></li>
+      <li><span class="who">div + onclick</span>
+        <span class="kb-fake" id="fake" data-k="div">저장하기</span>
+        <span id="v2" style="font-size:12px;color:var(--fg-muted)"></span></li>
+      <li><span class="who">div + tabindex</span>
+        <span class="kb-fake" id="half" tabindex="0" role="button" data-k="div-tab">저장하기</span>
+        <span id="v3" style="font-size:12px;color:var(--fg-muted)"></span></li>
+    </ul>
+  </div>
+  <div class="a11y__log" id="log">세 가지를 각각 <b>Tab</b> 으로 가서 <b>Enter</b> 와 <b>Space</b> 를 눌러 보세요.</div>
+</div>
+
+<p class="hint">
+  셋 다 똑같아 보이지만 <b>키보드로는 전혀 다릅니다.</b><br>
+  <b>진짜 <code>&lt;button&gt;</code></b>은 Tab 으로 갈 수 있고 Enter·Space 둘 다 눌립니다.
+  <b><code>&lt;div&gt;</code> + onclick</b>은 <b>Tab 이 아예 지나갑니다</b> — 키보드로는 못 씁니다.
+  <b><code>tabindex="0"</code>을 더하면</b> 갈 수는 있는데 <b>Enter·Space 가 안 먹습니다</b> —
+  키 처리를 직접 적어야 합니다.<br>
+  그래서 규칙은 하나입니다 — <b>누를 것은 <code>&lt;button&gt;</code>, 이동은 <code>&lt;a href&gt;</code></b>.
+  div 로 만들면 <b>tabindex · role · Enter · Space · 비활성 처리</b>를 전부 직접 짜야 하고,
+  거의 늘 하나씩 빠집니다.
+</p>
+
+<script>
+(function () {
+  var log = document.getElementById('log'), lines = [];
+  function note(t, cls) {
+    lines.push(cls ? '<span class="' + cls + '">' + t + '</span>' : t);
+    if (lines.length > 7) lines.shift();
+    log.innerHTML = lines.join('<br>');
+  }
+
+  // 세 가지가 '키보드로 되는지'를 미리 재서 옆에 적어 둔다
+  var checks = [
+    ['v1', true, true, '포커스 ○ · Enter ○ · Space ○'],
+    ['v2', false, false, '포커스 ✕ — 키보드로 못 감'],
+    ['v3', true, false, '포커스 ○ · Enter ✕ · Space ✕']
+  ];
+  checks.forEach(function (c) {
+    document.getElementById(c[0]).innerHTML =
+      '<span class="' + (c[1] && c[2] ? 'ok' : 'no') + '">' + c[3] + '</span>';
+  });
+
+  document.querySelector('.a11y__stage').addEventListener('click', function (e) {
+    var el = e.target.closest('[data-k]');
+    if (el) note('눌림 — ' + el.dataset.k, 'ok');
+  });
+
+  document.addEventListener('keydown', function (e) {
+    var el = document.activeElement;
+    if (!el || !el.dataset || !el.dataset.k) return;
+    if (e.key === 'Enter' || e.key === ' ') {
+      // 진짜 button 은 브라우저가 click 을 만들어 준다. div 는 아무 일도 안 일어난다.
+      if (el.tagName !== 'BUTTON') {
+        note(el.dataset.k + ' 에서 ' + (e.key === ' ' ? 'Space' : 'Enter') + ' — <b>아무 일도 안 일어남</b>', 'no');
+      }
+    }
+  });
+
+  document.addEventListener('focusin', function (e) {
+    var el = e.target;
+    if (el.dataset && el.dataset.k) note('포커스 — ' + el.dataset.k);
+  });
+
+  document.getElementById('fake').addEventListener('click', function () { note('마우스로는 눌립니다', ''); });
+  document.getElementById('half').addEventListener('click', function () { note('마우스로는 눌립니다', ''); });
+})();
+</script>
+</body>
+</html>

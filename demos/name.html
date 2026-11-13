@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>이름 붙이기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .ic { display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--r1); border: 1px solid var(--line-strong); background: var(--surface); font-size: 15px; cursor: pointer; }
+  .ic:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .nm-row { display: flex; align-items: center; gap: var(--s4); flex-wrap: wrap; padding: 7px 0; border-bottom: 1px solid var(--line); }
+  .nm-row .what { width: 150px; flex: none; font-size: 12.5px; color: var(--fg-muted); }
+  .nm-row .said { font-family: var(--mono); font-size: 12px; flex: 1; min-width: 140px; }
+  .said .ok { color: #1f8a4c; font-weight: 700; }
+  .said .no { color: var(--danger); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar"><b>이름 붙이기</b><span style="font-size:13px;color:var(--fg-muted)">스크린 리더가 뭐라고 읽을지</span></div>
+
+<div class="pad a11y">
+  <div class="a11y__stage">
+    <div class="nm-row">
+      <span class="what">글자가 있는 버튼</span>
+      <button class="ic" style="width:auto;padding:0 12px;font-size:13px">저장</button>
+      <span class="said" data-for="0"></span>
+    </div>
+    <div class="nm-row">
+      <span class="what">아이콘만 · 이름 없음</span>
+      <button class="ic"><span aria-hidden="true">🗑</span></button>
+      <span class="said" data-for="1"></span>
+    </div>
+    <div class="nm-row">
+      <span class="what">아이콘 + aria-label</span>
+      <button class="ic" aria-label="정산 요청 #4821 지우기"><span aria-hidden="true">🗑</span></button>
+      <span class="said" data-for="2"></span>
+    </div>
+    <div class="nm-row">
+      <span class="what">입력칸 · label 없음</span>
+      <input class="f" style="width:140px" placeholder="계좌번호">
+      <span class="said" data-for="3"></span>
+    </div>
+    <div class="nm-row">
+      <span class="what">입력칸 + label</span>
+      <span><label for="acc" style="font-size:12px;color:var(--fg-muted);display:block;margin-bottom:3px">계좌번호</label>
+      <input class="f" id="acc" style="width:140px" placeholder="- 없이 입력"></span>
+      <span class="said" data-for="4"></span>
+    </div>
+    <div class="nm-row">
+      <span class="what">링크 · 더 보기</span>
+      <a href="#" style="font-size:13px">더 보기</a>
+      <span class="said" data-for="5"></span>
+    </div>
+  </div>
+  <div class="a11y__log" id="log">각 줄의 오른쪽이 <b>스크린 리더가 읽는 말</b>입니다. 비어 있으면 아무 이름이 없다는 뜻입니다.</div>
+</div>
+
+<p class="hint">
+  화면을 못 보는 사람에게 버튼은 <b>이름 하나로만</b> 존재합니다. 그래서 모든 누를 것에는
+  <b>접근 이름</b>(accessible name)이 있어야 합니다.<br>
+  이름은 <b>순서대로</b> 정해집니다 — <code>aria-labelledby</code> → <code>aria-label</code> →
+  <code>&lt;label&gt;</code> → 안의 글자 → <code>title</code>. 위에서 하나라도 있으면 아래는 무시됩니다.<br>
+  <b>자리글(placeholder)은 이름이 아닙니다.</b> 입력을 시작하면 사라지고, 읽어 주는 기기도 제각각입니다 —
+  <code>&lt;label&gt;</code>을 따로 둬야 합니다.<br>
+  <b>'더 보기'가 열 개</b> 있는 화면은 링크 목록이 '더 보기, 더 보기, 더 보기…'가 됩니다.
+  무엇을 더 보는지까지 이름에 넣습니다.
+</p>
+
+<script>
+(function () {
+  // 브라우저가 계산한 접근 이름을 흉내 내 본다(간단판)
+  function accName(el) {
+    if (el.getAttribute('aria-labelledby')) {
+      var t = document.getElementById(el.getAttribute('aria-labelledby'));
+      if (t) return t.textContent.trim();
+    }
+    if (el.getAttribute('aria-label')) return el.getAttribute('aria-label');
+    if (el.id) {
+      var lb = document.querySelector('label[for="' + el.id + '"]');
+      if (lb) return lb.textContent.trim();
+    }
+    var closest = el.closest('label');
+    if (closest) return closest.textContent.trim();
+    if (el.tagName !== 'INPUT') {
+      // aria-hidden 인 자식은 이름 계산에서 빠진다 — 아이콘을 숨기면 이름이 없어진다
+      var t = '';
+      el.childNodes.forEach(function (c) {
+        if (c.nodeType === 3) t += c.textContent;
+        else if (c.nodeType === 1 && c.getAttribute('aria-hidden') !== 'true') t += c.textContent;
+      });
+      if (t.trim()) return t.trim();
+    }
+    if (el.getAttribute('title')) return el.getAttribute('title');
+    return '';
+  }
+  function roleOf(el) {
+    return el.tagName === 'BUTTON' ? '버튼' : el.tagName === 'A' ? '링크' : el.tagName === 'INPUT' ? '편집' : '';
+  }
+
+  document.querySelectorAll('.nm-row').forEach(function (row, i) {
+    var el = row.querySelector('button, input, a');
+    var said = row.querySelector('.said');
+    var name = accName(el);
+    said.innerHTML = name
+      ? '<span class="ok">"' + name + ', ' + roleOf(el) + '"</span>'
+      : '<span class="no">"' + roleOf(el) + '" — 이름이 없습니다</span>';
+  });
+})();
+</script>
+</body>
+</html>

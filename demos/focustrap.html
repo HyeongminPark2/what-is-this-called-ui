@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>포커스 트랩 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  dialog { border: 0; border-radius: var(--r2); padding: var(--s5); max-width: 320px; box-shadow: var(--e3); }
+  dialog::backdrop { background: rgba(14,16,20,.5); }
+  dialog h3 { font-size: 16px; margin: 0 0 var(--s3); }
+  dialog p { font-size: 13.5px; color: var(--fg-muted); margin: 0 0 var(--s4); }
+  .acts { display: flex; gap: var(--s2); justify-content: flex-end; }
+  .ui-btn--sm { min-height: 34px; padding: 7px 12px; font-size: 13px; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>포커스 트랩</b>
+  <label><input type="checkbox" id="broken"> 가두지 않고 열기</label>
+</div>
+
+<div class="pad a11y">
+  <div class="a11y__stage">
+    <div class="fk-row">
+      <button class="fk" data-n="배경 버튼 1">배경 버튼 1</button>
+      <button class="fk ui-btn ui-btn--sm" id="open" data-n="열기" style="background:var(--accent);color:#fff;border-color:var(--accent)">모달 열기</button>
+      <button class="fk" data-n="배경 버튼 2">배경 버튼 2</button>
+    </div>
+  </div>
+  <div class="a11y__log" id="log">모달을 연 뒤 <b>Tab</b> 을 계속 눌러 보세요.</div>
+</div>
+
+<dialog id="dlg" aria-labelledby="t">
+  <h3 id="t">정산을 확정할까요?</h3>
+  <p>확정하면 되돌릴 수 없습니다.</p>
+  <div class="acts">
+    <button class="ui-btn ui-btn--ghost ui-btn--sm" data-n="모달 · 취소" id="cancel">취소</button>
+    <button class="ui-btn ui-btn--sm" data-n="모달 · 확정" id="ok">확정</button>
+  </div>
+</dialog>
+
+<p class="hint">
+  <b>포커스 트랩</b>은 모달이 열린 동안 <b>키보드를 그 안에만</b> 두는 것입니다.
+  안 가두면 <kbd>Tab</kbd>이 모달 밖으로 나가, <b>보이지도 않는 배경 버튼</b>에 포커스가 가 있게 됩니다 —
+  화면을 못 보는 사람에게는 어디 있는지 알 길이 없는 상태입니다.<br>
+  <b>가두지 않고 열기</b>를 켜고 <kbd>Tab</kbd>을 여러 번 눌러 보세요. 기록에 <b>배경 버튼</b>이 찍히면 그게 사고입니다.<br>
+  <code>&lt;dialog&gt;</code>를 <code>showModal()</code>로 열면 <b>브라우저가 알아서 가둡니다</b> —
+  직접 만들 일이 거의 없어졌습니다. 다만 세 가지는 챙겨야 합니다 —
+  <b>열 때 안으로</b> 포커스를 넣고, <b>닫을 때 부른 버튼으로</b> 돌려주고, <kbd>Esc</kbd>로 닫히게.
+</p>
+
+<script>
+(function () {
+  var dlg = document.getElementById('dlg'), log = document.getElementById('log');
+  var openBtn = document.getElementById('open');
+  var lines = [], escaped = false;
+
+  function note(t, cls) {
+    lines.push(cls ? '<span class="' + cls + '">' + t + '</span>' : t);
+    if (lines.length > 7) lines.shift();
+    log.innerHTML = lines.join('<br>');
+  }
+
+  openBtn.addEventListener('click', function () {
+    lines = []; escaped = false;
+    if (document.getElementById('broken').checked) {
+      dlg.show();                 // 안 가둔다 — Tab 이 밖으로 나간다
+      note('show() 로 열었습니다 — <b>안 가둠</b>');
+    } else {
+      dlg.showModal();            // 브라우저가 가둔다
+      note('showModal() 로 열었습니다 — <b>브라우저가 가둠</b>');
+    }
+    document.getElementById('cancel').focus();
+  });
+
+  [document.getElementById('cancel'), document.getElementById('ok')].forEach(function (b) {
+    b.addEventListener('click', function () {
+      dlg.close();
+      openBtn.focus();            // 부른 버튼으로 돌려준다
+      note('닫고 <b>부른 버튼</b>으로 포커스를 돌려줬습니다', 'ok');
+    });
+  });
+
+  document.addEventListener('focusin', function (e) {
+    if (!dlg.open) return;
+    var name = e.target.dataset.n || e.target.tagName;
+    var inside = dlg.contains(e.target);
+    if (!inside) escaped = true;
+    note(name + (inside ? ' (모달 안)' : ' <b>(모달 밖!)</b>'), inside ? '' : 'no');
+  });
+})();
+</script>
+</body>
+</html>

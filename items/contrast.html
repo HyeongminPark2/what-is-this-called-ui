@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대비비 — 이름표</title>
+<meta name="description" content="대비비 기준 셋(4.5:1, 3:1)과 크기에 따라 판정이 갈리는 것을 재서 보여주는 항목.">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/card.css">
+<link rel="stylesheet" href="../assets/demo.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로</a>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">이름표<small>화면 속 그게 뭔지 알려주는 도감</small></a>
+  <nav>
+    <a href="../index.html#map">화면 지도</a>
+    <a href="../index.html#pairs">혼동 쌍</a>
+    <a href="../index.html#toc">목차</a>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+
+  <div class="item-head">
+    <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">12부 접근성</a> › 대비비</p>
+    <h1>대비비</h1>
+    <p class="en">Color contrast</p>
+    <p class="lede" style="margin-top:var(--s3)">글자색과 바탕색의 <b>밝기 차이</b>를 1~21로 잰 값. 이 부에서 <b>유일하게 눈으로 보이는</b> 항목입니다.</p>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+  </div>
+
+  <div class="card-layout">
+    <div>
+
+      <section class="slot" id="s1">
+        <h2 class="slot-label"><span class="n">1</span> 실물 — 직접 만져 보기</h2>
+        <div class="preview-bar">
+          <div class="seg" data-seg="contrast" role="group" aria-label="미리보기 폭">
+            <button type="button" data-w="390" aria-pressed="false">390 폰</button>
+            <button type="button" data-w="768" aria-pressed="false">768 태블릿</button>
+            <button type="button" data-w="full" aria-pressed="true">넓게</button>
+          </div>
+          <span class="preview-meta" data-meta="contrast"></span>
+          <a class="preview-open" href="../demos/contrast.html" target="_blank" rel="noopener">새 탭에서 열기 ↗</a>
+        </div>
+        <div class="stage" data-stage="contrast" data-w="full">
+          <iframe src="../demos/contrast.html" title="대비비 실물 예시"></iframe>
+        </div>
+        <div class="note" style="margin-bottom:0">
+          <p>색을 바꾸면 <b>세 크기가 각각 통과인지</b> 바로 나옵니다.
+          같은 색인데 큰 글자는 통과하고 본문은 미달하는 것을 보세요 —
+          기준이 하나가 아니라서 <b>"이 회색 써도 되나요"의 답은 "어디에 쓰는데요"</b>입니다.<br>
+          아래 네 칸은 이 도감이 실제로 쓰는 색입니다. <b>자리글</b>이 유독 아슬아슬합니다.</p>
+        </div>
+      </section>
+
+      <section class="slot" id="s2">
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <div class="scroll-x">
+        <table class="grid">
+          <tbody>
+            <tr><th>한국어</th><td>대비비, 명도 대비, 색 대비</td></tr>
+            <tr><th>영어</th><td>contrast ratio, color contrast, WCAG AA / AAA</td></tr>
+            <tr><th>같이 쓰는 말</th><td>기준을 정한 문서가 <b>WCAG</b>이고 수준이 <b>AA</b>(4.5:1)와 <b>AAA</b>(7:1)로 나뉩니다. 글자 아닌 것(테두리·아이콘)의 기준은 <b>비텍스트 대비</b>(non-text contrast, 3:1)입니다. 큰 글자는 <b>18.66px 굵게</b> 또는 <b>24px</b> 부터입니다.</td></tr>
+            <tr><th>자주 잘못 부름</th><td><b>밝기</b> — 대비비는 <b>두 색의 관계</b>이지 한 색의 성질이 아닙니다.<br><b>AA 와 AAA</b> — AAA 는 더 엄격한 선택 기준입니다. 보통 <b>AA 를 목표</b>로 합니다.<br><b>'보기에 충분한'</b> — 모니터·밝기·나이에 따라 다릅니다. <b>재야</b> 알 수 있습니다.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot" id="s3">
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
+        <p>접근성은 '눈으로는 안 보이는 것을 챙기는 일'입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <div class="scroll-x">
+        <table class="grid axes">
+          <thead><tr><th></th><th>무엇을 돕나</th><th>눈으로 보이나</th><th>안 하면 누가 막히나</th><th>어떻게 확인하나</th></tr></thead>
+          <tbody>
+            <tr><td>포커스</td><td><b>지금 어디인지</b></td><td><b>보여야 한다</b></td><td>키보드만 쓰는 사람</td><td>Tab 을 눌러 본다</td></tr>
+            <tr><td>포커스 트랩</td><td>모달 안에 가두기</td><td>안 보인다</td><td>키보드·스크린 리더</td><td>모달에서 Tab 을 돌려 본다</td></tr>
+            <tr><td>키보드 조작</td><td>마우스 없이 <b>전부</b></td><td>안 보인다</td><td>마우스를 못 쓰는 사람</td><td>마우스를 치우고 해 본다</td></tr>
+            <tr><td>이름 붙이기</td><td>뭐라고 <b>부르나</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>접근성 트리를 본다</td></tr>
+            <tr><td>스크린 리더가 읽는 것</td><td>역할 · 이름 · <b>상태</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>실제로 읽혀 본다</td></tr>
+            <tr><td>라이브 리전</td><td><b>저절로 바뀐 것</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>바꿔 놓고 들어 본다</td></tr>
+            <tr class="me"><td><b>대비비</b></td><td>글자가 <b>읽히나</b></td><td><b>보인다</b></td><td>저시력 · 밝은 곳 · 싼 화면</td><td><b>재 본다</b>(숫자로 나온다)</td></tr>
+            <tr><td>시맨틱 태그</td><td>화면의 <b>구조</b></td><td>안 보인다</td><td><b>거의 모두</b></td><td>구역 목록을 열어 본다</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="note" style="margin-bottom:0">
+          <p><b>한 줄로</b> — 기준은 셋입니다 — <b>본문 4.5:1 · 큰 글자 3:1 · 테두리와 아이콘 3:1</b>. 눈으로 판단하지 않고 잽니다.</p>
+        </div>
+      </section>
+
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 기준<span class="hint">같은 색이 크기 따라 갈린다</span></h2>
+        <div class="states">
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:6px"><div style="background:#ffffff;color:#14161a;border-radius:6px;padding:11px;border:1px solid var(--line)"><span style="font-size:14px;font-weight:400">본문</span></div><span style="font-family:var(--mono);font-size:10.5px;color:#1f8a4c;font-weight:700;text-align:center">16.1:1 · 통과</span></div>
+            </div>
+            <figcaption>본문 · 진한 색<span>넉넉히 통과. <b>기본 글자색</b></span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:6px"><div style="background:#ffffff;color:#8a93a3;border-radius:6px;padding:11px;border:1px solid var(--line)"><span style="font-size:14px;font-weight:400">본문</span></div><span style="font-family:var(--mono);font-size:10.5px;color:var(--danger);font-weight:700;text-align:center">3.4:1 · 미달 (4.5 필요)</span></div>
+            </div>
+            <figcaption>본문 · 흐린 색<span><b>흐릴수록 예뻐 보여</b> 가장 자주 넘긴다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:6px"><div style="background:#ffffff;color:#8a93a3;border-radius:6px;padding:11px;border:1px solid var(--line)"><span style="font-size:19px;font-weight:800">큰 글자</span></div><span style="font-family:var(--mono);font-size:10.5px;color:#1f8a4c;font-weight:700;text-align:center">3.4:1 · 통과 (3.0 필요)</span></div>
+            </div>
+            <figcaption>큰 글자 · 같은 색<span><b>같은 색인데 통과</b>한다 — 기준이 다르다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:6px"><div style="background:#2f6df6;color:#ffffff;border-radius:6px;padding:11px;"><span style="font-size:14px;font-weight:700">확정하기</span></div><span style="font-family:var(--mono);font-size:10.5px;color:#1f8a4c;font-weight:700;text-align:center">4.6:1 · 통과</span></div>
+            </div>
+            <figcaption>버튼<span>바탕이 색이면 <b>흰 글자</b>로 넘기는 일이 많다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:6px"><div style="background:#ffffff;color:#aeb6c2;border-radius:6px;padding:11px;border:1px solid var(--line-strong)"><span style="font-size:13px;font-weight:400">계좌번호를 입력하세요</span></div><span style="font-family:var(--mono);font-size:10.5px;color:var(--danger);font-weight:700;text-align:center">1.9:1 · 미달</span></div>
+            </div>
+            <figcaption>자리글<span><b>거의 늘 미달</b>이다. 그래서 자리글에 정보를 담으면 안 된다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:6px">
+                <div style="background:#ffffff;border:1px solid #e4e8ee;border-radius:6px;padding:11px">
+                  <span style="font-size:13px;color:#14161a">테두리가 1.3:1</span>
+                </div>
+                <span style="font-family:var(--mono);font-size:10.5px;color:var(--danger);font-weight:700;text-align:center">1.3:1 · 미달 (3.0 필요)</span>
+              </div>
+            </div>
+            <figcaption>테두리<span>글자만이 아니다. <b>입력칸 테두리도 3:1</b> 이어야 한다</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <div class="anatomy">
+          <div class="pinboard">
+            <div class="anat" role="img" aria-label="대비비의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
+                <div style="padding-left:26px;display:grid;gap:15px">
+                  <div class="pin-out" data-pin="1" style="max-width:230px;background:#ffffff;border:1px solid var(--line);border-radius:7px;padding:11px;display:grid;gap:5px">
+                    <span style="font-size:18px;font-weight:800;color:#14161a">큰 글자</span>
+                    <span style="font-size:13px;color:#14161a">본문 — 정산이 확정되었습니다</span>
+                    <span style="font-size:11px;color:#8a93a3">보조 글</span>
+                  </div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">본문 4.5 : 1</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">큰 글자(18.66px 굵게 · 24px) 3 : 1</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">테두리 · 아이콘 3 : 1</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">자리글 · 비활성   — 가장 자주 넘긴다</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">눈으로 판단하지 않는다 — 재면 숫자가 나온다</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="pin-list">
+            <li><b>한 덩어리 <em>color + background</em></b><span>대비비는 <b>두 색의 관계</b>다. 한 색만 보고는 알 수 없다</span></li>
+            <li><b>본문 기준 <em>4.5 : 1</em></b><span>대부분의 글이 여기 해당한다</span></li>
+            <li><b>큰 글자 기준 <em>3 : 1</em></b><span><b>18.66px 굵게</b> 또는 <b>24px</b> 부터. 획이 굵어 덜 흐려 보인다</span></li>
+            <li><b>글자 아닌 것 <em>3 : 1</em></b><span>입력칸 테두리·아이콘·그래프 — <b>잊기 쉬운 자리</b></span></li>
+            <li><b>자주 넘기는 자리 <em>자리글 · 비활성</em></b><span>흐릴수록 예뻐 보여서 <b>기준을 넘기기 쉽다</b></span></li>
+            <li><b>재는 법 <em>개발자 도구 · 대비비 계산기</em></b><span><b>눈으로 판단하지 않는다.</b> 숫자가 바로 나온다</span></li>
+          </ol>
+        </div>
+        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
+          <b>비활성(disabled)은 기준에서 빠집니다.</b> WCAG 가 비활성 요소를 예외로 두기 때문입니다 —
+          하지만 '규칙에 안 걸린다'와 '읽을 수 있다'는 다릅니다. 비활성 버튼이 무슨 버튼인지
+          아예 안 보이면 <b>왜 못 누르는지</b>도 알 수 없습니다.
+          규칙을 핑계로 지나치게 흐리게 두지 않는 편이 낫습니다.</p>
+      </section>
+
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+        <div class="twoup">
+          <div class="do">
+            <h3>이럴 때 쓴다</h3>
+            <ul>
+              <li><b>모든 글자</b> — 본문 4.5:1, 큰 글자 3:1</li>
+              <li><b>입력칸 테두리와 아이콘</b> — 3:1. 가장 자주 잊는 자리</li>
+              <li>다크 모드 — <b>두 벌을 각각</b> 재야 합니다</li>
+              <li>색 위에 얹은 흰 글자 — 브랜드 색이 밝으면 자주 미달합니다</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h3>이럴 때는 안 쓴다</h3>
+            <ul>
+              <li><b>눈으로 판단</b>하는 것 — 모니터·밝기·나이에 따라 다릅니다</li>
+              <li>자리글에 <b>중요한 정보</b>를 담는 것 — 거의 늘 미달입니다</li>
+              <li>색<b>만으로</b> 상태를 말하는 것 — 대비를 맞춰도 색맹에게는 같습니다</li>
+              <li>AAA(7:1)를 모든 곳에 요구하는 것 — 보통 <b>AA 가 목표</b>입니다</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 색을 쓰임으로 정리하는 것은 <a href="../items/color.html">색 토큰</a>, 두 벌 관리는 <a href="../items/dark.html">다크 모드</a>, 글자 크기 기준은 <a href="../items/typescale.html">타입 스케일</a>.</p>
+      </section>
+
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <div class="cases">
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:190px;display:grid;gap:6px"><div style="background:#ffffff;color:#697180;border-radius:6px;padding:11px;border:1px solid var(--line)"><span style="font-size:13px;font-weight:400">11월 1일 ~ 11월 7일</span></div><span style="font-family:var(--mono);font-size:10.5px;color:#1f8a4c;font-weight:700;text-align:center">4.9:1 · 통과</span></div>
+            </div>
+            <figcaption><b>보조 글</b>흐리게 하되 <b>4.5 는 넘긴다</b>. 이 도감의 보조 글 색</figcaption>
+          </figure>
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:190px;display:grid;gap:6px"><div style="background:#2f6df6;color:#ffffff;border-radius:6px;padding:11px;"><span style="font-size:13px;font-weight:700">확정하기</span></div><span style="font-family:var(--mono);font-size:10.5px;color:#1f8a4c;font-weight:700;text-align:center">4.6:1 · 통과</span></div>
+            </div>
+            <figcaption><b>주요 버튼</b>브랜드 색이 <b>밝으면 미달</b>한다. 색을 한 단 어둡게 하거나 글자를 키운다</figcaption>
+          </figure>
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:190px;display:grid;gap:6px">
+                <div style="background:#15181e;color:#9aa3b2;border-radius:6px;padding:11px">
+                  <span style="font-size:13px">다크 모드의 보조 글</span>
+                </div>
+                <span style="font-family:var(--mono);font-size:10.5px;color:#1f8a4c;font-weight:700;text-align:center">6.99:1 · 통과</span>
+              </div>
+            </div>
+            <figcaption><b>다크 모드</b><b>밝은 쪽에서 통과했다고 어두운 쪽도 통과하지는 않는다</b></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slot" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">재는 법과 기준</span></h2>
+        <p>브라우저 개발자 도구에서 색을 누르면 바로 나옵니다. 코드로 재야 할 때는 공식이 짧습니다.</p>
+<pre class="code"><span class="c">// 상대 밝기 → 대비비. WCAG 공식 그대로다</span>
+<span class="t">const</span> lum = (hex) =&gt; {
+  <span class="t">const</span> n = parseInt(hex.slice(<span class="a">1</span>), <span class="a">16</span>);
+  <span class="t">const</span> c = [(n &gt;&gt; <span class="a">16</span>) &amp; <span class="a">255</span>, (n &gt;&gt; <span class="a">8</span>) &amp; <span class="a">255</span>, n &amp; <span class="a">255</span>]
+    .map(v =&gt; (v /= <span class="a">255</span>) &lt;= <span class="a">.03928</span> ? v / <span class="a">12.92</span>
+                                 : ((v + <span class="a">.055</span>) / <span class="a">1.055</span>) ** <span class="a">2.4</span>);
+  <span class="t">return</span> <span class="a">.2126</span> * c[<span class="a">0</span>] + <span class="a">.7152</span> * c[<span class="a">1</span>] + <span class="a">.0722</span> * c[<span class="a">2</span>];
+};
+<span class="t">const</span> ratio = (a, b) =&gt; {
+  <span class="t">const</span> [x, y] = [lum(a), lum(b)];
+  <span class="t">return</span> (Math.max(x, y) + <span class="a">.05</span>) / (Math.min(x, y) + <span class="a">.05</span>);
+};
+
+ratio(<span class="s">'#697180'</span>, <span class="s">'#ffffff'</span>);   <span class="c">// 4.91 → 본문 통과</span></pre>
+        <div class="scroll-x">
+        <table class="grid kbd-table">
+          <thead><tr><th>규칙</th><th>지켜야 하는 것</th></tr></thead>
+          <tbody>
+            <tr><td>본문 4.5:1</td><td>대부분의 글. <b>기본 기준</b></td></tr>
+            <tr><td>큰 글자 3:1</td><td>18.66px 굵게 또는 24px 부터</td></tr>
+            <tr><td>테두리·아이콘 3:1</td><td>입력칸 테두리를 가장 자주 잊는다</td></tr>
+            <tr><td>다크 모드는 따로 잰다</td><td>밝은 쪽 통과가 어두운 쪽 통과를 보장하지 않는다</td></tr>
+            <tr><td>색만으로 말하지 않는다</td><td>대비를 맞춰도 <b>색맹에게는 같은 회색</b>이다</td></tr>
+            <tr><td>토큰에서 한 번 정한다</td><td>색을 쓸 때마다 재지 말고 <b>토큰을 만들 때</b> 재 둔다</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot slot--backend" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <div class="scroll-x">
+        <table class="grid">
+          <tbody>
+            <tr><th>토큰에서 한 번</th><td>색을 <a href="../items/color.html">토큰</a>으로 정리해 두면 <b>토큰 수만큼만</b> 재면 됩니다. 화면마다 재는 것과 일이 열 배 차이 납니다.</td></tr>
+            <tr><th>CI 에서 검사</th><td><code>axe-core</code>·Lighthouse 가 대비비를 자동으로 잽니다. <b>접근성 항목 중 자동화가 가장 잘 되는</b> 쪽입니다.</td></tr>
+            <tr><th>그림 위의 글자</th><td>사진 위에 글을 얹으면 <b>사진마다 대비가 다릅니다.</b> 반투명 막을 깔거나 글자에 그림자를 넣습니다.</td></tr>
+            <tr><th>브랜드 색과 충돌</th><td>브랜드 색이 밝으면 흰 글자가 미달합니다. <b>흰 글자용으로 한 단 어두운 색</b>을 토큰에 따로 두는 것이 흔한 해법입니다.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot" id="s10">
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
+        <p>기준은 셋 다 WCAG 를 따르고, 재는 도구가 다릅니다.</p>
+        <div class="platforms">
+          <div class="plat">
+            <header><b>웹</b><span>WCAG AA</span></header>
+            <div class="shot">
+              <div style="width:100%;max-width:120px;display:grid;gap:6px"><div style="background:#ffffff;color:#697180;border-radius:6px;padding:11px;border:1px solid var(--line)"><span style="font-size:12px;font-weight:400">보조 글</span></div><span style="font-family:var(--mono);font-size:10.5px;color:#1f8a4c;font-weight:700;text-align:center">4.9:1 · 통과</span></div>
+            </div>
+            <footer>개발자 도구에서 색을 누르면 바로 나옵니다. Lighthouse 가 전체를 훑어 줍니다.</footer>
+          </div>
+          <div class="plat">
+            <header><b>iOS</b><span>Apple HIG</span></header>
+            <div class="shot">
+              <div style="font-family:var(--mono);font-size:9.5px;color:var(--fg-muted);line-height:1.8;text-align:left">Accessibility<br>Inspector<br>Increase Contrast</div>
+            </div>
+            <footer>기준은 같고, <b>Accessibility Inspector</b> 로 잽니다. 사용자가 '대비 높이기'를 켤 수 있습니다.</footer>
+          </div>
+          <div class="plat">
+            <header><b>안드로이드</b><span>Material 3</span></header>
+            <div class="shot">
+              <div style="font-family:var(--mono);font-size:9.5px;color:var(--fg-muted);line-height:1.8;text-align:left">Accessibility<br>Scanner<br>고대비 텍스트</div>
+            </div>
+            <footer><b>Accessibility Scanner</b> 앱으로 화면을 찍으면 미달한 곳을 표시해 줍니다.</footer>
+          </div>
+        </div>
+        <div class="note note--warn" style="margin-bottom:0">
+          <p><b>자주 생기는 사고</b> — 기준(4.5:1 · 3:1)이 <b>세 플랫폼 모두 같습니다</b>. 그래서 "이 회색은 본문에 못 씁니다"가 그대로 통합니다. 다만 두 OS 에는 사용자가 켜는 <b>고대비 모드</b>가 있어서, 그때 어떻게 보일지까지 보는 편이 좋습니다.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <aside class="siblings">
+      <h2>헷갈리는 형제</h2>
+      <ol>
+        <li><a href="focus.html"><b>포커스</b><em>12부</em></a></li>
+        <li><a href="focustrap.html"><b>포커스 트랩</b><em>12부</em></a></li>
+        <li><a href="keyboard.html"><b>키보드 조작</b><em>12부</em></a></li>
+        <li><a href="name.html"><b>이름 붙이기</b><em>12부</em></a></li>
+        <li><a href="screenreader.html"><b>스크린 리더가 읽는 것</b><em>12부</em></a></li>
+        <li><a href="live.html"><b>라이브 리전</b><em>12부</em></a></li>
+        <li><a href="semantics.html"><b>시맨틱 태그</b><em>12부</em></a></li>
+      </ol>
+      <h2>같이 보면 좋은 것</h2>
+      <ol>
+        <li><a href="../items/color.html"><b>색 토큰</b><em>2부</em></a></li>
+        <li><a href="../items/dark.html"><b>다크 모드</b><em>2부</em></a></li>
+        <li><a href="../items/field.html"><b>텍스트 필드</b><em>4부</em></a></li>
+        <li><a href="../items/badge.html"><b>배지</b><em>5부</em></a></li>
+      </ol>
+      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-foot wrap">
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+</footer>
+
+<script src="../assets/card.js"></script>
+</body>
+</html>
