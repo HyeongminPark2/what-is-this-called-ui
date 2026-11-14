@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>권한 요청 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 420px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .pre { border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); padding: var(--s3); display: grid; gap: var(--s2); }
+  .pre h4 { margin: 0; font-size: 13px; }
+  .pre p { margin: 0; font-size: 12.5px; color: var(--fg-muted); }
+  .pre .btns { display: flex; gap: var(--s2); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>권한 요청</b>
+  <label><input type="checkbox" id="prep" checked> 앞선 설명 띄우기</label>
+  <button class="ui-btn ui-btn--ghost" id="reset">기기 설정 초기화</button>
+</div>
+
+<div class="pad">
+  <div class="permstage" id="stage">
+    <p style="margin:0;font-size:13px"><b>정산 알림</b></p>
+    <p style="margin:4px 0 10px;font-size:12.5px;color:var(--fg-muted)">새 정산이 들어오면 바로 알려 드립니다.</p>
+    <button class="ui-btn" id="ask">알림 받기</button>
+    <div id="after" style="margin-top:12px"></div>
+  </div>
+  <p class="ruler" id="state"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  OS 권한 창은 <b>한 번뿐</b>입니다. 거절당하면 앱은 다시 띄울 수 없고, 사용자가 직접
+  설정에 들어가야 합니다 — 거의 아무도 안 합니다.<br>
+  <b>앞선 설명 띄우기</b>를 켜면 우리 화면에서 먼저 묻습니다. 여기서 '나중에'를 고르면
+  <b>OS 창은 아직 쓰지 않은 채</b>로 남아, 나중에 다시 물어볼 수 있습니다.<br>
+  끄고 거절해 본 뒤 다시 눌러 보세요 — <b>아무 일도 일어나지 않습니다.</b>
+  그 한 번을 아끼는 것이 이 화면의 전부입니다.
+</p>
+
+<script>
+(function () {
+  var os = 'prompt';      // prompt | granted | denied  — 기기에 남는 상태
+  var osUsed = 0;
+  var pre = false;
+
+  function paint() {
+    var s = document.getElementById('state');
+    s.innerHTML = '기기에 남은 상태 <b>' + os + '</b> · OS 창을 쓴 횟수 <b>' + osUsed + '</b>' +
+      (os === 'denied' ? ' <span class="warn">— 앱에서는 다시 띄울 수 없다</span>' : '');
+    s.dataset.os = os; s.dataset.used = String(osUsed);
+
+    var after = document.getElementById('after');
+    if (os === 'granted') after.innerHTML = '<p style="margin:0;font-size:12.5px;color:var(--accent)"><b>알림을 받습니다</b></p>';
+    else if (os === 'denied') after.innerHTML =
+      '<p style="margin:0 0 6px;font-size:12.5px;color:var(--danger)">알림이 꺼져 있습니다.</p>' +
+      '<button class="ui-btn ui-btn--ghost" id="togo">기기 설정에서 켜기 →</button>';
+    else after.innerHTML = '';
+    var t = document.getElementById('togo');
+    if (t) t.addEventListener('click', function () {
+      document.getElementById('log').innerHTML = '설정 앱으로 보냈다 — <b>여기까지가 앱이 할 수 있는 전부</b>다';
+    });
+    document.getElementById('ask').disabled = os !== 'prompt' && !pre;
+  }
+
+  function osDialog() {
+    osUsed++;
+    var stage = document.getElementById('stage');
+    var d = document.createElement('div');
+    d.className = 'osdlg';
+    d.innerHTML = '<b>‘정산관리’에서 알림을<br>보내도록 허용하시겠습니까?</b>' +
+      '<div class="btns"><button type="button" data-v="deny">허용 안 함</button>' +
+      '<button type="button" data-v="allow">허용</button></div>';
+    stage.appendChild(d);
+    d.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      os = b.dataset.v === 'allow' ? 'granted' : 'denied';
+      d.remove();
+      document.getElementById('log').innerHTML = os === 'granted'
+        ? 'OS 창에서 허용했다'
+        : '<span class="warn">OS 창에서 거절했다 — 이 창은 다시 안 뜬다</span>';
+      paint();
+    });
+    paint();
+  }
+
+  document.getElementById('ask').addEventListener('click', function () {
+    if (os === 'denied') {
+      document.getElementById('log').innerHTML =
+        '<span class="warn">눌러도 아무 일이 없다 — 이미 거절당한 권한이다</span>';
+      return;
+    }
+    if (os === 'granted') { document.getElementById('log').textContent = '이미 허용돼 있다'; return; }
+
+    if (!document.getElementById('prep').checked) { osDialog(); return; }
+
+    pre = true;
+    var stage = document.getElementById('stage');
+    var box = document.createElement('div');
+    box.className = 'osdlg';
+    box.style.width = '92%';
+    box.innerHTML = '<b>알림을 보내도 될까요?</b>' +
+      '<p style="margin:0;font-size:11.5px;color:var(--fg-muted)">정산이 들어온 순간에만 보냅니다. 광고는 보내지 않습니다.</p>' +
+      '<div class="btns"><button type="button" data-v="later">나중에</button>' +
+      '<button type="button" data-v="ok">좋아요</button></div>';
+    box.id = 'prebox';
+    stage.appendChild(box);
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('button'); if (!b) return;
+      box.remove(); pre = false;
+      if (b.dataset.v === 'ok') osDialog();
+      else {
+        document.getElementById('log').innerHTML =
+          '나중에를 골랐다 — <b>OS 창은 아직 안 썼다.</b> 다음에 다시 물어볼 수 있다';
+        paint();
+      }
+    });
+  });
+
+  document.getElementById('reset').addEventListener('click', function () {
+    os = 'prompt'; osUsed = 0; pre = false;
+    document.getElementById('log').textContent = '기기 설정을 지웠다 — 처음 상태';
+    paint();
+  });
+  paint();
+})();
+</script>
+</body>
+</html>

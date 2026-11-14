@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>알림 센터 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 460px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .list { border: 1px solid var(--line); border-radius: var(--r1); overflow: hidden; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>알림 센터</b>
+  <label>읽음 처리
+    <select class="sel" id="mode" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+      <option value="open">열면 전부 읽음</option>
+      <option value="item" selected>누른 것만 읽음</option>
+      <option value="manual">직접 고를 때만</option>
+    </select></label>
+  <label><input type="checkbox" id="group" checked> 같은 것 묶기</label>
+  <button class="ui-btn ui-btn--ghost" id="more">새 알림 3개</button>
+</div>
+
+<div class="pad">
+  <div class="scr">
+    <div class="scr__bar">
+      알림 <span class="badge-count" id="badge">0</span>
+      <span class="sp"><button class="ui-btn ui-btn--ghost" id="allread" style="min-height:28px;padding:4px 9px;font-size:11.5px">모두 읽음</button></span>
+    </div>
+    <div class="scr__body" style="padding:0">
+      <div class="list" id="list" style="border:0;border-radius:0"></div>
+    </div>
+  </div>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  <b>열면 전부 읽음</b>으로 바꾸고 알림 센터를 열어 보세요 — 배지는 0이 되지만
+  <b>무엇을 봤는지는 모른 채</b>입니다. 목록을 훑다 닫으면 다시 찾을 길이 없습니다.<br>
+  <b>누른 것만 읽음</b>이 기본으로 맞습니다. 읽지 않은 것이 그대로 남아 다음에 이어서 볼 수 있습니다.<br>
+  <b>같은 것 묶기</b>를 끄면 '모란상회' 하나에서 온 알림 다섯 개가 다섯 줄을 차지합니다 —
+  배지 숫자가 크게 뛰는 흔한 이유입니다.
+</p>
+
+<script>
+(function () {
+  var SRC = [
+    ['모란상회', '정산이 승인되었습니다', '방금'],
+    ['모란상회', '정산이 승인되었습니다', '1분'],
+    ['모란상회', '정산이 승인되었습니다', '2분'],
+    ['한빛아웃도어', '새 주문 12건', '10분'],
+    ['시스템', '11월 정산 마감 안내', '1시간'],
+    ['새벽상사', '반려되었습니다', '3시간']
+  ];
+  var items = SRC.map(function (s, i) { return { who: s[0], what: s[1], when: s[2], read: false, id: i }; });
+  var opened = false;
+
+  function groups() {
+    if (!document.getElementById('group').checked) {
+      return items.map(function (it) { return { key: it.id, who: it.who, what: it.what, when: it.when, n: 1, ids: [it.id], read: it.read }; });
+    }
+    var map = [];
+    items.forEach(function (it) {
+      var g = map.find(function (m) { return m.who === it.who && m.what === it.what; });
+      if (g) { g.n++; g.ids.push(it.id); g.read = g.read && it.read; }
+      else map.push({ key: it.who + it.what, who: it.who, what: it.what, when: it.when, n: 1, ids: [it.id], read: it.read });
+    });
+    return map;
+  }
+
+  function unread() { return items.filter(function (i) { return !i.read; }).length; }
+
+  function render() {
+    var gs = groups();
+    document.getElementById('list').innerHTML = gs.map(function (g) {
+      return '<div class="noti' + (g.read ? ' read' : '') + '" data-ids="' + g.ids.join(',') + '">' +
+        '<span class="dot"></span>' +
+        '<span><b>' + g.who + '</b> ' + g.what + (g.n > 1 ? ' <b>· ' + g.n + '건</b>' : '') + '</span>' +
+        '<span class="when">' + g.when + '</span></div>';
+    }).join('');
+    var b = document.getElementById('badge');
+    b.textContent = String(unread());
+    b.dataset.n = String(unread());
+    b.hidden = unread() === 0;
+    document.getElementById('list').dataset.rows = String(gs.length);
+  }
+
+  function openCenter() {
+    opened = true;
+    if (document.getElementById('mode').value === 'open') {
+      items.forEach(function (i) { i.read = true; });
+      document.getElementById('log').innerHTML =
+        '<span class="warn">연 것만으로 전부 읽음이 됐다 — 무엇을 봤는지는 모른다</span>';
+    }
+    render();
+  }
+
+  document.getElementById('list').addEventListener('click', function (e) {
+    var row = e.target.closest('.noti'); if (!row) return;
+    if (document.getElementById('mode').value === 'manual') {
+      document.getElementById('log').innerHTML = '눌러도 안 읽음이 그대로다 — <b>직접 고를 때만</b> 읽음이 된다';
+      return;
+    }
+    row.dataset.ids.split(',').forEach(function (id) { items[+id].read = true; });
+    document.getElementById('log').innerHTML = '누른 것만 읽음이 됐다 — <b>나머지는 남는다</b>';
+    render();
+  });
+
+  document.getElementById('allread').addEventListener('click', function () {
+    items.forEach(function (i) { i.read = true; });
+    document.getElementById('log').innerHTML = '모두 읽음 — <b>사용자가 직접 고른 것</b>이라 괜찮다';
+    render();
+  });
+
+  document.getElementById('more').addEventListener('click', function () {
+    var base = items.length;
+    [['모란상회', '정산이 승인되었습니다'], ['한빛아웃도어', '새 주문 3건'], ['모란상회', '정산이 승인되었습니다']]
+      .forEach(function (s, k) { items.unshift({ who: s[0], what: s[1], when: '방금', read: false, id: base + k }); });
+    items.forEach(function (it, i) { it.id = i; });
+    document.getElementById('log').innerHTML = '새 알림 3개가 왔다';
+    render();
+  });
+
+  document.getElementById('mode').addEventListener('change', function () {
+    items.forEach(function (i) { i.read = false; });
+    opened = false;
+    document.getElementById('log').textContent = '';
+    render();
+    openCenter();
+  });
+  document.getElementById('group').addEventListener('change', render);
+
+  render();
+  openCenter();
+})();
+</script>
+</body>
+</html>

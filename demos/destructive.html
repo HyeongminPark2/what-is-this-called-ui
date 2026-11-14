@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>위험한 동작 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 8px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 460px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .files { border: 1px solid var(--line); border-radius: var(--r1); overflow: hidden; }
+  .file { display: flex; align-items: center; gap: var(--s3); padding: 8px 10px; border-bottom: 1px solid var(--line); font-size: 13px; }
+  .file:last-child { border-bottom: 0; }
+  .file.trash { color: var(--fg-muted); text-decoration: line-through; background: var(--bg); }
+  .ask { border: 1px solid var(--danger); border-radius: var(--r2); padding: var(--s3); display: grid; gap: var(--s2); }
+  .ask h4 { margin: 0; font-size: 13px; color: var(--danger); }
+  .ask p { margin: 0; font-size: 12.5px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>위험한 동작</b>
+  <label>확인 방식
+    <select class="sel" id="mode" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+      <option value="none">바로 지운다</option>
+      <option value="dialog" selected>한 번 되묻는다</option>
+      <option value="type">이름을 치게 한다</option>
+      <option value="grace">바로 지우고 되돌릴 틈을 준다</option>
+    </select></label>
+  <button class="ui-btn ui-btn--ghost" id="restore">처음부터</button>
+</div>
+
+<div class="pad">
+  <div class="scr">
+    <div class="scr__bar">가맹점 <span class="sp" id="count"></span></div>
+    <div class="scr__body">
+      <div class="files" id="files"></div>
+      <div id="ask"></div>
+      <div id="undo"></div>
+    </div>
+  </div>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  네 가지 방식을 바꿔 가며 <b>삭제</b>를 눌러 보세요.<br>
+  <b>바로 지운다</b>는 손가락이 미끄러지면 끝입니다. <b>한 번 되묻는다</b>는 가장 흔하지만,
+  세 번째부터는 읽지 않고 누릅니다. <b>이름을 치게 한다</b>는 확실하지만 번거로워
+  정말 위험한 것에만 씁니다.<br>
+  <b>되돌릴 틈을 주는</b> 쪽이 대개 가장 낫습니다 — 묻지 않아 빠르고, 실수해도 살아납니다.
+  묻는 것보다 <b>무를 수 있게 하는</b> 편이 거의 늘 친절합니다.
+</p>
+
+<script>
+(function () {
+  var ALL = ['모란상회', '한빛아웃도어', '새벽상사', '대림유통'];
+  var alive = ALL.slice();
+  var pending = null, timer = null;
+
+  function render() {
+    document.getElementById('files').innerHTML = ALL.map(function (n) {
+      var gone = alive.indexOf(n) < 0;
+      return '<div class="file' + (gone ? ' trash' : '') + '" data-n="' + n + '">' +
+        '<span style="flex:1">' + n + '</span>' +
+        (gone ? '<span style="font-size:11.5px">지워짐</span>'
+              : '<button class="ui-btn ui-btn--ghost" data-del="' + n + '" style="min-height:28px;padding:4px 9px;font-size:11.5px;color:var(--danger);border-color:var(--danger)">삭제</button>') +
+        '</div>';
+    }).join('');
+    var c = document.getElementById('count');
+    c.textContent = alive.length + '곳';
+    c.dataset.n = String(alive.length);
+  }
+
+  function clearAsk() { document.getElementById('ask').innerHTML = ''; pending = null; }
+
+  function reallyDelete(n, graceful) {
+    alive = alive.filter(function (x) { return x !== n; });
+    render();
+    if (graceful) {
+      var u = document.getElementById('undo');
+      u.innerHTML = '<div class="undo-bar" id="undobar"><span><b>' + n + '</b> 을(를) 지웠습니다</span>' +
+                    '<button type="button" id="undo-btn">되돌리기</button></div>';
+      document.getElementById('undo-btn').addEventListener('click', function () {
+        clearTimeout(timer);
+        alive = ALL.filter(function (x) { return alive.indexOf(x) >= 0 || x === n; });
+        u.innerHTML = ''; render();
+        document.getElementById('log').innerHTML = '<b>되돌렸다</b> — 서버에는 아직 안 보냈다';
+      });
+      timer = setTimeout(function () {
+        u.innerHTML = '';
+        document.getElementById('log').innerHTML = '5초가 지나 <b>서버로 보냈다</b> — 이제 진짜로 지워졌다';
+      }, 5000);
+      document.getElementById('log').innerHTML = '지웠다 — <b>5초 안에는 되돌릴 수 있다</b>';
+    } else {
+      document.getElementById('log').innerHTML = '지웠다 — <span class="warn">되돌릴 길이 없다</span>';
+    }
+  }
+
+  document.getElementById('files').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-del]'); if (!b) return;
+    var n = b.dataset.del, mode = document.getElementById('mode').value;
+    clearAsk();
+
+    if (mode === 'none') { reallyDelete(n, false); return; }
+    if (mode === 'grace') { reallyDelete(n, true); return; }
+
+    pending = n;
+    var ask = document.getElementById('ask');
+    if (mode === 'dialog') {
+      ask.innerHTML = '<div class="ask"><h4>‘' + n + '’ 을(를) 지울까요?</h4>' +
+        '<p>정산 내역 128건이 함께 지워집니다. 되돌릴 수 없습니다.</p>' +
+        '<div style="display:flex;gap:6px"><button class="ui-btn ui-btn--ghost" id="cancel">취소</button>' +
+        '<button class="ui-btn ui-btn--danger" id="go">삭제</button></div></div>';
+    } else {
+      ask.innerHTML = '<div class="ask"><h4>정말 지우려면 이름을 그대로 쳐 주세요</h4>' +
+        '<p>지울 것: <b>' + n + '</b> · 정산 내역 128건이 함께 지워집니다.</p>' +
+        '<input class="ui-input" id="typed" placeholder="' + n + '" autocomplete="off">' +
+        '<div style="display:flex;gap:6px"><button class="ui-btn ui-btn--ghost" id="cancel">취소</button>' +
+        '<button class="ui-btn ui-btn--danger" id="go" disabled>삭제</button></div></div>';
+      document.getElementById('typed').addEventListener('input', function () {
+        document.getElementById('go').disabled = this.value !== n;
+      });
+    }
+    document.getElementById('cancel').addEventListener('click', function () {
+      clearAsk(); document.getElementById('log').textContent = '취소했다';
+    });
+    document.getElementById('go').addEventListener('click', function () {
+      var t = pending; clearAsk(); reallyDelete(t, false);
+    });
+  });
+
+  document.getElementById('mode').addEventListener('change', function () {
+    clearAsk();
+    document.getElementById('log').textContent = '';
+  });
+  document.getElementById('restore').addEventListener('click', function () {
+    clearTimeout(timer); alive = ALL.slice(); clearAsk();
+    document.getElementById('undo').innerHTML = '';
+    document.getElementById('log').textContent = ''; render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>

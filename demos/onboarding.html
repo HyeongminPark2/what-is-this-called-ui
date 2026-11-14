@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>온보딩 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 8px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .two { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: var(--s5); align-items: start; }
+  @media (max-width: 680px) { .two { grid-template-columns: 1fr; } }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>온보딩</b>
+  <label>단계 수 <input type="range" id="n" class="ui-range" min="1" max="6" step="1" value="4" style="width:110px"> <span class="ruler" id="nv">4단계</span></label>
+  <label><input type="checkbox" id="skip"> 건너뛸 길 주기</label>
+</div>
+
+<div class="pad">
+  <div class="two">
+    <div class="scr" id="scr">
+      <div class="scr__bar">시작하기 <span class="sp" id="pos"></span></div>
+      <div class="scr__body">
+        <div class="steps" id="steps"></div>
+        <p style="margin:0;font-size:13px" id="q"></p>
+        <input class="ui-input" id="ans" placeholder="입력">
+      </div>
+      <div class="scr__foot">
+        <button class="ui-btn" id="next">다음</button>
+        <button class="ui-btn ui-btn--ghost" id="skipbtn" hidden>건너뛰기</button>
+        <span class="ruler sp" id="state" style="margin-left:auto"></span>
+      </div>
+    </div>
+    <div>
+      <p class="ruler" style="margin-top:0">단계마다 <b id="drop"></b>가 떠난다고 쳤을 때</p>
+      <div class="funnel" id="funnel"></div>
+      <p class="ruler" id="verdict"></p>
+    </div>
+  </div>
+</div>
+
+<p class="hint">
+  오른쪽은 <b>계산입니다</b> — 실제 측정값이 아니라 ‘단계마다 같은 비율이 떠난다’고 두고 곱한 것입니다.
+  그래도 요점은 분명합니다. 한 단계에서 15%만 떠나도 <b>여섯 단계면 절반 아래</b>로 떨어집니다.<br>
+  <b>건너뛸 길 주기</b>를 켜면 떠나는 비율이 줄어듭니다 — 막히면 나가는 대신 <b>건너뛰기</b>를
+  누르기 때문입니다. 온보딩에서 가장 값싸고 효과 큰 한 줄이 '나중에 하기'입니다.
+</p>
+
+<script>
+(function () {
+  var QS = ['쓰실 이름을 알려 주세요', '회사 이름은?', '어떤 일을 하시나요?', '팀 규모는?', '어디서 알게 되셨나요?', '관심 분야를 골라 주세요'];
+  var step = 0, left = false;
+
+  function drop() { return document.getElementById('skip').checked ? 0.06 : 0.15; }
+
+  function draw() {
+    var n = +document.getElementById('n').value;
+    if (step >= n) step = n - 1;
+    var skip = document.getElementById('skip').checked;
+
+    document.getElementById('nv').textContent = n + '단계';
+    document.getElementById('pos').textContent = (step + 1) + ' / ' + n;
+    document.getElementById('q').textContent = QS[step];
+    document.getElementById('skipbtn').hidden = !skip;
+    document.getElementById('next').textContent = (step === n - 1) ? '끝내기' : '다음';
+
+    var h = '';
+    for (var i = 0; i < n; i++) {
+      h += '<span class="st ' + (i === step ? 'on' : (i < step ? 'done' : '')) + '"><i>' +
+           (i < step ? '✓' : (i + 1)) + '</i></span>' + (i < n - 1 ? '<span class="line"></span>' : '');
+    }
+    document.getElementById('steps').innerHTML = h;
+
+    // 깔때기 — 같은 비율을 단계마다 곱한다
+    var d = drop(), rest = 100, rows = '';
+    for (var k = 0; k <= n; k++) {
+      var label = (k === 0) ? '들어옴' : (k === n ? '끝냄' : k + '단계 넘김');
+      rows += '<div class="f' + (k === n ? ' last' : '') + (rest < 60 ? ' low' : '') + '">' +
+        '<span>' + label + '</span>' +
+        '<span class="bar" style="width:' + rest.toFixed(1) + '%"></span>' +
+        '<span class="pct">' + rest.toFixed(0) + '%</span></div>';
+      rest = rest * (1 - d);
+    }
+    document.getElementById('funnel').innerHTML = rows;
+    document.getElementById('drop').textContent = Math.round(d * 100) + '%';
+
+    var done = 100 * Math.pow(1 - d, n);
+    var v = document.getElementById('verdict');
+    v.innerHTML = done < 50
+      ? '<span class="warn">끝까지 가는 사람 ' + done.toFixed(0) + '% — 절반도 못 넘긴다</span>'
+      : '끝까지 가는 사람 <b>' + done.toFixed(0) + '%</b>';
+    v.dataset.done = done.toFixed(1);
+  }
+
+  document.getElementById('next').addEventListener('click', function () {
+    var n = +document.getElementById('n').value;
+    if (step < n - 1) { step++; draw(); document.getElementById('state').textContent = ''; }
+    else { document.getElementById('state').innerHTML = '<b>끝냈다</b>'; }
+  });
+  document.getElementById('skipbtn').addEventListener('click', function () {
+    document.getElementById('state').innerHTML = '<b>건너뛰었다</b> — 나중에 설정에서 채운다';
+    var n = +document.getElementById('n').value;
+    if (step < n - 1) { step++; draw(); }
+  });
+  document.getElementById('n').addEventListener('input', function () { step = 0; draw(); });
+  document.getElementById('skip').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

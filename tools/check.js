@@ -220,6 +220,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     '10부': ['table', 'filter', 'search', 'form', 'validation', 'bulk', 'virtual', 'chart'],
     '9부': ['easing', 'duration', 'enterexit', 'cheap', 'spring', 'stagger', 'gesture', 'reducedmotion'],
     '11부': ['breakpoint', 'touchtarget', 'hover', 'systemback', 'dpr', 'viewport', 'softkeyboard', 'platformdiff'],
+    '13부': ['login', 'onboarding', 'searchresults', 'settings', 'checkout', 'permission', 'notifications', 'destructive'],
   };
   const ITEMS = Object.values(PARTS).flat();
   const partOf = s => Object.keys(PARTS).find(k => PARTS[k].includes(s));
@@ -1573,6 +1574,166 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     if (!(await page.textContent('.pf[data-p=android] .why')).includes('오른쪽 아래')) fail.push('플랫폼: 안드로이드 알림 차례가 틀렸다');
     if (first === await page.textContent('.pf[data-p=ios] .why')) fail.push('플랫폼: 질문을 바꿔도 내용이 그대로다');
   }
+  await page.close();
+
+  // 13부 화면 단위 패턴 데모 여덟 장
+  // 로그인 — 오류 문구로 계정이 있는지 새어 나가지 않는가
+  page = await demo('login', 980, 900);
+  if (await page.getAttribute('#pw', 'autocomplete') !== 'current-password') fail.push('로그인: 비밀번호 자동완성 힌트가 없다');
+  if (await page.getAttribute('#id', 'autocomplete') !== 'username') fail.push('로그인: 아이디 자동완성 힌트가 없다');
+  await page.locator('#submit').click(); await page.waitForTimeout(220);
+  if (!(await page.textContent('#err')).includes('아이디 또는 비밀번호')) fail.push('로그인: 기본 오류가 갈라 말한다');
+  await page.check('#leak'); await page.locator('#submit').click(); await page.waitForTimeout(220);
+  if (await page.getAttribute('#err', 'data-leak') !== '1') fail.push('로그인: 자세히 말해도 안 새어 나간다 (보여주려는 결과)');
+  await page.check('#noauto'); await page.waitForTimeout(160);
+  if (await page.getAttribute('#pw', 'autocomplete') !== 'off') fail.push('로그인: 자동완성 끄기가 안 먹는다');
+  await page.uncheck('#leak'); await page.fill('#pw', '1234');
+  await page.locator('#submit').click(); await page.waitForTimeout(220);
+  if (!await page.locator('#err').isHidden()) fail.push('로그인: 맞게 쳤는데 오류가 남는다');
+  await page.locator('#peek').click(); await page.waitForTimeout(140);
+  if (await page.getAttribute('#pw', 'type') !== 'text') fail.push('로그인: 보기를 눌러도 안 드러난다');
+  if (await page.getAttribute('#peek', 'aria-pressed') !== 'true') fail.push('로그인: 눌린 상태를 안 알린다');
+  await page.close();
+
+  // 온보딩 — 단계가 늘면 끝내는 사람이 곱으로 준다
+  page = await demo('onboarding', 980, 900);
+  if (await page.locator('.steps .st').count() !== 4) fail.push('온보딩: 네 단계가 아니다');
+  {
+    const a = +(await page.getAttribute('#verdict', 'data-done'));
+    await page.locator('#n').fill('6'); await page.dispatchEvent('#n', 'input'); await page.waitForTimeout(240);
+    const b = +(await page.getAttribute('#verdict', 'data-done'));
+    if (!(b < a)) fail.push(`온보딩: 단계를 늘려도 완료율이 안 준다 (${a} → ${b})`);
+    if (!(b < 50)) fail.push('온보딩: 여섯 단계인데 절반 아래로 안 떨어진다 (보여주려는 결과)');
+    await page.check('#skip'); await page.waitForTimeout(240);
+    if (!(+(await page.getAttribute('#verdict', 'data-done')) > b)) fail.push('온보딩: 건너뛸 길을 줘도 안 오른다');
+  }
+  if (!await page.locator('#skipbtn').isVisible()) fail.push('온보딩: 건너뛰기 버튼이 안 나온다');
+  await page.locator('#next').click(); await page.waitForTimeout(220);
+  if (await page.locator('.steps .st.done').count() !== 1) fail.push('온보딩: 지나간 단계에 표시가 없다');
+  await page.close();
+
+  // 검색 결과 화면 — 돌아왔을 때 질의와 굴린 자리가 살아나는가
+  page = await demo('searchresults', 980, 900);
+  if (await page.getAttribute('#addr', 'data-on') !== '1') fail.push('결과: 질의가 주소에 안 담긴다');
+  await page.$eval('#rl', e => { e.scrollTop = 80; }); await page.waitForTimeout(220);
+  await page.locator('#rl .r').first().click(); await page.waitForTimeout(240);
+  await page.locator('#back').click(); await page.waitForTimeout(260);
+  if (await page.inputValue('#q') !== '모란') fail.push('결과: 돌아왔는데 질의를 잃었다');
+  if (!(await page.$eval('#rl', e => e.scrollTop) > 40)) fail.push('결과: 굴린 자리가 안 살아난다');
+  await page.uncheck('#url'); await page.uncheck('#pos'); await page.waitForTimeout(220);
+  await page.locator('#rl .r').first().click(); await page.waitForTimeout(220);
+  await page.locator('#back').click(); await page.waitForTimeout(260);
+  if (await page.inputValue('#q') !== '') fail.push('결과: 둘 다 껐는데 질의가 남는다 (보여주려는 결과)');
+  await page.close();
+
+  // 설정 화면 — 스위치는 바로 적용, 체크박스는 저장
+  page = await demo('settings', 980, 900);
+  if (await page.locator('[role=switch]').count() !== 7) fail.push('설정: 바로 적용인데 스위치가 아니다');
+  if (!await page.locator('#foot').isHidden()) fail.push('설정: 바로 적용인데 저장 버튼이 있다');
+  await page.locator('[role=switch]').first().click(); await page.waitForTimeout(220);
+  if (!(await page.textContent('#log')).includes('바로 저장')) fail.push('설정: 스위치가 바로 저장되지 않는다');
+  await page.check('#save'); await page.waitForTimeout(260);
+  if (await page.locator('input[type=checkbox][data-i]').count() !== 7) fail.push('설정: 저장 방식인데 체크박스가 아니다');
+  if (await page.locator('#foot').isHidden()) fail.push('설정: 저장 방식인데 버튼이 없다');
+  await page.locator('input[type=checkbox][data-i]').first().check(); await page.waitForTimeout(220);
+  if (await page.getAttribute('#dirty', 'data-n') !== '1') fail.push('설정: 바뀐 것을 안 센다');
+  if (await page.locator('.setrow.dirty').count() !== 1) fail.push('설정: 바뀐 줄에 표시가 없다');
+  await page.locator('#apply').click(); await page.waitForTimeout(220);
+  if (await page.getAttribute('#dirty', 'data-n') !== '0') fail.push('설정: 저장해도 표시가 남는다');
+  await page.fill('#q', '알림'); await page.waitForTimeout(260);
+  if (await page.getAttribute('#list', 'data-rows') !== '4') fail.push('설정: 검색이 안 걸러 준다');
+  await page.close();
+
+  // 결제 흐름 — 비용은 처음부터, 두 번 눌림은 막는다
+  page = await demo('checkout', 980, 900);
+  if (await page.getAttribute('#sum', 'data-shown') !== '1') fail.push('결제: 첫 단계에 금액이 없다');
+  await page.uncheck('#always'); await page.waitForTimeout(220);
+  if (await page.getAttribute('#sum', 'data-shown') !== '0') fail.push('결제: 꺼도 금액이 보인다 (보여주려는 결과)');
+  await page.check('#always'); await page.waitForTimeout(160);
+  await page.locator('#next').click(); await page.waitForTimeout(220);
+  await page.fill('#addr', '서울시 영등포구');
+  await page.locator('#next').click(); await page.waitForTimeout(220);
+  await page.locator('#prev').click(); await page.waitForTimeout(220);
+  if (await page.inputValue('#addr') !== '서울시 영등포구') fail.push('결제: 이전으로 가니 적은 값이 사라진다');
+  await page.locator('#next').click(); await page.waitForTimeout(220);
+  await page.uncheck('#guard'); await page.waitForTimeout(160);
+  await page.locator('#next').click();
+  await page.locator('#next').click({ force: true });
+  await page.waitForTimeout(800);
+  if (!(+(await page.getAttribute('#orders', 'data-n')) >= 2))
+    fail.push('결제: 막기를 꺼도 주문이 하나다 (보여주려는 결과)');
+  await page.locator('#restart').click(); await page.waitForTimeout(220);
+  await page.locator('#next').click(); await page.waitForTimeout(160);
+  await page.locator('#next').click(); await page.waitForTimeout(160);
+  await page.check('#guard');
+  await page.locator('#next').click();
+  await page.locator('#next').click({ force: true });
+  await page.waitForTimeout(800);
+  if (await page.getAttribute('#orders', 'data-n') !== '1') fail.push('결제: 막았는데 주문이 둘 생겼다');
+  await page.close();
+
+  // 권한 요청 — 앞선 설명이 OS 창을 아껴 주는가
+  page = await demo('permission', 980, 900);
+  if (await page.getAttribute('#state', 'data-os') !== 'prompt') fail.push('권한: 처음 상태가 prompt 가 아니다');
+  await page.locator('#ask').click(); await page.waitForTimeout(220);
+  if (!await page.locator('#prebox').isVisible()) fail.push('권한: 앞선 설명이 안 뜬다');
+  if (await page.getAttribute('#state', 'data-used') !== '0') fail.push('권한: 앞선 설명 단계에서 벌써 OS 창을 썼다');
+  await page.locator('#prebox button[data-v=later]').click(); await page.waitForTimeout(220);
+  if (await page.getAttribute('#state', 'data-used') !== '0') fail.push('권한: 나중에를 골랐는데 OS 창이 쓰였다');
+  if (await page.getAttribute('#state', 'data-os') !== 'prompt') fail.push('권한: 나중에인데 기기 상태가 바뀌었다');
+  await page.locator('#ask').click(); await page.waitForTimeout(220);
+  await page.locator('#prebox button[data-v=ok]').click(); await page.waitForTimeout(260);
+  if (await page.getAttribute('#state', 'data-used') !== '1') fail.push('권한: 좋아요를 골라도 OS 창이 안 뜬다');
+  await page.locator('.osdlg button[data-v=deny]').click(); await page.waitForTimeout(260);
+  if (await page.getAttribute('#state', 'data-os') !== 'denied') fail.push('권한: 거절해도 denied 가 안 된다');
+  if (!await page.locator('#togo').isVisible()) fail.push('권한: 거절 뒤 설정으로 가는 길이 없다');
+  await page.locator('#ask').click({ force: true }); await page.waitForTimeout(220);
+  if (await page.getAttribute('#state', 'data-used') !== '1')
+    fail.push('권한: 거절당한 뒤에도 OS 창이 다시 뜬다 (보여주려는 결과)');
+  await page.close();
+
+  // 알림 센터 — 열었다고 전부 읽음으로 치지 않는가
+  page = await demo('notifications', 980, 900);
+  if (await page.getAttribute('#badge', 'data-n') !== '6') fail.push('알림: 안 읽은 수가 여섯이 아니다');
+  if (await page.getAttribute('#list', 'data-rows') !== '4') fail.push('알림: 묶으면 네 줄이 아니다');
+  await page.uncheck('#group'); await page.waitForTimeout(220);
+  if (await page.getAttribute('#list', 'data-rows') !== '6') fail.push('알림: 안 묶었는데 줄이 안 는다 (보여주려는 결과)');
+  await page.check('#group'); await page.waitForTimeout(220);
+  await page.locator('.noti').first().click(); await page.waitForTimeout(220);
+  if (await page.getAttribute('#badge', 'data-n') !== '3') fail.push('알림: 누른 묶음만 읽음이 안 된다');
+  await page.selectOption('#mode', 'open'); await page.waitForTimeout(260);
+  if (await page.getAttribute('#badge', 'data-n') !== '0') fail.push('알림: 열면 전부 읽음이 안 된다 (보여주려는 결과)');
+  await page.selectOption('#mode', 'manual'); await page.waitForTimeout(260);
+  await page.locator('.noti').first().click(); await page.waitForTimeout(220);
+  if (await page.getAttribute('#badge', 'data-n') !== '6') fail.push('알림: 직접 고를 때만인데 눌러서 읽음이 됐다');
+  await page.locator('#allread').click(); await page.waitForTimeout(220);
+  if (await page.getAttribute('#badge', 'data-n') !== '0') fail.push('알림: 모두 읽음이 안 먹는다');
+  await page.close();
+
+  // 위험한 동작 — 네 가지 확인 방식이 실제로 다르게 막는가
+  page = await demo('destructive', 980, 900);
+  if (await page.getAttribute('#count', 'data-n') !== '4') fail.push('위험: 네 곳이 아니다');
+  await page.locator('[data-del]').first().click(); await page.waitForTimeout(220);
+  if (!await page.locator('#go').isVisible()) fail.push('위험: 되묻지 않는다');
+  await page.locator('#cancel').click(); await page.waitForTimeout(160);
+  if (await page.getAttribute('#count', 'data-n') !== '4') fail.push('위험: 취소했는데 지워졌다');
+  await page.selectOption('#mode', 'type'); await page.waitForTimeout(160);
+  await page.locator('[data-del]').first().click(); await page.waitForTimeout(220);
+  if (!await page.locator('#go').isDisabled()) fail.push('위험: 이름을 안 쳤는데 눌린다');
+  await page.fill('#typed', '모란'); await page.waitForTimeout(160);
+  if (!await page.locator('#go').isDisabled()) fail.push('위험: 틀리게 쳤는데 눌린다');
+  await page.fill('#typed', '모란상회'); await page.waitForTimeout(160);
+  if (await page.locator('#go').isDisabled()) fail.push('위험: 그대로 쳤는데 안 열린다');
+  await page.locator('#cancel').click(); await page.waitForTimeout(160);
+  await page.selectOption('#mode', 'none'); await page.waitForTimeout(160);
+  await page.locator('[data-del]').first().click(); await page.waitForTimeout(220);
+  if (await page.getAttribute('#count', 'data-n') !== '3') fail.push('위험: 바로 지우기인데 안 지워진다 (보여주려는 결과)');
+  await page.locator('#restore').click(); await page.waitForTimeout(160);
+  await page.selectOption('#mode', 'grace'); await page.waitForTimeout(160);
+  await page.locator('[data-del]').first().click(); await page.waitForTimeout(220);
+  if (!await page.locator('#undobar').isVisible()) fail.push('위험: 되돌릴 틈을 안 준다');
+  await page.locator('#undo-btn').click(); await page.waitForTimeout(220);
+  if (await page.getAttribute('#count', 'data-n') !== '4') fail.push('위험: 되돌려도 안 살아난다');
   await page.close();
 
   await browser.close();

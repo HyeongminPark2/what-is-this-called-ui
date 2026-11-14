@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>로그인 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 420px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .fld { display: grid; gap: 4px; }
+  .fld label { font-size: 12px; color: var(--fg-muted); }
+  .fld .wrap { position: relative; }
+  .fld input { width: 100%; }
+  .fld .peek { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); border: 0; background: none; font-size: 12px; color: var(--accent); cursor: pointer; min-height: 32px; padding: 0 6px; }
+  .err { font-size: 12px; color: var(--danger); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>로그인</b>
+  <label><input type="checkbox" id="leak"> 오류를 자세히 말하기</label>
+  <label><input type="checkbox" id="noauto"> 자동완성 끄기</label>
+</div>
+
+<div class="pad">
+  <form class="scr" id="form" novalidate>
+    <div class="scr__bar">정산 관리자 <span class="sp">로그인</span></div>
+    <div class="scr__body">
+      <div class="fld">
+        <label for="id">아이디</label>
+        <input id="id" name="username" class="ui-input" type="text" autocomplete="username" value="hong">
+      </div>
+      <div class="fld">
+        <label for="pw">비밀번호</label>
+        <div class="wrap">
+          <input id="pw" name="password" class="ui-input" type="password" autocomplete="current-password" value="wrongpass">
+          <button type="button" class="peek" id="peek" aria-pressed="false">보기</button>
+        </div>
+      </div>
+      <p class="err" id="err" role="alert" hidden></p>
+      <label style="font-size:12.5px;display:inline-flex;align-items:center;gap:6px">
+        <input type="checkbox" id="keep" checked> 로그인 상태 유지
+      </label>
+    </div>
+    <div class="scr__foot">
+      <button class="ui-btn" type="submit" id="submit">로그인</button>
+      <a href="#" style="font-size:12.5px">비밀번호를 잊으셨나요?</a>
+      <span class="ruler sp" id="tries" style="margin-left:auto"></span>
+    </div>
+  </form>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  <b>맞는 아이디는 hong / 1234</b> 입니다. 틀린 값으로 눌러 보세요.<br>
+  <b>오류를 자세히 말하기</b>를 켜면 '없는 아이디입니다'와 '비밀번호가 틀렸습니다'를 갈라 말합니다 —
+  친절해 보이지만 <b>어떤 아이디가 있는지 알려 주는</b> 셈이 됩니다. 남의 계정을 찾는 쪽에서는
+  이것만으로 목록을 만들 수 있습니다.<br>
+  <b>자동완성 끄기</b>를 켜면 <code>autocomplete</code> 속성이 빠집니다. 비밀번호 관리자가
+  채워 주지 못해 <b>더 쉬운 비밀번호</b>를 쓰게 됩니다 — 보안을 위해 끈 것이 보안을 깎습니다.
+</p>
+
+<script>
+(function () {
+  var OKID = 'hong', OKPW = '1234';
+  var tries = 0;
+
+  function sync() {
+    var off = document.getElementById('noauto').checked;
+    var id = document.getElementById('id'), pw = document.getElementById('pw');
+    if (off) { id.removeAttribute('autocomplete'); pw.setAttribute('autocomplete', 'off'); }
+    else { id.setAttribute('autocomplete', 'username'); pw.setAttribute('autocomplete', 'current-password'); }
+    document.getElementById('tries').textContent = tries ? '실패 ' + tries + '회' : '';
+  }
+
+  document.getElementById('peek').addEventListener('click', function () {
+    var pw = document.getElementById('pw');
+    var on = pw.type === 'password';
+    pw.type = on ? 'text' : 'password';
+    this.textContent = on ? '가리기' : '보기';
+    this.setAttribute('aria-pressed', String(on));
+  });
+
+  document.getElementById('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var id = document.getElementById('id').value.trim();
+    var pw = document.getElementById('pw').value;
+    var err = document.getElementById('err');
+    var leak = document.getElementById('leak').checked;
+    var log = document.getElementById('log');
+
+    if (id === OKID && pw === OKPW) {
+      err.hidden = true; tries = 0;
+      log.innerHTML = '들어왔다 — ' +
+        (document.getElementById('keep').checked
+          ? '<b>로그인 상태 유지</b>: 오래 가는 쿠키를 심는다'
+          : '세션 쿠키만 — <b>브라우저를 닫으면 풀린다</b>');
+      sync(); return;
+    }
+
+    tries++;
+    err.hidden = false;
+    if (leak) {
+      err.innerHTML = (id === OKID)
+        ? '비밀번호가 틀렸습니다 <span style="font-weight:400">— 이 아이디는 있다고 알려 준 셈이다</span>'
+        : '없는 아이디입니다 <span style="font-weight:400">— 이 아이디는 없다고 알려 준 셈이다</span>';
+      log.innerHTML = '<span class="warn">계정이 있는지를 알려 주고 있다</span> — 아이디 목록을 만들 수 있다';
+    } else {
+      err.textContent = '아이디 또는 비밀번호가 올바르지 않습니다';
+      log.innerHTML = '둘 중 무엇이 틀렸는지 <b>말하지 않는다</b> — 계정이 있는지도 숨긴다';
+    }
+    err.dataset.leak = leak ? '1' : '0';
+    document.getElementById(id === OKID ? 'pw' : 'id').focus();
+    sync();
+  });
+
+  document.getElementById('noauto').addEventListener('change', sync);
+  document.getElementById('leak').addEventListener('change', sync);
+  sync();
+})();
+</script>
+</body>
+</html>

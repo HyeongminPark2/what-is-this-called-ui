@@ -1395,3 +1395,60 @@ body > .hint, body > .log, body > .ratio {
 .pf h4 em { font-style: normal; font-weight: 500; color: var(--fg-muted); font-size: 11px; }
 .pf .mini { height: 92px; border-radius: var(--r1); background: var(--bg); border: 1px solid var(--line); position: relative; overflow: hidden; }
 .pf .why { font-size: 11.5px; color: var(--fg-muted); }
+
+/* ───────── 13부 화면 단위 패턴 ───────── */
+
+/* 화면 하나를 흉내 내는 판 */
+.scr { border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); overflow: hidden; }
+.scr__bar { display: flex; align-items: center; gap: var(--s2); padding: var(--s2) var(--s3); border-bottom: 1px solid var(--line); background: var(--bg); font-size: 12.5px; font-weight: 700; }
+.scr__bar .sp { margin-left: auto; font-weight: 500; color: var(--fg-muted); font-size: 11.5px; }
+.scr__body { padding: var(--s4); display: grid; gap: var(--s3); }
+.scr__foot { padding: var(--s3) var(--s4); border-top: 1px solid var(--line); display: flex; gap: var(--s2); align-items: center; flex-wrap: wrap; }
+
+/* 단계 표시 */
+.steps { display: flex; align-items: center; gap: 6px; font-size: 11.5px; }
+.steps .st { display: flex; align-items: center; gap: 5px; color: var(--fg-muted); }
+.steps .st i { width: 18px; height: 18px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font-size: 10px; font-style: normal; background: var(--surface); }
+.steps .st.on { color: var(--accent); font-weight: 700; }
+.steps .st.on i { background: var(--accent); border-color: var(--accent); color: #fff; }
+.steps .st.done i { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.steps .line { flex: 1; height: 1px; background: var(--line); min-width: 12px; }
+
+/* 깔때기 — 단계마다 몇 명이 남나 */
+.funnel { display: grid; gap: 5px; }
+.funnel .f { display: grid; grid-template-columns: 96px 1fr 56px; align-items: center; gap: var(--s3); font-size: 12px; }
+.funnel .bar { height: 16px; border-radius: 3px; background: var(--accent); }
+.funnel .f.last .bar { background: var(--accent); }
+.funnel .pct { font-family: var(--mono); font-size: 11.5px; text-align: right; font-variant-numeric: tabular-nums; }
+.funnel .f.low .pct { color: var(--danger); font-weight: 700; }
+
+/* 설정 줄 */
+.setrow { display: flex; align-items: center; gap: var(--s3); padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+.setrow:last-child { border-bottom: 0; }
+.setrow .lab { flex: 1; min-width: 0; }
+.setrow .lab small { display: block; color: var(--fg-muted); font-size: 11.5px; }
+.setrow.dirty .lab { font-weight: 700; }
+.setrow.dirty .lab::after { content: " ·  바뀜"; color: var(--warn); font-size: 11px; font-weight: 700; }
+.danger-zone { border: 1px solid var(--danger); border-radius: var(--r2); padding: var(--s3); display: grid; gap: var(--s2); }
+.danger-zone h4 { margin: 0; font-size: 12.5px; color: var(--danger); }
+
+/* 알림 줄 */
+.noti { display: flex; gap: var(--s3); padding: 9px 10px; border-bottom: 1px solid var(--line); font-size: 12.5px; align-items: flex-start; }
+.noti:last-child { border-bottom: 0; }
+.noti .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex: none; margin-top: 6px; }
+.noti.read { background: var(--bg); color: var(--fg-muted); }
+.noti.read .dot { background: transparent; }
+.noti .when { margin-left: auto; color: var(--fg-muted); font-size: 11px; white-space: nowrap; }
+.badge-count { display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: var(--danger); color: #fff; font-size: 11px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* 권한 — OS 창 흉내 */
+.osdlg { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 86%; background: var(--surface); border-radius: var(--r2); box-shadow: var(--e3); padding: var(--s3); font-size: 11.5px; text-align: center; display: grid; gap: var(--s2); }
+.osdlg b { font-size: 12.5px; }
+.osdlg .btns { display: flex; border-top: 1px solid var(--line); margin: var(--s2) calc(var(--s3) * -1) calc(var(--s3) * -1); }
+.osdlg .btns button { flex: 1; border: 0; background: none; padding: 8px 0; font-size: 12px; color: var(--accent); cursor: pointer; }
+.osdlg .btns button + button { border-left: 1px solid var(--line); font-weight: 700; }
+.permstage { position: relative; min-height: 190px; border: 1px solid var(--line); border-radius: var(--r2); background: var(--bg); overflow: hidden; padding: var(--s3); }
+
+/* 되돌리기 줄 */
+.undo-bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s2) var(--s3); border-radius: var(--r1); background: var(--ink-900); color: #fff; font-size: 12.5px; }
+.undo-bar button { margin-left: auto; background: none; border: 0; color: #9ec1ff; font-weight: 700; cursor: pointer; font-size: 12.5px; }

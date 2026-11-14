@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>검색 결과 화면 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 520px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .rl { height: 190px; overflow: auto; border: 1px solid var(--line); border-radius: var(--r1); }
+  .rl .r { padding: 9px 10px; border-bottom: 1px solid var(--line); font-size: 13px; cursor: pointer; }
+  .rl .r:hover { background: var(--accent-soft); }
+  .rl .r small { display: block; color: var(--fg-muted); font-size: 11.5px; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>검색 결과 화면</b>
+  <label><input type="checkbox" id="url" checked> 질의·필터를 주소에 담기</label>
+  <label><input type="checkbox" id="pos" checked> 굴린 자리 기억하기</label>
+</div>
+
+<div class="pad">
+  <div class="scr" id="scr">
+    <div class="scr__bar" id="title">검색 결과</div>
+    <div class="scr__body" id="body"></div>
+  </div>
+  <p class="ruler" id="addr"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  결과에서 한 건을 눌러 들어갔다가 <b>← 뒤로</b>를 눌러 보세요.<br>
+  둘 다 켜 두면 <b>질의 · 필터 · 굴린 자리</b>가 그대로 살아납니다. 끄면 빈 검색 화면으로 돌아가고,
+  사용자는 <b>처음부터 다시</b> 찾아야 합니다 — 목록 화면에서 가장 자주 나오는 민원입니다.<br>
+  질의를 주소에 담아 두면 <b>공유</b>도 되고 <b>새로고침</b>해도 같은 화면이 나옵니다.
+</p>
+
+<script>
+(function () {
+  var NAMES = ['모란상회 신길역점', '모란상회 본점', '모란김밥 가산점', '모란떡집', '모란상사 구로점',
+               '모란유통 영등포점', '모란상회 역삼점', '모란전자 용산점', '모란문구 신촌점', '모란식품 마포점'];
+  var state = { q: '모란', filter: '전체', scroll: 0, view: 'list', picked: null };
+  var saved = null;
+
+  function render() {
+    var body = document.getElementById('body');
+    if (state.view === 'detail') {
+      document.getElementById('title').textContent = state.picked;
+      body.innerHTML =
+        '<p style="margin:0;font-size:13px"><b>' + state.picked + '</b></p>' +
+        '<p style="margin:0;font-size:12.5px;color:var(--fg-muted)">1,284,000원 · 승인됨</p>' +
+        '<button class="ui-btn ui-btn--ghost" id="back">← 뒤로</button>';
+      document.getElementById('back').addEventListener('click', goBack);
+    } else {
+      document.getElementById('title').textContent = '검색 결과';
+      var list = NAMES.filter(function (n) { return n.indexOf(state.q) >= 0; });
+      body.innerHTML =
+        '<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">' +
+          '<input class="ui-input" id="q" value="' + state.q + '" style="flex:1;min-width:120px">' +
+          '<select class="sel" id="f" style="width:auto;min-height:36px;padding:7px 28px 7px 9px;font-size:12.5px">' +
+            ['전체', '승인됨', '대기'].map(function (o) {
+              return '<option' + (o === state.filter ? ' selected' : '') + '>' + o + '</option>';
+            }).join('') + '</select>' +
+        '</div>' +
+        '<p style="margin:0;font-size:12.5px;color:var(--fg-muted)">‘<b>' + state.q + '</b>’ · ' +
+          state.filter + ' · <b>' + list.length + '건</b></p>' +
+        '<div class="rl" id="rl">' + list.map(function (n) {
+          return '<div class="r" data-n="' + n + '">' + n + '<small>1,284,000원 · 승인됨</small></div>';
+        }).join('') + '</div>';
+
+      var rl = document.getElementById('rl');
+      rl.scrollTop = state.scroll;
+      rl.addEventListener('scroll', function () { state.scroll = rl.scrollTop; });
+      rl.addEventListener('click', function (e) {
+        var r = e.target.closest('.r'); if (!r) return;
+        saved = document.getElementById('pos').checked || document.getElementById('url').checked
+          ? { q: state.q, filter: state.filter, scroll: document.getElementById('pos').checked ? state.scroll : 0 }
+          : null;
+        state.picked = r.dataset.n; state.view = 'detail';
+        render(); addr();
+        document.getElementById('log').innerHTML = '상세로 들어감 — ' +
+          (saved ? '돌아올 자리를 <b>기억해 둔다</b>' : '<span class="warn">아무것도 기억하지 않는다</span>');
+      });
+
+      document.getElementById('q').addEventListener('input', function () {
+        state.q = this.value; state.scroll = 0; render(); addr();
+      });
+      document.getElementById('f').addEventListener('change', function () {
+        state.filter = this.value; render(); addr();
+      });
+    }
+  }
+
+  function goBack() {
+    if (saved) {
+      state.q = saved.q; state.filter = saved.filter; state.scroll = saved.scroll;
+      document.getElementById('log').innerHTML =
+        '돌아옴 — 질의 ‘<b>' + state.q + '</b>’ · 굴린 자리 <b>' + Math.round(state.scroll) + 'px</b> 가 살아났다';
+    } else {
+      state.q = ''; state.filter = '전체'; state.scroll = 0;
+      document.getElementById('log').innerHTML =
+        '<span class="warn">돌아왔는데 빈 화면이다 — 처음부터 다시 찾아야 한다</span>';
+    }
+    state.view = 'list'; render(); addr();
+  }
+
+  function addr() {
+    var on = document.getElementById('url').checked;
+    var a = document.getElementById('addr');
+    a.innerHTML = on
+      ? '주소 <b>/search?q=' + encodeURIComponent(state.q) + '&amp;f=' + encodeURIComponent(state.filter) + '</b>'
+      : '주소 <span class="warn">/search — 질의가 안 담긴다. 공유도 새로고침도 안 된다</span>';
+    a.dataset.on = on ? '1' : '0';
+  }
+
+  document.getElementById('url').addEventListener('change', addr);
+  render(); addr();
+})();
+</script>
+</body>
+</html>

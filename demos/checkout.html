@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>결제 흐름 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 480px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .sum { display: grid; gap: 3px; font-size: 12.5px; padding: var(--s3); border: 1px solid var(--line); border-radius: var(--r1); background: var(--bg); }
+  .sum .l { display: flex; }
+  .sum .l span:last-child { margin-left: auto; font-variant-numeric: tabular-nums; }
+  .sum .tot { font-weight: 700; font-size: 13.5px; border-top: 1px solid var(--line); padding-top: 5px; margin-top: 3px; }
+  .fld { display: grid; gap: 4px; }
+  .fld label { font-size: 12px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>결제 흐름</b>
+  <label><input type="checkbox" id="always" checked> 금액을 늘 보여 주기</label>
+  <label><input type="checkbox" id="guard" checked> 두 번 눌림 막기</label>
+  <button class="ui-btn ui-btn--ghost" id="restart">처음부터</button>
+</div>
+
+<div class="pad">
+  <div class="scr">
+    <div class="scr__bar">주문 <span class="sp" id="pos"></span></div>
+    <div class="scr__body">
+      <div class="steps" id="steps"></div>
+      <div id="body"></div>
+      <div class="sum" id="sum"></div>
+    </div>
+    <div class="scr__foot">
+      <button class="ui-btn ui-btn--ghost" id="prev">← 이전</button>
+      <button class="ui-btn" id="next">다음</button>
+      <span class="ruler sp" id="orders" style="margin-left:auto"></span>
+    </div>
+  </div>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  단계를 오가며 <b>이전</b>으로 돌아가 보세요 — 적은 값이 그대로 남아 있어야 합니다.<br>
+  <b>금액을 늘 보여 주기</b>를 끄면 마지막 화면에서야 총액이 나옵니다. 배송비가 거기서 처음
+  드러나면 사람들은 그 자리에서 나갑니다 — 결제 이탈의 가장 큰 이유로 꼽히는 것이
+  <b>마지막에 나타난 비용</b>입니다.<br>
+  마지막 단계에서 <b>결제</b>를 빠르게 두 번 눌러 보세요. <b>두 번 눌림 막기</b>를 끄면
+  주문이 둘 생깁니다.
+</p>
+
+<script>
+(function () {
+  var STEPS = ['장바구니', '배송', '결제', '완료'];
+  var data = { addr: '', card: '' };
+  var step = 0, orders = 0, busy = false;
+
+  function money(n) { return n.toLocaleString('ko-KR') + '원'; }
+
+  function render() {
+    document.getElementById('pos').textContent = Math.min(step + 1, STEPS.length) + ' / ' + STEPS.length;
+    document.getElementById('steps').innerHTML = STEPS.map(function (s, i) {
+      return '<span class="st ' + (i === step ? 'on' : (i < step ? 'done' : '')) + '"><i>' +
+        (i < step ? '✓' : (i + 1)) + '</i>' + s + '</span>';
+    }).join('<span class="line"></span>');
+
+    var b = document.getElementById('body');
+    if (step === 0) {
+      b.innerHTML = '<p style="margin:0;font-size:13px">한빛아웃도어 등산화 <b>1개</b></p>' +
+        '<p style="margin:0;font-size:12.5px;color:var(--fg-muted)">배송비는 다음 단계에서 정해집니다</p>';
+    } else if (step === 1) {
+      b.innerHTML = '<div class="fld"><label for="addr">배송지</label>' +
+        '<input class="ui-input" id="addr" value="' + data.addr + '" placeholder="서울시 …"></div>';
+      document.getElementById('addr').addEventListener('input', function () { data.addr = this.value; });
+    } else if (step === 2) {
+      b.innerHTML = '<div class="fld"><label for="card">카드번호</label>' +
+        '<input class="ui-input" id="card" inputmode="numeric" value="' + data.card + '" placeholder="0000 0000 0000 0000"></div>';
+      document.getElementById('card').addEventListener('input', function () { data.card = this.value; });
+    } else {
+      b.innerHTML = '<p style="margin:0;font-size:13px"><b>주문이 끝났습니다</b></p>' +
+        '<p style="margin:0;font-size:12.5px;color:var(--fg-muted)">주문번호 2026-' + (1000 + orders) + '</p>';
+    }
+
+    var always = document.getElementById('always').checked;
+    var show = always || step >= 2;
+    var sum = document.getElementById('sum');
+    sum.hidden = !show;
+    sum.dataset.shown = show ? '1' : '0';
+    if (show) {
+      sum.innerHTML =
+        '<div class="l"><span>상품</span><span>' + money(129000) + '</span></div>' +
+        '<div class="l"><span>배송</span><span>' + money(3000) + '</span></div>' +
+        '<div class="l tot"><span>합계</span><span>' + money(132000) + '</span></div>';
+    }
+
+    document.getElementById('prev').disabled = step === 0 || step === 3;
+    document.getElementById('next').textContent = step === 2 ? '결제' : (step === 3 ? '끝' : '다음');
+    document.getElementById('next').disabled = step === 3;
+    document.getElementById('orders').textContent = '만들어진 주문 ' + orders + '건';
+    document.getElementById('orders').dataset.n = String(orders);
+  }
+
+  document.getElementById('next').addEventListener('click', function () {
+    if (step === 2) {
+      if (busy && document.getElementById('guard').checked) {
+        document.getElementById('log').innerHTML = '두 번째 누름을 <b>막았다</b> — 주문은 하나다';
+        return;
+      }
+      busy = true;
+      orders++;
+      document.getElementById('log').innerHTML = orders > 1
+        ? '<span class="warn">주문이 ' + orders + '건 생겼다 — 같은 결제가 두 번 갔다</span>'
+        : '결제 요청을 보냈다';
+      setTimeout(function () { busy = false; step = 3; render(); }, 450);
+      render();
+      return;
+    }
+    if (step < 3) { step++; render(); document.getElementById('log').textContent = ''; }
+  });
+  document.getElementById('prev').addEventListener('click', function () {
+    if (step > 0) { step--; render();
+      document.getElementById('log').innerHTML = '이전으로 — 적은 값이 <b>그대로 남아 있다</b>'; }
+  });
+  document.getElementById('restart').addEventListener('click', function () {
+    step = 0; orders = 0; busy = false; data = { addr: '', card: '' };
+    document.getElementById('log').textContent = ''; render();
+  });
+  document.getElementById('always').addEventListener('change', function () {
+    render();
+    document.getElementById('log').innerHTML = this.checked
+      ? '금액이 <b>처음부터</b> 보인다'
+      : '<span class="warn">배송비가 결제 단계에서야 드러난다</span>';
+  });
+  render();
+})();
+</script>
+</body>
+</html>
