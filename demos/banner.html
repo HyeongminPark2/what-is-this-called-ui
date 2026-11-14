@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>배너 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .stage { border: 1px solid var(--line); border-radius: var(--r2); overflow: hidden; max-width: 380px; }
+  .stage .body { padding: 10px; display: grid; gap: 7px; }
+  .stage .ln { height: 8px; border-radius: 3px; background: var(--bg); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>배너</b>
+  <label>띄울 배너 수 <input type="range" id="n" min="0" max="4" step="1" value="1" style="width:90px"><span class="ruler" id="nv"></span></label>
+  <label><input type="checkbox" id="dismiss" checked> 닫을 수 있게</label>
+  <label><input type="checkbox" id="remember" checked> 닫은 것은 다시 안 띄우기</label>
+</div>
+
+<div class="pad">
+  <div class="stage">
+    <div id="banners"></div>
+    <div class="body">
+      <b style="font-size:13px">정산 목록</b>
+      <span class="ln"></span><span class="ln" style="width:72%"></span><span class="ln" style="width:88%"></span>
+    </div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  배너는 <b>사라지지 않습니다</b> — 토스트와 가장 크게 다른 점입니다.
+  그래서 쌓이면 화면을 먹습니다. 수를 늘려 보세요 —
+  데모가 <b>배너가 화면의 몇 %를 먹는지</b>를 재서 적습니다.<br>
+  <b>닫을 수 있게</b>를 끄면 영영 남습니다. 그리고 닫은 것을 <b>기억하지 않으면</b>
+  새로 고칠 때마다 다시 뜹니다 — 데모가 그때 다시 뜬 개수를 셉니다.
+  읽고 치울 수 있어야 배너입니다.<br>
+  배너는 <b>화면 전체에 걸린 사정</b>을 알립니다 — 칸 하나의 오류는
+  <b>인라인 얼럿</b>의 몫입니다.
+</p>
+
+<script>
+(function () {
+  var ALL = [
+    ['warn', '11월 15일 02:00~04:00 점검이 있습니다', '자세히'],
+    ['info', '새 정산 방식이 12월부터 적용됩니다', '안내 보기'],
+    ['warn', '사업자 정보가 만료되어 갱신이 필요합니다', '갱신하기'],
+    ['info', '앱이 새 버전으로 바뀌었습니다', '바뀐 점']
+  ];
+  var closed = {};
+
+  function render(why) {
+    var n = +document.getElementById('n').value;
+    var canClose = document.getElementById('dismiss').checked;
+    var remember = document.getElementById('remember').checked;
+    var list = ALL.slice(0, n).filter(function (b, i) { return !(remember && closed[i]); });
+
+    document.getElementById('banners').innerHTML = list.map(function (b) {
+      var i = ALL.indexOf(b);
+      return '<div class="bnr' + (b[0] === 'info' ? ' info' : '') + '" data-i="' + i + '" role="status">' +
+        '<span aria-hidden="true">' + (b[0] === 'info' ? 'ℹ' : '!') + '</span>' +
+        '<span>' + b[1] + ' <u style="cursor:pointer">' + b[2] + '</u></span>' +
+        (canClose ? '<button data-x="' + i + '" aria-label="이 알림 닫기">✕</button>' : '') +
+        '</div>';
+    }).join('');
+
+    var stage = document.querySelector('.stage').getBoundingClientRect().height;
+    var used = [].slice.call(document.querySelectorAll('.bnr'))
+      .reduce(function (a, e) { return a + e.getBoundingClientRect().height; }, 0);
+    var pct = stage > 0 ? Math.round(used / stage * 100) : 0;
+    var reappeared = (!remember) ? Object.keys(closed).filter(function (k) { return +k < n; }).length : 0;
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '띄운 배너 <b>' + list.length + '개</b> · 화면에서 먹는 넓이 <b>' + pct + '%</b>' +
+      (pct > 30 ? ' <span class="warn">— 내용보다 알림이 커졌다</span>' : '') +
+      '<br>닫을 수 있나 <b>' + (canClose ? '있다' : '없다') + '</b>' +
+      (canClose ? '' : ' <span class="warn">— 영영 남는다</span>') +
+      (reappeared ? '<br><span class="warn">닫았는데 다시 뜬 것 ' + reappeared + '개</span> — 기억하지 않는다' : '') +
+      (why ? '<br>' + why : '');
+    rd.dataset.count = String(list.length);
+    rd.dataset.pct = String(pct);
+    rd.dataset.close = canClose ? '1' : '0';
+    rd.dataset.again = String(reappeared);
+  }
+
+  document.getElementById('banners').addEventListener('click', function (e) {
+    var x = e.target.closest('[data-x]');
+    if (x) {
+      closed[+x.dataset.x] = true;
+      render('');
+      document.getElementById('log').innerHTML = document.getElementById('remember').checked
+        ? '닫았다 — <b>다시 안 뜬다</b>'
+        : '닫았다 — <span class="warn">새로 고치면 또 뜬다</span>';
+      if (!document.getElementById('remember').checked) {
+        setTimeout(function () { render(''); }, 10);
+      }
+      return;
+    }
+    var b = e.target.closest('.bnr');
+    if (b) document.getElementById('log').innerHTML = '배너의 <b>할 일</b>로 넘어갔다';
+  });
+
+  document.getElementById('n').addEventListener('input', function () {
+    document.getElementById('nv').textContent = this.value + '개';
+    render('');
+  });
+  ['dismiss', 'remember'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', function () { render(''); });
+  });
+  document.getElementById('nv').textContent = '1개';
+  render('');
+})();
+</script>
+</body>
+</html>

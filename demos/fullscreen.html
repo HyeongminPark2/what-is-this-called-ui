@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>전체 화면 레이어 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>전체 화면 레이어</b>
+  <label>화면 폭 <select class="sel" id="w" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="320">폰 (320px)</option>
+    <option value="700">넓게 (700px)</option>
+  </select></label>
+  <label><input type="checkbox" id="auto" checked> 좁으면 전체 화면으로 바꾸기</label>
+  <button class="ui-btn" id="open">새 가게 등록</button>
+</div>
+
+<div class="pad">
+  <div class="ovs" id="stage" style="height:240px;max-width:700px">
+    <div class="ovs__page">
+      <b style="font-size:13px">가게 목록</b>
+      <span class="ln"></span><span class="ln" style="width:72%"></span><span class="ln" style="width:85%"></span>
+    </div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  같은 '새 가게 등록'이라도 <b>넓은 화면에서는 모달</b>, <b>좁은 화면에서는 전체 화면</b>이 맞습니다 —
+  390px 에 뜬 모달은 가장자리 여백만 남기고 내용 칸을 더 좁힙니다.
+  데모가 <b>내용이 쓸 수 있는 폭</b>을 재서 둘을 견줍니다.<br>
+  전체 화면 레이어는 <b>화면처럼 보이지만 화면이 아닙니다</b> — 뒤에 목록이 그대로 있고,
+  닫으면 돌아옵니다. 그래서 <b>닫기(✕)</b>이지 뒤로가기가 아니고,
+  제목 줄에 <b>무엇을 하는 중인지</b>를 적어야 합니다.<br>
+  기록에 넣어 두면 <b>시스템 백</b>으로도 닫힙니다 — 폰에서는 그게 기본 기대입니다.
+</p>
+
+<script>
+(function () {
+  var open = false;
+
+  function render(why) {
+    var w = +document.getElementById('w').value;
+    var auto = document.getElementById('auto').checked;
+    var full = auto && w <= 400;
+    var stage = document.getElementById('stage');
+    stage.style.maxWidth = w + 'px';
+    stage.querySelectorAll('.ovs__scrim, .fsl, .mdl-fake').forEach(function (e) { e.remove(); });
+
+    if (open) {
+      if (full) {
+        var layer = document.createElement('div');
+        layer.className = 'fsl';
+        layer.setAttribute('role', 'dialog');
+        layer.setAttribute('aria-modal', 'true');
+        layer.setAttribute('aria-label', '새 가게 등록');
+        layer.innerHTML =
+          '<div class="fsl__bar"><button id="x" aria-label="닫기">✕</button>' +
+          '<b style="font-size:13px">새 가게 등록</b>' +
+          '<button id="save" style="margin-left:auto;font-weight:700">저장</button></div>' +
+          '<div class="fsl__body"><span class="ln"></span><span class="ln" style="width:80%"></span>' +
+          '<span class="ln" style="width:65%"></span></div>';
+        stage.appendChild(layer);
+        layer.querySelector('#x').focus();
+      } else {
+        var scrim = document.createElement('div');
+        scrim.className = 'ovs__scrim'; scrim.id = 'scrim';
+        stage.appendChild(scrim);
+        var m = document.createElement('div');
+        m.className = 'mdl-fake';
+        m.setAttribute('role', 'dialog');
+        m.setAttribute('aria-modal', 'true');
+        m.setAttribute('aria-label', '새 가게 등록');
+        m.style.cssText = 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);' +
+          'width:min(420px, calc(100% - 48px));background:var(--surface);border-radius:var(--r2);' +
+          'box-shadow:0 14px 34px rgba(20,22,26,.22);padding:12px;display:grid;gap:8px';
+        m.innerHTML = '<div style="display:flex;gap:8px;align-items:center">' +
+          '<b style="font-size:13px">새 가게 등록</b>' +
+          '<button id="x" aria-label="닫기" style="margin-left:auto;background:none;border:0;cursor:pointer;color:var(--fg-muted)">✕</button></div>' +
+          '<span class="ln"></span><span class="ln" style="width:80%"></span>' +
+          '<div style="display:flex;gap:7px;justify-content:flex-end"><button class="ui-btn" id="save" style="min-height:30px;padding:4px 11px;font-size:12.5px">저장</button></div>';
+        stage.appendChild(m);
+        m.querySelector('#x').focus();
+      }
+    }
+
+    var inner = stage.querySelector('.fsl__body, .mdl-fake');
+    var usable = inner ? Math.round(inner.getBoundingClientRect().width) : 0;
+    var rd = document.getElementById('read');
+    rd.innerHTML = '화면 폭 <b>' + w + 'px</b> · ' + (open ? (full ? '<b>전체 화면</b>' : '<b>모달</b>') : '닫힘') +
+      (open ? '<br>내용이 쓸 수 있는 폭 <b>' + usable + 'px</b>' +
+        (!full && w <= 400 ? ' <span class="warn">— 좁은 화면인데 모달이라 더 좁다</span>' : '') : '') +
+      (why ? '<br>' + why : '');
+    rd.dataset.open = open ? '1' : '0';
+    rd.dataset.full = full ? '1' : '0';
+    rd.dataset.usable = String(usable);
+    rd.dataset.w = String(w);
+  }
+
+  document.getElementById('stage').addEventListener('click', function (e) {
+    if (e.target.id === 'x') { open = false; render(''); document.getElementById('log').innerHTML = '<b>닫기</b>를 눌렀다 — 목록으로 돌아왔다'; return; }
+    if (e.target.id === 'save') { open = false; render(''); document.getElementById('log').innerHTML = '<b>저장</b>하고 닫았다'; return; }
+    if (e.target.id === 'scrim') { open = false; render(''); document.getElementById('log').innerHTML = '가림막을 눌러 닫았다'; return; }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && open) { open = false; render(''); document.getElementById('log').innerHTML = '<b>Esc</b> 로 닫았다'; }
+  });
+
+  document.getElementById('open').addEventListener('click', function () { open = true; render(''); });
+  ['w', 'auto'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', function () { render(''); });
+  });
+  render('새 가게 등록을 눌러 보세요');
+})();
+</script>
+</body>
+</html>

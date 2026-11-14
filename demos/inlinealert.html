@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>인라인 얼럿 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 380px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .fm { display: grid; gap: 9px; border: 1px solid var(--line); border-radius: var(--r2); padding: 11px; }
+  .fm label { display: grid; gap: 4px; font-size: 12.5px; }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>인라인 얼럿</b>
+  <label>어디에 붙일까 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="field" selected>틀린 칸 바로 아래</option>
+    <option value="top">폼 맨 위에 모아서</option>
+    <option value="toast">토스트로 띄워서</option>
+  </select></label>
+  <button class="ui-btn" id="go">보내기</button>
+</div>
+
+<div class="pad">
+  <div id="topslot"></div>
+  <form class="fm" id="fm">
+    <label>가게 이름 <input class="ui-input" id="f1" value="모란상회"></label>
+    <label>사업자번호 <input class="ui-input" id="f2" value="123"></label>
+    <div id="s2"></div>
+    <label>정산 계좌 <input class="ui-input" id="f3" value=""></label>
+    <div id="s3"></div>
+  </form>
+  <div id="toastslot"></div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  인라인 얼럿은 <b>뜨지 않습니다</b> — 흐름 안에 자리를 차지하고 눌러서 치우지 않아도 됩니다.
+  <b>보내기</b>를 눌러 보세요. 붙이는 자리를 바꿔 가며
+  데모가 <b>틀린 칸에서 메시지까지의 거리(px)</b>를 재서 적습니다.<br>
+  <b>칸 바로 아래</b>면 거리가 0에 가깝고, <b>맨 위에 모으면</b> 수백 px 떨어져
+  어느 칸이 틀렸는지 찾아 내려가야 합니다. <b>토스트</b>는 사라져서
+  다시 볼 수도 없습니다 — 데모가 사라지는 것도 셉니다.<br>
+  어느 쪽이든 <code>aria-describedby</code> 로 <b>칸과 메시지를 묶어야</b>
+  소리로 들을 때 짝이 유지됩니다.
+</p>
+
+<script>
+(function () {
+  var toastT = null;
+
+  function clear() {
+    document.getElementById('topslot').innerHTML = '';
+    document.getElementById('s2').innerHTML = '';
+    document.getElementById('s3').innerHTML = '';
+    document.getElementById('toastslot').innerHTML = '';
+    ['f1', 'f2', 'f3'].forEach(function (id) {
+      var el = document.getElementById(id);
+      el.removeAttribute('aria-invalid');
+      el.removeAttribute('aria-describedby');
+    });
+  }
+
+  function alertHtml(id, text) {
+    return '<p class="ial err" id="' + id + '" role="alert">' +
+      '<span aria-hidden="true">!</span><span>' + text + '</span></p>';
+  }
+
+  function report(why) {
+    var k = document.getElementById('k').value;
+    var field = document.getElementById('f2');
+    var msg = document.querySelector('.ial, .suc__toast');
+    var dist = 0;
+    if (msg) {
+      var a = field.getBoundingClientRect(), b = msg.getBoundingClientRect();
+      dist = Math.round(Math.abs(b.top - a.bottom));
+    }
+    var tied = field.getAttribute('aria-describedby') ? 1 : 0;
+    var gone = k === 'toast' ? 1 : 0;
+    var rd = document.getElementById('read');
+    rd.innerHTML = '붙인 자리 <b>' +
+      ({ field: '칸 바로 아래', top: '폼 맨 위', toast: '토스트' }[k]) + '</b>' +
+      (msg ? '<br>틀린 칸에서 메시지까지 <b>' + dist + 'px</b>' +
+        (dist > 100 ? ' <span class="warn">— 멀어서 찾아 내려가야 한다</span>' : '') : '') +
+      '<br>칸과 메시지가 묶였나 <b>' + (tied ? '묶였다' : '안 묶였다') + '</b>' +
+      (tied ? '' : ' <span class="warn">— 소리로는 짝이 안 전해진다</span>') +
+      (gone ? '<br><span class="warn">몇 초 뒤 사라진다</span> — 다시 볼 수 없다' : '') +
+      (why ? '<br>' + why : '');
+    rd.dataset.dist = String(dist);
+    rd.dataset.tied = String(tied);
+    rd.dataset.gone = String(gone);
+    rd.dataset.kind = k;
+    rd.dataset.shown = msg ? '1' : '0';
+  }
+
+  document.getElementById('go').addEventListener('click', function () {
+    clearTimeout(toastT);
+    clear();
+    var k = document.getElementById('k').value;
+    var f2 = document.getElementById('f2');
+    f2.setAttribute('aria-invalid', 'true');
+
+    if (k === 'field') {
+      document.getElementById('s2').innerHTML = alertHtml('e2', '사업자번호는 10자리입니다 (지금 3자리)');
+      document.getElementById('s3').innerHTML = alertHtml('e3', '정산 계좌를 적어 주세요');
+      f2.setAttribute('aria-describedby', 'e2');
+      document.getElementById('f3').setAttribute('aria-describedby', 'e3');
+      document.getElementById('log').innerHTML = '<b>칸마다</b> 붙였다 — 어디를 고칠지 바로 보인다';
+    } else if (k === 'top') {
+      document.getElementById('topslot').innerHTML =
+        '<p class="ial err" role="alert"><span aria-hidden="true">!</span><span>' +
+        '고쳐야 할 칸이 2개 있습니다 — 사업자번호 · 정산 계좌</span></p>';
+      document.getElementById('log').innerHTML = '<b>맨 위에</b> 모았다 — 몇 개인지는 한눈에 보인다';
+    } else {
+      document.getElementById('toastslot').innerHTML =
+        '<div class="suc__toast" role="alert">사업자번호를 확인해 주세요</div>';
+      toastT = setTimeout(function () {
+        document.getElementById('toastslot').innerHTML = '';
+        report('<span class="warn">토스트가 사라졌다</span>');
+      }, 2500);
+      document.getElementById('log').innerHTML = '<span class="warn">토스트로 띄웠다</span> — 곧 사라진다';
+    }
+    report('');
+  });
+
+  document.getElementById('k').addEventListener('change', function () {
+    clearTimeout(toastT); clear(); report('');
+  });
+  report('보내기를 눌러 보세요');
+})();
+</script>
+</body>
+</html>

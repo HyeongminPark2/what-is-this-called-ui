@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>드롭다운 메뉴 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>드롭다운 메뉴</b>
+  <label>누르면 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="menu" selected>동작 목록 (메뉴)</option>
+    <option value="select">값 고르기 (셀렉트)</option>
+  </select></label>
+  <label><input type="checkbox" id="flip" checked> 자리가 없으면 위로 뒤집기</label>
+  <label>단추 위치 <input type="range" id="y" min="10" max="175" step="5" value="20" style="width:90px"></label>
+</div>
+
+<div class="pad">
+  <div class="ovs" id="stage">
+    <div class="ovs__page" style="padding:0">
+      <button class="ui-btn ui-btn--ghost" id="trigger" aria-haspopup="menu" aria-expanded="false"
+        style="position:absolute;left:14px;min-height:30px;padding:4px 11px;font-size:12.5px">더 보기 ▾</button>
+    </div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  <b>동작 목록</b>과 <b>값 고르기</b>는 생김새가 같아 가장 많이 섞입니다 —
+  메뉴는 누르면 <b>무슨 일이 일어나고</b>, 셀렉트는 누르면 <b>값이 정해질</b> 뿐입니다.
+  데모가 둘의 역할·키보드·표시를 나눠서 적습니다.<br>
+  단추를 아래로 내려 보세요. 자리가 모자라면 메뉴가 <b>위로 뒤집혀야</b> 합니다 —
+  데모가 <b>화면 밖으로 삐져나간 px</b>을 재서 적습니다. 뒤집기를 끄면 잘립니다.<br>
+  ↑↓ 로 옮기고 Esc 로 닫으며, 닫으면 초점이 <b>단추로 돌아와야</b> 합니다.
+</p>
+
+<script>
+(function () {
+  var ACTIONS = [
+    ['이름 바꾸기', '', false],
+    ['복사본 만들기', '⌘D', false],
+    ['보관함으로', '', false],
+    ['SEP', '', false],
+    ['지우기', '⌫', true]
+  ];
+  var VALUES = ['매주 수요일', '매달 1일', '매달 15일'];
+  var open = false, sel = 0, chosen = VALUES[0];
+
+  function items() {
+    return document.getElementById('k').value === 'menu'
+      ? ACTIONS.filter(function (a) { return a[0] !== 'SEP'; })
+      : VALUES.map(function (v) { return [v, '', false]; });
+  }
+
+  function render() {
+    var stage = document.getElementById('stage');
+    var trig = document.getElementById('trigger');
+    var kind = document.getElementById('k').value;
+    var y = +document.getElementById('y').value;
+    trig.style.top = y + 'px';
+    trig.textContent = kind === 'menu' ? '더 보기 ▾' : chosen + ' ▾';
+    trig.setAttribute('aria-haspopup', kind === 'menu' ? 'menu' : 'listbox');
+    trig.setAttribute('aria-expanded', String(open));
+
+    stage.querySelectorAll('.mnu').forEach(function (e) { e.remove(); });
+    if (!open) { report(''); return; }
+
+    var box = document.createElement('div');
+    box.className = 'mnu';
+    box.setAttribute('role', kind === 'menu' ? 'menu' : 'listbox');
+    box.innerHTML = (kind === 'menu' ? ACTIONS : VALUES.map(function (v) { return [v, '', false]; }))
+      .map(function (a, i) {
+        if (a[0] === 'SEP') return '<hr>';
+        var idx = items().findIndex(function (x) { return x[0] === a[0]; });
+        return '<button role="' + (kind === 'menu' ? 'menuitem' : 'option') + '" data-i="' + idx + '"' +
+          (kind === 'menu' ? '' : ' aria-selected="' + (a[0] === chosen) + '"') +
+          (idx === sel ? ' aria-selected="true"' : '') +
+          (a[2] ? ' class="danger"' : '') + '>' + a[0] +
+          (a[1] ? '<small>' + a[1] + '</small>' : '') + '</button>';
+      }).join('');
+    stage.appendChild(box);
+
+    // 자리가 모자라면 위로 뒤집는다 — 삐져나간 양을 재서 정한다
+    var sr = stage.getBoundingClientRect(), tr = trig.getBoundingClientRect();
+    box.style.left = '14px';
+    box.style.top = (tr.bottom - sr.top + 4) + 'px';
+    var br = box.getBoundingClientRect();
+    var over = Math.round(br.bottom - sr.bottom);
+    if (over > 0 && document.getElementById('flip').checked) {
+      box.style.top = (tr.top - sr.top - box.getBoundingClientRect().height - 4) + 'px';
+      box.dataset.flipped = '1';
+    } else {
+      box.dataset.flipped = '0';
+    }
+    box.querySelectorAll('button')[sel] && box.querySelectorAll('button')[sel].focus();
+    report('');
+  }
+
+  function report(why) {
+    var stage = document.getElementById('stage').getBoundingClientRect();
+    var box = document.querySelector('.mnu');
+    var over = 0, flipped = 0;
+    if (box) {
+      var br = box.getBoundingClientRect();
+      over = Math.max(0, Math.round(br.bottom - stage.bottom));
+      flipped = box.dataset.flipped === '1' ? 1 : 0;
+    }
+    var kind = document.getElementById('k').value;
+    var rd = document.getElementById('read');
+    rd.innerHTML = (open ? '열림' : '닫힘') + ' · <b>' + (kind === 'menu' ? '동작 목록' : '값 고르기') + '</b>' +
+      '<br>역할 <b>' + (kind === 'menu' ? 'menu / menuitem' : 'listbox / option') + '</b>' +
+      '<br>화면 밖으로 삐져나간 양 <b>' + over + 'px</b>' +
+      (over > 0 ? ' <span class="warn">— 잘린다</span>' : (flipped ? ' — <b>위로 뒤집었다</b>' : '')) +
+      (kind === 'select' ? '<br>고른 값 <b>' + chosen + '</b>' : '') +
+      (why ? '<br>' + why : '');
+    rd.dataset.open = open ? '1' : '0';
+    rd.dataset.over = String(over);
+    rd.dataset.flipped = String(flipped);
+    rd.dataset.kind = kind;
+    rd.dataset.chosen = chosen;
+    rd.dataset.role = kind === 'menu' ? 'menu' : 'listbox';
+  }
+
+  function close(why) {
+    open = false; render();
+    document.getElementById('trigger').focus();
+    if (why) document.getElementById('log').innerHTML = why;
+  }
+
+  document.getElementById('trigger').addEventListener('click', function () {
+    open = !open; sel = 0; render();
+  });
+
+  document.getElementById('stage').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-i]');
+    if (!b) return;
+    var it = items()[+b.dataset.i];
+    if (document.getElementById('k').value === 'select') {
+      chosen = it[0];
+      close('<b>' + it[0] + '</b> 로 값을 정했다 — 아무 일도 안 일어난다');
+    } else {
+      close('<b>' + it[0] + '</b> 를 실행했다 — 일이 일어났다');
+    }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (!open) return;
+    var n = items().length;
+    if (e.key === 'Escape') { close('<b>Esc</b> 로 닫았다 — 초점이 단추로 돌아왔다'); e.preventDefault(); }
+    if (e.key === 'ArrowDown') { sel = (sel + 1) % n; render(); e.preventDefault(); }
+    if (e.key === 'ArrowUp') { sel = (sel - 1 + n) % n; render(); e.preventDefault(); }
+  });
+
+  ['k', 'flip'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', function () { sel = 0; render(); });
+  });
+  document.getElementById('y').addEventListener('input', render);
+  render();
+})();
+</script>
+</body>
+</html>

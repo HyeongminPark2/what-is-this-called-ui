@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>커맨드 팔레트 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>커맨드 팔레트</b>
+  <label><input type="checkbox" id="fuzzy" checked> 띄엄띄엄 쳐도 찾기</label>
+  <label><input type="checkbox" id="recent" checked> 최근 쓴 것 먼저</label>
+  <button class="ui-btn" id="open">열기 (Ctrl+K)</button>
+</div>
+
+<div class="pad">
+  <div class="ovs" id="stage">
+    <div class="ovs__page">
+      <b style="font-size:13px">정산 목록</b>
+      <span class="ln"></span><span class="ln" style="width:70%"></span><span class="ln" style="width:85%"></span>
+      <span class="ln" style="width:60%"></span>
+    </div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  팔레트를 열고 <b>ㅈㅅ</b> 이나 <b>정내</b> 처럼 띄엄띄엄 쳐 보세요 —
+  '띄엄띄엄 쳐도 찾기'를 켜면 <b>정산 내역 내보내기</b>가 잡히고,
+  끄면 글자가 이어진 것만 잡힙니다. 데모가 <b>찾은 개수</b>를 둘 다 세서 적습니다.<br>
+  목록이 비어 있을 때 보이는 것이 중요합니다 — <b>최근 쓴 것</b>을 먼저 보여 주면
+  대부분 치지 않고도 고릅니다. 끄면 아무것도 없는 목록이 뜹니다.<br>
+  ↑↓ 로 고르고 Enter 로 실행합니다. <b>지금 고른 줄</b>은 색뿐 아니라
+  <code>aria-selected</code> 로도 알려야 합니다.
+</p>
+
+<script>
+(function () {
+  var CMDS = [
+    ['정산 내역 내보내기', '내보내기'],
+    ['정산 설정 열기', '이동'],
+    ['새 가게 등록', '만들기'],
+    ['영수증 다시 보내기', '보내기'],
+    ['사업자 정보 수정', '이동'],
+    ['도움말 보기', '도움말'],
+    ['로그아웃', '계정']
+  ];
+  var RECENT = ['정산 내역 내보내기', '새 가게 등록'];
+  var open = false, sel = 0, q = '';
+
+  function matchLoose(name, query) {
+    // 띄엄띄엄 치기 — 친 글자가 차례대로 들어 있으면 맞는 것으로 본다
+    var i = 0;
+    for (var c = 0; c < name.length && i < query.length; c++) {
+      if (name[c] === query[i]) i++;
+    }
+    return i === query.length;
+  }
+  function matchExact(name, query) { return name.indexOf(query) >= 0; }
+
+  function list() {
+    var fuzzy = document.getElementById('fuzzy').checked;
+    var recent = document.getElementById('recent').checked;
+    if (!q) return recent ? CMDS.filter(function (c) { return RECENT.indexOf(c[0]) >= 0; }) : [];
+    return CMDS.filter(function (c) { return (fuzzy ? matchLoose : matchExact)(c[0], q); });
+  }
+
+  function render() {
+    var stage = document.getElementById('stage');
+    stage.querySelectorAll('.ovs__scrim, .cmdk').forEach(function (e) { e.remove(); });
+    if (!open) { report(''); return; }
+
+    var scrim = document.createElement('div');
+    scrim.className = 'ovs__scrim'; scrim.id = 'scrim';
+    stage.appendChild(scrim);
+
+    var items = list();
+    var box = document.createElement('div');
+    box.className = 'cmdk';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-label', '명령 찾기');
+    box.innerHTML =
+      '<input id="q" placeholder="무엇을 할까요" value="' + q + '" aria-label="명령 찾기" ' +
+      'role="combobox" aria-expanded="true" aria-controls="cmdlist" aria-autocomplete="list">' +
+      (!q && document.getElementById('recent').checked ? '<div class="grp">최근 쓴 것</div>' : '') +
+      '<ul id="cmdlist" role="listbox">' +
+      (items.length
+        ? items.map(function (c, i) {
+            return '<li role="option" data-i="' + i + '" aria-selected="' + (i === sel) + '">' +
+              c[0] + '<small>' + c[1] + '</small></li>';
+          }).join('')
+        : '<li role="option" aria-selected="false" style="color:var(--fg-muted)">' +
+          (q ? '‘' + q + '’에 맞는 명령이 없습니다' : '무엇을 할지 쳐 보세요') + '</li>') +
+      '</ul>';
+    stage.appendChild(box);
+    var input = box.querySelector('#q');
+    input.focus();
+    input.setSelectionRange(q.length, q.length);
+    report('');
+  }
+
+  function report(why) {
+    var fuzzy = document.getElementById('fuzzy').checked;
+    var nLoose = q ? CMDS.filter(function (c) { return matchLoose(c[0], q); }).length : 0;
+    var nExact = q ? CMDS.filter(function (c) { return matchExact(c[0], q); }).length : 0;
+    var shown = list().length;
+    var rd = document.getElementById('read');
+    rd.innerHTML = (open ? '열림' : '닫힘') + (q ? ' · 친 글자 <b>' + q + '</b>' : ' · 아직 안 침') +
+      '<br>띄엄띄엄 찾기로 <b>' + nLoose + '개</b> · 이어진 글자만으로 <b>' + nExact + '개</b>' +
+      (q && nLoose > nExact ? ' <span class="warn">— 끄면 ' + (nLoose - nExact) + '개를 놓친다</span>' : '') +
+      '<br>지금 보이는 줄 <b>' + shown + '개</b>' +
+      (!q && !document.getElementById('recent').checked ? ' <span class="warn">— 빈 목록이다</span>' : '');
+    rd.dataset.open = open ? '1' : '0';
+    rd.dataset.loose = String(nLoose);
+    rd.dataset.exact = String(nExact);
+    rd.dataset.shown = String(shown);
+    rd.dataset.sel = String(sel);
+    rd.dataset.q = q;
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+      e.preventDefault(); open = true; q = ''; sel = 0; render();
+      document.getElementById('log').innerHTML = '<b>Ctrl+K</b> 로 열었다';
+      return;
+    }
+    if (!open) return;
+    if (e.key === 'Escape') { open = false; render(); document.getElementById('log').innerHTML = '<b>Esc</b> 로 닫았다'; return; }
+    var items = list();
+    if (e.key === 'ArrowDown') { sel = Math.min(items.length - 1, sel + 1); render(); e.preventDefault(); }
+    if (e.key === 'ArrowUp') { sel = Math.max(0, sel - 1); render(); e.preventDefault(); }
+    if (e.key === 'Enter' && items[sel]) {
+      open = false; render();
+      document.getElementById('log').innerHTML = '<b>' + items[sel][0] + '</b> 를 실행했다';
+      document.getElementById('read').dataset.ran = items[sel][0];
+      e.preventDefault();
+    }
+  });
+
+  document.getElementById('stage').addEventListener('input', function (e) {
+    if (e.target.id !== 'q') return;
+    q = e.target.value; sel = 0; render();
+  });
+  document.getElementById('stage').addEventListener('click', function (e) {
+    if (e.target.id === 'scrim') { open = false; render(); document.getElementById('log').innerHTML = '가림막을 눌러 닫았다'; return; }
+    var li = e.target.closest('[data-i]');
+    if (!li) return;
+    sel = +li.dataset.i;
+    var items = list();
+    open = false; render();
+    document.getElementById('log').innerHTML = '<b>' + items[sel][0] + '</b> 를 실행했다';
+    document.getElementById('read').dataset.ran = items[sel][0];
+  });
+
+  document.getElementById('open').addEventListener('click', function () { open = true; q = ''; sel = 0; render(); });
+  ['fuzzy', 'recent'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', function () { sel = 0; render(); });
+  });
+  render();
+})();
+</script>
+</body>
+</html>

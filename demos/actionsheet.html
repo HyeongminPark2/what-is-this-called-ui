@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>액션 시트 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>액션 시트</b>
+  <label>항목 수 <input type="range" id="n" min="2" max="9" step="1" value="3" style="width:90px"><span class="ruler" id="nv"></span></label>
+  <label><input type="checkbox" id="cancel" checked> 취소를 따로 떼어 두기</label>
+  <button class="ui-btn" id="open">열기</button>
+</div>
+
+<div class="pad">
+  <div class="ovs" id="stage" style="height:320px">
+    <div class="ovs__page">
+      <b style="font-size:13px">영수증_2411_01.jpg</b>
+      <span class="ln"></span><span class="ln" style="width:70%"></span><span class="ln" style="width:85%"></span>
+    </div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  액션 시트는 <b>지금 고른 것에 할 수 있는 일</b>을 아래에서 올려 보여 줍니다.
+  항목을 늘려 보세요 — 데모가 <b>시트가 화면의 몇 %를 덮는지</b>를 재서 적습니다.
+  절반을 넘어가면 시트가 아니라 <b>화면 한 장</b>으로 만드는 편이 낫습니다.<br>
+  <b>위험한 항목</b>은 빨갛게 두고 <b>맨 아래</b>에 둡니다 — 손가락이 먼저 닿는 자리를
+  피하는 것입니다. <b>취소</b>는 한 칸 떼어 둬야 실수로 안 눌립니다.
+  체크를 끄면 취소가 목록에 붙어 버립니다.<br>
+  가림막을 눌러도 닫혀야 하고, Esc 로도 닫혀야 합니다.
+</p>
+
+<script>
+(function () {
+  var ALL = [
+    ['영수증 다시 보내기', false],
+    ['이름 바꾸기', false],
+    ['다운로드', false],
+    ['복사본 만들기', false],
+    ['보관함으로', false],
+    ['공유하기', false],
+    ['인쇄', false],
+    ['정보 보기', false],
+    ['지우기', true]
+  ];
+  var open = false, picked = '';
+
+  function render() {
+    var n = +document.getElementById('n').value;
+    var sep = document.getElementById('cancel').checked;
+    var stage = document.getElementById('stage');
+    stage.querySelectorAll('.ovs__scrim, .ash').forEach(function (e) { e.remove(); });
+    if (!open) { report(''); return; }
+
+    var items = ALL.slice(0, n - 1).concat([ALL[ALL.length - 1]]);
+    var scrim = document.createElement('div');
+    scrim.className = 'ovs__scrim';
+    scrim.id = 'scrim';
+    stage.appendChild(scrim);
+
+    var sheet = document.createElement('div');
+    sheet.className = 'ash';
+    sheet.setAttribute('role', 'dialog');
+    sheet.setAttribute('aria-modal', 'true');
+    sheet.setAttribute('aria-label', '영수증에 할 수 있는 일');
+    sheet.innerHTML =
+      '<div class="ash__g">' +
+      items.map(function (it) {
+        return '<button data-a="' + it[0] + '"' + (it[1] ? ' class="danger"' : '') + '>' + it[0] + '</button>';
+      }).join('') +
+      (sep ? '' : '<button data-a="취소">취소</button>') +
+      '</div>' +
+      (sep ? '<button class="ash__cancel" data-a="취소">취소</button>' : '');
+    stage.appendChild(sheet);
+    sheet.querySelector('button').focus();
+    report('');
+  }
+
+  function report(why) {
+    var stage = document.getElementById('stage');
+    var sheet = stage.querySelector('.ash');
+    var h = stage.getBoundingClientRect().height;
+    var cover = sheet ? Math.round(sheet.getBoundingClientRect().height / h * 100) : 0;
+    var danger = sheet ? sheet.querySelectorAll('.danger').length : 0;
+    var lastIsDanger = sheet
+      ? !!sheet.querySelector('.ash__g button:last-child.danger, .ash__g button:nth-last-child(2).danger')
+      : false;
+    var rd = document.getElementById('read');
+    rd.innerHTML = (open ? '열림' : '닫힘') + ' · 시트가 덮는 넓이 <b>' + cover + '%</b>' +
+      (cover > 50 ? ' <span class="warn">— 절반을 넘었다. 화면 한 장이 낫다</span>' : '') +
+      '<br>위험한 항목 <b>' + danger + '개</b>' + (lastIsDanger ? ' — <b>맨 아래</b>에 있다' : '') +
+      '<br>취소가 <b>' + (document.getElementById('cancel').checked ? '떼어져' : '붙어') + '</b> 있다' +
+      (document.getElementById('cancel').checked ? '' : ' <span class="warn">— 실수로 눌리기 쉽다</span>') +
+      (picked ? '<br>고른 것 <b>' + picked + '</b>' : '') +
+      (why ? '<br>' + why : '');
+    rd.dataset.open = open ? '1' : '0';
+    rd.dataset.cover = String(cover);
+    rd.dataset.sep = document.getElementById('cancel').checked ? '1' : '0';
+    rd.dataset.picked = picked;
+    rd.dataset.last = lastIsDanger ? '1' : '0';
+  }
+
+  document.getElementById('stage').addEventListener('click', function (e) {
+    if (e.target.id === 'scrim') {
+      open = false; picked = ''; render();
+      document.getElementById('log').innerHTML = '<b>가림막</b>을 눌러 닫았다';
+      return;
+    }
+    var b = e.target.closest('[data-a]');
+    if (!b) return;
+    picked = b.dataset.a;
+    open = false;
+    render();
+    document.getElementById('log').innerHTML = '<b>' + picked + '</b> 를 골랐다';
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && open) {
+      open = false; picked = ''; render();
+      document.getElementById('log').innerHTML = '<b>Esc</b> 로 닫았다';
+    }
+  });
+
+  document.getElementById('open').addEventListener('click', function () { open = true; picked = ''; render(); });
+  document.getElementById('n').addEventListener('input', function () {
+    document.getElementById('nv').textContent = this.value + '개';
+    render();
+  });
+  document.getElementById('cancel').addEventListener('change', render);
+  document.getElementById('nv').textContent = '3개';
+  render();
+})();
+</script>
+</body>
+</html>

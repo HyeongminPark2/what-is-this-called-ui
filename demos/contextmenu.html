@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>컨텍스트 메뉴 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .rows { display: grid; gap: 4px; }
+  .rows .r { display: flex; gap: 7px; align-items: center; border: 1px solid var(--line); border-radius: var(--r1);
+    background: var(--surface); padding: 6px 8px; font-size: 12.5px; }
+  .rows .r.sel { border-color: var(--accent); background: var(--accent-soft); }
+  .rows .r .more { margin-left: auto; font-size: 11px; color: var(--fg-muted); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>컨텍스트 메뉴</b>
+  <label><input type="checkbox" id="visible" checked> ⋯ 단추도 같이 두기</label>
+  <label><input type="checkbox" id="keep"> 브라우저 기본 메뉴를 막지 않기</label>
+</div>
+
+<div class="pad">
+  <div class="ovs" id="stage" style="height:200px">
+    <div class="ovs__page">
+      <b style="font-size:13px">영수증</b>
+      <div class="rows" id="rows"></div>
+    </div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  줄에 <b>마우스 오른쪽</b>을 눌러 보세요(폰에서는 길게 누르기). 컨텍스트 메뉴는
+  <b>오직 그 방법으로만</b> 열립니다 — 그래서 <b>있는 줄도 모르는</b> 기능이 됩니다.
+  데모가 <b>같은 일에 이르는 길이 몇 개인지</b> 세서 적습니다.<br>
+  ⋯ 단추를 같이 두면 길이 둘이 되고, 끄면 하나뿐입니다 —
+  <b>숨은 길만 두지 않는 것</b>이 규칙입니다.<br>
+  브라우저 기본 메뉴를 막는 것은 <b>빼앗는 일</b>입니다. 복사·새 탭으로 열기를 못 쓰게 되니,
+  정말 필요할 때만 막고 <b>그 안에 그 기능들을 다시 넣어</b> 줘야 합니다.
+</p>
+
+<script>
+(function () {
+  var ROWS = ['영수증_2411_01.jpg', '영수증_2411_02.jpg', '정산내역_11월.pdf'];
+  var ITEMS = [['열기', ''], ['이름 바꾸기', 'F2'], ['복사', '⌘C'], ['SEP', ''], ['지우기', '⌫']];
+  var open = -1, sel = 0, opened = { right: 0, button: 0 }, blocked = 0;
+
+  function render() {
+    document.getElementById('rows').innerHTML = ROWS.map(function (r, i) {
+      return '<div class="r' + (open === i ? ' sel' : '') + '" data-i="' + i + '">' +
+        '<span>' + r + '</span>' +
+        (document.getElementById('visible').checked
+          ? '<button class="more" data-more="' + i + '" aria-haspopup="menu" aria-label="' + r + ' 메뉴 열기">⋯</button>'
+          : '') +
+        '</div>';
+    }).join('');
+
+    var stage = document.getElementById('stage');
+    stage.querySelectorAll('.mnu').forEach(function (e) { e.remove(); });
+    report('');
+  }
+
+  function openMenu(i, x, y, how) {
+    open = i; sel = 0;
+    opened[how]++;
+    render();
+    var stage = document.getElementById('stage');
+    var sr = stage.getBoundingClientRect();
+    var box = document.createElement('div');
+    box.className = 'mnu';
+    box.setAttribute('role', 'menu');
+    box.setAttribute('aria-label', ROWS[i] + ' 메뉴');
+    box.innerHTML = ITEMS.map(function (it, k) {
+      if (it[0] === 'SEP') return '<hr>';
+      var idx = ITEMS.filter(function (z) { return z[0] !== 'SEP'; }).findIndex(function (z) { return z[0] === it[0]; });
+      return '<button role="menuitem" data-a="' + it[0] + '" data-i="' + idx + '"' +
+        (it[0] === '지우기' ? ' class="danger"' : '') + '>' + it[0] +
+        (it[1] ? '<small>' + it[1] + '</small>' : '') + '</button>';
+    }).join('');
+    stage.appendChild(box);
+    var bw = box.getBoundingClientRect().width, bh = box.getBoundingClientRect().height;
+    var left = Math.min(x - sr.left, sr.width - bw - 6);
+    var top = Math.min(y - sr.top, sr.height - bh - 6);
+    box.style.left = Math.max(6, left) + 'px';
+    box.style.top = Math.max(6, top) + 'px';
+    box.querySelector('button').focus();
+    report('');
+  }
+
+  function report(why) {
+    var vis = document.getElementById('visible').checked;
+    var ways = 1 + (vis ? 1 : 0);
+    var rd = document.getElementById('read');
+    rd.innerHTML = (open >= 0 ? '열림 — <b>' + ROWS[open] + '</b>' : '닫힘') +
+      '<br>같은 일에 이르는 길 <b>' + ways + '개</b>' +
+      (ways === 1 ? ' <span class="warn">— 숨은 길 하나뿐이다</span>' : ' — ⋯ 단추와 오른쪽 누르기') +
+      '<br>오른쪽 눌러 연 횟수 <b>' + opened.right + '</b> · ⋯ 로 연 횟수 <b>' + opened.button + '</b>' +
+      (blocked ? '<br>브라우저 기본 메뉴를 막은 횟수 <b>' + blocked + '</b>' +
+        (document.getElementById('keep').checked ? '' : ' <span class="warn">— 복사·새 탭을 빼앗는다</span>') : '') +
+      (why ? '<br>' + why : '');
+    rd.dataset.open = String(open);
+    rd.dataset.ways = String(ways);
+    rd.dataset.right = String(opened.right);
+    rd.dataset.button = String(opened.button);
+    rd.dataset.blocked = String(blocked);
+  }
+
+  document.getElementById('stage').addEventListener('contextmenu', function (e) {
+    var r = e.target.closest('[data-i]');
+    if (!r || r.dataset.i === undefined) return;
+    if (document.getElementById('keep').checked) {
+      document.getElementById('log').innerHTML = '브라우저 기본 메뉴를 <b>그대로</b> 뒀다';
+      return;
+    }
+    e.preventDefault();
+    blocked++;
+    openMenu(+r.dataset.i, e.clientX, e.clientY, 'right');
+    document.getElementById('log').innerHTML = '<b>오른쪽 눌러</b> 열었다';
+  });
+
+  document.getElementById('stage').addEventListener('click', function (e) {
+    var m = e.target.closest('[data-more]');
+    if (m) {
+      var rr = m.getBoundingClientRect();
+      openMenu(+m.dataset.more, rr.left, rr.bottom + 2, 'button');
+      document.getElementById('log').innerHTML = '<b>⋯ 단추</b>로 열었다 — 보이는 길이다';
+      return;
+    }
+    var a = e.target.closest('[data-a]');
+    if (a) {
+      document.getElementById('log').innerHTML = '<b>' + a.dataset.a + '</b> 를 골랐다';
+      document.getElementById('read').dataset.picked = a.dataset.a;
+      open = -1; render();
+      return;
+    }
+    if (open >= 0) { open = -1; render(); }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (open < 0) return;
+    var btns = [].slice.call(document.querySelectorAll('.mnu button'));
+    if (e.key === 'Escape') { open = -1; render(); document.getElementById('log').innerHTML = '<b>Esc</b> 로 닫았다'; e.preventDefault(); }
+    if (e.key === 'ArrowDown') { sel = (sel + 1) % btns.length; btns[sel].focus(); e.preventDefault(); }
+    if (e.key === 'ArrowUp') { sel = (sel - 1 + btns.length) % btns.length; btns[sel].focus(); e.preventDefault(); }
+  });
+
+  ['visible', 'keep'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', function () { open = -1; render(); });
+  });
+  render();
+})();
+</script>
+</body>
+</html>

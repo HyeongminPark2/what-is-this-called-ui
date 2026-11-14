@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>코치마크 — 이름표</title>
+<meta name="description" content="처음 쓰는 사람에게 화면의 한 곳을 짚어 설명하는 겹침. 한 번만 띄우기와 건너뛸 길.">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/card.css">
+<link rel="stylesheet" href="../assets/demo.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로</a>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">이름표<small>화면 속 그게 뭔지 알려주는 도감</small></a>
+  <nav>
+    <a href="../index.html#map">화면 지도</a>
+    <a href="../index.html#pairs">혼동 쌍</a>
+    <a href="../index.html#toc">목차</a>
+    <a href="../appendix.html">색인</a>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+
+  <div class="item-head">
+    <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">6부 겹치는 것들</a> › 코치마크</p>
+    <h1>코치마크</h1>
+    <p class="en">Coach mark · product tour</p>
+    <p class="lede" style="margin-top:var(--s3)">화면의 <b>한 곳을 짚어</b> 설명합니다. 한 번에 여럿을 짚으면 <b>아무것도 안 읽힙니다</b>.</p>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+  </div>
+
+  <div class="card-layout">
+    <div>
+
+      <section class="slot" id="s1">
+        <h2 class="slot-label"><span class="n">1</span> 실물 — 직접 만져 보기</h2>
+        <div class="preview-bar">
+          <div class="seg" data-seg="coachmark" role="group" aria-label="미리보기 폭">
+            <button type="button" data-w="390" aria-pressed="false">390 폰</button>
+            <button type="button" data-w="768" aria-pressed="false">768 태블릿</button>
+            <button type="button" data-w="full" aria-pressed="true">넓게</button>
+          </div>
+          <span class="preview-meta" data-meta="coachmark"></span>
+          <a class="preview-open" href="../demos/coachmark.html" target="_blank" rel="noopener">새 탭에서 열기 ↗</a>
+        </div>
+        <div class="stage" data-stage="coachmark" data-w="full">
+          <iframe src="../demos/coachmark.html" title="코치마크 실물 예시"></iframe>
+        </div>
+        <div class="note" style="margin-bottom:0">
+          <p>한 번에 짚는 수를 늘려 보세요 — 데모가 <b>한꺼번에 읽어야 하는 말풍선 수</b>를 세서 적습니다.
+          둘을 넘으면 사람은 <b>아무것도 안 읽습니다</b>.<br>
+          <b>건너뛸 길</b>이 없으면 갇힙니다 — 끄고 눌러 보면 다음으로만 갈 수 있습니다.
+          데모가 빠져나갈 길의 수를 셉니다.<br>
+          코치마크는 <b>한 번만</b> 보여야 합니다. 본 적이 있으면 다시 띄우지 않고,
+          정말 필요하면 <b>도움말</b> 안에 같은 설명을 남겨 둡니다.</p>
+        </div>
+      </section>
+
+      <section class="slot" id="s2">
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <div class="scroll-x">
+        <table class="grid">
+          <tbody>
+            <tr><th>한국어</th><td>코치마크, 안내 말풍선, 기능 투어, 스포트라이트</td></tr>
+            <tr><th>영어</th><td>coach mark, product tour, onboarding tooltip, spotlight</td></tr>
+            <tr><th>같이 쓰는 말</th><td>여러 개를 이어 붙인 것을 <b>프로덕트 투어</b>(product tour), 짚는 곳만 밝게 남기는 효과를 <b>스포트라이트</b>라 합니다. 새 기능 하나만 알리는 작은 점은 <b>뉴 뱃지</b>나 <b>힌트 점</b>이라 부릅니다.</td></tr>
+            <tr><th>자주 잘못 부름</th><td><b>툴팁</b> — <a href="tooltip.html">툴팁</a>은 <b>가리켜야</b> 뜨고 설명만 합니다.<br><b>온보딩</b> — <a href="onboarding.html">온보딩</a>은 <b>흐름 전체</b>이고 코치마크는 그 한 방법입니다.<br><b>모달</b> — 처음에 한 장 띄우는 설명 화면은 <b>모달</b>입니다.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot" id="s3">
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
+        <p>겹쳐 뜨는 부품들은 모양으로는 구별이 안 됩니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <div class="scroll-x">
+        <table class="grid axes">
+          <thead><tr><th></th><th>뒤를 막나</th><th>포커스를 가두나</th><th>배경 스크롤</th><th>어디서 뜨나</th></tr></thead>
+          <tbody>
+            <tr><td>모달</td><td>막는다</td><td>가둔다</td><td>잠긴다</td><td>가운데</td></tr>
+            <tr><td>다이얼로그(비모달)</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로</td><td>가운데 · 띄워 둠</td></tr>
+            <tr><td>바텀시트</td><td>막거나 안 막는다</td><td>막을 때만</td><td>막을 때만</td><td>아래에서</td></tr>
+            <tr><td>드로어</td><td>보통 막는다</td><td>가둔다</td><td>잠긴다</td><td>옆에서</td></tr>
+            <tr><td>팝오버</td><td class="none">안 막는다</td><td>가두기도 한다</td><td class="none">그대로</td><td>누른 것 옆에</td></tr>
+            <tr><td>툴팁</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로</td><td>가리킨 것 옆에</td></tr>
+            <tr><td>토스트</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로</td><td>구석 · 저절로 사라짐</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="note" style="margin-bottom:0">
+          <p><b>한 줄로</b> — <b>한 번에 하나, 다 해서 셋까지.</b> 그 이상은 아무도 안 읽습니다.</p>
+        </div>
+      </section>
+
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">그림 한 장으로는 못 배운다</span></h2>
+        <div class="states">
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;left:6px;top:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface);z-index:3">내보내기</span><span style="position:absolute;right:6px;top:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface)">필터 ▾</span><span style="position:absolute;left:6px;bottom:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface)">도움말</span><span style="position:absolute;left:6px;top:6px;width:42px;height:13px;border-radius:3px;box-shadow:0 0 0 9999px color-mix(in srgb, var(--fg) 50%, transparent);z-index:2"></span><span style="position:absolute;left:16px;top:26px;border-radius:5px;background:var(--fg);color:var(--surface);padding:4px 6px;font-size:7px;max-width:84px;z-index:4"><b style="display:block;font-size:7.5px;margin-bottom:1px">여기서 내보내요</b>엑셀로 받을 수 있습니다<span style="display:flex;gap:5px;margin-top:3px;font-size:6.5px"><span style="text-decoration:underline">건너뛰기</span><span style="margin-left:auto;font-weight:700">다음</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">하나만 짚는다</span></div>
+            </div>
+            <figcaption>하나<span><b>읽힌다</b></span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;left:6px;top:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface);z-index:3">내보내기</span><span style="position:absolute;right:6px;top:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface)">필터 ▾</span><span style="position:absolute;left:6px;bottom:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface)">도움말</span><span style="position:absolute;inset:0;background:color-mix(in srgb, var(--fg) 50%, transparent);z-index:2"></span><span style="position:absolute;left:10px;top:24px;border-radius:5px;background:var(--fg);color:var(--surface);padding:4px 6px;font-size:7px;max-width:84px;z-index:4"><b style="display:block;font-size:7.5px;margin-bottom:1px">내보내기</b>엑셀로<span style="display:flex;gap:5px;margin-top:3px;font-size:6.5px"><span style="text-decoration:underline">건너뛰기</span><span style="margin-left:auto;font-weight:700">다음</span></span></span><span style="position:absolute;left:66px;top:24px;border-radius:5px;background:var(--fg);color:var(--surface);padding:4px 6px;font-size:7px;max-width:84px;z-index:4"><b style="display:block;font-size:7.5px;margin-bottom:1px">필터</b>좁혀 보기<span style="display:flex;gap:5px;margin-top:3px;font-size:6.5px"><span style="text-decoration:underline">건너뛰기</span><span style="margin-left:auto;font-weight:700">다음</span></span></span><span style="position:absolute;left:10px;top:48px;border-radius:5px;background:var(--fg);color:var(--surface);padding:4px 6px;font-size:7px;max-width:84px;z-index:4"><b style="display:block;font-size:7.5px;margin-bottom:1px">도움말</b>막히면 여기<span style="display:flex;gap:5px;margin-top:3px;font-size:6.5px"><span style="text-decoration:underline">건너뛰기</span><span style="margin-left:auto;font-weight:700">다음</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">셋을 한꺼번에 — 아무것도 안 읽는다</span></div>
+            </div>
+            <figcaption>여럿<span><b>다 안 읽는다</b></span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;left:6px;top:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface);z-index:3">내보내기</span><span style="position:absolute;right:6px;top:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface)">필터 ▾</span><span style="position:absolute;left:6px;bottom:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface)">도움말</span><span style="position:absolute;left:6px;top:6px;width:42px;height:13px;border-radius:3px;box-shadow:0 0 0 9999px color-mix(in srgb, var(--fg) 50%, transparent);z-index:2"></span><span style="position:absolute;left:16px;top:26px;border-radius:5px;background:var(--fg);color:var(--surface);padding:4px 6px;font-size:7px;max-width:84px;z-index:4"><b style="display:block;font-size:7.5px;margin-bottom:1px">여기서 내보내요</b>1 / 4<span style="display:flex;gap:5px;margin-top:3px;font-size:6.5px"><span style="text-decoration:underline">건너뛰기</span><span style="margin-left:auto;font-weight:700">다음</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">몇 번째인지 보인다</span></div>
+            </div>
+            <figcaption>몇 번째<span><b>얼마나 남았는지</b></span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;left:6px;top:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface);z-index:3">내보내기</span><span style="position:absolute;right:6px;top:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface)">필터 ▾</span><span style="position:absolute;left:6px;bottom:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface)">도움말</span><span style="position:absolute;left:6px;top:6px;width:42px;height:13px;border-radius:3px;box-shadow:0 0 0 9999px color-mix(in srgb, var(--fg) 50%, transparent);z-index:2"></span><span style="position:absolute;left:16px;top:26px;border-radius:5px;background:var(--fg);color:var(--surface);padding:4px 6px;font-size:7px;max-width:84px;z-index:4"><b style="display:block;font-size:7.5px;margin-bottom:1px">여기서 내보내요</b>엑셀로<span style="display:flex;gap:5px;margin-top:3px;font-size:6.5px"><span style="margin-left:auto;font-weight:700">다음</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">건너뛸 길이 없다</span></div>
+            </div>
+            <figcaption>건너뛰기 없음<span><b>갇힌다</b></span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">본 적 있음</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--fg-muted)">이미 본 사람</span><span style="display:block;font-size:8px;margin-top:2px">다시 안 띄운다</span></span></div></div>
+            </div>
+            <figcaption>두 번째부터<span><b>안 띄운다</b></span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">도움말</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px">도움말 › 내보내기</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">같은 설명이 여기에도 있다</span></span></div></div>
+            </div>
+            <figcaption>나중에 찾을 때<span><b>도움말</b>에 남긴다</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <div class="anatomy">
+          <div class="pinboard">
+            <div class="anat" role="img" aria-label="코치마크의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
+                <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">한 번에 하나만 짚는다</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">구멍 — 짚는 것만 밝게 남긴다</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">몇 번째인지 — 1 / 4</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--accent)">건너뛸 길 — 없으면 갇힌다</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--danger)">한 번만 띄운다 — 본 사람에게 또 띄우지 않는다</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">같은 설명을 도움말에도 남긴다</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="pin-list">
+            <li><b>하나씩 <em>한 번에 하나</em></b><span>둘이면 <b>안 읽는다</b></span></li>
+            <li><b>구멍 <em>짚는 것만 밝게</em></b><span>어디를 말하는지 <b>분명</b></span></li>
+            <li><b>몇 번째 <em>1 / 4</em></b><span>얼마나 남았는지</span></li>
+            <li><b>건너뛰기 <em>있어야 함</em></b><span>없으면 <b>갇힌다</b></span></li>
+            <li><b>한 번만 <em>본 뒤엔 안 띄움</em></b><span><b>기억</b>해 둔다</span></li>
+            <li><b>도움말 <em>같은 설명</em></b><span>나중에 <b>찾을 수 있게</b></span></li>
+          </ol>
+        </div>
+        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
+          코치마크는 <b>만드는 쪽에 편하고 쓰는 쪽에 불편한</b> 대표적인 부품입니다 —
+          화면을 안 고쳐도 설명을 덧붙일 수 있으니 자꾸 쓰게 되는데,
+          사람은 <b>빨리 시작하고 싶어</b> 거의 다 건너뜁니다.<br>
+          그래서 코치마크를 붙이고 싶어질 때
+          <b>화면만으로 알 수 없는 이유</b>를 먼저 찾아보는 것이 좋습니다 —
+          단추 이름이 모호하거나, 자리가 엉뚱하거나, 빈 상태가 비어 있어서일 때가 많습니다.
+          그걸 고치면 설명 자체가 필요 없어집니다.</p>
+      </section>
+
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+        <div class="twoup">
+          <div class="do">
+            <h3>이럴 때 쓴다</h3>
+            <ul>
+              <li><b>한 번에 하나</b>, 다 해서 셋까지</li>
+              <li><b>건너뛸 길</b>을 늘 두기</li>
+              <li>같은 설명을 <b>도움말</b>에도 남기기</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h3>이럴 때는 안 쓴다</h3>
+            <ul>
+              <li>처음 들어오자마자 <b>다섯 단계</b> 띄우기</li>
+              <li><b>건너뛰기 없이</b> 다음으로만 가게 하기</li>
+              <li>본 사람에게 <b>또</b> 띄우기</li>
+              <li>화면을 고치는 대신 <b>설명을 덧붙이기</b></li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 가리켜야 뜨면 <a href="tooltip.html">툴팁</a>, 흐름 전체는 <a href="onboarding.html">온보딩</a>, 빈 화면에서 가르치면 <a href="empty.html">빈 상태</a>, 기능이 많으면 <a href="commandpalette.html">커맨드 팔레트</a>.</p>
+      </section>
+
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <div class="cases">
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;left:6px;top:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface);z-index:3">내보내기</span><span style="position:absolute;right:6px;top:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface)">필터 ▾</span><span style="position:absolute;left:6px;bottom:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface)">도움말</span><span style="position:absolute;left:6px;top:6px;width:42px;height:13px;border-radius:3px;box-shadow:0 0 0 9999px color-mix(in srgb, var(--fg) 50%, transparent);z-index:2"></span><span style="position:absolute;left:16px;top:26px;border-radius:5px;background:var(--fg);color:var(--surface);padding:4px 6px;font-size:7px;max-width:84px;z-index:4"><b style="display:block;font-size:7.5px;margin-bottom:1px">여기서 내보내요</b>1 / 2<span style="display:flex;gap:5px;margin-top:3px;font-size:6.5px"><span style="text-decoration:underline">건너뛰기</span><span style="margin-left:auto;font-weight:700">다음</span></span></span></div></div>
+            </div>
+            <figcaption><b>새 기능</b><b>하나만</b> 짚는다</figcaption>
+          </figure>
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">힌트 점</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px">내보내기 <span style="color:var(--accent)">●</span></span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">점 하나로도 충분할 때가 있다</span></span></div></div>
+            </div>
+            <figcaption><b>작은 알림</b><b>점 하나</b>면 될 때도</figcaption>
+          </figure>
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">빈 상태로</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px">아직 정산이 없습니다</span><span style="display:block;font-size:8px;color:var(--accent);margin-top:2px">첫 가게 등록하기 ›</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">설명 대신 할 일을 준다</span></div>
+            </div>
+            <figcaption><b>빈 화면</b><a href="empty.html">빈 상태</a>가 더 낫다</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slot" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">이 부품의 계약서</span></h2>
+        <p>말풍선은 <code>role="dialog"</code> 로 두고, <b>본 적이 있는지</b>를 꼭 기억합니다.</p>
+<pre class="code">&lt;<span class="t">div</span> <span class="a">class</span>=<span class="s">"coach"</span> <span class="a">role</span>=<span class="s">"dialog"</span> <span class="a">aria-label</span>=<span class="s">"여기서 내보내요"</span>&gt;
+  &lt;<span class="t">b</span>&gt;여기서 내보내요&lt;/<span class="t">b</span>&gt;
+  &lt;<span class="t">p</span>&gt;정산 내역을 엑셀로 받을 수 있습니다.&lt;/<span class="t">p</span>&gt;
+  &lt;<span class="t">p</span>&gt;1 / 4&lt;/<span class="t">p</span>&gt;
+  &lt;<span class="t">button</span> <span class="a">data-skip</span>&gt;건너뛰기&lt;/<span class="t">button</span>&gt;
+  &lt;<span class="t">button</span> <span class="a">data-next</span>&gt;다음&lt;/<span class="t">button</span>&gt;
+&lt;/<span class="t">div</span>&gt;
+
+<span class="c">/* 짚는 것만 밝게 — 바깥을 어둡게 덮는 그림자 한 줄 */</span>
+.coach-hole { <span class="a">box-shadow</span>: <span class="a">0</span> <span class="a">0</span> <span class="a">0</span> <span class="a">9999px</span> <span class="a">rgba</span>(20, 22, 26, <span class="a">.5</span>); }
+
+<span class="c">// 한 번만 — 본 뒤에는 안 띄운다</span>
+<span class="t">if</span> (!localStorage.getItem(<span class="s">'tour:v2'</span>)) startTour();
+<span class="t">function</span> endTour() { localStorage.setItem(<span class="s">'tour:v2'</span>, <span class="s">'done'</span>); }</pre>
+        <div class="scroll-x">
+        <table class="grid kbd-table">
+          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <tbody>
+            <tr><td>Esc</td><td><b>건너뛰기</b>와 같다</td></tr>
+            <tr><td>Tab</td><td>말풍선 안에 갇힌다 — <b>건너뛰기·다음</b> 둘뿐</td></tr>
+            <tr><td>초점</td><td>열면 <b>말풍선</b>, 끝나면 <b>짚던 것</b>으로</td></tr>
+            <tr><td><code>aria-describedby</code></td><td>짚는 요소와 말풍선을 <b>묶어</b> 둘 수도 있다</td></tr>
+            <tr><td>모션</td><td><a href="reducedmotion.html">모션 줄이기</a>를 켠 사람에게는 <b>움직임을 끈다</b></td></tr>
+            <tr><td>확인하는 법</td><td>Esc 만으로 <b>빠져나갈 수 있는지</b> 본다</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot slot--backend" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <div class="scroll-x">
+        <table class="grid">
+          <tbody>
+            <tr><th>본 적이 있나</th><td>계정에 저장하면 <b>다른 기기에서도</b> 안 뜹니다 — 브라우저 저장소만 쓰면 기기마다 또 뜹니다.</td></tr>
+            <tr><th>투어 버전</th><td><code>tour:v2</code> 처럼 버전을 붙이면 <b>바뀐 기능만</b> 다시 안내할 수 있습니다.</td></tr>
+            <tr><th>누구에게</th><td>이미 그 기능을 써 본 사람에게는 <b>안 띄우는</b> 것이 맞습니다.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot" id="s10">
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
+        <p><b>정식 부품이 없고</b> 직접 만듭니다.</p>
+        <div class="platforms">
+          <div class="plat">
+            <header><b>웹</b><span>직접 만듦</span></header>
+            <div class="shot">
+              <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;left:6px;top:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface);z-index:3">내보내기</span><span style="position:absolute;right:6px;top:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface)">필터 ▾</span><span style="position:absolute;left:6px;bottom:6px;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;background:var(--surface)">도움말</span><span style="position:absolute;left:6px;top:6px;width:42px;height:13px;border-radius:3px;box-shadow:0 0 0 9999px color-mix(in srgb, var(--fg) 50%, transparent);z-index:2"></span><span style="position:absolute;left:16px;top:26px;border-radius:5px;background:var(--fg);color:var(--surface);padding:4px 6px;font-size:7px;max-width:84px;z-index:4"><b style="display:block;font-size:7.5px;margin-bottom:1px">여기서 내보내요</b>1 / 4<span style="display:flex;gap:5px;margin-top:3px;font-size:6.5px"><span style="text-decoration:underline">건너뛰기</span><span style="margin-left:auto;font-weight:700">다음</span></span></span></div></div>
+            </div>
+            <footer>라이브러리가 많지만 <b>한 번만 띄우기</b>는 직접 챙겨야 합니다.</footer>
+          </div>
+          <div class="plat">
+            <header><b>iOS</b><span>TipKit</span></header>
+            <div class="shot">
+              <div class="phone" role="img" aria-label="iOS 팁 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
+                <div style="position:absolute;left:5px;right:5px;top:30px;height:16px;border-radius:4px;background:var(--fg);opacity:.9"></div></div></div>
+            </div>
+            <footer>OS 가 <b>언제 몇 번 띄울지</b>까지 규칙으로 관리해 줍니다(iOS 17+).</footer>
+          </div>
+          <div class="plat">
+            <header><b>안드로이드</b><span>Tooltip · 직접</span></header>
+            <div class="shot">
+              <div class="phone" role="img" aria-label="안드로이드 팁 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
+                <div style="position:absolute;left:5px;right:5px;top:30px;height:14px;border-radius:4px;background:var(--fg);opacity:.9"></div></div></div>
+            </div>
+            <footer>정식 부품이 드물어 대개 직접 만듭니다. 짚는 효과도 손으로 그립니다.</footer>
+          </div>
+        </div>
+        <div class="note note--warn" style="margin-bottom:0">
+          <p><b>자주 생기는 사고</b> — iOS 의 <b>TipKit</b> 이 흥미로운 이유는 '어떻게 그릴지'가 아니라 <b>'언제 몇 번 띄울지'</b>를 OS 가 관리해 준다는 점입니다 — 같은 팁을 세 번까지만, 다른 팁과 겹치지 않게 같은 규칙을 모든 앱이 따릅니다. 웹에는 그런 장치가 없어 <b>우리가 그 규칙을 만들어야</b> 합니다. 적어도 <b>한 번만</b>과 <b>겹쳐 띄우지 않기</b> 두 가지는 정해 두는 편이 좋습니다.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <aside class="siblings">
+      <h2>헷갈리는 형제</h2>
+      <ol>
+        <li><a href="modal.html"><b>모달</b><em>6부</em></a></li>
+        <li><a href="dialog.html"><b>다이얼로그</b><em>6부</em></a></li>
+        <li><a href="sheet.html"><b>바텀시트</b><em>6부</em></a></li>
+        <li><a href="drawer.html"><b>드로어</b><em>6부</em></a></li>
+        <li><a href="popover.html"><b>팝오버</b><em>6부</em></a></li>
+        <li><a href="tooltip.html"><b>툴팁</b><em>6부</em></a></li>
+        <li><a href="toast.html"><b>토스트 · 스낵바</b><em>6부</em></a></li>
+        <li><a href="actionsheet.html"><b>액션 시트</b><em>6부</em></a></li>
+        <li><a href="banner.html"><b>배너</b><em>6부</em></a></li>
+        <li><a href="inlinealert.html"><b>인라인 얼럿</b><em>6부</em></a></li>
+        <li><a href="commandpalette.html"><b>커맨드 팔레트</b><em>6부</em></a></li>
+        <li><a href="lightbox.html"><b>라이트박스</b><em>6부</em></a></li>
+        <li><a href="menu.html"><b>드롭다운 메뉴</b><em>6부</em></a></li>
+        <li><a href="contextmenu.html"><b>컨텍스트 메뉴</b><em>6부</em></a></li>
+        <li><a href="fullscreen.html"><b>전체 화면 레이어</b><em>6부</em></a></li>
+      </ol>
+      <h2>같이 보면 좋은 것</h2>
+      <ol>
+        <li><a href="tooltip.html"><b>툴팁</b><em>6부</em></a></li>
+        <li><a href="onboarding.html"><b>온보딩</b><em>13부</em></a></li>
+        <li><a href="empty.html"><b>빈 상태</b><em>8부</em></a></li>
+        <li><a href="reducedmotion.html"><b>모션 줄이기</b><em>9부</em></a></li>
+      </ol>
+      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-foot wrap">
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+</footer>
+
+<script src="../assets/card.js"></script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>코치마크 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .tgt { position: absolute; border: 1px solid var(--line); border-radius: var(--r1);
+    background: var(--surface); font-size: 11.5px; padding: 5px 9px; }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>코치마크</b>
+  <label>한 번에 짚는 수 <input type="range" id="n" min="1" max="4" step="1" value="1" style="width:84px"><span class="ruler" id="nv"></span></label>
+  <label><input type="checkbox" id="skip" checked> 건너뛸 길 두기</label>
+  <button class="ui-btn" id="go">처음 쓰는 사람처럼 보기</button>
+</div>
+
+<div class="pad">
+  <div class="ovs" id="stage" style="height:210px">
+    <div class="ovs__page" style="padding:0">
+      <span class="tgt" id="t0" style="left:12px;top:14px">내보내기</span>
+      <span class="tgt" id="t1" style="right:12px;top:14px">필터 ▾</span>
+      <span class="tgt" id="t2" style="left:12px;top:58px">정산 주기 설정</span>
+      <span class="tgt" id="t3" style="left:12px;bottom:14px">도움말</span>
+    </div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  코치마크는 <b>화면의 한 곳을 짚어</b> 설명합니다. 한 번에 짚는 수를 늘려 보세요 —
+  데모가 <b>한꺼번에 읽어야 하는 말풍선 수</b>를 세서 적습니다.
+  둘을 넘으면 사람은 <b>아무것도 안 읽습니다</b>.<br>
+  <b>건너뛸 길</b>이 없으면 갇힙니다 — 끄고 눌러 보면 다음으로만 갈 수 있습니다.
+  데모가 빠져나갈 길의 수를 셉니다.<br>
+  코치마크는 <b>한 번만</b> 보여야 합니다. 본 적이 있으면 다시 띄우지 않고,
+  정말 필요하면 <b>도움말</b> 안에 같은 설명을 남겨 둡니다.
+</p>
+
+<script>
+(function () {
+  var STEPS = [
+    ['t0', '여기서 내보내요', '정산 내역을 엑셀로 받을 수 있습니다.'],
+    ['t1', '여기서 걸러요', '기간과 상태로 좁혀 볼 수 있습니다.'],
+    ['t2', '주기를 바꿔요', '매주 수요일이 기본입니다.'],
+    ['t3', '막히면 여기로', '도움말에 같은 설명이 또 있습니다.']
+  ];
+  var step = -1, seen = false;
+
+  function render() {
+    var stage = document.getElementById('stage');
+    stage.querySelectorAll('.cch, .cch__hole, .ovs__scrim').forEach(function (e) { e.remove(); });
+    if (step < 0) { report(''); return; }
+
+    var n = +document.getElementById('n').value;
+    var skip = document.getElementById('skip').checked;
+    var sr = stage.getBoundingClientRect();
+    var show = STEPS.slice(step, step + n);
+
+    show.forEach(function (s, k) {
+      var t = document.getElementById(s[0]).getBoundingClientRect();
+      var hole = document.createElement('div');
+      hole.className = 'cch__hole';
+      hole.style.left = (t.left - sr.left - 4) + 'px';
+      hole.style.top = (t.top - sr.top - 4) + 'px';
+      hole.style.width = (t.width + 8) + 'px';
+      hole.style.height = (t.height + 8) + 'px';
+      if (k === 0) stage.appendChild(hole);
+
+      var tip = document.createElement('div');
+      tip.className = 'cch';
+      tip.setAttribute('role', 'dialog');
+      tip.setAttribute('aria-label', s[1]);
+      tip.innerHTML = '<b>' + s[1] + '</b>' + s[2] +
+        '<span class="row"><span>' + (step + k + 1) + ' / ' + STEPS.length + '</span>' +
+        (skip ? '<button data-skip>건너뛰기</button>' : '') +
+        '<button data-next style="margin-left:auto;font-weight:700">' +
+        (step + k + 1 >= STEPS.length ? '끝내기' : '다음') + '</button></span>';
+      var top = t.bottom - sr.top + 8;
+      if (top + 86 > sr.height) top = t.top - sr.top - 86;
+      tip.style.top = Math.max(6, top) + 'px';
+      tip.style.left = Math.max(6, Math.min(sr.width - 180, t.left - sr.left)) + 'px';
+      stage.appendChild(tip);
+    });
+    report('');
+  }
+
+  function report(why) {
+    var n = +document.getElementById('n').value;
+    var skip = document.getElementById('skip').checked;
+    var tips = document.querySelectorAll('.cch').length;
+    var ways = (skip ? 1 : 0) + 1;   // 건너뛰기 + 다음
+    var rd = document.getElementById('read');
+    rd.innerHTML = (step < 0 ? (seen ? '끝났다 — 다시 안 띄운다' : '아직 안 띄웠다')
+      : '짚는 중 — <b>' + (step + 1) + ' / ' + STEPS.length + '</b>') +
+      '<br>한꺼번에 읽어야 하는 말풍선 <b>' + tips + '개</b>' +
+      (tips > 2 ? ' <span class="warn">— 아무것도 안 읽게 된다</span>' : '') +
+      '<br>빠져나갈 길 <b>' + ways + '개</b>' +
+      (skip ? '' : ' <span class="warn">— 건너뛸 수 없다</span>') +
+      (why ? '<br>' + why : '');
+    rd.dataset.step = String(step);
+    rd.dataset.tips = String(tips);
+    rd.dataset.ways = String(ways);
+    rd.dataset.seen = seen ? '1' : '0';
+  }
+
+  document.getElementById('stage').addEventListener('click', function (e) {
+    if (e.target.closest('[data-skip]')) {
+      step = -1; seen = true; render();
+      document.getElementById('log').innerHTML = '<b>건너뛰었다</b> — 다시 안 띄운다';
+      return;
+    }
+    if (e.target.closest('[data-next]')) {
+      var n = +document.getElementById('n').value;
+      step += n;
+      if (step >= STEPS.length) { step = -1; seen = true; document.getElementById('log').innerHTML = '<b>끝냈다</b>'; }
+      render();
+      return;
+    }
+  });
+
+  document.getElementById('go').addEventListener('click', function () {
+    if (seen) {
+      document.getElementById('log').innerHTML = '<b>이미 본 사람</b>이라 안 띄운다 — 도움말에서만 볼 수 있다';
+      report('');
+      return;
+    }
+    step = 0; render();
+    document.getElementById('log').innerHTML = '처음 쓰는 사람에게 <b>한 번만</b> 띄운다';
+  });
+
+  document.getElementById('n').addEventListener('input', function () {
+    document.getElementById('nv').textContent = this.value + '개';
+    render();
+  });
+  document.getElementById('skip').addEventListener('change', render);
+  document.getElementById('nv').textContent = '1개';
+  render();
+})();
+</script>
+</body>
+</html>

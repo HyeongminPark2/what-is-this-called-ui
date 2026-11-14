@@ -215,7 +215,9 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
             'radius', 'border', 'opacity', 'iconsize', 'statecolor', 'tokenname'],
     '5부': ['card', 'listitem', 'avatar', 'badge', 'chip', 'stat', 'timeline', 'rating',
             'icon', 'thumbnail', 'tablerow', 'keyvalue', 'media', 'accordion', 'tag'],
-    '6부': ['modal', 'dialog', 'sheet', 'drawer', 'popover', 'tooltip', 'toast'],
+    '6부': ['modal', 'dialog', 'sheet', 'drawer', 'popover', 'tooltip', 'toast',
+            'actionsheet', 'banner', 'inlinealert', 'commandpalette', 'lightbox', 'menu',
+            'contextmenu', 'coachmark', 'fullscreen'],
     '3부': ['weight', 'lineheight', 'letterspacing', 'hangul', 'numerals', 'truncate', 'webfont', 'hierarchy', 'casing', 'iconfont'],
     '4부': ['field', 'select', 'combobox', 'checkbox', 'radio', 'switch', 'segmented', 'slider'],
     '7부': ['appbar', 'sidebar', 'tabs', 'breadcrumb', 'pagination', 'infinite', 'bottomnav',
@@ -2547,6 +2549,137 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   await page.uncheck('#asof'); await page.waitForTimeout(260);
   if ((await page.textContent('#as')) !== '')
     fail.push('오래된데이터: 기준 시각을 꺼도 적혀 있다 (보여주려는 결과)');
+  await page.close();
+
+  // 6부 겹치는 것들 데모 아홉 장 — 덮는 넓이·쌓임·거리·찾기·초점·뒤집기·숨은 길·말풍선·폭
+  page = await demo('actionsheet', 980, 900);
+  await page.locator('#open').click(); await page.waitForTimeout(340);
+  if (await page.locator('[role=dialog][aria-modal=true]').count() !== 1) fail.push('액션시트: aria-modal 이 없다');
+  if (await page.getAttribute('#read', 'data-last') !== '1') fail.push('액션시트: 위험한 항목이 맨 아래가 아니다');
+  if (!(+(await page.getAttribute('#read', 'data-cover')) < 50)) fail.push('액션시트: 셋인데 절반을 넘는다');
+  await page.locator('#n').fill('9'); await page.dispatchEvent('#n', 'input'); await page.waitForTimeout(360);
+  if (!(+(await page.getAttribute('#read', 'data-cover')) > 50))
+    fail.push('액션시트: 아홉인데 절반을 안 넘는다 (보여주려는 결과)');
+  await page.keyboard.press('Escape'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-open') !== '0') fail.push('액션시트: Esc 로 안 닫힌다');
+  await page.close();
+
+  page = await demo('banner', 980, 900);
+  await page.locator('#n').fill('4'); await page.dispatchEvent('#n', 'input'); await page.waitForTimeout(360);
+  if (!(+(await page.getAttribute('#read', 'data-pct')) > 30))
+    fail.push('배너: 넷이 쌓여도 자리를 안 먹는다 (보여주려는 결과)');
+  await page.locator('[data-x="0"]').click(); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-count') !== '3') fail.push('배너: 닫아도 안 사라진다');
+  await page.uncheck('#remember'); await page.waitForTimeout(340);
+  if (!(+(await page.getAttribute('#read', 'data-again')) > 0))
+    fail.push('배너: 기억 안 해도 다시 안 뜬다 (보여주려는 결과)');
+  await page.uncheck('#dismiss'); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-close') !== '0') fail.push('배너: 닫기를 꺼도 ✕ 가 남아 있다');
+  await page.close();
+
+  page = await demo('inlinealert', 980, 900);
+  await page.locator('#go').click(); await page.waitForTimeout(360);
+  if (await page.getAttribute('#read', 'data-tied') !== '1') fail.push('인라인얼럿: 칸과 메시지가 안 묶였다');
+  {
+    const d0 = +(await page.getAttribute('#read', 'data-dist'));
+    await page.selectOption('#k', 'top'); await page.locator('#go').click(); await page.waitForTimeout(360);
+    const d1 = +(await page.getAttribute('#read', 'data-dist'));
+    if (!(d1 > d0 + 50)) fail.push('인라인얼럿: 맨 위에 모아도 안 멀어진다 (보여주려는 결과)');
+    if (await page.getAttribute('#read', 'data-tied') !== '0') fail.push('인라인얼럿: 모아 뒀는데 칸과 묶였다고 한다');
+  }
+  await page.selectOption('#k', 'toast'); await page.locator('#go').click(); await page.waitForTimeout(2600);
+  if (await page.getAttribute('#read', 'data-shown') !== '0')
+    fail.push('인라인얼럿: 토스트가 안 사라진다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('commandpalette', 980, 900);
+  await page.keyboard.press('Control+k'); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-open') !== '1') fail.push('팔레트: Ctrl+K 로 안 열린다');
+  if (!(+(await page.getAttribute('#read', 'data-shown')) > 0)) fail.push('팔레트: 최근 쓴 것이 안 보인다');
+  await page.fill('#q', '정내'); await page.waitForTimeout(360);
+  if (!(+(await page.getAttribute('#read', 'data-loose')) > +(await page.getAttribute('#read', 'data-exact'))))
+    fail.push('팔레트: 띄엄띄엄 쳐도 더 안 찾는다 (보여주려는 결과)');
+  await page.keyboard.press('Enter'); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-ran') !== '정산 내역 내보내기') fail.push('팔레트: Enter 로 실행이 안 된다');
+  await page.keyboard.press('Control+k'); await page.waitForTimeout(320);
+  await page.uncheck('#recent'); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-shown') !== '0')
+    fail.push('팔레트: 최근 쓴 것을 꺼도 목록이 남는다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('lightbox', 980, 900);
+  await page.locator('[data-i="2"]').click(); await page.waitForTimeout(340);
+  if (!(await page.getAttribute('#read', 'data-url')).includes('photo=3')) fail.push('라이트박스: 주소에 안 남는다');
+  await page.keyboard.press('ArrowRight'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-open') !== '3') fail.push('라이트박스: → 로 안 넘어간다');
+  await page.keyboard.press('Escape'); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-focus') !== '그림 3 칸') fail.push('라이트박스: 닫아도 초점이 안 돌아온다');
+  await page.uncheck('#restore');
+  await page.locator('[data-i="0"]').click(); await page.waitForTimeout(320);
+  await page.keyboard.press('Escape'); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-focus') === '그림 1 칸')
+    fail.push('라이트박스: 돌려주기를 꺼도 초점이 돌아온다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('menu', 980, 900);
+  await page.locator('#trigger').click(); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-role') !== 'menu') fail.push('메뉴: 동작 목록인데 menu 역할이 아니다');
+  await page.locator('#y').fill('175'); await page.dispatchEvent('#y', 'input'); await page.waitForTimeout(360);
+  if (await page.getAttribute('#read', 'data-flipped') !== '1') fail.push('메뉴: 자리가 없는데 안 뒤집는다');
+  await page.uncheck('#flip'); await page.waitForTimeout(360);
+  if (!(+(await page.getAttribute('#read', 'data-over')) > 0))
+    fail.push('메뉴: 안 뒤집는데도 안 잘린다 (보여주려는 결과)');
+  await page.keyboard.press('Escape'); await page.waitForTimeout(320);
+  if (await page.evaluate(() => document.activeElement.id) !== 'trigger')
+    fail.push('메뉴: 닫아도 초점이 단추로 안 돌아온다');
+  await page.selectOption('#k', 'select'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-role') !== 'listbox') fail.push('메뉴: 값 고르기인데 listbox 가 아니다');
+  await page.close();
+
+  page = await demo('contextmenu', 980, 900);
+  if (await page.getAttribute('#read', 'data-ways') !== '2') fail.push('컨텍스트메뉴: ⋯ 가 있는데 길이 둘이 아니다');
+  await page.locator('[data-more="0"]').click(); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-button') !== '1') fail.push('컨텍스트메뉴: ⋯ 로 안 열린다');
+  await page.keyboard.press('Escape'); await page.waitForTimeout(320);
+  await page.locator('.rows .r').first().click({ button: 'right' }); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-right') !== '1') fail.push('컨텍스트메뉴: 오른쪽 눌러도 안 열린다');
+  await page.keyboard.press('Escape'); await page.waitForTimeout(320);
+  await page.uncheck('#visible'); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-ways') !== '1')
+    fail.push('컨텍스트메뉴: ⋯ 를 빼도 길이 둘이라고 한다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('coachmark', 980, 900);
+  await page.locator('#go').click(); await page.waitForTimeout(360);
+  if (await page.getAttribute('#read', 'data-tips') !== '1') fail.push('코치마크: 하나씩 안 짚는다');
+  if (await page.getAttribute('#read', 'data-ways') !== '2') fail.push('코치마크: 건너뛸 길이 없다');
+  await page.locator('[data-skip]').click(); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-seen') !== '1') fail.push('코치마크: 건너뛰어도 본 것으로 안 친다');
+  await page.locator('#go').click(); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-step') !== '-1')
+    fail.push('코치마크: 본 사람에게 또 띄운다 (보여주려는 결과)');
+  await page.reload(); await page.waitForTimeout(420);
+  await page.uncheck('#skip'); await page.locator('#go').click(); await page.waitForTimeout(360);
+  if (await page.getAttribute('#read', 'data-ways') !== '1')
+    fail.push('코치마크: 건너뛰기를 꺼도 길이 둘이다 (보여주려는 결과)');
+  await page.locator('#n').fill('4'); await page.dispatchEvent('#n', 'input'); await page.waitForTimeout(380);
+  if (!(+(await page.getAttribute('#read', 'data-tips')) > 2))
+    fail.push('코치마크: 넷을 짚어도 말풍선이 안 는다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('fullscreen', 980, 900);
+  await page.selectOption('#w', '700'); await page.locator('#open').click(); await page.waitForTimeout(360);
+  if (await page.getAttribute('#read', 'data-full') !== '0') fail.push('전체화면: 넓은데 전체 화면으로 뜬다');
+  await page.keyboard.press('Escape'); await page.waitForTimeout(320);
+  await page.selectOption('#w', '320'); await page.locator('#open').click(); await page.waitForTimeout(380);
+  if (await page.getAttribute('#read', 'data-full') !== '1') fail.push('전체화면: 좁은데 모달로 뜬다');
+  {
+    const fullW = +(await page.getAttribute('#read', 'data-usable'));
+    await page.keyboard.press('Escape'); await page.waitForTimeout(320);
+    await page.uncheck('#auto'); await page.locator('#open').click(); await page.waitForTimeout(380);
+    const modalW = +(await page.getAttribute('#read', 'data-usable'));
+    if (!(modalW < fullW)) fail.push('전체화면: 좁은 화면에서 모달이 더 좁지 않다 (보여주려는 결과)');
+  }
   await page.close();
 
   await browser.close();

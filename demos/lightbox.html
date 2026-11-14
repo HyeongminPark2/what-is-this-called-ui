@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>라이트박스 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .grid button { aspect-ratio: 4/3; border: 1px solid var(--line); border-radius: var(--r1);
+    background: var(--accent-soft); color: var(--accent); font-size: 11px; cursor: pointer; }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>라이트박스</b>
+  <label><input type="checkbox" id="url" checked> 주소에 남기기</label>
+  <label><input type="checkbox" id="restore" checked> 닫으면 눌렀던 칸으로 초점 돌려주기</label>
+</div>
+
+<div class="pad">
+  <div class="ovs" id="stage">
+    <div class="ovs__page">
+      <b style="font-size:13px">영수증 8장</b>
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  그림을 눌러 크게 열어 보세요. 라이트박스는 <b>그림 하나를 보는 동안 뒤를 덮는</b> 겹침입니다 —
+  모달과 같은 규칙을 따릅니다. ← → 로 옮기고 Esc 로 닫습니다.<br>
+  닫았을 때 <b>초점이 눌렀던 칸으로 돌아가야</b> 합니다 — 안 그러면 키보드 사용자는
+  목록 맨 처음으로 튕겨 갑니다. 데모가 <b>닫은 뒤 초점이 어디인지</b>를 재서 적습니다.<br>
+  <b>주소에 남기면</b> 그 그림을 링크로 보낼 수 있고 뒤로가기로 닫힙니다 —
+  데모가 지금 주소를 같이 보여 줍니다.
+</p>
+
+<script>
+(function () {
+  var N = 8, open = -1, lastBtn = null;
+
+  function grid() {
+    var g = document.getElementById('grid');
+    g.innerHTML = '';
+    for (var i = 0; i < N; i++) {
+      g.innerHTML += '<button data-i="' + i + '" aria-label="영수증 ' + (i + 1) + ' 크게 보기">' + (i + 1) + '</button>';
+    }
+  }
+
+  function render() {
+    var stage = document.getElementById('stage');
+    stage.querySelectorAll('.ovs__scrim, .lbx').forEach(function (e) { e.remove(); });
+    if (open < 0) { report(''); return; }
+
+    var scrim = document.createElement('div');
+    scrim.className = 'ovs__scrim'; scrim.id = 'scrim';
+    stage.appendChild(scrim);
+
+    var box = document.createElement('div');
+    box.className = 'lbx';
+    box.setAttribute('role', 'dialog');
+    box.setAttribute('aria-modal', 'true');
+    box.setAttribute('aria-label', '영수증 ' + (open + 1));
+    box.innerHTML =
+      '<div class="lbx__img">영수증 ' + (open + 1) + '</div>' +
+      '<button class="lbx__x" id="x" aria-label="닫기">✕</button>' +
+      '<button class="lbx__nav" id="prev" style="left:8px" aria-label="이전 그림">‹</button>' +
+      '<button class="lbx__nav" id="next" style="right:8px" aria-label="다음 그림">›</button>' +
+      '<div class="lbx__cnt">' + (open + 1) + ' / ' + N + '</div>';
+    stage.appendChild(box);
+    document.getElementById('x').focus();
+    report('');
+  }
+
+  function report(why) {
+    var useUrl = document.getElementById('url').checked;
+    var url = open >= 0 && useUrl ? '/receipts?photo=' + (open + 1) : '/receipts';
+    var active = document.activeElement;
+    var where = active && active.dataset && active.dataset.i !== undefined
+      ? '그림 ' + (+active.dataset.i + 1) + ' 칸'
+      : (active && active.id ? active.id : '그 밖');
+    var rd = document.getElementById('read');
+    rd.innerHTML = (open >= 0 ? '열림 — 영수증 <b>' + (open + 1) + '</b>' : '닫힘') +
+      '<br>주소 <b>' + url + '</b>' +
+      (useUrl ? '' : ' <span class="warn">— 링크로 보낼 수 없다</span>') +
+      '<br>지금 초점 <b>' + where + '</b>' +
+      (why ? '<br>' + why : '');
+    rd.dataset.open = String(open);
+    rd.dataset.url = url;
+    rd.dataset.focus = where;
+    rd.dataset.restore = document.getElementById('restore').checked ? '1' : '0';
+  }
+
+  function close(why) {
+    var back = lastBtn;
+    open = -1;
+    render();
+    if (document.getElementById('restore').checked && back) back.focus();
+    report(why);
+  }
+
+  document.getElementById('stage').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-i]');
+    if (b) { lastBtn = b; open = +b.dataset.i; render(); document.getElementById('log').innerHTML = '<b>영수증 ' + (open + 1) + '</b> 을 열었다'; return; }
+    if (e.target.id === 'scrim') { close('<b>가림막</b>을 눌러 닫았다'); document.getElementById('log').innerHTML = '가림막을 눌러 닫았다'; return; }
+    if (e.target.id === 'x') { close(''); document.getElementById('log').innerHTML = '닫기를 눌렀다'; return; }
+    if (e.target.id === 'prev') { open = (open - 1 + N) % N; render(); return; }
+    if (e.target.id === 'next') { open = (open + 1) % N; render(); return; }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (open < 0) return;
+    if (e.key === 'Escape') { close('<b>Esc</b> 로 닫았다'); document.getElementById('log').innerHTML = 'Esc 로 닫았다'; e.preventDefault(); }
+    if (e.key === 'ArrowRight') { open = (open + 1) % N; render(); e.preventDefault(); }
+    if (e.key === 'ArrowLeft') { open = (open - 1 + N) % N; render(); e.preventDefault(); }
+  });
+
+  ['url', 'restore'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', function () { report(''); });
+  });
+
+  grid();
+  report('그림을 눌러 보세요');
+})();
+</script>
+</body>
+</html>
