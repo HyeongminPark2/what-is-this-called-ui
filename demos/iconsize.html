@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>아이콘 크기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 560px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>아이콘 크기</b>
+  <label>크기 <select class="sel" id="s" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="12">12px</option>
+    <option value="16">16px</option>
+    <option value="20" selected>20px</option>
+    <option value="24">24px</option>
+    <option value="32">32px</option>
+  </select></label>
+  <label><input type="checkbox" id="fix"> 선 굵기를 고정</label>
+  <label><input type="checkbox" id="blk"> 아이콘을 block 으로</label>
+  <label><input type="checkbox" id="pad" checked> 누르는 자리 44px</label>
+</div>
+
+<div class="pad">
+  <div style="display:grid;gap:7px;max-width:320px">
+    <div class="ics__row" id="row"><span id="ico"></span><span>영수증 내려받기</span>
+      <button class="ics__btn" id="btn" aria-label="지우기"><span id="ico2"></span></button></div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  아이콘 크기는 <b>글자 크기가 아니라 줄 높이에 맞춥니다</b> — 아이콘 가운데와 글자 가운데가
+  어긋난 픽셀 수를 재서 적습니다.<br>
+  그림은 <code>viewBox 24</code> 에 <b>선 굵기 1.5</b> 로 그렸습니다. 그대로 줄이면
+  선도 같이 얇아져 <b>12px 에서는 0.75px</b> 가 됩니다 — 화면에서 흐려 보이는 이유입니다.
+  '선 굵기를 고정'을 켜면 크기에 맞춰 굵기를 되돌려 1.5px 를 지킵니다.<br>
+  인라인 SVG 는 <b>글자처럼 베이스라인에 앉습니다</b> — 그래서 글자 가운데보다 몇 px 위로 뜹니다.
+  '아이콘을 block 으로'를 켜면 어긋남이 0에 가까워집니다. 눈으로는 잘 안 보이는데
+  아이콘과 글자를 나란히 두는 자리마다 생기는 어긋남입니다.<br>
+  아이콘이 작아도 <b>누르는 자리</b>는 44px 이어야 합니다 — 그 값도 같이 잽니다.
+</p>
+
+<script>
+(function () {
+  var VB = 24, SW = 1.5;
+  function svg(size, stroke) {
+    return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" ' +
+      'stroke="currentColor" stroke-width="' + stroke + '" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      '<path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg>';
+  }
+
+  function draw() {
+    var size = +document.getElementById('s').value;
+    var fix = document.getElementById('fix').checked;
+    var padOn = document.getElementById('pad').checked;
+    // 그린 선이 화면에서 몇 px 인가 — viewBox 를 줄인 비율만큼 같이 줄어든다
+    var scale = size / VB;
+    var stroke = fix ? SW / scale : SW;
+    var drawn = stroke * scale;
+
+    var icoEl = document.getElementById('ico');
+    icoEl.innerHTML = svg(size, stroke);
+    var blk = document.getElementById('blk').checked;
+    icoEl.style.display = blk ? 'flex' : '';
+    icoEl.style.alignItems = blk ? 'center' : '';
+    document.getElementById('ico2').innerHTML = svg(size, stroke);
+    var btn = document.getElementById('btn');
+    btn.style.width = btn.style.height = padOn ? '44px' : size + 'px';
+
+    // 가운데가 맞나 — 두 상자를 실제로 재서 중심을 견준다
+    var ir = document.querySelector('#ico svg').getBoundingClientRect();
+    var tr = document.querySelector('#row span:nth-of-type(2)') || document.getElementById('row').children[1];
+    var trr = tr.getBoundingClientRect();
+    var off = Math.abs((ir.top + ir.height / 2) - (trr.top + trr.height / 2));
+    var br = btn.getBoundingClientRect();
+
+    document.getElementById('row').classList.toggle('thin', drawn < 1);
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '아이콘 <b>' + size + 'px</b> · 그려진 선 <b>' + drawn.toFixed(2) + 'px</b>' +
+      (drawn < 1 ? ' <span class="warn">— 1px 미만이라 흐려진다</span>' : '') +
+      '<br>가운데 어긋남 <b>' + off.toFixed(1) + 'px</b>' +
+      '<br>누르는 자리 <b>' + Math.round(br.width) + '×' + Math.round(br.height) + '</b>' +
+      (br.width < 44 ? ' <span class="warn">— 44px 미달</span>' : '');
+    rd.dataset.blk = blk ? '1' : '0';
+    rd.dataset.drawn = drawn.toFixed(2);
+    rd.dataset.off = off.toFixed(1);
+    rd.dataset.hit = String(Math.round(br.width));
+
+    document.getElementById('note').innerHTML = (fix
+      ? '선 굵기를 되돌렸다 — 어느 크기에서나 <b>1.5px</b> 로 그려진다'
+      : '<span class="warn">그린 그대로 줄였다</span> — 작아질수록 선이 같이 얇아진다') +
+      '<br>' + (blk
+        ? '아이콘이 <b>block</b> 이라 글자와 가운데가 맞는다'
+        : '<span class="warn">인라인 SVG 라 베이스라인에 앉았다</span> — 글자 가운데보다 위로 뜬다');
+  }
+
+  ['s'].forEach(function (id) { document.getElementById(id).addEventListener('change', draw); });
+  ['fix', 'pad', 'blk'].forEach(function (id) { document.getElementById(id).addEventListener('change', draw); });
+  draw();
+})();
+</script>
+</body>
+</html>

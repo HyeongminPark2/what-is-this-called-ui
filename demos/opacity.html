@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>불투명도 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 560px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>불투명도</b>
+  <label>흐리게 하는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="none">그대로</option>
+    <option value="opacity" selected>부모에 opacity</option>
+    <option value="alpha">글자색에만 알파</option>
+    <option value="muted">흐린 색 토큰</option>
+  </select></label>
+  <label>세기 <input type="range" id="a" min="20" max="100" step="5" value="50" style="width:90px"><span class="ruler" id="av"></span></label>
+</div>
+
+<div class="pad">
+  <div class="op__stage">
+    <div class="op__card" id="card">
+      <span class="op__t" id="t">정산 2건이 밀렸습니다</span>
+      <button class="ui-btn ui-btn--ghost" id="btn" style="justify-self:start;font-size:12px;min-height:30px">확인하기</button>
+      <span class="op__b" id="b">2</span>
+    </div>
+    <div class="op__ov" id="ov">덮개<br>z-index: 2</div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  <b>대비비를 재서 적습니다</b> — 흰 바탕 위 글자를 <code>opacity: .5</code> 로 흐리면
+  4.5:1 아래로 떨어집니다. 비활성 상태를 이렇게 만들면 <b>읽을 수 없는 글</b>이 됩니다.<br>
+  더 조용한 사고가 하나 더 있습니다 — <code>opacity</code> 가 1보다 작아지면 그 상자가
+  <b>쌓임 문맥</b>이 되어, 안에 있는 <code>z-index: 5</code> 배지가 바깥의
+  <code>z-index: 2</code> 덮개 위로 못 올라갑니다. 모서리 자리를 실제로 찍어 누가 위에 있는지 잽니다.
+</p>
+
+<script>
+(function () {
+  function rgb(s) { var m = s.match(/[\d.]+/g); return m ? m.slice(0, 3).map(Number) : [0, 0, 0]; }
+  function lum(c) {
+    var a = c.map(function (v) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+    return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
+  }
+  function ratio(f, b) { var L1 = lum(f), L2 = lum(b); if (L1 < L2) { var t = L1; L1 = L2; L2 = t; } return (L1 + 0.05) / (L2 + 0.05); }
+  function mix(f, b, a) { return f.map(function (v, i) { return v * a + b[i] * (1 - a); }); }
+
+  function draw() {
+    var k = document.getElementById('k').value;
+    var a = +document.getElementById('a').value / 100;
+    document.getElementById('a').disabled = (k === 'none' || k === 'muted');
+    document.getElementById('av').textContent = (k === 'none' || k === 'muted') ? '—' : Math.round(a * 100) + '%';
+
+    var card = document.getElementById('card'), t = document.getElementById('t');
+    card.style.opacity = '';
+    t.style.color = '';
+    if (k === 'opacity') card.style.opacity = String(a);
+    if (k === 'alpha') { var f0 = rgb(getComputedStyle(document.body).color); t.style.color = 'rgba(' + f0.join(',') + ',' + a + ')'; }
+    if (k === 'muted') t.style.color = 'var(--fg-muted)';
+
+    // 대비비를 잰다 — 흐린 만큼 바탕과 섞인 색으로 계산한다
+    var bg = rgb(getComputedStyle(card).backgroundColor);
+    var fg = rgb(getComputedStyle(t).color);
+    var eff = (k === 'none' || k === 'muted') ? fg : mix(fg, bg, a);
+    var cr = ratio(eff, bg);
+
+    // 누가 위에 있나 — 겹치는 자리를 실제로 찍어 본다
+    var br = document.getElementById('b').getBoundingClientRect();
+    var hit = document.elementFromPoint(br.left + br.width / 2, br.top + br.height / 2);
+    var who = (hit && hit.id === 'b') ? '배지' : '덮개';
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '글자 대비비 <b>' + cr.toFixed(2) + ':1</b>' +
+      (cr < 4.5 ? ' <span class="warn">— 4.5:1 미달</span>' : ' — 통과') +
+      '<br>겹치는 자리에 있는 것 <b>' + who + '</b>' +
+      (who === '덮개' ? ' <span class="warn">— 배지의 z-index 5 가 안 먹는다</span>' : '');
+    rd.dataset.cr = cr.toFixed(2);
+    rd.dataset.pass = cr >= 4.5 ? '1' : '0';
+    rd.dataset.top = who;
+
+    document.getElementById('note').innerHTML = {
+      none: '그대로 — 기준값이다',
+      opacity: '<span class="warn">부모 전체가 흐려진다</span> — 글·버튼·배지까지 같이 흐려지고, 쌓임 문맥이 새로 생긴다',
+      alpha: '글자색만 흐려진다 — 쌓임 문맥은 <b>안 생긴다</b>. 다만 대비비는 똑같이 떨어진다',
+      muted: '<b>흐린 색 토큰</b> — 처음부터 대비비를 맞춰 고른 색이라 안전하다'
+    }[k];
+  }
+
+  document.getElementById('k').addEventListener('change', draw);
+  document.getElementById('a').addEventListener('input', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

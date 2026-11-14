@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>여백 붕괴 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width:520px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>여백 붕괴</b>
+  <label>붙이는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="margin">margin 으로 (붕괴한다)</option>
+    <option value="flex">flex + gap</option>
+    <option value="padding">부모에 padding</option>
+  </select></label>
+  <label>아래 24 / 위 16</label>
+</div>
+
+<div class="pad">
+  <div class="mc" id="stage"></div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  위 상자의 <code>margin-bottom: 24px</code>와 아래 상자의 <code>margin-top: 16px</code>을 더하면 40px 일 것 같지만,
+  <b>세로 여백은 겹쳐 더 큰 쪽만 남습니다</b> — 24px 입니다. 이걸 <b>여백 붕괴</b>(margin collapse)라 합니다.<br>
+  가로는 안 겹치고, <b>flex·grid 안에서도 안 겹칩니다</b>. 그래서 <code>gap</code>을 쓰면
+  40px 이 아니라 <b>정확히 적은 값</b>이 나옵니다 — 요즘 <code>gap</code>을 권하는 이유 가운데 하나입니다.<br>
+  부모의 <code>padding</code>이나 테두리가 생겨도 붕괴가 멈춥니다 — <b>예고 없이 간격이 바뀌는</b> 흔한 원인입니다.
+</p>
+
+<script>
+(function () {
+  function draw() {
+    var k = document.getElementById('k').value;
+    var stage = document.getElementById('stage');
+    var inner;
+    if (k === 'margin') {
+      inner = '<div class="mc__a" style="margin-bottom:24px">위 상자 — margin-bottom: 24px</div>' +
+              '<div class="mc__b" style="margin-top:16px">아래 상자 — margin-top: 16px</div>';
+      stage.style.cssText = '';
+    } else if (k === 'flex') {
+      inner = '<div class="mc__a" style="margin-bottom:24px">위 상자 — margin-bottom: 24px</div>' +
+              '<div class="mc__b" style="margin-top:16px">아래 상자 — margin-top: 16px</div>';
+      stage.style.cssText = 'display:flex;flex-direction:column;';
+    } else {
+      inner = '<div class="mc__a" style="margin-bottom:24px">위 상자 — margin-bottom: 24px</div>' +
+              '<div class="mc__b" style="margin-top:16px">아래 상자 — margin-top: 16px</div>';
+      stage.style.cssText = 'padding:1px;';
+    }
+    stage.innerHTML = inner;
+
+    requestAnimationFrame(function () {
+      var a = stage.querySelector('.mc__a').getBoundingClientRect();
+      var b = stage.querySelector('.mc__b').getBoundingClientRect();
+      var gap = Math.round(b.top - a.bottom);
+      var r = document.getElementById('read');
+      var collapsed = gap < 40;
+      r.innerHTML = '적은 값 24 + 16 = <b>40px</b> · 실제 간격 <b>' + gap + 'px</b>' +
+        (collapsed ? ' <span class="warn">— 겹쳤다</span>' : ' — 겹치지 않았다');
+      r.dataset.gap = String(gap);
+      r.dataset.collapsed = collapsed ? '1' : '0';
+
+      document.getElementById('note').innerHTML = {
+        margin: '<span class="warn">세로 여백이 겹쳐 큰 쪽만 남았다</span> — 더한 값이 안 나온다',
+        flex: 'flex 안에서는 <b>안 겹친다</b>. 그래서 적은 값이 그대로 나온다',
+        padding: '부모에 padding 이 생기면 <b>붕괴가 멈춘다</b> — 예고 없이 간격이 바뀌는 원인'
+      }[k];
+    });
+  }
+  document.getElementById('k').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

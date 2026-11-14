@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>모서리 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 560px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>모서리</b>
+  <label>바깥 <input type="range" id="r" min="0" max="28" step="2" value="12" style="width:84px"><span class="ruler" id="rv"></span></label>
+  <label>안쪽 여백 <input type="range" id="p" min="0" max="20" step="2" value="10" style="width:84px"><span class="ruler" id="pv"></span></label>
+  <label><input type="checkbox" id="fit" checked> 안쪽을 공식대로</label>
+  <label><input type="checkbox" id="clip" checked> overflow: hidden</label>
+</div>
+
+<div class="pad">
+  <div class="rd__scale" id="scale"></div>
+  <div class="rd__stage">
+    <div class="rd__card" id="card">
+      <span class="rd__strip" id="strip"></span>
+      <div style="padding:10px" id="pw"><span class="rd__in" id="in">안쪽 상자</span></div>
+    </div>
+    <p class="ruler" id="read" style="max-width:220px"></p>
+  </div>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  <b>안쪽 모서리는 바깥보다 여백만큼 작아야</b> 두 곡선이 나란히 돕니다 —
+  <code>안쪽 = 바깥 − 여백</code>입니다. 공식을 끄면 두 곡선 사이가 벌어져
+  <b>안쪽이 네모나게</b> 보입니다.<br>
+  <code>overflow: hidden</code>을 끄면 둥근 카드 위로 <b>네모난 그림이 튀어나옵니다</b> —
+  카드 왼쪽 위 모서리 자리에 무엇이 있는지를 실제로 찍어서 잽니다.
+</p>
+
+<script>
+(function () {
+  var SCALE = [[0, '없음'], [4, '작게'], [8, '보통'], [12, '카드'], [16, '시트'], [999, '알약']];
+  document.getElementById('scale').innerHTML = SCALE.map(function (s) {
+    return '<span style="border-radius:' + s[0] + 'px">' + (s[0] === 999 ? '999' : s[0]) +
+      '<small style="display:block;font-size:8px;color:var(--fg-muted)">' + s[1] + '</small></span>';
+  }).join('');
+
+  function draw() {
+    var R = +document.getElementById('r').value;
+    var P = +document.getElementById('p').value;
+    var fit = document.getElementById('fit').checked;
+    var clip = document.getElementById('clip').checked;
+    document.getElementById('rv').textContent = R + 'px';
+    document.getElementById('pv').textContent = P + 'px';
+
+    var card = document.getElementById('card'), inn = document.getElementById('in');
+    card.style.borderRadius = R + 'px';
+    card.style.overflow = clip ? 'hidden' : 'visible';
+    document.getElementById('pw').style.padding = P + 'px';
+    var ideal = Math.max(0, R - P);
+    inn.style.borderRadius = (fit ? ideal : R) + 'px';
+
+    // 재서 적는다 — 적힌 값이 아니라 브라우저가 쓴 값
+    var got = Math.round(parseFloat(getComputedStyle(inn).borderTopLeftRadius));
+    var okFit = got === ideal;
+
+    // 모서리가 튀어나왔나 — 카드 왼쪽 위 모서리 자리를 실제로 찍어 본다
+    var rc = card.getBoundingClientRect();
+    var d = Math.max(1, R * 0.28);
+    var hit = document.elementFromPoint(rc.left + d, rc.top + d);
+    var poke = hit === document.getElementById('strip');
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '바깥 <b>' + R + 'px</b> · 여백 <b>' + P + 'px</b><br>' +
+      '공식값 <b>' + ideal + 'px</b> · 지금 안쪽 <b>' + got + 'px</b><br>' +
+      (okFit ? '두 곡선이 <b>나란히</b> 돈다' : '<span class="warn">안쪽이 어긋난다</span>') +
+      (poke ? '<br><span class="warn">그림이 모서리 밖으로 튀어나왔다</span>' : '');
+    rd.dataset.ideal = String(ideal);
+    rd.dataset.got = String(got);
+    rd.dataset.fit = okFit ? '1' : '0';
+    rd.dataset.poke = poke ? '1' : '0';
+
+    document.getElementById('note').innerHTML = clip
+      ? '<code>overflow: hidden</code> 이 자식을 카드 모양대로 자른다'
+      : '<span class="warn">자르지 않으니</span> 네모난 자식이 둥근 모서리를 덮는다';
+  }
+
+  ['r', 'p'].forEach(function (id) { document.getElementById(id).addEventListener('input', draw); });
+  ['fit', 'clip'].forEach(function (id) { document.getElementById(id).addEventListener('change', draw); });
+  draw();
+})();
+</script>
+</body>
+</html>

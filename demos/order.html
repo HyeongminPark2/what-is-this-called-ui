@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>보이는 순서와 읽는 순서 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width:560px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>보이는 순서와 읽는 순서</b>
+  <label>보이기를 뒤집는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="none">안 뒤집음</option>
+    <option value="rev">row-reverse</option>
+    <option value="order">order 로 바꿈</option>
+    <option value="dom">마크업 순서를 바꿈</option>
+  </select></label>
+  <button class="ui-btn ui-btn--ghost" id="tab">Tab 으로 훑어보기</button>
+</div>
+
+<div class="pad">
+  <div class="ord" id="row"></div>
+  <p class="ordlog" id="seen"></p>
+  <p class="ordlog" id="read"></p>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  <b>Tab 으로 훑어보기</b>를 눌러 보세요 — 초점이 어느 차례로 가는지가 아래에 적힙니다.<br>
+  <code>row-reverse</code>와 <code>order</code>는 <b>보이기만</b> 바꿉니다. 눈으로는 취소가 먼저인데
+  <b>Tab 은 저장으로 먼저</b> 갑니다 — 키보드로 쓰는 사람에게는 화면이 거짓말을 하는 셈입니다.<br>
+  순서를 정말 바꾸려면 <b>마크업 순서</b>를 바꿉니다. 그러면 눈과 Tab 이 같아집니다.
+</p>
+
+<script>
+(function () {
+  var BASE = ['저장', '취소', '삭제'];
+
+  function draw() {
+    var k = document.getElementById('k').value;
+    var names = (k === 'dom') ? ['취소', '저장', '삭제'] : BASE.slice();
+    var row = document.getElementById('row');
+    row.className = 'ord' + (k === 'rev' ? ' rev' : '');
+    row.innerHTML = names.map(function (n, i) {
+      var ord = (k === 'order') ? (n === '취소' ? 0 : 1) : '';
+      return '<span tabindex="0" data-n="' + n + '"' + (ord !== '' ? ' style="order:' + ord + '"' : '') + '>' + n + '</span>';
+    }).join('');
+
+    // 눈에 보이는 차례 — 실제로 그려진 x 좌표로 잰다
+    var els = [].slice.call(row.querySelectorAll('span'));
+    var visual = els.slice().sort(function (a, b) {
+      return a.getBoundingClientRect().left - b.getBoundingClientRect().left;
+    }).map(function (e) { return e.dataset.n; });
+    var dom = els.map(function (e) { return e.dataset.n; });     // Tab 은 DOM 순서를 따른다
+
+    var same = visual.join() === dom.join();
+    var r = document.getElementById('read');
+    r.innerHTML = '눈 <b>' + visual.join(' → ') + '</b><br>Tab <b>' + dom.join(' → ') + '</b>' +
+      (same ? ' · 같다' : ' · <span class="warn">어긋난다</span>');
+    r.dataset.same = same ? '1' : '0';
+    r.dataset.visual = visual.join(',');
+    r.dataset.dom = dom.join(',');
+    document.getElementById('seen').textContent = '';
+
+    document.getElementById('note').innerHTML = {
+      none: '눈과 Tab 이 같다 — <b>기본값이 옳다</b>',
+      rev: '<span class="warn">보이기만 뒤집혔다</span> — Tab 은 마크업 순서를 그대로 따라간다',
+      order: '<span class="warn">order 도 보이기만 바꾼다</span> — 한두 칸만 옮겨도 어긋난다',
+      dom: '마크업을 바꿨으니 <b>눈과 Tab 이 같다</b> — 이게 맞는 방법이다'
+    }[k];
+  }
+
+  document.getElementById('tab').addEventListener('click', function () {
+    var els = [].slice.call(document.querySelectorAll('.ord span'));
+    var seen = [];
+    var i = 0;
+    (function step() {
+      if (i >= els.length) {
+        document.getElementById('seen').innerHTML = 'Tab 으로 간 차례 — <b>' + seen.join(' → ') + '</b>';
+        document.getElementById('seen').dataset.seen = seen.join(',');
+        return;
+      }
+      els[i].focus();
+      seen.push(document.activeElement.dataset.n);
+      i++;
+      setTimeout(step, 180);
+    })();
+  });
+  document.getElementById('k').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

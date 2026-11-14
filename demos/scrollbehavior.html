@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>스크롤 동작 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width:520px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>스크롤 동작</b>
+  <label><input type="checkbox" id="snap"> 스냅 켜기</label>
+  <label><input type="checkbox" id="smooth"> 부드럽게 굴리기</label>
+  <label><input type="checkbox" id="chain" checked> 끝에서 바깥까지 밀리기</label>
+  <button class="ui-btn ui-btn--ghost" id="go">3번으로</button>
+</div>
+
+<div class="pad">
+  <div class="sb" id="sb">
+    <div class="sb__page" id="p1">1</div>
+    <div class="sb__page" id="p2">2</div>
+    <div class="sb__page" id="p3">3</div>
+    <div class="sb__page" id="p4">4</div>
+  </div>
+  <div class="sb__x" id="x">
+    <div class="sb__card">가로 1</div><div class="sb__card">가로 2</div>
+    <div class="sb__card">가로 3</div><div class="sb__card">가로 4</div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  <b>스냅</b>을 켜면 굴림이 <b>칸 단위로</b> 멎습니다 — 사진첩·캐러셀에 쓰고, 긴 글에 쓰면 답답합니다.<br>
+  <b>끝에서 바깥까지 밀기</b>(스크롤 체이닝)를 끄면, 안쪽 상자를 끝까지 굴려도 <b>바깥 페이지가 안 따라 움직입니다</b> —
+  <a href="../items/modal.html">모달</a> 안에서 특히 쓸모 있습니다.<br>
+  <b>부드럽게 굴리기</b>는 '3번으로' 버튼에서 보입니다. 다만 <a href="reducedmotion.html">모션 줄이기</a>를 켠 사람에게는 꺼야 합니다.
+</p>
+
+<script>
+(function () {
+  var sb = document.getElementById('sb');
+
+  function draw() {
+    var snap = document.getElementById('snap').checked;
+    var smooth = document.getElementById('smooth').checked;
+    var chain = document.getElementById('chain').checked;
+
+    sb.classList.toggle('sb--snap', snap);
+    document.getElementById('x').classList.toggle('snap', snap);
+    sb.style.scrollBehavior = smooth ? 'smooth' : 'auto';
+    sb.style.overscrollBehavior = chain ? 'auto' : 'contain';
+
+    var r = document.getElementById('read');
+    r.innerHTML = 'scroll-snap-type <b>' + (snap ? 'y mandatory' : 'none') + '</b> · ' +
+      'scroll-behavior <b>' + (smooth ? 'smooth' : 'auto') + '</b> · ' +
+      'overscroll-behavior <b>' + (chain ? 'auto' : 'contain') + '</b>';
+    r.dataset.snap = snap ? '1' : '0';
+    r.dataset.smooth = smooth ? '1' : '0';
+    r.dataset.chain = chain ? '1' : '0';
+
+    document.getElementById('note').innerHTML = snap
+      ? '칸 단위로 멎는다 — <b>사진첩·캐러셀</b>에 맞다. 긴 글에 쓰면 답답하다'
+      : (chain
+        ? '끝까지 굴리면 <b>바깥 페이지가 따라 움직인다</b> — 모달 안에서는 대개 막는 편이 낫다'
+        : '<b>contain</b> — 안쪽에서 멈춘다. 바깥이 안 밀린다');
+  }
+
+  document.getElementById('go').addEventListener('click', function () {
+    document.getElementById('p3').scrollIntoView({
+      behavior: document.getElementById('smooth').checked ? 'smooth' : 'auto', block: 'start'
+    });
+  });
+  ['snap', 'smooth', 'chain'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', draw);
+  });
+  sb.addEventListener('scroll', function () {
+    document.getElementById('read').dataset.top = String(Math.round(sb.scrollTop));
+  });
+  draw();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>종횡비 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width:560px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>종횡비</b>
+  <label>비 <select class="sel" id="r" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="16/9">16 / 9</option>
+    <option value="4/3">4 / 3</option>
+    <option value="1/1" selected>1 / 1</option>
+    <option value="3/4">3 / 4</option>
+  </select></label>
+  <label><input type="checkbox" id="noratio"> 비를 안 정하고 높이만 주기</label>
+</div>
+
+<div class="pad">
+  <div class="ar-row" id="row"></div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  <code>aspect-ratio</code>는 <b>폭이 정해지면 높이가 따라오게</b> 합니다. 반응형에서
+  칸 폭이 바뀌어도 비가 유지됩니다.<br>
+  더 중요한 쓸모는 <b>자리를 미리 잡는 것</b>입니다. 그림이 오기 전에 높이를 알 수 있어
+  <b>글이 덜컥거리지 않습니다</b> — 체크를 켜면 비를 모른 채 높이만 준 모습이고,
+  내용이 들어오면 비가 깨집니다.<br>
+  안에 든 그림은 <code>object-fit: cover</code>로 <b>잘라 채웁니다</b>.
+</p>
+
+<script>
+(function () {
+  function draw() {
+    var r = document.getElementById('r').value;
+    var off = document.getElementById('noratio').checked;
+    var W = [118, 88, 150];
+
+    document.getElementById('row').innerHTML = W.map(function (w, i) {
+      var style = 'width:' + w + 'px;' + (off ? 'height:84px;' : 'aspect-ratio:' + r + ';');
+      return '<div class="ar"><div class="ar__box" data-i="' + i + '" style="' + style + '">' +
+        '<span class="fake" style="display:grid;place-items:center;background:var(--accent-soft)">' +
+        (off ? '높이 84' : r) + '</span></div>' +
+        '<span class="ar__tag">폭 ' + w + '</span></div>';
+    }).join('');
+
+    var boxes = [].slice.call(document.querySelectorAll('.ar__box'));
+    var ratios = boxes.map(function (b) {
+      var rect = b.getBoundingClientRect();
+      return (rect.width / rect.height).toFixed(2);
+    });
+    var same = ratios.every(function (v) { return v === ratios[0]; });
+    var read = document.getElementById('read');
+    read.innerHTML = '잰 비 — ' + ratios.join(' · ') +
+      (same ? ' · <b>셋이 같다</b>' : ' · <span class="warn">폭마다 비가 다르다</span>');
+    read.dataset.same = same ? '1' : '0';
+    read.dataset.ratios = ratios.join(',');
+
+    document.getElementById('note').innerHTML = off
+      ? '<span class="warn">높이만 주면 폭이 바뀔 때 비가 깨진다</span> — 반응형에서 바로 드러난다'
+      : '<code>aspect-ratio: ' + r + '</code> — 폭이 달라도 <b>비가 유지된다.</b> 그림 자리를 미리 잡는 데도 쓴다';
+  }
+  document.getElementById('r').addEventListener('change', draw);
+  document.getElementById('noratio').addEventListener('change', draw);
+  window.addEventListener('resize', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

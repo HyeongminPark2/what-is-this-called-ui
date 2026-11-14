@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>크기 정하기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width:560px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>크기 정하기</b>
+  <label>칸 폭 <input type="range" id="w" class="ui-range" min="120" max="460" step="10" value="300" style="width:160px"> <span class="ruler" id="wv">300px</span></label>
+  <label>글 <select class="sel" id="t" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="short">짧게</option>
+    <option value="long" selected>길게</option>
+    <option value="word">안 끊기는 긴 낱말</option>
+  </select></label>
+</div>
+
+<div class="pad">
+  <div class="sz" id="list" style="max-width:100%"></div>
+  <p class="ruler" id="read"></p>
+</div>
+
+<p class="hint">
+  칸 폭과 글을 바꿔 가며 <b>어떤 값이 어떻게 버티는지</b> 보세요.<br>
+  <code>width: 300px</code>은 칸이 좁아져도 <b>안 줄어</b> 넘칩니다.
+  <code>max-width: 300px</code>은 <b>좁아지면 같이 줄어듭니다</b> — 반응형에서 거의 늘 이쪽이 맞습니다.<br>
+  <code>min-content</code>는 <b>가장 긴 낱말만큼</b>, <code>max-content</code>는 <b>안 끊고 한 줄로</b>,
+  <code>fit-content</code>는 둘 사이에서 <b>칸이 허락하는 만큼</b>입니다.
+  <code>clamp()</code>는 최소·기본·최대를 한 줄로 적습니다.
+</p>
+
+<script>
+(function () {
+  var TEXT = {
+    short: '정산',
+    long: '11월 1일부터 7일까지의 정산 내역을 모아 보여 줍니다.',
+    word: '가맹점정산내역일괄내보내기화면'
+  };
+  var ROWS = [
+    ['width: 300px', 'width:300px'],
+    ['max-width: 300px', 'max-width:300px'],
+    ['min-content', 'width:min-content'],
+    ['max-content', 'width:max-content'],
+    ['fit-content', 'width:fit-content'],
+    ['clamp(120px, 50%, 300px)', 'width:clamp(120px, 50%, 300px)']
+  ];
+
+  function draw() {
+    var w = +document.getElementById('w').value;
+    var t = TEXT[document.getElementById('t').value];
+    document.getElementById('wv').textContent = w + 'px';
+
+    document.getElementById('list').innerHTML =
+      '<div style="width:' + w + 'px;max-width:100%;border:1px dashed var(--line-strong);border-radius:var(--r1);padding:7px;display:grid;gap:7px" id="hold">' +
+      ROWS.map(function (r, i) {
+        return '<div class="sz__row" data-i="' + i + '"><span class="sz__lab">' + r[0] + '</span>' +
+          '<span class="sz__cell"><span class="sz__box" style="' + r[1] + '">' + t + '</span></span></div>';
+      }).join('') + '</div>';
+
+    // 넘쳤는지는 짐작하지 말고 잰다 — 제가 들어앉은 칸보다 넓으면 넘친 것이다
+    var over = [];
+    [].forEach.call(document.querySelectorAll('.sz__row'), function (row) {
+      var cell = row.querySelector('.sz__cell');
+      var box = row.querySelector('.sz__box');
+      var bad = box.getBoundingClientRect().width > cell.getBoundingClientRect().width + 1;
+      row.classList.toggle('over', bad);
+      if (bad) over.push(row.dataset.i);
+    });
+    var cellW = document.querySelector('.sz__cell').getBoundingClientRect().width;
+    var r = document.getElementById('read');
+    r.innerHTML = '글이 들어갈 칸 <b>' + Math.round(cellW) + 'px</b> · ' +
+      (over.length ? '<span class="warn">넘친 줄 ' + over.length + '개</span>' : '<b>전부 들어갔다</b>');
+    r.dataset.over = String(over.length);
+    r.dataset.which = over.join(',');
+  }
+  document.getElementById('w').addEventListener('input', draw);
+  document.getElementById('t').addEventListener('change', draw);
+  window.addEventListener('resize', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

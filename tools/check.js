@@ -209,8 +209,10 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   // ── 2. 항목 카드 — 일곱 장 모두 같은 틀인지 ──
   const PARTS = {
     '12부': ['focus', 'focustrap', 'keyboard', 'name', 'screenreader', 'live', 'contrast', 'semantics', 'alttext', 'textzoom'],
-    '1부': ['box', 'flex', 'grid', 'center', 'overflow', 'sticky', 'container', 'safearea'],
-    '2부': ['color', 'dark', 'typescale', 'spacing', 'elevation', 'zindex'],
+    '1부': ['box', 'flex', 'grid', 'center', 'overflow', 'sticky', 'container', 'safearea',
+            'position', 'aspectratio', 'scrollbehavior', 'sizing', 'margincollapse', 'order'],
+    '2부': ['color', 'dark', 'typescale', 'spacing', 'elevation', 'zindex',
+            'radius', 'border', 'opacity', 'iconsize', 'statecolor', 'tokenname'],
     '5부': ['card', 'listitem', 'avatar', 'badge', 'chip', 'stat', 'timeline', 'rating'],
     '6부': ['modal', 'dialog', 'sheet', 'drawer', 'popover', 'tooltip', 'toast'],
     '3부': ['weight', 'lineheight', 'letterspacing', 'hangul', 'numerals', 'truncate', 'webfont', 'hierarchy', 'casing', 'iconfont'],
@@ -2070,6 +2072,166 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     await page.fill('#q', 'zzzz'); await page.waitForTimeout(250);
     if (await page.locator('#none').isHidden()) fail.push('색인: 0개일 때 안내가 없다');
   }
+  await page.close();
+
+  // 1부 뼈대 데모 여섯 장 — 자리·비·굴림·크기·여백·차례를 모두 잰다
+  page = await demo('position', 980, 900);
+  if (await page.getAttribute('#read', 'data-flow') !== '1') fail.push('포지션: static 이 자리를 안 차지한다');
+  if (await page.$eval('#box', e => getComputedStyle(e).position) !== 'static') fail.push('포지션: 실제 값이 static 이 아니다');
+  await page.selectOption('#k', 'absolute'); await page.waitForTimeout(260);
+  if (await page.getAttribute('#read', 'data-flow') !== '0')
+    fail.push('포지션: absolute 인데 자리를 그대로 차지한다 (보여주려는 결과)');
+  if (await page.locator('.pos__ghost').count() !== 1) fail.push('포지션: 빠진 자리를 안 보여 준다');
+  if (!(await page.getAttribute('#read', 'data-base')).includes('페이지'))
+    fail.push('포지션: 조상에 relative 가 없는데 기준이 페이지가 아니다');
+  await page.check('#anc'); await page.waitForTimeout(260);
+  if (!(await page.getAttribute('#read', 'data-base')).includes('가까운 조상'))
+    fail.push('포지션: relative 를 걸어도 기준이 안 바뀐다');
+  await page.close();
+
+  page = await demo('aspectratio', 980, 900);
+  if (await page.getAttribute('#read', 'data-same') !== '1') fail.push('종횡비: 폭이 달라도 비가 같아야 한다');
+  await page.selectOption('#r', '16/9'); await page.waitForTimeout(280);
+  if (!(+(await page.getAttribute('#read', 'data-ratios')).split(',')[0] > 1.7))
+    fail.push('종횡비: 16/9 로 안 바뀐다');
+  await page.check('#noratio'); await page.waitForTimeout(280);
+  if (await page.getAttribute('#read', 'data-same') !== '0')
+    fail.push('종횡비: 높이만 줬는데 폭마다 비가 같다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('scrollbehavior', 980, 900);
+  if (await page.$eval('#sb', e => getComputedStyle(e).scrollSnapType) !== 'none')
+    fail.push('스크롤동작: 처음부터 스냅이 걸려 있다');
+  await page.check('#snap'); await page.waitForTimeout(260);
+  if (!(await page.$eval('#sb', e => getComputedStyle(e).scrollSnapType)).includes('mandatory'))
+    fail.push('스크롤동작: 켜도 스냅이 안 걸린다');
+  await page.check('#smooth'); await page.waitForTimeout(220);
+  if (await page.$eval('#sb', e => getComputedStyle(e).scrollBehavior) !== 'smooth')
+    fail.push('스크롤동작: 부드럽게가 안 먹는다');
+  await page.uncheck('#chain'); await page.waitForTimeout(260);
+  if (await page.$eval('#sb', e => getComputedStyle(e).overscrollBehavior) !== 'contain')
+    fail.push('스크롤동작: 바깥까지 밀리는 것을 안 막는다');
+  await page.locator('#go').click(); await page.waitForTimeout(700);
+  if (!(+(await page.getAttribute('#read', 'data-top')) > 300)) fail.push('스크롤동작: 눌러도 안 굴러간다');
+  await page.close();
+
+  page = await demo('sizing', 980, 900);
+  if (await page.locator('.sz__row').count() !== 6) fail.push('크기: 여섯 가지가 아니다');
+  if (!(await page.getAttribute('#read', 'data-which')).split(',').includes('3'))
+    fail.push('크기: max-content 가 넉넉한 폭에서도 넘쳐야 한다 (보여주려는 결과)');
+  if ((await page.getAttribute('#read', 'data-which')).split(',').includes('1'))
+    fail.push('크기: max-width 가 칸 안에 머물지 않는다');
+  await page.locator('#w').fill('150'); await page.dispatchEvent('#w', 'input'); await page.waitForTimeout(300);
+  if (!await page.locator('.sz__row[data-i="0"]').evaluate(e => e.classList.contains('over')))
+    fail.push('크기: 좁혀도 width:300px 가 안 넘친다 (보여주려는 결과)');
+  if (await page.locator('.sz__row[data-i="1"]').evaluate(e => e.classList.contains('over')))
+    fail.push('크기: 좁혔을 때 max-width:300px 가 같이 안 줄어든다');
+  await page.close();
+
+  page = await demo('margincollapse', 980, 900);
+  if (await page.getAttribute('#read', 'data-collapsed') !== '1')
+    fail.push('여백붕괴: margin 끼리인데 안 겹친다 (보여주려는 결과)');
+  if (await page.getAttribute('#read', 'data-gap') !== '24') fail.push('여백붕괴: 큰 쪽 24px 이 안 남는다');
+  await page.selectOption('#k', 'flex'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-collapsed') !== '0') fail.push('여백붕괴: flex 안에서도 겹친다');
+  if (await page.getAttribute('#read', 'data-gap') !== '40') fail.push('여백붕괴: 적은 값 40px 이 그대로 안 나온다');
+  await page.close();
+
+  page = await demo('order', 980, 900);
+  if (await page.getAttribute('#read', 'data-same') !== '1') fail.push('순서: 기본인데 눈과 Tab 이 어긋난다');
+  await page.selectOption('#k', 'rev'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-same') !== '0')
+    fail.push('순서: row-reverse 인데 안 어긋난다 (보여주려는 결과)');
+  if (await page.getAttribute('#read', 'data-visual') !== '삭제,취소,저장') fail.push('순서: 눈에 보이는 차례가 안 뒤집혔다');
+  if (await page.getAttribute('#read', 'data-dom') !== '저장,취소,삭제') fail.push('순서: Tab 이 마크업 순서를 안 따른다');
+  await page.locator('#tab').click(); await page.waitForTimeout(950);
+  if (await page.getAttribute('#seen', 'data-seen') !== '저장,취소,삭제')
+    fail.push('순서: 실제로 Tab 을 돌려 보면 차례가 다르다');
+  await page.selectOption('#k', 'dom'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-same') !== '1') fail.push('순서: 마크업을 바꿔도 눈과 Tab 이 안 맞는다');
+  await page.close();
+
+  // 2부 꾸미는 규칙 데모 여섯 장 — 공식·이음선·대비비·선 굵기·색 거리·이름 규칙
+  page = await demo('radius', 980, 900);
+  if (await page.getAttribute('#read', 'data-ideal') !== '2') fail.push('모서리: 바깥 12 − 여백 10 이 2 가 아니다');
+  if (await page.getAttribute('#read', 'data-fit') !== '1') fail.push('모서리: 공식대로인데 어긋난다');
+  await page.uncheck('#fit'); await page.waitForTimeout(280);
+  if (await page.getAttribute('#read', 'data-fit') !== '0')
+    fail.push('모서리: 안팎에 같은 값을 줬는데 맞다고 한다 (보여주려는 결과)');
+  if (await page.getAttribute('#read', 'data-poke') !== '0') fail.push('모서리: 자르는데도 그림이 튀어나온다');
+  await page.uncheck('#clip'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-poke') !== '1')
+    fail.push('모서리: 안 자르는데 그림이 모서리를 안 덮는다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('border', 980, 900);
+  if (await page.getAttribute('#read', 'data-seam') !== '1') fail.push('테두리: 구분선만인데 이음선이 1px 이 아니다');
+  await page.selectOption('#m', 'all'); await page.waitForTimeout(280);
+  if (await page.getAttribute('#read', 'data-seam') !== '2')
+    fail.push('테두리: 맞닿은 테두리가 2px 로 안 겹친다 (보여주려는 결과)');
+  if (await page.getAttribute('#read', 'data-over') !== '0') fail.push('테두리: border-box 인데 넘친다');
+  await page.uncheck('#cb'); await page.waitForTimeout(320);
+  if (!(+(await page.getAttribute('#read', 'data-over')) > 0))
+    fail.push('테두리: content-box 인데 선이 폭에 안 더해진다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('opacity', 980, 900);
+  if (await page.getAttribute('#read', 'data-pass') !== '0')
+    fail.push('불투명도: opacity .5 인데 대비비가 통과한다 (보여주려는 결과)');
+  if (await page.getAttribute('#read', 'data-top') !== '덮개')
+    fail.push('불투명도: 부모 opacity 가 자식 z-index 를 안 가둔다 (보여주려는 결과)');
+  await page.selectOption('#k', 'none'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-pass') !== '1') fail.push('불투명도: 그대로인데 대비비가 미달이다');
+  if (await page.getAttribute('#read', 'data-top') !== '배지') fail.push('불투명도: z-index 5 가 2 위로 안 올라간다');
+  await page.selectOption('#k', 'alpha'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-top') !== '배지') fail.push('불투명도: 색 알파가 쌓임 문맥을 만든다');
+  await page.selectOption('#k', 'muted'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-pass') !== '1') fail.push('불투명도: 흐린 색 토큰이 대비비를 못 지킨다');
+  await page.close();
+
+  page = await demo('iconsize', 980, 900);
+  if (await page.getAttribute('#read', 'data-drawn') !== '1.25') fail.push('아이콘: 20px 에 1.5 가 1.25px 로 안 나온다');
+  if (await page.getAttribute('#read', 'data-hit') !== '44') fail.push('아이콘: 누르는 자리가 44px 이 아니다');
+  await page.selectOption('#s', '12'); await page.waitForTimeout(300);
+  if (!(+(await page.getAttribute('#read', 'data-drawn')) < 1))
+    fail.push('아이콘: 12px 로 줄여도 선이 안 얇아진다 (보여주려는 결과)');
+  await page.check('#fix'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-drawn') !== '1.50') fail.push('아이콘: 굵기를 고정해도 1.5px 로 안 돌아온다');
+  await page.selectOption('#s', '32'); await page.waitForTimeout(300);
+  if (!(+(await page.getAttribute('#read', 'data-off')) > 1.5))
+    fail.push('아이콘: 인라인 SVG 인데 베이스라인 어긋남이 없다 (보여주려는 결과)');
+  await page.check('#blk'); await page.waitForTimeout(300);
+  if (!(+(await page.getAttribute('#read', 'data-off')) < 1)) fail.push('아이콘: block 으로 둬도 가운데가 안 맞는다');
+  await page.uncheck('#pad'); await page.waitForTimeout(300);
+  if (!(+(await page.getAttribute('#read', 'data-hit')) < 44))
+    fail.push('아이콘: 그림 크기만 둬도 44px 이 나온다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('statecolor', 980, 900);
+  if (await page.locator('.stc__row').count() !== 4) fail.push('상태색: 네 가지가 아니다');
+  if (await page.getAttribute('#read', 'data-cues') !== '2') fail.push('상태색: 색 말고 단서가 둘이 아니다');
+  if (!(+(await page.getAttribute('#read', 'data-d1')) < +(await page.getAttribute('#read', 'data-d0'))))
+    fail.push('상태색: 적록 흉내를 거쳐도 두 색이 안 가까워진다');
+  if (await page.getAttribute('#read', 'data-same') !== '1')
+    fail.push('상태색: 성공과 오류를 색으로 가를 수 있다고 한다 (보여주려는 결과)');
+  await page.selectOption('#k', 'color'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-cues') !== '0')
+    fail.push('상태색: 색만 쓰는데 단서가 남아 있다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('tokenname', 980, 900);
+  if (!(+(await page.getAttribute('#verdict', 'data-bad')) >= 4))
+    fail.push('토큰이름: 고칠 이름이 넷 미만이다 (보여주려는 결과)');
+  if (!await page.locator('.tn__row[data-n="--blue-500"]').evaluate(e => e.classList.contains('bad')))
+    fail.push('토큰이름: 색 이름이 박힌 토큰을 안 잡는다');
+  if (await page.locator('.tn__row[data-n="--color-text-danger"]').evaluate(e => e.classList.contains('bad')))
+    fail.push('토큰이름: 좋은 이름을 고치라고 한다');
+  if (await page.getAttribute('.tn__row[data-n="--btn-bg"]', 'data-level') !== '부품')
+    fail.push('토큰이름: 부품 층을 못 가린다');
+  await page.fill('#n', '--green-300'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#verdict', 'data-mine') !== 'bad') fail.push('토큰이름: 넣은 나쁜 이름을 통과시킨다');
+  await page.check('#dark'); await page.waitForTimeout(320);
+  if (await page.locator('#lie').isHidden()) fail.push('토큰이름: 어두운 모드에서 이름이 거짓이 된다고 안 보여 준다');
   await page.close();
 
   await browser.close();

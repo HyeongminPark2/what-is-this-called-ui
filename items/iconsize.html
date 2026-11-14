@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>아이콘 크기 — 이름표</title>
+<meta name="description" content="아이콘 크기를 단으로 두는 법. 선 굵기가 같이 줄어드는 문제와 글자와의 가운데 맞추기.">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/card.css">
+<link rel="stylesheet" href="../assets/demo.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로</a>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">이름표<small>화면 속 그게 뭔지 알려주는 도감</small></a>
+  <nav>
+    <a href="../index.html#map">화면 지도</a>
+    <a href="../index.html#pairs">혼동 쌍</a>
+    <a href="../index.html#toc">목차</a>
+    <a href="../appendix.html">색인</a>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+
+  <div class="item-head">
+    <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">2부 꾸미는 규칙</a> › 아이콘 크기</p>
+    <h1>아이콘 크기</h1>
+    <p class="en">Icon size scale</p>
+    <p class="lede" style="margin-top:var(--s3)">아이콘은 <b>글자 크기가 아니라 줄 높이</b>에 맞춥니다. 그리고 <b>그림 크기와 누르는 자리</b>는 다른 값입니다.</p>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+  </div>
+
+  <div class="card-layout">
+    <div>
+
+      <section class="slot" id="s1">
+        <h2 class="slot-label"><span class="n">1</span> 실물 — 직접 만져 보기</h2>
+        <div class="preview-bar">
+          <div class="seg" data-seg="iconsize" role="group" aria-label="미리보기 폭">
+            <button type="button" data-w="390" aria-pressed="false">390 폰</button>
+            <button type="button" data-w="768" aria-pressed="false">768 태블릿</button>
+            <button type="button" data-w="full" aria-pressed="true">넓게</button>
+          </div>
+          <span class="preview-meta" data-meta="iconsize"></span>
+          <a class="preview-open" href="../demos/iconsize.html" target="_blank" rel="noopener">새 탭에서 열기 ↗</a>
+        </div>
+        <div class="stage" data-stage="iconsize" data-w="full">
+          <iframe src="../demos/iconsize.html" title="아이콘 크기 실물 예시"></iframe>
+        </div>
+        <div class="note" style="margin-bottom:0">
+          <p>그림은 <code>viewBox 24</code> 에 <b>선 굵기 1.5</b> 로 그렸습니다.
+          그대로 줄이면 선도 같이 얇아져 <b>12px 에서는 0.75px</b> 가 됩니다 —
+          화면에서 흐려 보이는 이유입니다. '선 굵기를 고정'을 켜면 1.5px 로 되돌아옵니다.<br>
+          인라인 SVG 는 <b>글자처럼 베이스라인에 앉아</b> 글자 가운데보다 몇 px 위로 뜹니다.
+          눈으로는 잘 안 보이는데, 아이콘과 글자를 나란히 두는 자리마다 생기는 어긋남입니다.</p>
+        </div>
+      </section>
+
+      <section class="slot" id="s2">
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <div class="scroll-x">
+        <table class="grid">
+          <tbody>
+            <tr><th>한국어</th><td>아이콘 크기, 아이콘 단</td></tr>
+            <tr><th>영어</th><td>icon size, icon scale, optical size</td></tr>
+            <tr><th>같이 쓰는 말</th><td>선으로 그린 것이 <b>라인 아이콘</b>(outline · stroke), 면으로 채운 것이 <b>솔리드</b>(filled)입니다. 크기마다 <b>다시 그린</b> 그림을 쓰는 것을 <b>광학 크기</b>(optical size)라 하고, Material Symbols 는 이것을 <code>opsz</code> 축으로 넣어 두었습니다.</td></tr>
+            <tr><th>자주 잘못 부름</th><td><b>터치 타깃</b> — <a href="touchtarget.html">터치 타깃</a>은 <b>누르는 넓이</b>이고 이건 <b>그림의 크기</b>입니다.<br><b>아이콘 글꼴</b> — <a href="iconfont.html">아이콘 글꼴</a>은 그림을 <b>글자로</b> 다루는 방식입니다.<br><b>파비콘</b> — 브라우저 탭에 쓰는 아이콘이라 별개입니다.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot" id="s3">
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
+        <p>토큰은 눈에 보이는 부품이 아니라 <b>값의 약속</b>입니다. 이 네 가지만 물어보면 어떤 약속인지 갈립니다.</p>
+        <div class="scroll-x">
+        <table class="grid axes">
+          <thead><tr><th></th><th>무엇을 정하나</th><th>몇 단이 좋나</th><th>바꾸면 어디가 바뀌나</th><th>틀렸을 때 증상</th></tr></thead>
+          <tbody>
+            <tr><td>색 토큰</td><td>색의 <b>쓰임</b></td><td>쓰임 10여 개</td><td>브랜드 색 전체</td><td>같은 파랑이 화면마다 조금씩 다르다</td></tr>
+            <tr><td>다크 모드</td><td><b>두 벌</b>의 값</td><td>2벌(+고대비)</td><td>화면 전체의 바탕과 글자</td><td>흰 상자 하나가 혼자 남아 눈을 찌른다</td></tr>
+            <tr><td>타입 스케일</td><td>글자 크기 <b>단계</b></td><td>6~8단</td><td>제목과 본문의 크기</td><td>뭐가 더 중요한지 안 읽힌다</td></tr>
+            <tr><td>간격 체계</td><td>여백의 <b>단위</b></td><td>6~8단(4·8의 배수)</td><td>모든 패딩과 줄 간격</td><td>뭐라 집어 말하기 어려운데 어수선하다</td></tr>
+            <tr><td>고도</td><td>그림자의 <b>세기</b></td><td>4~5단</td><td>떠 있는 부품들</td><td>무엇이 위에 있는지 안 보인다</td></tr>
+            <tr><td>z-index</td><td>쌓이는 <b>순서</b></td><td>5~6층</td><td>겹치는 것들의 앞뒤</td><td>토스트가 모달에 가려 안 보인다</td></tr>
+            <tr><td>모서리</td><td><b>둥근 정도</b></td><td>4~6단</td><td>카드 · 버튼 · 입력칸 전부</td><td>안팎 곡선이 어긋나 안쪽이 네모져 보인다</td></tr>
+            <tr><td>테두리와 구분선</td><td><b>가르는 선</b></td><td>선 1~2종</td><td>목록 · 카드 · 표</td><td>선이 두 겹이 되고 화면이 어수선하다</td></tr>
+            <tr><td>불투명도</td><td><b>흐린 정도</b></td><td>2~3단</td><td>비활성 · 가림막 · 흐린 글</td><td>글이 안 읽히고 z-index 가 안 먹는다</td></tr>
+            <tr class="me"><td><b>아이콘 크기</b></td><td>그림의 <b>크기</b></td><td>3~4단(16·20·24)</td><td>버튼 · 목록 · 앱바</td><td>선이 흐리고 글자와 가운데가 안 맞는다</td></tr>
+            <tr><td>상태 색</td><td>성공 · 주의 · 오류 · 정보</td><td>4가지 × 3자리</td><td>알림 · 배지 · 입력 오류</td><td>색을 못 보면 상태를 못 읽는다</td></tr>
+            <tr><td>토큰 이름 짓기</td><td>이름의 <b>규칙</b></td><td>층 3겹</td><td>토큰 전부</td><td>이름과 값이 어긋나 아무도 못 고친다</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="note" style="margin-bottom:0">
+          <p><b>한 줄로</b> — <b>세 단이면 충분합니다</b> — 16 · 20 · 24. 그리고 누르는 자리는 언제나 44px 입니다.</p>
+        </div>
+      </section>
+
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 단<span class="hint">자리마다 쓰는 크기가 있다</span></h2>
+        <div class="states">
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:grid;place-items:center;width:52px;height:52px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);color:var(--fg)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">12px</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">거의 안 쓴다</span></div>
+            </div>
+            <figcaption>너무 작다<span>선이 <b>1px 아래</b>로 흐려진다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:grid;place-items:center;width:52px;height:52px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">16px</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">본문 속 · 칩</span></div>
+            </div>
+            <figcaption>1단<span>글 안에 섞여 들어간다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:grid;place-items:center;width:52px;height:52px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">20px</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">목록 · 버튼</span></div>
+            </div>
+            <figcaption>2단<span><b>가장 많이</b> 쓴다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:grid;place-items:center;width:52px;height:52px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">24px</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">앱바 · 바텀탭</span></div>
+            </div>
+            <figcaption>3단<span>혼자 서는 자리</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:grid;place-items:center;width:52px;height:52px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg)"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">32px</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">빈 상태 · 안내</span></div>
+            </div>
+            <figcaption>큰 단<span>그림에 가깝게 쓴다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:grid;place-items:center;width:52px;height:52px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);color:var(--fg)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">12px</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">굵기를 되돌림</span></div>
+            </div>
+            <figcaption>굵기 고정<span>작아도 <b>1.5px 로</b> 그려진다</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <div class="anatomy">
+          <div class="pinboard">
+            <div class="anat" role="img" aria-label="아이콘 크기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+              <div style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
+                <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:11px">
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">viewBox="0 0 24 24"<span style="color:var(--fg-faint)"> ← 그린 좌표계</span></div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">width · height<span style="color:var(--fg-faint)"> ← 화면에서의 크기</span></div>
+                  <div class="pin-out" data-pin="3" style="color:var(--danger)">stroke-width 는 <b>같이 줄어든다</b></div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">stroke="currentColor"<span style="color:var(--fg-faint)"> ← 글자색을 따라간다</span></div>
+                  <div class="pin-out" data-pin="5" style="color:var(--danger)">인라인 SVG 는 <b>베이스라인</b>에 앉는다</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--accent)">누르는 자리는 44px<span style="color:var(--fg-faint)"> ← 그림 크기와 별개</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="pin-list">
+            <li><b><code>viewBox</code> <em>그린 좌표계</em></b><span>보통 24 로 통일한다</span></li>
+            <li><b><code>width·height</code> <em>화면 크기</em></b><span>여기만 바꾼다</span></li>
+            <li><b><code>stroke-width</code> <em>같이 줄어듦</em></b><span>작게 쓰면 <b>흐려진다</b></span></li>
+            <li><b><code>currentColor</code> <em>글자색 따라감</em></b><span>색을 따로 안 적어도 된다</span></li>
+            <li><b>베이스라인 <em>위로 뜸</em></b><span><code>display: block</code>으로 막는다</span></li>
+            <li><b>누르는 자리 <em>44px</em></b><span>그림 크기와 <b>따로</b> 둔다</span></li>
+          </ol>
+        </div>
+        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
+          <b>24 로 그려 16 으로 줄이는 것</b>이 가장 흔한 실수입니다.
+          모양은 같아 보여도 선이 1.5 에서 1.0 으로 얇아져 다른 아이콘처럼 보입니다.
+          같은 줄에 24px 짜리와 16px 짜리를 나란히 두면 <b>굵기가 달라</b> 금방 티가 납니다.<br>
+          해법은 둘입니다 — 크기마다 <b>굵기를 되돌리거나</b>,
+          아예 <b>크기별로 다시 그린</b> 그림을 쓰는 것입니다.
+          후자가 광학 크기이고, 작은 아이콘일수록 획을 덜어내 더 또렷해집니다.</p>
+      </section>
+
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+        <div class="twoup">
+          <div class="do">
+            <h3>이럴 때 쓴다</h3>
+            <ul>
+              <li>크기를 <b>16 · 20 · 24</b> 세 단으로 두기</li>
+              <li>SVG 에 <code>display: block</code>을 깔아 <b>베이스라인 어긋남</b> 막기</li>
+              <li><code>stroke="currentColor"</code>로 <b>글자색을 따라가게</b> 하기</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h3>이럴 때는 안 쓴다</h3>
+            <ul>
+              <li>24px 그림을 12px 로 줄여 쓰기 — <b>선이 흐려진다</b></li>
+              <li>아이콘 크기를 <b>누르는 자리</b>로 쓰기 — 44px 미달이 된다</li>
+              <li>같은 줄에 <b>굵기가 다른</b> 아이콘 섞기</li>
+              <li>아이콘만 두고 <b>이름을 안 붙이기</b> — 소리로는 아무것도 안 들린다</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 누르는 넓이는 <a href="touchtarget.html">터치 타깃</a>, 글자로 다루는 법은 <a href="iconfont.html">아이콘 글꼴</a>, 이름 붙이기는 <a href="name.html">이름 붙이기</a>.</p>
+      </section>
+
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <div class="cases">
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:grid;place-items:center;width:52px;height:52px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);color:var(--fg)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">목록 20px</span></div>
+            </div>
+            <figcaption><b>목록</b>줄 높이에 맞춘다</figcaption>
+          </figure>
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:grid;place-items:center;width:52px;height:52px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);color:var(--fg)"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">앱바 24px</span></div>
+            </div>
+            <figcaption><b>앱바</b>혼자 서니 <b>크게</b></figcaption>
+          </figure>
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:grid;place-items:center;width:52px;height:52px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);color:var(--fg)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">버튼 속 16px</span></div>
+            </div>
+            <figcaption><b>버튼 속</b>글자보다 <b>살짝 작게</b></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slot" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">이 단의 계약서</span></h2>
+        <p>크기는 단으로, 굵기는 크기에 맞춰 되돌립니다.</p>
+<pre class="code"><span class="c">/* 세 단이면 거의 다 덮는다 */</span>
+:root { --icon-1: <span class="a">16px</span>; --icon-2: <span class="a">20px</span>; --icon-3: <span class="a">24px</span>; }
+
+<span class="c">/* 베이스라인에 안 앉게 — 이 한 줄이 가운데 어긋남을 없앤다 */</span>
+svg { <span class="a">display</span>: block; }
+
+<span class="c">/* 누르는 자리는 그림 크기와 따로 둔다 */</span>
+.icon-btn { <span class="a">display</span>: grid; <span class="a">place-items</span>: center;
+  <span class="a">min-width</span>: <span class="a">44px</span>; <span class="a">min-height</span>: <span class="a">44px</span>; }
+
+&lt;<span class="t">button</span> <span class="a">class</span>=<span class="s">"icon-btn"</span> <span class="a">aria-label</span>=<span class="s">"영수증 내려받기"</span>&gt;
+  &lt;<span class="t">svg</span> <span class="a">width</span>=<span class="s">"20"</span> <span class="a">height</span>=<span class="s">"20"</span> <span class="a">viewBox</span>=<span class="s">"0 0 24 24"</span>
+       <span class="a">stroke</span>=<span class="s">"currentColor"</span> <span class="a">stroke-width</span>=<span class="s">"1.8"</span> <span class="a">aria-hidden</span>=<span class="s">"true"</span>&gt;…&lt;/<span class="t">svg</span>&gt;
+&lt;/<span class="t">button</span>&gt;</pre>
+        <div class="scroll-x">
+        <table class="grid kbd-table">
+          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <tbody>
+            <tr><td><code>aria-hidden="true"</code></td><td>그림은 안 읽는다. <b>버튼 쪽에</b> 이름을 붙인다</td></tr>
+            <tr><td><code>aria-label</code></td><td>아이콘만 있는 버튼에는 <b>반드시</b> 필요하다</td></tr>
+            <tr><td><code>currentColor</code></td><td>호버·비활성에서 <b>색이 저절로</b> 따라온다</td></tr>
+            <tr><td><code>vector-effect</code></td><td><code>non-scaling-stroke</code> — 확대해도 선 굵기를 지킨다</td></tr>
+            <tr><td>1em</td><td>글자 크기를 따라가게 하는 법. <b>줄 높이</b>와는 다르니 주의</td></tr>
+            <tr><td>확인하는 법</td><td>두 크기를 <b>나란히 놓고</b> 선 굵기가 같아 보이는지 본다</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot slot--backend" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <div class="scroll-x">
+        <table class="grid">
+          <tbody>
+            <tr><th>서버와는 상관없다</th><td>아이콘은 화면이 가진 자산입니다. 다만 <b>상태 이름</b>은 서버가 정합니다.</td></tr>
+            <tr><th>상태 이름</th><td><code>status: "pending"</code> 처럼 <b>이름</b>으로 주면 화면이 아이콘을 고릅니다 — 아이콘 파일명을 주고받지 않습니다.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot" id="s10">
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
+        <p><b>기본 단</b>이 플랫폼마다 다릅니다.</p>
+        <div class="platforms">
+          <div class="plat">
+            <header><b>웹</b><span>16 · 20 · 24</span></header>
+            <div class="shot">
+              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:grid;place-items:center;width:52px;height:52px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:block"><path d="M12 3v12M7 11l5 5 5-5M4 20h16"/></svg></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">20px</span></div>
+            </div>
+            <footer>정해진 규격이 없습니다. 쓰는 아이콘 묶음(Lucide · Heroicons)의 <b>viewBox 24</b> 를 따라가는 편입니다.</footer>
+          </div>
+          <div class="plat">
+            <header><b>iOS</b><span>SF Symbols</span></header>
+            <div class="shot">
+              <div class="phone" role="img" aria-label="iOS 아이콘 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
+                <div style="position:absolute;left:8px;top:30px;width:13px;height:13px;border:1.2px solid var(--accent);border-radius:3px"></div>
+                <div style="position:absolute;left:26px;right:6px;top:34px;height:6px;border-radius:3px;background:var(--accent-soft)"></div></div></div>
+            </div>
+            <footer>글자와 <b>같은 축</b>으로 다룹니다. 굵기·크기가 본문 글꼴을 따라 저절로 맞춰집니다.</footer>
+          </div>
+          <div class="plat">
+            <header><b>안드로이드</b><span>24dp 기본</span></header>
+            <div class="shot">
+              <div class="phone" role="img" aria-label="안드로이드 아이콘 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
+                <div style="position:absolute;left:8px;top:28px;width:16px;height:16px;border:1.4px solid var(--accent);border-radius:3px"></div>
+                <div style="position:absolute;left:30px;right:6px;top:34px;height:6px;border-radius:3px;background:var(--accent-soft)"></div></div></div>
+            </div>
+            <footer><b>24dp</b> 가 기본이고 그 안에 20dp 그림이 들어갑니다 — 바깥 2dp 가 여백입니다.</footer>
+          </div>
+        </div>
+        <div class="note note--warn" style="margin-bottom:0">
+          <p><b>자주 생기는 사고</b> — iOS 의 <b>SF Symbols</b> 는 아이콘을 글자처럼 다뤄, 글자 크기를 키우면 아이콘도 같이 커지고 굵기도 따라옵니다. 웹에는 그런 장치가 없어서 <b>단을 손으로 정해</b> 둬야 합니다. 안드로이드의 <b>24dp 안에 20dp 그림</b>이라는 규칙은 웹에서도 쓸 만합니다 — 아이콘 둘레에 여백을 넣어 두면 어느 자리에 놓아도 <b>서로 같은 크기</b>로 보입니다.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <aside class="siblings">
+      <h2>헷갈리는 형제</h2>
+      <ol>
+        <li><a href="color.html"><b>색 토큰</b><em>2부</em></a></li>
+        <li><a href="dark.html"><b>다크 모드</b><em>2부</em></a></li>
+        <li><a href="typescale.html"><b>타입 스케일</b><em>2부</em></a></li>
+        <li><a href="spacing.html"><b>간격 체계</b><em>2부</em></a></li>
+        <li><a href="elevation.html"><b>고도</b><em>2부</em></a></li>
+        <li><a href="zindex.html"><b>z-index</b><em>2부</em></a></li>
+        <li><a href="radius.html"><b>모서리</b><em>2부</em></a></li>
+        <li><a href="border.html"><b>테두리와 구분선</b><em>2부</em></a></li>
+        <li><a href="opacity.html"><b>불투명도</b><em>2부</em></a></li>
+        <li><a href="statecolor.html"><b>상태 색</b><em>2부</em></a></li>
+        <li><a href="tokenname.html"><b>토큰 이름 짓기</b><em>2부</em></a></li>
+      </ol>
+      <h2>같이 보면 좋은 것</h2>
+      <ol>
+        <li><a href="touchtarget.html"><b>터치 타깃</b><em>11부</em></a></li>
+        <li><a href="iconfont.html"><b>아이콘 글꼴</b><em>3부</em></a></li>
+        <li><a href="name.html"><b>이름 붙이기</b><em>12부</em></a></li>
+        <li><a href="typescale.html"><b>타입 스케일</b><em>2부</em></a></li>
+      </ol>
+      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-foot wrap">
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+</footer>
+
+<script src="../assets/card.js"></script>
+</body>
+</html>
