@@ -223,7 +223,8 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     '10부': ['table', 'filter', 'search', 'form', 'validation', 'bulk', 'virtual', 'chart', 'exportdata', 'daterange'],
     '9부': ['easing', 'duration', 'enterexit', 'cheap', 'spring', 'stagger', 'gesture', 'reducedmotion', 'sharedelement', 'scrolllink'],
     '11부': ['breakpoint', 'touchtarget', 'hover', 'systemback', 'dpr', 'viewport', 'softkeyboard', 'platformdiff'],
-    '13부': ['login', 'onboarding', 'searchresults', 'settings', 'checkout', 'permission', 'notifications', 'destructive'],
+    '13부': ['login', 'onboarding', 'searchresults', 'settings', 'checkout', 'permission', 'notifications', 'destructive',
+             'profile', 'dashboard', 'share', 'upload'],
     '14부': ['buttontext', 'errortext', 'emptytext', 'placeholder', 'koreanui', 'datetime', 'numbertext', 'voice'],
     '15부': ['wireframe', 'designsystem', 'component', 'variant', 'autolayout', 'prototype', 'handoff', 'assets', 'review', 'versioning'],
   };
@@ -2307,6 +2308,64 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   await page.locator('.mm__bar button[data-m="1"]').click(); await page.waitForTimeout(260);
   if (await page.getAttribute('.mm__bar button[data-m="1"]', 'aria-expanded') !== 'true')
     fail.push('메가메뉴: 열렸다고 안 알린다');
+  await page.close();
+
+  // 13부 화면 단위 패턴 데모 네 장 — 공개 범위·지표 수·공유 범위·헛되이 올린 양
+  page = await demo('profile', 980, 900);
+  if (await page.getAttribute('#read', 'data-act') !== 'message') fail.push('프로필: 남이 보는데 수정 단추가 뜬다');
+  if (await page.getAttribute('#read', 'data-shown') !== '3') fail.push('프로필: 남에게 보이는 칸이 셋이 아니다');
+  if (await page.getAttribute('#read', 'data-leak') !== '0') fail.push('프로필: 기본 상태에서 칸이 샌다');
+  await page.check('#all'); await page.waitForTimeout(320);
+  if (!(+(await page.getAttribute('#read', 'data-leak')) >= 5))
+    fail.push('프로필: 다 보여 줘도 새는 칸이 없다 (보여주려는 결과)');
+  await page.uncheck('#all'); await page.selectOption('#who', 'me'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-act') !== 'edit') fail.push('프로필: 내 프로필인데 수정이 아니다');
+  if (await page.getAttribute('#read', 'data-shown') !== '8') fail.push('프로필: 나는 여덟 칸을 다 못 본다');
+  await page.selectOption('#who', 'team'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-shown') !== '5') fail.push('프로필: 같은 팀이 다섯 칸을 못 본다');
+  await page.close();
+
+  page = await demo('dashboard', 980, 900);
+  if (await page.getAttribute('#read', 'data-buried') !== '0') fail.push('대시보드: 넷인데 으뜸 지표가 묻혔다');
+  if (!(+(await page.getAttribute('#read', 'data-links')) >= 4)) fail.push('대시보드: 지표마다 다음 할 일이 없다');
+  await page.locator('#n').fill('12'); await page.dispatchEvent('#n', 'input'); await page.waitForTimeout(380);
+  if (await page.getAttribute('#read', 'data-buried') !== '1')
+    fail.push('대시보드: 열둘인데 으뜸 지표가 안 묻힌다 (보여주려는 결과)');
+  if (!(+(await page.getAttribute('#read', 'data-share')) < 30)) fail.push('대시보드: 맨 위 칸의 몫이 안 줄어든다');
+  await page.uncheck('#act'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-links') !== '0')
+    fail.push('대시보드: 꺼도 다음 할 일이 남아 있다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('share', 980, 900);
+  if (await page.getAttribute('#read', 'data-scope') !== 'named') fail.push('공유: 기본이 고른 사람만이 아니다');
+  if (await page.getAttribute('#read', 'data-outside') !== '0') fail.push('공유: 기본인데 사내 밖으로 열린다');
+  await page.locator('input[value="any"]').check(); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-outside') !== '1')
+    fail.push('공유: 링크 있는 누구나인데 밖으로 안 열린다 (보여주려는 결과)');
+  if (await page.locator('#warn').isHidden()) fail.push('공유: 밖으로 열리는데 경고가 없다');
+  await page.locator('input[value="me"]').check(); await page.waitForTimeout(320);
+  if (await page.getAttribute('#log', 'data-dir') !== 'narrow') fail.push('공유: 좁혔다고 안 알린다');
+  await page.check('#guess'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-scope') !== 'any')
+    fail.push('공유: 기본을 넓게 둬도 안 넓어진다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('upload', 980, 900);
+  await page.locator('#go').click(); await page.waitForTimeout(1550);
+  if (await page.getAttribute('#read', 'data-done') !== '3') fail.push('올리기: 멀쩡한 세 장이 안 올라간다');
+  if (await page.getAttribute('#read', 'data-err') !== '2') fail.push('올리기: 두 장을 안 거른다');
+  if (await page.getAttribute('#read', 'data-wasted') !== '0.0') fail.push('올리기: 미리 걸렀는데 헛되이 올린 양이 있다');
+  if (await page.getAttribute('#read', 'data-retry') !== '2') fail.push('올리기: 실패한 줄에 다시 시도가 없다');
+  await page.uncheck('#pre'); await page.waitForTimeout(280);
+  await page.locator('#go').click(); await page.waitForTimeout(1650);
+  if (!(+(await page.getAttribute('#read', 'data-wasted')) > 15))
+    fail.push('올리기: 미리 안 걸러도 헛되이 올린 양이 없다 (보여주려는 결과)');
+  await page.uncheck('#each'); await page.waitForTimeout(280);
+  await page.locator('#go').click(); await page.waitForTimeout(1750);
+  if (await page.getAttribute('#read', 'data-rolledback') !== '1')
+    fail.push('올리기: 묶음 처리인데 안 되돌린다 (보여주려는 결과)');
+  if (await page.getAttribute('#read', 'data-done') !== '0') fail.push('올리기: 되돌렸는데 완료가 남아 있다');
   await page.close();
 
   await browser.close();

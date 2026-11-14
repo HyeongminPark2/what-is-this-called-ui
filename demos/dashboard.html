@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대시보드 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>대시보드</b>
+  <label>싣는 지표 <input type="range" id="n" min="1" max="12" step="1" value="4" style="width:100px"><span class="ruler" id="nv"></span></label>
+  <label><input type="checkbox" id="cmp" checked> 견줄 값 같이 적기</label>
+  <label><input type="checkbox" id="act" checked> 할 일로 이어 주기</label>
+</div>
+
+<div class="pad">
+  <div class="dsh" id="dsh"></div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  대시보드의 실패는 <b>지표를 너무 많이 싣는 것</b>입니다 — 숫자가 열두 개면
+  어느 것부터 볼지 정할 수 없어 아무것도 안 보게 됩니다.
+  데모가 <b>맨 위 칸이 전체의 몇 분의 일을 차지하는지</b>를 재서,
+  으뜸 지표가 묻혔는지 알려 줍니다.<br>
+  숫자 하나는 아무 뜻이 없습니다 — <b>지난주 대비</b> 같은 견줄 값이 붙어야
+  좋은지 나쁜지 압니다. '견줄 값 같이 적기'를 끄면 그 뜻이 사라집니다.<br>
+  그리고 대시보드는 <b>보는 데서 끝나면 안 됩니다</b>. 지표마다
+  '밀린 정산 3건 보기' 같은 <b>다음 할 일</b>로 이어 줘야 일이 됩니다.
+</p>
+
+<script>
+(function () {
+  // [이름, 값, 견줄 값(단위까지), 무엇과 견줬나, 다음 할 일]
+  var M = [
+    ['이번 주 정산액', '1,284만', '+12%', '지난주 대비', '밀린 정산 3건 보기'],
+    ['밀린 건수', '3건', '-2건', '어제 대비', '밀린 정산 처리'],
+    ['평균 처리 시간', '1.8일', '-0.3일', '지난주 대비', '오래 걸린 건 보기'],
+    ['오류율', '0.4%', '+0.1%p', '지난주 대비', '오류 목록'],
+    ['신규 가게', '12곳', '+3곳', '지난주 대비', '승인 대기 보기'],
+    ['환불액', '47만', '-8%', '지난주 대비', '환불 내역'],
+    ['카드 비중', '62%', '+1%p', '지난달 대비', '결제 수단별'],
+    ['세금계산서', '48장', '0장', '지난달 대비', '발행 내역'],
+    ['문의 건수', '9건', '-4건', '어제 대비', '문의함'],
+    ['재시도 성공률', '91%', '+2%p', '지난주 대비', '실패 건 보기'],
+    ['정산 예정', '2,140만', '+5%', '다음 주', '예정 내역'],
+    ['미등록 계좌', '2곳', '0곳', '어제 대비', '계좌 등록 요청']
+  ];
+
+  function tile(m, lead) {
+    var cmp = document.getElementById('cmp').checked;
+    var act = document.getElementById('act').checked;
+    var up = m[2].charAt(0) === '+', flat = m[2].charAt(0) !== '+' && m[2].charAt(0) !== '-';
+    var sign = flat ? '—' : (up ? '▲' : '▼');
+    var cls = flat ? '' : (up ? 'up' : 'dn');
+    return '<div class="dsh__t' + (lead ? ' lead' : '') + '" data-m="' + m[0] + '">' +
+      '<small>' + m[0] + '</small><b>' + m[1] + '</b>' +
+      (cmp ? '<span class="d ' + cls + '">' + sign + ' ' + m[2].replace(/^[+-]/, '') +
+        ' <span style="color:var(--fg-muted)">' + m[3] + '</span></span>' : '') +
+      (lead ? '<span class="dsh__bars">' + [3, 5, 4, 7, 6, 9, 8].map(function (h, i) {
+        return '<i class="' + (i === 6 ? 'on' : '') + '" style="height:' + (h * 11) + '%"></i>';
+      }).join('') + '</span>' : '') +
+      (act ? '<a href="#" class="d" style="color:var(--accent);text-decoration:none" data-go="' + m[4] + '">' + m[4] + ' ›</a>' : '') +
+      '</div>';
+  }
+
+  function draw() {
+    var n = +document.getElementById('n').value;
+    document.getElementById('nv').textContent = n + '개';
+    var list = M.slice(0, n);
+    var html = tile(list[0], true);
+    var rest = list.slice(1);
+    for (var i = 0; i < rest.length; i += 3) {
+      html += '<div class="dsh__row">' + rest.slice(i, i + 3).map(function (m) { return tile(m, false); }).join('') + '</div>';
+    }
+    document.getElementById('dsh').innerHTML = html;
+
+    // 으뜸 지표가 묻혔나 — 맨 위 칸이 전체 높이에서 차지하는 몫을 잰다
+    var all = document.getElementById('dsh').getBoundingClientRect().height;
+    var lead = document.querySelector('.dsh__t.lead').getBoundingClientRect().height;
+    var share = all > 0 ? lead / all : 0;
+    var buried = share < 0.3;
+    var cmp = document.getElementById('cmp').checked;
+    var act = document.getElementById('act').checked;
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '지표 <b>' + n + '개</b> · 으뜸 지표가 차지한 자리 <b>' + Math.round(share * 100) + '%</b>' +
+      (buried ? ' <span class="warn">— 묻혔다</span>' : '') +
+      '<br>견줄 값 <b>' + (cmp ? '있다' : '없다') + '</b> · 다음 할 일 <b>' + (act ? '있다' : '없다') + '</b>' +
+      (!cmp ? ' <span class="warn">— 숫자만으로는 좋은지 나쁜지 모른다</span>' : '');
+    rd.dataset.n = String(n);
+    rd.dataset.share = String(Math.round(share * 100));
+    rd.dataset.buried = buried ? '1' : '0';
+    rd.dataset.cmp = cmp ? '1' : '0';
+    rd.dataset.links = String(document.querySelectorAll('[data-go]').length);
+  }
+
+  document.getElementById('dsh').addEventListener('click', function (e) {
+    var a = e.target.closest('[data-go]');
+    if (!a) return;
+    e.preventDefault();
+    document.getElementById('log').innerHTML = '<b>' + a.dataset.go + '</b> 로 넘어갔다 — 보는 데서 끝나지 않는다';
+    document.getElementById('log').dataset.went = a.dataset.go;
+  });
+  document.getElementById('n').addEventListener('input', draw);
+  ['cmp', 'act'].forEach(function (id) { document.getElementById(id).addEventListener('change', draw); });
+  draw();
+})();
+</script>
+</body>
+</html>

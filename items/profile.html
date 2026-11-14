@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>프로필 — 이름표</title>
+<meta name="description" content="같은 주소인데 보는 사람에 따라 다른 화면. 공개 범위, 주 동작, 빈 프로필 처리.">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/card.css">
+<link rel="stylesheet" href="../assets/demo.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로</a>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">이름표<small>화면 속 그게 뭔지 알려주는 도감</small></a>
+  <nav>
+    <a href="../index.html#map">화면 지도</a>
+    <a href="../index.html#pairs">혼동 쌍</a>
+    <a href="../index.html#toc">목차</a>
+    <a href="../appendix.html">색인</a>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+
+  <div class="item-head">
+    <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">13부 화면 단위 패턴</a> › 프로필</p>
+    <h1>프로필</h1>
+    <p class="en">Profile page</p>
+    <p class="lede" style="margin-top:var(--s3)">프로필은 <b>하나의 화면이 아니라 여러 화면</b>입니다 — 내가 볼 때와 남이 볼 때가 다릅니다.</p>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+  </div>
+
+  <div class="card-layout">
+    <div>
+
+      <section class="slot" id="s1">
+        <h2 class="slot-label"><span class="n">1</span> 실물 — 직접 만져 보기</h2>
+        <div class="preview-bar">
+          <div class="seg" data-seg="profile" role="group" aria-label="미리보기 폭">
+            <button type="button" data-w="390" aria-pressed="false">390 폰</button>
+            <button type="button" data-w="768" aria-pressed="false">768 태블릿</button>
+            <button type="button" data-w="full" aria-pressed="true">넓게</button>
+          </div>
+          <span class="preview-meta" data-meta="profile"></span>
+          <a class="preview-open" href="../demos/profile.html" target="_blank" rel="noopener">새 탭에서 열기 ↗</a>
+        </div>
+        <div class="stage" data-stage="profile" data-w="full">
+          <iframe src="../demos/profile.html" title="프로필 실물 예시"></iframe>
+        </div>
+        <div class="note" style="margin-bottom:0">
+          <p>보는 사람을 바꿔 보세요 — 같은 주소인데 나에게는 '수정', 남에게는 '메시지'가 뜹니다.
+          데모가 <b>지금 몇 칸이 보이는지</b>와 <b>새면 안 되는 칸이 몇 개 새고 있는지</b>를 세서 적습니다.<br>
+          '모든 칸을 다 보여 주기'를 켜면 전화번호·생일·인사 메모까지 남에게 보입니다 —
+          빨간 줄이 <b>새면 안 되는</b> 칸입니다. 공개 범위는 <b>기본을 좁게</b> 두고
+          본인이 넓히게 하는 쪽이 안전합니다.</p>
+        </div>
+      </section>
+
+      <section class="slot" id="s2">
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <div class="scroll-x">
+        <table class="grid">
+          <tbody>
+            <tr><th>한국어</th><td>프로필, 프로필 화면, 내 정보, 사용자 페이지</td></tr>
+            <tr><th>영어</th><td>profile page, user page, account page</td></tr>
+            <tr><th>같이 쓰는 말</th><td>내가 보는 내 프로필을 <b>마이 페이지</b>, 남이 보는 쪽을 <b>공개 프로필</b>이라 가릅니다. 맨 위의 큰 띠 그림은 <b>커버</b>(cover · banner), 동그란 사진은 <b>아바타</b>입니다. 값을 고치는 화면은 보통 <b>프로필 편집</b>으로 따로 둡니다.</td></tr>
+            <tr><th>자주 잘못 부름</th><td><b>설정</b> — <a href="settings.html">설정 화면</a>은 <b>내 쪽 동작</b>을 바꾸고, 프로필은 <b>남에게 보이는 정보</b>입니다.<br><b>계정</b> — 계정은 <b>로그인 수단·보안</b>에 가깝습니다.<br><b>아바타</b> — <a href="avatar.html">아바타</a>는 그 안에 들어가는 <b>부품</b>입니다.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot" id="s3">
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
+        <p>화면 단위 패턴은 부품이 아니라 <b>끝내야 하는 일</b>입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <div class="scroll-x">
+        <table class="grid axes">
+          <thead><tr><th></th><th>무엇을 끝내야 하나</th><th>막히는 자리</th><th>중간에 떠나면</th><th>서버가 쥔 것</th></tr></thead>
+          <tbody>
+            <tr><td>로그인</td><td>내가 <b>누구인지</b> 증명</td><td>비밀번호를 잊음</td><td>아무 일도 안 일어남</td><td>세션 · 토큰</td></tr>
+            <tr><td>온보딩</td><td><b>처음 쓸 수</b> 있게</td><td>건너뛸 길이 없음</td><td><b>다시 처음부터</b></td><td>어디까지 봤나</td></tr>
+            <tr><td>검색 결과 화면</td><td>찾는 것을 <b>고름</b></td><td>0건</td><td>질의를 잃는다</td><td>질의 · 순위</td></tr>
+            <tr><td>설정 화면</td><td>값을 <b>바꿈</b></td><td>어디 있는지 못 찾음</td><td>바뀐 채 남는다</td><td>계정별 저장</td></tr>
+            <tr><td>결제 흐름</td><td><b>돈을 냄</b></td><td>비용이 뒤늦게 드러남</td><td>장바구니로 돌아감</td><td>주문 · 결제 상태</td></tr>
+            <tr><td>권한 요청</td><td>기기 기능을 <b>씀</b></td><td><b>한 번 거절하면 끝</b></td><td>그 기능만 못 씀</td><td>모름 — 기기에만 있다</td></tr>
+            <tr><td>알림 센터</td><td>놓친 것을 <b>따라잡음</b></td><td>읽음 처리가 안 맞음</td><td>그대로 쌓인다</td><td>읽음 상태 맞추기</td></tr>
+            <tr><td>위험한 동작</td><td>되돌릴 수 <b>없는 일</b></td><td>확인이 너무 쉬움</td><td><b>아무 일도 안 남 — 좋다</b></td><td>유예 · 복구 기간</td></tr>
+            <tr class="me"><td><b>프로필</b></td><td>남에게 <b>나를 보임</b></td><td>공개 범위를 모름</td><td>아무 일도 안 일어남</td><td><b>누가 무엇까지</b> 보나</td></tr>
+            <tr><td>대시보드</td><td><b>지금 괜찮은지</b> 판단</td><td>숫자가 너무 많음</td><td>아무 일도 안 일어남</td><td>집계 · 기준 시각</td></tr>
+            <tr><td>공유하기</td><td>남에게 <b>보여 줌</b></td><td>범위를 잘못 고름</td><td>링크가 안 나감</td><td><b>열쇠와 범위</b></td></tr>
+            <tr><td>파일 올리기</td><td>파일을 <b>건네줌</b></td><td>다 올리고 거절당함</td><td><b>올린 것이 날아감</b></td><td>크기 · 형식 · 보관</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="note" style="margin-bottom:0">
+          <p><b>한 줄로</b> — <b>'누가 보고 있나'를 먼저 정하세요.</b> 그걸 안 정하면 칸마다 공개 범위를 물을 수 없습니다.</p>
+        </div>
+      </section>
+
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 보는 사람<span class="hint">같은 주소, 다른 화면</span></h2>
+        <div class="states">
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:block;height:18px;background:linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%)"></span><span style="display:flex;gap:5px;align-items:center;padding:0 6px 5px;margin-top:-8px"><span style="width:20px;height:20px;border-radius:999px;border:1.5px solid var(--surface);background:var(--accent-soft);display:grid;place-items:center;font-size:6.5px;color:var(--accent);flex:none">길동</span><span style="display:grid;min-width:0"><span style="font-size:8.5px;font-weight:700">홍길동</span><span style="font-size:7px;color:var(--fg-muted)">내 프로필</span></span><span style="margin-left:auto;font-size:7px;color:var(--accent);white-space:nowrap">프로필 수정</span></span><span style="display:grid;gap:1px;border-top:1px solid var(--line);padding:3px 0"><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">이름</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">홍길동</span></span><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">소속</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">모란상회 · 정산팀</span></span><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">전화</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">010-0000-0000</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">다 보이고 다 고칠 수 있다</span></div>
+            </div>
+            <figcaption>나 자신<span>주 동작이 <b>수정</b></span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:block;height:18px;background:linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%)"></span><span style="display:flex;gap:5px;align-items:center;padding:0 6px 5px;margin-top:-8px"><span style="width:20px;height:20px;border-radius:999px;border:1.5px solid var(--surface);background:var(--accent-soft);display:grid;place-items:center;font-size:6.5px;color:var(--accent);flex:none">길동</span><span style="display:grid;min-width:0"><span style="font-size:8.5px;font-weight:700">홍길동</span><span style="font-size:7px;color:var(--fg-muted)">같은 팀이 보는 화면</span></span><span style="margin-left:auto;font-size:7px;color:var(--accent);white-space:nowrap">메시지 보내기</span></span><span style="display:grid;gap:1px;border-top:1px solid var(--line);padding:3px 0"><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">이름</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">홍길동</span></span><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">소속</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">모란상회 · 정산팀</span></span><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">자리</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">3층 B열</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">사내 칸까지 보인다</span></div>
+            </div>
+            <figcaption>같은 팀<span><b>한 겹 더</b> 보인다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:block;height:18px;background:linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%)"></span><span style="display:flex;gap:5px;align-items:center;padding:0 6px 5px;margin-top:-8px"><span style="width:20px;height:20px;border-radius:999px;border:1.5px solid var(--surface);background:var(--accent-soft);display:grid;place-items:center;font-size:6.5px;color:var(--accent);flex:none">길동</span><span style="display:grid;min-width:0"><span style="font-size:8.5px;font-weight:700">홍길동</span><span style="font-size:7px;color:var(--fg-muted)">남이 보는 화면</span></span><span style="margin-left:auto;font-size:7px;color:var(--accent);white-space:nowrap">메시지 보내기</span></span><span style="display:grid;gap:1px;border-top:1px solid var(--line);padding:3px 0"><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">이름</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">홍길동</span></span><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">소속</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">모란상회 · 정산팀</span></span><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">맡은 일</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">정산 검수</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">공개 칸만</span></div>
+            </div>
+            <figcaption>남<span><b>세 칸</b>만 보인다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:block;height:18px;background:linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%)"></span><span style="display:flex;gap:5px;align-items:center;padding:0 6px 5px;margin-top:-8px"><span style="width:20px;height:20px;border-radius:999px;border:1.5px solid var(--surface);background:var(--accent-soft);display:grid;place-items:center;font-size:6.5px;color:var(--accent);flex:none">길동</span><span style="display:grid;min-width:0"><span style="font-size:8.5px;font-weight:700">홍길동</span><span style="font-size:7px;color:var(--fg-muted)">남이 보는 화면</span></span><span style="margin-left:auto;font-size:7px;color:var(--accent);white-space:nowrap">메시지 보내기</span></span><span style="display:grid;gap:1px;border-top:1px solid var(--line);padding:3px 0"><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">이름</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">홍길동</span></span><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;background:color-mix(in srgb, var(--danger) 8%, transparent);"><span style="width:40px;color:var(--fg-muted);flex:none">전화</span><span style="color:var(--danger);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">010-0000-0000 ⚠</span></span><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;background:color-mix(in srgb, var(--danger) 8%, transparent);"><span style="width:40px;color:var(--fg-muted);flex:none">메모</span><span style="color:var(--danger);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">승진 대상 ⚠</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">새면 안 되는 값이 보인다</span></div>
+            </div>
+            <figcaption>범위 실수<span><b>샌다</b></span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:block;height:18px;background:linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%)"></span><span style="display:flex;gap:5px;align-items:center;padding:0 6px 5px;margin-top:-8px"><span style="width:20px;height:20px;border-radius:999px;border:1.5px solid var(--surface);background:var(--accent-soft);display:grid;place-items:center;font-size:6.5px;color:var(--accent);flex:none">길동</span><span style="display:grid;min-width:0"><span style="font-size:8.5px;font-weight:700">홍길동</span><span style="font-size:7px;color:var(--fg-muted)">남이 보는 화면</span></span><span style="margin-left:auto;font-size:7px;color:var(--accent);white-space:nowrap">메시지 보내기</span></span><span style="display:grid;gap:1px;border-top:1px solid var(--line);padding:3px 0"><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">이름</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">홍길동</span></span><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">소속</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">— 아직 안 적음</span></span><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">맡은 일</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">— 아직 안 적음</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">막지 말고 권하기만</span></div>
+            </div>
+            <figcaption>빈 프로필<span><b>안 적어도</b> 쓸 수 있어야</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:block;height:18px;background:linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%)"></span><span style="display:flex;gap:5px;align-items:center;padding:0 6px 5px;margin-top:-8px"><span style="width:20px;height:20px;border-radius:999px;border:1.5px solid var(--surface);background:var(--accent-soft);display:grid;place-items:center;font-size:6.5px;color:var(--accent);flex:none">—</span><span style="display:grid;min-width:0"><span style="font-size:8.5px;font-weight:700">홍길동</span><span style="font-size:7px;color:var(--fg-muted)">없는 사람</span></span><span style="margin-left:auto;font-size:7px;color:var(--accent);white-space:nowrap"></span></span><span style="display:grid;gap:1px;border-top:1px solid var(--line);padding:3px 0"><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">이름</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">탈퇴한 사용자</span></span><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">소속</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">—</span></span><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">맡은 일</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">—</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">404 가 아니라 이 화면</span></div>
+            </div>
+            <figcaption>탈퇴·없음<span><b>남긴 글</b>은 그대로 둔다</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <div class="anatomy">
+          <div class="pinboard">
+            <div class="anat" role="img" aria-label="프로필의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
+                <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">같은 주소, <b>보는 사람마다 다른 화면</b></div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">주 동작 — 나는 '수정', 남은 '메시지'</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">칸마다 <b>공개 범위</b>가 따로 있다</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">기본은 좁게 — 넓히는 건 본인이 한다</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">빈 프로필 — 채우라고 권하되 막지 않는다</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">아바타는 이니셜로도 선다 — 사진은 선택</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="pin-list">
+            <li><b>같은 주소 <em>다른 화면</em></b><span><b>보는 사람</b>이 화면을 가른다</span></li>
+            <li><b>주 동작 <em>하나만</em></b><span>나는 수정, 남은 메시지</span></li>
+            <li><b>공개 범위 <em>칸마다</em></b><span><b>한 덩어리로</b> 묶지 않는다</span></li>
+            <li><b>기본값 <em>좁게</em></b><span>넓히는 건 <b>본인</b>이</span></li>
+            <li><b>빈 프로필 <em>막지 않기</em></b><span>권하되 <b>쓸 수 있게</b></span></li>
+            <li><b>아바타 <em>이니셜로도</em></b><span>사진은 <b>선택</b>이다</span></li>
+          </ol>
+        </div>
+        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
+          프로필에서 나는 사고는 거의 전부 <b>공개 범위</b>에서 납니다.
+          칸마다 범위가 다른데 화면은 한 장이라, '이 칸이 누구에게 보이는지'를
+          만드는 사람도 쓰는 사람도 헷갈립니다.<br>
+          그래서 <b>화면에 적어 두는 것</b>이 가장 싼 해법입니다 —
+          칸 옆에 '사내 공개'·'나만' 같은 표시를 두면
+          본인이 보면서 고칠 수 있습니다.
+          그리고 <b>남이 보는 화면을 미리 보여 주는</b> 단추가 있으면
+          새는 칸을 본인이 먼저 발견합니다.</p>
+      </section>
+
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+        <div class="twoup">
+          <div class="do">
+            <h3>이럴 때 쓴다</h3>
+            <ul>
+              <li>칸마다 <b>공개 범위</b>를 두고 화면에 적기</li>
+              <li><b>남이 보는 화면 미리 보기</b> 단추 두기</li>
+              <li>빈 프로필에서도 <b>쓰던 일은 되게</b> 하기</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h3>이럴 때는 안 쓴다</h3>
+            <ul>
+              <li>공개 범위를 <b>한 덩어리</b>로 묶기 — 전화번호와 소속이 같이 열린다</li>
+              <li>프로필을 다 채워야 <b>다음으로 못 가게</b> 막기</li>
+              <li>탈퇴한 사람의 프로필을 <b>404</b> 로 보내기 — 남긴 글의 맥락이 끊긴다</li>
+              <li>'수정'과 '메시지'를 <b>둘 다</b> 띄우기 — 누구 화면인지 모호해진다</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 내 쪽 동작은 <a href="settings.html">설정 화면</a>, 동그란 사진은 <a href="avatar.html">아바타</a>, 남에게 보이기는 <a href="share.html">공유하기</a>, 로그인·계정은 <a href="login.html">로그인</a>.</p>
+      </section>
+
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <div class="cases">
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:block;height:18px;background:linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%)"></span><span style="display:flex;gap:5px;align-items:center;padding:0 6px 5px;margin-top:-8px"><span style="width:20px;height:20px;border-radius:999px;border:1.5px solid var(--surface);background:var(--accent-soft);display:grid;place-items:center;font-size:6.5px;color:var(--accent);flex:none">길동</span><span style="display:grid;min-width:0"><span style="font-size:8.5px;font-weight:700">홍길동</span><span style="font-size:7px;color:var(--fg-muted)">남이 보는 화면</span></span><span style="margin-left:auto;font-size:7px;color:var(--accent);white-space:nowrap">메시지 보내기</span></span><span style="display:grid;gap:1px;border-top:1px solid var(--line);padding:3px 0"><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">이름</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">홍길동</span></span><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">소속</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">모란상회</span></span></span></div></div>
+            </div>
+            <figcaption><b>사내 주소록</b><b>공개 칸만</b></figcaption>
+          </figure>
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:block;height:18px;background:linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%)"></span><span style="display:flex;gap:5px;align-items:center;padding:0 6px 5px;margin-top:-8px"><span style="width:20px;height:20px;border-radius:999px;border:1.5px solid var(--surface);background:var(--accent-soft);display:grid;place-items:center;font-size:6.5px;color:var(--accent);flex:none">길동</span><span style="display:grid;min-width:0"><span style="font-size:8.5px;font-weight:700">홍길동</span><span style="font-size:7px;color:var(--fg-muted)">내 프로필</span></span><span style="margin-left:auto;font-size:7px;color:var(--accent);white-space:nowrap">프로필 수정</span></span><span style="display:grid;gap:1px;border-top:1px solid var(--line);padding:3px 0"><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">이름</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">홍길동</span></span><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">한 줄 소개</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">정산을 맡고 있습니다</span></span></span></div></div>
+            </div>
+            <figcaption><b>커뮤니티</b><b>스스로 적은</b> 것 위주</figcaption>
+          </figure>
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:block;height:18px;background:linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%)"></span><span style="display:flex;gap:5px;align-items:center;padding:0 6px 5px;margin-top:-8px"><span style="width:20px;height:20px;border-radius:999px;border:1.5px solid var(--surface);background:var(--accent-soft);display:grid;place-items:center;font-size:6.5px;color:var(--accent);flex:none">길동</span><span style="display:grid;min-width:0"><span style="font-size:8.5px;font-weight:700">홍길동</span><span style="font-size:7px;color:var(--fg-muted)">손님이 보는 화면</span></span><span style="margin-left:auto;font-size:7px;color:var(--accent);white-space:nowrap">문의하기</span></span><span style="display:grid;gap:1px;border-top:1px solid var(--line);padding:3px 0"><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">가게</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">모란상회</span></span><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">업종</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">식료품</span></span></span></div></div>
+            </div>
+            <figcaption><b>가게 프로필</b><b>사람이 아니어도</b> 같은 틀</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slot" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">이 화면의 계약서</span></h2>
+        <p>보는 사람에 따라 <b>그리는 것 자체를</b> 바꿉니다 — 숨기기로 때우지 않습니다.</p>
+<pre class="code"><span class="c">&lt;!-- 서버가 이미 걸러서 준다. 화면이 CSS 로 숨기지 않는다 --&gt;</span>
+&lt;<span class="t">main</span>&gt;
+  &lt;<span class="t">h1</span>&gt;홍길동&lt;/<span class="t">h1</span>&gt;
+  &lt;<span class="t">p</span>&gt;모란상회 · 정산팀&lt;/<span class="t">p</span>&gt;
+
+  &lt;<span class="t">dl</span>&gt;
+    &lt;<span class="t">dt</span>&gt;맡은 일&lt;/<span class="t">dt</span>&gt;&lt;<span class="t">dd</span>&gt;정산 검수&lt;/<span class="t">dd</span>&gt;
+  &lt;/<span class="t">dl</span>&gt;
+
+  &lt;<span class="t">a</span> <span class="a">href</span>=<span class="s">"/messages/new?to=gildong"</span>&gt;메시지 보내기&lt;/<span class="t">a</span>&gt;
+&lt;/<span class="t">main</span>&gt;
+
+<span class="c">/* ✕ 이렇게 하면 소스에 값이 그대로 남아 있다 */</span>
+.private { <span class="a">display</span>: none; }</pre>
+        <div class="scroll-x">
+        <table class="grid kbd-table">
+          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <tbody>
+            <tr><td>Tab</td><td>주 동작이 <b>맨 앞</b>에 오게 마크업 순서를 둔다</td></tr>
+            <tr><td><code>&lt;dl&gt;</code></td><td>이름-값 짝이라 <b>소리로 읽을 때</b> 짝이 유지된다</td></tr>
+            <tr><td><code>&lt;h1&gt;</code></td><td>사람 이름이 그 화면의 <b>제목</b>이다</td></tr>
+            <tr><td><code>aria-label</code></td><td>아바타에는 <b>이름을 다시</b> 적지 않는다 — 중복해 읽힌다</td></tr>
+            <tr><td>숨기기</td><td><b>서버에서 거른다</b>. <code>display:none</code> 은 소스에 남는다</td></tr>
+            <tr><td>확인하는 법</td><td>로그아웃한 창에서 <b>같은 주소</b>를 열어 본다</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot slot--backend" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <div class="scroll-x">
+        <table class="grid">
+          <tbody>
+            <tr><th>걸러서 준다</th><td>응답 자체에 <b>볼 수 있는 칸만</b> 담습니다. 전부 주고 화면이 숨기면 <b>소스에 그대로</b> 남습니다.</td></tr>
+            <tr><th>누가 보는지</th><td>요청자의 신분에 따라 응답이 달라집니다 — <b>같은 URL 에 다른 몸체</b>라 캐시를 조심해야 합니다.</td></tr>
+            <tr><th>공개 범위</th><td>칸마다 <code>visibility: "org" | "team" | "self"</code> 를 들고 있어야 화면이 표시를 그릴 수 있습니다.</td></tr>
+            <tr><th>탈퇴</th><td>지우지 말고 <b>표시만</b> 바꿉니다 — 남긴 글의 작성자 자리가 비면 맥락이 끊깁니다.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot" id="s10">
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
+        <p><b>화면 구성은 어디서나 비슷</b>하고, 공개 범위를 다루는 자리만 다릅니다.</p>
+        <div class="platforms">
+          <div class="plat">
+            <header><b>웹</b><span>한 주소</span></header>
+            <div class="shot">
+              <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:block;height:18px;background:linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%)"></span><span style="display:flex;gap:5px;align-items:center;padding:0 6px 5px;margin-top:-8px"><span style="width:20px;height:20px;border-radius:999px;border:1.5px solid var(--surface);background:var(--accent-soft);display:grid;place-items:center;font-size:6.5px;color:var(--accent);flex:none">길동</span><span style="display:grid;min-width:0"><span style="font-size:8.5px;font-weight:700">홍길동</span><span style="font-size:7px;color:var(--fg-muted)">남이 보는 화면</span></span><span style="margin-left:auto;font-size:7px;color:var(--accent);white-space:nowrap">메시지 보내기</span></span><span style="display:grid;gap:1px;border-top:1px solid var(--line);padding:3px 0"><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">이름</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">홍길동</span></span><span style="display:flex;gap:5px;padding:2px 5px;font-size:8px;"><span style="width:40px;color:var(--fg-muted);flex:none">소속</span><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">모란상회</span></span></span></div></div>
+            </div>
+            <footer>주소 하나에 <b>여러 얼굴</b>입니다. 로그아웃 상태로 열어 보는 것이 가장 빠른 검사입니다.</footer>
+          </div>
+          <div class="plat">
+            <header><b>iOS</b><span>프로필 화면</span></header>
+            <div class="shot">
+              <div class="phone" role="img" aria-label="iOS 프로필 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
+                <div style="position:absolute;left:50%;top:24px;transform:translateX(-50%);width:16px;height:16px;border-radius:999px;background:var(--accent-soft)"></div>
+                <div style="position:absolute;left:8px;right:8px;top:44px;height:5px;border-radius:2px;background:var(--accent-soft)"></div>
+                <div style="position:absolute;left:5px;right:5px;top:54px;height:7px;border-radius:2px;background:var(--bg)"></div></div></div>
+            </div>
+            <footer>아바타를 <b>가운데</b> 두는 꼴이 흔합니다. 공개 범위는 설정 쪽으로 빼 둡니다.</footer>
+          </div>
+          <div class="plat">
+            <header><b>안드로이드</b><span>프로필 화면</span></header>
+            <div class="shot">
+              <div class="phone" role="img" aria-label="안드로이드 프로필 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
+                <div style="position:absolute;left:6px;top:24px;width:16px;height:16px;border-radius:999px;background:var(--accent-soft)"></div>
+                <div style="position:absolute;left:26px;right:6px;top:28px;height:5px;border-radius:2px;background:var(--accent-soft)"></div>
+                <div style="position:absolute;left:5px;right:5px;top:46px;height:7px;border-radius:2px;background:var(--bg)"></div></div></div>
+            </div>
+            <footer>아바타를 <b>왼쪽</b>에 두고 오른쪽에 이름을 적는 꼴이 많습니다. 틀은 같습니다.</footer>
+          </div>
+        </div>
+        <div class="note note--warn" style="margin-bottom:0">
+          <p><b>자주 생기는 사고</b> — 앱에서는 로그인한 사람이 대부분이라 <b>'남이 볼 때'를 잊기 쉽습니다</b>. 웹은 로그아웃 상태로 그냥 열리니 사고가 바로 드러나는데, 그게 오히려 다행입니다 — <b>로그아웃한 창에서 같은 주소를 열어 보는 것</b>을 마무리 검사로 넣어 두면 공개 범위 사고의 대부분이 걸립니다.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <aside class="siblings">
+      <h2>헷갈리는 형제</h2>
+      <ol>
+        <li><a href="login.html"><b>로그인</b><em>13부</em></a></li>
+        <li><a href="onboarding.html"><b>온보딩</b><em>13부</em></a></li>
+        <li><a href="searchresults.html"><b>검색 결과 화면</b><em>13부</em></a></li>
+        <li><a href="settings.html"><b>설정 화면</b><em>13부</em></a></li>
+        <li><a href="checkout.html"><b>결제 흐름</b><em>13부</em></a></li>
+        <li><a href="permission.html"><b>권한 요청</b><em>13부</em></a></li>
+        <li><a href="notifications.html"><b>알림 센터</b><em>13부</em></a></li>
+        <li><a href="destructive.html"><b>위험한 동작</b><em>13부</em></a></li>
+        <li><a href="dashboard.html"><b>대시보드</b><em>13부</em></a></li>
+        <li><a href="share.html"><b>공유하기</b><em>13부</em></a></li>
+        <li><a href="upload.html"><b>파일 올리기</b><em>13부</em></a></li>
+      </ol>
+      <h2>같이 보면 좋은 것</h2>
+      <ol>
+        <li><a href="avatar.html"><b>아바타</b><em>5부</em></a></li>
+        <li><a href="settings.html"><b>설정 화면</b><em>13부</em></a></li>
+        <li><a href="share.html"><b>공유하기</b><em>13부</em></a></li>
+        <li><a href="login.html"><b>로그인</b><em>13부</em></a></li>
+      </ol>
+      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-foot wrap">
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+</footer>
+
+<script src="../assets/card.js"></script>
+</body>
+</html>

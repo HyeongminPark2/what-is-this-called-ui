@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>파일 올리기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>파일 올리기</b>
+  <label><input type="checkbox" id="pre" checked> 보내기 전에 미리 거르기</label>
+  <label><input type="checkbox" id="each" checked> 파일마다 따로 처리</label>
+  <button class="ui-btn" id="go">다섯 장 올리기</button>
+</div>
+
+<div class="pad">
+  <div class="upl">
+    <div class="upl__drop" id="drop">여기로 끌어다 놓거나 <button class="ui-btn ui-btn--ghost" id="pick" style="min-height:28px;padding:3px 9px;font-size:12px">파일 고르기</button><br><small>JPG · PNG · PDF · 한 장 10MB 까지</small></div>
+    <div id="list"></div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  올리기의 핵심은 <b>언제 실패를 알려 주느냐</b>입니다. 10MB 가 넘거나 받지 않는 형식이면
+  <b>보내기 전에</b> 그 자리에서 알려 줘야 합니다 — 다 올리고 나서 거절하면
+  기다린 시간이 통째로 버려집니다. 데모가 <b>헛되이 올린 양(MB)</b>을 재서 적습니다.<br>
+  <b>파일마다 따로</b> 처리해야 합니다. 한 장이 실패했다고 나머지까지 되돌리면
+  멀쩡한 네 장을 다시 올려야 합니다. 끄면 그렇게 동작합니다.<br>
+  실패한 줄에는 <b>왜 실패했는지와 다시 시도</b>가 같이 있어야 합니다.
+</p>
+
+<script>
+(function () {
+  // [이름, MB, 형식, 받을 수 있나]
+  var FILES = [
+    ['영수증_2411_01.jpg', 1.2, 'jpg', true],
+    ['영수증_2411_02.jpg', 2.4, 'jpg', true],
+    ['정산내역_11월.pdf', 14.8, 'pdf', false],   // 너무 크다
+    ['영수증_2411_03.heic', 3.1, 'heic', false], // 안 받는 형식
+    ['영수증_2411_04.png', 0.8, 'png', true]
+  ];
+  var LIMIT = 10;
+  var rows = [], timer = null;
+
+  function why(f) {
+    if (f[1] > LIMIT) return '10MB 가 넘습니다 (' + f[1] + 'MB)';
+    if (['jpg', 'png', 'pdf'].indexOf(f[2]) < 0) return 'JPG · PNG · PDF 만 받습니다';
+    return '';
+  }
+
+  function render() {
+    document.getElementById('list').innerHTML = rows.map(function (r, i) {
+      return '<div class="upl__f' + (r.err ? ' err' : '') + '" data-i="' + i + '">' +
+        '<span class="nm">' + r.name + '</span>' +
+        '<span class="st">' + r.st + '</span>' +
+        '<span class="track"><i style="width:' + r.pct + '%"></i></span>' +
+        (r.err ? '<span class="st" style="grid-column:1/-1">' + r.err +
+          ' · <a href="#" data-retry="' + i + '" style="color:var(--accent)">다시 시도</a></span>' : '') +
+        '</div>';
+    }).join('');
+
+    var wasted = rows.reduce(function (a, r) { return a + (r.err ? r.sent : 0); }, 0);
+    var done = rows.filter(function (r) { return r.pct === 100 && !r.err; }).length;
+    var err = rows.filter(function (r) { return r.err; }).length;
+    var rd = document.getElementById('read');
+    rd.innerHTML = '올린 파일 <b>' + done + '</b> · 실패 <b>' + err + '</b>' +
+      '<br>헛되이 올린 양 <b>' + wasted.toFixed(1) + 'MB</b>' +
+      (wasted > 0 ? ' <span class="warn">— 보내고 나서 거절당했다</span>' : '');
+    rd.dataset.done = String(done);
+    rd.dataset.err = String(err);
+    rd.dataset.wasted = wasted.toFixed(1);
+    rd.dataset.retry = String(document.getElementById('list').querySelectorAll('[data-retry]').length);
+  }
+
+  function start() {
+    clearTimeout(timer);
+    var pre = document.getElementById('pre').checked;
+    var each = document.getElementById('each').checked;
+    rows = FILES.map(function (f) {
+      var bad = why(f);
+      if (bad && pre) {
+        // 보내기 전에 거른다 — 한 바이트도 안 올라간다
+        return { name: f[0], mb: f[1], pct: 0, sent: 0, st: '안 보냄', err: bad };
+      }
+      return { name: f[0], mb: f[1], pct: 0, sent: 0, st: '대기', err: '', bad: bad };
+    });
+    render();
+
+    var step = 0;
+    (function tick() {
+      step++;
+      var alive = false;
+      rows.forEach(function (r) {
+        if (r.err || r.pct >= 100) return;
+        alive = true;
+        r.pct = Math.min(100, r.pct + 25);
+        r.sent = r.mb * r.pct / 100;
+        r.st = r.pct + '%';
+        if (r.pct >= 100) {
+          if (r.bad) { r.err = r.bad; r.st = '거절됨'; r.sent = r.mb; }
+          else r.st = '완료';
+        }
+      });
+      render();
+      if (alive) { timer = setTimeout(tick, 170); return; }
+
+      // 묶음으로 처리하면 한 장이 실패할 때 전부 되돌린다
+      if (!each && rows.some(function (r) { return r.err; })) {
+        rows.forEach(function (r) {
+          if (!r.err) { r.pct = 0; r.sent = 0; r.st = '되돌림'; }
+        });
+        render();
+        document.getElementById('log').innerHTML =
+          '<span class="warn">한 장이 실패해 전부 되돌렸다</span> — 멀쩡한 것까지 다시 올려야 한다';
+        document.getElementById('read').dataset.rolledback = '1';
+      } else {
+        document.getElementById('log').innerHTML = '끝났다 — 실패한 줄만 다시 시도하면 된다';
+        document.getElementById('read').dataset.rolledback = '0';
+      }
+    })();
+  }
+
+  document.getElementById('list').addEventListener('click', function (e) {
+    var a = e.target.closest('[data-retry]');
+    if (!a) return;
+    e.preventDefault();
+    document.getElementById('log').innerHTML = '<b>' + rows[+a.dataset.retry].name + '</b> 만 다시 시도한다';
+  });
+  document.getElementById('go').addEventListener('click', start);
+  document.getElementById('pick').addEventListener('click', start);
+  ['pre', 'each'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', function () { rows = []; render(); });
+  });
+
+  var drop = document.getElementById('drop');
+  drop.addEventListener('dragover', function (e) { e.preventDefault(); drop.classList.add('over'); });
+  drop.addEventListener('dragleave', function () { drop.classList.remove('over'); });
+  drop.addEventListener('drop', function (e) { e.preventDefault(); drop.classList.remove('over'); start(); });
+
+  render();
+  document.getElementById('read').innerHTML = "'다섯 장 올리기'를 눌러 보세요";
+})();
+</script>
+</body>
+</html>

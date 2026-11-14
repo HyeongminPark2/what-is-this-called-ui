@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>공유하기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>공유하기</b>
+  <label><input type="checkbox" id="guess"> 처음부터 '링크 있는 누구나'로 두기</label>
+</div>
+
+<div class="pad">
+  <div class="shr">
+    <b style="font-size:13px">2026년 11월 정산 내역 공유</b>
+    <div class="shr__opt" id="opt"></div>
+    <div class="shr__link">
+      <input class="ui-input" id="url" readonly style="min-height:32px">
+      <button class="ui-btn" id="copy" style="min-height:32px;padding:5px 11px;font-size:12.5px">링크 복사</button>
+    </div>
+    <div class="shr__who" id="who"></div>
+    <p class="shr__warn" id="warn" hidden></p>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  공유의 실패는 거의 늘 <b>기본값이 너무 넓은 것</b>입니다 — 아무 생각 없이 누르면
+  링크가 사내 밖으로도 열립니다. 데모가 지금 범위에서 <b>볼 수 있는 사람 수</b>를
+  어림해 적고, 사내 밖까지 열리면 경고를 띄웁니다.<br>
+  '처음부터 링크 있는 누구나로 두기'를 켜 보세요. 아무것도 안 골라도
+  <b>가장 넓은 범위</b>에서 시작합니다 — 쓰기는 편하고 사고는 여기서 납니다.<br>
+  범위를 바꾸면 <b>이미 나간 링크</b>가 어떻게 되는지도 같이 알려 줘야 합니다.
+  좁히면 그 링크는 그 자리에서 막힙니다.
+</p>
+
+<script>
+(function () {
+  // [열쇠, 이름, 설명, 볼 수 있는 사람 어림]
+  var SCOPES = [
+    ['me', '나만', '아무도 못 본다', 1],
+    ['named', '고른 사람만', '홍길동 · 김철수 — 이름을 적어 넣는다', 3],
+    ['org', '모란상회 구성원', '로그인한 사내 사람이면 누구나', 48],
+    ['any', '링크 있는 누구나', '로그인 없이 열린다 · 검색에는 안 잡힌다', 9999]
+  ];
+  var cur = 'named';
+  var copied = 0;
+
+  function draw() {
+    document.getElementById('opt').innerHTML = SCOPES.map(function (s) {
+      return '<label class="' + (cur === s[0] ? 'on' : '') + '" data-s="' + s[0] + '">' +
+        '<input type="radio" name="scope" value="' + s[0] + '"' + (cur === s[0] ? ' checked' : '') + '>' +
+        '<span>' + s[1] + '<small>' + s[2] + '</small></span></label>';
+    }).join('');
+
+    var s = SCOPES.filter(function (x) { return x[0] === cur; })[0];
+    document.getElementById('url').value =
+      cur === 'me' ? '(공유 안 함)' : 'https://example.com/s/2411-0042' + (cur === 'any' ? '?t=9fa3' : '');
+    document.getElementById('copy').disabled = cur === 'me';
+
+    document.getElementById('who').innerHTML = ({
+      me: '<span>나만</span>',
+      named: '<span>홍길동</span><span>김철수</span><span>나</span>',
+      org: '<span>모란상회 48명</span>',
+      any: '<span>링크를 받은 누구나</span>'
+    })[cur];
+
+    var outside = cur === 'any';
+    var w = document.getElementById('warn');
+    w.hidden = !outside;
+    w.textContent = '⚠ 사내 밖으로도 열립니다 — 링크가 전달되면 막을 수 없습니다';
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '범위 <b>' + s[1] + '</b> · 볼 수 있는 사람 <b>' +
+      (s[3] >= 9999 ? '제한 없음' : s[3] + '명') + '</b>' +
+      (outside ? ' <span class="warn">— 사내 밖까지</span>' : '');
+    rd.dataset.scope = cur;
+    rd.dataset.people = String(s[3]);
+    rd.dataset.outside = outside ? '1' : '0';
+    rd.dataset.copied = String(copied);
+  }
+
+  document.getElementById('opt').addEventListener('change', function (e) {
+    var r = e.target.closest('input[name=scope]');
+    if (!r) return;
+    var before = cur;
+    cur = r.value;
+    draw();
+    var narrowed = SCOPES.findIndex(function (x) { return x[0] === cur; }) <
+                   SCOPES.findIndex(function (x) { return x[0] === before; });
+    document.getElementById('log').innerHTML = narrowed
+      ? '범위를 <b>좁혔다</b> — 이미 나간 링크는 이 자리에서 막힌다'
+      : '범위를 <b>넓혔다</b> — 이미 나간 링크도 같이 넓어진다';
+    document.getElementById('log').dataset.dir = narrowed ? 'narrow' : 'wide';
+  });
+
+  document.getElementById('copy').addEventListener('click', function () {
+    copied++;
+    draw();
+    document.getElementById('log').innerHTML = '링크를 복사했다 — <b>' +
+      SCOPES.filter(function (x) { return x[0] === cur; })[0][1] + '</b> 범위로 열린다';
+  });
+
+  document.getElementById('guess').addEventListener('change', function () {
+    cur = this.checked ? 'any' : 'named';
+    copied = 0;
+    draw();
+    document.getElementById('log').innerHTML = this.checked
+      ? '<span class="warn">기본이 가장 넓다</span> — 아무것도 안 골라도 밖으로 열린다'
+      : '기본이 <b>좁다</b> — 넓히려면 본인이 고른다';
+  });
+
+  draw();
+})();
+</script>
+</body>
+</html>

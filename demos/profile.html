@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>프로필 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>프로필</b>
+  <label>보는 사람 <select class="sel" id="who" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="me">나 자신</option>
+    <option value="team">같은 팀</option>
+    <option value="stranger" selected>남</option>
+  </select></label>
+  <label><input type="checkbox" id="all"> 모든 칸을 다 보여 주기</label>
+</div>
+
+<div class="pad">
+  <div class="pfl">
+    <div class="pfl__cover"></div>
+    <div class="pfl__head">
+      <span class="pfl__av" aria-hidden="true">길동</span>
+      <span class="pfl__who"><b>홍길동</b><small id="role"></small></span>
+      <button class="ui-btn ui-btn--ghost" id="act" style="margin-left:auto;min-height:30px;padding:4px 10px;font-size:12px"></button>
+    </div>
+    <div class="pfl__rows" id="rows"></div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  프로필은 <b>보는 사람에 따라 다른 화면</b>입니다 — 같은 주소인데 나에게는 '수정',
+  남에게는 '메시지'가 뜹니다. 데모가 <b>지금 몇 칸이 보이는지</b>와
+  <b>남에게 새면 안 되는 칸이 몇 개 새고 있는지</b>를 세서 적습니다.<br>
+  '모든 칸을 다 보여 주기'를 켜면 전화번호·생일·내부 메모까지 남에게 보입니다 —
+  빨갛게 표시되는 줄이 <b>새면 안 되는</b> 칸입니다. 공개 범위는
+  <b>기본을 좁게</b> 두고 본인이 넓히게 하는 쪽이 안전합니다.
+</p>
+
+<script>
+(function () {
+  // [칸 이름, 값, 누구까지 보여도 되나]
+  var FIELDS = [
+    ['이름', '홍길동', 'stranger'],
+    ['소속', '모란상회 · 정산팀', 'stranger'],
+    ['맡은 일', '정산 검수', 'stranger'],
+    ['사내 메신저', '@gildong', 'team'],
+    ['자리', '3층 B열', 'team'],
+    ['전화번호', '010-0000-0000', 'me'],
+    ['생일', '1990-05-02', 'me'],
+    ['인사 메모', '2026-03 승진 대상', 'me']
+  ];
+  var RANK = { stranger: 0, team: 1, me: 2 };
+
+  function draw() {
+    var who = document.getElementById('who').value;
+    var all = document.getElementById('all').checked;
+    var seen = RANK[who];
+
+    document.getElementById('role').textContent =
+      ({ me: '내 프로필', team: '같은 팀이 보는 화면', stranger: '남이 보는 화면' })[who];
+    var act = document.getElementById('act');
+    act.textContent = who === 'me' ? '프로필 수정' : '메시지 보내기';
+    act.dataset.act = who === 'me' ? 'edit' : 'message';
+
+    var leak = 0, shown = 0;
+    document.getElementById('rows').innerHTML = FIELDS.map(function (f) {
+      var need = RANK[f[2]];
+      var visible = all || seen >= need;
+      if (!visible) return '';
+      shown++;
+      var bad = seen < need;        // 볼 자격이 없는데 보이는 칸
+      if (bad) leak++;
+      return '<div class="pfl__r' + (bad ? ' priv' : '') + '" data-f="' + f[0] + '">' +
+        '<span>' + f[0] + '</span><span>' + f[1] + (bad ? ' ⚠' : '') + '</span></div>';
+    }).join('');
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '보이는 칸 <b>' + shown + '개</b> · 새면 안 되는 칸 <b>' + leak + '개</b>' +
+      (leak ? ' <span class="warn">— 남에게 보이면 안 되는 값이다</span>' : '') +
+      '<br>주 동작 <b>' + act.textContent + '</b>';
+    rd.dataset.shown = String(shown);
+    rd.dataset.leak = String(leak);
+    rd.dataset.act = act.dataset.act;
+  }
+
+  document.getElementById('act').addEventListener('click', function () {
+    document.getElementById('log').innerHTML = '<b>' + this.textContent + '</b> 를 눌렀다';
+  });
+  document.getElementById('who').addEventListener('change', draw);
+  document.getElementById('all').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

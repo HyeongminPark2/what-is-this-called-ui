@@ -1813,3 +1813,59 @@ body > .hint, body > .log, body > .ratio {
 .mm__col b { font-size: 11px; color: var(--fg-muted); }
 .mm__col a { font-size: 12px; color: var(--fg); text-decoration: none; }
 .mm__path { position: absolute; inset: 0; pointer-events: none; z-index: 9; }
+
+/* ── 13부 화면 단위 패턴 남은 넷 ──────────────────────── */
+.pfl { border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); overflow: hidden; max-width: 320px; }
+.pfl__cover { height: 54px; background: linear-gradient(135deg, var(--accent) 0%, var(--accent-soft) 100%); }
+.pfl__head { display: flex; gap: 10px; padding: 0 12px 10px; margin-top: -20px; align-items: flex-end; }
+.pfl__av { width: 48px; height: 48px; border-radius: 999px; border: 2px solid var(--surface);
+  background: var(--accent-soft); display: grid; place-items: center; font-size: 15px; color: var(--accent); flex: none; }
+.pfl__who { min-width: 0; display: grid; gap: 1px; }
+.pfl__who b { font-size: 14px; }
+.pfl__who small { font-size: 11.5px; color: var(--fg-muted); }
+.pfl__rows { border-top: 1px solid var(--line); }
+.pfl__r { display: flex; gap: 8px; padding: 7px 12px; font-size: 12.5px; border-top: 1px solid var(--line); }
+.pfl__r:first-child { border-top: 0; }
+.pfl__r span:first-child { width: 72px; color: var(--fg-muted); flex: none; }
+.pfl__r.priv { background: color-mix(in srgb, var(--danger) 7%, transparent); }
+.pfl__r.priv span:last-child { color: var(--danger); }
+
+.dsh { display: grid; gap: 8px; max-width: 420px; }
+.dsh__row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.dsh__t { border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); padding: 9px 10px; display: grid; gap: 2px; min-width: 0; }
+.dsh__t b { font-size: 17px; font-variant-numeric: tabular-nums; }
+.dsh__t small { font-size: 11px; color: var(--fg-muted); }
+.dsh__t .d { font-size: 11px; }
+.dsh__t .up { color: #1a7f37; }
+.dsh__t .dn { color: var(--danger); }
+.dsh__t.lead { grid-column: span 3; }
+.dsh__t.lead b { font-size: 26px; }
+.dsh__bars { display: flex; gap: 3px; align-items: flex-end; height: 34px; }
+.dsh__bars i { flex: 1; background: var(--accent-soft); border-radius: 2px 2px 0 0; }
+.dsh__bars i.on { background: var(--accent); }
+
+.shr { border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); padding: 11px; display: grid; gap: 9px; max-width: 330px; }
+.shr__opt { display: grid; gap: 5px; }
+.shr__opt label { display: flex; gap: 7px; align-items: flex-start; font-size: 12.5px; padding: 6px 8px;
+  border: 1px solid var(--line); border-radius: var(--r1); cursor: pointer; }
+.shr__opt label.on { border-color: var(--accent); background: var(--accent-soft); }
+.shr__opt small { display: block; font-size: 11px; color: var(--fg-muted); }
+.shr__link { display: flex; gap: 6px; align-items: center; }
+.shr__link input { font-family: var(--mono); font-size: 11.5px; }
+.shr__who { display: flex; gap: 4px; flex-wrap: wrap; font-size: 11px; }
+.shr__who span { border: 1px solid var(--line); border-radius: 999px; padding: 1px 8px; color: var(--fg-muted); }
+.shr__warn { font-size: 11.5px; color: var(--danger); }
+
+.upl { border: 1px solid var(--line); border-radius: var(--r2); background: var(--surface); padding: 11px; display: grid; gap: 9px; max-width: 360px; }
+.upl__drop { border: 2px dashed var(--line); border-radius: var(--r2); padding: 16px; text-align: center;
+  font-size: 12.5px; color: var(--fg-muted); }
+.upl__drop.over { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.upl__f { display: grid; grid-template-columns: 1fr auto; gap: 2px 8px; align-items: center;
+  border-top: 1px solid var(--line); padding: 6px 0; font-size: 12.5px; }
+.upl__f:first-of-type { border-top: 0; }
+.upl__f .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.upl__f .st { font-size: 11px; color: var(--fg-muted); white-space: nowrap; }
+.upl__f.err .nm, .upl__f.err .st { color: var(--danger); }
+.upl__f .track { grid-column: 1 / -1; height: 4px; border-radius: 999px; background: var(--bg); overflow: hidden; }
+.upl__f .track i { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+.upl__f.err .track i { background: var(--danger); }
