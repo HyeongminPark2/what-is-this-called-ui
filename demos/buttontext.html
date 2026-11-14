@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>버튼 문구 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 560px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .try { display: flex; gap: var(--s2); align-items: center; flex-wrap: wrap; }
+  .try input { flex: 1; min-width: 150px; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>버튼 문구</b>
+  <label><input type="checkbox" id="blind"> 버튼만 보고 맞히기</label>
+</div>
+
+<div class="pad">
+  <div id="ctx"></div>
+  <div class="verd" id="list"></div>
+  <div class="try">
+    <input class="ui-input" id="mine" placeholder="직접 써 보기 — 예: 초대 보내기">
+    <span class="ruler" id="myverd"></span>
+  </div>
+</div>
+
+<p class="hint">
+  버튼은 <b>누르면 무슨 일이 나는지</b>를 그 자리에서 말해야 합니다.
+  <b>버튼만 보고 맞히기</b>를 켜 보세요 — 앞뒤 설명이 사라지면
+  <code>확인</code>·<code>제출</code>이 아무것도 안 알려 준다는 게 드러납니다.<br>
+  판정은 세 가지만 봅니다. <b>동사가 있는가</b>, <b>두세 어절 안인가</b>,
+  <b>'확인·제출·완료' 같은 빈 말이 아닌가</b>. 아래 칸에 직접 써 보면 바로 매겨집니다.
+</p>
+
+<script>
+(function () {
+  var EMPTY = ['확인', '제출', '완료', '적용', 'OK', '예', '아니오', '닫기', '다음'];
+  var VERBS = ['보내기', '보내', '저장', '삭제', '지우기', '등록', '만들기', '초대', '내보내기', '결제',
+               '추가', '올리기', '내려받기', '다운로드', '신청', '취소', '로그인', '가입', '수정', '고치기',
+               '나가기', '복구', '되돌리기', '공유', '승인', '반려', '보기', '열기', '받기', '계속'];
+
+  var CASES = [
+    ['정산 128건을 내보낼까요?', '확인',            '무엇을 확인하는지 모른다'],
+    ['정산 128건을 내보낼까요?', '내보내기',        '누르면 무슨 일이 나는지 그 자리에서 보인다'],
+    ['저장하지 않은 내용이 있습니다', '아니오',      '무엇에 대한 아니오인지 모른다'],
+    ['저장하지 않은 내용이 있습니다', '저장하지 않고 나가기', '길지만 뜻이 분명하다'],
+    ['가맹점을 지울까요?', '제출',                  '지우는 일에 제출이라니'],
+    ['가맹점을 지울까요?', '가맹점 삭제',           '무엇을 지우는지까지 적었다'],
+    ['초대 메일을 보냅니다', '동료를 초대하고 메일을 발송합니다', '버튼이 아니라 문장이다']
+  ];
+
+  function judge(t) {
+    t = (t || '').trim();
+    var why = [], ok = true;
+    if (!t) return { ok: false, why: ['비었다'] };
+    if (EMPTY.indexOf(t) >= 0) { ok = false; why.push('빈 말 — 무슨 일이 나는지 안 알려 준다'); }
+    var hasVerb = VERBS.some(function (v) { return t.indexOf(v) >= 0; });
+    if (!hasVerb) { ok = false; why.push('동사가 없다'); }
+    var words = t.split(/\s+/).length;
+    if (words > 3) { ok = false; why.push(words + '어절 — 버튼이 아니라 문장이다'); }
+    if (/[.!]$/.test(t)) { ok = false; why.push('마침표를 찍지 않는다'); }
+    if (ok) why.push(words + '어절 · 동사 있음');
+    return { ok: ok, why: why };
+  }
+
+  function draw() {
+    var blind = document.getElementById('blind').checked;
+    document.getElementById('ctx').innerHTML = blind
+      ? '<p class="ruler"><span class="warn">앞뒤 설명을 가렸다</span> — 버튼 글자만 보고 무슨 일이 날지 알 수 있나</p>'
+      : '<p class="ruler">앞뒤 설명과 함께 보면 <b>빈 말도 알아들을 수</b> 있다. 그래서 잘 안 드러난다</p>';
+
+    document.getElementById('list').innerHTML = CASES.map(function (c) {
+      var j = judge(c[1]);
+      return '<div class="verd__row ' + (j.ok ? 'ok' : 'no') + '" data-t="' + c[1] + '">' +
+        '<span class="t">' + (blind ? '' : '<span style="color:var(--fg-muted);font-size:11.5px;display:block">' + c[0] + '</span>') +
+        '<b>[ ' + c[1] + ' ]</b></span>' +
+        '<span class="v">' + (j.ok ? '좋음' : '고칠 것') + '</span>' +
+        '<span class="verd__why">' + j.why.join(' · ') + ' — ' + c[2] + '</span></div>';
+    }).join('');
+    document.getElementById('list').dataset.bad =
+      String(CASES.filter(function (c) { return !judge(c[1]).ok; }).length);
+  }
+
+  document.getElementById('mine').addEventListener('input', function () {
+    var j = judge(this.value);
+    document.getElementById('myverd').innerHTML = !this.value.trim() ? ''
+      : (j.ok ? '<b>좋음</b> — ' + j.why.join(' · ')
+              : '<span class="warn">고칠 것</span> — ' + j.why.join(' · '));
+    document.getElementById('myverd').dataset.ok = j.ok ? '1' : '0';
+  });
+  document.getElementById('blind').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

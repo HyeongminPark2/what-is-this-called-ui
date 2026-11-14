@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자리글과 헬퍼 텍스트 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 420px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .f { display: grid; gap: 3px; margin-bottom: var(--s3); }
+  .f label { font-size: 12.5px; color: var(--fg-muted); }
+  .f .help { font-size: 11.5px; color: var(--fg-muted); }
+  .f.nolabel label { display: none; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>자리글과 헬퍼 텍스트</b>
+  <label><input type="checkbox" id="asLabel"> 레이블을 자리글로 쓰기</label>
+  <button class="ui-btn ui-btn--ghost" id="fill">세 칸 채우기</button>
+</div>
+
+<div class="pad">
+  <form class="scr" id="form" onsubmit="return false">
+    <div class="scr__bar">가맹점 등록</div>
+    <div class="scr__body" id="fields"></div>
+  </form>
+  <p class="ruler" id="lost"></p>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  <b>레이블을 자리글로 쓰기</b>를 켜고 <b>세 칸 채우기</b>를 눌러 보세요 —
+  글자를 치는 순간 <b>그 칸이 무슨 칸이었는지</b>가 사라집니다.
+  고치러 돌아왔을 때 전부 지워 봐야 알게 됩니다.<br>
+  자리글의 일은 <b>형식의 보기를 드는 것</b>입니다 — ‘1248100998’처럼요.
+  칸 이름은 <b>레이블</b>이, 규칙은 <b>헬퍼 텍스트</b>가 맡습니다.
+  셋은 서로 대신하지 못합니다.
+</p>
+
+<script>
+(function () {
+  var F = [
+    { id: 'biz',  label: '상호',       ph: '모란상회',      help: '사업자등록증에 적힌 이름' },
+    { id: 'num',  label: '사업자번호', ph: '1248100998',    help: '- 없이 10자리' },
+    { id: 'acc',  label: '정산 계좌',  ph: '110-123-456789', help: '예금주가 상호와 같아야 합니다' }
+  ];
+
+  function draw() {
+    var asLabel = document.getElementById('asLabel').checked;
+    document.getElementById('fields').innerHTML = F.map(function (f) {
+      return '<div class="f' + (asLabel ? ' nolabel' : '') + '" data-id="' + f.id + '">' +
+        '<label for="' + f.id + '">' + f.label + '</label>' +
+        '<input class="ui-input" id="' + f.id + '" placeholder="' +
+          (asLabel ? f.label : f.ph) + '" aria-label="' + f.label + '"' +
+          (asLabel ? '' : ' aria-describedby="' + f.id + '-h"') + '>' +
+        (asLabel ? '' : '<span class="help" id="' + f.id + '-h">' + f.help + '</span>') +
+        '</div>';
+    }).join('');
+    document.getElementById('fields').addEventListener('input', count);
+    count();
+  }
+
+  function count() {
+    var asLabel = document.getElementById('asLabel').checked;
+    var filled = F.filter(function (f) {
+      var el = document.getElementById(f.id);
+      return el && el.value.trim();
+    }).length;
+    var lost = asLabel ? filled : 0;
+    var l = document.getElementById('lost');
+    l.innerHTML = lost
+      ? '<span class="warn">이름을 잃은 칸 ' + lost + '개</span> — 지워 봐야 무슨 칸인지 알 수 있다'
+      : (asLabel ? '아직 안 채운 칸은 이름이 보인다 — <b>치는 순간 사라진다</b>'
+                 : '세 칸 모두 <b>레이블 · 자리글 · 헬퍼</b>를 따로 가지고 있다');
+    l.dataset.lost = String(lost);
+    document.getElementById('note').innerHTML = asLabel
+      ? '<span class="warn">자리글은 레이블이 아니다</span> — 색도 흐려서 대비비도 모자라기 쉽다'
+      : '자리글은 <b>형식의 보기</b>, 헬퍼는 <b>규칙</b>. 레이블은 <b>이름</b>이다';
+  }
+
+  document.getElementById('asLabel').addEventListener('change', draw);
+  document.getElementById('fill').addEventListener('click', function () {
+    F.forEach(function (f) {
+      var el = document.getElementById(f.id);
+      if (el) el.value = f.ph;
+    });
+    count();
+  });
+  draw();
+})();
+</script>
+</body>
+</html>

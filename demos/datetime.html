@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>날짜와 시간 쓰기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 8px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 620px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .scroll-x { overflow-x: auto; }
+  table.dt { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.dt th, table.dt td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  table.dt th { font-size: 11.5px; color: var(--fg-muted); }
+  table.dt td.m { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  table.dt td:last-child { min-width: 11ch; }
+  table.dt tr.pick td { background: var(--accent-soft); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>날짜와 시간 쓰기</b>
+  <label>얼마나 지났나 <input type="range" id="ago" class="ui-range" min="0" max="8" step="1" value="2" style="width:160px"> <span class="ruler" id="agov"></span></label>
+</div>
+
+<div class="pad">
+  <p class="ruler" id="base"></p>
+  <div class="scroll-x"><table class="dt">
+    <thead><tr><th>쓰는 법</th><th>보이는 모습</th><th>맞는 자리</th></tr></thead>
+    <tbody id="tbl"></tbody>
+  </table></div>
+  <p class="ruler" id="verdict"></p>
+</div>
+
+<p class="hint">
+  막대를 끌어 <b>얼마나 지난 시각</b>인지 바꿔 보세요. 같은 시각도 <b>얼마나 지났느냐</b>에 따라
+  쓰는 법이 달라집니다.<br>
+  <b>상대 시간</b>(3분 전)은 방금 일어난 일에는 읽기 쉽지만, 오래된 것에 쓰면
+  <b>‘8개월 전’</b>처럼 쓸모없어집니다. 반대로 <b>절대 시간</b>(11월 14일 09:12)은
+  언제나 맞지만 방금 일에는 번거롭습니다.<br>
+  둘 다 필요할 때는 <b>눈에는 상대, <code>title</code>·<code>datetime</code>에는 절대</b>로 둡니다.
+</p>
+
+<script>
+(function () {
+  var NOW = new Date('2026-11-14T09:12:00+09:00');
+  var STEPS = [
+    [30 * 1000, '30초 전'],
+    [5 * 60 * 1000, '5분 전'],
+    [3 * 3600 * 1000, '3시간 전'],
+    [26 * 3600 * 1000, '어제'],
+    [5 * 86400 * 1000, '5일 전'],
+    [20 * 86400 * 1000, '20일 전'],
+    [100 * 86400 * 1000, '100일 전'],
+    [260 * 86400 * 1000, '260일 전'],
+    [800 * 86400 * 1000, '800일 전']
+  ];
+  var WD = ['일', '월', '화', '수', '목', '금', '토'];
+  var p2 = function (n) { return String(n).padStart(2, '0'); };
+
+  function rel(ms) {
+    var s = Math.round(ms / 1000);
+    if (s < 60) return '방금';
+    var m = Math.round(s / 60);
+    if (m < 60) return m + '분 전';
+    var h = Math.round(m / 60);
+    if (h < 24) return h + '시간 전';
+    var d = Math.round(h / 24);
+    if (d === 1) return '어제';
+    if (d < 7) return d + '일 전';
+    if (d < 31) return Math.round(d / 7) + '주 전';
+    if (d < 365) return Math.round(d / 30) + '개월 전';
+    return Math.round(d / 365) + '년 전';
+  }
+
+  function draw() {
+    var i = +document.getElementById('ago').value;
+    var ms = STEPS[i][0];
+    var t = new Date(NOW.getTime() - ms);
+    document.getElementById('agov').textContent = STEPS[i][1];
+    document.getElementById('base').innerHTML =
+      '지금은 <b>2026년 11월 14일(토) 오전 9:12</b> 라고 치고, 그 시각은 <b>' + STEPS[i][1] + '</b>';
+
+    var days = ms / 86400000;
+    var abs = t.getFullYear() + '년 ' + (t.getMonth() + 1) + '월 ' + t.getDate() + '일(' + WD[t.getDay()] + ')';
+    var absShort = (t.getMonth() + 1) + '월 ' + t.getDate() + '일(' + WD[t.getDay()] + ')';
+    var hh = t.getHours(), ampm = hh < 12 ? '오전' : '오후';
+    var h12 = hh % 12 === 0 ? 12 : hh % 12;
+    var clock = ampm + ' ' + h12 + ':' + p2(t.getMinutes());
+    var iso = t.getFullYear() + '-' + p2(t.getMonth() + 1) + '-' + p2(t.getDate()) + 'T' + p2(hh) + ':' + p2(t.getMinutes());
+
+    var ROWS = [
+      ['상대 시간', rel(ms), days < 7, '방금 일어난 일 · 알림 · 댓글'],
+      ['이번 해 생략', absShort + ' ' + clock, days >= 7 && days < 320, '올해 안의 기록 · 목록'],
+      ['해까지 적기', abs + ' ' + clock, days >= 320, '해를 넘긴 것 · 계약 · 영수증'],
+      ['기계용 ISO', iso, false, '<code>datetime</code> 속성 · API · 정렬 키'],
+      ['숫자만', iso.slice(0, 10).replace(/-/g, '.'), false, '표 안처럼 자리가 좁을 때']
+    ];
+
+    document.getElementById('tbl').innerHTML = ROWS.map(function (r) {
+      return '<tr class="' + (r[2] ? 'pick' : '') + '" data-k="' + r[0] + '"><td>' + r[0] + '</td>' +
+        '<td class="m">' + r[1] + '</td><td style="color:var(--fg-muted);font-size:11.5px">' + r[3] + '</td></tr>';
+    }).join('');
+
+    var v = document.getElementById('verdict');
+    v.innerHTML = days < 7
+      ? '이 간격에는 <b>' + rel(ms) + '</b> 이 읽기 쉽다 · 정확한 시각은 <code>title</code> 에 넣는다'
+      : '<span class="warn">‘' + rel(ms) + '’ 로는 언제인지 알 수 없다</span> — ' +
+        '<b>' + (days >= 320 ? abs : absShort) + '</b> 로 적는다';
+    v.dataset.rel = rel(ms);
+    v.dataset.mode = days < 7 ? 'rel' : 'abs';
+  }
+
+  document.getElementById('ago').addEventListener('input', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

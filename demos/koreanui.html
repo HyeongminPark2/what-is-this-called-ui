@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>한국어 UI 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s5); max-width: 620px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .sec h3 { margin: 0 0 var(--s2); font-size: 13px; }
+  .sent { font-size: 14px; line-height: 1.7; }
+  .sent b { color: var(--accent); }
+  .sent .x { color: var(--danger); text-decoration: line-through; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>한국어 UI</b>
+  <label>이름 <input class="ui-input" id="word" value="모란상회" style="width:150px;min-height:34px;font-size:13px"></label>
+  <label><input type="checkbox" id="naive"> 조사를 하나로 박아 두기</label>
+</div>
+
+<div class="pad">
+  <div class="sec">
+    <h3>이름에 따라 조사가 바뀐다</h3>
+    <div class="josa">
+      <div class="josa__out" id="chips"></div>
+      <p class="sent" id="sent"></p>
+      <p class="ruler" id="rule"></p>
+    </div>
+  </div>
+  <div class="sec">
+    <h3>영어를 그대로 옮기면 생기는 말</h3>
+    <div class="ba" id="ba"></div>
+  </div>
+</div>
+
+<p class="hint">
+  위 칸에 이름을 바꿔 쳐 보세요 — <b>받침이 있느냐</b>에 따라 조사가 통째로 바뀝니다.
+  영어에는 없는 문제라 번역된 화면에서 <b>‘모란상회을(를) 삭제하시겠습니까’</b> 같은 말이 남습니다.<br>
+  <b>조사를 하나로 박아 두기</b>를 켜면 그 꼴이 됩니다. 괄호로 둘 다 적는 것은
+  <b>틀리지는 않지만 읽기 나쁜</b> 타협이고, 받침을 보고 고르는 함수 하나면 끝납니다.
+</p>
+
+<script>
+(function () {
+  function hasFinal(w) {
+    w = (w || '').trim();
+    if (!w) return null;
+    var c = w[w.length - 1];
+    var code = c.charCodeAt(0);
+    if (code < 0xAC00 || code > 0xD7A3) return null;      // 한글이 아니면 모른다
+    return (code - 0xAC00) % 28 !== 0;
+  }
+
+  var PAIRS = [['을', '를'], ['이', '가'], ['은', '는'], ['과', '와'], ['으로', '로']];
+
+  function draw() {
+    var w = document.getElementById('word').value;
+    var naive = document.getElementById('naive').checked;
+    var fin = hasFinal(w);
+
+    document.getElementById('chips').innerHTML = PAIRS.map(function (p) {
+      var pick = naive ? p[0] + '(' + p[1] + ')' : (fin === null ? p[0] + '(' + p[1] + ')' : (fin ? p[0] : p[1]));
+      return '<span class="josa__chip">' + p[0] + ' / ' + p[1] + ' → <em>' + pick + '</em></span>';
+    }).join('');
+
+    function j(i) {
+      var p = PAIRS[i];
+      return naive ? p[0] + '(' + p[1] + ')' : (fin === null ? p[0] + '(' + p[1] + ')' : (fin ? p[0] : p[1]));
+    }
+    var s = document.getElementById('sent');
+    s.innerHTML = '‘' + (w || '…') + '’<b>' + j(0) + '</b> 지울까요? ' +
+                  '‘' + (w || '…') + '’<b>' + j(2) + '</b> 정산 내역 128건을 가지고 있습니다.';
+    s.dataset.josa = j(0);
+
+    var r = document.getElementById('rule');
+    r.innerHTML = fin === null
+      ? '한글이 아니라 <b>받침을 알 수 없다</b> — 외래어·숫자는 따로 표를 둬야 한다'
+      : (naive
+        ? '<span class="warn">받침을 안 보고 하나로 박았다</span> — 괄호가 붙어 읽기 나쁘다'
+        : '마지막 글자 <b>‘' + w[w.length - 1] + '’</b>에 받침이 ' + (fin ? '<b>있다</b>' : '<b>없다</b>') +
+          ' → ' + (fin ? '을 · 이 · 은 · 과 · 으로' : '를 · 가 · 는 · 와 · 로'));
+    r.dataset.fin = fin === null ? 'null' : (fin ? '1' : '0');
+
+    document.getElementById('ba').innerHTML = [
+      ['귀하의 계정이 성공적으로 생성되었습니다.', '계정을 만들었습니다.', '‘성공적으로’는 Successfully 를 옮긴 말이다. 한국어에서는 안 쓴다'],
+      ['삭제하시겠습니까?', '삭제할까요?', '‘-하시겠습니까’는 길고 딱딱하다. 화면에서는 짧은 쪽이 읽힌다'],
+      ['당신의 설정이 저장되지 않았습니다.', '설정을 저장하지 못했습니다.', '‘당신의’는 your 를 옮긴 말이다. 한국어는 주어를 생략한다'],
+      ['이 작업을 수행할 수 없습니다.', '지금은 이 일을 할 수 없습니다.', '‘수행’은 perform 의 번역투다. 쉬운 말로 바꾼다']
+    ].map(function (p) {
+      return '<div class="ba__c bad"><span class="ba__tag">번역투</span><span class="ba__txt">' + p[0] + '</span></div>' +
+             '<div class="ba__c good"><span class="ba__tag">고친 말</span><span class="ba__txt">' + p[1] + '</span>' +
+             '<span class="ba__why">' + p[2] + '</span></div>';
+    }).join('');
+  }
+
+  document.getElementById('word').addEventListener('input', draw);
+  document.getElementById('naive').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

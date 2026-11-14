@@ -221,6 +221,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     '9부': ['easing', 'duration', 'enterexit', 'cheap', 'spring', 'stagger', 'gesture', 'reducedmotion'],
     '11부': ['breakpoint', 'touchtarget', 'hover', 'systemback', 'dpr', 'viewport', 'softkeyboard', 'platformdiff'],
     '13부': ['login', 'onboarding', 'searchresults', 'settings', 'checkout', 'permission', 'notifications', 'destructive'],
+    '14부': ['buttontext', 'errortext', 'emptytext', 'placeholder', 'koreanui', 'datetime', 'numbertext', 'voice'],
   };
   const ITEMS = Object.values(PARTS).flat();
   const partOf = s => Object.keys(PARTS).find(k => PARTS[k].includes(s));
@@ -1734,6 +1735,113 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   if (!await page.locator('#undobar').isVisible()) fail.push('위험: 되돌릴 틈을 안 준다');
   await page.locator('#undo-btn').click(); await page.waitForTimeout(220);
   if (await page.getAttribute('#count', 'data-n') !== '4') fail.push('위험: 되돌려도 안 살아난다');
+  await page.close();
+
+  // 14부 말투 데모 여덟 장
+  // 버튼 문구 — 글자만으로 무슨 일이 날지 아는가
+  page = await demo('buttontext', 980, 900);
+  if (await page.locator('.verd__row').count() !== 7) fail.push('버튼문구: 일곱 가지가 아니다');
+  if (await page.getAttribute('#list', 'data-bad') !== '4') fail.push('버튼문구: 고칠 것이 넷이 아니다 (보여주려는 결과)');
+  if (!await page.locator('.verd__row[data-t="확인"]').evaluate(e => e.classList.contains('no')))
+    fail.push('버튼문구: ‘확인’을 좋다고 한다');
+  if (!await page.locator('.verd__row[data-t="내보내기"]').evaluate(e => e.classList.contains('ok')))
+    fail.push('버튼문구: ‘내보내기’를 고치라 한다');
+  await page.fill('#mine', '초대 보내기'); await page.waitForTimeout(200);
+  if (await page.getAttribute('#myverd', 'data-ok') !== '1') fail.push('버튼문구: 직접 쓴 좋은 문구를 못 알아본다');
+  await page.fill('#mine', '제출'); await page.waitForTimeout(200);
+  if (await page.getAttribute('#myverd', 'data-ok') !== '0') fail.push('버튼문구: 빈 말을 못 잡는다');
+  await page.close();
+
+  // 오류 문구 — 사과는 길어지기만 하고 할 일은 안 는다
+  page = await demo('errortext', 980, 900);
+  if (!(await page.textContent('#goodtxt')).includes('다시 시도')) fail.push('오류문구: 고친 문구에 다음 수가 없다');
+  if (await page.locator('.parts .p').count() !== 4) fail.push('오류문구: 넷으로 안 뜯는다');
+  {
+    const a = +(await page.getAttribute('#len', 'data-len'));
+    await page.check('#sorry'); await page.waitForTimeout(240);
+    const b = +(await page.getAttribute('#len', 'data-len'));
+    if (!(b > a + 20)) fail.push(`오류문구: 사과를 넣어도 안 길어진다 (${a} → ${b}) (보여주려는 결과)`);
+  }
+  await page.uncheck('#sorry');
+  await page.selectOption('#k', 'conflict'); await page.waitForTimeout(240);
+  if (!(await page.textContent('#goodtxt')).includes('다른 사람이')) fail.push('오류문구: 상황마다 문구가 안 바뀐다');
+  await page.selectOption('#k', 'val'); await page.waitForTimeout(240);
+  if (await page.locator('.parts .p.miss').count() !== 1) fail.push('오류문구: 버튼 없는 경우를 안 가른다');
+  await page.close();
+
+  // 빈 상태 문구 — 다섯 경우를 다르게 쓴다
+  page = await demo('emptytext', 980, 900);
+  if (await page.locator('#pick button').count() !== 5) fail.push('빈문구: 다섯 가지가 아니다');
+  if (await page.getAttribute('#mock', 'data-act') !== '1') fail.push('빈문구: 할 수 있는 일 버튼이 없다');
+  await page.locator('#pick button').nth(3).click(); await page.waitForTimeout(240);
+  if (!(await page.textContent('#mock')).includes('모두 끝내셨어요')) fail.push('빈문구: 다 끝낸 것을 좋은 소식으로 안 쓴다');
+  if (await page.getAttribute('#mock', 'data-act') !== '0') fail.push('빈문구: 다 끝냈는데 버튼이 남아 있다');
+  await page.locator('#pick button').nth(2).click(); await page.waitForTimeout(240);
+  if (!(await page.textContent('#note')).includes('없는 것과 못 보는 것은 다르다')) fail.push('빈문구: 권한 없음을 안 가른다');
+  await page.close();
+
+  // 자리글 — 레이블로 쓰면 치는 순간 이름이 사라진다
+  page = await demo('placeholder', 980, 900);
+  if (await page.locator('.f .help').count() !== 3) fail.push('자리글: 헬퍼가 셋이 아니다');
+  if (await page.getAttribute('#lost', 'data-lost') !== '0') fail.push('자리글: 처음부터 잃은 칸이 있다');
+  await page.check('#asLabel'); await page.waitForTimeout(240);
+  if (await page.locator('.f .help').count() !== 0) fail.push('자리글: 레이블로 써도 헬퍼가 남는다');
+  await page.locator('#fill').click(); await page.waitForTimeout(240);
+  if (await page.getAttribute('#lost', 'data-lost') !== '3')
+    fail.push('자리글: 채워도 이름을 안 잃는다 (보여주려는 결과)');
+  await page.uncheck('#asLabel'); await page.waitForTimeout(240);
+  if (await page.getAttribute('#lost', 'data-lost') !== '0') fail.push('자리글: 되돌려도 이름이 안 돌아온다');
+  await page.close();
+
+  // 한국어 UI — 받침을 보고 조사를 고른다
+  page = await demo('koreanui', 980, 900);
+  if (await page.getAttribute('#rule', 'data-fin') !== '0') fail.push('한국어: ‘모란상회’ 받침 판별이 틀렸다');
+  if (await page.getAttribute('#sent', 'data-josa') !== '를') fail.push('한국어: 받침 없는데 ‘을’이 나온다');
+  await page.fill('#word', '대림유통'); await page.waitForTimeout(240);
+  if (await page.getAttribute('#rule', 'data-fin') !== '1') fail.push('한국어: ‘대림유통’ 받침 판별이 틀렸다');
+  if (await page.getAttribute('#sent', 'data-josa') !== '을') fail.push('한국어: 받침 있는데 ‘를’이 나온다');
+  await page.fill('#word', 'Starbucks'); await page.waitForTimeout(240);
+  if (await page.getAttribute('#rule', 'data-fin') !== 'null') fail.push('한국어: 한글이 아닌데 받침을 안다고 한다');
+  await page.fill('#word', '모란상회');
+  await page.check('#naive'); await page.waitForTimeout(240);
+  if (await page.getAttribute('#sent', 'data-josa') !== '을(를)')
+    fail.push('한국어: 하나로 박아도 괄호가 안 생긴다 (보여주려는 결과)');
+  await page.close();
+
+  // 날짜와 시간 — 오래되면 상대 시간이 쓸모없어진다
+  page = await demo('datetime', 980, 900);
+  if (await page.getAttribute('#verdict', 'data-mode') !== 'rel') fail.push('날짜: 최근인데 절대 시간을 권한다');
+  if (await page.locator('#tbl tr.pick').count() !== 1) fail.push('날짜: 맞는 줄이 하나가 아니다');
+  await page.locator('#ago').fill('7'); await page.dispatchEvent('#ago', 'input'); await page.waitForTimeout(240);
+  if (await page.getAttribute('#verdict', 'data-mode') !== 'abs')
+    fail.push('날짜: 오래됐는데도 상대 시간을 권한다 (보여주려는 결과)');
+  if (!(await page.textContent('#verdict')).includes('언제인지 알 수 없다')) fail.push('날짜: 쓸모없어졌다고 안 알린다');
+  await page.locator('#ago').fill('0'); await page.dispatchEvent('#ago', 'input'); await page.waitForTimeout(240);
+  if (await page.getAttribute('#verdict', 'data-rel') !== '방금') fail.push('날짜: 1분 안을 ‘방금’으로 안 쓴다');
+  await page.close();
+
+  // 숫자와 단위 — 자리에 따라 끊는 법이 다르다
+  page = await demo('numbertext', 980, 900);
+  if (await page.getAttribute('#verdict', 'data-pick') !== '자릿수 끊기') fail.push('숫자: 표 안에서 자릿수를 안 끊는다');
+  if (!(await page.textContent('#tbl')).includes('1,284,000원')) fail.push('숫자: 쉼표와 단위가 없다');
+  await page.selectOption('#where', 'stat'); await page.waitForTimeout(240);
+  if (await page.getAttribute('#verdict', 'data-pick') !== '만 단위로 줄이기') fail.push('숫자: 요약에서 만 단위로 안 간다');
+  if (!(await page.textContent('#tbl')).includes('만')) fail.push('숫자: 만 단위 표기가 없다');
+  await page.fill('#n', '980000000'); await page.waitForTimeout(240);
+  if (!(await page.textContent('#tbl')).includes('억')) fail.push('숫자: 큰 값이 억으로 안 간다');
+  if (await page.locator('.verd__row.no').count() !== 2) fail.push('숫자: 주의할 것 둘을 안 적는다');
+  await page.close();
+
+  // 말투 — 섞이면 한 화면에 여러 말투가 된다
+  page = await demo('voice', 980, 900);
+  if (await page.locator('.screen .line').count() !== 5) fail.push('말투: 다섯 줄이 아니다');
+  if (await page.getAttribute('#verdict', 'data-n') !== '1') fail.push('말투: 처음부터 섞여 있다');
+  await page.locator('#pick button[data-t=hap]').click(); await page.waitForTimeout(240);
+  if (!(await page.textContent('.screen')).includes('저장되었습니다')) fail.push('말투: 합쇼체로 안 바뀐다');
+  if (await page.getAttribute('#verdict', 'data-n') !== '1') fail.push('말투: 바꿨는데 섞였다고 한다');
+  await page.check('#mix'); await page.waitForTimeout(240);
+  if (await page.getAttribute('#verdict', 'data-n') !== '3')
+    fail.push('말투: 섞어도 한 가지라고 한다 (보여주려는 결과)');
   await page.close();
 
   await browser.close();

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>숫자와 단위 쓰기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 8px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s5); max-width: 620px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .sec h3 { margin: 0 0 var(--s2); font-size: 13px; }
+  table.nm { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.nm th, table.nm td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  table.nm th { font-size: 11.5px; color: var(--fg-muted); }
+  table.nm td.m { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  table.nm tr.pick td { background: var(--accent-soft); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>숫자와 단위 쓰기</b>
+  <label>값 <input class="ui-input" id="n" type="text" inputmode="numeric" value="1284000" style="width:150px;min-height:34px;font-size:13px"></label>
+  <label>자리 <select class="sel" id="where" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="table">표 안</option>
+    <option value="stat">요약 타일</option>
+    <option value="sentence">문장 속</option>
+  </select></label>
+</div>
+
+<div class="pad">
+  <div class="sec">
+    <h3>같은 값, 다른 자리</h3>
+    <table class="nm"><thead><tr><th>쓰는 법</th><th>보이는 모습</th><th>맞는 자리</th></tr></thead>
+      <tbody id="tbl"></tbody></table>
+    <p class="ruler" id="verdict"></p>
+  </div>
+  <div class="sec">
+    <h3>건수 · 비율에서 자주 틀리는 것</h3>
+    <div class="verd" id="edge"></div>
+  </div>
+</div>
+
+<p class="hint">
+  값과 자리를 바꿔 보세요. <b>표 안</b>에서는 자릿수를 맞춰 세로로 견주게 하고,
+  <b>요약 타일</b>에서는 크게 줄여 읽히게 하고, <b>문장 속</b>에서는 읽는 대로 적습니다.<br>
+  <b>단위 없는 숫자</b>가 가장 흔한 실수입니다 — ‘1,284,000’만 적으면 원인지 건인지 모릅니다.
+  한국어는 <b>만·억</b>으로 끊어 읽으므로 ‘1.2M’보다 <b>‘128만 원’</b>이 훨씬 빨리 읽힙니다.
+</p>
+
+<script>
+(function () {
+  function comma(n) { return n.toLocaleString('ko-KR'); }
+
+  function korShort(n) {
+    if (n >= 1e12) return (n / 1e12).toFixed(n >= 1e13 ? 0 : 1).replace(/\.0$/, '') + '조';
+    if (n >= 1e8) return (n / 1e8).toFixed(n >= 1e9 ? 0 : 1).replace(/\.0$/, '') + '억';
+    if (n >= 1e4) return (n / 1e4).toFixed(n >= 1e5 ? 0 : 1).replace(/\.0$/, '') + '만';
+    return comma(n);
+  }
+
+  function draw() {
+    var raw = (document.getElementById('n').value || '').replace(/[^\d.-]/g, '');
+    var n = Number(raw);
+    if (!isFinite(n)) n = 0;
+    var where = document.getElementById('where').value;
+
+    var ROWS = [
+      ['자릿수 끊기', comma(n) + '원', where === 'table', '표 · 금액 입력 · 영수증'],
+      ['만 단위로 줄이기', korShort(n) + ' 원', where === 'stat', '요약 타일 · 차트 눈금'],
+      ['읽는 대로', korShort(n) + ' 원쯤', where === 'sentence', '문장 속 · 안내문'],
+      ['단위 없이', comma(n), false, '<span style="color:var(--danger)">맞는 자리가 없다 — 원인지 건인지 모른다</span>'],
+      ['영어식 줄임', (n / 1e6).toFixed(2) + 'M', false, '한국어 화면에서는 끊어 읽는 단위가 달라 안 맞는다']
+    ];
+
+    document.getElementById('tbl').innerHTML = ROWS.map(function (r) {
+      return '<tr class="' + (r[2] ? 'pick' : '') + '" data-k="' + r[0] + '"><td>' + r[0] + '</td>' +
+        '<td class="m">' + r[1] + '</td><td style="color:var(--fg-muted);font-size:11.5px">' + r[3] + '</td></tr>';
+    }).join('');
+
+    var pickRow = ROWS.find(function (r) { return r[2]; });
+    var v = document.getElementById('verdict');
+    v.innerHTML = '이 자리에는 <b>' + pickRow[0] + '</b> — ' + pickRow[1];
+    v.dataset.pick = pickRow[0];
+
+    document.getElementById('edge').innerHTML = [
+      ['0건', '‘0건’ 이라고 적는다', true, '‘검색 결과가 없습니다’ 와 함께. <b>빈칸이나 ‘-’ 로 두지 않는다</b>'],
+      ['1건', '‘1건’ 그대로', true, '한국어는 복수형이 없어 <b>영어처럼 s 를 붙일 일이 없다</b>'],
+      ['99+', '‘99+’ 로 끊는다', true, '배지처럼 자리가 좁을 때. <b>어디서 끊는지</b> 정해 둔다'],
+      ['33.333%', '‘33.3%’ 로 반올림', true, '소수점은 <b>한 자리까지</b>가 보통. 다만 합이 100이 안 될 수 있다'],
+      ['0.5%', '‘0.5%’ 를 ‘1%’ 로', false, '작은 값을 올려 버리면 <b>0 이 아닌 것이 0 처럼</b> 보인다'],
+      ['-3,000원', '‘-3,000원’', false, '빼는 돈은 <b>‘3,000원 차감’</b> 처럼 말로 적는 편이 덜 헷갈린다']
+    ].map(function (e) {
+      return '<div class="verd__row ' + (e[2] ? 'ok' : 'no') + '"><span class="t"><b>' + e[0] + '</b> → ' + e[1] + '</span>' +
+        '<span class="v">' + (e[2] ? '이렇게' : '주의') + '</span>' +
+        '<span class="verd__why">' + e[3] + '</span></div>';
+    }).join('');
+  }
+
+  document.getElementById('n').addEventListener('input', draw);
+  document.getElementById('where').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

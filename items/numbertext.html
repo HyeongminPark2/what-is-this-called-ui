@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>숫자와 단위 쓰기 — 이름표</title>
+<meta name="description" content="자리에 따라 끊는 법. 만·억 단위, 단위 붙이기, 0건과 1건, 퍼센트 반올림.">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/card.css">
+<link rel="stylesheet" href="../assets/demo.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로</a>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">이름표<small>화면 속 그게 뭔지 알려주는 도감</small></a>
+  <nav>
+    <a href="../index.html#map">화면 지도</a>
+    <a href="../index.html#pairs">혼동 쌍</a>
+    <a href="../index.html#toc">목차</a>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+
+  <div class="item-head">
+    <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">14부 말투</a> › 숫자와 단위 쓰기</p>
+    <h1>숫자와 단위 쓰기</h1>
+    <p class="en">Writing numbers & units</p>
+    <p class="lede" style="margin-top:var(--s3)">같은 값도 <b>어디에 적느냐</b>에 따라 다르게 씁니다. 그리고 <b>단위 없는 숫자</b>는 아무것도 알려 주지 않습니다.</p>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+  </div>
+
+  <div class="card-layout">
+    <div>
+
+      <section class="slot" id="s1">
+        <h2 class="slot-label"><span class="n">1</span> 실물 — 직접 만져 보기</h2>
+        <div class="preview-bar">
+          <div class="seg" data-seg="numbertext" role="group" aria-label="미리보기 폭">
+            <button type="button" data-w="390" aria-pressed="false">390 폰</button>
+            <button type="button" data-w="768" aria-pressed="false">768 태블릿</button>
+            <button type="button" data-w="full" aria-pressed="true">넓게</button>
+          </div>
+          <span class="preview-meta" data-meta="numbertext"></span>
+          <a class="preview-open" href="../demos/numbertext.html" target="_blank" rel="noopener">새 탭에서 열기 ↗</a>
+        </div>
+        <div class="stage" data-stage="numbertext" data-w="full">
+          <iframe src="../demos/numbertext.html" title="숫자와 단위 쓰기 실물 예시"></iframe>
+        </div>
+        <div class="note" style="margin-bottom:0">
+          <p>값과 자리를 바꿔 보세요 — <b>표 안</b>에서는 자릿수를 맞춰 세로로 견주게,
+          <b>요약 타일</b>에서는 크게 줄여 읽히게 적습니다.<br>
+          한국어는 <b>만·억</b>으로 끊어 읽으므로 ‘1.2M’보다 <b>‘128만 원’</b>이 훨씬 빨리 읽힙니다.
+          아래에는 건수·비율에서 자주 틀리는 것을 모아 두었습니다.</p>
+        </div>
+      </section>
+
+      <section class="slot" id="s2">
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <div class="scroll-x">
+        <table class="grid">
+          <tbody>
+            <tr><th>한국어</th><td>자릿수 구분, 천 단위 쉼표, 단위 표기, 반올림</td></tr>
+            <tr><th>영어</th><td>number formatting, thousands separator, abbreviation, rounding</td></tr>
+            <tr><th>같이 쓰는 말</th><td>세 자리마다 찍는 쉼표가 <b>천 단위 구분</b>이고, 큰 수를 줄이는 것이 <b>약어 표기</b>(abbreviation)입니다. 브라우저가 말에 맞춰 적어 주는 장치가 <code>Intl.NumberFormat</code>이고, 화폐·퍼센트·단위까지 다룹니다.</td></tr>
+            <tr><th>자주 잘못 부름</th><td><b>숫자 꼴</b> — <a href="../items/numerals.html">숫자 꼴</a>은 <b>글자의 생김새</b>(등폭 숫자)입니다. 이쪽은 <b>무엇을 적을지</b>입니다.<br><b>포맷팅</b> — 넓은 말이라 날짜·시간까지 섞입니다. <a href="datetime.html">날짜와 시간</a>은 따로입니다.<br><b>단위</b> — 길이·무게의 단위계와는 다릅니다. 화면에서는 <b>원·건·%</b>가 대부분입니다.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot" id="s3">
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
+        <p>화면의 말은 꾸미는 것이 아니라 <b>일하는 것</b>입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <div class="scroll-x">
+        <table class="grid axes">
+          <thead><tr><th></th><th>무엇을 알려야 하나</th><th>흔한 실수</th><th>고치는 기준</th><th>한국어에서 더 조심할 것</th></tr></thead>
+          <tbody>
+            <tr><td>버튼 문구</td><td>누르면 <b>무슨 일이</b> 나나</td><td>‘확인’ · ‘제출’</td><td>동사 + 두세 어절</td><td>조사 없이 끝낸다</td></tr>
+            <tr><td>오류 문구</td><td>무엇이 · 왜 · <b>어떻게</b></td><td>코드만 보여 주기</td><td><b>다음 수</b>가 있나</td><td>사과보다 다음 수</td></tr>
+            <tr><td>빈 상태 문구</td><td>왜 비었고 <b>뭘 하면</b> 되나</td><td>‘데이터가 없습니다’</td><td>네 경우를 가른다</td><td>명사로 끝내지 않는다</td></tr>
+            <tr><td>자리글과 헬퍼 텍스트</td><td>형식의 <b>보기</b></td><td>레이블을 자리글로</td><td>셋을 <b>따로</b> 둔다</td><td>보기를 진짜처럼</td></tr>
+            <tr><td>한국어 UI</td><td>같은 말을 <b>한국어로</b></td><td>번역투</td><td>소리 내어 읽어 본다</td><td><b>조사</b> · 주어 생략</td></tr>
+            <tr><td>날짜와 시간 쓰기</td><td><b>언제</b>인지</td><td>기계 꼴 그대로</td><td>얼마나 지났나로 가른다</td><td>오전 · 오후와 요일</td></tr>
+            <tr class="me"><td><b>숫자와 단위 쓰기</b></td><td><b>얼마</b>인지</td><td>단위 없는 숫자</td><td>자리에 따라 끊는다</td><td><b>만 · 억</b>으로 읽는다</td></tr>
+            <tr><td>말투와 높임</td><td>우리가 <b>누구인지</b></td><td>화면마다 다른 말투</td><td><b>하나로</b> 정한다</td><td>해요체인가 합쇼체인가</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="note" style="margin-bottom:0">
+          <p><b>한 줄로</b> — <b>단위를 꼭 붙이고, 자리에 맞게 끊으세요.</b> 그리고 한국어에서는 K·M 이 아니라 <b>만·억</b>입니다.</p>
+        </div>
+      </section>
+
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 자리별로<span class="hint">같은 값, 다른 적기</span></h2>
+        <div class="states">
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-size:8px;font-weight:700;color:var(--accent)">표 안</span><span style="font-size:10px;line-height:1.55"><span style="font-family:var(--mono);font-size:11px;font-variant-numeric:tabular-nums">1,284,000원</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">자릿수를 맞춰 세로로 견준다</span></div>
+            </div>
+            <figcaption>표<span><a href="../items/numerals.html">등폭 숫자</a>와 함께 쓴다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-size:8px;font-weight:700;color:var(--accent)">요약 타일</span><span style="font-size:10px;line-height:1.55"><span style="font-family:var(--mono);font-size:11px;font-variant-numeric:tabular-nums">128만 원</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">크게 줄여 한눈에 읽힌다</span></div>
+            </div>
+            <figcaption>요약<span><a href="../items/stat.html">스탯</a>에서</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-size:8px;font-weight:700;color:var(--accent)">문장 속</span><span style="font-size:10px;line-height:1.55"><span style="font-family:var(--mono);font-size:11px;font-variant-numeric:tabular-nums">약 128만 원</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">읽는 대로 적는다</span></div>
+            </div>
+            <figcaption>문장<span>쉼표 숫자를 문장에 넣으면 <b>안 읽힌다</b></span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-size:8px;font-weight:700;color:var(--danger)">단위 없이</span><span style="font-size:10px;line-height:1.55"><span style="font-family:var(--mono);font-size:11px;font-variant-numeric:tabular-nums">1,284,000</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">원인지 건인지 모른다</span></div>
+            </div>
+            <figcaption>단위 빠짐<span><b>가장 흔한 실수</b></span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-size:8px;font-weight:700;color:var(--danger)">영어식 줄임</span><span style="font-size:10px;line-height:1.55"><span style="font-family:var(--mono);font-size:11px;font-variant-numeric:tabular-nums">1.28M</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">한국어는 만 단위로 끊어 읽는다</span></div>
+            </div>
+            <figcaption>K · M<span><b>한 번 더 계산</b>해야 한다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-size:8px;font-weight:700;color:var(--accent)">없을 때</span><span style="font-size:10px;line-height:1.55"><span style="font-family:var(--mono);font-size:11px;font-variant-numeric:tabular-nums">0건</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">빈칸이나 ‘-’ 로 두지 않는다</span></div>
+            </div>
+            <figcaption>0<span><a href="emptytext.html">빈 상태 문구</a>와 함께</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <div class="anatomy">
+          <div class="pinboard">
+            <div class="anat" role="img" aria-label="숫자와 단위 쓰기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
+                <div style="padding-left:26px;display:grid;gap:14px">
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">표 안 — 1,284,000원. 자릿수를 맞춘다</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">요약 타일 — 128만 원. 크게 줄여 읽힌다</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">단위를 꼭 붙인다 — 원인가 건인가</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">0건 · 1건 — 그대로 적는다. 복수형이 없다</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">소수점은 한 자리까지 — 33.3%</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">1.28M — 한국어는 만 단위로 끊어 읽는다</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="pin-list">
+            <li><b>표 안 <em>1,284,000원</em></b><span>자릿수를 맞춰 <b>세로로 견주게</b></span></li>
+            <li><b>요약 타일 <em>128만 원</em></b><span>크게 줄여 <b>한눈에</b></span></li>
+            <li><b>단위 <em>원 · 건 · %</em></b><span><b>반드시 붙인다.</b> 없으면 뜻이 없다</span></li>
+            <li><b>건수 <em>0건 · 1건</em></b><span>한국어에는 <b>복수형이 없다</b></span></li>
+            <li><b>소수점 <em>한 자리까지</em></b><span>33.3%. 더 적으면 <b>틀린 인상</b>을 준다</span></li>
+            <li><b>K · M <em>쓰지 않는다</em></b><span>한국어는 <b>만·억</b>으로 끊는다</span></li>
+          </ol>
+        </div>
+        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
+          <b>반올림은 합계를 깨뜨립니다.</b>
+          33.33% · 33.33% · 33.33% 를 각각 한 자리로 반올림하면 33.3 × 3 = 99.9 가 되어
+          <b>100%가 안 됩니다</b>.
+          비율을 여럿 늘어놓는 화면(차트 범례, 구성비 표)에서는
+          <b>가장 큰 항목에 나머지를 몰아주거나</b>,
+          '합이 100%가 안 될 수 있습니다'를 작게 적어 둡니다.
+          <b>작은 값을 0으로 만들지 않는</b> 것도 같은 줄기입니다 —
+          0.4%를 0%로 적으면 '없다'는 말이 되어 버립니다.</p>
+      </section>
+
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+        <div class="twoup">
+          <div class="do">
+            <h3>이럴 때 쓴다</h3>
+            <ul>
+              <li><b>단위를 꼭</b> 붙이기 — 원 · 건 · %</li>
+              <li>표에서는 자릿수를 맞추고 <b>오른쪽 정렬</b></li>
+              <li>요약에서는 <b>만·억</b>으로 줄이기</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h3>이럴 때는 안 쓴다</h3>
+            <ul>
+              <li>단위 없는 숫자 — <b>무엇의 숫자인지 모른다</b></li>
+              <li><b>K · M</b> 쓰기 — 한국어 독자는 한 번 더 계산한다</li>
+              <li>0 을 ‘-’ 나 빈칸으로 — <b>0건이라고 적는다</b></li>
+              <li>작은 값을 0 으로 반올림 — <b>없는 것처럼</b> 보인다</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 글자의 생김새는 <a href="../items/numerals.html">숫자 꼴</a>, 요약 한 칸은 <a href="../items/stat.html">스탯</a>, 비율 그림은 <a href="chart.html">차트 고르기</a>.</p>
+      </section>
+
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <div class="cases">
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-size:8px;font-weight:700;color:var(--accent)">표</span><span style="font-size:10px;line-height:1.55"><span style="font-family:var(--mono);font-size:11px;font-variant-numeric:tabular-nums">9,827,500원<br>1,284,000원<br>&nbsp;&nbsp;&nbsp;11,100원</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">오른쪽 정렬 + 등폭 숫자</span></div>
+            </div>
+            <figcaption><b>표 안의 금액</b><b>세로로 견주라고</b> 만든 자리</figcaption>
+          </figure>
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-size:8px;font-weight:700;color:var(--accent)">요약 타일</span><span style="font-size:10px;line-height:1.55"><span style="font-family:var(--mono);font-size:11px;font-variant-numeric:tabular-nums">24.7억</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">큰 글자로 줄여 읽힌다</span></div>
+            </div>
+            <figcaption><b>요약 타일</b><b>정확한 값은 표에</b> 있다</figcaption>
+          </figure>
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-size:8px;font-weight:700;color:var(--accent)">비율</span><span style="font-size:10px;line-height:1.55"><span style="font-family:var(--mono);font-size:11px;font-variant-numeric:tabular-nums">33.3% · 33.3% · 33.4%</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">합이 100이 되게 맞췄다</span></div>
+            </div>
+            <figcaption><b>구성비</b><b>반올림이 합을 깨뜨린다</b></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slot" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">이 숫자의 계약서</span></h2>
+        <p><code>Intl.NumberFormat</code>이 말과 화폐를 함께 다룹니다.</p>
+<pre class="code"><span class="c">// 표 안 — 자릿수를 끊고 단위를 붙인다</span>
+<span class="k">new</span> Intl.NumberFormat(<span class="s">'ko-KR'</span>, { style: <span class="s">'currency'</span>, currency: <span class="s">'KRW'</span> })
+  .format(<span class="a">1284000</span>);          <span class="c">// '₩1,284,000'</span>
+
+<span class="c">// 요약 — 만 · 억으로 줄인다 (Intl 은 한국어 단위를 자동으로 주지 않는다)</span>
+<span class="k">function</span> short(n) {
+  <span class="k">if</span> (n &gt;= <span class="a">1e8</span>) <span class="k">return</span> (n / <span class="a">1e8</span>).toFixed(<span class="a">1</span>).replace(<span class="s">/\.0$/</span>, <span class="s">''</span>) + <span class="s">'억'</span>;
+  <span class="k">if</span> (n &gt;= <span class="a">1e4</span>) <span class="k">return</span> (n / <span class="a">1e4</span>).toFixed(<span class="a">0</span>) + <span class="s">'만'</span>;
+  <span class="k">return</span> n.toLocaleString(<span class="s">'ko-KR'</span>);
+}
+
+<span class="c">/* 표에서는 오른쪽 정렬 + 등폭 숫자 */</span>
+<span class="t">td</span>.num { <span class="a">text-align</span>: right; <span class="a">font-variant-numeric</span>: tabular-nums; }</pre>
+        <div class="scroll-x">
+        <table class="grid kbd-table">
+          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <tbody>
+            <tr><td><code>Intl.NumberFormat</code></td><td>쉼표·화폐·퍼센트를 말에 맞춰 적어 준다. <b>직접 쉼표를 찍지 않는다</b></td></tr>
+            <tr><td><code>notation: 'compact'</code></td><td>영어는 <code>1.2M</code>, 한국어는 <code>128만</code>. 다만 <b>단위 선택이 아쉬울 때</b>가 있어 직접 쓰기도 한다</td></tr>
+            <tr><td><code>tabular-nums</code></td><td>표에서 자릿수를 맞춘다 — <a href="../items/numerals.html">숫자 꼴</a></td></tr>
+            <tr><td>스크린 리더</td><td><code>1,284,000</code>은 '백이십팔만 사천'으로 읽힌다. <b>단위가 없으면</b> 무엇인지 모른다</td></tr>
+            <tr><td><code>&lt;bdi&gt;</code></td><td>말이 섞인 줄에서 숫자 방향이 뒤집히는 것을 막는다</td></tr>
+            <tr><td>입력칸에는 쉼표를 넣지 않는다</td><td><code>type="text"</code> + <code>inputmode="numeric"</code>으로 받고 <b>보낼 때 숫자로</b> 바꾼다</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot slot--backend" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <div class="scroll-x">
+        <table class="grid">
+          <tbody>
+            <tr><th>돈은 정수로</th><td>원 단위는 <b>소수점 없는 정수</b>로 다룹니다. 부동소수점으로 두면 0.1 + 0.2 가 안 맞습니다.</td></tr>
+            <tr><th>반올림을 한곳에서</th><td>화면과 서버가 따로 반올림하면 <b>합계가 어긋납니다</b>. 어디서 할지 정해 둡니다.</td></tr>
+            <tr><th>단위를 함께 보낸다</th><td><code>{"amount":1284000,"currency":"KRW"}</code>. 숫자만 오면 화면이 <b>짐작</b>해야 합니다.</td></tr>
+            <tr><th>집계값의 자릿수</th><td>평균·비율은 <b>몇 자리까지</b>인지 정해 보냅니다. 안 정하면 화면마다 다르게 보입니다.</td></tr>
+            <tr><th>큰 수</th><td>자바스크립트는 아주 큰 정수를 <b>정확히 못 다룹니다</b>. ID 는 문자열로 보냅니다.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot" id="s10">
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
+        <p><b>만·억으로 끊는 것</b>은 한국어 화면에서만 할 일입니다.</p>
+        <div class="platforms">
+          <div class="plat">
+            <header><b>웹</b><span>Intl.NumberFormat</span></header>
+            <div class="shot">
+              <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-size:10px;line-height:1.55"><span style="font-family:var(--mono);font-size:11px;font-variant-numeric:tabular-nums">1,284,000원</span></span></div></div>
+            </div>
+            <footer>말과 화폐를 함께 다룹니다. <b>만·억 줄임</b>은 손을 좀 봐야 합니다.</footer>
+          </div>
+          <div class="plat">
+            <header><b>iOS</b><span>NumberFormatter</span></header>
+            <div class="shot">
+              <div class="phone" role="img" aria-label="iOS 금액 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
+                <div style="position:absolute;left:5px;right:5px;top:32px;font-size:7px;text-align:right;font-variant-numeric:tabular-nums">1,284,000원</div></div></div>
+            </div>
+            <footer>지역 설정을 따라갑니다. 표에서는 <b>등폭 숫자</b>를 켜야 자릿수가 맞습니다.</footer>
+          </div>
+          <div class="plat">
+            <header><b>안드로이드</b><span>NumberFormat</span></header>
+            <div class="shot">
+              <div class="phone" role="img" aria-label="안드로이드 금액 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
+                <div style="position:absolute;left:5px;right:5px;top:32px;font-size:7px;text-align:right;font-variant-numeric:tabular-nums">1,284,000원</div></div></div>
+            </div>
+            <footer>같은 방식입니다. <b>CompactDecimalFormat</b>이 '128만'을 만들어 줍니다.</footer>
+          </div>
+        </div>
+        <div class="note note--warn" style="margin-bottom:0">
+          <p><b>자주 생기는 사고</b> — 시안에 <b>‘1.2M’</b>이라고 적혀 있으면 영어 템플릿을 그대로 쓴 것입니다. 한국어 독자는 머릿속에서 한 번 더 바꿔야 해서 읽는 속도가 느려지고, 금액이 클수록 더합니다. <b>‘만·억으로 적습니다’</b>를 한 줄 정해 두면 이 왕복이 사라집니다.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <aside class="siblings">
+      <h2>헷갈리는 형제</h2>
+      <ol>
+        <li><a href="buttontext.html"><b>버튼 문구</b><em>14부</em></a></li>
+        <li><a href="errortext.html"><b>오류 문구</b><em>14부</em></a></li>
+        <li><a href="emptytext.html"><b>빈 상태 문구</b><em>14부</em></a></li>
+        <li><a href="placeholder.html"><b>자리글과 헬퍼 텍스트</b><em>14부</em></a></li>
+        <li><a href="koreanui.html"><b>한국어 UI</b><em>14부</em></a></li>
+        <li><a href="datetime.html"><b>날짜와 시간 쓰기</b><em>14부</em></a></li>
+        <li><a href="voice.html"><b>말투와 높임</b><em>14부</em></a></li>
+      </ol>
+      <h2>같이 보면 좋은 것</h2>
+      <ol>
+        <li><a href="../items/numerals.html"><b>숫자 꼴</b><em>3부</em></a></li>
+        <li><a href="../items/stat.html"><b>스탯</b><em>5부</em></a></li>
+        <li><a href="table.html"><b>데이터 테이블</b><em>10부</em></a></li>
+        <li><a href="chart.html"><b>차트 고르기</b><em>10부</em></a></li>
+      </ol>
+      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-foot wrap">
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+</footer>
+
+<script src="../assets/card.js"></script>
+</body>
+</html>

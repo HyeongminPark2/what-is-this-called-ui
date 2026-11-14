@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>빈 상태 문구 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 620px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .mock { border: 1px solid var(--line); border-radius: var(--r2); background: var(--bg); padding: var(--s5) var(--s4); text-align: center; display: grid; gap: 6px; place-items: center; }
+  .mock h4 { margin: 0; font-size: 14px; }
+  .mock p { margin: 0; font-size: 12.5px; color: var(--fg-muted); max-width: 32ch; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>빈 상태 문구</b>
+  <div class="pick" id="pick"></div>
+</div>
+
+<div class="pad">
+  <p class="ruler" id="q"></p>
+  <div class="ba" id="ba"></div>
+  <div class="mock" id="mock"></div>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  빈 화면은 한 가지가 아닙니다. <b>왜 비었는지</b>에 따라 할 말이 전혀 다릅니다 —
+  아직 안 만든 것, 찾았는데 없는 것, 볼 수 없는 것, 다 끝낸 것.<br>
+  <b>‘데이터가 없습니다’</b>는 넷을 한 문장으로 뭉갠 말이라 어느 경우에도 안 맞습니다.
+  좋은 빈 상태는 <b>왜 비었는지 한 줄</b>과 <b>지금 할 수 있는 일 하나</b>로 끝납니다.
+</p>
+
+<script>
+(function () {
+  var K = [
+    ['first', '아직 만든 게 없을 때', {
+      bad: '데이터가 없습니다',
+      h: '아직 등록한 가맹점이 없어요',
+      p: '가맹점을 등록하면 정산이 여기 쌓입니다',
+      act: '가맹점 등록',
+      why: '처음 온 사람에게는 <b>빈 화면이 곧 첫 설명</b>이다. 무엇을 하면 되는지 적는다'
+    }],
+    ['none', '찾았는데 0건일 때', {
+      bad: '결과가 없습니다',
+      h: '‘모란닭강정’에 맞는 가맹점이 없습니다',
+      p: '철자를 확인하거나 조건을 줄여 보세요',
+      act: '조건 지우기',
+      why: '<b>친 글자를 그대로</b> 적고, 조건을 푸는 길을 준다 — 막다른 길로 두지 않는다'
+    }],
+    ['perm', '볼 수 없을 때', {
+      bad: '데이터가 없습니다',
+      h: '이 목록은 볼 수 없습니다',
+      p: '가맹점 관리자만 볼 수 있어요',
+      act: '관리자에게 요청',
+      why: '<b>없는 것과 못 보는 것은 다르다.</b> 없다고 하면 사용자가 엉뚱한 데를 찾는다'
+    }],
+    ['done', '다 끝냈을 때', {
+      bad: '항목이 없습니다',
+      h: '처리할 정산이 없습니다',
+      p: '오늘 들어온 12건을 모두 끝내셨어요',
+      act: '',
+      why: '이건 <b>좋은 소식</b>이다. 텅 빈 화면으로 보이게 두면 안 된다'
+    }],
+    ['err', '못 불러왔을 때', {
+      bad: '데이터가 없습니다',
+      h: '목록을 불러오지 못했습니다',
+      p: '연결을 확인하고 다시 시도해 주세요',
+      act: '다시 시도',
+      why: '<b>비어 있는 게 아니라 실패한 것</b>이다. 빈 상태로 보이면 사용자는 기다리지 않는다'
+    }]
+  ];
+  var cur = 0;
+
+  function draw() {
+    document.getElementById('pick').innerHTML = K.map(function (k, i) {
+      return '<button type="button" aria-pressed="' + (i === cur) + '" data-i="' + i + '">' + k[1] + '</button>';
+    }).join('');
+
+    var d = K[cur][2];
+    document.getElementById('q').innerHTML = '상황 — <b>' + K[cur][1] + '</b>';
+    document.getElementById('ba').innerHTML =
+      '<div class="ba__c bad"><span class="ba__tag">흔한 문구</span><span class="ba__txt">' + d.bad + '</span>' +
+      '<span class="ba__why">어느 경우에도 안 맞는 한 문장</span></div>' +
+      '<div class="ba__c good"><span class="ba__tag">고친 문구</span><span class="ba__txt">' + d.h + '</span>' +
+      '<span class="ba__why">' + d.p + '</span></div>';
+    document.getElementById('mock').innerHTML =
+      '<h4>' + d.h + '</h4><p>' + d.p + '</p>' +
+      (d.act ? '<button class="ui-btn" style="min-height:36px;padding:8px 14px;font-size:13px">' + d.act + '</button>' : '');
+    document.getElementById('mock').dataset.act = d.act ? '1' : '0';
+    document.getElementById('note').innerHTML = d.why;
+  }
+
+  document.getElementById('pick').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    cur = +b.dataset.i; draw();
+  });
+  draw();
+})();
+</script>
+</body>
+</html>
