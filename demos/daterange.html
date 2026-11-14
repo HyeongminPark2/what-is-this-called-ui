@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>날짜 범위 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width:520px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>날짜 범위</b>
+  <label><input type="checkbox" id="presets" checked> 자주 쓰는 기간 주기</label>
+  <label><input type="checkbox" id="inclusive" checked> 끝날을 포함한다고 적기</label>
+</div>
+
+<div class="pad">
+  <div class="dr">
+    <div class="dr__presets" id="presets-row"></div>
+    <div class="dr__cal" id="cal"></div>
+    <p class="ruler" id="read"></p>
+    <p class="ruler" id="note"></p>
+  </div>
+</div>
+
+<p class="hint">
+  달력에서 시작일과 끝날을 눌러 보세요. <b>자주 쓰는 기간</b>(오늘·지난 7일·이번 달)이
+  달력보다 훨씬 빨리 끝납니다 — 실제로 대부분이 이 버튼으로 끝납니다.<br>
+  <b>끝날을 포함하는가</b>가 숨은 함정입니다. ‘11월 1일 ~ 11월 7일’이 7일을 포함하면 7일간,
+  안 하면 6일간입니다. 화면에는 <b>포함한다고 적어</b> 두고, 서버에는
+  <code>&lt; 11월 8일 00:00</code>으로 보내는 쪽이 경계에서 덜 틀립니다.
+</p>
+
+<script>
+(function () {
+  // 2026년 11월 — 1일이 일요일
+  var DAYS = 30, FIRST_DOW = 0;
+  var start = 1, end = 7;
+  var picking = 'start';
+
+  var PRESETS = [['오늘', 14, 14], ['어제', 13, 13], ['지난 7일', 8, 14], ['이번 달', 1, 30], ['지난 30일', 1, 30]];
+
+  function draw() {
+    var usePre = document.getElementById('presets').checked;
+    document.getElementById('presets-row').innerHTML = usePre
+      ? PRESETS.map(function (p, i) {
+          var on = start === p[1] && end === p[2];
+          return '<button type="button" class="ui-btn ui-btn--ghost" data-p="' + i + '"' +
+            (on ? ' style="border-color:var(--accent);color:var(--accent);font-weight:700"' : '') +
+            ' style="min-height:30px;padding:5px 10px;font-size:12px">' + p[0] + '</button>';
+        }).join('')
+      : '<span class="ruler">자주 쓰는 기간이 없으면 <b>달력만</b> 남는다</span>';
+
+    var h = ['일', '월', '화', '수', '목', '금', '토'].map(function (d) {
+      return '<span class="head">' + d + '</span>';
+    }).join('');
+    for (var i = 0; i < FIRST_DOW; i++) h += '<span class="out"></span>';
+    for (var d = 1; d <= DAYS; d++) {
+      var cls = (d === start || d === end) ? 'edge' : (d > start && d < end ? 'in' : '');
+      h += '<span class="' + cls + '" data-d="' + d + '">' + d + '</span>';
+    }
+    document.getElementById('cal').innerHTML = h;
+
+    var inc = document.getElementById('inclusive').checked;
+    var days = end - start + (inc ? 1 : 0);
+    var r = document.getElementById('read');
+    r.innerHTML = '11월 ' + start + '일 ~ 11월 ' + end + '일 · <b>' + days + '일간</b>' +
+      (inc ? ' <span style="color:var(--fg-muted)">(끝날 포함)</span>' : ' <span class="warn">(끝날 제외)</span>');
+    r.dataset.days = String(days);
+    r.dataset.inc = inc ? '1' : '0';
+
+    document.getElementById('note').innerHTML = inc
+      ? '서버에는 <b>&lt; 11월 ' + (end + 1) + '일 00:00</b> 으로 보낸다 — 시·분·초가 있어도 안 샌다'
+      : '<span class="warn">같은 날짜인데 하루가 적다</span> — 사용자는 거의 늘 끝날을 포함한다고 여긴다';
+  }
+
+  document.getElementById('cal').addEventListener('click', function (e) {
+    var s = e.target.closest('[data-d]'); if (!s) return;
+    var d = +s.dataset.d;
+    if (picking === 'start') { start = d; end = d; picking = 'end'; }
+    else { if (d < start) { end = start; start = d; } else end = d; picking = 'start'; }
+    draw();
+  });
+  document.getElementById('presets-row').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-p]'); if (!b) return;
+    var p = PRESETS[+b.dataset.p]; start = p[1]; end = p[2]; picking = 'start'; draw();
+  });
+  document.getElementById('presets').addEventListener('change', draw);
+  document.getElementById('inclusive').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

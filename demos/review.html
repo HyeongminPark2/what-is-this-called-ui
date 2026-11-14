@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자인 리뷰 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width:620px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>디자인 리뷰</b>
+  <label>어느 단계 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="wire">와이어프레임</option>
+    <option value="visual" selected>시안</option>
+    <option value="built">만든 뒤</option>
+  </select></label>
+</div>
+
+<div class="pad">
+  <p class="ruler" id="head"></p>
+  <div class="rv" id="list"></div>
+  <p class="ruler" id="verdict"></p>
+</div>
+
+<p class="hint">
+  리뷰에서 나오는 말은 <b>단계에 맞아야</b> 쓸모가 있습니다. 시안 단계에 와서
+  “이 정보를 빼죠”라고 하면 처음부터 다시 그려야 하고, 와이어프레임에 와서
+  “이 파랑이 좀…”이라고 하면 아직 정하지도 않은 것을 말하는 셈입니다 —
+  <a href="wireframe.html">와이어프레임과 목업과 시안</a>에서 본 그대로입니다.<br>
+  말투도 다릅니다. <b>“왜 이렇게 했나요”</b>는 설명을 끌어내고,
+  <b>“이건 아닌 것 같아요”</b>는 방어를 끌어냅니다. 같은 지적도 <b>무엇이 걱정인지</b>를
+  적으면 고칠 거리가 됩니다.
+</p>
+
+<script>
+(function () {
+  var SAY = [
+    ['이 정보를 빼죠', { wire: 1, visual: 0, built: 0 }, '구조 이야기다 — 와이어프레임 단계에서'],
+    ['순서를 바꿔 보면 어떨까요', { wire: 1, visual: 0, built: 0 }, '역시 구조. 시안에서 하면 다시 그려야 한다'],
+    ['이 파랑이 좀 칙칙한데요', { wire: 0, visual: 1, built: 1 }, '색은 시안부터 — 와이어프레임에는 색이 없다'],
+    ['대비가 모자라 보입니다', { wire: 0, visual: 1, built: 1 }, '시안에서 재면 고치기 싸다'],
+    ['글이 길어지면 어떻게 되나요', { wire: 0, visual: 1, built: 1 }, '경계 질문 — 시안·만든 뒤 둘 다 맞다'],
+    ['폰에서 눌러 봤는데 안 눌려요', { wire: 0, visual: 0, built: 1 }, '실제 기기 이야기 — 만든 뒤에만 알 수 있다'],
+    ['이건 아닌 것 같아요', { wire: 0, visual: 0, built: 0 }, '무엇이 걱정인지가 없다 — 어느 단계에서도 못 고친다'],
+    ['제 취향은 아니지만요', { wire: 0, visual: 0, built: 0 }, '취향은 기준이 아니다 — 무엇을 해치는지 말한다']
+  ];
+  var HEAD = {
+    wire: '<b>와이어프레임</b> 리뷰 — 묻는 것은 <b>구조</b>다',
+    visual: '<b>시안</b> 리뷰 — 묻는 것은 <b>마감</b>이다',
+    built: '<b>만든 뒤</b> 리뷰 — 묻는 것은 <b>실제로 되는가</b>다'
+  };
+
+  function draw() {
+    var k = document.getElementById('k').value;
+    document.getElementById('head').innerHTML = HEAD[k];
+    document.getElementById('list').innerHTML = SAY.map(function (s) {
+      var ok = !!s[1][k];
+      return '<div class="rv__row ' + (ok ? 'ok' : 'no') + '" data-s="' + s[0] + '">' +
+        '<span class="mk">' + (ok ? '○' : '✕') + '</span>' +
+        '<span>“' + s[0] + '”</span>' +
+        '<span class="rv__why">' + s[2] + '</span></div>';
+    }).join('');
+    var n = SAY.filter(function (s) { return s[1][k]; }).length;
+    var v = document.getElementById('verdict');
+    v.innerHTML = '이 단계에서 쓸모 있는 말 <b>' + n + '개</b> · 나머지는 <b>너무 이르거나 너무 늦다</b>';
+    v.dataset.n = String(n);
+  }
+  document.getElementById('k').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

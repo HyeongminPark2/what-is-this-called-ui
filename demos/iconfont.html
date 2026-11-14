@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>아이콘 글꼴 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width:620px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>아이콘 글꼴</b>
+  <label><input type="checkbox" id="fail"> 글꼴을 못 받았을 때</label>
+  <label>색 <input type="color" id="c" value="#2f6df6" style="width:40px;height:28px;padding:0;border:1px solid var(--line);border-radius:4px;background:none"></label>
+</div>
+
+<div class="pad">
+  <div class="icoset" id="set"></div>
+  <p class="ruler" id="verdict"></p>
+  <div class="verd" id="cmp"></div>
+</div>
+
+<p class="hint">
+  <b>아이콘 글꼴</b>은 글자 자리에 그림을 넣어 둔 글꼴입니다. 글자라서 <code>color</code>·
+  <code>font-size</code>가 그대로 먹는 것이 장점이었습니다.<br>
+  <b>글꼴을 못 받았을 때</b>를 켜 보세요 — 그 자리에 <b>엉뚱한 글자나 네모</b>가 남습니다.
+  스크린 리더가 그 글자를 <b>그대로 읽어 버리는</b> 것도 같은 뿌리의 문제입니다.<br>
+  요즘은 <b>SVG</b>를 씁니다. <code>currentColor</code>로 색도 따라오고, 필요 없는 아이콘까지
+  통째로 받는 일도 없습니다.
+</p>
+
+<script>
+(function () {
+  function draw() {
+    var fail = document.getElementById('fail').checked;
+    var c = document.getElementById('c').value;
+    var glyph = fail ? '' : '🗑';
+    document.getElementById('set').innerHTML =
+      '<div class="icobox' + (fail ? ' bad' : '') + '" data-k="font">' +
+        '<span class="face" style="color:' + c + '">' + (fail ? '<span style="font-size:16px;color:var(--danger)">&#xE801;</span>' : glyph) + '</span>' +
+        '<span class="tag">아이콘 글꼴</span></div>' +
+      '<div class="icobox" data-k="svg">' +
+        '<span class="face"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="' + c + '" stroke-width="2" aria-hidden="true">' +
+        '<path d="M4 7h16M9 7V5h6v2M7 7l1 13h8l1-13"/></svg></span>' +
+        '<span class="tag">SVG</span></div>';
+
+    var v = document.getElementById('verdict');
+    v.innerHTML = fail
+      ? '<span class="warn">글꼴을 못 받으면 그 자리에 엉뚱한 글자가 남는다</span> — SVG 는 그대로다'
+      : '둘 다 색이 <b>' + c + '</b> 를 따라간다 — 아이콘 글꼴은 <code>color</code>, SVG 는 <code>stroke</code>';
+    v.dataset.fail = fail ? '1' : '0';
+
+    document.getElementById('cmp').innerHTML = [
+      ['색을 CSS 로 바꾼다', true, true, '둘 다 된다'],
+      ['필요한 것만 받는다', false, true, '글꼴은 <b>안 쓰는 아이콘까지</b> 통째로 받는다'],
+      ['못 받아도 안 깨진다', false, true, '글꼴이 없으면 <b>네모나 엉뚱한 글자</b>가 남는다'],
+      ['여러 색을 한 아이콘에', false, true, '글꼴은 <b>한 색</b>뿐이다'],
+      ['자리를 미리 잡는다', false, true, '글꼴은 받기 전까지 <b>너비를 모른다</b>'],
+      ['요청이 적다', true, false, '글꼴은 <b>한 파일</b>, SVG 는 묶지 않으면 여러 개']
+    ].map(function (r) {
+      return '<div class="verd__row ' + (r[2] ? 'ok' : 'no') + '">' +
+        '<span class="t">' + r[0] + '</span>' +
+        '<span class="v">글꼴 ' + (r[1] ? '○' : '✕') + ' · SVG ' + (r[2] ? '○' : '✕') + '</span>' +
+        '<span class="verd__why">' + r[3] + '</span></div>';
+    }).join('');
+  }
+  document.getElementById('fail').addEventListener('change', draw);
+  document.getElementById('c').addEventListener('input', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

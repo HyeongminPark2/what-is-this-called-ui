@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대체 텍스트 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width:620px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>대체 텍스트</b>
+  <label><input type="checkbox" id="read" checked> 스크린 리더로 읽어 보기</label>
+</div>
+
+<div class="pad">
+  <div class="alt-grid" id="grid"></div>
+  <p class="ruler" id="verdict"></p>
+</div>
+
+<p class="hint">
+  대체 텍스트의 기준은 <b>‘이 그림이 없으면 무엇을 잃나’</b>입니다.
+  아무것도 안 잃으면 <code>alt=""</code>로 비워 <b>건너뛰게</b> 하고,
+  뜻을 잃으면 그 뜻을 적습니다.<br>
+  가장 흔한 실수는 <b>파일 이름</b>이 남는 것과 <b>‘이미지’라고 적는</b> 것입니다 —
+  둘 다 읽는 사람에게 아무것도 주지 않으면서 <b>건너뛰지도 못하게</b> 만듭니다.
+  차트는 숫자를 <a href="chart.html">표로 한 벌 더</a> 두는 것이 답입니다.
+</p>
+
+<script>
+(function () {
+  var CASES = [
+    ['장식 그림', '🌿', '', 'good', '아무 뜻이 없다 — 비워서 건너뛰게 한다', 'alt=""  → 아무것도 안 읽는다'],
+    ['뜻이 있는 아이콘', '⚠️', '승인 대기', 'good', '옆에 글자가 없으면 뜻을 적는다', 'alt="승인 대기"'],
+    ['글자가 박힌 그림', '🏷️', '11월 정산 마감 11월 20일', 'good', '그림 속 글자를 그대로 옮긴다', 'alt="11월 정산 마감 11월 20일"'],
+    ['사람 사진', '🧑', '모란상회 대표 홍길동', 'good', '누구인지가 뜻이다', 'alt="모란상회 대표 홍길동"'],
+    ['파일 이름이 남음', '🖼️', 'IMG_2481.png', 'bad', '아무 정보가 없는데 건너뛰지도 못한다', 'alt="IMG_2481.png"'],
+    ['‘이미지’라고 적음', '🖼️', '이미지', 'bad', '그림이라는 건 이미 안다', 'alt="이미지"'],
+    ['글자 옆 아이콘', '🗑️', '삭제', 'bad', '옆에 ‘삭제’가 있으면 두 번 읽힌다', 'alt="삭제" + 글자 "삭제"'],
+    ['차트', '📊', '매출 차트', 'bad', '숫자를 못 읽는다 — 표를 한 벌 더 둔다', 'alt="매출 차트"']
+  ];
+
+  function draw() {
+    var on = document.getElementById('read').checked;
+    document.getElementById('grid').innerHTML = CASES.map(function (c) {
+      return '<div class="alt ' + c[3] + '" data-k="' + c[0] + '">' +
+        '<h4>' + c[0] + '</h4>' +
+        '<div class="pic">' + c[1] + '</div>' +
+        '<span class="reads">' + (on ? (c[2] ? '“' + c[2] + '” 라고 읽힌다' : '아무것도 안 읽고 지나간다') : c[5]) + '</span>' +
+        '<span style="font-size:11.5px;color:var(--fg-muted)">' + c[4] + '</span></div>';
+    }).join('');
+    var bad = CASES.filter(function (c) { return c[3] === 'bad'; }).length;
+    var v = document.getElementById('verdict');
+    v.innerHTML = '여덟 가지 중 <span class="warn">고칠 것 ' + bad + '개</span> — ' +
+      '기준은 <b>‘이 그림이 없으면 무엇을 잃나’</b> 하나다';
+    v.dataset.bad = String(bad);
+  }
+  document.getElementById('read').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

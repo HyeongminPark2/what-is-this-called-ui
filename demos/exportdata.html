@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>내보내기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width:520px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>내보내기</b>
+  <label>건수 <input type="range" id="n" class="ui-range" min="50" max="200000" step="50" value="128" style="width:150px"> <span class="ruler" id="nv"></span></label>
+  <button class="ui-btn" id="go">내보내기</button>
+</div>
+
+<div class="pad">
+  <div class="scr">
+    <div class="scr__bar">정산 내보내기 <span class="sp" id="scope"></span></div>
+    <div class="scr__body">
+      <div class="ex-opt">
+        <label><input type="radio" name="range" value="page" checked> <span>이 쪽 20건<small>지금 보고 있는 것만</small></span></label>
+        <label><input type="radio" name="range" value="filter"> <span>조건에 맞는 전부<small>지금 걸린 필터 그대로</small></span></label>
+        <label><input type="radio" name="range" value="all"> <span>전체<small>조건을 무시하고 다</small></span></label>
+      </div>
+      <div class="ex-opt" style="border-top:1px solid var(--line);padding-top:var(--s3)">
+        <label><input type="radio" name="fmt" value="csv" checked> <span>CSV<small>엑셀·구글 시트에서 연다. 가장 호환이 넓다</small></span></label>
+        <label><input type="radio" name="fmt" value="xlsx"> <span>XLSX<small>서식·여러 시트가 되지만 만드는 쪽이 무겁다</small></span></label>
+        <label><input type="radio" name="fmt" value="pdf"> <span>PDF<small>보기용. 다시 계산할 수 없다</small></span></label>
+      </div>
+    </div>
+    <div class="scr__foot"><span class="ruler" id="est"></span></div>
+  </div>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  건수를 올려 보세요. <b>몇 건을 내보내는지</b>에 따라 방식이 달라집니다 —
+  적으면 그 자리에서 받고, 많으면 <b>만드는 데 시간이 걸려</b> 메일로 보내거나 나중에 받게 해야 합니다.<br>
+  범위를 <b>‘이 쪽’과 ‘조건에 맞는 전부’</b>로 갈라 묻는 것이 <a href="bulk.html">일괄 선택</a>과 같은 이유입니다 —
+  사용자는 거의 늘 <b>조건에 맞는 전부</b>를 뜻합니다.<br>
+  CSV 는 한글이 깨지기 쉬워 <b>BOM</b>을 붙여야 엑셀이 제대로 엽니다.
+</p>
+
+<script>
+(function () {
+  function rows() { return +document.getElementById('n').value; }
+  function range() { return document.querySelector('[name=range]:checked').value; }
+  function fmt() { return document.querySelector('[name=fmt]:checked').value; }
+
+  function count() {
+    var r = range(), n = rows();
+    return r === 'page' ? Math.min(20, n) : (r === 'filter' ? n : Math.round(n * 2.4));
+  }
+
+  function draw() {
+    document.getElementById('nv').textContent = rows().toLocaleString('ko-KR') + '건';
+    var c = count();
+    document.getElementById('scope').textContent = c.toLocaleString('ko-KR') + '건';
+
+    var perRow = { csv: 0.12, xlsx: 0.22, pdf: 0.6 }[fmt()];
+    var kb = c * perRow;
+    var sec = c / 9000;
+    var big = sec > 3;
+    var e = document.getElementById('est');
+    e.innerHTML = '어림 <b>' + (kb > 1024 ? (kb / 1024).toFixed(1) + ' MB' : Math.round(kb) + ' KB') + '</b> · ' +
+      (big
+        ? '<span class="warn">만드는 데 ' + sec.toFixed(0) + '초쯤 — 그 자리에서 못 준다</span>'
+        : '만드는 데 ' + sec.toFixed(1) + '초 — <b>바로 받을 수 있다</b>');
+    e.dataset.mode = big ? 'async' : 'sync';
+    e.dataset.rows = String(c);
+  }
+
+  document.getElementById('go').addEventListener('click', function () {
+    var big = document.getElementById('est').dataset.mode === 'async';
+    var c = count();
+    document.getElementById('log').innerHTML = big
+      ? '<b>만들어서 알려 드릴게요</b> — ' + c.toLocaleString('ko-KR') + '건은 오래 걸려 다 되면 메일로 보냅니다'
+      : '바로 받았다 — settlements_' + c + '.' + fmt() +
+        (fmt() === 'csv' ? ' <span style="color:var(--fg-muted)">(BOM 붙임 — 엑셀에서 한글이 안 깨지게)</span>' : '');
+  });
+  document.getElementById('n').addEventListener('input', draw);
+  [].forEach.call(document.querySelectorAll('[name=range],[name=fmt]'), function (el) {
+    el.addEventListener('change', draw);
+  });
+  draw();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대소문자 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width:620px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>대소문자</b>
+  <label>꼴 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="sentence">문장형 (Sentence case)</option>
+    <option value="title">제목형 (Title Case)</option>
+    <option value="upper">대문자 (UPPERCASE)</option>
+    <option value="lower">소문자 (lowercase)</option>
+  </select></label>
+  <label><input type="checkbox" id="ko" checked> 한국어도 함께 보기</label>
+</div>
+
+<div class="pad">
+  <div id="rows"></div>
+  <p class="ruler" id="verdict"></p>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  영어에는 <b>네 가지 꼴</b>이 있고 자리마다 관례가 다릅니다. 요즘 OS 지침은
+  <b>문장형</b>을 기본으로 권합니다 — 읽기 쉽고 번역해도 덜 깨지기 때문입니다.<br>
+  <b>대문자</b>는 눈에 띄지만 <b>글자 모양이 다 네모</b>가 되어 단어 윤곽이 사라지고,
+  스크린 리더가 <b>약자로 읽어 버리는</b> 일도 있습니다.<br>
+  <b>한국어에는 대소문자가 없습니다.</b> 그래서 <code>text-transform</code>을 전역으로 걸면
+  영어만 바뀌고 한국어는 그대로라, 한 줄 안에서 결이 어긋납니다.
+</p>
+
+<script>
+(function () {
+  var SAMPLES = [
+    ['버튼', 'Export settlements', '정산 내보내기'],
+    ['메뉴 항목', 'Account settings', '계정 설정'],
+    ['표 머리글', 'Merchant name', '가맹점 이름'],
+    ['제목', 'Export your settlement data', '정산 데이터를 내보냅니다']
+  ];
+  var CSS = { sentence: 'none', title: 'capitalize', upper: 'uppercase', lower: 'lowercase' };
+  var NOTE = {
+    sentence: '첫 글자만 대문자. <b>요즘 OS 지침의 기본값</b>이고 번역해도 덜 깨진다',
+    title: '단어마다 대문자. 짧은 제목에 쓰지만 <b>a · of · the 를 어떻게 할지</b>가 또 규칙이다',
+    upper: '<span class="warn">단어 윤곽이 사라져 읽기 느리다</span>. 스크린 리더가 약자로 읽기도 한다',
+    lower: '브랜드 느낌을 노리지만 <b>고유명사까지 내려가</b> 읽기 어색해진다'
+  };
+
+  function draw() {
+    var k = document.getElementById('k').value;
+    var showKo = document.getElementById('ko').checked;
+    document.getElementById('rows').innerHTML = SAMPLES.map(function (s) {
+      var bad = (k === 'upper' && s[0] === '제목') || (k === 'lower' && s[0] !== '버튼');
+      return '<div class="cs-row' + (bad ? ' bad' : '') + '" data-k="' + s[0] + '">' +
+        '<span class="lab">' + s[0] + '</span>' +
+        '<span class="sample"><span data-en style="text-transform:' + CSS[k] + '">' + s[1] + '</span>' +
+          (showKo ? ' <span style="color:var(--fg-muted);text-transform:' + CSS[k] + '">' + s[2] + '</span>' : '') +
+        '</span>' +
+        '<span class="note">' + (bad ? '이 자리엔 과하다' : '') + '</span></div>';
+    }).join('');
+
+    var v = document.getElementById('verdict');
+    v.innerHTML = 'CSS 로는 <b>text-transform: ' + CSS[k] + '</b>' +
+      (showKo ? ' — 한국어 쪽은 <b>아무 변화가 없다</b>' : '');
+    v.dataset.css = CSS[k];
+    document.getElementById('note').innerHTML = NOTE[k];
+  }
+  document.getElementById('k').addEventListener('change', draw);
+  document.getElementById('ko').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

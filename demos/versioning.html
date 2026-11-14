@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>버전 관리 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width:620px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>버전 관리</b>
+  <label>이름 짓는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="good">무엇이 바뀌었는지</option>
+    <option value="num">v1 · v2 · v3</option>
+    <option value="final">final · 진짜final</option>
+  </select></label>
+  <button class="ui-btn ui-btn--ghost" id="add">고친 것 하나 더</button>
+</div>
+
+<div class="pad">
+  <div class="vr" id="list"></div>
+  <p class="ruler" id="verdict"></p>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  시안 파일에도 역사가 쌓입니다. 문제는 <b>어느 것이 지금 것인지</b>와
+  <b>무엇이 왜 바뀌었는지</b>를 나중에 알 수 없다는 점입니다.<br>
+  <code>v3</code>·<code>final</code>은 둘 다 <b>그 질문에 답하지 않습니다</b>.
+  대신 <b>날짜 + 무엇이 바뀌었는지</b>를 적어 두면 고친 이유가 남고,
+  코드의 커밋 메시지와 같은 일을 하게 됩니다.<br>
+  시안 도구에도 <b>버전 기록</b>이 있습니다. 파일을 복제하는 대신 그 기능을 쓰면
+  '지금 것'이 늘 하나입니다.
+</p>
+
+<script>
+(function () {
+  var BASE = [
+    ['11-07', '첫 구조 — 목록과 상세', '홍길동'],
+    ['11-10', '정산 상태를 칩으로 바꿈', '홍길동'],
+    ['11-12', '폰에서 두 단 → 한 단', '김철수'],
+    ['11-14', '빈 화면과 오류 화면 추가', '홍길동']
+  ];
+  var extra = 0;
+
+  var NAMES = {
+    good: function (r, i) { return r[0] + ' ' + r[1]; },
+    num: function (r, i) { return '정산목록_v' + (i + 1); },
+    final: function (r, i) { return ['정산목록', '정산목록_final', '정산목록_final2', '정산목록_진짜final', '정산목록_진짜final_수정'][i] || ('정산목록_final' + i); }
+  };
+  var NOTE = {
+    good: '<b>무엇이 바뀌었는지</b>가 남는다 — 왜 그랬는지를 나중에 알 수 있다',
+    num: '<span class="warn">v3 과 v4 의 차이를 아무도 모른다</span> — 열어 봐야 안다',
+    final: '<span class="warn">어느 것이 지금 것인지 모른다</span> — 가장 흔하고 가장 나쁜 꼴'
+  };
+
+  function draw() {
+    var k = document.getElementById('k').value;
+    var rows = BASE.concat(Array.from({ length: extra }, function (_, i) {
+      return ['11-' + (15 + i), '간격을 8의 배수로 맞춤', '김철수'];
+    }));
+    document.getElementById('list').innerHTML = rows.map(function (r, i) {
+      var cur = i === rows.length - 1;
+      return '<div class="vr__row' + (cur ? ' cur' : '') + '" data-i="' + i + '">' +
+        '<span class="when">' + (k === 'good' ? r[0] : '—') + '</span>' +
+        '<span>' + NAMES[k](r, i) + (cur ? ' <b style="color:var(--accent)">· 지금 것</b>' : '') + '</span>' +
+        '<span class="who">' + r[2] + '</span></div>';
+    }).join('');
+
+    var v = document.getElementById('verdict');
+    v.innerHTML = k === 'good'
+      ? '<b>' + rows.length + '개</b> — 이름만 보고 <b>무엇이 바뀌었는지</b> 알 수 있다'
+      : '<span class="warn">' + rows.length + '개 — 이름만 보고는 아무것도 알 수 없다</span>';
+    v.dataset.k = k;
+    v.dataset.n = String(rows.length);
+    document.getElementById('note').innerHTML = NOTE[k];
+  }
+
+  document.getElementById('add').addEventListener('click', function () { extra++; draw(); });
+  document.getElementById('k').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

@@ -208,21 +208,21 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
 
   // ── 2. 항목 카드 — 일곱 장 모두 같은 틀인지 ──
   const PARTS = {
-    '12부': ['focus', 'focustrap', 'keyboard', 'name', 'screenreader', 'live', 'contrast', 'semantics'],
+    '12부': ['focus', 'focustrap', 'keyboard', 'name', 'screenreader', 'live', 'contrast', 'semantics', 'alttext', 'textzoom'],
     '1부': ['box', 'flex', 'grid', 'center', 'overflow', 'sticky', 'container', 'safearea'],
     '2부': ['color', 'dark', 'typescale', 'spacing', 'elevation', 'zindex'],
     '5부': ['card', 'listitem', 'avatar', 'badge', 'chip', 'stat', 'timeline', 'rating'],
     '6부': ['modal', 'dialog', 'sheet', 'drawer', 'popover', 'tooltip', 'toast'],
-    '3부': ['weight', 'lineheight', 'letterspacing', 'hangul', 'numerals', 'truncate', 'webfont', 'hierarchy'],
+    '3부': ['weight', 'lineheight', 'letterspacing', 'hangul', 'numerals', 'truncate', 'webfont', 'hierarchy', 'casing', 'iconfont'],
     '4부': ['field', 'select', 'combobox', 'checkbox', 'radio', 'switch', 'segmented', 'slider'],
     '7부': ['appbar', 'sidebar', 'tabs', 'breadcrumb', 'pagination', 'infinite', 'bottomnav'],
     '8부': ['spinner', 'skeleton', 'progress', 'optimistic', 'empty', 'error'],
-    '10부': ['table', 'filter', 'search', 'form', 'validation', 'bulk', 'virtual', 'chart'],
-    '9부': ['easing', 'duration', 'enterexit', 'cheap', 'spring', 'stagger', 'gesture', 'reducedmotion'],
+    '10부': ['table', 'filter', 'search', 'form', 'validation', 'bulk', 'virtual', 'chart', 'exportdata', 'daterange'],
+    '9부': ['easing', 'duration', 'enterexit', 'cheap', 'spring', 'stagger', 'gesture', 'reducedmotion', 'sharedelement', 'scrolllink'],
     '11부': ['breakpoint', 'touchtarget', 'hover', 'systemback', 'dpr', 'viewport', 'softkeyboard', 'platformdiff'],
     '13부': ['login', 'onboarding', 'searchresults', 'settings', 'checkout', 'permission', 'notifications', 'destructive'],
     '14부': ['buttontext', 'errortext', 'emptytext', 'placeholder', 'koreanui', 'datetime', 'numbertext', 'voice'],
-    '15부': ['wireframe', 'designsystem', 'component', 'variant', 'autolayout', 'prototype', 'handoff', 'assets'],
+    '15부': ['wireframe', 'designsystem', 'component', 'variant', 'autolayout', 'prototype', 'handoff', 'assets', 'review', 'versioning'],
   };
   const ITEMS = Object.values(PARTS).flat();
   const partOf = s => Object.keys(PARTS).find(k => PARTS[k].includes(s));
@@ -1951,6 +1951,125 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   await page.selectOption('#kind', 'illust'); await page.waitForTimeout(240);
   if (!(await page.textContent('#note')).includes('늘 작은 것은 아니다'))
     fail.push('에셋: SVG 가 늘 작다고 한다 (보여주려는 결과)');
+  await page.close();
+
+  // 다섯 부의 남은 데모 열 장
+  page = await demo('casing', 980, 900);
+  if (await page.locator('.cs-row').count() !== 4) fail.push('대소문자: 네 자리가 아니다');
+  await page.selectOption('#k', 'upper'); await page.waitForTimeout(220);
+  if (await page.$eval('.cs-row [data-en]', e => getComputedStyle(e).textTransform) !== 'uppercase')
+    fail.push('대소문자: text-transform 이 안 먹는다');
+  if (!(await page.textContent('#verdict')).includes('아무 변화가 없다'))
+    fail.push('대소문자: 한국어는 안 바뀐다고 안 적는다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('iconfont', 980, 900);
+  if (await page.locator('.icobox').count() !== 2) fail.push('아이콘글꼴: 둘을 안 견준다');
+  await page.check('#fail'); await page.waitForTimeout(220);
+  if (await page.locator('.icobox.bad').count() !== 1)
+    fail.push('아이콘글꼴: 글꼴 쪽만 깨지지 않는다 (보여주려는 결과)');
+  if (!(await page.locator('.verd__row').count() >= 6)) fail.push('아이콘글꼴: 견주는 표가 짧다');
+  await page.close();
+
+  page = await demo('sharedelement', 980, 900);
+  await page.locator('#go').click(); await page.waitForTimeout(500);
+  if (await page.getAttribute('#thumb', 'data-open') !== '1') fail.push('공유전환: 열어도 안 커진다');
+  if (!(await page.$eval('#thumb', e => e.getBoundingClientRect().height > 80))) fail.push('공유전환: 실제로 안 자랐다');
+  await page.locator('#back').click(); await page.waitForTimeout(420);
+  await page.uncheck('#shared'); await page.waitForTimeout(220);
+  await page.locator('#go').click(); await page.waitForTimeout(420);
+  if (!(await page.textContent('#log')).includes('관계가 안 보인다'))
+    fail.push('공유전환: 꺼도 관계가 보인다고 한다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('scrolllink', 980, 900);
+  await page.$eval('#sc', e => { e.scrollTop = e.scrollHeight; }); await page.waitForTimeout(320);
+  if (!(+(await page.getAttribute('#read', 'data-p')) > 90)) fail.push('스크롤연동: 끝까지 굴려도 100%가 아니다');
+  await page.selectOption('#k', 'parallax'); await page.waitForTimeout(260);
+  await page.$eval('#sc', e => { e.scrollTop = 200; }); await page.waitForTimeout(260);
+  if (await page.$eval('#hero', e => getComputedStyle(e).transform) === 'none') fail.push('스크롤연동: 시차가 안 움직인다');
+  await page.check('#calm'); await page.waitForTimeout(260);
+  await page.$eval('#sc', e => { e.scrollTop = 200; }); await page.waitForTimeout(260);
+  if (await page.$eval('#hero', e => getComputedStyle(e).transform) !== 'none')
+    fail.push('스크롤연동: 줄이기에서도 시차가 움직인다');
+  await page.close();
+
+  page = await demo('exportdata', 980, 900);
+  if (await page.getAttribute('#est', 'data-mode') !== 'sync') fail.push('내보내기: 적은 건수인데 비동기로 본다');
+  await page.locator('input[name=range][value=filter]').check();
+  await page.locator('#n').fill('200000'); await page.dispatchEvent('#n', 'input'); await page.waitForTimeout(280);
+  if (await page.getAttribute('#est', 'data-mode') !== 'async')
+    fail.push('내보내기: 20만 건도 그 자리에서 준다고 한다 (보여주려는 결과)');
+  await page.locator('#go').click(); await page.waitForTimeout(240);
+  if (!(await page.textContent('#log')).includes('메일로')) fail.push('내보내기: 오래 걸릴 때 길을 안 준다');
+  await page.close();
+
+  page = await demo('daterange', 980, 900);
+  if (await page.getAttribute('#read', 'data-days') !== '7') fail.push('날짜범위: 11월 1~7일이 7일간이 아니다');
+  await page.uncheck('#inclusive'); await page.waitForTimeout(240);
+  if (await page.getAttribute('#read', 'data-days') !== '6')
+    fail.push('날짜범위: 끝날을 빼도 7일간이다 (보여주려는 결과)');
+  await page.check('#inclusive'); await page.waitForTimeout(200);
+  await page.locator('[data-p="2"]').click(); await page.waitForTimeout(240);
+  if (await page.locator('.dr__cal .edge').count() !== 2) fail.push('날짜범위: 달력에 양끝이 없다');
+  await page.close();
+
+  page = await demo('alttext', 980, 900);
+  if (await page.locator('.alt').count() !== 8) fail.push('대체텍스트: 여덟 가지가 아니다');
+  if (await page.getAttribute('#verdict', 'data-bad') !== '4')
+    fail.push('대체텍스트: 고칠 것이 넷이 아니다 (보여주려는 결과)');
+  if (!(await page.textContent('.alt[data-k="장식 그림"]')).includes('아무것도 안 읽고'))
+    fail.push('대체텍스트: 빈 alt 가 건너뛴다고 안 적는다');
+  await page.close();
+
+  page = await demo('textzoom', 980, 900);
+  if (await page.getAttribute('#read', 'data-size') !== '15px') fail.push('확대: 기본이 15px 이 아니다');
+  await page.locator('#z').fill('200'); await page.dispatchEvent('#z', 'input'); await page.waitForTimeout(260);
+  if (await page.getAttribute('#read', 'data-size') !== '30px') fail.push('확대: 200%에서 안 커진다');
+  if (await page.getAttribute('#read', 'data-clip') !== '0') fail.push('확대: 늘렸을 뿐인데 잘린다');
+  await page.check('#fixed'); await page.waitForTimeout(260);
+  if (await page.getAttribute('#read', 'data-size') !== '13px')
+    fail.push('확대: px 로 박아도 커진다 (보여주려는 결과)');
+  if (await page.getAttribute('#read', 'data-clip') !== '1') fail.push('확대: 높이를 박아도 안 잘린다');
+  await page.close();
+
+  page = await demo('review', 980, 900);
+  if (await page.getAttribute('#verdict', 'data-n') !== '3') fail.push('리뷰: 시안 단계의 쓸모 있는 말이 셋이 아니다');
+  await page.selectOption('#k', 'wire'); await page.waitForTimeout(240);
+  if (!await page.locator('.rv__row[data-s="이 정보를 빼죠"]').evaluate(e => e.classList.contains('ok')))
+    fail.push('리뷰: 와이어프레임에서 구조 이야기를 막는다');
+  if (!await page.locator('.rv__row[data-s="이건 아닌 것 같아요"]').evaluate(e => e.classList.contains('no')))
+    fail.push('리뷰: 고칠 거리 없는 말을 쓸모 있다고 한다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('versioning', 980, 900);
+  if (await page.getAttribute('#verdict', 'data-k') !== 'good') fail.push('버전: 처음이 좋은 이름이 아니다');
+  await page.selectOption('#k', 'final'); await page.waitForTimeout(240);
+  if (!(await page.textContent('#list')).includes('진짜final'))
+    fail.push('버전: final 사슬이 안 보인다 (보여주려는 결과)');
+  await page.locator('#add').click(); await page.waitForTimeout(240);
+  if (await page.getAttribute('#verdict', 'data-n') !== '5') fail.push('버전: 고쳐도 안 늘어난다');
+  await page.close();
+
+  // 부록 색인 — 항목이 늘면 색인도 같이 늘어야 한다
+  page = await browser.newPage({ viewport: { width: 980, height: 1000 } });
+  page.on('pageerror', e => errors.push('[appendix] ' + e.message));
+  page.on('console', m => { if (m.type() === 'error') errors.push('[appendix] ' + m.text()); });
+  await page.goto(url('appendix.html'));
+  await page.waitForTimeout(400);
+  {
+    const listed = await page.locator('.ix__list li').count();
+    if (listed !== ITEMS.length) fail.push(`색인: ${listed}개가 실렸는데 항목은 ${ITEMS.length}개다 — tools/appendix.js 를 다시 돌린다`);
+    const slugs = await page.$$eval('.ix__list li', els => els.map(e => e.dataset.slug));
+    const miss = ITEMS.filter(s => !slugs.includes(s));
+    if (miss.length) fail.push('색인에 빠진 항목: ' + miss.join(', '));
+    await page.fill('#q', '모달'); await page.waitForTimeout(250);
+    if (!(+(await page.getAttribute('#count', 'data-n')) >= 1)) fail.push('색인: 한국어로 못 거른다');
+    await page.fill('#q', 'modal'); await page.waitForTimeout(250);
+    if (!(+(await page.getAttribute('#count', 'data-n')) >= 1)) fail.push('색인: 영어로 못 거른다');
+    await page.fill('#q', 'zzzz'); await page.waitForTimeout(250);
+    if (await page.locator('#none').isHidden()) fail.push('색인: 0개일 때 안내가 없다');
+  }
   await page.close();
 
   await browser.close();

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>확대와 글자 크기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width:520px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>확대와 글자 크기</b>
+  <label>글자 크기 <input type="range" id="z" class="ui-range" min="100" max="200" step="10" value="100" style="width:140px"> <span class="ruler" id="zv">100%</span></label>
+  <label><input type="checkbox" id="fixed"> 크기를 px 로 박아 두기</label>
+</div>
+
+<div class="pad">
+  <div class="zoomstage">
+    <div class="zoomcard" id="card">
+      <span class="t">모란상회 신길역점</span>
+      <div class="box">
+        <span style="color:var(--fg-muted)">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 등록된 계좌로 들어갑니다.</span>
+      </div>
+      <div class="row">
+        <span class="pill">정산 보기</span>
+        <span style="color:var(--fg-muted)">1,284,000원</span>
+      </div>
+    </div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  막대를 끌어 글자를 키워 보세요. OS·브라우저 설정으로 <b>사용자가 직접</b> 키울 수 있고,
+  저시력인 사람에게는 이게 유일한 길입니다.<br>
+  <b>px 로 박아 두기</b>를 켜면 글자가 안 커집니다. 거기에 상자 높이까지 <code>px</code>로 박아 두면
+  키운 글이 <b>상자 밖으로 잘립니다</b> — 설정을 켠 사람만 겪는 사고라 <b>우리 화면에서는 안 보입니다</b>.<br>
+  WCAG 는 <b>200%까지 키워도 내용과 기능을 잃지 않을 것</b>을 요구합니다.
+</p>
+
+<script>
+(function () {
+  var card = document.getElementById('card');
+
+  function draw() {
+    var z = +document.getElementById('z').value;
+    var fixed = document.getElementById('fixed').checked;
+    document.getElementById('zv').textContent = z + '%';
+
+    card.classList.toggle('fixed', fixed);
+    card.style.fontSize = fixed ? '' : (15 * z / 100).toFixed(1) + 'px';
+
+    var box = card.querySelector('.box');
+    var clipped = box.scrollHeight > box.clientHeight + 1;
+    var r = document.getElementById('read');
+    r.innerHTML = '글자 크기 <b>' + z + '%</b> · 실제로 그려진 크기 <b>' +
+      getComputedStyle(card).fontSize + '</b>' +
+      (clipped ? ' · <span class="warn">글이 잘렸다</span>' : '');
+    r.dataset.clip = clipped ? '1' : '0';
+    r.dataset.size = getComputedStyle(card).fontSize;
+
+    document.getElementById('note').innerHTML = fixed
+      ? '<span class="warn">px 로 박아 두면 설정을 켜도 안 커진다</span> — 상자 높이까지 박으면 글이 잘린다'
+      : 'rem · em 으로 두면 <b>설정을 그대로 따라간다</b>. 높이는 박지 말고 내용이 밀게 둔다';
+  }
+  document.getElementById('z').addEventListener('input', draw);
+  document.getElementById('fixed').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

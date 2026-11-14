@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>스크롤 연동 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width:460px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>스크롤 연동</b>
+  <label>무엇을 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="bar">읽은 만큼 막대 (쓸모 있다)</option>
+    <option value="sticky">붙박이 머리말 (쓸모 있다)</option>
+    <option value="parallax">시차 배경 (조심)</option>
+    <option value="hijack">스크롤 가로채기 (하지 않는다)</option>
+  </select></label>
+  <label><input type="checkbox" id="calm"> 모션 줄이기를 켠 사람으로</label>
+</div>
+
+<div class="pad">
+  <div class="sc" id="sc"><div class="sc__inner" id="inner"></div></div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  굴려 보세요. <b>읽은 만큼 막대</b>와 <b>붙박이 머리말</b>은 '내가 어디쯤인지'를 알려 줘
+  쓸모가 분명합니다.<br>
+  <b>시차 배경</b>은 배경이 글보다 천천히 움직이는 연출인데, 크게 쓰면 <b>멀미를 부릅니다</b>.
+  <b>스크롤 가로채기</b>는 굴린 만큼 안 가고 한 장씩 넘어가는 방식이라,
+  <b>기기가 고장 난 느낌</b>을 줍니다 — 아래에서 직접 겪어 보세요.<br>
+  <b>모션 줄이기</b>를 켜면 연출 쪽은 멎고 <b>막대와 붙박이는 남습니다</b>.
+</p>
+
+<script>
+(function () {
+  var sc = document.getElementById('sc');
+  var NOTE = {
+    bar: '읽은 비율을 그대로 보여 준다. <b>자리 이동이 거의 없어</b> 줄이기에서도 남긴다',
+    sticky: '지금 어느 묶음인지 알려 준다. 움직임이 아니라 <b>고정</b>이다',
+    parallax: '<span class="warn">배경이 다른 속도로 움직인다</span> — 크게 쓰면 멀미를 부른다. 줄이기에서 끈다',
+    hijack: '<span class="warn">굴린 만큼 안 간다</span> — 기기가 고장 난 느낌을 준다. 쓰지 않는 편이 낫다'
+  };
+
+  function build() {
+    var k = document.getElementById('k').value;
+    var calm = document.getElementById('calm').checked;
+    var h = '';
+    if (k === 'bar') h += '<div class="sc__bar"><i id="fill"></i></div>';
+    if (k === 'sticky') h += '<div class="sc__hero" id="hero" style="height:34px">11월 정산</div>';
+    if (k === 'parallax') h += '<div class="sc__hero" id="hero">배경</div>';
+    for (var i = 1; i <= 7; i++) {
+      h += '<p class="sc__p">' + i + '. 정산은 가맹점이 판 금액에서 수수료를 뺀 돈을 정해진 날에 보내 주는 일입니다. 기간과 수수료율에 따라 금액이 달라집니다.</p>';
+    }
+    document.getElementById('inner').innerHTML = h;
+    sc.dataset.k = k;
+    sc.dataset.calm = calm ? '1' : '0';
+    document.getElementById('note').innerHTML = NOTE[k] + (calm ? ' · <b>줄이기 켜짐</b>' : '');
+    sc.scrollTop = 0;
+    onScroll();
+  }
+
+  function onScroll() {
+    var k = document.getElementById('k').value;
+    var calm = document.getElementById('calm').checked;
+    var max = sc.scrollHeight - sc.clientHeight;
+    var p = max ? sc.scrollTop / max : 0;
+    var fill = document.getElementById('fill');
+    if (fill) fill.style.width = (p * 100).toFixed(1) + '%';
+    var hero = document.getElementById('hero');
+    if (hero && k === 'parallax') {
+      hero.style.transform = calm ? 'none' : 'translateY(' + (sc.scrollTop * 0.4).toFixed(0) + 'px)';
+    }
+    var r = document.getElementById('read');
+    r.innerHTML = '읽은 만큼 <b>' + Math.round(p * 100) + '%</b>' +
+      (k === 'hijack' ? ' · <span class="warn">굴린 양보다 적게 간다</span>' : '');
+    r.dataset.p = String(Math.round(p * 100));
+  }
+
+  sc.addEventListener('wheel', function (e) {
+    if (document.getElementById('k').value !== 'hijack') return;
+    e.preventDefault();                       // 가로채기 — 일부러 나쁜 쪽을 보여 준다
+    sc.scrollTop += Math.sign(e.deltaY) * 90;
+    onScroll();
+  }, { passive: false });
+
+  sc.addEventListener('scroll', onScroll);
+  document.getElementById('k').addEventListener('change', build);
+  document.getElementById('calm').addEventListener('change', build);
+  build();
+})();
+</script>
+</body>
+</html>
