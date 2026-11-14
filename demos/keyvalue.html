@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>키-값 목록 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hold { border: 1px dashed var(--fg-muted); border-radius: var(--r2); padding: 9px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>키-값 목록</b>
+  <label>칸 폭 <input type="range" id="w" min="180" max="420" step="20" value="340" style="width:96px"><span class="ruler" id="wv"></span></label>
+  <label>라벨 폭 <input type="range" id="k" min="60" max="150" step="10" value="90" style="width:84px"><span class="ruler" id="kvv"></span></label>
+  <label><input type="checkbox" id="cut" checked> 넘치면 말줄임</label>
+  <label><input type="checkbox" id="stack"> 좁으면 위아래로</label>
+</div>
+
+<div class="pad">
+  <div class="hold" id="hold" style="max-width:340px">
+    <dl class="kv" id="kv"></dl>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  키-값 목록은 <b>라벨 폭을 고정</b>하면 값이 한 줄로 가지런히 섭니다.
+  대신 칸이 좁아지면 <b>값이 먼저 잘립니다</b> — 데모가 라벨과 값 가운데
+  <b>잘린 칸이 몇 개인지</b> 세서 적습니다.<br>
+  '좁으면 위아래로'를 켜면 라벨을 값 위에 올립니다. 가지런함은 잃지만
+  <b>아무것도 안 잘립니다</b> — 폰에서 쓰는 꼴입니다.<br>
+  태그는 <code>&lt;dl&gt;</code> · <code>&lt;dt&gt;</code> · <code>&lt;dd&gt;</code> 입니다.
+  표가 아니라 <b>이름과 값의 짝</b>이라, 소리로 읽을 때도 짝이 유지됩니다.
+</p>
+
+<script>
+(function () {
+  var ROWS = [
+    ['주문번호', '2411-0042-88231'],
+    ['가게', '한빛아웃도어 영등포타임스퀘어점'],
+    ['결제 수단', '신한카드 (1234)'],
+    ['정산 예정일', '2026년 11월 19일 수요일'],
+    ['상태', '정산 대기']
+  ];
+
+  function draw() {
+    var w = +document.getElementById('w').value;
+    var k = +document.getElementById('k').value;
+    var cut = document.getElementById('cut').checked;
+    var stackOn = document.getElementById('stack').checked;
+    var stack = stackOn && w <= 260;
+
+    document.getElementById('wv').textContent = w + 'px';
+    document.getElementById('kvv').textContent = k + 'px';
+    document.getElementById('hold').style.maxWidth = w + 'px';
+
+    var dl = document.getElementById('kv');
+    dl.className = 'kv' + (cut ? ' cut' : '') + (stack ? ' stack' : '');
+    dl.style.setProperty('--kvw', k + 'px');
+    dl.innerHTML = ROWS.map(function (r, i) {
+      return '<div class="kv__r" data-i="' + i + '"><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>';
+    }).join('');
+
+    // 잘린 칸을 센다 — 담긴 폭과 보이는 폭을 견준다
+    var over = 0;
+    [].forEach.call(dl.querySelectorAll('.kv__r'), function (row) {
+      var bad = false;
+      ['dt', 'dd'].forEach(function (t) {
+        var el = row.querySelector(t);
+        if (el.scrollWidth > el.clientWidth + 0.5) bad = true;
+      });
+      row.classList.toggle('over', bad);
+      if (bad) over++;
+    });
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '칸 <b>' + w + 'px</b> · 라벨 <b>' + k + 'px</b> · ' +
+      (stack ? '<b>위아래</b>로' : '좌우로') +
+      '<br>잘린 줄 <b>' + over + '개</b>' +
+      (over ? ' <span class="warn">— 값을 끝까지 못 읽는다</span>' : '');
+    rd.dataset.over = String(over);
+    rd.dataset.stack = stack ? '1' : '0';
+    rd.dataset.w = String(w);
+
+    document.getElementById('log').innerHTML = cut
+      ? '넘치면 <b>말줄임</b>한다 — 줄 높이는 지켜진다'
+      : '말줄임을 껐다 — <b>줄이 넘어가</b> 가지런함이 깨진다';
+  }
+
+  ['w', 'k'].forEach(function (id) { document.getElementById(id).addEventListener('input', draw); });
+  ['cut', 'stack'].forEach(function (id) { document.getElementById(id).addEventListener('change', draw); });
+  draw();
+})();
+</script>
+</body>
+</html>

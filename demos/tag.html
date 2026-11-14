@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>태그 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>태그</b>
+  <label>무엇을 만들까 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="tag">태그 — 분류를 보여 준다</option>
+    <option value="chip">칩 — 눌러서 걸러낸다</option>
+    <option value="badge">배지 — 숫자를 알린다</option>
+    <option value="input">입력 태그 — 지울 수 있다</option>
+  </select></label>
+</div>
+
+<div class="pad">
+  <div style="display:grid;gap:7px;max-width:380px">
+    <span class="ruler" id="caption"></span>
+    <div class="tg" id="tg"></div>
+  </div>
+  <div class="tgv" id="verdict"></div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  배지 · 칩 · 태그는 생김새가 비슷해 가장 많이 섞여 쓰입니다.
+  가르는 질문은 셋입니다 — <b>눌리나</b> · <b>지울 수 있나</b> · <b>혼자 서나</b>.
+  데모가 지금 만든 것이 그 셋에 어떻게 답하는지 표로 적습니다.<br>
+  <b>태그</b>는 분류를 보여 주기만 합니다. <b>칩</b>은 눌러서 거르고,
+  <b>입력 태그</b>는 지울 수 있습니다. <b>배지</b>는 혼자 서지 못하고
+  <b>무언가에 붙어</b> 숫자를 알립니다 — 눌리는 것은 배지가 붙은 쪽입니다.
+</p>
+
+<script>
+(function () {
+  var TAGS = ['정산', '카드', '지연', '영등포', '11월'];
+  var on = { '카드': true };
+  var left = TAGS.slice(0, 3);
+
+  // [열쇠, 이름, 눌리나, 지울 수 있나, 혼자 서나, 설명]
+  var SPEC = {
+    tag:   ['태그', false, false, true,  '분류를 보여 준다. 글의 성격을 알린다'],
+    chip:  ['칩', true,  false, true,  '눌러서 켜고 끈다. 목록을 걸러낸다'],
+    badge: ['배지', false, false, false, '무언가에 붙어 숫자를 알린다'],
+    input: ['입력 태그', false, true,  true,  '내가 넣은 값. 지울 수 있다']
+  };
+
+  function draw() {
+    var k = document.getElementById('k').value;
+    var s = SPEC[k];
+    var tg = document.getElementById('tg');
+
+    if (k === 'tag') {
+      document.getElementById('caption').textContent = '이 글에 붙은 분류';
+      tg.innerHTML = TAGS.map(function (t) { return '<span data-t="' + t + '">' + t + '</span>'; }).join('');
+    } else if (k === 'chip') {
+      document.getElementById('caption').textContent = '눌러서 걸러내기';
+      tg.innerHTML = TAGS.map(function (t) {
+        return '<button data-c="' + t + '" aria-pressed="' + !!on[t] + '" class="' + (on[t] ? 'is-on' : '') + '">' + t + '</button>';
+      }).join('');
+    } else if (k === 'badge') {
+      document.getElementById('caption').textContent = '무언가에 붙는다 — 혼자 서지 못한다';
+      tg.innerHTML = '<button class="ui-btn ui-btn--ghost" style="min-height:32px;padding:5px 11px;font-size:12.5px">' +
+        '알림 <span class="cnt" data-b="3">3</span></button>' +
+        '<button class="ui-btn ui-btn--ghost" style="min-height:32px;padding:5px 11px;font-size:12.5px">' +
+        '문의 <span class="cnt" data-b="99">99+</span></button>';
+    } else {
+      document.getElementById('caption').textContent = '내가 넣은 값 — 지울 수 있다';
+      tg.innerHTML = left.map(function (t) {
+        return '<span data-t="' + t + '">' + t +
+          ' <button data-x="' + t + '" aria-label="' + t + ' 지우기" style="border:0;background:none;padding:0 0 0 2px;cursor:pointer;color:var(--fg-muted)">✕</button></span>';
+      }).join('') + '<button data-add style="border-style:dashed">+ 추가</button>';
+    }
+
+    var Q = [
+      ['눌리나', s[1]],
+      ['지울 수 있나', s[2]],
+      ['혼자 서나', s[3]]
+    ];
+    document.getElementById('verdict').innerHTML = Q.map(function (q) {
+      return '<div class="tgv__r" data-q="' + q[0] + '"><span class="q">' + q[0] + '</span>' +
+        '<span style="color:' + (q[1] ? 'var(--accent)' : 'var(--fg-muted)') + '">' +
+        (q[1] ? '그렇다' : '아니다') + '</span></div>';
+    }).join('');
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '<b>' + s[0] + '</b> — ' + s[4] +
+      '<br>눌림 <b>' + (s[1] ? 'O' : 'X') + '</b> · 지움 <b>' + (s[2] ? 'O' : 'X') +
+      '</b> · 혼자 섬 <b>' + (s[3] ? 'O' : 'X') + '</b>';
+    rd.dataset.kind = k;
+    rd.dataset.press = s[1] ? '1' : '0';
+    rd.dataset.remove = s[2] ? '1' : '0';
+    rd.dataset.alone = s[3] ? '1' : '0';
+    rd.dataset.on = String(Object.keys(on).filter(function (t) { return on[t]; }).length);
+    rd.dataset.left = String(left.length);
+  }
+
+  document.getElementById('tg').addEventListener('click', function (e) {
+    var c = e.target.closest('[data-c]');
+    if (c) {
+      on[c.dataset.c] = !on[c.dataset.c];
+      draw();
+      document.getElementById('log').innerHTML = '<b>' + c.dataset.c + '</b> 로 ' +
+        (on[c.dataset.c] ? '걸렀다' : '거르기를 풀었다');
+      return;
+    }
+    var x = e.target.closest('[data-x]');
+    if (x) {
+      left = left.filter(function (t) { return t !== x.dataset.x; });
+      draw();
+      document.getElementById('log').innerHTML = '<b>' + x.dataset.x + '</b> 를 지웠다';
+      return;
+    }
+    if (e.target.closest('[data-add]')) {
+      var next = TAGS.filter(function (t) { return left.indexOf(t) < 0; })[0];
+      if (next) { left = left.concat([next]); draw(); document.getElementById('log').innerHTML = '<b>' + next + '</b> 를 더했다'; }
+      return;
+    }
+    if (e.target.closest('[data-b]')) {
+      document.getElementById('log').innerHTML = '<b>배지가 붙은 단추</b>를 눌렀다 — 배지 자체는 안 눌린다';
+    }
+  });
+
+  document.getElementById('k').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

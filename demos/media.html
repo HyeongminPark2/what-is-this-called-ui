@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>미디어 오브젝트 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hold { border: 1px dashed var(--fg-muted); border-radius: var(--r2); padding: 9px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>미디어 오브젝트</b>
+  <label>붙이는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="flex">flex (요즘 방식)</option>
+    <option value="float">float (옛 방식)</option>
+  </select></label>
+  <label>칸 폭 <input type="range" id="w" min="200" max="400" step="20" value="360" style="width:96px"><span class="ruler" id="wv"></span></label>
+  <label><input type="checkbox" id="col"> 좁으면 위아래로</label>
+</div>
+
+<div class="pad">
+  <div class="hold" id="hold" style="max-width:380px">
+    <div class="mo" id="mo">
+      <span class="mo__img" aria-hidden="true">그림</span>
+      <span class="mo__body">
+        <b>한빛아웃도어 영등포타임스퀘어점</b>
+        <p id="p">2026년 11월 12일 정산 · 842,500원<br>세 건이 한 번에 묶여 들어왔습니다. 카드 두 건과 계좌이체 한 건이며, 수수료를 뺀 금액이 수요일에 들어갑니다.</p>
+      </span>
+    </div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  그림 하나에 글 한 덩어리 — 화면에서 가장 많이 쓰는 묶음입니다.
+  <code>float</code> 으로 붙이면 <b>글이 그림 밑으로 돌아 들어갑니다</b>.
+  데모가 글 둘째 줄의 왼쪽 끝이 <b>그림 아래까지 내려왔는지</b> 재서 알려 줍니다 —
+  <code>flex</code> 에서는 글이 늘 <b>한 기둥</b>으로 섭니다.<br>
+  그림은 <b>크기를 고정</b>하고(<code>flex: none</code>) 글 쪽만 줄어들게 둡니다.
+  안 그러면 좁은 화면에서 <b>그림이 먼저 찌그러집니다</b>.<br>
+  아주 좁아지면 위아래로 바꿉니다 — 가로로 버티면 글 칸이 몇 글자만 남습니다.
+</p>
+
+<script>
+(function () {
+  function draw() {
+    var k = document.getElementById('k').value;
+    var w = +document.getElementById('w').value;
+    var colOn = document.getElementById('col').checked;
+    var col = colOn && w <= 260;
+    document.getElementById('wv').textContent = w + 'px';
+    document.getElementById('hold').style.maxWidth = w + 'px';
+
+    var mo = document.getElementById('mo');
+    mo.className = 'mo' + (k === 'float' ? ' float' : '') + (col ? ' col' : '');
+
+    // 글이 그림 밑으로 돌아 들어갔나 — 글 상자와 그림 상자의 자리를 잰다
+    var img = mo.querySelector('.mo__img').getBoundingClientRect();
+    var p = document.getElementById('p');
+    var r = document.createRange();
+    r.selectNodeContents(p);
+    var rects = [].slice.call(r.getClientRects());
+    var wrapped = rects.some(function (x) { return x.left < img.right - 1 && x.top > img.top + 2; });
+
+    // 그림이 찌그러졌나 — 그린 크기와 정한 크기를 견준다
+    var want = col ? null : 56;
+    var squeezed = want !== null && img.width < want - 0.5;
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = (col ? '위아래' : '좌우') + ' · 칸 <b>' + w + 'px</b> · 그림 <b>' + Math.round(img.width) + 'px</b>' +
+      (squeezed ? ' <span class="warn">— 그림이 찌그러졌다</span>' : '') +
+      '<br>글이 그림 밑으로 돌아 들어감 <b>' + (wrapped ? '그렇다' : '아니다') + '</b>' +
+      (wrapped ? ' <span class="warn">— 한 기둥이 아니다</span>' : '');
+    rd.dataset.wrapped = wrapped ? '1' : '0';
+    rd.dataset.imgw = String(Math.round(img.width));
+    rd.dataset.col = col ? '1' : '0';
+    rd.dataset.mode = k;
+
+    document.getElementById('log').innerHTML = k === 'float'
+      ? '<span class="warn">float</span> — 글이 그림을 돌아 흐른다. 줄 수가 달라지면 모양이 흔들린다'
+      : '<b>flex</b> — 글이 한 기둥으로 선다. 그림은 <code>flex: none</code> 으로 지킨다';
+  }
+
+  document.getElementById('k').addEventListener('change', draw);
+  document.getElementById('w').addEventListener('input', draw);
+  document.getElementById('col').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

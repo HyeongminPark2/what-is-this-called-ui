@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>썸네일 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .src { display: grid; gap: 4px; justify-items: center; }
+  .src .box { border: 1px dashed var(--fg-muted); border-radius: var(--r1); overflow: hidden; }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>썸네일</b>
+  <label>원본 모양 <select class="sel" id="shape" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="wide">가로로 긴 사진 (16:9)</option>
+    <option value="tall">세로로 긴 사진 (3:4)</option>
+    <option value="square">정사각형 (1:1)</option>
+  </select></label>
+  <label><input type="checkbox" id="pos"> 가운데가 아니라 위쪽을 보이기</label>
+</div>
+
+<div class="pad">
+  <div class="src">
+    <span class="ruler">원본</span>
+    <span class="box" id="srcbox"></span>
+  </div>
+  <div class="thm" id="thm"></div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  썸네일 칸은 보통 <b>비율이 정해져</b> 있고 사진은 제각각입니다. 그래서 셋 중 하나를 고르게 됩니다 —
+  <b>잘라 채우거나</b>(cover), <b>여백을 남기거나</b>(contain), <b>늘려 맞추거나</b>(fill).<br>
+  데모가 <b>원본에서 잘려 나간 넓이</b>와 <b>가로세로 비가 얼마나 어긋났는지</b>를 재서 적습니다.
+  <code>fill</code> 은 한 픽셀도 안 잘리는 대신 <b>얼굴이 찌그러집니다</b> — 그래서 거의 안 씁니다.<br>
+  <code>cover</code> 를 쓰면 어디를 남길지가 문제인데, 기본은 가운데입니다.
+  인물 사진은 <code>object-position: top</code> 쪽이 머리가 안 잘립니다.
+</p>
+
+<script>
+(function () {
+  var SHAPES = { wide: [16, 9], tall: [3, 4], square: [1, 1] };
+  var BOX = [104, 78];   // 썸네일 칸 — 4:3 에 가깝다
+
+  function fake(w, h) {
+    // 사진 대신 테두리와 사람 모양을 그린다 — 잘림과 찌그러짐이 눈에 보이게.
+    // width·height 를 숫자로 줘야 <img> 에 본래 비가 생기고 object-fit 이 먹는다.
+    var m = Math.min(w, h);
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + w + ' ' + h + '" ' +
+      'width="' + w + '" height="' + h + '">' +
+      '<rect width="' + w + '" height="' + h + '" fill="#dbe7fb"/>' +
+      '<rect x="4" y="4" width="' + (w - 8) + '" height="' + (h - 8) + '" fill="none" ' +
+      'stroke="#1f6feb" stroke-width="6" stroke-dasharray="14 10"/>' +
+      '<circle cx="' + (w / 2) + '" cy="' + (h * 0.3) + '" r="' + (m * 0.16) + '" fill="#1f6feb"/>' +
+      '<rect x="' + (w / 2 - m * 0.26) + '" y="' + (h * 0.52) + '" width="' + (m * 0.52) + '" height="' + (h * 0.3) + '" rx="' + (m * 0.06) + '" fill="#1f6feb"/>' +
+      '</svg>';
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+  }
+
+  function draw() {
+    var sh = document.getElementById('shape').value;
+    var pos = document.getElementById('pos').checked ? 'top' : 'center';
+    var r = SHAPES[sh];
+    var sw = 104, sh2 = Math.round(104 * r[1] / r[0]);
+    var url = fake(r[0] * 40, r[1] * 40);
+
+    document.getElementById('srcbox').innerHTML =
+      '<img src="' + url + '" width="' + sw + '" height="' + sh2 + '" alt="원본 사진" style="display:block">';
+
+    var boxR = BOX[0] / BOX[1], srcR = r[0] / r[1];
+    // cover — 넘치는 쪽이 잘린다. 잘린 넓이의 몫을 센다
+    var coverCut = srcR > boxR ? (1 - boxR / srcR) : (1 - srcR / boxR);
+    // contain — 잘리지 않는 대신 여백이 남는다
+    var containPad = coverCut;
+    // fill — 안 잘리지만 비가 어긋난다
+    var fillSkew = Math.abs(boxR / srcR - 1);
+
+    var MODES = [
+      ['cover', 'object-fit: cover', '잘라 채운다', coverCut, 0],
+      ['contain', 'object-fit: contain', '여백이 남는다', 0, 0],
+      ['fill', 'object-fit: fill', '늘려 맞춘다', 0, fillSkew]
+    ];
+    document.getElementById('thm').innerHTML = MODES.map(function (m) {
+      var bad = m[3] > 0.25 || m[4] > 0.15;
+      return '<div class="thm__b' + (bad ? ' bad' : '') + '" data-m="' + m[0] + '">' +
+        '<span class="thm__box"><img src="' + url + '" alt="썸네일 ' + m[2] + '" ' +
+        'style="object-fit:' + m[0] + ';object-position:' + pos + '"></span>' +
+        '<small>' + m[1] + '</small>' +
+        '<small style="color:var(--fg-faint)">' + m[2] + '</small></div>';
+    }).join('');
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '원본 <b>' + r[0] + ':' + r[1] + '</b> · 칸 <b>4:3</b>' +
+      '<br>cover 가 잘라내는 넓이 <b>' + Math.round(coverCut * 100) + '%</b>' +
+      (coverCut > 0.25 ? ' <span class="warn">— 많이 잘린다</span>' : '') +
+      '<br>contain 이 남기는 여백 <b>' + Math.round(containPad * 100) + '%</b>' +
+      ' · fill 이 어긋내는 비 <b>' + Math.round(fillSkew * 100) + '%</b>' +
+      (fillSkew > 0.15 ? ' <span class="warn">— 찌그러진다</span>' : '');
+    rd.dataset.cut = String(Math.round(coverCut * 100));
+    rd.dataset.skew = String(Math.round(fillSkew * 100));
+    rd.dataset.pos = pos;
+
+    document.getElementById('log').innerHTML = pos === 'top'
+      ? '<b>위쪽</b>을 남긴다 — 인물 사진에서 머리가 안 잘린다'
+      : '<b>가운데</b>를 남긴다 — 기본값이다';
+  }
+
+  document.getElementById('shape').addEventListener('change', draw);
+  document.getElementById('pos').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

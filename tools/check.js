@@ -213,7 +213,8 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
             'position', 'aspectratio', 'scrollbehavior', 'sizing', 'margincollapse', 'order'],
     '2부': ['color', 'dark', 'typescale', 'spacing', 'elevation', 'zindex',
             'radius', 'border', 'opacity', 'iconsize', 'statecolor', 'tokenname'],
-    '5부': ['card', 'listitem', 'avatar', 'badge', 'chip', 'stat', 'timeline', 'rating'],
+    '5부': ['card', 'listitem', 'avatar', 'badge', 'chip', 'stat', 'timeline', 'rating',
+            'icon', 'thumbnail', 'tablerow', 'keyvalue', 'media', 'accordion', 'tag'],
     '6부': ['modal', 'dialog', 'sheet', 'drawer', 'popover', 'tooltip', 'toast'],
     '3부': ['weight', 'lineheight', 'letterspacing', 'hangul', 'numerals', 'truncate', 'webfont', 'hierarchy', 'casing', 'iconfont'],
     '4부': ['field', 'select', 'combobox', 'checkbox', 'radio', 'switch', 'segmented', 'slider'],
@@ -2366,6 +2367,99 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   if (await page.getAttribute('#read', 'data-rolledback') !== '1')
     fail.push('올리기: 묶음 처리인데 안 되돌린다 (보여주려는 결과)');
   if (await page.getAttribute('#read', 'data-done') !== '0') fail.push('올리기: 되돌렸는데 완료가 남아 있다');
+  await page.close();
+
+  // 5부 표시 부품 데모 일곱 장 — 통하는 그림·잘림·밀도·짝·기둥·찾기·세 질문
+  page = await demo('icon', 980, 900);
+  if (await page.getAttribute('#read', 'data-clear') !== '3')
+    fail.push('아이콘: 글자 없이 통하는 것이 셋이 아니다 (보여주려는 결과)');
+  if (await page.getAttribute('#read', 'data-noname') !== '0') fail.push('아이콘: 이름을 붙였는데 없는 단추가 있다');
+  await page.uncheck('#name'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-noname') !== '7')
+    fail.push('아이콘: 이름을 꺼도 읽을 이름이 남아 있다 (보여주려는 결과)');
+  await page.check('#lab'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-clear') !== '7') fail.push('아이콘: 글자를 적어도 안 통한다고 한다');
+  if (await page.getAttribute('#read', 'data-noname') !== '0') fail.push('아이콘: 글자가 이름 구실을 못 한다');
+  await page.close();
+
+  page = await demo('thumbnail', 980, 900);
+  if (await page.locator('.thm__b').count() !== 3) fail.push('썸네일: 세 가지를 안 견준다');
+  if (!(+(await page.getAttribute('#read', 'data-cut')) > 20))
+    fail.push('썸네일: 16:9 를 4:3 칸에 넣어도 안 잘린다 (보여주려는 결과)');
+  if (!(+(await page.getAttribute('#read', 'data-skew')) > 15))
+    fail.push('썸네일: fill 인데 비가 안 어긋난다 (보여주려는 결과)');
+  await page.check('#pos'); await page.waitForTimeout(320);
+  if (await page.$eval('.thm__b[data-m=cover] img', e => getComputedStyle(e).objectPosition) !== '50% 0%')
+    fail.push('썸네일: 위쪽 남기기가 안 먹는다');
+  await page.close();
+
+  page = await demo('tablerow', 980, 900);
+  {
+    const h0 = +(await page.getAttribute('#read', 'data-h'));
+    const fit0 = +(await page.getAttribute('#read', 'data-fit'));
+    await page.selectOption('#d', 'loose'); await page.waitForTimeout(340);
+    if (!(+(await page.getAttribute('#read', 'data-h')) > h0)) fail.push('테이블행: 넉넉하게 둬도 줄이 안 높아진다');
+    if (!(+(await page.getAttribute('#read', 'data-fit')) < fit0)) fail.push('테이블행: 밀도를 바꿔도 줄 수가 같다');
+  }
+  await page.selectOption('#d', ''); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-stray') !== '0') fail.push('테이블행: 행이 안 눌리는데 이동이 생긴다');
+  await page.check('#whole'); await page.waitForTimeout(340);
+  await page.locator('[data-b="0"]').click(); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-stray') !== '1')
+    fail.push('테이블행: 행 전체 링크인데 단추가 행을 안 뚫는다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('keyvalue', 980, 900);
+  if (await page.locator('dl.kv').count() !== 1) fail.push('키값: dl 로 안 적었다');
+  if (await page.getAttribute('#read', 'data-over') !== '0') fail.push('키값: 넉넉한데 값이 잘린다');
+  await page.locator('#w').fill('200'); await page.dispatchEvent('#w', 'input'); await page.waitForTimeout(350);
+  if (!(+(await page.getAttribute('#read', 'data-over')) > 0))
+    fail.push('키값: 좁혀도 값이 안 잘린다 (보여주려는 결과)');
+  await page.check('#stack'); await page.waitForTimeout(350);
+  if (await page.getAttribute('#read', 'data-over') !== '0') fail.push('키값: 위아래로 둬도 잘린다');
+  await page.close();
+
+  page = await demo('media', 980, 900);
+  if (await page.getAttribute('#read', 'data-wrapped') !== '0') fail.push('미디어: flex 인데 글이 한 기둥이 아니다');
+  if (await page.getAttribute('#read', 'data-imgw') !== '56') fail.push('미디어: 그림 크기가 안 지켜진다');
+  await page.selectOption('#k', 'float'); await page.waitForTimeout(350);
+  if (await page.getAttribute('#read', 'data-wrapped') !== '1')
+    fail.push('미디어: float 인데 글이 그림 밑으로 안 돈다 (보여주려는 결과)');
+  await page.selectOption('#k', 'flex'); await page.waitForTimeout(350);
+  await page.locator('#w').fill('200'); await page.dispatchEvent('#w', 'input'); await page.waitForTimeout(350);
+  if (await page.getAttribute('#read', 'data-imgw') !== '56') fail.push('미디어: 좁아지니 그림이 찌그러진다');
+  await page.close();
+
+  page = await demo('accordion', 980, 900);
+  if (await page.getAttribute('#read', 'data-open') !== '1') fail.push('아코디언: 처음에 하나가 안 열려 있다');
+  await page.locator('.acc__i[data-i="1"] button').click(); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-open') !== '2') fail.push('아코디언: 여러 개가 같이 안 열린다');
+  if (await page.getAttribute('.acc__i[data-i="1"] button', 'aria-expanded') !== 'true')
+    fail.push('아코디언: 열렸다고 안 알린다');
+  await page.check('#one'); await page.waitForTimeout(320);
+  await page.locator('.acc__i[data-i="3"] button').click(); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-open') !== '1')
+    fail.push('아코디언: 한 번에 하나만인데 둘이 열린다 (보여주려는 결과)');
+  await page.fill('#q', '환불'); await page.waitForTimeout(350);
+  if (!(+(await page.getAttribute('#read', 'data-hidden')) > 0))
+    fail.push('아코디언: 접힌 글 속의 말이 찾기에 잡힌다고 한다 (보여주려는 결과)');
+  await page.locator('.acc__i[data-i="2"] button').click(); await page.waitForTimeout(350);
+  if (await page.getAttribute('#read', 'data-hidden') !== '0') fail.push('아코디언: 펴도 보이는 글로 안 옮겨 간다');
+  await page.close();
+
+  page = await demo('tag', 980, 900);
+  if (await page.getAttribute('#read', 'data-press') !== '0') fail.push('태그: 태그가 눌린다고 한다');
+  if (await page.getAttribute('#read', 'data-alone') !== '1') fail.push('태그: 태그가 혼자 못 선다고 한다');
+  await page.selectOption('#k', 'chip'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-press') !== '1') fail.push('태그: 칩이 안 눌린다고 한다');
+  await page.locator('[data-c="정산"]').click(); await page.waitForTimeout(320);
+  if (await page.getAttribute('[data-c="정산"]', 'aria-pressed') !== 'true') fail.push('태그: 칩이 눌렸다고 안 알린다');
+  await page.selectOption('#k', 'badge'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-alone') !== '0')
+    fail.push('태그: 배지가 혼자 선다고 한다 (보여주려는 결과)');
+  await page.selectOption('#k', 'input'); await page.waitForTimeout(320);
+  await page.locator('[data-x="카드"]').click(); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-left') !== '2') fail.push('태그: 입력 태그를 못 지운다');
   await page.close();
 
   await browser.close();

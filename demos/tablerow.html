@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>테이블 행 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>테이블 행</b>
+  <label>밀도 <select class="sel" id="d" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="dense">빽빽하게</option>
+    <option value="">보통</option>
+    <option value="loose">넉넉하게</option>
+  </select></label>
+  <label><input type="checkbox" id="whole"> 행 전체를 눌리게</label>
+</div>
+
+<div class="pad">
+  <div class="trow" id="trow"></div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  줄 하나에는 보통 넷이 들어갑니다 — <b>고르기 · 주 열 · 값 · 동작</b>.
+  밀도를 바꾸면 한 화면에 들어가는 줄 수가 달라집니다 — 데모가
+  <b>480px 높이에 몇 줄이 들어가는지</b> 재서 적습니다.<br>
+  <b>행 전체를 눌리게</b> 하면 편한 대신, 안에 있는 단추를 눌러도 <b>행 이동이 같이 일어납니다</b>.
+  데모가 '영수증' 단추를 눌렀을 때 행 이동이 몇 번 따라왔는지 셉니다 —
+  막으려면 안쪽 단추에서 <code>stopPropagation()</code> 을 해야 합니다.<br>
+  고르기 체크박스에는 <b>줄마다 다른 이름</b>이 필요합니다 — 전부 '선택'이면 소리로는 구별이 안 됩니다.
+</p>
+
+<script>
+(function () {
+  var ROWS = [
+    ['모란상회', '2026-11-12', '1,284,000'],
+    ['한빛아웃도어 영등포점', '2026-11-12', '842,500'],
+    ['새벽상사', '2026-11-11', '318,000'],
+    ['대림유통', '2026-11-11', '2,140,000'],
+    ['모란상회 2호점', '2026-11-10', '96,400']
+  ];
+  var strayNav = 0, sel = {};
+
+  function draw() {
+    var d = document.getElementById('d').value;
+    var whole = document.getElementById('whole').checked;
+    var t = document.getElementById('trow');
+    t.className = 'trow' + (d ? ' ' + d : '');
+    t.innerHTML = ROWS.map(function (r, i) {
+      return '<' + (whole ? 'a href="#" ' : 'div ') + 'class="trow__r' + (sel[i] ? ' is-sel' : '') +
+        '" data-i="' + i + '"' + (whole ? ' style="text-decoration:none;color:inherit"' : '') + '>' +
+        '<input type="checkbox" data-c="' + i + '" aria-label="' + r[0] + ' 고르기"' + (sel[i] ? ' checked' : '') + '>' +
+        '<span class="nm">' + r[0] + '</span>' +
+        '<span class="amt">' + r[2] + '원</span>' +
+        '<button class="ui-btn ui-btn--ghost" data-b="' + i + '" style="min-height:26px;padding:2px 8px;font-size:11.5px">영수증</button>' +
+        '</' + (whole ? 'a' : 'div') + '>';
+    }).join('');
+
+    // 480px 높이에 몇 줄이 들어가나 — 한 줄 높이를 재서 나눈다
+    var h = document.querySelector('.trow__r').getBoundingClientRect().height;
+    var fit = Math.floor(480 / h);
+    var n = Object.keys(sel).filter(function (k) { return sel[k]; }).length;
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '한 줄 높이 <b>' + Math.round(h) + 'px</b> · 480px 에 <b>' + fit + '줄</b>' +
+      '<br>행 전체 누름 <b>' + (whole ? '켬' : '끔') + '</b> · 단추를 눌렀는데 행까지 이동한 횟수 <b>' + strayNav + '회</b>' +
+      (strayNav ? ' <span class="warn">— 안쪽 단추가 행을 뚫고 나간다</span>' : '') +
+      (n ? '<br>고른 줄 <b>' + n + '개</b>' : '');
+    rd.dataset.h = String(Math.round(h));
+    rd.dataset.fit = String(fit);
+    rd.dataset.stray = String(strayNav);
+    rd.dataset.sel = String(n);
+    rd.dataset.whole = whole ? '1' : '0';
+  }
+
+  document.getElementById('trow').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-b]');
+    var row = e.target.closest('.trow__r');
+    if (b) {
+      // 일부러 막지 않는다 — 행 전체가 링크면 이동이 따라온다
+      document.getElementById('log').innerHTML = '<b>' + ROWS[+b.dataset.b][0] + '</b> 의 영수증을 열었다';
+      if (document.getElementById('whole').checked) {
+        e.preventDefault();
+        strayNav++;
+        document.getElementById('log').innerHTML += ' — <span class="warn">그런데 행 이동도 같이 일어났다</span>';
+      }
+      draw();
+      return;
+    }
+    if (e.target.closest('[data-c]')) return;
+    if (row && document.getElementById('whole').checked) {
+      e.preventDefault();
+      document.getElementById('log').innerHTML = '<b>' + ROWS[+row.dataset.i][0] + '</b> 상세로 갔다';
+    }
+  });
+
+  document.getElementById('trow').addEventListener('change', function (e) {
+    var c = e.target.closest('[data-c]');
+    if (!c) return;
+    sel[+c.dataset.c] = c.checked;
+    draw();
+  });
+
+  document.getElementById('d').addEventListener('change', draw);
+  document.getElementById('whole').addEventListener('change', function () { strayNav = 0; draw(); });
+  draw();
+})();
+</script>
+</body>
+</html>

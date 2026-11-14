@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>접히는 글 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>접히는 글</b>
+  <label><input type="checkbox" id="one"> 한 번에 하나만 열기</label>
+  <label>찾는 말 <input class="ui-input" id="q" style="width:120px;min-height:32px;font-size:12.5px" placeholder="환불"></label>
+</div>
+
+<div class="pad">
+  <div class="acc" id="acc"></div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  접힌 글은 <b>화면에서 보이지 않습니다</b>. 그래서 브라우저의 찾기(Ctrl+F)도,
+  페이지 안 검색도 못 찾습니다 — 찾는 말을 넣어 보면
+  데모가 <b>지금 보이는 글에서 몇 건</b>, <b>접힌 글 속에 몇 건</b>이 있는지 나눠서 셉니다.
+  긴 약관이나 문서를 통째로 접어 두면 <b>검색으로 영영 못 찾는</b> 글이 됩니다.<br>
+  <b>한 번에 하나만 열기</b>는 비교를 막습니다 — 두 항목을 나란히 보려는 사람에게는 불편합니다.
+  꼭 필요한 자리가 아니면 <b>여러 개가 같이 열리게</b> 두는 편이 낫습니다.
+</p>
+
+<script>
+(function () {
+  var ITEMS = [
+    ['정산은 언제 들어오나요', '매주 수요일에 지난주 매출을 한 번에 보냅니다. 공휴일이 끼면 다음 영업일로 밀립니다.'],
+    ['수수료는 얼마인가요', '결제 수단마다 다릅니다. 카드 2.8%, 계좌이체 1.2%, 간편결제 2.4%입니다.'],
+    ['환불은 어떻게 처리되나요', '환불이 생기면 다음 정산에서 빼고 보냅니다. 정산액보다 환불이 크면 따로 청구합니다.'],
+    ['세금계산서는 언제 나오나요', '매달 1일에 지난달 몫을 한 장으로 끊어 드립니다.']
+  ];
+  var open = { 0: true };
+
+  function draw() {
+    var one = document.getElementById('one').checked;
+    document.getElementById('acc').innerHTML = ITEMS.map(function (it, i) {
+      var isOpen = !!open[i];
+      return '<div class="acc__i" data-i="' + i + '">' +
+        '<button aria-expanded="' + isOpen + '" aria-controls="p' + i + '">' +
+        it[0] + '<span class="tw" aria-hidden="true">' + (isOpen ? '▲' : '▼') + '</span></button>' +
+        '<div class="acc__p" id="p' + i + '"' + (isOpen ? '' : ' hidden') + '>' + it[1] + '</div>' +
+        '</div>';
+    }).join('');
+
+    var q = (document.getElementById('q').value || '').trim();
+    var visible = 0, hidden = 0;
+    if (q) {
+      // 제목은 늘 보이고, 본문은 열려 있을 때만 보인다 — 찾은 횟수를 나눠 센다
+      var count = function (hay) { return hay.split(q).length - 1; };
+      ITEMS.forEach(function (it, i) {
+        visible += count(it[0]);
+        if (open[i]) visible += count(it[1]);
+        else hidden += count(it[1]);
+      });
+    }
+
+    var n = Object.keys(open).filter(function (k) { return open[k]; }).length;
+    var rd = document.getElementById('read');
+    rd.innerHTML = '열린 항목 <b>' + n + ' / ' + ITEMS.length + '</b> · ' +
+      (one ? '한 번에 하나만' : '여러 개 가능') +
+      (q ? '<br>‘' + q + '’ — 보이는 글에서 <b>' + visible + '건</b>, 접힌 글 속에 <b>' + hidden + '건</b>' +
+        (hidden ? ' <span class="warn">— 찾기로는 안 잡힌다</span>' : '') : '');
+    rd.dataset.open = String(n);
+    rd.dataset.one = one ? '1' : '0';
+    rd.dataset.visible = String(visible);
+    rd.dataset.hidden = String(hidden);
+  }
+
+  document.getElementById('acc').addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    var i = +b.closest('.acc__i').dataset.i;
+    var one = document.getElementById('one').checked;
+    var was = !!open[i];
+    if (one) open = {};
+    open[i] = !was;
+    draw();
+    document.getElementById('log').innerHTML = '<b>' + ITEMS[i][0] + '</b> — ' + (was ? '접었다' : '폈다') +
+      (one && !was ? ' · <span class="warn">다른 항목은 저절로 접혔다</span>' : '');
+  });
+
+  document.getElementById('acc').addEventListener('keydown', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    var bs = [].slice.call(document.querySelectorAll('.acc__i > button'));
+    var i = bs.indexOf(b);
+    if (e.key === 'ArrowDown' && bs[i + 1]) { bs[i + 1].focus(); e.preventDefault(); }
+    if (e.key === 'ArrowUp' && bs[i - 1]) { bs[i - 1].focus(); e.preventDefault(); }
+  });
+
+  document.getElementById('one').addEventListener('change', function () {
+    if (this.checked) {
+      var first = Object.keys(open).filter(function (k) { return open[k]; })[0];
+      open = {};
+      if (first !== undefined) open[first] = true;
+    }
+    draw();
+  });
+  document.getElementById('q').addEventListener('input', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

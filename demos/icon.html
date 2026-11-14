@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>아이콘 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>아이콘</b>
+  <label><input type="checkbox" id="lab"> 글자를 같이 적기</label>
+  <label><input type="checkbox" id="name" checked> 아이콘만 쓸 때 이름 붙이기</label>
+</div>
+
+<div class="pad">
+  <div class="ico-quiz" id="list"></div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  아이콘은 <b>뜻이 통하는 것과 안 통하는 것</b>이 갈립니다 — 돋보기·휴지통처럼
+  현실의 물건을 그린 것은 통하고, 톱니바퀴 이후의 '설정'이나 세 점 메뉴는
+  <b>배워서</b> 아는 것입니다. 데모가 <b>글자 없이 뜻이 통하는 아이콘 수</b>를 세서 적습니다.<br>
+  '아이콘만 쓸 때 이름 붙이기'를 끄면 <b>소리로 읽을 이름이 없는 단추</b>가 생깁니다 —
+  데모가 그 개수도 같이 셉니다. 화면에 글자를 적으면 그 둘이 한꺼번에 풀립니다.
+</p>
+
+<script>
+(function () {
+  // [그림, 뜻, 글자 없이 통하나, 한 줄 설명]
+  var ICONS = [
+    ['🔍', '검색', true, '현실의 돋보기 — 거의 모두가 안다'],
+    ['🗑', '삭제', true, '휴지통 — 뜻이 그대로 통한다'],
+    ['＋', '추가', true, '더하기 — 모양이 곧 뜻이다'],
+    ['⚙', '설정', false, '톱니바퀴가 왜 설정인지는 배워야 안다'],
+    ['⋯', '더 보기', false, '점 셋은 약속일 뿐 그림이 아니다'],
+    ['⤢', '내보내기', false, '화살표 방향만으로는 안 갈린다'],
+    ['◫', '보관', false, '무엇을 그린 것인지 모른다']
+  ];
+
+  function draw() {
+    var lab = document.getElementById('lab').checked;
+    var nm = document.getElementById('name').checked;
+
+    document.getElementById('list').innerHTML = ICONS.map(function (ic) {
+      var clear = ic[2] || lab;     // 글자를 적으면 무조건 통한다
+      var named = lab || nm;        // 글자가 있거나 이름을 붙였으면 읽힌다
+      return '<div class="ico-quiz__r' + (clear ? '' : ' no') + '" data-k="' + ic[1] + '">' +
+        '<span class="g" aria-hidden="true" style="font-size:17px">' + ic[0] + '</span>' +
+        '<span class="lab">' +
+        (lab ? '<b style="font-size:12.5px">' + ic[1] + '</b>' : '<b style="font-size:12.5px;color:var(--fg-muted)">?</b>') +
+        '<small>' + ic[3] + '</small></span>' +
+        '<button class="icon-btn v" data-go="' + ic[1] + '"' +
+        (named ? ' aria-label="' + ic[1] + '"' : '') +
+        ' style="border:1px solid var(--line);border-radius:6px;min-width:34px;min-height:34px">' +
+        ic[0] + (lab ? ' <span style="font-size:11px">' + ic[1] + '</span>' : '') + '</button>' +
+        '</div>';
+    }).join('');
+
+    // 글자 없이 뜻이 통하는 수를 센다
+    var clear = ICONS.filter(function (ic) { return ic[2] || lab; }).length;
+    // 소리로 읽을 이름이 없는 단추를 센다
+    var noName = [].slice.call(document.querySelectorAll('.ico-quiz button')).filter(function (b) {
+      return !b.getAttribute('aria-label') && !b.textContent.replace(/[^가-힣A-Za-z]/g, '');
+    }).length;
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '글자 없이 뜻이 통하는 아이콘 <b>' + clear + ' / ' + ICONS.length + '</b>' +
+      (clear < ICONS.length ? ' <span class="warn">— 나머지는 배워야 안다</span>' : '') +
+      '<br>이름 없는 단추 <b>' + noName + '개</b>' +
+      (noName ? ' <span class="warn">— 소리로는 아무것도 안 들린다</span>' : '');
+    rd.dataset.clear = String(clear);
+    rd.dataset.noname = String(noName);
+    rd.dataset.lab = lab ? '1' : '0';
+  }
+
+  document.getElementById('list').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-go]');
+    if (!b) return;
+    document.getElementById('log').innerHTML = '<b>' + b.dataset.go + '</b> 를 눌렀다';
+  });
+  ['lab', 'name'].forEach(function (id) { document.getElementById(id).addEventListener('change', draw); });
+  draw();
+})();
+</script>
+</body>
+</html>
