@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>숫자 입력 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>숫자 입력</b>
+  <label>칸 종류 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="text" selected>text + inputmode="numeric"</option>
+    <option value="number">type="number"</option>
+  </select></label>
+  <label><input type="checkbox" id="comma" checked> 세 자리마다 쉼표</label>
+  <label><input type="checkbox" id="unit" checked> 단위를 칸 밖에</label>
+</div>
+
+<div class="pad">
+  <div class="num">
+    <label for="n" style="font-size:12.5px">정산 금액</label>
+    <div class="num__row">
+      <input class="ui-input" id="n" value="1284000" style="min-height:34px;font-size:13px">
+      <span class="unit" id="u">원</span>
+    </div>
+    <span class="ruler" id="hint2"></span>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  <code>type="number"</code> 는 쉬워 보이지만 함정이 많습니다 —
+  <b>휠을 굴리면 값이 바뀌고</b>, 쉼표를 넣으면 값이 <b>빈 문자열</b>이 되며,
+  브라우저마다 화살표가 다릅니다. 데모가 지금 칸의 <b>읽히는 값</b>을 그대로 적습니다.<br>
+  그래서 돈·전화번호처럼 <b>세어서 쓰지 않는 숫자</b>는
+  <code>text</code> 에 <code>inputmode="numeric"</code> 을 두는 편이 안전합니다 —
+  폰에서 숫자 자판이 뜨는 것은 똑같습니다.<br>
+  <b>쉼표</b>는 읽기엔 좋지만 칸 안에 두면 다루기 번거롭습니다.
+  <b>단위</b>는 칸 밖에 두어야 값만 깨끗하게 남습니다.
+</p>
+
+<script>
+(function () {
+  function digits(s) { return (s || '').replace(/[^\d]/g, ''); }
+  function withComma(s) { return digits(s).replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
+
+  function rebuild() {
+    var k = document.getElementById('k').value;
+    var old = document.getElementById('n');
+    var raw = digits(old.value);
+    var el = document.createElement('input');
+    el.className = 'ui-input';
+    el.id = 'n';
+    el.style.cssText = 'min-height:34px;font-size:13px';
+    if (k === 'number') {
+      el.type = 'number';
+      el.value = raw;
+      el.setAttribute('step', '1000');
+    } else {
+      el.type = 'text';
+      el.inputMode = 'numeric';
+      el.setAttribute('autocomplete', 'off');
+      el.value = document.getElementById('comma').checked ? withComma(raw) : raw;
+    }
+    old.replaceWith(el);
+    bind();
+  }
+
+  function draw(why) {
+    var el = document.getElementById('n');
+    var k = document.getElementById('k').value;
+    var shown = el.value;
+    var parsed = digits(shown);
+    var unitInside = !document.getElementById('unit').checked;
+    document.getElementById('u').style.display = unitInside ? 'none' : '';
+    document.getElementById('hint2').innerHTML = k === 'number'
+      ? '<span class="warn">휠을 굴리면 값이 바뀐다</span> · 쉼표를 넣으면 값이 비어 버린다'
+      : '폰에서 <b>숫자 자판</b>이 뜬다 · 쉼표를 넣어도 값이 안 사라진다';
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '칸 종류 <b>' + (k === 'number' ? 'type="number"' : 'text + inputmode') + '</b>' +
+      '<br>칸에 보이는 글자 <b>‘' + shown + '’</b>' +
+      '<br>숫자로 읽은 값 <b>' + (parsed || '(없음)') + '</b>' +
+      (k === 'number' && shown === '' && parsed === '' ? ' <span class="warn">— 쉼표를 넣으면 값이 사라진다</span>' : '') +
+      '<br>단위를 <b>' + (unitInside ? '칸 안에' : '칸 밖에') + '</b>' +
+      (unitInside ? ' <span class="warn">— 값과 섞인다</span>' : '') +
+      (why ? '<br>' + why : '');
+    rd.dataset.kind = k;
+    rd.dataset.shown = shown;
+    rd.dataset.parsed = parsed;
+    rd.dataset.type = el.type;
+    rd.dataset.inputmode = el.inputMode || '';
+  }
+
+  function bind() {
+    var el = document.getElementById('n');
+    el.addEventListener('input', function () {
+      if (document.getElementById('k').value === 'text' && document.getElementById('comma').checked) {
+        var pos = this.selectionStart, before = this.value.length;
+        this.value = withComma(this.value);
+        this.selectionStart = this.selectionEnd = Math.max(0, pos + (this.value.length - before));
+      }
+      draw('');
+    });
+    el.addEventListener('wheel', function () {
+      if (this.type === 'number') {
+        document.getElementById('log').innerHTML =
+          '<span class="warn">휠을 굴려 값이 바뀌었다</span> — 스크롤하다 숫자가 틀어진다';
+        setTimeout(function () { draw(''); }, 10);
+      }
+    });
+  }
+
+  document.getElementById('k').addEventListener('change', function () { rebuild(); draw(''); });
+  ['comma', 'unit'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', function () { rebuild(); draw(''); });
+  });
+  rebuild();
+  draw('');
+})();
+</script>
+</body>
+</html>

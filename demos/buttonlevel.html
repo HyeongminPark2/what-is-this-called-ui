@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>버튼 위계 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>버튼 위계</b>
+  <label>주 버튼 수 <input type="range" id="n" min="1" max="4" step="1" value="1" style="width:84px"><span class="ruler" id="nv"></span></label>
+  <label><input type="checkbox" id="danger"> 위험한 동작을 주 버튼으로</label>
+  <label><input type="checkbox" id="order" checked> 주 동작을 오른쪽에</label>
+</div>
+
+<div class="pad">
+  <div class="btl">
+    <div class="btl__row" id="row"></div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  버튼 위계는 <b>눈이 어디로 먼저 가는가</b>를 정하는 일입니다.
+  주 버튼을 늘려 보세요 — 데모가 <b>가장 진한 버튼이 몇 개인지</b> 세고,
+  둘을 넘으면 '어느 것이 주 동작인지 알 수 없다'고 적습니다.<br>
+  <b>위험한 동작을 주 버튼으로</b> 켜면 가장 눈에 띄는 자리에 '지우기'가 옵니다 —
+  실수로 누르기 가장 쉬운 자리입니다.<br>
+  주 동작의 <b>좌우 자리</b>도 플랫폼마다 다릅니다. 웹·안드로이드는 오른쪽,
+  iOS 의 알림창은 오른쪽이지만 목록의 확인은 왼쪽인 경우도 있습니다 —
+  한 서비스 안에서는 <b>한 쪽으로 고정</b>하는 것이 중요합니다.
+</p>
+
+<script>
+(function () {
+  function draw() {
+    var n = +document.getElementById('n').value;
+    var dangerMain = document.getElementById('danger').checked;
+    var rightMain = document.getElementById('order').checked;
+    document.getElementById('nv').textContent = n + '개';
+
+    var btns = [];
+    var labels = ['저장', '임시 저장', '미리 보기', '복사본'];
+    for (var i = 0; i < n; i++) btns.push({ t: labels[i], k: 'primary' });
+    for (var j = n; j < 3; j++) btns.push({ t: labels[j] || '취소', k: 'ghost' });
+    btns.push({ t: '지우기', k: dangerMain ? 'danger-primary' : 'danger-ghost' });
+
+    if (!rightMain) btns.reverse();
+
+    document.getElementById('row').innerHTML =
+      '<span class="n">주문 상세</span>' +
+      btns.map(function (b) {
+        var cls = b.k === 'primary' ? 'ui-btn'
+          : b.k === 'danger-primary' ? 'ui-btn ui-btn--danger'
+          : b.k === 'danger-ghost' ? 'ui-btn ui-btn--ghost'
+          : 'ui-btn ui-btn--ghost';
+        var st = b.k === 'danger-ghost' ? 'color:var(--danger);border-color:var(--danger);' : '';
+        return '<button class="' + cls + '" data-b="' + b.t + '" style="min-height:32px;padding:5px 12px;font-size:12.5px;' + st + '">' + b.t + '</button>';
+      }).join('');
+
+    document.getElementById('row').classList.toggle('many', n > 1);
+
+    // 가장 진한 버튼이 몇 개인가 — 바탕이 칠해진 것을 센다
+    var filled = [].slice.call(document.querySelectorAll('#row button')).filter(function (b) {
+      var bg = getComputedStyle(b).backgroundColor;
+      var m = bg.match(/[\d.]+/g) || [];
+      var alpha = m.length > 3 ? +m[3] : 1;
+      return alpha > 0.1 && !(m[0] === m[1] && m[1] === m[2]);
+    }).length;
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '가장 진한 버튼 <b>' + filled + '개</b>' +
+      (filled > 1 ? ' <span class="warn">— 어느 것이 주 동작인지 모른다</span>' : '') +
+      '<br>위험한 동작이 <b>' + (dangerMain ? '주 버튼' : '약한 버튼') + '</b>' +
+      (dangerMain ? ' <span class="warn">— 실수로 누르기 쉽다</span>' : '') +
+      '<br>주 동작이 <b>' + (rightMain ? '오른쪽' : '왼쪽') + '</b>에 있다';
+    rd.dataset.filled = String(filled);
+    rd.dataset.dangermain = dangerMain ? '1' : '0';
+    rd.dataset.right = rightMain ? '1' : '0';
+  }
+
+  document.getElementById('row').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-b]');
+    if (!b) return;
+    document.getElementById('log').innerHTML = '<b>' + b.dataset.b + '</b> 를 눌렀다';
+  });
+  document.getElementById('n').addEventListener('input', draw);
+  ['danger', 'order'].forEach(function (id) { document.getElementById(id).addEventListener('change', draw); });
+  document.getElementById('nv').textContent = '1개';
+  draw();
+})();
+</script>
+</body>
+</html>

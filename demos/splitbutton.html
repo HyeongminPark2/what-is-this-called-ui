@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>분할 버튼 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .stage { position: relative; min-height: 140px; }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>분할 버튼</b>
+  <label>만드는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="split" selected>주 동작 + 화살표 (분할)</option>
+    <option value="whole">전체가 메뉴를 연다</option>
+  </select></label>
+  <label><input type="checkbox" id="remember" checked> 마지막에 고른 것을 기본으로</label>
+</div>
+
+<div class="pad">
+  <div class="stage">
+    <span class="spb" id="spb"></span>
+    <div id="menuslot"></div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  분할 버튼은 <b>가장 많이 쓰는 하나</b>를 왼쪽에 꺼내 두고, 나머지는 화살표 안에 넣습니다 —
+  '내보내기(CSV)' 를 누르면 <b>한 번</b>에 끝납니다.
+  데모가 <b>주 동작까지 몇 번 눌러야 하는지</b>를 세서 둘을 견줍니다.<br>
+  <b>전체가 메뉴를 열면</b> 늘 두 번입니다. 대신 <b>무엇이 일어날지 모호하지 않습니다</b> —
+  분할 버튼의 약점은 왼쪽을 눌렀을 때 뭐가 될지 모르는 사람이 있다는 것입니다.
+  그래서 왼쪽에는 <b>지금 무엇이 걸려 있는지</b>를 이름으로 적어야 합니다.<br>
+  두 자리는 <b>따로 초점을 받아야</b> 하고, 화살표에는 따로 이름을 붙입니다.
+</p>
+
+<script>
+(function () {
+  var OPTS = ['CSV 로 내보내기', '엑셀로 내보내기', 'PDF 로 내보내기'];
+  var cur = 0, open = false, clicks = 0;
+
+  function render() {
+    var k = document.getElementById('k').value;
+    var spb = document.getElementById('spb');
+    if (k === 'split') {
+      spb.innerHTML =
+        '<button class="ui-btn" id="main" style="min-height:34px;padding:5px 13px;font-size:12.5px">' + OPTS[cur] + '</button>' +
+        '<button class="ui-btn" id="arrow" aria-haspopup="menu" aria-expanded="' + open + '" ' +
+        'aria-label="다른 형식으로 내보내기" style="min-height:34px;font-size:12.5px">▾</button>';
+    } else {
+      spb.innerHTML =
+        '<button class="ui-btn" id="arrow" aria-haspopup="menu" aria-expanded="' + open + '" ' +
+        'style="min-height:34px;padding:5px 13px;font-size:12.5px;border-radius:var(--r1)">내보내기 ▾</button>';
+    }
+
+    document.getElementById('menuslot').innerHTML = open
+      ? '<div class="mnu" style="position:absolute;left:0;top:40px">' +
+        OPTS.map(function (o, i) {
+          return '<button role="menuitem" data-i="' + i + '"' + (i === cur ? ' aria-selected="true"' : '') + '>' + o + '</button>';
+        }).join('') + '</div>'
+      : '';
+    report('');
+  }
+
+  function report(why) {
+    var k = document.getElementById('k').value;
+    var toMain = k === 'split' ? 1 : 2;
+    var focusables = document.querySelectorAll('.spb button').length;
+    var rd = document.getElementById('read');
+    rd.innerHTML = '만드는 법 <b>' + (k === 'split' ? '분할 버튼' : '전체가 메뉴') + '</b>' +
+      '<br>주 동작까지 누르는 횟수 <b>' + toMain + '번</b>' +
+      (toMain > 1 ? ' <span class="warn">— 늘 두 번이다</span>' : '') +
+      '<br>따로 초점을 받는 자리 <b>' + focusables + '개</b>' +
+      '<br>지금 걸린 주 동작 <b>' + OPTS[cur] + '</b>' +
+      '<br>실제로 누른 횟수 <b>' + clicks + '번</b>' +
+      (why ? '<br>' + why : '');
+    rd.dataset.kind = k;
+    rd.dataset.tomain = String(toMain);
+    rd.dataset.focusables = String(focusables);
+    rd.dataset.cur = String(cur);
+    rd.dataset.open = open ? '1' : '0';
+    rd.dataset.clicks = String(clicks);
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('#main')) {
+      clicks++;
+      open = false; render();
+      document.getElementById('log').innerHTML = '<b>' + OPTS[cur] + '</b> 를 한 번에 실행했다';
+      return;
+    }
+    if (e.target.closest('#arrow')) {
+      clicks++;
+      open = !open; render();
+      return;
+    }
+    var it = e.target.closest('[data-i]');
+    if (it) {
+      clicks++;
+      var i = +it.dataset.i;
+      if (document.getElementById('remember').checked) cur = i;
+      open = false; render();
+      document.getElementById('log').innerHTML = '<b>' + OPTS[i] + '</b> 를 실행했다' +
+        (document.getElementById('remember').checked ? ' — 다음부터 기본이 된다' : '');
+      return;
+    }
+    if (open && !e.target.closest('.spb')) { open = false; render(); }
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && open) { open = false; render(); }
+  });
+  ['k', 'remember'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', function () { clicks = 0; open = false; render(); });
+  });
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>여러 개 고르기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>여러 개 고르기</b>
+  <label>보이는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="token" selected>고른 것을 알약으로</option>
+    <option value="count">몇 개인지 숫자로</option>
+    <option value="native">기본 multiple 셀렉트</option>
+  </select></label>
+  <label>최대 보일 알약 <input type="range" id="max" min="1" max="6" step="1" value="3" style="width:76px"><span class="ruler" id="maxv"></span></label>
+</div>
+
+<div class="pad">
+  <div class="msel">
+    <span style="font-size:12.5px">정산에 넣을 가게</span>
+    <div id="top"></div>
+    <div class="msel__list" id="list"></div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  여러 개를 고르면 <b>고른 것을 어떻게 보일지</b>가 문제가 됩니다.
+  알약으로 늘어놓으면 <b>무엇을 골랐는지</b>는 한눈에 보이지만 줄이 늘어납니다 —
+  데모가 <b>고른 것 칸의 높이</b>를 재서 적습니다.<br>
+  '<b>최대 보일 알약</b>'을 줄이면 <code>+N</code> 으로 접힙니다. 숫자만 보이는 쪽은
+  높이가 안 변하지만 <b>무엇을 골랐는지 모릅니다</b>.<br>
+  브라우저 기본 <code>multiple</code> 셀렉트는 <b>Ctrl 을 눌러야</b> 여러 개가 골라집니다 —
+  모르는 사람이 많아 거의 쓰지 않습니다. 체크박스 목록이 훨씬 분명합니다.
+</p>
+
+<script>
+(function () {
+  var SHOPS = ['모란상회', '한빛아웃도어', '새벽상사', '대림유통', '모란상회 2호점', '푸른상사', '해든마트'];
+  var sel = { '모란상회': 1, '한빛아웃도어': 1, '새벽상사': 1, '대림유통': 1 };
+
+  function chosen() { return SHOPS.filter(function (s) { return sel[s]; }); }
+
+  function draw(why) {
+    var k = document.getElementById('k').value;
+    var max = +document.getElementById('max').value;
+    document.getElementById('maxv').textContent = max + '개';
+    var list = chosen();
+
+    if (k === 'native') {
+      document.getElementById('top').innerHTML =
+        '<select multiple size="4" id="nat" style="width:100%;font-size:12.5px;padding:4px;border:1px solid var(--line);border-radius:var(--r1);background:var(--surface);color:var(--fg)">' +
+        SHOPS.map(function (s) { return '<option' + (sel[s] ? ' selected' : '') + '>' + s + '</option>'; }).join('') +
+        '</select>';
+      document.getElementById('list').style.display = 'none';
+    } else {
+      document.getElementById('list').style.display = '';
+      if (k === 'token') {
+        var show = list.slice(0, max);
+        document.getElementById('top').innerHTML = '<div class="msel__box" id="box">' +
+          (list.length
+            ? show.map(function (s) {
+                return '<span class="tk">' + s + '<button data-x="' + s + '" aria-label="' + s + ' 빼기">✕</button></span>';
+              }).join('') + (list.length > max ? '<span class="more">+' + (list.length - max) + '</span>' : '')
+            : '<span class="more">아직 안 골랐습니다</span>') + '</div>';
+      } else {
+        document.getElementById('top').innerHTML = '<div class="msel__box" id="box">' +
+          '<span class="more">' + (list.length ? list.length + '곳 골랐습니다' : '아직 안 골랐습니다') + '</span></div>';
+      }
+      document.getElementById('list').innerHTML = SHOPS.map(function (s) {
+        return '<label><input type="checkbox" data-s="' + s + '"' + (sel[s] ? ' checked' : '') + '>' + s + '</label>';
+      }).join('');
+    }
+
+    var box = document.getElementById('box') || document.getElementById('nat');
+    var h = box ? Math.round(box.getBoundingClientRect().height) : 0;
+    var visible = k === 'token' ? Math.min(list.length, max) : (k === 'count' ? 0 : list.length);
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '고른 곳 <b>' + list.length + '곳</b> · 보이는 법 <b>' +
+      ({ token: '알약', count: '숫자', native: '기본 셀렉트' }[k]) + '</b>' +
+      '<br>고른 것 칸 높이 <b>' + h + 'px</b>' +
+      '<br>이름이 보이는 것 <b>' + visible + '개</b>' +
+      (k === 'count' ? ' <span class="warn">— 무엇을 골랐는지 모른다</span>' : '') +
+      (k === 'native' ? '<br><span class="warn">Ctrl 을 눌러야 여러 개가 골라진다</span>' : '') +
+      (why ? '<br>' + why : '');
+    rd.dataset.n = String(list.length);
+    rd.dataset.h = String(h);
+    rd.dataset.visible = String(visible);
+    rd.dataset.kind = k;
+  }
+
+  document.getElementById('list').addEventListener('change', function (e) {
+    var c = e.target.closest('[data-s]');
+    if (!c) return;
+    sel[c.dataset.s] = c.checked;
+    draw('');
+    document.getElementById('log').innerHTML = '<b>' + c.dataset.s + '</b> 를 ' + (c.checked ? '골랐다' : '뺐다');
+  });
+  document.getElementById('top').addEventListener('click', function (e) {
+    var x = e.target.closest('[data-x]');
+    if (!x) return;
+    sel[x.dataset.x] = false;
+    draw('');
+    document.getElementById('log').innerHTML = '<b>' + x.dataset.x + '</b> 를 알약에서 뺐다';
+  });
+  document.getElementById('k').addEventListener('change', function () { draw(''); });
+  document.getElementById('max').addEventListener('input', function () { draw(''); });
+  draw('');
+})();
+</script>
+</body>
+</html>

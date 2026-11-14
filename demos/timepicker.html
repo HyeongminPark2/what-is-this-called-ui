@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>시간 선택기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .tp { display: grid; gap: 7px; max-width: 320px; }
+  .tp__list { border: 1px solid var(--line); border-radius: var(--r1); background: var(--surface);
+    max-height: 132px; overflow: auto; display: grid; }
+  .tp__list button { border: 0; background: none; text-align: left; padding: 5px 9px; font-size: 12.5px;
+    cursor: pointer; color: var(--fg); font-variant-numeric: tabular-nums; }
+  .tp__list button[aria-selected="true"] { background: var(--accent-soft); color: var(--accent); }
+  .tp__list button[disabled] { color: var(--fg-faint); cursor: not-allowed; }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>시간 선택기</b>
+  <label>간격 <select class="sel" id="step" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="60">1시간</option>
+    <option value="30" selected>30분</option>
+    <option value="10">10분</option>
+    <option value="1">1분</option>
+  </select></label>
+  <label><input type="checkbox" id="h24" checked> 24시간제로 적기</label>
+  <label><input type="checkbox" id="biz" checked> 영업 시간 밖은 막기</label>
+</div>
+
+<div class="pad">
+  <div class="tp">
+    <label for="t" style="font-size:12.5px">방문 시간</label>
+    <input class="ui-input" id="t" value="14:30" inputmode="numeric" style="min-height:34px;font-size:13px;font-variant-numeric:tabular-nums">
+    <div class="tp__list" id="list" role="listbox" aria-label="시간 고르기"></div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  시간은 <b>가짓수가 많아</b> 목록으로 다 늘어놓으면 굴리기 지칩니다 —
+  간격을 1분으로 바꿔 보세요. 데모가 <b>목록에 든 줄 수</b>를 세서 적습니다
+  (1분 간격이면 <b>1,440줄</b>입니다).<br>
+  그래서 <b>쓰는 간격</b>을 정해 두는 것이 핵심입니다 — 예약이면 30분, 알람이면 1분.
+  그리고 <b>쳐서도 넣을 수 있어야</b> 합니다.<br>
+  <b>오전/오후</b>로 적으면 '12시'가 낮인지 밤인지 헷갈립니다 —
+  데모가 두 표기를 나란히 보여 줍니다. 한국에서는 <b>24시간제</b>가 덜 헷갈립니다.
+</p>
+
+<script>
+(function () {
+  var OPEN = 9 * 60, CLOSE = 18 * 60;     // 09:00 ~ 18:00
+  var sel = 14 * 60 + 30;
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function hhmm(m) { return pad(Math.floor(m / 60)) + ':' + pad(m % 60); }
+  function ampm(m) {
+    var h = Math.floor(m / 60), mm = m % 60;
+    var tag = h < 12 ? '오전' : '오후';
+    var h12 = h % 12 === 0 ? 12 : h % 12;
+    return tag + ' ' + h12 + ':' + pad(mm);
+  }
+
+  function draw(why) {
+    var step = +document.getElementById('step').value;
+    var h24 = document.getElementById('h24').checked;
+    var biz = document.getElementById('biz').checked;
+
+    var rows = [], blocked = 0;
+    for (var m = 0; m < 24 * 60; m += step) {
+      var off = biz && (m < OPEN || m > CLOSE);
+      if (off) blocked++;
+      rows.push([m, off]);
+    }
+    document.getElementById('list').innerHTML = rows.map(function (r) {
+      return '<button role="option" data-m="' + r[0] + '"' +
+        (r[1] ? ' disabled aria-disabled="true"' : '') +
+        (r[0] === sel ? ' aria-selected="true"' : '') + '>' +
+        (h24 ? hhmm(r[0]) : ampm(r[0])) + '</button>';
+    }).join('');
+    document.getElementById('t').value = h24 ? hhmm(sel) : ampm(sel);
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '고른 시간 <b>' + hhmm(sel) + '</b> · 같은 시간을 오전오후로 적으면 <b>' + ampm(sel) + '</b>' +
+      '<br>간격 <b>' + step + '분</b> · 목록에 든 줄 <b>' + rows.length + '줄</b>' +
+      (rows.length > 200 ? ' <span class="warn">— 굴려서 찾기 어렵다</span>' : '') +
+      '<br>막힌 줄 <b>' + blocked + '줄</b>' + (biz ? ' (영업 시간 밖)' : ' <span class="warn">— 안 되는 시간도 눌린다</span>') +
+      '<br>표기 <b>' + (h24 ? '24시간제' : '오전/오후') + '</b>' +
+      (h24 ? '' : ' <span class="warn">— 12시가 낮인지 밤인지 헷갈린다</span>') +
+      (why ? '<br>' + why : '');
+    rd.dataset.sel = hhmm(sel);
+    rd.dataset.rows = String(rows.length);
+    rd.dataset.blocked = String(blocked);
+    rd.dataset.h24 = h24 ? '1' : '0';
+    rd.dataset.step = String(step);
+  }
+
+  document.getElementById('list').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-m]');
+    if (!b || b.disabled) return;
+    sel = +b.dataset.m;
+    draw('');
+    document.getElementById('log').innerHTML = '<b>' + hhmm(sel) + '</b> 를 골랐다';
+  });
+  document.getElementById('t').addEventListener('change', function () {
+    var m = this.value.match(/(\d{1,2})\s*[:시]\s*(\d{1,2})?/);
+    if (!m) { draw('<span class="warn">시간으로 못 읽었다</span> — 14:30 처럼 적는다'); return; }
+    var h = +m[1], mm = +(m[2] || 0);
+    if (/오후/.test(this.value) && h < 12) h += 12;
+    if (/오전/.test(this.value) && h === 12) h = 0;
+    sel = Math.max(0, Math.min(24 * 60 - 1, h * 60 + mm));
+    draw('');
+    document.getElementById('log').innerHTML = '<b>쳐서</b> 넣었다 — 목록을 안 굴려도 된다';
+  });
+  ['step', 'h24', 'biz'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', function () { draw(''); });
+  });
+  draw('');
+})();
+</script>
+</body>
+</html>

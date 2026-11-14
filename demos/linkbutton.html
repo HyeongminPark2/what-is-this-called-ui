@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>링크와 버튼 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>링크와 버튼</b>
+  <label>무엇으로 만들까 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="right" selected>뜻에 맞게</option>
+    <option value="divlink">div 에 onclick 으로</option>
+    <option value="swap">서로 바꿔서</option>
+  </select></label>
+  <button class="ui-btn ui-btn--ghost" id="tab">Tab 으로 훑어보기</button>
+</div>
+
+<div class="pad">
+  <div class="lkb" id="list"></div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  가르는 질문은 하나입니다 — <b>이동인가, 동작인가</b>.
+  주소가 바뀌면 링크(<code>&lt;a href&gt;</code>), 그 자리에서 일이 일어나면 버튼(<code>&lt;button&gt;</code>)입니다.<br>
+  <b>div 에 onclick</b> 으로 만들면 보기에는 같지만 <b>Tab 이 멈추지 않고</b>
+  Enter 로도 안 눌립니다 — '<b>Tab 으로 훑어보기</b>'를 누르면 초점이 몇 군데 멈추는지 세 줍니다.<br>
+  <b>서로 바꿔서</b> 만들면 더 조용히 나쁩니다 — 링크로 만든 '저장'은
+  <b>새 탭으로 열리고</b>, 버튼으로 만든 '상세 보기'는 <b>가운데 버튼·복사·공유</b>가 안 됩니다.
+</p>
+
+<script>
+(function () {
+  // [이름, 이동인가, 설명]
+  var ITEMS = [
+    ['주문 상세 보기', true, '주소가 바뀐다'],
+    ['영수증 내려받기', true, '파일 주소로 간다'],
+    ['저장', false, '그 자리에서 일이 일어난다'],
+    ['정산 다시 계산', false, '그 자리에서 일이 일어난다']
+  ];
+
+  function kindOf(isNav) {
+    var k = document.getElementById('k').value;
+    if (k === 'right') return isNav ? 'a' : 'button';
+    if (k === 'swap') return isNav ? 'button' : 'a';
+    return 'div';
+  }
+
+  function draw() {
+    document.getElementById('list').innerHTML = ITEMS.map(function (it, i) {
+      var tag = kindOf(it[1]);
+      var want = it[1] ? 'a' : 'button';
+      var bad = tag !== want;
+      var inner = '<span>' + it[0] + '</span><span class="q">' + it[2] + '</span>';
+      if (tag === 'a') return '<a class="lkb__r' + (bad ? ' bad' : '') + '" href="#x" data-i="' + i + '" style="text-decoration:none;color:inherit">' + inner + '</a>';
+      if (tag === 'button') return '<button class="lkb__r' + (bad ? ' bad' : '') + '" data-i="' + i + '" style="text-align:left;font:inherit">' + inner + '</button>';
+      return '<div class="lkb__r bad" data-i="' + i + '" onclick="void 0">' + inner + '</div>';
+    }).join('');
+    report('');
+  }
+
+  function report(why) {
+    var k = document.getElementById('k').value;
+    var focusable = document.querySelectorAll('.lkb a[href], .lkb button').length;
+    var newtab = document.querySelectorAll('.lkb a[href]').length;
+    var wrong = document.querySelectorAll('.lkb__r.bad').length;
+    var rd = document.getElementById('read');
+    rd.innerHTML = '만든 법 <b>' +
+      ({ right: '뜻에 맞게', divlink: 'div + onclick', swap: '서로 바꿔서' }[k]) + '</b>' +
+      '<br>초점을 받을 수 있는 줄 <b>' + focusable + ' / ' + ITEMS.length + '</b>' +
+      (focusable < ITEMS.length ? ' <span class="warn">— 키보드로 못 간다</span>' : '') +
+      '<br>새 탭으로 열리는 줄 <b>' + newtab + '개</b>' +
+      (k === 'swap' ? ' <span class="warn">— 저장이 새 탭에서 열린다</span>' : '') +
+      '<br>뜻과 안 맞는 줄 <b>' + wrong + '개</b>' +
+      (why ? '<br>' + why : '');
+    rd.dataset.focusable = String(focusable);
+    rd.dataset.newtab = String(newtab);
+    rd.dataset.wrong = String(wrong);
+    rd.dataset.kind = k;
+  }
+
+  document.getElementById('list').addEventListener('click', function (e) {
+    var r = e.target.closest('[data-i]');
+    if (!r) return;
+    e.preventDefault();
+    var it = ITEMS[+r.dataset.i];
+    document.getElementById('log').innerHTML = it[1] ? '<b>' + it[0] + '</b> — 주소를 바꿔 이동했다' : '<b>' + it[0] + '</b> — 그 자리에서 일이 일어났다';
+  });
+
+  document.getElementById('tab').addEventListener('click', function () {
+    var els = [].slice.call(document.querySelectorAll('.lkb a[href], .lkb button'));
+    var seen = [], i = 0;
+    if (!els.length) {
+      document.getElementById('log').innerHTML = '<span class="warn">Tab 이 한 번도 안 멈춘다</span> — 키보드로는 못 쓴다';
+      document.getElementById('read').dataset.seen = '0';
+      return;
+    }
+    (function step() {
+      if (i >= els.length) {
+        document.getElementById('log').innerHTML = 'Tab 이 <b>' + seen.length + '번</b> 멈췄다 — ' + seen.join(' → ');
+        document.getElementById('read').dataset.seen = String(seen.length);
+        return;
+      }
+      els[i].focus();
+      seen.push(els[i].textContent.trim().split('\n')[0].slice(0, 8));
+      i++;
+      setTimeout(step, 170);
+    })();
+  });
+
+  document.getElementById('k').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

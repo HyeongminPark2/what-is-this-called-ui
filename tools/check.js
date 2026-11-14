@@ -219,7 +219,10 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
             'actionsheet', 'banner', 'inlinealert', 'commandpalette', 'lightbox', 'menu',
             'contextmenu', 'coachmark', 'fullscreen'],
     '3부': ['weight', 'lineheight', 'letterspacing', 'hangul', 'numerals', 'truncate', 'webfont', 'hierarchy', 'casing', 'iconfont'],
-    '4부': ['field', 'select', 'combobox', 'checkbox', 'radio', 'switch', 'segmented', 'slider'],
+    '4부': ['field', 'select', 'combobox', 'checkbox', 'radio', 'switch', 'segmented', 'slider',
+            'buttonlevel', 'linkbutton', 'datepicker', 'timepicker', 'quantity', 'textarea',
+            'password', 'numberinput', 'formatted', 'multiselect', 'rangeslider', 'colorinput',
+            'disabledstate', 'splitbutton'],
     '7부': ['appbar', 'sidebar', 'tabs', 'breadcrumb', 'pagination', 'infinite', 'bottomnav',
             'stepper', 'treeview', 'anchornav', 'backnav', 'megamenu'],
     '8부': ['spinner', 'skeleton', 'progress', 'optimistic', 'empty', 'error',
@@ -2680,6 +2683,219 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     const modalW = +(await page.getAttribute('#read', 'data-usable'));
     if (!(modalW < fullW)) fail.push('전체화면: 좁은 화면에서 모달이 더 좁지 않다 (보여주려는 결과)');
   }
+  await page.close();
+
+
+  // 4부 조작 부품 데모 열네 장 — 버튼 무게·초점 수·누른 횟수·줄 수·대비비·전송 여부
+  page = await demo('buttonlevel', 980, 900);
+  if (await page.getAttribute('#read', 'data-filled') !== '1') fail.push('버튼 위계: 진한 단추가 하나가 아니다');
+  await page.locator('#n').fill('3'); await page.dispatchEvent('#n', 'input'); await page.waitForTimeout(320);
+  if (!(+(await page.getAttribute('#read', 'data-filled')) > 1))
+    fail.push('버튼 위계: 주 버튼을 늘려도 진한 것이 하나다 (보여주려는 결과)');
+  await page.check('#danger'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-dangermain') !== '1')
+    fail.push('버튼 위계: 위험한 동작이 주 버튼이 안 된다 (보여주려는 결과)');
+  await page.uncheck('#order'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-right') !== '0') fail.push('버튼 위계: 주 동작이 왼쪽으로 안 간다');
+  await page.close();
+
+  page = await demo('linkbutton', 980, 900);
+  if (await page.getAttribute('#read', 'data-wrong') !== '0') fail.push('링크와 버튼: 뜻에 맞는데 어긋났다고 한다');
+  if (await page.getAttribute('#read', 'data-focusable') !== '4') fail.push('링크와 버튼: 네 줄이 초점을 못 받는다');
+  await page.selectOption('#k', 'divlink'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-focusable') !== '0')
+    fail.push('링크와 버튼: div 로 만들어도 Tab 이 멈춘다 (보여주려는 결과)');
+  await page.selectOption('#k', 'swap'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-wrong') !== '4')
+    fail.push('링크와 버튼: 바꿔 만들어도 어긋났다고 안 한다 (보여주려는 결과)');
+  if (await page.getAttribute('#read', 'data-newtab') !== '2')
+    fail.push('링크와 버튼: 저장이 새 탭으로 안 열린다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('datepicker', 980, 900);
+  if (await page.getAttribute('#read', 'data-moves') !== '0') fail.push('날짜 선택기: 처음부터 넘겼다고 센다');
+  if (!(+(await page.getAttribute('#read', 'data-blocked')) > 0)) fail.push('날짜 선택기: 못 고르는 날을 안 막는다');
+  await page.locator('#prev').click(); await page.locator('#prev').click();
+  await page.locator('#prev').click(); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-moves') !== '3')
+    fail.push('날짜 선택기: 달을 넘긴 횟수를 안 센다 (보여주려는 결과)');
+  await page.fill('#typed', '2026-12-25'); await page.dispatchEvent('#typed', 'change'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-sel') !== '2026-12-25') fail.push('날짜 선택기: 쳐서 못 넣는다');
+  await page.uncheck('#limit'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-blocked') !== '0')
+    fail.push('날짜 선택기: 막기를 꺼도 막혀 있다 (보여주려는 결과)');
+  await page.uncheck('#shortcut'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-quick') !== '0') fail.push('날짜 선택기: 자주 쓰는 날 단추가 안 빠진다');
+  await page.close();
+
+  page = await demo('timepicker', 980, 900);
+  if (await page.getAttribute('#read', 'data-sel') !== '14:30') fail.push('시간 선택기: 처음 고른 시각이 다르다');
+  if (await page.getAttribute('#read', 'data-rows') !== '48') fail.push('시간 선택기: 30분 간격이 48줄이 아니다');
+  if (!(+(await page.getAttribute('#read', 'data-blocked')) > 0)) fail.push('시간 선택기: 영업 시간 밖을 안 막는다');
+  await page.selectOption('#step', '1'); await page.waitForTimeout(500);
+  if (await page.getAttribute('#read', 'data-rows') !== '1440')
+    fail.push('시간 선택기: 1분 간격인데 1440줄이 아니다 (보여주려는 결과)');
+  await page.selectOption('#step', '30'); await page.waitForTimeout(340);
+  await page.uncheck('#h24'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-h24') !== '0') fail.push('시간 선택기: 오전오후 표기로 안 바뀐다');
+  await page.check('#h24'); await page.fill('#t', '09:30'); await page.dispatchEvent('#t', 'change'); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-sel') !== '09:30') fail.push('시간 선택기: 쳐서 못 넣는다');
+  await page.uncheck('#biz'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-blocked') !== '0')
+    fail.push('시간 선택기: 막기를 꺼도 막혀 있다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('quantity', 980, 900);
+  if (await page.getAttribute('#read', 'data-v') !== '1') fail.push('수량 스테퍼: 처음 수량이 1이 아니다');
+  if (await page.getAttribute('#read', 'data-minus') !== '1') fail.push('수량 스테퍼: 1에서 − 가 안 꺼진다');
+  if (await page.getAttribute('#read', 'data-hit') !== '34') fail.push('수량 스테퍼: 기본 단추 크기가 다르다');
+  await page.locator('#run').click(); await page.waitForTimeout(1600);
+  if (!(+(await page.getAttribute('#read', 'data-clicks')) >= 20))
+    fail.push('수량 스테퍼: 24까지 가는 데 스무 번이 안 걸린다 (보여주려는 결과)');
+  await page.fill('#val', '50'); await page.dispatchEvent('#val', 'change'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-v') !== '50') fail.push('수량 스테퍼: 쳐서 못 넣는다');
+  await page.uncheck('#typing'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-typing') !== '0')
+    fail.push('수량 스테퍼: 칸을 잠가도 칠 수 있다 (보여주려는 결과)');
+  await page.check('#small'); await page.waitForTimeout(320);
+  if (!(+(await page.getAttribute('#read', 'data-hit')) < 44))
+    fail.push('수량 스테퍼: 작게 둬도 44px 이 넘는다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('textarea', 980, 900);
+  await page.fill('#t', '짧은 메모'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-over') !== '0') fail.push('여러 줄 입력: 짧은데 넘쳤다고 한다');
+  {
+    const h0 = +(await page.getAttribute('#read', 'data-h'));
+    await page.$eval('#t', e => { e.value = Array(8).fill('한 줄 메모를 길게 적어 봅니다').join('\n'); e.dispatchEvent(new Event('input', { bubbles: true })); });
+    await page.waitForTimeout(340);
+    if (!(+(await page.getAttribute('#read', 'data-h')) > h0)) fail.push('여러 줄 입력: 내용만큼 안 늘어난다');
+  }
+  await page.fill('#t', 'ㄱ'.repeat(160)); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-over') !== '1') fail.push('여러 줄 입력: 한도를 넘겨도 안 빨개진다');
+  if (await page.getAttribute('#read', 'data-len') !== '160') fail.push('여러 줄 입력: 넘치면 못 친다');
+  await page.uncheck('#hard'); await page.locator('#pasteBtn').click(); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-len') !== '160') fail.push('여러 줄 입력: 안 막았는데 잘린다');
+  await page.check('#hard'); await page.locator('#pasteBtn').click(); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-len') !== '140') fail.push('여러 줄 입력: 막았는데 한도를 넘는다');
+  if (await page.getAttribute('#read', 'data-cut') !== '20')
+    fail.push('여러 줄 입력: 잘려 나간 글자를 안 센다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('password', 980, 900);
+  if (await page.getAttribute('#read', 'data-type') !== 'password') fail.push('비밀번호 칸: 처음부터 드러나 있다');
+  if (await page.getAttribute('#read', 'data-okclass') !== '1')
+    fail.push('비밀번호 칸: 갈래 규칙을 통과해야 하는데 막는다 (보여주려는 결과)');
+  if (await page.getAttribute('#read', 'data-oklen') !== '0')
+    fail.push('비밀번호 칸: 길이가 모자란데 통과시킨다 (보여주려는 결과)');
+  await page.fill('#p', '그냥길게적은한국어문장입니다'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-oklen') !== '1') fail.push('비밀번호 칸: 길게 적어도 길이 규칙을 못 넘는다');
+  if (await page.getAttribute('#read', 'data-okclass') !== '0')
+    fail.push('비밀번호 칸: 갈래 규칙이 긴 한국어 문장을 안 막는다 (보여주려는 결과)');
+  await page.locator('#eye').click(); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-type') !== 'text') fail.push('비밀번호 칸: 보기를 눌러도 안 드러난다');
+  if (await page.getAttribute('#eye', 'aria-pressed') !== 'true') fail.push('비밀번호 칸: 눌렸다고 안 알린다');
+  await page.uncheck('#manager'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-autocomplete') !== 'off')
+    fail.push('비밀번호 칸: 관리자를 막아도 그대로다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('numberinput', 980, 900);
+  if (await page.getAttribute('#read', 'data-type') !== 'text') fail.push('숫자 입력: 기본이 text 가 아니다');
+  if (await page.getAttribute('#read', 'data-inputmode') !== 'numeric') fail.push('숫자 입력: 숫자 자판이 안 뜬다');
+  if (!(await page.getAttribute('#read', 'data-shown')).includes(',')) fail.push('숫자 입력: 쉼표가 안 보인다');
+  if (await page.getAttribute('#read', 'data-parsed') !== '1284000') fail.push('숫자 입력: 숫자로 안 읽힌다');
+  await page.selectOption('#k', 'number'); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-type') !== 'number') fail.push('숫자 입력: type=number 로 안 바뀐다');
+  await page.$eval('#n', e => { e.value = '1,284,000'; e.dispatchEvent(new Event('input', { bubbles: true })); });
+  await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-shown') !== '')
+    fail.push('숫자 입력: type=number 에 쉼표를 넣어도 값이 남는다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('formatted', 980, 900);
+  if (await page.getAttribute('#read', 'data-raw') !== '1234567890') fail.push('자동 서식 입력: 숫자만 안 남는다');
+  if (await page.getAttribute('#read', 'data-shown') !== '123-45-67890') fail.push('자동 서식 입력: 서식이 안 들어간다');
+  if (await page.getAttribute('#read', 'data-full') !== '1') fail.push('자동 서식 입력: 열 자리를 다 채웠는데 아니라고 한다');
+  await page.uncheck('#strip'); await page.locator('#paste').click(); await page.waitForTimeout(340);
+  if (!/[^\d]/.test(await page.getAttribute('#read', 'data-shown')))
+    fail.push('자동 서식 입력: 걸러내기를 꺼도 기호가 안 남는다 (보여주려는 결과)');
+  await page.check('#strip'); await page.locator('#paste').click(); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-raw') !== '1234567890') fail.push('자동 서식 입력: 걸러내도 기호가 남는다');
+  await page.selectOption('#k', 'card'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-shown') !== '') fail.push('자동 서식 입력: 종류를 바꿔도 안 비운다');
+  await page.close();
+
+  page = await demo('multiselect', 980, 900);
+  if (await page.getAttribute('#read', 'data-n') !== '4') fail.push('여러 개 고르기: 넷을 안 골랐다');
+  if (await page.getAttribute('#read', 'data-visible') !== '3') fail.push('여러 개 고르기: 보이는 개수가 셋이 아니다');
+  {
+    const h0 = +(await page.getAttribute('#read', 'data-h'));
+    await page.locator('#max').fill('6'); await page.dispatchEvent('#max', 'input'); await page.waitForTimeout(340);
+    if (await page.getAttribute('#read', 'data-visible') !== '4') fail.push('여러 개 고르기: 더 보이게 해도 그대로다');
+    if (!(+(await page.getAttribute('#read', 'data-h')) >= h0)) fail.push('여러 개 고르기: 더 보이는데 칸이 줄었다');
+  }
+  await page.selectOption('#k', 'count'); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-visible') !== '0')
+    fail.push('여러 개 고르기: 숫자만 보이는데 이름이 보인다 (보여주려는 결과)');
+  await page.selectOption('#k', 'native'); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-kind') !== 'native') fail.push('여러 개 고르기: 기본 셀렉트로 안 바뀐다');
+  await page.close();
+
+  page = await demo('rangeslider', 980, 900);
+  if (await page.getAttribute('#read', 'data-flipped') !== '0') fail.push('범위 슬라이더: 처음부터 뒤집혔다고 한다');
+  if (await page.getAttribute('#read', 'data-choices') !== '51') fail.push('범위 슬라이더: 10만원 눈금이 51가지가 아니다');
+  await page.selectOption('#step', '50'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-choices') !== '11')
+    fail.push('범위 슬라이더: 눈금을 키워도 가짓수가 그대로다 (보여주려는 결과)');
+  await page.fill('#lof', '420'); await page.dispatchEvent('#lof', 'change'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-lo') !== '420') fail.push('범위 슬라이더: 숫자 칸으로 눈금 밖 값을 못 넣는다');
+  if (await page.getAttribute('#read', 'data-exact') !== '1') fail.push('범위 슬라이더: 눈금에 없는 값이라고 안 적는다');
+  await page.uncheck('#fields'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-fields') !== '0')
+    fail.push('범위 슬라이더: 숫자 칸을 빼도 남아 있다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('colorinput', 980, 900);
+  if (await page.getAttribute('#read', 'data-pass') !== '1') fail.push('색 고르기: 기본 파랑이 대비비를 못 넘는다');
+  if (await page.getAttribute('#read', 'data-kind') !== 'preset') fail.push('색 고르기: 정해 둔 색에서 고르는 상태가 아니다');
+  await page.fill('#hex', '#ffe066'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-pass') !== '0')
+    fail.push('색 고르기: 노랑 위 흰 글자를 안 막는다 (보여주려는 결과)');
+  await page.fill('#hex', 'zzz'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-valid') !== '0') fail.push('색 고르기: 색 코드가 아닌데 읽었다고 한다');
+  await page.locator('[data-c="#1a7f37"]').click(); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-hex') !== '#1a7f37') fail.push('색 고르기: 정해 둔 색을 못 고른다');
+  if (await page.getAttribute('#read', 'data-pass') !== '1') fail.push('색 고르기: 정해 둔 색이 대비비를 못 넘는다');
+  await page.close();
+
+  page = await demo('disabledstate', 980, 900);
+  if (await page.getAttribute('#read', 'data-focusable') !== '1')
+    fail.push('비활성: disabled 인 칸을 Tab 이 안 건너뛴다 (보여주려는 결과)');
+  await page.locator('#submit').click(); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-sent') !== '1')
+    fail.push('비활성: disabled 인 칸이 폼에 실린다 (보여주려는 결과)');
+  await page.selectOption('#k', 'readonly'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-focusable') !== '3') fail.push('비활성: readonly 가 초점을 못 받는다');
+  await page.locator('#submit').click(); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-sent') !== '3') fail.push('비활성: readonly 인데 값이 안 실린다');
+  await page.selectOption('#k', 'aria'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-focusable') !== '3') fail.push('비활성: aria-disabled 가 초점을 못 받는다');
+  await page.close();
+
+  page = await demo('splitbutton', 980, 900);
+  if (await page.getAttribute('#read', 'data-tomain') !== '1') fail.push('분할 버튼: 주 동작까지 한 번이 아니다');
+  if (await page.getAttribute('#read', 'data-focusables') !== '2') fail.push('분할 버튼: 두 자리가 따로 초점을 안 받는다');
+  await page.locator('#main').click(); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-clicks') !== '1') fail.push('분할 버튼: 한 번에 실행이 안 된다');
+  await page.locator('#arrow').click(); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-open') !== '1') fail.push('분할 버튼: 화살표로 메뉴가 안 열린다');
+  await page.locator('[data-i="1"]').click(); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-cur') !== '1') fail.push('분할 버튼: 고른 것이 기본이 안 된다');
+  await page.selectOption('#k', 'whole'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-tomain') !== '2')
+    fail.push('분할 버튼: 전체가 메뉴인데 한 번에 끝난다 (보여주려는 결과)');
+  if (await page.getAttribute('#read', 'data-focusables') !== '1') fail.push('분할 버튼: 초점 자리가 하나로 안 준다');
   await page.close();
 
   await browser.close();

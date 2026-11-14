@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자동 서식 입력 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>자동 서식 입력</b>
+  <label>무엇을 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="biz" selected>사업자번호 000-00-00000</option>
+    <option value="phone">전화번호 010-0000-0000</option>
+    <option value="card">카드번호 0000 0000 0000 0000</option>
+  </select></label>
+  <label><input type="checkbox" id="auto" checked> 치는 동안 서식 넣기</label>
+  <label><input type="checkbox" id="strip" checked> 붙여넣은 기호는 알아서 걸러내기</label>
+</div>
+
+<div class="pad">
+  <div class="fmt">
+    <label for="f" style="font-size:12.5px" id="lab"></label>
+    <input class="ui-input" id="f" inputmode="numeric" autocomplete="off" style="min-height:34px;font-size:13px">
+    <span class="ruler" id="hint2"></span>
+    <button class="ui-btn ui-btn--ghost" id="paste" style="justify-self:start;min-height:30px;padding:4px 11px;font-size:12.5px">기호가 섞인 값 붙여넣기</button>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  자동 서식은 <b>치는 사람을 돕는</b> 장치입니다 — 하이픈을 대신 넣어 주고,
+  붙여넣은 값에 섞인 공백·점·괄호를 걸러 줍니다.
+  '<b>기호가 섞인 값 붙여넣기</b>'를 눌러 보세요 — 걸러내기를 끄면
+  데모가 <b>서버로 갈 값이 어떻게 지저분한지</b>를 그대로 보여 줍니다.<br>
+  서식은 <b>보이는 것</b>일 뿐이고, 보낼 때는 <b>숫자만</b> 남겨야 합니다 —
+  데모가 둘을 나란히 적습니다.<br>
+  치는 동안 서식을 넣으면 <b>커서가 튀기</b> 쉽습니다. 데모가 커서 자리도 같이 적습니다.
+</p>
+
+<script>
+(function () {
+  var SPEC = {
+    biz: { name: '사업자번호', len: 10, groups: [3, 2, 5], sep: '-', dirty: '123-45-67890 (주)' },
+    phone: { name: '전화번호', len: 11, groups: [3, 4, 4], sep: '-', dirty: '+82 (10) 1234-5678' },
+    card: { name: '카드번호', len: 16, groups: [4, 4, 4, 4], sep: ' ', dirty: '1234-5678-9012-3456' }
+  };
+
+  function digits(s) { return (s || '').replace(/[^\d]/g, ''); }
+
+  function fmt(raw, spec) {
+    var out = [], i = 0;
+    for (var g = 0; g < spec.groups.length && i < raw.length; g++) {
+      out.push(raw.slice(i, i + spec.groups[g]));
+      i += spec.groups[g];
+    }
+    return out.filter(Boolean).join(spec.sep);
+  }
+
+  function draw(why) {
+    var spec = SPEC[document.getElementById('k').value];
+    var f = document.getElementById('f');
+    document.getElementById('lab').textContent = spec.name;
+    var raw = digits(f.value).slice(0, spec.len);
+    var shown = document.getElementById('auto').checked ? fmt(raw, spec) : raw;
+    document.getElementById('hint2').innerHTML =
+      '보낼 때는 <b>숫자 ' + spec.len + '자리</b>만 — 서식은 화면의 일입니다';
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '칸에 보이는 글자 <b>‘' + f.value + '’</b>' +
+      '<br>서버로 갈 값 <b>‘' + raw + '’</b> (' + raw.length + ' / ' + spec.len + '자리)' +
+      (/[^\d]/.test(f.value) && !document.getElementById('auto').checked
+        ? ' <span class="warn">— 기호가 섞여 있다</span>' : '') +
+      '<br>커서 자리 <b>' + (f.selectionStart === null ? '-' : f.selectionStart) + '</b>' +
+      (why ? '<br>' + why : '');
+    rd.dataset.shown = f.value;
+    rd.dataset.raw = raw;
+    rd.dataset.len = String(raw.length);
+    rd.dataset.full = raw.length === spec.len ? '1' : '0';
+    rd.dataset.auto = document.getElementById('auto').checked ? '1' : '0';
+    rd.dataset.caret = String(f.selectionStart === null ? -1 : f.selectionStart);
+  }
+
+  function reformat() {
+    var spec = SPEC[document.getElementById('k').value];
+    var f = document.getElementById('f');
+    if (!document.getElementById('auto').checked) { draw(''); return; }
+    var before = f.value.slice(0, f.selectionStart);
+    var beforeDigits = digits(before).length;
+    var raw = digits(f.value).slice(0, spec.len);
+    f.value = fmt(raw, spec);
+    // 커서를 '친 숫자 개수'로 되돌린다 — 안 그러면 맨 뒤로 튄다
+    var pos = 0, seen = 0;
+    while (pos < f.value.length && seen < beforeDigits) {
+      if (/\d/.test(f.value[pos])) seen++;
+      pos++;
+    }
+    f.selectionStart = f.selectionEnd = pos;
+    draw('');
+  }
+
+  document.getElementById('f').addEventListener('input', reformat);
+  document.getElementById('paste').addEventListener('click', function () {
+    var spec = SPEC[document.getElementById('k').value];
+    var f = document.getElementById('f');
+    if (document.getElementById('strip').checked) {
+      f.value = digits(spec.dirty).slice(0, spec.len);
+      reformat();
+      document.getElementById('log').innerHTML = '<b>‘' + spec.dirty + '’</b> 를 붙여넣고 기호를 걸러냈다';
+    } else {
+      f.value = spec.dirty;
+      draw('<span class="warn">기호가 그대로 남았다</span>');
+      document.getElementById('log').innerHTML = '<span class="warn">그대로 들어갔다</span> — 서버가 거절한다';
+    }
+  });
+  ['k', 'auto', 'strip'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', function () {
+      document.getElementById('f').value = '';
+      draw('');
+    });
+  });
+  document.getElementById('f').value = '1234567890';
+  reformat();
+})();
+</script>
+</body>
+</html>

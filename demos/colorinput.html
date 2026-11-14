@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>색 고르기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .prev { border: 1px solid var(--line); border-radius: var(--r2); padding: 9px 11px; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>색 고르기</b>
+  <label>고르는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="preset" selected>정해 둔 색에서 고르기</option>
+    <option value="free">아무 색이나 고르기</option>
+  </select></label>
+  <label><input type="checkbox" id="check" checked> 대비비를 재서 막기</label>
+</div>
+
+<div class="pad">
+  <div class="clr">
+    <div class="clr__row">
+      <span class="clr__sw" id="sw"></span>
+      <input class="ui-input" id="hex" value="#1f6feb" style="width:110px;min-height:32px;font-size:12.5px;font-family:var(--mono)" aria-label="색 코드">
+      <input type="color" id="pick" value="#1f6feb" style="width:34px;height:32px;padding:0;border:1px solid var(--line);border-radius:var(--r1);background:var(--surface)" aria-label="색 고르기">
+    </div>
+    <div class="clr__pre" id="pre"></div>
+    <div class="prev" id="prev">이 색 위의 흰 글자 — 버튼에 쓰면 이렇게 보입니다</div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  색을 <b>아무거나</b> 고르게 하면 대비비가 모자란 색이 쉽게 들어옵니다 —
+  데모가 고른 색 위 <b>흰 글자의 대비비</b>를 재서 적고, 4.5:1 아래면 막습니다.
+  <b>노랑</b>이나 <b>연두</b>를 골라 보면 바로 걸립니다.<br>
+  그래서 브랜드 색을 고르는 자리에는 <b>정해 둔 색</b>만 보이는 쪽이 안전합니다 —
+  데모가 고를 수 있는 가짓수를 세서 둘을 견줍니다.<br>
+  색 코드는 <b>쳐서도 넣을 수 있어야</b> 합니다. 디자이너가 건네는 값은 대개 <code>#1f6feb</code> 꼴입니다.
+</p>
+
+<script>
+(function () {
+  var PRESET = ['#1f6feb', '#1a7f37', '#9a6700', '#cf222e', '#8250df', '#0e7490'];
+
+  function rgb(h) {
+    h = h.replace('#', '');
+    if (h.length === 3) h = h.split('').map(function (c) { return c + c; }).join('');
+    return [0, 2, 4].map(function (i) { return parseInt(h.substr(i, 2), 16); });
+  }
+  function lum(c) {
+    var a = c.map(function (v) { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
+    return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
+  }
+  function ratio(f, b) { var L1 = lum(f), L2 = lum(b); if (L1 < L2) { var t = L1; L1 = L2; L2 = t; } return (L1 + 0.05) / (L2 + 0.05); }
+  function valid(h) { return /^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(h.trim()); }
+
+  function draw(why) {
+    var k = document.getElementById('k').value;
+    var hexEl = document.getElementById('hex');
+    var raw = hexEl.value.trim();
+    var ok = valid(raw);
+    var hex = ok ? (raw[0] === '#' ? raw : '#' + raw) : '#1f6feb';
+    var cr = ratio([255, 255, 255], rgb(hex));
+    var pass = cr >= 4.5;
+    var guard = document.getElementById('check').checked;
+
+    document.getElementById('sw').style.background = hex;
+    document.getElementById('pick').value = hex.length === 7 ? hex : '#1f6feb';
+    var prev = document.getElementById('prev');
+    prev.style.background = hex;
+    prev.style.color = '#fff';
+    prev.style.borderColor = (guard && !pass) ? 'var(--danger)' : 'var(--line)';
+
+    document.getElementById('pre').innerHTML = PRESET.map(function (c) {
+      return '<button data-c="' + c + '" aria-pressed="' + (c === hex) + '" style="background:' + c + '" aria-label="' + c + '"></button>';
+    }).join('');
+    document.getElementById('pick').style.display = k === 'free' ? '' : 'none';
+    hexEl.readOnly = false;
+
+    var choices = k === 'preset' ? PRESET.length : 16777216;
+    var rd = document.getElementById('read');
+    rd.innerHTML = '고른 색 <b>' + hex + '</b>' + (ok ? '' : ' <span class="warn">— 색 코드로 못 읽었다</span>') +
+      '<br>흰 글자 대비비 <b>' + cr.toFixed(2) + ':1</b>' +
+      (pass ? ' — 통과' : ' <span class="warn">— 4.5:1 미달</span>') +
+      (guard && !pass ? ' · <span class="warn">막았다</span>' : '') +
+      '<br>고를 수 있는 가짓수 <b>' + (k === 'preset' ? choices + '가지' : '1,600만 가지') + '</b>' +
+      (k === 'free' ? ' <span class="warn">— 안 되는 색이 훨씬 많다</span>' : '') +
+      (why ? '<br>' + why : '');
+    rd.dataset.hex = hex;
+    rd.dataset.cr = cr.toFixed(2);
+    rd.dataset.pass = pass ? '1' : '0';
+    rd.dataset.guard = guard ? '1' : '0';
+    rd.dataset.kind = k;
+    rd.dataset.valid = ok ? '1' : '0';
+  }
+
+  document.getElementById('pre').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-c]');
+    if (!b) return;
+    document.getElementById('hex').value = b.dataset.c;
+    draw('');
+    document.getElementById('log').innerHTML = '<b>' + b.dataset.c + '</b> 를 골랐다 — 정해 둔 색이라 안전하다';
+  });
+  document.getElementById('hex').addEventListener('input', function () { draw(''); });
+  document.getElementById('pick').addEventListener('input', function () {
+    document.getElementById('hex').value = this.value;
+    draw('');
+    document.getElementById('log').innerHTML = '<b>아무 색</b>이나 골랐다 — 대비비를 꼭 재야 한다';
+  });
+  ['k', 'check'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', function () { draw(''); });
+  });
+  draw('');
+})();
+</script>
+</body>
+</html>

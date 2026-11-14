@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>비활성과 읽기 전용 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>비활성과 읽기 전용</b>
+  <label>왜 못 고치나 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="disabled" selected>disabled (비활성)</option>
+    <option value="readonly">readonly (읽기 전용)</option>
+    <option value="aria">aria-disabled (눌리지만 안 먹음)</option>
+  </select></label>
+  <button class="ui-btn ui-btn--ghost" id="tab">Tab 으로 훑어보기</button>
+  <button class="ui-btn ui-btn--ghost" id="submit">보내 보기</button>
+</div>
+
+<div class="pad">
+  <div class="dis">
+    <div class="dis__r"><span class="lab">가게 이름</span><input class="ui-input" id="f1" value="모란상회" style="min-height:30px;font-size:12.5px"></div>
+    <div class="dis__r"><span class="lab">사업자번호</span><input class="ui-input" id="f2" value="123-45-67890" style="min-height:30px;font-size:12.5px"></div>
+    <div class="dis__r"><span class="lab">정산 계좌</span><input class="ui-input" id="f3" value="신한 110-***-****" style="min-height:30px;font-size:12.5px"></div>
+    <span class="ruler" id="why"></span>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  셋은 전부 '못 고친다'로 보이지만 <b>하는 일이 다릅니다</b>.
+  '<b>Tab 으로 훑어보기</b>'를 누르면 초점이 몇 군데 멈추는지 세 줍니다 —
+  <code>disabled</code> 는 <b>건너뜁니다</b>. 복사도 안 되고 소리로 읽히지도 않습니다.<br>
+  '<b>보내 보기</b>'는 더 중요합니다 — <code>disabled</code> 인 칸은 <b>폼에 안 실립니다</b>.
+  사업자번호를 못 고치게 하려고 <code>disabled</code> 를 걸었는데 <b>값이 안 가는</b> 사고가 여기서 납니다.
+  <code>readonly</code> 는 <b>읽히고 복사되고 실립니다</b>.<br>
+  <code>aria-disabled</code> 는 <b>눌리지만 안 먹는</b> 쪽입니다 — 왜 안 되는지 말해 줄 수 있습니다.
+</p>
+
+<script>
+(function () {
+  var FIELDS = ['f1', 'f2', 'f3'];
+  var LOCK = ['f2', 'f3'];
+
+  function draw(why) {
+    var k = document.getElementById('k').value;
+    FIELDS.forEach(function (id) {
+      var el = document.getElementById(id);
+      el.disabled = false; el.readOnly = false; el.removeAttribute('aria-disabled');
+      if (LOCK.indexOf(id) < 0) return;
+      if (k === 'disabled') el.disabled = true;
+      else if (k === 'readonly') el.readOnly = true;
+      else { el.setAttribute('aria-disabled', 'true'); el.readOnly = true; }
+    });
+
+    document.getElementById('why').innerHTML = ({
+      disabled: '사업자번호·계좌는 <b>심사 뒤에는 못 고칩니다</b>',
+      readonly: '사업자번호·계좌는 <b>심사 뒤에는 못 고칩니다</b> — 복사는 됩니다',
+      aria: '사업자번호·계좌는 <b>고객센터를 거쳐야</b> 바꿀 수 있습니다'
+    }[k]);
+
+    var rd = document.getElementById('read');
+    var focusable = FIELDS.filter(function (id) { return !document.getElementById(id).disabled; }).length;
+    var submitted = FIELDS.filter(function (id) { return !document.getElementById(id).disabled; }).length;
+    rd.innerHTML = '지금 <b>' + ({ disabled: 'disabled', readonly: 'readonly', aria: 'aria-disabled' }[k]) + '</b>' +
+      '<br>초점을 받을 수 있는 칸 <b>' + focusable + ' / 3</b>' +
+      (focusable < 3 ? ' <span class="warn">— 건너뛴다</span>' : '') +
+      '<br>보낼 때 실리는 칸 <b>' + submitted + ' / 3</b>' +
+      (submitted < 3 ? ' <span class="warn">— 값이 서버로 안 간다</span>' : '') +
+      '<br>왜 못 고치는지 <b>' + (k === 'aria' ? '적혀 있다' : '적혀 있다') + '</b>' +
+      (why ? '<br>' + why : '');
+    rd.dataset.kind = k;
+    rd.dataset.focusable = String(focusable);
+    rd.dataset.submitted = String(submitted);
+  }
+
+  document.getElementById('tab').addEventListener('click', function () {
+    var els = FIELDS.map(function (id) { return document.getElementById(id); })
+      .filter(function (el) { return !el.disabled; });
+    var seen = [], i = 0;
+    (function step() {
+      if (i >= els.length) {
+        document.getElementById('log').innerHTML = 'Tab 이 <b>' + seen.length + '번</b> 멈췄다 — ' + seen.join(' → ');
+        document.getElementById('read').dataset.seen = String(seen.length);
+        return;
+      }
+      els[i].focus();
+      seen.push(els[i].previousElementSibling ? els[i].previousElementSibling.textContent : els[i].id);
+      i++;
+      setTimeout(step, 170);
+    })();
+  });
+
+  document.getElementById('submit').addEventListener('click', function () {
+    var sent = FIELDS.filter(function (id) { return !document.getElementById(id).disabled; })
+      .map(function (id) { return document.getElementById(id).value; });
+    document.getElementById('log').innerHTML = '보낸 값 <b>' + sent.length + '개</b> — ' +
+      sent.map(function (v) { return '‘' + v + '’'; }).join(', ') +
+      (sent.length < 3 ? ' <span class="warn">· 사업자번호·계좌가 빠졌다</span>' : '');
+    document.getElementById('read').dataset.sent = String(sent.length);
+  });
+
+  document.getElementById('k').addEventListener('change', function () { draw(''); });
+  draw('');
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>여러 줄 입력 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>여러 줄 입력</b>
+  <label><input type="checkbox" id="grow" checked> 내용만큼 늘어나기</label>
+  <label><input type="checkbox" id="count" checked> 남은 글자 수 보이기</label>
+  <label><input type="checkbox" id="hard"> 넘치면 아예 못 치게</label>
+  <label><input type="checkbox" id="enter"> Enter 로 보내기</label>
+</div>
+
+<div class="pad">
+  <div class="ta">
+    <label for="t" style="font-size:12.5px">정산 메모</label>
+    <textarea id="t" rows="3" maxlength="" aria-describedby="cnt"
+      placeholder="이번 주 정산에서 특별히 적어 둘 것이 있으면 쓰세요"></textarea>
+    <span class="cnt" id="cnt"></span>
+    <button class="ui-btn ui-btn--ghost" id="pasteBtn" style="justify-self:start;min-height:30px;padding:4px 11px;font-size:12.5px">160자짜리 글 붙여넣기</button>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  여러 줄 칸에서 가장 자주 틀리는 것은 <b>넘쳤을 때</b>입니다.
+  '<b>160자짜리 글 붙여넣기</b>'를 눌러 보세요 — '아예 못 치게'를 켜면
+  <b>붙여넣은 글이 소리 없이 잘립니다</b>. 데모가 <b>잘려 나간 글자 수</b>를 세서 적습니다.
+  넘치더라도 <b>치게 두고 빨갛게 알리는</b> 쪽이 고치기 쉽습니다.<br>
+  <b>내용만큼 늘어나기</b>를 켜면 줄이 늘 때 칸도 같이 커집니다 —
+  데모가 지금 높이를 재서 적습니다. 끄면 작은 창 안에서 굴려야 합니다.<br>
+  <b>Enter 로 보내기</b>는 메신저의 관습입니다. 메모 칸에 그걸 켜면
+  <b>줄바꿈을 못 하게</b> 됩니다 — 둘은 같이 쓸 수 없습니다.
+</p>
+
+<script>
+(function () {
+  var LIMIT = 140, cut = 0, sent = 0;
+
+  function draw(why) {
+    var t = document.getElementById('t');
+    var grow = document.getElementById('grow').checked;
+    var showCount = document.getElementById('count').checked;
+    var hard = document.getElementById('hard').checked;
+
+    if (hard) t.setAttribute('maxlength', String(LIMIT));
+    else t.removeAttribute('maxlength');
+    if (grow) {
+      t.style.height = 'auto';
+      t.style.height = Math.min(220, t.scrollHeight) + 'px';
+    } else {
+      t.style.height = '';
+    }
+
+    var len = t.value.length;
+    var left = LIMIT - len;
+    var c = document.getElementById('cnt');
+    c.textContent = showCount ? (left >= 0 ? left + '자 남음' : (-left) + '자 넘음') : '';
+    c.classList.toggle('over', left < 0);
+    t.style.borderColor = left < 0 ? 'var(--danger)' : '';
+
+    var h = Math.round(t.getBoundingClientRect().height);
+    var rd = document.getElementById('read');
+    rd.innerHTML = '친 글자 <b>' + len + ' / ' + LIMIT + '</b>' +
+      (left < 0 ? ' <span class="warn">— ' + (-left) + '자 넘음</span>' : '') +
+      '<br>칸 높이 <b>' + h + 'px</b> · ' + (grow ? '내용만큼 늘어난다' : '<b>고정</b>') +
+      '<br>잘려 나간 글자 <b>' + cut + '자</b>' +
+      (cut ? ' <span class="warn">— 소리 없이 사라졌다</span>' : '') +
+      '<br>Enter 로 보내기 <b>' + (document.getElementById('enter').checked ? '켬' : '끔') + '</b>' +
+      (document.getElementById('enter').checked ? ' <span class="warn">— 줄바꿈을 못 한다</span>' : '') +
+      (sent ? ' · 보낸 횟수 ' + sent : '') +
+      (why ? '<br>' + why : '');
+    rd.dataset.len = String(len);
+    rd.dataset.h = String(h);
+    rd.dataset.cut = String(cut);
+    rd.dataset.grow = grow ? '1' : '0';
+    rd.dataset.over = left < 0 ? '1' : '0';
+    rd.dataset.count = showCount ? '1' : '0';
+  }
+
+  document.getElementById('t').addEventListener('input', function () { draw(''); });
+  document.getElementById('pasteBtn').addEventListener('click', function () {
+    var t = document.getElementById('t');
+    var text = 'ㄱ'.repeat(160);
+    var hard = document.getElementById('hard').checked;
+    if (hard) {
+      cut += text.length - LIMIT;          // 한도만큼만 들어가고 나머지는 사라진다
+      t.value = text.slice(0, LIMIT);
+      draw('<span class="warn">붙여넣은 글이 잘렸다</span> — 아무 말도 없이');
+      document.getElementById('log').innerHTML = '<span class="warn">' + (text.length - LIMIT) + '자가 사라졌다</span>';
+    } else {
+      t.value = text;
+      draw('');
+      document.getElementById('log').innerHTML = '다 들어갔다 — <b>넘쳤다고 알려만</b> 준다';
+    }
+  });
+  document.getElementById('t').addEventListener('paste', function (e) {
+    if (!document.getElementById('hard').checked) return;
+    var text = (e.clipboardData || window.clipboardData).getData('text');
+    var room = LIMIT - this.value.length;
+    if (text.length > room) {
+      cut += text.length - Math.max(0, room);
+      setTimeout(function () {
+        draw('<span class="warn">붙여넣은 글이 잘렸다</span> — 아무 말도 없이');
+        document.getElementById('log').innerHTML = '<span class="warn">' + cut + '자가 사라졌다</span>';
+      }, 10);
+    }
+  });
+  document.getElementById('t').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey && document.getElementById('enter').checked) {
+      e.preventDefault();
+      sent++;
+      draw('');
+      document.getElementById('log').innerHTML = '<b>Enter</b> 로 보냈다 — 줄바꿈은 Shift+Enter 로';
+    }
+  });
+  ['grow', 'count', 'hard', 'enter'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', function () { cut = 0; draw(''); });
+  });
+  draw('');
+})();
+</script>
+</body>
+</html>

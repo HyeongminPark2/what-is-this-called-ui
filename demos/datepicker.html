@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>날짜 선택기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>날짜 선택기</b>
+  <label><input type="checkbox" id="typing" checked> 쳐서도 넣을 수 있게</label>
+  <label><input type="checkbox" id="limit" checked> 못 고르는 날을 막기</label>
+  <label><input type="checkbox" id="shortcut" checked> 자주 쓰는 날 단추</label>
+</div>
+
+<div class="pad">
+  <div style="display:grid;gap:9px;max-width:320px">
+    <label style="display:grid;gap:4px;font-size:12.5px">정산 시작일
+      <input class="ui-input" id="typed" value="2026-11-12" inputmode="numeric" style="min-height:34px;font-size:13px;font-variant-numeric:tabular-nums"></label>
+    <div id="quick" style="display:flex;gap:5px;flex-wrap:wrap"></div>
+    <div class="dpk">
+      <div class="dpk__head">
+        <button id="prev" aria-label="이전 달">‹</button>
+        <b id="title" style="font-size:12.5px"></b>
+        <button id="next" aria-label="다음 달" style="margin-left:auto">›</button>
+      </div>
+      <div class="dpk__grid" id="grid" role="grid" aria-label="날짜 고르기"></div>
+    </div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  달력만 두면 <b>먼 날짜를 고를 때 몇 번이나 넘겨야</b> 합니다 —
+  데모가 지금 고른 날까지 <b>달을 몇 번 넘겨야 하는지</b>를 세서 적습니다.
+  그래서 <b>쳐서 넣는 칸</b>을 같이 두는 것이 거의 늘 낫습니다.<br>
+  <b>자주 쓰는 날 단추</b>(오늘 · 어제 · 지난주)는 대부분의 경우를 한 번에 끝냅니다.<br>
+  지난 정산 기간(11월 10일 이전)은 <b>흐리게 두고 막아야</b> 합니다 — 누를 수 있게 두면
+  고른 뒤에 '안 된다'는 말을 듣게 됩니다. 데모가 막힌 날 수를 셉니다.
+</p>
+
+<script>
+(function () {
+  var TODAY = new Date(2026, 10, 14);           // 2026-11-14
+  var MIN = new Date(2026, 10, 10);             // 11월 10일 이전은 지난 정산 기간이라 못 고름
+  var view = new Date(2026, 10, 1);
+  var sel = new Date(2026, 10, 12);
+  var moves = 0;
+
+  function ymd(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+
+  function draw() {
+    var limit = document.getElementById('limit').checked;
+    document.getElementById('title').textContent = view.getFullYear() + '년 ' + (view.getMonth() + 1) + '월';
+    document.getElementById('typed').disabled = !document.getElementById('typing').checked;
+
+    document.getElementById('quick').innerHTML = document.getElementById('shortcut').checked
+      ? [['오늘', 0], ['어제', -1], ['7일 전', -7], ['이번 달 1일', 'm1']].map(function (q) {
+          return '<button class="ui-btn ui-btn--ghost" data-q="' + q[1] + '" style="min-height:28px;padding:3px 9px;font-size:11.5px">' + q[0] + '</button>';
+        }).join('')
+      : '';
+
+    var first = new Date(view.getFullYear(), view.getMonth(), 1);
+    var start = first.getDay();
+    var days = new Date(view.getFullYear(), view.getMonth() + 1, 0).getDate();
+    var html = ['일', '월', '화', '수', '목', '금', '토'].map(function (d, i) {
+      return '<span class="dow' + (i === 0 ? ' sun' : '') + '">' + d + '</span>';
+    }).join('');
+    for (var i = 0; i < start; i++) html += '<span></span>';
+    var blocked = 0;
+    for (var d = 1; d <= days; d++) {
+      var date = new Date(view.getFullYear(), view.getMonth(), d);
+      var off = limit && date < MIN;
+      if (off) blocked++;
+      html += '<button data-d="' + ymd(date) + '"' +
+        (off ? ' disabled aria-disabled="true"' : '') +
+        (ymd(date) === ymd(sel) ? ' aria-selected="true"' : '') +
+        (ymd(date) === ymd(TODAY) ? ' aria-current="date"' : '') +
+        ' class="' + (date.getDay() === 0 ? 'sun' : '') + '">' + d + '</button>';
+    }
+    document.getElementById('grid').innerHTML = html;
+
+    // 지금 보고 있는 달에서 고른 날까지 몇 번 넘겨야 하나
+    var dist = Math.abs((sel.getFullYear() - view.getFullYear()) * 12 + (sel.getMonth() - view.getMonth()));
+    var rd = document.getElementById('read');
+    rd.innerHTML = '고른 날 <b>' + ymd(sel) + '</b> · 보고 있는 달 <b>' + (view.getMonth() + 1) + '월</b>' +
+      '<br>지금까지 달을 넘긴 횟수 <b>' + moves + '번</b>' +
+      (moves >= 3 ? ' <span class="warn">— 쳐서 넣는 쪽이 빠르다</span>' : '') +
+      '<br>막힌 날 <b>' + blocked + '일</b>' + (limit ? '' : ' <span class="warn">— 못 고르는 날도 눌린다</span>') +
+      '<br>쳐서 넣기 <b>' + (document.getElementById('typing').checked ? '된다' : '안 된다') + '</b>' +
+      ' · 자주 쓰는 날 단추 <b>' + (document.getElementById('shortcut').checked ? '있다' : '없다') + '</b>';
+    rd.dataset.sel = ymd(sel);
+    rd.dataset.moves = String(moves);
+    rd.dataset.blocked = String(blocked);
+    rd.dataset.typing = document.getElementById('typing').checked ? '1' : '0';
+    rd.dataset.quick = document.getElementById('shortcut').checked ? '1' : '0';
+    rd.dataset.dist = String(dist);
+  }
+
+  document.getElementById('grid').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-d]');
+    if (!b || b.disabled) return;
+    sel = new Date(b.dataset.d);
+    document.getElementById('typed').value = b.dataset.d;
+    draw();
+    document.getElementById('log').innerHTML = '<b>' + b.dataset.d + '</b> 을 골랐다';
+  });
+
+  document.getElementById('quick').addEventListener('click', function (e) {
+    var q = e.target.closest('[data-q]');
+    if (!q) return;
+    var v = q.dataset.q;
+    if (v === 'm1') sel = new Date(TODAY.getFullYear(), TODAY.getMonth(), 1);
+    else { sel = new Date(TODAY); sel.setDate(sel.getDate() + (+v)); }
+    view = new Date(sel.getFullYear(), sel.getMonth(), 1);
+    document.getElementById('typed').value = ymd(sel);
+    draw();
+    document.getElementById('log').innerHTML = '<b>' + q.textContent + '</b> 으로 한 번에 골랐다';
+  });
+
+  document.getElementById('typed').addEventListener('change', function () {
+    var d = new Date(this.value);
+    if (isNaN(d)) { document.getElementById('log').innerHTML = '<span class="warn">날짜로 못 읽었다</span> — 2026-11-12 처럼 적는다'; return; }
+    sel = d; view = new Date(d.getFullYear(), d.getMonth(), 1);
+    draw();
+    document.getElementById('log').innerHTML = '<b>쳐서</b> 넣었다 — 달을 안 넘겨도 된다';
+  });
+
+  document.getElementById('prev').addEventListener('click', function () {
+    view = new Date(view.getFullYear(), view.getMonth() - 1, 1); moves++; draw();
+  });
+  document.getElementById('next').addEventListener('click', function () {
+    view = new Date(view.getFullYear(), view.getMonth() + 1, 1); moves++; draw();
+  });
+  ['typing', 'limit', 'shortcut'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', draw);
+  });
+  draw();
+})();
+</script>
+</body>
+</html>
