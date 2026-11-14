@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>뒤로가기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 480px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>뒤로가기</b>
+  <label>들어온 길 <select class="sel" id="path" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="list">목록에서 눌러서</option>
+    <option value="search">검색 결과에서</option>
+    <option value="link">받은 링크로 바로</option>
+  </select></label>
+  <label>단추가 하는 일 <select class="sel" id="kind" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="back">뒤로(기록)</option>
+    <option value="up">위로(상위)</option>
+  </select></label>
+</div>
+
+<div class="pad">
+  <div class="bkn__screen">
+    <div class="bkn__bar">
+      <button class="ui-btn ui-btn--ghost" id="go" style="min-height:30px;padding:4px 10px">‹ <span id="label"></span></button>
+      <b id="title" style="font-size:13px"></b>
+    </div>
+    <div class="bkn__body">
+      <span id="where"></span>
+      <div class="bkn__hist" id="hist"></div>
+    </div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  같은 화면이라도 <b>어떻게 들어왔는지</b>에 따라 '뒤로'가 데려가는 곳이 달라집니다.
+  받은 링크로 바로 들어오면 기록에 앞 화면이 없어 <b>갈 데가 없습니다</b> —
+  데모가 기록을 들고 있다가 그 경우를 짚어 줍니다.<br>
+  <b>위로</b>는 다릅니다. 기록과 상관없이 <b>늘 상위 화면</b>(주문 상세 → 주문 목록)으로 갑니다.
+  그래서 링크로 들어온 사람에게도 갈 곳이 있습니다.<br>
+  둘을 섞어 쓰면 '뒤로를 눌렀는데 엉뚱한 데로 간다'가 됩니다 — 단추 하나에 하나만 맡깁니다.
+</p>
+
+<script>
+(function () {
+  var PATHS = {
+    list: { stack: ['홈', '주문 목록', '주문 상세'], label: '주문 목록' },
+    search: { stack: ['홈', '검색 결과', '주문 상세'], label: '검색 결과' },
+    link: { stack: ['주문 상세'], label: '' }
+  };
+  var UP = '주문 목록';
+
+  function draw() {
+    var p = document.getElementById('path').value;
+    var kind = document.getElementById('kind').value;
+    var st = PATHS[p].stack;
+    var prev = st.length > 1 ? st[st.length - 2] : null;
+    var dest = kind === 'back' ? prev : UP;
+    var dead = kind === 'back' && !prev;
+
+    document.getElementById('title').textContent = '주문 상세';
+    document.getElementById('label').textContent = dead ? '갈 데 없음' : dest;
+    document.getElementById('go').disabled = dead;
+    document.getElementById('where').innerHTML = '지금 <b>주문 상세</b> — ' +
+      ({ list: '목록에서 눌러', search: '검색 결과에서 눌러', link: '받은 링크로 바로' }[p]) + ' 들어왔다';
+    document.getElementById('hist').innerHTML = st.map(function (s, i) {
+      return '<span' + (i === st.length - 1 ? ' class="now"' : '') + '>' + s + '</span>';
+    }).join('');
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '기록 <b>' + st.length + '칸</b> · 단추는 <b>' + (kind === 'back' ? '뒤로(기록)' : '위로(상위)') + '</b>' +
+      '<br>누르면 가는 곳 <b>' + (dead ? '없다' : dest) + '</b>' +
+      (dead ? ' <span class="warn">— 링크로 들어오면 기록에 앞이 없다</span>' : '') +
+      (kind === 'back' && prev && prev !== UP ? ' <span class="warn">— 상위가 아니라 들어온 길로 간다</span>' : '');
+    rd.dataset.dest = dead ? '' : dest;
+    rd.dataset.dead = dead ? '1' : '0';
+    rd.dataset.stack = String(st.length);
+  }
+
+  document.getElementById('go').addEventListener('click', function () {
+    var dest = document.getElementById('read').dataset.dest;
+    document.getElementById('log').innerHTML = '<b>' + dest + '</b> 로 갔다';
+    document.getElementById('log').dataset.went = dest;
+  });
+  ['path', 'kind'].forEach(function (id) { document.getElementById(id).addEventListener('change', draw); });
+  draw();
+})();
+</script>
+</body>
+</html>

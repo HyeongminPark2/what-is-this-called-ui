@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>트리뷰 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hold { border: 1px dashed var(--fg-muted); border-radius: var(--r2); padding: 8px; width: 210px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>트리뷰</b>
+  <label>들여쓰기 <input type="range" id="ind" min="8" max="28" step="4" value="16" style="width:84px"><span class="ruler" id="indv"></span></label>
+  <label><input type="checkbox" id="deep"> 깊은 가지까지 펼치기</label>
+  <button class="ui-btn ui-btn--ghost" id="kb">키보드로 훑어보기</button>
+</div>
+
+<div class="pad">
+  <div class="hold">
+    <div class="tv" id="tv" role="tree" aria-label="분류"></div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  트리는 깊어질수록 <b>들여쓰기가 폭을 먹습니다</b> — 데모가 가장 깊은 줄에 남은
+  이름 자리를 재서 적습니다. 들여쓰기를 키우거나 가지를 더 펼치면 이름이 먼저 잘립니다.
+  <b>깊이 세 단</b>을 넘기면 트리가 아니라 다른 길 안내가 맞습니다.<br>
+  트리는 <b>목록이 아니라 트리로 읽혀야</b> 합니다 — <code>role="tree"</code> ·
+  <code>treeitem</code> · <code>aria-expanded</code> 를 쓰고, 화살표 키로 펴고 접습니다.
+  '키보드로 훑어보기'를 누르면 ↓ 로 내려가며 간 차례가 적힙니다.
+</p>
+
+<script>
+(function () {
+  var DATA = [
+    ['의류', [
+      ['아우터', [['패딩', []], ['코트', []]]],
+      ['상의', [['티셔츠', [['반팔 티셔츠', [['기능성 반팔 티셔츠', []]]]]], ['셔츠', []]]]
+    ]],
+    ['생활용품', [['주방', [['냄비', []]]], ['욕실', []]]]
+  ];
+  var open = { '의류': 1, '의류/상의': 1 };
+  var sel = '의류/아우터';
+
+  function render(nodes, path, depth) {
+    var ind = +document.getElementById('ind').value;
+    var out = '<ul role="group">';
+    nodes.forEach(function (n) {
+      var p = path ? path + '/' + n[0] : n[0];
+      var has = n[1].length > 0;
+      var isOpen = !!open[p];
+      out += '<li role="none">' +
+        '<div class="tv__r" role="treeitem" tabindex="-1" data-p="' + p + '" data-d="' + depth + '"' +
+        (has ? ' aria-expanded="' + isOpen + '"' : '') +
+        ' aria-selected="' + (sel === p) + '" aria-level="' + (depth + 1) + '">' +
+        '<span class="tv__tw">' + (has ? (isOpen ? '▾' : '▸') : '') + '</span>' +
+        '<span class="tv__nm">' + n[0] + '</span></div>';
+      if (has && isOpen) out += render(n[1], p, depth + 1);
+      out += '</li>';
+    });
+    return out + '</ul>';
+  }
+
+  function draw() {
+    var ind = +document.getElementById('ind').value;
+    document.getElementById('indv').textContent = ind + 'px';
+    document.getElementById('tv').style.setProperty('--ind', ind + 'px');
+    document.getElementById('tv').innerHTML = render(DATA, '', 0);
+    [].forEach.call(document.querySelectorAll('.tv ul ul'), function (u) { u.style.paddingLeft = ind + 'px'; });
+
+    // 이름 자리가 얼마나 남았나 — 가장 깊은 줄을 재서 적는다
+    var rows = [].slice.call(document.querySelectorAll('.tv__r'));
+    var deepest = rows.reduce(function (a, b) { return (+b.dataset.d > +a.dataset.d) ? b : a; }, rows[0]);
+    var nm = deepest.querySelector('.tv__nm');
+    var left = Math.round(nm.clientWidth);
+    var want = Math.round(nm.scrollWidth);
+    var cut = 0;
+    rows.forEach(function (row) {
+      var el = row.querySelector('.tv__nm');
+      var bad = el.scrollWidth > el.clientWidth + 0.5;
+      row.classList.toggle('tight', bad);
+      if (bad) cut++;
+    });
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '가장 깊은 줄 — 깊이 <b>' + (+deepest.dataset.d + 1) + '단</b> · 이름 자리 <b>' + left + 'px</b>' +
+      ' (필요한 폭 ' + want + 'px)' + (cut ? ' <span class="warn">— ' + cut + '줄이 잘렸다</span>' : '');
+    rd.dataset.left = String(left);
+    rd.dataset.cut = String(cut);
+    rd.dataset.depth = String(+deepest.dataset.d + 1);
+    rd.dataset.tree = String(document.querySelectorAll('[role=treeitem]').length);
+  }
+
+  document.getElementById('tv').addEventListener('click', function (e) {
+    var row = e.target.closest('.tv__r');
+    if (!row) return;
+    var p = row.dataset.p;
+    sel = p;
+    if (row.hasAttribute('aria-expanded')) open[p] = !open[p];
+    draw();
+    document.getElementById('log').innerHTML = '<b>' + p.split('/').pop() + '</b> — ' +
+      (row.getAttribute('aria-expanded') === 'true' ? '접었다' : '폈다');
+  });
+
+  document.getElementById('tv').addEventListener('keydown', function (e) {
+    var row = e.target.closest('.tv__r');
+    if (!row) return;
+    var rows = [].slice.call(document.querySelectorAll('.tv__r'));
+    var i = rows.indexOf(row);
+    if (e.key === 'ArrowDown' && rows[i + 1]) { rows[i + 1].focus(); e.preventDefault(); }
+    if (e.key === 'ArrowUp' && rows[i - 1]) { rows[i - 1].focus(); e.preventDefault(); }
+    if (e.key === 'ArrowRight' && row.getAttribute('aria-expanded') === 'false') { open[row.dataset.p] = 1; draw(); e.preventDefault(); }
+    if (e.key === 'ArrowLeft' && row.getAttribute('aria-expanded') === 'true') { open[row.dataset.p] = 0; draw(); e.preventDefault(); }
+  });
+
+  document.getElementById('deep').addEventListener('change', function () {
+    if (this.checked) {
+      open['의류/상의'] = 1; open['의류/상의/티셔츠'] = 1; open['의류/상의/티셔츠/반팔 티셔츠'] = 1;
+    } else {
+      open['의류/상의/티셔츠'] = 0; open['의류/상의/티셔츠/반팔 티셔츠'] = 0;
+    }
+    draw();
+  });
+  document.getElementById('ind').addEventListener('input', draw);
+
+  document.getElementById('kb').addEventListener('click', function () {
+    var rows = [].slice.call(document.querySelectorAll('.tv__r'));
+    rows[0].setAttribute('tabindex', '0');
+    rows[0].focus();
+    var seen = [rows[0].dataset.p.split('/').pop()];
+    var i = 0;
+    (function step() {
+      if (i >= Math.min(rows.length, 5) - 1) {
+        var el = document.getElementById('log');
+        el.innerHTML = '↓ 로 간 차례 — <b>' + seen.join(' → ') + '</b>';
+        el.dataset.seen = seen.join(',');
+        return;
+      }
+      i++;
+      rows[i].focus();
+      seen.push(document.activeElement.dataset.p.split('/').pop());
+      setTimeout(step, 170);
+    })();
+  });
+
+  draw();
+})();
+</script>
+</body>
+</html>

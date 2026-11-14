@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>스테퍼 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hold { border: 1px dashed var(--fg-muted); border-radius: var(--r2); padding: 9px; max-width: 420px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>스테퍼</b>
+  <label>폭 <select class="sel" id="w" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="420">420px</option>
+    <option value="320">320px</option>
+    <option value="260">260px</option>
+  </select></label>
+  <label><input type="checkbox" id="col"> 좁으면 세로로</label>
+  <label><input type="checkbox" id="free" checked> 끝낸 단계로 되돌아가기</label>
+</div>
+
+<div class="pad">
+  <div class="hold" id="hold">
+    <ol class="stp" id="stp" style="list-style:none;margin:0;padding:0"></ol>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  단계 이름은 <b>잘리면 안 됩니다</b> — 데모가 칸마다 <b>담긴 폭과 보이는 폭</b>을 견줘서
+  잘린 개수를 셉니다. 가로로 둔 채 폭을 줄이면 이름이 먼저 무너집니다.
+  '좁으면 세로로'를 켜면 같은 폭에서도 이름이 온전합니다.<br>
+  <b>끝낸 단계는 눌러서 되돌아갈 수 있어야</b> 합니다. 끄면 눌러도 안 갑니다 —
+  '배송지를 잘못 적었는데 처음부터 다시'가 벌어지는 자리입니다.<br>
+  지금 단계는 색뿐 아니라 <code>aria-current="step"</code> 으로도 알립니다.
+</p>
+
+<script>
+(function () {
+  var STEPS = [
+    ['장바구니 확인', '3건'],
+    ['배송지 입력', '모란상회'],
+    ['결제 수단', '카드'],
+    ['주문 확인', '']
+  ];
+  var cur = 2;
+
+  function draw() {
+    var w = document.getElementById('w').value;
+    var colOn = document.getElementById('col').checked;
+    var free = document.getElementById('free').checked;
+    document.getElementById('hold').style.maxWidth = w + 'px';
+    var col = colOn && +w <= 320;
+    var stp = document.getElementById('stp');
+    stp.className = 'stp' + (col ? ' col' : '');
+
+    stp.innerHTML = STEPS.map(function (s, i) {
+      var st = i < cur ? 'done' : (i === cur ? 'now' : '');
+      var can = free && i < cur;
+      return '<li class="stp__s ' + st + '" data-i="' + i + '"' +
+        (i === cur ? ' aria-current="step"' : '') + '>' +
+        '<span class="stp__n">' + (i < cur ? '✓' : (i + 1)) + '</span>' +
+        '<span class="stp__w">' +
+        (can ? '<button class="lbl" data-go="' + i + '" style="min-height:0;padding:0;border:0;background:none;text-align:inherit;cursor:pointer;color:var(--accent)">' + s[0] + '</button>'
+             : '<b>' + s[0] + '</b>') +
+        (s[1] ? '<small>' + s[1] + '</small>' : '') + '</span></li>';
+    }).join('');
+
+    // 이름이 잘렸나 — 글자가 실제로 찬 폭을 재서 칸과 견준다
+    var over = 0;
+    [].forEach.call(stp.querySelectorAll('.stp__s'), function (li) {
+      var el = li.querySelector('b') || li.querySelector('button');
+      var bad = el.scrollWidth > el.clientWidth + 0.5;
+      li.classList.toggle('over', bad);
+      if (bad) over++;
+    });
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = (col ? '세로' : '가로') + ' · 칸 <b>' + w + 'px</b> · 이름이 잘린 단계 <b>' + over + '개</b>' +
+      (over ? ' <span class="warn">— 이름을 못 읽는다</span>' : '') +
+      '<br>지금 단계 <b>' + STEPS[cur][0] + '</b> · 되돌아갈 수 있는 단계 <b>' +
+      (free ? cur : 0) + '개</b>';
+    rd.dataset.over = String(over);
+    rd.dataset.col = col ? '1' : '0';
+    rd.dataset.cur = String(cur);
+    rd.dataset.back = String(free ? cur : 0);
+    rd.dataset.aria = String(stp.querySelectorAll('[aria-current="step"]').length);
+  }
+
+  document.getElementById('stp').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-go]');
+    if (!b) return;
+    cur = +b.dataset.go;
+    draw();
+    document.getElementById('log').innerHTML = '<b>' + STEPS[cur][0] + '</b> 로 돌아갔다 — 적은 값은 그대로다';
+  });
+  ['w'].forEach(function (id) { document.getElementById(id).addEventListener('change', draw); });
+  ['col', 'free'].forEach(function (id) { document.getElementById(id).addEventListener('change', draw); });
+  draw();
+})();
+</script>
+</body>
+</html>

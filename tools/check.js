@@ -217,7 +217,8 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     '6부': ['modal', 'dialog', 'sheet', 'drawer', 'popover', 'tooltip', 'toast'],
     '3부': ['weight', 'lineheight', 'letterspacing', 'hangul', 'numerals', 'truncate', 'webfont', 'hierarchy', 'casing', 'iconfont'],
     '4부': ['field', 'select', 'combobox', 'checkbox', 'radio', 'switch', 'segmented', 'slider'],
-    '7부': ['appbar', 'sidebar', 'tabs', 'breadcrumb', 'pagination', 'infinite', 'bottomnav'],
+    '7부': ['appbar', 'sidebar', 'tabs', 'breadcrumb', 'pagination', 'infinite', 'bottomnav',
+            'stepper', 'treeview', 'anchornav', 'backnav', 'megamenu'],
     '8부': ['spinner', 'skeleton', 'progress', 'optimistic', 'empty', 'error'],
     '10부': ['table', 'filter', 'search', 'form', 'validation', 'bulk', 'virtual', 'chart', 'exportdata', 'daterange'],
     '9부': ['easing', 'duration', 'enterexit', 'cheap', 'spring', 'stagger', 'gesture', 'reducedmotion', 'sharedelement', 'scrolllink'],
@@ -2232,6 +2233,80 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   if (await page.getAttribute('#verdict', 'data-mine') !== 'bad') fail.push('토큰이름: 넣은 나쁜 이름을 통과시킨다');
   await page.check('#dark'); await page.waitForTimeout(320);
   if (await page.locator('#lie').isHidden()) fail.push('토큰이름: 어두운 모드에서 이름이 거짓이 된다고 안 보여 준다');
+  await page.close();
+
+  // 7부 길 안내 데모 다섯 장 — 잘림·깊이·가림·기록·대각선을 잰다
+  page = await demo('stepper', 980, 900);
+  if (await page.getAttribute('#read', 'data-aria') !== '1') fail.push('스테퍼: 지금 단계에 aria-current 가 하나가 아니다');
+  if (await page.getAttribute('#read', 'data-over') !== '0') fail.push('스테퍼: 넉넉한 폭에서 이름이 잘린다');
+  await page.selectOption('#w', '260'); await page.waitForTimeout(340);
+  if (!(+(await page.getAttribute('#read', 'data-over')) > 0))
+    fail.push('스테퍼: 좁혀도 이름이 안 잘린다 (보여주려는 결과)');
+  await page.check('#col'); await page.waitForTimeout(340);
+  if (await page.getAttribute('#read', 'data-over') !== '0') fail.push('스테퍼: 세로로 둬도 이름이 잘린다');
+  await page.locator('[data-go="0"]').click(); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-cur') !== '0') fail.push('스테퍼: 끝낸 단계를 눌러도 안 돌아간다');
+  await page.uncheck('#free'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-back') !== '0')
+    fail.push('스테퍼: 되돌아가기를 꺼도 길이 남아 있다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('treeview', 980, 900);
+  if (await page.locator('[role=tree]').count() !== 1) fail.push('트리뷰: role=tree 가 없다');
+  if (await page.getAttribute('#read', 'data-cut') !== '0') fail.push('트리뷰: 얕은데도 이름이 잘린다');
+  {
+    const left0 = +(await page.getAttribute('#read', 'data-left'));
+    await page.check('#deep'); await page.waitForTimeout(380);
+    const left1 = +(await page.getAttribute('#read', 'data-left'));
+    if (!(left1 < left0)) fail.push('트리뷰: 깊이 펼쳐도 이름 자리가 안 줄어든다');
+    if (!(+(await page.getAttribute('#read', 'data-cut')) > 0))
+      fail.push('트리뷰: 깊어져도 이름이 안 잘린다 (보여주려는 결과)');
+  }
+  await page.locator('#kb').click(); await page.waitForTimeout(1150);
+  if (!((await page.getAttribute('#log', 'data-seen') || '').split(',').length >= 4))
+    fail.push('트리뷰: ↓ 로 줄을 못 내려간다');
+  await page.close();
+
+  page = await demo('anchornav', 980, 900);
+  await page.locator('.anv__list a[data-s="s3"]').click(); await page.waitForTimeout(430);
+  if (await page.getAttribute('#read', 'data-under') !== '1')
+    fail.push('앵커내비: 고정 머리가 있는데 제목이 안 가려진다 (보여주려는 결과)');
+  await page.check('#margin'); await page.waitForTimeout(260);
+  await page.locator('.anv__list a[data-s="s4"]').click(); await page.waitForTimeout(430);
+  if (await page.getAttribute('#read', 'data-under') !== '0') fail.push('앵커내비: scroll-margin-top 이 안 먹는다');
+  if (!((await page.getAttribute('#read', 'data-on') || '').length > 0)) fail.push('앵커내비: 보는 절을 안 밝힌다');
+  await page.uncheck('#spy'); await page.waitForTimeout(260);
+  if (await page.locator('.anv__list a.on').count() !== 0)
+    fail.push('앵커내비: 꺼도 절이 밝혀져 있다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('backnav', 980, 900);
+  if (await page.getAttribute('#read', 'data-dest') !== '주문 목록') fail.push('뒤로가기: 목록에서 들어왔는데 목록으로 안 간다');
+  await page.selectOption('#path', 'search'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-dest') !== '검색 결과') fail.push('뒤로가기: 들어온 길이 달라도 같은 곳으로 간다');
+  await page.selectOption('#path', 'link'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-dead') !== '1')
+    fail.push('뒤로가기: 링크로 들어왔는데 갈 데가 있다고 한다 (보여주려는 결과)');
+  if (!await page.locator('#go').isDisabled()) fail.push('뒤로가기: 갈 데가 없는데 단추가 켜져 있다');
+  await page.selectOption('#kind', 'up'); await page.waitForTimeout(300);
+  if (await page.getAttribute('#read', 'data-dest') !== '주문 목록') fail.push('뒤로가기: 위로가 상위로 안 간다');
+  await page.close();
+
+  page = await demo('megamenu', 980, 900);
+  if (await page.getAttribute('#read', 'data-open') !== '-1') fail.push('메가메뉴: 처음부터 열려 있다');
+  await page.locator('.mm__bar button[data-m="0"]').hover(); await page.waitForTimeout(380);
+  if (await page.getAttribute('#read', 'data-open') !== '0') fail.push('메가메뉴: 닿아도 안 열린다');
+  await page.selectOption('#k', 'hover'); await page.waitForTimeout(260);
+  await page.locator('#run').click(); await page.waitForTimeout(1450);
+  if (!(+(await page.getAttribute('#log', 'data-breaks')) > 0))
+    fail.push('메가메뉴: 바로 열기인데 대각선에서 안 끊긴다 (보여주려는 결과)');
+  await page.selectOption('#k', 'delay'); await page.waitForTimeout(260);
+  await page.locator('#run').click(); await page.waitForTimeout(1450);
+  if (await page.getAttribute('#log', 'data-breaks') !== '0') fail.push('메가메뉴: 늦춰도 스쳐 지나가면 끊긴다');
+  await page.selectOption('#k', 'click'); await page.waitForTimeout(260);
+  await page.locator('.mm__bar button[data-m="1"]').click(); await page.waitForTimeout(260);
+  if (await page.getAttribute('.mm__bar button[data-m="1"]', 'aria-expanded') !== 'true')
+    fail.push('메가메뉴: 열렸다고 안 알린다');
   await page.close();
 
   await browser.close();

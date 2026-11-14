@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>메가 메뉴 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 520px; }
+  .stageo { position: relative; padding-bottom: 170px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>메가 메뉴</b>
+  <label>여는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="hover">마우스가 닿으면 바로</option>
+    <option value="delay" selected>닿고 100ms 뒤 · 떠나고 300ms 뒤 닫기</option>
+    <option value="click">눌러야 열림</option>
+  </select></label>
+  <button class="ui-btn ui-btn--ghost" id="run">대각선으로 가 보기</button>
+</div>
+
+<div class="pad">
+  <div class="stageo">
+    <div class="mm" id="mm">
+      <div class="mm__bar" id="mmbar">
+        <button data-m="0">의류</button><button data-m="1">생활용품</button><button data-m="2">식품</button>
+      </div>
+      <div class="mm__panel" id="panel" hidden></div>
+    </div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  머리글자에 마우스를 올리면 패널이 열립니다. 메가 메뉴의 고질병은 <b>대각선</b>입니다 —
+  머리글자에서 패널 오른쪽 아래 항목으로 곧장 가면 손이 <b>옆 머리글자 위를 스쳐</b>
+  메뉴가 바뀌어 버립니다. 가려던 항목이 그 자리에서 사라집니다.
+  '대각선으로 가 보기'는 그 경로를 흉내 내 <b>가는 길에 몇 번 끊겼는지</b> 셉니다.<br>
+  <b>열기를 100ms 늦추고 닫기를 300ms 늦추면</b> 스쳐 지나가는 손은 메뉴를 바꾸지
+  못하고, 잠깐 빈틈을 지나도 열린 채로 버팁니다 — 공짜로 고치는 가장 싼 방법입니다.<br>
+  <b>눌러야 열림</b>으로 두면 지나가는 손과 아예 상관이 없고,
+  키보드·터치에서도 같게 동작합니다.
+</p>
+
+<script>
+(function () {
+  var MENUS = [
+    [['아우터', ['패딩', '코트', '바람막이']], ['상의', ['티셔츠', '셔츠', '니트']], ['하의', ['청바지', '슬랙스']]],
+    [['주방', ['냄비', '프라이팬']], ['욕실', ['수건', '세면대']], ['청소', ['걸레', '세제']]],
+    [['신선', ['채소', '과일']], ['가공', ['통조림', '면류']], ['음료', ['생수', '커피']]]
+  ];
+  var openIdx = -1, breaks = 0, running = false, enterT = null, leaveT = null;
+
+  function paint() {
+    var panel = document.getElementById('panel');
+    [].forEach.call(document.querySelectorAll('.mm__bar button'), function (b, i) {
+      b.classList.toggle('on', i === openIdx);
+      b.setAttribute('aria-expanded', String(i === openIdx));
+    });
+    if (openIdx < 0) { panel.hidden = true; return; }
+    panel.hidden = false;
+    panel.innerHTML = MENUS[openIdx].map(function (c) {
+      return '<div class="mm__col"><b>' + c[0] + '</b>' +
+        c[1].map(function (x) { return '<a href="#">' + x + '</a>'; }).join('') + '</div>';
+    }).join('');
+  }
+
+  function setOpen(i, why) {
+    if (openIdx === i) return;
+    // 가는 길에 열려 있던 메뉴가 닫히거나 다른 것으로 바뀌면 한 번 끊긴 것이다
+    if (running && openIdx >= 0) breaks++;
+    openIdx = i;
+    paint();
+    report(why);
+  }
+
+  function report(why) {
+    var rd = document.getElementById('read');
+    rd.innerHTML = '열린 메뉴 <b>' + (openIdx < 0 ? '없음' : ['의류', '생활용품', '식품'][openIdx]) + '</b>' +
+      ' · 가는 길에 끊긴 횟수 <b>' + breaks + '회</b>' +
+      (breaks > 0 ? ' <span class="warn">— 손이 스친 자리에서 메뉴가 바뀌었다</span>' : '') +
+      (why ? '<br>' + why : '');
+    rd.dataset.open = String(openIdx);
+    rd.dataset.breaks = String(breaks);
+    rd.dataset.mode = document.getElementById('k').value;
+  }
+
+  function mode() { return document.getElementById('k').value; }
+
+  document.getElementById('mm').addEventListener('mouseover', function (e) {
+    if (mode() === 'click') return;
+    var b = e.target.closest('.mm__bar button');
+    var inPanel = e.target.closest('.mm__panel');
+    // 머리글자를 벗어나면 열기 예약을 취소한다 — 스쳐 지나가는 손은 열지 않는다
+    if (!b) clearTimeout(enterT);
+    if (inPanel) { clearTimeout(leaveT); return; }
+    if (!b) return;
+    clearTimeout(leaveT);
+    var i = +b.dataset.m;
+    if (mode() === 'hover') setOpen(i);
+    else { clearTimeout(enterT); enterT = setTimeout(function () { setOpen(i); }, 100); }
+  });
+
+  document.getElementById('mm').addEventListener('mouseout', function (e) {
+    if (mode() === 'click') return;
+    if (e.relatedTarget && document.getElementById('mm').contains(e.relatedTarget)) return;
+    clearTimeout(enterT);
+    if (mode() === 'hover') setOpen(-1);
+    else { clearTimeout(leaveT); leaveT = setTimeout(function () { setOpen(-1); }, 300); }
+  });
+
+  document.getElementById('mmbar').addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    var i = +b.dataset.m;
+    setOpen(openIdx === i ? -1 : i, '눌러서 ' + (openIdx === i ? '닫았다' : '열었다'));
+  });
+
+  document.getElementById('k').addEventListener('change', function () {
+    breaks = 0; running = false; setOpen(-1); report('여는 법을 바꿨다');
+  });
+
+  // 대각선 경로를 흉내 낸다 — 첫 머리글자에서 패널 오른쪽 아래 항목까지 곧장
+  document.getElementById('run').addEventListener('click', function () {
+    breaks = 0; running = false;
+    var first = document.querySelector('.mm__bar button');
+    var fr = first.getBoundingClientRect();
+    setOpen(0, '의류에 닿았다');
+    running = true;
+    setTimeout(function () {
+      var panel = document.getElementById('panel');
+      var pr = panel.getBoundingClientRect();
+      var x0 = fr.left + fr.width / 2, y0 = fr.top + fr.height / 2;
+      var x1 = pr.right - 40, y1 = pr.bottom - 14;
+      var n = 14, i = 0;
+      (function step() {
+        if (i > n) {
+          running = false;
+          document.getElementById('log').innerHTML = '대각선으로 지나갔다 — 끊긴 횟수 <b>' + breaks + '회</b>';
+          document.getElementById('log').dataset.breaks = String(breaks);
+          report('대각선 경로가 끝났다');
+          return;
+        }
+        var x = x0 + (x1 - x0) * i / n, y = y0 + (y1 - y0) * i / n;
+        var el = document.elementFromPoint(x, y);
+        if (el) {
+          el.dispatchEvent(new MouseEvent('mouseover', { bubbles: true, clientX: x, clientY: y }));
+        }
+        i++;
+        setTimeout(step, 45);
+      })();
+    }, 180);
+  });
+
+  report('머리글자에 마우스를 올려 보세요');
+})();
+</script>
+</body>
+</html>
