@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>되돌리기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>되돌리기</b>
+  <label>지울 때 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="undo">바로 지우고 되돌릴 길을 준다</option>
+    <option value="confirm">지우기 전에 되묻는다</option>
+  </select></label>
+  <label>되돌릴 수 있는 시간 <input type="range" id="t" min="2" max="10" step="1" value="5" style="width:84px"><span class="ruler" id="tv"></span></label>
+</div>
+
+<div class="pad">
+  <div class="udo">
+    <div class="udo__list" id="list"></div>
+    <div class="udo__bar" id="bar" hidden>
+      <span id="msg"></span>
+      <button id="undo">되돌리기</button>
+      <span class="t" id="left"></span>
+    </div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  지우기를 다루는 길은 둘입니다 — <b>지우기 전에 되묻거나</b>, <b>바로 지우고 되돌릴 길을 주거나</b>.
+  되묻기는 <b>매번 멈춰 세웁니다</b>. 데모가 지우는 동안 <b>몇 번 멈춰 세웠는지</b> 셉니다 —
+  열 번 지우면 열 번 멈춥니다.<br>
+  되돌리기는 안 멈추는 대신 <b>시간이 지나면 끝</b>입니다. 창이 닫힌 뒤에 눌러 보면
+  데모가 <b>너무 늦은 되돌리기</b>를 셉니다. 그래서 되돌릴 수 있는 시간은
+  <b>5초 안팎</b>이 보통이고, 되돌릴 수 없는 일에는 되묻기를 씁니다.
+</p>
+
+<script>
+(function () {
+  var ITEMS = [
+    ['영수증_2411_01.jpg', false],
+    ['영수증_2411_02.jpg', false],
+    ['정산내역_11월.pdf', false],
+    ['계약서_사본.pdf', false]
+  ];
+  var pending = null, timer = null, stops = 0, undone = 0, tooLate = 0, deleted = 0;
+
+  function render() {
+    document.getElementById('list').innerHTML = ITEMS.map(function (it, i) {
+      return '<div class="udo__r' + (it[1] ? ' gone' : '') + '" data-i="' + i + '">' +
+        '<span>' + it[0] + '</span>' +
+        (it[1] ? '<span style="margin-left:auto;font-size:11px;color:var(--fg-muted)">지움</span>'
+               : '<button class="ui-btn ui-btn--ghost" data-del="' + i + '" style="min-height:26px;padding:2px 9px;font-size:11.5px">지우기</button>') +
+        '</div>';
+    }).join('');
+
+    var rd = document.getElementById('read');
+    rd.innerHTML = '지운 것 <b>' + deleted + '</b> · 되돌린 것 <b>' + undone + '</b>' +
+      '<br>멈춰 세운 횟수 <b>' + stops + '회</b>' +
+      (stops ? ' <span class="warn">— 지울 때마다 멈춘다</span>' : '') +
+      (tooLate ? '<br><span class="warn">너무 늦은 되돌리기 ' + tooLate + '회</span> — 창이 닫히면 못 되돌린다' : '');
+    rd.dataset.deleted = String(deleted);
+    rd.dataset.undone = String(undone);
+    rd.dataset.stops = String(stops);
+    rd.dataset.late = String(tooLate);
+    rd.dataset.open = pending === null ? '0' : '1';
+  }
+
+  function closeBar() {
+    clearInterval(timer);
+    pending = null;
+    document.getElementById('bar').hidden = true;
+    render();
+  }
+
+  function startUndo(i) {
+    var sec = +document.getElementById('t').value;
+    ITEMS[i][1] = true;
+    deleted++;
+    pending = i;
+    var until = Date.now() + sec * 1000;
+    document.getElementById('bar').hidden = false;
+    document.getElementById('msg').textContent = ITEMS[i][0] + ' 을 지웠습니다';
+    clearInterval(timer);
+    timer = setInterval(function () {
+      var left = Math.max(0, Math.ceil((until - Date.now()) / 1000));
+      document.getElementById('left').textContent = left + '초';
+      document.getElementById('left').dataset.left = String(left);
+      if (left <= 0) {
+        closeBar();
+        document.getElementById('log').innerHTML = '되돌릴 수 있는 시간이 <b>끝났다</b>';
+      }
+    }, 120);
+    document.getElementById('left').textContent = sec + '초';
+    render();
+  }
+
+  document.getElementById('list').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-del]');
+    if (!b) return;
+    var i = +b.dataset.del;
+    if (document.getElementById('k').value === 'confirm') {
+      stops++;
+      // 되묻기는 매번 멈춰 세운다 — 데모에서는 바로 지운 것으로 친다
+      ITEMS[i][1] = true;
+      deleted++;
+      document.getElementById('log').innerHTML = '<b>정말 지울까요?</b> 를 한 번 더 물었다 — 그리고 지웠다';
+      render();
+      return;
+    }
+    startUndo(i);
+    document.getElementById('log').innerHTML = '바로 지웠다 — <b>되돌릴 길</b>이 아래에 있다';
+  });
+
+  document.getElementById('undo').addEventListener('click', function () {
+    if (pending === null) { tooLate++; render(); return; }
+    ITEMS[pending][1] = false;
+    deleted--;
+    undone++;
+    closeBar();
+    document.getElementById('log').innerHTML = '<b>되돌렸다</b> — 파일이 돌아왔다';
+  });
+
+  document.getElementById('k').addEventListener('change', function () {
+    ITEMS.forEach(function (it) { it[1] = false; });
+    stops = 0; undone = 0; tooLate = 0; deleted = 0;
+    closeBar();
+    document.getElementById('log').innerHTML = this.value === 'confirm'
+      ? '<span class="warn">되묻기</span> — 지울 때마다 한 번씩 멈춘다'
+      : '<b>되돌리기</b> — 안 멈추는 대신 시간이 지나면 끝이다';
+  });
+  document.getElementById('t').addEventListener('input', function () {
+    document.getElementById('tv').textContent = this.value + '초';
+  });
+  document.getElementById('tv').textContent = '5초';
+  render();
+})();
+</script>
+</body>
+</html>

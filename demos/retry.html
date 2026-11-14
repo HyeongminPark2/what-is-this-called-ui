@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>재시도 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>재시도</b>
+  <label>간격 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="backoff" selected>점점 길게 (지수 백오프)</option>
+    <option value="fixed">같은 간격으로</option>
+    <option value="none">바로바로 (쉬지 않고)</option>
+  </select></label>
+  <label>서버가 돌아오는 시점 <input type="range" id="w" min="1" max="8" step="1" value="4" style="width:84px"><span class="ruler" id="wv"></span></label>
+  <button class="ui-btn" id="go">보내기</button>
+</div>
+
+<div class="pad">
+  <div class="rty">
+    <div class="rty__track" id="track"></div>
+    <div class="rty__log" id="lines"></div>
+  </div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  서버가 잠깐 죽었다 돌아온다고 칩시다. <b>보내기</b>를 누르면 재시도가 시작됩니다.
+  <b>바로바로</b> 다시 보내면 짧은 시간에 요청이 수십 번 나갑니다 —
+  데모가 <b>보낸 횟수</b>와 <b>마지막 간격</b>을 재서 적습니다.
+  죽은 서버에 몰아치면 <b>더 못 일어납니다</b>.<br>
+  <b>지수 백오프</b>는 1초 · 2초 · 4초 · 8초로 간격을 늘립니다.
+  같은 시간에 보내는 횟수가 확 줄고, 서버가 돌아오면 금세 성공합니다.<br>
+  그리고 재시도가 돌아가는 동안 <b>사람에게도 보여 줘야</b> 합니다 —
+  언제 다시 시도하는지, 지금 몇 번째인지.
+</p>
+
+<script>
+(function () {
+  var MAX = 6, timer = null, tries = [], t0 = 0, done = false;
+
+  function gap(n) {
+    var k = document.getElementById('k').value;
+    if (k === 'none') return 150;
+    if (k === 'fixed') return 1000;
+    return Math.min(8000, 1000 * Math.pow(2, n));   // 1 · 2 · 4 · 8초
+  }
+
+  function render() {
+    document.getElementById('track').innerHTML = tries.map(function (t) {
+      var h = Math.max(6, Math.min(44, t.gap / 8000 * 44 + 6));
+      return '<i class="' + (t.ok ? 'ok' : 'fail') + '" style="height:' + h + 'px" title="' + t.at + 'ms"></i>';
+    }).join('');
+    if (!tries.length) {
+      document.getElementById('lines').innerHTML =
+        '<span style="color:var(--fg-faint)">아직 안 보냈습니다 — 위의 <b>보내기</b>를 눌러 보세요</span>';
+    } else
+    document.getElementById('lines').innerHTML = tries.map(function (t, i) {
+      return '<span>' + (i + 1) + '번째 · ' + (t.at / 1000).toFixed(1) + '초 · ' +
+        (t.ok ? '성공' : '실패 → ' + (t.gap / 1000).toFixed(1) + '초 뒤 다시') + '</span>';
+    }).join('');
+
+    var span = tries.length ? tries[tries.length - 1].at : 0;
+    var last = tries.length ? tries[tries.length - 1].gap : 0;
+    var rd = document.getElementById('read');
+    rd.innerHTML = '보낸 횟수 <b>' + tries.length + '회</b> · 걸린 시간 <b>' + (span / 1000).toFixed(1) + '초</b>' +
+      '<br>마지막 간격 <b>' + (last / 1000).toFixed(1) + '초</b>' +
+      (document.getElementById('k').value === 'none' ? ' <span class="warn">— 쉬지 않고 몰아친다</span>' : '') +
+      (done ? '<br><b>성공했다</b> — ' + tries.length + '번째에 돌아왔다' : '');
+    rd.dataset.tries = String(tries.length);
+    rd.dataset.last = String(last);
+    rd.dataset.done = done ? '1' : '0';
+    rd.dataset.kind = document.getElementById('k').value;
+  }
+
+  function attempt(n) {
+    var backAt = +document.getElementById('w').value * 1000;
+    var at = Date.now() - t0;
+    var ok = at >= backAt;
+    tries.push({ at: at, ok: ok, gap: ok ? 0 : gap(n) });
+    render();
+    if (ok) {
+      done = true;
+      render();
+      document.getElementById('log').innerHTML = '서버가 돌아왔다 — <b>' + tries.length + '번째</b>에 성공';
+      return;
+    }
+    if (tries.length >= (document.getElementById('k').value === 'none' ? 40 : MAX)) {
+      document.getElementById('log').innerHTML = '<span class="warn">그만 둔다</span> — 사람에게 다시 시도 단추를 준다';
+      return;
+    }
+    timer = setTimeout(function () { attempt(n + 1); }, gap(n));
+  }
+
+  document.getElementById('go').addEventListener('click', function () {
+    clearTimeout(timer);
+    tries = []; done = false; t0 = Date.now();
+    document.getElementById('log').innerHTML = '보냈다 — 서버가 아직 안 돌아왔다';
+    attempt(0);
+  });
+  document.getElementById('w').addEventListener('input', function () {
+    document.getElementById('wv').textContent = this.value + '초 뒤';
+  });
+  document.getElementById('k').addEventListener('change', function () {
+    clearTimeout(timer); tries = []; done = false; render();
+  });
+  document.getElementById('wv').textContent = '4초 뒤';
+  render();
+})();
+</script>
+</body>
+</html>

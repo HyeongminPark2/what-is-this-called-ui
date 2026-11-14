@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>재시도 — 이름표</title>
+<meta name="description" content="실패한 요청을 다시 보내는 방법. 지수 백오프, 다시 보내도 되는 요청, 사람에게 보여 주기.">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/card.css">
+<link rel="stylesheet" href="../assets/demo.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로</a>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">이름표<small>화면 속 그게 뭔지 알려주는 도감</small></a>
+  <nav>
+    <a href="../index.html#map">화면 지도</a>
+    <a href="../index.html#pairs">혼동 쌍</a>
+    <a href="../index.html#toc">목차</a>
+    <a href="../appendix.html">색인</a>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+
+  <div class="item-head">
+    <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">8부 피드백과 상태</a> › 재시도</p>
+    <h1>재시도</h1>
+    <p class="en">Retry · backoff</p>
+    <p class="lede" style="margin-top:var(--s3)">죽은 서버에 <b>쉬지 않고 몰아치면</b> 더 못 일어납니다. 간격을 <b>두 배씩</b> 늘리는 것이 기본입니다.</p>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+  </div>
+
+  <div class="card-layout">
+    <div>
+
+      <section class="slot" id="s1">
+        <h2 class="slot-label"><span class="n">1</span> 실물 — 직접 만져 보기</h2>
+        <div class="preview-bar">
+          <div class="seg" data-seg="retry" role="group" aria-label="미리보기 폭">
+            <button type="button" data-w="390" aria-pressed="false">390 폰</button>
+            <button type="button" data-w="768" aria-pressed="false">768 태블릿</button>
+            <button type="button" data-w="full" aria-pressed="true">넓게</button>
+          </div>
+          <span class="preview-meta" data-meta="retry"></span>
+          <a class="preview-open" href="../demos/retry.html" target="_blank" rel="noopener">새 탭에서 열기 ↗</a>
+        </div>
+        <div class="stage" data-stage="retry" data-w="full">
+          <iframe src="../demos/retry.html" title="재시도 실물 예시"></iframe>
+        </div>
+        <div class="note" style="margin-bottom:0">
+          <p>서버가 잠깐 죽었다 돌아온다고 칩시다. <b>바로바로</b> 다시 보내면
+          짧은 시간에 요청이 수십 번 나갑니다 — 데모가 <b>보낸 횟수</b>와
+          <b>마지막 간격</b>을 재서 적습니다.<br>
+          <b>지수 백오프</b>는 1 · 2 · 4 · 8초로 간격을 늘립니다. 같은 시간에 보내는 횟수가 확 줄고,
+          서버가 돌아오면 금세 성공합니다. 그리고 재시도가 도는 동안
+          <b>사람에게도 보여 줘야</b> 합니다 — 언제 다시 시도하는지, 지금 몇 번째인지.</p>
+        </div>
+      </section>
+
+      <section class="slot" id="s2">
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <div class="scroll-x">
+        <table class="grid">
+          <tbody>
+            <tr><th>한국어</th><td>재시도, 다시 시도, 백오프</td></tr>
+            <tr><th>영어</th><td>retry, exponential backoff, jitter</td></tr>
+            <tr><th>같이 쓰는 말</th><td>간격을 두 배씩 늘리는 것이 <b>지수 백오프</b>, 거기에 무작위를 섞어 여러 기기가 같은 순간에 몰리지 않게 하는 것이 <b>지터</b>(jitter)입니다. 같은 요청을 두 번 받아도 한 번만 처리되게 하는 성질을 <b>멱등</b>(idempotent)이라 하고, 계속 실패할 때 아예 요청을 끊는 장치를 <b>서킷 브레이커</b>라 부릅니다.</td></tr>
+            <tr><th>자주 잘못 부름</th><td><b>새로 고침</b> — 새로 고침은 <b>사람이</b> 화면 전체를 다시 부르는 것입니다.<br><b>폴링</b> — 폴링은 <b>실패와 상관없이</b> 주기적으로 묻는 것입니다.<br><b>오프라인 큐</b> — <a href="offline.html">오프라인</a>은 <b>연결이 없을 때</b> 쌓아 두는 쪽입니다.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot" id="s3">
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
+        <p>다시 보내는 방법들입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <div class="scroll-x">
+        <table class="grid axes">
+          <thead><tr><th></th><th>누가 다시 보내나</th><th>간격</th><th>서버에 주는 부담</th><th>언제 쓰나</th></tr></thead>
+          <tbody>
+            <tr><td>바로바로</td><td>기계</td><td><b>거의 없음</b></td><td><b>가장 크다</b></td><td>쓰지 않는다</td></tr>
+            <tr><td>같은 간격</td><td>기계</td><td>1초 · 1초 · 1초</td><td>중간</td><td>짧게 끊길 때</td></tr>
+            <tr class="me"><td><b>지수 백오프</b></td><td>기계</td><td><b>1 · 2 · 4 · 8초</b></td><td><b>작다</b></td><td>거의 늘 이쪽</td></tr>
+            <tr><td>사람이 누르기</td><td><b>사람</b></td><td>사람 마음</td><td>가장 작다</td><td>자동이 실패한 뒤</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="note" style="margin-bottom:0">
+          <p><b>한 줄로</b> — <b>간격을 두 배씩 늘리고, 다섯 번쯤에서 멈추고, 사람에게 단추를 주세요.</b></p>
+        </div>
+      </section>
+
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">간격이 전부를 가른다</span></h2>
+        <div class="states">
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:3px;align-items:flex-end;height:30px;border-bottom:1px solid var(--line);border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:4px 6px"><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">짧은 시간에 수십 번</span></div>
+            </div>
+            <figcaption>쉬지 않음<span><b>서버를 더 눕힌다</b></span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:3px;align-items:flex-end;height:30px;border-bottom:1px solid var(--line);border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:4px 6px"><span style="display:block;width:5px;height:10px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:10px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:10px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:10px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:10px;border-radius:1px;background:var(--accent)"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">1초마다</span></div>
+            </div>
+            <figcaption>같은 간격<span>짧게 끊길 때만</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:3px;align-items:flex-end;height:30px;border-bottom:1px solid var(--line);border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:4px 6px"><span style="display:block;width:5px;height:6px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:11px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:18px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:26px;border-radius:1px;background:var(--accent)"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">1 · 2 · 4초 뒤 성공</span></div>
+            </div>
+            <figcaption>지수 백오프<span><b>거의 늘 이쪽</b></span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">사람에게</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8.5px">3번째 시도 중…</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">4초 뒤 다시 시도합니다</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">몇 번째인지, 언제 다시인지</span></div>
+            </div>
+            <figcaption>보여 주기<span><b>말없이</b> 돌리지 않는다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">끝내 실패</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8.5px;color:var(--danger)">보내지 못했습니다</span><span style="display:block;font-size:8px;color:var(--accent);margin-top:3px">다시 시도 ›</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">사람에게 단추를 넘긴다</span></div>
+            </div>
+            <figcaption>포기<span><b>단추</b>를 준다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--danger)">위험</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--danger)">결제를 세 번 보냈다</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">멱등 키가 없으면 세 번 결제된다</span></span></div></div>
+            </div>
+            <figcaption>멱등하지 않은 요청<span><b>다시 보내면 안 된다</b></span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <div class="anatomy">
+          <div class="pinboard">
+            <div class="anat" role="img" aria-label="재시도의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
+                <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">간격을 두 배씩 — 1 · 2 · 4 · 8초</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">흔들기(jitter) — 다 같이 몰리지 않게</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">최대 횟수 — 다섯 번쯤에서 멈춘다</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">다시 보내도 되는 요청인지 먼저 본다</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">사람에게 보여 준다 — 몇 번째, 언제 다시</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--accent)">끝내 실패하면 다시 시도 단추를 준다</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="pin-list">
+            <li><b>간격 <em>두 배씩</em></b><span>1 · 2 · 4 · 8초</span></li>
+            <li><b>흔들기 <em>무작위 섞기</em></b><span>여러 기기가 <b>같이 몰리지</b> 않게</span></li>
+            <li><b>최대 횟수 <em>다섯 번쯤</em></b><span>그 뒤엔 사람에게</span></li>
+            <li><b>다시 보내도 되나 <em>먼저 확인</em></b><span><b>결제는 안 된다</b></span></li>
+            <li><b>보여 주기 <em>몇 번째 · 언제</em></b><span>말없이 돌리지 않는다</span></li>
+            <li><b>포기 <em>단추</em></b><span><b>사람이</b> 정하게</span></li>
+          </ol>
+        </div>
+        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
+          다시 보내기 전에 꼭 물어볼 것이 있습니다 —
+          <b>이 요청을 두 번 보내도 되나</b>입니다.
+          조회(GET)는 괜찮지만 <b>결제나 전송은 두 번 가면 사고</b>입니다.
+          그래서 그런 요청에는 <b>멱등 키</b>를 붙여,
+          서버가 같은 키를 두 번 받으면 한 번만 처리하게 해 둡니다.<br>
+          <b>흔들기</b>가 없는 백오프도 문제가 됩니다 —
+          수천 대가 동시에 끊겼다면 모두 정확히 1초 뒤에 다시 보내고,
+          그 순간 서버가 또 넘어집니다. 간격에 <b>무작위를 조금 섞으면</b>
+          그 몰림이 흩어집니다.</p>
+      </section>
+
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+        <div class="twoup">
+          <div class="do">
+            <h3>이럴 때 쓴다</h3>
+            <ul>
+              <li><b>지수 백오프 + 흔들기</b>를 기본으로</li>
+              <li>다시 보내도 되는 요청인지 <b>먼저</b> 보기</li>
+              <li>도는 동안 <b>몇 번째인지</b> 보여 주기</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h3>이럴 때는 안 쓴다</h3>
+            <ul>
+              <li>쉬지 않고 다시 보내기 — <b>서버를 더 눕힌다</b></li>
+              <li>결제·전송을 <b>멱등 키 없이</b> 다시 보내기</li>
+              <li>끝없이 다시 보내기 — <b>다섯 번쯤</b>에서 멈춘다</li>
+              <li>말없이 돌리기 — 사용자는 <b>멈춘 줄</b> 안다</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 연결이 아예 없으면 <a href="offline.html">오프라인</a>, 실패 화면은 <a href="error.html">에러 상태</a>, 기다림 표시는 <a href="spinner.html">스피너</a>, 문구는 <a href="errortext.html">오류 문구</a>.</p>
+      </section>
+
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <div class="cases">
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:3px;align-items:flex-end;height:30px;border-bottom:1px solid var(--line);border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:4px 6px"><span style="display:block;width:5px;height:6px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:11px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:18px;border-radius:1px;background:var(--accent)"></span></div></div>
+            </div>
+            <figcaption><b>목록 받기</b>조용히 다시 받는다</figcaption>
+          </figure>
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">폼 보내기</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8.5px;color:var(--danger)">보내지 못했습니다</span><span style="display:block;font-size:8px;color:var(--accent);margin-top:3px">다시 시도 ›</span></span></div></div>
+            </div>
+            <figcaption><b>폼 보내기</b><b>사람에게</b> 맡긴다</figcaption>
+          </figure>
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">결제</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--fg-muted)">Idempotency-Key: 9fa3…</span><span style="display:block;font-size:8px;margin-top:2px">두 번 와도 한 번만 처리</span></span></div></div>
+            </div>
+            <figcaption><b>결제</b><b>멱등 키</b>와 함께</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slot" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">이 재시도의 계약서</span></h2>
+        <p>간격을 두 배씩 늘리고 무작위를 조금 섞습니다. 다섯 번이면 충분합니다.</p>
+<pre class="code"><span class="t">async function</span> withRetry(fn, { max = <span class="a">5</span> } = {}) {
+  <span class="t">for</span> (<span class="t">let</span> n = <span class="a">0</span>; ; n++) {
+    <span class="t">try</span> { <span class="t">return</span> <span class="t">await</span> fn(); }
+    <span class="t">catch</span> (e) {
+      <span class="t">if</span> (n &gt;= max || !canRetry(e)) <span class="t">throw</span> e;
+      <span class="t">const</span> base = Math.min(<span class="a">8000</span>, <span class="a">1000</span> * <span class="a">2</span> ** n);
+      <span class="t">const</span> jitter = base * (<span class="a">0.5</span> + Math.random() * <span class="a">0.5</span>);  <span class="c">// 흔들기</span>
+      show(<span class="s">`${n + 2}번째 시도 — ${Math.round(jitter / 1000)}초 뒤`</span>);
+      <span class="t">await</span> sleep(jitter);
+    }
+  }
+}
+
+<span class="c">// 두 번 보내면 안 되는 요청에는 열쇠를 붙인다</span>
+fetch(<span class="s">'/pay'</span>, { headers: { <span class="s">'Idempotency-Key'</span>: orderKey } });</pre>
+        <div class="scroll-x">
+        <table class="grid kbd-table">
+          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <tbody>
+            <tr><td><code>role="status"</code></td><td>'3번째 시도 중'을 <b>소리로도</b> 알린다</td></tr>
+            <tr><td>다시 시도 단추</td><td>포기한 뒤에는 <b>초점을 받을 수 있는</b> 단추를 둔다</td></tr>
+            <tr><td><code>aria-busy</code></td><td>다시 받는 동안 그 자리에 붙인다</td></tr>
+            <tr><td>428 · 429 · 503</td><td><b>다시 보내도 되는</b> 응답 코드</td></tr>
+            <tr><td>400 · 401 · 404</td><td>다시 보내도 <b>똑같이 실패</b>한다 — 재시도하지 않는다</td></tr>
+            <tr><td>확인하는 법</td><td>네트워크를 끊었다 켜고 <b>몇 번 보냈는지</b> 센다</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot slot--backend" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <div class="scroll-x">
+        <table class="grid">
+          <tbody>
+            <tr><th><code>Retry-After</code></th><td>서버가 <b>언제 다시 오라</b>고 알려 주면 화면이 추측할 필요가 없습니다.</td></tr>
+            <tr><th>멱등 키</th><td>같은 키의 요청을 두 번 받으면 <b>처음 결과</b>를 그대로 돌려줍니다.</td></tr>
+            <tr><th>어떤 오류인지</th><td><code>429</code>(너무 잦음)와 <code>400</code>(잘못된 요청)은 <b>전혀 다른 대응</b>이 필요합니다.</td></tr>
+            <tr><th>서킷 브레이커</th><td>연속 실패가 쌓이면 <b>잠시 요청 자체를 끊어</b> 서버가 일어날 틈을 줍니다.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot" id="s10">
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
+        <p><b>생각은 같고</b> 라이브러리가 다릅니다.</p>
+        <div class="platforms">
+          <div class="plat">
+            <header><b>웹</b><span>직접 또는 라이브러리</span></header>
+            <div class="shot">
+              <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="display:flex;gap:3px;align-items:flex-end;height:30px;border-bottom:1px solid var(--line);border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:4px 6px"><span style="display:block;width:5px;height:6px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:11px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:18px;border-radius:1px;background:var(--accent)"></span></div></div>
+            </div>
+            <footer><code>fetch</code> 자체에는 재시도가 없습니다. 쿼리 라이브러리들이 <b>기본으로</b> 붙여 둡니다.</footer>
+          </div>
+          <div class="plat">
+            <header><b>iOS</b><span>URLSession · 직접</span></header>
+            <div class="shot">
+              <div class="phone" role="img" aria-label="iOS 재시도 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
+                <div style="position:absolute;left:6px;right:6px;top:30px;height:7px;border-radius:2px;background:var(--accent-soft)"></div>
+                <div style="position:absolute;left:6px;right:6px;top:42px;height:7px;border-radius:2px;background:color-mix(in srgb, var(--danger) 35%, transparent)"></div></div></div>
+            </div>
+            <footer><code>waitsForConnectivity</code> 로 <b>연결될 때까지</b> 기다리게 할 수 있습니다.</footer>
+          </div>
+          <div class="plat">
+            <header><b>안드로이드</b><span>WorkManager</span></header>
+            <div class="shot">
+              <div class="phone" role="img" aria-label="안드로이드 재시도 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
+                <div style="position:absolute;left:6px;right:6px;top:30px;height:7px;border-radius:2px;background:var(--accent-soft)"></div>
+                <div style="position:absolute;left:6px;right:6px;top:42px;height:7px;border-radius:2px;background:color-mix(in srgb, var(--danger) 35%, transparent)"></div></div></div>
+            </div>
+            <footer><b>백오프까지 OS 가</b> 맡습니다 — 앱이 꺼져 있어도 나중에 다시 보냅니다.</footer>
+          </div>
+        </div>
+        <div class="note note--warn" style="margin-bottom:0">
+          <p><b>자주 생기는 사고</b> — 안드로이드의 <b>WorkManager</b> 는 앱이 꺼진 뒤에도 재시도를 이어 가는, 웹에는 없는 장치입니다. 웹에서 가장 가까운 것은 <b>서비스 워커의 백그라운드 동기화</b>인데 아직 브라우저마다 다릅니다. 그래서 웹에서는 <b>탭이 살아 있는 동안만</b> 재시도가 돈다고 보는 편이 안전하고, 중요한 것은 <a href="offline.html">오프라인</a>처럼 <b>쌓아 뒀다가 다음에 열렸을 때</b> 보내는 쪽으로 설계합니다.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <aside class="siblings">
+      <h2>헷갈리는 형제</h2>
+      <ol>
+        <li><a href="spinner.html"><b>스피너</b><em>8부</em></a></li>
+        <li><a href="skeleton.html"><b>스켈레톤</b><em>8부</em></a></li>
+        <li><a href="progress.html"><b>프로그레스 바</b><em>8부</em></a></li>
+        <li><a href="optimistic.html"><b>낙관적 UI</b><em>8부</em></a></li>
+        <li><a href="empty.html"><b>빈 상태</b><em>8부</em></a></li>
+        <li><a href="error.html"><b>에러 상태</b><em>8부</em></a></li>
+        <li><a href="undo.html"><b>되돌리기</b><em>8부</em></a></li>
+        <li><a href="partialload.html"><b>부분 로딩</b><em>8부</em></a></li>
+        <li><a href="success.html"><b>성공 확인</b><em>8부</em></a></li>
+        <li><a href="offline.html"><b>오프라인</b><em>8부</em></a></li>
+        <li><a href="stale.html"><b>오래된 데이터</b><em>8부</em></a></li>
+      </ol>
+      <h2>같이 보면 좋은 것</h2>
+      <ol>
+        <li><a href="offline.html"><b>오프라인</b><em>8부</em></a></li>
+        <li><a href="error.html"><b>에러 상태</b><em>8부</em></a></li>
+        <li><a href="errortext.html"><b>오류 문구</b><em>14부</em></a></li>
+        <li><a href="spinner.html"><b>스피너</b><em>8부</em></a></li>
+      </ol>
+      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-foot wrap">
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+</footer>
+
+<script src="../assets/card.js"></script>
+</body>
+</html>

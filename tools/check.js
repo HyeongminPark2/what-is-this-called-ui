@@ -220,7 +220,8 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     '4부': ['field', 'select', 'combobox', 'checkbox', 'radio', 'switch', 'segmented', 'slider'],
     '7부': ['appbar', 'sidebar', 'tabs', 'breadcrumb', 'pagination', 'infinite', 'bottomnav',
             'stepper', 'treeview', 'anchornav', 'backnav', 'megamenu'],
-    '8부': ['spinner', 'skeleton', 'progress', 'optimistic', 'empty', 'error'],
+    '8부': ['spinner', 'skeleton', 'progress', 'optimistic', 'empty', 'error',
+            'undo', 'partialload', 'success', 'retry', 'offline', 'stale'],
     '10부': ['table', 'filter', 'search', 'form', 'validation', 'bulk', 'virtual', 'chart', 'exportdata', 'daterange'],
     '9부': ['easing', 'duration', 'enterexit', 'cheap', 'spring', 'stagger', 'gesture', 'reducedmotion', 'sharedelement', 'scrolllink'],
     '11부': ['breakpoint', 'touchtarget', 'hover', 'systemback', 'dpr', 'viewport', 'softkeyboard', 'platformdiff'],
@@ -2460,6 +2461,92 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   await page.selectOption('#k', 'input'); await page.waitForTimeout(320);
   await page.locator('[data-x="카드"]').click(); await page.waitForTimeout(320);
   if (await page.getAttribute('#read', 'data-left') !== '2') fail.push('태그: 입력 태그를 못 지운다');
+  await page.close();
+
+  // 8부 피드백과 상태 데모 여섯 장 — 멈춤 횟수·초점·중복 제출·재시도 간격·큐·빈 시간
+  page = await demo('undo', 980, 900);
+  await page.locator('[data-del="0"]').click(); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-deleted') !== '1') fail.push('되돌리기: 안 지워진다');
+  if (await page.locator('#bar').isHidden()) fail.push('되돌리기: 되돌릴 길이 안 뜬다');
+  await page.locator('#undo').click(); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-undone') !== '1') fail.push('되돌리기: 되돌려지지 않는다');
+  await page.locator('#t').fill('2'); await page.dispatchEvent('#t', 'input');
+  await page.locator('[data-del="1"]').click(); await page.waitForTimeout(2500);
+  if (!await page.locator('#bar').isHidden()) fail.push('되돌리기: 시간이 지나도 띠가 안 닫힌다');
+  await page.selectOption('#k', 'confirm'); await page.waitForTimeout(320);
+  await page.locator('[data-del="0"]').click(); await page.waitForTimeout(260);
+  await page.locator('[data-del="1"]').click(); await page.waitForTimeout(260);
+  if (await page.getAttribute('#read', 'data-stops') !== '2')
+    fail.push('되돌리기: 되묻기인데 안 멈춰 세운다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('partialload', 980, 900);
+  await page.selectOption('#k', 'part'); await page.waitForTimeout(260);
+  await page.locator('#go').click(); await page.waitForTimeout(1150);
+  if (await page.getAttribute('#read', 'data-lost') !== '0') fail.push('부분로딩: 그 줄만 그렸는데 초점이 날아간다');
+  if (await page.getAttribute('#read', 'data-kept') !== '1') fail.push('부분로딩: 치던 글이 사라진다');
+  await page.selectOption('#k', 'all'); await page.waitForTimeout(260);
+  await page.locator('#go').click(); await page.waitForTimeout(1250);
+  if (await page.getAttribute('#read', 'data-lost') !== '1')
+    fail.push('부분로딩: 전체를 그려도 초점이 남는다 (보여주려는 결과)');
+  if (await page.getAttribute('#read', 'data-kept') !== '0')
+    fail.push('부분로딩: 전체를 그려도 치던 글이 남는다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('success', 980, 900);
+  await page.locator('#save').click(); await page.waitForTimeout(320);
+  if (await page.getAttribute('#read', 'data-live') !== '1') fail.push('성공확인: role=status 가 없다');
+  await page.selectOption('#k', 'none'); await page.waitForTimeout(260);
+  await page.locator('#save').click(); await page.waitForTimeout(260);
+  await page.locator('#save').click(); await page.waitForTimeout(260);
+  if (await page.getAttribute('#read', 'data-sent') !== '2')
+    fail.push('성공확인: 안 알려도 다시 안 누른다 (보여주려는 결과)');
+  if (await page.getAttribute('#read', 'data-live') !== '0')
+    fail.push('성공확인: 안 알리는데 소리 자리가 있다 (보여주려는 결과)');
+  await page.close();
+
+  page = await demo('retry', 980, 900);
+  await page.selectOption('#k', 'backoff'); await page.waitForTimeout(220);
+  await page.locator('#w').fill('2'); await page.dispatchEvent('#w', 'input');
+  await page.locator('#go').click(); await page.waitForTimeout(4300);
+  {
+    const b = +(await page.getAttribute('#read', 'data-tries'));
+    if (!(b <= 5)) fail.push('재시도: 백오프인데 많이 보낸다 (' + b + '회)');
+    if (await page.getAttribute('#read', 'data-done') !== '1') fail.push('재시도: 서버가 돌아와도 성공을 못 한다');
+    await page.selectOption('#k', 'none'); await page.waitForTimeout(260);
+    await page.locator('#go').click(); await page.waitForTimeout(3400);
+    const n = +(await page.getAttribute('#read', 'data-tries'));
+    if (!(n > b * 2)) fail.push('재시도: 쉬지 않아도 횟수가 안 는다 (보여주려는 결과)');
+  }
+  await page.close();
+
+  page = await demo('offline', 980, 900);
+  await page.uncheck('#net'); await page.waitForTimeout(320);
+  await page.locator('#save').click(); await page.waitForTimeout(260);
+  await page.locator('#save').click(); await page.waitForTimeout(260);
+  if (await page.getAttribute('#readout', 'data-queue') !== '2') fail.push('오프라인: 끊긴 동안 안 쌓인다');
+  if (await page.getAttribute('#readout', 'data-lost') !== '0') fail.push('오프라인: 쌓아 뒀는데 잃은 것이 있다');
+  await page.check('#net'); await page.waitForTimeout(360);
+  if (await page.getAttribute('#readout', 'data-flushed') !== '2') fail.push('오프라인: 다시 연결해도 안 나간다');
+  await page.selectOption('#k', 'fail'); await page.uncheck('#net'); await page.waitForTimeout(320);
+  await page.locator('#save').click(); await page.waitForTimeout(260);
+  if (await page.getAttribute('#readout', 'data-lost') !== '1')
+    fail.push('오프라인: 그때마다 실패인데 잃는 것이 없다 (보여주려는 결과)');
+  await page.selectOption('#k', 'block'); await page.waitForTimeout(320);
+  if (await page.getAttribute('#readout', 'data-blocked') !== '1') fail.push('오프라인: 막기인데 단추가 켜져 있다');
+  await page.close();
+
+  page = await demo('stale', 980, 900);
+  await page.selectOption('#k', 'keep'); await page.waitForTimeout(260);
+  await page.locator('#go').click(); await page.waitForTimeout(1350);
+  if (await page.getAttribute('#read', 'data-blank') !== '0') fail.push('오래된데이터: 옛 값을 둬도 빈 시간이 생긴다');
+  await page.selectOption('#k', 'blank'); await page.waitForTimeout(260);
+  await page.locator('#go').click(); await page.waitForTimeout(1450);
+  if (!(+(await page.getAttribute('#read', 'data-blank')) > 500))
+    fail.push('오래된데이터: 비워도 숫자가 안 사라진다 (보여주려는 결과)');
+  await page.uncheck('#asof'); await page.waitForTimeout(260);
+  if ((await page.textContent('#as')) !== '')
+    fail.push('오래된데이터: 기준 시각을 꺼도 적혀 있다 (보여주려는 결과)');
   await page.close();
 
   await browser.close();

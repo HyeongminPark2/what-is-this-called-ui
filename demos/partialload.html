@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>부분 로딩 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>부분 로딩</b>
+  <label>다시 그리는 범위 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="part">바뀐 줄만</option>
+    <option value="all">화면 전체</option>
+  </select></label>
+  <button class="ui-btn" id="go">정산 상태 바꾸기</button>
+</div>
+
+<div class="pad">
+  <div class="prt" id="card"></div>
+  <p class="ruler" id="read"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  검색 칸에 커서를 둔 채 <b>정산 상태 바꾸기</b>를 눌러 보세요.
+  <b>화면 전체</b>를 다시 그리면 그 칸이 통째로 새로 만들어져서
+  <b>커서가 날아가고 치던 글도 사라집니다</b> — 데모가 초점이 어디로 갔는지와
+  입력칸의 값이 남았는지를 재서 적습니다.<br>
+  <b>바뀐 줄만</b> 다시 그리면 초점도 값도 그대로입니다.
+  그리고 기다리는 동안 <b>그 줄만 흐려지고</b> 나머지는 읽을 수 있습니다 —
+  전체 스피너는 멀쩡한 화면까지 가려 버립니다.
+</p>
+
+<script>
+(function () {
+  var ROWS = [
+    ['모란상회', '정산 대기'],
+    ['한빛아웃도어', '정산 대기'],
+    ['새벽상사', '정산 완료']
+  ];
+  var busy = -1, all = false;
+
+  function bodyHtml() {
+    if (all && busy >= 0) return '<div class="prt__busy">불러오는 중…</div>';
+    return ROWS.map(function (r, i) {
+      return '<div class="prt__r' + (busy === i ? ' busy' : '') + '" data-i="' + i + '">' +
+        '<span>' + r[0] + '</span>' +
+        '<span class="amt">' + (busy === i ? '바꾸는 중…' : r[1]) + '</span></div>';
+    }).join('');
+  }
+
+  // 전체를 다시 그리면 머리띠의 입력칸까지 새로 만들어진다 — 흉내가 아니라 실제로 그렇다
+  function renderAll(keepValue) {
+    document.getElementById('card').innerHTML =
+      '<div class="prt__bar"><b style="font-size:13px">정산 목록</b>' +
+      '<input class="ui-input" id="q" placeholder="여기에 치는 중이었다고 칩시다" ' +
+      'style="margin-left:auto;width:170px;min-height:30px;font-size:12px" value="' + (keepValue || '') + '">' +
+      '</div><div class="prt__body" id="body">' + bodyHtml() + '</div>';
+  }
+
+  function renderBody() {
+    document.getElementById('body').innerHTML = bodyHtml();
+  }
+
+  function report(why) {
+    var q = document.getElementById('q');
+    var focused = document.activeElement;
+    var lostFocus = focused !== q;
+    var kept = !!(q && q.value.length > 0);
+    var rd = document.getElementById('read');
+    rd.innerHTML = '다시 그린 범위 <b>' + (all ? '화면 전체' : '바뀐 줄만') + '</b>' +
+      '<br>초점이 검색 칸에 <b>' + (lostFocus ? '없다' : '있다') + '</b>' +
+      (lostFocus ? ' <span class="warn">— 커서가 날아갔다</span>' : '') +
+      '<br>치던 글 <b>' + (kept ? '남았다' : '사라졌다') + '</b>' +
+      (!kept && q.dataset.had === '1' ? ' <span class="warn">— 통째로 새로 만들어졌다</span>' : '') +
+      (why ? '<br>' + why : '');
+    rd.dataset.lost = lostFocus ? '1' : '0';
+    rd.dataset.kept = kept ? '1' : '0';
+    rd.dataset.mode = all ? 'all' : 'part';
+    rd.dataset.visible = String(document.querySelectorAll('.prt__r').length);
+  }
+
+  document.getElementById('go').addEventListener('click', function () {
+    var q = document.getElementById('q');
+    if (!q.value) { q.value = '모란'; }
+    q.dataset.had = '1';
+    q.focus();
+    busy = 0;
+    all = document.getElementById('k').value === 'all';
+    if (all) renderAll(q.value); else renderBody();
+    if (all) document.getElementById('q').focus();
+    report('바꾸는 중 — 기다려 보세요');
+    setTimeout(function () {
+      ROWS[0][1] = ROWS[0][1] === '정산 완료' ? '정산 대기' : '정산 완료';
+      busy = -1;
+      if (all) {
+        renderAll('');   // 새로 만들어진 칸은 비어 있고 초점도 없다
+        document.getElementById('log').innerHTML =
+          '<span class="warn">전체를 다시 그렸다</span> — 검색 칸이 새로 만들어졌다';
+      } else {
+        renderBody();
+        document.getElementById('log').innerHTML = '<b>그 줄만</b> 다시 그렸다 — 나머지는 그대로다';
+      }
+      report('');
+    }, 700);
+  });
+
+  document.getElementById('k').addEventListener('change', function () {
+    all = this.value === 'all';
+    renderAll('');
+    report('');
+  });
+
+  renderAll('');
+  report('검색 칸에 커서를 두고 눌러 보세요');
+})();
+</script>
+</body>
+</html>

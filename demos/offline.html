@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>오프라인 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 420px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <b>오프라인</b>
+  <label><input type="checkbox" id="net" checked> 연결됨</label>
+  <label>끊겼을 때 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="queue" selected>쌓아 두고 나중에 보낸다</option>
+    <option value="block">아예 못 누르게 막는다</option>
+    <option value="fail">눌리지만 그때마다 실패한다</option>
+  </select></label>
+</div>
+
+<div class="pad">
+  <div class="off__bar" id="banner"></div>
+  <div style="display:flex;gap:7px;flex-wrap:wrap">
+    <button class="ui-btn" id="save">메모 저장</button>
+    <button class="ui-btn ui-btn--ghost" id="read2">목록 보기</button>
+  </div>
+  <div class="off__q" id="q"></div>
+  <p class="ruler" id="readout"></p>
+  <p class="ruler" id="log"></p>
+</div>
+
+<p class="hint">
+  '연결됨'을 꺼 보세요. 끊긴 동안 저장을 누르면 셋 중 하나가 일어납니다 —
+  <b>쌓아 두거나</b>, <b>못 누르게 막거나</b>, <b>그때마다 실패하거나</b>.
+  데모가 <b>쌓인 작업 수</b>와 <b>헛되이 실패한 횟수</b>를 세서 적습니다.<br>
+  다시 연결하면 쌓아 둔 것이 <b>저절로 나갑니다</b> — 그 수도 같이 셉니다.
+  '그때마다 실패'는 가장 흔하면서 가장 나쁜 쪽입니다. 쓴 글이 사라지니까요.<br>
+  <b>읽기는 끊겨도 되게</b> 두는 편이 낫습니다 — 이미 받아 둔 목록은 볼 수 있습니다.
+</p>
+
+<script>
+(function () {
+  var queue = [], lostWork = 0, flushed = 0, n = 0;
+
+  function online() { return document.getElementById('net').checked; }
+
+  function render(why) {
+    var on = online();
+    var k = document.getElementById('k').value;
+    var b = document.getElementById('banner');
+    b.className = 'off__bar' + (on ? ' on' : '');
+    b.innerHTML = on
+      ? '<span aria-hidden="true">●</span> 연결됨' + (queue.length ? ' — 쌓인 ' + queue.length + '건을 보내는 중' : '')
+      : '<span aria-hidden="true">●</span> 연결이 끊겼습니다' +
+        (k === 'queue' ? ' — 쓴 것은 쌓아 뒀다가 보냅니다' : '');
+
+    document.getElementById('save').disabled = !on && k === 'block';
+    document.getElementById('q').innerHTML = queue.map(function (t) {
+      return '<span>⏳ ' + t + ' — 보내기 기다리는 중</span>';
+    }).join('');
+
+    var rd = document.getElementById('readout');
+    rd.innerHTML = '상태 <b>' + (on ? '연결됨' : '끊김') + '</b> · 쌓인 작업 <b>' + queue.length + '건</b>' +
+      '<br>헛되이 실패한 횟수 <b>' + lostWork + '회</b>' +
+      (lostWork ? ' <span class="warn">— 쓴 것이 사라졌다</span>' : '') +
+      '<br>다시 연결해 보낸 것 <b>' + flushed + '건</b>' +
+      (why ? '<br>' + why : '');
+    rd.dataset.online = on ? '1' : '0';
+    rd.dataset.queue = String(queue.length);
+    rd.dataset.lost = String(lostWork);
+    rd.dataset.flushed = String(flushed);
+    rd.dataset.blocked = document.getElementById('save').disabled ? '1' : '0';
+  }
+
+  document.getElementById('save').addEventListener('click', function () {
+    n++;
+    var name = '메모 ' + n;
+    if (online()) {
+      document.getElementById('log').innerHTML = '<b>' + name + '</b> 를 바로 보냈다';
+      render('');
+      return;
+    }
+    var k = document.getElementById('k').value;
+    if (k === 'queue') {
+      queue.push(name);
+      document.getElementById('log').innerHTML = '<b>' + name + '</b> 를 쌓아 뒀다 — 연결되면 나간다';
+    } else {
+      lostWork++;
+      document.getElementById('log').innerHTML =
+        '<span class="warn">' + name + ' 를 못 보냈다</span> — 쓴 글이 사라졌다';
+    }
+    render('');
+  });
+
+  document.getElementById('read2').addEventListener('click', function () {
+    document.getElementById('log').innerHTML = online()
+      ? '목록을 새로 받아 왔다'
+      : '<b>이미 받아 둔 목록</b>을 보여 준다 — 읽기는 끊겨도 된다';
+  });
+
+  document.getElementById('net').addEventListener('change', function () {
+    if (this.checked && queue.length) {
+      var sent = queue.length;
+      flushed += sent;
+      queue = [];
+      render('쌓아 둔 <b>' + sent + '건</b>이 저절로 나갔다');
+      document.getElementById('log').innerHTML = '다시 연결됨 — <b>' + sent + '건</b>을 보냈다';
+      return;
+    }
+    render('');
+  });
+
+  document.getElementById('k').addEventListener('change', function () {
+    queue = []; lostWork = 0; flushed = 0; render('');
+  });
+
+  render('');
+})();
+</script>
+</body>
+</html>
