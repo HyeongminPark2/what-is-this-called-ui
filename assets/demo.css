@@ -1493,3 +1493,61 @@ body > .hint, body > .log, body > .ratio {
 .lenbar { height: 8px; border-radius: 4px; background: var(--bg); border: 1px solid var(--line); overflow: hidden; }
 .lenbar i { display: block; height: 100%; background: var(--accent); }
 .lenbar.over i { background: var(--danger); }
+
+/* ───────── 15부 현장 용어 ───────── */
+
+/* 충실도 — 같은 화면을 네 단계로 */
+.fid { border: 1px solid var(--line); border-radius: var(--r2); background: var(--bg); padding: var(--s3); }
+.fid__screen { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r1); padding: var(--s3); display: grid; gap: var(--s2); min-height: 190px; }
+.fid .blk { background: var(--ink-100); border-radius: 3px; }
+.fid .blk.t { height: 10px; width: 46%; }
+.fid .blk.r { height: 8px; }
+.fid--wire .blk { background: var(--ink-100); }
+.fid--wire .real { visibility: hidden; }
+.fid--mock .blk { background: var(--ink-050); border: 1px dashed var(--line-strong); }
+.fid__row { display: flex; align-items: center; gap: var(--s2); }
+.fid__note { font-size: 11.5px; color: var(--fg-muted); margin-top: var(--s2); }
+
+/* 토큰 → 부품 → 패턴 세 겹 */
+.layers { display: grid; gap: var(--s3); }
+.layer { border: 1px solid var(--line); border-radius: var(--r2); padding: var(--s3); background: var(--surface); display: grid; gap: var(--s2); }
+.layer h4 { margin: 0; font-size: 12.5px; }
+.layer h4 em { font-style: normal; font-weight: 500; color: var(--fg-muted); font-size: 11px; }
+.layer .row { display: flex; gap: var(--s2); flex-wrap: wrap; align-items: center; }
+.swatch { width: 22px; height: 22px; border-radius: 4px; border: 1px solid var(--line); }
+
+/* 마스터와 인스턴스 */
+.inst-grid { display: flex; gap: var(--s3); flex-wrap: wrap; align-items: flex-start; }
+.inst { display: grid; gap: 5px; justify-items: center; }
+.inst__tag { font-size: 10.5px; color: var(--fg-muted); font-family: var(--mono); }
+.inst.master .inst__tag { color: var(--accent); font-weight: 700; }
+.inst.detached .inst__tag { color: var(--danger); font-weight: 700; }
+
+/* 배리언트 표 */
+.matrix { display: grid; gap: 6px; }
+.matrix__row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.matrix__lab { font-size: 11.5px; color: var(--fg-muted); width: 56px; flex: none; }
+.matrix__cell { border: 1px solid var(--line); border-radius: var(--r1); padding: 5px 7px; background: var(--surface); font-size: 11px; }
+
+/* 오토 레이아웃 ↔ CSS */
+.al { display: grid; gap: var(--s3); }
+.al__box { border: 1px dashed var(--accent); border-radius: var(--r1); padding: var(--s3); display: flex; gap: var(--s2); background: var(--bg); min-height: 86px; }
+.al__box i { display: block; background: var(--accent); border-radius: 3px; min-width: 26px; min-height: 26px; }
+.al__code { font-family: var(--mono); font-size: 12px; color: var(--accent); background: var(--bg); border: 1px solid var(--line); border-radius: var(--r1); padding: var(--s2) var(--s3); overflow-x: auto; }
+
+/* 핸드오프 점검표 */
+.spec { display: grid; gap: 5px; }
+.spec__row { display: grid; grid-template-columns: 22px 1fr auto; gap: var(--s2); align-items: center; padding: 6px 8px; border: 1px solid var(--line); border-radius: var(--r1); background: var(--surface); font-size: 12.5px; }
+.spec__row .mark { font-weight: 700; text-align: center; }
+.spec__row.has .mark { color: var(--accent); }
+.spec__row.miss { border-color: color-mix(in srgb, var(--danger) 45%, transparent); }
+.spec__row.miss .mark { color: var(--danger); }
+.spec__row .src { font-size: 11px; color: var(--fg-muted); white-space: nowrap; }
+
+/* 에셋 내보내기 */
+.exp { display: grid; gap: 6px; }
+.exp__row { display: grid; grid-template-columns: 72px 1fr 72px auto; gap: var(--s3); align-items: center; font-size: 12.5px; }
+.exp__bar { height: 12px; border-radius: 3px; background: var(--accent); }
+.exp__row.warn .exp__bar { background: var(--danger); }
+.exp__size { font-family: var(--mono); font-size: 11.5px; text-align: right; font-variant-numeric: tabular-nums; }
+.exp__row.pick .exp__size { color: var(--accent); font-weight: 700; }

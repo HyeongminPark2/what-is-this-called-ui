@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>핸드오프 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 620px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>핸드오프</b>
+  <label><input type="checkbox" id="spec"> 스펙까지 함께 받기</label>
+</div>
+
+<div class="pad">
+  <p class="ruler" id="head"></p>
+  <div class="spec" id="list"></div>
+  <p class="ruler" id="verdict"></p>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  <b>핸드오프</b>는 그림을 넘기는 일이 아니라 <b>만들 수 있을 만큼의 정보를 넘기는</b> 일입니다.
+  그림에서 <b>재서 알 수 있는 것</b>(간격·색·크기)과 <b>물어봐야 아는 것</b>(상태·반응형·빈 화면)이 갈립니다.<br>
+  위 체크를 끄면 <b>그림만</b> 받은 상태입니다. 아래에서 ✕ 가 붙은 것들이
+  개발 중에 <b>하나씩 물어보게 되는</b> 것들이고, 그 왕복이 일정의 상당 부분을 먹습니다.
+</p>
+
+<script>
+(function () {
+  var ITEMS = [
+    ['간격과 크기', '그림에서 잴 수 있다', true, true],
+    ['색과 글꼴', '그림에서 집을 수 있다', true, true],
+    ['토큰 이름', 'accent-500 인가 brand 인가', false, true],
+    ['상태 — 호버·누름·비활성', '그림은 기본 상태 하나뿐이다', false, true],
+    ['글이 길어지면', '두 줄로 접나, 말줄임인가', false, true],
+    ['폰에서는', '어느 폭에서 한 단이 되나', false, true],
+    ['빈 화면 · 로딩 · 오류', '시안에는 데이터가 가득하다', false, true],
+    ['움직임', '몇 ms 로, 어떤 곡선으로', false, true],
+    ['문구', '버튼 글자·오류 문장', false, true],
+    ['에셋', '아이콘은 SVG 인가 PNG 인가', false, true]
+  ];
+
+  function draw() {
+    var full = document.getElementById('spec').checked;
+    var rows = ITEMS.map(function (it) {
+      var has = full ? it[3] : it[2];
+      return '<div class="spec__row ' + (has ? 'has' : 'miss') + '" data-k="' + it[0] + '">' +
+        '<span class="mark">' + (has ? '✓' : '✕') + '</span>' +
+        '<span>' + it[0] + '<span style="display:block;font-size:11px;color:var(--fg-muted)">' + it[1] + '</span></span>' +
+        '<span class="src">' + (has ? (it[2] ? '그림에서' : '스펙에서') : '물어봐야 안다') + '</span></div>';
+    });
+    document.getElementById('list').innerHTML = rows.join('');
+
+    var miss = ITEMS.filter(function (it) { return !(full ? it[3] : it[2]); }).length;
+    document.getElementById('head').innerHTML = full
+      ? '그림 + 스펙을 받았다'
+      : '<b>그림만</b> 받았다';
+    var v = document.getElementById('verdict');
+    v.innerHTML = miss
+      ? '<span class="warn">물어봐야 아는 것 ' + miss + '개</span> — 개발 중에 하나씩 왕복한다'
+      : '열 가지가 다 넘어왔다 — <b>물어볼 것이 없다</b>';
+    v.dataset.miss = String(miss);
+
+    document.getElementById('note').innerHTML = full
+      ? '스펙은 <b>긴 문서가 아니어도</b> 된다 — 시안 옆에 적은 메모 열 줄이면 대개 충분하다'
+      : '그림에서 잴 수 있는 것은 <b>둘뿐</b>이다. 나머지 여덟은 말로 넘겨야 한다';
+  }
+
+  document.getElementById('spec').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

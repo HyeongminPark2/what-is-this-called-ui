@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>에셋 내보내기 — 이름표</title>
+<meta name="description" content="아이콘·로고·사진을 어떤 꼴로 넘길지. SVG와 배율별 비트맵, 그리고 포맷 고르기.">
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/card.css">
+<link rel="stylesheet" href="../assets/demo.css">
+</head>
+<body>
+<a class="skip" href="#main">본문으로</a>
+
+<header class="topbar">
+  <a class="brand" href="../index.html">이름표<small>화면 속 그게 뭔지 알려주는 도감</small></a>
+  <nav>
+    <a href="../index.html#map">화면 지도</a>
+    <a href="../index.html#pairs">혼동 쌍</a>
+    <a href="../index.html#toc">목차</a>
+  </nav>
+</header>
+
+<main id="main" class="wrap">
+
+  <div class="item-head">
+    <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">15부 현장 용어</a> › 에셋 내보내기</p>
+    <h1>에셋 내보내기</h1>
+    <p class="en">Exporting assets</p>
+    <p class="lede" style="margin-top:var(--s3)">무엇을 내보내느냐에 따라 <b>고를 것이 달라집니다</b>. 선은 SVG, 사진은 배율별 비트맵입니다.</p>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+  </div>
+
+  <div class="card-layout">
+    <div>
+
+      <section class="slot" id="s1">
+        <h2 class="slot-label"><span class="n">1</span> 실물 — 직접 만져 보기</h2>
+        <div class="preview-bar">
+          <div class="seg" data-seg="assets" role="group" aria-label="미리보기 폭">
+            <button type="button" data-w="390" aria-pressed="false">390 폰</button>
+            <button type="button" data-w="768" aria-pressed="false">768 태블릿</button>
+            <button type="button" data-w="full" aria-pressed="true">넓게</button>
+          </div>
+          <span class="preview-meta" data-meta="assets"></span>
+          <a class="preview-open" href="../demos/assets.html" target="_blank" rel="noopener">새 탭에서 열기 ↗</a>
+        </div>
+        <div class="stage" data-stage="assets" data-w="full">
+          <iframe src="../demos/assets.html" title="에셋 내보내기 실물 예시"></iframe>
+        </div>
+        <div class="note" style="margin-bottom:0">
+          <p>무엇을 내보낼지 골라 보세요 — 선으로 된 아이콘·로고는 <b>SVG 하나</b>면 어느 배율에서나
+          선명하고 파일도 작습니다. 사진은 SVG 로 만들 수 없으니 <b>배율별 비트맵</b>이 필요합니다.<br>
+          크기는 어림한 값입니다 — 요점은 숫자가 아니라 <b>어느 쪽이 몇 배 차이나는지</b>입니다.</p>
+        </div>
+      </section>
+
+      <section class="slot" id="s2">
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <div class="scroll-x">
+        <table class="grid">
+          <tbody>
+            <tr><th>한국어</th><td>에셋, 내보내기, 익스포트, 이미지 추출</td></tr>
+            <tr><th>영어</th><td>assets, export, asset export, slicing</td></tr>
+            <tr><th>같이 쓰는 말</th><td>넘기는 그림 파일을 통틀어 <b>에셋</b>이라 하고, 꺼내는 일이 <b>익스포트</b>입니다. 배율별로 뽑는 것을 <b>1x · 2x · 3x</b>, 여러 아이콘을 한 파일에 모은 것을 <b>스프라이트</b>·<b>아이콘 폰트</b>라 합니다. SVG 를 HTML 안에 직접 적어 넣는 것은 <b>인라인 SVG</b>입니다.</td></tr>
+            <tr><th>자주 잘못 부름</th><td><b>이미지</b> — SVG 는 그림이 아니라 <b>그리는 명령</b>이라 성격이 다릅니다.<br><b>해상도</b> — 배율과 섞입니다. <a href="dpr.html">화면 밀도</a>를 참고합니다.<br><b>슬라이스</b> — 옛 방식(큰 그림을 잘라 쓰기)의 이름이 남은 말입니다.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot" id="s3">
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
+        <p>현장 용어는 말이 아니라 <b>일하는 단계</b>를 가리킵니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <div class="scroll-x">
+        <table class="grid axes">
+          <thead><tr><th></th><th>무엇을 가리키나</th><th>언제 나오나</th><th>개발 쪽 대응물</th><th>잘못 알아들으면</th></tr></thead>
+          <tbody>
+            <tr><td>와이어프레임과 목업과 시안</td><td><b>얼마나 진짜 같은</b> 그림인가</td><td>기획 ~ 디자인</td><td>마크업 구조 ~ 완성 화면</td><td>엉뚱한 리뷰가 돌아온다</td></tr>
+            <tr><td>디자인 시스템</td><td>규칙 + 부품 + <b>문서</b></td><td>프로젝트 내내</td><td>토큰 + 컴포넌트 라이브러리</td><td>스타일 가이드와 섞인다</td></tr>
+            <tr><td>컴포넌트와 인스턴스</td><td><b>원본</b>과 복제본</td><td>시안 작업</td><td>컴포넌트 정의와 사용</td><td>원본을 고쳐 전체가 바뀐다</td></tr>
+            <tr><td>배리언트와 프롭</td><td>같은 부품의 <b>정해진 변형</b></td><td>시안 작업</td><td>props</td><td>상태와 섞인다</td></tr>
+            <tr><td>오토 레이아웃</td><td><b>자동 배치</b></td><td>시안 작업</td><td>flexbox</td><td>‘여백이 자동’을 못 알아듣는다</td></tr>
+            <tr><td>프로토타입</td><td><b>눌리는</b> 시안</td><td>리뷰 · 사용자 시험</td><td>아직 코드가 아니다</td><td>다 된 줄 안다</td></tr>
+            <tr><td>핸드오프</td><td><b>넘기는</b> 일</td><td>개발 시작 전</td><td>스펙 읽기</td><td>그림만 받고 규칙은 못 받는다</td></tr>
+            <tr class="me"><td><b>에셋 내보내기</b></td><td>그림 <b>파일</b> 넘기기</td><td>개발 중</td><td>srcset · SVG</td><td>1배만 받아 뭉갠다</td></tr>
+          </tbody>
+        </table>
+        </div>
+        <div class="note" style="margin-bottom:0">
+          <p><b>한 줄로</b> — <b>선이면 SVG, 사진이면 배율별 비트맵.</b> 그리고 포맷을 바꾸는 쪽이 배율보다 효과가 큽니다.</p>
+        </div>
+      </section>
+
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 무엇을 내보내나<span class="hint">고를 것이 달라진다</span></h2>
+        <div class="states">
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><div style="display:grid;grid-template-columns:46px 1fr 44px;gap:5px;align-items:center;font-size:8.5px"><span>SVG</span><span style="height:8px;border-radius:3px;background:var(--accent);width:14.084507042253522%"></span><span style="font-family:var(--mono);text-align:right;color:var(--accent);font-weight:700">2 KB</span></div><div style="display:grid;grid-template-columns:46px 1fr 44px;gap:5px;align-items:center;font-size:8.5px"><span>PNG 2x</span><span style="height:8px;border-radius:3px;background:var(--line-strong);width:47.887323943661976%"></span><span style="font-family:var(--mono);text-align:right;">7 KB</span></div><div style="display:grid;grid-template-columns:46px 1fr 44px;gap:5px;align-items:center;font-size:8.5px"><span>PNG 3x</span><span style="height:8px;border-radius:3px;background:var(--line-strong);width:100.0%"></span><span style="font-family:var(--mono);text-align:right;">14 KB</span></div></div><span style="font-size:8.5px;color:var(--fg-muted)">아이콘 — 선 몇 개</span></div>
+            </div>
+            <figcaption>아이콘<span><b>SVG 한 벌.</b> 색도 CSS 로 바꾼다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><div style="display:grid;grid-template-columns:46px 1fr 44px;gap:5px;align-items:center;font-size:8.5px"><span>SVG</span><span style="height:8px;border-radius:3px;background:var(--accent);width:14.705882352941178%"></span><span style="font-family:var(--mono);text-align:right;color:var(--accent);font-weight:700">6 KB</span></div><div style="display:grid;grid-template-columns:46px 1fr 44px;gap:5px;align-items:center;font-size:8.5px"><span>PNG 2x</span><span style="height:8px;border-radius:3px;background:var(--line-strong);width:47.05882352941177%"></span><span style="font-family:var(--mono);text-align:right;">19 KB</span></div><div style="display:grid;grid-template-columns:46px 1fr 44px;gap:5px;align-items:center;font-size:8.5px"><span>PNG 3x</span><span style="height:8px;border-radius:3px;background:var(--line-strong);width:100.0%"></span><span style="font-family:var(--mono);text-align:right;">41 KB</span></div></div><span style="font-size:8.5px;color:var(--fg-muted)">로고 — 글자 포함</span></div>
+            </div>
+            <figcaption>로고<span>글꼴을 <b>윤곽선으로</b> 바꿔 내보낸다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><div style="display:grid;grid-template-columns:46px 1fr 44px;gap:5px;align-items:center;font-size:8.5px"><span>JPG 1x</span><span style="height:8px;border-radius:3px;background:var(--line-strong);width:32.25806451612903%"></span><span style="font-family:var(--mono);text-align:right;">120 KB</span></div><div style="display:grid;grid-template-columns:46px 1fr 44px;gap:5px;align-items:center;font-size:8.5px"><span>JPG 2x</span><span style="height:8px;border-radius:3px;background:var(--line-strong);width:100.0%"></span><span style="font-family:var(--mono);text-align:right;">372 KB</span></div><div style="display:grid;grid-template-columns:46px 1fr 44px;gap:5px;align-items:center;font-size:8.5px"><span>WebP 2x</span><span style="height:8px;border-radius:3px;background:var(--accent);width:51.61290322580645%"></span><span style="font-family:var(--mono);text-align:right;color:var(--accent);font-weight:700">192 KB</span></div></div><span style="font-size:8.5px;color:var(--fg-muted)">사진 — SVG 로는 못 만든다</span></div>
+            </div>
+            <figcaption>사진<span><b>포맷을 바꾸는 쪽</b>이 효과가 크다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><div style="display:grid;grid-template-columns:46px 1fr 44px;gap:5px;align-items:center;font-size:8.5px"><span>SVG</span><span style="height:8px;border-radius:3px;background:var(--line-strong);width:100.0%"></span><span style="font-family:var(--mono);text-align:right;">168 KB</span></div><div style="display:grid;grid-template-columns:46px 1fr 44px;gap:5px;align-items:center;font-size:8.5px"><span>PNG 2x</span><span style="height:8px;border-radius:3px;background:var(--line-strong);width:78.57142857142856%"></span><span style="font-family:var(--mono);text-align:right;">132 KB</span></div><div style="display:grid;grid-template-columns:46px 1fr 44px;gap:5px;align-items:center;font-size:8.5px"><span>WebP 2x</span><span style="height:8px;border-radius:3px;background:var(--accent);width:33.33333333333333%"></span><span style="font-family:var(--mono);text-align:right;color:var(--accent);font-weight:700">56 KB</span></div></div><span style="font-size:8.5px;color:var(--fg-muted)">일러스트 — 그라데이션이 많다</span></div>
+            </div>
+            <figcaption>일러스트<span><b>SVG 가 더 클 수</b> 있다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:5px"><span style="font-size:9px">아이콘 24개</span><span style="font-size:8.5px;color:var(--fg-muted)">한 파일에 모아 두면 요청이 하나</span></div><span style="font-size:8.5px;color:var(--fg-muted)">스프라이트</span></div>
+            </div>
+            <figcaption>여러 개일 때<span><b>묶어서</b> 한 번에 받는다</span></figcaption>
+          </figure>
+          <figure class="state" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:5px"><span style="font-size:9px;color:var(--danger)">1배짜리만 받았다</span><span style="font-size:8.5px;color:var(--fg-muted)">3배 화면에서 뭉갠다</span></div><span style="font-size:8.5px;color:var(--fg-muted)">가장 흔한 사고</span></div>
+            </div>
+            <figcaption>1배만 받으면<span><a href="dpr.html">화면 밀도</a>에서 드러난다</span></figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <div class="anatomy">
+          <div class="pinboard">
+            <div class="anat" role="img" aria-label="에셋 내보내기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
+                <div style="padding-left:26px;display:grid;gap:14px">
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">선 · 글자 → SVG. 어느 배율에서나 선명하다</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">사진 → WebP · AVIF. SVG 로는 못 만든다</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">비트맵은 배율별로 — 1x · 2x · 3x</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">srcset 으로 브라우저가 고르게 한다</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">글꼴은 윤곽선으로 — 없는 곳에서 깨진다</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">SVG 가 늘 작은 것은 아니다 — 점이 많으면 커진다</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="pin-list">
+            <li><b>선 · 글자 <em>SVG</em></b><span>어느 배율에서나 선명하고 <b>대개 가장 작다</b></span></li>
+            <li><b>사진 <em>WebP · AVIF</em></b><span>SVG 로는 못 만든다. <b>포맷이 먼저</b></span></li>
+            <li><b>배율별 <em>1x · 2x · 3x</em></b><span>비트맵은 <b>배율만큼</b> 필요하다</span></li>
+            <li><b>고르게 하기 <em>srcset</em></b><span>브라우저가 <b>자기 배율에 맞는 것</b>만 받는다</span></li>
+            <li><b>글꼴 <em>윤곽선으로</em></b><span>안 바꾸면 <b>그 글꼴이 없는 곳</b>에서 깨진다</span></li>
+            <li><b>SVG 의 한계 <em>점이 많으면 커진다</em></b><span>그라데이션·패턴이 많으면 <b>비트맵이 낫다</b></span></li>
+          </ol>
+        </div>
+        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
+          <b>SVG 는 코드라서 다룰 수 있는 것이 많습니다.</b>
+          <code>fill="currentColor"</code>로 두면 CSS 의 글자색을 따라가
+          <a href="../items/dark.html">다크 모드</a>에서 색을 따로 안 만들어도 되고,
+          <code>aria-hidden</code>·<code>&lt;title&gt;</code>로 읽히는 방식도 정할 수 있습니다.
+          다만 그만큼 <b>남이 만든 SVG 를 그대로 붙이면</b>
+          엉뚱한 <code>id</code>·<code>style</code>이 따라 들어와 다른 그림과 부딪히기도 합니다 —
+          받으면 한 번 훑어보는 편이 좋습니다.</p>
+      </section>
+
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+        <div class="twoup">
+          <div class="do">
+            <h3>이럴 때 쓴다</h3>
+            <ul>
+              <li>아이콘·로고는 <b>SVG</b>로 받기</li>
+              <li>사진은 <b>포맷부터</b> 바꾸기 — WebP·AVIF</li>
+              <li>비트맵은 <b>배율별</b>로 받고 <code>srcset</code> 으로 고르게 하기</li>
+            </ul>
+          </div>
+          <div class="dont">
+            <h3>이럴 때는 안 쓴다</h3>
+            <ul>
+              <li>1배짜리만 받기 — <b>3배 화면에서 뭉갠다</b></li>
+              <li>모든 그림을 3배로만 — <b>1배 기기가 손해</b>를 본다</li>
+              <li>글꼴을 윤곽선으로 안 바꾸기 — <b>깨진다</b></li>
+              <li>아이콘을 PNG 로 — <b>색을 못 바꾸고</b> 더 크다</li>
+            </ul>
+          </div>
+        </div>
+        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 배율 이야기는 <a href="dpr.html">화면 밀도</a>, 넘기는 일 전체는 <a href="handoff.html">핸드오프</a>, 글꼴 파일은 <a href="../items/webfont.html">웹폰트</a>.</p>
+      </section>
+
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <div class="cases">
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="font-family:var(--mono);font-size:9px;color:var(--accent);line-height:1.7;border:1px solid var(--line);border-radius:5px;background:var(--bg);padding:6px 7px">&lt;svg fill="currentColor"&gt;<br>  &lt;path d="…"/&gt;<br>&lt;/svg&gt;</div><span style="font-size:8.5px;color:var(--fg-muted)">글자색을 따라간다</span></div>
+            </div>
+            <figcaption><b>아이콘</b><b>다크 모드</b>가 공짜로 해결된다</figcaption>
+          </figure>
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="font-family:var(--mono);font-size:9px;color:var(--accent);line-height:1.7;border:1px solid var(--line);border-radius:5px;background:var(--bg);padding:6px 7px">&lt;img src="c-800.jpg"<br>  srcset="c-400.jpg 400w,<br>    c-1200.jpg 1200w"<br>  sizes="(min-width:900px) 33vw, 100vw"&gt;</div><span style="font-size:8.5px;color:var(--fg-muted)">브라우저가 고른다</span></div>
+            </div>
+            <figcaption><b>사진</b><b>폭과 배율</b>을 함께 다룬다</figcaption>
+          </figure>
+          <figure class="case" style="margin:0">
+            <div class="shot">
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:5px"><span style="font-size:9px;color:var(--danger)">logo@1x.png 만 받음</span><span style="font-size:8.5px;color:var(--fg-muted)">“로고가 흐릿해요”</span></div></div>
+            </div>
+            <figcaption><b>흔한 민원</b><b>2배·3배를 함께</b> 달라고 한다</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slot" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 규칙<span class="hint">이 파일의 계약서</span></h2>
+        <p>SVG 는 코드로 넣고, 비트맵은 <code>srcset</code> 으로 고르게 합니다.</p>
+<pre class="code"><span class="c">&lt;!-- 아이콘: 색을 CSS 가 정하고, 장식이면 숨긴다 --&gt;</span>
+&lt;<span class="t">svg</span> <span class="a">width</span>=<span class="s">"24"</span> <span class="a">height</span>=<span class="s">"24"</span> <span class="a">fill</span>=<span class="s">"currentColor"</span> <span class="a">aria-hidden</span>=<span class="s">"true"</span>&gt;
+  &lt;<span class="t">path</span> <span class="a">d</span>=<span class="s">"…"</span>/&gt;
+&lt;/<span class="t">svg</span>&gt;
+
+<span class="c">&lt;!-- 뜻이 있는 그림이면 이름을 준다 --&gt;</span>
+&lt;<span class="t">svg</span> <span class="a">role</span>=<span class="s">"img"</span> <span class="a">aria-label</span>=<span class="s">"이름표 로고"</span>&gt;…&lt;/<span class="t">svg</span>&gt;
+
+<span class="c">&lt;!-- 사진: 폭과 배율을 브라우저가 고르게 --&gt;</span>
+&lt;<span class="t">img</span> <span class="a">src</span>=<span class="s">"c-800.webp"</span>
+     <span class="a">srcset</span>=<span class="s">"c-400.webp 400w, c-800.webp 800w, c-1200.webp 1200w"</span>
+     <span class="a">sizes</span>=<span class="s">"(min-width: 900px) 33vw, 100vw"</span>
+     <span class="a">width</span>=<span class="s">"800"</span> <span class="a">height</span>=<span class="s">"450"</span> <span class="a">alt</span>=<span class="s">"모란상회 매장 사진"</span>&gt;</pre>
+        <div class="scroll-x">
+        <table class="grid kbd-table">
+          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <tbody>
+            <tr><td><code>fill="currentColor"</code></td><td>글자색을 따라간다. <b>다크 모드에서 색을 또 안 만들어도</b> 된다</td></tr>
+            <tr><td>장식이면 <code>aria-hidden</code></td><td>아이콘 옆에 글자가 있으면 <b>두 번 읽히지 않게</b></td></tr>
+            <tr><td>뜻이 있으면 이름</td><td>로고·상태 아이콘은 <code>role="img"</code> + <code>aria-label</code> — <a href="../items/name.html">이름 붙이기</a></td></tr>
+            <tr><td><code>width</code>·<code>height</code></td><td>미리 적으면 <b>자리가 안 덜컥거린다</b></td></tr>
+            <tr><td><code>alt</code></td><td>사진의 뜻. 장식이면 <code>alt=""</code>로 비운다</td></tr>
+            <tr><td>받은 SVG 를 훑는다</td><td>엉뚱한 <code>id</code>·<code>style</code>이 따라와 <b>다른 그림과 부딪힌다</b></td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot slot--backend" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <div class="scroll-x">
+        <table class="grid">
+          <tbody>
+            <tr><th>변환은 서버에서</th><td>원본 하나를 올려 두고 <b>필요한 크기·포맷으로</b> 내려주는 쪽이 파일을 따로 관리하는 것보다 쌉니다.</td></tr>
+            <tr><th>포맷이 더 큰 몫</th><td>WebP·AVIF 로 바꾸면 절반 아래로 떨어집니다 — <b>배율보다 먼저</b> 볼 일입니다.</td></tr>
+            <tr><th>캐시</th><td>주소를 크기·포맷마다 따로 두면 CDN 이 안 어긋납니다.</td></tr>
+            <tr><th>업로드한 사진</th><td>폰 사진은 4000px 이 넘습니다. 받자마자 <b>쓸 크기로 줄여</b> 저장합니다.</td></tr>
+            <tr><th>SVG 를 그대로 올리지 않는다</th><td>사용자가 올린 SVG 에는 <b>스크립트가 들어갈 수</b> 있습니다. 걸러 내거나 비트맵으로 바꿉니다.</td></tr>
+          </tbody>
+        </table>
+        </div>
+      </section>
+
+      <section class="slot" id="s10">
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
+        <p><b>벡터 한 벌 vs 배율별 비트맵</b>이라는 선택은 어디나 같습니다.</p>
+        <div class="platforms">
+          <div class="plat">
+            <header><b>웹</b><span>SVG · srcset</span></header>
+            <div class="shot">
+              <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="font-family:var(--mono);font-size:9px;color:var(--accent);line-height:1.7;border:1px solid var(--line);border-radius:5px;background:var(--bg);padding:6px 7px">icon.svg<br>photo@2x.webp</div></div>
+            </div>
+            <footer>SVG 를 코드로 넣을 수 있는 것이 큰 이점입니다. <b>색·접근성</b>을 CSS 로 다룹니다.</footer>
+          </div>
+          <div class="plat">
+            <header><b>iOS</b><span>@2x @3x · SF Symbols</span></header>
+            <div class="shot">
+              <div class="phone" role="img" aria-label="iOS 에셋 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
+                <div style="position:absolute;left:5px;right:5px;top:30px;font-size:5px;color:var(--fg-muted)">icon@2x.png<br>icon@3x.png</div></div></div>
+            </div>
+            <footer>파일 이름에 배율을 붙입니다. 시스템 아이콘(<b>SF Symbols</b>)은 내보낼 필요가 없습니다.</footer>
+          </div>
+          <div class="plat">
+            <header><b>안드로이드</b><span>벡터 드로어블</span></header>
+            <div class="shot">
+              <div class="phone" role="img" aria-label="안드로이드 에셋 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
+                <div style="position:absolute;left:5px;right:5px;top:30px;font-size:5px;color:var(--fg-muted)">drawable/ic_store.xml</div></div></div>
+            </div>
+            <footer><b>벡터 드로어블</b>이 SVG 자리입니다. 쓰면 배율별 폴더가 필요 없습니다.</footer>
+          </div>
+        </div>
+        <div class="note note--warn" style="margin-bottom:0">
+          <p><b>자주 생기는 사고</b> — "아이콘 파일 주세요"로 끝나면 나중에 <b>색을 못 바꾸는 PNG</b>가 쌓입니다. 받을 때 <b>SVG 로, 색은 currentColor 로</b>를 한 번 말해 두면 다크 모드·상태 색이 전부 공짜로 해결되고, 사진은 <b>원본 한 장</b>만 받아 서버에서 줄이는 쪽이 파일 관리보다 훨씬 쌉니다.</p>
+        </div>
+      </section>
+
+    </div>
+
+    <aside class="siblings">
+      <h2>헷갈리는 형제</h2>
+      <ol>
+        <li><a href="wireframe.html"><b>와이어프레임과 목업과 시안</b><em>15부</em></a></li>
+        <li><a href="designsystem.html"><b>디자인 시스템</b><em>15부</em></a></li>
+        <li><a href="component.html"><b>컴포넌트와 인스턴스</b><em>15부</em></a></li>
+        <li><a href="variant.html"><b>배리언트와 프롭</b><em>15부</em></a></li>
+        <li><a href="autolayout.html"><b>오토 레이아웃</b><em>15부</em></a></li>
+        <li><a href="prototype.html"><b>프로토타입</b><em>15부</em></a></li>
+        <li><a href="handoff.html"><b>핸드오프</b><em>15부</em></a></li>
+      </ol>
+      <h2>같이 보면 좋은 것</h2>
+      <ol>
+        <li><a href="dpr.html"><b>화면 밀도</b><em>11부</em></a></li>
+        <li><a href="handoff.html"><b>핸드오프</b><em>15부</em></a></li>
+        <li><a href="../items/webfont.html"><b>웹폰트</b><em>3부</em></a></li>
+        <li><a href="../items/dark.html"><b>다크 모드</b><em>2부</em></a></li>
+      </ol>
+      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site-foot wrap">
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+</footer>
+
+<script src="../assets/card.js"></script>
+</body>
+</html>

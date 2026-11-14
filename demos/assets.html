@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>에셋 내보내기 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 8px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 620px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>에셋 내보내기</b>
+  <label>무엇을 <select class="sel" id="kind" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="icon">아이콘 (24px, 단순한 선)</option>
+    <option value="logo">로고 (120px, 글자 포함)</option>
+    <option value="photo">사진 (가로 800px)</option>
+    <option value="illust">일러스트 (300px, 그라데이션)</option>
+  </select></label>
+</div>
+
+<div class="pad">
+  <div class="exp" id="list"></div>
+  <p class="ruler" id="verdict"></p>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  무엇을 내보내느냐에 따라 <b>고를 것이 달라집니다.</b>
+  선으로 된 아이콘·로고는 <b>SVG</b> 하나면 어느 배율에서나 선명하고 파일도 작습니다.
+  사진은 SVG 로 만들 수 없으니 <b>배율별 비트맵</b>이 필요합니다.<br>
+  크기는 <b>어림한 값</b>입니다 — 요점은 숫자가 아니라 <b>어느 쪽이 몇 배 차이나는지</b>입니다.
+  자세한 배율 이야기는 <a href="../items/dpr.html">화면 밀도</a>에 있습니다.
+</p>
+
+<script>
+(function () {
+  // [이름, 상대 크기 계수, 쓸 수 있나, 설명]
+  var TABLE = {
+    icon: {
+      base: 2,
+      rows: [
+        ['SVG', 1, true, '선 몇 개라 가장 작다. 색도 CSS 로 바꾼다'],
+        ['PNG 1x', 1.2, false, '2·3배 화면에서 뭉갠다'],
+        ['PNG 2x', 3.4, false, '쓸 수는 있지만 SVG 보다 크다'],
+        ['PNG 3x', 7.1, false, '1배 기기도 이걸 받으면 손해다']
+      ],
+      pick: 'SVG',
+      note: '선으로 된 아이콘은 <b>SVG 한 벌</b>이면 끝난다. 색을 CSS 로 바꿀 수 있는 것도 큰 이점이다'
+    },
+    logo: {
+      base: 6,
+      rows: [
+        ['SVG', 1, true, '글자를 윤곽선으로 바꿔 내보낸다'],
+        ['PNG 1x', 1.1, false, '작은 글자가 먼저 뭉갠다'],
+        ['PNG 2x', 3.2, false, '괜찮지만 SVG 가 더 작고 선명하다'],
+        ['PNG 3x', 6.8, false, '배너처럼 아주 큰 자리가 아니면 과하다']
+      ],
+      pick: 'SVG',
+      note: '글꼴을 <b>윤곽선으로</b> 바꿔 내보내지 않으면 그 글꼴이 없는 곳에서 깨진다'
+    },
+    photo: {
+      base: 120,
+      rows: [
+        ['SVG', 0, false, '사진은 SVG 로 만들 수 없다'],
+        ['JPG 1x', 1, false, '2배 화면에서 흐리다'],
+        ['JPG 2x', 3.1, true, 'srcset 으로 배율에 맞게 내려준다'],
+        ['WebP 2x', 1.6, true, '같은 화질에 절반쯤 — 요즘 기본값']
+      ],
+      pick: 'WebP 2x',
+      note: '사진은 <b>포맷을 바꾸는 쪽</b>이 배율보다 효과가 크다 — <a href="../items/dpr.html">화면 밀도</a>'
+    },
+    illust: {
+      base: 40,
+      rows: [
+        ['SVG', 4.2, false, '그라데이션·패턴이 많으면 SVG 가 더 커진다'],
+        ['PNG 1x', 1, false, '배율이 높은 화면에서 뭉갠다'],
+        ['PNG 2x', 3.3, true, '가장 무난하다'],
+        ['WebP 2x', 1.4, true, '투명도도 되고 더 작다']
+      ],
+      pick: 'WebP 2x',
+      note: '<b>SVG 가 늘 작은 것은 아니다</b> — 점이 많아지면 비트맵보다 커진다'
+    }
+  };
+
+  function draw() {
+    var k = document.getElementById('kind').value;
+    var t = TABLE[k];
+    var max = Math.max.apply(null, t.rows.map(function (r) { return r[1]; }));
+
+    document.getElementById('list').innerHTML = t.rows.map(function (r) {
+      var kb = (r[1] * t.base).toFixed(r[1] * t.base < 10 ? 1 : 0);
+      var isPick = r[0] === t.pick;
+      return '<div class="exp__row ' + (isPick ? 'pick ' : '') + (r[1] === 0 ? 'warn' : '') + '" data-k="' + r[0] + '">' +
+        '<span>' + r[0] + '</span>' +
+        '<span class="exp__bar" style="width:' + (r[1] === 0 ? 100 : Math.max(r[1] / max * 100, 4)) + '%' +
+          (r[1] === 0 ? ';background:var(--line)' : '') + '"></span>' +
+        '<span class="exp__size">' + (r[1] === 0 ? '—' : kb + ' KB') + '</span>' +
+        '<span style="font-size:11px;color:var(--fg-muted)">' + r[3] + '</span></div>';
+    }).join('');
+
+    var v = document.getElementById('verdict');
+    v.innerHTML = '이 경우에는 <b>' + t.pick + '</b>';
+    v.dataset.pick = t.pick;
+    document.getElementById('note').innerHTML = t.note;
+  }
+
+  document.getElementById('kind').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

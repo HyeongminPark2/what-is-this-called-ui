@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>오토 레이아웃 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 620px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  table.map { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.map th, table.map td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  table.map th { font-size: 11.5px; color: var(--fg-muted); }
+  table.map td.m { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>오토 레이아웃</b>
+  <label>방향 <select class="sel" id="dir" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="row">가로</option><option value="column">세로</option></select></label>
+  <label>간격 <input type="range" id="gap" class="ui-range" min="0" max="32" step="4" value="8" style="width:90px"></label>
+  <label>맞춤 <select class="sel" id="align" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="flex-start">시작</option><option value="center">가운데</option><option value="flex-end">끝</option><option value="stretch">늘리기</option></select></label>
+  <label><input type="checkbox" id="fill"> 가운데 칸 채우기</label>
+</div>
+
+<div class="pad">
+  <div class="al">
+    <div class="al__box" id="box"><i></i><i id="mid"></i><i></i></div>
+    <div class="al__code" id="code"></div>
+  </div>
+  <table class="map">
+    <thead><tr><th>피그마에서 부르는 말</th><th>CSS 에서는</th><th>뜻</th></tr></thead>
+    <tbody id="tbl"></tbody>
+  </table>
+</div>
+
+<p class="hint">
+  <b>오토 레이아웃은 플렉스박스입니다.</b> 위 조작기를 움직이면 아래에 그대로 CSS 가 나옵니다 —
+  이름만 다를 뿐 같은 것입니다.<br>
+  이 대응표를 알고 있으면 <b>“여백이 자동이에요”</b>가 <code>gap</code> 이고,
+  <b>“채우기로 해 주세요”</b>가 <code>flex: 1</code> 이라는 것이 바로 들립니다.
+  시안을 받을 때 가장 자주 오가는 말들이라, 이 표 하나로 대화가 짧아집니다.
+</p>
+
+<script>
+(function () {
+  var MAP = [
+    ['오토 레이아웃', 'display: flex', '자식들을 한 방향으로 줄 세운다'],
+    ['가로 / 세로', 'flex-direction: row / column', '어느 방향으로 쌓나'],
+    ['간격 (gap)', 'gap', '자식 사이의 빈틈'],
+    ['패딩', 'padding', '상자 안쪽 여백'],
+    ['정렬', 'align-items / justify-content', '가로축·세로축 맞춤'],
+    ['채우기 (Fill)', 'flex: 1', '남은 자리를 다 쓴다'],
+    ['감싸기 (Hug)', 'width: fit-content', '내용만큼만 차지한다'],
+    ['고정 (Fixed)', 'width: 120px', '값을 박아 둔다'],
+    ['줄바꿈', 'flex-wrap: wrap', '넘치면 다음 줄로'],
+    ['절대 위치', 'position: absolute', '오토 레이아웃에서 빼낸다']
+  ];
+
+  function draw() {
+    var dir = document.getElementById('dir').value;
+    var gap = +document.getElementById('gap').value;
+    var align = document.getElementById('align').value;
+    var fill = document.getElementById('fill').checked;
+
+    var box = document.getElementById('box');
+    box.style.flexDirection = dir;
+    box.style.gap = gap + 'px';
+    box.style.alignItems = align;
+    document.getElementById('mid').style.flex = fill ? '1' : '';
+
+    var css = 'display: flex;\nflex-direction: ' + dir + ';\ngap: ' + gap + 'px;\nalign-items: ' + align + ';';
+    if (fill) css += '\n\n/* 가운데 칸 */\n.mid { flex: 1; }';
+    var c = document.getElementById('code');
+    c.textContent = css;
+    c.dataset.dir = dir;
+    c.dataset.fill = fill ? '1' : '0';
+
+    document.getElementById('tbl').innerHTML = MAP.map(function (r) {
+      return '<tr><td>' + r[0] + '</td><td class="m">' + r[1] + '</td>' +
+        '<td style="color:var(--fg-muted);font-size:11.5px">' + r[2] + '</td></tr>';
+    }).join('');
+  }
+
+  ['dir', 'gap', 'align', 'fill'].forEach(function (id) {
+    document.getElementById(id).addEventListener('input', draw);
+    document.getElementById(id).addEventListener('change', draw);
+  });
+  draw();
+})();
+</script>
+</body>
+</html>

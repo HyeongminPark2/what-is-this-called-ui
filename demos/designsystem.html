@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>디자인 시스템 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 8px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 620px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .demo-scope { --brand: #2f6df6; }
+  .b-btn { background: var(--brand); color: #fff; border: 0; border-radius: 6px; padding: 7px 13px; font: inherit; font-size: 12.5px; cursor: pointer; }
+  .b-chip { background: color-mix(in srgb, var(--brand) 12%, transparent); color: var(--brand); border-radius: 999px; padding: 3px 9px; font-size: 11.5px; }
+  .b-link { color: var(--brand); font-size: 12.5px; }
+  .b-card { border: 1px solid var(--line); border-radius: 8px; padding: var(--s3); display: grid; gap: 6px; }
+  .b-card .t { font-size: 13px; font-weight: 700; }
+  .b-bar { height: 6px; border-radius: 3px; background: var(--brand); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>디자인 시스템</b>
+  <label>브랜드 색 <input type="color" id="brand" value="#2f6df6" style="width:44px;height:30px;padding:0;border:1px solid var(--line);border-radius:5px;background:none"></label>
+  <label><input type="checkbox" id="hard"> 색을 부품마다 박아 두기</label>
+</div>
+
+<div class="pad demo-scope" id="scope">
+  <div class="layers">
+    <div class="layer">
+      <h4>① 토큰 <em>정해 둔 값. 이름이 있다</em></h4>
+      <div class="row">
+        <span class="swatch" id="sw"></span>
+        <span class="ruler" id="tok"></span>
+      </div>
+    </div>
+    <div class="layer">
+      <h4>② 부품 <em>토큰을 쓰는 조각들</em></h4>
+      <div class="row">
+        <button class="b-btn" id="p1">저장</button>
+        <span class="b-chip" id="p2">승인됨</span>
+        <a href="#" class="b-link" id="p3" onclick="return false">자세히</a>
+        <span class="b-bar" id="p4" style="width:70px"></span>
+      </div>
+    </div>
+    <div class="layer">
+      <h4>③ 패턴 <em>부품을 모아 만든 화면 조각</em></h4>
+      <div class="b-card">
+        <span class="t">모란상회 신길역점</span>
+        <div class="row"><span class="b-chip">승인됨</span><span style="font-size:11.5px;color:var(--fg-muted)">1,284,000원</span></div>
+        <div class="row"><button class="b-btn">정산 보기</button><a href="#" class="b-link" onclick="return false">내역</a></div>
+      </div>
+    </div>
+  </div>
+  <p class="ruler" id="verdict"></p>
+</div>
+
+<p class="hint">
+  색을 바꿔 보세요 — <b>토큰 하나</b>를 고치면 부품도 패턴도 따라옵니다.
+  이게 디자인 시스템이 하는 일의 거의 전부입니다.<br>
+  <b>색을 부품마다 박아 두기</b>를 켜면 토큰과의 연결이 끊깁니다. 색을 바꿔도
+  <b>몇 개는 안 따라오고</b>, 어느 것이 안 따라왔는지는 <b>눈으로 찾아야</b> 합니다.
+  부품이 수백 개가 되면 이 차이가 몇 주가 됩니다.
+</p>
+
+<script>
+(function () {
+  var PARTS = ['p1', 'p2', 'p3', 'p4'];
+
+  function draw() {
+    var c = document.getElementById('brand').value;
+    var hard = document.getElementById('hard').checked;
+    var scope = document.getElementById('scope');
+
+    scope.style.setProperty('--brand', c);
+    document.getElementById('sw').style.background = c;
+    document.getElementById('tok').innerHTML =
+      '<b>--brand</b> : <span style="font-family:var(--mono)">' + c + '</span>';
+
+    // 박아 두면 토큰을 안 따라간다 — 처음 색에 그대로 굳는다
+    PARTS.forEach(function (id, i) {
+      var el = document.getElementById(id);
+      var stuck = hard && i < 2;                 // 넷 중 둘만 박아 둔 상황
+      if (stuck) {
+        if (id === 'p2') { el.style.color = '#2f6df6'; el.style.background = 'rgba(47,109,246,.12)'; }
+        else el.style.background = '#2f6df6';
+      } else {
+        el.style.background = ''; el.style.color = '';
+      }
+      el.dataset.stuck = stuck ? '1' : '0';
+    });
+
+    var stuckN = PARTS.filter(function (id) { return document.getElementById(id).dataset.stuck === '1'; }).length;
+    var v = document.getElementById('verdict');
+    v.innerHTML = stuckN
+      ? '<span class="warn">토큰을 안 따라오는 부품 ' + stuckN + '개</span> — 색을 바꿔도 그대로다. 어느 것인지는 눈으로 찾아야 한다'
+      : '부품 <b>' + PARTS.length + '개</b>와 패턴이 <b>토큰 하나</b>를 따라간다';
+    v.dataset.stuck = String(stuckN);
+  }
+
+  document.getElementById('brand').addEventListener('input', draw);
+  document.getElementById('hard').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>

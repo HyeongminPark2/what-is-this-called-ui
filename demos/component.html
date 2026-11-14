@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>컴포넌트와 인스턴스 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 8px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 620px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .cbtn { border: 0; border-radius: 6px; padding: 7px 14px; font: inherit; font-size: 12.5px; cursor: pointer; background: var(--accent); color: #fff; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>컴포넌트와 인스턴스</b>
+  <label>마스터 글자 <input class="ui-input" id="label" value="저장" style="width:110px;min-height:32px;font-size:13px"></label>
+  <label>모서리 <input type="range" id="r" class="ui-range" min="0" max="20" step="2" value="6" style="width:100px"></label>
+  <button class="ui-btn ui-btn--ghost" id="reset">처음부터</button>
+</div>
+
+<div class="pad">
+  <div class="inst-grid" id="grid"></div>
+  <p class="ruler" id="log"></p>
+  <p class="ruler" id="verdict"></p>
+</div>
+
+<p class="hint">
+  맨 왼쪽이 <b>마스터</b>(원본)이고 나머지는 <b>인스턴스</b>(복제본)입니다.
+  마스터의 글자나 모서리를 바꿔 보세요 — 인스턴스가 전부 따라옵니다.<br>
+  인스턴스에서 <b>떼어내기</b>를 누르면 그 하나만 연결이 끊깁니다(디태치).
+  편해 보이지만, 나중에 마스터를 고칠 때 <b>떼어낸 것만 옛 모습으로</b> 남습니다 —
+  수백 개 중 어느 것이 떼어졌는지는 <b>눈으로 찾아야</b> 합니다.
+</p>
+
+<script>
+(function () {
+  var N = 5;
+  var detached = {};        // i -> 떼어낼 때의 모습
+
+  function master() {
+    return { label: document.getElementById('label').value || '버튼',
+             r: +document.getElementById('r').value };
+  }
+
+  function draw() {
+    var m = master();
+    var html = '<div class="inst master"><button class="cbtn" style="border-radius:' + m.r + 'px">' +
+      m.label + '</button><span class="inst__tag">마스터</span></div>';
+
+    for (var i = 1; i < N; i++) {
+      var d = detached[i];
+      var s = d || m;
+      html += '<div class="inst' + (d ? ' detached' : '') + '" data-i="' + i + '">' +
+        '<button class="cbtn" style="border-radius:' + s.r + 'px' + (d ? ';background:var(--fg-muted)' : '') + '">' +
+          s.label + '</button>' +
+        '<span class="inst__tag">' + (d ? '떼어냄' : '인스턴스') + '</span>' +
+        (d ? '' : '<button class="ui-btn ui-btn--ghost" data-det="' + i + '" style="min-height:26px;padding:3px 8px;font-size:11px">떼어내기</button>') +
+        '</div>';
+    }
+    document.getElementById('grid').innerHTML = html;
+
+    var n = Object.keys(detached).length;
+    var v = document.getElementById('verdict');
+    v.innerHTML = n
+      ? '<span class="warn">떼어낸 것 ' + n + '개</span> — 마스터를 고쳐도 안 따라온다'
+      : '인스턴스 <b>' + (N - 1) + '개</b>가 마스터 하나를 따라간다';
+    v.dataset.det = String(n);
+  }
+
+  document.getElementById('grid').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-det]'); if (!b) return;
+    var i = +b.dataset.det;
+    detached[i] = master();
+    document.getElementById('log').innerHTML =
+      '<b>' + i + '번</b>을 떼어냈다 — 지금 모습 그대로 굳었다';
+    draw();
+  });
+  ['label', 'r'].forEach(function (id) {
+    document.getElementById(id).addEventListener('input', function () {
+      var n = Object.keys(detached).length;
+      document.getElementById('log').innerHTML = n
+        ? '마스터를 고쳤다 — <span class="warn">떼어낸 ' + n + '개는 안 따라왔다</span>'
+        : '마스터를 고쳤다 — <b>전부 따라왔다</b>';
+      draw();
+    });
+  });
+  document.getElementById('reset').addEventListener('click', function () {
+    detached = {};
+    document.getElementById('label').value = '저장';
+    document.getElementById('r').value = '6';
+    document.getElementById('log').textContent = '';
+    draw();
+  });
+  draw();
+})();
+</script>
+</body>
+</html>

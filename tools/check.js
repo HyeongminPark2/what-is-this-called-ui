@@ -222,6 +222,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     '11부': ['breakpoint', 'touchtarget', 'hover', 'systemback', 'dpr', 'viewport', 'softkeyboard', 'platformdiff'],
     '13부': ['login', 'onboarding', 'searchresults', 'settings', 'checkout', 'permission', 'notifications', 'destructive'],
     '14부': ['buttontext', 'errortext', 'emptytext', 'placeholder', 'koreanui', 'datetime', 'numbertext', 'voice'],
+    '15부': ['wireframe', 'designsystem', 'component', 'variant', 'autolayout', 'prototype', 'handoff', 'assets'],
   };
   const ITEMS = Object.values(PARTS).flat();
   const partOf = s => Object.keys(PARTS).find(k => PARTS[k].includes(s));
@@ -1842,6 +1843,114 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   await page.check('#mix'); await page.waitForTimeout(240);
   if (await page.getAttribute('#verdict', 'data-n') !== '3')
     fail.push('말투: 섞어도 한 가지라고 한다 (보여주려는 결과)');
+  await page.close();
+
+  // 15부 현장 용어 데모 여덟 장
+  // 와이어프레임 — 단계마다 할 수 있는 질문이 다르다
+  page = await demo('wireframe', 980, 900);
+  if (await page.locator('#pick button').count() !== 4) fail.push('와이어: 네 단계가 아니다');
+  if (await page.getAttribute('#fid', 'data-kind') !== 'wire') fail.push('와이어: 처음이 와이어프레임이 아니다');
+  if ((await page.textContent('#fid')).includes('모란상회')) fail.push('와이어: 와이어프레임에 진짜 내용이 들어 있다');
+  await page.locator('#pick button').nth(2).click(); await page.waitForTimeout(240);
+  if (await page.getAttribute('#fid', 'data-kind') !== 'visual') fail.push('와이어: 시안으로 안 바뀐다');
+  if (!(await page.textContent('#fid')).includes('모란상회')) fail.push('와이어: 시안에 진짜 내용이 없다');
+  if (!(await page.textContent('#bad')).includes('구조를 바꾸자')) fail.push('와이어: 시안에서 막을 질문을 안 적는다');
+  await page.locator('#pick button').nth(3).click(); await page.waitForTimeout(240);
+  if (!(await page.textContent('#note')).includes('아직 코드가 아니다')) fail.push('와이어: 프로토타입에 꼬리표가 없다');
+  await page.close();
+
+  // 디자인 시스템 — 토큰 하나를 바꾸면 전부 따라온다
+  page = await demo('designsystem', 980, 900);
+  if (await page.getAttribute('#verdict', 'data-stuck') !== '0') fail.push('시스템: 처음부터 끊긴 부품이 있다');
+  {
+    const before = await page.$eval('#p1', e => getComputedStyle(e).backgroundColor);
+    await page.locator('#brand').evaluate(e => { e.value = '#c0342b'; e.dispatchEvent(new Event('input', { bubbles: true })); });
+    await page.waitForTimeout(240);
+    const after = await page.$eval('#p1', e => getComputedStyle(e).backgroundColor);
+    if (before === after) fail.push('시스템: 토큰을 바꿔도 부품이 안 따라온다');
+    await page.check('#hard'); await page.waitForTimeout(240);
+    if (await page.getAttribute('#verdict', 'data-stuck') !== '2')
+      fail.push('시스템: 박아 둬도 전부 따라온다 (보여주려는 결과)');
+    if (await page.$eval('#p1', e => getComputedStyle(e).backgroundColor) !== before)
+      fail.push('시스템: 박아 둔 것이 옛 색에 안 굳었다');
+  }
+  await page.close();
+
+  // 컴포넌트 — 떼어낸 것만 안 따라온다
+  page = await demo('component', 980, 900);
+  if (await page.locator('.inst').count() !== 5) fail.push('컴포넌트: 마스터 + 인스턴스가 다섯이 아니다');
+  await page.fill('#label', '내보내기'); await page.waitForTimeout(240);
+  if (await page.locator('.inst:not(.master) .cbtn').first().textContent() !== '내보내기')
+    fail.push('컴포넌트: 인스턴스가 마스터를 안 따라온다');
+  await page.locator('[data-det="1"]').click(); await page.waitForTimeout(240);
+  if (await page.getAttribute('#verdict', 'data-det') !== '1') fail.push('컴포넌트: 떼어내기가 안 먹는다');
+  await page.fill('#label', '저장하기'); await page.waitForTimeout(240);
+  if (await page.locator('.inst.detached .cbtn').textContent() !== '내보내기')
+    fail.push('컴포넌트: 떼어낸 것도 따라온다 (보여주려는 결과)');
+  if (await page.locator('.inst:not(.master):not(.detached) .cbtn').first().textContent() !== '저장하기')
+    fail.push('컴포넌트: 나머지가 안 따라온다');
+  await page.close();
+
+  // 배리언트 — 축을 늘리면 칸이 곱으로 는다
+  page = await demo('variant', 980, 900);
+  if (await page.getAttribute('#count', 'data-total') !== '18') fail.push('배리언트: 3 × 3 × 2 가 18이 아니다');
+  if (await page.locator('.cellwrap').count() !== 18) fail.push('배리언트: 칸 수와 센 수가 다르다');
+  await page.uncheck('#p3'); await page.waitForTimeout(240);
+  if (await page.getAttribute('#count', 'data-total') !== '9') fail.push('배리언트: 축을 빼도 9가 안 된다');
+  await page.check('#p3'); await page.check('#p4'); await page.waitForTimeout(280);
+  if (await page.getAttribute('#count', 'data-total') !== '54')
+    fail.push('배리언트: 축을 더해도 54가 안 된다 (보여주려는 결과)');
+  await page.close();
+
+  // 오토 레이아웃 — 조작기와 CSS 가 같이 움직인다
+  page = await demo('autolayout', 980, 900);
+  if (await page.$eval('#box', e => getComputedStyle(e).flexDirection) !== 'row') fail.push('오토: 처음이 가로가 아니다');
+  await page.selectOption('#dir', 'column'); await page.waitForTimeout(240);
+  if (await page.$eval('#box', e => getComputedStyle(e).flexDirection) !== 'column') fail.push('오토: 세로로 안 바뀐다');
+  if (!(await page.textContent('#code')).includes('column')) fail.push('오토: CSS 가 같이 안 바뀐다');
+  await page.locator('#gap').fill('24'); await page.dispatchEvent('#gap', 'input'); await page.waitForTimeout(240);
+  if (await page.$eval('#box', e => getComputedStyle(e).gap) !== '24px') fail.push('오토: 간격이 안 먹는다');
+  await page.check('#fill'); await page.waitForTimeout(240);
+  if (await page.$eval('#mid', e => getComputedStyle(e).flexGrow) !== '1') fail.push('오토: 채우기가 flex:1 이 아니다');
+  if (!(await page.locator('table.map tr').count() >= 10)) fail.push('오토: 대응표가 짧다');
+  await page.close();
+
+  // 프로토타입 — 이어 둔 자리만 움직인다
+  page = await demo('prototype', 980, 900);
+  if (!(+(await page.getAttribute('#body', 'data-hot')) >= 1)) fail.push('프로토: 이어 둔 자리가 없다');
+  if (!(+(await page.getAttribute('#body', 'data-dead')) >= 1)) fail.push('프로토: 안 이어 둔 자리가 없다');
+  await page.locator('.dead').first().click(); await page.waitForTimeout(240);
+  if (!(await page.textContent('#log')).includes('아무 일도 안 일어난다'))
+    fail.push('프로토: 안 이어 둔 데를 눌러도 알려 주지 않는다 (보여주려는 결과)');
+  await page.locator('.hotspot').first().click(); await page.waitForTimeout(240);
+  if (!(await page.textContent('#title')).includes('모란상회')) fail.push('프로토: 이어 둔 자리가 안 움직인다');
+  if (!(await page.textContent('#stamp')).includes('그림입니다')) fail.push('프로토: 꼬리표가 없다');
+  await page.close();
+
+  // 핸드오프 — 그림만 받으면 여덟 가지를 물어보게 된다
+  page = await demo('handoff', 980, 900);
+  if (await page.locator('.spec__row').count() !== 10) fail.push('핸드오프: 열 가지가 아니다');
+  if (await page.getAttribute('#verdict', 'data-miss') !== '8')
+    fail.push('핸드오프: 그림만 받았는데 물어볼 것이 여덟이 아니다 (보여주려는 결과)');
+  if (!await page.locator('.spec__row[data-k="간격과 크기"]').evaluate(e => e.classList.contains('has')))
+    fail.push('핸드오프: 간격을 그림에서 못 잰다고 한다');
+  if (!await page.locator('.spec__row[data-k="움직임"]').evaluate(e => e.classList.contains('miss')))
+    fail.push('핸드오프: 움직임이 그림에 있다고 한다');
+  await page.check('#spec'); await page.waitForTimeout(240);
+  if (await page.getAttribute('#verdict', 'data-miss') !== '0') fail.push('핸드오프: 스펙을 받아도 물어볼 것이 남는다');
+  await page.close();
+
+  // 에셋 — 무엇을 내보내느냐에 따라 고를 것이 다르다
+  page = await demo('assets', 980, 900);
+  if (await page.getAttribute('#verdict', 'data-pick') !== 'SVG') fail.push('에셋: 아이콘에 SVG 를 안 고른다');
+  if (await page.locator('.exp__row').count() !== 4) fail.push('에셋: 네 가지를 안 견준다');
+  await page.selectOption('#kind', 'photo'); await page.waitForTimeout(240);
+  if (await page.getAttribute('#verdict', 'data-pick') !== 'WebP 2x') fail.push('에셋: 사진에 WebP 를 안 고른다');
+  if (!(await page.textContent('.exp__row[data-k="SVG"]')).includes('만들 수 없다'))
+    fail.push('에셋: 사진을 SVG 로 만들 수 있다고 한다');
+  await page.selectOption('#kind', 'illust'); await page.waitForTimeout(240);
+  if (!(await page.textContent('#note')).includes('늘 작은 것은 아니다'))
+    fail.push('에셋: SVG 가 늘 작다고 한다 (보여주려는 결과)');
   await page.close();
 
   await browser.close();

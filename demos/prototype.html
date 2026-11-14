@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>프로토타입 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); max-width: 420px; }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .hot { outline: 2px dashed var(--accent); outline-offset: 2px; }
+  .stamp { font-size: 11px; color: var(--danger); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>프로토타입</b>
+  <label><input type="checkbox" id="hotspots" checked> 이어 둔 자리 보이기</label>
+  <label><input type="checkbox" id="real"> 진짜 데이터처럼 보이기</label>
+  <button class="ui-btn ui-btn--ghost" id="reset">처음부터</button>
+</div>
+
+<div class="pad">
+  <div class="scr">
+    <div class="scr__bar" id="title">정산 목록 <span class="sp" id="pos"></span></div>
+    <div class="scr__body" id="body"></div>
+  </div>
+  <p class="ruler" id="log"></p>
+  <p class="stamp" id="stamp">이 화면은 그림입니다 — 눌리는 자리만 이어 뒀고, 나머지는 아무 일도 하지 않습니다.</p>
+</div>
+
+<p class="hint">
+  화면 세 장을 <b>이어 둔</b> 것이 프로토타입입니다. 눌리는 자리(핫스팟)만 다음 장으로 가고,
+  <b>나머지는 전부 그림</b>입니다.<br>
+  <b>이어 둔 자리 보이기</b>를 끄고 아무 데나 눌러 보세요 — 대부분 아무 일도 안 일어납니다.
+  <b>진짜 데이터처럼 보이기</b>를 켜면 더 그럴듯해지는데, 그럴수록
+  <b>“거의 다 된 거죠?”</b>라는 말이 돌아옵니다. 눌린다고 만들어진 것이 아닙니다.
+</p>
+
+<script>
+(function () {
+  var screens = ['정산 목록', '모란상회 신길역점', '내보내기'];
+  var cur = 0, misses = 0;
+
+  function rows(real) {
+    var D = [['모란상회 신길역점', '1,284,000원'], ['한빛아웃도어 영등포점', '9,827,500원'], ['새벽상사 가산점', '11,100원']];
+    return D.map(function (d, i) {
+      return '<div class="' + (i === 0 ? 'hotspot' : 'dead') + '" data-go="' + (i === 0 ? '1' : '') + '" ' +
+        'style="display:flex;gap:8px;align-items:center;border:1px solid var(--line);border-radius:6px;padding:8px;cursor:pointer">' +
+        '<span style="width:20px;height:20px;border-radius:5px;background:var(--accent-soft)"></span>' +
+        '<span style="flex:1;font-size:12.5px">' + (real ? d[0] : 'Lorem ipsum ' + (i + 1)) +
+        '<span style="display:block;font-size:11px;color:var(--fg-muted)">' + (real ? d[1] : '0,000,000') + '</span></span></div>';
+    }).join('');
+  }
+
+  function draw() {
+    var real = document.getElementById('real').checked;
+    var show = document.getElementById('hotspots').checked;
+    document.getElementById('title').firstChild.nodeValue = screens[cur] + ' ';
+    document.getElementById('pos').textContent = (cur + 1) + ' / 3';
+
+    var b = document.getElementById('body');
+    if (cur === 0) {
+      b.innerHTML = '<input class="ui-input dead" placeholder="가맹점 검색" readonly>' + rows(real);
+    } else if (cur === 1) {
+      b.innerHTML =
+        '<p style="margin:0;font-size:13px"><b>' + (real ? '모란상회 신길역점' : 'Lorem ipsum 1') + '</b></p>' +
+        '<p style="margin:0;font-size:12px;color:var(--fg-muted)">' + (real ? '1,284,000원 · 승인됨' : '0,000,000 · Status') + '</p>' +
+        '<button class="ui-btn hotspot" data-go="2">내보내기</button>' +
+        '<button class="ui-btn ui-btn--ghost hotspot" data-go="0">← 목록</button>';
+    } else {
+      b.innerHTML =
+        '<p style="margin:0;font-size:13px">기간을 고르세요</p>' +
+        '<select class="sel dead"><option>11월 1일 ~ 7일</option></select>' +
+        '<button class="ui-btn dead">내보내기</button>' +
+        '<button class="ui-btn ui-btn--ghost hotspot" data-go="0">← 목록</button>';
+    }
+
+    [].forEach.call(b.querySelectorAll('.hotspot'), function (el) {
+      el.classList.toggle('hot', show);
+    });
+    b.dataset.hot = String(b.querySelectorAll('.hotspot').length);
+    b.dataset.dead = String(b.querySelectorAll('.dead').length);
+  }
+
+  document.getElementById('body').addEventListener('click', function (e) {
+    var h = e.target.closest('.hotspot');
+    if (h) {
+      cur = +h.dataset.go; misses = 0; draw();
+      document.getElementById('log').innerHTML = '<b>' + screens[cur] + '</b> 으로 이어 뒀다';
+      return;
+    }
+    misses++;
+    document.getElementById('log').innerHTML =
+      '<span class="warn">여기는 안 이어 뒀다 — 아무 일도 안 일어난다 (' + misses + '번째)</span>';
+    document.getElementById('log').dataset.miss = String(misses);
+  });
+
+  ['hotspots', 'real'].forEach(function (id) {
+    document.getElementById(id).addEventListener('change', function () {
+      draw();
+      if (id === 'real') {
+        document.getElementById('log').innerHTML = this.checked
+          ? '진짜 데이터처럼 보인다 — <span class="warn">“거의 다 된 거죠?”가 나오는 지점</span>'
+          : 'Lorem ipsum 으로 돌아갔다 — <b>아직 그림이라는 게 보인다</b>';
+      }
+    });
+  });
+  document.getElementById('reset').addEventListener('click', function () {
+    cur = 0; misses = 0; document.getElementById('log').textContent = ''; draw();
+  });
+  draw();
+})();
+</script>
+</body>
+</html>

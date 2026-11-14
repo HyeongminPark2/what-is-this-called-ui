@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>배리언트와 프롭 데모 — 이름표</title>
+<link rel="stylesheet" href="../assets/base.css">
+<link rel="stylesheet" href="../assets/demo.css">
+<style>
+  body { background: var(--surface); font-size: 15px; margin: 0; }
+  .bar { display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .bar b { font-size: 15px; margin-right: auto; }
+  .bar label { font-size: 13px; color: var(--fg-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .pad { padding: var(--s4); display: grid; gap: var(--s4); }
+  .hint { padding: var(--s4); font-size: 13px; color: var(--fg-muted); border-top: 1px solid var(--line); }
+  .vb { border: 0; border-radius: 6px; font: inherit; cursor: default; display: inline-flex; align-items: center; justify-content: center; }
+  .vb.sm { padding: 4px 9px; font-size: 11.5px; min-height: 28px; }
+  .vb.md { padding: 7px 13px; font-size: 12.5px; min-height: 36px; }
+  .vb.lg { padding: 10px 17px; font-size: 14px; min-height: 44px; }
+  .vb.primary { background: var(--accent); color: #fff; }
+  .vb.ghost { background: transparent; color: var(--fg); border: 1px solid var(--line-strong); }
+  .vb.danger { background: var(--danger); color: #fff; }
+  .vb.off { opacity: .45; }
+  .cellwrap { display: grid; gap: 4px; justify-items: center; }
+  .cellwrap small { font-size: 10px; color: var(--fg-muted); font-family: var(--mono); }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <b>배리언트와 프롭</b>
+  <label><input type="checkbox" id="p3" checked> 상태 (켜짐/꺼짐)</label>
+  <label><input type="checkbox" id="p4"> 아이콘 자리 (앞/뒤/없음)</label>
+</div>
+
+<div class="pad">
+  <p class="ruler" id="count"></p>
+  <div class="matrix" id="matrix"></div>
+  <p class="ruler" id="note"></p>
+</div>
+
+<p class="hint">
+  <b>배리언트</b>는 같은 부품의 <b>정해진 변형</b>입니다 — 크기 셋, 강조 셋, 상태 둘.
+  코드에서는 <code>props</code>와 같은 것이고, 시안에서는 한 칸씩 만들어 둡니다.<br>
+  축을 하나 늘릴 때마다 칸이 <b>곱으로</b> 늘어납니다. 위 체크를 켜 보세요 —
+  9 → 18 → 54 가 됩니다. <b>시안에서 54칸을 손으로 만드는 것</b>이 어떤 일인지가
+  배리언트 설계가 중요한 이유입니다.
+</p>
+
+<script>
+(function () {
+  var SIZES = [['sm', '작게'], ['md', '보통'], ['lg', '크게']];
+  var TONES = [['primary', '주'], ['ghost', '약하게'], ['danger', '위험']];
+  var STATES = [['on', '켜짐'], ['off', '꺼짐']];
+  var ICONS = [['none', '없음'], ['lead', '앞'], ['trail', '뒤']];
+
+  function draw() {
+    var useState = document.getElementById('p3').checked;
+    var useIcon = document.getElementById('p4').checked;
+    var states = useState ? STATES : [['on', '']];
+    var icons = useIcon ? ICONS : [['none', '']];
+
+    var total = SIZES.length * TONES.length * states.length * icons.length;
+    var axes = ['크기 ' + SIZES.length, '강조 ' + TONES.length];
+    if (useState) axes.push('상태 ' + states.length);
+    if (useIcon) axes.push('아이콘 ' + icons.length);
+
+    var c = document.getElementById('count');
+    c.innerHTML = '축 ' + axes.length + '개 (' + axes.join(' × ') + ') → 칸 <b>' + total + '개</b>';
+    c.dataset.total = String(total);
+    c.dataset.axes = String(axes.length);
+
+    var html = '';
+    SIZES.forEach(function (sz) {
+      html += '<div class="matrix__row"><span class="matrix__lab">' + sz[1] + '</span>';
+      TONES.forEach(function (tn) {
+        states.forEach(function (st) {
+          icons.forEach(function (ic) {
+            var label = (ic[0] === 'lead' ? '◆ ' : '') + '저장' + (ic[0] === 'trail' ? ' ◆' : '');
+            var tag = [sz[0], tn[0]];
+            if (useState) tag.push(st[0]);
+            if (useIcon) tag.push(ic[0]);
+            html += '<span class="cellwrap"><span class="vb ' + sz[0] + ' ' + tn[0] +
+              (st[0] === 'off' ? ' off' : '') + '" data-v="' + tag.join('/') + '">' + label + '</span>' +
+              '<small>' + tag.join('/') + '</small></span>';
+          });
+        });
+      });
+      html += '</div>';
+    });
+    document.getElementById('matrix').innerHTML = html;
+
+    var n = document.getElementById('note');
+    n.innerHTML = total > 20
+      ? '<span class="warn">' + total + '칸</span> — 손으로 만들 수는 있지만 <b>고칠 때마다 ' + total + '번</b>이다. 축을 줄이거나 부품을 쪼갠다'
+      : '<b>' + total + '칸</b> — 아직 손으로 다룰 만하다';
+  }
+
+  document.getElementById('p3').addEventListener('change', draw);
+  document.getElementById('p4').addEventListener('change', draw);
+  draw();
+})();
+</script>
+</body>
+</html>
