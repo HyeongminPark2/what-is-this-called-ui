@@ -32,12 +32,12 @@
 </div>
 
 <p class="hint">
-  같은 거리를 <b>네 가지 방법</b>으로 움직여 보고, 프레임 하나를 만드는 데 걸린 시간을 잽니다.<br>
-  <code>transform</code>과 <code>opacity</code>는 <b>배치를 다시 계산하지 않습니다</b> — 이미 그려 둔 그림을
-  옮기고 투명도만 바꾸면 되기 때문입니다.
-  <code>left</code>·<code>width</code>는 <b>상자의 자리와 크기</b>를 바꾸므로 그 줄의 배치를 전부 다시 재야 합니다.
-  (<code>box-shadow</code>·<code>filter</code>처럼 자리는 그대로여도 <b>다시 칠해야</b> 하는 것이 중간쯤입니다.)
-  상자 수를 올리면 차이가 벌어집니다 — 그 차이가 <b>버벅임</b>입니다.
+  같은 거리를 <b>네 가지 방법</b>으로 움직이면서 프레임 하나를 만드는 데 걸린 시간을 잽니다.<br>
+  <code>transform</code>과 <code>opacity</code>는 이미 그려 둔 그림을 옮기거나 투명도만 바꾸면 되기 때문에
+  <b>배치를 다시 계산하지 않습니다</b>.
+  반면 <code>left</code>와 <code>width</code>는 <b>상자의 자리와 크기</b>를 바꾸므로 그 줄의 배치를 전부 다시 계산해야 합니다.
+  (<code>box-shadow</code>나 <code>filter</code>처럼 자리는 그대로여도 <b>다시 칠해야</b> 하는 속성은 비용이 그 중간쯤입니다.)
+  상자 수를 늘리면 차이가 벌어지고, 이렇게 늘어난 시간이 화면에서는 <b>버벅임</b>으로 나타납니다.
 </p>
 
 <script>

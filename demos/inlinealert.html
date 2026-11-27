@@ -43,14 +43,14 @@
 </div>
 
 <p class="hint">
-  인라인 얼럿은 <b>뜨지 않습니다</b> — 흐름 안에 자리를 차지하고 눌러서 치우지 않아도 됩니다.
-  <b>보내기</b>를 눌러 보세요. 붙이는 자리를 바꿔 가며
-  데모가 <b>틀린 칸에서 메시지까지의 거리(px)</b>를 재서 적습니다.<br>
-  <b>칸 바로 아래</b>면 거리가 0에 가깝고, <b>맨 위에 모으면</b> 수백 px 떨어져
-  어느 칸이 틀렸는지 찾아 내려가야 합니다. <b>토스트</b>는 사라져서
-  다시 볼 수도 없습니다 — 데모가 사라지는 것도 셉니다.<br>
-  어느 쪽이든 <code>aria-describedby</code> 로 <b>칸과 메시지를 묶어야</b>
-  소리로 들을 때 짝이 유지됩니다.
+  인라인 얼럿은 화면 위에 <b>뜨지 않고</b> 문서 흐름 안에 자리를 차지하며, 사용자가 눌러서 치울 필요가 없습니다.
+  메시지를 붙이는 자리를 바꿔 가며 <b>보내기</b>를 눌러 보세요.
+  데모가 <b>틀린 칸에서 메시지까지의 거리(px)</b>를 재서 적어 줍니다.<br>
+  <b>칸 바로 아래</b>에 붙이면 거리가 0에 가깝지만, <b>맨 위에 모으면</b> 수백 px 떨어져서
+  사용자가 어느 칸이 틀렸는지 찾아 내려가야 합니다. <b>토스트</b>로 띄우면 메시지가 사라져서
+  다시 볼 수도 없는데, 데모는 토스트가 사라졌는지도 표시합니다.<br>
+  어느 자리에 붙이든 <code>aria-describedby</code>로 <b>칸과 메시지를 묶어야</b>
+  스크린 리더로 들을 때도 어느 칸의 메시지인지 알 수 있습니다.
 </p>
 
 <script>
@@ -89,10 +89,10 @@
     rd.innerHTML = '붙인 자리 <b>' +
       ({ field: '칸 바로 아래', top: '폼 맨 위', toast: '토스트' }[k]) + '</b>' +
       (msg ? '<br>틀린 칸에서 메시지까지 <b>' + dist + 'px</b>' +
-        (dist > 100 ? ' <span class="warn">— 멀어서 찾아 내려가야 한다</span>' : '') : '') +
-      '<br>칸과 메시지가 묶였나 <b>' + (tied ? '묶였다' : '안 묶였다') + '</b>' +
-      (tied ? '' : ' <span class="warn">— 소리로는 짝이 안 전해진다</span>') +
-      (gone ? '<br><span class="warn">몇 초 뒤 사라진다</span> — 다시 볼 수 없다' : '') +
+        (dist > 100 ? ' <span class="warn">— 칸과 멀어서 찾아 내려가야 합니다</span>' : '') : '') +
+      '<br>칸과 메시지 묶음 <b>' + (tied ? '묶임' : '안 묶임') + '</b>' +
+      (tied ? '' : ' <span class="warn">— 스크린 리더로는 어느 칸의 메시지인지 알 수 없습니다</span>') +
+      (gone ? '<br><span class="warn">몇 초 뒤 사라집니다</span>. 사라지면 다시 볼 수 없습니다' : '') +
       (why ? '<br>' + why : '');
     rd.dataset.dist = String(dist);
     rd.dataset.tied = String(tied);
@@ -113,20 +113,20 @@
       document.getElementById('s3').innerHTML = alertHtml('e3', '정산 계좌를 적어 주세요');
       f2.setAttribute('aria-describedby', 'e2');
       document.getElementById('f3').setAttribute('aria-describedby', 'e3');
-      document.getElementById('log').innerHTML = '<b>칸마다</b> 붙였다 — 어디를 고칠지 바로 보인다';
+      document.getElementById('log').innerHTML = '메시지를 <b>칸마다</b> 붙였습니다. 어디를 고쳐야 하는지 바로 보입니다';
     } else if (k === 'top') {
       document.getElementById('topslot').innerHTML =
         '<p class="ial err" role="alert"><span aria-hidden="true">!</span><span>' +
         '고쳐야 할 칸이 2개 있습니다 — 사업자번호 · 정산 계좌</span></p>';
-      document.getElementById('log').innerHTML = '<b>맨 위에</b> 모았다 — 몇 개인지는 한눈에 보인다';
+      document.getElementById('log').innerHTML = '메시지를 <b>맨 위에</b> 모았습니다. 고칠 칸이 몇 개인지는 한눈에 보입니다';
     } else {
       document.getElementById('toastslot').innerHTML =
         '<div class="suc__toast" role="alert">사업자번호를 확인해 주세요</div>';
       toastT = setTimeout(function () {
         document.getElementById('toastslot').innerHTML = '';
-        report('<span class="warn">토스트가 사라졌다</span>');
+        report('<span class="warn">토스트가 사라졌습니다</span>');
       }, 2500);
-      document.getElementById('log').innerHTML = '<span class="warn">토스트로 띄웠다</span> — 곧 사라진다';
+      document.getElementById('log').innerHTML = '<span class="warn">토스트로 띄웠습니다</span>. 토스트는 곧 사라집니다';
     }
     report('');
   });

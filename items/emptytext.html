@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>빈 상태 문구 — 이름표</title>
-<meta name="description" content="왜 비었는지에 따라 할 말이 다르다. 아직 없음·0건·못 봄·다 끝냄·실패를 가르는 법.">
+<meta name="description" content="화면이 왜 비었는지에 따라 적을 말이 달라집니다. 아직 없음·0건·못 봄·다 끝냄·실패를 가려 쓰는 방법을 다룹니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">14부 말투</a> › 빈 상태 문구</p>
     <h1>빈 상태 문구</h1>
     <p class="en">Empty state copy</p>
-    <p class="lede" style="margin-top:var(--s3)">빈 화면은 한 가지가 아닙니다. <b>왜 비었는지</b>에 따라 할 말이 전혀 다릅니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">빈 화면에 적을 말은 <b>왜 비었는지</b>에 따라 전혀 다릅니다. 아직 만든 것이 없을 때와 검색 결과가 0건일 때, 불러오지 못했을 때는 사용자가 할 일이 서로 다르기 때문입니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,29 +50,29 @@
           <iframe src="../demos/emptytext.html" title="빈 상태 문구 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>다섯 가지 빈 상태를 눌러 가며 봐 보세요 — 아직 만든 게 없을 때, 찾았는데 0건일 때,
-          볼 수 없을 때, 다 끝냈을 때, 못 불러왔을 때.<br>
-          <b>‘데이터가 없습니다’</b>는 이 다섯을 한 문장으로 뭉갠 말이라 <b>어느 경우에도 안 맞습니다</b>.</p>
+          <p>아직 만든 것이 없을 때, 찾았는데 0건일 때, 볼 수 없을 때,
+          다 끝냈을 때, 불러오지 못했을 때까지 다섯 가지 빈 상태를 눌러 가며 견줘 보세요.<br>
+          <b>‘데이터가 없습니다’</b>는 이 다섯 경우를 한 문장으로 뭉뚱그린 말이라서 <b>어느 경우에도 맞지 않습니다</b>.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>빈 상태 문구, 빈 화면 안내, 제로 스테이트</td></tr>
             <tr><th>영어</th><td>empty state copy, zero state, blank slate</td></tr>
-            <tr><th>같이 쓰는 말</th><td>처음 와서 아무것도 없는 상태를 <b>제로 스테이트</b>·<b>블랭크 슬레이트</b>, 그 자리를 설명으로 채우는 것을 <b>온보딩 빈 상태</b>라 부르기도 합니다. 검색에서 아무것도 안 나온 것은 따로 <b>노 리절트</b>(no results)라 가릅니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>빈 상태</b> — <a href="../items/empty.html">빈 상태</a>는 <b>화면의 모습</b>, 이쪽은 <b>거기 적는 말</b>입니다.<br><b>에러</b> — 못 불러온 것은 <b>비어 있는 게 아니라 실패한</b> 것입니다. 섞으면 사용자가 기다리지 않습니다.<br><b>스켈레톤</b> — <a href="../items/skeleton.html">스켈레톤</a>은 <b>아직 오는 중</b>입니다. 빈 상태는 <b>안 오는 것</b>입니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>처음 들어와 아직 아무것도 없는 상태는 <b>제로 스테이트</b>·<b>블랭크 슬레이트</b>라고 하고, 그 자리를 사용법 설명으로 채운 것을 <b>온보딩 빈 상태</b>라고 부르기도 합니다. 검색 결과가 하나도 없는 경우는 따로 <b>노 리절트</b>(no results)라고 부릅니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>빈 상태</b> — <a href="../items/empty.html">빈 상태</a>는 비어 있는 <b>화면 모습</b>이고, 빈 상태 문구는 <b>그 화면에 적는 말</b>입니다.<br><b>에러</b> — 목록을 불러오지 못한 것은 <b>비어 있는 것이 아니라 실패한</b> 것입니다. 실패를 빈 상태처럼 보여 주면 사용자는 원래 없는 줄 알고 기다리거나 다시 시도하지 않습니다.<br><b>스켈레톤</b> — <a href="../items/skeleton.html">스켈레톤</a>은 내용을 <b>아직 불러오는 중</b>일 때 보여 주고, 빈 상태는 불러온 결과에 <b>보여 줄 내용이 없을</b> 때 보여 줍니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>화면의 말은 꾸미는 것이 아니라 <b>일하는 것</b>입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>화면에 적는 문구는 사용자가 <b>무엇을 하면 되는지</b> 알려 주려고 씁니다. 아래 네 가지를 물어보면 문구마다 알려야 할 것과 자주 틀리는 곳, 고치는 기준이 드러납니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>무엇을 알려야 하나</th><th>흔한 실수</th><th>고치는 기준</th><th>한국어에서 더 조심할 것</th></tr></thead>
@@ -89,7 +89,7 @@
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — <b>왜 비었는지부터 가르세요.</b> 다섯 경우는 다섯 가지 말이 필요하고, 하나로 쓰면 다섯 번 틀립니다.</p>
+          <p><b>빈 상태 문구를 한 줄로 정리하면</b> — <b>화면이 왜 비었는지부터 가르세요.</b> 다섯 경우마다 사용자가 할 일이 다르기 때문에 문구도 다섯 가지가 필요하고, 한 문구로 모두 처리하면 어느 경우에도 맞지 않습니다.</p>
         </div>
       </section>
 
@@ -100,46 +100,46 @@
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--bg);padding:12px 8px;text-align:center;display:grid;gap:3px;place-items:center"><span style="font-size:9.5px;font-weight:700">아직 등록한 가맹점이 없어요</span><span style="font-size:8.5px;color:var(--fg-muted);max-width:22ch">가맹점을 등록하면 정산이 여기 쌓입니다</span><span style="display:inline-block;background:var(--accent);color:#fff;border-radius:4px;padding:3px 10px;font-size:9px">가맹점 등록</span></div><span style="font-size:8.5px;color:var(--fg-muted)">처음 온 사람에게는 빈 화면이 첫 설명이다</span></div>
             </div>
-            <figcaption>아직 없음<span><b>무엇을 하면 되는지</b> 적는다</span></figcaption>
+            <figcaption>아직 없음<span><b>무엇을 하면 되는지</b> 적습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--bg);padding:12px 8px;text-align:center;display:grid;gap:3px;place-items:center"><span style="font-size:9.5px;font-weight:700">‘모란닭강정’에 맞는 가맹점이 없습니다</span><span style="font-size:8.5px;color:var(--fg-muted);max-width:22ch">철자를 확인하거나 조건을 줄여 보세요</span><span style="display:inline-block;background:var(--accent);color:#fff;border-radius:4px;padding:3px 10px;font-size:9px">조건 지우기</span></div><span style="font-size:8.5px;color:var(--fg-muted)">친 글자를 그대로 적는다</span></div>
             </div>
-            <figcaption>찾았는데 0건<span><b>막다른 길</b>로 두지 않는다</span></figcaption>
+            <figcaption>찾았는데 0건<span>조건을 바꾸는 방법을 알려 주고, <b>더 할 일이 없는 화면</b>으로 두지 않습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--bg);padding:12px 8px;text-align:center;display:grid;gap:3px;place-items:center"><span style="font-size:9.5px;font-weight:700">이 목록은 볼 수 없습니다</span><span style="font-size:8.5px;color:var(--fg-muted);max-width:22ch">가맹점 관리자만 볼 수 있어요</span><span style="display:inline-block;background:var(--accent);color:#fff;border-radius:4px;padding:3px 10px;font-size:9px">관리자에게 요청</span></div><span style="font-size:8.5px;color:var(--fg-muted)">없는 것과 못 보는 것은 다르다</span></div>
             </div>
-            <figcaption>볼 수 없음<span>없다고 하면 <b>엉뚱한 데를 찾는다</b></span></figcaption>
+            <figcaption>볼 수 없음<span>권한이 없는 것을 내용이 없다고 적으면 사용자가 <b>엉뚱한 곳을 찾아다닙니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--bg);padding:12px 8px;text-align:center;display:grid;gap:3px;place-items:center"><span style="font-size:9.5px;font-weight:700">처리할 정산이 없습니다</span><span style="font-size:8.5px;color:var(--fg-muted);max-width:22ch">오늘 들어온 12건을 모두 끝내셨어요</span></div><span style="font-size:8.5px;color:var(--fg-muted)">이건 좋은 소식이다</span></div>
             </div>
-            <figcaption>다 끝냄<span><b>텅 빈 화면</b>으로 보이게 두지 않는다</span></figcaption>
+            <figcaption>다 끝냄<span>할 일을 모두 끝낸 상태이므로 <b>텅 빈 화면</b>처럼 보이게 두지 않습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--bg);padding:12px 8px;text-align:center;display:grid;gap:3px;place-items:center"><span style="font-size:9.5px;font-weight:700">목록을 불러오지 못했습니다</span><span style="font-size:8.5px;color:var(--fg-muted);max-width:22ch">연결을 확인하고 다시 시도해 주세요</span><span style="display:inline-block;background:var(--accent);color:#fff;border-radius:4px;padding:3px 10px;font-size:9px">다시 시도</span></div><span style="font-size:8.5px;color:var(--fg-muted)">비어 있는 게 아니라 실패한 것</span></div>
             </div>
-            <figcaption>못 불러옴<span><a href="errortext.html">오류 문구</a>로 넘어간다</span></figcaption>
+            <figcaption>못 불러옴<span>비어 있는 것이 아니라 실패한 것이므로 <a href="errortext.html">오류 문구</a>로 다룹니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--bg);padding:12px 8px;text-align:center;display:grid;gap:3px;place-items:center"><span style="font-size:9.5px;font-weight:700">데이터가 없습니다</span></div><span style="font-size:8.5px;color:var(--fg-muted)">다섯 경우를 한 문장으로 뭉갰다</span></div>
             </div>
-            <figcaption>뭉갠 문구<span><b>어느 경우에도 안 맞는다</b></span></figcaption>
+            <figcaption>뭉갠 문구<span>다섯 경우 <b>어디에도 맞지 않습니다</b></span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="빈 상태 문구의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="빈 상태 문구의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">왜 비었나 — 아직 없음 / 0건 / 못 봄 / 다 끝냄 / 실패</div>
@@ -153,75 +153,75 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>왜 비었나 <em>다섯 갈래</em></b><span><b>이걸 먼저 가르지</b> 않으면 문구를 못 쓴다</span></li>
-            <li><b>제목 <em>문장으로</em></b><span>'아직 등록한 가맹점이 없어요'. <b>명사로 끝내지 않는다</b></span></li>
-            <li><b>설명 <em>채우면 어떻게 되나</em></b><span>'등록하면 정산이 여기 쌓입니다'</span></li>
-            <li><b>버튼 <em>할 수 있는 일 하나</em></b><span><b>하나만.</b> 셋을 늘어놓으면 아무것도 안 고른다</span></li>
-            <li><b>좋은 소식 <em>다 끝냈을 때</em></b><span>버튼이 없어도 된다. <b>칭찬하는 자리</b>다</span></li>
-            <li><b>뭉갠 문구 <em>데이터가 없습니다</em></b><span>다섯을 한 말로 — <b>가장 흔한 실수</b></span></li>
+            <li><b>왜 비었나 <em>다섯 갈래</em></b><span><b>왜 비었는지를 먼저 가르지</b> 않으면 알맞은 문구를 쓸 수 없습니다</span></li>
+            <li><b>제목 <em>문장으로</em></b><span>'아직 등록한 가맹점이 없어요'처럼 문장으로 쓰고 <b>명사로 끝내지 않습니다</b></span></li>
+            <li><b>설명 <em>채우면 어떻게 되나</em></b><span>'등록하면 정산이 여기 쌓입니다'처럼 채우고 나면 어떻게 되는지 적습니다</span></li>
+            <li><b>버튼 <em>할 수 있는 일 하나</em></b><span>할 수 있는 일을 <b>하나만</b> 버튼으로 둡니다. 버튼 셋을 늘어놓으면 사용자가 어느 것도 고르지 않기 쉽습니다</span></li>
+            <li><b>좋은 소식 <em>다 끝냈을 때</em></b><span>버튼이 없어도 됩니다. 일을 다 끝낸 것을 알려 주고 <b>칭찬하는 자리</b>입니다</span></li>
+            <li><b>뭉갠 문구 <em>데이터가 없습니다</em></b><span>다섯 경우를 한 문장으로 뭉뚱그린 문구로, <b>가장 흔한 실수</b>입니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          <b>그림을 크게 그리는 것보다 문장 하나가 낫습니다.</b>
-          빈 상태 시안에는 큰 일러스트가 자주 들어오는데,
-          사용자가 거기서 원하는 것은 <b>'왜 비었고 뭘 하면 되나'</b>입니다.
-          그림은 그 답을 못 합니다.
-          그리고 처음 온 사람에게 이 화면은 <b>제품의 첫 설명</b>이기도 합니다 —
-          <a href="onboarding.html">온보딩</a>으로 따로 묻는 대신
-          여기서 한 줄로 알려 주면 단계 하나가 통째로 사라집니다.</p>
+          <b>빈 화면에는 큰 그림보다 문장 한 줄이 더 쓸모 있습니다.</b>
+          빈 상태 시안에는 큰 일러스트가 자주 들어가지만,
+          사용자가 그 화면에서 알고 싶은 것은 <b>'왜 비었고 무엇을 하면 되나'</b>이고
+          그림만으로는 이 물음에 답할 수 없습니다.
+          또 처음 온 사람에게 빈 화면은 <b>제품을 처음 설명하는 자리</b>이기도 합니다.
+          <a href="onboarding.html">온보딩</a> 단계를 따로 두는 대신
+          빈 화면에 한 줄로 사용법을 알려 주면 온보딩 단계를 하나 줄일 수 있습니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>빈 상태 문구를 쓰는 경우</h3>
             <ul>
               <li><b>왜 비었는지</b>부터 가르기</li>
-              <li>채우면 어떻게 되는지 <b>한 줄</b></li>
-              <li>할 수 있는 일을 <b>버튼 하나</b>로</li>
+              <li>채우면 어떻게 되는지 <b>한 줄</b>로 적기</li>
+              <li>할 수 있는 일을 <b>버튼 하나</b>로 두기</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>빈 상태 문구를 쓰지 않는 경우</h3>
             <ul>
-              <li>‘데이터가 없습니다’ — 다섯을 한 말로 뭉갠다</li>
-              <li>실패를 빈 상태로 보이게 하기 — <b>기다리지 않게</b> 된다</li>
-              <li>큰 그림만 두고 <b>할 일은 안 적기</b></li>
-              <li>다 끝낸 화면을 <b>텅 빈 것</b>처럼 보여 주기</li>
+              <li>‘데이터가 없습니다’라고 적을 때. 다섯 경우를 한 문장으로 뭉뚱그린 말입니다</li>
+              <li>불러오기 실패를 빈 상태처럼 보여 줄 때. 사용자가 원래 없는 줄 알고 <b>기다리지 않게</b> 됩니다</li>
+              <li>큰 그림만 두고 <b>할 일은 적지 않을 때</b></li>
+              <li>다 끝낸 화면을 <b>텅 빈 것</b>처럼 보여 줄 때</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 화면 모습은 <a href="../items/empty.html">빈 상태</a>, 실패면 <a href="errortext.html">오류 문구</a>, 아직 오는 중이면 <a href="../items/skeleton.html">스켈레톤</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>빈 상태 문구 대신 다른 것을 써야 하는 경우</b> — 화면 모습은 <a href="../items/empty.html">빈 상태</a>, 실패면 <a href="errortext.html">오류 문구</a>, 아직 오는 중이면 <a href="../items/skeleton.html">스켈레톤</a>.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--bg);padding:12px 8px;text-align:center;display:grid;gap:3px;place-items:center"><span style="font-size:9.5px;font-weight:700">아직 등록한 가맹점이 없어요</span><span style="font-size:8.5px;color:var(--fg-muted);max-width:22ch">등록하면 정산이 여기 쌓입니다</span><span style="display:inline-block;background:var(--accent);color:#fff;border-radius:4px;padding:3px 10px;font-size:9px">가맹점 등록</span></div></div>
             </div>
-            <figcaption><b>첫 화면</b><b>제품의 첫 설명</b>이 되는 자리</figcaption>
+            <figcaption><b>첫 화면</b>처음 온 사용자에게 <b>제품을 처음 설명하는</b> 자리입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--bg);padding:12px 8px;text-align:center;display:grid;gap:3px;place-items:center"><span style="font-size:9.5px;font-weight:700">‘모란닭강정’에 맞는 것이 없습니다</span><span style="font-size:8.5px;color:var(--fg-muted);max-width:22ch">조건을 줄여 보세요</span><span style="display:inline-block;background:var(--accent);color:#fff;border-radius:4px;padding:3px 10px;font-size:9px">조건 지우기</span></div></div>
             </div>
-            <figcaption><b>0건</b><a href="searchresults.html">검색 결과</a>에서</figcaption>
+            <figcaption><b>0건</b><a href="searchresults.html">검색 결과</a> 화면에서 씁니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--bg);padding:12px 8px;text-align:center;display:grid;gap:3px;place-items:center"><span style="font-size:9.5px;font-weight:700">처리할 정산이 없습니다</span><span style="font-size:8.5px;color:var(--fg-muted);max-width:22ch">오늘 12건을 모두 끝내셨어요</span></div></div>
             </div>
-            <figcaption><b>다 끝냄</b><b>좋은 소식</b>으로 적는다</figcaption>
+            <figcaption><b>다 끝냄</b>할 일을 다 끝냈다는 <b>좋은 소식</b>으로 적습니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 규칙<span class="hint">이 문구의 계약서</span></h2>
-        <p>빈 상태도 <b>제목이 있는 구역</b>입니다.</p>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 규칙<span class="hint">코드로 옮길 때 지킬 것</span></h2>
+        <p>빈 상태도 <b>제목이 있는 구역</b>으로 마크업합니다.</p>
 <pre class="code">&lt;<span class="t">section</span> <span class="a">aria-labelledby</span>=<span class="s">"e-t"</span>&gt;
   &lt;<span class="t">img</span> <span class="a">src</span>=<span class="s">"empty.svg"</span> <span class="a">alt</span>=<span class="s">""</span>&gt;        <span class="c">&lt;!-- 장식이면 alt 를 비운다 --&gt;</span>
   &lt;<span class="t">h2</span> <span class="a">id</span>=<span class="s">"e-t"</span>&gt;아직 등록한 가맹점이 없어요&lt;/<span class="t">h2</span>&gt;
@@ -233,43 +233,43 @@
 &lt;<span class="t">p</span> <span class="a">role</span>=<span class="s">"status"</span>&gt;‘모란닭강정’ 검색 결과 0건&lt;/<span class="t">p</span>&gt;</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td><code>&lt;h2&gt;</code>로 적는다</td><td>구역의 제목이다. <b>건너뛰어 읽을</b> 수 있게 된다</td></tr>
-            <tr><td>그림은 <code>alt=""</code></td><td>장식이면 비운다. <b>'빈 상자 그림'</b>을 읽어 줘 봐야 쓸모없다</td></tr>
-            <tr><td><code>role="status"</code></td><td>0건으로 바뀐 것을 알린다. <b>목록만 비면</b> 눈으로 안 보는 사람은 모른다</td></tr>
-            <tr><td>초점</td><td>검색 0건일 때 <b>초점을 옮기지 않는다.</b> 계속 치고 있을 수 있다</td></tr>
-            <tr><td>버튼은 <code>&lt;a&gt;</code>일 수도</td><td>이동이면 링크, 동작이면 버튼 — <a href="../items/semantics.html">시맨틱 태그</a></td></tr>
-            <tr><td>대비비</td><td>빈 상태 글은 <b>흐리게 쓰기 쉽다.</b> 4.5:1 을 지킨다 — <a href="../items/contrast.html">대비비</a></td></tr>
+            <tr><td><code>&lt;h2&gt;</code>로 적는다</td><td>빈 상태 문구의 제목을 구역 제목으로 적으면, 스크린 리더 사용자가 제목 단위로 <b>건너뛰며 읽을</b> 수 있습니다</td></tr>
+            <tr><td>그림은 <code>alt=""</code></td><td>장식용 그림이면 alt를 비웁니다. 스크린 리더가 <b>'빈 상자 그림'</b>이라고 읽어 줘도 사용자에게 도움이 되지 않습니다</td></tr>
+            <tr><td><code>role="status"</code></td><td>검색 결과가 0건으로 바뀐 것을 알립니다. <b>목록만 비우면</b> 화면을 눈으로 보지 않는 사용자는 결과가 없다는 것을 알 수 없습니다</td></tr>
+            <tr><td>초점</td><td>검색 결과가 0건이어도 <b>초점을 옮기지 않습니다.</b> 사용자가 아직 검색어를 치고 있을 수 있기 때문입니다</td></tr>
+            <tr><td>버튼은 <code>&lt;a&gt;</code>일 수도</td><td>다른 화면으로 이동하면 링크로, 그 자리에서 동작하면 버튼으로 만듭니다(<a href="../items/semantics.html">시맨틱 태그</a>)</td></tr>
+            <tr><td>대비비</td><td>빈 상태 글은 <b>흐린 색으로 쓰기 쉬운데</b>, 그래도 대비비 4.5:1은 지킵니다(<a href="../items/contrast.html">대비비</a>)</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>왜 비었는지를 함께 보낸다</th><td><code>{"items":[],"reason":"no_permission"}</code>. 빈 배열만 오면 화면이 <b>다섯 경우를 못 가릅니다</b>.</td></tr>
-            <tr><th>0건과 실패를 가른다</th><td>실패를 빈 배열로 돌려주면 <b>'없다'고 거짓말</b>하게 됩니다.</td></tr>
-            <tr><th>조건을 함께 돌려준다</th><td>0건일 때 <b>무엇으로 찾았는지</b>를 받아야 '‘모란닭강정’에 맞는 것이 없습니다'라고 쓸 수 있습니다.</td></tr>
-            <tr><th>처음 온 계정인지</th><td>'아직 없음'과 '다 지움'은 다릅니다. <b>한 번이라도 만든 적이 있는지</b>를 알면 문구가 달라집니다.</td></tr>
+            <tr><th>왜 비었는지를 함께 보낸다</th><td><code>{"items":[],"reason":"no_permission"}</code>처럼 이유를 함께 보냅니다. 빈 배열만 오면 화면이 <b>다섯 경우를 가를 수 없습니다</b>.</td></tr>
+            <tr><th>0건과 실패를 가른다</th><td>불러오기에 실패했는데 빈 배열을 돌려주면, 화면은 실제로는 있을 수 있는 내용을 <b>'없다'고 잘못 알리게</b> 됩니다.</td></tr>
+            <tr><th>조건을 함께 돌려준다</th><td>0건일 때 <b>어떤 조건으로 찾았는지</b>를 함께 받아야 화면에 '‘모란닭강정’에 맞는 것이 없습니다'라고 쓸 수 있습니다.</td></tr>
+            <tr><th>처음 온 계정인지</th><td>처음부터 아무것도 없는 '아직 없음'과 만들었다가 모두 지운 '다 지움'은 다른 상황입니다. 서버가 <b>한 번이라도 만든 적이 있는지</b>를 알려 주면 화면이 두 경우에 맞는 문구를 따로 쓸 수 있습니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p><b>문구 + 버튼 하나</b>라는 꼴은 셋이 같습니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>세 플랫폼 모두 빈 상태를 <b>문구와 버튼 하나</b>로 구성합니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>섹션으로</span></header>
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--bg);padding:12px 8px;text-align:center;display:grid;gap:3px;place-items:center"><span style="font-size:9.5px;font-weight:700">아직 없어요</span><span style="font-size:8.5px;color:var(--fg-muted);max-width:22ch">등록하면 쌓입니다</span><span style="display:inline-block;background:var(--accent);color:#fff;border-radius:4px;padding:3px 10px;font-size:9px">등록</span></div></div>
             </div>
-            <footer>제목·설명·버튼. 그림은 선택입니다. <b>0건은 따로</b> 다룹니다.</footer>
+            <footer>제목과 설명, 버튼으로 구성하고 그림은 넣어도 되고 빼도 됩니다. 검색 결과 <b>0건은 따로</b> 다룹니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>ContentUnavailableView</span></header>
@@ -277,7 +277,7 @@
               <div class="phone" role="img" aria-label="iOS 빈 상태 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:0;right:0;top:40px;text-align:center;font-size:6px">아직 없어요<br><span style="color:var(--fg-muted);font-size:5px">등록하면 쌓입니다</span></div></div></div>
             </div>
-            <footer>OS 가 <b>정식 부품</b>을 줍니다. 아이콘·제목·설명·버튼 자리가 정해져 있습니다.</footer>
+            <footer>OS가 빈 상태용 <b>정식 부품</b>을 제공하고, 아이콘·제목·설명·버튼 자리가 정해져 있습니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>Material</span></header>
@@ -285,18 +285,18 @@
               <div class="phone" role="img" aria-label="안드로이드 빈 상태 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:0;right:0;top:40px;text-align:center;font-size:6px">아직 없어요</div></div></div>
             </div>
-            <footer>정해진 부품은 없고 <b>짧게 쓰라</b>는 지침이 있습니다. 그림을 크게 넣지 말라고 적어 두었습니다.</footer>
+            <footer>정해진 부품은 없고, 문구를 <b>짧게 쓰라</b>는 지침과 그림을 크게 넣지 말라는 지침이 있습니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — 빈 상태는 <b>시연에서 안 보이는 화면</b>입니다 — 시연용 계정에는 데이터가 가득하기 때문입니다. 그래서 '데이터가 없습니다'가 끝까지 남고, <b>처음 온 사람만</b> 그 화면을 봅니다. 기능을 만들 때 <b>비어 있는 계정으로 한 번 열어 보는</b> 것이 이 항목의 유일한 점검법입니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — 시연용 계정에는 데이터가 가득하기 때문에 빈 상태는 <b>시연에서 거의 보이지 않습니다</b>. 그래서 '데이터가 없습니다' 같은 문구가 출시 뒤까지 남고, 그 화면은 <b>처음 온 사용자만</b> 보게 됩니다. 기능을 만들 때 <b>비어 있는 계정으로 한 번 열어 보면</b> 이런 문구를 미리 찾아 고칠 수 있습니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="buttontext.html"><b>버튼 문구</b><em>14부</em></a></li>
         <li><a href="errortext.html"><b>오류 문구</b><em>14부</em></a></li>
@@ -306,20 +306,20 @@
         <li><a href="numbertext.html"><b>숫자와 단위 쓰기</b><em>14부</em></a></li>
         <li><a href="voice.html"><b>말투와 높임</b><em>14부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="../items/empty.html"><b>빈 상태</b><em>8부</em></a></li>
         <li><a href="searchresults.html"><b>검색 결과 화면</b><em>13부</em></a></li>
         <li><a href="onboarding.html"><b>온보딩</b><em>13부</em></a></li>
         <li><a href="errortext.html"><b>오류 문구</b><em>14부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

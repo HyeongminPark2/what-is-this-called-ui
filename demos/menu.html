@@ -38,12 +38,12 @@
 </div>
 
 <p class="hint">
-  <b>동작 목록</b>과 <b>값 고르기</b>는 생김새가 같아 가장 많이 섞입니다 —
-  메뉴는 누르면 <b>무슨 일이 일어나고</b>, 셀렉트는 누르면 <b>값이 정해질</b> 뿐입니다.
-  데모가 둘의 역할·키보드·표시를 나눠서 적습니다.<br>
-  단추를 아래로 내려 보세요. 자리가 모자라면 메뉴가 <b>위로 뒤집혀야</b> 합니다 —
-  데모가 <b>화면 밖으로 삐져나간 px</b>을 재서 적습니다. 뒤집기를 끄면 잘립니다.<br>
-  ↑↓ 로 옮기고 Esc 로 닫으며, 닫으면 초점이 <b>단추로 돌아와야</b> 합니다.
+  <b>동작 목록</b>과 <b>값 고르기</b>는 생김새가 같아서 가장 많이 헷갈리는 짝입니다.
+  메뉴는 항목을 누르면 <b>무슨 일이 일어나고</b>, 셀렉트는 누르면 <b>값이 정해질</b> 뿐입니다.
+  데모는 두 목록의 역할과 키보드 조작, 표시를 나눠서 보여 줍니다.<br>
+  단추를 아래로 내려 보세요. 아래쪽 자리가 모자라면 메뉴가 <b>위로 뒤집혀 열려야</b> 합니다.
+  데모는 메뉴가 <b>화면 밖으로 나간 px</b>을 재서 보여 주고, 뒤집기를 끄면 메뉴가 잘립니다.<br>
+  ↑↓로 항목을 옮기고 Esc로 닫습니다. 닫으면 초점이 <b>단추로 돌아와야</b> 합니다.
 </p>
 
 <script>
@@ -121,8 +121,8 @@
     var rd = document.getElementById('read');
     rd.innerHTML = (open ? '열림' : '닫힘') + ' · <b>' + (kind === 'menu' ? '동작 목록' : '값 고르기') + '</b>' +
       '<br>역할 <b>' + (kind === 'menu' ? 'menu / menuitem' : 'listbox / option') + '</b>' +
-      '<br>화면 밖으로 삐져나간 양 <b>' + over + 'px</b>' +
-      (over > 0 ? ' <span class="warn">— 잘린다</span>' : (flipped ? ' — <b>위로 뒤집었다</b>' : '')) +
+      '<br>화면 밖으로 나간 양 <b>' + over + 'px</b>' +
+      (over > 0 ? ' <span class="warn">— 잘립니다</span>' : (flipped ? ' — <b>위로 뒤집었습니다</b>' : '')) +
       (kind === 'select' ? '<br>고른 값 <b>' + chosen + '</b>' : '') +
       (why ? '<br>' + why : '');
     rd.dataset.open = open ? '1' : '0';
@@ -149,16 +149,16 @@
     var it = items()[+b.dataset.i];
     if (document.getElementById('k').value === 'select') {
       chosen = it[0];
-      close('<b>' + it[0] + '</b> 로 값을 정했다 — 아무 일도 안 일어난다');
+      close('<b>' + it[0] + '</b>로 값을 정했습니다. 값만 바뀌고 다른 일은 일어나지 않습니다');
     } else {
-      close('<b>' + it[0] + '</b> 를 실행했다 — 일이 일어났다');
+      close('<b>' + it[0] + '</b> 항목을 실행해 일이 일어났습니다');
     }
   });
 
   document.addEventListener('keydown', function (e) {
     if (!open) return;
     var n = items().length;
-    if (e.key === 'Escape') { close('<b>Esc</b> 로 닫았다 — 초점이 단추로 돌아왔다'); e.preventDefault(); }
+    if (e.key === 'Escape') { close('<b>Esc</b>로 닫았고 초점이 단추로 돌아왔습니다'); e.preventDefault(); }
     if (e.key === 'ArrowDown') { sel = (sel + 1) % n; render(); e.preventDefault(); }
     if (e.key === 'ArrowUp') { sel = (sel - 1 + n) % n; render(); e.preventDefault(); }
   });

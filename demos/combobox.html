@@ -31,16 +31,16 @@
            aria-autocomplete="list" autocomplete="off" aria-describedby="q-h"
            placeholder="이름을 입력하면 걸러집니다">
     <ul class="cb__list" id="list" role="listbox" aria-label="가맹점" hidden></ul>
-    <p class="f__help" id="q-h">선택지가 229개라 열어서 찾기 어렵습니다. <b>타이핑으로 좁히는 것</b>이 콤보박스의 존재 이유입니다.</p>
+    <p class="f__help" id="q-h">선택지가 229개라 목록을 열어 찾기 어렵습니다. 콤보박스는 이런 목록을 <b>글자를 입력해 좁힐 수 있게</b> 하려고 쓰는 부품입니다.</p>
   </div>
 </div>
 
 <p class="out" id="out">아직 고르지 않았습니다.</p>
 
 <p class="hint">
-  <kbd>↓</kbd><kbd>↑</kbd>로 옮기고 <kbd>Enter</kbd>로 고르고 <kbd>Esc</kbd>로 닫습니다 — 손을 키보드에서 떼지 않아도 됩니다.<br>
-  위의 체크를 켜면 <b>목록에 없는 값도</b> 받습니다. 끄면 목록 안에서만 고를 수 있습니다.
-  이 하나가 "검색하는 셀렉트"와 "자동완성이 붙은 입력칸"을 가릅니다.
+  <kbd>↓</kbd><kbd>↑</kbd>로 항목을 옮기고 <kbd>Enter</kbd>로 고르고 <kbd>Esc</kbd>로 목록을 닫을 수 있어서, 키보드에서 손을 떼지 않고도 끝까지 고를 수 있습니다.<br>
+  위의 체크를 켜면 <b>목록에 없는 값도</b> 받고, 끄면 목록 안에서만 고를 수 있습니다.
+  이 설정 하나에 따라 콤보박스는 '검색하는 셀렉트'가 되기도 하고 '자동완성이 붙은 입력칸'이 되기도 합니다.
 </p>
 
 <script>
@@ -61,7 +61,7 @@
     shown = term ? DATA.filter(function (d) { return d.nm.indexOf(term) >= 0; }).slice(0, 30) : DATA.slice(0, 30);
     if (!shown.length) {
       list.innerHTML = free.checked
-        ? '<li class="cb__none">목록에 없습니다. <b>“' + term + '”</b> 그대로 쓰려면 Enter.</li>'
+        ? '<li class="cb__none">목록에 없습니다. Enter를 누르면 <b>“' + term + '”</b> 그대로 씁니다.</li>'
         : '<li class="cb__none">맞는 가맹점이 없습니다. 철자를 확인해 보세요.</li>';
       at = -1;
     } else {

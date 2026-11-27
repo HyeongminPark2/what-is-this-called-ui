@@ -36,13 +36,13 @@
 </div>
 
 <p class="hint">
-  팔레트를 열고 <b>ㅈㅅ</b> 이나 <b>정내</b> 처럼 띄엄띄엄 쳐 보세요 —
-  '띄엄띄엄 쳐도 찾기'를 켜면 <b>정산 내역 내보내기</b>가 잡히고,
-  끄면 글자가 이어진 것만 잡힙니다. 데모가 <b>찾은 개수</b>를 둘 다 세서 적습니다.<br>
-  목록이 비어 있을 때 보이는 것이 중요합니다 — <b>최근 쓴 것</b>을 먼저 보여 주면
-  대부분 치지 않고도 고릅니다. 끄면 아무것도 없는 목록이 뜹니다.<br>
-  ↑↓ 로 고르고 Enter 로 실행합니다. <b>지금 고른 줄</b>은 색뿐 아니라
-  <code>aria-selected</code> 로도 알려야 합니다.
+  팔레트를 열고 <b>ㅈㅅ</b>이나 <b>정내</b>처럼 글자를 띄엄띄엄 쳐 보세요.
+  '띄엄띄엄 쳐도 찾기'를 켜 두면 <b>정산 내역 내보내기</b>가 잡히고,
+  끄면 글자가 이어진 명령만 잡힙니다. 데모는 두 방식으로 <b>찾은 개수</b>를 모두 세어 보여 줍니다.<br>
+  아무것도 치지 않았을 때 목록에 무엇이 보이는지도 중요합니다. <b>최근 쓴 것</b>을 먼저 보여 주면
+  대부분은 글자를 치지 않고도 고르고, '최근 쓴 것 먼저'를 끄면 빈 목록이 뜹니다.<br>
+  ↑↓로 줄을 고르고 Enter로 실행합니다. <b>지금 고른 줄</b>은 색으로만 표시하지 말고
+  <code>aria-selected</code>로도 알려야 합니다.
 </p>
 
 <script>
@@ -119,9 +119,9 @@
     var rd = document.getElementById('read');
     rd.innerHTML = (open ? '열림' : '닫힘') + (q ? ' · 친 글자 <b>' + q + '</b>' : ' · 아직 안 침') +
       '<br>띄엄띄엄 찾기로 <b>' + nLoose + '개</b> · 이어진 글자만으로 <b>' + nExact + '개</b>' +
-      (q && nLoose > nExact ? ' <span class="warn">— 끄면 ' + (nLoose - nExact) + '개를 놓친다</span>' : '') +
+      (q && nLoose > nExact ? ' <span class="warn">— 끄면 ' + (nLoose - nExact) + '개를 놓칩니다</span>' : '') +
       '<br>지금 보이는 줄 <b>' + shown + '개</b>' +
-      (!q && !document.getElementById('recent').checked ? ' <span class="warn">— 빈 목록이다</span>' : '');
+      (!q && !document.getElementById('recent').checked ? ' <span class="warn">— 빈 목록입니다</span>' : '');
     rd.dataset.open = open ? '1' : '0';
     rd.dataset.loose = String(nLoose);
     rd.dataset.exact = String(nExact);
@@ -133,17 +133,17 @@
   document.addEventListener('keydown', function (e) {
     if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
       e.preventDefault(); open = true; q = ''; sel = 0; render();
-      document.getElementById('log').innerHTML = '<b>Ctrl+K</b> 로 열었다';
+      document.getElementById('log').innerHTML = '<b>Ctrl+K</b>로 열었습니다';
       return;
     }
     if (!open) return;
-    if (e.key === 'Escape') { open = false; render(); document.getElementById('log').innerHTML = '<b>Esc</b> 로 닫았다'; return; }
+    if (e.key === 'Escape') { open = false; render(); document.getElementById('log').innerHTML = '<b>Esc</b>로 닫았습니다'; return; }
     var items = list();
     if (e.key === 'ArrowDown') { sel = Math.min(items.length - 1, sel + 1); render(); e.preventDefault(); }
     if (e.key === 'ArrowUp') { sel = Math.max(0, sel - 1); render(); e.preventDefault(); }
     if (e.key === 'Enter' && items[sel]) {
       open = false; render();
-      document.getElementById('log').innerHTML = '<b>' + items[sel][0] + '</b> 를 실행했다';
+      document.getElementById('log').innerHTML = '<b>' + items[sel][0] + '</b> 명령을 실행했습니다';
       document.getElementById('read').dataset.ran = items[sel][0];
       e.preventDefault();
     }
@@ -154,13 +154,13 @@
     q = e.target.value; sel = 0; render();
   });
   document.getElementById('stage').addEventListener('click', function (e) {
-    if (e.target.id === 'scrim') { open = false; render(); document.getElementById('log').innerHTML = '가림막을 눌러 닫았다'; return; }
+    if (e.target.id === 'scrim') { open = false; render(); document.getElementById('log').innerHTML = '가림막을 눌러 닫았습니다'; return; }
     var li = e.target.closest('[data-i]');
     if (!li) return;
     sel = +li.dataset.i;
     var items = list();
     open = false; render();
-    document.getElementById('log').innerHTML = '<b>' + items[sel][0] + '</b> 를 실행했다';
+    document.getElementById('log').innerHTML = '<b>' + items[sel][0] + '</b> 명령을 실행했습니다';
     document.getElementById('read').dataset.ran = items[sel][0];
   });
 

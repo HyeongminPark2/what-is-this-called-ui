@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>넘침 — 이름표</title>
-<meta name="description" content="overflow 네 값의 차이와 말줄임, 가로 스크롤이 생기는 진짜 원인을 실물과 해부도로 보여주는 항목.">
+<meta name="description" content="overflow 네 값의 차이와 말줄임, 그리고 가로 스크롤이 생기는 실제 원인을 실물과 해부도로 보여 주는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">1부 뼈대</a> › 넘침</p>
     <h1>넘침</h1>
     <p class="en">Overflow</p>
-    <p class="lede" style="margin-top:var(--s3)">상자보다 내용이 클 때 <b>무엇을 할지 고르는 것</b>. 안 고르면 기본값(삐져나오기)이 고른 셈이 됩니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">넘침은 상자보다 내용이 클 때 넘친 부분을 <b>어떻게 처리할지 고르는 일</b>입니다. 아무것도 고르지 않으면 기본값인 visible이 적용되어 내용이 상자 밖으로 삐져나옵니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,31 +50,31 @@
           <iframe src="../demos/overflow.html" title="넘침 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>같은 글이 네 가지 <code>overflow</code>에서 어떻게 다른지 나란히 두었습니다.
-          <code>scroll</code>은 <b>안 넘쳐도 스크롤바 자리를 잡는 것</b>을 보세요.<br>
-          아래는 <b>가로 스크롤 범인 찾기</b>입니다. 체크를 켜고 끄면서
-          <code>scrollWidth - clientWidth</code>가 어떻게 변하는지 보세요 —
-          범인은 거의 늘 <b>줄어들지 못하는 칸 하나</b>입니다.</p>
+          <p>같은 글을 네 가지 <code>overflow</code> 값으로 나란히 두었습니다.
+          <code>scroll</code>은 글이 <b>넘치지 않아도 스크롤바 자리를 잡는다</b>는 점을 눈여겨보세요.<br>
+          아래는 <b>가로 스크롤의 원인을 찾는</b> 실험입니다. 체크를 켜고 끄면서
+          <code>scrollWidth - clientWidth</code> 값이 어떻게 바뀌는지 보세요.
+          가로 스크롤은 거의 항상 <b>줄어들지 못하는 칸 하나</b> 때문에 생깁니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>넘침, 오버플로, 말줄임</td></tr>
             <tr><th>영어</th><td>overflow, clipping, scroll container, text-overflow</td></tr>
-            <tr><th>같이 쓰는 말</th><td>스크롤이 생긴 상자를 <b>스크롤 컨테이너</b>(scroll container), 잘라 내는 것을 <b>클리핑</b>(clipping), 끝을 <code>…</code>으로 줄이는 것을 <b>말줄임</b>(ellipsis · truncation)이라 합니다. 가로만 따로 정하려면 <code>overflow-x</code>, 세로만은 <code>overflow-y</code>입니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b><code>hidden</code>과 말줄임</b> — <code>hidden</code>은 <b>그냥 자릅니다.</b> <code>…</code>이 나오려면 <code>text-overflow: ellipsis</code>와 <code>white-space: nowrap</code>이 같이 있어야 합니다.<br><b><code>auto</code>와 <code>scroll</code></b> — auto 는 넘칠 때만, scroll 은 <b>늘</b> 스크롤바 자리를 잡습니다.<br><b>'가로 스크롤이 생겼다'</b> — overflow 설정 문제가 아니라 <b>안에 안 줄어드는 것이 있다</b>는 뜻입니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>스크롤이 생긴 상자는 <b>스크롤 컨테이너</b>(scroll container), 넘친 부분을 잘라 내는 것은 <b>클리핑</b>(clipping), 글 끝을 <code>…</code>으로 줄이는 것은 <b>말줄임</b>(ellipsis · truncation)이라고 부릅니다. 가로만 따로 정할 때는 <code>overflow-x</code>, 세로만 정할 때는 <code>overflow-y</code>를 씁니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b><code>hidden</code>과 말줄임</b> — <code>hidden</code>은 넘친 부분을 <b>그냥 잘라 낼 뿐</b>이라서, <code>…</code>이 나오려면 <code>text-overflow: ellipsis</code>와 <code>white-space: nowrap</code>이 함께 있어야 합니다.<br><b><code>auto</code>와 <code>scroll</code></b> — auto는 넘칠 때만 스크롤바 자리를 잡고, scroll은 <b>항상</b> 잡습니다.<br><b>'가로 스크롤이 생겼다'</b> — overflow 설정 문제가 아니라 <b>안쪽에 줄어들지 않는 요소가 있다</b>는 뜻입니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>뼈대를 다루는 것들은 '눈에 안 보이는데 자리를 정한다'는 점이 같습니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>뼈대를 다루는 항목들은 눈에 보이지 않으면서 요소의 자리를 정한다는 점이 같아서 생김새로는 구별하기 어렵습니다. 대신 아래 네 가지를 물어 보면 서로 갈립니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>무엇을 정하나</th><th>방향</th><th>넘치면</th><th>누가 값을 정하나</th></tr></thead>
@@ -83,21 +83,21 @@
             <tr><td>플렉스</td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나온다</td><td>나 + 내용</td></tr>
             <tr><td>그리드</td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗는다</td><td>나 + 내용</td></tr>
             <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>나</td></tr>
-            <tr class="me"><td><b>넘침</b></td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이게 그 답이다</b></td><td>나</td></tr>
+            <tr class="me"><td><b>넘침</b></td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목이 정한다</b></td><td>나</td></tr>
             <tr><td>스티키</td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 간다</td><td>나</td></tr>
             <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남는다</td><td>나</td></tr>
-            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 안 눌린다</td><td><b>OS 가</b></td></tr>
+            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 안 눌린다</td><td><b>OS가</b></td></tr>
             <tr><td>포지션</td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 안 차지한다</td><td>기준이 되는 조상</td></tr>
             <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안이 잘린다</td><td>비를 적은 쪽</td></tr>
             <tr><td>스크롤 동작</td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥까지 밀린다</td><td>굴리는 상자</td></tr>
             <tr><td>크기 정하기</td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나간다</td><td>내용 또는 적은 값</td></tr>
             <tr><td>여백 붕괴</td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어든다</td><td>큰 쪽 하나</td></tr>
-            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab 이 어긋난다</td><td>마크업 순서</td></tr>
+            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab이 어긋난다</td><td>마크업 순서</td></tr>
           </tbody>
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — 넘침은 <b>고르는 일</b>입니다. 안 고르면 '삐져나오기'를 고른 것이고, <code>hidden</code>은 '안 읽혀도 된다'를 고른 것입니다.</p>
+          <p><b>넘침을 한 줄로 정리하면</b> — 넘침은 넘친 내용을 어떻게 할지 <b>고르는 일</b>입니다. 아무것도 고르지 않으면 내용이 삐져나오고, <code>hidden</code>을 고르면 잘린 내용은 읽지 못해도 된다고 정한 셈이 됩니다.</p>
         </div>
       </section>
 
@@ -108,31 +108,31 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;height:58px;border:1px solid var(--line-strong);border-radius:5px;background:var(--surface);padding:7px;font-size:10.5px;line-height:1.65;overflow:visible;">상자보다 글이 길어지면 무엇을 할지는 고르는 것이지 저절로 정해지지 않습니다.</div>
             </div>
-            <figcaption>visible<span>기본값. <b>밖으로 삐져나온다</b> — 부모에 가려 안 보일 수도</span></figcaption>
+            <figcaption>visible<span>기본값입니다. 내용이 <b>상자 밖으로 삐져나오고</b>, 부모가 잘라 내면 안 보일 수도 있습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;height:58px;border:1px solid var(--line-strong);border-radius:5px;background:var(--surface);padding:7px;font-size:10.5px;line-height:1.65;overflow:hidden;">상자보다 글이 길어지면 무엇을 할지는 고르는 것이지 저절로 정해지지 않습니다.</div>
             </div>
-            <figcaption>hidden<span><b>잘린다.</b> 읽을 방법이 없어진다</span></figcaption>
+            <figcaption>hidden<span>넘친 부분이 <b>잘려서</b> 읽을 방법이 없어집니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;height:58px;border:1px solid var(--line-strong);border-radius:5px;background:var(--surface);padding:7px;font-size:10.5px;line-height:1.65;overflow:auto;">상자보다 글이 길어지면 무엇을 할지는 고르는 것이지 저절로 정해지지 않습니다.</div>
             </div>
-            <figcaption>auto<span>넘칠 때<b>만</b> 스크롤바. 가장 무난하다</span></figcaption>
+            <figcaption>auto<span>넘칠 때<b>만</b> 스크롤바가 생기는, 가장 무난한 값입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;height:58px;border:1px solid var(--line-strong);border-radius:5px;background:var(--surface);padding:7px;font-size:10.5px;line-height:1.65;overflow:scroll;">짧은 글.</div>
             </div>
-            <figcaption>scroll<span><b>안 넘쳐도</b> 스크롤바 자리를 잡는다. 자리가 흔들리면 안 될 때</span></figcaption>
+            <figcaption>scroll<span><b>넘치지 않아도</b> 스크롤바 자리를 잡습니다. 레이아웃이 흔들리면 안 될 때 씁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;height:34px;border:1px solid var(--line-strong);border-radius:5px;background:var(--surface);padding:7px;font-size:10.5px;line-height:1.65;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">한 줄이 길어도 끝까지 가지 않고 말줄임</div>
             </div>
-            <figcaption>말줄임<span><b>세 속성이 한 세트</b> — overflow + text-overflow + white-space</span></figcaption>
+            <figcaption>말줄임<span>overflow, text-overflow, white-space <b>세 속성을 함께</b> 써야 말줄임이 됩니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -144,16 +144,16 @@
                 </div>
               </div>
             </div>
-            <figcaption>일부러 가로로<span>칩 줄·탭 줄은 <b>가로 스크롤이 맞는 답</b>일 때가 있다</span></figcaption>
+            <figcaption>일부러 가로로<span>칩 줄이나 탭 줄은 <b>가로 스크롤로 두는 편이 맞을</b> 때가 있습니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="넘침의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="넘침의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:15px">
                   <div class="pin-out" data-pin="1" style="max-width:230px">
@@ -169,53 +169,53 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>스크롤 컨테이너 <em>scroll container</em></b><span><code>overflow</code>가 visible 이 아닌 상자. <b>여기서부터 안쪽이 따로 굴러간다</b></span></li>
-            <li><b>visible <em>overflow: visible</em></b><span>기본값. 자르지도 굴리지도 않는다 — <b>부모가 대신 가릴 수는 있다</b></span></li>
-            <li><b>hidden <em>overflow: hidden</em></b><span>자른다. 쉬워 보이지만 <b>읽을 방법을 없애는</b> 선택이다</span></li>
-            <li><b>auto <em>overflow: auto</em></b><span>넘칠 때만 스크롤. 길이를 모를 때의 기본 선택</span></li>
-            <li><b>말줄임 <em>text-overflow: ellipsis</em></b><span><b>혼자서는 안 된다.</b> overflow·white-space 와 세 개가 한 세트</span></li>
-            <li><b>안 줄어드는 칸 <em>min-width: 0</em></b><span>가로 스크롤의 진짜 원인. <b>overflow 를 고쳐도 안 낫는다</b></span></li>
+            <li><b>스크롤 컨테이너 <em>scroll container</em></b><span><code>overflow</code>가 visible이 아닌 상자입니다. <b>이 상자 안쪽은 바깥과 따로 스크롤됩니다</b></span></li>
+            <li><b>visible <em>overflow: visible</em></b><span>기본값이며, 자르지도 스크롤하지도 않습니다. 다만 <b>부모가 대신 잘라 낼 수는 있습니다</b></span></li>
+            <li><b>hidden <em>overflow: hidden</em></b><span>넘친 부분을 자릅니다. 쓰기는 쉽지만 <b>잘린 내용을 읽을 방법이 사라집니다</b></span></li>
+            <li><b>auto <em>overflow: auto</em></b><span>넘칠 때만 스크롤됩니다. 내용 길이를 모를 때 기본으로 고르는 값입니다</span></li>
+            <li><b>말줄임 <em>text-overflow: ellipsis</em></b><span><b>이 속성 하나만으로는 말줄임이 되지 않고</b>, overflow·white-space와 함께 세 개를 써야 합니다</span></li>
+            <li><b>안 줄어드는 칸 <em>min-width: 0</em></b><span>가로 스크롤을 만드는 실제 원인입니다. <b>overflow를 고쳐서는 해결되지 않습니다</b></span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          <code>overflow</code>를 visible 이 아닌 값으로 바꾸면 <b>다른 일들도 같이 바뀝니다.</b>
-          그 안의 <code>position: sticky</code>가 그 상자 기준으로 바뀌고(그래서 '스티키가 안 먹어요'),
-          밖으로 나간 그림자·배지·드롭다운이 잘립니다. 그래서 <b>"일단 hidden 으로 막자"</b>가
-          다른 자리에서 새 버그로 돌아오는 일이 잦습니다.</p>
+          <code>overflow</code>를 visible이 아닌 값으로 바꾸면 <b>다른 동작도 함께 바뀝니다.</b>
+          그 안의 <code>position: sticky</code>는 이 상자를 기준으로 붙게 되는데, '스티키가 안 먹어요'라는 문제가 흔히 여기서 생깁니다.
+          또 상자 밖으로 나간 그림자·배지·드롭다운도 잘립니다. 그래서 <b>"일단 hidden으로 막자"</b>고 넘어가면
+          다른 자리에서 새 버그가 생기는 일이 잦습니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>넘침을 쓰는 경우</h3>
             <ul>
-              <li>길이를 <b>모르는</b> 내용을 담을 때 — <code>auto</code></li>
-              <li>목록의 제목처럼 <b>한 줄로 맞춰야</b> 할 때 — 말줄임 세 줄</li>
-              <li>칩 줄·탭 줄처럼 <b>옆으로 미는 것이 맞는</b> 때 — <code>overflow-x: auto</code></li>
+              <li>길이를 <b>알 수 없는</b> 내용을 담을 때. <code>auto</code>를 씁니다</li>
+              <li>목록의 제목처럼 <b>한 줄로 맞춰야</b> 할 때. 말줄임 세 줄을 씁니다</li>
+              <li>칩 줄이나 탭 줄처럼 <b>옆으로 밀어 보는 편이 맞을</b> 때. <code>overflow-x: auto</code>를 씁니다</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>넘침을 쓰지 않는 경우</h3>
             <ul>
-              <li><b>원인을 모른 채 <code>hidden</code>으로 덮는 것</b> — 가로 스크롤은 대개 안쪽에 범인이 있습니다</li>
-              <li>말줄임만 쓰고 <b>전체를 볼 방법을 안 주는</b> 것 — 툴팁이나 상세로 이어 줍니다</li>
-              <li><code>scroll</code>을 기본으로 쓰는 것 — 안 넘쳐도 스크롤바 자리가 남습니다</li>
-              <li><code>body</code>에 <code>overflow: hidden</code> — 스크롤이 통째로 막힙니다</li>
+              <li><b>원인을 모른 채 <code>hidden</code>으로 가릴 때</b>. 가로 스크롤은 대개 안쪽의 줄어들지 않는 요소 때문에 생깁니다</li>
+              <li>말줄임만 쓰고 <b>전체를 볼 방법을 주지 않을</b> 때. 툴팁이나 상세 화면에서 전체 글을 볼 수 있게 합니다</li>
+              <li><code>scroll</code>을 기본으로 쓸 때. 넘치지 않아도 스크롤바 자리가 남습니다</li>
+              <li><code>body</code>에 <code>overflow: hidden</code>을 줄 때. 페이지 스크롤이 통째로 막힙니다</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 한 줄로 줄이려면 말줄임, 안 줄어드는 칸은 <a href="flex.html">플렉스</a>·<a href="grid.html">그리드</a>의 <code>min-width: 0</code>, 굴리면서 붙여 두려면 <a href="sticky.html">스티키</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>넘침 대신 다른 것을 써야 하는 경우</b> — 한 줄로 줄이려면 말줄임, 안 줄어드는 칸은 <a href="flex.html">플렉스</a>·<a href="grid.html">그리드</a>의 <code>min-width: 0</code>, 스크롤하면서 붙여 두려면 <a href="sticky.html">스티키</a>.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:190px;height:30px;border:1px solid var(--line-strong);border-radius:5px;background:var(--surface);padding:7px;font-size:10.5px;line-height:1.65;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">환불 확인 요청 — 카드 승인 취소가 늦어져</div>
             </div>
-            <figcaption><b>목록 제목</b>한 줄로 자른다. <b>줄 높이가 일정해야</b> 목록이 산다</figcaption>
+            <figcaption><b>목록 제목</b>제목을 한 줄로 자릅니다. 항목마다 <b>줄 높이가 일정해야</b> 목록을 훑어보기 쉽습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -223,7 +223,7 @@
                 약관 전문은 길어서 상자 안에서 굴립니다. 화면 전체가 길어지는 것보다 낫습니다. 이 글은 일부러 넘치게 적어 둔 것입니다.
               </div>
             </div>
-            <figcaption><b>약관 상자</b><code>overflow-y: auto</code>. 화면을 길게 만들지 않는다</figcaption>
+            <figcaption><b>약관 상자</b><code>overflow-y: auto</code>로 상자 안에서 스크롤해서 화면 전체가 길어지지 않게 합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -236,15 +236,15 @@
                 </div>
               </div>
             </div>
-            <figcaption><b>칩 줄</b>폰에서 <b>일부러</b> 가로로 민다. 끝이 잘린 것이 보여야 민다는 걸 안다</figcaption>
+            <figcaption><b>칩 줄</b>폰에서는 <b>일부러</b> 가로로 밀어 보게 합니다. 끝의 칩이 잘려 보여야 사용자가 옆으로 밀 수 있다는 것을 압니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">이 상자의 계약서</span></h2>
-        <p>말줄임은 <b>세 줄이 한 세트</b>입니다. 하나라도 빠지면 아무 일도 안 일어납니다.</p>
-<pre class="code"><span class="c">/* 한 줄 말줄임 — 세 줄이 한 세트 */</span>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">넘침을 다룰 때 지킬 것</span></h2>
+        <p>말줄임은 <b>세 줄을 함께</b> 적어야 하고, 하나라도 빠지면 말줄임표가 나오지 않습니다.</p>
+<pre class="code"><span class="c">/* 한 줄 말줄임. 세 줄을 함께 쓴다 */</span>
 <span class="t">.title</span> {
   <span class="a">overflow</span>: hidden;
   <span class="a">text-overflow</span>: ellipsis;
@@ -260,73 +260,73 @@
   <span class="a">overflow</span>: hidden;
 }
 
-<span class="c">// 범인 찾기 — 콘솔에 붙여 넣는다</span>
+<span class="c">// 가로 스크롤 원인 찾기. 콘솔에 붙여 넣는다</span>
 [...document.querySelectorAll(<span class="s">'*'</span>)].filter(el =&gt;
   el.scrollWidth &gt; document.documentElement.clientWidth);</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
           <thead><tr><th>규칙</th><th>지켜야 하는 것</th></tr></thead>
           <tbody>
-            <tr><td>말줄임은 세 줄</td><td><code>overflow</code> + <code>text-overflow</code> + <code>white-space</code>. 하나만 써도 안 된다</td></tr>
-            <tr><td><code>min-width: 0</code>을 잊지 않는다</td><td>플렉스·그리드 자식이면 이 줄이 없을 때 <b>말줄임이 영영 안 걸린다</b></td></tr>
-            <tr><td><code>hidden</code> 전에 원인을 본다</td><td>가로 스크롤은 대개 <b>안 줄어드는 칸</b> 때문이다. 덮으면 다른 데서 터진다</td></tr>
-            <tr><td>자른 글은 볼 길을 준다</td><td><code>title</code> 속성이나 상세 화면으로. <b>잘린 채 끝나면 정보가 사라진다</b></td></tr>
-            <tr><td>스크롤 상자에는 높이가 있어야</td><td><code>overflow: auto</code>만으로는 안 굴러간다. <b>높이나 최대 높이</b>가 필요하다</td></tr>
-            <tr><td><code>hidden</code>은 부작용이 있다</td><td>안쪽 <code>sticky</code>가 그 상자 기준이 되고, 밖으로 나간 배지·그림자가 잘린다</td></tr>
+            <tr><td>말줄임은 세 줄</td><td><code>overflow</code> + <code>text-overflow</code> + <code>white-space</code>를 함께 써야 하고, 하나만 써서는 말줄임이 되지 않습니다</td></tr>
+            <tr><td><code>min-width: 0</code>을 잊지 않는다</td><td>플렉스·그리드 자식은 이 줄이 없으면 <b>말줄임이 걸리지 않습니다</b></td></tr>
+            <tr><td><code>hidden</code> 전에 원인을 본다</td><td>가로 스크롤은 대개 <b>줄어들지 않는 칸</b> 때문에 생깁니다. 원인을 그대로 둔 채 가리면 다른 곳에서 문제가 다시 생깁니다</td></tr>
+            <tr><td>자른 글은 볼 길을 준다</td><td><code>title</code> 속성이나 상세 화면으로 전체 글을 보여 줍니다. <b>잘린 채로 두면 사용자는 나머지 내용을 볼 수 없습니다</b></td></tr>
+            <tr><td>스크롤 상자에는 높이가 있어야</td><td><code>overflow: auto</code>만으로는 스크롤이 생기지 않고, <b>높이나 최대 높이</b>를 함께 줘야 합니다</td></tr>
+            <tr><td><code>hidden</code>은 부작용이 있다</td><td>안쪽 <code>sticky</code>가 그 상자를 기준으로 붙게 되고, 상자 밖으로 나간 배지·그림자가 잘립니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>자르기는 화면에서, 자료는 그대로</th><td>서버가 미리 잘라 보내면 <b>툴팁에도 전체가 없습니다.</b> 전체를 보내고 화면에서 줄이는 편이 낫습니다 — 양이 아주 많을 때만 서버에서 자릅니다.</td></tr>
-            <tr><th>가장 긴 값으로 한 번</th><td>말줄임이 걸리는지는 <b>실제로 긴 데이터</b>로만 알 수 있습니다. 개발 중의 짧은 더미 데이터로는 평생 안 드러납니다.</td></tr>
-            <tr><th>스크롤 상자와 무한 스크롤</th><td>상자 안에서 굴리면 <code>window</code>의 스크롤 이벤트가 안 옵니다. <a href="../items/infinite.html">무한 스크롤</a>을 붙이려면 <b>그 상자를 기준</b>으로 잡아야 합니다.</td></tr>
-            <tr><th>가로 스크롤 자동 검사</th><td><code>scrollWidth &gt; clientWidth</code> 한 줄이면 됩니다. CI 에 넣어 두면 <b>좁은 화면이 깨지는 것</b>을 사람이 안 봐도 잡힙니다.</td></tr>
+            <tr><th>자르기는 화면에서, 자료는 그대로</th><td>서버가 글을 미리 잘라 보내면 <b>툴팁에도 전체 글을 보여 줄 수 없습니다.</b> 그래서 전체를 보내고 화면에서 줄이는 편이 낫고, 서버에서 자르는 것은 양이 아주 많을 때뿐입니다.</td></tr>
+            <tr><th>가장 긴 값으로 한 번</th><td>말줄임이 제대로 걸리는지는 <b>실제로 긴 데이터</b>를 넣어 봐야 알 수 있습니다. 개발 중에 쓰는 짧은 더미 데이터로는 문제가 드러나지 않습니다.</td></tr>
+            <tr><th>스크롤 상자와 무한 스크롤</th><td>상자 안에서 스크롤하면 <code>window</code>에는 스크롤 이벤트가 오지 않기 때문에, <a href="../items/infinite.html">무한 스크롤</a>을 붙이려면 <b>그 상자를 기준</b>으로 잡아야 합니다.</td></tr>
+            <tr><th>가로 스크롤 자동 검사</th><td><code>scrollWidth &gt; clientWidth</code> 한 줄로 검사할 수 있습니다. 이 검사를 CI에 넣어 두면 사람이 일일이 보지 않아도 <b>좁은 화면에서 레이아웃이 깨지는 것</b>을 잡아냅니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p>'넘치면 어떻게'는 세 플랫폼 모두 있지만, 기본값이 다릅니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>넘친 내용을 처리하는 방법은 세 플랫폼 모두 있지만, 기본값이 서로 다릅니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>CSS overflow</span></header>
             <div class="shot">
               <div style="width:100%;max-width:120px;height:50px;border:1px solid var(--line-strong);border-radius:5px;background:var(--surface);padding:7px;font-size:10.5px;line-height:1.65;overflow:auto;">상자보다 글이 길어지면 무엇을 할지는 고르는 것이지 저절로 정해지지 않습니다.</div>
             </div>
-            <footer>기본값이 <b>삐져나오기</b>(visible)입니다. 자르거나 굴리려면 직접 적어야 합니다.</footer>
+            <footer>기본값이 <b>삐져나오기</b>(visible)라서, 자르거나 스크롤하게 하려면 직접 적어야 합니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>SwiftUI</span></header>
             <div class="shot">
               <div style="font-family:var(--mono);font-size:9.5px;color:var(--fg-muted);line-height:1.8;text-align:left">.lineLimit(1)<br>.truncationMode(.tail)<br>ScrollView { }</div>
             </div>
-            <footer>기본값이 <b>자르기</b>에 가깝습니다. <code>.lineLimit(1)</code> 한 줄로 말줄임이 되고 세 속성을 묶을 필요가 없습니다.</footer>
+            <footer>기본 동작이 <b>자르기</b>에 가깝습니다. <code>.lineLimit(1)</code> 한 줄로 말줄임이 되기 때문에 웹처럼 세 속성을 묶을 필요가 없습니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>Compose</span></header>
             <div class="shot">
               <div style="font-family:var(--mono);font-size:9.5px;color:var(--fg-muted);line-height:1.8;text-align:left">maxLines = 1<br>overflow = TextOverflow<br>&nbsp;.Ellipsis</div>
             </div>
-            <footer><code>maxLines</code> 와 <code>overflow</code> 두 값이면 끝입니다. 스크롤은 <code>verticalScroll</code> 을 붙입니다.</footer>
+            <footer><code>maxLines</code>와 <code>overflow</code> 두 값만 주면 말줄임이 됩니다. 스크롤이 필요하면 <code>verticalScroll</code>을 붙입니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — 앱 쪽에서는 <b>말줄임이 한 줄</b>이라, 웹에서 세 속성을 맞춰야 하는 사정이 낯섭니다. 또 웹에서만 <b>"일단 hidden 으로 막았더니 다른 게 잘렸다"</b>는 일이 생깁니다 — 같은 속성이 자르기·스크롤·쌓임 맥락에 다 걸려 있기 때문입니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — 앱에서는 <b>말줄임이 코드 한 줄</b>이라서, 앱 개발자에게는 웹에서 세 속성을 맞춰야 하는 사정이 낯섭니다. 또 <b>"일단 hidden으로 막았더니 다른 게 잘렸다"</b>는 일은 웹에서만 생기는데, overflow 속성 하나가 자르기·스크롤·쌓임 맥락에 모두 영향을 주기 때문입니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="box.html"><b>박스 모델</b><em>1부</em></a></li>
         <li><a href="flex.html"><b>플렉스</b><em>1부</em></a></li>
@@ -342,20 +342,20 @@
         <li><a href="margincollapse.html"><b>여백 붕괴</b><em>1부</em></a></li>
         <li><a href="order.html"><b>보이는 순서와 읽는 순서</b><em>1부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="../items/listitem.html"><b>리스트 아이템</b><em>5부</em></a></li>
         <li><a href="../items/flex.html"><b>플렉스</b><em>1부</em></a></li>
         <li><a href="../items/zindex.html"><b>z-index</b><em>2부</em></a></li>
         <li><span class="na"><b>말줄임</b><em>3부</em></span></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

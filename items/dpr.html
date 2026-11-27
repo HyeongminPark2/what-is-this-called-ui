@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>화면 밀도 — 이름표</title>
-<meta name="description" content="CSS 1px은 길이이지 화소가 아니다. 배율에 따라 그림을 몇 배로 받아야 하는지, 머리카락 선은 어떻게 긋는지.">
+<meta name="description" content="CSS의 1px이 화소가 아니라 길이 단위라는 점과, 화면 배율에 따라 그림을 몇 배 크기로 받아야 하는지, 머리카락처럼 가는 선은 어떻게 긋는지를 보여 주는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">11부 플랫폼</a> › 화면 밀도</p>
     <h1>화면 밀도</h1>
     <p class="en">Device pixel ratio</p>
-    <p class="lede" style="margin-top:var(--s3)"><b>CSS 의 1px 은 길이 단위이지 화소가 아닙니다.</b> 배율 3배 화면에서는 화소 세 개로 그려집니다.</p>
+    <p class="lede" style="margin-top:var(--s3)"><b>CSS의 1px은 화소가 아니라 길이 단위입니다.</b> 그래서 배율이 3배인 화면에서는 CSS 1px 길이를 기기 화소 세 개로 그립니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -51,29 +51,29 @@
         </div>
         <div class="note" style="margin-bottom:0">
           <p>배율을 바꾸면 캔버스의 <b>실제 화소 수</b>가 함께 바뀝니다.<br>
-          <b>1배짜리 그림</b>은 3배 화면에서 세 배로 늘어나 뭉개지고, <b>배율만큼 받은 그림</b>과
-          <b>SVG</b>는 그대로입니다. 아래 두 줄은 <code>1px</code> 선과 <b>화소 하나짜리</b> 선의 차이입니다 —
-          배율이 높을수록 화소 하나는 가늘어집니다. 위에 이 화면의 실제 배율도 나옵니다.</p>
+          <b>1배짜리 그림</b>은 3배 화면에서 세 배로 늘어나 뭉개지지만, <b>배율만큼 크게 받은 그림</b>과
+          <b>SVG</b>는 선명하게 그대로 보입니다. 아래 두 줄은 <code>1px</code> 선과 <b>화소 하나짜리</b> 선을 비교한 것으로,
+          배율이 높을수록 화소 하나짜리 선이 가늘어집니다. 위쪽에는 지금 보는 화면의 실제 배율도 나옵니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>화면 밀도, 픽셀 배율, 고해상도 화면</td></tr>
             <tr><th>영어</th><td>device pixel ratio (DPR), pixel density, Retina / HiDPI</td></tr>
-            <tr><th>같이 쓰는 말</th><td>브라우저가 알려 주는 값이 <code>window.devicePixelRatio</code>이고, 애플은 <b>레티나</b>, 일반적으로는 <b>HiDPI</b>라 부릅니다. 그림을 배율별로 주는 것이 <code>srcset</code>의 <b>1x · 2x · 3x</b>이고, 화소 하나 굵기의 선을 <b>헤어라인</b>(hairline)이라 합니다. 안드로이드의 길이 단위 <b>dp</b>, 애플의 <b>pt</b>가 CSS 의 px 과 같은 자리입니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>해상도</b> — '1920×1080'은 화소 수이고, 밀도는 <b>그 화소가 얼마나 빽빽한가</b>입니다.<br><b>화면 크기</b> — <a href="breakpoint.html">브레이크포인트</a>가 보는 폭은 <b>CSS px</b>이라 밀도와 무관합니다.<br><b>DPI</b> — 인쇄의 단위입니다. 화면에서는 배율로 다룹니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>브라우저는 배율을 <code>window.devicePixelRatio</code> 값으로 알려 줍니다. 배율이 높은 화면을 애플은 <b>레티나</b>라고 부르고, 일반적으로는 <b>HiDPI</b>라고 부릅니다. 그림을 배율별로 나눠 줄 때는 <code>srcset</code>에 <b>1x · 2x · 3x</b>를 적고, 화소 하나 굵기로 그은 선은 <b>헤어라인</b>(hairline)이라고 합니다. 안드로이드의 길이 단위 <b>dp</b>와 애플의 <b>pt</b>는 CSS의 px과 같은 역할을 합니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>해상도</b> — '1920×1080'은 화면 전체의 화소 수이고, 밀도는 <b>화소가 얼마나 빽빽하게 들어 있는가</b>를 가리킵니다.<br><b>화면 크기</b> — <a href="breakpoint.html">브레이크포인트</a>가 기준으로 삼는 폭은 <b>CSS px</b>로 재기 때문에 밀도와 상관이 없습니다.<br><b>DPI</b> — 인쇄에서 쓰는 단위이고, 화면에서는 밀도를 배율로 다룹니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>PC와 폰은 다른 기계가 아니라 <b>다른 전제</b>입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>PC와 폰의 차이는 기계 자체보다 화면을 쓰는 <b>전제</b>에 있습니다. 아래 네 가지를 물어보면 두 환경이 어디서 갈리는지 알 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>무엇이 다른가</th><th>폰에서는</th><th>PC에서는</th><th>안 챙기면</th></tr></thead>
@@ -82,15 +82,15 @@
             <tr><td>터치 타깃</td><td>누를 수 있는 <b>넓이</b></td><td>44px 이상</td><td>24px도 된다</td><td>옆 것이 눌린다</td></tr>
             <tr><td>호버가 없는 세계</td><td><b>올려놓기</b>가 되나</td><td class="none">없다</td><td>있다</td><td>영영 못 보는 정보가 생긴다</td></tr>
             <tr><td>시스템 백</td><td><b>뒤로 가는</b> 길</td><td>OS가 준다</td><td>브라우저 버튼</td><td>모달 대신 <b>앱이 나간다</b></td></tr>
-            <tr class="me"><td><b>화면 밀도</b></td><td>1px 의 <b>실제 화소 수</b></td><td>2~3배</td><td>1~2배</td><td>그림이 뭉갠다</td></tr>
-            <tr><td>뷰포트 단위</td><td><b>100vh</b> 가 가리키는 높이</td><td>주소창 때문에 흔들린다</td><td>고정</td><td>바닥 버튼이 잘린다</td></tr>
+            <tr class="me"><td><b>화면 밀도</b></td><td>1px의 <b>실제 화소 수</b></td><td>2~3배</td><td>1~2배</td><td>그림이 뭉개진다</td></tr>
+            <tr><td>뷰포트 단위</td><td><b>100vh</b>가 가리키는 높이</td><td>주소창 때문에 흔들린다</td><td>고정</td><td>바닥 버튼이 잘린다</td></tr>
             <tr><td>폰 키보드</td><td><b>올라오는</b> 자리</td><td>화면 절반</td><td class="none">없다</td><td>입력칸이 가려진다</td></tr>
-            <tr><td>HIG와 Material의 차이</td><td>OS 의 <b>말투</b></td><td>각자 다르다</td><td>웹 관례</td><td>어느 쪽에서도 어색하다</td></tr>
+            <tr><td>HIG와 Material의 차이</td><td>OS의 <b>말투</b></td><td>각자 다르다</td><td>웹 관례</td><td>어느 쪽에서도 어색하다</td></tr>
           </tbody>
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — <b>선은 저절로 맞고, 그림은 저절로 안 맞습니다.</b> 밀도 때문에 할 일은 거의 전부 <b>그림</b>에 관한 것입니다.</p>
+          <p><b>화면 밀도를 한 줄로 정리하면</b> — <b>선과 글자는 브라우저가 배율에 맞춰 그려 주지만, 비트맵 그림은 그렇지 않습니다.</b> 그래서 화면 밀도 때문에 챙길 일은 거의 전부 <b>그림</b>에 관한 것입니다.</p>
         </div>
       </section>
 
@@ -101,46 +101,46 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:9px;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--bg);"><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">1배 — 화소와 CSS px 이 같다</span></div>
             </div>
-            <figcaption>1배<span>옛날 모니터. 지금은 드물다</span></figcaption>
+            <figcaption>1배<span>예전 모니터의 배율입니다. 지금은 드뭅니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:9px;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--bg);"><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">2배 — 같은 자리에 화소 네 배</span></div>
             </div>
-            <figcaption>2배<span>노트북 대부분. <b>보기엔 같다</b></span></figcaption>
+            <figcaption>2배<span>대부분의 노트북이 2배입니다. 화소는 네 배지만 <b>눈에 보이는 크기는 같습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:9px;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--bg);"><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">3배 — 화소 아홉 배</span></div>
             </div>
-            <figcaption>3배<span>요즘 폰. 그림은 <b>세 배로 받아야</b> 한다</span></figcaption>
+            <figcaption>3배<span>요즘 폰의 배율입니다. 그림을 가로세로 <b>세 배 크기로 받아야</b> 선명합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:9px;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--bg);filter:blur(1.1px);"><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span></div><span style="font-family:var(--mono);font-size:9px;color:var(--danger)">1배 그림을 3배 화면에 — 뭉갠다</span></div>
             </div>
-            <figcaption>안 맞췄을 때<span>흐릿해진다. <b>가장 흔한 사고</b></span></figcaption>
+            <figcaption>안 맞췄을 때<span>그림이 흐릿해집니다. <b>가장 흔하게 일어나는 실수</b>입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:5px;background:var(--bg);padding:5px 8px"><span style="display:block;height:1px;background:var(--fg);margin:7px 0"></span><span style="display:block;height:1px;background:var(--fg);margin:7px 0"></span><span style="display:block;height:1px;background:var(--fg);margin:7px 0"></span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">CSS 1px — 어느 배율에서나 같은 굵기</span></div>
             </div>
-            <figcaption>선 — 1px<span>브라우저가 <b>알아서 화소를 맞춘다</b></span></figcaption>
+            <figcaption>선 — 1px<span>브라우저가 <b>배율에 맞게 화소 수를 맞춰</b> 그립니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:5px;background:var(--bg);padding:5px 8px"><span style="display:block;height:0.5px;background:var(--fg);margin:7px 0"></span><span style="display:block;height:0.5px;background:var(--fg);margin:7px 0"></span><span style="display:block;height:0.5px;background:var(--fg);margin:7px 0"></span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">화소 하나 — 배율이 높을수록 가늘다</span></div>
             </div>
-            <figcaption>선 — 머리카락<span><b>1 ÷ 배율</b> px. iOS 의 구분선이 이것이다</span></figcaption>
+            <figcaption>선 — 머리카락<span>굵기를 <b>1 ÷ 배율</b> px로 잡은 선입니다. iOS의 구분선이 이 굵기입니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="화면 밀도의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="화면 밀도의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">CSS 1px — 길이 단위다. 화소가 아니다</div>
@@ -154,49 +154,48 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>CSS px <em>길이 단위</em></b><span>어느 화면에서나 <b>눈에 같은 크기</b>로 보이게 정한 단위</span></li>
-            <li><b>배율 <em>devicePixelRatio</em></b><span>CSS 1px 을 기기 화소 <b>몇 개</b>로 그리는가</span></li>
-            <li><b>그림에 필요한 화소 <em>CSS 크기 × 배율</em></b><span>100px 자리에 3배면 <b>300화소</b>짜리가 필요하다</span></li>
-            <li><b>배율별로 주기 <em>srcset 1x 2x 3x</em></b><span>브라우저가 <b>자기 배율에 맞는 것</b>만 받는다</span></li>
-            <li><b>배율과 무관한 것 <em>SVG · 글자</em></b><span>그릴 때마다 다시 계산한다. <b>늘 선명하다</b></span></li>
-            <li><b>머리카락 선 <em>1 ÷ 배율 px</em></b><span>3배에서 <code>0.33px</code>이면 정확히 화소 하나</span></li>
+            <li><b>CSS px <em>길이 단위</em></b><span>어느 화면에서나 <b>눈에 같은 크기</b>로 보이도록 정한 길이 단위입니다</span></li>
+            <li><b>배율 <em>devicePixelRatio</em></b><span>CSS 1px을 기기 화소 <b>몇 개</b>로 그리는지 나타내는 값입니다</span></li>
+            <li><b>그림에 필요한 화소 <em>CSS 크기 × 배율</em></b><span>폭 100px 자리에 배율 3배라면 폭 <b>300화소</b>짜리 그림이 필요합니다</span></li>
+            <li><b>배율별로 주기 <em>srcset 1x 2x 3x</em></b><span>브라우저가 <b>화면 배율에 맞는 그림</b> 하나만 골라 받습니다</span></li>
+            <li><b>배율과 무관한 것 <em>SVG · 글자</em></b><span>그릴 때마다 배율에 맞춰 다시 계산하기 때문에 <b>늘 선명합니다</b></span></li>
+            <li><b>머리카락 선 <em>1 ÷ 배율 px</em></b><span>배율 3배 화면에서는 <code>0.33px</code>이 정확히 화소 하나입니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          <b>반대 방향의 실수</b>도 흔합니다 —
-          어디서나 선명하라고 모든 그림을 3배짜리로만 주는 것입니다.
-          그러면 1배 모니터에서도 <b>아홉 배 큰 파일</b>을 받게 되고,
-          화면에 뿌릴 때 줄이느라 오히려 느려집니다.
-          <code>srcset</code>을 적어 두면 브라우저가 <b>자기 배율과 통신 사정</b>을 보고
-          알아서 고릅니다 — 골라 주는 일을 브라우저에 넘기는 것이 요점입니다.</p>
+          어디서나 선명하게 보이도록 모든 그림을 3배짜리로만 주는 <b>반대 방향의 실수</b>도 흔합니다.
+          그러면 1배 모니터에서도 <b>화소 수가 아홉 배인 그림</b>을 받게 되고,
+          화면에 그릴 때 크기를 줄이는 작업까지 더해져 오히려 느려집니다.
+          <code>srcset</code>에 여러 크기를 적어 두면 브라우저가 <b>화면 배율과 통신 사정</b>을 보고
+          알맞은 것을 고르므로, 어떤 그림을 받을지는 브라우저에 맡기는 편이 낫습니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>화면 밀도를 쓰는 경우</h3>
             <ul>
-              <li>사진·비트맵 아이콘에 <code>srcset</code> 적기</li>
-              <li>아이콘은 되도록 <b>SVG</b>나 글꼴로</li>
-              <li>캔버스로 그릴 때 <b>배율만큼 크게</b> 잡고 축소해 쓰기</li>
+              <li>사진이나 비트맵 아이콘을 넣을 때. <code>srcset</code>을 적습니다</li>
+              <li>아이콘을 넣을 때. 되도록 <b>SVG</b>나 아이콘 글꼴을 씁니다</li>
+              <li>캔버스로 그릴 때. 캔버스를 <b>배율만큼 크게</b> 잡고 줄여서 보여 줍니다</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>화면 밀도를 쓰지 않는 경우</h3>
             <ul>
-              <li>모든 그림을 3배짜리로만 주기 — <b>1배 기기가 손해</b>를 본다</li>
-              <li><code>devicePixelRatio</code>로 <b>기기를 짐작</b>하기 — 같은 값이 여럿이다</li>
-              <li>선 굵기를 배율로 계산하기 — <b>1px 은 이미 맞는다</b></li>
-              <li>글자 크기를 배율로 바꾸기 — 바꿀 필요가 없다</li>
+              <li>모든 그림을 3배짜리로만 줄 때. <b>1배 기기</b>가 필요 없이 큰 파일을 받습니다</li>
+              <li><code>devicePixelRatio</code>로 <b>기기를 짐작</b>할 때. 서로 다른 기기가 같은 값을 냅니다</li>
+              <li>선 굵기를 배율로 계산할 때. <b>1px 선은 브라우저가 이미 맞춰</b> 그립니다</li>
+              <li>글자 크기를 배율에 따라 바꿀 때. 글자는 배율과 상관없이 선명하므로 바꿀 필요가 없습니다</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 폭에 따른 배치는 <a href="breakpoint.html">브레이크포인트</a>, 그림이 무거우면 포맷(WebP·AVIF)을 바꾸기, 아이콘이면 SVG 로.</p>
+        <p style="margin:var(--s4) 0 0"><b>화면 밀도 대신 다른 것을 써야 하는 경우</b> — 폭에 따른 배치는 <a href="breakpoint.html">브레이크포인트</a>에서 다루고, 그림이 무거우면 포맷(WebP·AVIF)을 바꾸며, 아이콘은 SVG로 만듭니다.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -207,7 +206,7 @@
                 <span>&nbsp;&nbsp;<span style="color:var(--accent)">&nbsp;&nbsp;logo@3x.png 3x"&gt;</span></span>
               </div>
             </div>
-            <figcaption><b>배율별로</b>브라우저가 <b>하나만</b> 받는다</figcaption>
+            <figcaption><b>배율별로</b>브라우저가 화면 배율에 맞는 그림 <b>하나만</b> 받습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -217,20 +216,20 @@
                 <span>ctx.scale(<span style="color:var(--accent)">dpr, dpr</span>);</span>
               </div>
             </div>
-            <figcaption><b>캔버스</b>안 하면 <b>캔버스만 흐릿</b>하다</figcaption>
+            <figcaption><b>캔버스</b>이렇게 맞추지 않으면 화면에서 <b>캔버스만 흐릿하게</b> 보입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:5px;background:var(--bg);padding:5px 8px"><span style="display:block;height:0.5px;background:var(--fg);margin:7px 0"></span><span style="display:block;height:0.5px;background:var(--fg);margin:7px 0"></span><span style="display:block;height:0.5px;background:var(--fg);margin:7px 0"></span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">border-width: 0.5px — 3배에선 화소 하나</span></div>
             </div>
-            <figcaption><b>구분선</b>iOS 느낌의 <b>가는 선</b>. 1배 화면에서는 흐려질 수 있다</figcaption>
+            <figcaption><b>구분선</b>iOS 구분선 같은 <b>가는 선</b>을 긋습니다. 1배 화면에서는 흐려질 수 있습니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">이 밀도의 계약서</span></h2>
-        <p>그림은 배율별로 주고, 캔버스는 직접 맞춥니다.</p>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">빠뜨리기 쉬운 설정까지</span></h2>
+        <p>그림은 <code>srcset</code>으로 배율별 파일을 주고, 캔버스는 배율을 읽어 화소 수를 직접 맞춥니다.</p>
 <pre class="code">&lt;<span class="t">img</span> <span class="a">src</span>=<span class="s">"logo.png"</span>
      <span class="a">srcset</span>=<span class="s">"logo@2x.png 2x, logo@3x.png 3x"</span>
      <span class="a">width</span>=<span class="s">"120"</span> <span class="a">height</span>=<span class="s">"40"</span> <span class="a">alt</span>=<span class="s">"이름표"</span>&gt;
@@ -246,43 +245,43 @@ cv.style.width = w + <span class="s">'px'</span>;                  <span class="
 ctx.scale(dpr, dpr);</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td><code>width</code>·<code>height</code>를 적는다</td><td>밀도와 별개로 <b>자리를 미리 잡아</b> 글이 덜컥거리지 않게 한다</td></tr>
-            <tr><td><code>srcset</code>의 <code>2x</code>와 <code>800w</code></td><td>배율만 다르면 <code>x</code>, <b>폭도 다르면</b> <code>w</code> + <code>sizes</code></td></tr>
-            <tr><td><code>alt</code></td><td>밀도와 무관하지만 <b>같이 빠지기 쉽다</b>. <a href="../items/name.html">이름 붙이기</a></td></tr>
-            <tr><td><code>image-rendering: pixelated</code></td><td>일부러 도트를 살릴 때만. <b>사진에 쓰면 더 나빠진다</b></td></tr>
-            <tr><td><code>0.5px</code> 테두리</td><td>1배 화면에서는 반올림돼 <b>사라지거나 흐려질 수</b> 있다. 질의로 가린다</td></tr>
-            <tr><td>배율로 기기를 짐작하지 않는다</td><td>같은 값이 폰에도 노트북에도 있다. 입력 방식은 <a href="hover.html">포인터 질의</a>로 묻는다</td></tr>
+            <tr><td><code>width</code>·<code>height</code>를 적는다</td><td>밀도와는 별개로, 그림이 들어갈 <b>자리를 미리 잡아</b> 그림이 늦게 뜰 때 글이 밀려 움직이지 않게 합니다</td></tr>
+            <tr><td><code>srcset</code>의 <code>2x</code>와 <code>800w</code></td><td>배율만 다르면 <code>x</code>를 쓰고, <b>표시 폭도 달라지면</b> <code>w</code>와 <code>sizes</code>를 함께 씁니다</td></tr>
+            <tr><td><code>alt</code></td><td>밀도와는 상관없지만 그림을 넣을 때 <b>함께 빠뜨리기 쉽습니다</b>. <a href="../items/name.html">이름 붙이기</a>를 참고합니다</td></tr>
+            <tr><td><code>image-rendering: pixelated</code></td><td>도트 그림처럼 화소를 일부러 살릴 때만 씁니다. <b>사진에 쓰면 오히려 거칠어집니다</b></td></tr>
+            <tr><td><code>0.5px</code> 테두리</td><td>1배 화면에서는 굵기가 반올림되어 <b>사라지거나 흐려질 수</b> 있으므로, 배율을 묻는 미디어 쿼리로 배율이 높은 화면에만 적용합니다</td></tr>
+            <tr><td>배율로 기기를 짐작하지 않는다</td><td>같은 배율 값이 폰에도 노트북에도 있습니다. 입력 방식이 궁금하면 <a href="hover.html">포인터 질의</a>로 묻습니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>이미지 변환은 서버에서</th><td>원본 하나를 올려 두고 <b>필요한 크기로 잘라</b> 내려주는 쪽이 파일을 따로 관리하는 것보다 쌉니다.</td></tr>
-            <tr><th>캐시가 갈라진다</th><td>같은 주소가 기기마다 다른 그림을 주면 CDN 캐시가 어긋납니다. <b>주소를 크기마다 따로</b> 두는 편이 안전합니다.</td></tr>
-            <tr><th>포맷이 더 큰 몫</th><td>같은 그림이라도 WebP·AVIF 로 바꾸면 절반 아래로 떨어집니다. <b>배율보다 먼저</b> 볼 일입니다.</td></tr>
-            <tr><th>업로드한 사진</th><td>요즘 폰 사진은 4000px 이 넘습니다. 받자마자 <b>쓸 크기로 줄여</b> 저장해 두지 않으면 목록 화면이 통째로 느려집니다.</td></tr>
+            <tr><th>이미지 변환은 서버에서</th><td>원본 하나만 올려 두고 서버가 <b>필요한 크기로 줄여</b> 내려주게 하면, 크기별 파일을 따로 관리하는 것보다 비용이 적게 듭니다.</td></tr>
+            <tr><th>캐시가 갈라진다</th><td>같은 주소에서 기기마다 다른 그림을 내려주면 CDN 캐시가 엉뚱한 그림을 돌려줄 수 있습니다. 그래서 <b>크기마다 주소를 따로</b> 두는 편이 안전합니다.</td></tr>
+            <tr><th>포맷이 더 큰 몫</th><td>같은 그림이라도 WebP나 AVIF로 바꾸면 파일 크기가 절반 아래로 줄어듭니다. 그래서 그림이 무거우면 <b>배율보다 포맷을 먼저</b> 살펴봅니다.</td></tr>
+            <tr><th>업로드한 사진</th><td>요즘 폰으로 찍은 사진은 폭이 4000px을 넘습니다. 업로드를 받자마자 <b>화면에 쓸 크기로 줄여</b> 저장해 두지 않으면, 사진이 여러 장 뜨는 목록 화면 전체가 느려집니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p>세 곳 모두 <b>길이와 화소를 갈라</b> 둡니다. 이름만 다릅니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>세 플랫폼 모두 <b>길이 단위와 기기 화소를 나눠</b> 다루고, 부르는 이름만 다릅니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>CSS px · DPR</span></header>
             <div class="shot">
               <div style="width:100%;max-width:105px;display:grid;gap:5px"><div style="display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:7px;border:1px solid var(--line);border-radius:5px;overflow:hidden;background:var(--bg);"><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span><span style="background:var(--accent)"></span><span style="background:transparent"></span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">CSS px</span></div>
             </div>
-            <footer><code>px</code>이 길이이고 <code>devicePixelRatio</code>가 배율입니다. 그림은 <code>srcset</code>으로 갈라 줍니다.</footer>
+            <footer><code>px</code>이 길이 단위이고 <code>devicePixelRatio</code>가 배율입니다. 그림은 <code>srcset</code>으로 배율별로 나눠 줍니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>pt · @2x @3x</span></header>
@@ -290,7 +289,7 @@ ctx.scale(dpr, dpr);</pre>
               <div class="phone" role="img" aria-label="iOS 에셋 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:6px;top:30px;font-size:6px;color:var(--fg-muted)">icon@2x<br>icon@3x</div></div></div>
             </div>
-            <footer>길이는 <b>pt</b>이고 파일 이름에 <code>@2x</code>·<code>@3x</code>를 붙여 둡니다. 구분선은 <b>화소 하나</b>가 관례입니다.</footer>
+            <footer>길이 단위는 <b>pt</b>이고, 배율별 그림은 파일 이름에 <code>@2x</code>·<code>@3x</code>를 붙여 구분합니다. 구분선은 <b>화소 하나</b> 굵기로 긋는 것이 관례입니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>dp · mdpi~xxxhdpi</span></header>
@@ -298,18 +297,18 @@ ctx.scale(dpr, dpr);</pre>
               <div class="phone" role="img" aria-label="안드로이드 에셋 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:6px;top:30px;font-size:6px;color:var(--fg-muted)">drawable-xhdpi<br>drawable-xxhdpi</div></div></div>
             </div>
-            <footer>길이는 <b>dp</b>이고 폴더 이름으로 배율을 가릅니다. 벡터 드로어블을 쓰면 한 벌로 끝납니다.</footer>
+            <footer>길이 단위는 <b>dp</b>이고, 배율별 그림은 폴더 이름으로 구분합니다. 벡터 드로어블을 쓰면 그림 한 벌로 모든 배율을 처리할 수 있습니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — "로고가 흐릿해요"는 거의 늘 이것입니다. 그리고 디자이너의 화면과 개발자의 화면이 <b>둘 다 2배</b>라서 못 보고 지나가는 일이 잦습니다. 시안을 받을 때 <b>2배·3배 파일을 함께</b> 달라고 하거나, 아예 SVG 로 받아 두면 이 왕복이 사라집니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — "로고가 흐릿해요"라는 문의는 거의 늘 배율에 맞는 그림을 주지 않아서 생깁니다. 게다가 디자이너와 개발자의 화면이 <b>둘 다 2배</b>인 경우가 많아서, 만드는 동안에는 문제를 못 보고 지나가기 쉽습니다. 시안을 받을 때 <b>2배·3배 파일을 함께</b> 달라고 하거나 처음부터 SVG로 받아 두면, 나중에 파일을 다시 주고받을 일이 없어집니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="breakpoint.html"><b>브레이크포인트</b><em>11부</em></a></li>
         <li><a href="touchtarget.html"><b>터치 타깃</b><em>11부</em></a></li>
@@ -319,20 +318,20 @@ ctx.scale(dpr, dpr);</pre>
         <li><a href="softkeyboard.html"><b>폰 키보드</b><em>11부</em></a></li>
         <li><a href="platformdiff.html"><b>HIG와 Material의 차이</b><em>11부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="breakpoint.html"><b>브레이크포인트</b><em>11부</em></a></li>
         <li><a href="../items/webfont.html"><b>웹폰트</b><em>3부</em></a></li>
         <li><a href="../items/skeleton.html"><b>스켈레톤</b><em>8부</em></a></li>
         <li><a href="chart.html"><b>차트 고르기</b><em>10부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

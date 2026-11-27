@@ -39,12 +39,12 @@
 </div>
 
 <p class="hint">
-  지우기를 다루는 길은 둘입니다 — <b>지우기 전에 되묻거나</b>, <b>바로 지우고 되돌릴 길을 주거나</b>.
-  되묻기는 <b>매번 멈춰 세웁니다</b>. 데모가 지우는 동안 <b>몇 번 멈춰 세웠는지</b> 셉니다 —
-  열 번 지우면 열 번 멈춥니다.<br>
-  되돌리기는 안 멈추는 대신 <b>시간이 지나면 끝</b>입니다. 창이 닫힌 뒤에 눌러 보면
-  데모가 <b>너무 늦은 되돌리기</b>를 셉니다. 그래서 되돌릴 수 있는 시간은
-  <b>5초 안팎</b>이 보통이고, 되돌릴 수 없는 일에는 되묻기를 씁니다.
+  지우기를 다루는 방법은 <b>지우기 전에 되묻는 것</b>과 <b>바로 지우고 되돌릴 기회를 주는 것</b>, 두 가지입니다.
+  되묻기는 지울 때마다 <b>사용자를 멈춰 세우기</b> 때문에 열 번 지우면 열 번 멈춥니다.
+  데모는 지우는 동안 <b>몇 번 멈춰 세웠는지</b> 셉니다.<br>
+  되돌리기는 멈춰 세우지 않는 대신 <b>시간이 지나면 더는 되돌릴 수 없습니다</b>. 띠가 닫힌 뒤에 되돌리기를 눌러 보면
+  데모가 <b>너무 늦은 되돌리기</b>로 셉니다. 되돌릴 수 있는 시간은 보통
+  <b>5초 안팎</b>으로 잡고, 되돌릴 수 없는 일에는 되돌리기 대신 되묻기를 씁니다.
 </p>
 
 <script>
@@ -69,8 +69,8 @@
     var rd = document.getElementById('read');
     rd.innerHTML = '지운 것 <b>' + deleted + '</b> · 되돌린 것 <b>' + undone + '</b>' +
       '<br>멈춰 세운 횟수 <b>' + stops + '회</b>' +
-      (stops ? ' <span class="warn">— 지울 때마다 멈춘다</span>' : '') +
-      (tooLate ? '<br><span class="warn">너무 늦은 되돌리기 ' + tooLate + '회</span> — 창이 닫히면 못 되돌린다' : '');
+      (stops ? ' <span class="warn">(지울 때마다 멈춥니다)</span>' : '') +
+      (tooLate ? '<br><span class="warn">너무 늦은 되돌리기 ' + tooLate + '회</span> (띠가 닫히면 되돌릴 수 없습니다)' : '');
     rd.dataset.deleted = String(deleted);
     rd.dataset.undone = String(undone);
     rd.dataset.stops = String(stops);
@@ -100,7 +100,7 @@
       document.getElementById('left').dataset.left = String(left);
       if (left <= 0) {
         closeBar();
-        document.getElementById('log').innerHTML = '되돌릴 수 있는 시간이 <b>끝났다</b>';
+        document.getElementById('log').innerHTML = '되돌릴 수 있는 시간이 <b>끝났습니다</b>';
       }
     }, 120);
     document.getElementById('left').textContent = sec + '초';
@@ -113,15 +113,15 @@
     var i = +b.dataset.del;
     if (document.getElementById('k').value === 'confirm') {
       stops++;
-      // 되묻기는 매번 멈춰 세운다 — 데모에서는 바로 지운 것으로 친다
+      // 되묻기는 매번 멈춰 세운다. 데모에서는 사용자가 '지우기'를 고른 것으로 친다
       ITEMS[i][1] = true;
       deleted++;
-      document.getElementById('log').innerHTML = '<b>정말 지울까요?</b> 를 한 번 더 물었다 — 그리고 지웠다';
+      document.getElementById('log').innerHTML = '<b>정말 지울까요?</b>라고 한 번 더 물은 뒤에 지웠습니다';
       render();
       return;
     }
     startUndo(i);
-    document.getElementById('log').innerHTML = '바로 지웠다 — <b>되돌릴 길</b>이 아래에 있다';
+    document.getElementById('log').innerHTML = '바로 지웠습니다. 아래 띠에서 <b>되돌릴 수 있습니다</b>';
   });
 
   document.getElementById('undo').addEventListener('click', function () {
@@ -130,7 +130,7 @@
     deleted--;
     undone++;
     closeBar();
-    document.getElementById('log').innerHTML = '<b>되돌렸다</b> — 파일이 돌아왔다';
+    document.getElementById('log').innerHTML = '<b>되돌렸습니다</b>. 파일이 다시 목록에 돌아왔습니다';
   });
 
   document.getElementById('k').addEventListener('change', function () {
@@ -138,8 +138,8 @@
     stops = 0; undone = 0; tooLate = 0; deleted = 0;
     closeBar();
     document.getElementById('log').innerHTML = this.value === 'confirm'
-      ? '<span class="warn">되묻기</span> — 지울 때마다 한 번씩 멈춘다'
-      : '<b>되돌리기</b> — 안 멈추는 대신 시간이 지나면 끝이다';
+      ? '<span class="warn">되묻기</span>는 지울 때마다 한 번씩 멈춰 세웁니다'
+      : '<b>되돌리기</b>는 멈춰 세우지 않는 대신 시간이 지나면 되돌릴 수 없습니다';
   });
   document.getElementById('t').addEventListener('input', function () {
     document.getElementById('tv').textContent = this.value + '초';

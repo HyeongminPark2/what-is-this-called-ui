@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>차트 고르기 — 이름표</title>
-<meta name="description" content="무엇을 묻느냐로 차트 종류가 정해진다. 비교·추세·분포·비율의 네 질문과 흔한 거짓말들.">
+<meta name="description" content="무엇을 묻느냐에 따라 차트 종류가 정해진다는 것을 비교·추세·분포·비율의 네 가지 질문과 숫자를 잘못 읽게 만드는 흔한 그림들로 보여 주는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">10부 데이터 다루는 화면</a> › 차트 고르기</p>
     <h1>차트 고르기</h1>
     <p class="en">Choosing a chart</p>
-    <p class="lede" style="margin-top:var(--s3)">차트는 <b>질문이 먼저</b>입니다. 무엇을 묻느냐가 정해지면 그릴 그림은 거의 자동으로 정해집니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">차트를 고를 때는 <b>질문부터</b> 정합니다. 데이터에 무엇을 묻는지가 정해지면 어떤 그림을 그릴지는 거의 저절로 정해집니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,29 +50,29 @@
           <iframe src="../demos/chart.html" title="차트 고르기 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>묻고 싶은 것을 골라 보세요. <b>맞는 그림</b>과 <b>흔히 잘못 고르는 그림</b>이 나란히 나옵니다.<br>
-          <b>축을 0에서 자르기</b>를 켜 보면 같은 숫자가 어떻게 <b>세 배쯤 달라 보이는지</b> 알 수 있습니다 —
-          보고서에서 가장 자주 나오는 거짓말입니다.</p>
+          <p>묻고 싶은 것을 골라 보세요. <b>질문에 맞는 그림</b>과 <b>흔히 잘못 고르는 그림</b>이 나란히 나옵니다.<br>
+          <b>축을 0에서 자르기</b>를 켜 보면 같은 숫자인데도 막대 길이가 <b>세 배쯤 달라 보입니다</b>.
+          보고서에서 숫자를 부풀려 보이게 하는 가장 흔한 방법입니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>차트, 그래프, 도표, 시각화</td></tr>
             <tr><th>영어</th><td>chart, graph, plot, data visualization</td></tr>
-            <tr><th>같이 쓰는 말</th><td>막대그래프가 <b>바 차트</b>, 눕히면 <b>가로 막대</b>(horizontal bar), 선이 <b>라인 차트</b>, 밑을 칠하면 <b>에어리어</b>, 점이 <b>산점도</b>(scatter), 원이 <b>파이</b>·<b>도넛</b>입니다. 작게 줄여 글 속에 넣은 선을 <b>스파크라인</b>이라 합니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>그래프</b> — 일상에서는 같은 말이지만 전산에서 '그래프'는 <b>점과 선의 연결 구조</b>를 뜻하기도 합니다.<br><b>대시보드</b> — 차트 여럿을 모아 둔 <b>화면</b>이지 차트 자체가 아닙니다.<br><b>인포그래픽</b> — 데이터보다 <b>설명</b>이 주인입니다. 정확도 기준이 다릅니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>막대그래프는 <b>바 차트</b>, 막대를 눕힌 것은 <b>가로 막대</b>(horizontal bar), 꺾은선은 <b>라인 차트</b>, 선 아래를 칠한 것은 <b>에어리어</b>, 점으로 찍은 것은 <b>산점도</b>(scatter), 원을 나눈 것은 <b>파이</b>·<b>도넛</b>이라고 부릅니다. 선 그래프를 작게 줄여 글 속에 넣은 것은 <b>스파크라인</b>이라고 합니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>그래프</b> — 일상에서는 차트와 같은 말로 쓰지만, 전산에서 '그래프'는 <b>점과 선으로 이루어진 연결 구조</b>를 뜻하기도 합니다.<br><b>대시보드</b> — 대시보드는 차트 여러 개를 모아 둔 <b>화면</b>을 가리킵니다.<br><b>인포그래픽</b> — 인포그래픽은 데이터보다 <b>설명</b>을 전하는 데 중심을 두기 때문에, 차트와는 정확도를 따지는 기준이 다릅니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>데이터를 다루는 화면은 '건수가 늘면 어떻게 되나'가 설계의 전부입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>데이터를 다루는 화면을 설계할 때는 '건수가 늘면 어떻게 되나'부터 따져야 합니다. 아래 네 가지를 물어보면 이 부의 항목들이 서로 어떻게 다른지 드러납니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>무엇을 다루나</th><th>건수가 늘면</th><th>주소에 담나</th><th>서버가 할 일</th></tr></thead>
@@ -83,7 +83,7 @@
             <tr><td>폼 설계</td><td>입력 <b>묶음</b></td><td>단계를 나눈다</td><td>안 담는다</td><td>저장 · 임시 저장</td></tr>
             <tr><td>입력 검증</td><td><b>틀린 값</b></td><td class="none">해당 없음</td><td>안 담는다</td><td><b>서버가 다시 검사</b></td></tr>
             <tr><td>일괄 선택</td><td><b>고른 것들</b></td><td>'전체'가 모호해진다</td><td>안 담는다</td><td>묶음 처리 · 되돌리기</td></tr>
-            <tr><td>가상 스크롤</td><td><b>긴 목록</b></td><td><b>이게 그 답이다</b></td><td>안 담는다</td><td>커서 페이징</td></tr>
+            <tr><td>가상 스크롤</td><td><b>긴 목록</b></td><td><b>이 기법으로 푼다</b></td><td>안 담는다</td><td>커서 페이징</td></tr>
             <tr class="me"><td><b>차트 고르기</b></td><td>숫자들의 <b>관계</b></td><td>점이 뭉친다</td><td>담기도 한다</td><td>집계 · 구간 나누기</td></tr>
             <tr><td>내보내기</td><td><b>파일</b>로 꺼내기</td><td>그 자리에서 못 준다</td><td>담기도 한다</td><td><b>비동기 작업</b></td></tr>
             <tr><td>날짜 범위</td><td><b>기간</b> 고르기</td><td class="none">해당 없음</td><td><b>담는다</b></td><td>경계 시각 맞추기</td></tr>
@@ -91,57 +91,57 @@
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — 차트를 고르기 전에 <b>한 문장</b>으로 물음을 적으세요. '누가 제일 큰가'와 '언제부터 늘었나'는 다른 그림입니다.</p>
+          <p><b>차트 고르기를 한 줄로 정리하면</b> — 차트를 고르기 전에 무엇을 묻는지 <b>한 문장</b>으로 적으세요. 같은 데이터라도 '누가 제일 큰가'를 물으면 막대, '언제부터 늘었나'를 물으면 꺾은선처럼 맞는 그림이 달라집니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 질문별로 고르기<span class="hint">그림이 아니라 물음이 먼저다</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 질문별로 고르기<span class="hint">그림보다 질문을 먼저 정합니다</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <svg viewBox="0 0 120 56" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;max-width:150px;height:auto;display:block" aria-hidden="true"><line x1="10" y1="48" x2="116" y2="48" stroke="var(--line)" stroke-width="1"/><rect x="14" y="24.4" width="16" height="23.6" fill="var(--fg-muted)" rx="1"/><rect x="35" y="31.3" width="16" height="16.7" fill="var(--fg-muted)" rx="1"/><rect x="56" y="17.6" width="16" height="30.4" fill="var(--accent)" rx="1"/><rect x="77" y="36.6" width="16" height="11.4" fill="var(--fg-muted)" rx="1"/></svg>
             </div>
-            <figcaption>누가 제일 큰가<span><b>막대</b>. 길이는 눈이 가장 잘 견준다</span></figcaption>
+            <figcaption>누가 제일 큰가<span><b>막대</b>를 씁니다. 사람의 눈은 길이를 가장 정확하게 견줍니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <svg viewBox="0 0 120 56" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;max-width:150px;height:auto;display:block" aria-hidden="true"><line x1="10" y1="48" x2="116" y2="48" stroke="var(--line)" stroke-width="1"/><polyline points="12.0,40.4 32.0,37.4 52.0,38.1 72.0,31.3 92.0,28.2 112.0,21.4" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/></svg>
             </div>
-            <figcaption>언제부터 늘었나<span><b>선</b>. 시간은 가로로 흐른다</span></figcaption>
+            <figcaption>언제부터 늘었나<span><b>선</b>을 씁니다. 시간을 가로축에 놓고 왼쪽에서 오른쪽으로 읽습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <svg viewBox="0 0 120 56" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;max-width:150px;height:auto;display:block" aria-hidden="true"><line x1="10" y1="48" x2="116" y2="48" stroke="var(--line)" stroke-width="1"/><line x1="12" y1="8" x2="12" y2="48" stroke="var(--line)" stroke-width="1"/><circle cx="20" cy="40" r="2.6" fill="var(--accent)" opacity=".75"/><circle cx="34" cy="33" r="2.6" fill="var(--accent)" opacity=".75"/><circle cx="48" cy="36" r="2.6" fill="var(--accent)" opacity=".75"/><circle cx="60" cy="25" r="2.6" fill="var(--accent)" opacity=".75"/><circle cx="74" cy="22" r="2.6" fill="var(--accent)" opacity=".75"/><circle cx="88" cy="16" r="2.6" fill="var(--accent)" opacity=".75"/><circle cx="102" cy="12" r="2.6" fill="var(--accent)" opacity=".75"/><circle cx="30" cy="28" r="2.6" fill="var(--accent)" opacity=".75"/><circle cx="66" cy="31" r="2.6" fill="var(--accent)" opacity=".75"/></svg>
             </div>
-            <figcaption>둘이 같이 움직이나<span><b>산점도</b>. 점이 뭉치면 투명도를 준다</span></figcaption>
+            <figcaption>둘이 같이 움직이나<span><b>산점도</b>를 씁니다. 점이 한곳에 뭉치면 점을 반투명하게 해서 겹친 정도가 보이게 합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <svg viewBox="0 0 56 56" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;max-width:110px;height:auto;display:block" aria-hidden="true"><circle cx="28" cy="28" r="24" fill="var(--fg-muted)" opacity=".25"/><path d="M28 28 L28 4 A24 24 0 0 1 48.8 40 Z" fill="var(--accent)"/></svg>
             </div>
-            <figcaption>전체의 몇 할인가<span><b>파이</b>. 조각이 <b>두셋</b>일 때만</span></figcaption>
+            <figcaption>전체의 몇 할인가<span><b>파이</b>를 씁니다. 다만 조각이 <b>두세 개</b>일 때만 알아보기 쉽습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <svg viewBox="0 0 120 56" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;max-width:150px;height:auto;display:block" aria-hidden="true"><line x1="10" y1="48" x2="116" y2="48" stroke="var(--line)" stroke-width="1"/><rect x="16" y="26.0" width="16" height="22.0" fill="var(--accent)" rx="1"/><rect x="16" y="14.0" width="16" height="12.0" fill="var(--fg-muted)" opacity=".45" rx="1"/><rect x="41" y="30.0" width="16" height="18.0" fill="var(--accent)" rx="1"/><rect x="41" y="14.0" width="16" height="16.0" fill="var(--fg-muted)" opacity=".45" rx="1"/><rect x="66" y="22.0" width="16" height="26.0" fill="var(--accent)" rx="1"/><rect x="66" y="12.0" width="16" height="10.0" fill="var(--fg-muted)" opacity=".45" rx="1"/><rect x="91" y="28.0" width="16" height="20.0" fill="var(--accent)" rx="1"/><rect x="91" y="10.0" width="16" height="18.0" fill="var(--fg-muted)" opacity=".45" rx="1"/></svg>
             </div>
-            <figcaption>묶음 안의 구성<span><b>쌓은 막대</b>. 맨 아래 조각만 견주기 쉽다</span></figcaption>
+            <figcaption>묶음 안의 구성<span><b>쌓은 막대</b>를 씁니다. 다만 기준선이 같은 맨 아래 조각만 막대끼리 견주기 쉽습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <svg viewBox="0 0 120 56" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;max-width:150px;height:auto;display:block" aria-hidden="true"><line x1="10" y1="48" x2="116" y2="48" stroke="var(--line)" stroke-width="1"/><polygon points="12,48 12.0,36.6 32.0,35.8 52.0,36.2 72.0,35.1 92.0,35.5 112.0,34.3 112,48" fill="var(--accent)" opacity=".15"/><polyline points="12.0,36.6 32.0,35.8 52.0,36.2 72.0,35.1 92.0,35.5 112.0,34.3" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/></svg>
             </div>
-            <figcaption>대충 흐름만<span><b>스파크라인</b>. 눈금 없이 글 옆에 둔다</span></figcaption>
+            <figcaption>대충 흐름만<span><b>스파크라인</b>을 씁니다. 눈금 없이 글 옆에 작게 둡니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="차트 고르기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="차트 고르기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="font-size:11.5px;font-weight:700">11월 가맹점별 매출</div>
@@ -155,54 +155,54 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>제목 <em>무엇의 무엇인가</em></b><span>'매출'이 아니라 <b>'11월 가맹점별 매출'</b></span></li>
-            <li><b>그림 <em>막대·선·점</em></b><span><b>물음에 맞는</b> 모양 하나</span></li>
-            <li><b>0 기준선 <em>막대는 필수</em></b><span>자르면 작은 차이가 <b>세 배로</b> 보인다</span></li>
-            <li><b>눈금과 단위 <em>원? 만 원? 건?</em></b><span>숫자만 있으면 크기를 못 읽는다</span></li>
-            <li><b>색 <em>뜻이 있을 때만</em></b><span>강조할 하나만 진하게. 나머지는 회색으로</span></li>
-            <li><b>표도 함께 <em>&lt;table&gt;</em></b><span>그림은 <b>눈으로만</b> 읽힌다. 숫자 표를 같이 둔다</span></li>
+            <li><b>제목 <em>무엇의 무엇인가</em></b><span>'매출'이 아니라 <b>'11월 가맹점별 매출'</b>처럼 무엇을 어떻게 나눈 값인지 적습니다</span></li>
+            <li><b>그림 <em>막대·선·점</em></b><span><b>질문에 맞는</b> 모양 하나를 고릅니다</span></li>
+            <li><b>0 기준선 <em>막대는 필수</em></b><span>막대 아래를 자르면 작은 차이가 <b>세 배</b>쯤으로 부풀어 보입니다</span></li>
+            <li><b>눈금과 단위 <em>원? 만 원? 건?</em></b><span>눈금 숫자만 있고 단위가 없으면 값이 얼마나 큰지 읽을 수 없습니다</span></li>
+            <li><b>색 <em>뜻이 있을 때만</em></b><span>강조할 항목 하나만 진한 색으로 칠하고 나머지는 회색으로 둡니다</span></li>
+            <li><b>표도 함께 <em>&lt;table&gt;</em></b><span>그림은 <b>눈으로만</b> 읽을 수 있으므로 숫자 표를 함께 둡니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          <b>막대의 밑은 0 이어야 합니다.</b> 길이로 크기를 읽는 그림이라
-          밑을 잘라내면 눈이 읽는 비율 자체가 거짓이 됩니다.
-          100·102·104 를 98 부터 그리면 <b>두 배 차이</b>처럼 보입니다.
-          선 그래프는 '변화'를 읽는 그림이라 잘라도 되지만,
-          이때는 <b>축에 잘랐다고 적어</b> 둡니다.</p>
+          <b>막대는 0에서 시작해야 합니다.</b> 막대그래프는 길이로 크기를 읽는 그림이라
+          아래를 잘라 내면 눈으로 읽는 길이의 비율이 실제 값의 비율과 달라집니다.
+          예를 들어 100·102·104를 98부터 그리면 겨우 2% 차이가 <b>두 배 차이</b>처럼 보입니다.
+          선 그래프는 값의 '변화'를 읽는 그림이라 축을 잘라도 되지만,
+          이때는 <b>축을 잘랐다는 표시를</b> 해 둡니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>차트 고르기를 쓰는 경우</h3>
             <ul>
-              <li>숫자들의 <b>관계</b>를 한눈에 보여야 할 때</li>
-              <li><b>흐름·크기 차이</b>가 표로는 안 보일 때</li>
-              <li>볼 사람이 <b>정확한 값이 아니라 경향</b>을 원할 때</li>
+              <li>숫자들 사이의 <b>관계</b>를 한눈에 보여 줘야 할 때</li>
+              <li><b>흐름이나 크기 차이</b>가 표로는 잘 보이지 않을 때</li>
+              <li>보는 사람이 <b>정확한 값보다 경향</b>을 알고 싶어 할 때</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>차트 고르기를 쓰지 않는 경우</h3>
             <ul>
-              <li>값이 <b>서넛</b>일 때 — 그냥 숫자로 적는 게 빠르다</li>
-              <li><b>정확한 값</b>이 필요할 때 → <a href="table.html">데이터 테이블</a></li>
-              <li>조각이 다섯을 넘는 파이 — <b>막대로 바꾼다</b></li>
-              <li>3차원·기울인 그림 — 보기에만 좋고 <b>크기를 왜곡</b>한다</li>
+              <li>값이 <b>서너 개</b>뿐일 때. 숫자로 적는 편이 더 빨리 읽힙니다</li>
+              <li><b>정확한 값</b>이 필요할 때. <a href="table.html">데이터 테이블</a>이 맞습니다</li>
+              <li>조각이 다섯 개를 넘는 파이를 그릴 때. <b>막대로 바꿉니다</b></li>
+              <li>3차원으로 그리거나 기울인 그림을 쓸 때. 보기에만 좋을 뿐 <b>크기를 왜곡</b>합니다</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 정확한 값이면 <a href="table.html">데이터 테이블</a>, 값 하나면 <a href="../items/stat.html">스탯</a>, 비율 하나면 <a href="../items/progress.html">프로그레스</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>차트 고르기 대신 다른 것을 써야 하는 경우</b> — 정확한 값이 필요하면 <a href="table.html">데이터 테이블</a>, 값 하나만 보여 주면 <a href="../items/stat.html">스탯</a>, 비율 하나만 보여 주면 <a href="../items/progress.html">프로그레스</a>를 씁니다.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <svg viewBox="0 0 120 56" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;max-width:150px;height:auto;display:block" aria-hidden="true"><line x1="10" y1="48" x2="116" y2="48" stroke="var(--line)" stroke-width="1"/><rect x="14" y="24.4" width="16" height="23.6" fill="var(--fg-muted)" rx="1"/><rect x="35" y="31.3" width="16" height="16.7" fill="var(--fg-muted)" rx="1"/><rect x="56" y="17.6" width="16" height="30.4" fill="var(--accent)" rx="1"/><rect x="77" y="36.6" width="16" height="11.4" fill="var(--fg-muted)" rx="1"/></svg>
             </div>
-            <figcaption><b>강조는 하나만</b>말하려는 막대만 진하게, 나머지는 회색</figcaption>
+            <figcaption><b>강조는 하나만</b>말하려는 막대만 진하게 칠하고 나머지는 회색으로 둡니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -212,7 +212,7 @@
                 <svg viewBox="0 0 120 56" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;max-width:100%;height:auto;display:block" aria-hidden="true"><line x1="10" y1="48" x2="116" y2="48" stroke="var(--line)" stroke-width="1"/><polygon points="12,48 12.0,36.6 32.0,35.8 52.0,36.2 72.0,34.3 92.0,35.1 112.0,32.8 112,48" fill="var(--accent)" opacity=".15"/><polyline points="12.0,36.6 32.0,35.8 52.0,36.2 72.0,34.3 92.0,35.1 112.0,32.8" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/></svg>
               </div>
             </div>
-            <figcaption><b>스탯 + 스파크라인</b>값 하나와 <b>흐름</b>을 같이. 대시보드의 기본 칸</figcaption>
+            <figcaption><b>스탯 + 스파크라인</b>값 하나와 그 값의 <b>흐름</b>을 함께 보여 줍니다. 대시보드에서 가장 흔한 칸입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -221,21 +221,21 @@
                 <span style="display:block;font-size:8.5px;color:var(--danger);margin-top:3px">같은 숫자를 98부터 그리면 두 배로 보인다</span>
               </div>
             </div>
-            <figcaption><b>0에서 시작한 막대</b>차이가 작으면 <b>작게 보이는 것이 맞다</b></figcaption>
+            <figcaption><b>0에서 시작한 막대</b>실제 차이가 작으면 그림에서도 <b>차이가 작게 보여야 맞습니다</b></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 접근<span class="hint">이 차트의 계약서</span></h2>
-        <p>차트는 <b>그림</b>이므로 이름을 붙이고, 숫자는 표로 한 벌 더 둡니다.</p>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 접근<span class="hint">차트가 꼭 갖출 것</span></h2>
+        <p>차트는 <b>그림</b>이므로 무엇을 보여 주는지 이름을 붙이고, 숫자는 표로 한 벌 더 둡니다.</p>
 <pre class="code">&lt;<span class="t">figure</span>&gt;
   &lt;<span class="t">figcaption</span>&gt;11월 가맹점별 매출 (단위: 만 원)&lt;/<span class="t">figcaption</span>&gt;
 
   &lt;<span class="t">svg</span> <span class="a">role</span>=<span class="s">"img"</span>
        <span class="a">aria-label</span>=<span class="s">"막대그래프. 새벽상사가 80으로 가장 높다"</span>&gt;…&lt;/<span class="t">svg</span>&gt;
 
-  &lt;<span class="t">table</span> <span class="a">class</span>=<span class="s">"sr-only"</span>&gt;      <span class="c">&lt;!-- 숫자를 읽을 길 --&gt;</span>
+  &lt;<span class="t">table</span> <span class="a">class</span>=<span class="s">"sr-only"</span>&gt;      <span class="c">&lt;!-- 숫자를 읽을 수 있게 표를 함께 둔다 --&gt;</span>
     &lt;<span class="t">tr</span>&gt;&lt;<span class="t">th</span>&gt;모란상회&lt;/<span class="t">th</span>&gt;&lt;<span class="t">td</span>&gt;62&lt;/<span class="t">td</span>&gt;&lt;/<span class="t">tr</span>&gt;
   &lt;/<span class="t">table</span>&gt;
 &lt;/<span class="t">figure</span>&gt;
@@ -244,44 +244,44 @@
 <span class="t">svg</span> { <span class="a">width</span>: <span class="a">100%</span>; <span class="a">height</span>: auto; }   <span class="c">/* viewBox + xMidYMid meet */</span></pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td><code>role="img"</code> + <code>aria-label</code></td><td><b>무엇을 말하는 그림인지</b> 한 문장. '차트'라고만 적으면 쓸모없다</td></tr>
-            <tr><td><code>&lt;figcaption&gt;</code></td><td>제목과 <b>단위</b>. 눈으로 보는 사람에게도 필요하다</td></tr>
-            <tr><td>숨은 <code>&lt;table&gt;</code></td><td>정확한 값을 읽을 유일한 길. <code>sr-only</code>로 둬도 된다</td></tr>
-            <tr><td>색만으로 구분하지 않는다</td><td>선은 <b>모양</b>(점선·실선)이나 직접 라벨로도 가른다</td></tr>
-            <tr><td><code>preserveAspectRatio</code></td><td>기본은 <code>xMidYMid meet</code>. <code>none</code>으로 두면 <b>원이 타원</b>이 된다</td></tr>
-            <tr><td>움직임</td><td>그리며 자라는 연출은 <code>prefers-reduced-motion</code>에서 끈다</td></tr>
+            <tr><td><code>role="img"</code> + <code>aria-label</code></td><td><b>그림이 무엇을 보여 주는지</b> 한 문장으로 적습니다. '차트'라고만 적으면 스크린 리더 사용자는 아무 정보도 얻지 못합니다</td></tr>
+            <tr><td><code>&lt;figcaption&gt;</code></td><td>제목과 <b>단위</b>를 적습니다. 눈으로 보는 사람에게도 필요한 정보입니다</td></tr>
+            <tr><td>숨은 <code>&lt;table&gt;</code></td><td>스크린 리더 사용자가 정확한 값을 읽을 수 있는 유일한 방법입니다. <code>sr-only</code>로 화면에서 숨겨 둬도 됩니다</td></tr>
+            <tr><td>색만으로 구분하지 않는다</td><td>선은 색과 함께 <b>모양</b>(점선·실선)을 다르게 하거나 선 옆에 이름을 직접 붙여 구분합니다</td></tr>
+            <tr><td><code>preserveAspectRatio</code></td><td>기본값은 <code>xMidYMid meet</code>입니다. <code>none</code>으로 두면 칸 비율에 맞춰 늘어나 <b>원이 타원</b>이 됩니다</td></tr>
+            <tr><td>움직임</td><td>막대나 선이 자라나며 그려지는 연출은 <code>prefers-reduced-motion</code>이 켜져 있으면 끕니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>집계는 서버에서</th><td>10만 건을 보내 브라우저가 더하게 하면 느립니다. <b>이미 더한 값</b>을 보냅니다.</td></tr>
-            <tr><th>구간을 정해 보낸다</th><td>일별인지 주별인지는 <b>서버가 결정</b>해 보내야 눈금이 흔들리지 않습니다. 기간이 길면 자동으로 묶습니다.</td></tr>
-            <tr><th>빈 구간을 채운다</th><td>거래가 없는 날은 행이 아예 없습니다. 그대로 그리면 <b>날짜가 건너뛴 선</b>이 됩니다. 0 을 채워 보냅니다.</td></tr>
-            <tr><th>시간대</th><td>'11월 1일'이 서버 기준인지 보는 사람 기준인지에 따라 숫자가 달라집니다. <b>기준을 적어</b> 보냅니다.</td></tr>
-            <tr><th>점이 너무 많을 때</th><td>1년치 분당 데이터는 50만 점입니다. 서버에서 <b>솎아</b>(downsample) 보내고, 확대하면 그 구간만 다시 받습니다.</td></tr>
+            <tr><th>집계는 서버에서</th><td>10만 건을 그대로 보내 브라우저가 더하게 하면 느립니다. 서버가 <b>미리 더한 값</b>을 보냅니다.</td></tr>
+            <tr><th>구간을 정해 보낸다</th><td>일별로 묶을지 주별로 묶을지는 <b>서버가 정해서</b> 보내야 화면마다 눈금이 달라지지 않습니다. 기간이 길면 서버가 알아서 더 큰 단위로 묶습니다.</td></tr>
+            <tr><th>빈 구간을 채운다</th><td>거래가 없는 날은 데이터베이스에 행이 아예 없어서, 그대로 그리면 <b>날짜를 건너뛴 선</b>이 됩니다. 그래서 빈 날짜에는 0을 채워 보냅니다.</td></tr>
+            <tr><th>시간대</th><td>'11월 1일'을 서버 시간대로 자르느냐 보는 사람의 시간대로 자르느냐에 따라 숫자가 달라집니다. 응답에 <b>어느 시간대 기준인지 적어</b> 보냅니다.</td></tr>
+            <tr><th>점이 너무 많을 때</th><td>1년치 분 단위 데이터는 50만 점이 넘습니다. 서버에서 점을 <b>솎아</b>(downsample) 보내고, 사용자가 확대하면 그 구간만 자세히 다시 받습니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p>표준 부품이 없어 <b>어디서나 라이브러리</b>를 씁니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>차트는 표준 부품이 드물어서 <b>대부분 라이브러리</b>를 씁니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>SVG / Canvas</span></header>
             <div class="shot">
               <svg viewBox="0 0 120 56" preserveAspectRatio="xMidYMid meet" role="img" style="width:100%;max-width:110px;height:auto;display:block" aria-hidden="true"><line x1="10" y1="48" x2="116" y2="48" stroke="var(--line)" stroke-width="1"/><rect x="14" y="24.4" width="16" height="23.6" fill="var(--fg-muted)" rx="1"/><rect x="35" y="31.3" width="16" height="16.7" fill="var(--fg-muted)" rx="1"/><rect x="56" y="17.6" width="16" height="30.4" fill="var(--accent)" rx="1"/></svg>
             </div>
-            <footer>점이 수천 개를 넘으면 SVG 가 느려집니다. 그때 <b>캔버스</b>로 바꿉니다.</footer>
+            <footer>점이 수천 개를 넘으면 SVG가 느려지므로, 그때는 <b>캔버스</b>로 바꿉니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>Swift Charts</span></header>
@@ -289,7 +289,7 @@
               <div class="phone" role="img" aria-label="iOS 차트 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <svg viewBox="0 0 40 24" style="position:absolute;left:4px;right:4px;top:30px;width:calc(100% - 8px)" aria-hidden="true"><rect x="4" y="10" width="6" height="12" fill="#2f6df6"/><rect x="14" y="6" width="6" height="16" fill="#2f6df6"/><rect x="24" y="14" width="6" height="8" fill="#2f6df6"/></svg></div></div>
             </div>
-            <footer>2022년부터 <b>OS 기본 차트</b>가 생겼습니다. 다크 모드와 글자 크기를 알아서 따릅니다.</footer>
+            <footer>2022년부터 <b>OS 기본 차트</b>가 생겼고, 다크 모드와 글자 크기 설정을 알아서 따릅니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>라이브러리</span></header>
@@ -297,18 +297,18 @@
               <div class="phone" role="img" aria-label="안드로이드 차트 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <svg viewBox="0 0 40 24" style="position:absolute;left:4px;right:4px;top:30px;width:calc(100% - 8px)" aria-hidden="true"><polyline points="4,20 12,14 20,16 28,8 36,6" fill="none" stroke="#2f6df6" stroke-width="1.5"/></svg></div></div>
             </div>
-            <footer>OS 기본 차트가 없어 외부 라이브러리를 씁니다. Compose 로 <b>직접 그리는</b> 경우도 많습니다.</footer>
+            <footer>OS 기본 차트가 없어서 외부 라이브러리를 쓰고, Compose로 <b>직접 그리는</b> 경우도 많습니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — "차트 하나 넣어 주세요"를 받으면 <b>무엇을 묻는 그림인지</b>를 먼저 물으세요. '매출 차트'는 요구사항이 아닙니다 — '지난달 대비 어느 가맹점이 늘었나'여야 막대인지 선인지가 정해지고, 그래야 서버가 어떤 모양으로 집계해 보낼지도 정해집니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — "차트 하나 넣어 주세요"라는 요청을 받으면 <b>무엇을 묻는 그림인지</b>부터 물어보세요. '매출 차트'만으로는 무엇을 그릴지 정할 수 없습니다. '지난달보다 어느 가맹점이 늘었나'처럼 질문이 구체적이어야 막대를 쓸지 선을 쓸지 정해지고, 그래야 서버가 어떤 모양으로 집계해 보낼지도 정해집니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="table.html"><b>데이터 테이블</b><em>10부</em></a></li>
         <li><a href="filter.html"><b>필터와 패싯</b><em>10부</em></a></li>
@@ -320,20 +320,20 @@
         <li><a href="exportdata.html"><b>내보내기</b><em>10부</em></a></li>
         <li><a href="daterange.html"><b>날짜 범위</b><em>10부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="../items/stat.html"><b>스탯</b><em>5부</em></a></li>
         <li><a href="table.html"><b>데이터 테이블</b><em>10부</em></a></li>
         <li><a href="../items/progress.html"><b>프로그레스</b><em>8부</em></a></li>
         <li><a href="../items/color.html"><b>색 역할</b><em>2부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

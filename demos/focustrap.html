@@ -36,7 +36,7 @@
       <button class="fk" data-n="배경 버튼 2">배경 버튼 2</button>
     </div>
   </div>
-  <div class="a11y__log" id="log">모달을 연 뒤 <b>Tab</b> 을 계속 눌러 보세요.</div>
+  <div class="a11y__log" id="log">모달을 연 뒤 <b>Tab</b>을 계속 눌러 보세요.</div>
 </div>
 
 <dialog id="dlg" aria-labelledby="t">
@@ -49,13 +49,13 @@
 </dialog>
 
 <p class="hint">
-  <b>포커스 트랩</b>은 모달이 열린 동안 <b>키보드를 그 안에만</b> 두는 것입니다.
-  안 가두면 <kbd>Tab</kbd>이 모달 밖으로 나가, <b>보이지도 않는 배경 버튼</b>에 포커스가 가 있게 됩니다 —
-  화면을 못 보는 사람에게는 어디 있는지 알 길이 없는 상태입니다.<br>
-  <b>가두지 않고 열기</b>를 켜고 <kbd>Tab</kbd>을 여러 번 눌러 보세요. 기록에 <b>배경 버튼</b>이 찍히면 그게 사고입니다.<br>
-  <code>&lt;dialog&gt;</code>를 <code>showModal()</code>로 열면 <b>브라우저가 알아서 가둡니다</b> —
-  직접 만들 일이 거의 없어졌습니다. 다만 세 가지는 챙겨야 합니다 —
-  <b>열 때 안으로</b> 포커스를 넣고, <b>닫을 때 부른 버튼으로</b> 돌려주고, <kbd>Esc</kbd>로 닫히게.
+  <b>포커스 트랩</b>은 모달이 열려 있는 동안 <b>키보드 포커스가 모달 안에서만</b> 움직이게 하는 동작입니다.
+  포커스를 가두지 않으면 <kbd>Tab</kbd>을 누를 때 포커스가 모달 밖으로 나가서, 가림막에 가려 <b>보이지도 않는 배경 버튼</b>에 가 있게 됩니다.
+  화면을 보지 못하는 사람은 포커스가 지금 어디 있는지 알 방법이 없습니다.<br>
+  <b>가두지 않고 열기</b>를 켜고 <kbd>Tab</kbd>을 여러 번 눌러 보세요. 기록에 <b>배경 버튼</b>이 찍히면 포커스가 모달 밖으로 빠져나간 것입니다.<br>
+  <code>&lt;dialog&gt;</code>를 <code>showModal()</code>로 열면 <b>브라우저가 알아서 포커스를 가두기</b> 때문에,
+  이제는 포커스 트랩을 직접 만들 일이 거의 없습니다. 다만 모달을 <b>열 때 포커스를 모달 안으로</b> 옮기고,
+  <b>닫을 때 모달을 연 버튼으로</b> 돌려주고, <kbd>Esc</kbd>로 닫히게 하는 세 가지는 챙겨야 합니다.
 </p>
 
 <script>
@@ -73,11 +73,11 @@
   openBtn.addEventListener('click', function () {
     lines = []; escaped = false;
     if (document.getElementById('broken').checked) {
-      dlg.show();                 // 안 가둔다 — Tab 이 밖으로 나간다
-      note('show() 로 열었습니다 — <b>안 가둠</b>');
+      dlg.show();                 // 가두지 않으므로 Tab을 누르면 밖으로 나간다
+      note('show()로 열었습니다. 포커스를 <b>가두지 않습니다</b>');
     } else {
       dlg.showModal();            // 브라우저가 가둔다
-      note('showModal() 로 열었습니다 — <b>브라우저가 가둠</b>');
+      note('showModal()로 열었습니다. <b>브라우저가 포커스를 가둡니다</b>');
     }
     document.getElementById('cancel').focus();
   });
@@ -85,8 +85,8 @@
   [document.getElementById('cancel'), document.getElementById('ok')].forEach(function (b) {
     b.addEventListener('click', function () {
       dlg.close();
-      openBtn.focus();            // 부른 버튼으로 돌려준다
-      note('닫고 <b>부른 버튼</b>으로 포커스를 돌려줬습니다', 'ok');
+      openBtn.focus();            // 모달을 연 버튼으로 돌려준다
+      note('모달을 닫고 <b>모달을 연 버튼</b>으로 포커스를 돌려줬습니다', 'ok');
     });
   });
 

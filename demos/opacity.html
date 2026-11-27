@@ -41,11 +41,11 @@
 </div>
 
 <p class="hint">
-  <b>대비비를 재서 적습니다</b> — 흰 바탕 위 글자를 <code>opacity: .5</code> 로 흐리면
-  4.5:1 아래로 떨어집니다. 비활성 상태를 이렇게 만들면 <b>읽을 수 없는 글</b>이 됩니다.<br>
-  더 조용한 사고가 하나 더 있습니다 — <code>opacity</code> 가 1보다 작아지면 그 상자가
-  <b>쌓임 문맥</b>이 되어, 안에 있는 <code>z-index: 5</code> 배지가 바깥의
-  <code>z-index: 2</code> 덮개 위로 못 올라갑니다. 모서리 자리를 실제로 찍어 누가 위에 있는지 잽니다.
+  바로 위 줄에 글자의 <b>대비비를 재서 적어 둡니다</b>. 흰 바탕 위 글자를 <code>opacity: .5</code>로 흐리면
+  대비비가 4.5:1 아래로 떨어지기 때문에, 비활성 상태를 이렇게 만들면 <b>읽기 어려운 글</b>이 됩니다.<br>
+  눈에 잘 띄지 않는 문제도 하나 더 있습니다. <code>opacity</code>가 1보다 작아지면 그 상자가 새
+  <b>쌓임 문맥</b>을 만들어서, 안에 있는 <code>z-index: 5</code> 배지가 바깥의
+  <code>z-index: 2</code> 덮개 위로 올라가지 못합니다. 데모는 두 요소가 겹치는 모서리 자리를 실제로 찍어 어느 쪽이 위에 있는지 확인합니다.
 </p>
 
 <script>
@@ -86,16 +86,16 @@
     rd.innerHTML = '글자 대비비 <b>' + cr.toFixed(2) + ':1</b>' +
       (cr < 4.5 ? ' <span class="warn">— 4.5:1 미달</span>' : ' — 통과') +
       '<br>겹치는 자리에 있는 것 <b>' + who + '</b>' +
-      (who === '덮개' ? ' <span class="warn">— 배지의 z-index 5 가 안 먹는다</span>' : '');
+      (who === '덮개' ? ' <span class="warn">— 배지의 z-index 5가 적용되지 않습니다</span>' : '');
     rd.dataset.cr = cr.toFixed(2);
     rd.dataset.pass = cr >= 4.5 ? '1' : '0';
     rd.dataset.top = who;
 
     document.getElementById('note').innerHTML = {
-      none: '그대로 — 기준값이다',
-      opacity: '<span class="warn">부모 전체가 흐려진다</span> — 글·버튼·배지까지 같이 흐려지고, 쌓임 문맥이 새로 생긴다',
-      alpha: '글자색만 흐려진다 — 쌓임 문맥은 <b>안 생긴다</b>. 다만 대비비는 똑같이 떨어진다',
-      muted: '<b>흐린 색 토큰</b> — 처음부터 대비비를 맞춰 고른 색이라 안전하다'
+      none: '그대로 — 비교할 기준입니다',
+      opacity: '<span class="warn">부모 전체가 흐려집니다</span> — 글과 버튼, 배지까지 함께 흐려지고 쌓임 문맥이 새로 생깁니다',
+      alpha: '글자색만 흐려집니다 — 쌓임 문맥은 <b>생기지 않지만</b> 대비비는 똑같이 떨어집니다',
+      muted: '<b>흐린 색 토큰</b> — 처음부터 대비비를 맞춰 고른 색이라 안전합니다'
     }[k];
   }
 

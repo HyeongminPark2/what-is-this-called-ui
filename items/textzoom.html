@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>확대와 글자 크기 — 이름표</title>
-<meta name="description" content="사용자가 글자를 키웠을 때도 쓰이는가. px로 박으면 안 커지고, 높이까지 박으면 잘린다.">
+<meta name="description" content="사용자가 글자를 키웠을 때도 화면을 쓸 수 있는지 다루는 항목입니다. 글자 크기를 px로 고정하면 글자가 커지지 않고, 상자 높이까지 고정하면 글이 잘립니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">12부 접근성</a> › 확대와 글자 크기</p>
     <h1>확대와 글자 크기</h1>
     <p class="en">Zoom & text resize</p>
-    <p class="lede" style="margin-top:var(--s3)">사용자는 <b>글자를 키울 수 있습니다</b>. 저시력인 사람에게는 이게 유일한 길입니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">사용자는 브라우저나 OS 설정으로 <b>글자를 키울 수 있습니다</b>. 저시력인 사람은 이 설정으로 글자를 키워야 화면을 읽을 수 있습니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,29 +50,29 @@
           <iframe src="../demos/textzoom.html" title="확대와 글자 크기 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>막대를 끌어 글자를 키워 보세요. OS·브라우저 설정으로 <b>사용자가 직접</b> 키울 수 있습니다.<br>
-          <b>px 로 박아 두기</b>를 켜면 안 커지고, 상자 높이까지 박으면 <b>글이 잘립니다</b> —
-          설정을 켠 사람만 겪는 사고라 <b>우리 화면에서는 안 보입니다</b>.</p>
+          <p>막대를 끌어 글자를 키워 보세요. 실제로는 사용자가 OS나 브라우저 설정으로 <b>직접</b> 글자를 키웁니다.<br>
+          <b>px 로 박아 두기</b>를 켜면 막대를 끌어도 글자가 커지지 않고, 상자 높이까지 px로 고정하면 <b>글이 잘립니다</b>.
+          이 사고는 글자 크기 설정을 켠 사람만 겪기 때문에 <b>개발하는 사람의 화면에서는 드러나지 않습니다</b>.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>확대, 글자 크기 조절, 글자 키우기, 텍스트 리사이즈</td></tr>
             <tr><th>영어</th><td>zoom, text resize, text spacing, dynamic type</td></tr>
-            <tr><th>같이 쓰는 말</th><td>화면 전체를 키우는 것이 <b>브라우저 확대</b>(zoom), 글자만 키우는 것이 <b>글자 크기 설정</b>입니다. iOS 는 <b>다이내믹 타입</b>, 안드로이드는 <b>글꼴 크기</b>라 부릅니다. WCAG 에는 <b>200%까지 확대</b>(1.4.4)와 <b>글자 간격을 늘려도 안 깨질 것</b>(1.4.12)이 따로 적혀 있습니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>반응형</b> — 폭이 달라지는 것과 <b>글자가 커지는</b> 것은 다릅니다. 다만 결과가 비슷해 섞입니다.<br><b>핀치 줌</b> — 손가락으로 벌리는 것도 확대지만, <b>막아 두는 코드</b>가 흔해 따로 짚어야 합니다.<br><b>화면 밀도</b> — <a href="dpr.html">화면 밀도</a>는 기기의 성질이고, 이쪽은 <b>사용자의 선택</b>입니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>화면 전체를 키우는 것은 <b>브라우저 확대</b>(zoom), 글자만 키우는 것은 <b>글자 크기 설정</b>이라고 합니다. 글자 크기 설정을 iOS에서는 <b>다이내믹 타입</b>, 안드로이드에서는 <b>글꼴 크기</b>라고 부릅니다. WCAG에는 <b>200%까지 확대해도 쓸 수 있어야 한다</b>는 기준(1.4.4)과 <b>글자 간격을 늘려도 화면이 깨지지 않아야 한다</b>는 기준(1.4.12)이 따로 있습니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>반응형</b> — 반응형은 화면 폭이 달라질 때를 다루고, 이 항목은 <b>글자가 커질 때</b>를 다룹니다. 다만 화면이 바뀌는 결과가 비슷해서 자주 섞어 부릅니다.<br><b>핀치 줌</b> — 두 손가락을 벌려 키우는 것도 확대에 속하지만, 핀치 줌을 <b>막아 두는 코드</b>가 흔해서 따로 짚어야 합니다.<br><b>화면 밀도</b> — <a href="dpr.html">화면 밀도</a>는 기기가 원래 가진 성질이고, 글자 크기는 <b>사용자가 고르는 설정</b>입니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>접근성은 따로 붙이는 것이 아니라 <b>빠뜨리지 않는 것</b>입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>접근성은 다 만든 뒤에 덧붙이기보다 만드는 동안 <b>빠뜨리지 않고 챙기는 일</b>입니다. 아래 네 가지를 물어보면 이 부의 항목들이 서로 어떻게 다른지 가를 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>무엇을 돕나</th><th>눈으로 보이나</th><th>안 하면 누가 막히나</th><th>어떻게 확인하나</th></tr></thead>
@@ -81,7 +81,7 @@
             <tr><td>포커스 트랩</td><td>모달 안에 가두기</td><td>안 보인다</td><td>키보드·스크린 리더</td><td>모달에서 Tab 을 돌려 본다</td></tr>
             <tr><td>키보드 조작</td><td>마우스 없이 <b>전부</b></td><td>안 보인다</td><td>마우스를 못 쓰는 사람</td><td>마우스를 치우고 해 본다</td></tr>
             <tr><td>이름 붙이기</td><td>뭐라고 <b>부르나</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>접근성 트리를 본다</td></tr>
-            <tr><td>스크린 리더가 읽는 것</td><td>역할 · 이름 · <b>상태</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>실제로 읽혀 본다</td></tr>
+            <tr><td>스크린 리더가 읽는 것</td><td>역할 · 이름 · <b>상태</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>직접 들어 본다</td></tr>
             <tr><td>라이브 리전</td><td><b>저절로 바뀐 것</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>바꿔 놓고 들어 본다</td></tr>
             <tr><td>대비비</td><td>글자가 <b>읽히나</b></td><td><b>보인다</b></td><td>저시력 · 밝은 곳 · 싼 화면</td><td><b>재 본다</b>(숫자로 나온다)</td></tr>
             <tr><td>시맨틱 태그</td><td>화면의 <b>구조</b></td><td>안 보인다</td><td><b>거의 모두</b></td><td>구역 목록을 열어 본다</td></tr>
@@ -91,7 +91,7 @@
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — <b>크기는 rem 으로, 높이는 박지 마세요.</b> 그러면 설정을 켠 사람에게도 그대로 쓰입니다.</p>
+          <p><b>확대와 글자 크기를 한 줄로 정리하면</b> — <b>글자 크기는 rem으로 정하고, 상자 높이는 고정하지 않습니다.</b> 그러면 글자 크기 설정을 켠 사람도 화면을 그대로 쓸 수 있습니다.</p>
         </div>
       </section>
 
@@ -102,46 +102,46 @@
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-weight:700;font-size:10px">모란상회</span><span style="color:var(--fg-muted);font-size:10px;display:block">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 들어갑니다.</span></div><span style="font-size:8.5px;color:var(--fg-muted)">기본 — 100%</span></div>
             </div>
-            <figcaption>기본<span>우리가 보는 모습</span></figcaption>
+            <figcaption>기본<span>개발하는 사람이 보통 보는 모습입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-weight:700;font-size:13px">모란상회</span><span style="color:var(--fg-muted);font-size:13px;display:block">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 들어갑니다.</span></div><span style="font-size:8.5px;color:var(--fg-muted)">150% — rem 으로 두면 따라온다</span></div>
             </div>
-            <figcaption>150%<span><b>상자가 글에 맞춰</b> 늘어난다</span></figcaption>
+            <figcaption>150%<span><b>상자가 글자 크기에 맞춰</b> 늘어납니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-weight:700;font-size:17px">모란상회</span><span style="color:var(--fg-muted);font-size:17px;display:block">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 들어갑니다.</span></div><span style="font-size:8.5px;color:var(--fg-muted)">200% — 여기까지는 지켜야 한다</span></div>
             </div>
-            <figcaption>200%<span>WCAG 가 요구하는 <b>상한</b></span></figcaption>
+            <figcaption>200%<span>WCAG가 이 배율까지 쓸 수 있어야 한다고 정한 <b>상한</b>입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-weight:700;font-size:10px">모란상회</span><span style="color:var(--fg-muted);font-size:10px;display:block">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 들어갑니다.</span></div><span style="font-size:8.5px;color:var(--fg-muted)">px 로 박음 — 설정을 켜도 안 커진다</span></div>
             </div>
-            <figcaption>px 로 박으면<span><b>설정이 아무 일도 안 한다</b></span></figcaption>
+            <figcaption>px 로 박으면<span>글자 크기를 px로 고정하면 <b>설정을 바꿔도 글자가 커지지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-weight:700;font-size:17px">모란상회</span><span style="color:var(--fg-muted);font-size:17px;display:block;height:22px;overflow:hidden">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 들어갑니다.</span></div><span style="font-size:8.5px;color:var(--danger)">높이까지 박음 — 글이 잘렸다</span></div>
             </div>
-            <figcaption>높이까지 박으면<span><b>내용을 잃는다</b></span></figcaption>
+            <figcaption>높이까지 박으면<span>커진 글이 상자 밖으로 넘쳐 잘리므로 <b>내용을 잃습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--danger)">확대 막기</span><span style="font-family:var(--mono);font-size:9.5px;color:var(--danger)">user-scalable=no</span></div><span style="font-size:8.5px;color:var(--fg-muted)">폰에서 아예 못 키운다</span></div>
             </div>
-            <figcaption>확대를 막으면<span><b>접근성 위반</b>이다</span></figcaption>
+            <figcaption>확대를 막으면<span><b>접근성 기준 위반</b>입니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="확대와 글자 크기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="확대와 글자 크기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">rem · em — 사용자 설정을 따라간다</div>
@@ -155,74 +155,74 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b><code>rem</code> <em>설정을 따라간다</em></b><span>뿌리 글자 크기의 배수다</span></li>
-            <li><b><code>px</code> <em>안 커진다</em></b><span><b>설정이 아무 일도 안 한다</b></span></li>
-            <li><b>높이 <em>박지 않는다</em></b><span>내용이 밀고 늘어나게 둔다</span></li>
-            <li><b>200% <em>지켜야 하는 선</em></b><span>여기까지 <b>내용과 기능</b>을 잃지 않아야 한다</span></li>
-            <li><b><code>user-scalable=no</code> <em>쓰지 않는다</em></b><span>핀치 줌을 막는 것은 <b>위반</b>이다</span></li>
-            <li><b>두 가지 설정 <em>글자만 / 화면 전체</em></b><span>따로 켜지므로 <b>둘 다</b> 봐야 한다</span></li>
+            <li><b><code>rem</code> <em>설정을 따라간다</em></b><span>뿌리 요소(html)의 글자 크기에 곱하는 배수입니다</span></li>
+            <li><b><code>px</code> <em>안 커진다</em></b><span>px로 고정하면 <b>글자 크기 설정을 바꿔도 반영되지 않습니다</b></span></li>
+            <li><b>높이 <em>박지 않는다</em></b><span>높이를 고정하지 않고, 내용이 커지는 만큼 상자도 늘어나게 둡니다</span></li>
+            <li><b>200% <em>지켜야 하는 선</em></b><span>200%까지 키워도 <b>내용과 기능</b>을 잃지 않아야 합니다</span></li>
+            <li><b><code>user-scalable=no</code> <em>쓰지 않는다</em></b><span>핀치 줌을 막는 것은 <b>접근성 기준 위반</b>입니다</span></li>
+            <li><b>두 가지 설정 <em>글자만 / 화면 전체</em></b><span>두 설정은 따로 켜지므로 <b>둘 다</b> 확인해야 합니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          <b>깨지는 자리는 글자 크기가 아니라 '박아 둔 높이'입니다.</b>
+          <b>글자를 키웠을 때 화면이 깨지는 원인은 대개 px로 고정해 둔 상자 높이입니다.</b>
           <code>font-size</code>를 <code>rem</code>으로 두어도
-          상자에 <code>height: 40px</code>이 박혀 있으면 글이 잘립니다.
-          버튼·칩·표 줄처럼 <b>높이를 맞춰 예쁘게 만든 곳</b>이 특히 그렇습니다.
-          <code>min-height</code>로 바꾸고 <code>overflow</code>를 열어 두면
-          대부분 해결되고, 그러면 <b>번역해서 글이 길어질 때</b>도 같이 버팁니다.</p>
+          상자에 <code>height: 40px</code>이 고정되어 있으면 커진 글이 잘립니다.
+          버튼, 칩, 표의 줄처럼 <b>높이를 딱 맞춰 정돈한 곳</b>에서 특히 이런 일이 생깁니다.
+          <code>height</code>를 <code>min-height</code>로 바꾸고 <code>overflow</code>를 열어 두면
+          대부분 해결되고, 그렇게 고쳐 두면 <b>번역해서 글이 길어질 때</b>도 화면이 깨지지 않습니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>확대와 글자 크기를 쓰는 경우</h3>
             <ul>
-              <li>글자 크기를 <b>rem</b>으로 두기</li>
-              <li>높이는 <code>min-height</code>로, <b>박지 않기</b></li>
-              <li><b>200%로 키워 한 번</b> 열어 보기</li>
+              <li>글자 크기를 정할 때. <b>rem</b> 단위로 정합니다</li>
+              <li>상자 높이를 정할 때. 높이를 <b>고정하지 말고</b> <code>min-height</code>로 정합니다</li>
+              <li>화면을 다 만든 뒤 점검할 때. 글자를 <b>200%로 키워서 한 번</b> 열어 봅니다</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>확대와 글자 크기를 쓰지 않는 경우</h3>
             <ul>
-              <li><code>user-scalable=no</code>·<code>maximum-scale=1</code> — <b>위반</b>이다</li>
-              <li><code>font-size</code>를 px 로 박기</li>
-              <li>상자 높이를 px 로 박고 <code>overflow:hidden</code></li>
-              <li>키우면 <b>기능이 사라지게</b> 두기 — 버튼이 밖으로 밀려나는 식</li>
+              <li><code>user-scalable=no</code>나 <code>maximum-scale=1</code>로 확대를 막을 때. <b>접근성 기준 위반</b>입니다</li>
+              <li><code>font-size</code>를 px로 고정할 때</li>
+              <li>상자 높이를 px로 고정하고 <code>overflow:hidden</code>을 걸 때</li>
+              <li>글자를 키우면 버튼이 화면 밖으로 밀려나는 식으로 <b>기능이 사라질</b> 때</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 기기의 배율은 <a href="dpr.html">화면 밀도</a>, 폭에 따른 배치는 <a href="breakpoint.html">브레이크포인트</a>, 글줄 길이는 <a href="../items/container.html">컨테이너</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>확대와 글자 크기 대신 다른 것을 써야 하는 경우</b> — 기기의 배율은 <a href="dpr.html">화면 밀도</a>, 폭에 따른 배치는 <a href="breakpoint.html">브레이크포인트</a>, 글줄 길이는 <a href="../items/container.html">컨테이너</a>.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="font-family:var(--mono);font-size:9px;color:var(--accent);line-height:1.7;border:1px solid var(--line);border-radius:5px;background:var(--bg);padding:6px 7px">html { font-size: 100% }<br>.card { font-size: 0.95rem }</div><span style="font-size:8.5px;color:var(--fg-muted)">설정을 그대로 따라간다</span></div>
             </div>
-            <figcaption><b>크기</b><b>rem</b>으로 둔다</figcaption>
+            <figcaption><b>크기</b>글자 크기는 <b>rem</b>으로 정합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="font-family:var(--mono);font-size:9px;color:var(--accent);line-height:1.7;border:1px solid var(--line);border-radius:5px;background:var(--bg);padding:6px 7px">.btn { min-height: 44px }<br>/* height 가 아니다 */</div><span style="font-size:8.5px;color:var(--fg-muted)">글이 커지면 같이 늘어난다</span></div>
             </div>
-            <figcaption><b>높이</b><code>min-height</code>로</figcaption>
+            <figcaption><b>높이</b>높이는 <code>min-height</code>로 정합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">메타 태그</span><span style="font-family:var(--mono);font-size:9.5px;color:var(--accent)">width=device-width, initial-scale=1</span></div><span style="font-size:8.5px;color:var(--fg-muted)">확대를 막는 말을 넣지 않는다</span></div>
             </div>
-            <figcaption><b>뷰포트</b><a href="viewport.html">뷰포트 단위</a>와 같은 줄</figcaption>
+            <figcaption><b>뷰포트</b><a href="viewport.html">뷰포트 단위</a>에서 다루는 것과 같은 뷰포트 메타 태그입니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">이 크기의 계약서</span></h2>
-        <p><code>rem</code>으로 두고 높이를 열어 둡니다.</p>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+        <p>글자 크기는 <code>rem</code>으로 정하고, 상자 높이는 고정하지 않고 열어 둡니다.</p>
 <pre class="code">&lt;<span class="t">meta</span> <span class="a">name</span>=<span class="s">"viewport"</span>
       <span class="a">content</span>=<span class="s">"width=device-width, initial-scale=1"</span>&gt;
 <span class="c">&lt;!-- user-scalable=no · maximum-scale=1 을 넣지 않는다 --&gt;</span>
@@ -233,45 +233,45 @@
 .btn  { <span class="a">min-height</span>: <span class="a">44px</span>; }   <span class="c">/* height 가 아니다 */</span>
 .card { <span class="a">min-height</span>: <span class="a">0</span>; <span class="a">overflow</span>: visible; }
 
-<span class="c">/* 큰 글자에서 한 줄에 다 안 들어가면 접히게 */</span>
+<span class="c">/* 글자가 커져 한 줄에 다 들어가지 않으면 다음 줄로 넘긴다 */</span>
 .row { <span class="a">display</span>: flex; <span class="a">flex-wrap</span>: wrap; <span class="a">gap</span>: <span class="a">var</span>(--s2); }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td><code>rem</code>으로</td><td>뿌리 크기의 배수라 <b>설정을 그대로</b> 따라간다</td></tr>
-            <tr><td><code>html</code>에 px 을 박지 않는다</td><td><code>font-size: 16px</code>을 뿌리에 적으면 <b>설정이 무시</b>된다</td></tr>
-            <tr><td><code>min-height</code></td><td><a href="touchtarget.html">터치 타깃</a>을 지키면서 글이 커지면 같이 늘어난다</td></tr>
-            <tr><td><code>flex-wrap: wrap</code></td><td>큰 글자에서 한 줄에 안 들어가면 <b>접히게</b> 둔다</td></tr>
-            <tr><td><code>user-scalable=no</code></td><td>쓰지 않는다. <b>WCAG 1.4.4 위반</b>이다</td></tr>
-            <tr><td>확인하는 법</td><td>브라우저를 <b>200%</b>로, 폰은 <b>글자 크기 최대</b>로 두고 열어 본다</td></tr>
+            <tr><td><code>rem</code>으로</td><td>뿌리 요소의 글자 크기에 곱하는 배수라서 <b>사용자 설정을 그대로</b> 따라갑니다</td></tr>
+            <tr><td><code>html</code>에 px 을 박지 않는다</td><td>뿌리 요소에 <code>font-size: 16px</code>을 적으면 <b>사용자의 글자 크기 설정이 무시</b>됩니다</td></tr>
+            <tr><td><code>min-height</code></td><td><a href="touchtarget.html">터치 타깃</a> 최소 크기를 지키면서도, 글이 커지면 상자가 같이 늘어납니다</td></tr>
+            <tr><td><code>flex-wrap: wrap</code></td><td>글자가 커져 한 줄에 들어가지 않으면 <b>다음 줄로 넘어가게</b> 둡니다</td></tr>
+            <tr><td><code>user-scalable=no</code></td><td>쓰지 않습니다. <b>WCAG 1.4.4 위반</b>입니다</td></tr>
+            <tr><td>확인하는 법</td><td>브라우저는 <b>200%</b>로 확대하고, 폰은 <b>글자 크기를 최대</b>로 두고 화면을 열어 봅니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>서버는 설정을 모른다</th><td>글자 크기 설정은 <b>요청에 안 담겨 옵니다.</b> 화면에서 CSS 로만 다룹니다.</td></tr>
-            <tr><th>글이 길어지는 것과 같은 문제</th><td>번역해서 길어질 때 깨지는 자리와 <b>거의 같습니다</b>. 한 번 고치면 둘 다 해결됩니다.</td></tr>
+            <tr><th>서버는 설정을 모른다</th><td>사용자의 글자 크기 설정은 <b>서버로 오는 요청에 담기지 않으므로</b>, 화면 쪽에서 CSS로만 다룹니다.</td></tr>
+            <tr><th>글이 길어지는 것과 같은 문제</th><td>글자를 키웠을 때 깨지는 자리는 번역해서 글이 길어질 때 깨지는 자리와 <b>거의 같아서</b>, 한 번 고치면 두 문제가 함께 해결됩니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p>세 곳 모두 <b>사용자가 켜는 설정</b>입니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>웹, iOS, 안드로이드 모두 글자 크기는 <b>사용자가 직접 켜는 설정</b>입니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>rem · 브라우저 확대</span></header>
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-weight:700;font-size:12px">모란상회</span><span style="color:var(--fg-muted);font-size:12px;display:block">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 들어갑니다.</span></div></div>
             </div>
-            <footer>브라우저 확대와 글자 크기 설정이 <b>따로</b> 있습니다. 둘 다 봐야 합니다.</footer>
+            <footer>브라우저 확대와 글자 크기 설정이 <b>따로</b> 있어서 둘 다 확인해야 합니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>Dynamic Type</span></header>
@@ -279,7 +279,7 @@
               <div class="phone" role="img" aria-label="iOS 글자 크기 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:28px;font-size:8px;font-weight:700">모란상회</div></div></div>
             </div>
-            <footer>시스템 글자 스타일을 쓰면 <b>자동으로</b> 따라갑니다. 접근성 설정에서 아주 크게도 됩니다.</footer>
+            <footer>시스템 글자 스타일을 쓰면 사용자 설정을 <b>자동으로</b> 따라갑니다. 접근성 설정에서는 글자를 훨씬 더 크게 키울 수도 있습니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>sp 단위</span></header>
@@ -287,18 +287,18 @@
               <div class="phone" role="img" aria-label="안드로이드 글자 크기 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:28px;font-size:8px;font-weight:700">모란상회</div></div></div>
             </div>
-            <footer>글자는 <b>sp</b>, 나머지는 <b>dp</b>. sp 로 적어야 설정을 따라갑니다.</footer>
+            <footer>글자 크기는 <b>sp</b>, 나머지 크기는 <b>dp</b>로 적습니다. 글자를 sp로 적어야 사용자 설정을 따라갑니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — 이 항목은 <b>우리 화면에서는 영영 안 보이는</b> 종류입니다 — 설정을 안 켰으니까요. 그래서 점검법이 하나뿐입니다. <b>브라우저를 200%로 두고, 폰은 글자 크기를 최대로 두고 한 번 열어 보는 것</b>. 그 한 번에 박아 둔 높이가 거의 다 드러납니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — 이 항목의 문제는 개발하는 사람이 글자 크기 설정을 켜 두지 않는 한 <b>개발 화면에서는 드러나지 않습니다</b>. 그래서 일부러 <b>브라우저는 200%로 확대하고, 폰은 글자 크기를 최대로 둔 채 화면을 한 번 열어 봐야</b> 합니다. 그렇게 한 번만 열어 봐도 높이를 고정해 둔 자리가 대부분 드러납니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="focus.html"><b>포커스</b><em>12부</em></a></li>
         <li><a href="focustrap.html"><b>포커스 트랩</b><em>12부</em></a></li>
@@ -310,20 +310,20 @@
         <li><a href="semantics.html"><b>시맨틱 태그</b><em>12부</em></a></li>
         <li><a href="alttext.html"><b>대체 텍스트</b><em>12부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="viewport.html"><b>뷰포트 단위</b><em>11부</em></a></li>
         <li><a href="../items/typescale.html"><b>타입 스케일</b><em>2부</em></a></li>
         <li><a href="touchtarget.html"><b>터치 타깃</b><em>11부</em></a></li>
         <li><a href="../items/truncate.html"><b>말줄임</b><em>3부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

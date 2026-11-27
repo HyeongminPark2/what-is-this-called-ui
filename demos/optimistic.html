@@ -31,10 +31,10 @@
 <div class="row"><span class="meta"><b>이미지 리사이저</b><span>멤버 1명</span></span><button class="star" aria-pressed="false" aria-label="즐겨찾기">★</button></div>
 
 <p class="hint">
-  별을 눌러 보세요. <b>서버 응답을 기다리지 않고 바로 칠해집니다.</b> 스피너가 없습니다.
-  '서버를 느리게'를 켜고 다시 눌러도 느낌은 똑같습니다 — 기다림이 사용자 쪽에서 사라졌기 때문입니다.<br>
-  <b>세 번째 줄(권한 없음)은 서버가 거절합니다.</b> 그러면 별이 원래대로 <b>되돌아가고</b> 이유를 알려 줍니다.
-  이 되돌림이 낙관적 UI의 핵심이자, 쓸 수 있는 자리를 가르는 기준입니다.
+  별을 눌러 보면 <b>서버 응답을 기다리지 않고 바로 칠해지며</b>, 스피너도 뜨지 않습니다.
+  '서버를 느리게'를 켜고 다시 눌러도 느낌은 똑같은데, 화면이 서버 응답을 기다리지 않으므로 사용자도 기다림을 겪지 않기 때문입니다.<br>
+  <b>세 번째 줄(권한 없음)은 서버가 거절합니다.</b> 그러면 별이 원래대로 <b>되돌아가고</b> 되돌린 이유를 알려 줍니다.
+  낙관적 UI에서는 이 되돌림이 가장 중요하고, 되돌려도 문제가 없는 일인지를 보고 낙관적 UI를 쓸지 정합니다.
 </p>
 
 <div class="tst-wrap" id="toasts" role="status" aria-live="polite"></div>
@@ -47,7 +47,7 @@
   document.querySelectorAll('.star').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var was = btn.getAttribute('aria-pressed') === 'true';
-      // 1) 먼저 화면을 바꾼다 — 서버는 아직 모른다
+      // 1) 서버에 알리기 전에 화면부터 바꾼다
       btn.setAttribute('aria-pressed', String(!was));
       btn.classList.add('is-pop', 'is-pending');
       setTimeout(function () { btn.classList.remove('is-pop'); }, 130);
@@ -55,7 +55,7 @@
       // 2) 서버에 보낸다
       setTimeout(function () {
         btn.classList.remove('is-pending');
-        if (!btn.dataset.fail) return;           // 성공 — 할 일이 없다
+        if (!btn.dataset.fail) return;           // 성공하면 할 일이 없다
         // 3) 거절당하면 되돌린다
         btn.setAttribute('aria-pressed', String(was));
         btn.classList.add('is-rollback');

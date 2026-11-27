@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>뷰포트 단위 — 이름표</title>
-<meta name="description" content="100vh가 가리키는 높이는 하나가 아니다. svh·lvh·dvh의 차이와 바닥 버튼이 잘리는 이유.">
+<meta name="description" content="폰에서 100vh가 가리키는 높이가 주소창에 따라 달라지는 까닭과 svh·lvh·dvh의 차이, 바닥 버튼이 잘리는 이유를 보여 주는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">11부 플랫폼</a> › 뷰포트 단위</p>
     <h1>뷰포트 단위</h1>
     <p class="en">Viewport units</p>
-    <p class="lede" style="margin-top:var(--s3)"><b>100vh 가 가리키는 높이는 하나가 아닙니다.</b> 폰 주소창이 숨었다 나타나기 때문입니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">폰 브라우저에서는 주소창이 숨었다 나타나기 때문에, <b>100vh 같은 뷰포트 단위가 가리키는 높이도 그때그때 달라집니다.</b></p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,30 +50,30 @@
           <iframe src="../demos/viewport.html" title="뷰포트 단위 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>세 폰이 같은 화면을 <code>100vh</code>·<code>100svh</code>·<code>100dvh</code>로 그린 것입니다.
-          <b>주소창 보이기</b>를 켜 보세요 — <code>100vh</code> 짜리만 바닥의 '다음' 버튼이 잘립니다.<br>
-          아래 표는 <b>이 브라우저</b>에서 네 단위가 실제로 몇 px 인지 잰 것입니다.
-          PC 에서는 숨는 주소창이 없어 넷이 같습니다 — 차이는 <b>폰에서만</b> 드러납니다.</p>
+          <p>세 폰은 같은 화면을 각각 <code>100vh</code>·<code>100svh</code>·<code>100dvh</code>로 그린 것입니다.
+          <b>주소창 보이기</b>를 켜 보면 <code>100vh</code>로 그린 폰에서만 바닥의 '다음' 버튼이 잘립니다.<br>
+          아래 표는 <b>지금 보는 브라우저</b>에서 네 단위가 실제로 몇 px인지 잰 결과입니다.
+          PC에는 숨었다 나타나는 주소창이 없어서 네 값이 같고, 차이는 <b>폰에서만</b> 드러납니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>뷰포트 단위, 화면 높이 단위</td></tr>
             <tr><th>영어</th><td>viewport units, vh / svh / lvh / dvh</td></tr>
-            <tr><th>같이 쓰는 말</th><td><b>v</b>는 viewport, <b>h</b>는 height 입니다. 앞에 붙는 글자가 <b>s</b>mall(작은 쪽) · <b>l</b>arge(큰 쪽) · <b>d</b>ynamic(지금) 입니다. 가로는 <code>vw</code>, 짧은 쪽·긴 쪽이 <code>vmin</code>·<code>vmax</code>입니다. 브라우저 창 안쪽에서 실제로 보이는 영역을 <b>비주얼 뷰포트</b>라 하고 <code>window.visualViewport</code>로 읽습니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>화면 높이</b> — 기기 화면이 아니라 <b>브라우저 창 안쪽</b>입니다.<br><b>100%</b> — <code>100%</code>는 <b>부모</b>의 높이이고 <code>100vh</code>는 창의 높이입니다. 전혀 다릅니다.<br><b>풀스크린</b> — 전체 화면 API 와는 상관없습니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td><b>v</b>는 viewport, <b>h</b>는 height의 머리글자이고, 앞에 붙는 글자는 <b>s</b>mall(작은 쪽), <b>l</b>arge(큰 쪽), <b>d</b>ynamic(지금 보이는 만큼)을 뜻합니다. 가로 폭은 <code>vw</code>로 적고, 짧은 쪽과 긴 쪽은 각각 <code>vmin</code>과 <code>vmax</code>로 적습니다. 브라우저 창 안쪽에서 실제로 보이는 영역은 <b>비주얼 뷰포트</b>라고 하며 <code>window.visualViewport</code>로 크기를 읽습니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>화면 높이</b> — 뷰포트 단위가 재는 것은 기기 화면이 아니라 <b>브라우저 창 안쪽</b>의 높이입니다.<br><b>100%</b> — <code>100%</code>는 <b>부모 요소</b>의 높이를 기준으로 하고, <code>100vh</code>는 창의 높이를 기준으로 하므로 서로 다른 값입니다.<br><b>풀스크린</b> — 화면 전체를 쓰게 하는 전체 화면 API와는 상관이 없습니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>PC와 폰은 다른 기계가 아니라 <b>다른 전제</b>입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>PC와 폰의 차이는 기계 자체보다 화면을 쓰는 <b>전제</b>에 있습니다. 아래 네 가지를 물어보면 두 환경이 어디서 갈리는지 알 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>무엇이 다른가</th><th>폰에서는</th><th>PC에서는</th><th>안 챙기면</th></tr></thead>
@@ -82,15 +82,15 @@
             <tr><td>터치 타깃</td><td>누를 수 있는 <b>넓이</b></td><td>44px 이상</td><td>24px도 된다</td><td>옆 것이 눌린다</td></tr>
             <tr><td>호버가 없는 세계</td><td><b>올려놓기</b>가 되나</td><td class="none">없다</td><td>있다</td><td>영영 못 보는 정보가 생긴다</td></tr>
             <tr><td>시스템 백</td><td><b>뒤로 가는</b> 길</td><td>OS가 준다</td><td>브라우저 버튼</td><td>모달 대신 <b>앱이 나간다</b></td></tr>
-            <tr><td>화면 밀도</td><td>1px 의 <b>실제 화소 수</b></td><td>2~3배</td><td>1~2배</td><td>그림이 뭉갠다</td></tr>
-            <tr class="me"><td><b>뷰포트 단위</b></td><td><b>100vh</b> 가 가리키는 높이</td><td>주소창 때문에 흔들린다</td><td>고정</td><td>바닥 버튼이 잘린다</td></tr>
+            <tr><td>화면 밀도</td><td>1px의 <b>실제 화소 수</b></td><td>2~3배</td><td>1~2배</td><td>그림이 뭉개진다</td></tr>
+            <tr class="me"><td><b>뷰포트 단위</b></td><td><b>100vh</b>가 가리키는 높이</td><td>주소창 때문에 흔들린다</td><td>고정</td><td>바닥 버튼이 잘린다</td></tr>
             <tr><td>폰 키보드</td><td><b>올라오는</b> 자리</td><td>화면 절반</td><td class="none">없다</td><td>입력칸이 가려진다</td></tr>
-            <tr><td>HIG와 Material의 차이</td><td>OS 의 <b>말투</b></td><td>각자 다르다</td><td>웹 관례</td><td>어느 쪽에서도 어색하다</td></tr>
+            <tr><td>HIG와 Material의 차이</td><td>OS의 <b>말투</b></td><td>각자 다르다</td><td>웹 관례</td><td>어느 쪽에서도 어색하다</td></tr>
           </tbody>
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — <b>바닥에 뭔가 붙는 화면이면 <code>100dvh</code></b>입니다. <code>100vh</code>는 PC 에서만 맞습니다.</p>
+          <p><b>뷰포트 단위를 한 줄로 정리하면</b> — <b>바닥에 버튼 같은 것이 붙는 화면이라면 <code>100dvh</code></b>를 씁니다. <code>100vh</code>는 주소창이 숨지 않는 PC에서만 화면 높이와 맞습니다.</p>
         </div>
       </section>
 
@@ -101,25 +101,25 @@
             <div class="shot">
               <div style="width:100%;max-width:112px;display:grid;gap:5px;justify-items:center"><div style="width:72px;height:120px;border:2px solid var(--line-strong);border-radius:10px;background:var(--surface);position:relative;overflow:hidden"><div style="position:absolute;left:0;right:0;top:0px;bottom:0;overflow:hidden"><div style="position:absolute;left:3px;right:3px;top:3px;height:114px;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px"><span style="position:absolute;left:2px;right:2px;bottom:2px;height:11px;border-radius:3px;background:var(--accent)"></span></div></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted);text-align:center">주소창 없음 — 셋이 같다</span></div>
             </div>
-            <figcaption>굴려서 숨었을 때<span>이때의 높이가 <b>lvh</b>이자 <b>vh</b></span></figcaption>
+            <figcaption>굴려서 숨었을 때<span>이때의 높이가 <b>lvh</b>이고, <b>vh</b>도 이 높이입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:112px;display:grid;gap:5px;justify-items:center"><div style="width:72px;height:120px;border:2px solid var(--line-strong);border-radius:10px;background:var(--surface);position:relative;overflow:hidden"><div style="position:absolute;left:0;right:0;top:0;height:16px;background:var(--bg);border-bottom:1px solid var(--line);font-size:6px;color:var(--fg-muted);display:grid;place-items:center">example.com</div><div style="position:absolute;left:0;right:0;top:16px;bottom:0;overflow:hidden"><div style="position:absolute;left:3px;right:3px;top:3px;height:114px;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px"><span style="position:absolute;left:2px;right:2px;bottom:2px;height:11px;border-radius:3px;background:var(--accent)"></span></div></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--danger);text-align:center">100vh — 아래가 잘린다</span></div>
             </div>
-            <figcaption>주소창이 보일 때<span><b>vh 는 큰 쪽으로 고정</b>이라 삐져나간다</span></figcaption>
+            <figcaption>주소창이 보일 때<span><b>vh는 큰 쪽 높이로 고정</b>되어 있어서 화면 아래로 넘칩니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:112px;display:grid;gap:5px;justify-items:center"><div style="width:72px;height:120px;border:2px solid var(--line-strong);border-radius:10px;background:var(--surface);position:relative;overflow:hidden"><div style="position:absolute;left:0;right:0;top:0;height:16px;background:var(--bg);border-bottom:1px solid var(--line);font-size:6px;color:var(--fg-muted);display:grid;place-items:center">example.com</div><div style="position:absolute;left:0;right:0;top:16px;bottom:0;overflow:hidden"><div style="position:absolute;left:3px;right:3px;top:3px;height:98px;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px"><span style="position:absolute;left:2px;right:2px;bottom:2px;height:11px;border-radius:3px;background:var(--accent)"></span></div></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted);text-align:center">100svh — 늘 안전하다</span></div>
             </div>
-            <figcaption>svh<span>작은 쪽. 주소창이 숨으면 <b>아래가 남는다</b></span></figcaption>
+            <figcaption>svh<span>작은 쪽 높이입니다. 주소창이 숨으면 <b>아래에 빈 공간이 남습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:112px;display:grid;gap:5px;justify-items:center"><div style="width:72px;height:120px;border:2px solid var(--line-strong);border-radius:10px;background:var(--surface);position:relative;overflow:hidden"><div style="position:absolute;left:0;right:0;top:0;height:16px;background:var(--bg);border-bottom:1px solid var(--line);font-size:6px;color:var(--fg-muted);display:grid;place-items:center">example.com</div><div style="position:absolute;left:0;right:0;top:16px;bottom:0;overflow:hidden"><div style="position:absolute;left:3px;right:3px;top:3px;height:98px;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px"><span style="position:absolute;left:2px;right:2px;bottom:2px;height:11px;border-radius:3px;background:var(--accent)"></span></div></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted);text-align:center">100dvh — 지금 보이는 만큼</span></div>
             </div>
-            <figcaption>dvh<span>굴리면 따라 바뀐다. <b>바닥에 딱 붙는다</b></span></figcaption>
+            <figcaption>dvh<span>화면을 굴리면 높이가 따라 바뀌어서 <b>바닥에 딱 맞게 붙습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -131,7 +131,7 @@
                 <span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted);text-align:center">키보드가 올라오면 또 줄어든다</span>
               </div>
             </div>
-            <figcaption>키보드까지 더하면<span><a href="softkeyboard.html">폰 키보드</a>는 <code>dvh</code>로도 안 잡힌다</span></figcaption>
+            <figcaption>키보드까지 더하면<span><a href="softkeyboard.html">폰 키보드</a>가 차지하는 높이는 <code>dvh</code>에도 반영되지 않습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -142,16 +142,16 @@
                 <span style="font-family:var(--mono);font-size:9px;color:var(--danger);text-align:center">100vw — 세로 막대 폭을 안 뺀다</span>
               </div>
             </div>
-            <figcaption>가로도 함정이 있다<span><code>100vw</code>는 <b>스크롤 막대</b>를 포함한다</span></figcaption>
+            <figcaption>가로도 함정이 있다<span><code>100vw</code>는 <b>스크롤 막대</b> 폭까지 포함합니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="뷰포트 단위의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="뷰포트 단위의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">100lvh — 큰 쪽. 주소창이 숨었을 때</div>
@@ -165,48 +165,48 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>큰 쪽 <em>lvh</em></b><span>주소창이 숨었을 때의 높이. <code>vh</code>와 같다</span></li>
-            <li><b>작은 쪽 <em>svh</em></b><span>주소창이 보일 때. <b>늘 안전</b>하지만 아래가 남는다</span></li>
-            <li><b>지금 <em>dvh</em></b><span>보이는 만큼. <b>굴리면 따라 바뀐다</b></span></li>
-            <li><b>vh 의 정체 <em>= lvh</em></b><span>큰 쪽 고정. <b>주소창이 보이면 삐져나간다</b></span></li>
-            <li><b>가로의 함정 <em>100vw</em></b><span>세로 스크롤 막대 폭을 <b>안 뺀다.</b> PC 에서 가로로 넘친다</span></li>
-            <li><b>전제 <em>meta viewport</em></b><span>없으면 폰이 <b>980px 창</b>인 척한다. 전부 헛돈다</span></li>
+            <li><b>큰 쪽 <em>lvh</em></b><span>주소창이 숨었을 때의 높이로, <code>vh</code>와 같습니다</span></li>
+            <li><b>작은 쪽 <em>svh</em></b><span>주소창이 보일 때의 높이입니다. 화면 밖으로 넘치지 않아 <b>늘 안전</b>하지만, 주소창이 숨으면 아래가 남습니다</span></li>
+            <li><b>지금 <em>dvh</em></b><span>지금 보이는 만큼의 높이라서 <b>화면을 굴리면 따라 바뀝니다</b></span></li>
+            <li><b>vh 의 정체 <em>= lvh</em></b><span>큰 쪽 높이로 고정되어 있어서 <b>주소창이 보이면 화면 아래로 넘칩니다</b></span></li>
+            <li><b>가로의 함정 <em>100vw</em></b><span>세로 스크롤 막대 폭을 <b>빼지 않기</b> 때문에 PC에서 가로로 넘칩니다</span></li>
+            <li><b>전제 <em>meta viewport</em></b><span>이 태그가 없으면 폰 브라우저가 화면을 <b>폭 980px짜리 창</b>으로 여기고 그려서, 뷰포트 단위와 미디어 쿼리가 모두 의도와 다르게 계산됩니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          <code>100dvh</code>가 늘 정답인 것도 아닙니다.
-          굴릴 때마다 값이 바뀌므로, 그 높이를 쓰는 상자가 <b>따라 움직이며 흔들립니다</b>.
-          배경처럼 <b>가만히 있어야 하는 것</b>에는 <code>100lvh</code>가 낫고,
+          <code>100dvh</code>에도 단점이 있습니다.
+          화면을 굴릴 때마다 값이 바뀌기 때문에, 그 높이를 쓰는 상자가 <b>크기를 따라 바꾸며 흔들립니다</b>.
+          그래서 배경처럼 <b>가만히 있어야 하는 것</b>에는 <code>100lvh</code>가 낫고,
           <b>바닥에 버튼이 붙는 화면</b>에는 <code>100dvh</code>가 맞습니다.
-          둘 다 피하고 싶으면 <code>100svh</code>를 쓰고 <b>아래가 조금 남는 것</b>을 받아들입니다.</p>
+          흔들림과 잘림을 둘 다 피하고 싶다면 <code>100svh</code>를 쓰고, 주소창이 숨었을 때 <b>아래가 조금 비는 것</b>은 감수합니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>뷰포트 단위를 쓰는 경우</h3>
             <ul>
-              <li>바닥에 버튼이 붙는 <b>한 화면짜리</b> 폼 → <code>100dvh</code></li>
-              <li>화면을 꽉 채우는 <a href="../items/modal.html">모달</a>·시트</li>
-              <li>히어로 영역 — 다만 <b>흔들림</b>을 보고 lvh 와 고른다</li>
+              <li>바닥에 버튼이 붙는 <b>한 화면짜리</b> 폼을 만들 때. <code>100dvh</code>를 씁니다</li>
+              <li>화면을 꽉 채우는 <a href="../items/modal.html">모달</a>이나 시트를 만들 때</li>
+              <li>첫 화면을 채우는 히어로 영역을 만들 때. 다만 <b>흔들림</b>이 거슬리면 lvh를 고릅니다</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>뷰포트 단위를 쓰지 않는 경우</h3>
             <ul>
-              <li><code>100vh</code>를 폰에서 그대로 — <b>바닥이 잘린다</b></li>
-              <li><code>100vw</code>로 전체 폭 — PC 에서 <b>가로 스크롤</b>이 생긴다</li>
-              <li><code>&lt;meta name="viewport"&gt;</code> 빠뜨리기</li>
-              <li>키보드까지 <code>dvh</code>로 해결될 거라 믿기 → <a href="softkeyboard.html">폰 키보드</a></li>
+              <li><code>100vh</code>를 폰에서 그대로 쓸 때. 주소창이 보이면 <b>바닥이 잘립니다</b></li>
+              <li><code>100vw</code>로 전체 폭을 잡을 때. PC에서 <b>가로 스크롤</b>이 생깁니다</li>
+              <li><code>&lt;meta name="viewport"&gt;</code>를 빠뜨렸을 때</li>
+              <li>키보드가 올라오는 문제까지 <code>dvh</code>로 해결될 거라고 여길 때. <a href="softkeyboard.html">폰 키보드</a> 항목을 봅니다</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 부모 높이를 꽉 채우려면 <code>100%</code>, 바닥에 붙이려면 <a href="../items/sticky.html">스티키</a>나 <code>position:fixed</code>, 글줄 길이를 묶으려면 <a href="../items/container.html">컨테이너</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>뷰포트 단위 대신 다른 것을 써야 하는 경우</b> — 부모 높이를 꽉 채우려면 <code>100%</code>를 쓰고, 바닥에 붙이려면 <a href="../items/sticky.html">스티키</a>나 <code>position:fixed</code>, 글줄 길이를 묶으려면 <a href="../items/container.html">컨테이너</a>를 씁니다.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -217,7 +217,7 @@
                 <span>}</span>
               </div>
             </div>
-            <figcaption><b>두 줄로 적는다</b>옛 브라우저는 앞줄, 새 브라우저는 <b>뒷줄</b>을 쓴다</figcaption>
+            <figcaption><b>두 줄로 적는다</b>옛 브라우저는 앞줄을, dvh를 아는 브라우저는 <b>뒷줄</b>을 씁니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -227,20 +227,20 @@
                 <span style="font-size:8.5px">세로 막대가 있으면 vw 가 더 넓다</span>
               </div>
             </div>
-            <figcaption><b>가로는 100%</b>전체 폭이 필요해도 <code>100vw</code>는 피한다</figcaption>
+            <figcaption><b>가로는 100%</b>전체 폭이 필요해도 <code>100vw</code> 대신 <code>100%</code>를 씁니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px;justify-items:center"><div style="width:72px;height:120px;border:2px solid var(--line-strong);border-radius:10px;background:var(--surface);position:relative;overflow:hidden"><div style="position:absolute;left:0;right:0;top:0;height:16px;background:var(--bg);border-bottom:1px solid var(--line);font-size:6px;color:var(--fg-muted);display:grid;place-items:center">example.com</div><div style="position:absolute;left:0;right:0;top:16px;bottom:0;overflow:hidden"><div style="position:absolute;left:3px;right:3px;top:3px;height:98px;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px"><span style="position:absolute;left:2px;right:2px;bottom:2px;height:11px;border-radius:3px;background:var(--accent)"></span></div></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted);text-align:center">100dvh — 바닥에 딱</span></div>
             </div>
-            <figcaption><b>한 화면짜리 폼</b><b>다음 버튼이 늘 보인다</b></figcaption>
+            <figcaption><b>한 화면짜리 폼</b>주소창이 보이든 숨든 <b>다음 버튼이 늘 보입니다</b></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">이 단위의 계약서</span></h2>
-        <p><code>meta viewport</code>를 적고, 높이는 두 줄로 겹쳐 적습니다.</p>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">빠뜨리기 쉬운 설정까지</span></h2>
+        <p>먼저 <code>meta viewport</code>를 적고, 높이는 옛 단위와 새 단위를 두 줄로 겹쳐 적습니다.</p>
 <pre class="code">&lt;<span class="t">meta</span> <span class="a">name</span>=<span class="s">"viewport"</span> <span class="a">content</span>=<span class="s">"width=device-width, initial-scale=1"</span>&gt;
 
 .screen {
@@ -259,41 +259,41 @@ visualViewport.addEventListener(<span class="s">'resize'</span>, () =&gt; {
 });</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td><code>meta viewport</code></td><td>없으면 폰이 <b>980px 창</b>인 척한다. 이 한 줄이 반응형의 전제다</td></tr>
-            <tr><td><code>user-scalable=no</code>를 쓰지 않는다</td><td>확대를 막으면 <b>저시력 사용자가 못 읽는다</b>. 접근성 위반이다</td></tr>
-            <tr><td><code>maximum-scale</code>도 마찬가지</td><td>5배까지는 열어 둔다</td></tr>
-            <tr><td>두 줄로 겹쳐 적기</td><td>모르는 단위가 나오는 줄은 <b>통째로 무시</b>되므로, 옛 줄을 먼저 적으면 저절로 대비가 된다</td></tr>
-            <tr><td><code>svh</code>·<code>dvh</code> 지원</td><td>2022년 이후 브라우저. 그 전 것에는 <code>vh</code>가 떨어진다</td></tr>
-            <tr><td><code>100vw</code> 대신 <code>100%</code></td><td>세로 스크롤 막대가 있는 PC 에서 <b>가로 스크롤</b>이 생기는 흔한 원인</td></tr>
+            <tr><td><code>meta viewport</code></td><td>이 태그가 없으면 폰 브라우저가 화면을 <b>폭 980px짜리 창</b>으로 여기고 그립니다. 반응형 화면은 이 한 줄이 있어야 작동합니다</td></tr>
+            <tr><td><code>user-scalable=no</code>를 쓰지 않는다</td><td>확대를 막으면 <b>저시력 사용자가 글을 읽을 수 없어서</b> 접근성 기준에 어긋납니다</td></tr>
+            <tr><td><code>maximum-scale</code>도 마찬가지</td><td>확대 배율은 5배까지 허용해 둡니다</td></tr>
+            <tr><td>두 줄로 겹쳐 적기</td><td>브라우저는 모르는 단위가 나오는 줄을 <b>통째로 무시</b>하므로, 옛 단위 줄을 먼저 적어 두면 옛 브라우저에서도 그 줄이 적용됩니다</td></tr>
+            <tr><td><code>svh</code>·<code>dvh</code> 지원</td><td>2022년 이후에 나온 브라우저가 지원합니다. 그 전 브라우저에서는 <code>vh</code> 줄이 적용됩니다</td></tr>
+            <tr><td><code>100vw</code> 대신 <code>100%</code></td><td>세로 스크롤 막대가 있는 PC에서 <b>가로 스크롤</b>이 생기는 흔한 원인이 <code>100vw</code>입니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>서버는 높이를 모른다</th><td>창 높이는 <b>요청에 담겨 오지 않습니다.</b> 서버에서 미리 그려 보낼 때는 CSS 로만 처리합니다.</td></tr>
-            <tr><th>첫 그림이 흔들린다</th><td>자바스크립트로 높이를 재서 넣는 방식은 <b>한 번 그린 뒤</b> 바뀌어 덜컥거립니다. CSS 단위로 되면 CSS 로 합니다.</td></tr>
+            <tr><th>서버는 높이를 모른다</th><td>창 높이는 <b>요청에 담겨 오지 않습니다.</b> 그래서 서버에서 HTML을 미리 그려 보낼 때는 높이 처리를 CSS에 맡깁니다.</td></tr>
+            <tr><th>첫 그림이 흔들린다</th><td>자바스크립트로 높이를 재서 넣으면 화면을 <b>한 번 그린 뒤에</b> 높이가 바뀌어 화면이 덜컥거립니다. CSS 단위로 해결할 수 있으면 CSS로 처리합니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p><b>웹에만 있는 문제</b>입니다. 앱에는 주소창이 없습니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>앱에는 주소창이 없기 때문에, 높이가 흔들리는 것은 <b>웹에만 있는 문제</b>입니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>vh · svh · lvh · dvh</span></header>
             <div class="shot">
               <div style="width:100%;max-width:105px;display:grid;gap:5px;justify-items:center"><div style="width:72px;height:120px;border:2px solid var(--line-strong);border-radius:10px;background:var(--surface);position:relative;overflow:hidden"><div style="position:absolute;left:0;right:0;top:0;height:16px;background:var(--bg);border-bottom:1px solid var(--line);font-size:6px;color:var(--fg-muted);display:grid;place-items:center">example.com</div><div style="position:absolute;left:0;right:0;top:16px;bottom:0;overflow:hidden"><div style="position:absolute;left:3px;right:3px;top:3px;height:98px;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px"><span style="position:absolute;left:2px;right:2px;bottom:2px;height:11px;border-radius:3px;background:var(--accent)"></span></div></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted);text-align:center">dvh</span></div>
             </div>
-            <footer>브라우저 UI 가 숨었다 나타나기 때문에 생긴 단위들입니다. 2022년에야 정리됐습니다.</footer>
+            <footer>svh·lvh·dvh는 브라우저 UI가 숨었다 나타나는 문제 때문에 생긴 단위이고, 2022년에야 표준으로 정리되었습니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>safe area · 전체 높이</span></header>
@@ -301,7 +301,7 @@ visualViewport.addEventListener(<span class="s">'resize'</span>, () =&gt; {
               <div class="phone" role="img" aria-label="iOS 세이프 에어리어 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:4px;right:4px;top:24px;bottom:10px;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px"></div></div></div>
             </div>
-            <footer>앱에는 주소창이 없어 높이가 하나입니다. 대신 <a href="../items/safearea.html">세이프 에어리어</a>를 빼야 합니다.</footer>
+            <footer>앱에는 주소창이 없어서 화면 높이가 하나로 정해집니다. 대신 노치와 홈 표시줄이 차지하는 <a href="../items/safearea.html">세이프 에어리어</a>를 빼고 배치해야 합니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>insets</span></header>
@@ -309,18 +309,18 @@ visualViewport.addEventListener(<span class="s">'resize'</span>, () =&gt; {
               <div class="phone" role="img" aria-label="안드로이드 인셋 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:4px;right:4px;top:24px;bottom:10px;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px"></div></div></div>
             </div>
-            <footer>상태 표시줄·내비 바를 <b>인셋</b>으로 빼 줍니다. 역시 높이가 흔들리지는 않습니다.</footer>
+            <footer>상태 표시줄과 내비게이션 바가 차지하는 높이를 <b>인셋</b>(insets)으로 알려 줍니다. 안드로이드 앱도 주소창이 없어서 높이가 흔들리지는 않습니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — "폰에서 아래 버튼이 안 눌려요"의 절반이 이것이고(<code>100vh</code>), 나머지 절반이 <a href="softkeyboard.html">폰 키보드</a>입니다. PC 브라우저에서는 둘 다 재현되지 않아 <b>고쳤는지 확인할 길이 폰뿐</b>입니다 — 이 항목만큼은 실제 기기에서 한 번 열어 보는 일정을 넣어 두는 편이 낫습니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — "폰에서 아래 버튼이 안 눌려요"라는 문의는 대개 <code>100vh</code> 때문이거나 <a href="softkeyboard.html">폰 키보드</a> 때문입니다. 두 문제 모두 PC 브라우저에서는 재현되지 않아서 <b>고쳤는지 확인하려면 폰에서 열어 봐야</b> 합니다. 그러니 이 부분은 일정에 실제 기기에서 한 번 열어 보는 단계를 넣어 두는 편이 낫습니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="breakpoint.html"><b>브레이크포인트</b><em>11부</em></a></li>
         <li><a href="touchtarget.html"><b>터치 타깃</b><em>11부</em></a></li>
@@ -330,20 +330,20 @@ visualViewport.addEventListener(<span class="s">'resize'</span>, () =&gt; {
         <li><a href="softkeyboard.html"><b>폰 키보드</b><em>11부</em></a></li>
         <li><a href="platformdiff.html"><b>HIG와 Material의 차이</b><em>11부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="softkeyboard.html"><b>폰 키보드</b><em>11부</em></a></li>
         <li><a href="../items/safearea.html"><b>세이프 에어리어</b><em>1부</em></a></li>
         <li><a href="../items/sticky.html"><b>스티키</b><em>1부</em></a></li>
         <li><a href="breakpoint.html"><b>브레이크포인트</b><em>11부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

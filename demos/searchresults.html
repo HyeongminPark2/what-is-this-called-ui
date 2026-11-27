@@ -38,9 +38,9 @@
 
 <p class="hint">
   결과에서 한 건을 눌러 들어갔다가 <b>← 뒤로</b>를 눌러 보세요.<br>
-  둘 다 켜 두면 <b>질의 · 필터 · 굴린 자리</b>가 그대로 살아납니다. 끄면 빈 검색 화면으로 돌아가고,
-  사용자는 <b>처음부터 다시</b> 찾아야 합니다 — 목록 화면에서 가장 자주 나오는 민원입니다.<br>
-  질의를 주소에 담아 두면 <b>공유</b>도 되고 <b>새로고침</b>해도 같은 화면이 나옵니다.
+  두 설정을 모두 켜 두면 <b>질의 · 필터 · 굴린 자리</b>가 그대로 되살아납니다. 반대로 끄면 빈 검색 화면으로 돌아가서
+  사용자가 <b>처음부터 다시</b> 찾아야 하는데, 목록 화면에서 가장 자주 나오는 민원이 바로 이 경우입니다.<br>
+  질의를 주소에 담아 두면 그 주소로 <b>공유</b>할 수 있고, <b>새로고침</b>해도 같은 화면이 나옵니다.
 </p>
 
 <script>
@@ -86,8 +86,8 @@
           : null;
         state.picked = r.dataset.n; state.view = 'detail';
         render(); addr();
-        document.getElementById('log').innerHTML = '상세로 들어감 — ' +
-          (saved ? '돌아올 자리를 <b>기억해 둔다</b>' : '<span class="warn">아무것도 기억하지 않는다</span>');
+        document.getElementById('log').innerHTML = '상세 화면으로 들어왔습니다. ' +
+          (saved ? '돌아갈 자리를 <b>기억해 두었습니다</b>' : '<span class="warn">아무것도 기억하지 않았습니다</span>');
       });
 
       document.getElementById('q').addEventListener('input', function () {
@@ -103,11 +103,11 @@
     if (saved) {
       state.q = saved.q; state.filter = saved.filter; state.scroll = saved.scroll;
       document.getElementById('log').innerHTML =
-        '돌아옴 — 질의 ‘<b>' + state.q + '</b>’ · 굴린 자리 <b>' + Math.round(state.scroll) + 'px</b> 가 살아났다';
+        '돌아왔습니다. 질의 ‘<b>' + state.q + '</b>’와 굴린 자리 <b>' + Math.round(state.scroll) + 'px</b>가 되살아났습니다';
     } else {
       state.q = ''; state.filter = '전체'; state.scroll = 0;
       document.getElementById('log').innerHTML =
-        '<span class="warn">돌아왔는데 빈 화면이다 — 처음부터 다시 찾아야 한다</span>';
+        '<span class="warn">돌아왔더니 빈 화면입니다. 처음부터 다시 찾아야 합니다</span>';
     }
     state.view = 'list'; render(); addr();
   }
@@ -117,7 +117,7 @@
     var a = document.getElementById('addr');
     a.innerHTML = on
       ? '주소 <b>/search?q=' + encodeURIComponent(state.q) + '&amp;f=' + encodeURIComponent(state.filter) + '</b>'
-      : '주소 <span class="warn">/search — 질의가 안 담긴다. 공유도 새로고침도 안 된다</span>';
+      : '주소 <span class="warn">/search (질의가 담기지 않아 공유도 새로고침도 되지 않습니다)</span>';
     a.dataset.on = on ? '1' : '0';
   }
 

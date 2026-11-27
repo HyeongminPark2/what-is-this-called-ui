@@ -34,11 +34,11 @@
 </div>
 
 <p class="hint">
-  버튼은 <b>누르면 무슨 일이 나는지</b>를 그 자리에서 말해야 합니다.
-  <b>버튼만 보고 맞히기</b>를 켜 보세요 — 앞뒤 설명이 사라지면
-  <code>확인</code>·<code>제출</code>이 아무것도 안 알려 준다는 게 드러납니다.<br>
-  판정은 세 가지만 봅니다. <b>동사가 있는가</b>, <b>두세 어절 안인가</b>,
-  <b>'확인·제출·완료' 같은 빈 말이 아닌가</b>. 아래 칸에 직접 써 보면 바로 매겨집니다.
+  버튼 글자는 <b>누르면 무슨 일이 일어나는지</b>를 버튼만 보고도 알 수 있게 적어야 합니다.
+  <b>버튼만 보고 맞히기</b>를 켜 보세요. 앞뒤 설명이 사라지면
+  <code>확인</code>·<code>제출</code> 같은 버튼만으로는 무슨 일이 일어날지 전혀 알 수 없다는 것이 드러납니다.<br>
+  판정 기준은 <b>동사가 있는가</b>, <b>두세 어절 안인가</b>,
+  <b>'확인·제출·완료' 같은 빈 말이 아닌가</b> 세 가지입니다. 아래 칸에 버튼 문구를 직접 써 보면 이 기준으로 바로 판정해 줍니다.
 </p>
 
 <script>
@@ -49,25 +49,25 @@
                '나가기', '복구', '되돌리기', '공유', '승인', '반려', '보기', '열기', '받기', '계속'];
 
   var CASES = [
-    ['정산 128건을 내보낼까요?', '확인',            '무엇을 확인하는지 모른다'],
-    ['정산 128건을 내보낼까요?', '내보내기',        '누르면 무슨 일이 나는지 그 자리에서 보인다'],
-    ['저장하지 않은 내용이 있습니다', '아니오',      '무엇에 대한 아니오인지 모른다'],
-    ['저장하지 않은 내용이 있습니다', '저장하지 않고 나가기', '길지만 뜻이 분명하다'],
-    ['가맹점을 지울까요?', '제출',                  '지우는 일에 제출이라니'],
-    ['가맹점을 지울까요?', '가맹점 삭제',           '무엇을 지우는지까지 적었다'],
-    ['초대 메일을 보냅니다', '동료를 초대하고 메일을 발송합니다', '버튼이 아니라 문장이다']
+    ['정산 128건을 내보낼까요?', '확인',            '무엇을 확인하는지 알 수 없습니다'],
+    ['정산 128건을 내보낼까요?', '내보내기',        '누르면 무슨 일이 일어나는지 버튼만 보고 알 수 있습니다'],
+    ['저장하지 않은 내용이 있습니다', '아니오',      '무엇에 대한 아니오인지 알 수 없습니다'],
+    ['저장하지 않은 내용이 있습니다', '저장하지 않고 나가기', '길지만 뜻이 분명합니다'],
+    ['가맹점을 지울까요?', '제출',                  '지우는 동작에 ‘제출’은 맞지 않습니다'],
+    ['가맹점을 지울까요?', '가맹점 삭제',           '무엇을 지우는지까지 적었습니다'],
+    ['초대 메일을 보냅니다', '동료를 초대하고 메일을 발송합니다', '버튼이 아니라 문장입니다']
   ];
 
   function judge(t) {
     t = (t || '').trim();
     var why = [], ok = true;
-    if (!t) return { ok: false, why: ['비었다'] };
-    if (EMPTY.indexOf(t) >= 0) { ok = false; why.push('빈 말 — 무슨 일이 나는지 안 알려 준다'); }
+    if (!t) return { ok: false, why: ['비어 있습니다'] };
+    if (EMPTY.indexOf(t) >= 0) { ok = false; why.push('빈 말이라 무슨 일이 일어나는지 알려 주지 않습니다'); }
     var hasVerb = VERBS.some(function (v) { return t.indexOf(v) >= 0; });
-    if (!hasVerb) { ok = false; why.push('동사가 없다'); }
+    if (!hasVerb) { ok = false; why.push('동사가 없습니다'); }
     var words = t.split(/\s+/).length;
-    if (words > 3) { ok = false; why.push(words + '어절 — 버튼이 아니라 문장이다'); }
-    if (/[.!]$/.test(t)) { ok = false; why.push('마침표를 찍지 않는다'); }
+    if (words > 3) { ok = false; why.push(words + '어절이라 버튼이 아니라 문장입니다'); }
+    if (/[.!]$/.test(t)) { ok = false; why.push('마침표를 찍지 않습니다'); }
     if (ok) why.push(words + '어절 · 동사 있음');
     return { ok: ok, why: why };
   }
@@ -75,8 +75,8 @@
   function draw() {
     var blind = document.getElementById('blind').checked;
     document.getElementById('ctx').innerHTML = blind
-      ? '<p class="ruler"><span class="warn">앞뒤 설명을 가렸다</span> — 버튼 글자만 보고 무슨 일이 날지 알 수 있나</p>'
-      : '<p class="ruler">앞뒤 설명과 함께 보면 <b>빈 말도 알아들을 수</b> 있다. 그래서 잘 안 드러난다</p>';
+      ? '<p class="ruler"><span class="warn">앞뒤 설명을 가렸습니다</span>. 버튼 글자만 보고 무슨 일이 일어날지 알 수 있는지 보세요</p>'
+      : '<p class="ruler">앞뒤 설명과 함께 보면 <b>빈 말도 알아들을 수</b> 있어서 문제가 잘 드러나지 않습니다</p>';
 
     document.getElementById('list').innerHTML = CASES.map(function (c) {
       var j = judge(c[1]);
@@ -84,7 +84,7 @@
         '<span class="t">' + (blind ? '' : '<span style="color:var(--fg-muted);font-size:11.5px;display:block">' + c[0] + '</span>') +
         '<b>[ ' + c[1] + ' ]</b></span>' +
         '<span class="v">' + (j.ok ? '좋음' : '고칠 것') + '</span>' +
-        '<span class="verd__why">' + j.why.join(' · ') + ' — ' + c[2] + '</span></div>';
+        '<span class="verd__why">' + j.why.join(' · ') + '. ' + c[2] + '</span></div>';
     }).join('');
     document.getElementById('list').dataset.bad =
       String(CASES.filter(function (c) { return !judge(c[1]).ok; }).length);

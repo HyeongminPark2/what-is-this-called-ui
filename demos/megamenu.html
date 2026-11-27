@@ -41,14 +41,14 @@
 </div>
 
 <p class="hint">
-  머리글자에 마우스를 올리면 패널이 열립니다. 메가 메뉴의 고질병은 <b>대각선</b>입니다 —
-  머리글자에서 패널 오른쪽 아래 항목으로 곧장 가면 손이 <b>옆 머리글자 위를 스쳐</b>
-  메뉴가 바뀌어 버립니다. 가려던 항목이 그 자리에서 사라집니다.
-  '대각선으로 가 보기'는 그 경로를 흉내 내 <b>가는 길에 몇 번 끊겼는지</b> 셉니다.<br>
-  <b>열기를 100ms 늦추고 닫기를 300ms 늦추면</b> 스쳐 지나가는 손은 메뉴를 바꾸지
-  못하고, 잠깐 빈틈을 지나도 열린 채로 버팁니다 — 공짜로 고치는 가장 싼 방법입니다.<br>
-  <b>눌러야 열림</b>으로 두면 지나가는 손과 아예 상관이 없고,
-  키보드·터치에서도 같게 동작합니다.
+  머리글자에 마우스를 올리면 패널이 열립니다. 메가 메뉴에서 가장 자주 생기는 문제는 <b>대각선</b> 이동입니다.
+  머리글자에서 패널 오른쪽 아래 항목으로 마우스를 곧장 옮기면 마우스가 <b>옆 머리글자 위를 지나가면서</b>
+  메뉴가 바뀌고, 가려던 항목이 사라집니다.
+  '대각선으로 가 보기'는 이 경로를 따라 마우스를 움직여 보고 <b>가는 동안 메뉴가 몇 번 바뀌거나 닫혔는지</b> 셉니다.<br>
+  <b>열기를 100ms, 닫기를 300ms 늦추면</b> 머리글자 위를 잠깐 지나가는 마우스로는 메뉴가 바뀌지
+  않고, 빈틈을 잠깐 지나도 메뉴가 열린 채로 유지됩니다. 코드 몇 줄로 고칠 수 있는 가장 간단한 방법입니다.<br>
+  <b>눌러야 열림</b>으로 두면 마우스 이동과는 아예 상관이 없어지고,
+  키보드와 터치에서도 똑같이 동작합니다.
 </p>
 
 <script>
@@ -87,7 +87,7 @@
     var rd = document.getElementById('read');
     rd.innerHTML = '열린 메뉴 <b>' + (openIdx < 0 ? '없음' : ['의류', '생활용품', '식품'][openIdx]) + '</b>' +
       ' · 가는 길에 끊긴 횟수 <b>' + breaks + '회</b>' +
-      (breaks > 0 ? ' <span class="warn">— 손이 스친 자리에서 메뉴가 바뀌었다</span>' : '') +
+      (breaks > 0 ? ' <span class="warn">· 마우스가 지나간 자리에서 메뉴가 바뀌었습니다</span>' : '') +
       (why ? '<br>' + why : '');
     rd.dataset.open = String(openIdx);
     rd.dataset.breaks = String(breaks);
@@ -100,7 +100,7 @@
     if (mode() === 'click') return;
     var b = e.target.closest('.mm__bar button');
     var inPanel = e.target.closest('.mm__panel');
-    // 머리글자를 벗어나면 열기 예약을 취소한다 — 스쳐 지나가는 손은 열지 않는다
+    // 머리글자를 벗어나면 열기 예약을 취소한다. 잠깐 지나가는 마우스로는 열지 않는다
     if (!b) clearTimeout(enterT);
     if (inPanel) { clearTimeout(leaveT); return; }
     if (!b) return;
@@ -122,19 +122,19 @@
     var b = e.target.closest('button');
     if (!b) return;
     var i = +b.dataset.m;
-    setOpen(openIdx === i ? -1 : i, '눌러서 ' + (openIdx === i ? '닫았다' : '열었다'));
+    setOpen(openIdx === i ? -1 : i, '눌러서 ' + (openIdx === i ? '닫았습니다' : '열었습니다'));
   });
 
   document.getElementById('k').addEventListener('change', function () {
-    breaks = 0; running = false; setOpen(-1); report('여는 법을 바꿨다');
+    breaks = 0; running = false; setOpen(-1); report('여는 법을 바꿨습니다');
   });
 
-  // 대각선 경로를 흉내 낸다 — 첫 머리글자에서 패널 오른쪽 아래 항목까지 곧장
+  // 대각선 경로를 흉내 낸다. 첫 머리글자에서 패널 오른쪽 아래 항목까지 곧장 간다
   document.getElementById('run').addEventListener('click', function () {
     breaks = 0; running = false;
     var first = document.querySelector('.mm__bar button');
     var fr = first.getBoundingClientRect();
-    setOpen(0, '의류에 닿았다');
+    setOpen(0, '의류에 마우스가 닿았습니다');
     running = true;
     setTimeout(function () {
       var panel = document.getElementById('panel');
@@ -145,9 +145,9 @@
       (function step() {
         if (i > n) {
           running = false;
-          document.getElementById('log').innerHTML = '대각선으로 지나갔다 — 끊긴 횟수 <b>' + breaks + '회</b>';
+          document.getElementById('log').innerHTML = '대각선으로 지나갔습니다 · 끊긴 횟수 <b>' + breaks + '회</b>';
           document.getElementById('log').dataset.breaks = String(breaks);
-          report('대각선 경로가 끝났다');
+          report('대각선 경로가 끝났습니다');
           return;
         }
         var x = x0 + (x1 - x0) * i / n, y = y0 + (y1 - y0) * i / n;

@@ -39,12 +39,12 @@
 </div>
 
 <p class="hint">
-  썸네일 칸은 보통 <b>비율이 정해져</b> 있고 사진은 제각각입니다. 그래서 셋 중 하나를 고르게 됩니다 —
-  <b>잘라 채우거나</b>(cover), <b>여백을 남기거나</b>(contain), <b>늘려 맞추거나</b>(fill).<br>
-  데모가 <b>원본에서 잘려 나간 넓이</b>와 <b>가로세로 비가 얼마나 어긋났는지</b>를 재서 적습니다.
-  <code>fill</code> 은 한 픽셀도 안 잘리는 대신 <b>얼굴이 찌그러집니다</b> — 그래서 거의 안 씁니다.<br>
-  <code>cover</code> 를 쓰면 어디를 남길지가 문제인데, 기본은 가운데입니다.
-  인물 사진은 <code>object-position: top</code> 쪽이 머리가 안 잘립니다.
+  썸네일 칸은 보통 <b>가로세로 비율이 정해져</b> 있는데 사진의 비율은 제각각입니다. 그래서 사진을 <b>잘라 채우거나</b>(cover),
+  <b>여백을 남기거나</b>(contain), <b>늘려 맞추는</b>(fill) 세 가지 방법 가운데 하나를 고르게 됩니다.<br>
+  데모는 <b>원본에서 잘려 나간 넓이</b>와 <b>가로세로 비가 얼마나 어긋났는지</b>를 재서 적습니다.
+  <code>fill</code>은 한 픽셀도 잘리지 않는 대신 사진 속 <b>얼굴이 찌그러지기</b> 때문에 거의 쓰지 않습니다.<br>
+  <code>cover</code>를 쓰면 사진의 어느 부분을 남길지 정해야 하는데, 기본값은 가운데입니다.
+  인물 사진은 <code>object-position: top</code>으로 위쪽을 남겨야 머리가 잘리지 않습니다.
 </p>
 
 <script>
@@ -102,17 +102,17 @@
     var rd = document.getElementById('read');
     rd.innerHTML = '원본 <b>' + r[0] + ':' + r[1] + '</b> · 칸 <b>4:3</b>' +
       '<br>cover 가 잘라내는 넓이 <b>' + Math.round(coverCut * 100) + '%</b>' +
-      (coverCut > 0.25 ? ' <span class="warn">— 많이 잘린다</span>' : '') +
+      (coverCut > 0.25 ? ' <span class="warn">(많이 잘립니다)</span>' : '') +
       '<br>contain 이 남기는 여백 <b>' + Math.round(containPad * 100) + '%</b>' +
       ' · fill 이 어긋내는 비 <b>' + Math.round(fillSkew * 100) + '%</b>' +
-      (fillSkew > 0.15 ? ' <span class="warn">— 찌그러진다</span>' : '');
+      (fillSkew > 0.15 ? ' <span class="warn">(찌그러집니다)</span>' : '');
     rd.dataset.cut = String(Math.round(coverCut * 100));
     rd.dataset.skew = String(Math.round(fillSkew * 100));
     rd.dataset.pos = pos;
 
     document.getElementById('log').innerHTML = pos === 'top'
-      ? '<b>위쪽</b>을 남긴다 — 인물 사진에서 머리가 안 잘린다'
-      : '<b>가운데</b>를 남긴다 — 기본값이다';
+      ? '<b>위쪽</b>을 남깁니다. 인물 사진에서 머리가 잘리지 않습니다'
+      : '<b>가운데</b>를 남깁니다. 기본값입니다';
   }
 
   document.getElementById('shape').addEventListener('change', draw);

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>시간 선택기 — 이름표</title>
-<meta name="description" content="시각을 고르는 부품. 간격 정하기, 24시간제, 안 되는 시간 막기.">
+<meta name="description" content="시각을 고르는 부품인 시간 선택기에서 간격을 정하는 법과 24시간제, 고를 수 없는 시간을 막는 법을 다루는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">4부 조작 부품</a> › 시간 선택기</p>
     <h1>시간 선택기</h1>
     <p class="en">Time picker</p>
-    <p class="lede" style="margin-top:var(--s3)">시간은 <b>가짓수가 많습니다</b>. 다 늘어놓지 말고 <b>쓰는 간격</b>을 먼저 정해야 합니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">하루의 시각은 분 단위로만 세어도 1,440가지라서 <b>가짓수가 많습니다</b>. 그래서 모든 시각을 늘어놓지 말고, 그 화면에서 <b>쓰는 간격</b>부터 정해야 합니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,32 +50,32 @@
           <iframe src="../demos/timepicker.html" title="시간 선택기 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>간격을 1분으로 바꿔 보세요 — 데모가 <b>목록에 든 줄 수</b>를 세서 적습니다
-          (1분 간격이면 <b>1,440줄</b>입니다).<br>
-          그래서 쓰는 간격을 정해 두는 것이 핵심입니다 — 예약이면 30분, 알람이면 1분.
-          그리고 <b>쳐서도 넣을 수 있어야</b> 합니다.<br>
-          <b>오전/오후</b>로 적으면 '12시'가 낮인지 밤인지 헷갈립니다 —
-          한국에서는 <b>24시간제</b>가 덜 헷갈립니다.</p>
+          <p>간격을 1분으로 바꿔 보세요. 데모가 <b>목록에 든 줄 수</b>를 세어 적어 주는데,
+          1분 간격이면 <b>1,440줄</b>이나 됩니다.<br>
+          그래서 예약이면 30분, 알람이면 1분처럼 쓰는 간격을 정해 두는 것이 핵심이고,
+          목록을 굴리지 않고 <b>쳐서도 넣을 수 있어야</b> 합니다.<br>
+          또 <b>오전/오후</b>로 적으면 '12시'가 낮인지 밤인지 알기 어렵기 때문에,
+          한국에서는 <b>24시간제</b>로 적는 편이 덜 헷갈립니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>시간 선택기, 타임 피커, 시각 고르기</td></tr>
             <tr><th>영어</th><td>time picker, time input</td></tr>
-            <tr><th>같이 쓰는 말</th><td>돌려 맞추는 꼴은 <b>휠</b>(wheel picker), 시계판을 누르는 꼴은 <b>클록 다이얼</b>입니다. HTML 에는 <code>&lt;input type="time"&gt;</code> 이 있고, 날짜와 시각을 같이 고르는 것은 <code>datetime-local</code> 입니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>날짜 선택기</b> — <a href="datepicker.html">날짜 선택기</a>는 <b>날</b>을 고릅니다.<br><b>지속 시간</b> — '30분 동안'은 시각이 아니라 <b>길이</b>라 다른 부품입니다.<br><b>타이머</b> — 타이머는 <b>흘러가는 것</b>이지 고르는 것이 아닙니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>돌려서 맞추는 꼴은 <b>휠</b>(wheel picker), 시계판을 눌러 고르는 꼴은 <b>클록 다이얼</b>이라고 부릅니다. HTML에는 <code>&lt;input type="time"&gt;</code>이 있고, 날짜와 시각을 함께 고를 때는 <code>datetime-local</code>을 씁니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>날짜 선택기</b> — <a href="datepicker.html">날짜 선택기</a>는 시각이 아니라 <b>날</b>을 고르는 부품입니다.<br><b>지속 시간</b> — '30분 동안'은 시각이 아니라 <b>길이</b>를 나타내는 값이라서 다른 부품으로 받습니다.<br><b>타이머</b> — 타이머는 시간이 <b>흘러가는 것</b>을 보여 주는 부품이고, 시각을 고르는 부품이 아닙니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>조작 부품은 모두 '값을 받는다'는 점이 같습니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>조작 부품은 모두 사용자에게서 값을 받는다는 점은 같지만, 아래 네 가지를 따져 보면 서로 구별할 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>고르는 개수</th><th>선택지가 보이나</th><th>바로 적용되나</th><th>타이핑</th></tr></thead>
@@ -106,57 +106,57 @@
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — <b>쓰는 간격을 먼저 정하세요.</b> 1분 간격 목록은 1,440줄입니다.</p>
+          <p><b>시간 선택기를 한 줄로 정리하면</b> — <b>쓰는 간격을 먼저 정하세요.</b> 1분 간격으로 목록을 만들면 1,440줄이나 되어서 원하는 시각을 굴려 찾기 어렵습니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">그림 한 장으로는 못 배운다</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">상태마다 달라지는 모습</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:4px;max-height:62px;overflow:hidden"><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);">14:00</span><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);background:var(--accent-soft);color:var(--accent);">14:30</span><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);">15:00</span></div><span style="font-size:8.5px;color:var(--fg-muted)">30분 간격 — 48줄</span></div>
             </div>
-            <figcaption>알맞은 간격<span><b>예약은 30분</b></span></figcaption>
+            <figcaption>알맞은 간격<span><b>예약은 30분</b> 간격이면 하루가 48줄이라 찾기 쉽습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:4px;max-height:62px;overflow:hidden"><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);">00:00</span><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);">00:01</span><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);">00:02</span></div><span style="font-size:8.5px;color:var(--fg-muted)">1분 간격 — 1,440줄</span></div>
             </div>
-            <figcaption>너무 촘촘함<span><b>굴려서 못 찾는다</b></span></figcaption>
+            <figcaption>너무 촘촘함<span>1분 간격이면 1,440줄이라 <b>굴려서는 찾기 어렵습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:4px;max-height:62px;overflow:hidden"><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);color:var(--fg-faint);">08:30</span><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);background:var(--accent-soft);color:var(--accent);">09:00</span><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);">09:30</span></div><span style="font-size:8.5px;color:var(--fg-muted)">영업 시간 밖은 막혔다</span></div>
             </div>
-            <figcaption>막힌 시간<span><b>흐리게</b> 두고 막는다</span></figcaption>
+            <figcaption>막힌 시간<span>고를 수 없는 시간은 <b>흐리게</b> 표시하고 누르지 못하게 막습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">쳐서 넣기</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;font-family:var(--mono)">14:30</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">쳐서 한 번에</span></span></div></div>
             </div>
-            <figcaption>쳐서 넣기<span><b>굴리지 않아도</b> 된다</span></figcaption>
+            <figcaption>쳐서 넣기<span>시각을 쳐서 넣으면 목록을 <b>굴리지 않아도</b> 됩니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:4px;max-height:62px;overflow:hidden"><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);">오전 12:00</span><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);background:var(--accent-soft);color:var(--accent);">오후 12:00</span></div><span style="font-size:8.5px;color:var(--fg-muted)">둘 중 어느 쪽이 정오인가</span></div>
             </div>
-            <figcaption>오전/오후<span><b>12시가 헷갈린다</b></span></figcaption>
+            <figcaption>오전/오후<span>'12시'가 정오인지 자정인지 <b>헷갈립니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">시간대</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;font-family:var(--mono)">14:30 (KST)</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">시간대가 섞이면 적는다</span></span></div></div>
             </div>
-            <figcaption>시간대<span>섞이면 <b>적는다</b></span></figcaption>
+            <figcaption>시간대<span>여러 시간대가 섞이는 화면이면 시간대를 <b>함께 적습니다</b></span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="시간 선택기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="시간 선택기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
                   <div class="pin-out" data-pin="1" style="color:var(--accent)">쓰는 간격을 정한다 — 예약 30분, 알람 1분</div>
@@ -170,122 +170,122 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>간격 <em>먼저 정하기</em></b><span>예약 30분 · 알람 1분</span></li>
-            <li><b>쳐서 넣기 <em>같이 두기</em></b><span>굴리지 않아도 된다</span></li>
-            <li><b>24시간제 <em>덜 헷갈림</em></b><span><b>12시 문제</b>가 없다</span></li>
-            <li><b>막힌 시간 <em>흐리게</em></b><span>누르기 전에 알린다</span></li>
-            <li><b>첫 자리 <em>지금 가까이</em></b><span>목록이 길면 <b>굴려 둔다</b></span></li>
-            <li><b>시간대 <em>섞이면 적기</em></b><span>'(KST)'</span></li>
+            <li><b>간격 <em>먼저 정하기</em></b><span>예약은 30분, 알람은 1분처럼 쓰임에 맞춰 간격부터 정합니다</span></li>
+            <li><b>쳐서 넣기 <em>같이 두기</em></b><span>입력 칸을 같이 두면 목록을 굴리지 않고 바로 쳐 넣을 수 있습니다</span></li>
+            <li><b>24시간제 <em>덜 헷갈림</em></b><span>'12시'가 낮인지 밤인지 헷갈리는 <b>12시 문제</b>가 생기지 않습니다</span></li>
+            <li><b>막힌 시간 <em>흐리게</em></b><span>고를 수 없는 시간을 흐리게 표시해 누르기 전에 알립니다</span></li>
+            <li><b>첫 자리 <em>지금 가까이</em></b><span>목록이 길면 열 때 지금 시각 근처로 <b>굴려 둡니다</b></span></li>
+            <li><b>시간대 <em>섞이면 적기</em></b><span>시간대가 섞이는 화면이면 '(KST)'처럼 시간대를 적습니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          <b>오전 12시 · 오후 12시</b>는 한국어에서 특히 헷갈립니다 —
-          '오전 12시'를 자정으로 읽는 사람과 정오로 읽는 사람이 둘 다 있습니다.
-          그래서 예약·마감처럼 <b>틀리면 안 되는 자리</b>에서는
-          24시간제(<code>00:00</code>·<code>12:00</code>)가 안전합니다.<br>
-          목록이 길 때는 <b>열었을 때 어디를 보여 주느냐</b>도 중요합니다 —
-          00:00 부터 보여 주면 대부분 한참 굴려야 합니다.
-          <b>지금 시각이나 고른 값 근처</b>로 굴려 두면 그 수고가 사라집니다.</p>
+          <b>오전 12시 · 오후 12시</b>는 한국어에서 특히 헷갈리는 표기입니다.
+          '오전 12시'를 자정으로 읽는 사람도 있고 정오로 읽는 사람도 있기 때문입니다.
+          그래서 예약이나 마감처럼 <b>틀리면 안 되는 자리</b>에서는
+          24시간제(<code>00:00</code>·<code>12:00</code>)로 적는 편이 안전합니다.<br>
+          목록이 길 때는 <b>열었을 때 어디를 보여 주느냐</b>도 중요합니다.
+          00:00부터 보여 주면 사용자 대부분이 원하는 시각까지 한참 굴려야 하는데,
+          열 때 <b>지금 시각이나 이미 고른 값 근처</b>로 굴려 두면 그 수고를 덜 수 있습니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>시간 선택기를 쓰는 경우</h3>
             <ul>
-              <li><b>쓰는 간격</b>을 정하기 — 예약 30분, 알람 1분</li>
-              <li><b>24시간제</b>로 적기</li>
-              <li>열었을 때 <b>지금 시각 가까이</b>를 보여 주기</li>
+              <li>예약은 30분, 알람은 1분처럼 <b>쓰는 간격</b>을 정해 두기</li>
+              <li>시각을 <b>24시간제</b>로 적기</li>
+              <li>목록을 열었을 때 <b>지금 시각 가까이</b>를 보여 주기</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>시간 선택기를 쓰지 않는 경우</h3>
             <ul>
-              <li>1분 간격 목록을 <b>그냥 늘어놓기</b></li>
-              <li><b>오전/오후</b>로 적고 12시를 쓰기</li>
-              <li>안 되는 시간을 <b>눌리게</b> 두기</li>
-              <li>시간대가 섞이는데 <b>안 적기</b></li>
+              <li>1분 간격 목록을 <b>그대로 늘어놓기</b>. 1,440줄을 굴려 가며 찾아야 합니다</li>
+              <li><b>오전/오후</b> 표기로 12시를 적기. 정오인지 자정인지 헷갈립니다</li>
+              <li>고를 수 없는 시간을 <b>눌리게</b> 두기. 누른 뒤에야 안 된다는 것을 알게 됩니다</li>
+              <li>여러 시간대가 섞이는데 시간대를 <b>적지 않기</b></li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 날이면 <a href="datepicker.html">날짜 선택기</a>, 적는 꼴은 <a href="datetime.html">날짜와 시간 쓰기</a>, 범위면 <a href="daterange.html">날짜 범위</a>, 값 고르기 일반은 <a href="select.html">셀렉트</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>시간 선택기 대신 다른 것을 써야 하는 경우</b> — 날을 고르면 <a href="datepicker.html">날짜 선택기</a>, 날짜와 시각을 적는 형식은 <a href="datetime.html">날짜와 시간 쓰기</a>, 기간을 고르면 <a href="daterange.html">날짜 범위</a>, 목록에서 값을 고르는 일반적인 경우는 <a href="select.html">셀렉트</a>.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:grid;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:4px;max-height:62px;overflow:hidden"><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);">14:00</span><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);background:var(--accent-soft);color:var(--accent);">14:30</span></div></div>
             </div>
-            <figcaption><b>예약</b><b>30분</b> 간격</figcaption>
+            <figcaption><b>예약</b>예약 시간은 <b>30분</b> 간격으로 고릅니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:grid;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:4px;max-height:62px;overflow:hidden"><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);background:var(--accent-soft);color:var(--accent);">07:00</span><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);">07:01</span></div></div>
             </div>
-            <figcaption><b>알람</b><b>1분</b>이 필요하다</figcaption>
+            <figcaption><b>알람</b>알람은 분까지 맞춰야 하므로 <b>1분</b> 간격이 필요합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">마감 시각</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;font-family:var(--mono)">18:00 마감</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">24시간제로 못박는다</span></span></div></div>
             </div>
-            <figcaption><b>마감</b><b>틀리면 안 되는</b> 자리</figcaption>
+            <figcaption><b>마감</b><b>틀리면 안 되는</b> 자리라서 24시간제로 적습니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">이 부품의 계약서</span></h2>
-        <p>브라우저 기본이 폰 자판까지 맡아 줍니다. 간격은 <code>step</code> 으로 정합니다.</p>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+        <p>브라우저 기본 시간 입력을 쓰면 휴대폰 자판까지 브라우저가 알아서 맞춰 줍니다. 간격은 <code>step</code>으로 정합니다.</p>
 <pre class="code">&lt;<span class="t">label</span> <span class="a">for</span>=<span class="s">"t"</span>&gt;방문 시간&lt;/<span class="t">label</span>&gt;
 &lt;<span class="t">input</span> <span class="a">id</span>=<span class="s">"t"</span> <span class="a">type</span>=<span class="s">"time"</span>
        <span class="a">min</span>=<span class="s">"09:00"</span> <span class="a">max</span>=<span class="s">"18:00"</span>
        <span class="a">step</span>=<span class="s">"1800"</span>&gt;   <span class="c">&lt;!-- 1800초 = 30분 --&gt;</span>
 
-<span class="c">// 직접 목록을 만들 때 — 간격이 곧 줄 수다</span>
+<span class="c">// 직접 목록을 만들 때는 간격에 따라 줄 수가 정해진다</span>
 <span class="t">const</span> rows = [];
 <span class="t">for</span> (<span class="t">let</span> m = <span class="a">0</span>; m &lt; <span class="a">24</span> * <span class="a">60</span>; m += step) rows.push(m);
 <span class="c">// step 30 → 48줄 · step 1 → 1440줄</span></pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td>↑ ↓</td><td>시·분을 하나씩 올리고 내린다</td></tr>
-            <tr><td>← →</td><td>시와 분 사이를 옮긴다</td></tr>
-            <tr><td>숫자 키</td><td>바로 쳐 넣는다 — <b>가장 빠른</b> 길</td></tr>
-            <tr><td><code>step</code></td><td>간격을 <b>초 단위</b>로 적는다 (1800 = 30분)</td></tr>
-            <tr><td><code>min</code>·<code>max</code></td><td>브라우저가 <b>범위를 막아</b> 준다</td></tr>
-            <tr><td>확인하는 법</td><td>목록을 열고 <b>지금 시각이 보이는지</b> 본다</td></tr>
+            <tr><td>↑ ↓</td><td>시나 분을 하나씩 올리고 내립니다</td></tr>
+            <tr><td>← →</td><td>시 칸과 분 칸 사이를 오갑니다</td></tr>
+            <tr><td>숫자 키</td><td>숫자를 바로 쳐 넣습니다. 시각을 넣는 <b>가장 빠른</b> 방법입니다</td></tr>
+            <tr><td><code>step</code></td><td>간격을 <b>초 단위</b>로 적습니다. 1800이면 30분 간격입니다</td></tr>
+            <tr><td><code>min</code>·<code>max</code></td><td>브라우저가 <b>범위를 막아</b> 줍니다</td></tr>
+            <tr><td>확인하는 법</td><td>목록을 열었을 때 <b>지금 시각이 보이는지</b> 확인합니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>시각만</th><td>시간대 없이 <code>"14:30"</code> 으로 주고받는 쪽이 <b>날짜와 섞이지</b> 않습니다.</td></tr>
-            <tr><th>시각 + 날짜</th><td>둘이 함께면 <b>ISO 8601</b>(<code>2026-11-12T14:30+09:00</code>)로 주는 편이 안전합니다.</td></tr>
-            <tr><th>되는 시간</th><td>영업 시간이나 예약 가능 슬롯을 주면 화면이 <b>막을 수</b> 있습니다.</td></tr>
+            <tr><th>시각만</th><td>시각만 다룰 때는 시간대 없이 <code>"14:30"</code>처럼 주고받아야 값이 <b>날짜와 섞이지</b> 않습니다.</td></tr>
+            <tr><th>시각 + 날짜</th><td>날짜와 시각을 함께 다룰 때는 <b>ISO 8601</b> 형식(<code>2026-11-12T14:30+09:00</code>)으로 주는 편이 안전합니다.</td></tr>
+            <tr><th>되는 시간</th><td>서버가 영업 시간이나 예약 가능한 슬롯을 함께 내려 주면, 화면에서 고를 수 없는 시간을 미리 <b>막을 수</b> 있습니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p><b>고르는 방식</b>이 플랫폼마다 다릅니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>시각을 <b>고르는 방식</b>은 플랫폼마다 다릅니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>input type="time"</span></header>
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="display:grid;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:4px;max-height:62px;overflow:hidden"><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);">14:00</span><span style="display:block;padding:2px 6px;font-size:7.5px;font-family:var(--mono);background:var(--accent-soft);color:var(--accent);">14:30</span></div></div>
             </div>
-            <footer>브라우저마다 생김새가 다르지만 <b>쳐서 넣기</b>는 어디서나 됩니다.</footer>
+            <footer>생김새는 브라우저마다 다르지만 <b>쳐서 넣기</b>는 어느 브라우저에서나 됩니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>DatePicker(.hourAndMinute)</span></header>
@@ -294,7 +294,7 @@
                 <div style="position:absolute;left:8px;right:8px;top:28px;height:18px;border-radius:4px;background:var(--bg);border:1px solid var(--line)"></div>
                 <div style="position:absolute;left:12px;right:12px;top:34px;height:5px;border-radius:2px;background:var(--accent-soft)"></div></div></div>
             </div>
-            <footer><b>휠</b>이 기본입니다. 손가락으로는 빠른데 <b>먼 시각</b>은 여전히 느립니다.</footer>
+            <footer><b>휠</b>을 돌려 고르는 방식이 기본입니다. 손가락으로 돌리면 빠르지만, 지금 값에서 <b>먼 시각</b>까지 가려면 여전히 오래 돌려야 합니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>TimePicker</span></header>
@@ -303,18 +303,18 @@
                 <div style="position:absolute;left:50%;top:38px;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:999px;border:1px solid var(--line)"></div>
                 <div style="position:absolute;left:50%;top:38px;transform:translate(-50%,-50%);width:3px;height:3px;border-radius:999px;background:var(--accent)"></div></div></div>
             </div>
-            <footer><b>시계판</b>을 눌러 고르고, <b>쳐서 넣기</b>로 바꾸는 단추가 있습니다.</footer>
+            <footer><b>시계판</b>을 눌러 고르는 방식이 기본이고, <b>쳐서 넣기</b>로 바꾸는 단추가 따로 있습니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — 세 플랫폼 모두 <b>쳐서 넣는 길</b>을 결국 같이 둡니다 — 휠이든 시계판이든 <b>먼 시각</b>에는 느리기 때문입니다. 웹에서 직접 만든다면 그 교훈만 가져오면 됩니다: 목록이나 휠을 만들더라도 <b>칸을 없애지 않는 것</b>. 안드로이드 시계판은 보기에 재미있지만 <b>정확히 14:37</b> 같은 값에는 쓰기 어렵습니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — 세 플랫폼 모두 결국 <b>쳐서 넣는 길</b>을 함께 둡니다. 휠이든 시계판이든 지금 값에서 <b>먼 시각</b>으로 옮기려면 느리기 때문입니다. 웹에서 직접 만들 때도 목록이나 휠을 만들되 <b>입력 칸은 없애지 않으면</b> 됩니다. 안드로이드 시계판은 보기에는 재미있지만 <b>정확히 14:37</b>처럼 분까지 맞춰야 하는 값을 고르기는 어렵습니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="field.html"><b>텍스트 필드</b><em>4부</em></a></li>
         <li><a href="select.html"><b>셀렉트</b><em>4부</em></a></li>
@@ -338,20 +338,20 @@
         <li><a href="disabledstate.html"><b>비활성과 읽기 전용</b><em>4부</em></a></li>
         <li><a href="splitbutton.html"><b>분할 버튼</b><em>4부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="datepicker.html"><b>날짜 선택기</b><em>4부</em></a></li>
         <li><a href="datetime.html"><b>날짜와 시간 쓰기</b><em>14부</em></a></li>
         <li><a href="select.html"><b>셀렉트</b><em>4부</em></a></li>
         <li><a href="numberinput.html"><b>숫자 입력</b><em>4부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

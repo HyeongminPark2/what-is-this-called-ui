@@ -59,18 +59,18 @@
       <span class="said" data-for="5"></span>
     </div>
   </div>
-  <div class="a11y__log" id="log">각 줄의 오른쪽이 <b>스크린 리더가 읽는 말</b>입니다. 비어 있으면 아무 이름이 없다는 뜻입니다.</div>
+  <div class="a11y__log" id="log">각 줄의 오른쪽에 적힌 것이 <b>스크린 리더가 읽는 말</b>입니다. 비어 있으면 그 요소에 이름이 없다는 뜻입니다.</div>
 </div>
 
 <p class="hint">
-  화면을 못 보는 사람에게 버튼은 <b>이름 하나로만</b> 존재합니다. 그래서 모든 누를 것에는
+  화면을 보지 못하는 사람은 버튼을 <b>이름으로만</b> 구별합니다. 그래서 누를 수 있는 모든 요소에는
   <b>접근 이름</b>(accessible name)이 있어야 합니다.<br>
-  이름은 <b>순서대로</b> 정해집니다 — <code>aria-labelledby</code> → <code>aria-label</code> →
-  <code>&lt;label&gt;</code> → 안의 글자 → <code>title</code>. 위에서 하나라도 있으면 아래는 무시됩니다.<br>
-  <b>자리글(placeholder)은 이름이 아닙니다.</b> 입력을 시작하면 사라지고, 읽어 주는 기기도 제각각입니다 —
+  이름은 정해진 <b>순서대로</b> 찾습니다. <code>aria-labelledby</code>를 먼저 보고, 없으면 <code>aria-label</code>,
+  <code>&lt;label&gt;</code>, 요소 안의 글자, <code>title</code> 순서로 내려갑니다. 위의 것이 하나라도 있으면 아래의 것은 무시됩니다.<br>
+  <b>자리글(placeholder)은 이름이 아닙니다.</b> 입력을 시작하면 사라지고, 스크린 리더마다 읽는 방식도 다르기 때문에
   <code>&lt;label&gt;</code>을 따로 둬야 합니다.<br>
-  <b>'더 보기'가 열 개</b> 있는 화면은 링크 목록이 '더 보기, 더 보기, 더 보기…'가 됩니다.
-  무엇을 더 보는지까지 이름에 넣습니다.
+  <b>'더 보기'가 열 개</b> 있는 화면에서는 스크린 리더의 링크 목록에 '더 보기, 더 보기, 더 보기…'만 나열됩니다.
+  그래서 무엇을 더 보는지까지 이름에 넣습니다.
 </p>
 
 <script>
@@ -89,7 +89,7 @@
     var closest = el.closest('label');
     if (closest) return closest.textContent.trim();
     if (el.tagName !== 'INPUT') {
-      // aria-hidden 인 자식은 이름 계산에서 빠진다 — 아이콘을 숨기면 이름이 없어진다
+      // aria-hidden 인 자식은 이름 계산에서 빠지므로, 아이콘만 있는 버튼은 아이콘을 숨기면 이름이 없어진다
       var t = '';
       el.childNodes.forEach(function (c) {
         if (c.nodeType === 3) t += c.textContent;

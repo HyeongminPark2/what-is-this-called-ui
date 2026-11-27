@@ -37,11 +37,11 @@
 </div>
 
 <p class="hint">
-  색만으로 상태를 가르면 <b>적록 색각인 분에게는 성공과 오류가 같은 색</b>이 됩니다 —
-  아래에 두 색의 거리를 재서 적습니다. 흉내 변환은 <b>어림한 값</b>이라
-  실제로 그렇게 보인다는 뜻은 아니고, '충분히 가까워 못 가른다'를 숫자로 보이려는 것입니다.<br>
-  고치는 법은 <b>색을 바꾸는 게 아니라 단서를 더하는 것</b>입니다 —
-  모양(✓ · !)과 말('승인됨')을 붙이면 색을 못 봐도 읽힙니다.
+  색만으로 상태를 가르면 <b>적록 색각인 사람에게는 성공과 오류가 거의 같은 색</b>으로 보입니다.
+  아래에 두 색이 얼마나 다른지를 거리로 재서 적습니다. 색각 흉내 변환은 <b>어림한 값</b>이라서
+  실제로 꼭 그렇게 보인다는 뜻은 아니고, 두 색이 '구별하기 어려울 만큼 가깝다'는 것을 숫자로 보여 주려는 것입니다.<br>
+  해결 방법은 <b>색을 바꾸는 것이 아니라 단서를 더하는 것</b>입니다.
+  모양(✓ · !)과 말('승인됨')을 함께 붙이면 색을 구별하지 못해도 상태를 읽을 수 있습니다.
 </p>
 
 <script>
@@ -84,18 +84,18 @@
 
     var rd = document.getElementById('read');
     rd.innerHTML = '성공과 오류의 색 거리 — 그대로 <b>' + Math.round(d0) + '</b>, 적록 흉내 <b>' + Math.round(d1) + '</b>' +
-      (same ? ' <span class="warn">— 못 가른다</span>' : '') +
+      (same ? ' <span class="warn">— 구별하기 어렵습니다</span>' : '') +
       '<br>색 말고 쓰는 단서 <b>' + (cues - 1) + '가지</b>' +
-      (cues === 1 ? ' <span class="warn">— 색 하나뿐이다</span>' : '');
+      (cues === 1 ? ' <span class="warn">— 색 하나뿐입니다</span>' : '');
     rd.dataset.d0 = String(Math.round(d0));
     rd.dataset.d1 = String(Math.round(d1));
     rd.dataset.same = same ? '1' : '0';
     rd.dataset.cues = String(cues - 1);
 
     document.getElementById('note').innerHTML = {
-      color: '<span class="warn">색만 쓴다</span> — 색을 못 보면 네 줄이 모두 같은 줄이 된다',
-      icon: '모양을 더했다 — 색 없이도 <b>성공과 오류</b>가 갈린다',
-      text: '<b>말까지 적었다</b> — 읽어 주는 소리만 들어도 상태를 안다'
+      color: '<span class="warn">색만 씁니다</span> — 색을 구별하지 못하면 네 줄이 모두 같아 보입니다',
+      icon: '모양을 더했습니다 — 색 없이도 <b>성공과 오류</b>를 가를 수 있습니다',
+      text: '<b>말까지 적었습니다</b> — 스크린 리더가 읽어 주는 소리만 들어도 상태를 알 수 있습니다'
     }[k];
   }
 

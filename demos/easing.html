@@ -34,20 +34,20 @@
 </div>
 
 <p class="hint">
-  네 공이 <b>같은 거리를 같은 시간에</b> 달립니다. 다른 것은 <b>속도를 어떻게 나눠 쓰느냐</b>뿐입니다.<br>
-  <code>linear</code>는 처음부터 끝까지 같은 속도라 <b>기계가 미는 것처럼</b> 보입니다.
-  <code>ease-out</code>은 빨리 떠나 천천히 멎습니다 — <b>화면에 들어오는 것</b>에 씁니다.
-  <code>ease-in</code>은 반대라 <b>나가는 것</b>에 쓰고, 들어오는 데 쓰면 굼떠 보입니다.
-  줄 이름을 눌러 보면 오른쪽에 그 곡선이 그려집니다 — <b>가로가 시간, 세로가 간 거리</b>입니다.
+  네 공이 <b>같은 거리를 같은 시간 동안</b> 달리고, 다른 것은 <b>속도를 어떻게 나눠 쓰느냐</b>뿐입니다.<br>
+  <code>linear</code>는 처음부터 끝까지 속도가 같아서 <b>기계적으로</b> 보입니다.
+  <code>ease-out</code>은 빠르게 출발해 천천히 멈추기 때문에 <b>화면에 들어오는 것</b>에 씁니다.
+  <code>ease-in</code>은 그 반대여서 <b>나가는 것</b>에 쓰는데, 들어오는 것에 쓰면 출발이 느려 굼떠 보입니다.
+  줄 이름을 누르면 오른쪽에 그 줄의 곡선이 그려지고, 그래프의 <b>가로가 시간, 세로가 간 거리</b>입니다.
 </p>
 
 <script>
 (function () {
   var EASES = [
-    ['linear',   'linear',                         '0,120 120,0',                        false, '처음부터 끝까지 같은 속도 — 기계 같다'],
-    ['ease',     'ease',                           'C 30,90 42,0 120,0',                 false, '브라우저 기본값. 무난하지만 끝이 길다'],
-    ['ease-out', 'cubic-bezier(.22,.9,.3,1)',      'C 26,12 36,0 120,0',                 true,  '빨리 떠나 천천히 멎는다 — 들어올 때'],
-    ['ease-in',  'cubic-bezier(.7,0,.84,0)',       'C 84,120 94,108 120,0',              false, '천천히 떠나 빨리 사라진다 — 나갈 때']
+    ['linear',   'linear',                         '0,120 120,0',                        false, '처음부터 끝까지 속도가 같아서 기계적으로 보입니다'],
+    ['ease',     'ease',                           'C 30,90 42,0 120,0',                 false, '브라우저 기본값입니다. 무난하지만 끝부분이 길게 늘어집니다'],
+    ['ease-out', 'cubic-bezier(.22,.9,.3,1)',      'C 26,12 36,0 120,0',                 true,  '빠르게 출발해 천천히 멈춥니다. 들어올 때 씁니다'],
+    ['ease-in',  'cubic-bezier(.7,0,.84,0)',       'C 84,120 94,108 120,0',              false, '천천히 출발해 빠르게 사라집니다. 나갈 때 씁니다']
   ];
   var sel = 2;
   var trk = document.getElementById('trk');
@@ -72,7 +72,7 @@
       ball.style.transform = 'translateX(' + far + 'px)';
     });
     document.getElementById('ruler').innerHTML =
-      '네 줄 모두 <b>' + d + 'ms</b> · 같은 거리 — 다른 것은 <b>속도를 나눠 쓰는 방식</b>뿐이다';
+      '네 줄 모두 <b>' + d + 'ms</b> 동안 같은 거리를 달립니다. 다른 것은 <b>속도를 나눠 쓰는 방식</b>뿐입니다';
   }
 
   function drawCurve() {
@@ -87,7 +87,7 @@
       row.classList.toggle('is-bad', i === sel && !e[3] && e[0] !== 'linear' && e[0] !== 'ease');
       row.style.fontWeight = i === sel ? '700' : '';
     });
-    document.getElementById('curve').setAttribute('aria-label', e[0] + ' 곡선 — ' + e[4]);
+    document.getElementById('curve').setAttribute('aria-label', e[0] + ' 곡선. ' + e[4]);
   }
 
   trk.addEventListener('click', function (ev) {

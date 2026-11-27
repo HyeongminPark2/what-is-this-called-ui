@@ -37,12 +37,12 @@
 </div>
 
 <p class="hint">
-  배지 · 칩 · 태그는 생김새가 비슷해 가장 많이 섞여 쓰입니다.
-  가르는 질문은 셋입니다 — <b>눌리나</b> · <b>지울 수 있나</b> · <b>혼자 서나</b>.
-  데모가 지금 만든 것이 그 셋에 어떻게 답하는지 표로 적습니다.<br>
-  <b>태그</b>는 분류를 보여 주기만 합니다. <b>칩</b>은 눌러서 거르고,
-  <b>입력 태그</b>는 지울 수 있습니다. <b>배지</b>는 혼자 서지 못하고
-  <b>무언가에 붙어</b> 숫자를 알립니다 — 눌리는 것은 배지가 붙은 쪽입니다.
+  배지, 칩, 태그는 생김새가 비슷해서 특히 많이 섞여 쓰입니다.
+  셋을 가르려면 <b>누를 수 있나</b>, <b>지울 수 있나</b>, 다른 요소에 붙지 않고 <b>혼자 놓이나</b>를 물어보면 됩니다.
+  데모는 지금 고른 부품이 이 세 질문에 어떻게 답하는지 표로 적습니다.<br>
+  <b>태그</b>는 분류를 보여 주기만 합니다. <b>칩</b>은 눌러서 목록을 거르고,
+  <b>입력 태그</b>는 지울 수 있습니다. <b>배지</b>는 혼자 놓이지 않고
+  <b>다른 요소에 붙어서</b> 숫자를 알리며, 누를 수 있는 것은 배지가 아니라 배지가 붙은 요소입니다.
 </p>
 
 <script>
@@ -114,24 +114,24 @@
     if (c) {
       on[c.dataset.c] = !on[c.dataset.c];
       draw();
-      document.getElementById('log').innerHTML = '<b>' + c.dataset.c + '</b> 로 ' +
-        (on[c.dataset.c] ? '걸렀다' : '거르기를 풀었다');
+      document.getElementById('log').innerHTML = '<b>' + c.dataset.c + '</b> 칩으로 ' +
+        (on[c.dataset.c] ? '걸렀습니다' : '거르기를 풀었습니다');
       return;
     }
     var x = e.target.closest('[data-x]');
     if (x) {
       left = left.filter(function (t) { return t !== x.dataset.x; });
       draw();
-      document.getElementById('log').innerHTML = '<b>' + x.dataset.x + '</b> 를 지웠다';
+      document.getElementById('log').innerHTML = '<b>' + x.dataset.x + '</b> 태그를 지웠습니다';
       return;
     }
     if (e.target.closest('[data-add]')) {
       var next = TAGS.filter(function (t) { return left.indexOf(t) < 0; })[0];
-      if (next) { left = left.concat([next]); draw(); document.getElementById('log').innerHTML = '<b>' + next + '</b> 를 더했다'; }
+      if (next) { left = left.concat([next]); draw(); document.getElementById('log').innerHTML = '<b>' + next + '</b> 태그를 더했습니다'; }
       return;
     }
     if (e.target.closest('[data-b]')) {
-      document.getElementById('log').innerHTML = '<b>배지가 붙은 단추</b>를 눌렀다 — 배지 자체는 안 눌린다';
+      document.getElementById('log').innerHTML = '<b>배지가 붙은 단추</b>를 눌렀습니다. 배지 자체는 눌리지 않습니다';
     }
   });
 

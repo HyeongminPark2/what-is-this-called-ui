@@ -29,16 +29,16 @@
       <input class="num" id="amtn" inputmode="numeric" value="300,000" aria-label="금액 직접 입력">
     </div>
     <div class="sld__ticks"><span>0</span><span>50만</span><span>100만</span></div>
-    <p class="f__help" id="amt-h">끌어서 대충 맞추고, 정확한 값은 오른쪽 칸에 적습니다.
-      <b>슬라이더만 두면 정확한 값을 못 넣습니다.</b> 다만 눈금(step)이 1만 원이라
-      123,456을 적어도 <b>120,000으로 붙습니다</b> — 눈금을 정하는 순간 그 사이 값은 못 고르게 됩니다.</p>
+    <p class="f__help" id="amt-h">슬라이더를 끌어 대략 맞추고, 정확한 값은 오른쪽 칸에 적습니다.
+      <b>슬라이더만 두면 정확한 값을 넣을 수 없기 때문입니다.</b> 다만 눈금(step)이 1만 원 단위라서
+      123,456을 적어도 <b>120,000으로 맞춰집니다</b>. 이처럼 눈금을 정하면 눈금 사이의 값은 고를 수 없게 됩니다.</p>
   </div>
 
   <div class="f sld">
     <label class="f__lb" for="days">보관 기간</label>
     <input type="range" id="days" min="7" max="365" step="1" value="90" aria-describedby="days-h">
     <div class="sld__ticks"><span>7일</span><span class="sld__val" id="daysv" style="font-size:14px">90일</span><span>365일</span></div>
-    <p class="f__help" id="days-h">범위가 넓고 눈금이 촘촘하면 손으로 맞추기 어렵습니다. 이럴 때는 숫자 칸이 더 낫습니다.</p>
+    <p class="f__help" id="days-h">범위가 넓고 눈금이 촘촘하면 손으로 원하는 값에 맞추기 어려워서, 숫자 칸이 더 낫습니다.</p>
   </div>
 
   <div class="f sld">
@@ -46,15 +46,15 @@
     <input type="range" id="size" min="0" max="2" step="1" value="1" list="sizes" aria-describedby="size-h">
     <datalist id="sizes"><option value="0"></option><option value="1"></option><option value="2"></option></datalist>
     <div class="sld__ticks"><span>작게</span><span>보통</span><span>크게</span></div>
-    <p class="f__help" id="size-h">칸이 셋뿐이면 <b>세그먼티드 컨트롤</b>이 더 분명합니다 — 지금 어디인지 글자로 보입니다.</p>
+    <p class="f__help" id="size-h">고를 칸이 셋뿐이면 지금 고른 값이 글자로 보이는 <b>세그먼티드 컨트롤</b>이 더 분명합니다.</p>
   </div>
 </div>
 
 <p class="out" id="out"></p>
 
 <p class="hint">
-  손잡이를 잡고 <kbd>←</kbd><kbd>→</kbd>를 눌러 보세요. 한 칸씩 움직이고, <kbd>Home</kbd>·<kbd>End</kbd>로 양 끝까지 갑니다.
-  <b>슬라이더는 값이 숫자로 보이지 않으면 쓸 수 없습니다</b> — 그래서 지금 값을 늘 옆에 적습니다.
+  손잡이를 잡고 <kbd>←</kbd><kbd>→</kbd>를 눌러 보세요. 손잡이가 눈금 한 칸씩 움직이고, <kbd>Home</kbd>·<kbd>End</kbd>를 누르면 양 끝까지 갑니다.
+  <b>슬라이더는 값이 숫자로 보이지 않으면 쓸 수 없기 때문에</b> 지금 값을 늘 옆에 적어 둡니다.
 </p>
 
 <script>

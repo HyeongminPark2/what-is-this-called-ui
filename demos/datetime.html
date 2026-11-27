@@ -39,12 +39,12 @@
 </div>
 
 <p class="hint">
-  막대를 끌어 <b>얼마나 지난 시각</b>인지 바꿔 보세요. 같은 시각도 <b>얼마나 지났느냐</b>에 따라
-  쓰는 법이 달라집니다.<br>
-  <b>상대 시간</b>(3분 전)은 방금 일어난 일에는 읽기 쉽지만, 오래된 것에 쓰면
-  <b>‘8개월 전’</b>처럼 쓸모없어집니다. 반대로 <b>절대 시간</b>(11월 14일 09:12)은
-  언제나 맞지만 방금 일에는 번거롭습니다.<br>
-  둘 다 필요할 때는 <b>눈에는 상대, <code>title</code>·<code>datetime</code>에는 절대</b>로 둡니다.
+  막대를 끌어 <b>얼마나 지난 시각</b>인지 바꿔 보세요. 같은 시각이라도 지금부터 <b>얼마나 지났는지</b>에 따라
+  적는 방법이 달라집니다.<br>
+  <b>상대 시간</b>(3분 전)은 방금 일어난 일을 읽기 쉽게 보여 주지만, 오래된 일에 쓰면
+  <b>‘8개월 전’</b>처럼 언제인지 알 수 없는 표기가 됩니다. 반대로 <b>절대 시간</b>(11월 14일 09:12)은
+  언제나 정확하지만 방금 일어난 일에 쓰기에는 번거롭습니다.<br>
+  둘 다 필요하면 <b>화면 글자는 상대 시간으로, <code>title</code>·<code>datetime</code>에는 절대 시간으로</b> 적습니다.
 </p>
 
 <script>
@@ -85,7 +85,7 @@
     var t = new Date(NOW.getTime() - ms);
     document.getElementById('agov').textContent = STEPS[i][1];
     document.getElementById('base').innerHTML =
-      '지금은 <b>2026년 11월 14일(토) 오전 9:12</b> 라고 치고, 그 시각은 <b>' + STEPS[i][1] + '</b>';
+      '지금을 <b>2026년 11월 14일(토) 오전 9:12</b>라고 할 때 그 시각은 <b>' + STEPS[i][1] + '</b>입니다';
 
     var days = ms / 86400000;
     var abs = t.getFullYear() + '년 ' + (t.getMonth() + 1) + '월 ' + t.getDate() + '일(' + WD[t.getDay()] + ')';
@@ -110,9 +110,9 @@
 
     var v = document.getElementById('verdict');
     v.innerHTML = days < 7
-      ? '이 간격에는 <b>' + rel(ms) + '</b> 이 읽기 쉽다 · 정확한 시각은 <code>title</code> 에 넣는다'
-      : '<span class="warn">‘' + rel(ms) + '’ 로는 언제인지 알 수 없다</span> — ' +
-        '<b>' + (days >= 320 ? abs : absShort) + '</b> 로 적는다';
+      ? '이 간격에서는 <b>' + rel(ms) + '</b>처럼 상대 시간으로 적어야 읽기 쉽습니다. 정확한 시각은 <code>title</code>에 넣습니다'
+      : '<span class="warn">‘' + rel(ms) + '’로는 언제인지 알 수 없다</span>. 이때는 ' +
+        '<b>' + (days >= 320 ? abs : absShort) + '</b>처럼 절대 시간으로 적습니다';
     v.dataset.rel = rel(ms);
     v.dataset.mode = days < 7 ? 'rel' : 'abs';
   }

@@ -12,7 +12,7 @@
   .bar b { font-size: 15px; margin-right: auto; }
   .bar .ui-btn { min-height: 36px; padding: 8px 13px; font-size: 13px; }
   .panel { min-height: 268px; border-bottom: 1px solid var(--line); }
-  /* 줄 높이를 고정해야 스켈레톤과 실제 줄이 딱 맞는다 — 안 맞으면 바꿔 끼울 때 덜컥거린다 */
+  /* 줄 높이를 고정해야 스켈레톤과 실제 줄이 딱 맞는다. 안 맞으면 바꿔 끼울 때 덜컥거린다 */
   .row { display: flex; align-items: center; gap: var(--s3); padding: var(--s3) var(--s4); border-bottom: 1px solid var(--line); height: 72px; }
   .row .av { width: 36px; height: 36px; border-radius: 50%; background: var(--accent-soft); flex: none; }
   .row .meta { flex: 1; min-width: 0; }
@@ -41,9 +41,9 @@
 <p class="shift" id="shift">&nbsp;</p>
 
 <p class="hint">
-  두 버튼을 번갈아 눌러 보세요. <b>스켈레톤</b>은 들어올 줄 수와 크기를 미리 알고 자리를 잡아 둡니다.
-  <b>스피너</b>는 모르기 때문에, 내용이 들어오는 순간 화면이 <b>덜컥</b>합니다 —
-  이 덜컥거림을 <b>레이아웃 시프트</b>(layout shift)라 부르고, 아래에 얼마나 흔들렸는지 적어 둡니다.
+  두 버튼을 번갈아 눌러 보세요. <b>스켈레톤</b>은 들어올 줄 수와 크기를 미리 알고 그만큼 자리를 잡아 둡니다.
+  반면 <b>스피너</b>는 들어올 내용의 크기를 모르기 때문에, 내용이 들어오는 순간 화면이 <b>덜컥</b> 밀립니다.
+  이렇게 화면이 밀리는 것을 <b>레이아웃 시프트</b>(layout shift)라고 부르며, 화면이 몇 px 흔들렸는지 위에 적어 둡니다.
 </p>
 
 <script>

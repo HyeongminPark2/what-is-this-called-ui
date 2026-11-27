@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>다이얼로그 — 이름표</title>
-<meta name="description" content="다이얼로그가 무엇이고 모달과 어떤 관계인지, 실물과 상태와 해부도로 보여주는 항목.">
+<meta name="description" content="다이얼로그가 무엇인지, 모달과는 어떤 관계인지를 실물과 상태, 해부도로 보여 주는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">6부 겹치는 것들</a> › 다이얼로그</p>
     <h1>다이얼로그</h1>
     <p class="en">Dialog (modeless · modal)</p>
-    <p class="lede" style="margin-top:var(--s3)">사용자와 주고받으려고 띄우는 <b>대화 상자</b>. 뒤를 막으면 <b>모달</b>, 안 막으면 <b>비모달</b>입니다 — 모달은 다이얼로그의 한 종류입니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">다이얼로그는 사용자에게 무언가를 묻거나 입력을 받으려고 화면 위에 띄우는 <b>대화 상자</b>입니다. 뒤쪽 화면을 막으면 <b>모달</b>, 막지 않으면 <b>비모달</b>이라고 부르기 때문에 모달은 다이얼로그의 한 종류입니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,29 +50,29 @@
           <iframe src="../demos/dialog.html" title="다이얼로그 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>찾기를 열어 둔 채 뒤쪽 글을 읽어 보세요.</b> 스크롤도 되고 글자도 선택됩니다.
-          옆의 <b>나가기 확인</b>은 똑같은 <code>&lt;dialog&gt;</code>를 <code>showModal()</code>로 연 것입니다 — 뒤가 막히고 <kbd>Tab</kbd>이 갇힙니다.
-          <b>메서드 한 글자가 모달과 비모달을 가릅니다.</b></p>
+          <p><b>찾기를 열어 둔 채 뒤쪽 글을 읽어 보세요.</b> 비모달이라서 뒤쪽 글을 스크롤할 수도 있고 글자를 선택할 수도 있습니다.
+          옆의 <b>나가기 확인</b>은 같은 <code>&lt;dialog&gt;</code> 요소를 <code>showModal()</code>로 연 것인데, 이렇게 열면 뒤쪽 화면이 막히고 <kbd>Tab</kbd>으로 옮기는 포커스도 다이얼로그 안에서만 돕니다.
+          <b>모달과 비모달은 어느 메서드로 여느냐로만 갈립니다.</b></p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>다이얼로그, 대화 상자</td></tr>
             <tr><th>영어</th><td>dialog</td></tr>
-            <tr><th>같이 쓰는 말</th><td>뒤를 막는 것이 <b>모달 다이얼로그</b>, 안 막는 것이 <b>비모달</b>(modeless·non-modal). 답을 하나 받으려고 띄우는 작은 모달은 <b>얼럿 다이얼로그</b>.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>모달</b> — 모달은 다이얼로그의 <b>한 종류</b>입니다. 모든 다이얼로그가 모달은 아닙니다.<br><b>팝업</b> — 브라우저의 새 창과 섞입니다.<br><b>창</b> — 운영체제의 윈도와 헷갈립니다. 다이얼로그는 페이지 안에 있습니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>뒤쪽 화면을 막는 것은 <b>모달 다이얼로그</b>, 막지 않는 것은 <b>비모달</b>(modeless·non-modal)이라고 부릅니다. 답 하나를 받으려고 띄우는 작은 모달은 <b>얼럿 다이얼로그</b>라고 합니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>모달</b> — 모달은 다이얼로그의 <b>한 종류</b>일 뿐이어서, 뒤를 막지 않는 다이얼로그를 모달이라고 부르면 틀립니다.<br><b>팝업</b> — 브라우저가 새로 여는 팝업 창과 이름이 겹쳐서 헷갈립니다.<br><b>창</b> — 운영체제의 윈도와 헷갈립니다. 다이얼로그는 별도의 창이 아니라 페이지 안에 그려집니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>겹쳐 뜨는 부품들은 모양으로는 구별이 안 됩니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>겹쳐 뜨는 부품들은 모양만 보고는 구별하기 어렵지만, 아래 네 가지를 따져 보면 어느 부품인지 가려낼 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>뒤를 막나</th><th>포커스를 가두나</th><th>배경 스크롤</th><th>어디서 뜨나</th></tr></thead>
@@ -88,57 +88,57 @@
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — 다이얼로그는 <b>상위 개념</b>이고, 뒤를 막는지로 모달과 비모달이 갈립니다. 코드로는 <code>showModal()</code> 이냐 <code>show()</code> 냐 한 글자 차이입니다.</p>
+          <p><b>다이얼로그를 한 줄로 정리하면</b> — 다이얼로그는 모달과 비모달을 함께 이르는 <b>상위 개념</b>이고, 뒤쪽 화면을 막느냐에 따라 둘로 나뉩니다. 코드에서는 <code>showModal()</code>로 여느냐 <code>show()</code>로 여느냐만 다릅니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">그림 한 장으로는 못 배운다</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">상태마다 달라지는 모습</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="다이얼로그가 닫힌 화면"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div style="margin-top:8px"><span class="mini__trigger">찾기</span></div></div>
             </div>
-            <figcaption>닫힘<span>트리거만 보인다</span></figcaption>
+            <figcaption>닫힘<span>트리거만 보입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="비모달 다이얼로그가 열린 모습"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div class="mini__pop" style="right:5px;top:14px;width:70px"><b style="font-size:8.5px;display:block;margin-bottom:3px">찾기</b><i>결제 ▸ 4곳</i></div></div>
             </div>
-            <figcaption>비모달 열림<span><b>스크림이 없다.</b> 뒤쪽 글이 그대로 밝고 만져진다</span></figcaption>
+            <figcaption>비모달 열림<span><b>스크림이 없어서</b> 뒤쪽 글이 그대로 밝게 보이고, 누르거나 선택할 수도 있습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="모달 다이얼로그가 열린 모습"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div class="mini__scrim"><div class="mini__card"><b>저장하지 않고 나갈까요?</b><p>고친 내용이 사라집니다.</p><div class="mini__btns"><span class="mini__btn mini__btn--ghost">계속</span><span class="mini__btn">나가기</span></div></div></div></div>
             </div>
-            <figcaption>모달 열림<span>같은 부품인데 <code>showModal()</code> 로 열었다. 뒤가 막힌다</span></figcaption>
+            <figcaption>모달 열림<span>같은 부품을 <code>showModal()</code>로 열었기 때문에 뒤쪽 화면이 막힙니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="비모달 다이얼로그 두 개가 열린 모습"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div class="mini__pop" style="right:5px;top:10px;width:66px"><b style="font-size:8px;display:block">찾기</b><i>결제</i></div><div class="mini__pop" style="right:16px;top:40px;width:66px"><b style="font-size:8px;display:block">서식</b><i>굵게 · 기울임</i></div></div>
             </div>
-            <figcaption>여러 개<span>비모달은 <b>동시에 여럿</b> 띄울 수 있다. 모달은 쌓으면 안 된다</span></figcaption>
+            <figcaption>여러 개<span>비모달은 <b>동시에 여러 개</b> 띄울 수 있지만, 모달은 여러 개를 겹쳐 띄우면 안 됩니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="다이얼로그를 옮기는 중"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div class="mini__pop" style="right:14px;top:22px;width:70px;transform:rotate(-2deg)"><b style="font-size:8.5px;display:block;margin-bottom:3px">찾기</b><i>결제 ▸ 4곳</i></div><div style="position:absolute;left:6px;bottom:6px;font-size:7.5px;color:var(--fg-muted)">제목 줄을 끌어 옮긴다</div></div>
             </div>
-            <figcaption>옮기는 중<span>뒤를 가릴 때 치울 수 있어야 한다. 모달에는 없는 조작</span></figcaption>
+            <figcaption>옮기는 중<span>다이얼로그가 뒤쪽 내용을 가리면 끌어서 옮길 수 있어야 합니다. 모달에는 없는 조작입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="뒤쪽에서 결과가 바뀌는 모습"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div class="mini__pop" style="right:5px;top:14px;width:70px"><b style="font-size:8.5px;display:block;margin-bottom:3px">찾기</b><i>결제 ▸ 4곳</i></div><div style="position:absolute;left:7px;top:34px;background:#ffe08a;border-radius:2px;padding:0 3px;font-size:8px;color:#14161a">결제</div></div>
             </div>
-            <figcaption>뒤쪽이 살아 있음<span>다이얼로그를 둔 채 뒤쪽 내용이 바뀐다. 비모달의 존재 이유</span></figcaption>
+            <figcaption>뒤쪽이 살아 있음<span>다이얼로그를 띄워 둔 채로 뒤쪽 내용이 바뀝니다. 비모달을 쓰는 이유가 이것입니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="다이얼로그의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="다이얼로그의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" data-pin="1" style="background:var(--surface);border:1px solid var(--line);border-radius:var(--r2);padding:12px;position:relative;min-height:188px">
                 <div style="font-size:10.5px;color:var(--fg-muted);line-height:1.9">이관 자체는 예정보다 이틀 빨리 끝났지만,<br>장애 대응 절차가 문서로 남아 있지 않아<br>새벽에 연락이 두 번 더 오갔다.</div>
                 <div data-pin="2" style="position:absolute;right:12px;top:30px;width:190px;background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:var(--e3)">
@@ -158,76 +158,76 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>뒤쪽 내용 <em>background content</em></b><span><b>어둡지 않다.</b> 스크림이 없다는 것이 비모달의 전부라 해도 된다</span></li>
-            <li><b>다이얼로그 <em>dialog surface</em></b><span>모달보다 작고 그림자도 약하다. 화면 구석에 붙여 두는 일이 많다</span></li>
-            <li><b>제목 줄 <em>title bar</em></b><span>무엇을 하는 창인지. 끌어서 옮기는 손잡이를 겸한다</span></li>
-            <li><b>닫기 <em>close</em></b><span>비모달은 사용자가 닫을 때까지 떠 있으니 닫기가 더 중요하다</span></li>
-            <li><b>내용 <em>content</em></b><span>뒤쪽을 보면서 하는 일이라 작고 단순해야 한다</span></li>
-            <li><b>액션 영역 <em>actions</em></b><span>'다음 찾기'처럼 <b>여러 번 누르는</b> 버튼이 온다. 모달은 한 번 누르면 끝이다</span></li>
+            <li><b>뒤쪽 내용 <em>background content</em></b><span><b>어두워지지 않습니다.</b> 스크림이 없다는 점이 비모달과 모달을 가르는 가장 큰 차이입니다</span></li>
+            <li><b>다이얼로그 <em>dialog surface</em></b><span>모달보다 작고 그림자도 약하며, 화면 구석에 붙여 두는 경우가 많습니다</span></li>
+            <li><b>제목 줄 <em>title bar</em></b><span>무엇을 하는 다이얼로그인지 알려 주고, 끌어서 옮기는 손잡이 역할도 합니다</span></li>
+            <li><b>닫기 <em>close</em></b><span>비모달은 사용자가 닫을 때까지 계속 떠 있기 때문에 모달보다 닫기 버튼이 더 중요합니다</span></li>
+            <li><b>내용 <em>content</em></b><span>뒤쪽 화면을 보면서 쓰는 것이라 작고 단순하게 만듭니다</span></li>
+            <li><b>액션 영역 <em>actions</em></b><span>'다음 찾기'처럼 <b>여러 번 누르는</b> 버튼이 놓입니다. 모달에서는 버튼을 한 번 누르면 다이얼로그가 닫힙니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          모달의 해부도(<a href="modal.html#s5">모달 ⑤칸</a>)와 비교해 보면 <b>스크림이 없다</b>는 것 하나가
-          다릅니다. 그 하나가 포커스·스크롤·겹침 순서까지 전부 바꿉니다.</p>
+          모달의 해부도(<a href="modal.html#s5">모달 ⑤칸</a>)와 비교해 보면 <b>스크림이 없다</b>는 점만
+          다릅니다. 하지만 스크림이 없으면 뒤쪽 화면을 계속 쓸 수 있으므로, 포커스를 가두지 않고 배경 스크롤도 잠그지 않으며 다른 창과의 겹침 순서도 따로 정해야 합니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>다이얼로그를 쓰는 경우</h3>
             <ul>
-              <li>찾기·바꾸기처럼 <b>뒤쪽을 보면서</b> 하는 일</li>
-              <li>도구 창·속성 패널 — 열어 둔 채 여러 번 쓰는 것</li>
-              <li>길게 띄워 두고 참고하는 보조 정보</li>
+              <li>찾기·바꾸기처럼 <b>뒤쪽 화면을 보면서</b> 일할 때</li>
+              <li>도구 창이나 속성 패널처럼 열어 둔 채 여러 번 쓸 때</li>
+              <li>보조 정보를 오래 띄워 두고 참고할 때</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>다이얼로그를 쓰지 않는 경우</h3>
             <ul>
-              <li>꼭 답을 받아야 할 때 → 모달. 비모달은 무시하고 지나갈 수 있습니다</li>
-              <li>되돌릴 수 없는 일의 확인 → 모달</li>
-              <li>좁은 화면 — 뒤쪽을 볼 자리가 없어 비모달의 이점이 사라집니다</li>
-              <li>비모달을 여러 개 띄워 두고 겹침 순서를 안 정하기</li>
+              <li>꼭 답을 받아야 할 때. 비모달은 사용자가 무시하고 지나갈 수 있으니 모달을 씁니다</li>
+              <li>되돌릴 수 없는 작업을 확인받을 때. 이때도 모달을 씁니다</li>
+              <li>화면이 좁을 때. 다이얼로그를 띄우면 뒤쪽을 볼 자리가 남지 않아서 비모달로 둘 이유가 없습니다</li>
+              <li>비모달을 여러 개 띄우면서 겹침 순서를 정하지 않을 때</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 답을 꼭 받아야 하면 <a href="modal.html">모달</a>, 누른 것 옆에 붙어야 하면 <a href="popover.html">팝오버</a>, 옆에 길게 두고 쓰면 <a href="drawer.html">드로어</a>, 알려만 주면 <a href="toast.html">토스트</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>다이얼로그 대신 다른 것을 써야 하는 경우</b> — 답을 꼭 받아야 하면 <a href="modal.html">모달</a>, 누른 것 옆에 붙어야 하면 <a href="popover.html">팝오버</a>, 옆에 길게 두고 쓰면 <a href="drawer.html">드로어</a>, 알려만 주면 <a href="toast.html">토스트</a>.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div class="mini" role="img" aria-label="찾기 바꾸기 다이얼로그 재현"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div class="mini__pop" style="right:5px;top:12px;width:72px"><b style="font-size:8.5px;display:block;margin-bottom:3px">찾기 · 바꾸기</b><i>결제 ▸ 4곳</i><i>바꿀 말</i></div></div>
             </div>
-            <figcaption><b>찾기 · 바꾸기</b>비모달의 교과서. 뒤쪽 글이 보여야 쓸 수 있다</figcaption>
+            <figcaption><b>찾기 · 바꾸기</b>비모달을 쓰는 대표적인 예입니다. 찾은 글자를 뒤쪽 문서에서 확인해야 하므로 뒤쪽 글이 보여야 합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div class="mini" role="img" aria-label="서식 패널 재현"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div class="mini__pop" style="right:5px;top:10px;width:64px"><b style="font-size:8px;display:block;margin-bottom:3px">서식</b><i>굵게 · 기울임</i><i>글자 크기</i></div></div>
             </div>
-            <figcaption><b>도구 창</b>열어 둔 채 여러 번 쓴다. 닫으라고 조르지 않는다</figcaption>
+            <figcaption><b>도구 창</b>열어 둔 채 여러 번 쓰는 창이라, 사용자가 닫기 전에는 닫으라고 요구하지 않습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div class="mini" role="img" aria-label="모달 다이얼로그 재현"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div class="mini__scrim"><div class="mini__card"><b>저장하지 않고 나갈까요?</b><p>고친 내용이 사라집니다.</p><div class="mini__btns"><span class="mini__btn mini__btn--ghost">계속</span><span class="mini__btn mini__btn--danger">나가기</span></div></div></div></div>
             </div>
-            <figcaption><b>모달 다이얼로그</b>같은 부품의 다른 열기 방식. 이쪽은 답하기 전에는 못 지나간다</figcaption>
+            <figcaption><b>모달 다이얼로그</b>같은 부품을 다른 방식으로 연 것입니다. 모달은 답하기 전에는 뒤쪽 화면으로 돌아갈 수 없습니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">이 부품의 계약서</span></h2>
-        <p>같은 요소를 어떻게 여느냐만 다릅니다. 이 두 줄이 이 항목의 전부입니다.</p>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+        <p>모달과 비모달은 같은 <code>&lt;dialog&gt;</code> 요소를 어느 메서드로 여느냐만 다릅니다. 아래 코드의 <code>show()</code>와 <code>showModal()</code> 두 줄이 그 차이입니다.</p>
 <pre class="code">&lt;<span class="t">dialog</span> <span class="a">id</span>=<span class="s">"dlg"</span> <span class="a">aria-labelledby</span>=<span class="s">"t"</span>&gt;…&lt;/<span class="t">dialog</span>&gt;
 
-<span class="c">// 비모달 — 뒤를 막지 않는다. 포커스도 안 가둔다</span>
+<span class="c">// 비모달. 뒤를 막지 않고 포커스도 가두지 않는다</span>
 dlg.show();
 
-<span class="c">// 모달 — 뒤가 inert 가 되고 포커스가 갇힌다</span>
+<span class="c">// 모달. 뒤가 inert 가 되고 포커스가 안에 갇힌다</span>
 dlg.showModal();
 
 <span class="c">// 지금 어느 쪽으로 열려 있는지 물어볼 수 있다</span>
@@ -237,67 +237,67 @@ dlg.matches(<span class="s">':modal'</span>);   <span class="c">// showModal() �
 dialog.dlg <span class="a">{</span> <span class="t">position</span>: fixed; <span class="t">top</span>: 72px; <span class="t">right</span>: 20px; <span class="t">margin</span>: 0; <span class="a">}</span></pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td><kbd>Esc</kbd></td><td>양쪽 다 닫힌다. <code>&lt;dialog&gt;</code>가 해 준다</td></tr>
-            <tr><td><kbd>Tab</kbd></td><td><b>모달만</b> 갇힌다. 비모달은 뒤쪽 화면으로 이어진다</td></tr>
-            <tr><td>배경 스크롤</td><td>모달만 잠근다. 비모달은 그대로 둔다 — 그게 쓰는 이유다</td></tr>
-            <tr><td>열릴 때</td><td>포커스를 첫 입력칸으로. 비모달은 뒤에서 하던 일이 있으니 더 조심한다</td></tr>
-            <tr><td>닫힐 때</td><td>포커스가 열었던 곳으로 돌아간다. 양쪽 다 직접 해 줘야 한다</td></tr>
+            <tr><td><kbd>Esc</kbd></td><td>모달과 비모달 모두 닫힙니다. <code>&lt;dialog&gt;</code> 요소가 알아서 처리합니다</td></tr>
+            <tr><td><kbd>Tab</kbd></td><td><b>모달에서만</b> 포커스가 안에 갇히고, 비모달에서는 뒤쪽 화면으로 이어집니다</td></tr>
+            <tr><td>배경 스크롤</td><td>모달일 때만 잠급니다. 비모달은 뒤쪽 화면을 쓰려고 띄우는 것이라 그대로 둡니다</td></tr>
+            <tr><td>열릴 때</td><td>포커스를 첫 입력 칸으로 옮깁니다. 비모달은 사용자가 뒤쪽에서 하던 일이 있으니 포커스를 옮길지 더 신중하게 정합니다</td></tr>
+            <tr><td>닫힐 때</td><td>포커스를 다이얼로그를 열었던 요소로 돌려보냅니다. 모달과 비모달 모두 이 처리를 직접 해야 합니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>show() = 비동기 · showModal() = 동기</th><td>비모달은 띄워 놓고 다른 일을 계속합니다. 모달은 답이 올 때까지 멈춥니다. <code>await</code> 를 붙이느냐 안 붙이느냐와 같은 선택입니다.</td></tr>
-            <tr><th>비모달 여럿 = 동시 세션</th><td>여러 개가 동시에 떠 있을 수 있어 <b>겹침 순서와 포커스 관리</b>가 필요합니다. 모달은 한 번에 하나라 그 고민이 없습니다.</td></tr>
-            <tr><th>상태가 뒤쪽과 묶여 있다</th><td>찾기 다이얼로그는 뒤쪽 문서를 계속 읽습니다. 다이얼로그를 띄우면서 뒤쪽을 얼려 버리면 쓸 수가 없습니다.</td></tr>
-            <tr><th>무시 가능 = 보장 없음</th><td>비모달은 사용자가 그냥 지나칠 수 있습니다. <b>반드시 처리돼야 하는 일은 담지 않습니다.</b></td></tr>
+            <tr><th>show() = 비동기 · showModal() = 동기</th><td>비모달은 띄워 놓고 다른 일을 계속하는 반면, 모달은 사용자의 답이 올 때까지 흐름을 멈춥니다. 비동기 호출에 <code>await</code>를 붙이느냐 붙이지 않느냐를 고르는 것과 같습니다.</td></tr>
+            <tr><th>비모달 여럿 = 동시 세션</th><td>비모달은 여러 개가 동시에 떠 있을 수 있어서 <b>겹침 순서와 포커스를 관리</b>해야 합니다. 모달은 한 번에 하나만 띄우므로 이런 관리가 필요 없습니다.</td></tr>
+            <tr><th>상태가 뒤쪽과 묶여 있다</th><td>찾기 다이얼로그는 뒤쪽 문서의 내용을 계속 읽어 와야 합니다. 그래서 다이얼로그를 띄우면서 뒤쪽 화면의 상태 갱신을 멈추면 찾기 기능이 동작하지 않습니다.</td></tr>
+            <tr><th>무시 가능 = 보장 없음</th><td>비모달은 사용자가 응답하지 않고 지나칠 수 있기 때문에 <b>반드시 처리돼야 하는 일은 비모달에 담지 않습니다.</b></td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p>모바일은 화면이 좁아 비모달 다이얼로그가 거의 없습니다. 그래서 모바일에서 '다이얼로그'라고 하면 사실상 모달을 뜻합니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>모바일은 화면이 좁아서 비모달 다이얼로그를 거의 쓰지 않습니다. 그래서 모바일에서 '다이얼로그'라고 하면 대개 모달을 뜻합니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span><code>&lt;dialog&gt;</code></span></header>
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="웹 비모달 다이얼로그 재현"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div class="mini__pop" style="right:5px;top:12px;width:70px"><b style="font-size:8.5px;display:block;margin-bottom:3px">찾기</b><i>결제 ▸ 4곳</i></div></div>
             </div>
-            <footer><b>다이얼로그</b> · 한 요소로 모달과 비모달을 둘 다 만듭니다. 웹에서만 이 구분이 또렷합니다.</footer>
+            <footer><b>다이얼로그</b> · <code>&lt;dialog&gt;</code> 요소 하나로 모달과 비모달을 모두 만듭니다. 모달과 비모달을 또렷하게 나누는 곳은 웹뿐입니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>Apple HIG</span></header>
             <div class="shot">
               <div class="phone" role="img" aria-label="iOS 얼럿 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen"><div class="ios-alert"><div class="ios-alert__box"><div><b>저장하지 않고 나갈까요?</b><p>고친 내용이 사라집니다.</p></div><div class="ios-alert__btns"><span>계속</span><span style="color:#ff453a">나가기</span></div></div></div></div></div>
             </div>
-            <footer><b>얼럿</b>(Alert) · <b>모달만</b> 있습니다. 비모달에 해당하는 것은 맥의 <b>패널</b>(panel)이고, iOS 에는 사실상 없습니다.</footer>
+            <footer><b>얼럿</b>(Alert) · <b>모달만</b> 있습니다. 비모달에 해당하는 것은 macOS의 <b>패널</b>(panel)이고, iOS에는 이에 해당하는 부품이 거의 없습니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>Material 3</span></header>
             <div class="shot">
               <div class="phone" role="img" aria-label="안드로이드 다이얼로그 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen"><div class="md-dialog"><div class="md-dialog__box"><b>저장하지 않고 나갈까요?</b><p>고친 내용이 사라집니다.</p><div class="md-dialog__btns"><span>계속</span><span class="filled">나가기</span></div></div></div></div></div>
             </div>
-            <footer><b>다이얼로그</b>(Dialog) · 기본이 모달입니다. 안 막는 것은 다이얼로그가 아니라 <b>바텀시트</b>나 <b>스낵바</b>로 풉니다.</footer>
+            <footer><b>다이얼로그</b>(Dialog) · 기본이 모달입니다. 뒤를 막지 않아야 하면 다이얼로그가 아니라 <b>바텀시트</b>나 <b>스낵바</b>를 씁니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — "다이얼로그 띄워 주세요"는 모바일에서 <b>모달</b>로 알아듣습니다. 뒤를 안 막는 것을 원한다면 그 말만으로는 전달되지 않습니다 — '뒤를 보면서 쓰는 창'이라고 역할로 말해야 합니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — 모바일에서는 "다이얼로그 띄워 주세요"라는 말을 <b>모달</b>을 띄워 달라는 뜻으로 알아듣습니다. 그래서 뒤를 막지 않는 창을 원한다면 '뒤쪽 화면을 보면서 쓰는 창'처럼 역할을 함께 말해야 합니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="modal.html"><b>모달</b><em>6부</em></a></li>
         <li><a href="sheet.html"><b>바텀시트</b><em>6부</em></a></li>
@@ -315,20 +315,20 @@ dialog.dlg <span class="a">{</span> <span class="t">position</span>: fixed; <spa
         <li><a href="coachmark.html"><b>코치마크</b><em>6부</em></a></li>
         <li><a href="fullscreen.html"><b>전체 화면 레이어</b><em>6부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><span class="na"><b>포커스 트랩</b><em>12부</em></span></li>
         <li><span class="na"><b>고도와 z-index</b><em>2부</em></span></li>
         <li><span class="na"><b>커맨드 팔레트</b><em>6부</em></span></li>
         <li><span class="na"><b>확인 요청의 수준</b><em>8부</em></span></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

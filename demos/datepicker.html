@@ -42,12 +42,12 @@
 </div>
 
 <p class="hint">
-  달력만 두면 <b>먼 날짜를 고를 때 몇 번이나 넘겨야</b> 합니다 —
-  데모가 지금 고른 날까지 <b>달을 몇 번 넘겨야 하는지</b>를 세서 적습니다.
-  그래서 <b>쳐서 넣는 칸</b>을 같이 두는 것이 거의 늘 낫습니다.<br>
-  <b>자주 쓰는 날 단추</b>(오늘 · 어제 · 지난주)는 대부분의 경우를 한 번에 끝냅니다.<br>
-  지난 정산 기간(11월 10일 이전)은 <b>흐리게 두고 막아야</b> 합니다 — 누를 수 있게 두면
-  고른 뒤에 '안 된다'는 말을 듣게 됩니다. 데모가 막힌 날 수를 셉니다.
+  달력만 두면 <b>먼 날짜를 고를 때 달을 몇 번이나 넘겨야</b> 합니다.
+  데모가 지금 고른 날까지 <b>달을 몇 번 넘겨야 하는지</b> 세어 적는데,
+  이 횟수를 보면 <b>쳐서 넣는 칸</b>을 함께 두는 편이 거의 언제나 낫다는 것을 알 수 있습니다.<br>
+  <b>자주 쓰는 날 단추</b>(오늘 · 어제 · 지난주)를 두면 대부분의 경우를 한 번에 고를 수 있습니다.<br>
+  지난 정산 기간(11월 10일 이전)은 <b>흐리게 두고 막아야</b> 합니다. 누를 수 있게 두면
+  사용자는 날짜를 고른 뒤에야 '안 된다'는 말을 듣게 됩니다. 데모는 막힌 날이 며칠인지도 셉니다.
 </p>
 
 <script>
@@ -98,8 +98,8 @@
     var rd = document.getElementById('read');
     rd.innerHTML = '고른 날 <b>' + ymd(sel) + '</b> · 보고 있는 달 <b>' + (view.getMonth() + 1) + '월</b>' +
       '<br>지금까지 달을 넘긴 횟수 <b>' + moves + '번</b>' +
-      (moves >= 3 ? ' <span class="warn">— 쳐서 넣는 쪽이 빠르다</span>' : '') +
-      '<br>막힌 날 <b>' + blocked + '일</b>' + (limit ? '' : ' <span class="warn">— 못 고르는 날도 눌린다</span>') +
+      (moves >= 3 ? ' <span class="warn">— 쳐서 넣는 쪽이 빠릅니다</span>' : '') +
+      '<br>막힌 날 <b>' + blocked + '일</b>' + (limit ? '' : ' <span class="warn">— 못 고르는 날도 눌립니다</span>') +
       '<br>쳐서 넣기 <b>' + (document.getElementById('typing').checked ? '된다' : '안 된다') + '</b>' +
       ' · 자주 쓰는 날 단추 <b>' + (document.getElementById('shortcut').checked ? '있다' : '없다') + '</b>';
     rd.dataset.sel = ymd(sel);
@@ -116,7 +116,7 @@
     sel = new Date(b.dataset.d);
     document.getElementById('typed').value = b.dataset.d;
     draw();
-    document.getElementById('log').innerHTML = '<b>' + b.dataset.d + '</b> 을 골랐다';
+    document.getElementById('log').innerHTML = '<b>' + b.dataset.d + '</b> 날짜를 골랐습니다';
   });
 
   document.getElementById('quick').addEventListener('click', function (e) {
@@ -128,15 +128,15 @@
     view = new Date(sel.getFullYear(), sel.getMonth(), 1);
     document.getElementById('typed').value = ymd(sel);
     draw();
-    document.getElementById('log').innerHTML = '<b>' + q.textContent + '</b> 으로 한 번에 골랐다';
+    document.getElementById('log').innerHTML = '<b>' + q.textContent + '</b> 단추로 한 번에 골랐습니다';
   });
 
   document.getElementById('typed').addEventListener('change', function () {
     var d = new Date(this.value);
-    if (isNaN(d)) { document.getElementById('log').innerHTML = '<span class="warn">날짜로 못 읽었다</span> — 2026-11-12 처럼 적는다'; return; }
+    if (isNaN(d)) { document.getElementById('log').innerHTML = '<span class="warn">날짜로 읽을 수 없습니다</span>. 2026-11-12 처럼 적어 주세요'; return; }
     sel = d; view = new Date(d.getFullYear(), d.getMonth(), 1);
     draw();
-    document.getElementById('log').innerHTML = '<b>쳐서</b> 넣었다 — 달을 안 넘겨도 된다';
+    document.getElementById('log').innerHTML = '<b>쳐서</b> 넣었습니다. 달을 넘기지 않아도 됩니다';
   });
 
   document.getElementById('prev').addEventListener('click', function () {

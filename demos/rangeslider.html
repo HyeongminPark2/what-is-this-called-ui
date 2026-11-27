@@ -47,13 +47,13 @@
 </div>
 
 <p class="hint">
-  범위 슬라이더는 <b>두 손잡이</b>가 한 줄에 있습니다. 손잡이를 서로 지나치게 두면
-  <b>최소가 최대보다 큰</b> 값이 만들어집니다 — 체크를 끄고 끌어 보면
-  데모가 <b>뒤집힌 상태</b>를 잡아 적습니다.<br>
-  슬라이더만으로는 <b>정확한 값</b>을 못 넣습니다. 눈금을 50만원으로 키우면
-  데모가 <b>넣을 수 있는 값의 가짓수</b>를 세서 보여 줍니다 —
-  숫자 칸은 <b>눈금에 없는 값</b>도 넣을 수 있습니다 — 그래서 같이 두는 편이 거의 늘 낫습니다.<br>
-  두 손잡이가 겹치면 <b>어느 것을 잡았는지</b> 알 수 없어, 키보드에서는 Tab 으로 갈라서 다룹니다.
+  범위 슬라이더에는 <b>두 손잡이</b>가 한 줄에 놓입니다. 두 손잡이가 서로 지나치게 두면
+  <b>최소가 최대보다 큰</b> 값이 만들어지는데, 체크를 끄고 손잡이를 끌어 보면
+  데모가 <b>뒤집힌 상태</b>를 잡아 적어 줍니다.<br>
+  슬라이더만으로는 <b>정확한 값</b>을 넣을 수 없습니다. 눈금을 50만원으로 키우면
+  데모가 <b>넣을 수 있는 값의 가짓수</b>를 세어 보여 줍니다.
+  숫자 칸은 <b>눈금에 없는 값</b>도 넣을 수 있기 때문에, 슬라이더와 함께 두는 편이 거의 언제나 낫습니다.<br>
+  두 손잡이가 겹치면 <b>어느 것을 잡았는지</b> 알 수 없으므로, 키보드에서는 Tab으로 두 손잡이를 하나씩 오가며 다룹니다.
 </p>
 
 <script>
@@ -88,12 +88,12 @@
     var exact = (a % step !== 0) || (b % step !== 0);
     var rd = document.getElementById('read');
     rd.innerHTML = '범위 <b>' + left + ' ~ ' + right + '만원</b>' +
-      (flipped ? ' <span class="warn">— 최소가 최대보다 크다</span>' : '') +
-      (exact ? ' <span style="color:var(--accent)">— 눈금에 없는 값이다</span>' : '') +
+      (flipped ? ' <span class="warn">— 최소가 최대보다 큽니다</span>' : '') +
+      (exact ? ' <span style="color:var(--accent)">— 눈금에 없는 값입니다</span>' : '') +
       '<br>눈금 <b>' + step + '만원</b> · 끌어서 넣을 수 있는 값 <b>' + choices + '가지</b>' +
-      (choices < 15 ? ' <span class="warn">— 끌어서는 원하는 값이 없을 수 있다</span>' : '') +
-      '<br>숫자 칸 <b>' + (document.getElementById('fields').checked ? '있다' : '없다') + '</b>' +
-      (document.getElementById('fields').checked ? '' : ' <span class="warn">— 정확한 값을 못 넣는다</span>') +
+      (choices < 15 ? ' <span class="warn">— 끌어서는 원하는 값이 없을 수도 있습니다</span>' : '') +
+      '<br>숫자 칸 <b>' + (document.getElementById('fields').checked ? '있음' : '없음') + '</b>' +
+      (document.getElementById('fields').checked ? '' : ' <span class="warn">— 정확한 값을 넣을 수 없습니다</span>') +
       (why ? '<br>' + why : '');
     rd.dataset.lo = String(a);
     rd.dataset.hi = String(b);
@@ -113,12 +113,12 @@
   ['lof', 'hif'].forEach(function (id, i) {
     document.getElementById(id).addEventListener('change', function () {
       var n = parseInt(this.value, 10);
-      if (isNaN(n)) { draw('<span class="warn">숫자가 아니다</span>'); return; }
+      if (isNaN(n)) { draw('<span class="warn">숫자가 아닙니다</span>'); return; }
       n = Math.max(MIN, Math.min(MAX, n));
       last = i === 0 ? 'lo' : 'hi';
       document.getElementById(last).value = String(n);
       draw('');
-      document.getElementById('log').innerHTML = '<b>숫자 칸</b>으로 정확히 넣었다';
+      document.getElementById('log').innerHTML = '<b>숫자 칸</b>으로 정확히 넣었습니다';
     });
   });
   ['cross', 'fields', 'step'].forEach(function (id) {

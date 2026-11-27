@@ -61,11 +61,11 @@
 </div>
 
 <p class="hint">
-  색을 바꿔 보세요 — <b>토큰 하나</b>를 고치면 부품도 패턴도 따라옵니다.
-  이게 디자인 시스템이 하는 일의 거의 전부입니다.<br>
-  <b>색을 부품마다 박아 두기</b>를 켜면 토큰과의 연결이 끊깁니다. 색을 바꿔도
-  <b>몇 개는 안 따라오고</b>, 어느 것이 안 따라왔는지는 <b>눈으로 찾아야</b> 합니다.
-  부품이 수백 개가 되면 이 차이가 몇 주가 됩니다.
+  색을 바꿔 보세요. <b>토큰 하나</b>를 고치면 그 토큰을 참조하는 부품과 패턴의 색이 함께 바뀌는데,
+  디자인 시스템이 하는 일은 대부분 이것입니다.<br>
+  <b>색을 부품마다 박아 두기</b>를 켜면 토큰과의 연결이 끊깁니다. 그러면 색을 바꿔도
+  <b>몇 개는 바뀌지 않고</b>, 어느 것이 바뀌지 않았는지는 <b>눈으로 하나씩 찾아야</b> 합니다.
+  부품이 수백 개로 늘면 끊긴 곳을 찾아 고치는 데만 몇 주가 걸립니다.
 </p>
 
 <script>
@@ -98,8 +98,8 @@
     var stuckN = PARTS.filter(function (id) { return document.getElementById(id).dataset.stuck === '1'; }).length;
     var v = document.getElementById('verdict');
     v.innerHTML = stuckN
-      ? '<span class="warn">토큰을 안 따라오는 부품 ' + stuckN + '개</span> — 색을 바꿔도 그대로다. 어느 것인지는 눈으로 찾아야 한다'
-      : '부품 <b>' + PARTS.length + '개</b>와 패턴이 <b>토큰 하나</b>를 따라간다';
+      ? '<span class="warn">토큰을 안 따라오는 부품 ' + stuckN + '개</span> — 색을 바꿔도 그대로입니다. 어느 부품인지는 눈으로 찾아야 합니다'
+      : '부품 <b>' + PARTS.length + '개</b>와 패턴이 모두 <b>토큰 하나</b>를 따라 바뀝니다';
     v.dataset.stuck = String(stuckN);
   }
 

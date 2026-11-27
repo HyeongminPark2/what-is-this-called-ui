@@ -77,7 +77,7 @@ const page = `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>색인 — 이름표</title>
-<meta name="description" content="이름표에 실린 ${rows.length}개 항목을 가나다순으로 모은 색인. 한국어 이름과 영어 이름으로 찾을 수 있다.">
+<meta name="description" content="이름표에 실린 ${rows.length}개 항목을 가나다순으로 모은 색인입니다. 한국어 이름과 영어 이름으로 찾을 수 있습니다.">
 <link rel="stylesheet" href="assets/base.css">
 <link rel="stylesheet" href="assets/card.css">
 <link rel="stylesheet" href="assets/demo.css">
@@ -99,7 +99,7 @@ const page = `<!doctype html>
     <p class="crumb"><a href="index.html">이름표</a> › 색인</p>
     <h1>색인</h1>
     <p class="en">Index</p>
-    <p class="lede" style="margin-top:var(--s3)">${rows.length}개 항목을 가나다순으로. <b>이름을 이미 아는 사람</b>을 위한 뒷문입니다 — 이름을 모르면 <a href="index.html#map">화면 지도</a>로 들어가세요.</p>
+    <p class="lede" style="margin-top:var(--s3)">${rows.length}개 항목을 가나다순으로 모았습니다. <b>이름을 이미 아는 사람</b>이 바로 찾아가는 곳이라서, 이름을 모르면 <a href="index.html#map">화면 지도</a>에서 생김새로 찾는 편이 빠릅니다.</p>
   </div>
 
   <div class="ix__bar">

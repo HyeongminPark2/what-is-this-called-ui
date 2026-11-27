@@ -36,11 +36,11 @@
 </div>
 
 <p class="hint">
-  화면 세 장을 <b>이어 둔</b> 것이 프로토타입입니다. 눌리는 자리(핫스팟)만 다음 장으로 가고,
-  <b>나머지는 전부 그림</b>입니다.<br>
-  <b>이어 둔 자리 보이기</b>를 끄고 아무 데나 눌러 보세요 — 대부분 아무 일도 안 일어납니다.
-  <b>진짜 데이터처럼 보이기</b>를 켜면 더 그럴듯해지는데, 그럴수록
-  <b>“거의 다 된 거죠?”</b>라는 말이 돌아옵니다. 눌린다고 만들어진 것이 아닙니다.
+  화면 세 장을 서로 <b>이어 둔</b> 것이 프로토타입입니다. 눌리는 자리(핫스팟)를 누를 때만 다음 장으로 넘어가고,
+  <b>나머지는 모두 그림</b>입니다.<br>
+  <b>이어 둔 자리 보이기</b>를 끄고 아무 데나 눌러 보세요. 대부분은 눌러도 아무 일도 일어나지 않습니다.
+  <b>진짜 데이터처럼 보이기</b>를 켜면 화면이 더 그럴듯해지는데, 그럴수록 보는 사람에게서
+  <b>“거의 다 된 거죠?”</b>라는 말이 돌아옵니다. 하지만 눌린다고 해서 만들어진 것은 아닙니다.
 </p>
 
 <script>
@@ -93,7 +93,7 @@
     var h = e.target.closest('.hotspot');
     if (h) {
       cur = +h.dataset.go; misses = 0; draw();
-      document.getElementById('log').innerHTML = '<b>' + screens[cur] + '</b> 으로 이어 뒀다';
+      document.getElementById('log').innerHTML = '<b>' + screens[cur] + '</b> 화면으로 이어 둔 자리라서 넘어갔습니다';
       return;
     }
     misses++;
@@ -107,8 +107,8 @@
       draw();
       if (id === 'real') {
         document.getElementById('log').innerHTML = this.checked
-          ? '진짜 데이터처럼 보인다 — <span class="warn">“거의 다 된 거죠?”가 나오는 지점</span>'
-          : 'Lorem ipsum 으로 돌아갔다 — <b>아직 그림이라는 게 보인다</b>';
+          ? '진짜 데이터처럼 보입니다. <span class="warn">“거의 다 된 거죠?”라는 말은 이때 나옵니다</span>'
+          : 'Lorem ipsum으로 돌아갔습니다. <b>아직 그림이라는 것이 드러납니다</b>';
       }
     });
   });

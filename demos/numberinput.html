@@ -40,14 +40,14 @@
 </div>
 
 <p class="hint">
-  <code>type="number"</code> 는 쉬워 보이지만 함정이 많습니다 —
-  <b>휠을 굴리면 값이 바뀌고</b>, 쉼표를 넣으면 값이 <b>빈 문자열</b>이 되며,
-  브라우저마다 화살표가 다릅니다. 데모가 지금 칸의 <b>읽히는 값</b>을 그대로 적습니다.<br>
-  그래서 돈·전화번호처럼 <b>세어서 쓰지 않는 숫자</b>는
-  <code>text</code> 에 <code>inputmode="numeric"</code> 을 두는 편이 안전합니다 —
-  폰에서 숫자 자판이 뜨는 것은 똑같습니다.<br>
-  <b>쉼표</b>는 읽기엔 좋지만 칸 안에 두면 다루기 번거롭습니다.
-  <b>단위</b>는 칸 밖에 두어야 값만 깨끗하게 남습니다.
+  <code>type="number"</code>는 쉬워 보이지만 문제가 많습니다.
+  칸 위에서 <b>휠을 굴리면 값이 바뀌고</b>, 쉼표를 넣으면 값이 <b>빈 문자열</b>이 되며,
+  화살표 모양도 브라우저마다 다릅니다. 데모가 지금 칸에서 <b>읽히는 값</b>을 그대로 적어 줍니다.<br>
+  그래서 돈이나 전화번호처럼 <b>세어서 쓰지 않는 숫자</b>는
+  <code>text</code> 칸에 <code>inputmode="numeric"</code>을 다는 편이 안전합니다.
+  이렇게 해도 폰에서는 똑같이 숫자 자판이 뜹니다.<br>
+  <b>쉼표</b>는 읽기에는 좋지만 칸 안에 넣으면 값을 다루기가 번거로워집니다.
+  <b>단위</b>는 칸 밖에 두어야 칸에 숫자 값만 남습니다.
 </p>
 
 <script>
@@ -85,16 +85,16 @@
     var unitInside = !document.getElementById('unit').checked;
     document.getElementById('u').style.display = unitInside ? 'none' : '';
     document.getElementById('hint2').innerHTML = k === 'number'
-      ? '<span class="warn">휠을 굴리면 값이 바뀐다</span> · 쉼표를 넣으면 값이 비어 버린다'
-      : '폰에서 <b>숫자 자판</b>이 뜬다 · 쉼표를 넣어도 값이 안 사라진다';
+      ? '<span class="warn">휠을 굴리면 값이 바뀝니다</span> · 쉼표를 넣으면 값이 비어 버립니다'
+      : '폰에서 <b>숫자 자판</b>이 뜹니다 · 쉼표를 넣어도 값이 사라지지 않습니다';
 
     var rd = document.getElementById('read');
     rd.innerHTML = '칸 종류 <b>' + (k === 'number' ? 'type="number"' : 'text + inputmode') + '</b>' +
       '<br>칸에 보이는 글자 <b>‘' + shown + '’</b>' +
       '<br>숫자로 읽은 값 <b>' + (parsed || '(없음)') + '</b>' +
-      (k === 'number' && shown === '' && parsed === '' ? ' <span class="warn">— 쉼표를 넣으면 값이 사라진다</span>' : '') +
+      (k === 'number' && shown === '' && parsed === '' ? ' <span class="warn">— 쉼표를 넣으면 값이 사라집니다</span>' : '') +
       '<br>단위를 <b>' + (unitInside ? '칸 안에' : '칸 밖에') + '</b>' +
-      (unitInside ? ' <span class="warn">— 값과 섞인다</span>' : '') +
+      (unitInside ? ' <span class="warn">— 단위가 값과 섞입니다</span>' : '') +
       (why ? '<br>' + why : '');
     rd.dataset.kind = k;
     rd.dataset.shown = shown;
@@ -116,7 +116,7 @@
     el.addEventListener('wheel', function () {
       if (this.type === 'number') {
         document.getElementById('log').innerHTML =
-          '<span class="warn">휠을 굴려 값이 바뀌었다</span> — 스크롤하다 숫자가 틀어진다';
+          '<span class="warn">휠을 굴려서 값이 바뀌었습니다</span> — 화면을 스크롤하다가 숫자가 바뀔 수 있습니다';
         setTimeout(function () { draw(''); }, 10);
       }
     });

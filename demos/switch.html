@@ -35,7 +35,7 @@
       <button class="sw__btn" id="s2" role="switch" aria-checked="false" aria-label="주간 요약"></button>
     </div>
     <div class="sw">
-      <span class="tx"><b>제품 소식</b><span>이 줄은 서버가 거절합니다 — 되돌아갑니다</span></span>
+      <span class="tx"><b>제품 소식</b><span>이 줄은 서버가 거절해서 원래대로 되돌아갑니다</span></span>
       <span class="sw__state" data-for="s3">끔</span>
       <button class="sw__btn" id="s3" role="switch" aria-checked="false" data-fail="1" aria-label="제품 소식"></button>
     </div>
@@ -56,10 +56,10 @@
 </div>
 
 <p class="hint">
-  <b>같은 설정을 두 방식으로 뒀습니다.</b> 위는 누르는 즉시 적용되고 저장 버튼이 없습니다.
-  아래는 바꿔도 아무 일이 안 일어나고 <b>저장</b>을 눌러야 합니다.
-  둘을 한 화면에 섞으면 사용자는 무엇이 저장됐는지 알 수 없습니다 — 그래서 <b>하나만 고르는 것</b>이 규칙입니다.<br>
-  세 번째 스위치는 서버가 거절합니다. <b>되돌아가고 이유를 알려 줍니다</b> — 즉시 적용의 값은 여기서 치릅니다.
+  <b>같은 설정을 두 방식으로 만들어 두었습니다.</b> 위쪽 스위치는 누르는 즉시 적용되고 저장 버튼이 없습니다.
+  반면 아래쪽 체크박스는 바꿔도 아무 일이 일어나지 않고 <b>저장</b>을 눌러야 적용됩니다.
+  두 방식을 한 화면에 섞으면 사용자는 무엇이 이미 저장됐는지 알 수 없으므로, 화면마다 <b>한 가지 방식만 쓰는 것</b>이 규칙입니다.<br>
+  세 번째 스위치는 서버가 요청을 거절하기 때문에 <b>원래대로 되돌아가고 이유를 알려 줍니다</b>. 즉시 적용 방식을 쓰려면 이렇게 실패했을 때의 처리까지 만들어야 합니다.
 </p>
 
 <div class="tst-wrap" id="toasts" role="status" aria-live="polite"></div>
@@ -84,7 +84,7 @@
         toast('바꾸지 못해 되돌렸습니다');
       }, 600);
     });
-    // 스페이스·엔터는 button 이라 공짜로 된다
+    // button 요소라서 스페이스와 엔터가 따로 만들지 않아도 동작한다
   });
 
   function label(btn) {

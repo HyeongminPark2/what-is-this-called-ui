@@ -42,19 +42,19 @@
   <section>
     <h4>입력용 — 내가 주는 점수</h4>
     <div class="rate-input" id="input" role="radiogroup" aria-label="이 상품에 점수 주기"></div>
-    <p class="res" id="mine">아직 안 줬습니다. <kbd>←</kbd><kbd>→</kbd>로도 고를 수 있습니다.</p>
+    <p class="res" id="mine">아직 점수를 주지 않았습니다. <kbd>←</kbd><kbd>→</kbd>로도 고를 수 있습니다.</p>
   </section>
 </div>
 
 <p class="hint">
-  별점은 <b>점수 하나를 별 다섯 개로</b> 보여 주는 표시입니다. 읽기용과 입력용이 생김새는 같은데
-  <b>완전히 다른 부품</b>입니다 — 읽기용은 그림(<code>role="img"</code>)이고,
-  입력용은 <b>라디오 그룹</b>이라 하나만 고르고 화살표로 움직입니다.<br>
-  평균은 <b>반올림하지 않습니다.</b> 4.3을 별 넷으로 그리면 4.0과 4.4가 같아 보입니다.
-  별 안쪽을 <b>86%만 칠하는</b> 쪽이 정확합니다.<br>
-  <b>숫자를 함께 적습니다.</b> 별만 있으면 4.3인지 4.5인지 알 수 없고, 색이 안 보이는 사람에게는
-  아무 뜻도 아닙니다. <b>리뷰 개수도 같이 적습니다</b> — 별 다섯 개인데 리뷰가 1개인 것과
-  별 넷에 1,284개인 것은 전혀 다른 이야기입니다.
+  별점은 <b>점수 하나를 별 다섯 개로</b> 보여 주는 표시입니다. 읽기용과 입력용은 생김새는 같지만
+  <b>완전히 다른 부품</b>입니다. 읽기용은 그림 하나(<code>role="img"</code>)이고,
+  입력용은 <b>라디오 그룹</b>이라서 하나만 고를 수 있고 화살표 키로 움직입니다.<br>
+  평균은 <b>반올림하지 않습니다.</b> 4.3을 별 넷으로 그리면 4.0과 4.4가 똑같이 보이기 때문에,
+  별 다섯 개 너비의 <b>86%만 칠하는</b> 쪽이 정확합니다.<br>
+  별 옆에는 <b>숫자를 함께 적습니다.</b> 별만 있으면 4.3인지 4.5인지 알 수 없고, 색을 구별하지 못하는 사람은
+  칠한 별과 빈 별을 가를 수 없습니다. <b>리뷰 개수도 같이 적는데</b>, 별 다섯 개에 리뷰가 1개인 상품과
+  별 넷에 리뷰가 1,284개인 상품은 점수를 믿을 수 있는 정도가 크게 다르기 때문입니다.
 </p>
 
 <script>
@@ -87,8 +87,8 @@
         'aria-label="' + i + '점 — ' + WORDS[i] + '" tabindex="' + (i === (mine || 1) ? '0' : '-1') + '" ' +
         'data-v="' + i + '" class="' + (i <= mine ? 'on' : '') + '">★</button>';
     }).join('');
-    msg.innerHTML = mine ? '<b>' + mine + '점</b> — ' + WORDS[mine] + ' <button type="button" class="ui-btn ui-btn--ghost" id="clr" style="min-height:28px;padding:4px 9px;font-size:12px;margin-left:6px">지우기</button>'
-                         : '아직 안 줬습니다. <kbd>←</kbd><kbd>→</kbd>로도 고를 수 있습니다.';
+    msg.innerHTML = mine ? '<b>' + mine + '점</b>(' + WORDS[mine] + ') <button type="button" class="ui-btn ui-btn--ghost" id="clr" style="min-height:28px;padding:4px 9px;font-size:12px;margin-left:6px">지우기</button>'
+                         : '아직 점수를 주지 않았습니다. <kbd>←</kbd><kbd>→</kbd>로도 고를 수 있습니다.';
     var c = document.getElementById('clr');
     if (c) c.addEventListener('click', function () { mine = 0; drawInput(); });
   }

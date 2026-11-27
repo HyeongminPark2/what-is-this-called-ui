@@ -39,13 +39,13 @@
 </div>
 
 <p class="hint">
-  셋은 전부 '못 고친다'로 보이지만 <b>하는 일이 다릅니다</b>.
-  '<b>Tab 으로 훑어보기</b>'를 누르면 초점이 몇 군데 멈추는지 세 줍니다 —
-  <code>disabled</code> 는 <b>건너뜁니다</b>. 복사도 안 되고 소리로 읽히지도 않습니다.<br>
-  '<b>보내 보기</b>'는 더 중요합니다 — <code>disabled</code> 인 칸은 <b>폼에 안 실립니다</b>.
-  사업자번호를 못 고치게 하려고 <code>disabled</code> 를 걸었는데 <b>값이 안 가는</b> 사고가 여기서 납니다.
-  <code>readonly</code> 는 <b>읽히고 복사되고 실립니다</b>.<br>
-  <code>aria-disabled</code> 는 <b>눌리지만 안 먹는</b> 쪽입니다 — 왜 안 되는지 말해 줄 수 있습니다.
+  세 방법 모두 칸을 고칠 수 없게 보이지만 <b>실제로 하는 일은 다릅니다</b>.
+  '<b>Tab 으로 훑어보기</b>'를 누르면 초점이 몇 군데에 멈추는지 세어 주는데,
+  <code>disabled</code>인 칸은 초점이 <b>건너뜁니다</b>. 그래서 복사도 안 되고 화면 낭독기로 읽히지도 않습니다.<br>
+  '<b>보내 보기</b>'로 확인할 동작은 더 중요합니다. <code>disabled</code>인 칸은 <b>폼을 보낼 때 값이 실리지 않습니다</b>.
+  사업자번호를 못 고치게 하려고 <code>disabled</code>를 걸었다가 <b>값이 서버로 가지 않는</b> 문제가 이 동작 때문에 생깁니다.
+  반면 <code>readonly</code>인 칸은 <b>읽히고, 복사되고, 폼에도 실립니다</b>.<br>
+  <code>aria-disabled</code>는 <b>눌러도 동작하지 않는</b> 방식이라서, 사용자가 눌렀을 때 왜 안 되는지 알려 줄 수 있습니다.
 </p>
 
 <script>
@@ -66,7 +66,7 @@
 
     document.getElementById('why').innerHTML = ({
       disabled: '사업자번호·계좌는 <b>심사 뒤에는 못 고칩니다</b>',
-      readonly: '사업자번호·계좌는 <b>심사 뒤에는 못 고칩니다</b> — 복사는 됩니다',
+      readonly: '사업자번호·계좌는 <b>심사 뒤에는 못 고칩니다</b>. 복사는 됩니다',
       aria: '사업자번호·계좌는 <b>고객센터를 거쳐야</b> 바꿀 수 있습니다'
     }[k]);
 
@@ -75,10 +75,10 @@
     var submitted = FIELDS.filter(function (id) { return !document.getElementById(id).disabled; }).length;
     rd.innerHTML = '지금 <b>' + ({ disabled: 'disabled', readonly: 'readonly', aria: 'aria-disabled' }[k]) + '</b>' +
       '<br>초점을 받을 수 있는 칸 <b>' + focusable + ' / 3</b>' +
-      (focusable < 3 ? ' <span class="warn">— 건너뛴다</span>' : '') +
+      (focusable < 3 ? ' <span class="warn">— 초점이 건너뜁니다</span>' : '') +
       '<br>보낼 때 실리는 칸 <b>' + submitted + ' / 3</b>' +
-      (submitted < 3 ? ' <span class="warn">— 값이 서버로 안 간다</span>' : '') +
-      '<br>왜 못 고치는지 <b>' + (k === 'aria' ? '적혀 있다' : '적혀 있다') + '</b>' +
+      (submitted < 3 ? ' <span class="warn">— 값이 서버로 가지 않습니다</span>' : '') +
+      '<br>왜 못 고치는지 <b>' + (k === 'aria' ? '적혀 있습니다' : '적혀 있습니다') + '</b>' +
       (why ? '<br>' + why : '');
     rd.dataset.kind = k;
     rd.dataset.focusable = String(focusable);
@@ -91,7 +91,7 @@
     var seen = [], i = 0;
     (function step() {
       if (i >= els.length) {
-        document.getElementById('log').innerHTML = 'Tab 이 <b>' + seen.length + '번</b> 멈췄다 — ' + seen.join(' → ');
+        document.getElementById('log').innerHTML = 'Tab이 <b>' + seen.length + '번</b> 멈췄습니다 — ' + seen.join(' → ');
         document.getElementById('read').dataset.seen = String(seen.length);
         return;
       }
@@ -107,7 +107,7 @@
       .map(function (id) { return document.getElementById(id).value; });
     document.getElementById('log').innerHTML = '보낸 값 <b>' + sent.length + '개</b> — ' +
       sent.map(function (v) { return '‘' + v + '’'; }).join(', ') +
-      (sent.length < 3 ? ' <span class="warn">· 사업자번호·계좌가 빠졌다</span>' : '');
+      (sent.length < 3 ? ' <span class="warn">· 사업자번호·계좌가 빠졌습니다</span>' : '');
     document.getElementById('read').dataset.sent = String(sent.length);
   });
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>종횡비 — 이름표</title>
-<meta name="description" content="폭이 정해지면 높이가 따라오게 하는 값. 비를 유지하는 쓸모보다 자리를 미리 잡는 쓸모가 크다.">
+<meta name="description" content="폭이 정해지면 높이가 따라오게 하는 종횡비를 다루는 항목입니다. 비를 유지하는 쓸모보다 자리를 미리 잡는 쓸모가 더 큽니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">1부 뼈대</a> › 종횡비</p>
     <h1>종횡비</h1>
     <p class="en">Aspect ratio</p>
-    <p class="lede" style="margin-top:var(--s3)">폭이 정해지면 <b>높이가 따라오게</b> 하는 값. 비를 지키는 것보다 <b>자리를 미리 잡는</b> 쓸모가 큽니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">종횡비는 폭이 정해지면 그 비에 맞춰 <b>높이가 따라오게</b> 하는 값입니다. 실무에서는 비를 지키는 것보다 그림이 오기 전에 <b>자리를 미리 잡는</b> 데 더 쓸모가 있습니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,28 +50,28 @@
           <iframe src="../demos/aspectratio.html" title="종횡비 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>폭이 서로 다른 세 상자가 <b>같은 비</b>를 지킵니다 — 아래에 실제로 잰 값이 나옵니다.<br>
-          <b>비를 안 정하고 높이만 주기</b>를 켜면 폭마다 비가 달라집니다. 반응형에서 바로 드러나는 차이입니다.</p>
+          <p>폭이 서로 다른 세 상자가 <b>같은 비</b>를 유지하는지, 아래에 실제로 잰 값이 나옵니다.<br>
+          <b>비를 안 정하고 높이만 주기</b>를 켜면 폭마다 비가 달라집니다. 화면 폭에 따라 칸 폭이 바뀌는 반응형 화면에서 바로 드러나는 차이입니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>종횡비, 가로세로비, 비율</td></tr>
             <tr><th>영어</th><td>aspect ratio, intrinsic ratio</td></tr>
-            <tr><th>같이 쓰는 말</th><td>CSS 속성 이름이 그대로 <code>aspect-ratio</code>입니다. 이 속성이 없던 시절 <code>padding-top: 56.25%</code>로 흉내 내던 것을 <b>패딩 트릭</b>이라 불렀습니다. 안을 어떻게 채울지는 <code>object-fit</code>이고, <b>cover</b>는 잘라 채우고 <b>contain</b>은 다 보이게 넣습니다. 그림이 늦게 와 글이 밀리는 것을 <b>레이아웃 시프트</b>(CLS)라 합니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>해상도</b> — 화소 수와 <b>비</b>는 다릅니다. 1920×1080 과 1280×720 은 같은 16:9 입니다.<br><b>크롭</b> — 잘라내는 것은 <code>object-fit</code>의 일입니다. 비는 <b>상자의 모양</b>입니다.<br><b>스케일</b> — 키우는 것과 <b>비를 유지하는</b> 것은 다릅니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>CSS 속성 이름도 그대로 <code>aspect-ratio</code>입니다. 이 속성이 없던 시절에는 <code>padding-top: 56.25%</code>로 비를 흉내 냈는데, 이 방법을 <b>패딩 트릭</b>이라고 불렀습니다. 상자 안을 어떻게 채울지는 <code>object-fit</code>으로 정하며, <b>cover</b>는 넘치는 부분을 잘라 내며 채우고 <b>contain</b>은 그림 전체가 보이게 넣습니다. 그림이 늦게 도착해 글이 밀리는 현상은 <b>레이아웃 시프트</b>(CLS)라고 합니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>해상도</b> — 화소 수와 <b>비</b>는 다릅니다. 예를 들어 1920×1080과 1280×720은 화소 수가 다르지만 비는 똑같이 16:9입니다.<br><b>크롭</b> — 그림을 잘라 내는 것은 <code>object-fit</code>이 하는 일이고, 비는 <b>상자의 모양</b>을 정합니다.<br><b>스케일</b> — 크기를 키우는 것과 <b>비를 유지하는</b> 것은 다른 일입니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>뼈대는 눈에 안 보이지만 <b>모든 화면이 그 위에</b> 섭니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>뼈대는 눈에 보이지 않지만 <b>모든 화면의 배치</b>를 정합니다. 아래 네 가지를 물어 보면 서로 갈립니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>무엇을 정하나</th><th>방향</th><th>넘치면</th><th>누가 값을 정하나</th></tr></thead>
@@ -80,21 +80,21 @@
             <tr><td>플렉스</td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나온다</td><td>나 + 내용</td></tr>
             <tr><td>그리드</td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗는다</td><td>나 + 내용</td></tr>
             <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>나</td></tr>
-            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이게 그 답이다</b></td><td>나</td></tr>
+            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목이 정한다</b></td><td>나</td></tr>
             <tr><td>스티키</td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 간다</td><td>나</td></tr>
             <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남는다</td><td>나</td></tr>
-            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 안 눌린다</td><td><b>OS 가</b></td></tr>
+            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 안 눌린다</td><td><b>OS가</b></td></tr>
             <tr><td>포지션</td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 안 차지한다</td><td>기준이 되는 조상</td></tr>
             <tr class="me"><td><b>종횡비</b></td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안이 잘린다</td><td>비를 적은 쪽</td></tr>
             <tr><td>스크롤 동작</td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥까지 밀린다</td><td>굴리는 상자</td></tr>
             <tr><td>크기 정하기</td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나간다</td><td>내용 또는 적은 값</td></tr>
             <tr><td>여백 붕괴</td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어든다</td><td>큰 쪽 하나</td></tr>
-            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab 이 어긋난다</td><td>마크업 순서</td></tr>
+            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab이 어긋난다</td><td>마크업 순서</td></tr>
           </tbody>
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — <b>그림 자리에는 거의 늘 비를 적어 두세요.</b> 그림이 늦게 와도 글이 밀리지 않습니다.</p>
+          <p><b>종횡비를 한 줄로 정리하면</b> — <b>그림이 들어갈 자리에는 거의 항상 비를 적어 두세요.</b> 그러면 그림이 늦게 도착해도 글이 밀리지 않습니다.</p>
         </div>
       </section>
 
@@ -105,46 +105,46 @@
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="width:100%;aspect-ratio:16/9;border:1px solid var(--accent);border-radius:5px;background:var(--accent-soft);display:grid;place-items:center;font-family:var(--mono);font-size:9.5px;color:var(--accent)">16 / 9</div><span style="font-size:8.5px;color:var(--fg-muted)">영상·히어로</span></div>
             </div>
-            <figcaption>16 : 9<span><b>가장 흔한</b> 가로형</span></figcaption>
+            <figcaption>16 : 9<span><b>가장 흔한</b> 가로형 비입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="width:100%;aspect-ratio:4/3;border:1px solid var(--accent);border-radius:5px;background:var(--accent-soft);display:grid;place-items:center;font-family:var(--mono);font-size:9.5px;color:var(--accent)">4 / 3</div><span style="font-size:8.5px;color:var(--fg-muted)">옛 사진</span></div>
             </div>
-            <figcaption>4 : 3<span>사진·썸네일</span></figcaption>
+            <figcaption>4 : 3<span>사진과 썸네일에 씁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="width:100%;aspect-ratio:1/1;border:1px solid var(--accent);border-radius:5px;background:var(--accent-soft);display:grid;place-items:center;font-family:var(--mono);font-size:9.5px;color:var(--accent)">1 / 1</div><span style="font-size:8.5px;color:var(--fg-muted)">아바타·상품</span></div>
             </div>
-            <figcaption>1 : 1<span><b>정사각.</b> 목록에서 잘 선다</span></figcaption>
+            <figcaption>1 : 1<span><b>정사각형</b>이라서 목록에서 줄이 가지런히 맞습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="width:100%;aspect-ratio:3/4;border:1px solid var(--accent);border-radius:5px;background:var(--accent-soft);display:grid;place-items:center;font-family:var(--mono);font-size:9.5px;color:var(--accent)">3 / 4</div><span style="font-size:8.5px;color:var(--fg-muted)">세로 사진</span></div>
             </div>
-            <figcaption>3 : 4<span>폰에서 찍은 사진</span></figcaption>
+            <figcaption>3 : 4<span>폰에서 세로로 찍은 사진의 비입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="width:100%;aspect-ratio:16/9;border:1px solid var(--accent);border-radius:5px;background:var(--ink-050);display:grid;place-items:center;font-family:var(--mono);font-size:9.5px;color:var(--accent)">자리만 잡아 둠</div><span style="font-size:8.5px;color:var(--fg-muted)">그림이 오기 전</span></div>
             </div>
-            <figcaption>오기 전<span><b>자리를 미리</b> 잡아 둔다</span></figcaption>
+            <figcaption>오기 전<span>그림이 오기 전에 <b>자리를 미리</b> 잡아 둡니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="width:100%;aspect-ratio:16/9;border:1px solid var(--danger);border-radius:5px;background:color-mix(in srgb, var(--danger) 10%, transparent);display:grid;place-items:center;font-family:var(--mono);font-size:9.5px;color:var(--danger)">높이가 따로 박힘</div><span style="font-size:8.5px;color:var(--fg-muted)">비가 무시된다</span></div>
             </div>
-            <figcaption>높이가 박히면<span><b>비가 안 먹는다</b></span></figcaption>
+            <figcaption>높이가 박히면<span>높이가 따로 정해져 있으면 <b>비가 적용되지 않습니다</b></span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="종횡비의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="종횡비의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">aspect-ratio: 16 / 9 — 폭이 정해지면 높이가 따라온다</div>
@@ -158,76 +158,76 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>비 <em>16 / 9</em></b><span>폭이 정해지면 <b>높이가 따라온다</b></span></li>
-            <li><b>반응형 <em>비가 유지된다</em></b><span>칸 폭이 바뀌어도 <b>모양이 같다</b></span></li>
-            <li><b>자리 잡기 <em>오기 전에</em></b><span>그림이 늦게 와도 <b>글이 안 밀린다</b></span></li>
-            <li><b>채우기 <em>object-fit: cover</em></b><span><b>잘라서</b> 채운다. contain 은 다 보이게</span></li>
-            <li><b><code>&lt;img&gt;</code> <em>width · height 속성</em></b><span>속성만 적어도 <b>비가 생긴다</b></span></li>
-            <li><b>안 먹을 때 <em>높이가 따로 박힘</em></b><span><code>height</code>가 있으면 <b>비가 진다</b></span></li>
+            <li><b>비 <em>16 / 9</em></b><span>폭이 정해지면 <b>높이가 따라옵니다</b></span></li>
+            <li><b>반응형 <em>비가 유지된다</em></b><span>칸 폭이 바뀌어도 <b>모양이 같습니다</b></span></li>
+            <li><b>자리 잡기 <em>오기 전에</em></b><span>그림이 늦게 와도 <b>글이 밀리지 않습니다</b></span></li>
+            <li><b>채우기 <em>object-fit: cover</em></b><span>넘치는 부분을 <b>잘라서</b> 채웁니다. contain은 그림 전체가 보이게 넣습니다</span></li>
+            <li><b><code>&lt;img&gt;</code> <em>width · height 속성</em></b><span>속성만 적어도 <b>비가 정해집니다</b></span></li>
+            <li><b>안 먹을 때 <em>높이가 따로 박힘</em></b><span><code>height</code>가 따로 있으면 <b>비가 무시됩니다</b></span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          <b>그림에 <code>width</code>·<code>height</code> 속성을 적는 것만으로</b>
-          브라우저가 비를 계산해 자리를 미리 잡아 줍니다 —
-          CSS 로 <code>width: 100%</code>를 주어도 그 비는 그대로 쓰입니다.
-          오래된 조언('HTML 에 크기를 적지 마라')이 지금은 정반대가 된 자리라,
+          <b>그림에 <code>width</code>·<code>height</code> 속성을 적기만 해도</b>
+          브라우저가 비를 계산해 자리를 미리 잡아 주고,
+          CSS로 <code>width: 100%</code>를 주어도 그 비는 그대로 쓰입니다.
+          예전에는 'HTML에 크기를 적지 마라'고 조언했지만 지금은 정반대가 되었기 때문에,
           옛 습관대로 속성을 지워 두면 <b>그림이 뜰 때마다 글이 밀립니다</b>.
-          비가 저마다 다른 사진이라면 서버가 <b>가로·세로를 함께</b> 내려주는 것이
-          이 문제를 가장 싸게 해결합니다.</p>
+          사진마다 비가 다르다면 서버가 <b>가로·세로 크기를 함께</b> 내려 주는 것이
+          가장 적은 비용으로 이 문제를 푸는 방법입니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>종횡비를 쓰는 경우</h3>
             <ul>
-              <li>그림·영상 자리에 <b>거의 늘</b></li>
-              <li>목록 썸네일 — <b>모양이 같아야</b> 줄이 선다</li>
-              <li><code>&lt;img&gt;</code>에는 <b>width·height 속성</b>도 함께</li>
+              <li>그림이나 영상이 들어갈 자리를 만들 때. <b>거의 항상</b> 비를 적어 둡니다</li>
+              <li>목록 썸네일을 넣을 때. 썸네일 <b>모양이 같아야</b> 줄이 가지런합니다</li>
+              <li><code>&lt;img&gt;</code>를 쓸 때. <b>width·height 속성</b>도 함께 적습니다</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>종횡비를 쓰지 않는 경우</h3>
             <ul>
-              <li>비와 <code>height</code>를 <b>같이</b> 주기 — 비가 진다</li>
-              <li>글이 든 상자에 비를 박기 — <b>글이 넘친다</b></li>
-              <li>패딩 트릭을 새로 쓰기 — <b>이제 속성이 있다</b></li>
-              <li><code>object-fit</code> 없이 그림 넣기 — <b>찌그러진다</b></li>
+              <li>비와 <code>height</code>를 <b>함께</b> 줄 때. height가 우선해서 비가 무시됩니다</li>
+              <li>글이 든 상자에 비를 고정할 때. 글이 길어지면 <b>상자 밖으로 넘칩니다</b></li>
+              <li>패딩 트릭을 새로 쓸 때. <b>이제는 aspect-ratio 속성이 있습니다</b></li>
+              <li><code>object-fit</code> 없이 그림을 넣을 때. 그림이 <b>찌그러집니다</b></li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 크기 자체는 <a href="sizing.html">크기 정하기</a>, 넘치는 처리는 <a href="../items/overflow.html">넘침</a>, 오기 전 자리는 <a href="../items/skeleton.html">스켈레톤</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>종횡비 대신 다른 것을 써야 하는 경우</b> — 크기 자체는 <a href="sizing.html">크기 정하기</a>, 넘치는 처리는 <a href="../items/overflow.html">넘침</a>, 그림이 오기 전의 자리 표시는 <a href="../items/skeleton.html">스켈레톤</a>.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="width:100%;aspect-ratio:1/1;border:1px solid var(--accent);border-radius:5px;background:var(--accent-soft);display:grid;place-items:center;font-family:var(--mono);font-size:9.5px;color:var(--accent)">아바타</div><span style="font-size:8.5px;color:var(--fg-muted)">목록에서 줄이 선다</span></div>
             </div>
-            <figcaption><b>정사각 썸네일</b><a href="../items/listitem.html">리스트</a>에서</figcaption>
+            <figcaption><b>정사각 썸네일</b><a href="../items/listitem.html">리스트</a>에서 정사각 썸네일로 줄을 맞춥니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="width:100%;aspect-ratio:16/9;border:1px solid var(--accent);border-radius:5px;background:var(--accent-soft);display:grid;place-items:center;font-family:var(--mono);font-size:9.5px;color:var(--accent)">영상</div><span style="font-size:8.5px;color:var(--fg-muted)">가장 흔한 비</span></div>
             </div>
-            <figcaption><b>영상</b><b>자리를 미리</b> 잡는다</figcaption>
+            <figcaption><b>영상</b>영상을 불러오기 전에 <b>자리를 미리</b> 잡습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="font-family:var(--mono);font-size:9px;color:var(--accent);line-height:1.7;border:1px solid var(--line);border-radius:5px;background:var(--bg);padding:6px 7px">&lt;img src="s.jpg"<br>  width="800" height="450"<br>  style="width:100%;height:auto"&gt;</div><span style="font-size:8.5px;color:var(--fg-muted)">속성만으로도 비가 생긴다</span></div>
             </div>
-            <figcaption><b>속성으로</b><b>가장 간단한 길</b></figcaption>
+            <figcaption><b>속성으로</b>속성 두 개만 적는 <b>가장 간단한 방법</b>입니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 규칙<span class="hint">이 비의 계약서</span></h2>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 규칙<span class="hint">종횡비를 쓸 때 지킬 것</span></h2>
         <p>상자에는 <code>aspect-ratio</code>, 그림에는 <b>크기 속성</b>을 적습니다.</p>
-<pre class="code"><span class="c">/* 상자 — 폭이 정해지면 높이가 따라온다 */</span>
+<pre class="code"><span class="c">/* 상자. 폭이 정해지면 높이가 따라온다 */</span>
 .thumb {
   <span class="a">aspect-ratio</span>: <span class="a">16</span> / <span class="a">9</span>;
   <span class="a">width</span>: <span class="a">100%</span>;
@@ -236,47 +236,47 @@
 }
 .thumb <span class="t">img</span> { <span class="a">width</span>: <span class="a">100%</span>; <span class="a">height</span>: <span class="a">100%</span>; <span class="a">object-fit</span>: cover; }
 
-<span class="c">&lt;!-- 그림 자체 — 속성만 적어도 비가 생긴다 --&gt;</span>
+<span class="c">&lt;!-- 그림 자체. 속성만 적어도 비가 생긴다 --&gt;</span>
 &lt;<span class="t">img</span> <span class="a">src</span>=<span class="s">"store.jpg"</span> <span class="a">width</span>=<span class="s">"800"</span> <span class="a">height</span>=<span class="s">"450"</span>
      <span class="a">style</span>=<span class="s">"width:100%;height:auto"</span> <span class="a">alt</span>=<span class="s">"모란상회 매장"</span>&gt;</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td><code>width</code>·<code>height</code> 속성</td><td><b>지우지 않는다.</b> 브라우저가 비를 계산해 자리를 잡는다</td></tr>
-            <tr><td><code>height: auto</code></td><td>CSS 로 폭만 주면 <b>속성의 비</b>가 쓰인다</td></tr>
-            <tr><td><code>object-fit: cover</code></td><td>없으면 <b>찌그러진다</b></td></tr>
-            <tr><td><code>alt</code></td><td>자리만 잡고 뜻은 따로다 — <a href="alttext.html">대체 텍스트</a></td></tr>
-            <tr><td>글이 든 상자</td><td>비를 박으면 <b>글이 넘친다</b>. 글에는 <code>min-height</code>를 쓴다</td></tr>
-            <tr><td>SVG</td><td><code>viewBox</code>가 이미 비를 가진다. <code>preserveAspectRatio</code>를 <code>none</code>으로 두면 <b>찌그러진다</b></td></tr>
+            <tr><td><code>width</code>·<code>height</code> 속성</td><td><b>지우지 않습니다.</b> 브라우저가 이 속성으로 비를 계산해 자리를 잡습니다</td></tr>
+            <tr><td><code>height: auto</code></td><td>CSS로 폭만 주면 <b>속성에서 계산한 비</b>가 쓰입니다</td></tr>
+            <tr><td><code>object-fit: cover</code></td><td>없으면 그림이 <b>찌그러집니다</b></td></tr>
+            <tr><td><code>alt</code></td><td>비는 자리만 잡아 줄 뿐이고, 그림의 뜻은 <a href="alttext.html">대체 텍스트</a>로 따로 적습니다</td></tr>
+            <tr><td>글이 든 상자</td><td>비를 고정하면 <b>글이 넘치므로</b>, 글이 든 상자에는 <code>min-height</code>를 씁니다</td></tr>
+            <tr><td>SVG</td><td><code>viewBox</code>에 이미 비가 들어 있습니다. <code>preserveAspectRatio</code>를 <code>none</code>으로 두면 <b>찌그러집니다</b></td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>가로·세로를 함께 보낸다</th><td><code>{"w":800,"h":450}</code>가 있으면 화면이 <b>자리를 미리</b> 잡습니다.</td></tr>
-            <tr><th>사진마다 비가 다르다</th><td>사용자가 올린 사진은 제각각입니다. <b>한 비로 잘라</b> 저장하거나 비를 함께 보냅니다.</td></tr>
-            <tr><th>썸네일을 만들어 둔다</th><td>원본을 줄여 쓰면 느립니다 — <a href="dpr.html">화면 밀도</a>·<a href="assets.html">에셋 내보내기</a>.</td></tr>
+            <tr><th>가로·세로를 함께 보낸다</th><td>응답에 <code>{"w":800,"h":450}</code>처럼 크기가 있으면 화면이 그림을 받기 전에 <b>자리를 미리</b> 잡을 수 있습니다.</td></tr>
+            <tr><th>사진마다 비가 다르다</th><td>사용자가 올린 사진은 비가 제각각이라서, 저장할 때 <b>한 비로 잘라</b> 두거나 응답에 비를 함께 보냅니다.</td></tr>
+            <tr><th>썸네일을 만들어 둔다</th><td>큰 원본을 화면에서 줄여 쓰면 느리기 때문에 썸네일을 따로 만들어 둡니다(<a href="dpr.html">화면 밀도</a>·<a href="assets.html">에셋 내보내기</a> 참고).</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p><b>비로 자리를 잡는다</b>는 생각은 같습니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p><b>비로 자리를 잡는다</b>는 생각은 세 플랫폼 모두 같습니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>aspect-ratio</span></header>
             <div class="shot">
               <div style="width:100%;max-width:100px;display:grid;gap:5px"><div style="width:100%;aspect-ratio:16/9;border:1px solid var(--accent);border-radius:5px;background:var(--accent-soft);display:grid;place-items:center;font-family:var(--mono);font-size:9.5px;color:var(--accent)">16/9</div></div>
             </div>
-            <footer>2021년부터 속성 하나로 됩니다. 전에는 <b>패딩 트릭</b>을 썼습니다.</footer>
+            <footer>2021년부터는 속성 하나로 비를 정할 수 있고, 그전에는 <b>패딩 트릭</b>을 썼습니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>aspectRatio</span></header>
@@ -284,7 +284,7 @@
               <div class="phone" role="img" aria-label="iOS 비 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:30px;aspect-ratio:16/9;background:var(--accent-soft);border:1px solid var(--accent);border-radius:3px"></div></div></div>
             </div>
-            <footer><code>.aspectRatio(16/9, contentMode:)</code>. <code>fill</code>이 cover 자리입니다.</footer>
+            <footer><code>.aspectRatio(16/9, contentMode:)</code>로 정하고, <code>fill</code>이 웹의 cover에 해당합니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>aspectRatio</span></header>
@@ -292,18 +292,18 @@
               <div class="phone" role="img" aria-label="안드로이드 비 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:30px;aspect-ratio:16/9;background:var(--accent-soft);border:1px solid var(--accent);border-radius:3px"></div></div></div>
             </div>
-            <footer>Compose 의 <code>Modifier.aspectRatio()</code>. <code>ContentScale.Crop</code>이 cover 입니다.</footer>
+            <footer>Compose의 <code>Modifier.aspectRatio()</code>로 정하고, <code>ContentScale.Crop</code>이 웹의 cover에 해당합니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — "그림이 뜨면 글이 밀려요"는 비를 안 적어서 생깁니다. 고치는 값이 아주 싸고(<code>&lt;img&gt;</code> 속성 두 개) 효과는 바로 보여서, <b>목록 화면을 만들 때 가장 먼저 챙기면 좋은 한 줄</b>입니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — "그림이 뜨면 글이 밀려요"라는 문제는 비를 적지 않아서 생깁니다. <code>&lt;img&gt;</code> 속성 두 개만 적으면 고칠 수 있고 효과도 바로 보이기 때문에, <b>목록 화면을 만들 때 가장 먼저 챙기면 좋은 한 줄</b>입니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="box.html"><b>박스 모델</b><em>1부</em></a></li>
         <li><a href="flex.html"><b>플렉스</b><em>1부</em></a></li>
@@ -319,20 +319,20 @@
         <li><a href="margincollapse.html"><b>여백 붕괴</b><em>1부</em></a></li>
         <li><a href="order.html"><b>보이는 순서와 읽는 순서</b><em>1부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="sizing.html"><b>크기 정하기</b><em>1부</em></a></li>
         <li><a href="../items/overflow.html"><b>넘침</b><em>1부</em></a></li>
         <li><a href="dpr.html"><b>화면 밀도</b><em>11부</em></a></li>
         <li><a href="../items/skeleton.html"><b>스켈레톤</b><em>8부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

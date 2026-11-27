@@ -32,12 +32,12 @@
 </div>
 
 <p class="hint">
-  삭제를 눌러 보세요. 하던 일을 막지 않고 구석에서 알려 주고, 5초 뒤 저절로 사라집니다.
-  <b>여러 개를 빠르게 지우면 쌓입니다.</b> 토스트에 마우스를 올리면 타이머가 멈추고,
-  <b>되돌리기</b>를 누르면 지운 항목이 돌아옵니다.
+  삭제를 눌러 보세요. 토스트는 하던 일을 막지 않고 화면 구석에서 결과를 알려 준 뒤 5초가 지나면 저절로 사라집니다.
+  <b>여러 개를 빠르게 지우면 토스트가 쌓입니다.</b> 토스트에 마우스를 올리면 타이머가 멈추고,
+  <b>되돌리기</b>를 누르면 지운 항목이 목록으로 돌아옵니다.
 </p>
 
-<!-- 토스트가 쌓이는 자리. 알림이라 라이브 리전으로 읽힌다. -->
+<!-- 토스트가 쌓이는 자리. 알림이므로 라이브 리전으로 읽힌다. -->
 <div class="tst-wrap" id="toasts" role="status" aria-live="polite"></div>
 
 <script>
@@ -51,7 +51,7 @@
     var n = list.querySelectorAll('.row').length;
     count.textContent = n ? n + '건 남음' : '';
     if (!n && !list.querySelector('.gone')) {
-      list.insertAdjacentHTML('beforeend', '<p class="gone">할 일이 없습니다. 되돌리기로 가져올 수 있습니다.</p>');
+      list.insertAdjacentHTML('beforeend', '<p class="gone">할 일이 없습니다. 지운 항목은 되돌리기로 다시 가져올 수 있습니다.</p>');
     }
   }
 

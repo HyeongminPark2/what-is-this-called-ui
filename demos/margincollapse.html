@@ -33,11 +33,11 @@
 </div>
 
 <p class="hint">
-  위 상자의 <code>margin-bottom: 24px</code>와 아래 상자의 <code>margin-top: 16px</code>을 더하면 40px 일 것 같지만,
-  <b>세로 여백은 겹쳐 더 큰 쪽만 남습니다</b> — 24px 입니다. 이걸 <b>여백 붕괴</b>(margin collapse)라 합니다.<br>
-  가로는 안 겹치고, <b>flex·grid 안에서도 안 겹칩니다</b>. 그래서 <code>gap</code>을 쓰면
-  40px 이 아니라 <b>정확히 적은 값</b>이 나옵니다 — 요즘 <code>gap</code>을 권하는 이유 가운데 하나입니다.<br>
-  부모의 <code>padding</code>이나 테두리가 생겨도 붕괴가 멈춥니다 — <b>예고 없이 간격이 바뀌는</b> 흔한 원인입니다.
+  위 상자의 <code>margin-bottom: 24px</code>와 아래 상자의 <code>margin-top: 16px</code>을 더하면 40px일 것 같지만,
+  <b>세로 여백은 겹쳐서 더 큰 쪽만 남기</b> 때문에 실제 간격은 24px입니다. 이 현상을 <b>여백 붕괴</b>(margin collapse)라고 합니다.<br>
+  가로 여백은 겹치지 않고, <b>flex·grid 안에서도 겹치지 않습니다</b>. 그래서 <code>gap</code>을 쓰면
+  <b>적은 값이 정확히</b> 나오는데, 요즘 <code>gap</code>을 권하는 이유 가운데 하나입니다.<br>
+  부모에 <code>padding</code>이나 테두리가 생겨도 붕괴가 멈추는데, 이것이 <b>예고 없이 간격이 바뀌는</b> 흔한 원인입니다.
 </p>
 
 <script>
@@ -73,9 +73,9 @@
       r.dataset.collapsed = collapsed ? '1' : '0';
 
       document.getElementById('note').innerHTML = {
-        margin: '<span class="warn">세로 여백이 겹쳐 큰 쪽만 남았다</span> — 더한 값이 안 나온다',
-        flex: 'flex 안에서는 <b>안 겹친다</b>. 그래서 적은 값이 그대로 나온다',
-        padding: '부모에 padding 이 생기면 <b>붕괴가 멈춘다</b> — 예고 없이 간격이 바뀌는 원인'
+        margin: '<span class="warn">세로 여백이 겹쳐 큰 쪽만 남았습니다</span>. 더한 값이 나오지 않습니다',
+        flex: 'flex 안에서는 여백이 <b>겹치지 않아서</b> 적은 값이 그대로 나옵니다',
+        padding: '부모에 padding이 생기면 <b>붕괴가 멈춥니다</b>. 예고 없이 간격이 바뀌는 원인이 됩니다'
       }[k];
     });
   }

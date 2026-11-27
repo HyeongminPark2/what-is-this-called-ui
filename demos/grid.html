@@ -41,15 +41,15 @@
 </div>
 
 <p class="hint">
-  그리드는 <b>두 방향으로 칸을 나누는</b> 방법입니다. 플렉스가 '한 줄에 늘어놓기'라면
-  그리드는 '판을 먼저 그리고 거기에 넣기'입니다.<br>
-  <code>1fr</code>은 '남은 자리를 한 몫씩'이라는 뜻입니다. <b>auto-fit minmax</b>는
-  '칸이 최소 150px 아래로 작아지면 열 수를 줄여라'라는 말이라, 브라우저 폭만 바꿔도
-  <b>미디어 쿼리 없이</b> 접힙니다 — 카드 그리드가 거의 다 이것입니다.<br>
-  <b>긴 글 넣기</b>를 켜 보세요. <b>고르던 칸들이 어긋납니다</b> — 긴 칸이 옆 칸의 자리를 빼앗습니다.
-  <code>1fr</code>이 사실은 <code>minmax(<b>auto</b>, 1fr)</code>이고 <b>auto 는 '내용만큼'</b>이라
-  그 칸이 글보다 작아지지 못하기 때문입니다. 글이 더 길면 그때는 판이 통째로 터집니다.
-  <code>minmax(0, 1fr)</code>로 고치면 그제서야 칸이 줄고 글이 잘립니다.
+  그리드는 <b>두 방향으로 칸을 나누는</b> 방법입니다. 플렉스가 자식을 한 줄에 늘어놓는다면,
+  그리드는 판을 먼저 칸으로 나눈 뒤 그 칸에 자식을 넣습니다.<br>
+  <code>1fr</code>은 남은 자리를 한 몫씩 나눠 받는다는 뜻입니다. <b>auto-fit minmax</b>는
+  칸이 최소 150px보다 좁아지면 열 수를 줄이라는 뜻이라서, 브라우저 폭만 바꿔도
+  <b>미디어 쿼리 없이</b> 열 수가 줄어듭니다. 카드 그리드는 대부분 이 방식으로 만듭니다.<br>
+  <b>긴 글 넣기</b>를 켜 보세요. 긴 글이 든 칸이 옆 칸의 자리를 빼앗아 <b>고르던 칸들이 어긋납니다</b>.
+  <code>1fr</code>은 사실 <code>minmax(<b>auto</b>, 1fr)</code>이고 <b>auto는 '내용만큼'</b>이라서
+  그 칸이 글보다 좁아지지 못하기 때문입니다. 글이 더 길면 판 전체가 부모 밖으로 넘칩니다.
+  <code>minmax(0, 1fr)</code>로 고쳐야 칸이 줄어들고 넘친 글이 잘립니다.
 </p>
 
 <script>
@@ -99,10 +99,10 @@
       var cw = getComputedStyle(lay).gridTemplateColumns.split(' ').map(parseFloat).filter(function (x) { return !isNaN(x); });
       var gap2 = Math.round(Math.max.apply(null, cw) - Math.min.apply(null, cw));
       if (over > 2) {
-        ruler.innerHTML = '<span style="color:var(--danger);font-weight:700">판이 ' + Math.round(over) + 'px 터졌습니다</span>';
+        ruler.innerHTML = '<span style="color:var(--danger);font-weight:700">판이 ' + Math.round(over) + 'px 넘쳤습니다</span>';
       } else if (gap2 > 2) {
         ruler.innerHTML = '<span style="color:var(--danger);font-weight:700">칸 너비가 ' + gap2 + 'px 어긋났습니다</span>' +
-          ' — 1fr 은 minmax(<b>auto</b>, 1fr) 이라 긴 칸이 <b>옆 칸의 자리를 빼앗습니다</b>';
+          '. 1fr은 minmax(<b>auto</b>, 1fr)이라서 긴 칸이 <b>옆 칸의 자리를 빼앗습니다</b>';
       } else {
         ruler.innerHTML = '칸이 고릅니다 · 각 ' + Math.round(cw[0]) + 'px';
       }

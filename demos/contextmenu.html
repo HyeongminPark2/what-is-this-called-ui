@@ -39,13 +39,13 @@
 </div>
 
 <p class="hint">
-  줄에 <b>마우스 오른쪽</b>을 눌러 보세요(폰에서는 길게 누르기). 컨텍스트 메뉴는
-  <b>오직 그 방법으로만</b> 열립니다 — 그래서 <b>있는 줄도 모르는</b> 기능이 됩니다.
-  데모가 <b>같은 일에 이르는 길이 몇 개인지</b> 세서 적습니다.<br>
-  ⋯ 단추를 같이 두면 길이 둘이 되고, 끄면 하나뿐입니다 —
-  <b>숨은 길만 두지 않는 것</b>이 규칙입니다.<br>
-  브라우저 기본 메뉴를 막는 것은 <b>빼앗는 일</b>입니다. 복사·새 탭으로 열기를 못 쓰게 되니,
-  정말 필요할 때만 막고 <b>그 안에 그 기능들을 다시 넣어</b> 줘야 합니다.
+  목록의 줄 위에서 <b>마우스 오른쪽 버튼</b>을 눌러 보세요(폰에서는 길게 누릅니다). 컨텍스트 메뉴는
+  <b>이 동작으로만</b> 열리기 때문에, 사용자가 <b>메뉴가 있는 줄도 모르고</b> 지나치기 쉽습니다.
+  같은 메뉴를 여는 <b>길이 몇 개인지</b> 데모가 세어 적습니다.<br>
+  ⋯ 단추를 함께 두면 메뉴를 여는 길이 둘이 되고, ⋯ 단추를 끄면 눈에 보이지 않는 오른쪽 버튼 하나만 남습니다.
+  그래서 <b>숨은 길만 두지 않는 것</b>이 규칙입니다.<br>
+  브라우저 기본 메뉴를 막으면 사용자는 그 메뉴에 있던 복사나 새 탭으로 열기를 <b>쓸 수 없게</b> 됩니다.
+  그러니 정말 필요할 때만 막고, 막았다면 <b>우리 메뉴 안에 그 기능들을 다시 넣어</b> 줘야 합니다.
 </p>
 
 <script>
@@ -102,10 +102,10 @@
     var rd = document.getElementById('read');
     rd.innerHTML = (open >= 0 ? '열림 — <b>' + ROWS[open] + '</b>' : '닫힘') +
       '<br>같은 일에 이르는 길 <b>' + ways + '개</b>' +
-      (ways === 1 ? ' <span class="warn">— 숨은 길 하나뿐이다</span>' : ' — ⋯ 단추와 오른쪽 누르기') +
+      (ways === 1 ? ' <span class="warn">— 숨은 길 하나뿐입니다</span>' : ' — ⋯ 단추와 오른쪽 누르기') +
       '<br>오른쪽 눌러 연 횟수 <b>' + opened.right + '</b> · ⋯ 로 연 횟수 <b>' + opened.button + '</b>' +
       (blocked ? '<br>브라우저 기본 메뉴를 막은 횟수 <b>' + blocked + '</b>' +
-        (document.getElementById('keep').checked ? '' : ' <span class="warn">— 복사·새 탭을 빼앗는다</span>') : '') +
+        (document.getElementById('keep').checked ? '' : ' <span class="warn">— 복사와 새 탭으로 열기를 쓸 수 없습니다</span>') : '') +
       (why ? '<br>' + why : '');
     rd.dataset.open = String(open);
     rd.dataset.ways = String(ways);
@@ -118,13 +118,13 @@
     var r = e.target.closest('[data-i]');
     if (!r || r.dataset.i === undefined) return;
     if (document.getElementById('keep').checked) {
-      document.getElementById('log').innerHTML = '브라우저 기본 메뉴를 <b>그대로</b> 뒀다';
+      document.getElementById('log').innerHTML = '브라우저 기본 메뉴를 <b>그대로</b> 두었습니다';
       return;
     }
     e.preventDefault();
     blocked++;
     openMenu(+r.dataset.i, e.clientX, e.clientY, 'right');
-    document.getElementById('log').innerHTML = '<b>오른쪽 눌러</b> 열었다';
+    document.getElementById('log').innerHTML = '<b>오른쪽 버튼을 눌러</b> 열었습니다';
   });
 
   document.getElementById('stage').addEventListener('click', function (e) {
@@ -132,12 +132,12 @@
     if (m) {
       var rr = m.getBoundingClientRect();
       openMenu(+m.dataset.more, rr.left, rr.bottom + 2, 'button');
-      document.getElementById('log').innerHTML = '<b>⋯ 단추</b>로 열었다 — 보이는 길이다';
+      document.getElementById('log').innerHTML = '<b>⋯ 단추</b>로 열었습니다. 눈에 보이는 길입니다';
       return;
     }
     var a = e.target.closest('[data-a]');
     if (a) {
-      document.getElementById('log').innerHTML = '<b>' + a.dataset.a + '</b> 를 골랐다';
+      document.getElementById('log').innerHTML = '<b>' + a.dataset.a + '</b>를 골랐습니다';
       document.getElementById('read').dataset.picked = a.dataset.a;
       open = -1; render();
       return;
@@ -148,7 +148,7 @@
   document.addEventListener('keydown', function (e) {
     if (open < 0) return;
     var btns = [].slice.call(document.querySelectorAll('.mnu button'));
-    if (e.key === 'Escape') { open = -1; render(); document.getElementById('log').innerHTML = '<b>Esc</b> 로 닫았다'; e.preventDefault(); }
+    if (e.key === 'Escape') { open = -1; render(); document.getElementById('log').innerHTML = '<b>Esc</b>로 닫았습니다'; e.preventDefault(); }
     if (e.key === 'ArrowDown') { sel = (sel + 1) % btns.length; btns[sel].focus(); e.preventDefault(); }
     if (e.key === 'ArrowUp') { sel = (sel - 1 + btns.length) % btns.length; btns[sel].focus(); e.preventDefault(); }
   });

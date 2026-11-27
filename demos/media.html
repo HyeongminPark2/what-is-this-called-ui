@@ -42,13 +42,13 @@
 </div>
 
 <p class="hint">
-  그림 하나에 글 한 덩어리 — 화면에서 가장 많이 쓰는 묶음입니다.
-  <code>float</code> 으로 붙이면 <b>글이 그림 밑으로 돌아 들어갑니다</b>.
-  데모가 글 둘째 줄의 왼쪽 끝이 <b>그림 아래까지 내려왔는지</b> 재서 알려 줍니다 —
-  <code>flex</code> 에서는 글이 늘 <b>한 기둥</b>으로 섭니다.<br>
+  미디어 오브젝트는 그림 하나 옆에 글 한 덩어리를 붙이는 묶음으로, 화면에서 특히 많이 씁니다.
+  <code>float</code>으로 그림을 붙이면 글이 길어질 때 <b>그림 아래쪽까지 감싸며 흘러내립니다</b>.
+  데모는 글 둘째 줄의 왼쪽 끝이 <b>그림 아래까지 내려왔는지</b> 재서 알려 주는데,
+  <code>flex</code>에서는 글이 늘 그림 옆에 <b>한 단</b>으로 놓입니다.<br>
   그림은 <b>크기를 고정</b>하고(<code>flex: none</code>) 글 쪽만 줄어들게 둡니다.
-  안 그러면 좁은 화면에서 <b>그림이 먼저 찌그러집니다</b>.<br>
-  아주 좁아지면 위아래로 바꿉니다 — 가로로 버티면 글 칸이 몇 글자만 남습니다.
+  그러지 않으면 좁은 화면에서 <b>그림이 먼저 찌그러집니다</b>.<br>
+  화면이 아주 좁아지면 그림과 글을 위아래로 바꿔 놓습니다. 가로 배치를 고집하면 글 칸에 몇 글자밖에 들어가지 않습니다.
 </p>
 
 <script>
@@ -78,17 +78,17 @@
 
     var rd = document.getElementById('read');
     rd.innerHTML = (col ? '위아래' : '좌우') + ' · 칸 <b>' + w + 'px</b> · 그림 <b>' + Math.round(img.width) + 'px</b>' +
-      (squeezed ? ' <span class="warn">— 그림이 찌그러졌다</span>' : '') +
+      (squeezed ? ' <span class="warn">(그림이 찌그러졌습니다)</span>' : '') +
       '<br>글이 그림 밑으로 돌아 들어감 <b>' + (wrapped ? '그렇다' : '아니다') + '</b>' +
-      (wrapped ? ' <span class="warn">— 한 기둥이 아니다</span>' : '');
+      (wrapped ? ' <span class="warn">(글이 한 단으로 놓이지 않았습니다)</span>' : '');
     rd.dataset.wrapped = wrapped ? '1' : '0';
     rd.dataset.imgw = String(Math.round(img.width));
     rd.dataset.col = col ? '1' : '0';
     rd.dataset.mode = k;
 
     document.getElementById('log').innerHTML = k === 'float'
-      ? '<span class="warn">float</span> — 글이 그림을 돌아 흐른다. 줄 수가 달라지면 모양이 흔들린다'
-      : '<b>flex</b> — 글이 한 기둥으로 선다. 그림은 <code>flex: none</code> 으로 지킨다';
+      ? '<span class="warn">float</span>을 쓰면 글이 그림을 감싸며 흐르고, 줄 수가 달라지면 모양도 달라집니다'
+      : '<b>flex</b>를 쓰면 글이 한 단으로 놓이고, 그림 크기는 <code>flex: none</code>으로 지킵니다';
   }
 
   document.getElementById('k').addEventListener('change', draw);

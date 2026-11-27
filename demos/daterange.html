@@ -32,11 +32,11 @@
 </div>
 
 <p class="hint">
-  달력에서 시작일과 끝날을 눌러 보세요. <b>자주 쓰는 기간</b>(오늘·지난 7일·이번 달)이
-  달력보다 훨씬 빨리 끝납니다 — 실제로 대부분이 이 버튼으로 끝납니다.<br>
-  <b>끝날을 포함하는가</b>가 숨은 함정입니다. ‘11월 1일 ~ 11월 7일’이 7일을 포함하면 7일간,
-  안 하면 6일간입니다. 화면에는 <b>포함한다고 적어</b> 두고, 서버에는
-  <code>&lt; 11월 8일 00:00</code>으로 보내는 쪽이 경계에서 덜 틀립니다.
+  달력에서 시작일과 끝날을 눌러 보세요. <b>자주 쓰는 기간</b>(오늘·지난 7일·이번 달) 버튼을 쓰면
+  달력보다 훨씬 빨리 고를 수 있고, 실제로도 대부분 이 버튼으로 기간을 고릅니다.<br>
+  <b>끝날을 포함하는지</b>는 놓치기 쉬운 부분입니다. ‘11월 1일 ~ 11월 7일’에 7일을 포함하면 7일간,
+  포함하지 않으면 6일간이 됩니다. 그래서 화면에는 <b>끝날을 포함한다고 적어</b> 두고, 서버에는
+  <code>&lt; 11월 8일 00:00</code>으로 보내는 편이 경계에서 덜 틀립니다.
 </p>
 
 <script>
@@ -57,7 +57,7 @@
             (on ? ' style="border-color:var(--accent);color:var(--accent);font-weight:700"' : '') +
             ' style="min-height:30px;padding:5px 10px;font-size:12px">' + p[0] + '</button>';
         }).join('')
-      : '<span class="ruler">자주 쓰는 기간이 없으면 <b>달력만</b> 남는다</span>';
+      : '<span class="ruler">자주 쓰는 기간 버튼이 없으면 <b>달력만</b> 남습니다</span>';
 
     var h = ['일', '월', '화', '수', '목', '금', '토'].map(function (d) {
       return '<span class="head">' + d + '</span>';
@@ -78,8 +78,8 @@
     r.dataset.inc = inc ? '1' : '0';
 
     document.getElementById('note').innerHTML = inc
-      ? '서버에는 <b>&lt; 11월 ' + (end + 1) + '일 00:00</b> 으로 보낸다 — 시·분·초가 있어도 안 샌다'
-      : '<span class="warn">같은 날짜인데 하루가 적다</span> — 사용자는 거의 늘 끝날을 포함한다고 여긴다';
+      ? '서버에는 <b>&lt; 11월 ' + (end + 1) + '일 00:00</b>으로 보냅니다. 자료에 시·분·초가 있어도 끝날의 자료가 빠지지 않습니다'
+      : '<span class="warn">같은 날짜인데 하루가 적습니다.</span> 사용자는 거의 언제나 끝날이 포함된다고 생각합니다';
   }
 
   document.getElementById('cal').addEventListener('click', function (e) {

@@ -37,11 +37,11 @@
 </div>
 
 <p class="hint">
-  <b>안쪽 모서리는 바깥보다 여백만큼 작아야</b> 두 곡선이 나란히 돕니다 —
-  <code>안쪽 = 바깥 − 여백</code>입니다. 공식을 끄면 두 곡선 사이가 벌어져
+  <b>안쪽 모서리는 바깥보다 여백만큼 작아야</b> 두 곡선이 나란히 이어집니다.
+  식으로 쓰면 <code>안쪽 = 바깥 − 여백</code>입니다. 공식을 끄면 두 곡선 사이가 벌어져
   <b>안쪽이 네모나게</b> 보입니다.<br>
-  <code>overflow: hidden</code>을 끄면 둥근 카드 위로 <b>네모난 그림이 튀어나옵니다</b> —
-  카드 왼쪽 위 모서리 자리에 무엇이 있는지를 실제로 찍어서 잽니다.
+  <code>overflow: hidden</code>을 끄면 둥근 카드 위로 <b>네모난 그림이 튀어나옵니다</b>.
+  데모는 카드 왼쪽 위 모서리 자리에 무엇이 그려져 있는지 실제로 찍어서 확인합니다.
 </p>
 
 <script>
@@ -80,16 +80,16 @@
     var rd = document.getElementById('read');
     rd.innerHTML = '바깥 <b>' + R + 'px</b> · 여백 <b>' + P + 'px</b><br>' +
       '공식값 <b>' + ideal + 'px</b> · 지금 안쪽 <b>' + got + 'px</b><br>' +
-      (okFit ? '두 곡선이 <b>나란히</b> 돈다' : '<span class="warn">안쪽이 어긋난다</span>') +
-      (poke ? '<br><span class="warn">그림이 모서리 밖으로 튀어나왔다</span>' : '');
+      (okFit ? '두 곡선이 <b>나란히</b> 이어집니다' : '<span class="warn">안쪽 곡선이 어긋납니다</span>') +
+      (poke ? '<br><span class="warn">그림이 모서리 밖으로 튀어나왔습니다</span>' : '');
     rd.dataset.ideal = String(ideal);
     rd.dataset.got = String(got);
     rd.dataset.fit = okFit ? '1' : '0';
     rd.dataset.poke = poke ? '1' : '0';
 
     document.getElementById('note').innerHTML = clip
-      ? '<code>overflow: hidden</code> 이 자식을 카드 모양대로 자른다'
-      : '<span class="warn">자르지 않으니</span> 네모난 자식이 둥근 모서리를 덮는다';
+      ? '<code>overflow: hidden</code>이 자식을 카드 모양대로 자릅니다'
+      : '<span class="warn">자르지 않아서</span> 네모난 자식이 둥근 모서리를 덮습니다';
   }
 
   ['r', 'p'].forEach(function (id) { document.getElementById(id).addEventListener('input', draw); });

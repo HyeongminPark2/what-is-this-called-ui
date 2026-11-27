@@ -39,7 +39,7 @@
     </div>
     <div>
       <div class="tr-box is-fade">환불 확인 요청 — 카드 승인 취소가 늦어져 고객이 두 번 문의했고 담당자가 바뀌면서 한 번 더 늦어진 건입니다. 지금은 은행 점검 시간이라 확인이 더 늦어지고 있습니다.</div>
-      <span class="cap"><b>흐려서 끊기</b> · 그라데이션<br><code>…</code>이 없어 <b>더 있다</b>는 느낌만 준다</span>
+      <span class="cap"><b>흐려서 끊기</b> · 그라데이션<br><code>…</code> 없이 <b>뒤에 글이 더 있다</b>는 것만 알려 줍니다</span>
     </div>
   </div>
 
@@ -50,13 +50,13 @@
 </div>
 
 <p class="hint">
-  말줄임은 <b>정보를 지우는 일</b>입니다. 그래서 '어디서 자를지'보다 <b>'전체를 어떻게 보게 할지'</b>가 먼저입니다 —
-  <code>title</code> 속성, 툴팁, 상세 화면 중 하나는 있어야 합니다.<br>
-  한 줄은 <code>text-overflow: ellipsis</code> 세 줄짜리 세트로, 여러 줄은 <code>-webkit-line-clamp</code>로 합니다.
+  말줄임을 하면 잘린 부분이 <b>화면에서 보이지 않게 됩니다</b>. 그래서 '어디서 자를지'보다 <b>'전체를 어떻게 보게 할지'</b>를 먼저 정해야 하고,
+  <code>title</code> 속성이나 툴팁, 상세 화면 가운데 하나는 꼭 있어야 합니다.<br>
+  한 줄 말줄임은 <code>text-overflow: ellipsis</code>를 포함한 세 줄짜리 세트로, 여러 줄은 <code>-webkit-line-clamp</code>로 처리합니다.
   줄 수 막대를 움직여 보세요.<br>
-  <b>잘렸는지 아닌지를 코드로 알 수 있습니다</b> — <code>scrollWidth &gt; clientWidth</code>(한 줄),
-  <code>scrollHeight &gt; clientHeight</code>(여러 줄). 그래서 <b>잘렸을 때만</b> 툴팁을 붙이는 것이 가능합니다.
-  안 잘렸는데 툴팁이 뜨면 거슬립니다.
+  <b>글이 잘렸는지는 코드로 알 수 있습니다</b>. 한 줄이면 <code>scrollWidth &gt; clientWidth</code>,
+  여러 줄이면 <code>scrollHeight &gt; clientHeight</code>로 확인하므로 <b>잘렸을 때만</b> 툴팁을 붙일 수 있습니다.
+  잘리지 않은 글에 툴팁이 뜨면 같은 내용을 한 번 더 보여 주는 셈이라 거슬립니다.
 </p>
 
 <script>

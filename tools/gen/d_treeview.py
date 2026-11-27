@@ -3,7 +3,7 @@ from ax7 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
-LEDE7 = "길 안내 부품은 모두 '누르면 어디론가 간다'는 점이 같습니다. 이 네 가지만 물어보면 갈립니다."
+LEDE7 = "길 안내 부품은 모두 누르면 다른 곳으로 옮겨 간다는 점이 같습니다. 그래서 아래 네 가지를 물어보면 서로 구별할 수 있습니다."
 
 def tree(items, w="152px", note="", ok=None):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -35,89 +35,89 @@ ANAT = '''              <div class="anat--wide" style="background:var(--bg);bord
 
 D = dict(
   slug="treeview", ko="트리뷰", en="Tree view",
-  desc="계층을 펴고 접으며 다니는 길 안내. 깊이 제한, 화살표 키, 들여쓰기가 먹는 폭.",
-  lede="<b>부모와 자식</b>이 있는 것들을 펴고 접으며 다닙니다. 깊이가 <b>세 단</b>을 넘으면 다른 길을 찾는 편이 낫습니다.",
+  desc="계층을 펴고 접으며 옮겨 다니는 트리뷰를, 깊이 제한과 화살표 키 조작, 들여쓰기가 차지하는 폭까지 함께 다루는 항목입니다.",
+  lede="트리뷰는 폴더와 파일처럼 <b>부모와 자식</b> 관계가 있는 항목들을 가지 단위로 펴고 접으며 찾아가는 부품입니다. 깊이가 <b>세 단</b>을 넘으면 다른 길 안내 방식을 쓰는 편이 낫습니다.",
   axes_lede=LEDE7,
   live_note='''        <div class="note" style="margin-bottom:0">
-          <p>트리는 깊어질수록 <b>들여쓰기가 폭을 먹습니다</b> — 데모가 가장 깊은 줄에 남은
-          이름 자리를 재서 적습니다. 들여쓰기를 키우거나 가지를 더 펼치면 이름이 먼저 잘립니다.<br>
-          트리는 <b>목록이 아니라 트리로 읽혀야</b> 합니다 — <code>role="tree"</code> ·
-          <code>treeitem</code> · <code>aria-expanded</code> 를 쓰고 화살표 키로 폅니다.
-          '키보드로 훑어보기'를 누르면 ↓ 로 내려가며 간 차례가 적힙니다.</p>
+          <p>트리는 깊어질수록 <b>들여쓰기가 가로 폭을 많이 차지합니다</b>. 데모는 가장 깊은 줄에서
+          이름을 적을 자리가 얼마나 남았는지 재서 보여 줍니다. 들여쓰기를 키우거나 가지를 더 펼치면 이름부터 잘립니다.<br>
+          스크린 리더에서도 트리는 <b>목록이 아니라 트리로 읽혀야</b> 하므로 <code>role="tree"</code>,
+          <code>treeitem</code>, <code>aria-expanded</code>를 쓰고 화살표 키로 가지를 펴게 합니다.
+          '키보드로 훑어보기'를 누르면 ↓ 키로 내려가면서 지나간 줄이 차례대로 적힙니다.</p>
         </div>''',
   names=rows([
     ("한국어", "트리뷰, 트리, 폴더 트리, 계층 목록"),
     ("영어", "tree view, tree, file tree, hierarchy navigation"),
     ("같이 쓰는 말",
-     "가지를 펴고 접는 꺾쇠를 <b>디스클로저</b>(disclosure triangle), "
-     "자식이 없는 끝 가지를 <b>잎</b>(leaf)이라 부릅니다. "
-     "여러 개를 고를 수 있게 체크박스를 붙인 것이 <b>체크박스 트리</b>이고, "
-     "한 번에 한 가지만 펴지는 것을 <b>아코디언 트리</b>라 하기도 합니다."),
-    ("자주 잘못 부름",
-     "<b>아코디언</b> — 아코디언은 <b>내용을 펴는</b> 것이고 트리는 <b>길을 펴는</b> 것입니다.<br>"
-     "<b>사이드바</b> — <a href=\"sidebar.html\">사이드바</a>는 <b>자리</b>이고, 그 안에 트리가 들어가기도 합니다.<br>"
-     "<b>브레드크럼</b> — <a href=\"breadcrumb.html\">브레드크럼</a>은 <b>한 줄기만</b> 보여 줍니다."),
+     "가지를 펴고 접는 꺾쇠는 <b>디스클로저</b>(disclosure triangle), "
+     "자식이 없는 끝 가지는 <b>잎</b>(leaf)이라고 부릅니다. "
+     "여러 항목을 고를 수 있게 체크박스를 붙인 것은 <b>체크박스 트리</b>이고, "
+     "한 번에 한 가지만 펼쳐지는 것은 <b>아코디언 트리</b>라고 부르기도 합니다."),
+    ("자주 잘못 부르는 이름",
+     "<b>아코디언</b> — 아코디언은 펼치면 <b>내용</b>이 나오고, 트리는 펼치면 그 아래 <b>하위 항목</b>이 나옵니다.<br>"
+     "<b>사이드바</b> — <a href=\"sidebar.html\">사이드바</a>는 화면 옆이라는 <b>자리</b>를 가리키는 이름이고, 그 안에 트리가 들어가기도 합니다.<br>"
+     "<b>브레드크럼</b> — <a href=\"breadcrumb.html\">브레드크럼</a>은 지금 위치까지 이어진 <b>한 줄기만</b> 보여 주고, 트리는 여러 가지를 함께 보여 줍니다."),
   ]),
   axes=ax("트리뷰"),
-  oneline="<b>깊이 세 단, 가지 스무 개</b>가 넘어가면 트리로는 감당이 안 됩니다 — 검색을 붙이세요.",
+  oneline="<b>깊이가 세 단, 가지가 스무 개</b>를 넘으면 트리만으로는 원하는 항목을 찾기 어려우므로 검색을 함께 붙입니다.",
   states=states([
     (tree([(0, "▸", "의류", False), (0, "▸", "생활용품", False), (0, "▸", "식품", False)], "152px", "다 접힘", True),
-     "접힘", "<b>한눈에</b> 전체가 보인다"),
+     "접힘", "최상위 가지만 보여서 <b>한눈에</b> 전체 구성이 보입니다"),
     (tree([(0, "▾", "의류", False), (1, "▸", "아우터", True), (1, "▸", "상의", False), (0, "▸", "생활용품", False)], "152px", "한 가지만 폄", True),
-     "폄", "지금 가지만 열어 둔다"),
+     "폄", "지금 보고 있는 가지만 펼쳐 둡니다"),
     (tree([(0, "▾", "의류", False), (1, "▾", "상의", False), (2, "▾", "티셔츠", False), (3, "", "반팔 티…", False)], "152px", "이름이 잘렸다", False),
-     "너무 깊음", "<b>들여쓰기가</b> 이름을 먹는다"),
+     "너무 깊음", "<b>들여쓰기가</b> 폭을 차지해서 이름이 잘립니다"),
     (tree([(0, "▾", "의류", False), (1, "▸", "아우터", False), (1, "▸", "상의", True), (1, "▸", "하의", False)], "152px", "고른 줄이 밝다", True),
-     "고름", "<code>aria-selected</code>"),
+     "고름", "고른 줄은 배경을 밝히고 <code>aria-selected</code>로 알립니다"),
     (one(txt('<span style="display:block;font-size:8.5px;color:var(--fg-muted)">⌨ ↓ ↑ 로 오르내리고</span>'
              '<span style="display:block;font-size:8.5px;color:var(--fg-muted)">→ 로 펴고 ← 로 접는다</span>'),
          "키보드", True, "Tab 은 트리 전체에 한 번만 멈춘다", "152px"),
-     "키보드", "<b>화살표</b>가 주인공이다"),
+     "키보드", "트리 안에서는 <b>화살표 키</b>로 움직입니다"),
     (one(txt('<span style="display:block;font-size:8.5px;color:var(--fg-muted)">가지 184개</span>'
              '<span style="display:block;font-size:8.5px;color:var(--danger);margin-top:2px">굴려도 못 찾는다</span>'),
          "너무 많음", False, "검색이 필요하다", "152px"),
-     "가지가 많음", "트리만으로는 <b>못 찾는다</b>"),
+     "가지가 많음", "가지가 많으면 트리만으로는 원하는 항목을 <b>찾기 어렵습니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("<code>role=\"tree\"</code>", "목록이 아니다", "소리로 <b>트리</b>라고 전해진다"),
-    ("<code>treeitem</code>", "+ <code>aria-level</code>", "<b>몇 단</b>인지 알린다"),
-    ("<code>aria-expanded</code>", "폈나 접었나", "꺾쇠의 <b>소리 버전</b>"),
-    ("꺾쇠", "▸ ▾", "자식이 있다는 신호"),
-    ("들여쓰기", "폭을 먹는다", "깊이 × 들여쓰기만큼 <b>이름 자리가 준다</b>"),
-    ("<code>tabindex</code>", "하나만 0", "Tab 은 트리에 <b>한 번만</b> 멈춘다"),
+    ("<code>role=\"tree\"</code>", "목록이 아니다", "스크린 리더가 <b>트리</b>라고 읽어 줍니다"),
+    ("<code>treeitem</code>", "+ <code>aria-level</code>", "항목이 <b>몇 단</b>에 있는지 알립니다"),
+    ("<code>aria-expanded</code>", "폈나 접었나", "꺾쇠 모양이 보여 주는 펼침 상태를 <b>스크린 리더에도</b> 알립니다"),
+    ("꺾쇠", "▸ ▾", "자식 항목이 있다는 표시입니다"),
+    ("들여쓰기", "폭을 먹는다", "깊이 × 들여쓰기 폭만큼 <b>이름을 적을 자리가 줄어듭니다</b>"),
+    ("<code>tabindex</code>", "하나만 0", "<kbd>Tab</kbd>을 누르면 트리 안에서는 <b>한 번만</b> 멈춥니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          트리는 <b>만들기는 쉽고 쓰기는 어려운</b> 부품입니다.
-          가지가 백 개를 넘으면 펴고 접는 수고가 쌓여, 결국 찾던 것을 못 찾습니다.
-          그래서 실제로 쓸 만한 트리에는 거의 늘 <b>검색 칸</b>이 붙어 있고,
-          검색 결과를 고르면 <b>그 가지까지 저절로 펴지게</b> 해 둡니다.<br>
-          키보드도 보통 부품과 다릅니다 — Tab 은 트리 전체에 <b>한 번만</b> 멈추고,
-          그 안은 <b>화살표</b>로 다닙니다. 가지 백 개를 Tab 으로 넘기게 두면 못 씁니다.</p>''',
+          트리는 <b>만들기는 쉽지만 사용자가 쓰기는 어려운</b> 부품입니다.
+          가지가 백 개를 넘으면 가지를 하나하나 펴고 접어 봐야 해서, 결국 찾던 항목을 찾지 못하는 일이 생깁니다.
+          그래서 실제 제품의 트리에는 거의 늘 <b>검색 칸</b>이 붙어 있고,
+          검색 결과를 고르면 <b>그 항목이 있는 가지까지 저절로 펼쳐지게</b> 해 둡니다.<br>
+          키보드 조작도 다른 부품과 다릅니다. <kbd>Tab</kbd>은 트리 전체에서 <b>한 번만</b> 멈추고,
+          트리 안에서는 <b>화살표 키</b>로 움직입니다. 가지가 백 개인 트리에서 <kbd>Tab</kbd>이 줄마다 멈추면 키보드로는 트리를 지나갈 수 없습니다.</p>''',
   do=ul([
-    "깊이를 <b>세 단</b> 안으로 두기",
-    "트리 위에 <b>검색 칸</b> 두기 — 찾으면 그 가지까지 펴 주기",
-    "<b>화살표 키</b>로 펴고 접게 하기",
+    "깊이를 <b>세 단</b> 안으로 둘 때",
+    "트리 위에 <b>검색 칸</b>을 두고, 찾은 항목이 있는 가지까지 펼쳐 줄 때",
+    "<b>화살표 키</b>로 가지를 펴고 접게 할 때",
   ]),
   dont=ul([
-    "가지마다 Tab 이 멈추게 두기 — <b>백 번 눌러야</b> 지나간다",
-    "꺾쇠 없이 들여쓰기만으로 계층 알리기",
-    "트리를 <b>폰에</b> 그대로 올리기 — 들여쓰기가 화면을 다 먹는다",
-    "펴고 접은 상태를 <b>안 기억하기</b> — 돌아오면 다시 처음부터다",
+    "가지마다 <kbd>Tab</kbd>이 멈추게 둘 때. 가지가 백 개면 <b>백 번 눌러야</b> 트리를 지나갑니다",
+    "꺾쇠 없이 들여쓰기만으로 계층을 알릴 때",
+    "트리를 <b>폰 화면에</b> 그대로 올릴 때. 들여쓰기가 좁은 화면 폭을 대부분 차지합니다",
+    "펴고 접은 상태를 <b>기억하지 않을</b> 때. 다른 화면에 갔다 돌아오면 가지를 처음부터 다시 펼쳐야 합니다",
   ]),
   instead='자리로서의 옆 띠는 <a href="sidebar.html">사이드바</a>, 한 줄기만이면 <a href="breadcrumb.html">브레드크럼</a>, 찾기가 주 목적이면 <a href="search.html">검색</a>, 좁은 화면에서는 <a href="drawer.html">드로어</a>.',
   cases=cases([
     (tree([(0, "▾", "src", False), (1, "", "app.js", True), (1, "▸", "lib", False)], "150px", "", True),
-     "파일 트리", "가장 익은 자리"),
+     "파일 트리", "사용자에게 가장 익숙한 트리입니다"),
     (tree([(0, "▾", "의류", False), (1, "", "아우터", False), (1, "", "상의", False)], "150px", "", True),
-     "분류 고르기", "깊이 <b>둘</b>이면 충분하다"),
+     "분류 고르기", "깊이는 <b>두 단</b>이면 충분합니다"),
     (one(txt('<span style="display:block;font-size:8.5px">🔍 반팔</span>'
              '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">의류 › 상의 › 티셔츠 ›</span>'
              '<span style="display:block;font-size:8.5px;color:var(--accent)">반팔 티셔츠</span>'),
          "검색과 함께", True, "찾으면 그 가지까지 펴 준다", "150px"),
-     "검색과 함께", "가지가 많으면 <b>이게 본체</b>다"),
+     "검색과 함께", "가지가 많으면 트리보다 <b>검색이 주된 찾기 수단</b>이 됩니다"),
   ]),
-  code_lede="목록 태그에 역할을 얹습니다. 중첩 <code>&lt;ul&gt;</code>이 계층 그대로입니다.",
+  code_lede="목록 태그에 ARIA 역할을 붙여 만듭니다. <code>&lt;ul&gt;</code>을 중첩한 구조가 그대로 트리의 계층이 됩니다.",
   code='''&lt;<span class="t">ul</span> <span class="a">role</span>=<span class="s">"tree"</span> <span class="a">aria-label</span>=<span class="s">"분류"</span>&gt;
   &lt;<span class="t">li</span> <span class="a">role</span>=<span class="s">"none"</span>&gt;
     &lt;<span class="t">div</span> <span class="a">role</span>=<span class="s">"treeitem"</span> <span class="a">aria-expanded</span>=<span class="s">"true"</span>
@@ -131,35 +131,35 @@ D = dict(
   &lt;/<span class="t">li</span>&gt;
 &lt;/<span class="t">ul</span>&gt;''',
   keys=kbd([
-    ("↓ ↑", "보이는 줄을 하나씩 오르내린다 — <b>접힌 자식은 건너뛴다</b>"),
-    ("→", "접혀 있으면 편다. 이미 폈으면 <b>첫 자식</b>으로"),
-    ("←", "펴져 있으면 접는다. 이미 접혔으면 <b>부모</b>로"),
-    ("Home · End", "트리의 <b>처음 · 마지막</b> 줄로"),
-    ("Tab", "트리 전체에 <b>한 번만</b> 멈춘다"),
-    ("글자 키", "그 글자로 시작하는 <b>다음 줄</b>로 — 긴 트리에서 쓸모가 크다"),
+    ("↓ ↑", "화면에 보이는 줄을 하나씩 오르내리며, <b>접힌 가지의 자식은 건너뜁니다</b>"),
+    ("→", "접혀 있으면 펼치고, 이미 펼쳐져 있으면 <b>첫 자식</b>으로 갑니다"),
+    ("←", "펼쳐져 있으면 접고, 이미 접혀 있으면 <b>부모</b>로 갑니다"),
+    ("Home · End", "트리의 <b>첫 줄이나 마지막 줄</b>로 갑니다"),
+    ("Tab", "트리 전체에서 <b>한 번만</b> 멈춥니다"),
+    ("글자 키", "누른 글자로 시작하는 <b>다음 줄</b>로 갑니다. 긴 트리에서 특히 쓸모가 있습니다"),
   ]),
   backend=rows([
-    ("한 번에 다 주지 않는다", "가지가 수천 개면 처음부터 다 보내지 않습니다. <b>펼 때마다</b> 그 가지의 자식만 받아 옵니다(lazy)."),
-    ("자식이 있는지", "<code>has_children: true</code> 를 같이 주면 <b>꺾쇠를 그릴지</b> 바로 정할 수 있습니다 — 안 주면 펴 보고서야 압니다."),
-    ("경로", "<code>path: [\"의류\",\"상의\"]</code> 처럼 주면 <b>그 가지까지 펴 둔 채</b> 화면을 열 수 있습니다."),
+    ("한 번에 다 주지 않는다", "가지가 수천 개면 처음부터 전부 보내지 않고, 사용자가 가지를 <b>펼 때마다</b> 그 가지의 자식만 받아 옵니다(lazy)."),
+    ("자식이 있는지", "응답에 <code>has_children: true</code>를 함께 담아 주면 화면이 <b>꺾쇠를 그릴지</b> 바로 정할 수 있습니다. 이 값이 없으면 가지를 펼쳐 본 뒤에야 자식이 있는지 알 수 있습니다."),
+    ("경로", "<code>path: [\"의류\",\"상의\"]</code>처럼 경로를 담아 주면 <b>그 가지까지 펼친 상태로</b> 화면을 열 수 있습니다."),
   ]),
-  plat_lede="<b>PC 쪽 부품</b>입니다. 폰에는 거의 안 씁니다.",
+  plat_lede="트리뷰는 <b>PC 화면에서 쓰는 부품</b>이라서 폰에서는 거의 쓰지 않습니다.",
   plats=plats([
     ("웹", "role=\"tree\"",
      tree([(0, "▾", "의류", False), (1, "", "상의", True)], "110px", "", True),
-     "정해진 태그가 없어 <b>역할로</b> 만듭니다. 화살표 키도 직접 붙입니다."),
+     "트리용 태그가 따로 없어서 목록 태그에 <b>ARIA 역할</b>을 붙여 만들고, 화살표 키 동작도 직접 구현합니다."),
     ("iOS", "OutlineGroup",
      '''              <div class="phone" role="img" aria-label="iOS 트리 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:28px;height:8px;border-radius:2px;background:var(--accent-soft)"></div>
                 <div style="position:absolute;left:12px;right:5px;top:40px;height:8px;border-radius:2px;background:var(--accent-soft)"></div></div></div>''',
-     "SwiftUI 의 <code>OutlineGroup</code>. 폰에서는 거의 안 쓰고 <b>아이패드·맥</b>에서 씁니다."),
+     "SwiftUI의 <code>OutlineGroup</code>으로 만듭니다. 아이폰에서는 거의 쓰지 않고 <b>아이패드와 맥</b>에서 씁니다."),
     ("안드로이드", "없다",
      '''              <div class="phone" role="img" aria-label="안드로이드 계층 화면 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:28px;height:8px;border-radius:2px;background:var(--accent-soft)"></div>
                 <div style="position:absolute;left:5px;right:5px;top:40px;height:8px;border-radius:2px;background:var(--accent-soft)"></div></div></div>''',
-     "Material 에 트리가 없습니다. <b>화면을 갈아 가며</b> 한 단씩 들어가는 쪽을 씁니다."),
+     "Material에는 트리 부품이 없습니다. 대신 단계마다 <b>새 화면으로 넘어가며</b> 한 단씩 들어가는 방식을 씁니다."),
   ]),
-  plat_note="폰에 트리가 없는 데는 이유가 있습니다 — 깊이마다 들여쓰기가 들어가면 <b>390px 가 금세 동납니다</b>. 안드로이드가 쓰는 <b>한 단씩 들어가는 화면</b>(분류 → 하위 분류 → 목록)이 좁은 화면에서는 훨씬 낫고, 그때 지금 자리를 알려 주는 것이 <a href=\"breadcrumb.html\">브레드크럼</a>입니다. 웹에서도 폰 폭에서는 트리를 접고 그 꼴로 바꾸는 편이 안전합니다.",
+  plat_note="폰에서 트리를 쓰지 않는 이유는 깊이마다 들여쓰기가 더해지면 <b>390px 폭이 금세 모자라기</b> 때문입니다. 좁은 화면에서는 안드로이드처럼 분류, 하위 분류, 목록 순으로 <b>한 단씩 새 화면으로 들어가는 방식</b>이 훨씬 낫고, 이때 지금 위치를 알려 주는 부품이 <a href=\"breadcrumb.html\">브레드크럼</a>입니다. 웹에서도 폰 폭에서는 트리를 접고 이 방식으로 바꾸는 편이 안전합니다.",
   siblings=siblings("treeview"),
   related='''        <li><a href="sidebar.html"><b>사이드바</b><em>7부</em></a></li>
         <li><a href="breadcrumb.html"><b>브레드크럼</b><em>7부</em></a></li>

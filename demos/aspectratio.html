@@ -34,12 +34,12 @@
 </div>
 
 <p class="hint">
-  <code>aspect-ratio</code>는 <b>폭이 정해지면 높이가 따라오게</b> 합니다. 반응형에서
+  <code>aspect-ratio</code>를 주면 <b>폭이 정해질 때 높이가 따라옵니다</b>. 그래서 반응형 화면에서
   칸 폭이 바뀌어도 비가 유지됩니다.<br>
-  더 중요한 쓸모는 <b>자리를 미리 잡는 것</b>입니다. 그림이 오기 전에 높이를 알 수 있어
-  <b>글이 덜컥거리지 않습니다</b> — 체크를 켜면 비를 모른 채 높이만 준 모습이고,
-  내용이 들어오면 비가 깨집니다.<br>
-  안에 든 그림은 <code>object-fit: cover</code>로 <b>잘라 채웁니다</b>.
+  더 중요한 쓸모는 <b>자리를 미리 잡는 것</b>입니다. 그림이 오기 전에 높이를 알 수 있어서
+  그림이 들어와도 <b>글이 밀리지 않습니다</b>. 체크를 켜면 비 없이 높이만 준 모습이 되는데,
+  이때는 내용이 들어오면 비가 깨집니다.<br>
+  상자 안의 그림은 <code>object-fit: cover</code>로 넘치는 부분을 <b>잘라 내며 채웁니다</b>.
 </p>
 
 <script>
@@ -70,8 +70,8 @@
     read.dataset.ratios = ratios.join(',');
 
     document.getElementById('note').innerHTML = off
-      ? '<span class="warn">높이만 주면 폭이 바뀔 때 비가 깨진다</span> — 반응형에서 바로 드러난다'
-      : '<code>aspect-ratio: ' + r + '</code> — 폭이 달라도 <b>비가 유지된다.</b> 그림 자리를 미리 잡는 데도 쓴다';
+      ? '<span class="warn">높이만 주면 폭이 바뀔 때 비가 깨집니다</span>. 반응형 화면에서 바로 드러납니다'
+      : '<code>aspect-ratio: ' + r + '</code> · 폭이 달라도 <b>비가 유지됩니다.</b> 그림 자리를 미리 잡는 데도 씁니다';
   }
   document.getElementById('r').addEventListener('change', draw);
   document.getElementById('noratio').addEventListener('change', draw);

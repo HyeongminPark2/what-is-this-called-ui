@@ -33,10 +33,10 @@
 
 <p class="hint">
   맨 왼쪽이 <b>마스터</b>(원본)이고 나머지는 <b>인스턴스</b>(복제본)입니다.
-  마스터의 글자나 모서리를 바꿔 보세요 — 인스턴스가 전부 따라옵니다.<br>
-  인스턴스에서 <b>떼어내기</b>를 누르면 그 하나만 연결이 끊깁니다(디태치).
-  편해 보이지만, 나중에 마스터를 고칠 때 <b>떼어낸 것만 옛 모습으로</b> 남습니다 —
-  수백 개 중 어느 것이 떼어졌는지는 <b>눈으로 찾아야</b> 합니다.
+  마스터의 글자나 모서리를 바꿔 보면 인스턴스가 모두 같이 바뀝니다.<br>
+  인스턴스에서 <b>떼어내기</b>를 누르면 그 하나만 마스터와의 연결이 끊깁니다(디태치).
+  당장은 편해 보이지만, 나중에 마스터를 고치면 <b>떼어낸 것만 옛 모습으로</b> 남습니다.
+  인스턴스가 수백 개라면 그중 어느 것을 떼어냈는지 <b>눈으로 찾아야</b> 합니다.
 </p>
 
 <script>
@@ -69,8 +69,8 @@
     var n = Object.keys(detached).length;
     var v = document.getElementById('verdict');
     v.innerHTML = n
-      ? '<span class="warn">떼어낸 것 ' + n + '개</span> — 마스터를 고쳐도 안 따라온다'
-      : '인스턴스 <b>' + (N - 1) + '개</b>가 마스터 하나를 따라간다';
+      ? '<span class="warn">떼어낸 것 ' + n + '개</span> — 마스터를 고쳐도 바뀌지 않습니다'
+      : '인스턴스 <b>' + (N - 1) + '개</b>가 마스터 하나를 따라 바뀝니다';
     v.dataset.det = String(n);
   }
 
@@ -79,15 +79,15 @@
     var i = +b.dataset.det;
     detached[i] = master();
     document.getElementById('log').innerHTML =
-      '<b>' + i + '번</b>을 떼어냈다 — 지금 모습 그대로 굳었다';
+      '<b>' + i + '번</b>을 떼어냈습니다. 이제 마스터를 고쳐도 지금 모습 그대로 남습니다';
     draw();
   });
   ['label', 'r'].forEach(function (id) {
     document.getElementById(id).addEventListener('input', function () {
       var n = Object.keys(detached).length;
       document.getElementById('log').innerHTML = n
-        ? '마스터를 고쳤다 — <span class="warn">떼어낸 ' + n + '개는 안 따라왔다</span>'
-        : '마스터를 고쳤다 — <b>전부 따라왔다</b>';
+        ? '마스터를 고쳤습니다. <span class="warn">떼어낸 ' + n + '개는 바뀌지 않았습니다</span>'
+        : '마스터를 고쳤습니다. 인스턴스가 <b>모두 같이 바뀌었습니다</b>';
       draw();
     });
   });

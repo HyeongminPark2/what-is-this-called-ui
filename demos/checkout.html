@@ -48,12 +48,12 @@
 </div>
 
 <p class="hint">
-  단계를 오가며 <b>이전</b>으로 돌아가 보세요 — 적은 값이 그대로 남아 있어야 합니다.<br>
-  <b>금액을 늘 보여 주기</b>를 끄면 마지막 화면에서야 총액이 나옵니다. 배송비가 거기서 처음
-  드러나면 사람들은 그 자리에서 나갑니다 — 결제 이탈의 가장 큰 이유로 꼽히는 것이
-  <b>마지막에 나타난 비용</b>입니다.<br>
+  단계를 오가며 <b>이전</b>으로 돌아가 보세요. 앞에서 적은 값이 그대로 남아 있어야 합니다.<br>
+  <b>금액을 늘 보여 주기</b>를 끄면 마지막 화면에서야 총액이 나옵니다. 배송비가 그때 처음
+  드러나면 많은 사람이 그 자리에서 결제를 그만두는데, 결제 이탈의 가장 큰 이유로 꼽히는 것이
+  이렇게 <b>마지막에 나타난 비용</b>입니다.<br>
   마지막 단계에서 <b>결제</b>를 빠르게 두 번 눌러 보세요. <b>두 번 눌림 막기</b>를 끄면
-  주문이 둘 생깁니다.
+  주문이 두 건 생깁니다.
 </p>
 
 <script>
@@ -110,14 +110,14 @@
   document.getElementById('next').addEventListener('click', function () {
     if (step === 2) {
       if (busy && document.getElementById('guard').checked) {
-        document.getElementById('log').innerHTML = '두 번째 누름을 <b>막았다</b> — 주문은 하나다';
+        document.getElementById('log').innerHTML = '두 번째 누름을 <b>막았습니다</b>. 주문은 한 건만 생겼습니다';
         return;
       }
       busy = true;
       orders++;
       document.getElementById('log').innerHTML = orders > 1
-        ? '<span class="warn">주문이 ' + orders + '건 생겼다 — 같은 결제가 두 번 갔다</span>'
-        : '결제 요청을 보냈다';
+        ? '<span class="warn">주문이 ' + orders + '건 생겼습니다. 같은 결제 요청이 두 번 갔습니다</span>'
+        : '결제 요청을 보냈습니다';
       setTimeout(function () { busy = false; step = 3; render(); }, 450);
       render();
       return;
@@ -126,7 +126,7 @@
   });
   document.getElementById('prev').addEventListener('click', function () {
     if (step > 0) { step--; render();
-      document.getElementById('log').innerHTML = '이전으로 — 적은 값이 <b>그대로 남아 있다</b>'; }
+      document.getElementById('log').innerHTML = '이전 단계로 돌아왔습니다. 적은 값이 <b>그대로 남아 있습니다</b>'; }
   });
   document.getElementById('restart').addEventListener('click', function () {
     step = 0; orders = 0; busy = false; data = { addr: '', card: '' };
@@ -135,8 +135,8 @@
   document.getElementById('always').addEventListener('change', function () {
     render();
     document.getElementById('log').innerHTML = this.checked
-      ? '금액이 <b>처음부터</b> 보인다'
-      : '<span class="warn">배송비가 결제 단계에서야 드러난다</span>';
+      ? '금액이 <b>처음부터</b> 보입니다'
+      : '<span class="warn">배송비가 결제 단계에서야 드러납니다</span>';
   });
   render();
 })();

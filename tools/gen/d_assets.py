@@ -30,91 +30,91 @@ ANAT = '''              <div class="anat--wide" style="background:var(--bg);bord
 
 D = dict(
   slug="assets", ko="에셋 내보내기", en="Exporting assets",
-  desc="아이콘·로고·사진을 어떤 꼴로 넘길지. SVG와 배율별 비트맵, 그리고 포맷 고르기.",
-  lede="무엇을 내보내느냐에 따라 <b>고를 것이 달라집니다</b>. 선은 SVG, 사진은 배율별 비트맵입니다.",
-  axes_lede="현장 용어는 말이 아니라 <b>일하는 단계</b>를 가리킵니다. 이 네 가지만 물어보면 갈립니다.",
+  desc="아이콘과 로고, 사진을 어떤 형식으로 넘길지 다루는 항목입니다. SVG와 배율별 비트맵 가운데 무엇을 쓰고, 파일 포맷은 어떻게 고르는지 보여 줍니다.",
+  lede="에셋 내보내기는 시안에 쓴 그림을 개발에서 쓸 파일로 꺼내는 일이고, 무엇을 내보내느냐에 따라 <b>골라야 할 형식이 달라집니다</b>. 선으로 된 그림은 SVG로, 사진은 배율별 비트맵으로 내보냅니다.",
+  axes_lede="15부에서 다루는 현장 용어는 화면 부품의 이름 대신 디자인과 개발이 <b>함께 일하는 단계</b>를 가리킵니다. 아래 네 가지를 물어보면 이 용어들을 서로 구별할 수 있습니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
-          <p>무엇을 내보낼지 골라 보세요 — 선으로 된 아이콘·로고는 <b>SVG 하나</b>면 어느 배율에서나
-          선명하고 파일도 작습니다. 사진은 SVG 로 만들 수 없으니 <b>배율별 비트맵</b>이 필요합니다.<br>
-          크기는 어림한 값입니다 — 요점은 숫자가 아니라 <b>어느 쪽이 몇 배 차이나는지</b>입니다.</p>
+          <p>무엇을 내보낼지 골라 보세요. 선으로 된 아이콘과 로고는 <b>SVG 파일 하나</b>만 있으면 어느 배율에서나
+          선명하고 파일도 작습니다. 반면 사진은 SVG로 만들 수 없기 때문에 <b>배율별 비트맵</b>이 필요합니다.<br>
+          파일 크기는 어림한 값이므로, 숫자 자체보다 <b>어느 쪽이 몇 배 차이 나는지</b>를 보면 됩니다.</p>
         </div>''',
   names=rows([
     ("한국어", "에셋, 내보내기, 익스포트, 이미지 추출"),
     ("영어", "assets, export, asset export, slicing"),
     ("같이 쓰는 말",
-     "넘기는 그림 파일을 통틀어 <b>에셋</b>이라 하고, 꺼내는 일이 <b>익스포트</b>입니다. "
-     "배율별로 뽑는 것을 <b>1x · 2x · 3x</b>, 여러 아이콘을 한 파일에 모은 것을 "
-     "<b>스프라이트</b>·<b>아이콘 폰트</b>라 합니다. "
-     "SVG 를 HTML 안에 직접 적어 넣는 것은 <b>인라인 SVG</b>입니다."),
-    ("자주 잘못 부름",
-     "<b>이미지</b> — SVG 는 그림이 아니라 <b>그리는 명령</b>이라 성격이 다릅니다.<br>"
-     "<b>해상도</b> — 배율과 섞입니다. <a href=\"dpr.html\">화면 밀도</a>를 참고합니다.<br>"
-     "<b>슬라이스</b> — 옛 방식(큰 그림을 잘라 쓰기)의 이름이 남은 말입니다."),
+     "개발 쪽에 넘기는 그림 파일을 통틀어 <b>에셋</b>이라고 하고, 시안 도구에서 파일로 꺼내는 일을 <b>익스포트</b>라고 합니다. "
+     "배율별로 뽑은 파일은 <b>1x · 2x · 3x</b>로 구분하고, 여러 아이콘을 한 파일에 모은 것은 "
+     "<b>스프라이트</b> 또는 <b>아이콘 폰트</b>라고 부릅니다. "
+     "SVG를 HTML 안에 직접 적어 넣는 방식은 <b>인라인 SVG</b>라고 합니다."),
+    ("자주 잘못 부르는 이름",
+     "<b>이미지</b> — SVG는 점으로 찍힌 그림이 아니라 <b>그림을 그리는 명령</b>을 적은 파일이라서 다른 이미지 파일과 성격이 다릅니다.<br>"
+     "<b>해상도</b> — 배율과 섞어 부르는 일이 많습니다. 둘의 차이는 <a href=\"dpr.html\">화면 밀도</a> 항목에 있습니다.<br>"
+     "<b>슬라이스</b> — 큰 그림을 잘라 쓰던 옛 방식의 이름이 지금까지 남은 말입니다."),
   ]),
   axes=ax("에셋 내보내기"),
-  oneline="<b>선이면 SVG, 사진이면 배율별 비트맵.</b> 그리고 포맷을 바꾸는 쪽이 배율보다 효과가 큽니다.",
+  oneline="<b>선으로 된 그림은 SVG로, 사진은 배율별 비트맵으로 내보냅니다.</b> 사진의 파일 크기를 줄일 때는 배율을 줄이는 것보다 포맷을 바꾸는 쪽이 효과가 큽니다.",
   s4_title="무엇을 내보내나", s4_hint="고를 것이 달라진다",
   states=states([
     (bars([('SVG', 1, (True, '2 KB')), ('PNG 2x', 3.4, (False, '7 KB')), ('PNG 3x', 7.1, (False, '14 KB'))],
           "152px", "아이콘 — 선 몇 개"),
-     "아이콘", "<b>SVG 한 벌.</b> 색도 CSS 로 바꾼다"),
+     "아이콘", "<b>SVG 한 벌</b>이면 되고, 색도 CSS로 바꿀 수 있습니다"),
     (bars([('SVG', 1, (True, '6 KB')), ('PNG 2x', 3.2, (False, '19 KB')), ('PNG 3x', 6.8, (False, '41 KB'))],
           "152px", "로고 — 글자 포함"),
-     "로고", "글꼴을 <b>윤곽선으로</b> 바꿔 내보낸다"),
+     "로고", "로고 속 글꼴을 <b>윤곽선으로</b> 바꿔서 내보냅니다"),
     (bars([('JPG 1x', 1, (False, '120 KB')), ('JPG 2x', 3.1, (False, '372 KB')), ('WebP 2x', 1.6, (True, '192 KB'))],
           "152px", "사진 — SVG 로는 못 만든다"),
-     "사진", "<b>포맷을 바꾸는 쪽</b>이 효과가 크다"),
+     "사진", "배율을 줄이는 것보다 <b>포맷을 바꾸는 쪽</b>이 파일 크기를 줄이는 효과가 큽니다"),
     (bars([('SVG', 4.2, (False, '168 KB')), ('PNG 2x', 3.3, (False, '132 KB')), ('WebP 2x', 1.4, (True, '56 KB'))],
           "152px", "일러스트 — 그라데이션이 많다"),
-     "일러스트", "<b>SVG 가 더 클 수</b> 있다"),
+     "일러스트", "그라데이션이 많으면 <b>SVG가 비트맵보다 더 클 수</b> 있습니다"),
     (card('<span style="font-size:9px">아이콘 24개</span>'
           '<span style="font-size:8.5px;color:var(--fg-muted)">한 파일에 모아 두면 요청이 하나</span>', "152px", "스프라이트"),
-     "여러 개일 때", "<b>묶어서</b> 한 번에 받는다"),
+     "여러 개일 때", "여러 아이콘을 한 파일로 <b>묶어서</b> 한 번에 받습니다"),
     (card('<span style="font-size:9px;color:var(--danger)">1배짜리만 받았다</span>'
           '<span style="font-size:8.5px;color:var(--fg-muted)">3배 화면에서 뭉갠다</span>', "152px", "가장 흔한 사고"),
-     "1배만 받으면", "<a href=\"dpr.html\">화면 밀도</a>에서 드러난다"),
+     "1배만 받으면", "<a href=\"dpr.html\">화면 밀도</a>가 높은 기기에서 그림이 흐릿하게 보입니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("선 · 글자", "SVG", "어느 배율에서나 선명하고 <b>대개 가장 작다</b>"),
-    ("사진", "WebP · AVIF", "SVG 로는 못 만든다. <b>포맷이 먼저</b>"),
-    ("배율별", "1x · 2x · 3x", "비트맵은 <b>배율만큼</b> 필요하다"),
-    ("고르게 하기", "srcset", "브라우저가 <b>자기 배율에 맞는 것</b>만 받는다"),
-    ("글꼴", "윤곽선으로", "안 바꾸면 <b>그 글꼴이 없는 곳</b>에서 깨진다"),
-    ("SVG 의 한계", "점이 많으면 커진다", "그라데이션·패턴이 많으면 <b>비트맵이 낫다</b>"),
+    ("선 · 글자", "SVG", "어느 배율에서나 선명하고, 파일도 <b>대개 가장 작습니다</b>"),
+    ("사진", "WebP · AVIF", "사진은 SVG로 만들 수 없으니 <b>포맷부터</b> 고릅니다"),
+    ("배율별", "1x · 2x · 3x", "비트맵은 지원할 <b>배율마다</b> 한 장씩 필요합니다"),
+    ("고르게 하기", "srcset", "브라우저가 그 기기의 <b>배율에 맞는 파일</b>만 골라 받습니다"),
+    ("글꼴", "윤곽선으로", "윤곽선으로 바꾸지 않으면 <b>그 글꼴이 설치되지 않은 곳</b>에서 글자가 깨집니다"),
+    ("SVG 의 한계", "점이 많으면 커진다", "그라데이션이나 패턴이 많은 그림은 <b>비트맵이 더 작습니다</b>"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          <b>SVG 는 코드라서 다룰 수 있는 것이 많습니다.</b>
-          <code>fill="currentColor"</code>로 두면 CSS 의 글자색을 따라가
-          <a href="../items/dark.html">다크 모드</a>에서 색을 따로 안 만들어도 되고,
-          <code>aria-hidden</code>·<code>&lt;title&gt;</code>로 읽히는 방식도 정할 수 있습니다.
-          다만 그만큼 <b>남이 만든 SVG 를 그대로 붙이면</b>
-          엉뚱한 <code>id</code>·<code>style</code>이 따라 들어와 다른 그림과 부딪히기도 합니다 —
-          받으면 한 번 훑어보는 편이 좋습니다.</p>''',
+          <b>SVG는 코드이기 때문에 CSS와 HTML로 다룰 수 있는 것이 많습니다.</b>
+          <code>fill="currentColor"</code>로 두면 아이콘 색이 CSS의 글자색을 따라가므로
+          <a href="../items/dark.html">다크 모드</a>용 색을 따로 만들지 않아도 되고,
+          <code>aria-hidden</code>이나 <code>&lt;title&gt;</code>로 스크린 리더가 읽는 방식도 정할 수 있습니다.
+          반대로 코드이기 때문에 <b>남이 만든 SVG를 그대로 붙이면</b>
+          그 안의 <code>id</code>나 <code>style</code>이 함께 들어와 페이지의 다른 그림과 충돌하기도 합니다.
+          그래서 SVG를 받으면 안의 코드를 한 번 훑어보는 편이 좋습니다.</p>''',
   do=ul([
-    "아이콘·로고는 <b>SVG</b>로 받기",
-    "사진은 <b>포맷부터</b> 바꾸기 — WebP·AVIF",
-    "비트맵은 <b>배율별</b>로 받고 <code>srcset</code> 으로 고르게 하기",
+    "아이콘과 로고를 <b>SVG</b>로 받을 때",
+    "사진을 WebP나 AVIF로 <b>포맷부터</b> 바꿀 때",
+    "비트맵을 <b>배율별</b>로 받아 <code>srcset</code>으로 브라우저가 고르게 할 때",
   ]),
   dont=ul([
-    "1배짜리만 받기 — <b>3배 화면에서 뭉갠다</b>",
-    "모든 그림을 3배로만 — <b>1배 기기가 손해</b>를 본다",
-    "글꼴을 윤곽선으로 안 바꾸기 — <b>깨진다</b>",
-    "아이콘을 PNG 로 — <b>색을 못 바꾸고</b> 더 크다",
+    "1배짜리 파일만 받을 때. <b>3배 화면에서는 그림이 뭉개져</b> 보입니다",
+    "모든 그림을 3배짜리로만 넣을 때. <b>1배 기기는 쓰지도 않을 큰 파일을</b> 받게 됩니다",
+    "로고의 글꼴을 윤곽선으로 바꾸지 않을 때. 글꼴이 없는 곳에서 <b>글자가 깨집니다</b>",
+    "아이콘을 PNG로 받을 때. CSS로 <b>색을 바꿀 수 없고</b> 파일도 더 큽니다",
   ]),
   instead='배율 이야기는 <a href="dpr.html">화면 밀도</a>, 넘기는 일 전체는 <a href="handoff.html">핸드오프</a>, 글꼴 파일은 <a href="../items/webfont.html">웹폰트</a>.',
   cases=cases([
     (code(['&lt;svg fill="currentColor"&gt;', '  &lt;path d="…"/&gt;', '&lt;/svg&gt;'], "150px", "글자색을 따라간다", True),
-     "아이콘", "<b>다크 모드</b>가 공짜로 해결된다"),
+     "아이콘", "글자색을 따라가므로 <b>다크 모드</b>용 색을 따로 만들지 않아도 됩니다"),
     (code(['&lt;img src="c-800.jpg"', '  srcset="c-400.jpg 400w,', '    c-1200.jpg 1200w"', '  sizes="(min-width:900px) 33vw, 100vw"&gt;'],
           "150px", "브라우저가 고른다", True),
-     "사진", "<b>폭과 배율</b>을 함께 다룬다"),
+     "사진", "화면 <b>폭과 배율</b>에 맞는 파일을 브라우저가 함께 따져서 고릅니다"),
     (card('<span style="font-size:9px;color:var(--danger)">logo@1x.png 만 받음</span>'
           '<span style="font-size:8.5px;color:var(--fg-muted)">“로고가 흐릿해요”</span>', "150px"),
-     "흔한 민원", "<b>2배·3배를 함께</b> 달라고 한다"),
+     "흔한 민원", "로고를 받을 때 <b>2배·3배 파일도 함께</b> 달라고 합니다"),
   ]),
-  s8_title="최소 마크업과 규칙", s8_hint="이 파일의 계약서",
-  code_lede="SVG 는 코드로 넣고, 비트맵은 <code>srcset</code> 으로 고르게 합니다.",
+  s8_title="최소 마크업과 규칙", s8_hint="SVG와 비트맵을 넣는 법",
+  code_lede="SVG는 코드로 직접 넣고, 비트맵은 <code>srcset</code>으로 여러 파일을 적어 브라우저가 고르게 합니다.",
   code='''<span class="c">&lt;!-- 아이콘: 색을 CSS 가 정하고, 장식이면 숨긴다 --&gt;</span>
 &lt;<span class="t">svg</span> <span class="a">width</span>=<span class="s">"24"</span> <span class="a">height</span>=<span class="s">"24"</span> <span class="a">fill</span>=<span class="s">"currentColor"</span> <span class="a">aria-hidden</span>=<span class="s">"true"</span>&gt;
   &lt;<span class="t">path</span> <span class="a">d</span>=<span class="s">"…"</span>/&gt;
@@ -129,35 +129,35 @@ D = dict(
      <span class="a">sizes</span>=<span class="s">"(min-width: 900px) 33vw, 100vw"</span>
      <span class="a">width</span>=<span class="s">"800"</span> <span class="a">height</span>=<span class="s">"450"</span> <span class="a">alt</span>=<span class="s">"모란상회 매장 사진"</span>&gt;''',
   keys=kbd([
-    ("<code>fill=\"currentColor\"</code>", "글자색을 따라간다. <b>다크 모드에서 색을 또 안 만들어도</b> 된다"),
-    ("장식이면 <code>aria-hidden</code>", "아이콘 옆에 글자가 있으면 <b>두 번 읽히지 않게</b>"),
-    ("뜻이 있으면 이름", "로고·상태 아이콘은 <code>role=\"img\"</code> + <code>aria-label</code> — <a href=\"../items/name.html\">이름 붙이기</a>"),
-    ("<code>width</code>·<code>height</code>", "미리 적으면 <b>자리가 안 덜컥거린다</b>"),
-    ("<code>alt</code>", "사진의 뜻. 장식이면 <code>alt=\"\"</code>로 비운다"),
-    ("받은 SVG 를 훑는다", "엉뚱한 <code>id</code>·<code>style</code>이 따라와 <b>다른 그림과 부딪힌다</b>"),
+    ("<code>fill=\"currentColor\"</code>", "아이콘 색이 글자색을 따라가므로 <b>다크 모드용 색을 따로 만들지 않아도</b> 됩니다"),
+    ("장식이면 <code>aria-hidden</code>", "아이콘 옆에 같은 뜻의 글자가 있으면 스크린 리더가 <b>두 번 읽지 않도록</b> 아이콘을 숨깁니다"),
+    ("뜻이 있으면 이름", "로고나 상태 아이콘에는 <code>role=\"img\"</code>와 <code>aria-label</code>로 이름을 붙입니다(<a href=\"../items/name.html\">이름 붙이기</a> 참고)"),
+    ("<code>width</code>·<code>height</code>", "크기를 미리 적어 두면 그림을 불러오는 동안 <b>주변 내용이 밀리지 않습니다</b>"),
+    ("<code>alt</code>", "사진이 전하는 뜻을 적습니다. 장식용 사진이면 <code>alt=\"\"</code>로 비워 둡니다"),
+    ("받은 SVG 를 훑는다", "받은 SVG에 딸려 온 <code>id</code>나 <code>style</code>이 <b>페이지의 다른 그림과 충돌</b>할 수 있습니다"),
   ]),
   backend=rows([
-    ("변환은 서버에서", "원본 하나를 올려 두고 <b>필요한 크기·포맷으로</b> 내려주는 쪽이 파일을 따로 관리하는 것보다 쌉니다."),
-    ("포맷이 더 큰 몫", "WebP·AVIF 로 바꾸면 절반 아래로 떨어집니다 — <b>배율보다 먼저</b> 볼 일입니다."),
-    ("캐시", "주소를 크기·포맷마다 따로 두면 CDN 이 안 어긋납니다."),
-    ("업로드한 사진", "폰 사진은 4000px 이 넘습니다. 받자마자 <b>쓸 크기로 줄여</b> 저장합니다."),
-    ("SVG 를 그대로 올리지 않는다", "사용자가 올린 SVG 에는 <b>스크립트가 들어갈 수</b> 있습니다. 걸러 내거나 비트맵으로 바꿉니다."),
+    ("변환은 서버에서", "원본 하나만 올려 두고 요청에 따라 <b>필요한 크기와 포맷으로</b> 바꿔 내려주면, 크기별 파일을 따로 관리하는 것보다 비용이 적게 듭니다."),
+    ("포맷이 더 큰 몫", "사진을 WebP나 AVIF로 바꾸면 파일 크기가 절반 아래로 줄어듭니다. 그래서 배율을 따지기 <b>전에 포맷부터</b> 확인합니다."),
+    ("캐시", "크기와 포맷마다 주소를 따로 두면 CDN이 다른 파일을 잘못 내주는 일이 생기지 않습니다."),
+    ("업로드한 사진", "휴대폰으로 찍은 사진은 폭이 4000px을 넘기도 하므로, 업로드를 받자마자 <b>실제로 쓸 크기로 줄여서</b> 저장합니다."),
+    ("SVG 를 그대로 올리지 않는다", "SVG 안에는 <b>스크립트를 넣을 수</b> 있기 때문에, 사용자가 올린 SVG는 위험한 내용을 걸러 내거나 비트맵으로 바꿔서 저장합니다."),
   ]),
-  plat_lede="<b>벡터 한 벌 vs 배율별 비트맵</b>이라는 선택은 어디나 같습니다.",
+  plat_lede="<b>벡터 파일 한 벌</b>을 쓸지 <b>배율별 비트맵</b>을 쓸지 고르는 일은 어느 플랫폼에서나 같습니다.",
   plats=plats([
     ("웹", "SVG · srcset",
      code(['icon.svg', 'photo@2x.webp'], "110px", "", True),
-     "SVG 를 코드로 넣을 수 있는 것이 큰 이점입니다. <b>색·접근성</b>을 CSS 로 다룹니다."),
+     "SVG를 코드로 직접 넣을 수 있다는 것이 큰 이점입니다. 덕분에 아이콘의 <b>색과 접근성</b>을 CSS와 HTML 속성으로 다룰 수 있습니다."),
     ("iOS", "@2x @3x · SF Symbols",
      '''              <div class="phone" role="img" aria-label="iOS 에셋 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:30px;font-size:5px;color:var(--fg-muted)">icon@2x.png<br>icon@3x.png</div></div></div>''',
-     "파일 이름에 배율을 붙입니다. 시스템 아이콘(<b>SF Symbols</b>)은 내보낼 필요가 없습니다."),
+     "<code>icon@2x.png</code>처럼 파일 이름에 배율을 붙입니다. OS가 제공하는 시스템 아이콘(<b>SF Symbols</b>)은 따로 내보낼 필요가 없습니다."),
     ("안드로이드", "벡터 드로어블",
      '''              <div class="phone" role="img" aria-label="안드로이드 에셋 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:30px;font-size:5px;color:var(--fg-muted)">drawable/ic_store.xml</div></div></div>''',
-     "<b>벡터 드로어블</b>이 SVG 자리입니다. 쓰면 배율별 폴더가 필요 없습니다."),
+     "<b>벡터 드로어블</b>이 웹의 SVG에 해당하며, 벡터 드로어블을 쓰면 배율별 폴더를 따로 두지 않아도 됩니다."),
   ]),
-  plat_note="\"아이콘 파일 주세요\"로 끝나면 나중에 <b>색을 못 바꾸는 PNG</b>가 쌓입니다. 받을 때 <b>SVG 로, 색은 currentColor 로</b>를 한 번 말해 두면 다크 모드·상태 색이 전부 공짜로 해결되고, 사진은 <b>원본 한 장</b>만 받아 서버에서 줄이는 쪽이 파일 관리보다 훨씬 쌉니다.",
+  plat_note="\"아이콘 파일 주세요\"라고만 요청하면 나중에 <b>색을 바꿀 수 없는 PNG</b> 파일이 쌓입니다. 요청할 때 <b>SVG로, 색은 currentColor로</b> 달라고 한 번만 말해 두면 다크 모드와 상태별 색을 따로 만들 필요가 없어집니다. 사진은 <b>원본 한 장</b>만 받아 서버에서 줄여 쓰는 쪽이 크기별 파일을 관리하는 것보다 훨씬 적은 비용이 듭니다.",
   siblings=siblings("assets"),
   related='''        <li><a href="dpr.html"><b>화면 밀도</b><em>11부</em></a></li>
         <li><a href="handoff.html"><b>핸드오프</b><em>15부</em></a></li>

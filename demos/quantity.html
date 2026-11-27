@@ -39,12 +39,12 @@
 
 <p class="hint">
   스테퍼는 <b>한두 번 고칠 때</b>만 빠릅니다. 목표 수량을 24로 두고
-  '<b>목표까지 ＋만 눌러 보기</b>'를 눌러 보세요 — 데모가 <b>몇 번 눌러야 하는지</b>를 세서 적습니다.
-  쳐서 넣으면 <b>한 번</b>입니다.<br>
-  그래서 가운데 칸은 <b>읽기 전용으로 두지 않습니다</b>. 체크를 끄면 칸이 잠겨
-  큰 수를 넣을 길이 사라집니다.<br>
-  단추는 <b>44px</b> 이어야 손가락이 닿습니다 — 작게 두면 데모가 터치 타깃 미달이라고 적습니다.
-  그리고 <b>1에서 −</b>, <b>최대에서 ＋</b>는 꺼져 있어야 합니다.
+  '<b>목표까지 ＋만 눌러 보기</b>'를 눌러 보세요. 데모가 <b>몇 번 눌러야 하는지</b>를 세어 적어 주는데,
+  같은 수를 가운데 칸에 쳐서 넣으면 <b>한 번</b>에 끝납니다.<br>
+  그래서 가운데 칸은 <b>읽기 전용으로 두지 않습니다</b>. 체크를 끄면 칸이 잠겨서
+  큰 수를 넣을 방법이 없어집니다.<br>
+  단추는 <b>44px</b>은 되어야 손가락으로 정확히 누를 수 있습니다. 단추를 작게 두면 데모가 터치 타깃 크기에 못 미친다고 알려 줍니다.
+  또 <b>1에서 −</b>, <b>최대에서 ＋</b>는 꺼 두어야 합니다.
 </p>
 
 <script>
@@ -69,10 +69,10 @@
     var rd = document.getElementById('read');
     rd.innerHTML = '지금 수량 <b>' + v + '</b> · 목표 <b>' + goal + '</b>' +
       '<br>＋ 를 누른 횟수 <b>' + clicks + '번</b>' +
-      (clicks >= 10 ? ' <span class="warn">— 쳐서 넣으면 한 번이다</span>' : '') +
-      '<br>단추 크기 <b>' + hit + 'px</b>' + (hit < 44 ? ' <span class="warn">— 44px 미달</span>' : '') +
-      '<br>가운데 칸 <b>' + (typing ? '쳐서 넣을 수 있다' : '잠겨 있다') + '</b>' +
-      (typing ? '' : ' <span class="warn">— 큰 수를 넣을 길이 없다</span>') +
+      (clicks >= 10 ? ' <span class="warn">— 쳐서 넣으면 한 번에 끝납니다</span>' : '') +
+      '<br>단추 크기 <b>' + hit + 'px</b>' + (hit < 44 ? ' <span class="warn">— 44px에 못 미칩니다</span>' : '') +
+      '<br>가운데 칸은 <b>' + (typing ? '쳐서 넣을 수 있습니다' : '잠겨 있습니다') + '</b>' +
+      (typing ? '' : ' <span class="warn">— 큰 수를 넣을 방법이 없습니다</span>') +
       (why ? '<br>' + why : '');
     rd.dataset.v = String(v);
     rd.dataset.clicks = String(clicks);
@@ -89,10 +89,10 @@
   });
   document.getElementById('val').addEventListener('change', function () {
     var n = parseInt(this.value, 10);
-    if (isNaN(n)) { draw('<span class="warn">숫자가 아니다</span>'); return; }
+    if (isNaN(n)) { draw('<span class="warn">숫자가 아닙니다</span>'); return; }
     v = Math.max(1, Math.min(MAX, n));
     draw('');
-    document.getElementById('log').innerHTML = '<b>쳐서</b> 넣었다 — 한 번에 끝났다';
+    document.getElementById('log').innerHTML = '<b>쳐서</b> 넣었더니 한 번에 끝났습니다';
   });
   document.getElementById('run').addEventListener('click', function () {
     var goal = +document.getElementById('goal').value;
@@ -100,7 +100,7 @@
     var t = setInterval(function () {
       if (v >= goal || v >= MAX) {
         clearInterval(t);
-        document.getElementById('log').innerHTML = '목표까지 <b>' + clicks + '번</b> 눌렀다';
+        document.getElementById('log').innerHTML = '목표까지 <b>' + clicks + '번</b> 눌렀습니다';
         draw('');
         return;
       }

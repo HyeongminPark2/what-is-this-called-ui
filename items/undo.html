@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>되돌리기 — 이름표</title>
-<meta name="description" content="지운 뒤에 되돌릴 길을 주는 방식. 되묻기와의 차이, 되돌릴 수 있는 시간, 한계.">
+<meta name="description" content="지운 뒤에 되돌릴 기회를 주는 방식을 다룹니다. 되묻기와는 어떻게 다른지, 되돌릴 수 있는 시간은 얼마인지, 어떤 한계가 있는지를 보여 주는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">8부 피드백과 상태</a> › 되돌리기</p>
     <h1>되돌리기</h1>
     <p class="en">Undo</p>
-    <p class="lede" style="margin-top:var(--s3)">되묻기는 <b>할 때마다 멈춰 세웁니다</b>. 되돌리기는 안 멈추는 대신 <b>몇 초 안에만</b> 됩니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">되돌리기는 지운 뒤 잠깐 띠를 띄워, 방금 한 일을 무를 기회를 주는 방식입니다. 되묻기는 사용자를 <b>지울 때마다 멈춰 세우지만</b>, 되돌리기는 멈춰 세우지 않는 대신 <b>몇 초 안에만</b> 되돌릴 수 있습니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,32 +50,31 @@
           <iframe src="../demos/undo.html" title="되돌리기 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>되묻기는 <b>매번 멈춰 세웁니다</b> — 데모가 지우는 동안 몇 번 멈춰 세웠는지 셉니다.
-          열 번 지우면 열 번 멈춥니다.<br>
-          되돌리기는 안 멈추는 대신 <b>시간이 지나면 끝</b>입니다.
-          창이 닫힌 뒤에 눌러 보면 데모가 <b>너무 늦은 되돌리기</b>를 셉니다.
-          그래서 되돌릴 수 있는 시간은 <b>5초 안팎</b>이 보통이고,
-          정말 되돌릴 수 없는 일에는 되묻기를 씁니다.</p>
+          <p>되묻기는 지울 때마다 <b>사용자를 멈춰 세우기</b> 때문에, 열 번 지우면 열 번 멈춥니다. 데모는 지우는 동안 몇 번 멈춰 세웠는지 셉니다.<br>
+          되돌리기는 멈춰 세우지 않는 대신 <b>시간이 지나면 더는 되돌릴 수 없습니다</b>.
+          띠가 닫힌 뒤에 되돌리기를 눌러 보면 데모가 <b>너무 늦은 되돌리기</b>로 셉니다.
+          되돌릴 수 있는 시간은 보통 <b>5초 안팎</b>으로 잡고,
+          정말 되돌릴 수 없는 일에는 되돌리기 대신 되묻기를 씁니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>되돌리기, 실행 취소, 언두</td></tr>
             <tr><th>영어</th><td>undo, undo toast, undo snackbar</td></tr>
-            <tr><th>같이 쓰는 말</th><td>지운 뒤 잠깐 뜨는 띠를 <b>언두 스낵바</b>(undo snackbar)라 부릅니다. 지운 것을 바로 없애지 않고 일정 기간 두는 것을 <b>소프트 삭제</b>(soft delete), 그 기간을 <b>유예 기간</b>(grace period)이라 합니다. 여러 단계를 되돌리는 것은 <b>되돌리기 기록</b>(undo stack)입니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>취소</b> — 취소는 <b>하기 전에</b> 그만두는 것입니다. 되돌리기는 <b>한 뒤에</b>입니다.<br><b>되묻기</b> — <a href="destructive.html">위험한 동작</a>의 확인은 <b>막아 세우는</b> 쪽입니다.<br><b>휴지통</b> — 휴지통은 <b>며칠</b> 두는 유예 기간이고, 되돌리기는 <b>몇 초</b>입니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>지운 뒤 잠깐 뜨는 띠는 <b>언두 스낵바</b>(undo snackbar)라고 부릅니다. 지운 것을 바로 없애지 않고 일정 기간 남겨 두는 것은 <b>소프트 삭제</b>(soft delete), 그 기간은 <b>유예 기간</b>(grace period)이라고 합니다. 여러 단계를 거슬러 되돌릴 수 있게 쌓아 두는 기록은 <b>되돌리기 기록</b>(undo stack)이라고 합니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>취소</b> — 취소는 <b>하기 전에</b> 그만두는 것이고, 되돌리기는 <b>이미 한 뒤에</b> 무르는 것입니다.<br><b>되묻기</b> — <a href="destructive.html">위험한 동작</a>의 확인은 실행하기 전에 <b>사용자를 멈춰 세우는</b> 방식이라 되돌리기와 다릅니다.<br><b>휴지통</b> — 휴지통은 지운 것을 <b>며칠</b> 동안 남겨 두는 유예 기간이고, 되돌리기는 <b>몇 초</b> 동안만 기회를 줍니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>되돌릴 수 없는 일을 다루는 방법들입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>되돌릴 수 없는 일을 다루는 방법들을 모았습니다. 아래 네 가지를 물어보면 방법마다 차이가 드러납니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>언제 멈추나</th><th>되돌릴 수 있나</th><th>몇 번 멈추나</th><th>되돌릴 수 없는 일에</th></tr></thead>
@@ -88,57 +87,57 @@
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — <b>되돌릴 수 있으면 묻지 마세요.</b> 묻는 것이 맞는 일은 되돌릴 수 없는 일뿐입니다.</p>
+          <p><b>되돌리기를 한 줄로 정리하면</b> — <b>되돌릴 수 있는 일이라면 미리 묻지 않습니다.</b> 실행하기 전에 되물어야 하는 것은 되돌릴 수 없는 일뿐입니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">시간이 지나면 끝난다</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">시간이 지나면 닫히는 되돌리기 띠</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;align-items:center;gap:6px;border-radius:6px;background:var(--fg);color:var(--surface);padding:5px 8px;font-size:8px;border:1px solid var(--accent)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">영수증을 지웠습니다</span><span style="font-weight:700;text-decoration:underline;white-space:nowrap">되돌리기</span><span style="margin-left:auto;font-family:var(--mono);opacity:.7;white-space:nowrap">5초</span></div><span style="font-size:8.5px;color:var(--fg-muted)">눌리면 돌아온다</span></div>
             </div>
-            <figcaption>뜬 직후<span><b>5초</b> 안에 누를 수 있다</span></figcaption>
+            <figcaption>뜬 직후<span><b>5초</b> 안에 되돌리기를 누를 수 있습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;align-items:center;gap:6px;border-radius:6px;background:var(--fg);color:var(--surface);padding:5px 8px;font-size:8px;border:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">영수증을 지웠습니다</span><span style="font-weight:700;text-decoration:underline;white-space:nowrap">되돌리기</span><span style="margin-left:auto;font-family:var(--mono);opacity:.7;white-space:nowrap">1초</span></div><span style="font-size:8.5px;color:var(--fg-muted)">곧 닫힌다</span></div>
             </div>
-            <figcaption>끝나 갈 때<span>남은 시간을 <b>보여 준다</b></span></figcaption>
+            <figcaption>끝나 갈 때<span>남은 시간을 <b>보여 줍니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;align-items:center;gap:6px;border-radius:6px;background:var(--fg);color:var(--surface);padding:5px 8px;font-size:8px;border:1px solid var(--accent)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">영수증이 돌아왔습니다</span></div><span style="font-size:8.5px;color:var(--fg-muted)">되돌렸다</span></div>
             </div>
-            <figcaption>되돌린 뒤<span><b>돌아왔다고</b> 알린다</span></figcaption>
+            <figcaption>되돌린 뒤<span>지운 것이 <b>돌아왔다고</b> 알립니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--danger)">시간이 끝남</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8.5px;color:var(--fg-muted)">띠가 사라졌다</span><span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">이제는 못 되돌린다</span></span></div></div>
             </div>
-            <figcaption>창이 닫힘<span><b>끝</b>이다</span></figcaption>
+            <figcaption>창이 닫힘<span>띠가 닫히면 <b>더는 되돌릴 수 없습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;align-items:center;gap:6px;border-radius:6px;background:var(--fg);color:var(--surface);padding:5px 8px;font-size:8px;border:1px solid var(--accent)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">3개를 지웠습니다</span><span style="font-weight:700;text-decoration:underline;white-space:nowrap">되돌리기</span><span style="margin-left:auto;font-family:var(--mono);opacity:.7;white-space:nowrap">5초</span></div><span style="font-size:8.5px;color:var(--fg-muted)">묶어서 하나로</span></div>
             </div>
-            <figcaption>여러 개<span>띠를 <b>쌓지 않는다</b></span></figcaption>
+            <figcaption>여러 개<span>여러 개를 지워도 띠를 <b>쌓지 않고</b> 하나로 묶습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--line)">되묻기</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8.5px">정말 지울까요?</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">취소 · 지우기</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">되돌릴 수 없는 일에만</span></div>
             </div>
-            <figcaption>되묻기<span><b>할 때마다</b> 멈춘다</span></figcaption>
+            <figcaption>되묻기<span>지울 <b>때마다</b> 사용자를 멈춰 세웁니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="되돌리기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="되돌리기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
                   <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">무엇을 했는지 — '영수증을 지웠습니다'</div>
@@ -152,77 +151,77 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>무엇을 했는지 <em>한 줄</em></b><span>'영수증을 지웠습니다'</span></li>
-            <li><b>되돌리기 <em>한 번</em></b><span>두 단계로 만들지 않는다</span></li>
-            <li><b>남은 시간 <em>5초 안팎</em></b><span><b>보여 주면</b> 덜 불안하다</span></li>
-            <li><b>창이 닫힘 <em>끝</em></b><span>그 뒤에는 <b>방법이 없다</b></span></li>
-            <li><b><code>role="status"</code> <em>소리로</em></b><span>띠가 떴다는 것을 알린다</span></li>
-            <li><b>되묻기 <em>되돌릴 수 없을 때</em></b><span><b>그때만</b> 쓴다</span></li>
+            <li><b>무엇을 했는지 <em>한 줄</em></b><span>'영수증을 지웠습니다'처럼 방금 한 일을 한 줄로 적습니다</span></li>
+            <li><b>되돌리기 <em>한 번</em></b><span>한 번 누르면 되돌아가게 하고, 두 단계로 만들지 않습니다</span></li>
+            <li><b>남은 시간 <em>5초 안팎</em></b><span>남은 시간을 <b>보여 주면</b> 사용자가 덜 불안해합니다</span></li>
+            <li><b>창이 닫힘 <em>끝</em></b><span>띠가 닫힌 뒤에는 <b>되돌릴 방법이 없습니다</b></span></li>
+            <li><b><code>role="status"</code> <em>소리로</em></b><span>스크린 리더로 띠가 떴다는 것을 알립니다</span></li>
+            <li><b>되묻기 <em>되돌릴 수 없을 때</em></b><span>되돌릴 수 없는 일에만 씁니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          되묻기를 기본으로 두면 <b>사람이 그것을 안 읽게</b> 됩니다 —
-          매번 뜨는 창은 몇 번 지나면 '예'를 누르는 동작이 되어 버려
-          정작 막아야 할 때 못 막습니다.
+          모든 삭제에 되묻기를 붙이면 <b>사용자가 확인 창을 읽지 않게</b> 됩니다.
+          매번 뜨는 창은 몇 번 겪고 나면 읽지 않고 '예'를 누르는 습관이 되어 버려서,
+          정작 막아야 할 때 막지 못합니다.
           그래서 <b>되돌릴 수 있는 일은 묻지 않고</b>, 되묻기는
-          정말 되돌릴 수 없는 일에 아껴 둡니다.<br>
-          키보드만 쓰는 사람에게는 <b>5초가 짧습니다</b> —
-          띠가 떴다는 것을 알고, Tab 으로 가서, 누르기까지의 시간입니다.
-          띠에 초점을 옮기거나(알림이라면), 적어도 <code>role="status"</code> 로
-          <b>떴다는 것을 알려야</b> 합니다.</p>
+          정말 되돌릴 수 없는 일에만 씁니다.<br>
+          키보드만 쓰는 사람에게는 <b>5초가 짧습니다</b>.
+          띠가 떴다는 것을 알아채고, Tab으로 되돌리기 버튼까지 가서 누르는 데 걸리는 시간을 생각해야 합니다.
+          그래서 (알림이라면) 띠로 초점을 옮기거나, 적어도 <code>role="status"</code>로
+          <b>띠가 떴다는 것을 알려야</b> 합니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>되돌리기를 쓰는 경우</h3>
             <ul>
-              <li>되돌릴 수 있는 일은 <b>묻지 않기</b></li>
-              <li><b>남은 시간</b>을 보여 주기</li>
-              <li>여러 개를 지우면 띠를 <b>하나로</b> 묶기</li>
+              <li>되돌릴 수 있는 일을 처리할 때. 미리 <b>묻지 않고</b> 되돌리기 띠를 띄웁니다</li>
+              <li>되돌릴 수 있는 <b>남은 시간</b>을 보여 줄 때</li>
+              <li>여러 개를 지웠을 때. 띠를 <b>하나로</b> 묶어 보여 줍니다</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>되돌리기를 쓰지 않는 경우</h3>
             <ul>
-              <li>모든 삭제에 <b>되묻기</b> 붙이기 — 읽지 않게 된다</li>
-              <li>되돌리기를 <b>두 단계</b>로 만들기 — 한 번이면 된다</li>
-              <li>띠를 <b>쌓기</b> — 셋을 지우면 셋이 떠 화면을 덮는다</li>
-              <li><b>소리로 안 알리기</b> — 띠가 떴는지도 모른다</li>
+              <li>모든 삭제에 <b>되묻기</b>를 붙일 때. 사용자가 확인 창을 읽지 않게 됩니다</li>
+              <li>되돌리기를 <b>두 단계</b>로 만들 때. 한 번 누르면 되돌아가야 합니다</li>
+              <li>띠를 <b>쌓아</b> 띄울 때. 셋을 지우면 띠 셋이 떠서 화면을 덮습니다</li>
+              <li><b>스크린 리더로 알리지 않을 때</b>. 화면을 보지 못하는 사용자는 띠가 떴는지도 모릅니다</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 되돌릴 수 없는 일은 <a href="destructive.html">위험한 동작</a>, 띠 부품 자체는 <a href="toast.html">토스트</a>, 며칠 두는 것은 휴지통(소프트 삭제), 보내기 전 확인은 <a href="dialog.html">다이얼로그</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>되돌리기 대신 다른 것을 써야 하는 경우</b> — 되돌릴 수 없는 일은 <a href="destructive.html">위험한 동작</a>, 띠 부품 자체는 <a href="toast.html">토스트</a>, 며칠 두는 것은 휴지통(소프트 삭제), 보내기 전 확인은 <a href="dialog.html">다이얼로그</a>.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:flex;align-items:center;gap:6px;border-radius:6px;background:var(--fg);color:var(--surface);padding:5px 8px;font-size:8px;border:1px solid var(--accent)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">메일을 보냈습니다</span><span style="font-weight:700;text-decoration:underline;white-space:nowrap">보내기 취소</span><span style="margin-left:auto;font-family:var(--mono);opacity:.7;white-space:nowrap">5초</span></div></div>
             </div>
-            <figcaption><b>메일 보내기</b><b>보낸 뒤</b>에도 무를 수 있다</figcaption>
+            <figcaption><b>메일 보내기</b>메일을 <b>보낸 뒤</b>에도 잠깐 동안 무를 수 있습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:flex;align-items:center;gap:6px;border-radius:6px;background:var(--fg);color:var(--surface);padding:5px 8px;font-size:8px;border:1px solid var(--accent)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">1건을 보관함으로</span><span style="font-weight:700;text-decoration:underline;white-space:nowrap">되돌리기</span><span style="margin-left:auto;font-family:var(--mono);opacity:.7;white-space:nowrap">5초</span></div></div>
             </div>
-            <figcaption><b>보관</b>되돌리기가 <b>가장 잘 맞는</b> 자리</figcaption>
+            <figcaption><b>보관</b>보관은 다시 꺼내기 쉬운 일이라 되돌리기가 <b>가장 잘 맞습니다</b></figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">유예 기간</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8.5px">계정을 지우면 30일 뒤 삭제됩니다</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">그 안에는 되살릴 수 있습니다</span></span></div></div>
             </div>
-            <figcaption><b>계정 삭제</b><b>며칠</b>을 둔다</figcaption>
+            <figcaption><b>계정 삭제</b>되돌릴 수 있는 기간을 <b>며칠</b> 둡니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">이 띠의 계약서</span></h2>
-        <p>띠는 <code>role="status"</code> 로 알리고, 되돌리기는 <b>평범한 버튼</b>입니다.</p>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+        <p>띠는 <code>role="status"</code>로 알리고, 되돌리기는 <b>평범한 버튼</b>으로 만듭니다.</p>
 <pre class="code">&lt;<span class="t">div</span> <span class="a">class</span>=<span class="s">"undo-bar"</span> <span class="a">role</span>=<span class="s">"status"</span>&gt;
   &lt;<span class="t">span</span>&gt;영수증_2411_01.jpg 을 지웠습니다&lt;/<span class="t">span</span>&gt;
   &lt;<span class="t">button</span>&gt;되돌리기&lt;/<span class="t">button</span>&gt;
@@ -240,43 +239,43 @@ undoBtn.onclick = <span class="t">async</span> () =&gt; {
 };</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td><code>role="status"</code></td><td>띠가 떴다고 <b>하던 말이 끝난 뒤</b> 읽어 준다</td></tr>
-            <tr><td>Tab</td><td>띠의 되돌리기로 <b>갈 수 있어야</b> 한다</td></tr>
-            <tr><td>초점 옮기기</td><td>띠로 초점을 <b>뺏지는 않는다</b> — 하던 일이 끊긴다</td></tr>
-            <tr><td>Ctrl + Z</td><td>글 편집기라면 <b>같이</b> 묶어 둔다</td></tr>
-            <tr><td>시간</td><td>5초는 키보드 사용자에게 <b>짧다</b> — 멈춤 단추를 두거나 늘린다</td></tr>
-            <tr><td>확인하는 법</td><td>마우스를 안 쓰고 <b>Tab 만으로</b> 되돌려 본다</td></tr>
+            <tr><td><code>role="status"</code></td><td>스크린 리더가 <b>읽던 내용을 마친 뒤</b> 띠가 떴다고 읽어 줍니다</td></tr>
+            <tr><td>Tab</td><td>Tab으로 띠의 되돌리기 버튼까지 <b>갈 수 있어야</b> 합니다</td></tr>
+            <tr><td>초점 옮기기</td><td>띠로 초점을 <b>가져가지는 않습니다</b>. 초점을 가져가면 사용자가 하던 일이 끊깁니다</td></tr>
+            <tr><td>Ctrl + Z</td><td>글 편집기라면 되돌리기 버튼과 <b>같은 동작</b>으로 묶어 둡니다</td></tr>
+            <tr><td>시간</td><td>5초는 키보드 사용자에게 <b>짧습니다</b>. 시간을 멈추는 버튼을 두거나 시간을 늘립니다</td></tr>
+            <tr><td>확인하는 법</td><td>마우스를 쓰지 않고 <b>Tab만으로</b> 되돌려 봅니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>바로 지우지 않는다</th><td><b>표시만 지우고</b> 몇 초 뒤에 정말 지웁니다 — 그 사이에 되돌리기가 옵니다.</td></tr>
-            <tr><th>되돌리기 열쇠</th><td>지울 때 <code>undo_token</code> 을 돌려주면 <b>무엇을 되살릴지</b>가 분명해집니다.</td></tr>
-            <tr><th>여러 개</th><td>묶어서 지웠으면 <b>묶음 단위</b>로 되살려야 합니다 — 하나씩이면 순서가 꼬입니다.</td></tr>
-            <tr><th>유예 기간</th><td>계정·프로젝트처럼 큰 것은 <b>며칠</b>을 둡니다. 그동안은 목록에서만 숨깁니다.</td></tr>
+            <tr><th>바로 지우지 않는다</th><td>처음에는 <b>지웠다는 표시만 해 두고</b> 몇 초 뒤에 실제로 지웁니다. 되돌리기 요청은 그 사이에 들어옵니다.</td></tr>
+            <tr><th>되돌리기 열쇠</th><td>지울 때 <code>undo_token</code>을 돌려주면 되돌리기 요청이 왔을 때 <b>무엇을 되살릴지</b>가 분명해집니다.</td></tr>
+            <tr><th>여러 개</th><td>여러 개를 묶어서 지웠다면 <b>묶음 단위</b>로 되살려야 합니다. 하나씩 되살리면 순서가 꼬입니다.</td></tr>
+            <tr><th>유예 기간</th><td>계정이나 프로젝트처럼 큰 것을 지울 때는 유예 기간을 <b>며칠</b> 둡니다. 그동안은 데이터를 지우지 않고 목록에서만 숨깁니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p><b>안드로이드가 이 방식을 가장 적극적으로</b> 씁니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>세 플랫폼 가운데 <b>안드로이드가 되돌리기를 가장 적극적으로</b> 씁니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>직접 만듦</span></header>
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="display:flex;align-items:center;gap:6px;border-radius:6px;background:var(--fg);color:var(--surface);padding:5px 8px;font-size:8px;border:1px solid var(--accent)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">지웠습니다</span><span style="font-weight:700;text-decoration:underline;white-space:nowrap">되돌리기</span><span style="margin-left:auto;font-family:var(--mono);opacity:.7;white-space:nowrap">5초</span></div></div>
             </div>
-            <footer>토스트에 단추를 붙여 만듭니다. <b>소리로 알리는 것</b>을 빠뜨리기 쉽습니다.</footer>
+            <footer>토스트에 버튼을 붙여 만듭니다. <b>스크린 리더로 알리는 처리</b>를 빠뜨리기 쉽습니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>흔들어 취소 · 세 손가락</span></header>
@@ -284,7 +283,7 @@ undoBtn.onclick = <span class="t">async</span> () =&gt; {
               <div class="phone" role="img" aria-label="iOS 되돌리기 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:30px;height:12px;border-radius:4px;background:var(--fg);opacity:.85"></div></div></div>
             </div>
-            <footer>글 편집에는 <b>세 손가락 쓸기</b>가 있습니다. 목록 삭제에는 되묻기를 더 씁니다.</footer>
+            <footer>글을 편집할 때는 <b>세 손가락 쓸기</b>로 되돌릴 수 있습니다. 목록에서 지울 때는 되돌리기보다 되묻기를 더 많이 씁니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>Snackbar + UNDO</span></header>
@@ -293,18 +292,18 @@ undoBtn.onclick = <span class="t">async</span> () =&gt; {
                 <div style="position:absolute;left:4px;right:4px;bottom:6px;height:11px;border-radius:3px;background:var(--fg);opacity:.9"></div>
                 <div style="position:absolute;right:7px;bottom:9px;width:10px;height:4px;border-radius:2px;background:var(--accent)"></div></div></div>
             </div>
-            <footer>Material 이 <b>스낵바 + UNDO</b> 를 표준으로 못박아, 목록에서 되묻기를 거의 안 씁니다.</footer>
+            <footer>Material이 <b>스낵바에 UNDO를 붙이는 방식</b>을 표준으로 정해 두었기 때문에, 목록에서 지울 때 되묻기를 거의 쓰지 않습니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — 안드로이드가 <b>'지우고 되돌리기'</b>를 표준으로 삼은 덕에 그쪽 앱에서는 삭제 확인 창이 드뭅니다 — 쓰다 보면 훨씬 덜 거슬립니다. iOS 는 반대로 되묻기를 더 쓰는데, <b>흔들어 취소</b>라는 숨은 기능이 있어 글 편집에서는 되돌리기가 됩니다. 웹에서는 둘 다 직접 만들어야 하니 <b>어느 쪽을 기본으로 삼을지</b>를 팀에서 한 번 정해 두면 화면마다 다르게 되는 일이 없습니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — 안드로이드는 <b>'지우고 되돌리기'</b>를 표준으로 삼았기 때문에 안드로이드 앱에서는 삭제 확인 창이 드물고, 그만큼 쓰면서 덜 거슬립니다. 반대로 iOS는 되묻기를 더 많이 쓰지만, <b>흔들어 취소</b>라는 잘 알려지지 않은 기능이 있어서 글을 편집할 때는 되돌릴 수 있습니다. 웹에서는 두 방식 모두 직접 만들어야 하므로, <b>어느 쪽을 기본으로 삼을지</b>를 팀에서 한 번 정해 두면 화면마다 방식이 달라지는 일을 막을 수 있습니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="spinner.html"><b>스피너</b><em>8부</em></a></li>
         <li><a href="skeleton.html"><b>스켈레톤</b><em>8부</em></a></li>
@@ -318,20 +317,20 @@ undoBtn.onclick = <span class="t">async</span> () =&gt; {
         <li><a href="offline.html"><b>오프라인</b><em>8부</em></a></li>
         <li><a href="stale.html"><b>오래된 데이터</b><em>8부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="toast.html"><b>토스트</b><em>6부</em></a></li>
         <li><a href="destructive.html"><b>위험한 동작</b><em>13부</em></a></li>
         <li><a href="optimistic.html"><b>낙관적 UI</b><em>8부</em></a></li>
         <li><a href="live.html"><b>라이브 리전</b><em>12부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

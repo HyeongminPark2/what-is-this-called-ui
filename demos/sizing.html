@@ -32,11 +32,11 @@
 </div>
 
 <p class="hint">
-  칸 폭과 글을 바꿔 가며 <b>어떤 값이 어떻게 버티는지</b> 보세요.<br>
-  <code>width: 300px</code>은 칸이 좁아져도 <b>안 줄어</b> 넘칩니다.
-  <code>max-width: 300px</code>은 <b>좁아지면 같이 줄어듭니다</b> — 반응형에서 거의 늘 이쪽이 맞습니다.<br>
-  <code>min-content</code>는 <b>가장 긴 낱말만큼</b>, <code>max-content</code>는 <b>안 끊고 한 줄로</b>,
-  <code>fit-content</code>는 둘 사이에서 <b>칸이 허락하는 만큼</b>입니다.
+  칸 폭과 글을 바꿔 가며 <b>값마다 폭이 어떻게 바뀌는지</b> 보세요.<br>
+  <code>width: 300px</code>은 칸이 좁아져도 <b>줄어들지 않아서</b> 넘칩니다.
+  반면 <code>max-width: 300px</code>은 칸이 <b>좁아지면 함께 줄어들기</b> 때문에, 반응형 화면에서는 대부분 이쪽이 맞습니다.<br>
+  <code>min-content</code>는 <b>가장 긴 낱말만큼</b>, <code>max-content</code>는 줄을 바꾸지 않은 <b>한 줄 길이만큼</b> 폭을 차지하고,
+  <code>fit-content</code>는 둘 사이에서 <b>칸 폭을 넘지 않는 만큼</b> 차지합니다.
   <code>clamp()</code>는 최소·기본·최대를 한 줄로 적습니다.
 </p>
 

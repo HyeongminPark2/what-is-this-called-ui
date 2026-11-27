@@ -27,77 +27,77 @@ ANAT = '''              <div class="anat--wide" style="background:var(--bg);bord
 
 D = dict(
   slug="textzoom", ko="확대와 글자 크기", en="Zoom & text resize",
-  desc="사용자가 글자를 키웠을 때도 쓰이는가. px로 박으면 안 커지고, 높이까지 박으면 잘린다.",
-  lede="사용자는 <b>글자를 키울 수 있습니다</b>. 저시력인 사람에게는 이게 유일한 길입니다.",
-  axes_lede="접근성은 따로 붙이는 것이 아니라 <b>빠뜨리지 않는 것</b>입니다. 이 네 가지만 물어보면 갈립니다.",
+  desc="사용자가 글자를 키웠을 때도 화면을 쓸 수 있는지 다루는 항목입니다. 글자 크기를 px로 고정하면 글자가 커지지 않고, 상자 높이까지 고정하면 글이 잘립니다.",
+  lede="사용자는 브라우저나 OS 설정으로 <b>글자를 키울 수 있습니다</b>. 저시력인 사람은 이 설정으로 글자를 키워야 화면을 읽을 수 있습니다.",
+  axes_lede="접근성은 다 만든 뒤에 덧붙이기보다 만드는 동안 <b>빠뜨리지 않고 챙기는 일</b>입니다. 아래 네 가지를 물어보면 이 부의 항목들이 서로 어떻게 다른지 가를 수 있습니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
-          <p>막대를 끌어 글자를 키워 보세요. OS·브라우저 설정으로 <b>사용자가 직접</b> 키울 수 있습니다.<br>
-          <b>px 로 박아 두기</b>를 켜면 안 커지고, 상자 높이까지 박으면 <b>글이 잘립니다</b> —
-          설정을 켠 사람만 겪는 사고라 <b>우리 화면에서는 안 보입니다</b>.</p>
+          <p>막대를 끌어 글자를 키워 보세요. 실제로는 사용자가 OS나 브라우저 설정으로 <b>직접</b> 글자를 키웁니다.<br>
+          <b>px 로 박아 두기</b>를 켜면 막대를 끌어도 글자가 커지지 않고, 상자 높이까지 px로 고정하면 <b>글이 잘립니다</b>.
+          이 사고는 글자 크기 설정을 켠 사람만 겪기 때문에 <b>개발하는 사람의 화면에서는 드러나지 않습니다</b>.</p>
         </div>''',
   names=rows([
     ("한국어", "확대, 글자 크기 조절, 글자 키우기, 텍스트 리사이즈"),
     ("영어", "zoom, text resize, text spacing, dynamic type"),
     ("같이 쓰는 말",
-     "화면 전체를 키우는 것이 <b>브라우저 확대</b>(zoom), 글자만 키우는 것이 <b>글자 크기 설정</b>입니다. "
-     "iOS 는 <b>다이내믹 타입</b>, 안드로이드는 <b>글꼴 크기</b>라 부릅니다. "
-     "WCAG 에는 <b>200%까지 확대</b>(1.4.4)와 "
-     "<b>글자 간격을 늘려도 안 깨질 것</b>(1.4.12)이 따로 적혀 있습니다."),
-    ("자주 잘못 부름",
-     "<b>반응형</b> — 폭이 달라지는 것과 <b>글자가 커지는</b> 것은 다릅니다. 다만 결과가 비슷해 섞입니다.<br>"
-     "<b>핀치 줌</b> — 손가락으로 벌리는 것도 확대지만, <b>막아 두는 코드</b>가 흔해 따로 짚어야 합니다.<br>"
-     "<b>화면 밀도</b> — <a href=\"dpr.html\">화면 밀도</a>는 기기의 성질이고, 이쪽은 <b>사용자의 선택</b>입니다."),
+     "화면 전체를 키우는 것은 <b>브라우저 확대</b>(zoom), 글자만 키우는 것은 <b>글자 크기 설정</b>이라고 합니다. "
+     "글자 크기 설정을 iOS에서는 <b>다이내믹 타입</b>, 안드로이드에서는 <b>글꼴 크기</b>라고 부릅니다. "
+     "WCAG에는 <b>200%까지 확대해도 쓸 수 있어야 한다</b>는 기준(1.4.4)과 "
+     "<b>글자 간격을 늘려도 화면이 깨지지 않아야 한다</b>는 기준(1.4.12)이 따로 있습니다."),
+    ("자주 잘못 부르는 이름",
+     "<b>반응형</b> — 반응형은 화면 폭이 달라질 때를 다루고, 이 항목은 <b>글자가 커질 때</b>를 다룹니다. 다만 화면이 바뀌는 결과가 비슷해서 자주 섞어 부릅니다.<br>"
+     "<b>핀치 줌</b> — 두 손가락을 벌려 키우는 것도 확대에 속하지만, 핀치 줌을 <b>막아 두는 코드</b>가 흔해서 따로 짚어야 합니다.<br>"
+     "<b>화면 밀도</b> — <a href=\"dpr.html\">화면 밀도</a>는 기기가 원래 가진 성질이고, 글자 크기는 <b>사용자가 고르는 설정</b>입니다."),
   ]),
   axes=ax("확대와 글자 크기"),
-  oneline="<b>크기는 rem 으로, 높이는 박지 마세요.</b> 그러면 설정을 켠 사람에게도 그대로 쓰입니다.",
+  oneline="<b>글자 크기는 rem으로 정하고, 상자 높이는 고정하지 않습니다.</b> 그러면 글자 크기 설정을 켠 사람도 화면을 그대로 쓸 수 있습니다.",
   s4_title="키웠을 때", s4_hint="무엇이 깨지나",
   states=states([
-    (card("10px", note="기본 — 100%"), "기본", "우리가 보는 모습"),
-    (card("13px", note="150% — rem 으로 두면 따라온다", ok=True), "150%", "<b>상자가 글에 맞춰</b> 늘어난다"),
-    (card("17px", note="200% — 여기까지는 지켜야 한다", ok=True), "200%", "WCAG 가 요구하는 <b>상한</b>"),
-    (card("10px", note="px 로 박음 — 설정을 켜도 안 커진다", ok=False), "px 로 박으면", "<b>설정이 아무 일도 안 한다</b>"),
-    (card("17px", h="22px", clip=True, note="높이까지 박음 — 글이 잘렸다", ok=False), "높이까지 박으면", "<b>내용을 잃는다</b>"),
+    (card("10px", note="기본 — 100%"), "기본", "개발하는 사람이 보통 보는 모습입니다"),
+    (card("13px", note="150% — rem 으로 두면 따라온다", ok=True), "150%", "<b>상자가 글자 크기에 맞춰</b> 늘어납니다"),
+    (card("17px", note="200% — 여기까지는 지켜야 한다", ok=True), "200%", "WCAG가 이 배율까지 쓸 수 있어야 한다고 정한 <b>상한</b>입니다"),
+    (card("10px", note="px 로 박음 — 설정을 켜도 안 커진다", ok=False), "px 로 박으면", "글자 크기를 px로 고정하면 <b>설정을 바꿔도 글자가 커지지 않습니다</b>"),
+    (card("17px", h="22px", clip=True, note="높이까지 박음 — 글이 잘렸다", ok=False), "높이까지 박으면", "커진 글이 상자 밖으로 넘쳐 잘리므로 <b>내용을 잃습니다</b>"),
     (one(mono('user-scalable=no', 'var(--danger)'), "확대 막기", False, "폰에서 아예 못 키운다"),
-     "확대를 막으면", "<b>접근성 위반</b>이다"),
+     "확대를 막으면", "<b>접근성 기준 위반</b>입니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("<code>rem</code>", "설정을 따라간다", "뿌리 글자 크기의 배수다"),
-    ("<code>px</code>", "안 커진다", "<b>설정이 아무 일도 안 한다</b>"),
-    ("높이", "박지 않는다", "내용이 밀고 늘어나게 둔다"),
-    ("200%", "지켜야 하는 선", "여기까지 <b>내용과 기능</b>을 잃지 않아야 한다"),
-    ("<code>user-scalable=no</code>", "쓰지 않는다", "핀치 줌을 막는 것은 <b>위반</b>이다"),
-    ("두 가지 설정", "글자만 / 화면 전체", "따로 켜지므로 <b>둘 다</b> 봐야 한다"),
+    ("<code>rem</code>", "설정을 따라간다", "뿌리 요소(html)의 글자 크기에 곱하는 배수입니다"),
+    ("<code>px</code>", "안 커진다", "px로 고정하면 <b>글자 크기 설정을 바꿔도 반영되지 않습니다</b>"),
+    ("높이", "박지 않는다", "높이를 고정하지 않고, 내용이 커지는 만큼 상자도 늘어나게 둡니다"),
+    ("200%", "지켜야 하는 선", "200%까지 키워도 <b>내용과 기능</b>을 잃지 않아야 합니다"),
+    ("<code>user-scalable=no</code>", "쓰지 않는다", "핀치 줌을 막는 것은 <b>접근성 기준 위반</b>입니다"),
+    ("두 가지 설정", "글자만 / 화면 전체", "두 설정은 따로 켜지므로 <b>둘 다</b> 확인해야 합니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          <b>깨지는 자리는 글자 크기가 아니라 '박아 둔 높이'입니다.</b>
+          <b>글자를 키웠을 때 화면이 깨지는 원인은 대개 px로 고정해 둔 상자 높이입니다.</b>
           <code>font-size</code>를 <code>rem</code>으로 두어도
-          상자에 <code>height: 40px</code>이 박혀 있으면 글이 잘립니다.
-          버튼·칩·표 줄처럼 <b>높이를 맞춰 예쁘게 만든 곳</b>이 특히 그렇습니다.
-          <code>min-height</code>로 바꾸고 <code>overflow</code>를 열어 두면
-          대부분 해결되고, 그러면 <b>번역해서 글이 길어질 때</b>도 같이 버팁니다.</p>''',
+          상자에 <code>height: 40px</code>이 고정되어 있으면 커진 글이 잘립니다.
+          버튼, 칩, 표의 줄처럼 <b>높이를 딱 맞춰 정돈한 곳</b>에서 특히 이런 일이 생깁니다.
+          <code>height</code>를 <code>min-height</code>로 바꾸고 <code>overflow</code>를 열어 두면
+          대부분 해결되고, 그렇게 고쳐 두면 <b>번역해서 글이 길어질 때</b>도 화면이 깨지지 않습니다.</p>''',
   do=ul([
-    "글자 크기를 <b>rem</b>으로 두기",
-    "높이는 <code>min-height</code>로, <b>박지 않기</b>",
-    "<b>200%로 키워 한 번</b> 열어 보기",
+    "글자 크기를 정할 때. <b>rem</b> 단위로 정합니다",
+    "상자 높이를 정할 때. 높이를 <b>고정하지 말고</b> <code>min-height</code>로 정합니다",
+    "화면을 다 만든 뒤 점검할 때. 글자를 <b>200%로 키워서 한 번</b> 열어 봅니다",
   ]),
   dont=ul([
-    "<code>user-scalable=no</code>·<code>maximum-scale=1</code> — <b>위반</b>이다",
-    "<code>font-size</code>를 px 로 박기",
-    "상자 높이를 px 로 박고 <code>overflow:hidden</code>",
-    "키우면 <b>기능이 사라지게</b> 두기 — 버튼이 밖으로 밀려나는 식",
+    "<code>user-scalable=no</code>나 <code>maximum-scale=1</code>로 확대를 막을 때. <b>접근성 기준 위반</b>입니다",
+    "<code>font-size</code>를 px로 고정할 때",
+    "상자 높이를 px로 고정하고 <code>overflow:hidden</code>을 걸 때",
+    "글자를 키우면 버튼이 화면 밖으로 밀려나는 식으로 <b>기능이 사라질</b> 때",
   ]),
   instead='기기의 배율은 <a href="dpr.html">화면 밀도</a>, 폭에 따른 배치는 <a href="breakpoint.html">브레이크포인트</a>, 글줄 길이는 <a href="../items/container.html">컨테이너</a>.',
   cases=cases([
     (code(['html { font-size: 100% }', '.card { font-size: 0.95rem }'], "150px", "설정을 그대로 따라간다", True),
-     "크기", "<b>rem</b>으로 둔다"),
+     "크기", "글자 크기는 <b>rem</b>으로 정합니다"),
     (code(['.btn { min-height: 44px }', '/* height 가 아니다 */'], "150px", "글이 커지면 같이 늘어난다", True),
-     "높이", "<code>min-height</code>로"),
+     "높이", "높이는 <code>min-height</code>로 정합니다"),
     (one(mono('width=device-width, initial-scale=1', 'var(--accent)'), "메타 태그", True, "확대를 막는 말을 넣지 않는다"),
-     "뷰포트", "<a href=\"viewport.html\">뷰포트 단위</a>와 같은 줄"),
+     "뷰포트", "<a href=\"viewport.html\">뷰포트 단위</a>에서 다루는 것과 같은 뷰포트 메타 태그입니다"),
   ]),
-  s8_title="최소 코드와 규칙", s8_hint="이 크기의 계약서",
-  code_lede="<code>rem</code>으로 두고 높이를 열어 둡니다.",
+  s8_title="최소 코드와 규칙", s8_hint="구현할 때 지킬 최소 규칙",
+  code_lede="글자 크기는 <code>rem</code>으로 정하고, 상자 높이는 고정하지 않고 열어 둡니다.",
   code='''&lt;<span class="t">meta</span> <span class="a">name</span>=<span class="s">"viewport"</span>
       <span class="a">content</span>=<span class="s">"width=device-width, initial-scale=1"</span>&gt;
 <span class="c">&lt;!-- user-scalable=no · maximum-scale=1 을 넣지 않는다 --&gt;</span>
@@ -108,35 +108,35 @@ D = dict(
 .btn  { <span class="a">min-height</span>: <span class="a">44px</span>; }   <span class="c">/* height 가 아니다 */</span>
 .card { <span class="a">min-height</span>: <span class="a">0</span>; <span class="a">overflow</span>: visible; }
 
-<span class="c">/* 큰 글자에서 한 줄에 다 안 들어가면 접히게 */</span>
+<span class="c">/* 글자가 커져 한 줄에 다 들어가지 않으면 다음 줄로 넘긴다 */</span>
 .row { <span class="a">display</span>: flex; <span class="a">flex-wrap</span>: wrap; <span class="a">gap</span>: <span class="a">var</span>(--s2); }''',
   keys=kbd([
-    ("<code>rem</code>으로", "뿌리 크기의 배수라 <b>설정을 그대로</b> 따라간다"),
-    ("<code>html</code>에 px 을 박지 않는다", "<code>font-size: 16px</code>을 뿌리에 적으면 <b>설정이 무시</b>된다"),
-    ("<code>min-height</code>", "<a href=\"touchtarget.html\">터치 타깃</a>을 지키면서 글이 커지면 같이 늘어난다"),
-    ("<code>flex-wrap: wrap</code>", "큰 글자에서 한 줄에 안 들어가면 <b>접히게</b> 둔다"),
-    ("<code>user-scalable=no</code>", "쓰지 않는다. <b>WCAG 1.4.4 위반</b>이다"),
-    ("확인하는 법", "브라우저를 <b>200%</b>로, 폰은 <b>글자 크기 최대</b>로 두고 열어 본다"),
+    ("<code>rem</code>으로", "뿌리 요소의 글자 크기에 곱하는 배수라서 <b>사용자 설정을 그대로</b> 따라갑니다"),
+    ("<code>html</code>에 px 을 박지 않는다", "뿌리 요소에 <code>font-size: 16px</code>을 적으면 <b>사용자의 글자 크기 설정이 무시</b>됩니다"),
+    ("<code>min-height</code>", "<a href=\"touchtarget.html\">터치 타깃</a> 최소 크기를 지키면서도, 글이 커지면 상자가 같이 늘어납니다"),
+    ("<code>flex-wrap: wrap</code>", "글자가 커져 한 줄에 들어가지 않으면 <b>다음 줄로 넘어가게</b> 둡니다"),
+    ("<code>user-scalable=no</code>", "쓰지 않습니다. <b>WCAG 1.4.4 위반</b>입니다"),
+    ("확인하는 법", "브라우저는 <b>200%</b>로 확대하고, 폰은 <b>글자 크기를 최대</b>로 두고 화면을 열어 봅니다"),
   ]),
   backend=rows([
-    ("서버는 설정을 모른다", "글자 크기 설정은 <b>요청에 안 담겨 옵니다.</b> 화면에서 CSS 로만 다룹니다."),
-    ("글이 길어지는 것과 같은 문제", "번역해서 길어질 때 깨지는 자리와 <b>거의 같습니다</b>. 한 번 고치면 둘 다 해결됩니다."),
+    ("서버는 설정을 모른다", "사용자의 글자 크기 설정은 <b>서버로 오는 요청에 담기지 않으므로</b>, 화면 쪽에서 CSS로만 다룹니다."),
+    ("글이 길어지는 것과 같은 문제", "글자를 키웠을 때 깨지는 자리는 번역해서 글이 길어질 때 깨지는 자리와 <b>거의 같아서</b>, 한 번 고치면 두 문제가 함께 해결됩니다."),
   ]),
-  plat_lede="세 곳 모두 <b>사용자가 켜는 설정</b>입니다.",
+  plat_lede="웹, iOS, 안드로이드 모두 글자 크기는 <b>사용자가 직접 켜는 설정</b>입니다.",
   plats=plats([
     ("웹", "rem · 브라우저 확대",
      card("12px", w="110px"),
-     "브라우저 확대와 글자 크기 설정이 <b>따로</b> 있습니다. 둘 다 봐야 합니다."),
+     "브라우저 확대와 글자 크기 설정이 <b>따로</b> 있어서 둘 다 확인해야 합니다."),
     ("iOS", "Dynamic Type",
      '''              <div class="phone" role="img" aria-label="iOS 글자 크기 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:28px;font-size:8px;font-weight:700">모란상회</div></div></div>''',
-     "시스템 글자 스타일을 쓰면 <b>자동으로</b> 따라갑니다. 접근성 설정에서 아주 크게도 됩니다."),
+     "시스템 글자 스타일을 쓰면 사용자 설정을 <b>자동으로</b> 따라갑니다. 접근성 설정에서는 글자를 훨씬 더 크게 키울 수도 있습니다."),
     ("안드로이드", "sp 단위",
      '''              <div class="phone" role="img" aria-label="안드로이드 글자 크기 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:28px;font-size:8px;font-weight:700">모란상회</div></div></div>''',
-     "글자는 <b>sp</b>, 나머지는 <b>dp</b>. sp 로 적어야 설정을 따라갑니다."),
+     "글자 크기는 <b>sp</b>, 나머지 크기는 <b>dp</b>로 적습니다. 글자를 sp로 적어야 사용자 설정을 따라갑니다."),
   ]),
-  plat_note="이 항목은 <b>우리 화면에서는 영영 안 보이는</b> 종류입니다 — 설정을 안 켰으니까요. 그래서 점검법이 하나뿐입니다. <b>브라우저를 200%로 두고, 폰은 글자 크기를 최대로 두고 한 번 열어 보는 것</b>. 그 한 번에 박아 둔 높이가 거의 다 드러납니다.",
+  plat_note="이 항목의 문제는 개발하는 사람이 글자 크기 설정을 켜 두지 않는 한 <b>개발 화면에서는 드러나지 않습니다</b>. 그래서 일부러 <b>브라우저는 200%로 확대하고, 폰은 글자 크기를 최대로 둔 채 화면을 한 번 열어 봐야</b> 합니다. 그렇게 한 번만 열어 봐도 높이를 고정해 둔 자리가 대부분 드러납니다.",
   siblings=siblings("textzoom"),
   related='''        <li><a href="viewport.html"><b>뷰포트 단위</b><em>11부</em></a></li>
         <li><a href="../items/typescale.html"><b>타입 스케일</b><em>2부</em></a></li>

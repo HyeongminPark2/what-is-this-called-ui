@@ -29,12 +29,12 @@
 </div>
 
 <p class="hint">
-  접힌 글은 <b>화면에서 보이지 않습니다</b>. 그래서 브라우저의 찾기(Ctrl+F)도,
-  페이지 안 검색도 못 찾습니다 — 찾는 말을 넣어 보면
-  데모가 <b>지금 보이는 글에서 몇 건</b>, <b>접힌 글 속에 몇 건</b>이 있는지 나눠서 셉니다.
-  긴 약관이나 문서를 통째로 접어 두면 <b>검색으로 영영 못 찾는</b> 글이 됩니다.<br>
-  <b>한 번에 하나만 열기</b>는 비교를 막습니다 — 두 항목을 나란히 보려는 사람에게는 불편합니다.
-  꼭 필요한 자리가 아니면 <b>여러 개가 같이 열리게</b> 두는 편이 낫습니다.
+  접힌 글은 <b>화면에 보이지 않기</b> 때문에 브라우저의 찾기(Ctrl+F)로도,
+  페이지 안 검색으로도 찾을 수 없습니다. 찾는 말을 넣어 보면
+  데모가 <b>지금 보이는 글에서 몇 건</b>, <b>접힌 글 속에서 몇 건</b>이 나오는지 나눠서 셉니다.
+  긴 약관이나 문서를 통째로 접어 두면 그 글은 <b>검색으로 끝내 찾을 수 없게</b> 됩니다.<br>
+  <b>한 번에 하나만 열기</b>를 켜면 두 항목을 펴 놓고 비교할 수 없어서, 나란히 보려는 사람에게는 불편합니다.
+  그래서 꼭 필요한 자리가 아니라면 <b>여러 개가 함께 열리게</b> 두는 편이 낫습니다.
 </p>
 
 <script>
@@ -75,7 +75,7 @@
     rd.innerHTML = '열린 항목 <b>' + n + ' / ' + ITEMS.length + '</b> · ' +
       (one ? '한 번에 하나만' : '여러 개 가능') +
       (q ? '<br>‘' + q + '’ — 보이는 글에서 <b>' + visible + '건</b>, 접힌 글 속에 <b>' + hidden + '건</b>' +
-        (hidden ? ' <span class="warn">— 찾기로는 안 잡힌다</span>' : '') : '');
+        (hidden ? ' <span class="warn">(브라우저 찾기로는 찾을 수 없습니다)</span>' : '') : '');
     rd.dataset.open = String(n);
     rd.dataset.one = one ? '1' : '0';
     rd.dataset.visible = String(visible);
@@ -91,8 +91,8 @@
     if (one) open = {};
     open[i] = !was;
     draw();
-    document.getElementById('log').innerHTML = '<b>' + ITEMS[i][0] + '</b> — ' + (was ? '접었다' : '폈다') +
-      (one && !was ? ' · <span class="warn">다른 항목은 저절로 접혔다</span>' : '');
+    document.getElementById('log').innerHTML = '<b>' + ITEMS[i][0] + '</b> 항목을 ' + (was ? '접었습니다' : '폈습니다') +
+      (one && !was ? ' · <span class="warn">다른 항목은 저절로 접혔습니다</span>' : '');
   });
 
   document.getElementById('acc').addEventListener('keydown', function (e) {

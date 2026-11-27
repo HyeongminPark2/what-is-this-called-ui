@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>대시보드 — 이름표</title>
-<meta name="description" content="지금 괜찮은지 한눈에 판단하는 화면. 지표 수, 견줄 값, 다음 할 일로 이어 주기.">
+<meta name="description" content="지금 괜찮은지 한눈에 판단하는 화면입니다. 지표를 몇 개 둘지, 견줄 값을 어떻게 붙일지, 다음 할 일로 어떻게 이어 줄지 다룹니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">13부 화면 단위 패턴</a> › 대시보드</p>
     <h1>대시보드</h1>
     <p class="en">Dashboard</p>
-    <p class="lede" style="margin-top:var(--s3)">대시보드가 답해야 하는 질문은 하나입니다 — <b>지금 괜찮은가</b>. 숫자를 늘릴수록 그 답이 멀어집니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">대시보드가 답해야 하는 질문은 <b>지금 괜찮은가</b> 하나입니다. 그런데 숫자를 늘릴수록 어느 숫자를 먼저 봐야 할지 흐려져서 이 질문에 답하기 어려워집니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,31 +50,31 @@
           <iframe src="../demos/dashboard.html" title="대시보드 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>지표를 늘려 보세요. 데모가 <b>맨 위 칸이 전체에서 차지하는 몫</b>을 재서
-          으뜸 지표가 묻혔는지 알려 줍니다 — 열두 개가 되면 어느 것부터 볼지 정할 수 없습니다.<br>
-          숫자 하나는 아무 뜻이 없습니다. <b>지난주 대비</b> 같은 견줄 값이 붙어야
-          좋은지 나쁜지 압니다. 그리고 대시보드는 <b>보는 데서 끝나면 안 됩니다</b> —
-          지표마다 '밀린 정산 3건 보기' 같은 다음 할 일로 이어 줘야 일이 됩니다.</p>
+          <p>지표를 늘려 보세요. 데모는 <b>맨 위 칸이 전체 높이에서 차지하는 몫</b>을 재서
+          으뜸 지표가 다른 지표에 묻혔는지 알려 줍니다. 지표가 열두 개쯤 되면 어느 것부터 봐야 할지 정할 수 없습니다.<br>
+          숫자 하나만으로는 좋은지 나쁜지 판단할 수 없고, <b>지난주 대비</b> 같은 견줄 값이 붙어야
+          판단할 수 있습니다. 또 대시보드는 <b>숫자를 보는 데서 끝나면 안 됩니다</b>.
+          지표마다 '밀린 정산 3건 보기' 같은 다음 할 일로 이어 줘야 사용자가 바로 일을 처리할 수 있습니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>대시보드, 현황판, 요약 화면</td></tr>
             <tr><th>영어</th><td>dashboard, overview, summary screen</td></tr>
-            <tr><th>같이 쓰는 말</th><td>숫자 하나를 담은 칸이 <b>스탯 타일</b>(stat tile · KPI card), 그 안의 작은 꺾은선이 <b>스파크라인</b>(sparkline)입니다. 맨 위에 하나만 크게 두는 지표를 <b>으뜸 지표</b>(north star · primary metric)라 부르고, 숫자 밑에 붙는 '지난주 대비'를 <b>견줄 값</b>(comparison)이라 합니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>리포트</b> — 리포트는 <b>깊이 파는</b> 화면이고 대시보드는 <b>훑는</b> 화면입니다.<br><b>데이터 테이블</b> — <a href="table.html">데이터 테이블</a>은 <b>줄 단위로 다루는</b> 화면입니다.<br><b>차트</b> — <a href="chart.html">차트 고르기</a>는 그 안에 들어가는 <b>부품</b>입니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>숫자 하나를 담은 칸을 <b>스탯 타일</b>(stat tile · KPI card), 그 안에 들어가는 작은 꺾은선 그래프를 <b>스파크라인</b>(sparkline)이라고 합니다. 맨 위에 하나만 크게 두는 지표는 <b>으뜸 지표</b>(north star · primary metric)라 부르고, 숫자 밑에 붙는 '지난주 대비' 같은 값은 <b>견줄 값</b>(comparison)이라고 합니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>리포트</b> — 리포트는 한 주제를 <b>깊이 분석하는</b> 화면이고, 대시보드는 여러 지표를 <b>훑어보는</b> 화면입니다.<br><b>데이터 테이블</b> — <a href="table.html">데이터 테이블</a>은 데이터를 <b>한 줄씩 다루는</b> 화면입니다.<br><b>차트</b> — 차트는 대시보드 안에 들어가는 <b>부품</b>이고, 고르는 법은 <a href="chart.html">차트 고르기</a>에서 다룹니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>화면 단위 패턴은 부품이 아니라 <b>끝내야 하는 일</b>입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>화면 단위 패턴은 부품 하나가 아니라 사용자가 <b>끝내야 하는 일</b> 하나를 기준으로 나눕니다. 그래서 아래 네 가지를 따져 보면 화면끼리 구별할 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>무엇을 끝내야 하나</th><th>막히는 자리</th><th>중간에 떠나면</th><th>서버가 쥔 것</th></tr></thead>
@@ -95,7 +95,7 @@
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — <b>지표 다섯 개를 넘기면 의심하세요.</b> 숫자를 더하는 대신 '그래서 무엇을 하라'를 더합니다.</p>
+          <p><b>대시보드를 한 줄로 정리하면</b> — <b>지표가 다섯 개를 넘으면 정말 다 필요한지 다시 따져 보세요.</b> 숫자를 더 넣는 대신 '그래서 무엇을 하면 되는지'를 알려 주는 링크를 붙입니다.</p>
         </div>
       </section>
 
@@ -106,46 +106,46 @@
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--bg);padding:5px"><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;grid-column:1/-1;"><span style="font-size:7px;color:var(--fg-muted)">이번 주 정산액</span><span style="font-size:15px;font-weight:700">1,284만</span><span style="font-size:7px;color:#1a7f37">▲ 12% <span style="color:var(--fg-faint)">지난주 대비</span></span><span style="font-size:7px;color:var(--accent)">밀린 정산 보기 ›</span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">밀린 건수</span><span style="font-size:11px;font-weight:700">3건</span><span style="font-size:7px;color:var(--danger)">▼ 2건 <span style="color:var(--fg-faint)">어제</span></span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">오류율</span><span style="font-size:11px;font-weight:700">0.4%</span><span style="font-size:7px;color:#1a7f37">▲ 0.1%p <span style="color:var(--fg-faint)">지난주</span></span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">처리 시간</span><span style="font-size:11px;font-weight:700">1.8일</span><span style="font-size:7px;color:var(--danger)">▼ 0.3일 <span style="color:var(--fg-faint)">지난주</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">으뜸 하나 + 셋</span></div>
             </div>
-            <figcaption>좋은 꼴<span><b>으뜸이 가장 크다</b></span></figcaption>
+            <figcaption>좋은 꼴<span><b>으뜸 지표가 가장 크게</b> 보입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;border:1px solid var(--danger);border-radius:6px;background:var(--bg);padding:5px"><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">정산액</span><span style="font-size:11px;font-weight:700">1,284만</span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">밀린 건수</span><span style="font-size:11px;font-weight:700">3건</span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">오류율</span><span style="font-size:11px;font-weight:700">0.4%</span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">처리 시간</span><span style="font-size:11px;font-weight:700">1.8일</span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">신규 가게</span><span style="font-size:11px;font-weight:700">12곳</span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">환불액</span><span style="font-size:11px;font-weight:700">47만</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">숫자만 있다</span></div>
             </div>
-            <figcaption>견줄 값 없음<span><b>좋은지 나쁜지</b> 모른다</span></figcaption>
+            <figcaption>견줄 값 없음<span>숫자만 있어서 <b>좋은지 나쁜지</b> 알 수 없습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;border:1px solid var(--danger);border-radius:6px;background:var(--bg);padding:5px"><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">정산액</span><span style="font-size:11px;font-weight:700">1,284만</span><span style="font-size:7px;color:#1a7f37">▲ 12% <span style="color:var(--fg-faint)">지난주</span></span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">밀린</span><span style="font-size:11px;font-weight:700">3건</span><span style="font-size:7px;color:var(--danger)">▼ 2건 <span style="color:var(--fg-faint)">어제</span></span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">오류율</span><span style="font-size:11px;font-weight:700">0.4%</span><span style="font-size:7px;color:#1a7f37">▲ 0.1%p <span style="color:var(--fg-faint)">지난주</span></span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">시간</span><span style="font-size:11px;font-weight:700">1.8일</span><span style="font-size:7px;color:var(--danger)">▼ 0.3일 <span style="color:var(--fg-faint)">지난주</span></span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">신규</span><span style="font-size:11px;font-weight:700">12곳</span><span style="font-size:7px;color:#1a7f37">▲ 3곳 <span style="color:var(--fg-faint)">지난주</span></span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">환불</span><span style="font-size:11px;font-weight:700">47만</span><span style="font-size:7px;color:var(--danger)">▼ 8% <span style="color:var(--fg-faint)">지난주</span></span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">카드</span><span style="font-size:11px;font-weight:700">62%</span><span style="font-size:7px;color:#1a7f37">▲ 1%p <span style="color:var(--fg-faint)">지난달</span></span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">문의</span><span style="font-size:11px;font-weight:700">9건</span><span style="font-size:7px;color:var(--danger)">▼ 4건 <span style="color:var(--fg-faint)">어제</span></span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">계산서</span><span style="font-size:11px;font-weight:700">48장</span><span style="font-size:7px;color:var(--fg-muted)">— 0장 <span style="color:var(--fg-faint)">지난달</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">열두 개면 다 비슷해 보인다</span></div>
             </div>
-            <figcaption>너무 많음<span><b>으뜸이 묻힌다</b></span></figcaption>
+            <figcaption>너무 많음<span>지표가 많아 <b>으뜸 지표가 눈에 띄지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;grid-template-columns:repeat(1,1fr);gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--bg);padding:5px"><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;grid-column:1/-1;"><span style="font-size:7px;color:var(--fg-muted)">이번 주 정산액</span><span style="font-size:15px;font-weight:700">1,284만</span><span style="font-size:7px;color:#1a7f37">▲ 12% <span style="color:var(--fg-faint)">지난주 대비</span></span><span style="font-size:7px;color:var(--accent)">밀린 정산 3건 보기 ›</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">지표마다 할 일이 붙는다</span></div>
             </div>
-            <figcaption>할 일로 이어짐<span><b>보는 데서 안 끝난다</b></span></figcaption>
+            <figcaption>할 일로 이어짐<span>숫자를 <b>보는 데서 끝나지 않고</b> 할 일로 이어집니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">빈 상태</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8.5px;color:var(--fg-muted)">아직 정산이 없습니다</span><span style="display:block;font-size:8px;color:var(--accent);margin-top:3px">첫 가게 등록하기 ›</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">숫자가 0 인 화면도 설계한다</span></div>
             </div>
-            <figcaption>빈 상태<span><b>0 이 아니라 안내</b></span></figcaption>
+            <figcaption>빈 상태<span><b>0을 보여 주는 대신</b> 무엇부터 할지 안내합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">기준 시각</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--fg-muted)">11월 14일 09:00 기준</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">한 시간마다 새로 집계</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">언제 숫자인지 적는다</span></div>
             </div>
-            <figcaption>기준 시각<span><b>실시간이 아니면</b> 적는다</span></figcaption>
+            <figcaption>기준 시각<span>숫자가 <b>실시간이 아니면</b> 언제 기준인지 적습니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="대시보드의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="대시보드의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
                   <div class="pin-out" data-pin="1" style="color:var(--accent)">으뜸 지표 하나 — 가장 크게</div>
@@ -159,74 +159,74 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>으뜸 지표 <em>하나</em></b><span><b>가장 크게</b> 둔다</span></li>
-            <li><b>견줄 값 <em>지난주 대비</em></b><span>숫자에 <b>뜻</b>을 준다</span></li>
-            <li><b>다음 할 일 <em>링크</em></b><span>보는 데서 <b>안 끝난다</b></span></li>
-            <li><b>기준 시각 <em>언제 숫자인가</em></b><span>실시간이 아니면 <b>적는다</b></span></li>
-            <li><b>지표 수 <em>다섯 안팎</em></b><span>늘릴수록 <b>으뜸이 묻힌다</b></span></li>
-            <li><b>빈 상태 <em>0 인 화면</em></b><span><b>처음 쓰는 사람</b>이 보는 화면이다</span></li>
+            <li><b>으뜸 지표 <em>하나</em></b><span>하나만 골라 <b>가장 크게</b> 둡니다</span></li>
+            <li><b>견줄 값 <em>지난주 대비</em></b><span>비교할 값이 있어야 숫자가 좋은지 나쁜지 <b>판단</b>할 수 있습니다</span></li>
+            <li><b>다음 할 일 <em>링크</em></b><span>숫자를 보는 데서 <b>끝나지 않고</b> 할 일로 이어지게 합니다</span></li>
+            <li><b>기준 시각 <em>언제 숫자인가</em></b><span>실시간이 아니면 기준 시각을 <b>적어 둡니다</b></span></li>
+            <li><b>지표 수 <em>다섯 안팎</em></b><span>지표를 늘릴수록 <b>으뜸 지표가 눈에 덜 띕니다</b></span></li>
+            <li><b>빈 상태 <em>0 인 화면</em></b><span><b>처음 쓰는 사람</b>은 이 화면부터 보게 됩니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           대시보드를 만들 때 가장 흔한 요청이 <b>'이 숫자도 넣어 주세요'</b>입니다.
-          하나씩 보면 다 맞는 말인데, 쌓이면 <b>아무도 안 보는 화면</b>이 됩니다.
-          그래서 지표를 더하기 전에 <b>'이 숫자가 나쁘면 무엇을 하나'</b>를 물어보는 것이 좋습니다 —
-          답이 없으면 그 숫자는 대시보드가 아니라 리포트에 있을 자리입니다.<br>
-          '지난주 대비'를 고를 때도 기준이 필요합니다. 주말이 끼는 업무라면
-          <b>지난주 같은 요일</b>과 견주는 쪽이 맞고, 그 기준을 화면에 적어 둬야 합니다.</p>
+          하나씩 보면 다 맞는 요청이지만, 그렇게 쌓이다 보면 <b>아무도 보지 않는 화면</b>이 됩니다.
+          그래서 지표를 더하기 전에 <b>'이 숫자가 나쁘면 무엇을 하나'</b>를 물어보는 것이 좋습니다.
+          답이 없다면 그 숫자는 대시보드가 아니라 리포트에 넣을 숫자입니다.<br>
+          '지난주 대비'를 고를 때도 기준을 정해야 합니다. 예를 들어 주말이 끼는 업무라면
+          <b>지난주 같은 요일</b>과 견주는 편이 맞고, 그 기준을 화면에도 적어 둬야 합니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>대시보드를 쓰는 경우</h3>
             <ul>
-              <li><b>으뜸 지표 하나</b>를 정하고 가장 크게 두기</li>
-              <li>숫자마다 <b>견줄 값</b>과 <b>다음 할 일</b> 붙이기</li>
-              <li><b>기준 시각</b>을 화면에 적기</li>
+              <li><b>으뜸 지표 하나</b>를 정하고 가장 크게 둘 때</li>
+              <li>숫자마다 <b>견줄 값</b>과 <b>다음 할 일</b>을 붙일 때</li>
+              <li><b>기준 시각</b>을 화면에 적을 때</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>대시보드를 쓰지 않는 경우</h3>
             <ul>
-              <li>지표를 <b>칸이 남아서</b> 더 넣기</li>
-              <li>숫자만 두고 <b>견줄 값을 빼기</b> — 좋은지 나쁜지 모른다</li>
-              <li><b>빈 상태</b>를 안 만들기 — 처음 쓰는 사람에게는 0 뿐이다</li>
-              <li>실시간이 아닌데 <b>실시간처럼</b> 보이게 두기</li>
+              <li><b>칸이 남는다는 이유로</b> 지표를 더 넣을 때</li>
+              <li>숫자만 두고 <b>견줄 값을 뺄</b> 때. 좋은지 나쁜지 알 수 없습니다</li>
+              <li><b>빈 상태</b>를 만들지 않을 때. 처음 쓰는 사람에게는 0만 잔뜩 보입니다</li>
+              <li>실시간이 아닌데 <b>실시간처럼</b> 보이게 둘 때</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 깊이 파는 화면은 <a href="table.html">데이터 테이블</a>, 그림 고르기는 <a href="chart.html">차트 고르기</a>, 숫자 칸 자체는 <a href="stat.html">스탯 타일</a>, 숫자 표기는 <a href="numbertext.html">숫자와 단위 쓰기</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>대시보드 대신 다른 것을 써야 하는 경우</b> — 깊이 파는 화면은 <a href="table.html">데이터 테이블</a>, 그림 고르기는 <a href="chart.html">차트 고르기</a>, 숫자 칸 자체는 <a href="stat.html">스탯 타일</a>, 숫자 표기는 <a href="numbertext.html">숫자와 단위 쓰기</a>.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:grid;grid-template-columns:repeat(1,1fr);gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--bg);padding:5px"><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;grid-column:1/-1;"><span style="font-size:7px;color:var(--fg-muted)">이번 주 정산액</span><span style="font-size:15px;font-weight:700">1,284만</span><span style="font-size:7px;color:#1a7f37">▲ 12% <span style="color:var(--fg-faint)">지난주 대비</span></span><span style="font-size:7px;color:var(--accent)">내역 보기 ›</span></span></div></div>
             </div>
-            <figcaption><b>정산 현황</b><b>으뜸 하나</b>로 시작</figcaption>
+            <figcaption><b>정산 현황</b><b>으뜸 지표 하나</b>로 시작합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--bg);padding:5px"><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">오늘 주문</span><span style="font-size:11px;font-weight:700">128건</span><span style="font-size:7px;color:#1a7f37">▲ 9건 <span style="color:var(--fg-faint)">어제</span></span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">준비 중</span><span style="font-size:11px;font-weight:700">14건</span><span style="font-size:7px;color:#1a7f37">▲ 2건 <span style="color:var(--fg-faint)">어제</span></span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">지연</span><span style="font-size:11px;font-weight:700">2건</span><span style="font-size:7px;color:#1a7f37">▲ 2건 <span style="color:var(--fg-faint)">어제</span></span></span></div></div>
             </div>
-            <figcaption><b>운영 화면</b><b>지금 일어나는</b> 것</figcaption>
+            <figcaption><b>운영 화면</b><b>지금 일어나고 있는</b> 일을 보여 줍니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">빈 상태</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--fg-muted)">아직 쌓인 게 없습니다</span><span style="display:block;font-size:8px;color:var(--accent);margin-top:3px">첫 주문 받아 보기 ›</span></span></div></div>
             </div>
-            <figcaption><b>처음 쓰는 사람</b><b>0 대신 안내</b></figcaption>
+            <figcaption><b>처음 쓰는 사람</b><b>0 대신</b> 무엇부터 할지 안내합니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">이 화면의 계약서</span></h2>
-        <p>숫자 칸은 <b>링크를 품은 덩어리</b>로 둡니다. 읽는 차례가 곧 중요도입니다.</p>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+        <p>숫자 칸은 제목·숫자·견줄 값·링크를 <b>한 덩어리로</b> 묶어 둡니다. 마크업에서 읽는 차례는 중요도 순서와 같아야 합니다.</p>
 <pre class="code">&lt;<span class="t">section</span> <span class="a">aria-labelledby</span>=<span class="s">"lead"</span>&gt;
   &lt;<span class="t">h2</span> <span class="a">id</span>=<span class="s">"lead"</span>&gt;이번 주 정산액&lt;/<span class="t">h2</span>&gt;
   &lt;<span class="t">p</span> <span class="a">class</span>=<span class="s">"big"</span>&gt;&lt;<span class="t">strong</span>&gt;1,284만&lt;/<span class="t">strong</span>&gt;원&lt;/<span class="t">p</span>&gt;
@@ -236,47 +236,47 @@
 
 &lt;<span class="t">p</span> <span class="a">class</span>=<span class="s">"asof"</span>&gt;&lt;<span class="t">time</span> <span class="a">datetime</span>=<span class="s">"2026-11-14T09:00"</span>&gt;11월 14일 09:00&lt;/<span class="t">time</span>&gt; 기준&lt;/<span class="t">p</span>&gt;
 
-<span class="c">/* 숫자는 자릿수가 흔들리지 않게 */</span>
+<span class="c">/* 숫자가 바뀌어도 자릿수가 흔들리지 않게 */</span>
 .big strong { <span class="a">font-variant-numeric</span>: tabular-nums; }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td>Tab</td><td><b>으뜸 지표의 링크</b>가 먼저 오게 마크업 순서를 둔다</td></tr>
-            <tr><td><code>&lt;h2&gt;</code></td><td>지표 이름이 제목이다 — <b>제목만 훑어</b> 지나갈 수 있다</td></tr>
-            <tr><td><code>&lt;time&gt;</code></td><td>기준 시각은 기계도 읽게 적는다</td></tr>
-            <tr><td><code>tabular-nums</code></td><td>값이 바뀌어도 <b>자릿수가 안 흔들린다</b></td></tr>
-            <tr><td><code>aria-live</code></td><td>저절로 새로 고치는 숫자에만. <b>남발하면</b> 계속 읽어 댄다</td></tr>
-            <tr><td>확인하는 법</td><td>제목만 따라 훑어서 <b>중요한 차례</b>가 맞는지 본다</td></tr>
+            <tr><td>Tab</td><td>Tab을 눌렀을 때 <b>으뜸 지표의 링크</b>가 먼저 오도록 마크업 순서를 정합니다</td></tr>
+            <tr><td><code>&lt;h2&gt;</code></td><td>지표 이름을 제목으로 두면 스크린 리더 사용자도 <b>제목만 훑어</b> 지나갈 수 있습니다</td></tr>
+            <tr><td><code>&lt;time&gt;</code></td><td>기준 시각은 기계도 읽을 수 있게 <code>datetime</code> 속성으로 함께 적습니다</td></tr>
+            <tr><td><code>tabular-nums</code></td><td>숫자 폭을 고르게 맞춰서 값이 바뀌어도 <b>자릿수가 흔들리지 않습니다</b></td></tr>
+            <tr><td><code>aria-live</code></td><td>저절로 새로 고쳐지는 숫자에만 붙입니다. <b>여기저기 붙이면</b> 스크린 리더가 숫자가 바뀔 때마다 계속 읽습니다</td></tr>
+            <tr><td>확인하는 법</td><td>제목만 따라 훑어서 <b>중요도 순서</b>대로 나오는지 확인합니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>기준 시각을 같이</th><td><code>as_of: "2026-11-14T09:00"</code> 가 있어야 화면이 '언제 숫자'인지 적을 수 있습니다.</td></tr>
-            <tr><th>견줄 값도 서버에서</th><td>화면이 두 번 물어 빼기보다 <code>delta</code> 를 같이 주는 편이 <b>기준이 하나</b>로 유지됩니다.</td></tr>
-            <tr><th>무거운 집계</th><td>대시보드 질의는 보통 무겁습니다 — <b>미리 집계해 둔 표</b>를 읽게 하고, 주기를 화면에 적습니다.</td></tr>
-            <tr><th>0 과 없음</th><td><code>0</code> 과 <code>null</code> 은 다릅니다 — 0 은 '없었다', null 은 '아직 모른다'입니다.</td></tr>
+            <tr><th>기준 시각을 같이</th><td>응답에 <code>as_of: "2026-11-14T09:00"</code> 같은 값이 있어야 화면이 언제 기준 숫자인지 적을 수 있습니다.</td></tr>
+            <tr><th>견줄 값도 서버에서</th><td>화면이 두 기간의 값을 따로 받아 빼는 것보다 서버가 <code>delta</code>를 같이 주는 편이 비교 <b>기준을 한곳</b>에서 관리할 수 있습니다.</td></tr>
+            <tr><th>무거운 집계</th><td>대시보드 질의는 보통 무겁기 때문에 <b>미리 집계해 둔 표</b>를 읽게 하고, 집계 주기를 화면에 적습니다.</td></tr>
+            <tr><th>0 과 없음</th><td><code>0</code>과 <code>null</code>은 뜻이 다릅니다. 0은 '없었다'이고, null은 '아직 모른다'입니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p><b>PC 화면의 패턴</b>입니다. 폰에서는 한 줄씩 쌓습니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>대시보드는 <b>PC 화면에서 주로 쓰는 패턴</b>이고, 폰에서는 칸을 한 줄씩 쌓아 보여 줍니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>격자</span></header>
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--bg);padding:5px"><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;grid-column:1/-1;"><span style="font-size:7px;color:var(--fg-muted)">정산액</span><span style="font-size:15px;font-weight:700">1,284만</span><span style="font-size:7px;color:#1a7f37">▲ 12% <span style="color:var(--fg-faint)">지난주</span></span></span><span style="display:grid;gap:1px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:5px 6px;min-width:0;"><span style="font-size:7px;color:var(--fg-muted)">밀린</span><span style="font-size:11px;font-weight:700">3건</span><span style="font-size:7px;color:var(--danger)">▼ 2건 <span style="color:var(--fg-faint)">어제</span></span></span></div></div>
             </div>
-            <footer>폭이 넓으니 <b>격자</b>로 둡니다. 폰 폭에서는 한 줄씩 쌓습니다.</footer>
+            <footer>화면 폭이 넓으니 칸을 <b>격자</b>로 배치하고, 폰 폭에서는 한 줄씩 쌓습니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>위젯 · 요약 화면</span></header>
@@ -285,7 +285,7 @@
                 <div style="position:absolute;left:5px;right:5px;top:24px;height:20px;border-radius:4px;background:var(--accent-soft)"></div>
                 <div style="position:absolute;left:5px;right:5px;top:48px;height:12px;border-radius:4px;background:var(--bg)"></div></div></div>
             </div>
-            <footer>홈 화면 <b>위젯</b>이 같은 자리입니다 — 숫자 하나와 다음 할 일 하나가 들어갑니다.</footer>
+            <footer>홈 화면 <b>위젯</b>이 대시보드 구실을 하는데, 숫자 하나와 다음 할 일 하나가 들어갑니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>카드 쌓기</span></header>
@@ -294,18 +294,18 @@
                 <div style="position:absolute;left:5px;right:5px;top:24px;height:18px;border-radius:4px;background:var(--accent-soft)"></div>
                 <div style="position:absolute;left:5px;right:5px;top:46px;height:14px;border-radius:4px;background:var(--bg)"></div></div></div>
             </div>
-            <footer><b>카드</b>를 한 줄씩 쌓습니다. 맨 위 카드가 으뜸 지표를 맡습니다.</footer>
+            <footer><b>카드</b>를 한 줄씩 쌓고, 맨 위 카드에 으뜸 지표를 둡니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — iOS 위젯의 제약이 좋은 연습입니다 — <b>숫자 하나와 할 일 하나</b>만 들어갑니다. 대시보드를 설계할 때 '이 화면을 위젯 한 칸으로 줄이면 무엇이 남나'를 물어보면 으뜸 지표가 저절로 정해집니다. 폰 폭에서는 격자를 접고 <b>한 줄씩 쌓되 차례는 중요도대로</b> 두는 것이 안전합니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — iOS 위젯에는 <b>숫자 하나와 할 일 하나</b>만 들어가는데, 이 제약을 대시보드 설계에 빌려 쓰면 좋습니다. '이 화면을 위젯 한 칸으로 줄이면 무엇이 남나'를 물어보면 으뜸 지표를 쉽게 정할 수 있기 때문입니다. 폰 폭에서는 격자를 풀고 <b>한 줄씩 쌓되, 순서는 중요도대로</b> 두는 것이 안전합니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="login.html"><b>로그인</b><em>13부</em></a></li>
         <li><a href="onboarding.html"><b>온보딩</b><em>13부</em></a></li>
@@ -319,20 +319,20 @@
         <li><a href="share.html"><b>공유하기</b><em>13부</em></a></li>
         <li><a href="upload.html"><b>파일 올리기</b><em>13부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="stat.html"><b>스탯 타일</b><em>5부</em></a></li>
         <li><a href="chart.html"><b>차트 고르기</b><em>10부</em></a></li>
         <li><a href="numbertext.html"><b>숫자와 단위 쓰기</b><em>14부</em></a></li>
         <li><a href="empty.html"><b>빈 상태</b><em>8부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

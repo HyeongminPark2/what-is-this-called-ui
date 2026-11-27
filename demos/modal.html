@@ -66,10 +66,10 @@
 </div>
 
 <p class="hint">
-  삭제를 눌러 모달을 열고 확인해 보세요 — <kbd>Tab</kbd>이 모달 안에서만 도는지,
-  <kbd>Esc</kbd>로 닫히는지, 닫은 뒤 포커스가 눌렀던 버튼으로 돌아오는지, 뒤쪽 목록이 스크롤되는지.
-  <b>이 페이지를 도감 안의 틀(iframe)로 보고 있다면 Tab은 바깥 페이지로 새어 나갑니다</b> —
-  <code>&lt;dialog&gt;</code>는 자기 문서 안에서만 포커스를 가두기 때문입니다. 새 탭에서 열면 제대로 돕니다.
+  삭제를 눌러 모달을 연 뒤 <kbd>Tab</kbd>을 눌렀을 때 포커스가 모달 안에서만 도는지,
+  <kbd>Esc</kbd>로 닫히는지, 닫은 뒤 포커스가 눌렀던 버튼으로 돌아오는지, 뒤쪽 목록이 스크롤되지 않는지 확인해 보세요.
+  다만 <b>이 페이지를 도감 안의 틀(iframe)로 보고 있다면 Tab을 누를 때 포커스가 바깥 페이지로 넘어갑니다.</b>
+  <code>&lt;dialog&gt;</code>는 자기 문서 안에서만 포커스를 가두기 때문이고, 새 탭에서 열면 모달 안에서만 돕니다.
 </p>
 
 <dialog class="mdl" id="confirm" aria-labelledby="confirm-title">
@@ -110,7 +110,7 @@
     b.addEventListener('click', close);
   });
 
-  // 배경(백드롭)을 누르면 닫는다 — dialog 자체 영역 밖 클릭을 가려낸다
+  // 배경(백드롭)을 누르면 닫는다. dialog 영역 밖을 누른 클릭만 가려낸다
   dlg.addEventListener('click', function (e) {
     var r = dlg.getBoundingClientRect();
     var inside = e.clientX >= r.left && e.clientX <= r.right &&
@@ -127,7 +127,7 @@
     }, 700);
   });
 
-  // 닫힐 때 — 스크롤 풀고 포커스를 부른 버튼으로 되돌린다
+  // 닫힐 때 스크롤 잠금을 풀고 포커스를 모달을 연 버튼으로 되돌린다
   dlg.addEventListener('close', function () {
     document.body.style.overflow = '';
     if (opener && document.body.contains(opener)) opener.focus();

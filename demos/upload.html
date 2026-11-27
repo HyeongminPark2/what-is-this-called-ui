@@ -33,12 +33,12 @@
 </div>
 
 <p class="hint">
-  올리기의 핵심은 <b>언제 실패를 알려 주느냐</b>입니다. 10MB 가 넘거나 받지 않는 형식이면
-  <b>보내기 전에</b> 그 자리에서 알려 줘야 합니다 — 다 올리고 나서 거절하면
-  기다린 시간이 통째로 버려집니다. 데모가 <b>헛되이 올린 양(MB)</b>을 재서 적습니다.<br>
-  <b>파일마다 따로</b> 처리해야 합니다. 한 장이 실패했다고 나머지까지 되돌리면
-  멀쩡한 네 장을 다시 올려야 합니다. 끄면 그렇게 동작합니다.<br>
-  실패한 줄에는 <b>왜 실패했는지와 다시 시도</b>가 같이 있어야 합니다.
+  파일 올리기에서 가장 중요한 것은 <b>실패를 언제 알려 주느냐</b>입니다. 10MB가 넘거나 받지 않는 형식이면
+  <b>보내기 전에</b> 그 자리에서 알려 줘야 합니다. 다 올리고 나서 거절하면
+  사용자가 기다린 시간이 모두 헛수고가 되기 때문입니다. 데모는 <b>헛되이 올린 양(MB)</b>을 재서 적습니다.<br>
+  또 파일은 <b>하나씩 따로</b> 처리해야 합니다. 한 장이 실패했다고 나머지까지 되돌리면
+  멀쩡한 네 장을 다시 올려야 하는데, '파일마다 따로 처리'를 끄면 데모가 그렇게 동작합니다.<br>
+  실패한 줄에는 <b>왜 실패했는지와 다시 시도</b> 버튼이 함께 있어야 합니다.
 </p>
 
 <script>
@@ -77,7 +77,7 @@
     var rd = document.getElementById('read');
     rd.innerHTML = '올린 파일 <b>' + done + '</b> · 실패 <b>' + err + '</b>' +
       '<br>헛되이 올린 양 <b>' + wasted.toFixed(1) + 'MB</b>' +
-      (wasted > 0 ? ' <span class="warn">— 보내고 나서 거절당했다</span>' : '');
+      (wasted > 0 ? ' <span class="warn">(다 보내고 나서 거절당했습니다)</span>' : '');
     rd.dataset.done = String(done);
     rd.dataset.err = String(err);
     rd.dataset.wasted = wasted.toFixed(1);
@@ -123,10 +123,10 @@
         });
         render();
         document.getElementById('log').innerHTML =
-          '<span class="warn">한 장이 실패해 전부 되돌렸다</span> — 멀쩡한 것까지 다시 올려야 한다';
+          '<span class="warn">한 장이 실패해 전부 되돌렸습니다.</span> 멀쩡한 파일까지 다시 올려야 합니다';
         document.getElementById('read').dataset.rolledback = '1';
       } else {
-        document.getElementById('log').innerHTML = '끝났다 — 실패한 줄만 다시 시도하면 된다';
+        document.getElementById('log').innerHTML = '올리기가 끝났습니다. 실패한 줄만 다시 시도하면 됩니다';
         document.getElementById('read').dataset.rolledback = '0';
       }
     })();
@@ -136,7 +136,7 @@
     var a = e.target.closest('[data-retry]');
     if (!a) return;
     e.preventDefault();
-    document.getElementById('log').innerHTML = '<b>' + rows[+a.dataset.retry].name + '</b> 만 다시 시도한다';
+    document.getElementById('log').innerHTML = '<b>' + rows[+a.dataset.retry].name + '</b>만 다시 시도합니다';
   });
   document.getElementById('go').addEventListener('click', start);
   document.getElementById('pick').addEventListener('click', start);

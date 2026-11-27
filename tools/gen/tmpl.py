@@ -229,6 +229,18 @@ def kbd(pairs):
     return "\n".join('            <tr><td>%s</td><td>%s</td></tr>' % p for p in pairs)
 
 
+# 항목 이름 뒤 조사. 한글이 아닌 끝 글자는 읽는 소리로 정한다(UI = 유아이, z-index = 인덱스).
+_NO_BATCHIM = {"UI", "z-index"}
+
+
+def eul(word):
+    """을/를 — 받침이 있으면 '을'."""
+    last = word.strip()[-1]
+    if "가" <= last <= "힣":
+        return word + ("을" if (ord(last) - 0xAC00) % 28 else "를")
+    return word + ("를" if any(word.endswith(w) for w in _NO_BATCHIM) else "을")
+
+
 SLOTS = ["실물", "이름", "가르는 기준", "상태", "해부도", "쓸 때", "사례", "마크업", "백엔드 메모", "플랫폼"]
 
 
@@ -238,16 +250,21 @@ def page(d):
     # 칸 이름은 부마다 조금씩 다르다. 토큰에는 '키보드'도 '상태'도 그대로 맞지 않는다.
     # 부마다 비교 축의 첫 줄이 다르다. 안 적은 카드는 그 부의 것을 쓴다.
     PART_LEDE = {
-        "4부 조작 부품": "조작 부품은 모두 '값을 받는다'는 점이 같습니다. 이 네 가지만 물어보면 갈립니다.",
-        "6부 겹치는 것들": "겹쳐 뜨는 부품들은 모양으로는 구별이 안 됩니다. 이 네 가지만 물어보면 갈립니다.",
+        "4부 조작 부품": "조작 부품은 모두 사용자에게서 값을 받는다는 점은 같지만, 아래 네 가지를 따져 보면 서로 구별할 수 있습니다.",
+        "6부 겹치는 것들": "겹쳐 뜨는 부품들은 모양만 보고는 구별하기 어렵지만, 아래 네 가지를 따져 보면 어느 부품인지 가려낼 수 있습니다.",
     }
     d.setdefault("axes_lede", PART_LEDE.get(d["part"],
-                 "겹쳐 뜨는 부품들은 모양으로는 구별이 안 됩니다. 이 네 가지만 물어보면 갈립니다."))
+                 "겹쳐 뜨는 부품들은 모양만 보고는 구별하기 어렵지만, 아래 네 가지를 따져 보면 어느 부품인지 가려낼 수 있습니다."))
     d.setdefault("s4_title", "상태")
-    d.setdefault("s4_hint", "그림 한 장으로는 못 배운다")
+    d.setdefault("s4_hint", "상태마다 달라지는 모습")
     d.setdefault("s8_title", "최소 마크업과 키보드")
-    d.setdefault("s8_hint", "이 부품의 계약서")
-    d.setdefault("keys_heads", "<th>키</th><th>일어나야 하는 일</th>")
+    d.setdefault("s8_hint", "구현할 때 지킬 최소 규칙")
+    d.setdefault("keys_heads", "<th>키와 동작</th><th>그때 일어나야 하는 일</th>")
+    d["ko_eul"] = eul(d["ko"])
+    # 부품이 아니라 주제인 카드('호버가 없는 세계' 등)는 세 머리말을 카드에서 따로 적는다.
+    d.setdefault("do_title", d["ko_eul"] + " 쓰는 경우")
+    d.setdefault("dont_title", d["ko_eul"] + " 쓰지 않는 경우")
+    d.setdefault("instead_title", d["ko"] + " 대신 다른 것을 써야 하는 경우")
     jump = "".join('<a href="#s%d">%s %s</a>' % (i + 1, "①②③④⑤⑥⑦⑧⑨⑩"[i], n)
                    for i, n in enumerate(SLOTS))
     return '''<!doctype html>
@@ -305,7 +322,7 @@ def page(d):
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
@@ -316,11 +333,11 @@ def page(d):
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
         <p>{axes_lede}</p>
 {axes}
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — {oneline}</p>
+          <p><b>{ko_eul} 한 줄로 정리하면</b> — {oneline}</p>
         </div>
       </section>
 
@@ -332,10 +349,10 @@ def page(d):
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="{ko}의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="{ko}의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
 {anat}
             </div>
           </div>
@@ -350,23 +367,23 @@ def page(d):
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>{do_title}</h3>
             <ul>
 {do}
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>{dont_title}</h3>
             <ul>
 {dont}
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — {instead}</p>
+        <p style="margin:var(--s4) 0 0"><b>{instead_title}</b> — {instead}</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
 {cases}
         </div>
@@ -387,7 +404,7 @@ def page(d):
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
@@ -398,34 +415,34 @@ def page(d):
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
         <p>{plat_lede}</p>
         <div class="platforms">
 {plats}
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — {plat_note}</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — {plat_note}</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
 {siblings}
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
 {related}
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

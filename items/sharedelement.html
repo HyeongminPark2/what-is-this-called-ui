@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>공유 요소 전환 — 이름표</title>
-<meta name="description" content="두 화면에 있는 같은 것을 이어서 움직이는 전환. 관계를 눈으로 알려 주지만 비싸다.">
+<meta name="description" content="두 화면에 있는 같은 요소를 이어서 움직이는 전환입니다. 두 화면의 관계를 눈으로 보여 주지만 구현 비용이 크다는 점을 다루는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">9부 움직임</a> › 공유 요소 전환</p>
     <h1>공유 요소 전환</h1>
     <p class="en">Shared element transition</p>
-    <p class="lede" style="margin-top:var(--s3)">두 화면에 있는 <b>같은 것</b>을 이어서 움직입니다. 관계를 말이 아니라 <b>눈으로</b> 알려 줍니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">공유 요소 전환은 두 화면에 있는 <b>같은 요소</b>를 이어서 움직이는 전환입니다. 두 화면이 어떤 관계인지 설명하는 글 없이 <b>움직임으로</b> 보여 줍니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,29 +50,29 @@
           <iframe src="../demos/sharedelement.html" title="공유 요소 전환 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>목록의 그림이 상세의 큰 그림으로 <b>이어서</b> 자랍니다.<br>
-          <b>이어서 움직이기</b>를 끄면 목록이 사라지고 상세가 따로 나타납니다 — 같은 자료인데
-          <b>관계가 안 보여</b> 어디서 왔는지 잠깐 헷갈립니다.</p>
+          <p>목록의 작은 그림이 상세 화면의 큰 그림으로 <b>이어서</b> 커집니다.<br>
+          <b>이어서 움직이기</b>를 끄면 목록이 사라진 뒤 상세 화면이 따로 나타나는데, 같은 자료인데도
+          두 화면의 <b>관계가 보이지 않아서</b> 상세 화면이 어디서 왔는지 잠깐 헷갈립니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>공유 요소 전환, 이어지는 전환, 확대 전환</td></tr>
             <tr><th>영어</th><td>shared element transition, shared axis, hero animation, container transform</td></tr>
-            <tr><th>같이 쓰는 말</th><td>안드로이드에서는 <b>셰어드 엘리먼트</b>, Material 3 에서는 <b>컨테이너 트랜스폼</b>이라 부릅니다. 플러터 쪽에서는 <b>히어로 애니메이션</b>입니다. 웹에는 <b>뷰 트랜지션</b>(View Transitions API)이 생겨 <code>view-transition-name</code>으로 같은 것임을 알려 줍니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>페이지 전환</b> — 화면이 통째로 바뀌는 것이고, 이쪽은 <b>한 조각이 이어지는</b> 것입니다.<br><b>확대 애니메이션</b> — 그냥 커지는 것과 <b>두 화면을 잇는</b> 것은 다릅니다.<br><b>모프</b> — 모양이 변형되는 연출을 가리키기도 해 자주 섞입니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>안드로이드에서는 <b>셰어드 엘리먼트</b>, Material 3에서는 <b>컨테이너 트랜스폼</b>이라고 부르고, 플러터에서는 <b>히어로 애니메이션</b>이라고 부릅니다. 웹에는 <b>뷰 트랜지션</b>(View Transitions API)이 생겨서 <code>view-transition-name</code>으로 두 요소가 같은 것임을 브라우저에 알려 줍니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>페이지 전환</b> — 페이지 전환은 화면이 통째로 바뀌는 것이고, 공유 요소 전환은 그 가운데 <b>한 요소가 두 화면을 이어 움직이는</b> 것입니다.<br><b>확대 애니메이션</b> — 요소가 그냥 커지는 것과 <b>두 화면을 이어 주는</b> 것은 다릅니다.<br><b>모프</b> — 모프는 모양이 변형되는 연출을 가리키기도 해서 공유 요소 전환과 자주 섞어 부릅니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>움직임은 장식이 아니라 <b>말</b>입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>움직임은 화면에서 무엇이 바뀌었는지 사용자에게 <b>알려 주는</b> 역할을 합니다. 아래 네 가지를 따져 보면 움직임을 다루는 항목들을 서로 구별할 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>무엇을 정하나</th><th>사람이 읽는 뜻</th><th>과하면</th><th>모션 줄이기에서</th></tr></thead>
@@ -91,7 +91,7 @@
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — <b>같은 것이라는 사실을 코드가 알아야</b> 되는 연출입니다. 그 값을 치를 만한 자리인지 먼저 따져 보세요.</p>
+          <p><b>공유 요소 전환을 한 줄로 정리하면</b> — 공유 요소 전환은 두 화면의 요소가 <b>같은 것이라는 사실을 코드가 알아야</b> 만들 수 있습니다. 그만한 구현 비용을 들일 만한 자리인지 먼저 따져 보세요.</p>
         </div>
       </section>
 
@@ -102,46 +102,46 @@
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><span style="position:absolute;left:28px;right:6px;top:6px;height:8px;border-radius:2px;background:var(--ink-100)"></span><span style="position:absolute;left:28px;right:6px;top:20px;height:8px;border-radius:2px;background:var(--ink-100)"></span><span style="position:absolute;left:28px;right:6px;top:34px;height:8px;border-radius:2px;background:var(--ink-100)"></span><span style="position:absolute;left:6px;top:6px;width:18px;height:18px;border-radius:4px;background:var(--accent)"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">목록 — 작은 그림</span></div>
             </div>
-            <figcaption>출발<span>목록의 <b>작은 그림</b></span></figcaption>
+            <figcaption>출발<span>목록에 <b>작은 그림</b>이 있습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><span style="position:absolute;left:28px;right:6px;top:6px;height:8px;border-radius:2px;background:var(--ink-100)"></span><span style="position:absolute;left:28px;right:6px;top:20px;height:8px;border-radius:2px;background:var(--ink-100)"></span><span style="position:absolute;left:28px;right:6px;top:34px;height:8px;border-radius:2px;background:var(--ink-100)"></span><span style="position:absolute;left:6px;top:6px;width:46px;height:34px;border-radius:4px;background:var(--accent)"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">이어서 자라는 중</span></div>
             </div>
-            <figcaption>가는 중<span><b>240~320ms</b>. 그 사이 목록은 흐려진다</span></figcaption>
+            <figcaption>가는 중<span><b>240~320ms</b> 동안 그림이 커지고, 그 사이 목록은 흐려집니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><span style="position:absolute;left:6px;top:6px;width:calc(100% - 12px);height:40px;border-radius:4px;background:var(--accent)"></span><span style="position:absolute;left:6px;right:6px;top:52px;height:8px;border-radius:2px;background:var(--ink-100)"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">상세 — 큰 그림</span></div>
             </div>
-            <figcaption>도착<span>같은 것이 <b>커진 것</b>으로 읽힌다</span></figcaption>
+            <figcaption>도착<span>목록의 그림이 <b>커진 것</b>으로 보입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><span style="position:absolute;left:28px;right:6px;top:6px;height:8px;border-radius:2px;background:var(--ink-100)"></span><span style="position:absolute;left:28px;right:6px;top:20px;height:8px;border-radius:2px;background:var(--ink-100)"></span><span style="position:absolute;left:28px;right:6px;top:34px;height:8px;border-radius:2px;background:var(--ink-100)"></span><span style="position:absolute;left:6px;top:6px;width:18px;height:18px;border-radius:4px;background:var(--accent)"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">돌아갈 때도 같은 길</span></div>
             </div>
-            <figcaption>돌아오기<span><b>왔던 자리로</b> 줄어든다</span></figcaption>
+            <figcaption>돌아오기<span><b>왔던 자리로</b> 줄어들며 돌아갑니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:76px;position:relative;border:1px solid var(--danger);border-radius:6px;background:var(--bg);overflow:hidden"><span style="position:absolute;inset:6px;border-radius:5px;background:var(--surface);border:1px solid var(--line)"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">그냥 나타났다</span></div>
             </div>
-            <figcaption>안 이을 때<span><b>관계가 안 보인다</b></span></figcaption>
+            <figcaption>안 이을 때<span>두 화면의 <b>관계가 보이지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><span style="position:absolute;inset:6px;border-radius:5px;background:var(--surface);border:1px dashed var(--line-strong);display:grid;place-items:center;font-size:8px;color:var(--fg-muted)">페이드</span></div><span style="font-size:8.5px;color:var(--fg-muted)">자리를 못 찾으면</span></div>
             </div>
-            <figcaption>떨어뜨리기<span><b>그냥 페이드</b>로 물러난다</span></figcaption>
+            <figcaption>떨어뜨리기<span>이을 수 없을 때는 <b>그냥 페이드</b>로 바꿔 보여 줍니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="공유 요소 전환의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="공유 요소 전환의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">두 화면에 같은 것이 있다 — 그걸 코드가 알아야 한다</div>
@@ -155,75 +155,75 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>같은 것 <em>이름을 붙인다</em></b><span><b>코드가 알아야</b> 이을 수 있다</span></li>
-            <li><b>자리 재기 <em>출발과 도착</em></b><span>두 자리를 재서 <b>그 사이</b>를 움직인다</span></li>
-            <li><b>길이 <em>240~320ms</em></b><span>짧으면 안 보이고 길면 기다린다 — <a href="duration.html">지속 시간</a></span></li>
-            <li><b>나머지 <em>투명도</em></b><span>이어지는 것 말고는 <b>바꿔치기</b>한다</span></li>
-            <li><b>돌아오기 <em>같은 길</em></b><span><b>왔던 자리로.</b> 안 그러면 더 헷갈린다</span></li>
-            <li><b>못 찾으면 <em>페이드로</em></b><span><b>떨어뜨릴 길</b>을 반드시 둔다</span></li>
+            <li><b>같은 것 <em>이름을 붙인다</em></b><span>두 요소가 같다는 것을 <b>코드가 알아야</b> 이을 수 있습니다</span></li>
+            <li><b>자리 재기 <em>출발과 도착</em></b><span>출발 자리와 도착 자리를 재서 <b>그 사이</b>를 움직입니다</span></li>
+            <li><b>길이 <em>240~320ms</em></b><span>짧으면 움직임이 보이지 않고 길면 기다리게 됩니다. 자세한 내용은 <a href="duration.html">지속 시간</a>에 있습니다</span></li>
+            <li><b>나머지 <em>투명도</em></b><span>이어지는 요소를 뺀 나머지는 투명도로 <b>바꿔치기</b>합니다</span></li>
+            <li><b>돌아오기 <em>같은 길</em></b><span>돌아갈 때도 <b>왔던 자리로</b> 움직입니다. 다른 자리로 가면 더 헷갈립니다</span></li>
+            <li><b>못 찾으면 <em>페이드로</em></b><span>이을 수 없을 때 <b>대신할 방법(폴백)</b>을 반드시 둡니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          <b>떨어뜨릴 길이 가장 중요합니다.</b>
-          목록에서 한참 굴려 내려간 뒤 들어갔다 나오면
-          출발 자리가 <b>화면 밖</b>일 수 있고,
-          필터가 바뀌어 그 줄이 아예 사라졌을 수도 있습니다.
-          그럴 때 억지로 이으면 <b>화면 밖에서 날아오는</b> 이상한 연출이 됩니다.
-          <b>자리를 못 찾으면 그냥 페이드</b>로 물러나게 해 두면,
-          되는 때만 예쁘고 안 되는 때도 멀쩡합니다.</p>
+          공유 요소 전환에서 특히 중요한 것은 <b>이을 수 없을 때 대신할 방법</b>입니다.
+          목록을 한참 스크롤해 내려간 뒤 상세에 들어갔다 나오면
+          출발 자리가 <b>화면 밖</b>에 있을 수 있고,
+          필터가 바뀌어서 그 줄이 아예 사라졌을 수도 있습니다.
+          이럴 때 억지로 이으면 요소가 <b>화면 밖에서 날아 들어오는</b> 이상한 연출이 됩니다.
+          그래서 <b>자리를 못 찾으면 그냥 페이드</b>로 바꿔 보여 주도록 해 두면,
+          이을 수 있을 때는 이어서 움직이고 이을 수 없을 때도 화면이 어색해지지 않습니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>공유 요소 전환을 쓰는 경우</h3>
             <ul>
-              <li>목록 → 상세처럼 <b>같은 것</b>이 양쪽에 있을 때</li>
-              <li>사진·카드처럼 <b>눈에 띄는 한 조각</b>이 이어질 때</li>
-              <li><b>돌아올 때도</b> 같은 길을 둘 수 있을 때</li>
+              <li>목록과 상세 화면처럼 <b>같은 요소</b>가 양쪽 화면에 있을 때</li>
+              <li>사진이나 카드처럼 <b>눈에 띄는 요소 하나</b>가 이어질 때</li>
+              <li><b>돌아올 때도</b> 같은 경로로 움직이게 할 수 있을 때</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>공유 요소 전환을 쓰지 않는 경우</h3>
             <ul>
-              <li>이어지는 것이 <b>작고 안 눈에 띌</b> 때 — 값을 못 한다</li>
-              <li>출발 자리가 <b>화면 밖</b>인데 억지로 잇기</li>
-              <li>글자처럼 <b>크기가 많이 다른</b> 것을 억지로 모프하기</li>
-              <li>떨어뜨릴 길 없이 — <b>안 되는 때</b>가 반드시 온다</li>
+              <li>이어지는 요소가 <b>작아서 눈에 잘 띄지 않을</b> 때. 들인 비용만큼 효과가 없습니다</li>
+              <li>출발 자리가 <b>화면 밖</b>에 있는데 억지로 이을 때</li>
+              <li>글자처럼 두 화면에서 <b>크기가 많이 다른</b> 것을 억지로 모프할 때</li>
+              <li>이을 수 없을 때 대신할 방법을 두지 않을 때. <b>이을 수 없는 경우</b>는 반드시 생깁니다</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 그냥 들고 나는 것은 <a href="enterexit.html">진입과 퇴장</a>, 곡선은 <a href="easing.html">이징</a>, 줄이 차례로면 <a href="stagger.html">차례로 들어오기</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>공유 요소 전환 대신 다른 것을 써야 하는 경우</b> — 요소가 그냥 들어오고 나가는 것은 <a href="enterexit.html">진입과 퇴장</a>, 곡선은 <a href="easing.html">이징</a>, 여러 줄이 차례로 들어오게 하려면 <a href="stagger.html">차례로 들어오기</a>.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="height:72px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><span style="position:absolute;left:28px;right:6px;top:6px;height:8px;border-radius:2px;background:var(--ink-100)"></span><span style="position:absolute;left:28px;right:6px;top:20px;height:8px;border-radius:2px;background:var(--ink-100)"></span><span style="position:absolute;left:28px;right:6px;top:34px;height:8px;border-radius:2px;background:var(--ink-100)"></span><span style="position:absolute;left:6px;top:6px;width:18px;height:18px;border-radius:4px;background:var(--accent)"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">목록 → 상세</span></div>
             </div>
-            <figcaption><b>사진 목록</b><b>가장 잘 맞는 자리</b></figcaption>
+            <figcaption><b>사진 목록</b>공유 요소 전환이 <b>가장 잘 맞는 자리</b>입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="height:72px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><span style="position:absolute;left:6px;right:6px;top:20px;height:28px;border-radius:5px;background:var(--accent)"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">카드 → 전체 화면</span></div>
             </div>
-            <figcaption><b>카드 펼치기</b>카드가 <b>그대로 자란다</b></figcaption>
+            <figcaption><b>카드 펼치기</b>카드가 <b>그대로 커져서</b> 전체 화면이 됩니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="height:72px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><span style="position:absolute;left:6px;top:28px;width:20px;height:20px;border-radius:50%;background:var(--accent)"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">아바타 → 프로필</span></div>
             </div>
-            <figcaption><b>작은 조각</b><b>너무 작으면</b> 값을 못 한다</figcaption>
+            <figcaption><b>작은 조각</b>이어지는 요소가 <b>너무 작으면</b> 들인 비용만큼 효과가 없습니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">이 전환의 계약서</span></h2>
-        <p>같은 것에 <b>같은 이름</b>을 붙이면 브라우저가 이어 줍니다.</p>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+        <p>두 화면의 같은 요소에 <b>같은 이름</b>을 붙이면 브라우저가 둘 사이를 이어 줍니다.</p>
 <pre class="code"><span class="c">/* 두 화면의 같은 것에 같은 이름을 붙인다 */</span>
 .list .thumb[data-id="42"] { <span class="a">view-transition-name</span>: store-42; }
 .detail .hero                { <span class="a">view-transition-name</span>: store-42; }
@@ -238,42 +238,42 @@
 }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td>이름은 <b>한 화면에 하나</b></td><td>같은 <code>view-transition-name</code>이 둘이면 <b>전환이 통째로 멎는다</b></td></tr>
-            <tr><td>안 되는 브라우저</td><td><code>startViewTransition</code>이 없으면 <b>그냥 바꾼다.</b> 기능은 그대로여야 한다</td></tr>
-            <tr><td>초점은 기다리지 않는다</td><td>연출 중에도 초점은 <b>바로</b> 옮긴다 — <a href="enterexit.html">진입과 퇴장</a></td></tr>
-            <tr><td><a href="reducedmotion.html">모션 줄이기</a></td><td>큰 거리를 지나가는 연출이라 <b>줄이기에서 끈다</b></td></tr>
-            <tr><td>읽는 순서</td><td>연출은 눈에만 있다. <b>DOM 순서</b>는 그대로여야 한다</td></tr>
-            <tr><td>긴 목록</td><td><a href="virtual.html">가상 스크롤</a>이면 출발 요소가 <b>아예 없을 수</b> 있다</td></tr>
+            <tr><td>이름은 <b>한 화면에 하나</b></td><td>같은 <code>view-transition-name</code>이 한 화면에 둘 있으면 <b>전환 전체가 동작하지 않습니다</b></td></tr>
+            <tr><td>안 되는 브라우저</td><td><code>startViewTransition</code>이 없으면 연출 없이 <b>그냥 화면을 바꿉니다.</b> 기능은 그대로 동작해야 합니다</td></tr>
+            <tr><td>초점은 기다리지 않는다</td><td>연출 중에도 초점은 <b>바로</b> 옮깁니다. 자세한 내용은 <a href="enterexit.html">진입과 퇴장</a>에 있습니다</td></tr>
+            <tr><td><a href="reducedmotion.html">모션 줄이기</a></td><td>큰 거리를 지나가는 연출이라서 <b>모션 줄이기에서는 끕니다</b></td></tr>
+            <tr><td>읽는 순서</td><td>연출은 화면에서만 일어나는 일이므로 <b>DOM 순서</b>는 그대로 둬야 합니다</td></tr>
+            <tr><td>긴 목록</td><td><a href="virtual.html">가상 스크롤</a>을 쓰면 출발 요소가 DOM에 <b>아예 없을 수</b> 있습니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>자료가 양쪽에 있어야</th><td>상세를 새로 받아야 한다면 <b>그 사이에 빈 화면</b>이 생깁니다. 목록이 가진 값으로 먼저 그려 두면 매끄럽습니다.</td></tr>
-            <tr><th>그림을 미리 받아 둔다</th><td>큰 그림이 늦게 오면 <b>자라다 멈춘 자리</b>가 비어 보입니다.</td></tr>
-            <tr><th>주소가 바뀌는 전환</th><td>뒤로가기로 돌아올 때도 같은 길을 쓰려면 <b>어디서 왔는지</b>를 알아야 합니다 — <a href="systemback.html">시스템 백</a>.</td></tr>
+            <tr><th>자료가 양쪽에 있어야</th><td>상세 자료를 새로 받아야 한다면 <b>받는 동안 빈 화면</b>이 생깁니다. 목록이 이미 가진 값으로 먼저 그려 두면 전환이 매끄럽습니다.</td></tr>
+            <tr><th>그림을 미리 받아 둔다</th><td>큰 그림이 늦게 오면 <b>커지는 연출이 끝난 자리</b>가 비어 보입니다. 그래서 큰 그림은 미리 받아 둡니다.</td></tr>
+            <tr><th>주소가 바뀌는 전환</th><td>뒤로가기로 돌아올 때도 같은 경로로 움직이려면 상세 화면이 <b>어느 줄에서 왔는지</b> 알아야 합니다. 자세한 내용은 <a href="systemback.html">시스템 백</a>에 있습니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p><b>앱에서 먼저 흔해졌고</b> 웹은 최근에 따라왔습니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>공유 요소 전환은 <b>앱에서 먼저 흔해졌고</b>, 웹에서는 최근에야 쓸 수 있게 되었습니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>View Transitions</span></header>
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="height:60px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><span style="position:absolute;left:28px;right:6px;top:6px;height:8px;border-radius:2px;background:var(--ink-100)"></span><span style="position:absolute;left:28px;right:6px;top:20px;height:8px;border-radius:2px;background:var(--ink-100)"></span><span style="position:absolute;left:28px;right:6px;top:34px;height:8px;border-radius:2px;background:var(--ink-100)"></span><span style="position:absolute;left:6px;top:6px;width:18px;height:18px;border-radius:4px;background:var(--accent)"></span></div></div>
             </div>
-            <footer><code>view-transition-name</code>으로 같은 것임을 알립니다. <b>최근 브라우저</b>에서만 됩니다.</footer>
+            <footer><code>view-transition-name</code>으로 두 요소가 같은 것임을 알립니다. <b>최근 브라우저</b>에서만 동작합니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>matchedGeometryEffect</span></header>
@@ -281,7 +281,7 @@
               <div class="phone" role="img" aria-label="iOS 공유 전환 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:28px;height:18px;border-radius:4px;background:var(--accent)"></div></div></div>
             </div>
-            <footer>SwiftUI 에서 <code>matchedGeometryEffect</code>로 잇습니다. <b>같은 id</b>를 주면 됩니다.</footer>
+            <footer>SwiftUI에서는 <code>matchedGeometryEffect</code>로 두 요소를 잇고, 두 요소에 <b>같은 id</b>를 주면 됩니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>Container transform</span></header>
@@ -289,18 +289,18 @@
               <div class="phone" role="img" aria-label="Material 컨테이너 전환 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:28px;height:18px;border-radius:4px;background:var(--accent)"></div></div></div>
             </div>
-            <footer>Material 3 의 <b>컨테이너 트랜스폼</b>이 규격입니다. 네 가지 전환 가운데 하나로 정리돼 있습니다.</footer>
+            <footer>Material 3에는 <b>컨테이너 트랜스폼</b>이라는 규격이 있고, 네 가지 전환 패턴 가운데 하나로 정리되어 있습니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — 시안에서 가장 멋있어 보이는 연출이지만, <b>되는 경우와 안 되는 경우</b>를 함께 정해야 합니다 — 목록을 한참 굴려 내려간 뒤, 필터가 바뀐 뒤, 검색으로 바로 들어온 뒤. 받을 때 <b>"자리를 못 찾으면 어떻게 합니까"</b>를 한 번 물어보면 떨어뜨릴 길이 함께 정해집니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — 공유 요소 전환은 시안에서 가장 멋있어 보이는 연출이지만, <b>이을 수 있는 경우와 없는 경우</b>를 함께 정해야 합니다. 목록을 한참 스크롤해 내려간 뒤, 필터가 바뀐 뒤, 검색으로 상세 화면에 바로 들어온 뒤가 이을 수 없는 대표적인 경우입니다. 시안을 받을 때 <b>"출발 자리를 못 찾으면 어떻게 하나요?"</b>라고 한 번 물어보면 대신할 방법도 함께 정해집니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="easing.html"><b>이징 곡선</b><em>9부</em></a></li>
         <li><a href="duration.html"><b>지속 시간</b><em>9부</em></a></li>
@@ -312,20 +312,20 @@
         <li><a href="reducedmotion.html"><b>모션 줄이기</b><em>9부</em></a></li>
         <li><a href="scrolllink.html"><b>스크롤 연동</b><em>9부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="enterexit.html"><b>진입과 퇴장</b><em>9부</em></a></li>
         <li><a href="easing.html"><b>이징 곡선</b><em>9부</em></a></li>
         <li><a href="reducedmotion.html"><b>모션 줄이기</b><em>9부</em></a></li>
         <li><a href="searchresults.html"><b>검색 결과 화면</b><em>13부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

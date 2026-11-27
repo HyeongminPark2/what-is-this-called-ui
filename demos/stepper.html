@@ -37,12 +37,12 @@
 </div>
 
 <p class="hint">
-  단계 이름은 <b>잘리면 안 됩니다</b> — 데모가 칸마다 <b>담긴 폭과 보이는 폭</b>을 견줘서
-  잘린 개수를 셉니다. 가로로 둔 채 폭을 줄이면 이름이 먼저 무너집니다.
-  '좁으면 세로로'를 켜면 같은 폭에서도 이름이 온전합니다.<br>
-  <b>끝낸 단계는 눌러서 되돌아갈 수 있어야</b> 합니다. 끄면 눌러도 안 갑니다 —
-  '배송지를 잘못 적었는데 처음부터 다시'가 벌어지는 자리입니다.<br>
-  지금 단계는 색뿐 아니라 <code>aria-current="step"</code> 으로도 알립니다.
+  단계 이름은 <b>잘리면 안 됩니다</b>. 데모는 칸마다 <b>이름 글자 전체의 폭과 실제로 보이는 폭</b>을 비교해서
+  이름이 잘린 단계가 몇 개인지 셉니다. 가로 배치 그대로 폭을 줄이면 단계 이름부터 잘리고,
+  '좁으면 세로로'를 켜면 같은 폭에서도 이름이 잘리지 않습니다.<br>
+  <b>끝낸 단계는 눌러서 되돌아갈 수 있어야</b> 합니다. 이 기능을 끄면 끝낸 단계를 눌러도 이동하지 않는데,
+  그러면 배송지를 잘못 적은 사용자가 처음부터 다시 해야 합니다.<br>
+  지금 단계는 색뿐 아니라 <code>aria-current="step"</code>으로도 알립니다.
 </p>
 
 <script>
@@ -76,7 +76,7 @@
         (s[1] ? '<small>' + s[1] + '</small>' : '') + '</span></li>';
     }).join('');
 
-    // 이름이 잘렸나 — 글자가 실제로 찬 폭을 재서 칸과 견준다
+    // 이름이 잘렸는지 본다. 글자가 실제로 차지하는 폭을 재서 칸 폭과 비교한다
     var over = 0;
     [].forEach.call(stp.querySelectorAll('.stp__s'), function (li) {
       var el = li.querySelector('b') || li.querySelector('button');
@@ -87,7 +87,7 @@
 
     var rd = document.getElementById('read');
     rd.innerHTML = (col ? '세로' : '가로') + ' · 칸 <b>' + w + 'px</b> · 이름이 잘린 단계 <b>' + over + '개</b>' +
-      (over ? ' <span class="warn">— 이름을 못 읽는다</span>' : '') +
+      (over ? ' <span class="warn">· 이름을 읽을 수 없습니다</span>' : '') +
       '<br>지금 단계 <b>' + STEPS[cur][0] + '</b> · 되돌아갈 수 있는 단계 <b>' +
       (free ? cur : 0) + '개</b>';
     rd.dataset.over = String(over);
@@ -102,7 +102,7 @@
     if (!b) return;
     cur = +b.dataset.go;
     draw();
-    document.getElementById('log').innerHTML = '<b>' + STEPS[cur][0] + '</b> 로 돌아갔다 — 적은 값은 그대로다';
+    document.getElementById('log').innerHTML = '<b>' + STEPS[cur][0] + '</b> 단계로 돌아갔습니다. 앞서 적은 값은 그대로 남아 있습니다';
   });
   ['w'].forEach(function (id) { document.getElementById(id).addEventListener('change', draw); });
   ['col', 'free'].forEach(function (id) { document.getElementById(id).addEventListener('change', draw); });

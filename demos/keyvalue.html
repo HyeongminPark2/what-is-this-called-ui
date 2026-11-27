@@ -34,13 +34,13 @@
 </div>
 
 <p class="hint">
-  키-값 목록은 <b>라벨 폭을 고정</b>하면 값이 한 줄로 가지런히 섭니다.
-  대신 칸이 좁아지면 <b>값이 먼저 잘립니다</b> — 데모가 라벨과 값 가운데
-  <b>잘린 칸이 몇 개인지</b> 세서 적습니다.<br>
-  '좁으면 위아래로'를 켜면 라벨을 값 위에 올립니다. 가지런함은 잃지만
-  <b>아무것도 안 잘립니다</b> — 폰에서 쓰는 꼴입니다.<br>
-  태그는 <code>&lt;dl&gt;</code> · <code>&lt;dt&gt;</code> · <code>&lt;dd&gt;</code> 입니다.
-  표가 아니라 <b>이름과 값의 짝</b>이라, 소리로 읽을 때도 짝이 유지됩니다.
+  키-값 목록에서 <b>라벨 폭을 고정</b>하면 값이 세로로 가지런히 줄을 맞춥니다.
+  대신 칸이 좁아지면 <b>값이 먼저 잘리는데</b>, 데모는 라벨과 값 가운데
+  <b>잘린 칸이 몇 개인지</b> 세어 적습니다.<br>
+  '좁으면 위아래로'를 켜면 라벨을 값 위에 올립니다. 값의 시작 위치가 가지런하지는 않지만
+  <b>아무것도 잘리지 않아서</b>, 폰 화면에서 흔히 씁니다.<br>
+  태그는 <code>&lt;dl&gt;</code> · <code>&lt;dt&gt;</code> · <code>&lt;dd&gt;</code>를 씁니다.
+  키-값 목록은 표가 아니라 <b>이름과 값의 짝</b>이라서, 스크린 리더로 읽을 때도 짝이 유지됩니다.
 </p>
 
 <script>
@@ -87,14 +87,14 @@
     rd.innerHTML = '칸 <b>' + w + 'px</b> · 라벨 <b>' + k + 'px</b> · ' +
       (stack ? '<b>위아래</b>로' : '좌우로') +
       '<br>잘린 줄 <b>' + over + '개</b>' +
-      (over ? ' <span class="warn">— 값을 끝까지 못 읽는다</span>' : '');
+      (over ? ' <span class="warn">(값을 끝까지 읽을 수 없습니다)</span>' : '');
     rd.dataset.over = String(over);
     rd.dataset.stack = stack ? '1' : '0';
     rd.dataset.w = String(w);
 
     document.getElementById('log').innerHTML = cut
-      ? '넘치면 <b>말줄임</b>한다 — 줄 높이는 지켜진다'
-      : '말줄임을 껐다 — <b>줄이 넘어가</b> 가지런함이 깨진다';
+      ? '넘치면 <b>말줄임</b>합니다. 줄 높이는 그대로입니다'
+      : '말줄임을 껐습니다. 값이 <b>다음 줄로 넘어가서</b> 줄 높이가 들쭉날쭉해집니다';
   }
 
   ['w', 'k'].forEach(function (id) { document.getElementById(id).addEventListener('input', draw); });

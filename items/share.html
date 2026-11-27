@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>공유하기 — 이름표</title>
-<meta name="description" content="남에게 보여 주는 화면. 범위의 기본값, 권한, 이미 나간 링크를 다루는 법.">
+<meta name="description" content="남에게 보여 주는 범위를 정하는 화면입니다. 범위의 기본값, 권한, 이미 나간 링크를 다루는 법을 설명합니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">13부 화면 단위 패턴</a> › 공유하기</p>
     <h1>공유하기</h1>
     <p class="en">Share · permissions</p>
-    <p class="lede" style="margin-top:var(--s3)">공유 화면의 실패는 거의 늘 <b>기본값이 너무 넓은 것</b>입니다. 사고는 거기서 납니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">공유 화면에서 생기는 사고는 거의 언제나 <b>공유 범위의 기본값이 너무 넓어서</b> 일어납니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,32 +50,32 @@
           <iframe src="../demos/share.html" title="공유하기 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>범위를 바꿔 보세요 — 데모가 지금 범위에서 <b>볼 수 있는 사람 수</b>를 어림해 적고,
+          <p>범위를 바꿔 보세요. 데모는 지금 범위에서 <b>볼 수 있는 사람 수</b>를 어림해 적고,
           사내 밖까지 열리면 경고를 띄웁니다.<br>
-          '처음부터 링크 있는 누구나로 두기'를 켜면 아무것도 안 골라도
-          <b>가장 넓은 범위</b>에서 시작합니다 — 쓰기는 편하고 사고는 여기서 납니다.<br>
-          범위를 바꾸면 <b>이미 나간 링크</b>가 어떻게 되는지도 같이 알려 줘야 합니다.
-          좁히면 그 링크는 그 자리에서 막힙니다.</p>
+          '처음부터 링크 있는 누구나로 두기'를 켜면 아무것도 고르지 않아도
+          <b>가장 넓은 범위</b>에서 시작합니다. 쓰기에는 편하지만 공유 사고는 대부분 이 설정에서 일어납니다.<br>
+          범위를 바꿀 때는 <b>이미 나간 링크</b>가 어떻게 되는지도 함께 알려 줘야 합니다.
+          범위를 좁히면 이미 보낸 링크도 그 순간부터 열리지 않기 때문입니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>공유하기, 공유 설정, 권한 설정, 링크 공유</td></tr>
             <tr><th>영어</th><td>share, sharing settings, permissions, link sharing</td></tr>
-            <tr><th>같이 쓰는 말</th><td><b>누가</b> 볼 수 있는지가 <b>범위</b>(scope · audience), <b>무엇을</b> 할 수 있는지가 <b>권한</b>(permission · role)입니다. 링크만 있으면 로그인 없이 열리는 것을 <b>링크 공유</b>(link sharing), 그 링크에 붙는 임의의 문자열을 <b>토큰</b>이라 부릅니다. OS 가 띄우는 앱 고르기 판은 <b>공유 시트</b>(share sheet)입니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>초대</b> — 초대는 <b>이름을 적어</b> 부르는 쪽, 링크 공유는 <b>가진 사람 누구나</b>입니다.<br><b>게시</b> — 게시는 <b>찾아지게</b> 만드는 것이고 링크 공유는 <b>안 찾아집니다</b>.<br><b>내보내기</b> — <a href="exportdata.html">내보내기</a>는 <b>파일로 떼어 주는</b> 일입니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td><b>누가</b> 볼 수 있는지를 <b>범위</b>(scope · audience), <b>무엇을</b> 할 수 있는지를 <b>권한</b>(permission · role)이라고 합니다. 링크만 있으면 로그인 없이 열리는 방식은 <b>링크 공유</b>(link sharing)라 하고, 그 링크에 붙는 임의의 문자열은 <b>토큰</b>이라고 부릅니다. OS가 띄우는, 보낼 앱을 고르는 화면은 <b>공유 시트</b>(share sheet)라고 합니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>초대</b> — 초대는 상대의 <b>이름을 적어</b> 부르는 방식이고, 링크 공유는 링크를 <b>가진 사람 누구나</b> 열 수 있는 방식입니다.<br><b>게시</b> — 게시는 다른 사람이 검색이나 목록으로 <b>찾을 수 있게</b> 만드는 것이고, 링크 공유는 링크를 모르면 <b>찾을 수 없습니다</b>.<br><b>내보내기</b> — <a href="exportdata.html">내보내기</a>는 데이터를 <b>파일로 떼어 주는</b> 일입니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>화면 단위 패턴은 부품이 아니라 <b>끝내야 하는 일</b>입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>화면 단위 패턴은 부품 하나가 아니라 사용자가 <b>끝내야 하는 일</b> 하나를 기준으로 나눕니다. 그래서 아래 네 가지를 따져 보면 화면끼리 구별할 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>무엇을 끝내야 하나</th><th>막히는 자리</th><th>중간에 떠나면</th><th>서버가 쥔 것</th></tr></thead>
@@ -96,7 +96,7 @@
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — <b>기본은 가장 좁게.</b> 넓히는 것은 쉬워도, 넓게 나간 링크를 거두는 건 어렵습니다.</p>
+          <p><b>공유하기를 한 줄로 정리하면</b> — <b>공유 범위의 기본값은 가장 좁게 둡니다.</b> 범위를 넓히기는 쉽지만, 넓은 범위로 이미 퍼진 링크를 거둬들이기는 어렵기 때문입니다.</p>
         </div>
       </section>
 
@@ -107,46 +107,46 @@
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border:1px solid border-color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:3px 5px"><span style="display:block;font-size:8px">● 나만</span><span style="display:block;font-size:7px;color:var(--fg-muted)">아무도 못 본다</span></span><span style="display:block;border:1px solid border-color:var(--line);border-radius:4px;padding:3px 5px"><span style="display:block;font-size:8px">○ 고른 사람만</span></span><span style="display:block;border:1px solid border-color:var(--line);border-radius:4px;padding:3px 5px"><span style="display:block;font-size:8px">○ 링크 있는 누구나</span></span><span style="font-size:7px;color:var(--fg-muted)">볼 수 있는 사람 1명</span></div></div>
             </div>
-            <figcaption>나만<span><b>가장 좁다</b></span></figcaption>
+            <figcaption>나만<span><b>가장 좁은</b> 범위입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border:1px solid border-color:var(--line);border-radius:4px;padding:3px 5px"><span style="display:block;font-size:8px">○ 나만</span></span><span style="display:block;border:1px solid border-color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:3px 5px"><span style="display:block;font-size:8px">● 고른 사람만</span><span style="display:block;font-size:7px;color:var(--fg-muted)">홍길동 · 김철수</span></span><span style="display:block;border:1px solid border-color:var(--line);border-radius:4px;padding:3px 5px"><span style="display:block;font-size:8px">○ 링크 있는 누구나</span></span><span style="display:flex;gap:4px;align-items:center"><span style="flex:1;min-width:0;font-family:var(--mono);font-size:7px;border:1px solid var(--line);border-radius:3px;padding:2px 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">example.com/s/2411</span><span style="font-size:7px;color:#fff;background:var(--accent);border-radius:3px;padding:2px 5px">복사</span></span><span style="font-size:7px;color:var(--fg-muted)">홍길동 · 김철수 · 나</span></div></div>
             </div>
-            <figcaption>고른 사람만<span><b>이름으로</b> 건넨다</span></figcaption>
+            <figcaption>고른 사람만<span>볼 사람을 <b>이름으로</b> 골라 건넵니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border:1px solid border-color:var(--line);border-radius:4px;padding:3px 5px"><span style="display:block;font-size:8px">○ 고른 사람만</span></span><span style="display:block;border:1px solid border-color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:3px 5px"><span style="display:block;font-size:8px">● 모란상회 구성원</span><span style="display:block;font-size:7px;color:var(--fg-muted)">로그인하면 누구나</span></span><span style="display:block;border:1px solid border-color:var(--line);border-radius:4px;padding:3px 5px"><span style="display:block;font-size:8px">○ 링크 있는 누구나</span></span><span style="display:flex;gap:4px;align-items:center"><span style="flex:1;min-width:0;font-family:var(--mono);font-size:7px;border:1px solid var(--line);border-radius:3px;padding:2px 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">example.com/s/2411</span><span style="font-size:7px;color:#fff;background:var(--accent);border-radius:3px;padding:2px 5px">복사</span></span><span style="font-size:7px;color:var(--fg-muted)">모란상회 48명</span></div></div>
             </div>
-            <figcaption>사내 전체<span><b>로그인이 벽</b>이 된다</span></figcaption>
+            <figcaption>사내 전체<span><b>로그인해야</b> 열리므로 사내 사람만 볼 수 있습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border:1px solid border-color:var(--line);border-radius:4px;padding:3px 5px"><span style="display:block;font-size:8px">○ 모란상회 구성원</span></span><span style="display:block;border:1px solid border-color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:3px 5px"><span style="display:block;font-size:8px">● 링크 있는 누구나</span><span style="display:block;font-size:7px;color:var(--fg-muted)">로그인 없이 열린다</span></span><span style="display:flex;gap:4px;align-items:center"><span style="flex:1;min-width:0;font-family:var(--mono);font-size:7px;border:1px solid var(--line);border-radius:3px;padding:2px 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">example.com/s/2411?t=9fa3</span><span style="font-size:7px;color:#fff;background:var(--accent);border-radius:3px;padding:2px 5px">복사</span></span><span style="font-size:7px;color:var(--fg-muted)">링크를 받은 누구나</span><span style="font-size:7px;color:var(--danger)">⚠ 전달되면 막을 수 없다</span></div></div>
             </div>
-            <figcaption>링크 있는 누구나<span><b>사내 밖까지</b></span></figcaption>
+            <figcaption>링크 있는 누구나<span>링크가 전달되면 <b>사내 밖까지</b> 열립니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">권한</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px">볼 수만 ▾</span><span style="display:block;font-size:7px;color:var(--fg-muted);margin-top:2px">댓글 · 고칠 수 있음</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">범위와 따로 고른다</span></div>
             </div>
-            <figcaption>권한<span>범위와 <b>다른 축</b></span></figcaption>
+            <figcaption>권한<span>범위와는 <b>따로 정하는 값</b>입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--line)">좁힘</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--danger)">범위를 좁혔다</span><span style="display:block;font-size:7px;color:var(--fg-muted);margin-top:2px">이미 나간 링크는 이제 안 열립니다</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">되돌림이 아니라 차단이다</span></div>
             </div>
-            <figcaption>좁힐 때<span><b>알려 줘야</b> 한다</span></figcaption>
+            <figcaption>좁힐 때<span>이미 나간 링크가 막힌다는 것을 <b>알려 줘야</b> 합니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="공유하기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="공유하기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
                   <div class="pin-out" data-pin="1" style="color:var(--accent)">범위 — 나만 · 고른 사람 · 사내 · 링크 있는 누구나</div>
@@ -160,76 +160,76 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>범위 <em>누가 보나</em></b><span>넷이면 충분하다</span></li>
-            <li><b>기본값 <em>가장 좁게</em></b><span><b>넓히는 건 본인이</b></span></li>
-            <li><b>권한 <em>무엇을 하나</em></b><span>범위와 <b>따로</b> 고른다</span></li>
-            <li><b>지금 누가 <em>이름으로</em></b><span><b>세어서</b> 보여 준다</span></li>
-            <li><b>좁힐 때 <em>차단된다</em></b><span>'이미 나간 링크가 막힌다'고 적는다</span></li>
-            <li><b>만료 · 암호 <em>덜 위험하게</em></b><span>넓은 범위를 <b>시간으로</b> 묶는다</span></li>
+            <li><b>범위 <em>누가 보나</em></b><span>범위는 네 가지면 충분합니다</span></li>
+            <li><b>기본값 <em>가장 좁게</em></b><span>기본값은 가장 좁게 두고, <b>넓히는 일은 본인이</b> 합니다</span></li>
+            <li><b>권한 <em>무엇을 하나</em></b><span>범위와 <b>따로</b> 고르게 합니다</span></li>
+            <li><b>지금 누가 <em>이름으로</em></b><span>지금 볼 수 있는 사람을 이름으로 적고 <b>몇 명인지 세어</b> 보여 줍니다</span></li>
+            <li><b>좁힐 때 <em>차단된다</em></b><span>'이미 나간 링크가 막힙니다'라고 화면에 적습니다</span></li>
+            <li><b>만료 · 암호 <em>덜 위험하게</em></b><span>넓은 범위로 공유할 때는 열 수 있는 <b>기간을 정해</b> 둡니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          공유 사고는 <b>악의가 아니라 기본값</b>에서 납니다.
-          급한 사람은 가장 빠른 길을 고르는데,
-          그 길이 '링크 있는 누구나'면 그게 선택이 됩니다.
-          그래서 기본은 <b>좁게</b> 두고, 넓히는 자리에
-          <b>무슨 일이 일어나는지</b>를 한 줄로 적어 두는 것이 전부입니다.<br>
-          넓은 범위를 꼭 써야 한다면 <b>만료</b>를 붙이세요 —
-          '7일 뒤 만료'는 거의 모든 경우에 충분하고,
-          잊고 열어 둔 링크를 <b>저절로</b> 닫아 줍니다.</p>
+          공유 사고는 대개 <b>악의가 아니라 기본값</b> 때문에 일어납니다.
+          급한 사람은 가장 빨리 끝나는 쪽을 고르는데,
+          기본값이 '링크 있는 누구나'라면 그대로 그 범위로 공유하게 됩니다.
+          그래서 기본값은 <b>좁게</b> 두고, 범위를 넓히는 자리에
+          넓히면 <b>무슨 일이 일어나는지</b> 한 줄로 적어 두면 됩니다.<br>
+          넓은 범위를 꼭 써야 한다면 <b>만료</b>를 붙이세요.
+          '7일 뒤 만료' 정도면 거의 모든 경우에 충분하고,
+          깜빡 잊고 열어 둔 링크도 기한이 지나면 <b>자동으로</b> 닫힙니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>공유하기를 쓰는 경우</h3>
             <ul>
-              <li>기본을 <b>가장 좁게</b> 두기</li>
-              <li>지금 누가 볼 수 있는지 <b>세어서</b> 보여 주기</li>
-              <li>넓은 범위에는 <b>만료</b> 붙이기</li>
+              <li>기본값을 <b>가장 좁게</b> 둘 때</li>
+              <li>지금 누가 볼 수 있는지 <b>세어서</b> 보여 줄 때</li>
+              <li>넓은 범위에 <b>만료</b>를 붙일 때</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>공유하기를 쓰지 않는 경우</h3>
             <ul>
-              <li>기본을 <b>'링크 있는 누구나'</b>로 두기 — 사고가 여기서 난다</li>
-              <li>범위와 권한을 <b>한 덩어리</b>로 묶기 — '볼 수만'이 사라진다</li>
-              <li>좁힐 때 <b>말없이</b> 막기 — 받은 사람은 왜 안 열리는지 모른다</li>
-              <li>링크를 <b>짐작할 수 있게</b> 만들기 — 토큰은 길고 임의로</li>
+              <li>기본값을 <b>'링크 있는 누구나'</b>로 둘 때. 공유 사고가 대부분 여기서 일어납니다</li>
+              <li>범위와 권한을 <b>한 덩어리</b>로 묶을 때. '볼 수만' 있게 하는 선택지가 사라집니다</li>
+              <li>범위를 좁히면서 <b>아무 안내 없이</b> 링크를 막을 때. 링크를 받은 사람은 왜 안 열리는지 알 수 없습니다</li>
+              <li>링크를 <b>짐작할 수 있게</b> 만들 때. 토큰은 길고 무작위로 만듭니다</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 파일로 떼어 주면 <a href="exportdata.html">내보내기</a>, 남에게 보이는 내 정보는 <a href="profile.html">프로필</a>, 기기 기능은 <a href="permission.html">권한 요청</a>, 되돌릴 수 없는 일은 <a href="destructive.html">위험한 동작</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>공유하기 대신 다른 것을 써야 하는 경우</b> — 파일로 떼어 주면 <a href="exportdata.html">내보내기</a>, 남에게 보이는 내 정보는 <a href="profile.html">프로필</a>, 기기 기능은 <a href="permission.html">권한 요청</a>, 되돌릴 수 없는 일은 <a href="destructive.html">위험한 동작</a>.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border:1px solid border-color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:3px 5px"><span style="display:block;font-size:8px">● 고른 사람만</span><span style="display:block;font-size:7px;color:var(--fg-muted)">홍길동 · 김철수</span></span><span style="display:flex;gap:4px;align-items:center"><span style="flex:1;min-width:0;font-family:var(--mono);font-size:7px;border:1px solid var(--line);border-radius:3px;padding:2px 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">example.com/s/2411</span><span style="font-size:7px;color:#fff;background:var(--accent);border-radius:3px;padding:2px 5px">복사</span></span><span style="font-size:7px;color:var(--fg-muted)">3명</span></div></div>
             </div>
-            <figcaption><b>문서 공유</b><b>이름으로</b> 건넨다</figcaption>
+            <figcaption><b>문서 공유</b>볼 사람을 <b>이름으로</b> 골라 건넵니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border:1px solid border-color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:3px 5px"><span style="display:block;font-size:8px">● 링크 있는 누구나</span><span style="display:block;font-size:7px;color:var(--fg-muted)">7일 뒤 만료</span></span><span style="display:flex;gap:4px;align-items:center"><span style="flex:1;min-width:0;font-family:var(--mono);font-size:7px;border:1px solid var(--line);border-radius:3px;padding:2px 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">example.com/s/2411?t=9fa3</span><span style="font-size:7px;color:#fff;background:var(--accent);border-radius:3px;padding:2px 5px">복사</span></span><span style="font-size:7px;color:var(--fg-muted)">링크를 받은 누구나</span></div></div>
             </div>
-            <figcaption><b>외부 공유</b><b>만료</b>를 붙인다</figcaption>
+            <figcaption><b>외부 공유</b>링크에 <b>만료</b>를 붙입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">폰</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px">공유 시트</span><span style="display:block;font-size:7px;color:var(--fg-muted);margin-top:2px">메시지 · 메일 · 복사…</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">OS 가 앱 고르기를 맡는다</span></div>
             </div>
-            <figcaption><b>폰</b><b>OS 공유 시트</b>를 쓴다</figcaption>
+            <figcaption><b>폰</b>보낼 곳을 고를 때는 <b>OS 공유 시트</b>를 씁니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">이 화면의 계약서</span></h2>
-        <p>범위는 <b>라디오</b>입니다 — 하나만 고르는 값이고, 기본은 가장 좁은 쪽입니다.</p>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+        <p>범위는 하나만 고르는 값이므로 <b>라디오</b>로 만들고, 기본 선택은 가장 좁은 쪽에 둡니다.</p>
 <pre class="code">&lt;<span class="t">fieldset</span>&gt;
   &lt;<span class="t">legend</span>&gt;누가 볼 수 있나&lt;/<span class="t">legend</span>&gt;
   &lt;<span class="t">label</span>&gt;&lt;<span class="t">input</span> <span class="a">type</span>=<span class="s">"radio"</span> <span class="a">name</span>=<span class="s">"scope"</span> <span class="a">value</span>=<span class="s">"named"</span> <span class="a">checked</span>&gt;
@@ -246,43 +246,43 @@
 &lt;<span class="t">p</span> <span class="a">role</span>=<span class="s">"status"</span>&gt;복사했습니다&lt;/<span class="t">p</span>&gt;</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td>↑ ↓</td><td>라디오 사이를 옮긴다 — <b>Tab 이 아니다</b></td></tr>
-            <tr><td>Enter · Space</td><td>복사 단추를 누른다</td></tr>
-            <tr><td><code>role="status"</code></td><td>'복사했습니다'를 <b>소리로도</b> 알린다</td></tr>
-            <tr><td><code>readonly</code></td><td>링크 칸은 고르기는 되고 <b>고쳐지지는</b> 않는다</td></tr>
-            <tr><td><code>&lt;fieldset&gt;</code></td><td>범위 묶음에 이름을 준다 — 무엇을 고르는지 <b>소리로</b> 전해진다</td></tr>
-            <tr><td>확인하는 법</td><td>로그아웃한 창에서 <b>복사한 링크</b>를 열어 본다</td></tr>
+            <tr><td>↑ ↓</td><td>라디오 사이를 옮깁니다. 라디오 사이는 <b>Tab이 아니라</b> 화살표로 옮깁니다</td></tr>
+            <tr><td>Enter · Space</td><td>복사 단추를 누릅니다</td></tr>
+            <tr><td><code>role="status"</code></td><td>'복사했습니다'를 스크린 리더로도 <b>소리 내어</b> 알립니다</td></tr>
+            <tr><td><code>readonly</code></td><td>링크 칸의 글자를 선택할 수는 있지만 <b>고칠 수는</b> 없게 합니다</td></tr>
+            <tr><td><code>&lt;fieldset&gt;</code></td><td>범위 묶음에 이름을 붙여서 무엇을 고르는 자리인지 스크린 리더로도 <b>전해지게</b> 합니다</td></tr>
+            <tr><td>확인하는 법</td><td>로그아웃한 창에서 <b>복사한 링크</b>를 열어 봅니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>토큰은 길고 임의로</th><td>짧은 번호를 쓰면 <b>짐작해서</b> 남의 것이 열립니다. 길이와 무작위성이 유일한 벽입니다.</td></tr>
-            <tr><th>좁히면 즉시 막기</th><td>범위를 좁힌 순간부터 옛 토큰은 <b>거절</b>해야 합니다 — 캐시에 남아 열리면 좁힌 적이 없는 셈입니다.</td></tr>
-            <tr><th>만료</th><td><code>expires_at</code> 을 두고 서버가 검사합니다. 화면에만 적어 두면 아무 소용이 없습니다.</td></tr>
-            <tr><th>누가 열었나</th><td>링크 공유는 <b>누가 봤는지 모릅니다</b> — 그게 필요하면 로그인을 요구하는 범위를 써야 합니다.</td></tr>
+            <tr><th>토큰은 길고 임의로</th><td>짧은 번호를 쓰면 번호를 <b>짐작해서</b> 남의 문서를 열 수 있습니다. 링크 공유에서는 토큰의 길이와 무작위성 말고는 막아 주는 장치가 없습니다.</td></tr>
+            <tr><th>좁히면 즉시 막기</th><td>범위를 좁힌 순간부터 옛 토큰은 <b>거절</b>해야 합니다. 캐시에 남은 응답 때문에 계속 열린다면 범위를 좁힌 효과가 없습니다.</td></tr>
+            <tr><th>만료</th><td><code>expires_at</code>을 저장해 두고 서버가 요청마다 검사합니다. 만료 날짜를 화면에만 적어 두면 기한이 지나도 링크가 열립니다.</td></tr>
+            <tr><th>누가 열었나</th><td>링크 공유로는 <b>누가 봤는지 알 수 없습니다</b>. 열어 본 사람을 알아야 한다면 로그인을 요구하는 범위를 써야 합니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p><b>폰에는 OS 공유 시트</b>가 있어 앱 고르기를 맡아 줍니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p><b>폰에는 OS 공유 시트</b>가 있어서, 어느 앱으로 보낼지 고르는 일은 OS가 맡습니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>직접 만듦 + Web Share</span></header>
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border:1px solid border-color:var(--accent);background:var(--accent-soft);border-radius:4px;padding:3px 5px"><span style="display:block;font-size:8px">● 고른 사람만</span></span><span style="display:flex;gap:4px;align-items:center"><span style="flex:1;min-width:0;font-family:var(--mono);font-size:7px;border:1px solid var(--line);border-radius:3px;padding:2px 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">example.com/s/2411</span><span style="font-size:7px;color:#fff;background:var(--accent);border-radius:3px;padding:2px 5px">복사</span></span><span style="font-size:7px;color:var(--fg-muted)">3명</span></div></div>
             </div>
-            <footer>범위 고르기는 직접 만들고, 보내는 자리에서는 <code>navigator.share()</code> 를 쓸 수 있습니다.</footer>
+            <footer>범위를 고르는 화면은 직접 만들고, 보내는 단계에서는 <code>navigator.share()</code>를 쓸 수 있습니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>공유 시트</span></header>
@@ -294,7 +294,7 @@
                   <span style="width:10px;height:10px;border-radius:3px;background:var(--accent-soft)"></span>
                   <span style="width:10px;height:10px;border-radius:3px;background:var(--accent-soft)"></span></div></div></div>
             </div>
-            <footer><code>UIActivityViewController</code> 가 <b>어디로 보낼지</b>를 맡습니다. 범위는 앱이 따로 정합니다.</footer>
+            <footer><code>UIActivityViewController</code>가 <b>어디로 보낼지</b> 고르는 화면을 띄웁니다. 공유 범위는 앱이 따로 정합니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>Sharesheet</span></header>
@@ -305,18 +305,18 @@
                   <span style="width:10px;height:10px;border-radius:999px;background:var(--accent-soft)"></span>
                   <span style="width:10px;height:10px;border-radius:999px;background:var(--accent-soft)"></span></div></div></div>
             </div>
-            <footer><code>Intent.ACTION_SEND</code> 입니다. 자주 쓰는 상대를 <b>맨 앞</b>에 올려 줍니다.</footer>
+            <footer><code>Intent.ACTION_SEND</code>로 띄웁니다. 자주 보내는 상대를 <b>맨 앞</b>에 보여 줍니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — 공유는 <b>두 가지 일</b>이 한 단추에 섞여 있습니다 — <b>누가 볼 수 있게 할지</b>(범위)와 <b>어디로 보낼지</b>(앱·메신저). 폰은 뒤쪽을 OS 가 맡아 주지만 범위는 여전히 앱이 정합니다. 웹에서는 <code>navigator.share()</code> 로 뒤쪽만 빌려 쓸 수 있고, 범위 고르기는 어차피 직접 만들어야 합니다. <b>둘을 한 화면에 섞지 말고</b> 범위를 먼저 정한 뒤 보내기로 넘기는 차례가 덜 헷갈립니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — 공유 단추 하나에는 <b>누가 볼 수 있게 할지</b>(범위)와 <b>어디로 보낼지</b>(앱·메신저)라는 <b>두 가지 일</b>이 섞여 있습니다. 폰에서는 보낼 곳을 고르는 일을 OS가 맡지만, 범위는 여전히 앱이 정합니다. 웹에서도 <code>navigator.share()</code>로 보낼 곳 고르기만 맡길 수 있고, 범위를 고르는 화면은 직접 만들어야 합니다. 그러니 <b>두 가지를 한 화면에 섞지 말고</b>, 범위를 먼저 정한 뒤 보내기로 넘어가게 하면 사용자가 덜 헷갈립니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="login.html"><b>로그인</b><em>13부</em></a></li>
         <li><a href="onboarding.html"><b>온보딩</b><em>13부</em></a></li>
@@ -330,20 +330,20 @@
         <li><a href="dashboard.html"><b>대시보드</b><em>13부</em></a></li>
         <li><a href="upload.html"><b>파일 올리기</b><em>13부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="profile.html"><b>프로필</b><em>13부</em></a></li>
         <li><a href="exportdata.html"><b>내보내기</b><em>10부</em></a></li>
         <li><a href="permission.html"><b>권한 요청</b><em>13부</em></a></li>
         <li><a href="radio.html"><b>라디오 그룹</b><em>4부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

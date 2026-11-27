@@ -38,13 +38,13 @@
 </div>
 
 <p class="hint">
-  같은 '새 가게 등록'이라도 <b>넓은 화면에서는 모달</b>, <b>좁은 화면에서는 전체 화면</b>이 맞습니다 —
-  390px 에 뜬 모달은 가장자리 여백만 남기고 내용 칸을 더 좁힙니다.
-  데모가 <b>내용이 쓸 수 있는 폭</b>을 재서 둘을 견줍니다.<br>
-  전체 화면 레이어는 <b>화면처럼 보이지만 화면이 아닙니다</b> — 뒤에 목록이 그대로 있고,
-  닫으면 돌아옵니다. 그래서 <b>닫기(✕)</b>이지 뒤로가기가 아니고,
-  제목 줄에 <b>무엇을 하는 중인지</b>를 적어야 합니다.<br>
-  기록에 넣어 두면 <b>시스템 백</b>으로도 닫힙니다 — 폰에서는 그게 기본 기대입니다.
+  같은 '새 가게 등록'이라도 <b>넓은 화면에서는 모달</b>로, <b>좁은 화면에서는 전체 화면</b>으로 띄우는 것이 맞습니다.
+  390px 폭에 모달을 띄우면 모달 둘레에 여백이 생기는 만큼 내용을 담을 칸이 더 좁아지기 때문입니다.
+  데모는 두 방식에서 <b>내용이 쓸 수 있는 폭</b>을 재서 비교합니다.<br>
+  전체 화면 레이어는 <b>새 화면처럼 보이지만 실제로 화면이 바뀐 것은 아닙니다</b>. 뒤에 가게 목록이 그대로 남아 있어서,
+  레이어를 닫으면 목록으로 돌아옵니다. 그래서 뒤로가기(‹)가 아니라 <b>닫기(✕)</b> 단추를 두고,
+  제목 줄에는 <b>무엇을 하는 중인지</b> 적어야 합니다.<br>
+  레이어를 열 때 기록에 한 칸을 넣어 두면 <b>시스템 백</b>으로도 닫힙니다. 폰 사용자는 시스템 백으로 레이어가 닫히기를 기대합니다.
 </p>
 
 <script>
@@ -101,7 +101,7 @@
     var rd = document.getElementById('read');
     rd.innerHTML = '화면 폭 <b>' + w + 'px</b> · ' + (open ? (full ? '<b>전체 화면</b>' : '<b>모달</b>') : '닫힘') +
       (open ? '<br>내용이 쓸 수 있는 폭 <b>' + usable + 'px</b>' +
-        (!full && w <= 400 ? ' <span class="warn">— 좁은 화면인데 모달이라 더 좁다</span>' : '') : '') +
+        (!full && w <= 400 ? ' <span class="warn">— 좁은 화면에 모달을 띄워서 내용 칸이 더 좁습니다</span>' : '') : '') +
       (why ? '<br>' + why : '');
     rd.dataset.open = open ? '1' : '0';
     rd.dataset.full = full ? '1' : '0';
@@ -110,13 +110,13 @@
   }
 
   document.getElementById('stage').addEventListener('click', function (e) {
-    if (e.target.id === 'x') { open = false; render(''); document.getElementById('log').innerHTML = '<b>닫기</b>를 눌렀다 — 목록으로 돌아왔다'; return; }
-    if (e.target.id === 'save') { open = false; render(''); document.getElementById('log').innerHTML = '<b>저장</b>하고 닫았다'; return; }
-    if (e.target.id === 'scrim') { open = false; render(''); document.getElementById('log').innerHTML = '가림막을 눌러 닫았다'; return; }
+    if (e.target.id === 'x') { open = false; render(''); document.getElementById('log').innerHTML = '<b>닫기</b>를 눌러 목록으로 돌아왔습니다'; return; }
+    if (e.target.id === 'save') { open = false; render(''); document.getElementById('log').innerHTML = '<b>저장</b>하고 닫았습니다'; return; }
+    if (e.target.id === 'scrim') { open = false; render(''); document.getElementById('log').innerHTML = '가림막을 눌러 닫았습니다'; return; }
   });
 
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && open) { open = false; render(''); document.getElementById('log').innerHTML = '<b>Esc</b> 로 닫았다'; }
+    if (e.key === 'Escape' && open) { open = false; render(''); document.getElementById('log').innerHTML = '<b>Esc</b>로 닫았습니다'; }
   });
 
   document.getElementById('open').addEventListener('click', function () { open = true; render(''); });

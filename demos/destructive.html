@@ -50,11 +50,11 @@
 
 <p class="hint">
   네 가지 방식을 바꿔 가며 <b>삭제</b>를 눌러 보세요.<br>
-  <b>바로 지운다</b>는 손가락이 미끄러지면 끝입니다. <b>한 번 되묻는다</b>는 가장 흔하지만,
-  세 번째부터는 읽지 않고 누릅니다. <b>이름을 치게 한다</b>는 확실하지만 번거로워
+  <b>바로 지운다</b>는 손가락이 잘못 닿기만 해도 되돌릴 수 없습니다. <b>한 번 되묻는다</b>는 가장 흔한 방식이지만,
+  세 번째쯤부터는 사용자가 문구를 읽지 않고 누릅니다. <b>이름을 치게 한다</b>는 확실하지만 번거로워서
   정말 위험한 것에만 씁니다.<br>
-  <b>되돌릴 틈을 주는</b> 쪽이 대개 가장 낫습니다 — 묻지 않아 빠르고, 실수해도 살아납니다.
-  묻는 것보다 <b>무를 수 있게 하는</b> 편이 거의 늘 친절합니다.
+  대개는 <b>되돌릴 틈을 주는</b> 방식이 가장 낫습니다. 묻지 않으니 빠르고, 실수로 지워도 되살릴 수 있기 때문입니다.
+  누르기 전에 묻는 것보다 누른 뒤에 <b>무를 수 있게 하는</b> 편이 거의 언제나 사용자에게 편합니다.
 </p>
 
 <script>
@@ -90,15 +90,15 @@
         clearTimeout(timer);
         alive = ALL.filter(function (x) { return alive.indexOf(x) >= 0 || x === n; });
         u.innerHTML = ''; render();
-        document.getElementById('log').innerHTML = '<b>되돌렸다</b> — 서버에는 아직 안 보냈다';
+        document.getElementById('log').innerHTML = '<b>되돌렸습니다.</b> 서버에는 아직 보내지 않았습니다';
       });
       timer = setTimeout(function () {
         u.innerHTML = '';
-        document.getElementById('log').innerHTML = '5초가 지나 <b>서버로 보냈다</b> — 이제 진짜로 지워졌다';
+        document.getElementById('log').innerHTML = '5초가 지나 <b>서버로 보냈습니다.</b> 이제 실제로 지워졌습니다';
       }, 5000);
-      document.getElementById('log').innerHTML = '지웠다 — <b>5초 안에는 되돌릴 수 있다</b>';
+      document.getElementById('log').innerHTML = '지웠습니다. <b>5초 안에는 되돌릴 수 있습니다</b>';
     } else {
-      document.getElementById('log').innerHTML = '지웠다 — <span class="warn">되돌릴 길이 없다</span>';
+      document.getElementById('log').innerHTML = '지웠습니다. <span class="warn">되돌릴 방법이 없습니다</span>';
     }
   }
 
@@ -128,7 +128,7 @@
       });
     }
     document.getElementById('cancel').addEventListener('click', function () {
-      clearAsk(); document.getElementById('log').textContent = '취소했다';
+      clearAsk(); document.getElementById('log').textContent = '취소했습니다';
     });
     document.getElementById('go').addEventListener('click', function () {
       var t = pending; clearAsk(); reallyDelete(t, false);

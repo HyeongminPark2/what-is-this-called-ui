@@ -44,11 +44,11 @@
 
 <p class="hint">
   자간은 <b>본문에서 거의 건드리지 않는 것</b>이 맞습니다. 글꼴 디자이너가 이미 맞춰 둔 값이고,
-  한글은 특히 조금만 벌려도 <b>글자가 흩어져</b> 읽기 힘들어집니다.<br>
-  <b>손대는 자리는 둘뿐입니다.</b> ① 아주 큰 제목은 조금 좁혀서(<code>-0.02em</code>) 덩어리로 보이게 하고,
+  특히 한글은 조금만 벌려도 <b>글자가 흩어져</b> 읽기 힘들어지기 때문입니다.<br>
+  <b>자간을 조정하는 자리는 두 군데뿐입니다.</b> ① 아주 큰 제목은 조금 좁혀서(<code>-0.02em</code>) 한 덩어리로 보이게 하고,
   ② 작은 대문자 라벨은 조금 벌려서(<code>0.05em</code>) 글자가 붙어 보이지 않게 합니다.<br>
-  막대를 양 끝으로 밀어 보세요. 음수로 가면 <b>글자가 서로 닿고</b>, 양수로 가면 낱글자로 흩어집니다.
-  단위는 <code>em</code>을 씁니다 — 글자 크기가 바뀌면 자간도 같이 따라와야 하기 때문입니다.
+  막대를 양 끝으로 밀어 보세요. 음수로 가면 <b>글자가 서로 닿고</b>, 양수로 가면 글자가 낱낱이 흩어져 보입니다.
+  단위는 <code>em</code>을 쓰는데, 글자 크기가 바뀌면 자간도 같은 비율로 따라 바뀌어야 하기 때문입니다.
 </p>
 
 <script>
@@ -62,10 +62,10 @@
     });
     requestAnimationFrame(function () {
       var w = document.getElementById('body').getBoundingClientRect().width;
-      var tip = v < -0.03 ? '<span class="bad">너무 좁습니다 — 글자가 닿습니다</span>'
-              : v > 0.06 ? '<span class="bad">너무 넓습니다 — 낱글자로 흩어집니다</span>'
-              : Math.abs(v) < 0.005 ? '<span class="good">기본값 — 본문은 이대로가 맞습니다</span>'
-              : '<span style="color:var(--warn);font-weight:700">제목·라벨에만 쓰는 범위</span>';
+      var tip = v < -0.03 ? '<span class="bad">너무 좁습니다. 글자가 서로 닿습니다</span>'
+              : v > 0.06 ? '<span class="bad">너무 넓습니다. 글자가 낱낱이 흩어져 보입니다</span>'
+              : Math.abs(v) < 0.005 ? '<span class="good">기본값입니다. 본문은 이대로 두는 것이 맞습니다</span>'
+              : '<span style="color:var(--warn);font-weight:700">제목과 라벨에만 쓰는 범위입니다</span>';
       meter.innerHTML = 'letter-spacing <b>' + v.toFixed(3) + 'em</b> · ' + tip;
     });
   }

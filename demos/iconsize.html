@@ -40,15 +40,15 @@
 </div>
 
 <p class="hint">
-  아이콘 크기는 <b>글자 크기가 아니라 줄 높이에 맞춥니다</b> — 아이콘 가운데와 글자 가운데가
-  어긋난 픽셀 수를 재서 적습니다.<br>
-  그림은 <code>viewBox 24</code> 에 <b>선 굵기 1.5</b> 로 그렸습니다. 그대로 줄이면
-  선도 같이 얇아져 <b>12px 에서는 0.75px</b> 가 됩니다 — 화면에서 흐려 보이는 이유입니다.
-  '선 굵기를 고정'을 켜면 크기에 맞춰 굵기를 되돌려 1.5px 를 지킵니다.<br>
-  인라인 SVG 는 <b>글자처럼 베이스라인에 앉습니다</b> — 그래서 글자 가운데보다 몇 px 위로 뜹니다.
-  '아이콘을 block 으로'를 켜면 어긋남이 0에 가까워집니다. 눈으로는 잘 안 보이는데
-  아이콘과 글자를 나란히 두는 자리마다 생기는 어긋남입니다.<br>
-  아이콘이 작아도 <b>누르는 자리</b>는 44px 이어야 합니다 — 그 값도 같이 잽니다.
+  아이콘 크기는 <b>글자 크기가 아니라 줄 높이에 맞춥니다</b>. 위에는 아이콘의 세로 가운데와 글자의 세로 가운데가
+  몇 픽셀 어긋났는지 재서 적습니다.<br>
+  이 아이콘은 <code>viewBox 24</code>에 <b>선 굵기 1.5</b>로 그렸습니다. 그대로 줄이면
+  선도 함께 얇아져서 <b>12px에서는 0.75px</b>이 되는데, 작은 아이콘이 화면에서 흐려 보이는 이유가 이것입니다.
+  '선 굵기를 고정'을 켜면 크기에 맞춰 굵기를 되돌려 선을 1.5px로 유지합니다.<br>
+  인라인 SVG는 <b>글자처럼 베이스라인 위에 놓이기</b> 때문에 글자 가운데보다 몇 px 위로 뜹니다.
+  '아이콘을 block 으로'를 켜면 어긋남이 0에 가까워집니다. 눈으로는 잘 보이지 않지만
+  아이콘과 글자를 나란히 두는 자리마다 이 어긋남이 생깁니다.<br>
+  아이콘이 작아도 <b>누르는 자리</b>는 44px이어야 하므로, 그 크기도 함께 재서 적습니다.
 </p>
 
 <script>
@@ -89,7 +89,7 @@
 
     var rd = document.getElementById('read');
     rd.innerHTML = '아이콘 <b>' + size + 'px</b> · 그려진 선 <b>' + drawn.toFixed(2) + 'px</b>' +
-      (drawn < 1 ? ' <span class="warn">— 1px 미만이라 흐려진다</span>' : '') +
+      (drawn < 1 ? ' <span class="warn">— 1px 미만이라 흐려 보입니다</span>' : '') +
       '<br>가운데 어긋남 <b>' + off.toFixed(1) + 'px</b>' +
       '<br>누르는 자리 <b>' + Math.round(br.width) + '×' + Math.round(br.height) + '</b>' +
       (br.width < 44 ? ' <span class="warn">— 44px 미달</span>' : '');
@@ -99,11 +99,11 @@
     rd.dataset.hit = String(Math.round(br.width));
 
     document.getElementById('note').innerHTML = (fix
-      ? '선 굵기를 되돌렸다 — 어느 크기에서나 <b>1.5px</b> 로 그려진다'
-      : '<span class="warn">그린 그대로 줄였다</span> — 작아질수록 선이 같이 얇아진다') +
+      ? '선 굵기를 되돌렸습니다 — 어느 크기에서나 <b>1.5px</b>로 그려집니다'
+      : '<span class="warn">그린 그대로 줄였습니다</span> — 작아질수록 선도 함께 얇아집니다') +
       '<br>' + (blk
-        ? '아이콘이 <b>block</b> 이라 글자와 가운데가 맞는다'
-        : '<span class="warn">인라인 SVG 라 베이스라인에 앉았다</span> — 글자 가운데보다 위로 뜬다');
+        ? '아이콘이 <b>block</b>이라 글자와 가운데가 맞습니다'
+        : '<span class="warn">인라인 SVG라 베이스라인 위에 놓였습니다</span> — 글자 가운데보다 위로 뜹니다');
   }
 
   ['s'].forEach(function (id) { document.getElementById(id).addEventListener('change', draw); });

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>여러 개 고르기 — 이름표</title>
-<meta name="description" content="여러 값을 고르는 부품. 고른 것을 보이는 세 가지 방법과 기본 multiple 셀렉트의 한계.">
+<meta name="description" content="여러 값을 고르는 부품에서 고른 것을 보여 주는 세 가지 방법과 브라우저 기본 multiple 셀렉트의 한계를 다루는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">4부 조작 부품</a> › 여러 개 고르기</p>
     <h1>여러 개 고르기</h1>
     <p class="en">Multi-select</p>
-    <p class="lede" style="margin-top:var(--s3)">고르는 것보다 <b>고른 것을 보이는 쪽</b>이 어렵습니다 — 알약은 늘어나고, 숫자는 모호합니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">여러 개 고르기에서는 고르는 동작보다 <b>고른 것을 보여 주는 방법</b>이 더 어렵습니다. 고른 것을 알약으로 늘어놓으면 칸이 점점 길어지고, 개수만 숫자로 보여 주면 무엇을 골랐는지 알 수 없기 때문입니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,32 +50,32 @@
           <iframe src="../demos/multiselect.html" title="여러 개 고르기 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>알약으로 늘어놓으면 <b>무엇을 골랐는지</b>는 한눈에 보이지만 줄이 늘어납니다 —
-          데모가 <b>고른 것 칸의 높이</b>를 재서 적습니다.<br>
-          '<b>최대 보일 알약</b>'을 줄이면 <code>+N</code> 으로 접힙니다.
-          숫자만 보이는 쪽은 높이가 안 변하지만 <b>무엇을 골랐는지 모릅니다</b>.<br>
-          브라우저 기본 <code>multiple</code> 셀렉트는 <b>Ctrl 을 눌러야</b> 여러 개가 골라집니다 —
-          체크박스 목록이 훨씬 분명합니다.</p>
+          <p>고른 것을 알약으로 늘어놓으면 <b>무엇을 골랐는지</b> 한눈에 보이지만 줄 수가 늘어납니다.
+          데모가 <b>고른 것 칸의 높이</b>를 재서 적어 주니 확인해 보세요.<br>
+          '<b>최대 보일 알약</b>'을 줄이면 넘치는 알약이 <code>+N</code>으로 접힙니다.
+          개수만 숫자로 보여 주면 높이는 변하지 않지만 <b>무엇을 골랐는지 알 수 없습니다</b>.<br>
+          브라우저 기본 <code>multiple</code> 셀렉트는 <b>Ctrl을 누른 채</b> 눌러야 여러 개가 골라지기 때문에,
+          체크박스 목록으로 만드는 편이 훨씬 알아보기 쉽습니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>여러 개 고르기, 다중 선택, 멀티 셀렉트</td></tr>
             <tr><th>영어</th><td>multi-select, multiple selection, token input</td></tr>
-            <tr><th>같이 쓰는 말</th><td>고른 것이 알약으로 쌓이는 꼴은 <b>토큰 입력</b>(token input), 쳐서 걸러 가며 고르는 꼴은 <b>멀티 콤보박스</b>입니다. 넘치는 것을 <code>+N</code> 으로 접는 것을 <b>오버플로 카운트</b>라 합니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>체크박스</b> — <a href="checkbox.html">체크박스</a>는 <b>다 보이는</b> 쪽입니다.<br><b>콤보박스</b> — <a href="combobox.html">콤보박스</a>는 <b>하나</b>만 고릅니다.<br><b>태그</b> — <a href="tag.html">태그</a>는 <b>보여 주는</b> 부품입니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>고른 것이 알약으로 쌓이는 꼴은 <b>토큰 입력</b>(token input), 글자를 쳐서 목록을 걸러 가며 고르는 꼴은 <b>멀티 콤보박스</b>라고 부릅니다. 넘치는 알약을 <code>+N</code>으로 접는 것은 <b>오버플로 카운트</b>라고 합니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>체크박스</b> — <a href="checkbox.html">체크박스</a>는 고를 수 있는 항목이 처음부터 <b>모두 보이는</b> 부품입니다.<br><b>콤보박스</b> — <a href="combobox.html">콤보박스</a>는 <b>하나</b>만 고릅니다.<br><b>태그</b> — <a href="tag.html">태그</a>는 고르는 부품이 아니라 값을 <b>보여 주는</b> 부품입니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>조작 부품은 모두 '값을 받는다'는 점이 같습니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>조작 부품은 모두 사용자에게서 값을 받는다는 점은 같지만, 아래 네 가지를 따져 보면 서로 구별할 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>고르는 개수</th><th>선택지가 보이나</th><th>바로 적용되나</th><th>타이핑</th></tr></thead>
@@ -106,57 +106,57 @@
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — <b>고른 것이 보이게 하세요.</b> 숫자만 보이면 확인하려고 다시 열게 됩니다.</p>
+          <p><b>여러 개 고르기를 한 줄로 정리하면</b> — <b>무엇을 골랐는지 보이게 하세요.</b> 개수만 보여 주면 사용자는 고른 것을 확인하려고 목록을 다시 열어야 합니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">그림 한 장으로는 못 배운다</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">상태마다 달라지는 모습</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:flex;gap:3px;flex-wrap:wrap;align-items:center;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:4px 5px;min-height:22px"><span style="display:inline-flex;gap:3px;align-items:center;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 4px 1px 7px;font-size:7.5px">모란상회<span style="opacity:.6">✕</span></span><span style="display:inline-flex;gap:3px;align-items:center;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 4px 1px 7px;font-size:7.5px">한빛아웃도어<span style="opacity:.6">✕</span></span></span><span style="font-size:8.5px;color:var(--fg-muted)">둘을 골랐다</span></div>
             </div>
-            <figcaption>조금<span><b>이름이</b> 다 보인다</span></figcaption>
+            <figcaption>조금<span>고른 것의 <b>이름이</b> 모두 보입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:flex;gap:3px;flex-wrap:wrap;align-items:center;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:4px 5px;min-height:22px"><span style="display:inline-flex;gap:3px;align-items:center;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 4px 1px 7px;font-size:7.5px">모란상회<span style="opacity:.6">✕</span></span><span style="display:inline-flex;gap:3px;align-items:center;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 4px 1px 7px;font-size:7.5px">한빛아웃도어<span style="opacity:.6">✕</span></span><span style="display:inline-flex;gap:3px;align-items:center;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 4px 1px 7px;font-size:7.5px">새벽상사<span style="opacity:.6">✕</span></span><span style="font-size:7.5px;color:var(--fg-muted)">+5</span></span><span style="font-size:8.5px;color:var(--fg-muted)">넘치면 +N 으로</span></div>
             </div>
-            <figcaption>많이<span><b>+N</b> 으로 접는다</span></figcaption>
+            <figcaption>많이<span>넘치는 것은 <b>+N</b>으로 접습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:flex;gap:3px;flex-wrap:wrap;align-items:center;border:1px solid var(--danger);border-radius:4px;background:var(--surface);padding:4px 5px;min-height:22px"><span style="font-size:8px;color:var(--fg-muted)">8곳 골랐습니다</span></span><span style="font-size:8.5px;color:var(--fg-muted)">숫자만 — 무엇인지 모른다</span></div>
             </div>
-            <figcaption>숫자만<span><b>다시 열어</b> 봐야 한다</span></figcaption>
+            <figcaption>숫자만<span>무엇을 골랐는지 보려면 목록을 <b>다시 열어</b> 봐야 합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:flex;gap:3px;flex-wrap:wrap;align-items:center;border:1px solid var(--line);border-radius:4px;background:var(--surface);padding:4px 5px;min-height:22px"><span style="font-size:7.5px;color:var(--fg-faint)">아직 안 골랐습니다</span></span><span style="font-size:8.5px;color:var(--fg-muted)">아직 안 골랐다</span></div>
             </div>
-            <figcaption>빈 상태<span><b>무엇을 고르는지</b> 적는다</span></figcaption>
+            <figcaption>빈 상태<span>아직 고른 것이 없으면 <b>무엇을 고르는 칸인지</b> 적어 둡니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--danger)">기본 셀렉트</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px">⌃ Ctrl + 클릭</span><span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">모르는 사람이 많다</span></span></div></div>
             </div>
-            <figcaption><code>multiple</code><span><b>Ctrl 을 눌러야</b> 한다</span></figcaption>
+            <figcaption><code>multiple</code><span>여러 개를 고르려면 <b>Ctrl을 누른 채</b> 눌러야 합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">많을 때</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px">🔍 모란</span><span style="display:block;font-size:7.5px;color:var(--fg-muted);margin-top:2px">☑ 모란상회</span><span style="display:block;font-size:7.5px;color:var(--fg-muted)">☐ 모란상회 2호점</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">검색 칸을 붙인다</span></div>
             </div>
-            <figcaption>항목이 많음<span><b>검색</b>을 붙인다</span></figcaption>
+            <figcaption>항목이 많음<span>목록 위에 <b>검색</b> 칸을 붙입니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="여러 개 고르기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="여러 개 고르기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
                   <div class="pin-out" data-pin="1" style="color:var(--accent)">고른 것 — 알약으로 보이면 무엇인지 안다</div>
@@ -170,76 +170,76 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>고른 것 <em>알약으로</em></b><span><b>무엇인지</b> 보인다</span></li>
-            <li><b><code>+N</code> <em>넘치면 접기</em></b><span>높이를 지킨다</span></li>
-            <li><b>목록 <em>체크박스</em></b><span>가장 <b>분명하다</b></span></li>
-            <li><b><code>multiple</code> <em>Ctrl 필요</em></b><span><b>모르는 사람</b>이 많다</span></li>
-            <li><b>숫자만 <em>높이 고정</em></b><span>대신 <b>이름을 모른다</b></span></li>
-            <li><b>검색 <em>많을 때</em></b><span>스무 개 넘으면</span></li>
+            <li><b>고른 것 <em>알약으로</em></b><span>고른 것이 <b>무엇인지</b> 이름으로 보입니다</span></li>
+            <li><b><code>+N</code> <em>넘치면 접기</em></b><span>넘치는 알약을 접어 칸 높이가 늘어나지 않게 합니다</span></li>
+            <li><b>목록 <em>체크박스</em></b><span>무엇이 골라졌는지 가장 <b>분명하게</b> 보입니다</span></li>
+            <li><b><code>multiple</code> <em>Ctrl 필요</em></b><span>Ctrl을 눌러야 한다는 것을 <b>모르는 사람</b>이 많습니다</span></li>
+            <li><b>숫자만 <em>높이 고정</em></b><span>칸 높이는 일정하지만 고른 것의 <b>이름을 알 수 없습니다</b></span></li>
+            <li><b>검색 <em>많을 때</em></b><span>항목이 스무 개를 넘으면 검색 칸을 붙입니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          브라우저 기본 <code>&lt;select multiple&gt;</code> 은 <b>거의 쓰이지 않습니다</b> —
+          브라우저 기본 <code>&lt;select multiple&gt;</code>은 실제 화면에서 <b>거의 쓰이지 않습니다</b>.
           Ctrl(⌘)을 누른 채 눌러야 여러 개가 골라지는데,
-          그걸 아는 사람이 적고 <b>어디에도 안 적혀 있습니다</b>.
-          게다가 실수로 그냥 누르면 <b>고른 것이 전부 풀립니다</b>.<br>
+          이 방법을 아는 사람이 적고 화면 <b>어디에도 안내가 없기</b> 때문입니다.
+          게다가 Ctrl 없이 한 항목을 그냥 누르면 <b>이미 고른 것이 모두 풀립니다</b>.<br>
           그래서 체크박스 목록이나 토큰 입력으로 만드는 편이 낫고,
           항목이 스무 개를 넘으면 <b>검색 칸</b>을 붙입니다.
-          고른 것을 위에 알약으로 쌓아 두면
-          <b>목록을 안 열고도</b> 무엇을 골랐는지 알 수 있습니다.</p>
+          고른 것을 목록 위에 알약으로 쌓아 두면
+          <b>목록을 열지 않고도</b> 무엇을 골랐는지 알 수 있습니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>여러 개 고르기를 쓰는 경우</h3>
             <ul>
-              <li>고른 것을 <b>알약으로</b> 보이기</li>
-              <li>넘치면 <b><code>+N</code></b> 으로 접기</li>
-              <li>스무 개 넘으면 <b>검색 칸</b> 붙이기</li>
+              <li>고른 것을 <b>알약으로</b> 보여 주기</li>
+              <li>알약이 넘치면 <b><code>+N</code></b>으로 접기</li>
+              <li>항목이 스무 개를 넘으면 <b>검색 칸</b> 붙이기</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>여러 개 고르기를 쓰지 않는 경우</h3>
             <ul>
-              <li><code>&lt;select multiple&gt;</code> 그냥 쓰기 — <b>Ctrl 을 모른다</b></li>
-              <li><b>숫자만</b> 보이기 — 확인하려고 다시 연다</li>
-              <li>알약을 <b>다 늘어놓기</b> — 칸이 화면을 먹는다</li>
-              <li>고른 것을 <b>지울 길</b>을 안 주기</li>
+              <li><code>&lt;select multiple&gt;</code>을 그대로 쓰기. 사용자 대부분이 <b>Ctrl을 눌러야 한다는 것을 모릅니다</b></li>
+              <li>개수를 <b>숫자로만</b> 보여 주기. 고른 것을 확인하려고 목록을 다시 열어야 합니다</li>
+              <li>알약을 <b>모두 늘어놓기</b>. 칸이 길어져 화면을 많이 차지합니다</li>
+              <li>고른 것을 <b>빼는 방법</b>을 주지 않기</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 다 보이면 <a href="checkbox.html">체크박스</a>, 하나만 고르면 <a href="combobox.html">콤보박스</a>, 보여 주기만 하면 <a href="tag.html">태그</a>, 거르기 화면은 <a href="filter.html">필터와 패싯</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>여러 개 고르기 대신 다른 것을 써야 하는 경우</b> — 항목을 모두 늘어놓아도 되면 <a href="checkbox.html">체크박스</a>, 하나만 고르면 <a href="combobox.html">콤보박스</a>, 값을 보여 주기만 하면 <a href="tag.html">태그</a>, 조건으로 목록을 거르는 화면은 <a href="filter.html">필터와 패싯</a>.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:4px"><span style="display:flex;gap:3px;flex-wrap:wrap;align-items:center;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:4px 5px;min-height:22px"><span style="display:inline-flex;gap:3px;align-items:center;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 4px 1px 7px;font-size:7.5px">모란상회<span style="opacity:.6">✕</span></span><span style="display:inline-flex;gap:3px;align-items:center;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 4px 1px 7px;font-size:7.5px">한빛아웃도어<span style="opacity:.6">✕</span></span><span style="font-size:7.5px;color:var(--fg-muted)">+2</span></span></div>
             </div>
-            <figcaption><b>가게 고르기</b><b>알약 + <code>+N</code></b></figcaption>
+            <figcaption><b>가게 고르기</b><b>알약</b>으로 보여 주고 넘치면 <b><code>+N</code></b>으로 접습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:4px"><span style="display:flex;gap:3px;flex-wrap:wrap;align-items:center;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:4px 5px;min-height:22px"><span style="display:inline-flex;gap:3px;align-items:center;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 4px 1px 7px;font-size:7.5px">카드<span style="opacity:.6">✕</span></span><span style="display:inline-flex;gap:3px;align-items:center;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 4px 1px 7px;font-size:7.5px">계좌이체<span style="opacity:.6">✕</span></span></span></div>
             </div>
-            <figcaption><b>결제 수단</b><b>몇 개 안 된다</b></figcaption>
+            <figcaption><b>결제 수단</b>고를 수 있는 항목이 <b>몇 개 안 되어서</b> 알약을 모두 보여 줍니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:4px"><span style="display:flex;gap:3px;flex-wrap:wrap;align-items:center;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:4px 5px;min-height:22px"><span style="font-size:8px;color:var(--fg-muted)">조건 3개</span></span></div>
             </div>
-            <figcaption><b>필터</b>숫자도 괜찮은 자리</figcaption>
+            <figcaption><b>필터</b>개수만 숫자로 보여 줘도 괜찮은 자리입니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">이 부품의 계약서</span></h2>
-        <p>체크박스 목록이 가장 분명합니다. 고른 것은 위에 알약으로 쌓습니다.</p>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+        <p>체크박스 목록으로 만들면 무엇이 골라졌는지 가장 분명하게 보입니다. 고른 것은 목록 위에 알약으로 쌓습니다.</p>
 <pre class="code">&lt;<span class="t">fieldset</span>&gt;
   &lt;<span class="t">legend</span>&gt;정산에 넣을 가게&lt;/<span class="t">legend</span>&gt;
 
@@ -254,42 +254,42 @@
 &lt;/<span class="t">fieldset</span>&gt;</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td>Space</td><td>체크박스를 켜고 끈다</td></tr>
-            <tr><td>Tab</td><td>체크박스 <b>하나하나</b>에 멈춘다 — 많으면 묶음을 접는다</td></tr>
-            <tr><td>Backspace</td><td>토큰 입력에서 <b>마지막 알약</b>을 지우는 관습</td></tr>
-            <tr><td><code>&lt;fieldset&gt;</code></td><td>묶음에 이름을 준다 — <b>무엇을 고르는지</b>가 들린다</td></tr>
-            <tr><td><code>aria-label</code></td><td>✕ 에 <b>무엇을 빼는지</b> 적는다</td></tr>
-            <tr><td>확인하는 법</td><td>소리로 들어 <b>몇 개 골랐는지</b> 알 수 있는지 본다</td></tr>
+            <tr><td>Space</td><td>체크박스를 켜고 끕니다</td></tr>
+            <tr><td>Tab</td><td>체크박스 <b>하나하나</b>에 멈추기 때문에, 항목이 많으면 묶음을 접어 둡니다</td></tr>
+            <tr><td>Backspace</td><td>토큰 입력에서는 관습적으로 <b>마지막 알약</b>을 지웁니다</td></tr>
+            <tr><td><code>&lt;fieldset&gt;</code></td><td>묶음에 이름을 붙여 스크린 리더가 <b>무엇을 고르는 묶음인지</b> 읽어 줍니다</td></tr>
+            <tr><td><code>aria-label</code></td><td>✕ 단추에 <b>무엇을 빼는지</b> 적습니다</td></tr>
+            <tr><td>확인하는 법</td><td>스크린 리더로 들으며 <b>몇 개 골랐는지</b> 알 수 있는지 확인합니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>배열로 받는다</th><td><code>shops: ["moran", "hanbit"]</code> — 쉼표로 이은 문자열은 <b>이름에 쉼표</b>가 있으면 깨집니다.</td></tr>
-            <tr><th>최대 개수</th><td>한도가 있으면 서버가 줘야 화면이 <b>미리 막을 수</b> 있습니다.</td></tr>
-            <tr><th>전체 선택</th><td>'조건에 맞는 전부'는 <b>개수만</b> 주고받는 편이 가볍습니다 — <a href="bulk.html">일괄 선택</a> 참고.</td></tr>
+            <tr><th>배열로 받는다</th><td>고른 값은 <code>shops: ["moran", "hanbit"]</code>처럼 배열로 주고받습니다. 쉼표로 이은 문자열로 보내면 <b>이름에 쉼표</b>가 든 값에서 나누는 자리가 틀어집니다.</td></tr>
+            <tr><th>최대 개수</th><td>고를 수 있는 개수에 한도가 있으면 서버가 그 값을 내려 줘야 화면에서 <b>미리 막을 수</b> 있습니다.</td></tr>
+            <tr><th>전체 선택</th><td>'조건에 맞는 전부'를 고를 때는 항목 목록 대신 <b>개수만</b> 주고받는 편이 가볍습니다. 자세한 내용은 <a href="bulk.html">일괄 선택</a> 항목에 있습니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p><b>기본 부품이 약한</b> 자리입니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>여러 개 고르기는 플랫폼이 주는 <b>기본 부품만으로는 부족한</b> 경우가 많습니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>select multiple · 직접</span></header>
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:4px"><span style="display:flex;gap:3px;flex-wrap:wrap;align-items:center;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:4px 5px;min-height:22px"><span style="display:inline-flex;gap:3px;align-items:center;border:1px solid var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 4px 1px 7px;font-size:7.5px">모란상회<span style="opacity:.6">✕</span></span><span style="font-size:7.5px;color:var(--fg-muted)">+2</span></span></div>
             </div>
-            <footer>기본 부품이 쓰기 어려워 <b>거의 직접</b> 만듭니다.</footer>
+            <footer>기본 부품은 쓰기 어려워서 <b>대부분 직접</b> 만듭니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>목록 + 체크</span></header>
@@ -299,7 +299,7 @@
                 <div style="position:absolute;right:7px;top:27px;font-size:5px;color:var(--accent)">✓</div>
                 <div style="position:absolute;left:5px;right:5px;top:38px;height:8px;border-radius:2px;background:var(--bg)"></div></div></div>
             </div>
-            <footer>목록 줄 오른쪽에 <b>체크</b>를 두는 꼴이 표준입니다.</footer>
+            <footer>목록의 각 줄 오른쪽에 <b>체크 표시</b>를 두는 꼴이 표준입니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>Chip · 체크박스</span></header>
@@ -308,18 +308,18 @@
                 <div style="position:absolute;left:5px;top:26px;width:20px;height:8px;border-radius:999px;background:var(--accent-soft)"></div>
                 <div style="position:absolute;left:28px;top:26px;width:16px;height:8px;border-radius:999px;border:1px solid var(--line)"></div></div></div>
             </div>
-            <footer><b>필터 칩</b>을 늘어놓는 꼴이 많습니다 — 고른 것이 바로 보입니다.</footer>
+            <footer><b>필터 칩</b>을 늘어놓는 꼴을 많이 쓰는데, 이렇게 하면 고른 것이 바로 보입니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — 안드로이드의 <b>필터 칩을 늘어놓는 꼴</b>은 고르는 곳과 고른 결과가 <b>한 자리</b>라는 점이 좋습니다 — 따로 알약을 쌓을 필요가 없습니다. 항목이 열 개 안쪽이면 웹에서도 이 꼴이 가장 간단합니다. 그보다 많아지면 <b>목록 + 알약</b>으로 가는 편이 낫습니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — 안드로이드처럼 <b>필터 칩을 늘어놓는 꼴</b>은 고르는 곳과 고른 결과를 보여 주는 곳이 <b>같은 자리</b>여서 알약을 따로 쌓을 필요가 없습니다. 항목이 열 개 안쪽이면 웹에서도 이 꼴이 가장 간단합니다. 항목이 그보다 많으면 <b>목록과 알약</b>을 함께 쓰는 편이 낫습니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="field.html"><b>텍스트 필드</b><em>4부</em></a></li>
         <li><a href="select.html"><b>셀렉트</b><em>4부</em></a></li>
@@ -343,20 +343,20 @@
         <li><a href="disabledstate.html"><b>비활성과 읽기 전용</b><em>4부</em></a></li>
         <li><a href="splitbutton.html"><b>분할 버튼</b><em>4부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="checkbox.html"><b>체크박스</b><em>4부</em></a></li>
         <li><a href="combobox.html"><b>콤보박스</b><em>4부</em></a></li>
         <li><a href="tag.html"><b>태그</b><em>5부</em></a></li>
         <li><a href="filter.html"><b>필터와 패싯</b><em>10부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

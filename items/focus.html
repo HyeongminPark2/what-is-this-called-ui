@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>포커스 — 이름표</title>
-<meta name="description" content="포커스가 무엇이고 왜 테두리를 지우면 안 되는지, 순서와 건너뛰기 링크까지 다루는 항목.">
+<meta name="description" content="포커스가 무엇인지, 포커스 테두리를 왜 지우면 안 되는지 보여 주고 포커스 순서와 건너뛰기 링크까지 다루는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">12부 접근성</a> › 포커스</p>
     <h1>포커스</h1>
     <p class="en">Focus · focus indicator</p>
-    <p class="lede" style="margin-top:var(--s3)">키보드가 <b>지금 가리키는 곳</b>. 마우스를 못 쓰는 사람에게는 이것이 곧 커서입니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">포커스는 키보드가 <b>지금 가리키고 있는 요소</b>입니다. 마우스를 쓰지 못하는 사람은 포커스 표시를 보고 화면의 어디에서 작업하고 있는지 알기 때문에, 포커스 표시가 마우스 커서 역할을 합니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,30 +50,30 @@
           <iframe src="../demos/focus.html" title="포커스 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><kbd>Tab</kbd>을 눌러 보세요. 어디에 포커스가 갔는지, <b>테두리가 보이는지</b>를 기록합니다.<br>
-          테두리를 <b>아예 없애기</b>로 바꾸면 포커스는 움직이는데 <b>화면에서는 아무것도 안 보입니다</b> —
-          <code>outline: none</code> 한 줄이 하는 일입니다.<br>
-          맨 앞의 <b>건너뛰기 링크</b>는 평소엔 숨어 있다가 <b>첫 Tab 에만</b> 나타납니다.</p>
+          <p><kbd>Tab</kbd>을 눌러 보세요. 포커스가 어디로 갔는지, 그리고 <b>테두리가 보이는지</b>가 기록에 남습니다.<br>
+          테두리를 <b>아예 없애기</b>로 바꾸면 포커스는 그대로 옮겨 가는데도 <b>화면에는 아무 표시가 나타나지 않습니다</b>.
+          CSS에 <code>outline: none</code> 한 줄을 넣으면 이렇게 됩니다.<br>
+          맨 앞의 <b>건너뛰기 링크</b>는 평소에는 숨어 있다가 <b>처음 Tab을 눌렀을 때만</b> 나타납니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>포커스, 초점, 포커스 링, 포커스 표시</td></tr>
             <tr><th>영어</th><td>focus, focus ring, focus indicator, focus order</td></tr>
-            <tr><th>같이 쓰는 말</th><td>포커스를 둘러싼 테두리를 <b>포커스 링</b>(focus ring · indicator), Tab 으로 도는 순서를 <b>포커스 순서</b>(focus order · tab order)라 합니다. 맨 앞의 숨은 링크는 <b>건너뛰기 링크</b>(skip link), 포커스를 받을 수 있는 요소는 <b>포커서블</b>(focusable)입니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>호버</b> — 호버는 마우스를 올린 것, 포커스는 <b>키보드가 가리키는 것</b>입니다. 같은 모양으로 만들면 어느 쪽인지 알 수 없습니다.<br><b>선택</b> — 글을 드래그한 것은 selection 입니다.<br><b><code>:focus</code>와 <code>:focus-visible</code></b> — 앞은 <b>마우스로 눌러도</b> 걸리고, 뒤는 키보드로 왔을 때만입니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>포커스를 받은 요소를 둘러싼 테두리는 <b>포커스 링</b>(focus ring · indicator), Tab을 누를 때 포커스가 옮겨 가는 순서는 <b>포커스 순서</b>(focus order · tab order)라고 부릅니다. 페이지 맨 앞에 숨겨 둔 링크는 <b>건너뛰기 링크</b>(skip link), 포커스를 받을 수 있는 요소는 <b>포커서블</b>(focusable) 요소라고 합니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>호버</b> — 호버는 마우스를 올려 둔 상태이고, 포커스는 <b>키보드가 가리키는 상태</b>입니다. 두 상태를 같은 모양으로 그리면 사용자는 지금 어느 쪽인지 알 수 없습니다.<br><b>선택</b> — 마우스로 글자를 끌어서 칠한 것은 포커스가 아니라 선택(selection)입니다.<br><b><code>:focus</code>와 <code>:focus-visible</code></b> — <code>:focus</code>는 <b>마우스로 눌렀을 때도</b> 적용되고, <code>:focus-visible</code>은 키보드로 포커스가 왔을 때만 적용됩니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>접근성은 '눈으로는 안 보이는 것을 챙기는 일'입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>접근성은 눈으로는 보이지 않는 부분까지 챙기는 일입니다. 아래 네 가지를 물어보면 이 부의 항목들이 서로 어떻게 다른지 가를 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>무엇을 돕나</th><th>눈으로 보이나</th><th>안 하면 누가 막히나</th><th>어떻게 확인하나</th></tr></thead>
@@ -82,7 +82,7 @@
             <tr class="me"><td><b>포커스 트랩</b></td><td>모달 안에 가두기</td><td>안 보인다</td><td>키보드·스크린 리더</td><td>모달에서 Tab 을 돌려 본다</td></tr>
             <tr><td>키보드 조작</td><td>마우스 없이 <b>전부</b></td><td>안 보인다</td><td>마우스를 못 쓰는 사람</td><td>마우스를 치우고 해 본다</td></tr>
             <tr><td>이름 붙이기</td><td>뭐라고 <b>부르나</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>접근성 트리를 본다</td></tr>
-            <tr><td>스크린 리더가 읽는 것</td><td>역할 · 이름 · <b>상태</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>실제로 읽혀 본다</td></tr>
+            <tr><td>스크린 리더가 읽는 것</td><td>역할 · 이름 · <b>상태</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>직접 들어 본다</td></tr>
             <tr><td>라이브 리전</td><td><b>저절로 바뀐 것</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>바꿔 놓고 들어 본다</td></tr>
             <tr><td>대비비</td><td>글자가 <b>읽히나</b></td><td><b>보인다</b></td><td>저시력 · 밝은 곳 · 싼 화면</td><td><b>재 본다</b>(숫자로 나온다)</td></tr>
             <tr><td>시맨틱 태그</td><td>화면의 <b>구조</b></td><td>안 보인다</td><td><b>거의 모두</b></td><td>구역 목록을 열어 본다</td></tr>
@@ -92,7 +92,7 @@
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — 포커스 테두리는 <b>지워도 되는 장식이 아닙니다.</b> 지우면 키보드만 쓰는 사람에게 화면이 통째로 안 보이게 됩니다.</p>
+          <p><b>포커스를 한 줄로 정리하면</b> — 포커스 테두리는 키보드로 화면을 쓰는 사람에게 <b>지금 어느 요소에 있는지</b> 알려 주는 표시입니다. 이 테두리를 지우면 키보드만 쓰는 사람은 어느 요소를 누르게 될지 모르는 채로 화면을 다뤄야 합니다.</p>
         </div>
       </section>
 
@@ -103,46 +103,46 @@
             <div class="shot">
               <div style="display:grid;place-items:center;padding:6px"><span style="display:inline-block;padding:7px 13px;border-radius:6px;border:1px solid var(--line-strong);background:var(--surface);font-size:12px;">저장</span></div>
             </div>
-            <figcaption>평소<span>아무 표시 없음</span></figcaption>
+            <figcaption>평소<span>아무 표시도 없습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;place-items:center;padding:6px"><span style="display:inline-block;padding:7px 13px;border-radius:6px;border:1px solid var(--line-strong);background:var(--surface);font-size:12px;background:var(--bg)">저장</span></div>
             </div>
-            <figcaption>호버<span><b>마우스</b>를 올린 상태</span></figcaption>
+            <figcaption>호버<span><b>마우스</b>를 올려 둔 상태입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;place-items:center;padding:6px"><span style="display:inline-block;padding:7px 13px;border-radius:6px;border:1px solid var(--line-strong);background:var(--surface);font-size:12px;outline:2px solid var(--accent);outline-offset:2px">저장</span></div>
             </div>
-            <figcaption>포커스<span><b>키보드</b>가 가리키는 상태. 또렷해야 한다</span></figcaption>
+            <figcaption>포커스<span><b>키보드</b>가 가리키는 상태입니다. 테두리가 또렷하게 보여야 합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;place-items:center;padding:6px"><span style="display:inline-block;padding:7px 13px;border-radius:6px;border:1px solid var(--line-strong);background:var(--surface);font-size:12px;outline:1px dotted var(--line-strong)">저장</span></div>
             </div>
-            <figcaption>희미한 테두리<span>있긴 한데 <b>안 보인다.</b> 없는 것과 비슷하다</span></figcaption>
+            <figcaption>희미한 테두리<span>테두리가 있기는 하지만 너무 흐려서 <b>잘 보이지 않습니다.</b> 사용자에게는 테두리가 없는 것과 거의 같습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;place-items:center;padding:6px"><span style="display:inline-block;padding:7px 13px;border-radius:6px;border:1px solid var(--line-strong);background:var(--surface);font-size:12px;">저장</span></div>
             </div>
-            <figcaption>지운 테두리<span><code>outline: none</code>. <b>어디 있는지 알 수 없다</b></span></figcaption>
+            <figcaption>지운 테두리<span><code>outline: none</code>으로 테두리를 지운 상태입니다. 포커스가 <b>어디 있는지 알 수 없습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;place-items:center;padding:6px"><span style="display:inline-block;padding:7px 13px;border-radius:6px;border:1px solid var(--line-strong);background:var(--surface);font-size:12px;outline:2px solid var(--accent);outline-offset:2px;opacity:.45">저장</span></div>
             </div>
-            <figcaption>비활성<span>비활성은 <b>포커스를 안 받는다</b> — 받으면 왜 안 눌리는지 알 수 없다</span></figcaption>
+            <figcaption>비활성<span>비활성 버튼은 <b>포커스를 받지 않습니다.</b> 포커스를 받으면 사용자는 버튼이 왜 눌리지 않는지 알 수 없기 때문입니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="포커스의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="포커스의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:15px;justify-items:start">
                   <div class="pin-out" data-pin="1" style="display:inline-block;padding:8px 14px;border-radius:6px;border:1px solid var(--line-strong);background:var(--surface);font-size:12.5px;outline:2px solid var(--accent);outline-offset:2px">저장하기</div>
@@ -156,54 +156,54 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>포커스된 것 <em>focused element</em></b><span>키보드가 지금 가리키는 하나. <b>화면에 꼭 하나</b>만 있다</span></li>
-            <li><b>테두리 조건 <em>:focus-visible</em></b><span>키보드로 왔을 때만 그린다. 마우스 클릭에는 안 그려 <b>지저분해지지 않는다</b></span></li>
-            <li><b>띄우기 <em>outline-offset</em></b><span>글자에 바싹 붙으면 안 보인다. <b>2px 쯤 띄운다</b></span></li>
-            <li><b>지우기 <em>outline: none</em></b><span><b>이 한 줄이 가장 흔한 접근성 사고</b>다</span></li>
-            <li><b>순서에 넣기·빼기 <em>tabindex</em></b><span><code>0</code>은 순서에 넣고, <code>-1</code>은 빼되 코드로는 보낼 수 있게 한다</span></li>
-            <li><b>건너뛰기 링크 <em>skip link</em></b><span>평소엔 숨고 첫 Tab 에만 나타난다. <b>메뉴 서른 개를 건너뛴다</b></span></li>
+            <li><b>포커스된 것 <em>focused element</em></b><span>키보드가 지금 가리키는 요소입니다. 포커스된 요소는 <b>화면에 한 번에 하나만</b> 있습니다</span></li>
+            <li><b>테두리 조건 <em>:focus-visible</em></b><span>키보드로 포커스가 왔을 때만 테두리를 그립니다. 마우스로 클릭할 때는 그리지 않으므로 <b>화면이 지저분해지지 않습니다</b></span></li>
+            <li><b>띄우기 <em>outline-offset</em></b><span>테두리가 요소 가장자리에 바싹 붙으면 잘 보이지 않기 때문에 <b>2px쯤 띄웁니다</b></span></li>
+            <li><b>지우기 <em>outline: none</em></b><span>포커스 테두리를 지우는 이 한 줄이 <b>가장 흔한 접근성 사고</b>입니다</span></li>
+            <li><b>순서에 넣기·빼기 <em>tabindex</em></b><span><code>0</code>은 요소를 포커스 순서에 넣고, <code>-1</code>은 순서에서 빼되 코드로는 포커스를 보낼 수 있게 합니다</span></li>
+            <li><b>건너뛰기 링크 <em>skip link</em></b><span>평소에는 숨어 있다가 처음 Tab을 누를 때 나타납니다. 이 링크를 누르면 <b>메뉴가 서른 개라도 한 번에 건너뛰고</b> 본문으로 갑니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          <code>outline: none</code>을 쓰고 싶어지는 이유는 대개 <b>기본 테두리가 투박해서</b>입니다.
-          답은 지우는 것이 아니라 <b>갈아 끼우는 것</b>입니다 —
-          <code>:focus-visible</code>로 조건을 좁히고, 색과 두께를 브랜드에 맞추면 됩니다.
-          지운 채로 두면 '예뻐 보이는 대신 못 쓰는 화면'이 됩니다.</p>
+          <code>outline: none</code>을 쓰고 싶어지는 이유는 대개 <b>브라우저의 기본 테두리가 투박해 보여서</b>입니다.
+          이럴 때는 테두리를 지우지 말고 <b>다른 테두리로 바꿔 그리면</b> 됩니다.
+          <code>:focus-visible</code>로 키보드 포커스일 때만 그리도록 조건을 좁히고, 색과 두께를 브랜드에 맞추는 방식입니다.
+          테두리를 지운 채로 두면 화면은 깔끔해 보여도 키보드로는 쓸 수 없게 됩니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>포커스를 쓰는 경우</h3>
             <ul>
-              <li><b>누를 수 있는 모든 것</b> — 버튼, 링크, 입력칸, 탭</li>
-              <li>키보드로 간 곳이 <b>화면 밖이면 스크롤</b>해서 보여 줍니다</li>
-              <li>붙박이 머리말이 가릴 수 있으면 <code>scroll-margin-top</code>으로 띄웁니다</li>
-              <li>긴 메뉴가 있으면 <b>건너뛰기 링크</b>를 맨 앞에</li>
+              <li>버튼, 링크, 입력칸, 탭처럼 <b>누를 수 있는 모든 요소</b>에 포커스 테두리를 그릴 때</li>
+              <li>키보드로 옮겨 간 요소가 <b>화면 밖에 있어서 스크롤</b>해 보여 줘야 할 때</li>
+              <li>화면 위에 고정된 머리말이 포커스된 요소를 가릴 수 있을 때. <code>scroll-margin-top</code>으로 그만큼 띄웁니다</li>
+              <li>본문 앞에 긴 메뉴가 있을 때. 페이지 맨 앞에 <b>건너뛰기 링크</b>를 둡니다</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>포커스를 쓰지 않는 경우</h3>
             <ul>
-              <li><b><code>outline: none</code></b> — 대신 갈아 끼웁니다</li>
-              <li>호버와 <b>똑같이</b> 그리는 것 — 어느 쪽인지 알 수 없습니다</li>
-              <li><code>tabindex</code>에 <b>1 이상</b>을 주는 것 — 순서가 뒤엉킵니다</li>
-              <li>비활성에 포커스를 주는 것 — 왜 안 눌리는지 알 수 없습니다</li>
+              <li><b><code>outline: none</code></b>으로 테두리를 지울 때. 지우지 말고 다른 테두리로 바꿔 그립니다</li>
+              <li>포커스를 호버와 <b>똑같이</b> 그릴 때. 사용자가 둘 중 어느 쪽인지 알 수 없습니다</li>
+              <li><code>tabindex</code>에 <b>1 이상</b>의 값을 줄 때. 화면에 보이는 순서와 포커스 순서가 어긋납니다</li>
+              <li>비활성 요소에 포커스를 줄 때. 사용자는 그 요소가 왜 눌리지 않는지 알 수 없습니다</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 모달 안에 가두는 일은 <a href="focustrap.html">포커스 트랩</a>, 키로 눌리는지는 <a href="keyboard.html">키보드 조작</a>, 이름은 <a href="name.html">이름 붙이기</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>포커스 대신 다른 것을 써야 하는 경우</b> — 모달 안에 가두는 일은 <a href="focustrap.html">포커스 트랩</a>, 키로 눌리는지는 <a href="keyboard.html">키보드 조작</a>, 이름은 <a href="name.html">이름 붙이기</a>.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="display:grid;place-items:center;padding:6px"><span style="display:inline-block;padding:7px 13px;border-radius:6px;border:1px solid var(--line-strong);background:var(--surface);font-size:12px;outline:2px solid var(--accent);outline-offset:2px">저장하기</span></div>
             </div>
-            <figcaption><b>버튼</b>가장 흔한 자리. <b>두께 2px 이상</b>이라야 보인다</figcaption>
+            <figcaption><b>버튼</b>포커스 테두리가 가장 흔하게 쓰이는 자리입니다. 테두리 <b>두께가 2px 이상</b>이어야 잘 보입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -211,7 +211,7 @@
                 <span style="font-size:11.5px;font-weight:600">정산 요청 #4821</span>
               </div>
             </div>
-            <figcaption><b>목록의 줄</b>테두리를 <b>안쪽</b>에 그린다. 바깥이면 옆 줄을 덮는다</figcaption>
+            <figcaption><b>목록의 줄</b>테두리를 줄의 <b>안쪽</b>에 그립니다. 바깥쪽에 그리면 테두리가 위아래 줄을 덮기 때문입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -220,92 +220,92 @@
                 <span style="font-size:10.5px;color:var(--fg-muted)">평소엔 숨어 있다</span>
               </div>
             </div>
-            <figcaption><b>건너뛰기 링크</b>첫 Tab 에만 나타난다. <b>메뉴를 통째로 건너뛴다</b></figcaption>
+            <figcaption><b>건너뛰기 링크</b>처음 Tab을 누를 때만 나타나고, 누르면 <b>메뉴 전체를 건너뛰고</b> 본문으로 갑니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 키보드<span class="hint">이 화면의 계약서</span></h2>
-        <p>기본 테두리를 <b>지우지 말고 갈아 끼웁니다.</b> 조건은 <code>:focus-visible</code>로 좁힙니다.</p>
-<pre class="code"><span class="c">/* 지우지 말고 갈아 끼운다 */</span>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+        <p>브라우저의 기본 테두리는 <b>지우지 말고 원하는 모양으로 바꿔 그립니다.</b> 그리고 <code>:focus-visible</code>로 키보드 포커스일 때만 그리도록 조건을 좁힙니다.</p>
+<pre class="code"><span class="c">/* 지우지 말고 바꿔 그린다 */</span>
 <span class="t">:focus-visible</span> {
   <span class="a">outline</span>: <span class="a">2px</span> solid <span class="t">var</span>(<span class="a">--accent</span>);
   <span class="a">outline-offset</span>: <span class="a">2px</span>;
 }
 
-<span class="c">/* 목록의 줄은 안쪽에 — 옆 줄을 덮지 않게 */</span>
+<span class="c">/* 목록의 줄은 안쪽에 그려서 옆 줄을 덮지 않게 한다 */</span>
 <span class="t">.row</span>:focus-visible { <span class="a">outline-offset</span>: -<span class="a">2px</span>; }
 
 <span class="c">/* 붙박이 머리말에 가리지 않게 */</span>
 <span class="t">:target</span>, [<span class="a">tabindex</span>] { <span class="a">scroll-margin-top</span>: <span class="a">72px</span>; }
 
-<span class="c">&lt;!-- 건너뛰기 링크 — 문서 맨 앞 --&gt;</span>
+<span class="c">&lt;!-- 건너뛰기 링크는 문서 맨 앞에 둔다 --&gt;</span>
 &lt;<span class="t">a</span> <span class="a">class</span>=<span class="s">"skip"</span> <span class="a">href</span>=<span class="s">"#main"</span>&gt;본문으로 건너뛰기&lt;/<span class="t">a</span>&gt;</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td><kbd>Tab</kbd></td><td>다음 누를 것으로. <b>화면에 보이는 순서</b>와 같아야 한다</td></tr>
-            <tr><td><kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>뒤로</td></tr>
-            <tr><td><code>:focus-visible</code></td><td>키보드로 왔을 때만 그린다. 마우스 클릭에는 안 그려진다</td></tr>
-            <tr><td><code>tabindex="0"</code></td><td>원래 못 받던 것을 순서에 넣는다. <b>1 이상은 쓰지 않는다</b></td></tr>
-            <tr><td><code>tabindex="-1"</code></td><td>Tab 으로는 못 가지만 <code>.focus()</code>로는 보낼 수 있다</td></tr>
-            <tr><td><code>:focus-within</code></td><td><b>안쪽에</b> 포커스가 있을 때 부모를 꾸민다</td></tr>
+            <tr><td><kbd>Tab</kbd></td><td>다음 요소로 포커스가 옮겨 갑니다. 옮겨 가는 순서는 <b>화면에 보이는 순서</b>와 같아야 합니다</td></tr>
+            <tr><td><kbd>Shift</kbd>+<kbd>Tab</kbd></td><td>이전 요소로 돌아갑니다</td></tr>
+            <tr><td><code>:focus-visible</code></td><td>키보드로 포커스가 왔을 때만 테두리를 그리고, 마우스로 클릭했을 때는 그리지 않습니다</td></tr>
+            <tr><td><code>tabindex="0"</code></td><td>원래 포커스를 받지 못하던 요소를 포커스 순서에 넣습니다. <b>1 이상의 값은 쓰지 않습니다</b></td></tr>
+            <tr><td><code>tabindex="-1"</code></td><td>Tab으로는 갈 수 없지만 <code>.focus()</code>로는 포커스를 보낼 수 있습니다</td></tr>
+            <tr><td><code>:focus-within</code></td><td><b>자식 요소</b>에 포커스가 있을 때 부모 요소의 모양을 바꿉니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>순서는 DOM 순서다</th><td><code>order</code>나 <code>grid-area</code>로 <b>보이는 자리를 바꿔도 Tab 순서는 안 바뀝니다.</b> 서버가 내려주는 순서를 그대로 그리는 쪽이 안전합니다.</td></tr>
-            <tr><th>화면이 바뀐 뒤</th><td>목록을 다시 그리거나 라우팅으로 화면을 바꾸면 <b>포커스가 body 로 떨어집니다.</b> 새 화면의 제목으로 옮겨 줘야 '어디로 왔는지'가 전달됩니다.</td></tr>
-            <tr><th>지운 줄의 포커스</th><td>항목을 지우면 그 자리의 포커스가 사라집니다. <b>다음 줄이나 목록 자체</b>로 옮깁니다 — <a href="../items/chip.html">칩</a>에서 다룬 것과 같은 문제입니다.</td></tr>
-            <tr><th>자동 검사</th><td>Playwright 로 <kbd>Tab</kbd>을 눌러 가며 <code>document.activeElement</code>를 기록하면 <b>순서와 테두리를 CI 에서</b> 확인할 수 있습니다.</td></tr>
+            <tr><th>순서는 DOM 순서다</th><td>Tab 순서는 DOM 순서를 따르기 때문에 <code>order</code>나 <code>grid-area</code>로 <b>보이는 자리를 바꿔도 Tab 순서는 바뀌지 않습니다.</b> 그래서 서버가 내려주는 순서대로 DOM을 그리는 쪽이 안전합니다.</td></tr>
+            <tr><th>화면이 바뀐 뒤</th><td>목록을 다시 그리거나 라우팅으로 화면을 바꾸면 <b>포커스가 body로 돌아갑니다.</b> 이때 포커스를 새 화면의 제목으로 옮겨 줘야 사용자가 어느 화면으로 왔는지 알 수 있습니다.</td></tr>
+            <tr><th>지운 줄의 포커스</th><td>포커스가 있던 항목을 지우면 포커스도 함께 사라지므로, 포커스를 <b>다음 줄이나 목록 자체</b>로 옮깁니다. <a href="../items/chip.html">칩</a>에서 다룬 것과 같은 문제입니다.</td></tr>
+            <tr><th>자동 검사</th><td>Playwright로 <kbd>Tab</kbd>을 눌러 가며 <code>document.activeElement</code>를 기록하면 <b>포커스 순서와 테두리를 CI에서</b> 확인할 수 있습니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p>두 OS 에는 <b>키보드 말고도</b> 포커스를 옮기는 방법이 더 있습니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>iOS와 안드로이드에는 <b>키보드 말고도</b> 포커스를 옮기는 방법이 더 있습니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>:focus-visible</span></header>
             <div class="shot">
               <div style="display:grid;place-items:center;padding:6px"><span style="display:inline-block;padding:7px 13px;border-radius:6px;border:1px solid var(--line-strong);background:var(--surface);font-size:12px;outline:2px solid var(--accent);outline-offset:2px">저장</span></div>
             </div>
-            <footer>브라우저가 기본 테두리를 그려 줍니다. <b>지우는 것이 가장 흔한 사고</b>입니다.</footer>
+            <footer>브라우저가 기본 테두리를 그려 주는데, <b>이 테두리를 지우는 것이 가장 흔한 사고</b>입니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>VoiceOver · 포커스</span></header>
             <div class="shot">
               <div style="font-family:var(--mono);font-size:9.5px;color:var(--fg-muted);line-height:1.8;text-align:left">.accessibilityFocused<br>@FocusState</div>
             </div>
-            <footer>키보드 외에 <b>VoiceOver 커서</b>와 스위치 제어가 있습니다. 포커스가 두 갈래라 둘 다 챙겨야 합니다.</footer>
+            <footer>키보드 외에도 <b>VoiceOver 커서</b>와 스위치 제어로 포커스를 옮깁니다. 키보드 포커스와 VoiceOver 커서가 따로 움직이므로 둘 다 챙겨야 합니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>TalkBack · 포커스</span></header>
             <div class="shot">
               <div style="font-family:var(--mono);font-size:9.5px;color:var(--fg-muted);line-height:1.8;text-align:left">FocusRequester<br>Modifier.focusable( )</div>
             </div>
-            <footer>역시 <b>TalkBack 커서</b>와 키보드 포커스가 따로입니다. TV·크롬북에서는 키보드 포커스가 주인공입니다.</footer>
+            <footer>iOS와 마찬가지로 <b>TalkBack 커서</b>와 키보드 포커스가 따로 움직입니다. TV와 크롬북에서는 키보드 포커스가 주된 조작 수단입니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — 웹에서 "포커스"는 보통 <b>키보드 하나</b>를 뜻하지만, 앱에서는 <b>스크린 리더 커서</b>와 키보드 포커스가 따로 움직입니다. "포커스를 여기로 옮겨 주세요"가 어느 쪽인지 확인해야 합니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — 웹에서 "포커스"는 보통 <b>키보드 포커스</b> 하나를 뜻하지만, 앱에서는 <b>스크린 리더 커서</b>와 키보드 포커스가 따로 움직입니다. 그래서 "포커스를 여기로 옮겨 주세요"라는 요청을 받으면 둘 중 어느 쪽을 말하는지 확인해야 합니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="focustrap.html"><b>포커스 트랩</b><em>12부</em></a></li>
         <li><a href="keyboard.html"><b>키보드 조작</b><em>12부</em></a></li>
@@ -317,20 +317,20 @@
         <li><a href="alttext.html"><b>대체 텍스트</b><em>12부</em></a></li>
         <li><a href="textzoom.html"><b>확대와 글자 크기</b><em>12부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="../items/modal.html"><b>모달</b><em>6부</em></a></li>
         <li><a href="../items/tabs.html"><b>탭</b><em>7부</em></a></li>
         <li><a href="../items/field.html"><b>텍스트 필드</b><em>4부</em></a></li>
         <li><a href="../items/chip.html"><b>칩</b><em>5부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

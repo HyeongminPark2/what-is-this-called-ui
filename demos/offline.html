@@ -38,12 +38,12 @@
 </div>
 
 <p class="hint">
-  '연결됨'을 꺼 보세요. 끊긴 동안 저장을 누르면 셋 중 하나가 일어납니다 —
-  <b>쌓아 두거나</b>, <b>못 누르게 막거나</b>, <b>그때마다 실패하거나</b>.
-  데모가 <b>쌓인 작업 수</b>와 <b>헛되이 실패한 횟수</b>를 세서 적습니다.<br>
-  다시 연결하면 쌓아 둔 것이 <b>저절로 나갑니다</b> — 그 수도 같이 셉니다.
-  '그때마다 실패'는 가장 흔하면서 가장 나쁜 쪽입니다. 쓴 글이 사라지니까요.<br>
-  <b>읽기는 끊겨도 되게</b> 두는 편이 낫습니다 — 이미 받아 둔 목록은 볼 수 있습니다.
+  '연결됨'을 꺼 보세요. 끊긴 동안 저장을 누르면 방식에 따라 <b>쌓아 두거나</b>, <b>버튼을 못 누르게 막거나</b>,
+  <b>누를 때마다 실패하는</b> 세 가지 가운데 하나가 일어납니다.
+  데모는 <b>쌓인 작업 수</b>와 <b>헛되이 실패한 횟수</b>를 세서 적습니다.<br>
+  다시 연결하면 쌓아 둔 작업이 <b>저절로 나가고</b>, 데모는 나간 작업 수도 함께 셉니다.
+  '그때마다 실패'는 가장 흔하면서도 가장 나쁜 방식인데, 사용자가 쓴 글이 사라지기 때문입니다.<br>
+  연결이 <b>끊겨도 읽기는 되게</b> 두는 편이 낫습니다. 그러면 이미 받아 둔 목록은 계속 볼 수 있습니다.
 </p>
 
 <script>
@@ -70,7 +70,7 @@
     var rd = document.getElementById('readout');
     rd.innerHTML = '상태 <b>' + (on ? '연결됨' : '끊김') + '</b> · 쌓인 작업 <b>' + queue.length + '건</b>' +
       '<br>헛되이 실패한 횟수 <b>' + lostWork + '회</b>' +
-      (lostWork ? ' <span class="warn">— 쓴 것이 사라졌다</span>' : '') +
+      (lostWork ? ' <span class="warn">(쓴 내용이 사라졌습니다)</span>' : '') +
       '<br>다시 연결해 보낸 것 <b>' + flushed + '건</b>' +
       (why ? '<br>' + why : '');
     rd.dataset.online = on ? '1' : '0';
@@ -84,26 +84,26 @@
     n++;
     var name = '메모 ' + n;
     if (online()) {
-      document.getElementById('log').innerHTML = '<b>' + name + '</b> 를 바로 보냈다';
+      document.getElementById('log').innerHTML = '<b>' + name + '</b>을(를) 바로 보냈습니다';
       render('');
       return;
     }
     var k = document.getElementById('k').value;
     if (k === 'queue') {
       queue.push(name);
-      document.getElementById('log').innerHTML = '<b>' + name + '</b> 를 쌓아 뒀다 — 연결되면 나간다';
+      document.getElementById('log').innerHTML = '<b>' + name + '</b>을(를) 쌓아 두었습니다. 연결되면 보냅니다';
     } else {
       lostWork++;
       document.getElementById('log').innerHTML =
-        '<span class="warn">' + name + ' 를 못 보냈다</span> — 쓴 글이 사라졌다';
+        '<span class="warn">' + name + '을(를) 보내지 못했습니다</span>. 쓴 글이 사라졌습니다';
     }
     render('');
   });
 
   document.getElementById('read2').addEventListener('click', function () {
     document.getElementById('log').innerHTML = online()
-      ? '목록을 새로 받아 왔다'
-      : '<b>이미 받아 둔 목록</b>을 보여 준다 — 읽기는 끊겨도 된다';
+      ? '목록을 새로 받아 왔습니다'
+      : '<b>이미 받아 둔 목록</b>을 보여 줍니다. 연결이 끊겨도 읽기는 됩니다';
   });
 
   document.getElementById('net').addEventListener('change', function () {
@@ -111,8 +111,8 @@
       var sent = queue.length;
       flushed += sent;
       queue = [];
-      render('쌓아 둔 <b>' + sent + '건</b>이 저절로 나갔다');
-      document.getElementById('log').innerHTML = '다시 연결됨 — <b>' + sent + '건</b>을 보냈다';
+      render('쌓아 둔 <b>' + sent + '건</b>이 저절로 나갔습니다');
+      document.getElementById('log').innerHTML = '다시 연결되어 <b>' + sent + '건</b>을 보냈습니다';
       return;
     }
     render('');

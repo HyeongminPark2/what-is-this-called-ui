@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>색 토큰 — 이름표</title>
-<meta name="description" content="색을 #2f6df6 같은 값이 아니라 --accent 같은 쓰임으로 정해 두는 방법을 실물과 해부도로 보여주는 항목.">
+<meta name="description" content="색을 #2f6df6 같은 값 대신 --accent 같은 쓰임의 이름으로 정해 두는 방법을 실물과 해부도로 보여 주는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">2부 꾸미는 규칙</a> › 색 토큰</p>
     <h1>색 토큰</h1>
     <p class="en">Color tokens · semantic color</p>
-    <p class="lede" style="margin-top:var(--s3)">색을 <b>값</b>이 아니라 <b>쓰임</b>으로 부르는 약속. 화면은 <code>#2f6df6</code>을 모르고 <code>--accent</code>만 압니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">색 토큰은 색을 <b>값</b> 대신 <b>쓰임</b>의 이름으로 부르기로 정해 둔 것입니다. 화면 코드에는 <code>#2f6df6</code> 같은 값을 적지 않고 <code>--accent</code> 같은 이름만 적습니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,100 +50,100 @@
           <iframe src="../demos/color.html" title="색 토큰 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>1단은 색 이름표(<code>blue-500</code>), 2단은 쓰임표(<code>--accent</code>), 3단은 부품표(<code>button-bg</code>)입니다.
-          <b>어두운 화면으로</b>를 켜면 2단의 <b>화살표만</b> 다른 색을 가리키게 바뀝니다 —
-          1단의 색은 그대로이고 3단은 손대지 않았는데 버튼 색이 따라옵니다. 이것이 토큰을 쓰는 이유 전부입니다.</p>
+          <p>1단은 색 자체의 이름(<code>blue-500</code>), 2단은 쓰임의 이름(<code>--accent</code>), 3단은 부품 전용 이름(<code>button-bg</code>)입니다.
+          <b>어두운 화면으로</b>를 켜면 2단의 <b>화살표만</b> 다른 색을 가리키도록 바뀝니다.
+          1단의 색은 그대로이고 3단도 손대지 않았지만, 3단이 2단을 가리키고 있기 때문에 버튼 색이 함께 바뀝니다. 한 곳만 고쳐서 화면 전체의 색을 바꿀 수 있다는 점이 토큰을 쓰는 이유입니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>색 토큰, 시맨틱 색, 의미 색</td></tr>
             <tr><th>영어</th><td>color token, semantic color, design token</td></tr>
-            <tr><th>같이 쓰는 말</th><td><b>원시 토큰</b>(raw · primitive · global)은 <code>blue-500</code>처럼 색 그 자체이고, <b>시맨틱 토큰</b>(semantic · alias)은 <code>--accent</code>처럼 쓰임입니다. <b>컴포넌트 토큰</b>(component)은 <code>button-bg</code>처럼 부품 전용입니다. 색을 가로로 늘어놓은 10단 묶음을 <b>색 램프</b>(ramp · scale)라고 합니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>테마</b> — 테마는 토큰 <b>한 벌</b>을 가리키는 말이고, 토큰은 그 안의 항목 하나입니다.<br><b>CSS 변수</b> — 변수는 담는 그릇이고 토큰은 그 안에 담긴 <b>약속</b>입니다. 변수를 쓴다고 토큰이 되지는 않습니다.<br><b>팔레트</b> — 팔레트는 쓸 수 있는 색의 목록, 토큰은 어디에 쓸지까지 정한 것입니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td><b>원시 토큰</b>(raw · primitive · global)은 <code>blue-500</code>처럼 색 그 자체를 가리키고, <b>시맨틱 토큰</b>(semantic · alias)은 <code>--accent</code>처럼 쓰임을 가리킵니다. <b>컴포넌트 토큰</b>(component)은 <code>button-bg</code>처럼 한 부품에만 쓰는 토큰입니다. 같은 색을 10단으로 늘어놓은 묶음은 <b>색 램프</b>(ramp · scale)라고 부릅니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>테마</b> — 테마는 토큰 <b>한 벌</b> 전체를 가리키는 말이고, 토큰은 그 안의 항목 하나입니다.<br><b>CSS 변수</b> — CSS 변수는 값을 저장하는 수단이고, 토큰은 그 값을 어디에 쓸지 정한 <b>규칙</b>입니다. 그래서 CSS 변수를 쓴다고 해서 저절로 토큰이 되지는 않습니다.<br><b>팔레트</b> — 팔레트는 쓸 수 있는 색을 모아 둔 목록이고, 토큰은 그 색을 어디에 쓸지까지 정한 것입니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>토큰은 눈에 보이는 부품이 아니라 <b>값의 약속</b>입니다. 이 네 가지만 물어보면 어떤 약속인지 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>토큰은 눈에 보이는 부품이 아니라 값을 어떻게 쓸지 <b>정해 둔 규칙</b>입니다. 그래서 생김새 대신 아래 네 가지를 물어보면 토큰끼리 무엇이 다른지 가려집니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>무엇을 정하나</th><th>몇 단이 좋나</th><th>바꾸면 어디가 바뀌나</th><th>틀렸을 때 증상</th></tr></thead>
           <tbody>
-            <tr class="me"><td><b>색 토큰</b></td><td>색의 <b>쓰임</b></td><td>쓰임 10여 개</td><td>브랜드 색 전체</td><td>같은 파랑이 화면마다 조금씩 다르다</td></tr>
-            <tr><td>다크 모드</td><td><b>두 벌</b>의 값</td><td>2벌(+고대비)</td><td>화면 전체의 바탕과 글자</td><td>흰 상자 하나가 혼자 남아 눈을 찌른다</td></tr>
-            <tr><td>타입 스케일</td><td>글자 크기 <b>단계</b></td><td>6~8단</td><td>제목과 본문의 크기</td><td>뭐가 더 중요한지 안 읽힌다</td></tr>
-            <tr><td>간격 체계</td><td>여백의 <b>단위</b></td><td>6~8단(4·8의 배수)</td><td>모든 패딩과 줄 간격</td><td>뭐라 집어 말하기 어려운데 어수선하다</td></tr>
-            <tr><td>고도</td><td>그림자의 <b>세기</b></td><td>4~5단</td><td>떠 있는 부품들</td><td>무엇이 위에 있는지 안 보인다</td></tr>
-            <tr><td>z-index</td><td>쌓이는 <b>순서</b></td><td>5~6층</td><td>겹치는 것들의 앞뒤</td><td>토스트가 모달에 가려 안 보인다</td></tr>
-            <tr><td>모서리</td><td><b>둥근 정도</b></td><td>4~6단</td><td>카드 · 버튼 · 입력칸 전부</td><td>안팎 곡선이 어긋나 안쪽이 네모져 보인다</td></tr>
-            <tr><td>테두리와 구분선</td><td><b>가르는 선</b></td><td>선 1~2종</td><td>목록 · 카드 · 표</td><td>선이 두 겹이 되고 화면이 어수선하다</td></tr>
-            <tr><td>불투명도</td><td><b>흐린 정도</b></td><td>2~3단</td><td>비활성 · 가림막 · 흐린 글</td><td>글이 안 읽히고 z-index 가 안 먹는다</td></tr>
-            <tr><td>아이콘 크기</td><td>그림의 <b>크기</b></td><td>3~4단(16·20·24)</td><td>버튼 · 목록 · 앱바</td><td>선이 흐리고 글자와 가운데가 안 맞는다</td></tr>
-            <tr><td>상태 색</td><td>성공 · 주의 · 오류 · 정보</td><td>4가지 × 3자리</td><td>알림 · 배지 · 입력 오류</td><td>색을 못 보면 상태를 못 읽는다</td></tr>
-            <tr><td>토큰 이름 짓기</td><td>이름의 <b>규칙</b></td><td>층 3겹</td><td>토큰 전부</td><td>이름과 값이 어긋나 아무도 못 고친다</td></tr>
+            <tr class="me"><td><b>색 토큰</b></td><td>색의 <b>쓰임</b></td><td>쓰임 10여 개</td><td>브랜드 색 전체</td><td>같은 파랑이 화면마다 조금씩 다릅니다</td></tr>
+            <tr><td>다크 모드</td><td><b>두 벌</b>의 값</td><td>2벌(+고대비)</td><td>화면 전체의 바탕과 글자</td><td>어두운 화면에 흰 상자 하나만 남아 눈이 부십니다</td></tr>
+            <tr><td>타입 스케일</td><td>글자 크기 <b>단계</b></td><td>6~8단</td><td>제목과 본문의 크기</td><td>무엇이 더 중요한지 알아보기 어렵습니다</td></tr>
+            <tr><td>간격 체계</td><td>여백의 <b>단위</b></td><td>6~8단(4·8의 배수)</td><td>모든 패딩과 줄 간격</td><td>딱 집어 말하기 어렵지만 어수선해 보입니다</td></tr>
+            <tr><td>고도</td><td>그림자의 <b>세기</b></td><td>4~5단</td><td>떠 있는 부품들</td><td>무엇이 위에 있는지 알 수 없습니다</td></tr>
+            <tr><td>z-index</td><td>쌓이는 <b>순서</b></td><td>5~6층</td><td>겹치는 것들의 앞뒤</td><td>토스트가 모달에 가려 보이지 않습니다</td></tr>
+            <tr><td>모서리</td><td><b>둥근 정도</b></td><td>4~6단</td><td>카드 · 버튼 · 입력칸 전부</td><td>안팎 곡선이 어긋나 안쪽이 네모져 보입니다</td></tr>
+            <tr><td>테두리와 구분선</td><td><b>가르는 선</b></td><td>선 1~2종</td><td>목록 · 카드 · 표</td><td>선이 두 겹이 되고 화면이 어수선해집니다</td></tr>
+            <tr><td>불투명도</td><td><b>흐린 정도</b></td><td>2~3단</td><td>비활성 · 가림막 · 흐린 글</td><td>글이 잘 읽히지 않고 z-index가 적용되지 않습니다</td></tr>
+            <tr><td>아이콘 크기</td><td>그림의 <b>크기</b></td><td>3~4단(16·20·24)</td><td>버튼 · 목록 · 앱바</td><td>선이 흐리고 글자와 가운데가 맞지 않습니다</td></tr>
+            <tr><td>상태 색</td><td>성공 · 주의 · 오류 · 정보</td><td>4가지 × 3자리</td><td>알림 · 배지 · 입력 오류</td><td>색을 구별하지 못하면 상태를 알 수 없습니다</td></tr>
+            <tr><td>토큰 이름 짓기</td><td>이름의 <b>규칙</b></td><td>층 3겹</td><td>토큰 전부</td><td>이름과 값이 어긋나 어느 토큰을 고쳐야 할지 알 수 없습니다</td></tr>
           </tbody>
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — 색 토큰은 <b>'이 색을 어디에 쓰는가'</b>에 이름을 붙인 것입니다. 이름에 <code>blue</code>가 들어가면 아직 쓰임이 아닙니다.</p>
+          <p><b>색 토큰을 한 줄로 정리하면</b> — 색 토큰은 <b>'이 색을 어디에 쓰는가'</b>에 이름을 붙인 것입니다. 그래서 이름에 <code>blue</code> 같은 색 이름이 들어 있다면 아직 쓰임으로 이름을 짓지 않은 것입니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 쓰임<span class="hint">색은 예쁘라고 고르는 것이 아니다</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 쓰임<span class="hint">쓰임마다 정해 둔 색</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center"><span style="width:44px;height:44px;border-radius:10px;background:var(--accent);border:1px solid rgba(0,0,0,.08);display:block"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">--accent</span><span style="font-size:10px;color:var(--fg-faint)">강조 · 주요 동작</span></div>
             </div>
-            <figcaption>강조<span>누를 것과 고른 것. <b>한 화면에 하나</b>가 원칙이다</span></figcaption>
+            <figcaption>강조<span>누를 수 있는 것과 선택된 것을 표시합니다. 강조색을 쓴 주요 동작은 <b>한 화면에 하나</b>만 두는 것이 원칙입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center"><span style="width:44px;height:44px;border-radius:10px;background:var(--danger);border:1px solid rgba(0,0,0,.08);display:block"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">--danger</span><span style="font-size:10px;color:var(--fg-faint)">되돌릴 수 없음</span></div>
             </div>
-            <figcaption>위험<span>삭제·거절처럼 <b>되돌리기 어려운</b> 것에만</span></figcaption>
+            <figcaption>위험<span>삭제나 거절처럼 <b>되돌리기 어려운</b> 동작에만 씁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center"><span style="width:44px;height:44px;border-radius:10px;background:var(--warn);border:1px solid rgba(0,0,0,.08);display:block"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">--warn</span><span style="font-size:10px;color:var(--fg-faint)">주의</span></div>
             </div>
-            <figcaption>주의<span>막지는 않지만 알아 둘 것</span></figcaption>
+            <figcaption>주의<span>진행을 막지는 않지만 사용자가 알아 두어야 할 내용에 씁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center"><span style="width:44px;height:44px;border-radius:10px;background:#1f8a4c;border:1px solid rgba(0,0,0,.08);display:block"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">--success</span><span style="font-size:10px;color:var(--fg-faint)">끝남</span></div>
             </div>
-            <figcaption>성공<span>확인됨·완료. 초록은 색맹에게 빨강과 겹치니 <b>글자도 함께</b></span></figcaption>
+            <figcaption>성공<span>확인이나 완료를 알립니다. 색맹인 사람에게는 초록이 빨강과 비슷해 보이므로 <b>글자도 함께</b> 적습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center"><span style="width:44px;height:44px;border-radius:10px;background:var(--fg-muted);border:1px solid rgba(0,0,0,.08);display:block"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">--fg-muted</span><span style="font-size:10px;color:var(--fg-faint)">보조 글</span></div>
             </div>
-            <figcaption>보조<span>덜 중요한 글. 대비비 4.5:1 은 지켜야 한다</span></figcaption>
+            <figcaption>보조<span>덜 중요한 글에 씁니다. 흐린 색이라도 바탕과의 대비비 4.5:1은 지켜야 합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center"><span style="width:44px;height:44px;border-radius:10px;background:var(--line);border:1px solid rgba(0,0,0,.08);display:block"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">--line</span><span style="font-size:10px;color:var(--fg-faint)">선 · 경계</span></div>
             </div>
-            <figcaption>경계<span>칸을 나누는 선. 글자가 아니므로 3:1 이면 된다</span></figcaption>
+            <figcaption>경계<span>칸을 나누는 선에 씁니다. 글자가 아니므로 대비비는 3:1이면 충분합니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="색 토큰의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="색 토큰의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div style="background:var(--bg);border-radius:var(--r2);padding:14px 10px 14px 0">
                 <div style="padding-left:26px">
                   <div class="pin-out" data-pin="1" style="background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:13px 13px 14px">
@@ -160,52 +160,52 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>면 <em>surface</em></b><span>카드의 바탕. 페이지 바탕(<code>--bg</code>)과 <b>한 단계 다르게</b> 둔다</span></li>
-            <li><b>본문 글 <em>fg · text-primary</em></b><span>가장 진한 글. 바탕과 대비비 <b>4.5:1</b> 이상</span></li>
-            <li><b>보조 글 <em>fg-muted · text-secondary</em></b><span>덜 중요한 글. 흐리게 하다 대비를 놓치기 가장 쉬운 자리</span></li>
-            <li><b>위험 글 <em>danger · text-error</em></b><span>빨강 하나로 알리지 않는다 — 글로도 말한다</span></li>
-            <li><b>주요 버튼 <em>accent · primary</em></b><span>한 화면에 하나. 둘이 되면 둘 다 안 눌린다</span></li>
-            <li><b>약한 강조 <em>accent-soft · subtle</em></b><span>같은 강조색의 <b>연한 짝</b>. 배지·선택된 줄에 쓴다</span></li>
+            <li><b>면 <em>surface</em></b><span>카드의 바탕색입니다. 페이지 바탕(<code>--bg</code>)과 <b>한 단계 다른</b> 색으로 둡니다</span></li>
+            <li><b>본문 글 <em>fg · text-primary</em></b><span>가장 진한 글자색입니다. 바탕과의 대비비가 <b>4.5:1</b> 이상이어야 합니다</span></li>
+            <li><b>보조 글 <em>fg-muted · text-secondary</em></b><span>덜 중요한 글에 씁니다. 글자를 흐리게 만들다 보면 대비비 기준을 놓치기 쉬운 자리입니다</span></li>
+            <li><b>위험 글 <em>danger · text-error</em></b><span>빨간색만으로 알리지 않고, 무엇이 문제인지 글로도 적습니다</span></li>
+            <li><b>주요 버튼 <em>accent · primary</em></b><span>한 화면에 하나만 둡니다. 두 개가 되면 어느 쪽이 주요 동작인지 알기 어려워집니다</span></li>
+            <li><b>약한 강조 <em>accent-soft · subtle</em></b><span>강조색과 짝을 이루는 <b>연한 색</b>입니다. 배지나 선택된 줄에 씁니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          쓰임 하나에 색 하나가 아니라 <b>짝</b>으로 갑니다 — 강조색에는 글자색(<code>on-accent</code>)과
-          연한 바탕(<code>accent-soft</code>)이 함께 있어야 합니다. 이 짝을 안 만들어 두면
-          결국 화면에서 <code>rgba(…, .1)</code> 같은 것을 손으로 섞게 되고, 다크 모드에서 그게 전부 깨집니다.</p>
+          색 토큰은 쓰임 하나에 색 하나씩 정하지 않고 여러 색을 <b>짝</b>으로 묶어 정합니다. 예를 들어 강조색에는 그 위에 올릴 글자색(<code>on-accent</code>)과
+          연한 바탕색(<code>accent-soft</code>)이 함께 있어야 합니다. 이 짝을 미리 만들어 두지 않으면
+          화면을 만들 때마다 <code>rgba(…, .1)</code> 같은 색을 손으로 섞게 되는데, 이렇게 섞은 색은 토큰을 거치지 않아서 다크 모드로 바꿔도 따라 바뀌지 않습니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>색 토큰을 쓰는 경우</h3>
             <ul>
-              <li>색을 <b>두 번 이상</b> 쓸 때 — 한 번 쓰는 색은 토큰이 아닙니다</li>
-              <li>다크 모드나 고대비 모드를 <b>할 생각이 있을</b> 때</li>
-              <li>브랜드 색이 바뀔 수 있을 때 — 1단만 고치면 끝납니다</li>
+              <li>같은 색을 <b>두 번 이상</b> 쓸 때. 한 번만 쓰는 색은 토큰으로 만들 필요가 없습니다</li>
+              <li>다크 모드나 고대비 모드를 <b>지원할 계획이 있을</b> 때</li>
+              <li>브랜드 색이 바뀔 수 있을 때. 토큰을 쓰면 1단의 값만 고치면 됩니다</li>
               <li>여러 사람이 같은 화면을 만들 때</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>색 토큰을 쓰지 않는 경우</h3>
             <ul>
-              <li>일러스트나 그래프 색 — 의미가 아니라 <b>구별</b>이 목적이라 규칙이 다릅니다</li>
-              <li>토큰 이름에 색 이름을 넣는 것 — <code>--blue-button</code>은 다크 모드에서 파랗지 않게 됩니다</li>
-              <li>쓰임이 겹치는 토큰을 자꾸 늘리는 것 — <code>--accent2</code>가 생기면 이미 무너진 것입니다</li>
+              <li>일러스트나 그래프 색을 정할 때. 이런 색은 의미를 전하기보다 서로 <b>구별</b>되는 것이 목적이라 규칙이 다릅니다</li>
+              <li>토큰 이름에 색 이름을 넣을 때. <code>--blue-button</code>은 다크 모드에서 파란색이 아니게 될 수 있어 이름과 실제 색이 어긋납니다</li>
+              <li>쓰임이 겹치는 토큰을 자꾸 늘릴 때. <code>--accent2</code> 같은 이름이 생겼다면 이미 쓰임의 구분이 흐려졌다는 뜻입니다</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 밝고 어두운 두 벌이 필요하면 <a href="dark.html">다크 모드</a>, 떠 있는 느낌은 색이 아니라 <a href="elevation.html">고도</a>로 냅니다.</p>
+        <p style="margin:var(--s4) 0 0"><b>색 토큰 대신 다른 것을 써야 하는 경우</b> — 밝고 어두운 두 벌이 필요하면 <a href="dark.html">다크 모드</a>, 떠 있는 느낌은 색이 아니라 <a href="elevation.html">고도</a>로 냅니다.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="display:flex;gap:3px;width:100%;max-width:220px"><span style="flex:1;height:40px;background:#eaf1ff;display:block"></span><span style="flex:1;height:40px;background:#c5d9ff;display:block"></span><span style="flex:1;height:40px;background:#8fb4ff;display:block"></span><span style="flex:1;height:40px;background:#5b90f9;display:block"></span><span style="flex:1;height:40px;background:#2f6df6;display:block"></span><span style="flex:1;height:40px;background:#2254c7;display:block"></span><span style="flex:1;height:40px;background:#1a3f94;display:block"></span><span style="flex:1;height:40px;background:#132c66;display:block"></span></div>
             </div>
-            <figcaption><b>색 램프</b>같은 색의 10단. 여기서 골라 쓰임에 연결한다</figcaption>
+            <figcaption><b>색 램프</b>같은 색을 10단으로 나눈 묶음입니다. 여기서 값을 골라 쓰임에 연결합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -217,7 +217,7 @@
                 <div class="tok__row" style="padding:6px 8px;font-size:12px"><span class="tok__chip" style="width:22px;height:22px;background:#2f6df6"></span><span class="tok__name">button-bg</span></div>
               </div>
             </div>
-            <figcaption><b>3단 연결</b>값 → 쓰임 → 부품. 화면은 맨 아래만 본다</figcaption>
+            <figcaption><b>3단 연결</b>값에서 쓰임으로, 쓰임에서 부품으로 이어집니다. 화면 코드는 맨 아래의 부품 토큰만 씁니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -227,27 +227,27 @@
                 <div style="font-size:11px;color:var(--fg-muted);border-top:1px solid var(--line);padding-top:6px">점 색만 다르면 색맹에게는 같은 줄입니다</div>
               </div>
             </div>
-            <figcaption><b>상태 색</b>빨강·초록 한 쌍은 <b>가장 흔한 색맹 조합</b>이다</figcaption>
+            <figcaption><b>상태 색</b>빨강과 초록은 색맹인 사람이 <b>가장 흔하게 구별하지 못하는</b> 조합입니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 이름 규칙<span class="hint">이 토큰의 계약서</span></h2>
-        <p>CSS 변수 세 겹으로 그대로 옮겨집니다. <b>화면은 2단·3단만 봅니다.</b></p>
-<pre class="code"><span class="c">/* 1단 — 색 그 자체. 쓰임을 모른다 */</span>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 이름 규칙<span class="hint">코드로 옮기는 법과 지킬 규칙</span></h2>
+        <p>세 단의 토큰은 CSS 변수 세 겹으로 그대로 옮길 수 있습니다. <b>화면 코드에서는 2단과 3단만 씁니다.</b></p>
+<pre class="code"><span class="c">/* 1단. 색 그 자체이고 쓰임은 정하지 않는다 */</span>
 <span class="t">:root</span> {
   <span class="a">--blue-500</span>: <span class="s">#2f6df6</span>;
   <span class="a">--blue-300</span>: <span class="s">#6f9bff</span>;
   <span class="a">--gray-900</span>: <span class="s">#14161a</span>;
 
-  <span class="c">/* 2단 — 쓰임. 화면이 보는 것은 여기부터 */</span>
+  <span class="c">/* 2단. 쓰임을 정한다. 화면은 여기부터 쓴다 */</span>
   <span class="a">--accent</span>: <span class="t">var</span>(<span class="a">--blue-500</span>);
   <span class="a">--on-accent</span>: <span class="s">#fff</span>;
   <span class="a">--fg</span>: <span class="t">var</span>(<span class="a">--gray-900</span>);
 }
 
-<span class="c">/* 어두운 모드 — 2단의 연결만 갈아 끼운다 */</span>
+<span class="c">/* 어두운 모드에서는 2단의 연결만 바꾼다 */</span>
 <span class="t">:root[data-theme="dark"]</span> {
   <span class="a">--accent</span>: <span class="t">var</span>(<span class="a">--blue-300</span>);
   <span class="a">--fg</span>: <span class="s">#e8ebf0</span>;
@@ -258,65 +258,65 @@
         <table class="grid kbd-table">
           <thead><tr><th>규칙</th><th>지켜야 하는 것</th></tr></thead>
           <tbody>
-            <tr><td>이름에 색을 넣지 않는다</td><td><code>--brand-blue</code> ✗ → <code>--accent</code> ✓. 색이 바뀌어도 이름이 안 거짓말하게</td></tr>
-            <tr><td>쓰임 + 자리 + 강도</td><td><code>--text-danger-strong</code>처럼 <b>무엇에 / 어디에 / 얼마나</b> 순으로 읽히게 짓는다</td></tr>
-            <tr><td>짝을 함께 만든다</td><td>바탕색에는 늘 그 위 글자색(<code>--on-*</code>)을 같이 정의한다</td></tr>
-            <tr><td>화면에서 1단 금지</td><td><code>var(--blue-500)</code>을 컴포넌트에서 쓰면 다크 모드가 거기서 깨진다</td></tr>
-            <tr><td>대비비를 값으로 못 박는다</td><td>본문 4.5:1, 큰 글자·아이콘 3:1. 토큰을 고칠 때마다 다시 잰다</td></tr>
+            <tr><td>이름에 색을 넣지 않는다</td><td><code>--brand-blue</code> ✗ → <code>--accent</code> ✓. 이렇게 지어야 색이 바뀌어도 이름과 실제 색이 어긋나지 않습니다</td></tr>
+            <tr><td>쓰임 + 자리 + 강도</td><td><code>--text-danger-strong</code>처럼 <b>무엇에 / 어디에 / 얼마나</b> 순서로 읽히도록 짓습니다</td></tr>
+            <tr><td>짝을 함께 만든다</td><td>바탕색을 정할 때는 그 위에 올릴 글자색(<code>--on-*</code>)도 늘 함께 정의합니다</td></tr>
+            <tr><td>화면에서 1단 금지</td><td>컴포넌트에서 <code>var(--blue-500)</code>을 직접 쓰면 그 자리만 다크 모드에서 색이 바뀌지 않습니다</td></tr>
+            <tr><td>대비비를 값으로 못 박는다</td><td>본문은 4.5:1, 큰 글자와 아이콘은 3:1 이상이어야 하고, 토큰 값을 고칠 때마다 대비비를 다시 잽니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>토큰 = 설정 파일의 상수</th><td>코드 여기저기 박힌 매직 넘버를 <code>config</code>로 뺀 것과 같은 일입니다. 다른 점은 <b>값이 여러 벌</b>(밝게·어둡게)이라는 것뿐입니다.</td></tr>
-            <tr><th>어디에 저장하나</th><td>보통 JSON 한 벌을 원본으로 두고(<b>W3C Design Tokens</b> 형식) 거기서 CSS·iOS·안드로이드 파일을 <b>생성</b>합니다. 손으로 세 군데 고치면 반드시 어긋납니다.</td></tr>
-            <tr><th>바꿀 때 영향 범위</th><td>2단 하나를 고치면 그것을 가리키는 모든 3단이 따라 바뀝니다. 그래서 <b>2단은 적게</b> 두고 뜻을 또렷하게 지어야 합니다.</td></tr>
-            <tr><th>서버가 색을 보내는 경우</th><td>상태 코드(<code>APPROVED</code>)를 보내고 색은 화면이 고릅니다. 서버가 <code>#1f8a4c</code>를 보내면 다크 모드에서 고칠 방법이 없습니다.</td></tr>
+            <tr><th>토큰 = 설정 파일의 상수</th><td>코드 여기저기에 직접 적힌 매직 넘버를 <code>config</code>로 빼내는 것과 같은 일입니다. 다만 토큰은 밝은 화면용과 어두운 화면용처럼 <b>값이 여러 벌</b>이라는 점이 다릅니다.</td></tr>
+            <tr><th>어디에 저장하나</th><td>보통 <b>W3C Design Tokens</b> 형식의 JSON 한 벌을 원본으로 두고, 거기서 CSS와 iOS, 안드로이드용 파일을 <b>생성</b>합니다. 세 플랫폼의 파일을 손으로 따로 고치면 결국 값이 서로 어긋나기 때문입니다.</td></tr>
+            <tr><th>바꿀 때 영향 범위</th><td>2단 토큰 하나를 고치면 그 토큰을 가리키는 3단 토큰이 모두 함께 바뀝니다. 그래서 <b>2단은 개수를 적게</b> 두고 이름의 뜻을 또렷하게 지어야 합니다.</td></tr>
+            <tr><th>서버가 색을 보내는 경우</th><td>서버는 <code>APPROVED</code> 같은 상태 코드만 보내고, 색은 화면 쪽에서 고릅니다. 서버가 <code>#1f8a4c</code> 같은 색 값을 직접 보내면 화면에서는 다크 모드에 맞게 색을 바꿀 방법이 없습니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p>세 플랫폼 모두 같은 생각을 하지만 부르는 말과 단 수가 다릅니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>세 플랫폼 모두 색을 쓰임으로 정한다는 생각은 같지만, 부르는 이름과 단의 수가 다릅니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>CSS 사용자 지정 속성</span></header>
             <div class="shot">
               <div style="font-family:var(--mono);font-size:10px;color:var(--fg-muted);line-height:1.8;text-align:left">--accent<br>--fg<br>--surface</div>
             </div>
-            <footer><b>CSS 변수</b>로 둡니다. <code>:root</code>에 두고 <code>[data-theme]</code>로 갈아 끼우는 꼴이 가장 흔합니다.</footer>
+            <footer><b>CSS 변수</b>로 정의합니다. <code>:root</code>에 기본값을 두고 <code>[data-theme]</code> 속성에 따라 값을 바꾸는 방식이 가장 흔합니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>Apple HIG</span></header>
             <div class="shot">
               <div style="font-family:var(--mono);font-size:10px;color:var(--fg-muted);line-height:1.8;text-align:left">.label<br>.secondaryLabel<br>.systemBackground</div>
             </div>
-            <footer><b>시맨틱 컬러</b>가 OS 에 내장돼 있습니다. <code>Color.primary</code>처럼 쓰면 다크 모드·고대비가 <b>저절로</b> 따라옵니다.</footer>
+            <footer><b>시맨틱 컬러</b>가 OS에 들어 있습니다. <code>Color.primary</code>처럼 쓰면 다크 모드와 고대비 설정에 맞춰 색이 <b>저절로</b> 바뀝니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>Material 3</span></header>
             <div class="shot">
               <div style="font-family:var(--mono);font-size:10px;color:var(--fg-muted);line-height:1.8;text-align:left">primary<br>onPrimary<br>surfaceVariant</div>
             </div>
-            <footer><b>색 역할</b>(color roles)이라 부르고 <code>primary</code>/<code>onPrimary</code> 짝이 규격에 박혀 있습니다.</footer>
+            <footer><b>색 역할</b>(color roles)이라고 부르며, <code>primary</code>와 <code>onPrimary</code> 같은 짝이 규격에 정해져 있습니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — iOS 와 안드로이드는 <b>시맨틱 색이 OS 에 이미 있습니다.</b> 거기에 브랜드 색을 억지로 덮으면 다크 모드·고대비·돋보기 설정이 한꺼번에 어긋납니다. 디자이너가 "primary 로 해 주세요"라고 할 때, 안드로이드 쪽에는 그게 <b>이미 정해진 이름</b>이라 뜻이 다를 수 있습니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — iOS와 안드로이드에는 <b>시맨틱 색이 OS에 이미 정해져 있습니다.</b> 그 위에 브랜드 색을 억지로 덮어쓰면 다크 모드와 고대비, 돋보기 설정에 맞춰 색이 제대로 바뀌지 않습니다. 또 디자이너가 "primary로 해 주세요"라고 할 때, 안드로이드에서는 primary가 <b>이미 정해진 역할 이름</b>이라 디자이너가 생각한 뜻과 다를 수 있습니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="dark.html"><b>다크 모드</b><em>2부</em></a></li>
         <li><a href="typescale.html"><b>타입 스케일</b><em>2부</em></a></li>
@@ -330,20 +330,20 @@
         <li><a href="statecolor.html"><b>상태 색</b><em>2부</em></a></li>
         <li><a href="tokenname.html"><b>토큰 이름 짓기</b><em>2부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="../items/field.html"><b>텍스트 필드</b><em>4부</em></a></li>
         <li><span class="na"><b>대비비</b><em>12부</em></span></li>
         <li><span class="na"><b>배지와 칩</b><em>5부</em></span></li>
         <li><span class="na"><b>디자인 시스템</b><em>15부</em></span></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

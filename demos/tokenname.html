@@ -26,18 +26,18 @@
   <div class="tn__set" id="set"></div>
   <p class="ruler" id="verdict"></p>
   <div id="lie" hidden>
-    <p class="ruler"><span class="warn">이름이 거짓이 됐다</span> — <code id="lien"></code> 의 값은
+    <p class="ruler"><span class="warn">이름과 값이 어긋났습니다</span> — <code id="lien"></code>의 실제 값은
       <span id="lieswatch" style="display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;border:1px solid var(--line)"></span>
-      <code id="liev"></code> 다</p>
+      <code id="liev"></code>입니다</p>
   </div>
 </div>
 
 <p class="hint">
-  이름을 <b>규칙 셋으로 매깁니다</b> — ①값이 이름에 박혀 있나(<code>blue</code> · <code>14</code>)
-  ②무엇에 쓰는지가 있나(<code>text</code> · <code>bg</code> · <code>border</code>)
-  ③어느 층인가(원시 · 의미 · 부품).<br>
-  값을 이름에 박으면 <b>어두운 모드에서 이름이 거짓</b>이 됩니다 —
-  위 체크를 켜고 <code>--blue</code> 의 실제 값을 보세요. 파랑이라고 적혀 있는데 파랑이 아닙니다.
+  토큰 이름을 <b>세 가지 규칙으로 따져 봅니다</b>. ①이름에 값이 들어 있는지(<code>blue</code> · <code>14</code>),
+  ②무엇에 쓰는지가 드러나는지(<code>text</code> · <code>bg</code> · <code>border</code>),
+  ③어느 층의 이름인지(원시 · 의미 · 부품)를 봅니다.<br>
+  이름에 값을 넣으면 <b>어두운 모드에서 이름과 실제 값이 어긋납니다</b>.
+  위의 '어두운 모드로'를 켜고 <code>--blue</code>의 실제 값을 보세요. 이름은 파랑인데 실제 색은 파랑이 아닙니다.
 </p>
 
 <script>
@@ -63,11 +63,11 @@
 
     var level = isPart ? '부품' : (hasColorWord || (hasNumber && !hasUse) ? '원시' : '의미');
     var why = [], bad = false;
-    if (hasColorWord) { why.push('색 이름이 박혀 있다'); bad = true; }
-    if (hasNumber && !hasUse && !/^space|^radius/.test(n)) { why.push('값이 숫자로 박혀 있다'); bad = true; }
-    if (vague) { why.push('어디에 쓰는지가 없다'); bad = true; }
-    if (!bad && level === '원시') { why.push('원시 층이라 화면에서 바로 쓰지 않는다'); }
-    if (!why.length) why.push(hasUse ? '쓰임이 이름에 있다' : '층과 쓰임이 분명하다');
+    if (hasColorWord) { why.push('색 이름이 들어 있습니다'); bad = true; }
+    if (hasNumber && !hasUse && !/^space|^radius/.test(n)) { why.push('값이 숫자로 들어 있습니다'); bad = true; }
+    if (vague) { why.push('어디에 쓰는지가 드러나지 않습니다'); bad = true; }
+    if (!bad && level === '원시') { why.push('원시 층이라 화면에서 바로 쓰지 않습니다'); }
+    if (!why.length) why.push(hasUse ? '쓰임이 이름에 드러납니다' : '층과 쓰임이 분명합니다');
     return { name: raw, level: level, bad: bad, why: why.join(' · ') };
   }
 
@@ -86,7 +86,7 @@
     var bad = list.filter(function (j) { return j.bad; }).length;
     var v = document.getElementById('verdict');
     v.innerHTML = '매긴 이름 <b>' + list.length + '개</b> 가운데 고칠 것 <b>' + bad + '개</b>' +
-      (mine ? ' · 넣은 이름은 ' + (mine.bad ? '<span class="warn">고쳐야 한다</span>' : '<b>써도 된다</b>') : '');
+      (mine ? ' · 넣은 이름은 ' + (mine.bad ? '<span class="warn">고쳐야 합니다</span>' : '<b>써도 됩니다</b>') : '');
     v.dataset.bad = String(bad);
     v.dataset.mine = mine ? (mine.bad ? 'bad' : 'ok') : '';
 

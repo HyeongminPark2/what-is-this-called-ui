@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>무엇을 움직이나 — 이름표</title>
-<meta name="description" content="transform·opacity는 배치를 다시 하지 않고, left·width는 한다. 버벅임의 거의 모든 원인.">
+<meta name="description" content="transform과 opacity는 배치를 다시 계산하지 않지만 left와 width는 다시 계산합니다. 화면이 버벅이는 원인 대부분이 이 차이에서 나온다는 것을 보여 주는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">9부 움직임</a> › 무엇을 움직이나</p>
     <h1>무엇을 움직이나</h1>
     <p class="en">Cheap vs expensive properties</p>
-    <p class="lede" style="margin-top:var(--s3)">같은 움직임도 <b>어떤 속성을 바꾸느냐</b>에 따라 값이 다릅니다. 버벅임의 거의 전부가 여기서 납니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">같은 움직임이라도 <b>어떤 속성을 바꾸느냐</b>에 따라 브라우저가 치르는 비용이 다릅니다. 움직임이 버벅이는 원인은 대부분 여기에 있습니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,30 +50,30 @@
           <iframe src="../demos/cheap.html" title="무엇을 움직이나 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>네 가지 방법으로 같은 거리를 움직이고 <b>한 프레임을 만드는 데 걸린 시간</b>을 잽니다.<br>
-          상자 수를 올리면 차이가 벌어집니다 — <code>transform</code>·<code>opacity</code>는
-          거의 그대로인데 <code>left</code>·<code>width</code>는 함께 올라갑니다.
-          그 차이가 그대로 <b>버벅임</b>입니다.</p>
+          <p>네 가지 방법으로 같은 거리를 움직이면서 <b>한 프레임을 만드는 데 걸린 시간</b>을 잽니다.<br>
+          상자 수를 늘리면 차이가 벌어지는데, <code>transform</code>과 <code>opacity</code>는
+          시간이 거의 그대로인 반면 <code>left</code>와 <code>width</code>는 상자 수와 함께 늘어납니다.
+          이렇게 늘어난 시간이 화면에서는 <b>버벅임</b>으로 나타납니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>리플로우, 리페인트, 합성, 레이어</td></tr>
             <tr><th>영어</th><td>reflow / layout, repaint, compositing, GPU acceleration</td></tr>
-            <tr><th>같이 쓰는 말</th><td>배치를 다시 재는 것이 <b>리플로우</b>(reflow)·<b>레이아웃</b>, 다시 칠하는 것이 <b>리페인트</b>(repaint)·<b>페인트</b>, 이미 그린 조각을 옮겨 겹치는 것이 <b>컴포지팅</b>(compositing)입니다. 읽기와 쓰기가 번갈아 일어나 배치가 되풀이되는 것을 <b>레이아웃 스래싱</b>이라 합니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>GPU 가속</b> — <code>transform</code>이 빠른 것은 가속 때문만이 아니라 <b>배치를 건너뛰기</b> 때문입니다.<br><b>FPS</b> — 초당 프레임 수는 결과이고, 원인은 <b>프레임 하나에 든 시간</b>입니다.<br><b>최적화</b> — 이건 최적화가 아니라 <b>처음부터 맞게 쓰는</b> 문제입니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>요소의 자리와 크기를 다시 계산하는 것을 <b>리플로우</b>(reflow) 또는 <b>레이아웃</b>, 픽셀을 다시 칠하는 것을 <b>리페인트</b>(repaint) 또는 <b>페인트</b>, 이미 그린 조각을 옮겨 겹치는 것을 <b>컴포지팅</b>(compositing)이라고 합니다. 값을 읽고 쓰는 일이 번갈아 일어나 배치 계산이 되풀이되는 현상은 <b>레이아웃 스래싱</b>이라고 부릅니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>GPU 가속</b> — <code>transform</code>이 빠른 것은 GPU 가속 때문만이 아니라 <b>배치 계산을 건너뛰기</b> 때문입니다.<br><b>FPS</b> — 초당 프레임 수는 결과로 나타나는 숫자이고, 그 원인은 <b>프레임 하나를 만드는 데 든 시간</b>입니다.<br><b>최적화</b> — 속성을 고르는 일은 나중에 하는 최적화가 아니라 <b>처음부터 맞게 써야</b> 하는 기본입니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>움직임은 장식이 아니라 <b>말</b>입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>움직임은 화면에서 무엇이 바뀌었는지 사용자에게 <b>알려 주는</b> 역할을 합니다. 아래 네 가지를 따져 보면 움직임을 다루는 항목들을 서로 구별할 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>무엇을 정하나</th><th>사람이 읽는 뜻</th><th>과하면</th><th>모션 줄이기에서</th></tr></thead>
@@ -92,7 +92,7 @@
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — <b>움직일 때는 <code>transform</code>, 사라질 때는 <code>opacity</code>.</b> 이 둘로 안 되는 움직임은 대개 설계를 다시 보는 게 빠릅니다.</p>
+          <p><b>무엇을 움직이나를 한 줄로 정리하면</b> — <b>자리를 옮길 때는 <code>transform</code>, 나타나거나 사라질 때는 <code>opacity</code></b>를 씁니다. 이 두 속성으로 만들 수 없는 움직임이라면 대개 움직임 설계를 다시 보는 편이 빠릅니다.</p>
         </div>
       </section>
 
@@ -103,46 +103,46 @@
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><div style="font-family:var(--mono);font-size:10px;color:var(--accent)">transform</div><div style="display:flex;gap:3px"><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--accent);color:#fff">스타일</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--bg);color:var(--fg-faint);border:1px solid var(--line)">배치</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--bg);color:var(--fg-faint);border:1px solid var(--line)">칠하기</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--accent);color:#fff">합치기</span></div><span style="font-size:9px;color:var(--fg-muted)">배치 · 칠하기 건너뜀 — 가장 싸다</span></div>
             </div>
-            <figcaption>자리 옮기기<span><code>translate</code>·<code>scale</code>·<code>rotate</code></span></figcaption>
+            <figcaption>자리 옮기기<span><code>translate</code>·<code>scale</code>·<code>rotate</code>로 자리와 크기, 각도를 바꿉니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><div style="font-family:var(--mono);font-size:10px;color:var(--accent)">opacity</div><div style="display:flex;gap:3px"><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--accent);color:#fff">스타일</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--bg);color:var(--fg-faint);border:1px solid var(--line)">배치</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--bg);color:var(--fg-faint);border:1px solid var(--line)">칠하기</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--accent);color:#fff">합치기</span></div><span style="font-size:9px;color:var(--fg-muted)">같은 길. 투명도만 바꾼다</span></div>
             </div>
-            <figcaption>사라지기<span><b>페이드</b>에 쓰는 바로 그것</span></figcaption>
+            <figcaption>사라지기<span><b>페이드</b> 효과에 쓰는 속성입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><div style="font-family:var(--mono);font-size:10px;color:var(--warn)">color · background</div><div style="display:flex;gap:3px"><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--accent);color:#fff">스타일</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--bg);color:var(--fg-faint);border:1px solid var(--line)">배치</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--warn);color:#fff">칠하기</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--accent);color:#fff">합치기</span></div><span style="font-size:9px;color:var(--fg-muted)">다시 칠한다 — 중간</span></div>
             </div>
-            <figcaption>색 바뀜<span>자리는 그대로지만 칠은 다시 한다</span></figcaption>
+            <figcaption>색 바뀜<span>자리는 그대로지만 픽셀은 다시 칠합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><div style="font-family:var(--mono);font-size:10px;color:var(--warn)">box-shadow · filter</div><div style="display:flex;gap:3px"><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--accent);color:#fff">스타일</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--bg);color:var(--fg-faint);border:1px solid var(--line)">배치</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--warn);color:#fff">칠하기</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--accent);color:#fff">합치기</span></div><span style="font-size:9px;color:var(--fg-muted)">넓은 영역을 다시 칠한다</span></div>
             </div>
-            <figcaption>그림자 · 흐림<span>면적이 넓어 생각보다 비싸다</span></figcaption>
+            <figcaption>그림자 · 흐림<span>다시 칠하는 면적이 넓어서 생각보다 비용이 큽니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><div style="font-family:var(--mono);font-size:10px;color:var(--danger)">left · top · margin</div><div style="display:flex;gap:3px"><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--accent);color:#fff">스타일</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--danger);color:#fff">배치</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--danger);color:#fff">칠하기</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--accent);color:#fff">합치기</span></div><span style="font-size:9px;color:var(--fg-muted)">배치부터 전부 다시 — 가장 비싸다</span></div>
             </div>
-            <figcaption>자리 바꾸기<span><b>같은 결과를 transform 으로</b> 낼 수 있다</span></figcaption>
+            <figcaption>자리 바꾸기<span><b>같은 결과를 transform으로</b> 낼 수 있습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><div style="font-family:var(--mono);font-size:10px;color:var(--danger)">width · height · font-size</div><div style="display:flex;gap:3px"><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--accent);color:#fff">스타일</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--danger);color:#fff">배치</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--danger);color:#fff">칠하기</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--accent);color:#fff">합치기</span></div><span style="font-size:9px;color:var(--fg-muted)">형제들 자리까지 흔든다</span></div>
             </div>
-            <figcaption>크기 바꾸기<span><b>scale</b>로 대신할 수 있는지 먼저 본다</span></figcaption>
+            <figcaption>크기 바꾸기<span><b>scale</b>로 대신할 수 있는지 먼저 따져 봅니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="무엇을 움직이나의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="무엇을 움직이나의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="max-width:230px;display:flex;gap:3px"><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--accent);color:#fff">스타일</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--bg);color:var(--fg-faint);border:1px solid var(--line)">배치</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--bg);color:var(--fg-faint);border:1px solid var(--line)">칠하기</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--accent);color:#fff">합치기</span></div>
@@ -156,49 +156,49 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>네 단계 <em>스타일 → 배치 → 칠하기 → 합치기</em></b><span>뒤로 갈수록 싸다. <b>어디서 끼어드느냐</b>가 비용이다</span></li>
-            <li><b>가장 싼 둘 <em>transform · opacity</em></b><span>스타일만 바꾸고 <b>합치기로 건너뛴다</b></span></li>
-            <li><b>중간 <em>색 · 그림자</em></b><span>자리는 그대로지만 <b>다시 칠해야</b> 한다</span></li>
-            <li><b>가장 비싼 것 <em>left · width · margin</em></b><span>그 줄 전체, 때로는 문서 전체를 <b>다시 잰다</b></span></li>
-            <li><b>예산 <em>16.7ms</em></b><span>60fps 기준 한 프레임. 여기서 <b>브라우저 몫도</b> 빼야 한다</span></li>
-            <li><b>쓰고 바로 읽기 <em>layout thrashing</em></b><span><code>el.style.width=…; el.offsetWidth</code> — 그 줄에서 배치가 <b>즉시</b> 돈다</span></li>
+            <li><b>네 단계 <em>스타일 → 배치 → 칠하기 → 합치기</em></b><span>뒤 단계일수록 비용이 적습니다. 속성을 바꿨을 때 <b>어느 단계부터 다시 하느냐</b>가 비용을 정합니다</span></li>
+            <li><b>가장 싼 둘 <em>transform · opacity</em></b><span>스타일만 바꾸고 배치와 칠하기를 건너뛰어 <b>바로 합치기</b>로 갑니다</span></li>
+            <li><b>중간 <em>색 · 그림자</em></b><span>자리는 그대로지만 <b>다시 칠해야</b> 합니다</span></li>
+            <li><b>가장 비싼 것 <em>left · width · margin</em></b><span>그 줄 전체, 때로는 문서 전체의 자리를 <b>다시 계산합니다</b></span></li>
+            <li><b>예산 <em>16.7ms</em></b><span>60fps 기준으로 한 프레임에 쓸 수 있는 시간입니다. 여기서 <b>브라우저가 쓰는 시간도</b> 빼야 합니다</span></li>
+            <li><b>쓰고 바로 읽기 <em>layout thrashing</em></b><span><code>el.style.width=…; el.offsetWidth</code>처럼 쓰고 바로 읽으면 그 줄에서 배치 계산이 <b>즉시</b> 일어납니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          <b>읽기와 쓰기를 섞지 않는 것</b>이 두 번째 규칙입니다.
+          두 번째 규칙은 <b>읽기와 쓰기를 섞지 않는 것</b>입니다.
           반복문 안에서 <code>style.left</code>를 쓰고 바로 <code>offsetLeft</code>를 읽으면,
-          브라우저는 정확한 값을 주려고 <b>그 자리에서 배치를 다시</b> 합니다 —
-          100개면 배치가 100번 돕니다.
-          <b>읽을 것을 먼저 다 읽고, 쓸 것을 나중에 다 쓰면</b> 한 번으로 끝납니다.</p>
+          브라우저는 정확한 값을 돌려주려고 <b>그 자리에서 배치를 다시</b> 계산합니다.
+          그래서 요소가 100개면 배치 계산도 100번 일어납니다.
+          반면 <b>읽을 값을 먼저 다 읽고 쓸 값을 나중에 다 쓰면</b> 배치 계산은 한 번으로 끝납니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>무엇을 움직이나를 쓰는 경우</h3>
             <ul>
-              <li>자리 옮김은 <code>transform: translate()</code></li>
-              <li>크기 변화는 <code>scale()</code>로 대신할 수 있는지 먼저 보기</li>
-              <li>나타남·사라짐은 <code>opacity</code></li>
-              <li>읽기를 먼저 몰아 하고 <b>쓰기를 나중에</b></li>
+              <li>자리를 옮길 때. <code>transform: translate()</code>를 씁니다</li>
+              <li>크기를 바꿀 때. <code>scale()</code>로 대신할 수 있는지 먼저 봅니다</li>
+              <li>나타나거나 사라질 때. <code>opacity</code>를 씁니다</li>
+              <li>값을 여러 개 읽고 쓸 때. 읽기를 먼저 몰아서 하고 <b>쓰기는 나중에</b> 합니다</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>무엇을 움직이나를 쓰지 않는 경우</h3>
             <ul>
-              <li><code>left</code>·<code>top</code>으로 애니메이션 — 같은 결과를 더 비싸게 낸다</li>
-              <li><code>width</code>를 매 프레임 — 형제들 자리까지 흔든다</li>
-              <li>반복문 안에서 <b>쓰고 바로 읽기</b></li>
-              <li><code>will-change</code>를 아무 데나 — 레이어가 늘면 <b>메모리를 먹는다</b></li>
+              <li><code>left</code>·<code>top</code>으로 애니메이션할 때. <code>transform</code>과 같은 결과를 더 큰 비용으로 냅니다</li>
+              <li><code>width</code>를 매 프레임 바꿀 때. 옆에 있는 요소들의 자리까지 다시 계산됩니다</li>
+              <li>반복문 안에서 값을 <b>쓰고 바로 읽을</b> 때</li>
+              <li><code>will-change</code>를 아무 데나 걸 때. 레이어가 늘어나면 그만큼 <b>메모리를 씁니다</b></li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 긴 목록이 무거우면 <a href="virtual.html">가상 스크롤</a>, 그림이 무거우면 크기를 줄이기, 애니메이션이 많으면 <a href="reducedmotion.html">모션 줄이기</a>부터 챙기기.</p>
+        <p style="margin:var(--s4) 0 0"><b>무엇을 움직이나 대신 다른 것을 써야 하는 경우</b> — 긴 목록이 무거우면 <a href="virtual.html">가상 스크롤</a>, 그림이 무거우면 그림 크기 줄이기, 애니메이션이 많으면 <a href="reducedmotion.html">모션 줄이기</a>부터.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -208,7 +208,7 @@
                 <span style="color:var(--fg-muted)">같은 결과, 다른 값</span>
               </div>
             </div>
-            <figcaption><b>자리 옮김</b>결과가 같으면 <b>싼 쪽</b>을 고른다</figcaption>
+            <figcaption><b>자리 옮김</b>결과가 같으면 <b>비용이 적은 쪽</b>을 고릅니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -217,7 +217,7 @@
                 <span style="color:var(--accent)">grid-template-rows: 0fr → 1fr</span>
               </div>
             </div>
-            <figcaption><b>펼치기</b><code>auto</code>로는 전환이 안 돼 오래 꼼수를 썼다. 요즘은 <b>격자 비율</b>로 한다</figcaption>
+            <figcaption><b>펼치기</b>높이를 <code>auto</code>로 두면 전환이 되지 않아서 오랫동안 우회하는 방법을 썼습니다. 요즘은 <b>격자 비율</b>을 바꿔서 펼칩니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -228,14 +228,14 @@
                 <span>els.forEach((e,i) =&gt; e.style.transform = …);</span>
               </div>
             </div>
-            <figcaption><b>읽기와 쓰기 가르기</b>배치가 <b>100번에서 한 번</b>이 된다</figcaption>
+            <figcaption><b>읽기와 쓰기 가르기</b>배치 계산이 <b>100번에서 한 번</b>으로 줄어듭니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">이 성능의 계약서</span></h2>
-        <p>움직임은 <code>transform</code>·<code>opacity</code>로 적고, 읽기와 쓰기를 가릅니다.</p>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+        <p>움직임은 <code>transform</code>과 <code>opacity</code>로 적고, 값을 읽는 코드와 쓰는 코드를 나눕니다.</p>
 <pre class="code"><span class="c">/* 싼 쪽 */</span>
 .card { <span class="a">transition</span>: transform <span class="a">220ms</span> <span class="a">var</span>(--ease-out), opacity <span class="a">160ms</span> linear; }
 .card.out { <span class="a">transform</span>: translateY(<span class="a">8px</span>); <span class="a">opacity</span>: <span class="a">0</span>; }
@@ -250,43 +250,43 @@
 items.forEach((el, i) =&gt; { el.style.transform = <span class="s">`translateY(${</span>tops[i]<span class="s">}px)`</span>; });  <span class="c">// 쓰기</span></pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td><code>will-change</code>는 <b>미리</b>, 그리고 <b>치운다</b></td><td>움직이기 직전에 켜고 끝나면 지운다. 늘 켜 두면 레이어가 쌓인다</td></tr>
-            <tr><td><code>transform</code>은 <b>새 기준</b>을 만든다</td><td>자식의 <code>position:fixed</code>가 화면이 아니라 <b>이 상자</b>를 따르게 된다</td></tr>
-            <tr><td><code>opacity</code>도 쌓임 맥락을 만든다</td><td><a href="../items/zindex.html">z-index</a>가 안 먹는 흔한 이유다</td></tr>
-            <tr><td><code>content-visibility: auto</code></td><td>화면 밖 덩어리를 안 그린다. 긴 문서에 효과가 크다</td></tr>
-            <tr><td><code>@media (prefers-reduced-motion)</code></td><td>비싼 애니메이션일수록 <b>줄이기에서 먼저</b> 끈다</td></tr>
-            <tr><td>재는 법</td><td>개발자 도구의 성능 탭에서 <b>보라색(배치)·초록색(칠하기)</b> 띠를 본다</td></tr>
+            <tr><td><code>will-change</code>는 <b>미리</b>, 그리고 <b>치운다</b></td><td>움직이기 직전에 켜고 움직임이 끝나면 지웁니다. 늘 켜 두면 레이어가 계속 쌓입니다</td></tr>
+            <tr><td><code>transform</code>은 <b>새 기준</b>을 만든다</td><td>자식 요소의 <code>position:fixed</code>가 화면이 아니라 <b>이 상자</b>를 기준으로 자리를 잡습니다</td></tr>
+            <tr><td><code>opacity</code>도 쌓임 맥락을 만든다</td><td><a href="../items/zindex.html">z-index</a>가 듣지 않을 때 흔히 이것이 원인입니다</td></tr>
+            <tr><td><code>content-visibility: auto</code></td><td>화면 밖에 있는 덩어리는 그리지 않습니다. 긴 문서에서 효과가 큽니다</td></tr>
+            <tr><td><code>@media (prefers-reduced-motion)</code></td><td>비용이 큰 애니메이션일수록 <b>모션 줄이기 설정에서 먼저</b> 끕니다</td></tr>
+            <tr><td>재는 법</td><td>개발자 도구의 성능 탭에서 <b>보라색(배치)·초록색(칠하기)</b> 띠가 얼마나 긴지 봅니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>느린 쪽이 어디인지</th><td>'화면이 버벅인다'의 원인은 서버일 수도 그리기일 수도 있습니다. <b>응답 시간과 프레임 시간</b>을 따로 재야 갈립니다.</td></tr>
-            <tr><th>한 번에 밀어 넣는 양</th><td>서버가 2,000건을 한 번에 주면 그리는 쪽이 멎습니다. <b>쪽을 나누거나</b> <a href="virtual.html">가상 스크롤</a>로 받습니다.</td></tr>
-            <tr><th>이미지 크기</th><td>원본 2000px 이미지를 100px 자리에 넣으면 칠하기가 비쌉니다. <b>서버에서 줄여</b> 보냅니다.</td></tr>
-            <tr><th>실사용자 측정</th><td>개발 기기는 빠릅니다. <b>INP</b> 같은 실사용자 지표를 모아 보면 느린 기기의 사정이 드러납니다.</td></tr>
+            <tr><th>느린 쪽이 어디인지</th><td>화면이 버벅일 때 원인은 서버일 수도 있고 화면을 그리는 쪽일 수도 있습니다. <b>응답 시간과 프레임 시간</b>을 따로 재야 어느 쪽인지 가릴 수 있습니다.</td></tr>
+            <tr><th>한 번에 밀어 넣는 양</th><td>서버가 2,000건을 한 번에 보내면 화면을 그리는 동안 브라우저가 멈춥니다. 그래서 <b>페이지를 나눠 받거나</b> <a href="virtual.html">가상 스크롤</a>을 씁니다.</td></tr>
+            <tr><th>이미지 크기</th><td>원본 2000px 이미지를 100px 자리에 넣으면 칠하는 비용이 커집니다. 이미지는 <b>서버에서 줄여</b> 보냅니다.</td></tr>
+            <tr><th>실사용자 측정</th><td>개발자가 쓰는 기기는 대개 빠릅니다. <b>INP</b> 같은 실사용자 지표를 모아 보면 느린 기기에서 실제로 얼마나 걸리는지 알 수 있습니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p><b>어디서나 같은 규칙</b>입니다 — 자리를 다시 재게 하지 마라.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>플랫폼이 달라도 <b>자리를 다시 계산하게 하지 않는다</b>는 규칙은 같습니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>transform · opacity</span></header>
             <div class="shot">
               <div style="width:100%;max-width:105px;display:grid;gap:4px"><div style="font-family:var(--mono);font-size:10px;color:var(--accent)">transform</div><div style="display:flex;gap:3px"><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--accent);color:#fff">스타일</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--bg);color:var(--fg-faint);border:1px solid var(--line)">배치</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--bg);color:var(--fg-faint);border:1px solid var(--line)">칠하기</span><span style="flex:1;text-align:center;font-size:8.5px;padding:3px 0;border-radius:3px;background:var(--accent);color:#fff">합치기</span></div><span style="font-size:9px;color:var(--fg-muted)"></span></div>
             </div>
-            <footer>브라우저가 네 단계를 돕니다. 개발자 도구에서 <b>어느 단계가 걸렸는지</b> 색으로 볼 수 있습니다.</footer>
+            <footer>브라우저가 네 단계를 거쳐 화면을 그립니다. 개발자 도구에서 <b>어느 단계에 시간이 걸렸는지</b> 색으로 볼 수 있습니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>Core Animation</span></header>
@@ -294,7 +294,7 @@ items.forEach((el, i) =&gt; { el.style.transform = <span class="s">`translateY($
               <div class="phone" role="img" aria-label="iOS 레이어 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:8px;top:30px;width:26px;height:26px;border-radius:5px;background:var(--accent)"></div></div></div>
             </div>
-            <footer>레이어를 옮기는 일은 <b>GPU 몫</b>입니다. 반면 <code>cornerRadius</code>·그림자는 오프스크린 칠하기를 부릅니다.</footer>
+            <footer>레이어를 옮기는 일은 <b>GPU가 맡습니다</b>. 반면 <code>cornerRadius</code>와 그림자는 화면 밖에서 따로 칠하는 오프스크린 렌더링을 일으킵니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>View · Compose</span></header>
@@ -302,18 +302,18 @@ items.forEach((el, i) =&gt; { el.style.transform = <span class="s">`translateY($
               <div class="phone" role="img" aria-label="안드로이드 레이어 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:8px;top:30px;width:26px;height:26px;border-radius:5px;background:var(--accent)"></div></div></div>
             </div>
-            <footer><code>translationX</code>는 싸고 <code>layout()</code>을 부르는 변경은 비쌉니다. Compose 도 같은 갈래입니다.</footer>
+            <footer><code>translationX</code>는 비용이 적고 <code>layout()</code>을 부르는 변경은 비용이 큽니다. Compose도 마찬가지입니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — "애니메이션이 끊겨요"를 받으면 <b>무엇을 바꾸고 있는지</b>부터 봅니다. <code>left</code>나 <code>width</code>를 매 프레임 바꾸고 있다면 기기를 탓할 일이 아니고, <code>transform</code>으로 바꾸는 것만으로 해결되는 경우가 많습니다. 라이브러리를 바꾸는 것보다 <b>속성 두 개를 바꾸는 쪽</b>이 거의 늘 빠릅니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — "애니메이션이 끊겨요"라는 신고를 받으면 애니메이션이 <b>어떤 속성을 바꾸고 있는지</b>부터 봅니다. <code>left</code>나 <code>width</code>를 매 프레임 바꾸고 있다면 기기 성능 문제가 아니고, <code>transform</code>으로 바꾸는 것만으로 해결되는 경우가 많습니다. 애니메이션 라이브러리를 바꾸는 것보다 <b>속성 두 개를 바꾸는 편</b>이 대부분 더 빨리 해결됩니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="easing.html"><b>이징 곡선</b><em>9부</em></a></li>
         <li><a href="duration.html"><b>지속 시간</b><em>9부</em></a></li>
@@ -325,20 +325,20 @@ items.forEach((el, i) =&gt; { el.style.transform = <span class="s">`translateY($
         <li><a href="sharedelement.html"><b>공유 요소 전환</b><em>9부</em></a></li>
         <li><a href="scrolllink.html"><b>스크롤 연동</b><em>9부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="virtual.html"><b>가상 스크롤</b><em>10부</em></a></li>
         <li><a href="../items/zindex.html"><b>z-index</b><em>2부</em></a></li>
         <li><a href="reducedmotion.html"><b>모션 줄이기</b><em>9부</em></a></li>
         <li><a href="../items/skeleton.html"><b>스켈레톤</b><em>8부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

@@ -37,12 +37,12 @@
 </div>
 
 <p class="hint">
-  다시 받는 동안 화면을 <b>비울지 옛 값을 둘지</b>가 갈립니다.
-  비우면 그동안 <b>아무것도 못 읽습니다</b> — 데모가 <b>숫자가 사라져 있던 시간(ms)</b>을 재서 적습니다.
-  옛 값을 두면 그 시간이 <b>0</b>입니다.<br>
-  대신 옛 값에는 <b>언제 숫자인지</b>를 붙여야 합니다 — '3분 전 기준'이 없으면
-  방금 받은 값인 줄 압니다. 체크를 끄고 보면 숫자만 덩그러니 남습니다.<br>
-  다시 받는 동안에는 숫자를 <b>흐리게</b> 해 '지금 바뀌는 중'임을 알립니다.
+  다시 받는 동안 화면을 <b>비울지, 옛 값을 그대로 둘지</b>를 정해야 합니다.
+  화면을 비우면 사용자는 그동안 <b>아무것도 읽을 수 없는데</b>, 데모는 <b>숫자가 사라져 있던 시간(ms)</b>을 재서 적습니다.
+  옛 값을 그대로 두면 이 시간이 <b>0</b>이 됩니다.<br>
+  그 대신 옛 값에는 <b>언제 기준인 숫자인지</b>를 붙여야 합니다. '3분 전 기준'이 없으면
+  사용자는 방금 받은 값인 줄 압니다. 체크를 끄면 기준 시각 없이 숫자만 남는 모습을 볼 수 있습니다.<br>
+  다시 받는 동안에는 숫자를 <b>흐리게</b> 해서 지금 값이 바뀌는 중이라는 것을 알립니다.
 </p>
 
 <script>
@@ -69,9 +69,9 @@
     var rd = document.getElementById('read');
     rd.innerHTML = '값 <b>' + VALUES[idx] + '</b> · ' + (ageMin === 0 ? '방금' : ageMin + '분 전') + ' 기준' +
       '<br>숫자가 사라져 있던 시간 <b>' + blankMs + 'ms</b>' +
-      (blankMs > 0 ? ' <span class="warn">— 그동안 아무것도 못 읽는다</span>' : '') +
+      (blankMs > 0 ? ' <span class="warn">(그동안 아무것도 읽을 수 없습니다)</span>' : '') +
       '<br>언제 숫자인지 적기 <b>' + (asofOn ? '켬' : '끔') + '</b>' +
-      (!asofOn ? ' <span class="warn">— 방금 값인 줄 안다</span>' : '') +
+      (!asofOn ? ' <span class="warn">(방금 받은 값처럼 보입니다)</span>' : '') +
       (why ? '<br>' + why : '');
     rd.dataset.blank = String(blankMs);
     rd.dataset.asof = asofOn ? '1' : '0';
@@ -85,7 +85,7 @@
     busy = true;
     blankMs = 0;
     if (document.getElementById('k').value === 'blank') blankStart = Date.now();
-    render('다시 받는 중');
+    render('다시 받는 중입니다');
     setTimeout(function () {
       busy = false;
       if (document.getElementById('k').value === 'blank') blankMs = Date.now() - blankStart;
@@ -93,8 +93,8 @@
       ageMin = 0;
       render('');
       document.getElementById('log').innerHTML = blankMs
-        ? '<span class="warn">' + blankMs + 'ms 동안 숫자가 없었다</span>'
-        : '<b>옛 값을 보는 동안</b> 새 값이 들어왔다';
+        ? '<span class="warn">' + blankMs + 'ms 동안 숫자가 보이지 않았습니다</span>'
+        : '<b>옛 값을 보여 주는 동안</b> 새 값이 들어왔습니다';
       clearTimeout(ageT);
       ageT = setTimeout(function () { ageMin = 3; render(''); }, 2500);
     }, 900);

@@ -41,12 +41,12 @@
 </div>
 
 <p class="hint">
-  폰 브라우저는 굴릴 때 <b>주소창이 숨었다 나타납니다.</b> 그래서 '화면 높이'가 두 개입니다 —
-  주소창이 있을 때(작은 쪽)와 없을 때(큰 쪽).<br>
-  <code>100vh</code>는 <b>큰 쪽</b>으로 고정입니다. 주소창이 보이는 동안에는 화면 밖으로 삐져나가
-  <b>바닥의 버튼이 안 보입니다.</b> <code>100svh</code>는 작은 쪽, <code>100dvh</code>는
-  <b>지금 보이는 만큼</b>입니다.<br>
-  바닥에 버튼이 붙는 화면이라면 <code>100dvh</code>가 거의 늘 맞습니다.
+  폰 브라우저는 화면을 굴릴 때 <b>주소창이 숨었다 나타납니다.</b> 그래서 '화면 높이'도
+  주소창이 있을 때의 작은 높이와 없을 때의 큰 높이, 두 가지가 생깁니다.<br>
+  <code>100vh</code>는 <b>큰 쪽</b> 높이로 고정되어 있어서, 주소창이 보이는 동안에는 화면 밖으로 넘쳐
+  <b>바닥의 버튼이 보이지 않습니다.</b> 반면 <code>100svh</code>는 작은 쪽 높이이고, <code>100dvh</code>는
+  <b>지금 보이는 만큼</b>의 높이입니다.<br>
+  바닥에 버튼이 붙는 화면이라면 대부분 <code>100dvh</code>가 맞습니다.
 </p>
 
 <script>
@@ -74,15 +74,15 @@
         '</div></div>' +
         '<p class="cap" data-k="' + s[1] + '" data-cut="' + cut + '"><b>' + s[0] + '</b><span>' + s[2] + '</span>' +
         '<span style="color:' + (cut > 0 ? 'var(--danger)' : 'var(--fg-muted)') + '">' +
-        (cut > 0 ? '아래 ' + cut + 'px 가 화면 밖 — ' + s[3] : s[3]) + '</span></p></div>';
+        (cut > 0 ? '아래 ' + cut + 'px가 화면 밖 · ' + s[3] : s[3]) + '</span></p></div>';
     }).join('');
 
     var cut = Math.max(0, H - seen);
     var rl = document.getElementById('ruler');
     rl.innerHTML = barOn
-      ? '주소창이 보이는 중 — 보이는 높이 <b>' + seen + 'px</b>, ' +
-        '<code>100vh</code>는 <span class="warn">' + H + 'px 라 ' + cut + 'px 가 밖으로 나간다</span>'
-      : '주소창이 숨은 중 — 보이는 높이 <b>' + seen + 'px</b>, 세 단위가 모두 같다';
+      ? '주소창이 보이는 동안 보이는 높이는 <b>' + seen + 'px</b>인데, ' +
+        '<code>100vh</code>는 <span class="warn">' + H + 'px라서 ' + cut + 'px가 화면 밖으로 나갑니다</span>'
+      : '주소창이 숨으면 보이는 높이가 <b>' + seen + 'px</b>이고, 세 단위의 값이 모두 같습니다';
     rl.dataset.cut = String(cut);
   }
 
@@ -111,8 +111,8 @@
     var same = vals.every(function (v) { return v === vals[0]; });
     var tip = document.getElementById('tip');
     tip.innerHTML = same
-      ? '이 브라우저에서는 넷이 <b>모두 ' + vals[0] + '</b> — 숨는 주소창이 없어서다. 차이는 <b>폰에서만</b> 드러난다.'
-      : '이 브라우저에서는 값이 갈린다 — 주소창이 숨었다 나타나는 중이다.';
+      ? '이 브라우저에서는 네 값이 <b>모두 ' + vals[0] + '</b>로 같습니다. 숨었다 나타나는 주소창이 없기 때문이고, 차이는 <b>폰에서만</b> 드러납니다.'
+      : '이 브라우저에서는 값이 서로 다릅니다. 주소창이 숨었다 나타나는 브라우저이기 때문입니다.';
     tip.dataset.same = same ? '1' : '0';
   }
 

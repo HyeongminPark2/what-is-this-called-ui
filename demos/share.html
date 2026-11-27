@@ -37,13 +37,13 @@
 </div>
 
 <p class="hint">
-  공유의 실패는 거의 늘 <b>기본값이 너무 넓은 것</b>입니다 — 아무 생각 없이 누르면
-  링크가 사내 밖으로도 열립니다. 데모가 지금 범위에서 <b>볼 수 있는 사람 수</b>를
+  공유 화면에서 생기는 사고는 거의 언제나 <b>기본값이 너무 넓어서</b> 일어납니다. 기본값이 넓으면 별생각 없이 누르기만 해도
+  링크가 사내 밖으로까지 열립니다. 데모는 지금 범위에서 <b>볼 수 있는 사람 수</b>를
   어림해 적고, 사내 밖까지 열리면 경고를 띄웁니다.<br>
-  '처음부터 링크 있는 누구나로 두기'를 켜 보세요. 아무것도 안 골라도
-  <b>가장 넓은 범위</b>에서 시작합니다 — 쓰기는 편하고 사고는 여기서 납니다.<br>
-  범위를 바꾸면 <b>이미 나간 링크</b>가 어떻게 되는지도 같이 알려 줘야 합니다.
-  좁히면 그 링크는 그 자리에서 막힙니다.
+  '처음부터 링크 있는 누구나로 두기'를 켜 보세요. 아무것도 고르지 않아도
+  <b>가장 넓은 범위</b>에서 시작하는데, 쓰기에는 편하지만 공유 사고는 대부분 이 설정에서 일어납니다.<br>
+  범위를 바꿀 때는 <b>이미 나간 링크</b>가 어떻게 되는지도 함께 알려 줘야 합니다.
+  범위를 좁히면 이미 보낸 링크도 그 순간부터 열리지 않기 때문입니다.
 </p>
 
 <script>
@@ -85,7 +85,7 @@
     var rd = document.getElementById('read');
     rd.innerHTML = '범위 <b>' + s[1] + '</b> · 볼 수 있는 사람 <b>' +
       (s[3] >= 9999 ? '제한 없음' : s[3] + '명') + '</b>' +
-      (outside ? ' <span class="warn">— 사내 밖까지</span>' : '');
+      (outside ? ' <span class="warn">(사내 밖까지 열립니다)</span>' : '');
     rd.dataset.scope = cur;
     rd.dataset.people = String(s[3]);
     rd.dataset.outside = outside ? '1' : '0';
@@ -101,16 +101,16 @@
     var narrowed = SCOPES.findIndex(function (x) { return x[0] === cur; }) <
                    SCOPES.findIndex(function (x) { return x[0] === before; });
     document.getElementById('log').innerHTML = narrowed
-      ? '범위를 <b>좁혔다</b> — 이미 나간 링크는 이 자리에서 막힌다'
-      : '범위를 <b>넓혔다</b> — 이미 나간 링크도 같이 넓어진다';
+      ? '범위를 <b>좁혔습니다.</b> 이미 나간 링크는 지금부터 열리지 않습니다'
+      : '범위를 <b>넓혔습니다.</b> 이미 나간 링크로도 넓어진 범위의 사람이 열 수 있습니다';
     document.getElementById('log').dataset.dir = narrowed ? 'narrow' : 'wide';
   });
 
   document.getElementById('copy').addEventListener('click', function () {
     copied++;
     draw();
-    document.getElementById('log').innerHTML = '링크를 복사했다 — <b>' +
-      SCOPES.filter(function (x) { return x[0] === cur; })[0][1] + '</b> 범위로 열린다';
+    document.getElementById('log').innerHTML = '링크를 복사했습니다. 이 링크는 <b>' +
+      SCOPES.filter(function (x) { return x[0] === cur; })[0][1] + '</b> 범위로 열립니다';
   });
 
   document.getElementById('guess').addEventListener('change', function () {
@@ -118,8 +118,8 @@
     copied = 0;
     draw();
     document.getElementById('log').innerHTML = this.checked
-      ? '<span class="warn">기본이 가장 넓다</span> — 아무것도 안 골라도 밖으로 열린다'
-      : '기본이 <b>좁다</b> — 넓히려면 본인이 고른다';
+      ? '<span class="warn">기본값이 가장 넓습니다.</span> 아무것도 고르지 않아도 사내 밖으로 열립니다'
+      : '기본값이 <b>좁습니다.</b> 범위를 넓히려면 본인이 직접 고릅니다';
   });
 
   draw();

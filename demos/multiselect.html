@@ -37,13 +37,13 @@
 </div>
 
 <p class="hint">
-  여러 개를 고르면 <b>고른 것을 어떻게 보일지</b>가 문제가 됩니다.
-  알약으로 늘어놓으면 <b>무엇을 골랐는지</b>는 한눈에 보이지만 줄이 늘어납니다 —
-  데모가 <b>고른 것 칸의 높이</b>를 재서 적습니다.<br>
-  '<b>최대 보일 알약</b>'을 줄이면 <code>+N</code> 으로 접힙니다. 숫자만 보이는 쪽은
-  높이가 안 변하지만 <b>무엇을 골랐는지 모릅니다</b>.<br>
-  브라우저 기본 <code>multiple</code> 셀렉트는 <b>Ctrl 을 눌러야</b> 여러 개가 골라집니다 —
-  모르는 사람이 많아 거의 쓰지 않습니다. 체크박스 목록이 훨씬 분명합니다.
+  여러 개를 고르게 하면 <b>고른 것을 어떻게 보여 줄지</b>를 정해야 합니다.
+  고른 것을 알약으로 늘어놓으면 <b>무엇을 골랐는지</b> 한눈에 보이지만 줄 수가 늘어납니다.
+  데모가 <b>고른 것 칸의 높이</b>를 재서 적어 줍니다.<br>
+  '<b>최대 보일 알약</b>'을 줄이면 넘치는 알약이 <code>+N</code>으로 접힙니다. 개수만 숫자로 보여 주면
+  높이는 변하지 않지만 <b>무엇을 골랐는지 알 수 없습니다</b>.<br>
+  브라우저 기본 <code>multiple</code> 셀렉트는 <b>Ctrl을 누른 채</b> 눌러야 여러 개가 골라집니다.
+  이 방법을 모르는 사람이 많아서 실제로는 거의 쓰지 않고, 체크박스 목록으로 만드는 편이 훨씬 알아보기 쉽습니다.
 </p>
 
 <script>
@@ -93,8 +93,8 @@
       ({ token: '알약', count: '숫자', native: '기본 셀렉트' }[k]) + '</b>' +
       '<br>고른 것 칸 높이 <b>' + h + 'px</b>' +
       '<br>이름이 보이는 것 <b>' + visible + '개</b>' +
-      (k === 'count' ? ' <span class="warn">— 무엇을 골랐는지 모른다</span>' : '') +
-      (k === 'native' ? '<br><span class="warn">Ctrl 을 눌러야 여러 개가 골라진다</span>' : '') +
+      (k === 'count' ? ' <span class="warn">— 무엇을 골랐는지 알 수 없습니다</span>' : '') +
+      (k === 'native' ? '<br><span class="warn">Ctrl을 누른 채 눌러야 여러 개가 골라집니다</span>' : '') +
       (why ? '<br>' + why : '');
     rd.dataset.n = String(list.length);
     rd.dataset.h = String(h);
@@ -107,14 +107,14 @@
     if (!c) return;
     sel[c.dataset.s] = c.checked;
     draw('');
-    document.getElementById('log').innerHTML = '<b>' + c.dataset.s + '</b> 를 ' + (c.checked ? '골랐다' : '뺐다');
+    document.getElementById('log').innerHTML = '<b>' + c.dataset.s + '</b> 항목을 ' + (c.checked ? '골랐습니다' : '뺐습니다');
   });
   document.getElementById('top').addEventListener('click', function (e) {
     var x = e.target.closest('[data-x]');
     if (!x) return;
     sel[x.dataset.x] = false;
     draw('');
-    document.getElementById('log').innerHTML = '<b>' + x.dataset.x + '</b> 를 알약에서 뺐다';
+    document.getElementById('log').innerHTML = '<b>' + x.dataset.x + '</b> 항목을 알약에서 뺐습니다';
   });
   document.getElementById('k').addEventListener('change', function () { draw(''); });
   document.getElementById('max').addEventListener('input', function () { draw(''); });

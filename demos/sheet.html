@@ -35,9 +35,9 @@
 </div>
 
 <p class="hint">
-  <b>⋯</b>을 눌러 보세요. 선택지가 손가락이 닿는 아래쪽에서 올라옵니다.
-  <kbd>Esc</kbd>나 바깥을 눌러 닫을 수 있고, 핸들을 아래로 끌어도 닫힙니다.
-  폭을 넓히면 같은 시트가 가운데로 모입니다.
+  <b>⋯</b>을 눌러 보세요. 손가락이 쉽게 닿는 화면 아래쪽에서 선택지가 올라옵니다.
+  <kbd>Esc</kbd>를 누르거나 시트 바깥을 누르면 닫히고, 핸들을 아래로 끌어도 닫힙니다.
+  화면 폭을 넓히면 같은 시트가 화면 가운데로 옮겨 갑니다.
 </p>
 
 <dialog class="sheet" id="sheet" aria-labelledby="sheet-t">
@@ -84,7 +84,7 @@
     if (e.clientY < r.top || e.clientX < r.left || e.clientX > r.right) dlg.close();
   });
 
-  // 핸들을 아래로 끌면 닫힌다 — 시트만의 조작
+  // 핸들을 아래로 끌면 닫힌다. 시트에만 있는 조작
   var y0 = null;
   function down(e) { y0 = (e.touches ? e.touches[0] : e).clientY; dlg.style.transition = 'none'; }
   function move(e) {

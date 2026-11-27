@@ -39,12 +39,12 @@
 </div>
 
 <p class="hint">
-  OS 권한 창은 <b>한 번뿐</b>입니다. 거절당하면 앱은 다시 띄울 수 없고, 사용자가 직접
-  설정에 들어가야 합니다 — 거의 아무도 안 합니다.<br>
-  <b>앞선 설명 띄우기</b>를 켜면 우리 화면에서 먼저 묻습니다. 여기서 '나중에'를 고르면
-  <b>OS 창은 아직 쓰지 않은 채</b>로 남아, 나중에 다시 물어볼 수 있습니다.<br>
-  끄고 거절해 본 뒤 다시 눌러 보세요 — <b>아무 일도 일어나지 않습니다.</b>
-  그 한 번을 아끼는 것이 이 화면의 전부입니다.
+  OS 권한 창은 <b>한 번만</b> 띄울 수 있습니다. 사용자가 거절하면 앱은 그 창을 다시 띄울 수 없고, 사용자가 직접
+  기기 설정에 들어가 켜야 하는데 그렇게 하는 사람은 거의 없습니다.<br>
+  <b>앞선 설명 띄우기</b>를 켜면 OS 창을 띄우기 전에 우리 화면에서 먼저 묻습니다. 여기서 '나중에'를 고르면
+  <b>OS 창은 아직 쓰지 않은 채</b>로 남기 때문에, 나중에 다시 물어볼 수 있습니다.<br>
+  반대로 앞선 설명을 끄고 OS 창에서 거절한 뒤 다시 눌러 보면 <b>아무 일도 일어나지 않습니다.</b>
+  권한 요청 화면은 결국 이 한 번의 OS 창을 언제 쓸지 정하는 일입니다.
 </p>
 
 <script>
@@ -56,7 +56,7 @@
   function paint() {
     var s = document.getElementById('state');
     s.innerHTML = '기기에 남은 상태 <b>' + os + '</b> · OS 창을 쓴 횟수 <b>' + osUsed + '</b>' +
-      (os === 'denied' ? ' <span class="warn">— 앱에서는 다시 띄울 수 없다</span>' : '');
+      (os === 'denied' ? ' <span class="warn">(앱에서는 OS 창을 다시 띄울 수 없습니다)</span>' : '');
     s.dataset.os = os; s.dataset.used = String(osUsed);
 
     var after = document.getElementById('after');
@@ -67,7 +67,7 @@
     else after.innerHTML = '';
     var t = document.getElementById('togo');
     if (t) t.addEventListener('click', function () {
-      document.getElementById('log').innerHTML = '설정 앱으로 보냈다 — <b>여기까지가 앱이 할 수 있는 전부</b>다';
+      document.getElementById('log').innerHTML = '설정 앱으로 안내했습니다. 거절된 권한에 대해 <b>앱이 할 수 있는 일은 여기까지입니다</b>';
     });
     document.getElementById('ask').disabled = os !== 'prompt' && !pre;
   }
@@ -86,8 +86,8 @@
       os = b.dataset.v === 'allow' ? 'granted' : 'denied';
       d.remove();
       document.getElementById('log').innerHTML = os === 'granted'
-        ? 'OS 창에서 허용했다'
-        : '<span class="warn">OS 창에서 거절했다 — 이 창은 다시 안 뜬다</span>';
+        ? 'OS 창에서 허용했습니다'
+        : '<span class="warn">OS 창에서 거절했습니다. 이 창은 다시 뜨지 않습니다</span>';
       paint();
     });
     paint();
@@ -96,10 +96,10 @@
   document.getElementById('ask').addEventListener('click', function () {
     if (os === 'denied') {
       document.getElementById('log').innerHTML =
-        '<span class="warn">눌러도 아무 일이 없다 — 이미 거절당한 권한이다</span>';
+        '<span class="warn">눌러도 아무 일이 일어나지 않습니다. 이미 거절당한 권한이기 때문입니다</span>';
       return;
     }
-    if (os === 'granted') { document.getElementById('log').textContent = '이미 허용돼 있다'; return; }
+    if (os === 'granted') { document.getElementById('log').textContent = '이미 허용되어 있습니다'; return; }
 
     if (!document.getElementById('prep').checked) { osDialog(); return; }
 
@@ -120,7 +120,7 @@
       if (b.dataset.v === 'ok') osDialog();
       else {
         document.getElementById('log').innerHTML =
-          '나중에를 골랐다 — <b>OS 창은 아직 안 썼다.</b> 다음에 다시 물어볼 수 있다';
+          '나중에를 골랐습니다. <b>OS 창은 아직 쓰지 않았으므로</b> 다음에 다시 물어볼 수 있습니다';
         paint();
       }
     });
@@ -128,7 +128,7 @@
 
   document.getElementById('reset').addEventListener('click', function () {
     os = 'prompt'; osUsed = 0; pre = false;
-    document.getElementById('log').textContent = '기기 설정을 지웠다 — 처음 상태';
+    document.getElementById('log').textContent = '기기 설정을 지워 처음 상태로 되돌렸습니다';
     paint();
   });
   paint();

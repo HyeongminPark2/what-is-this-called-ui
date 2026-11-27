@@ -35,10 +35,10 @@
 </div>
 
 <p class="hint">
-  <b>찾기</b>를 열어 두고 뒤쪽 글을 그대로 읽어 보세요. 스크롤도 되고 글자도 선택됩니다 — <b>뒤를 막지 않습니다.</b>
-  <code>dialog.show()</code>로 연 것이고, 이것이 <b>비모달 다이얼로그</b>입니다.<br>
-  <b>나가기 확인</b>은 같은 <code>&lt;dialog&gt;</code>를 <code>showModal()</code>로 연 것입니다. 뒤가 막히고 <kbd>Tab</kbd>이 갇힙니다.
-  <b>메서드 한 글자가 모달과 비모달을 가릅니다.</b>
+  <b>찾기</b>를 열어 둔 채 뒤쪽 글을 읽어 보세요. 찾기 창이 <b>뒤를 막지 않기</b> 때문에 뒤쪽 글을 스크롤할 수도 있고 글자를 선택할 수도 있습니다.
+  이 창은 <code>dialog.show()</code>로 연 것이고, 이렇게 연 다이얼로그를 <b>비모달 다이얼로그</b>라고 부릅니다.<br>
+  <b>나가기 확인</b>은 같은 <code>&lt;dialog&gt;</code> 요소를 <code>showModal()</code>로 연 것인데, 이렇게 열면 뒤쪽 화면이 막히고 <kbd>Tab</kbd>으로 옮기는 포커스도 창 안에서만 돕니다.
+  <b>모달과 비모달은 어느 메서드로 여느냐로만 갈립니다.</b>
 </p>
 
 <dialog class="dlg" id="finder" aria-labelledby="f-t">
@@ -81,12 +81,12 @@
 
   document.getElementById('find').addEventListener('click', function () {
     if (finder.open) { finder.close(); return; }
-    finder.show();                 // show() — 뒤를 막지 않는다
+    finder.show();                 // show()는 뒤를 막지 않는다
     q.focus(); q.select();
     run();
   });
   document.getElementById('conf').addEventListener('click', function () {
-    leave.showModal();             // showModal() — 뒤를 막는다
+    leave.showModal();             // showModal()은 뒤를 막는다
   });
 
   [finder, leave].forEach(function (d) {

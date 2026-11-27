@@ -33,13 +33,13 @@
 </div>
 
 <p class="hint">
-  줄 하나에는 보통 넷이 들어갑니다 — <b>고르기 · 주 열 · 값 · 동작</b>.
-  밀도를 바꾸면 한 화면에 들어가는 줄 수가 달라집니다 — 데모가
+  표의 줄 하나에는 보통 <b>고르기 · 주 열 · 값 · 동작</b> 네 가지가 들어갑니다.
+  밀도를 바꾸면 한 화면에 들어가는 줄 수가 달라지는데, 데모는
   <b>480px 높이에 몇 줄이 들어가는지</b> 재서 적습니다.<br>
-  <b>행 전체를 눌리게</b> 하면 편한 대신, 안에 있는 단추를 눌러도 <b>행 이동이 같이 일어납니다</b>.
-  데모가 '영수증' 단추를 눌렀을 때 행 이동이 몇 번 따라왔는지 셉니다 —
-  막으려면 안쪽 단추에서 <code>stopPropagation()</code> 을 해야 합니다.<br>
-  고르기 체크박스에는 <b>줄마다 다른 이름</b>이 필요합니다 — 전부 '선택'이면 소리로는 구별이 안 됩니다.
+  <b>행 전체를 누를 수 있게</b> 하면 누르기는 편하지만, 행 안에 있는 단추를 눌러도 <b>행 이동이 같이 일어납니다</b>.
+  데모는 '영수증' 단추를 눌렀을 때 행 이동이 몇 번 함께 일어났는지 셉니다.
+  이를 막으려면 안쪽 단추에서 <code>stopPropagation()</code>을 호출해야 합니다.<br>
+  고르기 체크박스에는 <b>줄마다 다른 이름</b>을 붙여야 합니다. 이름이 모두 '선택'이면 스크린 리더로 들을 때 줄을 구별할 수 없습니다.
 </p>
 
 <script>
@@ -76,7 +76,7 @@
     var rd = document.getElementById('read');
     rd.innerHTML = '한 줄 높이 <b>' + Math.round(h) + 'px</b> · 480px 에 <b>' + fit + '줄</b>' +
       '<br>행 전체 누름 <b>' + (whole ? '켬' : '끔') + '</b> · 단추를 눌렀는데 행까지 이동한 횟수 <b>' + strayNav + '회</b>' +
-      (strayNav ? ' <span class="warn">— 안쪽 단추가 행을 뚫고 나간다</span>' : '') +
+      (strayNav ? ' <span class="warn">(안쪽 단추의 눌림이 행까지 전달됩니다)</span>' : '') +
       (n ? '<br>고른 줄 <b>' + n + '개</b>' : '');
     rd.dataset.h = String(Math.round(h));
     rd.dataset.fit = String(fit);
@@ -90,11 +90,11 @@
     var row = e.target.closest('.trow__r');
     if (b) {
       // 일부러 막지 않는다 — 행 전체가 링크면 이동이 따라온다
-      document.getElementById('log').innerHTML = '<b>' + ROWS[+b.dataset.b][0] + '</b> 의 영수증을 열었다';
+      document.getElementById('log').innerHTML = '<b>' + ROWS[+b.dataset.b][0] + '</b>의 영수증을 열었습니다';
       if (document.getElementById('whole').checked) {
         e.preventDefault();
         strayNav++;
-        document.getElementById('log').innerHTML += ' — <span class="warn">그런데 행 이동도 같이 일어났다</span>';
+        document.getElementById('log').innerHTML += ' <span class="warn">그런데 행 이동도 같이 일어났습니다</span>';
       }
       draw();
       return;
@@ -102,7 +102,7 @@
     if (e.target.closest('[data-c]')) return;
     if (row && document.getElementById('whole').checked) {
       e.preventDefault();
-      document.getElementById('log').innerHTML = '<b>' + ROWS[+row.dataset.i][0] + '</b> 상세로 갔다';
+      document.getElementById('log').innerHTML = '<b>' + ROWS[+row.dataset.i][0] + '</b> 상세 화면으로 이동했습니다';
     }
   });
 

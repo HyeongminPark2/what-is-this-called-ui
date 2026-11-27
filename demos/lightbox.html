@@ -37,12 +37,12 @@
 </div>
 
 <p class="hint">
-  그림을 눌러 크게 열어 보세요. 라이트박스는 <b>그림 하나를 보는 동안 뒤를 덮는</b> 겹침입니다 —
-  모달과 같은 규칙을 따릅니다. ← → 로 옮기고 Esc 로 닫습니다.<br>
-  닫았을 때 <b>초점이 눌렀던 칸으로 돌아가야</b> 합니다 — 안 그러면 키보드 사용자는
-  목록 맨 처음으로 튕겨 갑니다. 데모가 <b>닫은 뒤 초점이 어디인지</b>를 재서 적습니다.<br>
-  <b>주소에 남기면</b> 그 그림을 링크로 보낼 수 있고 뒤로가기로 닫힙니다 —
-  데모가 지금 주소를 같이 보여 줍니다.
+  그림을 눌러 크게 열어 보세요. 라이트박스는 <b>그림 하나를 보는 동안 뒤를 덮는</b> 겹침 부품이라서
+  모달과 같은 규칙을 따릅니다. ← →로 그림을 옮기고 Esc로 닫습니다.<br>
+  닫았을 때 <b>초점이 눌렀던 칸으로 돌아가야</b> 합니다. 그렇지 않으면 키보드 사용자의 초점이
+  목록 맨 처음으로 가 버립니다. 데모는 <b>닫은 뒤 초점이 어디에 있는지</b>를 재서 보여 줍니다.<br>
+  <b>주소에 남기면</b> 그 그림을 링크로 보낼 수 있고 뒤로가기로도 닫힙니다.
+  데모는 지금 주소도 함께 보여 줍니다.
 </p>
 
 <script>
@@ -92,7 +92,7 @@
     var rd = document.getElementById('read');
     rd.innerHTML = (open >= 0 ? '열림 — 영수증 <b>' + (open + 1) + '</b>' : '닫힘') +
       '<br>주소 <b>' + url + '</b>' +
-      (useUrl ? '' : ' <span class="warn">— 링크로 보낼 수 없다</span>') +
+      (useUrl ? '' : ' <span class="warn">— 링크로 보낼 수 없습니다</span>') +
       '<br>지금 초점 <b>' + where + '</b>' +
       (why ? '<br>' + why : '');
     rd.dataset.open = String(open);
@@ -111,16 +111,16 @@
 
   document.getElementById('stage').addEventListener('click', function (e) {
     var b = e.target.closest('[data-i]');
-    if (b) { lastBtn = b; open = +b.dataset.i; render(); document.getElementById('log').innerHTML = '<b>영수증 ' + (open + 1) + '</b> 을 열었다'; return; }
-    if (e.target.id === 'scrim') { close('<b>가림막</b>을 눌러 닫았다'); document.getElementById('log').innerHTML = '가림막을 눌러 닫았다'; return; }
-    if (e.target.id === 'x') { close(''); document.getElementById('log').innerHTML = '닫기를 눌렀다'; return; }
+    if (b) { lastBtn = b; open = +b.dataset.i; render(); document.getElementById('log').innerHTML = '<b>영수증 ' + (open + 1) + '</b> 그림을 열었습니다'; return; }
+    if (e.target.id === 'scrim') { close('<b>가림막</b>을 눌러 닫았습니다'); document.getElementById('log').innerHTML = '가림막을 눌러 닫았습니다'; return; }
+    if (e.target.id === 'x') { close(''); document.getElementById('log').innerHTML = '닫기를 눌렀습니다'; return; }
     if (e.target.id === 'prev') { open = (open - 1 + N) % N; render(); return; }
     if (e.target.id === 'next') { open = (open + 1) % N; render(); return; }
   });
 
   document.addEventListener('keydown', function (e) {
     if (open < 0) return;
-    if (e.key === 'Escape') { close('<b>Esc</b> 로 닫았다'); document.getElementById('log').innerHTML = 'Esc 로 닫았다'; e.preventDefault(); }
+    if (e.key === 'Escape') { close('<b>Esc</b>로 닫았습니다'); document.getElementById('log').innerHTML = 'Esc로 닫았습니다'; e.preventDefault(); }
     if (e.key === 'ArrowRight') { open = (open + 1) % N; render(); e.preventDefault(); }
     if (e.key === 'ArrowLeft') { open = (open - 1 + N) % N; render(); e.preventDefault(); }
   });

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>뒤로가기 — 이름표</title>
-<meta name="description" content="화면 안의 뒤로가기 단추. 기록을 되돌리는 '뒤로'와 상위로 가는 '위로'의 차이.">
+<meta name="description" content="화면 안에 두는 뒤로가기 단추를 다루고, 방문 기록을 되돌리는 '뒤로'와 상위 화면으로 가는 '위로'가 어떻게 다른지 보여 주는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">7부 길 안내</a> › 뒤로가기</p>
     <h1>뒤로가기</h1>
     <p class="en">Back · up navigation</p>
-    <p class="lede" style="margin-top:var(--s3)">같은 단추처럼 보이지만 둘입니다 — <b>들어온 길</b>로 되돌아가는 '뒤로'와 <b>늘 상위</b>로 가는 '위로'.</p>
+    <p class="lede" style="margin-top:var(--s3)">뒤로가기 단추는 겉보기에는 하나지만 실제로는 두 가지입니다. 하나는 <b>들어온 길</b>을 따라 되돌아가는 '뒤로'이고, 다른 하나는 어디서 들어왔든 <b>늘 상위 화면</b>으로 가는 '위로'입니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,32 +50,32 @@
           <iframe src="../demos/backnav.html" title="뒤로가기 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>같은 화면이라도 <b>어떻게 들어왔는지</b>에 따라 '뒤로'가 데려가는 곳이 달라집니다.
-          받은 링크로 바로 들어오면 기록에 앞 화면이 없어 <b>갈 데가 없습니다</b> —
-          데모가 기록을 들고 있다가 그 경우를 짚어 줍니다.<br>
-          <b>위로</b>는 다릅니다. 기록과 상관없이 늘 상위 화면으로 가서,
-          링크로 들어온 사람에게도 갈 곳이 있습니다.
-          둘을 섞으면 '뒤로를 눌렀는데 엉뚱한 데로 간다'가 됩니다.</p>
+          <p>같은 화면이라도 <b>어떻게 들어왔는지</b>에 따라 '뒤로'를 눌렀을 때 가는 곳이 달라집니다.
+          받은 링크로 바로 들어오면 방문 기록에 앞 화면이 없어서 <b>돌아갈 곳이 없습니다</b>.
+          데모는 방문 기록을 따로 저장해 두었다가 이런 경우를 표시해 줍니다.<br>
+          반면 <b>위로</b>는 방문 기록과 상관없이 늘 상위 화면으로 가기 때문에,
+          링크로 들어온 사람도 갈 곳이 있습니다.
+          두 동작을 섞어 쓰면 사용자는 뒤로를 눌렀는데 예상과 다른 화면에 도착하게 됩니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>뒤로가기, 뒤로 단추, 위로 가기, 상위로</td></tr>
             <tr><th>영어</th><td>back, up navigation, back link, ancestor navigation</td></tr>
-            <tr><th>같이 쓰는 말</th><td>브라우저·OS 의 기록을 되감는 것이 <b>뒤로</b>(back), 계층에서 부모로 올라가는 것이 <b>위로</b>(up)입니다. 안드로이드가 이 둘을 <b>명시적으로 나눠</b> 지침에 적어 두었습니다 — 시스템 백은 뒤로, 앱바 왼쪽의 ← 는 위로입니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>닫기</b> — 닫기는 <b>그 부품만</b> 치웁니다. 화면을 안 바꿉니다.<br><b>시스템 백</b> — <a href="systemback.html">시스템 백</a>은 <b>OS 가 쥔</b> 동작이고 이건 화면 안의 단추입니다.<br><b>취소</b> — 취소는 <b>하던 일을 무르는</b> 것이지 자리 이동이 아닙니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>브라우저나 OS의 방문 기록을 한 칸 되돌리는 것은 <b>뒤로</b>(back), 계층에서 부모 화면으로 올라가는 것은 <b>위로</b>(up)라고 합니다. 안드로이드는 이 둘을 지침에 <b>명시적으로 나눠</b> 적어 두었는데, 시스템 백이 뒤로이고 앱바 왼쪽의 ←가 위로입니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>닫기</b> — 닫기는 모달처럼 위에 뜬 <b>그 부품만</b> 없애고, 아래 화면은 바꾸지 않습니다.<br><b>시스템 백</b> — <a href="systemback.html">시스템 백</a>은 <b>OS가 처리하는</b> 동작이고, 뒤로가기는 화면 안에 둔 단추입니다.<br><b>취소</b> — 취소는 화면을 옮기는 것이 아니라 <b>하던 일을 없던 일로 되돌리는</b> 동작입니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>길 안내 부품은 모두 '누르면 어디론가 간다'는 점이 같습니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>길 안내 부품은 모두 누르면 다른 곳으로 옮겨 간다는 점이 같습니다. 그래서 아래 네 가지를 물어보면 서로 구별할 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>자리</th><th>데려가는 곳</th><th>지금 위치</th><th>감당하는 개수</th></tr></thead>
@@ -96,57 +96,57 @@
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — <b>단추 하나에 하나만 맡기세요.</b> '뒤로'라고 적었으면 기록대로, '목록으로'라고 적었으면 늘 목록으로.</p>
+          <p><b>뒤로가기를 한 줄로 정리하면</b> — <b>단추 하나에는 동작 하나만 맡기세요.</b> '뒤로'라고 적었으면 방문 기록대로 돌아가고, '목록으로'라고 적었으면 늘 목록으로 가야 합니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">그림 한 장으로는 못 배운다</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">상태마다 달라지는 모습</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;align-items:center;gap:6px;padding:5px 7px;border-bottom:1px solid var(--line)"><span style="font-size:8.5px;color:var(--accent)">‹ 주문 목록</span><span style="font-size:8.5px;font-weight:700">주문 상세</span></span><span style="display:block;padding:6px 7px;font-size:8px;color:var(--fg-muted)">주문번호 2411-0042</span></div><span style="font-size:8.5px;color:var(--fg-muted)">목록에서 눌러 들어왔다</span></div>
             </div>
-            <figcaption>목록에서<span>뒤로 = 위로, <b>둘이 같다</b></span></figcaption>
+            <figcaption>목록에서<span>목록에서 들어왔으면 뒤로와 위로가 <b>같은 곳으로 갑니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;align-items:center;gap:6px;padding:5px 7px;border-bottom:1px solid var(--line)"><span style="font-size:8.5px;color:var(--accent)">‹ 검색 결과</span><span style="font-size:8.5px;font-weight:700">주문 상세</span></span><span style="display:block;padding:6px 7px;font-size:8px;color:var(--fg-muted)">주문번호 2411-0042</span></div><span style="font-size:8.5px;color:var(--fg-muted)">검색에서 눌러 들어왔다</span></div>
             </div>
-            <figcaption>검색에서<span>뒤로는 <b>검색 결과</b>로</span></figcaption>
+            <figcaption>검색에서<span>검색에서 들어왔으면 뒤로는 <b>검색 결과</b>로 갑니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;align-items:center;gap:6px;padding:5px 7px;border-bottom:1px solid var(--line)"><span style="font-size:8.5px;font-weight:700">주문 상세</span></span><span style="display:block;padding:6px 7px;font-size:8px;color:var(--fg-muted)">주문번호 2411-0042</span></div><span style="font-size:8.5px;color:var(--fg-muted)">기록에 앞 화면이 없다</span></div>
             </div>
-            <figcaption>링크로 바로<span><b>갈 데가 없다</b></span></figcaption>
+            <figcaption>링크로 바로<span>방문 기록에 앞 화면이 없어서 뒤로는 <b>갈 곳이 없습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;align-items:center;gap:6px;padding:5px 7px;border-bottom:1px solid var(--line)"><span style="font-size:8.5px;color:var(--accent)">‹ 주문 목록</span><span style="font-size:8.5px;font-weight:700">주문 상세</span></span><span style="display:block;padding:6px 7px;font-size:8px;color:var(--fg-muted)">주문번호 2411-0042</span></div><span style="font-size:8.5px;color:var(--fg-muted)">기록과 상관없이 상위로</span></div>
             </div>
-            <figcaption>위로<span><b>늘 같은 곳</b>으로</span></figcaption>
+            <figcaption>위로<span>어디서 들어왔든 <b>늘 같은 곳</b>으로 갑니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:3px;flex-wrap:wrap;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="font-family:var(--mono);font-size:7.5px;border:1px solid border-color:var(--line);color:var(--fg-muted);border-radius:999px;padding:1px 6px">홈</span><span style="font-family:var(--mono);font-size:7.5px;border:1px solid border-color:var(--line);color:var(--fg-muted);border-radius:999px;padding:1px 6px">주문 목록</span><span style="font-family:var(--mono);font-size:7.5px;border:1px solid border-color:var(--accent);color:var(--accent);border-radius:999px;padding:1px 6px">주문 상세</span></div><span style="font-size:8.5px;color:var(--fg-muted)">기록 세 칸</span></div>
             </div>
-            <figcaption>기록<span>뒤로는 <b>이 줄</b>을 되감는다</span></figcaption>
+            <figcaption>기록<span>뒤로는 <b>이 방문 기록</b>을 한 칸씩 되돌립니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:3px;flex-wrap:wrap;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px"><span style="font-family:var(--mono);font-size:7.5px;border:1px solid border-color:var(--accent);color:var(--accent);border-radius:999px;padding:1px 6px">주문 상세</span></div><span style="font-size:8.5px;color:var(--fg-muted)">기록 한 칸 — 되감을 것이 없다</span></div>
             </div>
-            <figcaption>기록 한 칸<span>링크·새 탭으로 들어온 경우</span></figcaption>
+            <figcaption>기록 한 칸<span>링크나 새 탭으로 들어오면 기록이 한 칸뿐입니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="뒤로가기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="뒤로가기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
                   <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">뒤로(기록) — history.back(), 들어온 길로</div>
@@ -160,76 +160,76 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>뒤로(기록) <em><code>history.back()</code></em></b><span><b>들어온 길</b>로</span></li>
-            <li><b>위로(상위) <em>부모 화면</em></b><span><b>늘 같은 곳</b>으로</span></li>
-            <li><b>기록이 빈 경우 <em>링크로 들어옴</em></b><span>뒤로는 <b>갈 데가 없다</b></span></li>
-            <li><b>이름을 적는다 <em>'‹ 주문 목록'</em></b><span>어디로 가는지 <b>미리</b> 알린다</span></li>
-            <li><b><code>&lt;a href&gt;</code> <em>링크로</em></b><span>새 탭·마우스 가운데 버튼이 <b>그냥 된다</b></span></li>
-            <li><b>닫기와 구별 <em>뜻이 다름</em></b><span><b>섞으면</b> 둘 다 못 믿는다</span></li>
+            <li><b>뒤로(기록) <em><code>history.back()</code></em></b><span><b>들어온 길</b>을 따라 되돌아갑니다</span></li>
+            <li><b>위로(상위) <em>부모 화면</em></b><span>어디서 들어왔든 <b>늘 같은 곳</b>으로 갑니다</span></li>
+            <li><b>기록이 빈 경우 <em>링크로 들어옴</em></b><span>뒤로를 눌러도 <b>갈 곳이 없습니다</b></span></li>
+            <li><b>이름을 적는다 <em>'‹ 주문 목록'</em></b><span>누르기 전에 어디로 가는지 <b>미리</b> 알려 줍니다</span></li>
+            <li><b><code>&lt;a href&gt;</code> <em>링크로</em></b><span>새 탭으로 열기와 마우스 가운데 버튼 클릭을 <b>따로 구현하지 않아도</b> 그대로 쓸 수 있습니다</span></li>
+            <li><b>닫기와 구별 <em>뜻이 다름</em></b><span>두 동작을 <b>섞어 쓰면</b> 사용자는 어느 단추가 무엇을 할지 예측할 수 없습니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          실무에서 가장 안전한 선택은 <b>위로</b>입니다 —
-          기록이 어떻든 <b>늘 같은 곳</b>으로 가고, 링크로 들어온 사람에게도 갈 곳이 있습니다.
-          그리고 <b>어디로 가는지 이름을 적어 두면</b>('‹ 주문 목록')
-          누르기 전에 알 수 있어 기대와 결과가 어긋나지 않습니다.<br>
-          <code>history.back()</code> 을 쓸 거라면 <b>기록이 비었을 때의 길</b>을 꼭 정해 두세요 —
-          <code>document.referrer</code> 가 우리 도메인이 아니면
-          상위 화면으로 보내는 식입니다. 이걸 안 하면 아무 일도 안 일어나는 단추가 됩니다.</p>
+          실무에서 가장 안전한 선택은 <b>위로</b>입니다.
+          방문 기록이 어떻든 <b>늘 같은 곳</b>으로 가고, 링크로 들어온 사람에게도 갈 곳이 있기 때문입니다.
+          여기에 '‹ 주문 목록'처럼 <b>어디로 가는지 이름을 적어 두면</b>
+          사용자가 누르기 전에 도착할 곳을 알 수 있어서 예상과 결과가 어긋나지 않습니다.<br>
+          <code>history.back()</code>을 쓸 거라면 <b>방문 기록이 비었을 때 갈 곳</b>을 꼭 정해 두세요.
+          예를 들어 <code>document.referrer</code>가 우리 도메인이 아니면
+          상위 화면으로 보내는 식입니다. 이 처리를 빠뜨리면 눌러도 아무 일도 일어나지 않는 단추가 됩니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>뒤로가기를 쓰는 경우</h3>
             <ul>
-              <li><b>어디로 가는지 이름</b>을 적기 — '‹ 주문 목록'</li>
-              <li><code>&lt;a href&gt;</code> 로 두기 — <b>새 탭</b>으로도 열린다</li>
-              <li>기록이 비었을 때 갈 <b>기본 자리</b>를 정해 두기</li>
+              <li>'‹ 주문 목록'처럼 <b>어디로 가는지 이름</b>을 적을 때</li>
+              <li><code>&lt;a href&gt;</code>로 둘 때. <b>새 탭</b>으로도 열 수 있습니다</li>
+              <li>방문 기록이 비었을 때 갈 <b>기본 화면</b>을 정해 둘 때</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>뒤로가기를 쓰지 않는 경우</h3>
             <ul>
-              <li><code>history.back()</code> 만 쓰고 <b>빈 기록</b>을 안 챙기기</li>
-              <li>'뒤로'라고 적고 <b>상위로</b> 보내기 — 둘 중 하나만 한다</li>
-              <li>닫기 자리에 뒤로를 두기 — <b>모달이 사라지는 줄</b> 안다</li>
-              <li>폰에서 <b>시스템 백과 다른 곳</b>으로 보내기</li>
+              <li><code>history.back()</code>만 쓰고 <b>방문 기록이 빈 경우</b>를 챙기지 않을 때</li>
+              <li>'뒤로'라고 적어 두고 <b>상위 화면으로</b> 보낼 때. 단추 하나는 두 동작 중 하나만 합니다</li>
+              <li>닫기 자리에 뒤로를 둘 때. 사용자는 누르면 <b>모달만 사라질 거라고</b> 생각합니다</li>
+              <li>폰에서 <b>시스템 백과 다른 곳</b>으로 보낼 때</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — OS 쪽 동작은 <a href="systemback.html">시스템 백</a>, 계층 전체를 보이려면 <a href="breadcrumb.html">브레드크럼</a>, 부품만 치우는 것은 <a href="modal.html">모달</a>의 닫기, 되돌리기는 <a href="destructive.html">위험한 동작</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>뒤로가기 대신 다른 것을 써야 하는 경우</b> — OS 쪽 동작은 <a href="systemback.html">시스템 백</a>, 계층 전체를 보이려면 <a href="breadcrumb.html">브레드크럼</a>, 부품만 치우는 것은 <a href="modal.html">모달</a>의 닫기, 되돌리기는 <a href="destructive.html">위험한 동작</a>.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;align-items:center;gap:6px;padding:5px 7px;border-bottom:1px solid var(--line)"><span style="font-size:8.5px;color:var(--accent)">‹ 주문 목록</span><span style="font-size:8.5px;font-weight:700">주문 상세</span></span><span style="display:block;padding:6px 7px;font-size:8px;color:var(--fg-muted)">주문번호 2411-0042</span></div></div>
             </div>
-            <figcaption><b>상세 화면</b><b>이름을 적는다</b></figcaption>
+            <figcaption><b>상세 화면</b>돌아갈 화면의 <b>이름을 적습니다</b></figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;align-items:center;gap:6px;padding:5px 7px;border-bottom:1px solid var(--line)"><span style="font-size:8.5px;color:var(--accent)">‹ 설정</span><span style="font-size:8.5px;font-weight:700">알림 설정</span></span><span style="display:block;padding:6px 7px;font-size:8px;color:var(--fg-muted)">주문번호 2411-0042</span></div></div>
             </div>
-            <figcaption><b>설정 하위</b>계층이 뚜렷하면 <b>위로</b></figcaption>
+            <figcaption><b>설정 하위</b>계층이 뚜렷하면 <b>위로</b>를 씁니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">닫기</span><span style="font-size:10px;line-height:1.55"><span style="display:flex;align-items:center;gap:5px;font-size:8.5px"><span style="color:var(--fg-muted)">✕</span><span style="font-weight:700">새 주문</span></span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:4px">덮고 올라온 화면은 닫기다</span></span></div></div>
             </div>
-            <figcaption><b>덮고 올라온 화면</b>뒤로가 아니라 <b>닫기</b></figcaption>
+            <figcaption><b>덮고 올라온 화면</b>아래 화면을 덮고 올라온 화면에는 뒤로가 아니라 <b>닫기</b>를 둡니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">이 부품의 계약서</span></h2>
-        <p>링크로 두는 것이 거의 늘 맞습니다. 기록을 쓸 때만 빈 기록을 챙깁니다.</p>
-<pre class="code"><span class="c">&lt;!-- 거의 늘 이쪽 — 새 탭으로도 열리고, 기록이 비어도 간다 --&gt;</span>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+        <p>대부분은 링크로 두는 것이 맞습니다. <code>history.back()</code>으로 방문 기록을 쓸 때만 기록이 빈 경우를 따로 처리합니다.</p>
+<pre class="code"><span class="c">&lt;!-- 대부분 이 방식이 맞다. 새 탭으로도 열리고, 기록이 비어도 간다 --&gt;</span>
 &lt;<span class="t">a</span> <span class="a">class</span>=<span class="s">"backlink"</span> <span class="a">href</span>=<span class="s">"/orders"</span>&gt;
   &lt;<span class="t">span</span> <span class="a">aria-hidden</span>=<span class="s">"true"</span>&gt;‹&lt;/<span class="t">span</span>&gt; 주문 목록
 &lt;/<span class="t">a</span>&gt;
@@ -242,42 +242,42 @@
 }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td>Tab · Enter</td><td>링크다 — <b>따로 붙일 것이 없다</b></td></tr>
-            <tr><td>Alt + ←</td><td>브라우저의 뒤로. <b>화면 안 단추와 같은 곳</b>으로 가야 덜 헷갈린다</td></tr>
-            <tr><td><code>aria-hidden</code></td><td>‹ 같은 기호는 안 읽게 하고 <b>'주문 목록'</b>만 읽힌다</td></tr>
-            <tr><td>Esc</td><td>뒤로가 아니라 <b>닫기</b>에 묶는다</td></tr>
-            <tr><td><code>rel="up"</code></td><td>뜻을 적어 두는 표시. <b>동작은 안 바뀐다</b></td></tr>
-            <tr><td>확인하는 법</td><td>새 탭에서 상세 주소를 <b>직접 열고</b> 단추를 눌러 본다</td></tr>
+            <tr><td>Tab · Enter</td><td>평범한 링크이므로 키보드 조작을 위해 <b>따로 붙일 것이 없습니다</b></td></tr>
+            <tr><td>Alt + ←</td><td>브라우저의 뒤로입니다. <b>화면 안 단추와 같은 곳</b>으로 가야 사용자가 덜 헷갈립니다</td></tr>
+            <tr><td><code>aria-hidden</code></td><td>‹ 같은 기호는 읽지 않게 하고 <b>'주문 목록'</b>만 읽게 합니다</td></tr>
+            <tr><td>Esc</td><td>뒤로가 아니라 <b>닫기</b> 동작에 연결합니다</td></tr>
+            <tr><td><code>rel="up"</code></td><td>링크의 뜻을 적어 두는 표시일 뿐이라서 <b>동작은 바뀌지 않습니다</b></td></tr>
+            <tr><td>확인하는 법</td><td>새 탭에서 상세 화면 주소를 <b>직접 연 뒤</b> 단추를 눌러 봅니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>상위 주소를 같이</th><td>응답에 <code>parent_url</code> 이나 <code>category_id</code> 가 있으면 <b>위로</b>를 만들 수 있습니다 — 없으면 화면이 짐작해야 합니다.</td></tr>
-            <tr><th>들어온 길</th><td><code>?from=search</code> 같은 표시를 붙여 두면 <b>돌아갈 곳</b>을 정확히 알 수 있습니다. 다만 주소가 지저분해집니다.</td></tr>
-            <tr><th>목록 상태</th><td>되돌아갈 때 <b>쪽·필터·굴린 자리</b>를 살리려면 그 상태가 주소에 있어야 합니다.</td></tr>
+            <tr><th>상위 주소를 같이</th><td>응답에 <code>parent_url</code>이나 <code>category_id</code>가 있으면 화면이 <b>위로</b> 단추를 만들 수 있습니다. 이 값이 없으면 화면이 상위 화면을 짐작해야 합니다.</td></tr>
+            <tr><th>들어온 길</th><td>주소에 <code>?from=search</code> 같은 표시를 붙여 두면 <b>돌아갈 곳</b>을 정확히 알 수 있습니다. 다만 그만큼 주소가 길고 복잡해집니다.</td></tr>
+            <tr><th>목록 상태</th><td>목록으로 되돌아갈 때 <b>쪽 번호와 필터, 스크롤 위치</b>를 되살리려면 이 상태가 주소에 들어 있어야 합니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p><b>안드로이드가 뒤로와 위로를 나눠</b> 둔 것이 이 항목의 출발점입니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>이 항목은 <b>안드로이드가 뒤로와 위로를 나눠</b> 둔 데서 출발합니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>링크 또는 history</span></header>
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;align-items:center;gap:6px;padding:5px 7px;border-bottom:1px solid var(--line)"><span style="font-size:8.5px;color:var(--accent)">‹ 주문 목록</span><span style="font-size:8.5px;font-weight:700">주문 상세</span></span><span style="display:block;padding:6px 7px;font-size:8px;color:var(--fg-muted)">주문번호 2411-0042</span></div></div>
             </div>
-            <footer>브라우저의 뒤로가 이미 있어서, 화면 안 단추는 <b>위로</b>로 두는 쪽이 덜 겹칩니다.</footer>
+            <footer>브라우저에 이미 뒤로 버튼이 있으므로, 화면 안 단추는 <b>위로</b>로 두는 편이 역할이 덜 겹칩니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>내비게이션 바 ‹</span></header>
@@ -286,7 +286,7 @@
                 <div style="position:absolute;left:4px;top:24px;font-size:6px;color:var(--accent)">‹ 주문</div>
                 <div style="position:absolute;left:5px;right:5px;top:36px;height:8px;border-radius:2px;background:var(--accent-soft)"></div></div></div>
             </div>
-            <footer>왼쪽 위 ‹ 에 <b>앞 화면 이름</b>이 붙습니다. 가장자리를 밀어도 같은 동작입니다.</footer>
+            <footer>왼쪽 위 ‹ 옆에 <b>앞 화면 이름</b>이 붙습니다. 화면 왼쪽 가장자리에서 밀어도 같은 동작을 합니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>Up ← + 시스템 백</span></header>
@@ -295,18 +295,18 @@
                 <div style="position:absolute;left:4px;top:24px;font-size:7px;color:var(--fg)">←</div>
                 <div style="position:absolute;left:5px;right:5px;top:36px;height:8px;border-radius:2px;background:var(--accent-soft)"></div></div></div>
             </div>
-            <footer>앱바의 ← 는 <b>위로</b>, 시스템 백은 <b>뒤로</b>입니다. 둘이 다른 곳으로 가도 됩니다.</footer>
+            <footer>앱바의 ←는 <b>위로</b>, 시스템 백은 <b>뒤로</b>이므로 둘이 서로 다른 곳으로 가도 됩니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — iOS 의 ‹ 에 <b>앞 화면 이름</b>이 붙는 것은 그대로 베낄 만합니다 — 누르기 전에 어디로 가는지 알 수 있어 기대와 결과가 어긋나지 않습니다. 안드로이드가 <b>둘을 나눠</b> 둔 것은 더 엄밀하지만, 웹에서는 브라우저 뒤로가 이미 '뒤로'를 맡고 있으니 <b>화면 안 단추는 위로</b>로 두는 쪽이 겹치지 않습니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — iOS처럼 ‹ 옆에 <b>앞 화면 이름</b>을 붙이는 방식은 웹에서도 그대로 따라 할 만합니다. 누르기 전에 어디로 가는지 알 수 있어서 예상과 결과가 어긋나지 않기 때문입니다. 안드로이드처럼 <b>뒤로와 위로를 나누는</b> 방식은 더 엄밀하지만, 웹에서는 브라우저의 뒤로 버튼이 이미 '뒤로'를 맡고 있으므로 <b>화면 안 단추는 위로</b>로 두는 편이 역할이 겹치지 않습니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="appbar.html"><b>앱바 · 헤더</b><em>7부</em></a></li>
         <li><a href="sidebar.html"><b>사이드바 내비게이션</b><em>7부</em></a></li>
@@ -320,20 +320,20 @@
         <li><a href="anchornav.html"><b>앵커 내비</b><em>7부</em></a></li>
         <li><a href="megamenu.html"><b>메가 메뉴</b><em>7부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="systemback.html"><b>시스템 백</b><em>11부</em></a></li>
         <li><a href="breadcrumb.html"><b>브레드크럼</b><em>7부</em></a></li>
         <li><a href="appbar.html"><b>앱바</b><em>7부</em></a></li>
         <li><a href="searchresults.html"><b>검색 결과 화면</b><em>13부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

@@ -37,10 +37,10 @@
 
 <p class="hint">
   열고 닫기를 되풀이해 보세요. 기본값은 <b>들어올 때 260ms ease-out</b>,
-  <b>나갈 때 180ms ease-in</b>입니다 — 나가는 쪽이 더 짧습니다.<br>
-  들어오는 것은 <b>어디서 왔는지 보여 줘야</b> 하니 시간이 필요하지만,
-  나가는 것은 이미 볼 일이 끝난 것이라 <b>기다릴 이유가 없습니다.</b>
-  둘을 같게 맞추면 닫을 때마다 <b>한 박자 붙잡히는</b> 느낌이 납니다.
+  <b>나갈 때 180ms ease-in</b>으로, 나가는 움직임이 더 짧습니다.<br>
+  들어오는 것은 <b>어디서 왔는지 보여 줘야</b> 해서 시간이 필요하지만,
+  나가는 것은 사용자가 이미 다 본 것이어서 <b>기다리게 할 이유가 없습니다.</b>
+  둘을 같게 맞추면 닫을 때마다 <b>필요 없이 더 기다리게</b> 됩니다.
 </p>
 
 <script>
@@ -81,7 +81,7 @@
       panel.hidden = true; dim.hidden = true; busy = false;
     }, s.ms);
     log.innerHTML = '나감 — <b>' + s.ms + 'ms ' + s.name + '</b>' +
-      (s.ms >= 260 ? ' <span class="warn">· 닫는데 기다리게 된다</span>' : '');
+      (s.ms >= 260 ? ' <span class="warn">· 닫는 데 기다리게 된다</span>' : '');
   }
 
   btn.addEventListener('click', function () {

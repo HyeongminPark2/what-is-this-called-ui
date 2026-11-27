@@ -41,7 +41,7 @@
   </section>
 
   <section>
-    <h4>가로 스크롤 범인 찾기</h4>
+    <h4>가로 스크롤 원인 찾기</h4>
     <div class="culprit">
       <div class="culprit__view" id="view">
         <div id="track"></div>
@@ -56,12 +56,12 @@
 </div>
 
 <p class="hint">
-  <code>overflow</code>는 <b>넘친 것을 어떻게 할지</b> 정합니다. <code>hidden</code>은 가장 쉬워 보이지만
-  <b>읽을 방법을 없애는</b> 선택이라, 글에는 <code>text-overflow: ellipsis</code>로 '잘렸다'를 알려 주는 편이 낫습니다.<br>
-  <code>scroll</code>은 <b>안 넘쳐도 스크롤바 자리를 잡습니다.</b> 자리가 흔들리지 않아야 하는 데서만 씁니다.<br>
-  <b>가로 스크롤은 거의 늘 '줄어들지 못하는 칸' 하나 때문</b>입니다. 플렉스·그리드 자식의
-  최소 너비가 <b>내용만큼</b>이라서, <code>min-width: 0</code>을 주기 전에는 아무리 좁혀도 안 줄어듭니다.
-  범인을 찾을 때는 개발자 도구에서 <b>폭이 부모보다 큰 요소</b>를 찾으면 됩니다.
+  <code>overflow</code>는 <b>넘친 내용을 어떻게 할지</b> 정합니다. <code>hidden</code>은 가장 쉬워 보이지만
+  잘린 내용을 <b>읽을 방법이 사라지기</b> 때문에, 글에는 <code>text-overflow: ellipsis</code>로 글이 잘렸다는 것을 알려 주는 편이 낫습니다.<br>
+  <code>scroll</code>은 <b>넘치지 않아도 스크롤바 자리를 잡기</b> 때문에 레이아웃이 흔들리지 않아야 하는 곳에서만 씁니다.<br>
+  <b>가로 스크롤은 거의 항상 '줄어들지 못하는 칸' 하나 때문에</b> 생깁니다. 플렉스·그리드 자식의
+  최소 너비가 <b>내용만큼</b>이라서, <code>min-width: 0</code>을 주기 전에는 화면을 좁혀도 그 칸이 줄어들지 않습니다.
+  원인이 되는 칸을 찾을 때는 개발자 도구에서 <b>폭이 부모보다 큰 요소</b>를 찾으면 됩니다.
 </p>
 
 <script>

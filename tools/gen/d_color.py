@@ -24,68 +24,68 @@ ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2)
 
 D = dict(
   slug="color", ko="색 토큰", en="Color tokens · semantic color",
-  desc="색을 #2f6df6 같은 값이 아니라 --accent 같은 쓰임으로 정해 두는 방법을 실물과 해부도로 보여주는 항목.",
-  lede="색을 <b>값</b>이 아니라 <b>쓰임</b>으로 부르는 약속. 화면은 <code>#2f6df6</code>을 모르고 <code>--accent</code>만 압니다.",
-  axes_lede="토큰은 눈에 보이는 부품이 아니라 <b>값의 약속</b>입니다. 이 네 가지만 물어보면 어떤 약속인지 갈립니다.",
+  desc="색을 #2f6df6 같은 값 대신 --accent 같은 쓰임의 이름으로 정해 두는 방법을 실물과 해부도로 보여 주는 항목입니다.",
+  lede="색 토큰은 색을 <b>값</b> 대신 <b>쓰임</b>의 이름으로 부르기로 정해 둔 것입니다. 화면 코드에는 <code>#2f6df6</code> 같은 값을 적지 않고 <code>--accent</code> 같은 이름만 적습니다.",
+  axes_lede="토큰은 눈에 보이는 부품이 아니라 값을 어떻게 쓸지 <b>정해 둔 규칙</b>입니다. 그래서 생김새 대신 아래 네 가지를 물어보면 토큰끼리 무엇이 다른지 가려집니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
-          <p>1단은 색 이름표(<code>blue-500</code>), 2단은 쓰임표(<code>--accent</code>), 3단은 부품표(<code>button-bg</code>)입니다.
-          <b>어두운 화면으로</b>를 켜면 2단의 <b>화살표만</b> 다른 색을 가리키게 바뀝니다 —
-          1단의 색은 그대로이고 3단은 손대지 않았는데 버튼 색이 따라옵니다. 이것이 토큰을 쓰는 이유 전부입니다.</p>
+          <p>1단은 색 자체의 이름(<code>blue-500</code>), 2단은 쓰임의 이름(<code>--accent</code>), 3단은 부품 전용 이름(<code>button-bg</code>)입니다.
+          <b>어두운 화면으로</b>를 켜면 2단의 <b>화살표만</b> 다른 색을 가리키도록 바뀝니다.
+          1단의 색은 그대로이고 3단도 손대지 않았지만, 3단이 2단을 가리키고 있기 때문에 버튼 색이 함께 바뀝니다. 한 곳만 고쳐서 화면 전체의 색을 바꿀 수 있다는 점이 토큰을 쓰는 이유입니다.</p>
         </div>''',
   names=rows([
     ("한국어", "색 토큰, 시맨틱 색, 의미 색"),
     ("영어", "color token, semantic color, design token"),
     ("같이 쓰는 말",
-     "<b>원시 토큰</b>(raw · primitive · global)은 <code>blue-500</code>처럼 색 그 자체이고, "
-     "<b>시맨틱 토큰</b>(semantic · alias)은 <code>--accent</code>처럼 쓰임입니다. "
-     "<b>컴포넌트 토큰</b>(component)은 <code>button-bg</code>처럼 부품 전용입니다. "
-     "색을 가로로 늘어놓은 10단 묶음을 <b>색 램프</b>(ramp · scale)라고 합니다."),
-    ("자주 잘못 부름",
-     "<b>테마</b> — 테마는 토큰 <b>한 벌</b>을 가리키는 말이고, 토큰은 그 안의 항목 하나입니다.<br>"
-     "<b>CSS 변수</b> — 변수는 담는 그릇이고 토큰은 그 안에 담긴 <b>약속</b>입니다. 변수를 쓴다고 토큰이 되지는 않습니다.<br>"
-     "<b>팔레트</b> — 팔레트는 쓸 수 있는 색의 목록, 토큰은 어디에 쓸지까지 정한 것입니다."),
+     "<b>원시 토큰</b>(raw · primitive · global)은 <code>blue-500</code>처럼 색 그 자체를 가리키고, "
+     "<b>시맨틱 토큰</b>(semantic · alias)은 <code>--accent</code>처럼 쓰임을 가리킵니다. "
+     "<b>컴포넌트 토큰</b>(component)은 <code>button-bg</code>처럼 한 부품에만 쓰는 토큰입니다. "
+     "같은 색을 10단으로 늘어놓은 묶음은 <b>색 램프</b>(ramp · scale)라고 부릅니다."),
+    ("자주 잘못 부르는 이름",
+     "<b>테마</b> — 테마는 토큰 <b>한 벌</b> 전체를 가리키는 말이고, 토큰은 그 안의 항목 하나입니다.<br>"
+     "<b>CSS 변수</b> — CSS 변수는 값을 저장하는 수단이고, 토큰은 그 값을 어디에 쓸지 정한 <b>규칙</b>입니다. 그래서 CSS 변수를 쓴다고 해서 저절로 토큰이 되지는 않습니다.<br>"
+     "<b>팔레트</b> — 팔레트는 쓸 수 있는 색을 모아 둔 목록이고, 토큰은 그 색을 어디에 쓸지까지 정한 것입니다."),
   ]),
   axes=ax("색 토큰"),
-  oneline="색 토큰은 <b>'이 색을 어디에 쓰는가'</b>에 이름을 붙인 것입니다. 이름에 <code>blue</code>가 들어가면 아직 쓰임이 아닙니다.",
-  s4_title="쓰임", s4_hint="색은 예쁘라고 고르는 것이 아니다",
+  oneline="색 토큰은 <b>'이 색을 어디에 쓰는가'</b>에 이름을 붙인 것입니다. 그래서 이름에 <code>blue</code> 같은 색 이름이 들어 있다면 아직 쓰임으로 이름을 짓지 않은 것입니다.",
+  s4_title="쓰임", s4_hint="쓰임마다 정해 둔 색",
   states=states([
-    (chip("var(--accent)", "--accent", "강조 · 주요 동작"), "강조", "누를 것과 고른 것. <b>한 화면에 하나</b>가 원칙이다"),
-    (chip("var(--danger)", "--danger", "되돌릴 수 없음"), "위험", "삭제·거절처럼 <b>되돌리기 어려운</b> 것에만"),
-    (chip("var(--warn)", "--warn", "주의"), "주의", "막지는 않지만 알아 둘 것"),
-    (chip("#1f8a4c", "--success", "끝남"), "성공", "확인됨·완료. 초록은 색맹에게 빨강과 겹치니 <b>글자도 함께</b>"),
-    (chip("var(--fg-muted)", "--fg-muted", "보조 글"), "보조", "덜 중요한 글. 대비비 4.5:1 은 지켜야 한다"),
-    (chip("var(--line)", "--line", "선 · 경계"), "경계", "칸을 나누는 선. 글자가 아니므로 3:1 이면 된다"),
+    (chip("var(--accent)", "--accent", "강조 · 주요 동작"), "강조", "누를 수 있는 것과 선택된 것을 표시합니다. 강조색을 쓴 주요 동작은 <b>한 화면에 하나</b>만 두는 것이 원칙입니다"),
+    (chip("var(--danger)", "--danger", "되돌릴 수 없음"), "위험", "삭제나 거절처럼 <b>되돌리기 어려운</b> 동작에만 씁니다"),
+    (chip("var(--warn)", "--warn", "주의"), "주의", "진행을 막지는 않지만 사용자가 알아 두어야 할 내용에 씁니다"),
+    (chip("#1f8a4c", "--success", "끝남"), "성공", "확인이나 완료를 알립니다. 색맹인 사람에게는 초록이 빨강과 비슷해 보이므로 <b>글자도 함께</b> 적습니다"),
+    (chip("var(--fg-muted)", "--fg-muted", "보조 글"), "보조", "덜 중요한 글에 씁니다. 흐린 색이라도 바탕과의 대비비 4.5:1은 지켜야 합니다"),
+    (chip("var(--line)", "--line", "선 · 경계"), "경계", "칸을 나누는 선에 씁니다. 글자가 아니므로 대비비는 3:1이면 충분합니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("면", "surface", "카드의 바탕. 페이지 바탕(<code>--bg</code>)과 <b>한 단계 다르게</b> 둔다"),
-    ("본문 글", "fg · text-primary", "가장 진한 글. 바탕과 대비비 <b>4.5:1</b> 이상"),
-    ("보조 글", "fg-muted · text-secondary", "덜 중요한 글. 흐리게 하다 대비를 놓치기 가장 쉬운 자리"),
-    ("위험 글", "danger · text-error", "빨강 하나로 알리지 않는다 — 글로도 말한다"),
-    ("주요 버튼", "accent · primary", "한 화면에 하나. 둘이 되면 둘 다 안 눌린다"),
-    ("약한 강조", "accent-soft · subtle", "같은 강조색의 <b>연한 짝</b>. 배지·선택된 줄에 쓴다"),
+    ("면", "surface", "카드의 바탕색입니다. 페이지 바탕(<code>--bg</code>)과 <b>한 단계 다른</b> 색으로 둡니다"),
+    ("본문 글", "fg · text-primary", "가장 진한 글자색입니다. 바탕과의 대비비가 <b>4.5:1</b> 이상이어야 합니다"),
+    ("보조 글", "fg-muted · text-secondary", "덜 중요한 글에 씁니다. 글자를 흐리게 만들다 보면 대비비 기준을 놓치기 쉬운 자리입니다"),
+    ("위험 글", "danger · text-error", "빨간색만으로 알리지 않고, 무엇이 문제인지 글로도 적습니다"),
+    ("주요 버튼", "accent · primary", "한 화면에 하나만 둡니다. 두 개가 되면 어느 쪽이 주요 동작인지 알기 어려워집니다"),
+    ("약한 강조", "accent-soft · subtle", "강조색과 짝을 이루는 <b>연한 색</b>입니다. 배지나 선택된 줄에 씁니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          쓰임 하나에 색 하나가 아니라 <b>짝</b>으로 갑니다 — 강조색에는 글자색(<code>on-accent</code>)과
-          연한 바탕(<code>accent-soft</code>)이 함께 있어야 합니다. 이 짝을 안 만들어 두면
-          결국 화면에서 <code>rgba(…, .1)</code> 같은 것을 손으로 섞게 되고, 다크 모드에서 그게 전부 깨집니다.</p>''',
+          색 토큰은 쓰임 하나에 색 하나씩 정하지 않고 여러 색을 <b>짝</b>으로 묶어 정합니다. 예를 들어 강조색에는 그 위에 올릴 글자색(<code>on-accent</code>)과
+          연한 바탕색(<code>accent-soft</code>)이 함께 있어야 합니다. 이 짝을 미리 만들어 두지 않으면
+          화면을 만들 때마다 <code>rgba(…, .1)</code> 같은 색을 손으로 섞게 되는데, 이렇게 섞은 색은 토큰을 거치지 않아서 다크 모드로 바꿔도 따라 바뀌지 않습니다.</p>''',
   do=ul([
-    "색을 <b>두 번 이상</b> 쓸 때 — 한 번 쓰는 색은 토큰이 아닙니다",
-    "다크 모드나 고대비 모드를 <b>할 생각이 있을</b> 때",
-    "브랜드 색이 바뀔 수 있을 때 — 1단만 고치면 끝납니다",
+    "같은 색을 <b>두 번 이상</b> 쓸 때. 한 번만 쓰는 색은 토큰으로 만들 필요가 없습니다",
+    "다크 모드나 고대비 모드를 <b>지원할 계획이 있을</b> 때",
+    "브랜드 색이 바뀔 수 있을 때. 토큰을 쓰면 1단의 값만 고치면 됩니다",
     "여러 사람이 같은 화면을 만들 때",
   ]),
   dont=ul([
-    "일러스트나 그래프 색 — 의미가 아니라 <b>구별</b>이 목적이라 규칙이 다릅니다",
-    "토큰 이름에 색 이름을 넣는 것 — <code>--blue-button</code>은 다크 모드에서 파랗지 않게 됩니다",
-    "쓰임이 겹치는 토큰을 자꾸 늘리는 것 — <code>--accent2</code>가 생기면 이미 무너진 것입니다",
+    "일러스트나 그래프 색을 정할 때. 이런 색은 의미를 전하기보다 서로 <b>구별</b>되는 것이 목적이라 규칙이 다릅니다",
+    "토큰 이름에 색 이름을 넣을 때. <code>--blue-button</code>은 다크 모드에서 파란색이 아니게 될 수 있어 이름과 실제 색이 어긋납니다",
+    "쓰임이 겹치는 토큰을 자꾸 늘릴 때. <code>--accent2</code> 같은 이름이 생겼다면 이미 쓰임의 구분이 흐려졌다는 뜻입니다",
   ]),
   instead='밝고 어두운 두 벌이 필요하면 <a href="dark.html">다크 모드</a>, 떠 있는 느낌은 색이 아니라 <a href="elevation.html">고도</a>로 냅니다.',
   cases=cases([
     ('''              <div style="display:flex;gap:3px;width:100%%;max-width:220px">%s</div>''' %
      "".join('<span style="flex:1;height:40px;background:%s;display:block"></span>' % c
              for c in ["#eaf1ff", "#c5d9ff", "#8fb4ff", "#5b90f9", "#2f6df6", "#2254c7", "#1a3f94", "#132c66"]),
-     "색 램프", "같은 색의 10단. 여기서 골라 쓰임에 연결한다"),
+     "색 램프", "같은 색을 10단으로 나눈 묶음입니다. 여기서 값을 골라 쓰임에 연결합니다"),
     ('''              <div class="tok" style="width:100%;max-width:230px">
                 <div class="tok__row" style="padding:6px 8px;font-size:12px"><span class="tok__chip" style="width:22px;height:22px;background:#2f6df6"></span><span class="tok__name">blue-500</span></div>
                 <div style="text-align:center;color:var(--fg-faint);font-size:12px">↓</div>
@@ -93,30 +93,30 @@ D = dict(
                 <div style="text-align:center;color:var(--fg-faint);font-size:12px">↓</div>
                 <div class="tok__row" style="padding:6px 8px;font-size:12px"><span class="tok__chip" style="width:22px;height:22px;background:#2f6df6"></span><span class="tok__name">button-bg</span></div>
               </div>''',
-     "3단 연결", "값 → 쓰임 → 부품. 화면은 맨 아래만 본다"),
+     "3단 연결", "값에서 쓰임으로, 쓰임에서 부품으로 이어집니다. 화면 코드는 맨 아래의 부품 토큰만 씁니다"),
     ('''              <div style="display:grid;gap:7px;width:100%;max-width:230px">
                 <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="width:16px;height:16px;border-radius:5px;background:var(--danger);display:block"></span>거절됨<span style="margin-left:auto;color:var(--fg-faint);font-size:11px">색 + 글자</span></div>
                 <div style="display:flex;align-items:center;gap:8px;font-size:12px"><span style="width:16px;height:16px;border-radius:5px;background:#1f8a4c;display:block"></span>승인됨<span style="margin-left:auto;color:var(--fg-faint);font-size:11px">색 + 글자</span></div>
                 <div style="font-size:11px;color:var(--fg-muted);border-top:1px solid var(--line);padding-top:6px">점 색만 다르면 색맹에게는 같은 줄입니다</div>
               </div>''',
-     "상태 색", "빨강·초록 한 쌍은 <b>가장 흔한 색맹 조합</b>이다"),
+     "상태 색", "빨강과 초록은 색맹인 사람이 <b>가장 흔하게 구별하지 못하는</b> 조합입니다"),
   ]),
-  s8_title="최소 코드와 이름 규칙", s8_hint="이 토큰의 계약서",
+  s8_title="최소 코드와 이름 규칙", s8_hint="코드로 옮기는 법과 지킬 규칙",
   keys_heads="<th>규칙</th><th>지켜야 하는 것</th>",
-  code_lede="CSS 변수 세 겹으로 그대로 옮겨집니다. <b>화면은 2단·3단만 봅니다.</b>",
-  code='''<span class="c">/* 1단 — 색 그 자체. 쓰임을 모른다 */</span>
+  code_lede="세 단의 토큰은 CSS 변수 세 겹으로 그대로 옮길 수 있습니다. <b>화면 코드에서는 2단과 3단만 씁니다.</b>",
+  code='''<span class="c">/* 1단. 색 그 자체이고 쓰임은 정하지 않는다 */</span>
 <span class="t">:root</span> {
   <span class="a">--blue-500</span>: <span class="s">#2f6df6</span>;
   <span class="a">--blue-300</span>: <span class="s">#6f9bff</span>;
   <span class="a">--gray-900</span>: <span class="s">#14161a</span>;
 
-  <span class="c">/* 2단 — 쓰임. 화면이 보는 것은 여기부터 */</span>
+  <span class="c">/* 2단. 쓰임을 정한다. 화면은 여기부터 쓴다 */</span>
   <span class="a">--accent</span>: <span class="t">var</span>(<span class="a">--blue-500</span>);
   <span class="a">--on-accent</span>: <span class="s">#fff</span>;
   <span class="a">--fg</span>: <span class="t">var</span>(<span class="a">--gray-900</span>);
 }
 
-<span class="c">/* 어두운 모드 — 2단의 연결만 갈아 끼운다 */</span>
+<span class="c">/* 어두운 모드에서는 2단의 연결만 바꾼다 */</span>
 <span class="t">:root[data-theme="dark"]</span> {
   <span class="a">--accent</span>: <span class="t">var</span>(<span class="a">--blue-300</span>);
   <span class="a">--fg</span>: <span class="s">#e8ebf0</span>;
@@ -124,31 +124,31 @@ D = dict(
 
 <span class="t">.btn</span> { <span class="a">background</span>: <span class="t">var</span>(<span class="a">--accent</span>); <span class="a">color</span>: <span class="t">var</span>(<span class="a">--on-accent</span>); }''',
   keys=kbd([
-    ("이름에 색을 넣지 않는다", "<code>--brand-blue</code> ✗ → <code>--accent</code> ✓. 색이 바뀌어도 이름이 안 거짓말하게"),
-    ("쓰임 + 자리 + 강도", "<code>--text-danger-strong</code>처럼 <b>무엇에 / 어디에 / 얼마나</b> 순으로 읽히게 짓는다"),
-    ("짝을 함께 만든다", "바탕색에는 늘 그 위 글자색(<code>--on-*</code>)을 같이 정의한다"),
-    ("화면에서 1단 금지", "<code>var(--blue-500)</code>을 컴포넌트에서 쓰면 다크 모드가 거기서 깨진다"),
-    ("대비비를 값으로 못 박는다", "본문 4.5:1, 큰 글자·아이콘 3:1. 토큰을 고칠 때마다 다시 잰다"),
+    ("이름에 색을 넣지 않는다", "<code>--brand-blue</code> ✗ → <code>--accent</code> ✓. 이렇게 지어야 색이 바뀌어도 이름과 실제 색이 어긋나지 않습니다"),
+    ("쓰임 + 자리 + 강도", "<code>--text-danger-strong</code>처럼 <b>무엇에 / 어디에 / 얼마나</b> 순서로 읽히도록 짓습니다"),
+    ("짝을 함께 만든다", "바탕색을 정할 때는 그 위에 올릴 글자색(<code>--on-*</code>)도 늘 함께 정의합니다"),
+    ("화면에서 1단 금지", "컴포넌트에서 <code>var(--blue-500)</code>을 직접 쓰면 그 자리만 다크 모드에서 색이 바뀌지 않습니다"),
+    ("대비비를 값으로 못 박는다", "본문은 4.5:1, 큰 글자와 아이콘은 3:1 이상이어야 하고, 토큰 값을 고칠 때마다 대비비를 다시 잽니다"),
   ]),
   backend=rows([
-    ("토큰 = 설정 파일의 상수", "코드 여기저기 박힌 매직 넘버를 <code>config</code>로 뺀 것과 같은 일입니다. 다른 점은 <b>값이 여러 벌</b>(밝게·어둡게)이라는 것뿐입니다."),
-    ("어디에 저장하나", "보통 JSON 한 벌을 원본으로 두고(<b>W3C Design Tokens</b> 형식) 거기서 CSS·iOS·안드로이드 파일을 <b>생성</b>합니다. 손으로 세 군데 고치면 반드시 어긋납니다."),
-    ("바꿀 때 영향 범위", "2단 하나를 고치면 그것을 가리키는 모든 3단이 따라 바뀝니다. 그래서 <b>2단은 적게</b> 두고 뜻을 또렷하게 지어야 합니다."),
-    ("서버가 색을 보내는 경우", "상태 코드(<code>APPROVED</code>)를 보내고 색은 화면이 고릅니다. 서버가 <code>#1f8a4c</code>를 보내면 다크 모드에서 고칠 방법이 없습니다."),
+    ("토큰 = 설정 파일의 상수", "코드 여기저기에 직접 적힌 매직 넘버를 <code>config</code>로 빼내는 것과 같은 일입니다. 다만 토큰은 밝은 화면용과 어두운 화면용처럼 <b>값이 여러 벌</b>이라는 점이 다릅니다."),
+    ("어디에 저장하나", "보통 <b>W3C Design Tokens</b> 형식의 JSON 한 벌을 원본으로 두고, 거기서 CSS와 iOS, 안드로이드용 파일을 <b>생성</b>합니다. 세 플랫폼의 파일을 손으로 따로 고치면 결국 값이 서로 어긋나기 때문입니다."),
+    ("바꿀 때 영향 범위", "2단 토큰 하나를 고치면 그 토큰을 가리키는 3단 토큰이 모두 함께 바뀝니다. 그래서 <b>2단은 개수를 적게</b> 두고 이름의 뜻을 또렷하게 지어야 합니다."),
+    ("서버가 색을 보내는 경우", "서버는 <code>APPROVED</code> 같은 상태 코드만 보내고, 색은 화면 쪽에서 고릅니다. 서버가 <code>#1f8a4c</code> 같은 색 값을 직접 보내면 화면에서는 다크 모드에 맞게 색을 바꿀 방법이 없습니다."),
   ]),
-  plat_lede="세 플랫폼 모두 같은 생각을 하지만 부르는 말과 단 수가 다릅니다.",
+  plat_lede="세 플랫폼 모두 색을 쓰임으로 정한다는 생각은 같지만, 부르는 이름과 단의 수가 다릅니다.",
   plats=plats([
     ("웹", "CSS 사용자 지정 속성",
      '''              <div style="font-family:var(--mono);font-size:10px;color:var(--fg-muted);line-height:1.8;text-align:left">--accent<br>--fg<br>--surface</div>''',
-     "<b>CSS 변수</b>로 둡니다. <code>:root</code>에 두고 <code>[data-theme]</code>로 갈아 끼우는 꼴이 가장 흔합니다."),
+     "<b>CSS 변수</b>로 정의합니다. <code>:root</code>에 기본값을 두고 <code>[data-theme]</code> 속성에 따라 값을 바꾸는 방식이 가장 흔합니다."),
     ("iOS", "Apple HIG",
      '''              <div style="font-family:var(--mono);font-size:10px;color:var(--fg-muted);line-height:1.8;text-align:left">.label<br>.secondaryLabel<br>.systemBackground</div>''',
-     "<b>시맨틱 컬러</b>가 OS 에 내장돼 있습니다. <code>Color.primary</code>처럼 쓰면 다크 모드·고대비가 <b>저절로</b> 따라옵니다."),
+     "<b>시맨틱 컬러</b>가 OS에 들어 있습니다. <code>Color.primary</code>처럼 쓰면 다크 모드와 고대비 설정에 맞춰 색이 <b>저절로</b> 바뀝니다."),
     ("안드로이드", "Material 3",
      '''              <div style="font-family:var(--mono);font-size:10px;color:var(--fg-muted);line-height:1.8;text-align:left">primary<br>onPrimary<br>surfaceVariant</div>''',
-     "<b>색 역할</b>(color roles)이라 부르고 <code>primary</code>/<code>onPrimary</code> 짝이 규격에 박혀 있습니다."),
+     "<b>색 역할</b>(color roles)이라고 부르며, <code>primary</code>와 <code>onPrimary</code> 같은 짝이 규격에 정해져 있습니다."),
   ]),
-  plat_note="iOS 와 안드로이드는 <b>시맨틱 색이 OS 에 이미 있습니다.</b> 거기에 브랜드 색을 억지로 덮으면 다크 모드·고대비·돋보기 설정이 한꺼번에 어긋납니다. 디자이너가 \"primary 로 해 주세요\"라고 할 때, 안드로이드 쪽에는 그게 <b>이미 정해진 이름</b>이라 뜻이 다를 수 있습니다.",
+  plat_note="iOS와 안드로이드에는 <b>시맨틱 색이 OS에 이미 정해져 있습니다.</b> 그 위에 브랜드 색을 억지로 덮어쓰면 다크 모드와 고대비, 돋보기 설정에 맞춰 색이 제대로 바뀌지 않습니다. 또 디자이너가 \"primary로 해 주세요\"라고 할 때, 안드로이드에서는 primary가 <b>이미 정해진 역할 이름</b>이라 디자이너가 생각한 뜻과 다를 수 있습니다.",
   siblings=siblings("color"),
   related='''        <li><a href="../items/field.html"><b>텍스트 필드</b><em>4부</em></a></li>
         <li><span class="na"><b>대비비</b><em>12부</em></span></li>

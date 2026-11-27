@@ -52,13 +52,13 @@
 </div>
 
 <p class="hint">
-  상자 하나는 <b>네 겹</b>입니다 — 내용 · 안쪽 여백 · 테두리 · 바깥 여백.
-  겉에서 차지하는 자리는 이 넷을 다 더한 것입니다.<br>
-  <code>box-sizing</code>을 꺼 보세요. <b><code>width: 200px</code>이라고 적었는데 상자가 200px이 아닙니다.</b>
-  기본값(<code>content-box</code>)에서 width 는 <b>내용만</b>의 너비라, 패딩과 테두리가 바깥으로 더 붙습니다.
-  그래서 거의 모든 프로젝트가 맨 위에 <code>* { box-sizing: border-box }</code> 한 줄을 깔아 둡니다 —
-  그러면 width 가 <b>테두리까지 포함한</b> 너비가 됩니다.<br>
-  <b>margin 은 상자 크기에 안 들어갑니다.</b> border-box 를 켜도 바깥 여백은 따로입니다.
+  상자 하나는 내용, 안쪽 여백, 테두리, 바깥 여백의 <b>네 겹</b>으로 이루어지고,
+  상자가 바깥에서 차지하는 자리는 이 넷을 모두 더한 크기입니다.<br>
+  <code>box-sizing</code>을 꺼 보세요. <b><code>width: 200px</code>이라고 적었는데도 상자가 200px보다 커집니다.</b>
+  기본값(<code>content-box</code>)에서는 width가 <b>내용 칸만</b>의 너비라서 패딩과 테두리가 그 바깥에 더해지기 때문입니다.
+  대부분의 프로젝트는 맨 위에 <code>* { box-sizing: border-box }</code> 한 줄을 넣어
+  width가 <b>테두리까지 포함한</b> 너비가 되게 합니다.<br>
+  <b>margin은 상자 크기에 들어가지 않기</b> 때문에 border-box를 켜도 바깥 여백은 따로 더해집니다.
 </p>
 
 <script>

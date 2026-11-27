@@ -3,7 +3,7 @@ from ax13 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
-L13 = "화면 단위 패턴은 부품이 아니라 <b>끝내야 하는 일</b>입니다. 이 네 가지만 물어보면 갈립니다."
+L13 = "화면 단위 패턴은 부품 하나가 아니라 사용자가 <b>끝내야 하는 일</b> 하나를 기준으로 나눕니다. 그래서 아래 네 가지를 따져 보면 화면끼리 구별할 수 있습니다."
 
 def panel(opts, link, who, warn="", w="152px", ok=None):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -40,99 +40,99 @@ ANAT = '''              <div class="anat--wide" style="background:var(--bg);bord
 
 D = dict(
   slug="share", ko="공유하기", en="Share · permissions",
-  desc="남에게 보여 주는 화면. 범위의 기본값, 권한, 이미 나간 링크를 다루는 법.",
-  lede="공유 화면의 실패는 거의 늘 <b>기본값이 너무 넓은 것</b>입니다. 사고는 거기서 납니다.",
+  desc="남에게 보여 주는 범위를 정하는 화면입니다. 범위의 기본값, 권한, 이미 나간 링크를 다루는 법을 설명합니다.",
+  lede="공유 화면에서 생기는 사고는 거의 언제나 <b>공유 범위의 기본값이 너무 넓어서</b> 일어납니다.",
   axes_lede=L13,
   live_note='''        <div class="note" style="margin-bottom:0">
-          <p>범위를 바꿔 보세요 — 데모가 지금 범위에서 <b>볼 수 있는 사람 수</b>를 어림해 적고,
+          <p>범위를 바꿔 보세요. 데모는 지금 범위에서 <b>볼 수 있는 사람 수</b>를 어림해 적고,
           사내 밖까지 열리면 경고를 띄웁니다.<br>
-          '처음부터 링크 있는 누구나로 두기'를 켜면 아무것도 안 골라도
-          <b>가장 넓은 범위</b>에서 시작합니다 — 쓰기는 편하고 사고는 여기서 납니다.<br>
-          범위를 바꾸면 <b>이미 나간 링크</b>가 어떻게 되는지도 같이 알려 줘야 합니다.
-          좁히면 그 링크는 그 자리에서 막힙니다.</p>
+          '처음부터 링크 있는 누구나로 두기'를 켜면 아무것도 고르지 않아도
+          <b>가장 넓은 범위</b>에서 시작합니다. 쓰기에는 편하지만 공유 사고는 대부분 이 설정에서 일어납니다.<br>
+          범위를 바꿀 때는 <b>이미 나간 링크</b>가 어떻게 되는지도 함께 알려 줘야 합니다.
+          범위를 좁히면 이미 보낸 링크도 그 순간부터 열리지 않기 때문입니다.</p>
         </div>''',
   names=rows([
     ("한국어", "공유하기, 공유 설정, 권한 설정, 링크 공유"),
     ("영어", "share, sharing settings, permissions, link sharing"),
     ("같이 쓰는 말",
-     "<b>누가</b> 볼 수 있는지가 <b>범위</b>(scope · audience), "
-     "<b>무엇을</b> 할 수 있는지가 <b>권한</b>(permission · role)입니다. "
-     "링크만 있으면 로그인 없이 열리는 것을 <b>링크 공유</b>(link sharing), "
-     "그 링크에 붙는 임의의 문자열을 <b>토큰</b>이라 부릅니다. "
-     "OS 가 띄우는 앱 고르기 판은 <b>공유 시트</b>(share sheet)입니다."),
-    ("자주 잘못 부름",
-     "<b>초대</b> — 초대는 <b>이름을 적어</b> 부르는 쪽, 링크 공유는 <b>가진 사람 누구나</b>입니다.<br>"
-     "<b>게시</b> — 게시는 <b>찾아지게</b> 만드는 것이고 링크 공유는 <b>안 찾아집니다</b>.<br>"
-     "<b>내보내기</b> — <a href=\"exportdata.html\">내보내기</a>는 <b>파일로 떼어 주는</b> 일입니다."),
+     "<b>누가</b> 볼 수 있는지를 <b>범위</b>(scope · audience), "
+     "<b>무엇을</b> 할 수 있는지를 <b>권한</b>(permission · role)이라고 합니다. "
+     "링크만 있으면 로그인 없이 열리는 방식은 <b>링크 공유</b>(link sharing)라 하고, "
+     "그 링크에 붙는 임의의 문자열은 <b>토큰</b>이라고 부릅니다. "
+     "OS가 띄우는, 보낼 앱을 고르는 화면은 <b>공유 시트</b>(share sheet)라고 합니다."),
+    ("자주 잘못 부르는 이름",
+     "<b>초대</b> — 초대는 상대의 <b>이름을 적어</b> 부르는 방식이고, 링크 공유는 링크를 <b>가진 사람 누구나</b> 열 수 있는 방식입니다.<br>"
+     "<b>게시</b> — 게시는 다른 사람이 검색이나 목록으로 <b>찾을 수 있게</b> 만드는 것이고, 링크 공유는 링크를 모르면 <b>찾을 수 없습니다</b>.<br>"
+     "<b>내보내기</b> — <a href=\"exportdata.html\">내보내기</a>는 데이터를 <b>파일로 떼어 주는</b> 일입니다."),
   ]),
   axes=ax("공유하기"),
-  oneline="<b>기본은 가장 좁게.</b> 넓히는 것은 쉬워도, 넓게 나간 링크를 거두는 건 어렵습니다.",
+  oneline="<b>공유 범위의 기본값은 가장 좁게 둡니다.</b> 범위를 넓히기는 쉽지만, 넓은 범위로 이미 퍼진 링크를 거둬들이기는 어렵기 때문입니다.",
   s4_title="범위", s4_hint="넓어질수록 거두기 어렵다",
   states=states([
     (panel([("나만", "아무도 못 본다", True), ("고른 사람만", "", False), ("링크 있는 누구나", "", False)],
             "", "볼 수 있는 사람 1명", "", "152px", True),
-     "나만", "<b>가장 좁다</b>"),
+     "나만", "<b>가장 좁은</b> 범위입니다"),
     (panel([("나만", "", False), ("고른 사람만", "홍길동 · 김철수", True), ("링크 있는 누구나", "", False)],
             "example.com/s/2411", "홍길동 · 김철수 · 나", "", "152px", True),
-     "고른 사람만", "<b>이름으로</b> 건넨다"),
+     "고른 사람만", "볼 사람을 <b>이름으로</b> 골라 건넵니다"),
     (panel([("고른 사람만", "", False), ("모란상회 구성원", "로그인하면 누구나", True), ("링크 있는 누구나", "", False)],
             "example.com/s/2411", "모란상회 48명", "", "152px", True),
-     "사내 전체", "<b>로그인이 벽</b>이 된다"),
+     "사내 전체", "<b>로그인해야</b> 열리므로 사내 사람만 볼 수 있습니다"),
     (panel([("모란상회 구성원", "", False), ("링크 있는 누구나", "로그인 없이 열린다", True)],
             "example.com/s/2411?t=9fa3", "링크를 받은 누구나",
             "⚠ 전달되면 막을 수 없다", "152px", False),
-     "링크 있는 누구나", "<b>사내 밖까지</b>"),
+     "링크 있는 누구나", "링크가 전달되면 <b>사내 밖까지</b> 열립니다"),
     (one(txt('<span style="display:block;font-size:8px">볼 수만 ▾</span>'
              '<span style="display:block;font-size:7px;color:var(--fg-muted);margin-top:2px">댓글 · 고칠 수 있음</span>'),
          "권한", True, "범위와 따로 고른다", "152px"),
-     "권한", "범위와 <b>다른 축</b>"),
+     "권한", "범위와는 <b>따로 정하는 값</b>입니다"),
     (one(txt('<span style="display:block;font-size:8px;color:var(--danger)">범위를 좁혔다</span>'
              '<span style="display:block;font-size:7px;color:var(--fg-muted);margin-top:2px">이미 나간 링크는 이제 안 열립니다</span>'),
          "좁힘", None, "되돌림이 아니라 차단이다", "152px"),
-     "좁힐 때", "<b>알려 줘야</b> 한다"),
+     "좁힐 때", "이미 나간 링크가 막힌다는 것을 <b>알려 줘야</b> 합니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("범위", "누가 보나", "넷이면 충분하다"),
-    ("기본값", "가장 좁게", "<b>넓히는 건 본인이</b>"),
-    ("권한", "무엇을 하나", "범위와 <b>따로</b> 고른다"),
-    ("지금 누가", "이름으로", "<b>세어서</b> 보여 준다"),
-    ("좁힐 때", "차단된다", "'이미 나간 링크가 막힌다'고 적는다"),
-    ("만료 · 암호", "덜 위험하게", "넓은 범위를 <b>시간으로</b> 묶는다"),
+    ("범위", "누가 보나", "범위는 네 가지면 충분합니다"),
+    ("기본값", "가장 좁게", "기본값은 가장 좁게 두고, <b>넓히는 일은 본인이</b> 합니다"),
+    ("권한", "무엇을 하나", "범위와 <b>따로</b> 고르게 합니다"),
+    ("지금 누가", "이름으로", "지금 볼 수 있는 사람을 이름으로 적고 <b>몇 명인지 세어</b> 보여 줍니다"),
+    ("좁힐 때", "차단된다", "'이미 나간 링크가 막힙니다'라고 화면에 적습니다"),
+    ("만료 · 암호", "덜 위험하게", "넓은 범위로 공유할 때는 열 수 있는 <b>기간을 정해</b> 둡니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          공유 사고는 <b>악의가 아니라 기본값</b>에서 납니다.
-          급한 사람은 가장 빠른 길을 고르는데,
-          그 길이 '링크 있는 누구나'면 그게 선택이 됩니다.
-          그래서 기본은 <b>좁게</b> 두고, 넓히는 자리에
-          <b>무슨 일이 일어나는지</b>를 한 줄로 적어 두는 것이 전부입니다.<br>
-          넓은 범위를 꼭 써야 한다면 <b>만료</b>를 붙이세요 —
-          '7일 뒤 만료'는 거의 모든 경우에 충분하고,
-          잊고 열어 둔 링크를 <b>저절로</b> 닫아 줍니다.</p>''',
+          공유 사고는 대개 <b>악의가 아니라 기본값</b> 때문에 일어납니다.
+          급한 사람은 가장 빨리 끝나는 쪽을 고르는데,
+          기본값이 '링크 있는 누구나'라면 그대로 그 범위로 공유하게 됩니다.
+          그래서 기본값은 <b>좁게</b> 두고, 범위를 넓히는 자리에
+          넓히면 <b>무슨 일이 일어나는지</b> 한 줄로 적어 두면 됩니다.<br>
+          넓은 범위를 꼭 써야 한다면 <b>만료</b>를 붙이세요.
+          '7일 뒤 만료' 정도면 거의 모든 경우에 충분하고,
+          깜빡 잊고 열어 둔 링크도 기한이 지나면 <b>자동으로</b> 닫힙니다.</p>''',
   do=ul([
-    "기본을 <b>가장 좁게</b> 두기",
-    "지금 누가 볼 수 있는지 <b>세어서</b> 보여 주기",
-    "넓은 범위에는 <b>만료</b> 붙이기",
+    "기본값을 <b>가장 좁게</b> 둘 때",
+    "지금 누가 볼 수 있는지 <b>세어서</b> 보여 줄 때",
+    "넓은 범위에 <b>만료</b>를 붙일 때",
   ]),
   dont=ul([
-    "기본을 <b>'링크 있는 누구나'</b>로 두기 — 사고가 여기서 난다",
-    "범위와 권한을 <b>한 덩어리</b>로 묶기 — '볼 수만'이 사라진다",
-    "좁힐 때 <b>말없이</b> 막기 — 받은 사람은 왜 안 열리는지 모른다",
-    "링크를 <b>짐작할 수 있게</b> 만들기 — 토큰은 길고 임의로",
+    "기본값을 <b>'링크 있는 누구나'</b>로 둘 때. 공유 사고가 대부분 여기서 일어납니다",
+    "범위와 권한을 <b>한 덩어리</b>로 묶을 때. '볼 수만' 있게 하는 선택지가 사라집니다",
+    "범위를 좁히면서 <b>아무 안내 없이</b> 링크를 막을 때. 링크를 받은 사람은 왜 안 열리는지 알 수 없습니다",
+    "링크를 <b>짐작할 수 있게</b> 만들 때. 토큰은 길고 무작위로 만듭니다",
   ]),
   instead='파일로 떼어 주면 <a href="exportdata.html">내보내기</a>, 남에게 보이는 내 정보는 <a href="profile.html">프로필</a>, 기기 기능은 <a href="permission.html">권한 요청</a>, 되돌릴 수 없는 일은 <a href="destructive.html">위험한 동작</a>.',
   cases=cases([
     (panel([("고른 사람만", "홍길동 · 김철수", True)], "example.com/s/2411", "3명", "", "150px", True),
-     "문서 공유", "<b>이름으로</b> 건넨다"),
+     "문서 공유", "볼 사람을 <b>이름으로</b> 골라 건넵니다"),
     (panel([("링크 있는 누구나", "7일 뒤 만료", True)], "example.com/s/2411?t=9fa3", "링크를 받은 누구나", "", "150px", None),
-     "외부 공유", "<b>만료</b>를 붙인다"),
+     "외부 공유", "링크에 <b>만료</b>를 붙입니다"),
     (one(txt('<span style="display:block;font-size:8px">공유 시트</span>'
              '<span style="display:block;font-size:7px;color:var(--fg-muted);margin-top:2px">메시지 · 메일 · 복사…</span>'),
          "폰", True, "OS 가 앱 고르기를 맡는다", "150px"),
-     "폰", "<b>OS 공유 시트</b>를 쓴다"),
+     "폰", "보낼 곳을 고를 때는 <b>OS 공유 시트</b>를 씁니다"),
   ]),
-  s8_title="최소 마크업과 키보드", s8_hint="이 화면의 계약서",
-  code_lede="범위는 <b>라디오</b>입니다 — 하나만 고르는 값이고, 기본은 가장 좁은 쪽입니다.",
+  s8_title="최소 마크업과 키보드", s8_hint="구현할 때 지킬 최소 규칙",
+  code_lede="범위는 하나만 고르는 값이므로 <b>라디오</b>로 만들고, 기본 선택은 가장 좁은 쪽에 둡니다.",
   code='''&lt;<span class="t">fieldset</span>&gt;
   &lt;<span class="t">legend</span>&gt;누가 볼 수 있나&lt;/<span class="t">legend</span>&gt;
   &lt;<span class="t">label</span>&gt;&lt;<span class="t">input</span> <span class="a">type</span>=<span class="s">"radio"</span> <span class="a">name</span>=<span class="s">"scope"</span> <span class="a">value</span>=<span class="s">"named"</span> <span class="a">checked</span>&gt;
@@ -148,24 +148,24 @@ D = dict(
 &lt;<span class="t">button</span>&gt;링크 복사&lt;/<span class="t">button</span>&gt;
 &lt;<span class="t">p</span> <span class="a">role</span>=<span class="s">"status"</span>&gt;복사했습니다&lt;/<span class="t">p</span>&gt;''',
   keys=kbd([
-    ("↑ ↓", "라디오 사이를 옮긴다 — <b>Tab 이 아니다</b>"),
-    ("Enter · Space", "복사 단추를 누른다"),
-    ("<code>role=\"status\"</code>", "'복사했습니다'를 <b>소리로도</b> 알린다"),
-    ("<code>readonly</code>", "링크 칸은 고르기는 되고 <b>고쳐지지는</b> 않는다"),
-    ("<code>&lt;fieldset&gt;</code>", "범위 묶음에 이름을 준다 — 무엇을 고르는지 <b>소리로</b> 전해진다"),
-    ("확인하는 법", "로그아웃한 창에서 <b>복사한 링크</b>를 열어 본다"),
+    ("↑ ↓", "라디오 사이를 옮깁니다. 라디오 사이는 <b>Tab이 아니라</b> 화살표로 옮깁니다"),
+    ("Enter · Space", "복사 단추를 누릅니다"),
+    ("<code>role=\"status\"</code>", "'복사했습니다'를 스크린 리더로도 <b>소리 내어</b> 알립니다"),
+    ("<code>readonly</code>", "링크 칸의 글자를 선택할 수는 있지만 <b>고칠 수는</b> 없게 합니다"),
+    ("<code>&lt;fieldset&gt;</code>", "범위 묶음에 이름을 붙여서 무엇을 고르는 자리인지 스크린 리더로도 <b>전해지게</b> 합니다"),
+    ("확인하는 법", "로그아웃한 창에서 <b>복사한 링크</b>를 열어 봅니다"),
   ]),
   backend=rows([
-    ("토큰은 길고 임의로", "짧은 번호를 쓰면 <b>짐작해서</b> 남의 것이 열립니다. 길이와 무작위성이 유일한 벽입니다."),
-    ("좁히면 즉시 막기", "범위를 좁힌 순간부터 옛 토큰은 <b>거절</b>해야 합니다 — 캐시에 남아 열리면 좁힌 적이 없는 셈입니다."),
-    ("만료", "<code>expires_at</code> 을 두고 서버가 검사합니다. 화면에만 적어 두면 아무 소용이 없습니다."),
-    ("누가 열었나", "링크 공유는 <b>누가 봤는지 모릅니다</b> — 그게 필요하면 로그인을 요구하는 범위를 써야 합니다."),
+    ("토큰은 길고 임의로", "짧은 번호를 쓰면 번호를 <b>짐작해서</b> 남의 문서를 열 수 있습니다. 링크 공유에서는 토큰의 길이와 무작위성 말고는 막아 주는 장치가 없습니다."),
+    ("좁히면 즉시 막기", "범위를 좁힌 순간부터 옛 토큰은 <b>거절</b>해야 합니다. 캐시에 남은 응답 때문에 계속 열린다면 범위를 좁힌 효과가 없습니다."),
+    ("만료", "<code>expires_at</code>을 저장해 두고 서버가 요청마다 검사합니다. 만료 날짜를 화면에만 적어 두면 기한이 지나도 링크가 열립니다."),
+    ("누가 열었나", "링크 공유로는 <b>누가 봤는지 알 수 없습니다</b>. 열어 본 사람을 알아야 한다면 로그인을 요구하는 범위를 써야 합니다."),
   ]),
-  plat_lede="<b>폰에는 OS 공유 시트</b>가 있어 앱 고르기를 맡아 줍니다.",
+  plat_lede="<b>폰에는 OS 공유 시트</b>가 있어서, 어느 앱으로 보낼지 고르는 일은 OS가 맡습니다.",
   plats=plats([
     ("웹", "직접 만듦 + Web Share",
      panel([("고른 사람만", "", True)], "example.com/s/2411", "3명", "", "110px", True),
-     "범위 고르기는 직접 만들고, 보내는 자리에서는 <code>navigator.share()</code> 를 쓸 수 있습니다."),
+     "범위를 고르는 화면은 직접 만들고, 보내는 단계에서는 <code>navigator.share()</code>를 쓸 수 있습니다."),
     ("iOS", "공유 시트",
      '''              <div class="phone" role="img" aria-label="iOS 공유 시트 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:3px;right:3px;bottom:3px;top:34px;border-radius:5px 5px 2px 2px;background:var(--surface);border:1px solid var(--line)"></div>
@@ -173,16 +173,16 @@ D = dict(
                   <span style="width:10px;height:10px;border-radius:3px;background:var(--accent-soft)"></span>
                   <span style="width:10px;height:10px;border-radius:3px;background:var(--accent-soft)"></span>
                   <span style="width:10px;height:10px;border-radius:3px;background:var(--accent-soft)"></span></div></div></div>''',
-     "<code>UIActivityViewController</code> 가 <b>어디로 보낼지</b>를 맡습니다. 범위는 앱이 따로 정합니다."),
+     "<code>UIActivityViewController</code>가 <b>어디로 보낼지</b> 고르는 화면을 띄웁니다. 공유 범위는 앱이 따로 정합니다."),
     ("안드로이드", "Sharesheet",
      '''              <div class="phone" role="img" aria-label="안드로이드 공유 시트 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:3px;right:3px;bottom:3px;top:38px;border-radius:5px 5px 2px 2px;background:var(--surface);border:1px solid var(--line)"></div>
                 <div style="position:absolute;left:6px;top:44px;display:flex;gap:3px">
                   <span style="width:10px;height:10px;border-radius:999px;background:var(--accent-soft)"></span>
                   <span style="width:10px;height:10px;border-radius:999px;background:var(--accent-soft)"></span></div></div></div>''',
-     "<code>Intent.ACTION_SEND</code> 입니다. 자주 쓰는 상대를 <b>맨 앞</b>에 올려 줍니다."),
+     "<code>Intent.ACTION_SEND</code>로 띄웁니다. 자주 보내는 상대를 <b>맨 앞</b>에 보여 줍니다."),
   ]),
-  plat_note="공유는 <b>두 가지 일</b>이 한 단추에 섞여 있습니다 — <b>누가 볼 수 있게 할지</b>(범위)와 <b>어디로 보낼지</b>(앱·메신저). 폰은 뒤쪽을 OS 가 맡아 주지만 범위는 여전히 앱이 정합니다. 웹에서는 <code>navigator.share()</code> 로 뒤쪽만 빌려 쓸 수 있고, 범위 고르기는 어차피 직접 만들어야 합니다. <b>둘을 한 화면에 섞지 말고</b> 범위를 먼저 정한 뒤 보내기로 넘기는 차례가 덜 헷갈립니다.",
+  plat_note="공유 단추 하나에는 <b>누가 볼 수 있게 할지</b>(범위)와 <b>어디로 보낼지</b>(앱·메신저)라는 <b>두 가지 일</b>이 섞여 있습니다. 폰에서는 보낼 곳을 고르는 일을 OS가 맡지만, 범위는 여전히 앱이 정합니다. 웹에서도 <code>navigator.share()</code>로 보낼 곳 고르기만 맡길 수 있고, 범위를 고르는 화면은 직접 만들어야 합니다. 그러니 <b>두 가지를 한 화면에 섞지 말고</b>, 범위를 먼저 정한 뒤 보내기로 넘어가게 하면 사용자가 덜 헷갈립니다.",
   siblings=siblings("share"),
   related='''        <li><a href="profile.html"><b>프로필</b><em>13부</em></a></li>
         <li><a href="exportdata.html"><b>내보내기</b><em>10부</em></a></li>

@@ -33,12 +33,12 @@
 </div>
 
 <p class="hint">
-  가르는 질문은 하나입니다 — <b>이동인가, 동작인가</b>.
-  주소가 바뀌면 링크(<code>&lt;a href&gt;</code>), 그 자리에서 일이 일어나면 버튼(<code>&lt;button&gt;</code>)입니다.<br>
-  <b>div 에 onclick</b> 으로 만들면 보기에는 같지만 <b>Tab 이 멈추지 않고</b>
-  Enter 로도 안 눌립니다 — '<b>Tab 으로 훑어보기</b>'를 누르면 초점이 몇 군데 멈추는지 세 줍니다.<br>
-  <b>서로 바꿔서</b> 만들면 더 조용히 나쁩니다 — 링크로 만든 '저장'은
-  <b>새 탭으로 열리고</b>, 버튼으로 만든 '상세 보기'는 <b>가운데 버튼·복사·공유</b>가 안 됩니다.
+  링크와 버튼은 누른 결과가 <b>다른 곳으로 이동하는지, 그 자리에서 동작하는지</b>로 가릅니다.
+  누른 뒤 주소가 바뀌면 링크(<code>&lt;a href&gt;</code>)이고, 그 자리에서 일이 일어나면 버튼(<code>&lt;button&gt;</code>)입니다.<br>
+  <b>div 에 onclick</b> 을 달아 만들면 보기에는 똑같지만 <b>Tab 이 멈추지 않고</b>
+  Enter 로도 눌리지 않습니다. '<b>Tab 으로 훑어보기</b>'를 누르면 초점이 몇 군데에서 멈추는지 세어 줍니다.<br>
+  링크와 버튼을 <b>서로 바꿔서</b> 만들면 겉으로 티가 덜 나서 문제를 더 늦게 알아챕니다. 링크로 만든 '저장'은
+  <b>새 탭으로 열리고</b>, 버튼으로 만든 '상세 보기'는 <b>가운데 버튼·복사·공유</b>가 되지 않습니다.
 </p>
 
 <script>
@@ -80,9 +80,9 @@
     rd.innerHTML = '만든 법 <b>' +
       ({ right: '뜻에 맞게', divlink: 'div + onclick', swap: '서로 바꿔서' }[k]) + '</b>' +
       '<br>초점을 받을 수 있는 줄 <b>' + focusable + ' / ' + ITEMS.length + '</b>' +
-      (focusable < ITEMS.length ? ' <span class="warn">— 키보드로 못 간다</span>' : '') +
+      (focusable < ITEMS.length ? ' <span class="warn">— 키보드로 갈 수 없습니다</span>' : '') +
       '<br>새 탭으로 열리는 줄 <b>' + newtab + '개</b>' +
-      (k === 'swap' ? ' <span class="warn">— 저장이 새 탭에서 열린다</span>' : '') +
+      (k === 'swap' ? ' <span class="warn">— 저장이 새 탭에서 열립니다</span>' : '') +
       '<br>뜻과 안 맞는 줄 <b>' + wrong + '개</b>' +
       (why ? '<br>' + why : '');
     rd.dataset.focusable = String(focusable);
@@ -96,20 +96,20 @@
     if (!r) return;
     e.preventDefault();
     var it = ITEMS[+r.dataset.i];
-    document.getElementById('log').innerHTML = it[1] ? '<b>' + it[0] + '</b> — 주소를 바꿔 이동했다' : '<b>' + it[0] + '</b> — 그 자리에서 일이 일어났다';
+    document.getElementById('log').innerHTML = it[1] ? '<b>' + it[0] + '</b> — 주소를 바꿔 이동했습니다' : '<b>' + it[0] + '</b> — 그 자리에서 일이 일어났습니다';
   });
 
   document.getElementById('tab').addEventListener('click', function () {
     var els = [].slice.call(document.querySelectorAll('.lkb a[href], .lkb button'));
     var seen = [], i = 0;
     if (!els.length) {
-      document.getElementById('log').innerHTML = '<span class="warn">Tab 이 한 번도 안 멈춘다</span> — 키보드로는 못 쓴다';
+      document.getElementById('log').innerHTML = '<span class="warn">Tab 이 한 번도 멈추지 않습니다</span>. 키보드로는 쓸 수 없습니다';
       document.getElementById('read').dataset.seen = '0';
       return;
     }
     (function step() {
       if (i >= els.length) {
-        document.getElementById('log').innerHTML = 'Tab 이 <b>' + seen.length + '번</b> 멈췄다 — ' + seen.join(' → ');
+        document.getElementById('log').innerHTML = 'Tab 이 <b>' + seen.length + '번</b> 멈췄습니다 — ' + seen.join(' → ');
         document.getElementById('read').dataset.seen = String(seen.length);
         return;
       }

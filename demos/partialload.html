@@ -33,12 +33,12 @@
 
 <p class="hint">
   검색 칸에 커서를 둔 채 <b>정산 상태 바꾸기</b>를 눌러 보세요.
-  <b>화면 전체</b>를 다시 그리면 그 칸이 통째로 새로 만들어져서
-  <b>커서가 날아가고 치던 글도 사라집니다</b> — 데모가 초점이 어디로 갔는지와
-  입력칸의 값이 남았는지를 재서 적습니다.<br>
-  <b>바뀐 줄만</b> 다시 그리면 초점도 값도 그대로입니다.
-  그리고 기다리는 동안 <b>그 줄만 흐려지고</b> 나머지는 읽을 수 있습니다 —
-  전체 스피너는 멀쩡한 화면까지 가려 버립니다.
+  <b>화면 전체</b>를 다시 그리면 검색 칸이 통째로 새로 만들어지기 때문에
+  <b>커서가 사라지고 치던 글도 지워집니다</b>. 데모는 초점이 어디로 갔는지와
+  입력칸의 값이 남았는지를 확인해서 적습니다.<br>
+  반면 <b>바뀐 줄만</b> 다시 그리면 초점과 입력값이 그대로 남습니다.
+  기다리는 동안에도 <b>그 줄만 흐려지므로</b> 나머지 줄은 계속 읽을 수 있는데,
+  전체 스피너를 쓰면 바뀌지 않는 부분까지 가려 버립니다.
 </p>
 
 <script>
@@ -59,7 +59,7 @@
     }).join('');
   }
 
-  // 전체를 다시 그리면 머리띠의 입력칸까지 새로 만들어진다 — 흉내가 아니라 실제로 그렇다
+  // 전체를 다시 그리면 머리띠의 입력칸까지 실제로 새로 만들어진다(흉내 낸 동작이 아니다)
   function renderAll(keepValue) {
     document.getElementById('card').innerHTML =
       '<div class="prt__bar"><b style="font-size:13px">정산 목록</b>' +
@@ -79,10 +79,10 @@
     var kept = !!(q && q.value.length > 0);
     var rd = document.getElementById('read');
     rd.innerHTML = '다시 그린 범위 <b>' + (all ? '화면 전체' : '바뀐 줄만') + '</b>' +
-      '<br>초점이 검색 칸에 <b>' + (lostFocus ? '없다' : '있다') + '</b>' +
-      (lostFocus ? ' <span class="warn">— 커서가 날아갔다</span>' : '') +
-      '<br>치던 글 <b>' + (kept ? '남았다' : '사라졌다') + '</b>' +
-      (!kept && q.dataset.had === '1' ? ' <span class="warn">— 통째로 새로 만들어졌다</span>' : '') +
+      '<br>초점이 검색 칸에 <b>' + (lostFocus ? '없습니다' : '있습니다') + '</b>' +
+      (lostFocus ? ' <span class="warn">(커서가 사라졌습니다)</span>' : '') +
+      '<br>치던 글이 <b>' + (kept ? '남았습니다' : '사라졌습니다') + '</b>' +
+      (!kept && q.dataset.had === '1' ? ' <span class="warn">(검색 칸이 통째로 새로 만들어졌습니다)</span>' : '') +
       (why ? '<br>' + why : '');
     rd.dataset.lost = lostFocus ? '1' : '0';
     rd.dataset.kept = kept ? '1' : '0';
@@ -99,17 +99,17 @@
     all = document.getElementById('k').value === 'all';
     if (all) renderAll(q.value); else renderBody();
     if (all) document.getElementById('q').focus();
-    report('바꾸는 중 — 기다려 보세요');
+    report('바꾸는 중입니다. 잠시 기다려 보세요');
     setTimeout(function () {
       ROWS[0][1] = ROWS[0][1] === '정산 완료' ? '정산 대기' : '정산 완료';
       busy = -1;
       if (all) {
         renderAll('');   // 새로 만들어진 칸은 비어 있고 초점도 없다
         document.getElementById('log').innerHTML =
-          '<span class="warn">전체를 다시 그렸다</span> — 검색 칸이 새로 만들어졌다';
+          '<span class="warn">전체를 다시 그렸습니다</span>. 검색 칸도 새로 만들어졌습니다';
       } else {
         renderBody();
-        document.getElementById('log').innerHTML = '<b>그 줄만</b> 다시 그렸다 — 나머지는 그대로다';
+        document.getElementById('log').innerHTML = '<b>그 줄만</b> 다시 그렸습니다. 나머지는 그대로입니다';
       }
       report('');
     }, 700);

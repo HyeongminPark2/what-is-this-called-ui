@@ -20,66 +20,66 @@ ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2)
 
 D = dict(
   slug="combobox", ko="콤보박스", en="Combobox · Autocomplete",
-  desc="콤보박스가 무엇이고 셀렉트와 어떻게 다른지 실물과 상태와 해부도로 보여주는 항목.",
-  lede="<b>타이핑으로 선택지를 좁혀</b> 고르는 칸. 입력칸과 목록을 붙여 놓은 것이라, 선택지가 수십·수백 개일 때 유일하게 쓸 만한 방법입니다.",
+  desc="콤보박스가 무엇인지, 셀렉트와는 어떻게 다른지를 실물과 상태, 해부도로 보여 주는 항목입니다.",
+  lede="콤보박스는 <b>글자를 입력해 선택지를 좁힌 뒤</b> 고르는 칸입니다. 입력칸과 목록을 붙여 놓은 부품이라서, 선택지가 수십·수백 개일 때는 사실상 콤보박스 말고는 쓸 만한 방법이 없습니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
-          <p><kbd>↓</kbd><kbd>↑</kbd>로 옮기고 <kbd>Enter</kbd>로 고르고 <kbd>Esc</kbd>로 닫습니다 — 손을 키보드에서 떼지 않아도 됩니다.<br>
-          위의 체크를 켜면 <b>목록에 없는 값도</b> 받습니다. 끄면 목록 안에서만 고를 수 있습니다.
-          이 하나가 '검색되는 셀렉트'와 '자동완성이 붙은 입력칸'을 가릅니다.</p>
+          <p><kbd>↓</kbd><kbd>↑</kbd>로 항목을 옮기고 <kbd>Enter</kbd>로 고르고 <kbd>Esc</kbd>로 목록을 닫을 수 있어서, 키보드에서 손을 떼지 않고도 끝까지 고를 수 있습니다.<br>
+          위의 체크를 켜면 <b>목록에 없는 값도</b> 받고, 끄면 목록 안에서만 고를 수 있습니다.
+          이 설정 하나에 따라 콤보박스는 '검색되는 셀렉트'가 되기도 하고 '자동완성이 붙은 입력칸'이 되기도 합니다.</p>
         </div>''',
   names=rows([
     ("한국어", "콤보박스, 자동완성, 검색 선택"),
     ("영어", "combobox, autocomplete, typeahead"),
-    ("같이 쓰는 말", "입력에 맞춰 걸러 주는 동작을 <b>타입어헤드</b>, 키보드로 짚고 있는 항목을 <b>활성 항목</b>(active descendant), 맞은 글자를 굵게 하는 것을 <b>하이라이트</b>라 합니다."),
-    ("자주 잘못 부름",
-     "<b>셀렉트</b> — 타이핑으로 걸러지면 콤보박스입니다.<br>"
-     "<b>검색창</b> — 검색창은 결과 <b>화면</b>으로 넘어가고, 콤보박스는 <b>값 하나를 그 자리에서</b> 정합니다.<br>"
-     "<b>드롭다운</b> — 너무 뭉뚱그린 말이라 셀렉트·메뉴·콤보박스가 전부 섞입니다."),
+    ("같이 쓰는 말", "입력한 글자에 맞춰 선택지를 걸러 주는 동작은 <b>타입어헤드</b>, 키보드로 짚고 있는 항목은 <b>활성 항목</b>(active descendant), 입력한 글자와 맞는 부분을 굵게 표시하는 것은 <b>하이라이트</b>라고 부릅니다."),
+    ("자주 잘못 부르는 이름",
+     "<b>셀렉트</b> — 글자를 입력해 선택지를 걸러 낼 수 있으면 셀렉트가 아니라 콤보박스입니다.<br>"
+     "<b>검색창</b> — 검색창은 검색 결과 <b>화면</b>으로 넘어가지만, 콤보박스는 <b>그 자리에서 값 하나를</b> 정합니다.<br>"
+     "<b>드롭다운</b> — 아래로 펼쳐지는 것을 두루 가리키는 말이라서, 이렇게 부르면 셀렉트와 메뉴, 콤보박스를 구별할 수 없습니다."),
   ]),
   axes=ax("콤보박스"),
-  oneline="콤보박스는 <b>타이핑으로 좁힐 수 있는 셀렉트</b>입니다. 목록에 없는 값을 받을지 말지는 따로 정해야 하고, 그게 성격을 완전히 바꿉니다.",
+  oneline="콤보박스는 <b>글자를 입력해 선택지를 좁힐 수 있는 셀렉트</b>입니다. 목록에 없는 값을 받을지는 따로 정해야 하는데, 이 설정에 따라 서버가 받는 값과 검증 방식까지 달라집니다.",
   states=states([
-    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 4px;font-size:6px;color:var(--fg-faint)">이름을 입력하세요</div></div>', bars="", label="닫힌 콤보박스"), "닫힘", "입력칸처럼 보인다. 자리글로 <b>타이핑하라</b>고 알린다"),
-    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--accent);border-radius:3px"></div><div style="border:1px solid var(--line);border-radius:3px;margin-top:3px;padding:3px;background:var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.15)"><div style="font-size:6px;padding:1px 3px">모란상회 1호</div><div style="font-size:6px;padding:1px 3px;color:var(--fg-muted)">모란김밥 2호</div></div></div>', bars="", label="열린 콤보박스"), "열림", "아직 안 쳤으면 <b>앞쪽 몇 개</b>를 보여 준다"),
-    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--accent);border-radius:3px;display:flex;align-items:center;padding:0 3px;font-size:6px">블루보틀</div><div style="border:1px solid var(--line);border-radius:3px;margin-top:3px;padding:3px;background:var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.15)"><div style="font-size:6px;padding:1px 3px;background:var(--accent-soft);border-radius:2px"><b style="color:var(--accent)">블루보틀</b> 성수</div></div></div>', bars="", label="걸러진 목록"), "걸러짐", "맞은 글자를 굵게. <b>왜 이게 떴는지</b>가 보여야 한다"),
-    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--accent);border-radius:3px;display:flex;align-items:center;padding:0 3px;font-size:6px">없는가게</div><div style="border:1px solid var(--line);border-radius:3px;margin-top:3px;padding:4px;background:var(--surface);font-size:5.5px;color:var(--fg-muted)">맞는 것이 없습니다</div></div>', bars="", label="결과 없음"), "결과 없음", "막다른 길로 두지 않는다. <b>그대로 쓰기</b>나 다시 찾을 길을 준다"),
-    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--accent);border-radius:3px"></div><div style="border:1px solid var(--line);border-radius:3px;margin-top:3px;padding:4px;background:var(--surface);display:flex;align-items:center;gap:4px"><span class="spn spn--sm" style="width:8px;height:8px;border-width:1.5px"></span><span style="font-size:5.5px;color:var(--fg-muted)">찾는 중…</span></div></div>', bars="", label="서버에서 찾는 중"), "찾는 중", "서버에서 가져올 때. <b>디바운스</b>로 한 글자마다 안 부른다"),
-    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 3px;font-size:6px">블루보틀 성수 5호</div><div style="font-size:5.5px;color:#1f8a4c;font-weight:700;margin-top:2px">M1004 선택됨</div></div>', bars="", label="고른 뒤"), "고름", "목록이 닫히고 값이 칸에 남는다. <b>코드도 같이</b> 기억한다"),
+    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 4px;font-size:6px;color:var(--fg-faint)">이름을 입력하세요</div></div>', bars="", label="닫힌 콤보박스"), "닫힘", "입력칸처럼 보이며, 자리글로 <b>글자를 입력하라</b>고 알려 줍니다"),
+    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--accent);border-radius:3px"></div><div style="border:1px solid var(--line);border-radius:3px;margin-top:3px;padding:3px;background:var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.15)"><div style="font-size:6px;padding:1px 3px">모란상회 1호</div><div style="font-size:6px;padding:1px 3px;color:var(--fg-muted)">모란김밥 2호</div></div></div>', bars="", label="열린 콤보박스"), "열림", "아직 아무것도 입력하지 않았다면 선택지 가운데 <b>앞쪽 몇 개</b>를 보여 줍니다"),
+    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--accent);border-radius:3px;display:flex;align-items:center;padding:0 3px;font-size:6px">블루보틀</div><div style="border:1px solid var(--line);border-radius:3px;margin-top:3px;padding:3px;background:var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.15)"><div style="font-size:6px;padding:1px 3px;background:var(--accent-soft);border-radius:2px"><b style="color:var(--accent)">블루보틀</b> 성수</div></div></div>', bars="", label="걸러진 목록"), "걸러짐", "입력한 글자와 맞는 부분을 굵게 표시해서 <b>이 항목이 왜 걸렸는지</b> 보여 줍니다"),
+    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--accent);border-radius:3px;display:flex;align-items:center;padding:0 3px;font-size:6px">없는가게</div><div style="border:1px solid var(--line);border-radius:3px;margin-top:3px;padding:4px;background:var(--surface);font-size:5.5px;color:var(--fg-muted)">맞는 것이 없습니다</div></div>', bars="", label="결과 없음"), "결과 없음", "'없음'만 띄우고 끝내지 않습니다. 입력한 값을 <b>그대로 쓰기</b>나 다시 찾는 방법을 함께 보여 줍니다"),
+    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--accent);border-radius:3px"></div><div style="border:1px solid var(--line);border-radius:3px;margin-top:3px;padding:4px;background:var(--surface);display:flex;align-items:center;gap:4px"><span class="spn spn--sm" style="width:8px;height:8px;border-width:1.5px"></span><span style="font-size:5.5px;color:var(--fg-muted)">찾는 중…</span></div></div>', bars="", label="서버에서 찾는 중"), "찾는 중", "서버에서 목록을 가져오는 중입니다. <b>디바운스</b>를 걸어 글자 하나 칠 때마다 서버를 부르지 않게 합니다"),
+    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 3px;font-size:6px">블루보틀 성수 5호</div><div style="font-size:5.5px;color:#1f8a4c;font-weight:700;margin-top:2px">M1004 선택됨</div></div>', bars="", label="고른 뒤"), "고름", "목록이 닫히고 고른 값이 칸에 남습니다. 이때 이름과 함께 <b>코드도 같이</b> 기억해 둡니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("입력칸", "combobox input", "<code>role=\"combobox\"</code>. 열림 여부를 <code>aria-expanded</code>로 알린다"),
-    ("입력한 글자", "query", "이게 걸러내는 기준이다. 지우면 다시 전체가 된다"),
-    ("목록", "listbox", "입력칸 바로 아래. 화면 밖으로 나가면 위로 뒤집는다"),
-    ("활성 항목", "active option", "키보드가 짚고 있는 것. <code>aria-activedescendant</code>로 알린다 — <b>포커스는 입력칸에 그대로 둔다</b>"),
-    ("보조 정보", "secondary text", "같은 이름이 여럿일 때 가르는 열쇠. 코드·지역·날짜"),
-    ("결과 수", "result count", "몇 개로 좁혀졌는지. 라이브 리전으로 읽히게 하면 더 좋다"),
+    ("입력칸", "combobox input", "<code>role=\"combobox\"</code>를 달고, 목록이 열렸는지를 <code>aria-expanded</code>로 알립니다"),
+    ("입력한 글자", "query", "선택지를 걸러 내는 기준입니다. 글자를 지우면 다시 전체 목록이 나옵니다"),
+    ("목록", "listbox", "입력칸 바로 아래에 띄웁니다. 화면 아래로 넘칠 것 같으면 입력칸 위쪽에 띄웁니다"),
+    ("활성 항목", "active option", "키보드로 짚고 있는 항목이며 <code>aria-activedescendant</code>로 알립니다. 이때 <b>포커스는 입력칸에 그대로 둡니다</b>"),
+    ("보조 정보", "secondary text", "같은 이름이 여럿일 때 서로 구별하게 해 주는 코드, 지역, 날짜 같은 정보입니다"),
+    ("결과 수", "result count", "선택지가 몇 개로 좁혀졌는지 보여 줍니다. 라이브 리전으로 스크린 리더가 읽게 하면 더 좋습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          그림에 없는 가장 중요한 결정이 <b>목록에 없는 값을 받을 것인가</b>입니다.
-          받으면 자유 입력에 자동완성이 붙은 것이고, 안 받으면 검색되는 셀렉트입니다 —
-          서버가 받는 값의 모양부터 달라집니다.</p>''',
+          그림에는 보이지 않지만 콤보박스에서 특히 중요한 결정이 <b>목록에 없는 값을 받을 것인가</b>입니다.
+          받으면 자동완성이 붙은 자유 입력칸이 되고, 받지 않으면 검색되는 셀렉트가 됩니다.
+          어느 쪽을 고르느냐에 따라 서버가 받는 값의 형태부터 달라집니다.</p>''',
   do=ul([
-    "선택지가 <b>수십 개 넘게</b> 있을 때 — 가맹점, 도시, 사용자",
-    "이름을 아는 상태에서 고를 때 — 타이핑이 가장 빠릅니다",
+    "가맹점, 도시, 사용자처럼 선택지가 <b>수십 개 넘게</b> 있을 때",
+    "찾는 항목의 이름을 이미 알고 있을 때. 이름을 입력하는 쪽이 목록을 훑는 것보다 빠릅니다",
     "목록이 서버에 있어 한 번에 다 못 받을 때",
   ]),
   dont=ul([
-    "선택지가 열 개 안팎 → 셀렉트가 더 단순합니다",
-    "이름을 모르고 둘러봐야 할 때 → 걸러낼 말을 모르면 쓸 수 없습니다",
-    "결과 없음을 막다른 길로 두기 — 그대로 쓰기나 다시 찾을 길을 줍니다",
-    "포커스를 목록으로 옮기기 — 그러면 계속 타이핑할 수 없습니다",
+    "선택지가 열 개 안팎일 때. 셀렉트가 더 단순합니다",
+    "이름을 모르고 둘러보며 골라야 할 때. 무엇을 입력해 걸러야 할지 모르면 쓸 수 없습니다",
+    "결과가 없을 때 '없음'만 띄우고 끝낼 때. 입력한 값을 그대로 쓰거나 다시 찾을 방법을 줍니다",
+    "포커스를 목록으로 옮길 때. 포커스가 입력칸을 떠나면 이어서 입력할 수 없습니다",
   ]),
   instead='열 개 안팎이면 <a href="select.html">셀렉트</a>, 자유롭게 적으면 <a href="field.html">텍스트 필드</a>, 여럿 고르면 <a href="checkbox.html">체크박스</a>나 태그 입력.',
   cases=cases([
     (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--accent);border-radius:3px;display:flex;align-items:center;padding:0 3px;font-size:6px">블루보틀</div><div style="border:1px solid var(--line);border-radius:3px;margin-top:3px;padding:3px;background:var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.15)"><div style="font-size:6px;padding:1px 3px;display:flex"><span style="flex:1"><b style="color:var(--accent)">블루보틀</b> 성수</span><span style="color:var(--fg-muted);font-size:5px">M1004</span></div></div></div>', bars="", tall=False, label="단일 선택 콤보박스 재현"),
-     "하나 고르기", "가장 흔한 모습. 고르면 닫힌다"),
+     "하나 고르기", "가장 흔한 모습입니다. 하나를 고르면 목록이 닫힙니다"),
     (mini('<div style="margin-top:10px;padding:0 6px"><div style="min-height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;gap:2px;padding:2px;flex-wrap:wrap"><span style="background:var(--accent-soft);color:var(--accent);border-radius:2px;padding:0 3px;font-size:5.5px">성수 ✕</span><span style="background:var(--accent-soft);color:var(--accent);border-radius:2px;padding:0 3px;font-size:5.5px">삼청 ✕</span></div></div>', bars="", tall=False, label="여러 개 고른 재현"),
-     "여럿 고르기", "고른 것이 <b>칩</b>으로 쌓인다. 지울 수 있어야 한다"),
+     "여럿 고르기", "고른 항목이 칸 안에 <b>칩</b>으로 하나씩 붙고, 칩마다 지울 수 있어야 합니다"),
     (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--accent);border-radius:3px;display:flex;align-items:center;padding:0 3px;font-size:6px">새로운가게</div><div style="border:1px solid var(--line);border-radius:3px;margin-top:3px;padding:4px;background:var(--surface);font-size:5.5px"><b>“새로운가게”</b> 그대로 쓰기</div></div>', bars="", tall=False, label="없는 값 허용 재현"),
-     "없는 값 받기", "목록에 없어도 받는 모드. 태그·키워드에서 흔하다"),
+     "없는 값 받기", "목록에 없는 값도 받는 방식입니다. 태그나 키워드를 입력하는 칸에서 흔히 씁니다"),
   ]),
-  code_lede="브라우저가 주는 부품이 없어서 <b>직접 만들어야</b> 합니다. 그래서 키보드와 스크린 리더 처리를 빠뜨리기 쉽습니다.",
+  code_lede="콤보박스는 브라우저가 제공하는 부품이 없어서 <b>직접 만들어야</b> 합니다. 그래서 키보드 조작과 스크린 리더 처리를 빠뜨리기 쉽습니다.",
   code='''&lt;<span class="t">input</span> <span class="a">role</span>=<span class="s">"combobox"</span> <span class="a">aria-expanded</span>=<span class="s">"false"</span>
        <span class="a">aria-controls</span>=<span class="s">"list"</span> <span class="a">aria-autocomplete</span>=<span class="s">"list"</span>
        <span class="a">autocomplete</span>=<span class="s">"off"</span>&gt;
@@ -93,31 +93,31 @@ input.setAttribute(<span class="s">'aria-activedescendant'</span>, <span class="
 <span class="c">// 서버에서 찾을 때는 한 글자마다 부르지 않는다</span>
 clearTimeout(t); t = setTimeout(search, <span class="a">250</span>);''',
   keys=kbd([
-    ("<kbd>↓</kbd><kbd>↑</kbd>", "항목을 옮긴다. 닫혀 있으면 연다. <b>포커스는 입력칸에 그대로</b>"),
-    ("<kbd>Enter</kbd>", "짚고 있는 것을 고른다. 없는 값 허용 모드면 적은 글자를 그대로 쓴다"),
-    ("<kbd>Esc</kbd>", "고르지 않고 닫는다. 한 번 더 누르면 적은 글자도 지운다"),
-    ("<kbd>Home</kbd><kbd>End</kbd>", "글자의 처음·끝으로. 목록이 아니라 <b>입력칸</b>이 받는다"),
-    ("스크린 리더", "<code>aria-activedescendant</code>로 짚은 항목을 읽히고, 결과 수를 라이브 리전으로 알린다"),
+    ("<kbd>↓</kbd><kbd>↑</kbd>", "항목을 옮기고, 목록이 닫혀 있으면 엽니다. 이때도 <b>포커스는 입력칸에 그대로 둡니다</b>"),
+    ("<kbd>Enter</kbd>", "짚고 있는 항목을 고릅니다. 목록에 없는 값을 받는 설정이면 입력한 글자를 그대로 값으로 씁니다"),
+    ("<kbd>Esc</kbd>", "고르지 않고 목록을 닫습니다. 한 번 더 누르면 입력한 글자도 지웁니다"),
+    ("<kbd>Home</kbd><kbd>End</kbd>", "입력한 글자의 처음이나 끝으로 커서를 옮깁니다. 이 키는 목록이 아니라 <b>입력칸</b>이 받습니다"),
+    ("스크린 리더", "<code>aria-activedescendant</code>로 짚은 항목을 읽어 주고, 결과 수는 라이브 리전으로 알립니다"),
   ]),
   backend=rows([
-    ("걸러내기를 어디서 하나", "목록이 작으면 화면에서, 크면 서버에서 합니다. 서버면 <b>디바운스</b>(250ms쯤)로 한 글자마다 부르지 않습니다."),
-    ("응답 순서 뒤섞임", "'블'·'블루'·'블루보'의 응답이 거꾸로 올 수 있습니다. <b>마지막 질의의 결과만</b> 반영합니다 — 안 그러면 엉뚱한 목록이 남습니다."),
-    ("값과 라벨", "고른 뒤 보내야 하는 건 보이는 이름이 아니라 <b>코드</b>입니다. 이름만 보내면 동명이인·동명 가맹점에서 바로 깨집니다."),
-    ("없는 값 허용 = 다른 계약", "받으면 서버가 <b>새 값을 만들</b> 수 있어야 하고, 안 받으면 <b>목록에 있는지 다시 검증</b>해야 합니다. 화면 설정 하나가 API 모양을 바꿉니다."),
+    ("걸러내기를 어디서 하나", "목록이 작으면 화면에서 거르고, 크면 서버에서 거릅니다. 서버에서 거를 때는 <b>디바운스</b>를 250ms쯤 걸어 글자 하나 칠 때마다 요청을 보내지 않게 합니다."),
+    ("응답 순서 뒤섞임", "'블', '블루', '블루보'를 차례로 보냈어도 응답은 거꾸로 올 수 있습니다. 그래서 <b>마지막으로 보낸 질의의 결과만</b> 반영해야 하고, 그렇지 않으면 지금 입력한 글자와 맞지 않는 목록이 남습니다."),
+    ("값과 라벨", "고른 뒤 서버에 보내야 하는 값은 화면에 보이는 이름이 아니라 <b>코드</b>입니다. 이름만 보내면 이름이 같은 사람이나 가맹점이 있을 때 어느 쪽인지 구별할 수 없습니다."),
+    ("없는 값 허용 = 다른 계약", "목록에 없는 값을 받으면 서버가 <b>새 값을 만들</b> 수 있어야 하고, 받지 않으면 서버가 그 값이 <b>목록에 있는지 다시 검증</b>해야 합니다. 화면의 설정 하나에 따라 API의 형태가 달라집니다."),
   ]),
-  plat_lede="웹에는 표준 부품이 없고, 모바일은 각자의 검색 화면으로 풉니다.",
+  plat_lede="웹에는 콤보박스 표준 부품이 없고, 모바일에서는 플랫폼마다 제공하는 검색 화면으로 해결합니다.",
   plats=plats([
     ("웹", "표준 부품 없음",
      mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--accent);border-radius:3px;display:flex;align-items:center;padding:0 3px;font-size:6px">블루보틀</div><div style="border:1px solid var(--line);border-radius:3px;margin-top:3px;padding:3px;background:var(--surface)"><div style="font-size:6px;padding:1px 3px"><b style="color:var(--accent)">블루보틀</b> 성수</div></div></div>', bars="", label="웹 콤보박스 재현"),
-     "<b>콤보박스</b> · <code>&lt;datalist&gt;</code>가 비슷하지만 모양을 못 바꾸고 동작도 제각각이라 거의 직접 만듭니다."),
+     "<b>콤보박스</b> · <code>&lt;datalist&gt;</code>가 비슷한 일을 하지만 모양을 바꿀 수 없고 브라우저마다 동작이 달라서, 대부분 직접 만듭니다."),
     ("iOS", "Apple HIG",
      phone('<div style="position:absolute;left:8px;right:8px;top:30px"><div style="background:var(--bg);border-radius:8px;padding:4px 6px;font-size:7px;color:var(--fg-muted)">⌕ 블루보틀</div><div style="margin-top:5px"><div style="font-size:7px;padding:3px 0;border-bottom:1px solid var(--line)">블루보틀 성수</div><div style="font-size:7px;padding:3px 0;color:var(--fg-muted)">블루보틀 삼청</div></div></div>', "iOS 검색 화면 재현"),
-     "<b>검색 화면</b>으로 푸는 쪽이 많습니다. 칸을 누르면 전체 화면 검색으로 넘어가고, 고르면 돌아옵니다."),
+     "<b>검색 화면</b>으로 해결하는 경우가 많습니다. 칸을 누르면 전체 화면 검색으로 넘어가고, 항목을 고르면 원래 화면으로 돌아옵니다."),
     ("안드로이드", "Material 3",
      phone('<div style="position:absolute;left:10px;right:10px;top:36px"><div style="border:1px solid var(--accent);border-radius:4px;padding:5px;font-size:7px">블루보틀</div><div style="background:var(--surface);border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,.25);margin-top:3px;padding:3px"><div style="font-size:7px;padding:3px 5px">블루보틀 성수</div></div></div>', "안드로이드 Exposed dropdown 재현"),
-     "<b>Exposed dropdown menu</b>의 편집 가능 모드, 또는 <b>Search bar</b>. 둘 다 표준으로 정리돼 있습니다."),
+     "<b>Exposed dropdown menu</b>의 편집 가능 모드나 <b>Search bar</b>를 씁니다. 둘 다 표준 부품으로 정리되어 있습니다."),
   ]),
-  plat_note="폰에서는 <b>칸 아래에 목록을 띄우는 방식이 잘 안 맞습니다.</b> 키보드가 올라오면 목록이 가려지기 때문입니다. 그래서 모바일에서는 전체 화면 검색이나 <a href=\"sheet.html\">바텀시트</a>로 바꾸는 편이 낫고, 그 결정을 디자인 시안에 같이 그려 둬야 합니다.",
+  plat_note="폰에서는 <b>칸 아래에 목록을 띄우는 방식이 잘 안 맞습니다.</b> 키보드가 올라오면 목록이 가려지기 때문입니다. 그래서 모바일에서는 전체 화면 검색이나 <a href=\"sheet.html\">바텀시트</a>로 바꾸는 편이 낫습니다. 모바일에서 어느 방식을 쓸지는 디자인 시안에 함께 그려 두어야 합니다.",
   siblings=siblings("combobox"),
   related='''        <li><span class="na"><b>태그 입력(칩 입력)</b><em>4부</em></span></li>
         <li><span class="na"><b>검색과 결과</b><em>13부</em></span></li>

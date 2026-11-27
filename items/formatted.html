@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>자동 서식 입력 — 이름표</title>
-<meta name="description" content="치는 동안 하이픈·공백을 넣어 주는 칸. 커서 튐, 붙여넣기 걸러내기, 보낼 값 분리.">
+<meta name="description" content="치는 동안 하이픈이나 공백을 넣어 주는 칸에서 커서가 튀는 문제와 붙여넣은 기호 걸러내기, 보낼 값을 따로 두는 법을 다루는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">4부 조작 부품</a> › 자동 서식 입력</p>
     <h1>자동 서식 입력</h1>
     <p class="en">Formatted input · input mask</p>
-    <p class="lede" style="margin-top:var(--s3)">서식은 <b>보이는 것</b>일 뿐입니다. 보낼 때는 <b>숫자만</b> 남겨야 합니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">자동 서식 입력은 사용자가 숫자를 치는 동안 하이픈이나 공백을 넣어 읽기 쉽게 보여 주는 칸입니다. 서식은 화면에 <b>보이는 모양</b>에만 쓰고, 서버로 보낼 때는 <b>숫자만</b> 남겨야 합니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,31 +50,31 @@
           <iframe src="../demos/formatted.html" title="자동 서식 입력 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>'<b>기호가 섞인 값 붙여넣기</b>'를 눌러 보세요 — 걸러내기를 끄면
-          데모가 <b>서버로 갈 값이 어떻게 지저분한지</b>를 그대로 보여 줍니다.<br>
-          서식은 보이는 것일 뿐이고, 보낼 때는 숫자만 남겨야 합니다 —
-          데모가 둘을 나란히 적습니다.<br>
-          치는 동안 서식을 넣으면 <b>커서가 튀기</b> 쉽습니다. 데모가 커서 자리도 같이 적습니다.</p>
+          <p>'<b>기호가 섞인 값 붙여넣기</b>'를 눌러 보세요. 걸러내기를 끄면
+          <b>서버로 갈 값에 기호가 어떻게 섞이는지</b> 데모가 그대로 보여 줍니다.<br>
+          서식은 화면에 보이는 모양에만 쓰고, 보낼 때는 숫자만 남겨야 합니다.
+          데모가 칸에 보이는 값과 서버로 갈 값을 나란히 적어 줍니다.<br>
+          치는 동안 서식을 넣으면 <b>커서가 엉뚱한 자리로 튀기</b> 쉬워서, 데모가 커서 자리도 함께 적어 줍니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>자동 서식 입력, 입력 마스크, 서식 입력</td></tr>
             <tr><th>영어</th><td>formatted input, input mask, masked input</td></tr>
-            <tr><th>같이 쓰는 말</th><td>정해진 꼴로 칸을 채우게 하는 것을 <b>입력 마스크</b>(input mask), 치는 동안 서식이 들어가는 것을 <b>라이브 포매팅</b>이라 합니다. 자릿수를 다 채우면 다음 칸으로 넘기는 동작은 <b>오토 탭</b>(auto-tab)입니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>자리글</b> — <a href="placeholder.html">자리글</a>은 <b>치면 사라지는 안내</b>입니다.<br><b>입력 검증</b> — <a href="validation.html">입력 검증</a>은 <b>맞는지 보는</b> 일이고, 이건 <b>꼴을 맞춰 주는</b> 일입니다.<br><b>숫자 입력</b> — <a href="numberinput.html">숫자 입력</a>에는 하이픈이 없습니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>정해진 꼴에 맞춰 칸을 채우게 하는 것은 <b>입력 마스크</b>(input mask), 치는 동안 서식이 들어가는 것은 <b>라이브 포매팅</b>이라고 부릅니다. 자릿수를 다 채우면 다음 칸으로 넘기는 동작은 <b>오토 탭</b>(auto-tab)이라고 합니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>자리글</b> — <a href="placeholder.html">자리글</a>은 서식을 넣어 주지 않고, 사용자가 치기 시작하면 <b>사라지는 안내</b>입니다.<br><b>입력 검증</b> — <a href="validation.html">입력 검증</a>은 값이 <b>맞는지 확인하는</b> 일이고, 자동 서식 입력은 값의 <b>모양을 맞춰 주는</b> 일입니다.<br><b>숫자 입력</b> — <a href="numberinput.html">숫자 입력</a>은 하이픈 같은 서식을 넣지 않습니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>조작 부품은 모두 '값을 받는다'는 점이 같습니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>조작 부품은 모두 사용자에게서 값을 받는다는 점은 같지만, 아래 네 가지를 따져 보면 서로 구별할 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>고르는 개수</th><th>선택지가 보이나</th><th>바로 적용되나</th><th>타이핑</th></tr></thead>
@@ -105,57 +105,57 @@
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — <b>보이는 값과 보낼 값을 나누세요.</b> 서식은 화면의 일입니다.</p>
+          <p><b>자동 서식 입력을 한 줄로 정리하면</b> — <b>보이는 값과 보낼 값을 나누세요.</b> 하이픈 같은 서식은 화면에서만 붙이고, 서버에는 숫자만 보냅니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">그림 한 장으로는 못 배운다</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">상태마다 달라지는 모습</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:block;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:3px 6px;font-size:8.5px;font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">123-45-67890</span><span style="font-size:7.5px;color:var(--fg-muted);font-family:var(--mono)">보낼 값 1234567890</span><span style="font-size:8.5px;color:var(--fg-muted)">서식이 들어갔다</span></div>
             </div>
-            <figcaption>기본<span><b>보이는 값</b>과 보낼 값</span></figcaption>
+            <figcaption>기본<span>칸에는 서식이 든 <b>보이는 값</b>이, 서버에는 숫자만 든 보낼 값이 갑니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:block;border:1px solid var(--line);border-radius:4px;background:var(--surface);padding:3px 6px;font-size:8.5px;font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">123-45-678</span><span style="font-size:7.5px;color:var(--fg-muted);font-family:var(--mono)">보낼 값 123456780</span><span style="font-size:8.5px;color:var(--fg-muted)">아직 덜 찼다</span></div>
             </div>
-            <figcaption>치는 중<span>자릿수를 <b>세어 준다</b></span></figcaption>
+            <figcaption>치는 중<span>몇 자리를 쳤는지 <b>세어 보여 줍니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:block;border:1px solid var(--danger);border-radius:4px;background:var(--surface);padding:3px 6px;font-size:8.5px;font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">123-45-67890 (주)</span><span style="font-size:7.5px;color:var(--fg-muted);font-family:var(--mono)">보낼 값 12345678900</span><span style="font-size:8.5px;color:var(--fg-muted)">기호가 그대로 들어갔다</span></div>
             </div>
-            <figcaption>안 걸러냄<span><b>서버가 거절한다</b></span></figcaption>
+            <figcaption>안 걸러냄<span>기호가 섞인 값을 보내면 <b>서버가 거절합니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:block;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:3px 6px;font-size:8.5px;font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">1234 5678 9012 3456</span><span style="font-size:7.5px;color:var(--fg-muted);font-family:var(--mono)">보낼 값 1234567890123456</span><span style="font-size:8.5px;color:var(--fg-muted)">카드는 네 자리씩</span></div>
             </div>
-            <figcaption>다른 꼴<span><b>종류마다</b> 다르다</span></figcaption>
+            <figcaption>다른 꼴<span>서식은 번호 <b>종류마다</b> 다릅니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--danger)">커서 튐</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px">123-45-6|7890</span><span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">커서가 맨 뒤로 튀면 못 고친다</span></span></div></div>
             </div>
-            <figcaption>커서 튐<span><b>가운데를 못 고친다</b></span></figcaption>
+            <figcaption>커서 튐<span>커서가 맨 뒤로 튀어서 <b>가운데 글자를 고칠 수 없습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:block;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:3px 6px;font-size:8.5px;font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">010-1234-5678</span><span style="font-size:7.5px;color:var(--fg-muted);font-family:var(--mono)">보낼 값 01012345678</span><span style="font-size:8.5px;color:var(--fg-muted)">앞의 0 이 살아 있다</span></div>
             </div>
-            <figcaption>앞의 0<span><b><code>text</code></b> 라서 안 사라진다</span></figcaption>
+            <figcaption>앞의 0<span><b><code>text</code></b> 칸이라서 앞의 0이 사라지지 않습니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="자동 서식 입력의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="자동 서식 입력의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
                   <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">보이는 값 — 하이픈·공백이 들어간 꼴</div>
@@ -169,77 +169,77 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>보이는 값 <em>서식 포함</em></b><span>읽기 좋게</span></li>
-            <li><b>보낼 값 <em>숫자만</em></b><span><b>화면이</b> 벗긴다</span></li>
-            <li><b>붙여넣기 <em>걸러내기</em></b><span>공백·괄호·점</span></li>
-            <li><b>커서 <em>튀기 쉬움</em></b><span><b>친 숫자 개수</b>로 되돌린다</span></li>
-            <li><b>오토 탭 <em>다 채우면</em></b><span>다음 칸으로</span></li>
-            <li><b>Backspace <em>기호 건너뛰기</em></b><span>하이픈에서 <b>멈추지 않게</b></span></li>
+            <li><b>보이는 값 <em>서식 포함</em></b><span>하이픈이나 공백을 넣어 읽기 쉽게 보여 줍니다</span></li>
+            <li><b>보낼 값 <em>숫자만</em></b><span>보내기 전에 <b>화면에서</b> 서식 글자를 지웁니다</span></li>
+            <li><b>붙여넣기 <em>걸러내기</em></b><span>붙여넣은 값에 섞인 공백·괄호·점을 걸러 냅니다</span></li>
+            <li><b>커서 <em>튀기 쉬움</em></b><span>서식을 넣은 뒤 <b>커서 앞에 있던 숫자 개수</b>를 기준으로 커서를 되돌립니다</span></li>
+            <li><b>오토 탭 <em>다 채우면</em></b><span>자릿수를 다 채우면 다음 칸으로 넘어갑니다</span></li>
+            <li><b>Backspace <em>기호 건너뛰기</em></b><span>지울 때 하이픈에서 <b>멈추지 않게</b> 합니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          <b>커서가 튀는 것</b>이 이 부품의 가장 흔한 버그입니다 —
-          값을 다시 쓰면 커서가 맨 뒤로 가서,
-          가운데 한 글자를 고치려던 사람은 <b>매번 끝으로 끌려갑니다</b>.
-          고치는 법은 간단합니다 — 서식을 넣기 전에
-          <b>커서 앞의 숫자가 몇 개였는지</b>를 세어 두고,
-          새 값에서 같은 개수만큼 지난 자리로 커서를 돌려놓으면 됩니다.<br>
-          <b>오토 탭</b>은 편해 보이지만 조심해야 합니다 —
-          자동으로 넘어간 뒤 Backspace 를 누르면
-          <b>앞 칸으로 못 돌아가는</b> 구현이 많습니다.</p>
+          이 부품에서 가장 흔한 버그는 <b>커서가 튀는 것</b>입니다.
+          서식을 넣으려고 칸의 값을 통째로 다시 쓰면 커서가 맨 뒤로 가기 때문에,
+          가운데 한 글자를 고치려던 사용자는 <b>글자를 칠 때마다 커서가 끝으로 옮겨집니다</b>.
+          고치는 방법은 간단합니다. 서식을 넣기 전에
+          <b>커서 앞에 숫자가 몇 개 있었는지</b> 세어 두고,
+          새 값에서 숫자를 같은 개수만큼 지난 자리로 커서를 돌려놓으면 됩니다.<br>
+          <b>오토 탭</b>은 편해 보이지만 조심해서 써야 합니다.
+          자동으로 다음 칸으로 넘어간 뒤 Backspace를 눌러도
+          <b>앞 칸으로 돌아가지 못하는</b> 구현이 많기 때문입니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>자동 서식 입력을 쓰는 경우</h3>
             <ul>
               <li><b>보이는 값과 보낼 값</b>을 나누기</li>
-              <li>붙여넣은 <b>기호를 걸러내기</b></li>
-              <li>서식을 넣은 뒤 <b>커서를 되돌리기</b></li>
+              <li>붙여넣은 값에서 <b>기호를 걸러내기</b></li>
+              <li>서식을 넣은 뒤 <b>커서를 원래 자리로 되돌리기</b></li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>자동 서식 입력을 쓰지 않는 경우</h3>
             <ul>
-              <li>기호가 섞인 채로 <b>서버에 보내기</b></li>
-              <li>커서를 <b>맨 뒤로</b> 보내기</li>
-              <li><code>type="number"</code> 에 서식 넣기 — <b>값이 사라진다</b></li>
-              <li>자리글로 서식을 흉내 내기 — <b>치면 사라진다</b></li>
+              <li>기호가 섞인 값을 그대로 <b>서버에 보내기</b></li>
+              <li>서식을 넣을 때마다 커서를 <b>맨 뒤로</b> 보내기</li>
+              <li><code>type="number"</code> 칸에 서식 넣기. 하이픈이 들어가면 <b>값이 사라집니다</b></li>
+              <li>자리글로 서식을 흉내 내기. 사용자가 치기 시작하면 <b>안내가 사라집니다</b></li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 서식 없는 숫자는 <a href="numberinput.html">숫자 입력</a>, 맞는지 보는 일은 <a href="validation.html">입력 검증</a>, 안내 글은 <a href="placeholder.html">자리글과 헬퍼 텍스트</a>, 오류 문구는 <a href="errortext.html">오류 문구</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>자동 서식 입력 대신 다른 것을 써야 하는 경우</b> — 서식 없는 숫자는 <a href="numberinput.html">숫자 입력</a>, 값이 맞는지 확인하는 일은 <a href="validation.html">입력 검증</a>, 칸 안팎의 안내 글은 <a href="placeholder.html">자리글과 헬퍼 텍스트</a>, 오류 문구는 <a href="errortext.html">오류 문구</a>.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:4px"><span style="display:block;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:3px 6px;font-size:8.5px;font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">123-45-67890</span><span style="font-size:7.5px;color:var(--fg-muted);font-family:var(--mono)">보낼 값 1234567890</span></div>
             </div>
-            <figcaption><b>사업자번호</b><b>세 자리씩</b></figcaption>
+            <figcaption><b>사업자번호</b><b>세 자리씩</b> 끊어 하이픈을 넣습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:4px"><span style="display:block;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:3px 6px;font-size:8.5px;font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">010-1234-5678</span><span style="font-size:7.5px;color:var(--fg-muted);font-family:var(--mono)">보낼 값 01012345678</span></div>
             </div>
-            <figcaption><b>전화번호</b>앞의 0 이 <b>살아야</b> 한다</figcaption>
+            <figcaption><b>전화번호</b>맨 앞의 0이 <b>사라지지 않아야</b> 합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:4px"><span style="display:block;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:3px 6px;font-size:8.5px;font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">1234 5678 9012 3456</span><span style="font-size:7.5px;color:var(--fg-muted);font-family:var(--mono)">보낼 값 1234567890123456</span></div>
             </div>
-            <figcaption><b>카드번호</b><b>네 자리씩</b></figcaption>
+            <figcaption><b>카드번호</b><b>네 자리씩</b> 끊어 공백을 넣습니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">이 부품의 계약서</span></h2>
-        <p>숫자만 뽑아 다시 꼴을 만들고, <b>커서를 되돌립니다</b>.</p>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+        <p>칸의 값에서 숫자만 뽑아 서식을 다시 입힌 뒤, <b>커서를 원래 자리로 되돌립니다</b>.</p>
 <pre class="code"><span class="t">const</span> digits = s =&gt; s.replace(/[^\d]/g, <span class="s">''</span>);
 <span class="t">const</span> fmt = raw =&gt; [raw.slice(<span class="a">0</span>, <span class="a">3</span>), raw.slice(<span class="a">3</span>, <span class="a">5</span>), raw.slice(<span class="a">5</span>, <span class="a">10</span>)]
   .filter(Boolean).join(<span class="s">'-'</span>);
@@ -258,42 +258,42 @@ input.addEventListener(<span class="s">'input'</span>, () =&gt; {
 });</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td><code>inputmode="numeric"</code></td><td>폰에서 <b>숫자 자판</b>이 뜬다</td></tr>
-            <tr><td>Backspace</td><td>하이픈에서 <b>멈추지 않게</b> 한 칸 더 지운다</td></tr>
-            <tr><td>붙여넣기</td><td><code>paste</code> 에서 <b>기호를 걸러</b> 낸다</td></tr>
-            <tr><td><code>autocomplete</code></td><td><code>tel</code>·<code>cc-number</code> 처럼 <b>뜻을 적어</b> 둔다</td></tr>
-            <tr><td><code>maxlength</code></td><td>서식 글자까지 세니 <b>넉넉하게</b> 둔다</td></tr>
-            <tr><td>확인하는 법</td><td>가운데 한 글자를 고쳐 보고 <b>커서가 튀는지</b> 본다</td></tr>
+            <tr><td><code>inputmode="numeric"</code></td><td>폰에서 <b>숫자 자판</b>이 뜹니다</td></tr>
+            <tr><td>Backspace</td><td>하이픈에서 <b>멈추지 않도록</b> 한 칸 더 지웁니다</td></tr>
+            <tr><td>붙여넣기</td><td><code>paste</code> 이벤트에서 <b>기호를 걸러</b> 냅니다</td></tr>
+            <tr><td><code>autocomplete</code></td><td><code>tel</code>·<code>cc-number</code>처럼 칸에 들어갈 값의 <b>종류를 적어</b> 둡니다</td></tr>
+            <tr><td><code>maxlength</code></td><td>하이픈 같은 서식 글자까지 세기 때문에 <b>넉넉하게</b> 둡니다</td></tr>
+            <tr><td>확인하는 법</td><td>가운데 한 글자를 고쳐 보고 <b>커서가 튀는지</b> 확인합니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>숫자만 받는다</th><td><code>"123-45-67890"</code> 이 아니라 <code>"1234567890"</code> 으로 보냅니다.</td></tr>
-            <tr><th>관대하게 받기</th><td>그래도 서버는 <b>기호가 섞여 와도</b> 걸러서 받는 편이 안전합니다.</td></tr>
-            <tr><th>검증은 서버에서</th><td>사업자번호 체크섬 같은 것은 <b>서버가</b> 봐야 믿을 수 있습니다.</td></tr>
+            <tr><th>숫자만 받는다</th><td>서버에는 <code>"123-45-67890"</code>이 아니라 <code>"1234567890"</code>으로 보냅니다.</td></tr>
+            <tr><th>관대하게 받기</th><td>화면에서 숫자만 보내더라도, 서버는 <b>기호가 섞인 값이 와도</b> 걸러서 받는 편이 안전합니다.</td></tr>
+            <tr><th>검증은 서버에서</th><td>사업자번호 체크섬 같은 검사는 <b>서버에서</b> 해야 결과를 믿을 수 있습니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p><b>직접 만드는 쪽</b>이 대부분입니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>자동 서식 입력은 어느 플랫폼에서든 <b>직접 만드는 경우</b>가 대부분입니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>직접 만듦</span></header>
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:4px"><span style="display:block;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:3px 6px;font-size:8.5px;font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">123-45-67890</span><span style="font-size:7.5px;color:var(--fg-muted);font-family:var(--mono)">보낼 값 1234567890</span></div>
             </div>
-            <footer>표준 마스크가 없어 직접 만듭니다 — <b>커서 처리</b>가 늘 어렵습니다.</footer>
+            <footer>표준 마스크 기능이 없어서 직접 만들어야 하고, 그때마다 <b>커서 처리</b>가 까다롭습니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>직접 만듦</span></header>
@@ -302,7 +302,7 @@ input.addEventListener(<span class="s">'input'</span>, () =&gt; {
                 <div style="position:absolute;left:5px;right:5px;top:26px;height:10px;border-radius:3px;border:1px solid var(--line)"></div>
                 <div style="position:absolute;left:8px;top:29px;font-size:5px;font-family:var(--mono)">123-45-6789</div></div></div>
             </div>
-            <footer>역시 직접 만듭니다. <code>textField(shouldChangeCharactersIn:)</code> 에서 다듬습니다.</footer>
+            <footer>iOS에서도 직접 만듭니다. <code>textField(shouldChangeCharactersIn:)</code>에서 들어오는 글자를 받아 서식을 입힙니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>VisualTransformation</span></header>
@@ -311,18 +311,18 @@ input.addEventListener(<span class="s">'input'</span>, () =&gt; {
                 <div style="position:absolute;left:5px;right:5px;top:26px;height:11px;border-radius:3px;border:1px solid var(--line)"></div>
                 <div style="position:absolute;left:8px;top:29px;font-size:5px;font-family:var(--mono)">123-45-6789</div></div></div>
             </div>
-            <footer>Compose 의 <b>VisualTransformation</b> 이 값과 보이는 꼴을 <b>아예 나눕니다</b>.</footer>
+            <footer>Compose의 <b>VisualTransformation</b>은 저장되는 값과 화면에 보이는 모양을 <b>처음부터 나눠</b> 다룹니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — 안드로이드 Compose 의 <b>VisualTransformation</b> 은 이 항목의 핵심을 언어 차원에서 푼 드문 예입니다 — <b>값은 숫자만</b>, <b>보이는 것은 서식</b>으로 나누고 커서 자리까지 맞춰 줍니다. 웹에서 직접 만들 때도 이 구조를 흉내 내면 — 값과 보이는 꼴을 따로 들고, 커서는 숫자 개수로 계산 — 버그가 확 줄어듭니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — 안드로이드 Compose의 <b>VisualTransformation</b>은 이 항목에서 다룬 문제를 플랫폼 API로 풀어 둔 드문 예입니다. <b>값에는 숫자만</b> 두고 <b>화면에는 서식을 입힌 모양</b>을 보여 주며, 커서 자리도 둘 사이에서 맞춰 줍니다. 웹에서 직접 만들 때도 같은 구조를 따라 값과 보이는 모양을 따로 들고 커서 자리를 숫자 개수로 계산하면, 커서가 튀는 버그를 크게 줄일 수 있습니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="field.html"><b>텍스트 필드</b><em>4부</em></a></li>
         <li><a href="select.html"><b>셀렉트</b><em>4부</em></a></li>
@@ -346,20 +346,20 @@ input.addEventListener(<span class="s">'input'</span>, () =&gt; {
         <li><a href="disabledstate.html"><b>비활성과 읽기 전용</b><em>4부</em></a></li>
         <li><a href="splitbutton.html"><b>분할 버튼</b><em>4부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="numberinput.html"><b>숫자 입력</b><em>4부</em></a></li>
         <li><a href="validation.html"><b>입력 검증</b><em>10부</em></a></li>
         <li><a href="field.html"><b>텍스트 필드</b><em>4부</em></a></li>
         <li><a href="placeholder.html"><b>자리글과 헬퍼 텍스트</b><em>14부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

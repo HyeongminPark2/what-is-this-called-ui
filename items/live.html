@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>라이브 리전 — 이름표</title>
-<meta name="description" content="저절로 바뀐 화면을 소리로 알리는 방법과, 리전을 미리 두어야 하는 이유를 보여주는 항목.">
+<meta name="description" content="사용자가 보고 있지 않은 사이에 바뀐 화면 내용을 소리로 알리는 방법과, 리전을 미리 만들어 두어야 하는 이유를 보여 주는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">12부 접근성</a> › 라이브 리전</p>
     <h1>라이브 리전</h1>
     <p class="en">Live region</p>
-    <p class="lede" style="margin-top:var(--s3)">화면이 <b>저절로 바뀐 것</b>을 소리로 알리는 자리. 눈으로는 보이지만 소리로는 안 들리는 틈을 메웁니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">라이브 리전은 화면 내용이 <b>저절로 바뀌었을 때</b> 스크린 리더가 그 내용을 소리로 읽어 주게 하는 영역입니다. 화면에 새로 뜬 내용은 눈으로는 바로 보이지만, 라이브 리전이 없으면 스크린 리더는 아무것도 읽지 않습니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,30 +50,30 @@
           <iframe src="../demos/live.html" title="라이브 리전 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>세 버튼을 눌러 보세요. <b>조용히 바꾸기</b>는 화면 숫자만 바뀌고
-          아래 기록은 그대로입니다 — 화면을 못 보는 사람에게는 <b>아무 일도 없던 것</b>입니다.<br>
-          <code>status</code>는 <b>하던 말이 끝난 뒤</b>, <code>alert</code>는 <b>말을 끊고</b> 알립니다.
-          기록의 '[기다렸다가]'와 '[말을 끊고]'가 그 차이입니다.</p>
+          <p>세 버튼을 눌러 보세요. <b>조용히 바꾸기</b>를 누르면 화면의 숫자만 바뀌고
+          아래 기록에는 아무것도 남지 않습니다. 화면을 보지 못하는 사람은 <b>무엇이 바뀌었는지 전혀 알 수 없습니다</b>.<br>
+          <code>status</code>는 스크린 리더가 <b>읽던 말을 마친 뒤</b> 알리고, <code>alert</code>는 <b>읽던 말을 끊고</b> 바로 알립니다.
+          기록에 찍히는 '[기다렸다가]'와 '[말을 끊고]'가 이 차이를 보여 줍니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>라이브 리전, 실시간 알림 영역</td></tr>
             <tr><th>영어</th><td>live region, aria-live, polite, assertive</td></tr>
-            <tr><th>같이 쓰는 말</th><td>기다렸다 읽는 것을 <b>polite</b>, 말을 끊고 읽는 것을 <b>assertive</b>라 합니다. <code>role="status"</code>는 polite 의, <code>role="alert"</code>는 assertive 의 짧은 이름입니다. 여러 번 바뀔 때 다 읽을지 정하는 것은 <b><code>aria-atomic</code></b>·<b><code>aria-relevant</code></b> 입니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>토스트</b> — 토스트는 <b>부품</b>이고 라이브 리전은 <b>읽히게 하는 장치</b>입니다. 토스트를 띄워도 리전이 없으면 안 읽힙니다.<br><b>알림</b>(notification) — 브라우저 알림은 다른 기능입니다.<br><b><code>alert()</code></b> — 자바스크립트의 그 함수와는 아무 상관이 없습니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>읽던 말을 마칠 때까지 기다렸다가 읽는 방식은 <b>polite</b>, 읽던 말을 끊고 바로 읽는 방식은 <b>assertive</b>라고 합니다. <code>role="status"</code>는 polite 리전을, <code>role="alert"</code>는 assertive 리전을 짧게 쓰는 방법입니다. 내용이 바뀔 때 무엇을 읽을지는 <b><code>aria-atomic</code></b>과 <b><code>aria-relevant</code></b>로 정합니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>토스트</b> — 토스트는 화면에 뜨는 <b>부품</b>이고, 라이브 리전은 그 내용을 <b>스크린 리더가 읽게 하는 장치</b>입니다. 그래서 토스트를 띄워도 라이브 리전이 없으면 스크린 리더는 읽지 않습니다.<br><b>알림</b>(notification) — 브라우저가 띄우는 알림은 라이브 리전과 다른 기능입니다.<br><b><code>alert()</code></b> — <code>role="alert"</code>는 자바스크립트의 <code>alert()</code> 함수와 아무 상관이 없습니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>접근성은 '눈으로는 안 보이는 것을 챙기는 일'입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>접근성은 눈으로는 보이지 않는 부분까지 챙기는 일입니다. 아래 네 가지를 물어보면 이 부의 항목들이 서로 어떻게 다른지 가를 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>무엇을 돕나</th><th>눈으로 보이나</th><th>안 하면 누가 막히나</th><th>어떻게 확인하나</th></tr></thead>
@@ -82,7 +82,7 @@
             <tr><td>포커스 트랩</td><td>모달 안에 가두기</td><td>안 보인다</td><td>키보드·스크린 리더</td><td>모달에서 Tab 을 돌려 본다</td></tr>
             <tr><td>키보드 조작</td><td>마우스 없이 <b>전부</b></td><td>안 보인다</td><td>마우스를 못 쓰는 사람</td><td>마우스를 치우고 해 본다</td></tr>
             <tr><td>이름 붙이기</td><td>뭐라고 <b>부르나</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>접근성 트리를 본다</td></tr>
-            <tr><td>스크린 리더가 읽는 것</td><td>역할 · 이름 · <b>상태</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>실제로 읽혀 본다</td></tr>
+            <tr><td>스크린 리더가 읽는 것</td><td>역할 · 이름 · <b>상태</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>직접 들어 본다</td></tr>
             <tr class="me"><td><b>라이브 리전</b></td><td><b>저절로 바뀐 것</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>바꿔 놓고 들어 본다</td></tr>
             <tr><td>대비비</td><td>글자가 <b>읽히나</b></td><td><b>보인다</b></td><td>저시력 · 밝은 곳 · 싼 화면</td><td><b>재 본다</b>(숫자로 나온다)</td></tr>
             <tr><td>시맨틱 태그</td><td>화면의 <b>구조</b></td><td>안 보인다</td><td><b>거의 모두</b></td><td>구역 목록을 열어 본다</td></tr>
@@ -92,7 +92,7 @@
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — 라이브 리전은 <b>미리 비워 둔 채로 있어야</b> 합니다. 알릴 때 통째로 만들면 읽지 않습니다 — 가장 흔한 실수입니다.</p>
+          <p><b>라이브 리전을 한 줄로 정리하면</b> — 라이브 리전은 <b>처음부터 빈 채로 화면에 두어야</b> 합니다. 알릴 때가 되어서야 리전을 새로 만들면 스크린 리더가 읽지 않는데, 이것이 가장 흔한 실수입니다.</p>
         </div>
       </section>
 
@@ -103,46 +103,46 @@
             <div class="shot">
               <div style="width:100%;max-width:168px;display:grid;gap:7px;justify-items:center"><span style="display:inline-block;background:var(--ink-900);color:#fff;border-radius:6px;padding:6px 11px;font-size:11px">저장했습니다</span><span style="font-family:var(--mono);font-size:10px;color:var(--danger);font-weight:700;text-align:center">(안 읽힘) — 리전이 없다</span></div>
             </div>
-            <figcaption>리전 없음<span>화면에는 떴는데 <b>소리로는 아무 일도 없다</b></span></figcaption>
+            <figcaption>리전 없음<span>화면에는 토스트가 떴지만 <b>스크린 리더는 아무것도 읽지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:168px;display:grid;gap:7px;justify-items:center"><span style="display:inline-block;background:var(--ink-900);color:#fff;border-radius:6px;padding:6px 11px;font-size:11px">저장했습니다</span><span style="font-family:var(--mono);font-size:10px;color:#1f8a4c;font-weight:700;text-align:center">[기다렸다가] "저장했습니다"</span></div>
             </div>
-            <figcaption>status<span><b>하던 말이 끝난 뒤</b> 알린다. 대부분 이것</span></figcaption>
+            <figcaption>status<span><b>읽던 말을 마친 뒤</b> 알립니다. 대부분 이 방식을 씁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:168px;display:grid;gap:7px;justify-items:center"><span style="display:inline-block;background:var(--ink-900);color:#fff;border-radius:6px;padding:6px 11px;font-size:11px">연결이 끊겼습니다</span><span style="font-family:var(--mono);font-size:10px;color:var(--warn);font-weight:700;text-align:center">[말을 끊고] "연결이 끊겼습니다"</span></div>
             </div>
-            <figcaption>alert<span><b>말을 끊는다.</b> 정말 급한 것에만</span></figcaption>
+            <figcaption>alert<span><b>읽던 말을 끊고</b> 알립니다. 정말 급한 내용에만 씁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:168px;display:grid;gap:7px;justify-items:center"><span style="display:inline-block;border:1px solid var(--line);border-radius:6px;padding:6px 11px;font-size:11px;background:var(--surface)">검색 결과 12건</span><span style="font-family:var(--mono);font-size:10px;color:#1f8a4c;font-weight:700;text-align:center">[기다렸다가] "검색 결과 12건"</span></div>
             </div>
-            <figcaption>결과 개수<span>입력할 때마다 바뀌는 숫자 — <b>polite 가 맞다</b></span></figcaption>
+            <figcaption>결과 개수<span>입력할 때마다 바뀌는 숫자이므로 <b>polite로 알리는 것이 맞습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:168px;display:grid;gap:7px;justify-items:center"><span style="display:inline-block;border:1px solid var(--danger);border-radius:6px;padding:6px 11px;font-size:11px;color:var(--danger)">계좌번호는 10자리입니다</span><span style="font-family:var(--mono);font-size:10px;color:var(--warn);font-weight:700;text-align:center">[말을 끊고] "계좌번호는 10자리입니다"</span></div>
             </div>
-            <figcaption>폼 오류<span>제출을 막은 오류는 <b>바로 알려야</b> 한다</span></figcaption>
+            <figcaption>폼 오류<span>제출을 막은 오류는 <b>바로 알려야</b> 합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:168px;display:grid;gap:7px;justify-items:center"><span style="display:inline-block;border:1px solid var(--line);border-radius:6px;padding:6px 11px;font-size:11px;background:var(--surface);color:var(--fg-muted)">1초마다 바뀌는 숫자</span><span style="font-family:var(--mono);font-size:10px;color:var(--danger);font-weight:700;text-align:center">(계속 읽어 시끄럽다)</span></div>
             </div>
-            <figcaption>너무 자주<span><b>수다스러운 리전</b>은 안 쓰느니만 못하다</span></figcaption>
+            <figcaption>너무 자주<span>내용이 <b>너무 자주 바뀌는 리전</b>은 스크린 리더가 쉬지 않고 읽어서, 리전을 두지 않은 것보다 더 불편합니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="라이브 리전의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="라이브 리전의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:15px">
                   <div class="pin-out" data-pin="1" style="display:inline-block;background:var(--ink-900);color:#fff;border-radius:7px;padding:8px 13px;font-size:12px;justify-self:start">정산이 3건 추가되었습니다</div>
@@ -156,54 +156,54 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>알릴 말 <em>message</em></b><span>저절로 바뀐 것. 사용자가 누른 결과거나 서버가 보낸 것</span></li>
-            <li><b>기다렸다 알리기 <em>role="status"</em></b><span>하던 말을 마치고 읽는다. <b>대부분 이것으로 충분</b></span></li>
-            <li><b>끊고 알리기 <em>role="alert"</em></b><span>말을 끊는다. <b>오류·연결 끊김</b>처럼 급한 것에만</span></li>
-            <li><b>미리 두기 <em>빈 리전</em></b><span><b>알릴 때 만들면 안 읽는다.</b> 처음부터 비워 둔 채로 있어야 한다</span></li>
-            <li><b>내용만 바꾸기 <em>textContent</em></b><span>리전을 지웠다 다시 만들면 <b>새 리전</b>이라 안 읽힌다</span></li>
-            <li><b>다 바뀐 뒤에 <em>aria-busy</em></b><span>여러 줄을 고칠 때 <code>true</code>로 묶었다가 끝나면 <code>false</code></span></li>
+            <li><b>알릴 말 <em>message</em></b><span>저절로 바뀐 내용입니다. 사용자가 누른 버튼의 결과일 수도 있고, 서버가 보낸 소식일 수도 있습니다</span></li>
+            <li><b>기다렸다 알리기 <em>role="status"</em></b><span>읽던 말을 마친 뒤에 읽습니다. <b>대부분은 이 방식으로 충분합니다</b></span></li>
+            <li><b>끊고 알리기 <em>role="alert"</em></b><span>읽던 말을 끊고 바로 읽습니다. <b>오류나 연결 끊김</b>처럼 급한 내용에만 씁니다</span></li>
+            <li><b>미리 두기 <em>빈 리전</em></b><span><b>알릴 때 리전을 만들면 읽지 않으므로</b>, 처음부터 빈 리전을 두어야 합니다</span></li>
+            <li><b>내용만 바꾸기 <em>textContent</em></b><span>리전을 지웠다가 다시 만들면 스크린 리더가 <b>새 리전</b>으로 보고 읽지 않습니다</span></li>
+            <li><b>다 바뀐 뒤에 <em>aria-busy</em></b><span>여러 줄을 한꺼번에 고칠 때 <code>true</code>로 두었다가, 다 고친 뒤 <code>false</code>로 바꿉니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          <b>리전을 알릴 때 만들면 안 읽힙니다.</b> 스크린 리더는 '이미 있던 리전의 내용이 바뀐 것'을
-          감시하기 때문입니다. 그래서 토스트를 띄울 때마다 <code>&lt;div role="status"&gt;</code>를
-          새로 붙이면 아무 소리도 안 납니다 — <b>빈 리전을 화면 어딘가에 미리 두고
-          그 안의 글만 바꾸는</b> 것이 정석입니다.</p>
+          <b>알릴 때가 되어서 리전을 만들면 스크린 리더가 읽지 않습니다.</b> 스크린 리더는 이미 있던 리전의 내용이 바뀌는 것만
+          지켜보기 때문입니다. 그래서 토스트를 띄울 때마다 <code>&lt;div role="status"&gt;</code>를
+          새로 붙이면 아무 소리도 나지 않습니다. <b>빈 리전을 화면 어딘가에 미리 두고
+          그 안의 글만 바꾸는</b> 것이 표준적인 방법입니다.</p>
       </section>
 
       <section class="slot" id="s6">
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>라이브 리전을 쓰는 경우</h3>
             <ul>
-              <li><b>사용자가 누른 뒤 저절로</b> 바뀌는 것 — 저장됨, 삭제됨, N건 추가됨</li>
-              <li>검색 결과 개수처럼 <b>입력에 따라</b> 바뀌는 숫자</li>
-              <li>폼 오류 — 제출을 막았으면 <code>alert</code></li>
-              <li>연결 끊김·세션 만료</li>
+              <li>저장됨, 삭제됨, N건 추가됨처럼 <b>사용자가 버튼을 누른 뒤 저절로</b> 바뀌는 내용을 알릴 때</li>
+              <li>검색 결과 개수처럼 <b>입력에 따라</b> 바뀌는 숫자를 알릴 때</li>
+              <li>폼 오류를 알릴 때. 오류 때문에 제출을 막았다면 <code>alert</code>로 알립니다</li>
+              <li>연결이 끊기거나 세션이 만료되었을 때</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>라이브 리전을 쓰지 않는 경우</h3>
             <ul>
-              <li><b>1초마다 바뀌는 것</b>에 거는 것 — 계속 읽어 시끄럽습니다</li>
-              <li><b>모든 것</b>에 <code>alert</code>를 쓰는 것 — 끊는 것은 거슬립니다</li>
-              <li>리전을 <b>알릴 때 만드는</b> 것 — 안 읽힙니다</li>
-              <li>화면에 안 보이는데 소리로만 알리는 것 — <b>둘 다</b> 있어야 합니다</li>
+              <li><b>1초마다 바뀌는 내용</b>에 걸 때. 스크린 리더가 쉬지 않고 읽어서 시끄럽습니다</li>
+              <li><b>모든 알림</b>에 <code>alert</code>를 쓸 때. 읽던 말이 자꾸 끊기면 사용자가 불편합니다</li>
+              <li>리전을 <b>알릴 때 새로 만들</b> 때. 스크린 리더가 읽지 않습니다</li>
+              <li>화면에는 보이지 않고 소리로만 알릴 때. 화면 표시와 소리 <b>둘 다</b> 있어야 합니다</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 부품 자체는 <a href="../items/toast.html">토스트</a>·<a href="../items/error.html">에러 상태</a>, 상태 속성은 <a href="screenreader.html">스크린 리더가 읽는 것</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>라이브 리전 대신 다른 것을 써야 하는 경우</b> — 부품 자체는 <a href="../items/toast.html">토스트</a>·<a href="../items/error.html">에러 상태</a>, 상태 속성은 <a href="screenreader.html">스크린 리더가 읽는 것</a>.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:190px;display:grid;gap:7px;justify-items:center"><span style="display:inline-block;background:var(--ink-900);color:#fff;border-radius:6px;padding:6px 11px;font-size:11px">정산을 확정했습니다</span><span style="font-family:var(--mono);font-size:10px;color:#1f8a4c;font-weight:700;text-align:center">[기다렸다가] 읽는다</span></div>
             </div>
-            <figcaption><b>토스트</b><b>리전은 따로</b> 둔다. 토스트 자체를 리전으로 만들면 안 읽힌다</figcaption>
+            <figcaption><b>토스트</b><b>리전은 토스트와 따로</b> 둡니다. 토스트를 띄울 때 토스트 자체를 리전으로 만들면 스크린 리더가 읽지 않습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -213,7 +213,7 @@
               </div>
               <div style="font-family:var(--mono);font-size:9.5px;color:#1f8a4c;margin-top:6px;text-align:center;font-weight:700">role="status"</div>
             </div>
-            <figcaption><b>검색 결과</b>타이핑할 때마다 바뀐다. <b>polite</b> 라야 안 시끄럽다</figcaption>
+            <figcaption><b>검색 결과</b>글자를 칠 때마다 바뀌기 때문에 <b>polite</b>로 알려야 시끄럽지 않습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -223,15 +223,15 @@
               </div>
               <div style="font-family:var(--mono);font-size:9.5px;color:var(--danger);margin-top:6px;text-align:center;font-weight:700">role="alert"</div>
             </div>
-            <figcaption><b>폼 오류</b>제출을 막았으면 <b>바로</b> 알린다</figcaption>
+            <figcaption><b>폼 오류</b>오류 때문에 제출을 막았다면 <b>바로</b> 알립니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 규칙<span class="hint">미리 두고 내용만 바꾼다</span></h2>
-        <p>빈 리전을 <b>미리</b> 두고, 알릴 때는 <b>그 안의 글만</b> 바꿉니다.</p>
-<pre class="code"><span class="c">&lt;!-- 화면 어딘가에 미리 — 비어 있는 채로 --&gt;</span>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 규칙<span class="hint">리전은 미리 두고 내용만 바꾼다</span></h2>
+        <p>빈 리전을 <b>미리</b> 만들어 두고, 알릴 때는 <b>리전 안의 글만</b> 바꿉니다.</p>
+<pre class="code"><span class="c">&lt;!-- 화면 어딘가에 빈 채로 미리 둔다 --&gt;</span>
 &lt;<span class="t">div</span> <span class="a">id</span>=<span class="s">"status"</span> <span class="a">role</span>=<span class="s">"status"</span> <span class="a">class</span>=<span class="s">"sr-only"</span>&gt;&lt;/<span class="t">div</span>&gt;
 &lt;<span class="t">div</span> <span class="a">id</span>=<span class="s">"errors"</span> <span class="a">role</span>=<span class="s">"alert"</span> <span class="a">class</span>=<span class="s">"sr-only"</span>&gt;&lt;/<span class="t">div</span>&gt;
 
@@ -242,73 +242,73 @@ status.textContent = <span class="s">'정산을 확정했습니다'</span>;
 status.textContent = <span class="s">''</span>;
 requestAnimationFrame(() =&gt; status.textContent = msg);
 
-<span class="c">/* 보이지 않게 두는 표준 방법 — display:none 은 안 읽힌다 */</span>
+<span class="c">/* 보이지 않게 두는 표준 방법. display:none 으로 숨기면 읽히지 않는다 */</span>
 <span class="t">.sr-only</span> { <span class="a">position</span>: absolute; <span class="a">width</span>: <span class="a">1px</span>; <span class="a">height</span>: <span class="a">1px</span>;
            <span class="a">overflow</span>: hidden; <span class="a">clip</span>: <span class="t">rect</span>(<span class="a">0 0 0 0</span>); }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
           <thead><tr><th>규칙</th><th>지켜야 하는 것</th></tr></thead>
           <tbody>
-            <tr><td>리전을 미리 둔다</td><td>비어 있는 채로. <b>알릴 때 만들면 안 읽힌다</b></td></tr>
-            <tr><td>내용만 바꾼다</td><td>요소를 갈아 끼우지 않는다</td></tr>
-            <tr><td><code>status</code>를 기본으로</td><td><code>alert</code>는 말을 끊으니 <b>정말 급한 것</b>에만</td></tr>
-            <tr><td><code>display:none</code>으로 숨기지 않는다</td><td>안 읽힌다. <code>.sr-only</code> 방식으로 숨긴다</td></tr>
-            <tr><td>같은 말을 또 알릴 때</td><td>한 번 비웠다가 다시 넣어야 <b>바뀐 것</b>으로 친다</td></tr>
-            <tr><td>자주 바뀌면 묶는다</td><td><code>aria-busy</code>로 묶었다가 <b>끝나고 한 번</b>만 읽히게</td></tr>
+            <tr><td>리전을 미리 둔다</td><td>빈 채로 미리 둡니다. <b>알릴 때 만들면 읽히지 않습니다</b></td></tr>
+            <tr><td>내용만 바꾼다</td><td>리전 요소를 새 요소로 바꾸지 않고 안의 글만 바꿉니다</td></tr>
+            <tr><td><code>status</code>를 기본으로</td><td><code>alert</code>는 읽던 말을 끊기 때문에 <b>정말 급한 내용</b>에만 씁니다</td></tr>
+            <tr><td><code>display:none</code>으로 숨기지 않는다</td><td><code>display:none</code>으로 숨기면 읽히지 않으므로 <code>.sr-only</code> 방식으로 숨깁니다</td></tr>
+            <tr><td>같은 말을 또 알릴 때</td><td>리전을 한 번 비웠다가 다시 넣어야 스크린 리더가 <b>내용이 바뀐 것</b>으로 봅니다</td></tr>
+            <tr><td>자주 바뀌면 묶는다</td><td><code>aria-busy</code>로 묶어 두었다가 바뀌는 일이 <b>끝난 뒤 한 번만</b> 읽히게 합니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>무엇을 알릴지 정한다</th><td>서버 응답이 올 때마다 다 알리면 시끄럽습니다. <b>사용자가 한 행동의 결과</b>만 알리는 것이 기준입니다.</td></tr>
-            <tr><th>실시간 밀어 주기</th><td>웹소켓으로 남이 바꾼 것까지 알리면 <b>끝없이 말합니다.</b> 내 행동과 남의 행동을 나눠 다룹니다.</td></tr>
-            <tr><th>문구는 짧게</th><td>소리로 듣는 글입니다. '정산 요청 #4821이(가) 정상적으로 처리 완료되었습니다' 보다 <b>'정산을 확정했습니다'</b>가 낫습니다.</td></tr>
-            <tr><th>검사</th><td>자동 도구는 리전이 <b>있는지</b>는 보지만 <b>실제로 읽히는지</b>는 못 봅니다. VoiceOver 를 켜고 한 번 해 보는 수밖에 없습니다.</td></tr>
+            <tr><th>무엇을 알릴지 정한다</th><td>서버 응답이 올 때마다 모두 알리면 시끄럽기 때문에, <b>사용자가 한 행동의 결과</b>만 알리는 것을 기준으로 삼습니다.</td></tr>
+            <tr><th>실시간 밀어 주기</th><td>웹소켓으로 받은 다른 사람의 변경까지 모두 알리면 <b>스크린 리더가 쉬지 않고 읽습니다.</b> 그래서 내가 한 행동의 결과와 다른 사람이 바꾼 내용을 나눠서 다룹니다.</td></tr>
+            <tr><th>문구는 짧게</th><td>라이브 리전의 문구는 소리로 듣는 글이므로 짧을수록 좋습니다. '정산 요청 #4821이(가) 정상적으로 처리 완료되었습니다' 보다 <b>'정산을 확정했습니다'</b>가 낫습니다.</td></tr>
+            <tr><th>검사</th><td>자동 검사 도구는 리전이 <b>있는지</b>는 확인하지만 <b>실제로 읽히는지</b>는 확인하지 못합니다. 그래서 VoiceOver를 켜고 직접 한 번 들어 봐야 합니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p>두 OS 는 <b>알림을 보내는 함수</b>로 같은 일을 합니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>iOS와 안드로이드에서는 <b>알림을 보내는 함수</b>를 불러 같은 일을 합니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>aria-live</span></header>
             <div class="shot">
               <div style="width:100%;max-width:120px;display:grid;gap:7px;justify-items:center"><span style="display:inline-block;background:var(--ink-900);color:#fff;border-radius:6px;padding:6px 11px;font-size:11px">저장했습니다</span><span style="font-family:var(--mono);font-size:10px;color:#1f8a4c;font-weight:700;text-align:center">role="status"</span></div>
             </div>
-            <footer><b>미리 둔 리전</b>의 내용을 바꿉니다. '알릴 때 만들면 안 읽힌다'는 함정이 웹 특유입니다.</footer>
+            <footer><b>미리 둔 리전</b>의 내용을 바꿔서 알립니다. 알릴 때 리전을 만들면 읽히지 않는 문제는 웹에만 있습니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>VoiceOver</span></header>
             <div class="shot">
               <div style="font-family:var(--mono);font-size:9.5px;color:var(--fg-muted);line-height:1.8;text-align:left">UIAccessibility<br>&nbsp;.post(notification:<br>&nbsp;.announcement)</div>
             </div>
-            <footer><b>함수를 불러</b> 알립니다. 리전을 미리 둘 필요가 없어 더 단순합니다.</footer>
+            <footer><b>함수를 불러</b> 알립니다. 리전을 미리 둘 필요가 없어서 웹보다 단순합니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>TalkBack</span></header>
             <div class="shot">
               <div style="font-family:var(--mono);font-size:9.5px;color:var(--fg-muted);line-height:1.8;text-align:left">announceForAccessibility<br>liveRegion = Polite</div>
             </div>
-            <footer>함수와 <b>liveRegion</b> 속성 둘 다 있습니다. 웹과 거의 같은 개념입니다.</footer>
+            <footer>함수로 알리는 방법과 <b>liveRegion</b> 속성을 다는 방법이 둘 다 있는데, liveRegion은 웹의 라이브 리전과 거의 같은 개념입니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — 앱은 <b>"이 말을 지금 해 줘"</b>라고 함수를 부르면 끝나지만, 웹은 <b>미리 둔 리전의 내용을 바꾸는</b> 간접적인 방식입니다. 그래서 "알림이 안 읽혀요"의 원인이 웹에서만 '리전을 새로 만들어서'인 경우가 많습니다.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — 앱에서는 읽을 문장을 넘겨 함수를 한 번 부르면 되지만, 웹에서는 <b>미리 둔 리전의 내용을 바꾸는</b> 간접적인 방식을 씁니다. 그래서 웹에서는 "알림이 안 읽혀요"라는 문제의 원인이 '리전을 새로 만들어서'인 경우가 많습니다.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="focus.html"><b>포커스</b><em>12부</em></a></li>
         <li><a href="focustrap.html"><b>포커스 트랩</b><em>12부</em></a></li>
@@ -320,20 +320,20 @@ requestAnimationFrame(() =&gt; status.textContent = msg);
         <li><a href="alttext.html"><b>대체 텍스트</b><em>12부</em></a></li>
         <li><a href="textzoom.html"><b>확대와 글자 크기</b><em>12부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="../items/toast.html"><b>토스트 · 스낵바</b><em>6부</em></a></li>
         <li><a href="../items/error.html"><b>에러 상태</b><em>8부</em></a></li>
         <li><a href="../items/progress.html"><b>프로그레스 바</b><em>8부</em></a></li>
         <li><a href="../items/screenreader.html"><b>스크린 리더가 읽는 것</b><em>12부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

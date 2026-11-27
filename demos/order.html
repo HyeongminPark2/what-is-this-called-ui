@@ -35,10 +35,10 @@
 </div>
 
 <p class="hint">
-  <b>Tab 으로 훑어보기</b>를 눌러 보세요 — 초점이 어느 차례로 가는지가 아래에 적힙니다.<br>
-  <code>row-reverse</code>와 <code>order</code>는 <b>보이기만</b> 바꿉니다. 눈으로는 취소가 먼저인데
-  <b>Tab 은 저장으로 먼저</b> 갑니다 — 키보드로 쓰는 사람에게는 화면이 거짓말을 하는 셈입니다.<br>
-  순서를 정말 바꾸려면 <b>마크업 순서</b>를 바꿉니다. 그러면 눈과 Tab 이 같아집니다.
+  <b>Tab 으로 훑어보기</b>를 누르면 초점이 어느 차례로 옮겨 가는지 아래에 적힙니다.<br>
+  <code>row-reverse</code>와 <code>order</code>는 <b>보이는 자리만</b> 바꿉니다. 그래서 눈으로는 취소가 먼저 보이는데
+  <b>Tab은 저장으로 먼저</b> 가고, 키보드를 쓰는 사람은 보이는 차례와 다르게 움직이는 초점을 따라가야 합니다.<br>
+  순서를 실제로 바꾸려면 <b>마크업 순서</b>를 바꿔야 보이는 차례와 Tab 차례가 같아집니다.
 </p>
 
 <script>
@@ -72,10 +72,10 @@
     document.getElementById('seen').textContent = '';
 
     document.getElementById('note').innerHTML = {
-      none: '눈과 Tab 이 같다 — <b>기본값이 옳다</b>',
-      rev: '<span class="warn">보이기만 뒤집혔다</span> — Tab 은 마크업 순서를 그대로 따라간다',
-      order: '<span class="warn">order 도 보이기만 바꾼다</span> — 한두 칸만 옮겨도 어긋난다',
-      dom: '마크업을 바꿨으니 <b>눈과 Tab 이 같다</b> — 이게 맞는 방법이다'
+      none: '보이는 차례와 Tab 차례가 같습니다. <b>기본 상태가 맞는 상태</b>입니다',
+      rev: '<span class="warn">보이는 자리만 뒤집혔습니다</span>. Tab은 마크업 순서를 그대로 따라갑니다',
+      order: '<span class="warn">order도 보이는 자리만 바꿉니다</span>. 한두 칸만 옮겨도 차례가 어긋납니다',
+      dom: '마크업을 바꿨기 때문에 <b>보이는 차례와 Tab 차례가 같습니다</b>. 이것이 맞는 방법입니다'
     }[k];
   }
 

@@ -59,12 +59,12 @@
 </div>
 
 <p class="hint">
-  <b>맞는 아이디는 hong / 1234</b> 입니다. 틀린 값으로 눌러 보세요.<br>
-  <b>오류를 자세히 말하기</b>를 켜면 '없는 아이디입니다'와 '비밀번호가 틀렸습니다'를 갈라 말합니다 —
-  친절해 보이지만 <b>어떤 아이디가 있는지 알려 주는</b> 셈이 됩니다. 남의 계정을 찾는 쪽에서는
-  이것만으로 목록을 만들 수 있습니다.<br>
-  <b>자동완성 끄기</b>를 켜면 <code>autocomplete</code> 속성이 빠집니다. 비밀번호 관리자가
-  채워 주지 못해 <b>더 쉬운 비밀번호</b>를 쓰게 됩니다 — 보안을 위해 끈 것이 보안을 깎습니다.
+  <b>로그인에 성공하는 값은 hong / 1234</b>입니다. 일부러 틀린 값을 넣고 눌러 보세요.<br>
+  <b>오류를 자세히 말하기</b>를 켜면 '없는 아이디입니다'와 '비밀번호가 틀렸습니다'를 나눠서 보여 줍니다.
+  친절해 보이지만 <b>어떤 아이디가 가입되어 있는지 알려 주는</b> 셈이어서, 남의 계정을 노리는 사람은
+  아이디를 차례로 넣어 보는 것만으로 계정 목록을 만들 수 있습니다.<br>
+  <b>자동완성 끄기</b>를 켜면 <code>autocomplete</code> 속성이 빠집니다. 그러면 비밀번호 관리자가
+  칸을 채워 주지 못해서 사용자가 <b>더 쉬운 비밀번호</b>를 쓰게 되고, 보안을 위해 끈 설정이 오히려 보안을 약하게 만듭니다.
 </p>
 
 <script>
@@ -98,10 +98,10 @@
 
     if (id === OKID && pw === OKPW) {
       err.hidden = true; tries = 0;
-      log.innerHTML = '들어왔다 — ' +
+      log.innerHTML = '로그인했습니다. ' +
         (document.getElementById('keep').checked
-          ? '<b>로그인 상태 유지</b>: 오래 가는 쿠키를 심는다'
-          : '세션 쿠키만 — <b>브라우저를 닫으면 풀린다</b>');
+          ? '<b>로그인 상태 유지</b>를 골랐으니 오래 가는 쿠키를 남깁니다'
+          : '세션 쿠키만 남기기 때문에 <b>브라우저를 닫으면 로그인이 풀립니다</b>');
       sync(); return;
     }
 
@@ -109,12 +109,12 @@
     err.hidden = false;
     if (leak) {
       err.innerHTML = (id === OKID)
-        ? '비밀번호가 틀렸습니다 <span style="font-weight:400">— 이 아이디는 있다고 알려 준 셈이다</span>'
-        : '없는 아이디입니다 <span style="font-weight:400">— 이 아이디는 없다고 알려 준 셈이다</span>';
-      log.innerHTML = '<span class="warn">계정이 있는지를 알려 주고 있다</span> — 아이디 목록을 만들 수 있다';
+        ? '비밀번호가 틀렸습니다 <span style="font-weight:400">(이 아이디가 있다고 알려 준 셈입니다)</span>'
+        : '없는 아이디입니다 <span style="font-weight:400">(이 아이디가 없다고 알려 준 셈입니다)</span>';
+      log.innerHTML = '<span class="warn">계정이 있는지 알려 주고 있습니다.</span> 이 문구를 이용하면 가입된 아이디 목록을 만들 수 있습니다';
     } else {
       err.textContent = '아이디 또는 비밀번호가 올바르지 않습니다';
-      log.innerHTML = '둘 중 무엇이 틀렸는지 <b>말하지 않는다</b> — 계정이 있는지도 숨긴다';
+      log.innerHTML = '둘 중 무엇이 틀렸는지 <b>말하지 않기 때문에</b> 계정이 있는지도 드러나지 않습니다';
     }
     err.dataset.leak = leak ? '1' : '0';
     document.getElementById(id === OKID ? 'pw' : 'id').focus();

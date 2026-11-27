@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>키보드 조작 — 이름표</title>
-<meta name="description" content="마우스 없이 전부 되는지, div 로 만든 버튼이 왜 안 되는지를 실물로 보여주는 항목.">
+<meta name="description" content="마우스 없이 모든 조작이 되는지, div로 만든 버튼은 왜 키보드로 쓸 수 없는지를 실물로 보여 주는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -28,7 +28,7 @@
     <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">12부 접근성</a> › 키보드 조작</p>
     <h1>키보드 조작</h1>
     <p class="en">Keyboard operability</p>
-    <p class="lede" style="margin-top:var(--s3)"><b>마우스 없이도 전부 되어야</b> 한다는 것. 손을 못 쓰는 사람뿐 아니라 마우스가 고장 난 사람에게도 해당합니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">키보드 조작은 화면의 모든 기능을 <b>마우스 없이 키보드만으로도 쓸 수 있어야</b> 한다는 요구입니다. 손을 자유롭게 쓰지 못하는 사람뿐 아니라 마우스가 고장 난 사람에게도 해당합니다.</p>
     <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
   </div>
 
@@ -50,30 +50,30 @@
           <iframe src="../demos/keyboard.html" title="키보드 조작 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>세 가지가 똑같아 보이는데 <b>키보드로는 전혀 다릅니다.</b>
-          마우스를 쓰지 말고 <kbd>Tab</kbd>·<kbd>Enter</kbd>·<kbd>Space</kbd>로만 해 보세요.<br>
-          <code>&lt;div&gt;</code>는 <b>Tab 이 아예 지나가고</b>, <code>tabindex</code>를 더하면 갈 수는 있는데
-          <b>Enter·Space 가 안 먹습니다</b>. 기록에 '아무 일도 안 일어남'이 찍히는 것이 그 순간입니다.</p>
+          <p>세 버튼은 똑같아 보이지만 <b>키보드로 다뤄 보면 전혀 다르게 동작합니다.</b>
+          마우스는 쓰지 말고 <kbd>Tab</kbd>·<kbd>Enter</kbd>·<kbd>Space</kbd>로만 눌러 보세요.<br>
+          <code>&lt;div&gt;</code>로 만든 버튼은 <b>Tab을 눌러도 포커스가 건너뛰고</b>, <code>tabindex</code>를 더하면 포커스는 가지만
+          <b>Enter나 Space를 눌러도 반응하지 않습니다</b>. 이때 기록에 '아무 일도 안 일어남'이 찍힙니다.</p>
         </div>
       </section>
 
       <section class="slot" id="s2">
-        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">부르는 말이 여러 개다</span></h2>
+        <h2 class="slot-label"><span class="n">2</span> 이름<span class="hint">같은 것을 부르는 여러 이름</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
             <tr><th>한국어</th><td>키보드 조작, 키보드 접근성, 키보드만으로</td></tr>
             <tr><th>영어</th><td>keyboard operability, keyboard accessibility, keyboard trap</td></tr>
-            <tr><th>같이 쓰는 말</th><td>빠져나올 수 없게 갇히는 것을 <b>키보드 트랩</b>(keyboard trap)이라 하고 — <a href="focustrap.html">포커스 트랩</a>과 달리 <b>나쁜 뜻</b>입니다. 부품마다 정해진 키 약속을 <b>키보드 인터랙션 패턴</b>(ARIA Authoring Practices)이라 합니다.</td></tr>
-            <tr><th>자주 잘못 부름</th><td><b>단축키</b> — 단축키는 <b>빠르게</b> 하는 것이고, 키보드 조작은 <b>되기는 하는가</b>입니다.<br><b>포커스</b> — 포커스는 '어디 있는가', 키보드 조작은 '<b>거기서 뭘 할 수 있는가</b>'입니다.<br><b>키보드 트랩</b> — 못 빠져나오는 사고입니다. 모달의 포커스 트랩과 헷갈리면 안 됩니다.</td></tr>
+            <tr><th>같이 쓰는 말</th><td>포커스가 어딘가에 갇혀 빠져나올 수 없게 된 상태는 <b>키보드 트랩</b>(keyboard trap)이라고 부르는데, 일부러 가두는 <a href="focustrap.html">포커스 트랩</a>과 달리 <b>사고를 가리키는 말</b>입니다. 부품마다 정해 둔 키 동작 규칙은 <b>키보드 인터랙션 패턴</b>(ARIA Authoring Practices)이라고 합니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>단축키</b> — 단축키는 기능을 <b>더 빠르게</b> 쓰는 방법이고, 키보드 조작은 키보드로 그 기능을 <b>쓸 수 있기는 한가</b>를 따집니다.<br><b>포커스</b> — 포커스는 '지금 어디에 있는가'를 말하고, 키보드 조작은 '<b>거기서 무엇을 할 수 있는가</b>'를 말합니다.<br><b>키보드 트랩</b> — 포커스가 빠져나오지 못하는 사고를 말합니다. 모달이 일부러 거는 포커스 트랩과 헷갈리지 않아야 합니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제들과 비교하는 네 축</span></h2>
-        <p>접근성은 '눈으로는 안 보이는 것을 챙기는 일'입니다. 이 네 가지만 물어보면 갈립니다.</p>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <p>접근성은 눈으로는 보이지 않는 부분까지 챙기는 일입니다. 아래 네 가지를 물어보면 이 부의 항목들이 서로 어떻게 다른지 가를 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
           <thead><tr><th></th><th>무엇을 돕나</th><th>눈으로 보이나</th><th>안 하면 누가 막히나</th><th>어떻게 확인하나</th></tr></thead>
@@ -82,7 +82,7 @@
             <tr><td>포커스 트랩</td><td>모달 안에 가두기</td><td>안 보인다</td><td>키보드·스크린 리더</td><td>모달에서 Tab 을 돌려 본다</td></tr>
             <tr class="me"><td><b>키보드 조작</b></td><td>마우스 없이 <b>전부</b></td><td>안 보인다</td><td>마우스를 못 쓰는 사람</td><td>마우스를 치우고 해 본다</td></tr>
             <tr><td>이름 붙이기</td><td>뭐라고 <b>부르나</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>접근성 트리를 본다</td></tr>
-            <tr><td>스크린 리더가 읽는 것</td><td>역할 · 이름 · <b>상태</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>실제로 읽혀 본다</td></tr>
+            <tr><td>스크린 리더가 읽는 것</td><td>역할 · 이름 · <b>상태</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>직접 들어 본다</td></tr>
             <tr><td>라이브 리전</td><td><b>저절로 바뀐 것</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>바꿔 놓고 들어 본다</td></tr>
             <tr><td>대비비</td><td>글자가 <b>읽히나</b></td><td><b>보인다</b></td><td>저시력 · 밝은 곳 · 싼 화면</td><td><b>재 본다</b>(숫자로 나온다)</td></tr>
             <tr><td>시맨틱 태그</td><td>화면의 <b>구조</b></td><td>안 보인다</td><td><b>거의 모두</b></td><td>구역 목록을 열어 본다</td></tr>
@@ -92,7 +92,7 @@
         </table>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄로</b> — 규칙은 하나입니다 — <b>누를 것은 <code>&lt;button&gt;</code>, 이동은 <code>&lt;a href&gt;</code></b>. div 로 만들면 다섯 가지를 직접 짜야 합니다.</p>
+          <p><b>키보드 조작을 한 줄로 정리하면</b> — <b>누르는 것은 <code>&lt;button&gt;</code>으로, 다른 곳으로 이동하는 것은 <code>&lt;a href&gt;</code>로</b> 만듭니다. 같은 동작을 div로 만들면 브라우저가 해 주던 다섯 가지를 직접 짜야 합니다.</p>
         </div>
       </section>
 
@@ -103,46 +103,46 @@
             <div class="shot">
               <div style="width:100%;max-width:168px;display:grid;gap:6px;justify-items:center"><span style="display:inline-block;background:var(--accent);color:#fff;border-radius:6px;padding:6px 12px;font-size:11.5px;font-weight:700">저장하기</span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">&lt;button&gt;</span><span style="font-size:10.5px">Tab <span style="color:#1f8a4c;font-weight:700">○</span> &nbsp; Enter <span style="color:#1f8a4c;font-weight:700">○</span></span><span style="font-size:10px;color:var(--fg-faint);text-align:center">공짜로 다 된다</span></div>
             </div>
-            <figcaption>진짜 버튼<span><b>포커스·Enter·Space·비활성</b>이 다 따라온다</span></figcaption>
+            <figcaption>진짜 버튼<span><b>포커스, Enter, Space, 비활성 처리</b>가 모두 기본으로 들어 있습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:168px;display:grid;gap:6px;justify-items:center"><span style="display:inline-block;background:var(--accent);color:#fff;border-radius:6px;padding:6px 12px;font-size:11.5px;font-weight:700">저장하기</span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">&lt;div onclick&gt;</span><span style="font-size:10.5px">Tab <span style="color:var(--danger);font-weight:700">✕</span> &nbsp; Enter <span style="color:var(--danger);font-weight:700">✕</span></span><span style="font-size:10px;color:var(--fg-faint);text-align:center">키보드로 못 간다</span></div>
             </div>
-            <figcaption>div + onclick<span><b>Tab 이 지나간다.</b> 마우스로만 쓸 수 있다</span></figcaption>
+            <figcaption>div + onclick<span><b>Tab을 눌러도 포커스가 건너뜁니다.</b> 마우스로만 쓸 수 있습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:168px;display:grid;gap:6px;justify-items:center"><span style="display:inline-block;background:var(--accent);color:#fff;border-radius:6px;padding:6px 12px;font-size:11.5px;font-weight:700">저장하기</span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">div + tabindex</span><span style="font-size:10.5px">Tab <span style="color:#1f8a4c;font-weight:700">○</span> &nbsp; Enter <span style="color:var(--danger);font-weight:700">✕</span></span><span style="font-size:10px;color:var(--fg-faint);text-align:center">갈 수는 있다</span></div>
             </div>
-            <figcaption>+ tabindex<span><b>Enter·Space 가 안 먹는다.</b> 직접 짜야 한다</span></figcaption>
+            <figcaption>+ tabindex<span>포커스는 가지만 <b>Enter나 Space에 반응하지 않습니다.</b> 키 처리를 직접 짜야 합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:168px;display:grid;gap:6px;justify-items:center"><span style="display:inline-block;background:var(--accent);color:#fff;border-radius:6px;padding:6px 12px;font-size:11.5px;font-weight:700">저장하기</span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">+ keydown</span><span style="font-size:10.5px">Tab <span style="color:#1f8a4c;font-weight:700">○</span> &nbsp; Enter <span style="color:#1f8a4c;font-weight:700">○</span></span><span style="font-size:10px;color:var(--fg-faint);text-align:center">겨우 비슷해졌다</span></div>
             </div>
-            <figcaption>+ 키 처리<span>여기까지 와야 버튼 흉내가 난다 — <b>그냥 button 을 쓰면 된다</b></span></figcaption>
+            <figcaption>+ 키 처리<span>키 처리까지 더해야 겨우 버튼처럼 동작합니다. 처음부터 <b>button을 쓰면 이 작업이 필요 없습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:168px;display:grid;gap:6px;justify-items:center"><span style="display:inline-block;background:var(--accent);color:#fff;border-radius:6px;padding:6px 12px;font-size:11.5px;font-weight:700">저장하기</span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">&lt;a&gt; (href 없음)</span><span style="font-size:10.5px">Tab <span style="color:var(--danger);font-weight:700">✕</span> &nbsp; Enter <span style="color:var(--danger);font-weight:700">✕</span></span><span style="font-size:10px;color:var(--fg-faint);text-align:center">링크가 아니다</span></div>
             </div>
-            <figcaption>href 없는 a<span><code>href</code> 없는 <code>&lt;a&gt;</code>는 <b>포커스를 못 받는다</b></span></figcaption>
+            <figcaption>href 없는 a<span><code>href</code>가 없는 <code>&lt;a&gt;</code>는 <b>포커스를 받지 못합니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:168px;display:grid;gap:6px;justify-items:center"><span style="display:inline-block;background:var(--accent);color:#fff;border-radius:6px;padding:6px 12px;font-size:11.5px;font-weight:700">저장하기</span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">&lt;button disabled&gt;</span><span style="font-size:10.5px">Tab <span style="color:var(--danger);font-weight:700">✕</span> &nbsp; Enter <span style="color:var(--danger);font-weight:700">✕</span></span><span style="font-size:10px;color:var(--fg-faint);text-align:center">일부러 뺀 것</span></div>
             </div>
-            <figcaption>비활성<span>포커스를 <b>일부러</b> 안 받는다 — 이건 맞는 동작</span></figcaption>
+            <figcaption>비활성<span>포커스를 <b>일부러</b> 받지 않게 한 것이므로 올바른 동작입니다</span></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분 이름이 제일 안 알려진 지식</span></h2>
+        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
-            <div class="anat" role="img" aria-label="키보드 조작의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호별 이름이 있다.">
+            <div class="anat" role="img" aria-label="키보드 조작의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:15px">
                   <div class="pin-out" data-pin="1" style="display:inline-block;background:var(--accent);color:#fff;border-radius:6px;padding:8px 14px;font-size:12.5px;font-weight:700;justify-self:start">저장하기</div>
@@ -156,19 +156,19 @@
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>누를 것 <em>button</em></b><span><b>원래 태그를 쓰면</b> 아래 다섯 줄이 전부 공짜다</span></li>
-            <li><b>태그가 주는 것 <em>&lt;button&gt;</em></b><span>포커스 순서 · Enter · Space · 역할 · 비활성 처리</span></li>
-            <li><b>div 로 만들면 <em>&lt;div onclick&gt;</em></b><span><b>Tab 이 아예 안 간다.</b> 마우스 전용이 된다</span></li>
-            <li><b>순서에 넣기 <em>tabindex="0" + role</em></b><span>갈 수는 있게 된다. <b>아직 눌리지는 않는다</b></span></li>
-            <li><b>키 처리 <em>keydown</em></b><span>Enter 와 Space 를 <b>직접</b> 받아 click 을 만들어야 한다</span></li>
-            <li><b>부품별 약속 <em>화살표 · Esc · Home/End</em></b><span>탭·라디오·메뉴마다 <b>정해진 키</b>가 있다</span></li>
+            <li><b>누를 것 <em>button</em></b><span><b>원래 태그를 쓰면</b> 아래 다섯 줄에 적힌 동작을 브라우저가 모두 처리합니다</span></li>
+            <li><b>태그가 주는 것 <em>&lt;button&gt;</em></b><span>포커스 순서, Enter, Space, 역할, 비활성 처리를 기본으로 제공합니다</span></li>
+            <li><b>div 로 만들면 <em>&lt;div onclick&gt;</em></b><span><b>Tab으로 포커스가 아예 가지 않아서</b> 마우스로만 쓸 수 있습니다</span></li>
+            <li><b>순서에 넣기 <em>tabindex="0" + role</em></b><span>포커스가 갈 수는 있게 되지만, <b>키로 누를 수는 아직 없습니다</b></span></li>
+            <li><b>키 처리 <em>keydown</em></b><span>Enter와 Space 입력을 <b>직접</b> 받아서 click 이벤트를 일으켜야 합니다</span></li>
+            <li><b>부품별 약속 <em>화살표 · Esc · Home/End</em></b><span>탭, 라디오, 메뉴처럼 부품마다 <b>정해진 키 동작</b>이 있습니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
-          <code>&lt;div&gt;</code>로 버튼을 만들면 챙길 것이 <b>다섯 가지</b>입니다 —
-          <code>tabindex</code> · <code>role</code> · Enter · Space · 비활성 처리.
-          거기에 <b>Space 는 기본으로 화면을 스크롤</b>하므로 <code>preventDefault()</code>도 필요합니다.
-          전부 맞춰도 <code>&lt;button&gt;</code> 한 글자보다 나은 점이 없습니다 —
+          <code>&lt;div&gt;</code>로 버튼을 만들면 <code>tabindex</code>, <code>role</code>, Enter, Space, 비활성 처리까지
+          <b>다섯 가지</b>를 직접 챙겨야 합니다.
+          게다가 <b>Space는 기본으로 화면을 스크롤</b>하기 때문에 <code>preventDefault()</code>로 스크롤도 막아야 합니다.
+          이 다섯 가지를 전부 맞춰도 <code>&lt;button&gt;</code> 태그를 쓴 것보다 나은 점은 없습니다.
           그래서 이 항목의 결론은 언제나 <b>"원래 태그를 쓰세요"</b>입니다.</p>
       </section>
 
@@ -176,34 +176,34 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>이럴 때 쓴다</h3>
+            <h3>키보드 조작을 쓰는 경우</h3>
             <ul>
-              <li><b>모든 화면</b> — 마우스를 치우고 한 번 끝까지 해 봅니다</li>
-              <li>부품을 새로 만들 때 — <b>원래 태그</b>가 있는지 먼저 찾습니다</li>
-              <li>탭·메뉴·라디오처럼 <b>화살표로 도는</b> 부품을 만들 때</li>
+              <li><b>모든 화면</b>을 만들 때. 마우스를 치우고 화면을 처음부터 끝까지 한 번 써 봅니다</li>
+              <li>부품을 새로 만들 때. 같은 일을 하는 <b>원래 태그</b>가 있는지 먼저 찾습니다</li>
+              <li>탭, 메뉴, 라디오처럼 <b>화살표 키로 항목 사이를 옮겨 다니는</b> 부품을 만들 때</li>
             </ul>
           </div>
           <div class="dont">
-            <h3>이럴 때는 안 쓴다</h3>
+            <h3>키보드 조작을 쓰지 않는 경우</h3>
             <ul>
-              <li><code>&lt;div&gt;</code>·<code>&lt;span&gt;</code>에 <code>onclick</code>만 거는 것</li>
-              <li><b>빠져나올 수 없게</b> 만드는 것(키보드 트랩) — 가장 심각한 사고입니다</li>
-              <li>마우스 전용 동작만 두는 것 — 호버로만 열리는 메뉴, 드래그로만 되는 정렬</li>
-              <li><code>tabindex</code>에 1 이상을 주는 것</li>
+              <li><code>&lt;div&gt;</code>나 <code>&lt;span&gt;</code>에 <code>onclick</code>만 걸 때</li>
+              <li>포커스가 <b>빠져나올 수 없게</b> 만들 때(키보드 트랩). 키보드 사고 가운데 가장 심각합니다</li>
+              <li>호버로만 열리는 메뉴나 드래그로만 되는 정렬처럼 마우스로만 할 수 있는 동작만 둘 때</li>
+              <li><code>tabindex</code>에 1 이상의 값을 줄 때</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>대신 이걸</b> — 어디 있는지 보이게 하려면 <a href="focus.html">포커스</a>, 모달 안에 가두려면 <a href="focustrap.html">포커스 트랩</a>, 태그 고르기는 <a href="semantics.html">시맨틱 태그</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>키보드 조작 대신 다른 것을 써야 하는 경우</b> — 어디 있는지 보이게 하려면 <a href="focus.html">포커스</a>, 모달 안에 가두려면 <a href="focustrap.html">포커스 트랩</a>, 태그 고르기는 <a href="semantics.html">시맨틱 태그</a>.</p>
       </section>
 
       <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 흉내 낸 재현 그림</span></h2>
+        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:190px;display:grid;gap:6px;justify-items:center"><span style="display:inline-block;background:var(--accent);color:#fff;border-radius:6px;padding:6px 12px;font-size:11.5px;font-weight:700">저장하기</span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">&lt;button&gt;</span><span style="font-size:10.5px">Tab <span style="color:#1f8a4c;font-weight:700">○</span> &nbsp; Enter <span style="color:#1f8a4c;font-weight:700">○</span></span><span style="font-size:10px;color:var(--fg-faint);text-align:center"></span></div>
             </div>
-            <figcaption><b>버튼</b><b>이것 하나면 끝난다</b></figcaption>
+            <figcaption><b>버튼</b><b>button 태그 하나로</b> 키보드 조작이 모두 해결됩니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -214,7 +214,7 @@
               </div>
               <div style="font-family:var(--mono);font-size:10px;color:var(--fg-muted);margin-top:7px;text-align:center">Tab 한 번 + ← → 로 이동</div>
             </div>
-            <figcaption><b>탭</b><b>로빙 탭인덱스</b> — 줄 전체가 Tab 한 번이고 안에서는 화살표</figcaption>
+            <figcaption><b>탭</b><b>로빙 탭인덱스</b>(roving tabindex)를 씁니다. 탭 줄 전체를 Tab 한 번으로 지나가고, 줄 안에서는 화살표 키로 옮겨 다닙니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -223,15 +223,15 @@
                 <span style="font-size:10px;color:var(--fg-muted);font-family:var(--mono)">↑↓ 이동 · Enter 고르기 · Esc 닫기</span>
               </div>
             </div>
-            <figcaption><b>콤보박스</b>부품마다 <b>정해진 키 약속</b>이 있다</figcaption>
+            <figcaption><b>콤보박스</b>콤보박스처럼 부품마다 <b>정해진 키 동작</b>이 있습니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">원래 태그를 쓰면 공짜</span></h2>
-        <p>가장 짧은 답은 <b>태그를 바꾸는 것</b>입니다. 굳이 div 로 만들 때 필요한 줄들을 아래에 적어 뒀습니다.</p>
-<pre class="code"><span class="c">&lt;!-- 이 한 줄이면 끝난다 --&gt;</span>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">원래 태그를 쓰면 기본으로 따라온다</span></h2>
+        <p>가장 간단한 해결책은 <b>태그를 button으로 바꾸는 것</b>입니다. 그래도 div로 만들어야 한다면 필요한 코드를 아래에 적어 두었습니다.</p>
+<pre class="code"><span class="c">&lt;!-- 이 한 줄이면 된다 --&gt;</span>
 &lt;<span class="t">button</span> <span class="a">type</span>=<span class="s">"button"</span>&gt;저장하기&lt;/<span class="t">button</span>&gt;
 
 <span class="c">&lt;!-- 굳이 div 로 만든다면 이만큼이 필요하다 --&gt;</span>
@@ -246,68 +246,68 @@ el.addEventListener(<span class="s">'keydown'</span>, (e) =&gt; {
 });</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키</th><th>일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td><kbd>Tab</kbd></td><td>다음 누를 것으로. <b>보이는 순서와 같아야</b> 한다</td></tr>
-            <tr><td><kbd>Enter</kbd></td><td>버튼·링크를 누른다</td></tr>
-            <tr><td><kbd>Space</kbd></td><td>버튼·체크박스를 누른다. <b>기본은 화면 스크롤</b>이라 막아야 한다</td></tr>
-            <tr><td><kbd>Esc</kbd></td><td>모달·메뉴·콤보박스를 닫는다</td></tr>
-            <tr><td><kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd></td><td>탭·라디오·메뉴 <b>안에서</b> 움직인다</td></tr>
-            <tr><td><kbd>Home</kbd><kbd>End</kbd></td><td>목록의 처음·끝으로</td></tr>
+            <tr><td><kbd>Tab</kbd></td><td>다음 요소로 포커스가 옮겨 갑니다. 옮겨 가는 순서는 <b>화면에 보이는 순서와 같아야</b> 합니다</td></tr>
+            <tr><td><kbd>Enter</kbd></td><td>버튼이나 링크를 누릅니다</td></tr>
+            <tr><td><kbd>Space</kbd></td><td>버튼이나 체크박스를 누릅니다. Space의 <b>기본 동작은 화면 스크롤</b>이라 직접 만든 버튼에서는 막아야 합니다</td></tr>
+            <tr><td><kbd>Esc</kbd></td><td>모달, 메뉴, 콤보박스를 닫습니다</td></tr>
+            <tr><td><kbd>←</kbd><kbd>→</kbd><kbd>↑</kbd><kbd>↓</kbd></td><td>탭, 라디오, 메뉴 <b>안에서</b> 항목 사이를 옮겨 다닙니다</td></tr>
+            <tr><td><kbd>Home</kbd><kbd>End</kbd></td><td>목록의 처음이나 끝으로 갑니다</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 감각으로 번역</span></h2>
+        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>테스트가 가장 쉽다</th><td>접근성 항목 중 <b>직접 해 보기가 가장 쉽습니다</b> — 마우스를 치우고 화면을 끝까지 써 보면 됩니다. 도구도 지식도 필요 없습니다.</td></tr>
-            <tr><th>자동 검사</th><td>Playwright 로 <kbd>Tab</kbd>을 눌러 가며 <code>activeElement</code>를 기록하면 '누를 수 있는데 Tab 이 안 가는 것'을 <b>CI 에서</b> 잡을 수 있습니다.</td></tr>
-            <tr><th>컴포넌트 라이브러리</th><td>직접 만들기 전에 <b>키 약속이 구현된 라이브러리</b>를 찾는 편이 거의 늘 낫습니다. 콤보박스 하나에만 키 처리가 열 줄 넘게 들어갑니다.</td></tr>
-            <tr><th>드래그로만 되는 것</th><td>순서 바꾸기를 드래그로만 만들면 <b>키보드로는 아예 못 합니다.</b> '위로/아래로' 버튼을 함께 둡니다.</td></tr>
+            <tr><th>테스트가 가장 쉽다</th><td>접근성 항목 가운데 <b>직접 확인하기가 가장 쉽습니다</b>. 마우스를 치우고 화면을 끝까지 써 보면 되므로 따로 도구나 지식이 필요 없습니다.</td></tr>
+            <tr><th>자동 검사</th><td>Playwright로 <kbd>Tab</kbd>을 눌러 가며 <code>activeElement</code>를 기록하면, 누를 수는 있는데 Tab으로 포커스가 가지 않는 요소를 <b>CI에서</b> 찾아낼 수 있습니다.</td></tr>
+            <tr><th>컴포넌트 라이브러리</th><td>부품을 직접 만들기 전에 <b>키 동작이 이미 구현된 라이브러리</b>를 찾는 편이 대개 낫습니다. 콤보박스 하나에만 키 처리 코드가 열 줄 넘게 들어가기 때문입니다.</td></tr>
+            <tr><th>드래그로만 되는 것</th><td>순서 바꾸기를 드래그로만 만들면 <b>키보드로는 순서를 아예 바꿀 수 없으므로</b>, '위로/아래로' 버튼을 함께 둡니다.</td></tr>
           </tbody>
         </table>
         </div>
       </section>
 
       <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">같은 부품, 다른 말</span></h2>
-        <p>두 OS 는 <b>키보드 말고도</b> 다른 조작 수단이 있어 범위가 더 넓습니다.</p>
+        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+        <p>iOS와 안드로이드에는 <b>키보드 말고도</b> 다른 조작 수단이 있어서 챙겨야 할 범위가 더 넓습니다.</p>
         <div class="platforms">
           <div class="plat">
             <header><b>웹</b><span>기본 태그</span></header>
             <div class="shot">
               <div style="width:100%;max-width:120px;display:grid;gap:6px;justify-items:center"><span style="display:inline-block;background:var(--accent);color:#fff;border-radius:6px;padding:6px 12px;font-size:11.5px;font-weight:700">저장하기</span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">&lt;button&gt;</span><span style="font-size:10.5px">Tab <span style="color:#1f8a4c;font-weight:700">○</span> &nbsp; Enter <span style="color:#1f8a4c;font-weight:700">○</span></span><span style="font-size:10px;color:var(--fg-faint);text-align:center"></span></div>
             </div>
-            <footer><code>&lt;button&gt;</code>·<code>&lt;a href&gt;</code>가 전부 해 줍니다. <b>div 로 만들 때만</b> 문제가 생깁니다.</footer>
+            <footer><code>&lt;button&gt;</code>과 <code>&lt;a href&gt;</code>를 쓰면 브라우저가 키보드 조작을 모두 처리하고, <b>div로 만들 때만</b> 문제가 생깁니다.</footer>
           </div>
           <div class="plat">
             <header><b>iOS</b><span>VoiceOver · 스위치 제어</span></header>
             <div class="shot">
               <div style="font-family:var(--mono);font-size:9.5px;color:var(--fg-muted);line-height:1.8;text-align:left">Button { }<br>.accessibilityAction</div>
             </div>
-            <footer>키보드보다 <b>VoiceOver 제스처</b>와 <b>스위치 제어</b>가 주된 수단입니다. 표준 부품을 쓰면 따라옵니다.</footer>
+            <footer>키보드보다 <b>VoiceOver 제스처</b>와 <b>스위치 제어</b>가 주된 조작 수단입니다. 표준 부품을 쓰면 이 조작이 기본으로 됩니다.</footer>
           </div>
           <div class="plat">
             <header><b>안드로이드</b><span>TalkBack · 스위치</span></header>
             <div class="shot">
               <div style="font-family:var(--mono);font-size:9.5px;color:var(--fg-muted);line-height:1.8;text-align:left">Modifier.clickable<br>onClickLabel</div>
             </div>
-            <footer><code>clickable</code> 을 쓰면 TalkBack 동작이 따라옵니다. <b>직접 그린 터치 영역</b>은 안 됩니다.</footer>
+            <footer><code>clickable</code>을 쓰면 TalkBack 동작이 기본으로 붙지만, <b>직접 그린 터치 영역</b>에는 붙지 않습니다.</footer>
           </div>
         </div>
         <div class="note note--warn" style="margin-bottom:0">
-          <p><b>자주 생기는 사고</b> — 앱에서는 '키보드'보다 <b>스크린 리더 제스처와 스위치 제어</b>가 주인공입니다. 그래서 같은 요구가 웹에서는 "Tab 으로 되나요", 앱에서는 "VoiceOver 로 되나요"로 나옵니다 — <b>뜻은 같습니다</b>.</p>
+          <p><b>플랫폼 차이 때문에 자주 생기는 문제</b> — 앱에서는 키보드보다 <b>스크린 리더 제스처와 스위치 제어</b>를 더 많이 따집니다. 그래서 같은 요구가 웹에서는 "Tab으로 되나요", 앱에서는 "VoiceOver로 되나요"라는 질문으로 나오지만 <b>묻는 내용은 같습니다</b>.</p>
         </div>
       </section>
 
     </div>
 
     <aside class="siblings">
-      <h2>헷갈리는 형제</h2>
+      <h2>같은 부에서 헷갈리기 쉬운 항목</h2>
       <ol>
         <li><a href="focus.html"><b>포커스</b><em>12부</em></a></li>
         <li><a href="focustrap.html"><b>포커스 트랩</b><em>12부</em></a></li>
@@ -319,20 +319,20 @@ el.addEventListener(<span class="s">'keydown'</span>, (e) =&gt; {
         <li><a href="alttext.html"><b>대체 텍스트</b><em>12부</em></a></li>
         <li><a href="textzoom.html"><b>확대와 글자 크기</b><em>12부</em></a></li>
       </ol>
-      <h2>같이 보면 좋은 것</h2>
+      <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="../items/focus.html"><b>포커스</b><em>12부</em></a></li>
         <li><a href="../items/semantics.html"><b>시맨틱 태그</b><em>12부</em></a></li>
         <li><a href="../items/combobox.html"><b>콤보박스</b><em>4부</em></a></li>
         <li><a href="../items/tabs.html"><b>탭</b><em>7부</em></a></li>
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">아직 안 쓴 항목은 회색입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이고 특정 제품의 화면 캡처가 아닙니다.</p>
+  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

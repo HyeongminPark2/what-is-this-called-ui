@@ -41,12 +41,12 @@
 </div>
 
 <p class="hint">
-  색을 <b>아무거나</b> 고르게 하면 대비비가 모자란 색이 쉽게 들어옵니다 —
-  데모가 고른 색 위 <b>흰 글자의 대비비</b>를 재서 적고, 4.5:1 아래면 막습니다.
-  <b>노랑</b>이나 <b>연두</b>를 골라 보면 바로 걸립니다.<br>
-  그래서 브랜드 색을 고르는 자리에는 <b>정해 둔 색</b>만 보이는 쪽이 안전합니다 —
-  데모가 고를 수 있는 가짓수를 세서 둘을 견줍니다.<br>
-  색 코드는 <b>쳐서도 넣을 수 있어야</b> 합니다. 디자이너가 건네는 값은 대개 <code>#1f6feb</code> 꼴입니다.
+  색을 <b>아무거나</b> 고르게 하면 대비비가 모자란 색이 쉽게 들어옵니다.
+  데모가 고른 색 위에 올린 <b>흰 글자의 대비비</b>를 재서 적고, 4.5:1보다 낮으면 막습니다.
+  <b>노랑</b>이나 <b>연두</b>를 골라 보면 바로 막히는 것을 볼 수 있습니다.<br>
+  그래서 브랜드 색을 고르는 자리에는 <b>정해 둔 색</b>만 보여 주는 편이 안전합니다.
+  데모가 두 방식에서 고를 수 있는 가짓수를 세어 비교해 줍니다.<br>
+  색 코드는 <b>쳐서도 넣을 수 있어야</b> 합니다. 디자이너가 건네는 값이 대개 <code>#1f6feb</code> 같은 색 코드이기 때문입니다.
 </p>
 
 <script>
@@ -90,12 +90,12 @@
 
     var choices = k === 'preset' ? PRESET.length : 16777216;
     var rd = document.getElementById('read');
-    rd.innerHTML = '고른 색 <b>' + hex + '</b>' + (ok ? '' : ' <span class="warn">— 색 코드로 못 읽었다</span>') +
+    rd.innerHTML = '고른 색 <b>' + hex + '</b>' + (ok ? '' : ' <span class="warn">— 색 코드로 읽지 못했습니다</span>') +
       '<br>흰 글자 대비비 <b>' + cr.toFixed(2) + ':1</b>' +
       (pass ? ' — 통과' : ' <span class="warn">— 4.5:1 미달</span>') +
-      (guard && !pass ? ' · <span class="warn">막았다</span>' : '') +
+      (guard && !pass ? ' · <span class="warn">막았습니다</span>' : '') +
       '<br>고를 수 있는 가짓수 <b>' + (k === 'preset' ? choices + '가지' : '1,600만 가지') + '</b>' +
-      (k === 'free' ? ' <span class="warn">— 안 되는 색이 훨씬 많다</span>' : '') +
+      (k === 'free' ? ' <span class="warn">— 쓸 수 없는 색이 훨씬 많습니다</span>' : '') +
       (why ? '<br>' + why : '');
     rd.dataset.hex = hex;
     rd.dataset.cr = cr.toFixed(2);
@@ -110,13 +110,13 @@
     if (!b) return;
     document.getElementById('hex').value = b.dataset.c;
     draw('');
-    document.getElementById('log').innerHTML = '<b>' + b.dataset.c + '</b> 를 골랐다 — 정해 둔 색이라 안전하다';
+    document.getElementById('log').innerHTML = '<b>' + b.dataset.c + '</b> 색을 골랐습니다. 정해 둔 색이라 안전합니다';
   });
   document.getElementById('hex').addEventListener('input', function () { draw(''); });
   document.getElementById('pick').addEventListener('input', function () {
     document.getElementById('hex').value = this.value;
     draw('');
-    document.getElementById('log').innerHTML = '<b>아무 색</b>이나 골랐다 — 대비비를 꼭 재야 한다';
+    document.getElementById('log').innerHTML = '<b>아무 색</b>이나 골랐습니다. 대비비를 꼭 재야 합니다';
   });
   ['k', 'check'].forEach(function (id) {
     document.getElementById(id).addEventListener('change', function () { draw(''); });
