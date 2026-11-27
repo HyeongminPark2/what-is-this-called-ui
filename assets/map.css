@@ -14,6 +14,24 @@
   overflow: visible;
 }
 .mapfig__lines line { stroke: var(--accent); stroke-width: 1.5; }
+
+/* 부품을 짚었을 때 마우스 옆에 뜨는 이름 */
+.maptip {
+  position: fixed; z-index: 60; pointer-events: none;
+  display: flex; align-items: flex-start; gap: 8px;
+  max-width: 280px; padding: 7px 11px 7px 8px;
+  border-radius: var(--r1);
+  background: var(--fg); color: var(--bg);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .3);
+  font-size: 14px; font-weight: 700; line-height: 1.35;
+}
+.maptip[hidden] { display: none; }
+.maptip .no {
+  flex: none; width: 20px; height: 20px; border-radius: var(--r-full);
+  background: var(--accent); color: #fff;
+  font-size: 11px; font-weight: 800; line-height: 20px; text-align: center;
+}
+.maptip em, .maptip b { display: block; font-style: normal; font-weight: 500; font-size: 12px; opacity: .75; color: inherit; }
 .mapfig__lines circle { fill: var(--accent); }
 
 .mapfig__screen { overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 24px; }   /* 바깥으로 뺀 번호(최대 22px)가 들어갈 자리 */

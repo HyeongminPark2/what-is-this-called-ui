@@ -1,8 +1,51 @@
 /* 화면 지도.
-   선을 열다섯 개 늘 그어 두면 어지럽다. 기본은 번호 배지 + 옆 목록이고,
-   짚은 것 하나만 지시선을 긋는다. 좌표는 손으로 박지 않고 매번 계산한다. */
+   선을 열다섯 개 늘 그어 두면 어지럽다. 기본은 번호 배지 + 아래 목록이다.
+   목록의 이름을 짚으면 부품까지 지시선을 긋고, 부품을 짚으면 마우스 옆에 이름을 띄운다.
+   좌표는 손으로 박지 않고 매번 계산한다. */
 (function () {
   var NS = 'http://www.w3.org/2000/svg';
+
+  // 화면에서 부품을 짚으면 이름을 마우스 옆에 띄운다.
+  // 지도가 길어 아래 목록이 화면 밖에 있을 때가 많아서, 목록까지 선을 그어도 이름이 안 보인다.
+  var tip = document.createElement('div');
+  tip.className = 'maptip';
+  tip.setAttribute('aria-hidden', 'true');
+  tip.hidden = true;
+  document.body.appendChild(tip);
+
+  function showTip(lbl, x, y) {
+    if (!tip._for || tip._for !== lbl) {
+      var body = lbl.querySelector(':scope > span:not(.no)') || lbl;
+      tip.innerHTML = '<span class="no">' + lbl.querySelector('.no').textContent + '</span>' +
+                      '<span>' + body.innerHTML + '</span>';
+      tip._for = lbl;
+    }
+    tip.hidden = false;
+    var w = tip.offsetWidth, h = tip.offsetHeight;
+    var left = Math.min(x + 14, window.innerWidth - w - 8);
+    var top = y + 18 + h > window.innerHeight - 8 ? y - h - 12 : y + 18;
+    tip.style.left = Math.max(8, left) + 'px';
+    tip.style.top = Math.max(8, top) + 'px';
+  }
+  function hideTip() { tip.hidden = true; tip._for = null; }
+
+  // 터치로 누르면 브라우저가 마우스 이벤트를 흉내 내며 곧바로 mouseleave 까지 보낸다.
+  // 손가락으로 누른 직후의 mouseleave 는 무시하고, 다른 곳을 누르면 거둔다.
+  var lastTouch = 0;
+  function clearAll() {
+    hideTip();
+    document.querySelectorAll('.mapfig .is-on').forEach(function (el) { el.classList.remove('is-on'); });
+    document.querySelectorAll('.mapfig__lines').forEach(function (svg) {
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+    });
+  }
+  document.addEventListener('pointerdown', function (e) {
+    if (e.pointerType === 'mouse') return;
+    lastTouch = Date.now();
+    if (!e.target.closest('.mapfig [data-p], .mapfig .lbl')) clearAll();
+  });
+  // 고정 위치라 스크롤하면 엉뚱한 곳에 남는다. 마우스는 다시 움직이면 돌아온다.
+  window.addEventListener('scroll', hideTip, { passive: true });
 
   document.querySelectorAll('.mapfig').forEach(function (fig) {
     var svg    = fig.querySelector('.mapfig__lines');
@@ -40,11 +83,30 @@
       lbl.addEventListener('blur', off);
 
       // 화면에서 부품을 짚어도 이름이 밝아진다 — '이게 뭐지' 방향
+      // 부품 쪽에서는 선 대신 마우스 옆에 이름을 띄운다.
       target.addEventListener('mouseenter', function (e) {
         e.stopPropagation();          // 겹쳐 있으면 안쪽 것이 이긴다
-        on(lbl);
+        if (Date.now() - lastTouch < 1000) return;      // 터치는 pointerup 에서 처리했다
+        on(lbl, true);
+        showTip(lbl, e.clientX, e.clientY);
       });
-      target.addEventListener('mouseleave', off);
+      target.addEventListener('mousemove', function (e) {
+        if (!lbl.classList.contains('is-on')) return;   // 안쪽 부품이 이긴 상태면 바깥 것은 가만히
+        if (Date.now() - lastTouch < 1000) return;      // 터치가 흉내 낸 움직임
+        e.stopPropagation();
+        showTip(lbl, e.clientX, e.clientY);
+      });
+      target.addEventListener('pointerup', function (e) {
+        if (e.pointerType === 'mouse') return;
+        e.stopPropagation();          // 겹쳐 있으면 안쪽 것이 이긴다
+        lastTouch = Date.now();
+        on(lbl, true);
+        showTip(lbl, e.clientX, e.clientY);
+      });
+      target.addEventListener('mouseleave', function () {
+        if (Date.now() - lastTouch < 1000) return;
+        off();
+      });
     });
 
     // 두 부품의 모서리가 같은 자리면 번호끼리 겹쳐 하나가 안 보인다. 겹치면 옆으로 비킨다.
@@ -76,17 +138,18 @@
     window.addEventListener('load', spread);
 
     function off() {
+      hideTip();
       fig.querySelectorAll('.is-on').forEach(function (el) { el.classList.remove('is-on'); });
       while (svg.firstChild) svg.removeChild(svg.firstChild);
     }
 
-    function on(lbl) {
+    function on(lbl, fromPart) {
       off();
       var t = lbl._target;
       if (!t) return;
       lbl.classList.add('is-on');
       t.classList.add('is-on');
-      drawTo(lbl, t);
+      if (!fromPart) drawTo(lbl, t);
     }
 
     function drawTo(lbl, t) {
