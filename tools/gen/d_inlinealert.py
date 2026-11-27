@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from _tx import one, code, txt, mono
-from tmpl import axis_table, siblings, states, cases, pins, plats, rows, ul, kbd
-
-L6 = "겹쳐 뜨는 부품은 생김새로는 가르기 어렵습니다. 아래 네 가지로 가릅니다."
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def al(kind, text, label, note="", ok=None, w="152px", field=None, after=False):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -50,7 +48,6 @@ D = dict(
   slug="inlinealert", ko="인라인 얼럿", en="Inline alert",
   desc="화면 위에 뜨지 않고 문서 흐름 안에 자리를 차지하는 알림입니다. 틀린 칸과 얼마나 가까이 두는지, 칸과 어떻게 묶는지, 토스트와는 어떻게 다른지 다룹니다.",
   lede="인라인 얼럿은 화면 위에 <b>뜨지 않고</b> 문서 흐름 안에 자리를 차지하는 알림입니다. 사용자가 눌러서 치울 필요가 없고, 문제를 고치면 저절로 사라집니다.",
-  axes_lede=L6,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>메시지를 붙이는 자리를 바꿔 보세요. 데모가 <b>틀린 칸에서 메시지까지의 거리(px)</b>를 재서 적어 줍니다.<br>
           <b>칸 바로 아래</b>에 붙이면 거리가 0에 가깝지만, <b>맨 위에 모으면</b> 수백 px 떨어져서
@@ -70,8 +67,6 @@ D = dict(
      "<b>토스트</b> — <a href=\"toast.html\">토스트</a>는 화면 위에 <b>떴다가 저절로 사라집니다</b>.<br>"
      "<b>툴팁</b> — <a href=\"tooltip.html\">툴팁</a>은 대상에 마우스를 <b>올려야</b> 보입니다."),
   ]),
-  axes=axis_table("인라인 얼럿"),
-  oneline="인라인 얼럿은 <b>틀린 칸 바로 아래에 붙이는 것이 가장 좋습니다.</b> 칸에서 멀어질수록 사용자가 어느 칸이 틀렸는지 찾아 내려가야 하기 때문입니다.",
   states=states([
     (al("err", "사업자번호는 10자리입니다", "", "거리가 0에 가까움", True, "152px", "사업자번호"),
      "틀린 칸 바로 아래에 붙였을 때", "틀린 칸과 <b>가장 가깝습니다</b>"),

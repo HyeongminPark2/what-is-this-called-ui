@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax5 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def anchor(badge, icon="✉"):
@@ -39,7 +38,6 @@ D = dict(
   slug="badge", ko="배지", en="Badge · notification badge",
   desc="배지의 갈래(점·숫자·라벨)와 99+ 처리, 칩과의 차이를 실물과 해부도로 보여 주는 항목입니다.",
   lede="배지는 아이콘이나 목록 줄 같은 다른 요소에 <b>붙어서 정보를 하나 더 알려 주는</b> 작은 표시입니다. 배지만 따로 떨어져 놓이는 일은 없습니다.",
-  axes_lede="표시 부품은 모두 보여 주기만 합니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>막대를 끝까지 밀어 보세요. 숫자가 세 자리가 되면 <b><code>99+</code></b>로 줄어드는데,
           줄이지 않으면 배지가 길어져서 붙어 있던 아이콘을 밀어내기 때문입니다.
@@ -59,8 +57,6 @@ D = dict(
      "<b>태그</b> — 태그는 사용자가 <b>직접 붙인 분류</b>이고, 배지는 시스템이 알려 주는 상태입니다.<br>"
      "<b>토스트</b> — 토스트는 화면에 잠깐 떠서 알린 뒤 <b>사라지고</b>, 배지는 요소에 붙은 채로 남아 있습니다."),
   ]),
-  axes=ax("배지"),
-  oneline="배지는 늘 다른 요소에 <b>붙어 있습니다</b>. 따로 떨어져 놓여 있고 누를 수도 있다면 그건 배지가 아니라 <a href=\"chip.html\">칩</a>입니다.",
   s4_title="배지의 종류", s4_hint="종류마다 알리는 내용",
   states=states([
     (anchor('<span style="position:absolute;top:-3px;right:-3px;width:9px;height:9px;border-radius:99px;'

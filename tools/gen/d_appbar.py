@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from ax7 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 CARD = 'background:var(--surface);border:1px solid var(--line);border-radius:8px'
@@ -33,8 +32,6 @@ D = dict(
      "<b>툴바</b> — 툴바는 <b>동작 버튼만</b> 모아 둔 줄입니다. 제목과 뒤로가기가 함께 있으면 툴바가 아니라 앱바입니다.<br>"
      "<b>탭</b> — 탭은 같은 화면 안에서 내용을 바꿔 보여 주는 부품이고, 앱바는 화면 맨 위에 늘 붙어 있는 틀입니다."),
   ]),
-  axes=ax("앱바"),
-  oneline="앱바는 모든 화면 맨 위에 붙는 <b>틀</b>입니다. 지금 어느 화면인지와 나가는 길을 담고, 동작 버튼은 <b>이 화면에서 가장 자주 하는 일 한두 개</b>만 올립니다.",
   states=states([
     (mini('<div style="position:absolute;top:0;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);padding:4px 5px;font-size:7px;font-weight:700">거래 내역</div><div class="mini__bg" style="padding-top:18px"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div></div>', bars="", label="기본 앱바"), "가장 흔한 기본 모습", "제목과 동작 버튼만 있는, 가장 흔한 모습입니다"),
     (mini('<div style="position:absolute;top:0;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);padding:4px 5px;font-size:7px;display:flex;gap:4px"><span style="color:var(--accent)">‹</span><b>거래 내역</b></div><div class="mini__bg" style="padding-top:18px"><div class="mini__bar mini__bar--w80"></div></div>', bars="", label="뒤로가 붙은 앱바"), "뒤로 버튼이 붙었을 때", "하위 화면에서는 <b>어디서 왔는지</b>를 알려 주는 뒤로 버튼을 왼쪽에 둡니다"),

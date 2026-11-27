@@ -29,7 +29,7 @@
     <h1>에러 상태</h1>
     <p class="en">Error state</p>
     <p class="lede" style="margin-top:var(--s3)">에러 상태는 사용자가 하려던 일이 <b>실패했다는 것</b>과 <b>이제 무엇을 하면 되는지</b>를 알리는 화면입니다. 에러를 어디에 붙이느냐에 따라 네 단계로 나뉩니다.</p>
-    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 상태</a><a href="#s4">④ 해부도</a><a href="#s5">⑤ 쓸 때</a><a href="#s6">⑥ 사례</a><a href="#s7">⑦ 마크업</a><a href="#s8">⑧ 백엔드 메모</a><a href="#s9">⑨ 플랫폼</a></nav>
   </div>
 
   <div class="card-layout">
@@ -71,26 +71,7 @@
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제 부품과 견주는 네 가지 기준</span></h2>
-        <p>겹쳐 뜨는 부품은 생김새로는 가르기 어렵습니다. 아래 네 가지로 가릅니다.</p>
-        <div class="scroll-x">
-        <table class="grid axes">
-          <thead><tr><th></th><th>무엇이 실패했는가</th><th>에러를 붙이는 자리</th><th>사용자가 할 수 있는 일</th><th>나머지 화면은 어떻게 되는가</th></tr></thead>
-          <tbody>
-            <tr><td>칸 하나</td><td>입력값 하나가 규칙에 맞지 않음</td><td><b>그 칸 바로 아래</b></td><td>고쳐서 다시 보냄</td><td>그대로 쓸 수 있음</td></tr>
-            <tr><td>폼 전체</td><td>보내기 자체가 실패함</td><td><b>폼 맨 위</b></td><td>다시 시도하거나 나중에 다시 함</td><td>입력값을 지우지 않고 그대로 둠</td></tr>
-            <tr><td>화면 전체</td><td>화면을 그리지 못함</td><td><b>화면 한가운데</b></td><td>다시 불러오거나 이전 화면으로 돌아감</td><td>쓸 수 없음</td></tr>
-            <tr><td>연결 끊김</td><td>서버에 연결하지 못함</td><td><b>앱 맨 위의 띠</b></td><td>기다리거나 오프라인으로 씀</td><td>읽기는 그대로 되게 둠</td></tr>
-          </tbody>
-        </table>
-        </div>
-        <div class="note" style="margin-bottom:0">
-          <p><b>에러 상태를 한 줄로 정리하면</b> — 에러는 사용자가 <b>문제를 고칠 수 있는 가장 가까운 자리</b>에 붙입니다. 꼭 필요하지 않으면 에러의 단계를 올리지 않습니다.</p>
-        </div>
-      </section>
-
-      <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">상태마다 달라지는 모습</span></h2>
+        <h2 class="slot-label"><span class="n">3</span> 상태<span class="hint">상태마다 달라지는 모습</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -131,8 +112,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
             <div class="anat" role="img" aria-label="에러 상태의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
@@ -163,8 +144,8 @@
           공격자에게는 시스템 구조를 알려 주는 정보가 됩니다. 자세한 내용은 서버 로그에 남기고, 화면에는 그 로그를 찾을 수 있는 오류 번호만 적습니다.</p>
       </section>
 
-      <section class="slot" id="s6">
-        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
             <h3>에러 상태를 쓰는 경우</h3>
@@ -188,8 +169,8 @@
         <p style="margin:var(--s4) 0 0"><b>에러 상태 대신 다른 것을 써야 하는 경우</b> — 사용자에게 알려 주기만 하면 되는 일이면 <a href="toast.html">토스트</a>를 쓰고, 답을 꼭 받아야 하면 <a href="modal.html">모달</a>을 씁니다. 아직 불러오는 중이라면 <a href="spinner.html">스피너</a>를, 실패가 아니라 원래 내용이 없는 것이라면 <a href="empty.html">빈 상태</a>를 보여 줍니다.</p>
       </section>
 
-      <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -212,8 +193,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 최소 마크업과 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
         <p>구현에서 중요한 것은 에러 설명을 <b>해당 입력 칸과 연결해 두는 것</b>입니다. 색만으로 에러를 알리면 스크린 리더 사용자와 색각 이상인 사람은 에러가 났다는 것을 알 수 없습니다.</p>
 <pre class="code"><span class="c">&lt;!-- 칸과 설명을 이어 둔다. 색만으로는 안 된다 --&gt;</span>
 &lt;<span class="t">input</span> <span class="a">id</span>=<span class="s">"acct"</span> <span class="a">aria-invalid</span>=<span class="s">"true"</span> <span class="a">aria-describedby</span>=<span class="s">"e1"</span>&gt;
@@ -243,8 +224,8 @@ log.error(<span class="a">{</span> id: <span class="s">'a4f21c'</span>, err <spa
         </div>
       </section>
 
-      <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
+      <section class="slot slot--backend" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
@@ -258,8 +239,8 @@ log.error(<span class="a">{</span> id: <span class="s">'a4f21c'</span>, err <spa
         </div>
       </section>
 
-      <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+      <section class="slot" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
         <p>에러를 네 단계로 나누는 틀은 플랫폼마다 비슷하고, 부르는 이름과 쓰는 부품만 다릅니다.</p>
         <div class="platforms">
           <div class="plat">

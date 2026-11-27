@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax5 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def av(inner="길동", size=40, sq=False, style="", extra=""):
@@ -44,7 +43,6 @@ D = dict(
   slug="avatar", ko="아바타", en="Avatar · profile picture",
   desc="아바타의 갈래와 크기, 사진이 없을 때 보이는 이니셜 바닥, 여럿을 겹쳐 쌓고 +N으로 줄이는 방법을 실물과 해부도로 보여 주는 항목입니다.",
   lede="아바타는 사람이나 조직 <b>하나를 가리키는 작은 그림</b>입니다. 화면을 꾸미려고 두는 것이 아니라, 이 내용이 누구의 것인지 알려 주려고 둡니다.",
-  axes_lede="표시 부품은 모두 보여 주기만 합니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>사진이 깨진 상태로 보기</b>를 켜 보세요. 사진이 사라지면 깨진 그림 아이콘 대신 <b>밑에 깔아 둔 이니셜</b>이 드러납니다.
           아바타의 기본값은 사진이 아니라 이니셜이고, 사진은 그 위에 덮어 두는 것이기 때문입니다.<br>
@@ -63,8 +61,6 @@ D = dict(
      "<b>썸네일</b> — 썸네일은 사진이나 영상 같은 <b>내용을 줄여 보여 주는 그림</b>이고, 아바타는 그 내용을 만든 사람처럼 주체를 가리킵니다.<br>"
      "<b>배지</b> — 아바타 모서리에 붙는 작은 점은 배지가 아니라 <b>상태 점</b>이라고 따로 부릅니다."),
   ]),
-  axes=ax("아바타"),
-  oneline="아바타는 <b>누구인지를 작은 그림 하나로 보여 주는 것</b>입니다. 사진이 없어도 누구인지 알려 줄 수 있어야 하기 때문에, 아바타의 기본값은 사진이 아니라 이니셜입니다.",
   s4_title="아바타의 종류", s4_hint="종류마다 달라지는 아바타 모습",
   states=states([
     (wrap(av('<span style="position:absolute;inset:0;background:linear-gradient(135deg,#9fc0ff,#5b90f9 60%,#2254c7)"></span>')), "사진이 있을 때", "사진이 있으면 가장 좋지만, <b>사진이 없는 경우가 많습니다</b>"),

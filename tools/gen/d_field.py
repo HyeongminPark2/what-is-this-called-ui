@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from ax4 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2);padding:12px">
@@ -36,8 +35,6 @@ D = dict(
      "<b>힌트</b> — 헬퍼 텍스트는 '힌트'가 아니라 칸 아래에 <b>늘 보이는 설명</b>입니다.<br>"
      "<b>폼</b> — 폼은 여러 칸을 모은 입력 양식 전체이고, 필드는 그 안의 칸 하나입니다."),
   ]),
-  axes=ax("텍스트 필드"),
-  oneline="텍스트 필드를 잘 만들었는지는 <b>칸 바깥</b>을 보면 알 수 있습니다. 라벨이 늘 보이는지, 설명이 입력하기 전에 보이는지, 에러 메시지가 고쳐야 할 칸 바로 옆에 붙는지를 확인합니다.",
   states=states([
     (mini('<div style="margin-top:9px;padding:0 6px"><div style="font-size:6.5px;margin-bottom:2px">업무용 메일</div><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px"></div></div>', bars="", label="기본 상태"), "평소 상태", "라벨은 <b>늘 보여야</b> 합니다. 라벨 없이 자리글만 두지 않습니다"),
     (mini('<div style="margin-top:9px;padding:0 6px"><div style="font-size:6.5px;margin-bottom:2px">업무용 메일</div><div style="height:12px;border:1px solid var(--accent);border-radius:3px;box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent)"></div></div>', bars="", label="포커스 상태"), "포커스를 받았을 때", "포커스 링을 지우지 않습니다. 키보드로 쓰는 사람은 포커스 링을 보고 지금 어느 칸에 있는지 압니다"),

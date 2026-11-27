@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax1 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -35,7 +34,6 @@ D = dict(
   slug="position", ko="포지션", en="Position",
   desc="포지션의 다섯 값이 자리를 차지하는지, 무엇을 기준으로 움직이는지를 보여 주고, absolute의 기준을 찾는 법과 fixed가 화면에 붙지 않는 함정을 다루는 항목입니다.",
   lede="포지션의 다섯 값은 요소가 <b>자리를 차지하는가</b>와 <b>무엇을 기준으로 움직이는가</b>, 이 두 가지를 정합니다.",
-  axes_lede="뼈대는 눈에 보이지 않지만 <b>모든 배치</b>를 정합니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>값을 바꿔 가며 <b>점선 칸</b>을 보세요. <code>absolute</code>와 <code>fixed</code>는
           흐름에서 빠지기 때문에 <b>자리를 차지하지 않습니다</b>.<br>
@@ -55,8 +53,6 @@ D = dict(
      "<b>float</b> — 예전에 쓰던 배치 방법이고, 지금은 <a href=\"../items/flex.html\">플렉스</a>·<a href=\"../items/grid.html\">그리드</a>를 씁니다.<br>"
      "<b>스티키</b> — <a href=\"../items/sticky.html\">스티키</a>도 포지션 값 가운데 하나지만, 다룰 내용이 많아서 항목을 따로 두었습니다."),
   ]),
-  axes=ax("포지션"),
-  oneline="<b><code>absolute</code> 요소가 엉뚱한 곳에 붙는다면 조상에 <code>relative</code>가 없는 것입니다.</b> 원인은 거의 이것 하나뿐입니다.",
   s4_title="포지션의 다섯 값", s4_hint="값마다 달라지는 차지하는 자리와 기준",
   states=states([
     (stage(flow('앞 줄', 5) + '<span style="position:absolute;left:5px;top:21px">' + BOX('') + '</span>' + flow('뒷 줄', 37),

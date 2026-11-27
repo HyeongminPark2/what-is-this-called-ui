@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from ax13 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
-
-L13 = "화면 단위 패턴은 사용자가 <b>끝내야 하는 일</b> 하나로 나눕니다. 아래 네 가지로 서로 가릅니다."
 
 def files(rows_, w="152px", note="", ok=None, drop=None):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -47,7 +44,6 @@ D = dict(
   slug="upload", ko="파일 올리기", en="File upload",
   desc="파일을 서버에 건네는 화면입니다. 보내기 전에 거르는 법, 파일마다 따로 처리하는 법, 실패한 파일을 다시 올리게 하는 법을 다룹니다.",
   lede="파일 올리기에서 가장 중요한 것은 <b>실패를 언제 알려 주느냐</b>입니다. 파일을 다 올린 뒤에야 거절하면 사용자가 기다린 시간이 모두 헛수고가 됩니다.",
-  axes_lede=L13,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>10MB가 넘거나 받지 않는 형식이면 <b>보내기 전에</b> 그 자리에서 알려 줘야 합니다.
           데모는 <b>헛되이 올린 양(MB)</b>을 재서 적는데, 미리 거르기를 끄면 그 숫자가 올라갑니다.<br>
@@ -67,8 +63,6 @@ D = dict(
      "<b>내보내기</b> — <a href=\"exportdata.html\">내보내기</a>는 데이터가 <b>반대 방향</b>으로 나가는 일입니다.<br>"
      "<b>프로그레스 바</b> — <a href=\"progress.html\">프로그레스 바</a>는 올리기 화면 안에 들어가는 <b>부품</b>입니다."),
   ]),
-  axes=ax("파일 올리기"),
-  oneline="<b>파일은 보내기 전에 거르세요.</b> 파일의 크기와 형식은 고르는 순간 브라우저가 이미 알고 있습니다.",
   do_title="파일 올리기 화면을 만들 때 할 일",
   dont_title="파일 올리기를 잘못 만드는 경우",
   instead_title="함께 보면 좋은 항목",

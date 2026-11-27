@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax13 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def scr(inner, w="152px", head="검색 결과"):
@@ -33,7 +32,6 @@ D = dict(
   slug="searchresults", ko="검색 결과 화면", en="Search results page",
   desc="찾은 것 가운데 하나를 고르는 화면입니다. 질의를 다시 보여 주는 법, 상태를 주소에 담는 법, 돌아왔을 때 되살리는 법을 다룹니다.",
   lede="검색은 <b>찾는 일</b>이고 결과 화면은 그 가운데서 <b>고르는 일</b>을 합니다. 사용자는 결과 하나에 들어갔다가 다시 <b>돌아오기</b>를 되풀이하므로, 이 왕복이 매끄럽게 되도록 만드는 것이 설계의 핵심입니다.",
-  axes_lede="화면 단위 패턴은 사용자가 <b>끝내야 하는 일</b> 하나로 나눕니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>결과에서 한 건을 눌러 들어갔다가 <b>← 뒤로</b>를 눌러 보세요.<br>
           두 설정을 모두 켜 두면 <b>질의 · 필터 · 굴린 자리</b>가 그대로 되살아납니다. 반대로 끄면 빈 검색 화면으로
@@ -52,8 +50,6 @@ D = dict(
      "<b>필터</b> — <a href=\"filter.html\">필터</a>는 결과 화면을 이루는 한 부분입니다.<br>"
      "<b>목록</b> — 일반 목록에는 질의가 없지만, 결과 화면은 <b>무엇으로 찾았는지</b>를 늘 함께 들고 있습니다."),
   ]),
-  axes=ax("검색 결과 화면"),
-  oneline="<b>검색 상태를 주소에 담으세요.</b> 주소에 담으면 공유·새로고침·뒤로가기가 한꺼번에 해결되지만, 담지 않으면 세 가지 모두 제대로 동작하지 않습니다.",
   do_title="검색 결과 화면으로 만들면 좋은 경우",
   dont_title="검색 결과 화면을 잘못 만드는 경우",
   instead_title="함께 보면 좋은 항목",

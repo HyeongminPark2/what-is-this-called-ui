@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax10 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -30,7 +29,6 @@ D = dict(
   slug="daterange", ko="날짜 범위", en="Date range",
   desc="기간을 고르는 화면에서 자주 쓰는 기간 버튼이 달력보다 빠른 이유와, 끝날을 포함하는지에 따라 기간이 하루 달라지는 문제를 다루는 항목입니다.",
   lede="날짜 범위는 조회할 기간을 고르는 장치입니다. 대부분은 달력보다 <b>자주 쓰는 기간</b> 버튼으로 더 빨리 고를 수 있고, <b>끝날을 포함하는지</b>를 놓치면 기간이 하루 어긋나기 쉽습니다.",
-  axes_lede="데이터 화면은 '건수가 늘면 어떻게 되나'부터 따집니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>달력에서 시작일과 끝날을 눌러 보세요. 실제로는 달력까지 가지 않고 <b>자주 쓰는 기간</b> 버튼만으로
           고르는 경우가 대부분입니다.<br>
@@ -50,8 +48,6 @@ D = dict(
      "<b>필터</b> — 날짜 범위도 <a href=\"filter.html\">필터</a>의 한 갈래이지만, 정해진 값을 고르는 필터와는 <b>고르는 방식</b>이 전혀 다릅니다.<br>"
      "<b>기간</b> — '기간'이라는 말은 '3개월'처럼 길이를 뜻하기도 하고 '11월 1~7일'처럼 구간을 뜻하기도 하므로 어느 쪽인지 가려야 합니다."),
   ]),
-  axes=ax("날짜 범위"),
-  oneline="<b>자주 쓰는 기간 버튼을 먼저 두고, 달력은 그 뒤에 둡니다.</b> 그리고 끝날을 포함하는지 화면에 적어 두세요.",
   s4_title="기간을 고르는 과정", s4_hint="대부분은 버튼만으로 고릅니다",
   states=states([
     (one('<div style="display:flex;gap:3px;flex-wrap:wrap">'

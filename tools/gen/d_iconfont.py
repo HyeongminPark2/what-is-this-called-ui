@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax3 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -21,7 +20,6 @@ D = dict(
   slug="iconfont", ko="아이콘 글꼴", en="Icon font",
   desc="글자 자리에 그림을 넣은 아이콘 글꼴이 무엇인지, 글꼴을 받지 못하면 왜 깨지고 엉뚱하게 읽히는지, SVG와는 무엇이 다른지 보여 주는 항목입니다.",
   lede="아이콘 글꼴은 <b>글자 자리에 그림을 넣은 글꼴</b>입니다. 글자처럼 CSS로 색과 크기를 바로 바꿀 수 있어서 널리 쓰였지만, 지금은 <b>SVG가 거의 모든 면에서</b> 낫습니다.",
-  axes_lede="글자 항목은 모두 글을 잘 읽히게 하려고 씁니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>색을 바꿔 보세요. 아이콘 글꼴은 <code>color</code>로, SVG는 <code>stroke</code>로 색이 바뀝니다.
           CSS로 색을 바꿀 수 있다는 점이 아이콘 글꼴의 옛 장점이었는데, 지금은 SVG도 똑같이 됩니다.<br>
@@ -41,8 +39,6 @@ D = dict(
      "<b>이모지</b> — 이모지는 OS에 들어 있는 그림이라서 <b>만드는 쪽이 모양을 정할 수 없습니다</b>.<br>"
      "<b>아이콘</b> — 아이콘은 그림 자체를 가리키고, 아이콘 글꼴은 <b>그 그림을 화면에 넘기는 방식</b>입니다. 자세한 내용은 <a href=\"assets.html\">에셋 내보내기</a>를 보세요."),
   ]),
-  axes=ax("아이콘 글꼴"),
-  oneline="<b>새로 만든다면 SVG를 씁니다.</b> 아이콘 글꼴은 이미 쓰고 있는 곳에서만 남겨 둘 이유가 있습니다.",
   s4_title="아이콘 글꼴과 SVG의 차이", s4_hint="두 방식을 나란히 본 모습",
   states=states([
     (one('<span style="font-size:20px;color:var(--accent)">🗑</span>', "아이콘 글꼴", None, "color · font-size 가 적용됨"),

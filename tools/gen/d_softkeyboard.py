@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax11 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def ph(kbd_h, cta_bottom, note, warn=False, w="112px", fields=4):
@@ -30,7 +29,6 @@ D = dict(
   slug="softkeyboard", ko="폰 키보드", en="Software keyboard",
   desc="화면 절반을 덮는 폰 키보드 때문에 가려지는 입력칸과 버튼을 visualViewport로 다루는 법과, 키보드 모양을 정하는 법을 보여 주는 항목입니다.",
   lede="폰 키보드는 올라오면 <b>화면의 절반쯤</b>을 덮기 때문에, 그 자리에 있던 입력칸과 버튼은 모두 키보드에 가려집니다.",
-  axes_lede="PC와 폰은 기계보다 <b>쓰는 전제</b>가 다릅니다. 아래 네 가지로 두 환경을 견줍니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>입력칸 누르기</b>로 키보드를 올려 보세요. 한글 키보드는 자동완성 줄까지 더해
           화면의 절반을 덮습니다.<br>
@@ -51,8 +49,6 @@ D = dict(
      "<b>리사이즈</b> — 키보드가 올라와도 <code>window.resize</code> 이벤트가 <b>오지 않는 기기</b>가 있습니다.<br>"
      "<b>키보드 조작</b> — <a href=\"../items/keyboard.html\">키보드 조작</a>은 PC에서 Tab과 Enter로 화면을 다루는 이야기라서 이 항목과는 다른 주제입니다."),
   ]),
-  axes=ax("폰 키보드"),
-  oneline="<b>키보드가 올라와도 창 크기는 바뀌지 않습니다.</b> 그래서 <code>position: fixed</code>로 바닥에 붙인 것은 제자리에 남은 채 키보드 뒤에 가려집니다.",
   s4_title="키보드가 올라올 때 생기는 일", s4_hint="키보드에 가려지는 것",
   do_title="폰 키보드를 챙겨야 하는 화면",
   dont_title="폰 키보드를 다룰 때 피할 것",

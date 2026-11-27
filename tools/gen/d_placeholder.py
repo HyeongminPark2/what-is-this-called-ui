@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax14 import ax
 from _t14 import ba, one, btn
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -30,7 +29,6 @@ D = dict(
   slug="placeholder", ko="자리글과 헬퍼 텍스트", en="Placeholder & helper text",
   desc="칸 이름과 형식의 보기, 입력 규칙을 각각 다른 자리에 적는 방법과, 자리글을 레이블 대신 쓰면 안 되는 이유를 다룹니다.",
   lede="레이블은 칸 이름을, 자리글은 형식의 보기를, 헬퍼 텍스트는 입력 규칙을 알려 주기 때문에 셋은 <b>서로 다른 일</b>을 합니다. 하나로 셋을 대신하면 나머지 두 정보가 화면에서 빠집니다.",
-  axes_lede="화면 문구는 사용자가 <b>무엇을 하면 되는지</b> 알려 줍니다. 아래 네 가지로 문구마다 다른 점을 봅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>레이블을 자리글로 쓰기</b>를 켜고 <b>세 칸 채우기</b>를 눌러 보세요.
           글자가 들어가는 순간 자리글이 사라지면서 <b>그 칸이 무슨 칸이었는지</b>도 알 수 없게 됩니다.<br>
@@ -49,8 +47,6 @@ D = dict(
      "<b>툴팁</b> — <a href=\"../items/tooltip.html\">툴팁</a>은 마우스를 올려야 보이기 때문에 <a href=\"hover.html\">폰에서는 볼 수 없습니다</a>.<br>"
      "<b>오류 문구</b> — <a href=\"errortext.html\">오류</a> 문구는 값이 틀린 <b>뒤</b>에 보여 주고, 헬퍼 텍스트는 틀리기 <b>전</b>에 미리 보여 줍니다."),
   ]),
-  axes=ax("자리글과 헬퍼 텍스트"),
-  oneline="<b>자리글은 보기를, 헬퍼는 규칙을, 레이블은 이름을 알려 줍니다.</b> 셋 다 필요하고, 어느 하나가 다른 것을 대신할 수 없습니다.",
   s4_title="레이블·자리글·헬퍼를 나눠 둔 모습", s4_hint="하나를 빼면 사라지는 정보",
   states=states([
     (fld('사업자번호', '1248100998', '', '- 없이 10자리', "152px", "셋이 다 있음", True),

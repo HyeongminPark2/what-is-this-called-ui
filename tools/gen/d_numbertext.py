@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax14 import ax
 from _t14 import ba, one, btn
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -22,7 +21,6 @@ D = dict(
   slug="numbertext", ko="숫자와 단위 쓰기", en="Writing numbers & units",
   desc="숫자를 놓는 자리에 따라 끊어 적는 방법을 다룹니다. 만·억 단위와 단위 붙이기, 0건과 1건, 퍼센트 반올림까지 함께 봅니다.",
   lede="같은 값이라도 <b>어디에 적는지</b>에 따라 표기가 달라집니다. 또 <b>단위 없는 숫자</b>만으로는 무엇을 센 값인지 알 수 없습니다.",
-  axes_lede="화면 문구는 사용자가 <b>무엇을 하면 되는지</b> 알려 줍니다. 아래 네 가지로 문구마다 다른 점을 봅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>값과 자리를 바꿔 보세요. <b>표 안</b>에서는 세로로 견주기 쉽도록 자릿수를 맞춰 적고,
           <b>요약 타일</b>에서는 한눈에 읽히도록 크게 줄여 적습니다.<br>
@@ -42,8 +40,6 @@ D = dict(
      "<b>포맷팅</b> — 날짜·시간 표기까지 아우르는 넓은 말입니다. <a href=\"datetime.html\">날짜와 시간</a> 표기는 따로 다룹니다.<br>"
      "<b>단위</b> — 여기서 말하는 단위는 길이·무게의 단위계와 다르며, 화면에서는 <b>원·건·%</b>가 대부분입니다."),
   ]),
-  axes=ax("숫자와 단위 쓰기"),
-  oneline="<b>숫자에는 단위를 꼭 붙이고, 놓이는 자리에 맞게 끊어 적으세요.</b> 큰 수를 줄일 때 한국어에서는 K·M 대신 <b>만·억</b>을 씁니다.",
   s4_title="놓이는 자리별 숫자 표기", s4_hint="같은 값을 자리에 맞게 다르게 적기",
   states=states([
     (num('1,284,000원', "표 안", True, "자릿수를 맞춰 세로로 견줌"), "표 안의 금액", "<a href=\"../items/numerals.html\">등폭 숫자</a>와 함께 씁니다"),

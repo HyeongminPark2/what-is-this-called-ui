@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax2 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def chip(c, t, sub=""):
@@ -26,7 +25,6 @@ D = dict(
   slug="color", ko="색 토큰", en="Color tokens · semantic color",
   desc="색을 #2f6df6 같은 값 대신 --accent 같은 쓰임의 이름으로 정해 두는 방법을 실물과 해부도로 보여 주는 항목입니다.",
   lede="색 토큰은 색을 <b>값</b> 대신 <b>쓰임</b>의 이름으로 부르기로 정해 둔 것입니다. 화면 코드에는 <code>#2f6df6</code> 같은 값을 적지 않고 <code>--accent</code> 같은 이름만 적습니다.",
-  axes_lede="토큰은 부품이 아니라 <b>값을 쓰는 규칙</b>입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>1단은 색 자체의 이름(<code>blue-500</code>), 2단은 쓰임의 이름(<code>--accent</code>), 3단은 부품 전용 이름(<code>button-bg</code>)입니다.
           <b>어두운 화면으로</b>를 켜면 2단의 <b>화살표만</b> 다른 색을 가리키도록 바뀝니다.
@@ -45,8 +43,6 @@ D = dict(
      "<b>CSS 변수</b> — CSS 변수는 값을 저장하는 수단이고, 토큰은 그 값을 어디에 쓸지 정한 <b>규칙</b>입니다. 그래서 CSS 변수를 쓴다고 해서 저절로 토큰이 되지는 않습니다.<br>"
      "<b>팔레트</b> — 팔레트는 쓸 수 있는 색을 모아 둔 목록이고, 토큰은 그 색을 어디에 쓸지까지 정한 것입니다."),
   ]),
-  axes=ax("색 토큰"),
-  oneline="색 토큰은 <b>'이 색을 어디에 쓰는가'</b>에 이름을 붙인 것입니다. 그래서 이름에 <code>blue</code> 같은 색 이름이 들어 있다면 아직 쓰임으로 이름을 짓지 않은 것입니다.",
   s4_title="쓰임에 따라 나눈 색", s4_hint="쓰임마다 정해 둔 색과 그 색을 쓰는 자리",
   states=states([
     (chip("var(--accent)", "--accent", "강조 · 주요 동작"), "강조할 때", "누를 수 있는 것과 선택된 것을 표시합니다. 강조색을 쓴 주요 동작은 <b>한 화면에 하나</b>만 두는 것이 원칙입니다"),

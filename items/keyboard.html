@@ -29,7 +29,7 @@
     <h1>키보드 조작</h1>
     <p class="en">Keyboard operability</p>
     <p class="lede" style="margin-top:var(--s3)">키보드 조작은 화면의 모든 기능을 <b>마우스 없이 키보드만으로도 쓸 수 있어야</b> 한다는 요구입니다. 손을 자유롭게 쓰지 못하는 사람뿐 아니라 마우스가 고장 난 사람에게도 해당합니다.</p>
-    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 상태</a><a href="#s4">④ 해부도</a><a href="#s5">⑤ 쓸 때</a><a href="#s6">⑥ 사례</a><a href="#s7">⑦ 마크업</a><a href="#s8">⑧ 백엔드 메모</a><a href="#s9">⑨ 플랫폼</a></nav>
   </div>
 
   <div class="card-layout">
@@ -72,32 +72,7 @@
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제 부품과 견주는 네 가지 기준</span></h2>
-        <p>접근성은 눈에 안 보이는 부분까지 챙기는 일입니다. 아래 네 가지로 서로 가릅니다.</p>
-        <div class="scroll-x">
-        <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 돕는가</th><th>화면에 눈으로 보이는가</th><th>챙기지 않으면 누가 막히는가</th><th>어떻게 확인하는가</th></tr></thead>
-          <tbody>
-            <tr><td>포커스</td><td><b>지금 어디에 있는지</b> 보여 주기</td><td><b>보여야 함</b></td><td>키보드만 쓰는 사람</td><td>Tab을 눌러 보기</td></tr>
-            <tr><td>포커스 트랩</td><td>포커스를 모달 안에 가두기</td><td>보이지 않음</td><td>키보드나 스크린 리더 사용자</td><td>모달을 열고 Tab을 계속 눌러 보기</td></tr>
-            <tr class="me"><td><b>키보드 조작</b></td><td>마우스 없이 <b>모든 기능</b> 쓰기</td><td>보이지 않음</td><td>마우스를 못 쓰는 사람</td><td>마우스를 치우고 써 보기</td></tr>
-            <tr><td>이름 붙이기</td><td>요소를 뭐라고 <b>부르는지</b> 정하기</td><td>보이지 않음</td><td>화면을 못 보는 사람</td><td>접근성 트리를 살펴보기</td></tr>
-            <tr><td>스크린 리더가 읽는 것</td><td>역할 · 이름 · <b>상태</b> 전하기</td><td>보이지 않음</td><td>화면을 못 보는 사람</td><td>스크린 리더로 직접 들어 보기</td></tr>
-            <tr><td>라이브 리전</td><td><b>저절로 바뀐 내용</b> 알리기</td><td>보이지 않음</td><td>화면을 못 보는 사람</td><td>내용을 바꾼 뒤 들어 보기</td></tr>
-            <tr><td>대비비</td><td>글자가 <b>잘 읽히는지</b> 따지기</td><td><b>보임</b></td><td>저시력 사용자, 햇빛 아래나 값싼 화면으로 보는 사람</td><td><b>도구로 재 보기</b>(숫자로 나옴)</td></tr>
-            <tr><td>시맨틱 태그</td><td>화면의 <b>구조</b> 알리기</td><td>보이지 않음</td><td><b>거의 모든 사용자</b></td><td>구역 목록을 열어 보기</td></tr>
-            <tr><td>대체 텍스트</td><td>그림의 <b>뜻</b> 전하기</td><td>보이지 않음</td><td>화면을 눈으로 보지 않는 사람</td><td>이미지를 끄고 읽어 보기</td></tr>
-            <tr><td>확대와 글자 크기</td><td><b>키웠을 때</b>도 쓸 수 있는지 따지기</td><td>보이지 않음</td><td>저시력 사용자</td><td>200%로 키워 보기</td></tr>
-          </tbody>
-        </table>
-        </div>
-        <div class="note" style="margin-bottom:0">
-          <p><b>키보드 조작을 한 줄로 정리하면</b> — <b>누르는 것은 <code>&lt;button&gt;</code>으로, 다른 곳으로 이동하는 것은 <code>&lt;a href&gt;</code>로</b> 만듭니다. 같은 동작을 div로 만들면 브라우저가 해 주던 다섯 가지를 직접 짜야 합니다.</p>
-        </div>
-      </section>
-
-      <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 태그에 따라 달라지는 키보드 동작<span class="hint">모양이 같은 버튼이 태그마다 다르게 동작하는 모습</span></h2>
+        <h2 class="slot-label"><span class="n">3</span> 태그에 따라 달라지는 키보드 동작<span class="hint">모양이 같은 버튼이 태그마다 다르게 동작하는 모습</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -138,8 +113,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
             <div class="anat" role="img" aria-label="키보드 조작의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
@@ -172,8 +147,8 @@
           그래서 이 항목의 결론은 언제나 <b>"원래 태그를 쓰세요"</b>입니다.</p>
       </section>
 
-      <section class="slot" id="s6">
-        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
             <h3>키보드 조작을 확인해야 하는 경우</h3>
@@ -196,8 +171,8 @@
         <p style="margin:var(--s4) 0 0"><b>키보드 조작과 이어지는 주제는 다른 항목에서 다룹니다</b> — 포커스가 어디 있는지 보이게 하는 방법은 <a href="focus.html">포커스</a>에서, 모달 안에 포커스를 가두는 방법은 <a href="focustrap.html">포커스 트랩</a>에서 다룹니다. 어떤 태그를 골라야 하는지는 <a href="semantics.html">시맨틱 태그</a>를 보세요.</p>
       </section>
 
-      <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -228,8 +203,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">원래 태그를 쓰면 저절로 지켜지는 규칙</span></h2>
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 최소 마크업과 키보드<span class="hint">원래 태그를 쓰면 저절로 지켜지는 규칙</span></h2>
         <p>가장 간단한 해결책은 <b>태그를 button으로 바꾸는 것</b>입니다. 그래도 div로 만들어야 한다면 필요한 코드를 아래에 적어 두었습니다.</p>
 <pre class="code"><span class="c">&lt;!-- 이 한 줄이면 된다 --&gt;</span>
 &lt;<span class="t">button</span> <span class="a">type</span>=<span class="s">"button"</span>&gt;저장하기&lt;/<span class="t">button</span>&gt;
@@ -259,8 +234,8 @@ el.addEventListener(<span class="s">'keydown'</span>, (e) =&gt; {
         </div>
       </section>
 
-      <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
+      <section class="slot slot--backend" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
@@ -273,8 +248,8 @@ el.addEventListener(<span class="s">'keydown'</span>, (e) =&gt; {
         </div>
       </section>
 
-      <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+      <section class="slot" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
         <p>iOS와 안드로이드에는 <b>키보드 말고도</b> 다른 조작 수단이 있어서 챙겨야 할 범위가 더 넓습니다.</p>
         <div class="platforms">
           <div class="plat">

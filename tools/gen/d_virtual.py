@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax10 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def scroller(rowstxt, note="", w="160px", h="62px"):
@@ -24,7 +23,6 @@ D = dict(
   slug="virtual", ko="가상 스크롤", en="Virtual scrolling",
   desc="수만 줄짜리 목록에서 보이는 줄만 그리는 가상 스크롤을 받침대 높이, 창 계산, 고정 줄 높이라는 제약과 대안까지 다루는 항목입니다.",
   lede="가상 스크롤은 목록이 수만 줄이어도 화면에 <b>보이는 줄만</b> 그려서 브라우저가 느려지지 않게 하는 기법입니다. 대신 안 그린 줄은 찾기·인쇄·스크린 리더에서 빠지므로 <b>잃는 것</b>도 분명합니다.",
-  axes_lede="데이터 화면은 '건수가 늘면 어떻게 되나'부터 따집니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>가상 스크롤</b>을 끄고 2만 줄을 그려 보세요. 그리는 데 걸린 시간과
           <b>실제로 만들어진 DOM 노드 수</b>가 아래에 나옵니다.<br>
@@ -44,8 +42,6 @@ D = dict(
      "<b>페이지네이션</b> — <a href=\"../items/pagination.html\">페이지네이션</a>은 목록을 쪽으로 끊어 보여 주고, 가상 스크롤은 목록 전체를 <b>하나로 이어 둡니다</b>.<br>"
      "<b>레이지 로딩</b> — 레이지 로딩은 이미지를 필요할 때 늦게 받는 기법이라 가상 스크롤과는 다릅니다."),
   ]),
-  axes=ax("가상 스크롤"),
-  oneline="가상 스크롤은 다른 방법이 통하지 않을 때 꺼내는 <b>마지막 수단</b>입니다. 줄 수를 줄이거나 쪽을 나눠서 해결된다면 언제나 그쪽이 낫습니다.",
   s4_title="상태", s4_hint="줄이 늘어날 때 일어나는 일",
   states=states([
     (scroller(['모란상회', '한빛아웃도어', '새벽상사', '대림유통'], "200줄이면 그냥 다 그려도 됨"),

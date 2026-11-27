@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from ax5 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
-
-L5 = "표시 부품은 모두 보여 주기만 합니다. 아래 네 가지로 서로 가릅니다."
 
 def box(inner, label, note="", ok=None, w="152px", h="56px"):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -37,7 +34,6 @@ D = dict(
   slug="thumbnail", ko="썸네일", en="Thumbnail",
   desc="비율이 정해진 칸에 비율이 제각각인 사진을 넣는 법을 잘라 채우기, 여백 두기, 찌그러짐, 자리 예약으로 나눠 보여 주는 항목입니다.",
   lede="썸네일은 사진을 작게 줄여 보여 주는 그림입니다. 썸네일 칸은 <b>가로세로 비율이 정해져</b> 있는데 사진의 비율은 제각각이라서, 사진의 일부를 잘라 낼지, 여백을 둘지, 비율을 포기할지 가운데 <b>무엇을 포기할지</b> 늘 골라야 합니다.",
-  axes_lede=L5,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>데모는 <b>원본에서 잘려 나간 넓이</b>와 <b>가로세로 비가 얼마나 어긋났는지</b>를 재서 적습니다.
           <code>cover</code>는 사진을 잘라 칸을 채우고, <code>contain</code>은 여백을 남깁니다.
@@ -57,8 +53,6 @@ D = dict(
      "<b>아이콘</b> — <a href=\"icon.html\">아이콘</a>은 뜻을 나타내는 <b>기호</b>이고, 썸네일은 <b>그 물건을 찍은 사진</b>입니다.<br>"
      "<b>커버</b> — 커버는 화면 맨 위에 넓게 까는 <b>띠 모양 그림</b>입니다."),
   ]),
-  axes=ax("썸네일"),
-  oneline="<b>썸네일은 <code>cover</code>를 기본으로 두세요.</b> 대개 여백을 남기는 것보다 잘라 채우는 쪽이 낫고, 사진이 찌그러지는 것은 둘 다보다 나쁩니다.",
   s4_title="채우는 방식과 상태", s4_hint="채우는 방식과 상태마다 달라지는 썸네일",
   states=states([
     (box(pic(100, 56, -12, 0), "cover", "칸을 꽉 채우고 양옆이 잘림", True),

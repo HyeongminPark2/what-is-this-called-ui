@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax1 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -27,7 +26,6 @@ D = dict(
   slug="aspectratio", ko="종횡비", en="Aspect ratio",
   desc="폭이 정해지면 높이가 따라오게 하는 종횡비를 다루는 항목입니다. 비를 유지하는 쓸모보다 자리를 미리 잡는 쓸모가 더 큽니다.",
   lede="종횡비는 폭이 정해지면 그 비에 맞춰 <b>높이가 따라오게</b> 하는 값입니다. 실무에서는 비를 지키는 것보다 그림이 오기 전에 <b>자리를 미리 잡는</b> 데 더 쓸모가 있습니다.",
-  axes_lede="뼈대는 눈에 보이지 않지만 <b>모든 배치</b>를 정합니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>폭이 서로 다른 세 상자가 <b>같은 비</b>를 유지하는지, 아래에 실제로 잰 값이 나옵니다.<br>
           <b>비를 정하지 않고 높이만 주기</b>를 켜면 폭마다 비가 달라집니다. 화면 폭에 따라 칸 폭이 바뀌는 반응형 화면에서 바로 드러나는 차이입니다.</p>
@@ -45,8 +43,6 @@ D = dict(
      "<b>크롭</b> — 그림을 잘라 내는 것은 <code>object-fit</code>이 하는 일이고, 비는 <b>상자의 모양</b>을 정합니다.<br>"
      "<b>스케일</b> — 크기를 키우는 것과 <b>비를 유지하는</b> 것은 다른 일입니다."),
   ]),
-  axes=ax("종횡비"),
-  oneline="<b>그림이 들어갈 자리에는 거의 항상 비를 적어 두세요.</b> 그러면 그림이 늦게 도착해도 글이 밀리지 않습니다.",
   s4_title="자주 쓰는 비와 자리 잡기", s4_hint="폭이 같아도 비에 따라 달라지는 높이",
   do_title="종횡비를 정해 두는 경우",
   dont_title="종횡비를 다룰 때 피할 것",

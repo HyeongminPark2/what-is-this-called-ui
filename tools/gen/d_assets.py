@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax15 import ax
 from _t15 import code, card, btn
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -32,7 +31,6 @@ D = dict(
   slug="assets", ko="에셋 내보내기", en="Exporting assets",
   desc="아이콘과 로고, 사진을 어떤 형식으로 넘길지 다루는 항목입니다. SVG와 배율별 비트맵 가운데 무엇을 쓰고, 파일 포맷은 어떻게 고르는지 보여 줍니다.",
   lede="에셋 내보내기는 시안에 쓴 그림을 개발에서 쓸 파일로 꺼내는 일이고, 무엇을 내보내느냐에 따라 <b>골라야 할 형식이 달라집니다</b>. 선으로 된 그림은 SVG로, 사진은 배율별 비트맵으로 내보냅니다.",
-  axes_lede="현장 용어는 부품이 아니라 디자인과 개발이 <b>함께 일하는 단계</b>를 가리킵니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>무엇을 내보낼지 골라 보세요. 선으로 된 아이콘과 로고는 <b>SVG 파일 하나</b>만 있으면 어느 배율에서나
           선명하고 파일도 작습니다. 반면 사진은 SVG로 만들 수 없기 때문에 <b>배율별 비트맵</b>이 필요합니다.<br>
@@ -51,8 +49,6 @@ D = dict(
      "<b>해상도</b> — 배율과 섞어 부르는 일이 많습니다. 둘의 차이는 <a href=\"dpr.html\">화면 밀도</a> 항목에 있습니다.<br>"
      "<b>슬라이스</b> — 큰 그림을 잘라 쓰던 옛 방식의 이름이 지금까지 남은 말입니다."),
   ]),
-  axes=ax("에셋 내보내기"),
-  oneline="<b>선으로 된 그림은 SVG로, 사진은 배율별 비트맵으로 내보냅니다.</b> 사진의 파일 크기를 줄일 때는 배율을 줄이는 것보다 포맷을 바꾸는 쪽이 효과가 큽니다.",
   s4_title="내보내는 그림의 종류", s4_hint="종류마다 알맞은 형식",
   states=states([
     (bars([('SVG', 1, (True, '2 KB')), ('PNG 2x', 3.4, (False, '7 KB')), ('PNG 3x', 7.1, (False, '14 KB'))],

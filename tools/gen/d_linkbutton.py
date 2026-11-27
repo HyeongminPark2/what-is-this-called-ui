@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax4 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -55,8 +54,6 @@ D = dict(
      "<b>CTA</b> — CTA 는 화면에서 맡는 역할을 가리키는 이름이고, 태그 이름은 아닙니다.<br>"
      "<b>링크 색</b> — 링크를 파란 밑줄로 그리는 것은 <b>관습</b>이고, 꼭 지켜야 하는 규칙은 아닙니다."),
   ]),
-  axes=ax("링크와 버튼"),
-  oneline="<b>누른 뒤 주소가 바뀌면 링크, 그렇지 않으면 버튼</b>을 씁니다. 링크와 버튼을 가르는 기준은 이것 하나입니다.",
   states=states([
     (r([("주문 상세 보기", "a", False), ("저장", "button", False)], "", "뜻에 맞게 씀", True),
      "뜻에 맞게 썼을 때", "<b>뜻에 맞게</b> 썼습니다"),

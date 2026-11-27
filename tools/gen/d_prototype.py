@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax15 import ax
 from _t15 import code, card, btn, blocks
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -18,7 +17,6 @@ D = dict(
   slug="prototype", ko="프로토타입", en="Prototype",
   desc="프로토타입이 시안의 화면끼리 이어 두어 눌러 볼 수 있게 만든 그림이고, 아직 코드가 아니라는 것을 보여 주는 항목입니다.",
   lede="프로토타입은 <b>눌러 볼 수 있게 만든 시안</b>입니다. 화면 몇 장을 서로 이어 둔 그림일 뿐 실제로 <b>만들어진 제품이 아닙니다</b>.",
-  axes_lede="현장 용어는 부품이 아니라 디자인과 개발이 <b>함께 일하는 단계</b>를 가리킵니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>이어 둔 자리 보이기</b>를 끄고 아무 데나 눌러 보세요. 대부분은 눌러도 아무 일도 일어나지 않습니다.<br>
           <b>진짜 데이터처럼 보이기</b>를 켜면 화면이 더 그럴듯해지는데, 그럴수록 보는 사람에게서
@@ -37,8 +35,6 @@ D = dict(
      "<b>데모</b> — 보여 주려고 만드는 것이고, 프로토타입은 사용자에게 <b>물어보려고</b> 만드는 것입니다.<br>"
      "<b>프로토타입(개발)</b> — 개발 쪽에서는 <b>시험해 보고 버릴 생각으로 짠 코드</b>를 뜻하기도 합니다. 같은 말이 디자인 쪽과 다른 것을 가리킵니다."),
   ]),
-  axes=ax("프로토타입"),
-  oneline="프로토타입으로 <b>무엇을 물어보려는지</b>를 먼저 정하세요. 물을 것이 정해지면 이어 둘 화면도 몇 장으로 줄어듭니다.",
   s4_title="프로토타입으로 할 수 있는 것과 없는 것", s4_hint="그림과 실제 제품의 차이",
   states=states([
     (card('<span style="font-size:9px">목록 → 상세 → 내보내기</span>'

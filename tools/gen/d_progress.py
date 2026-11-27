@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
-
-WAIT = table(
-  ["끝나는 때를 아는가", "들어올 내용의 자리를 미리 잡는가", "사용자가 기다려야 하는가", "내용이 들어올 때 화면이 덜컥거리는가"],
-  [["스피너", "모름", "잡지 않음", "기다림", "덜컥거림"],
-   ["스켈레톤", "모름", "잡아 둠", "기다림", "덜컥거리지 않음"],
-   ["프로그레스 바", "알고 있음", "잡기도 함", "기다림", "덜컥거리지 않음"],
-   ["낙관적 UI", "해당 없음", "잡아 둠", "기다리지 않음", "덜컥거리지 않음"]],
-  me="프로그레스")
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:10px">
                 <div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 26px 16px">
@@ -42,8 +34,6 @@ D = dict(
      "<b>스피너</b> — 끝나는 때를 아는지에 따라 스피너와 프로그레스 바가 갈립니다. 끝나는 때를 모르는데 퍼센트를 지어내면 안 됩니다.<br>"
      "<b>슬라이더</b> — 생김새는 닮았지만 슬라이더는 <b>사용자가 움직이는</b> 입력 부품이고, 프로그레스 바는 사용자가 조작할 수 없습니다."),
   ]),
-  axes=WAIT,
-  oneline="프로그레스 바는 <b>끝나는 때를 알 때만</b> 씁니다. 진행률을 모르면서 퍼센트를 보여 주면 막대가 90% 근처에서 멈춰 버리는 일이 생기고, 사용자는 아무 표시가 없을 때보다 더 답답해합니다.",
   states=states([
     (mini('<div style="margin-top:12px"><span style="display:block;height:5px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:0%;background:var(--accent);border-radius:99px"></i></span></div>', bars="68", label="아직 시작 안 한 막대"), "막 시작했을 때(0%)", "막 시작한 상태입니다. 막대가 0에서 한동안 움직이지 않으면 사용자는 멈춘 줄 압니다"),
     (mini('<div style="margin-top:12px"><span style="display:block;height:5px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:62%;background:var(--accent);border-radius:99px"></i></span><div style="font-size:7px;color:var(--fg-muted);margin-top:4px">62% · 12초 남음</div></div>', bars="68", label="진행 중인 결정형 막대"), "진행률을 알 때(결정형)", "퍼센트와 남은 시간을 함께 보여 줍니다"),

@@ -29,7 +29,7 @@
     <h1>아이콘 크기</h1>
     <p class="en">Icon size scale</p>
     <p class="lede" style="margin-top:var(--s3)">아이콘 크기는 <b>글자 크기가 아니라 줄 높이</b>에 맞춥니다. 또 아이콘의 <b>그림 크기와 누르는 자리의 크기</b>는 따로 정하는 값입니다.</p>
-    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 상태</a><a href="#s4">④ 해부도</a><a href="#s5">⑤ 쓸 때</a><a href="#s6">⑥ 사례</a><a href="#s7">⑦ 마크업</a><a href="#s8">⑧ 백엔드 메모</a><a href="#s9">⑨ 플랫폼</a></nav>
   </div>
 
   <div class="card-layout">
@@ -73,34 +73,7 @@
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제 부품과 견주는 네 가지 기준</span></h2>
-        <p>토큰은 부품이 아니라 <b>값을 쓰는 규칙</b>입니다. 아래 네 가지로 서로 가릅니다.</p>
-        <div class="scroll-x">
-        <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하는가</th><th>몇 단으로 두면 좋은가</th><th>값을 바꾸면 어디가 바뀌는가</th><th>잘못 정했을 때 나타나는 증상</th></tr></thead>
-          <tbody>
-            <tr><td>색 토큰</td><td>색의 <b>쓰임</b></td><td>쓰임 10여 개</td><td>브랜드 색 전체</td><td>같은 파랑이 화면마다 조금씩 다릅니다</td></tr>
-            <tr><td>다크 모드</td><td><b>두 벌</b>의 값</td><td>2벌, 고대비까지 두면 3벌</td><td>화면 전체의 바탕과 글자</td><td>어두운 화면에 흰 상자 하나만 남아 눈이 부십니다</td></tr>
-            <tr><td>타입 스케일</td><td>글자 크기 <b>단계</b></td><td>6~8단</td><td>제목과 본문의 크기</td><td>무엇이 더 중요한지 알아보기 어렵습니다</td></tr>
-            <tr><td>간격 체계</td><td>여백의 <b>단위</b></td><td>6~8단(4·8의 배수)</td><td>모든 패딩과 줄 간격</td><td>딱 집어 말하기 어렵지만 어수선해 보입니다</td></tr>
-            <tr><td>고도</td><td>그림자의 <b>세기</b></td><td>4~5단</td><td>떠 있는 부품들</td><td>무엇이 위에 있는지 알 수 없습니다</td></tr>
-            <tr><td>z-index</td><td>쌓이는 <b>순서</b></td><td>5~6층</td><td>겹치는 것들의 앞뒤</td><td>토스트가 모달에 가려 보이지 않습니다</td></tr>
-            <tr><td>모서리</td><td><b>둥근 정도</b></td><td>4~6단</td><td>카드 · 버튼 · 입력칸 전부</td><td>안팎 곡선이 어긋나 안쪽이 네모져 보입니다</td></tr>
-            <tr><td>테두리와 구분선</td><td><b>가르는 선</b></td><td>선 1~2종</td><td>목록 · 카드 · 표</td><td>선이 두 겹이 되고 화면이 어수선해집니다</td></tr>
-            <tr><td>불투명도</td><td><b>흐린 정도</b></td><td>2~3단</td><td>비활성 · 가림막 · 흐린 글</td><td>글이 잘 읽히지 않고 z-index가 적용되지 않습니다</td></tr>
-            <tr class="me"><td><b>아이콘 크기</b></td><td>그림의 <b>크기</b></td><td>3~4단(16·20·24)</td><td>버튼 · 목록 · 앱바</td><td>선이 흐리고 글자와 가운데가 맞지 않습니다</td></tr>
-            <tr><td>상태 색</td><td>성공 · 주의 · 오류 · 정보</td><td>4가지, 색마다 3자리</td><td>알림 · 배지 · 입력 오류</td><td>색을 구별하지 못하면 상태를 알 수 없습니다</td></tr>
-            <tr><td>토큰 이름 짓기</td><td>이름의 <b>규칙</b></td><td>층 3겹</td><td>토큰 전부</td><td>이름과 값이 어긋나 어느 토큰을 고쳐야 할지 알 수 없습니다</td></tr>
-          </tbody>
-        </table>
-        </div>
-        <div class="note" style="margin-bottom:0">
-          <p><b>아이콘 크기를 한 줄로 정리하면</b> — 아이콘 크기는 16 · 20 · 24, <b>세 단이면 충분합니다</b>. 그리고 누르는 자리는 그림 크기와 상관없이 언제나 44px입니다.</p>
-        </div>
-      </section>
-
-      <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 아이콘 크기 단계별 쓰는 자리<span class="hint">자리마다 쓰는 크기</span></h2>
+        <h2 class="slot-label"><span class="n">3</span> 아이콘 크기 단계별 쓰는 자리<span class="hint">자리마다 쓰는 크기</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -141,8 +114,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
             <div class="anat" role="img" aria-label="아이콘 크기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
@@ -176,8 +149,8 @@
           뒤의 방법이 광학 크기인데, 작은 아이콘일수록 획을 덜어 내서 더 또렷하게 보이도록 그립니다.</p>
       </section>
 
-      <section class="slot" id="s6">
-        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
             <h3>아이콘 크기를 정할 때 지킬 것</h3>
@@ -200,8 +173,8 @@
         <p style="margin:var(--s4) 0 0"><b>함께 보면 좋은 항목</b> — 누르는 넓이는 <a href="touchtarget.html">터치 타깃</a> 항목에서, 아이콘을 글자로 다루는 방식은 <a href="iconfont.html">아이콘 글꼴</a> 항목에서 다룹니다. 아이콘 버튼에 이름을 붙이는 방법은 <a href="name.html">이름 붙이기</a> 항목을 봅니다.</p>
       </section>
 
-      <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -224,8 +197,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 지킬 규칙<span class="hint">아이콘 크기를 코드로 옮기는 방법</span></h2>
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 최소 코드와 지킬 규칙<span class="hint">아이콘 크기를 코드로 옮기는 방법</span></h2>
         <p>크기는 정해 둔 단에서 고르고, 선 굵기는 크기에 맞춰 원래대로 되돌립니다.</p>
 <pre class="code"><span class="c">/* 세 단이면 거의 모든 자리에 충분하다 */</span>
 :root { --icon-1: <span class="a">16px</span>; --icon-2: <span class="a">20px</span>; --icon-3: <span class="a">24px</span>; }
@@ -256,8 +229,8 @@ svg { <span class="a">display</span>: block; }
         </div>
       </section>
 
-      <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
+      <section class="slot slot--backend" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
@@ -268,8 +241,8 @@ svg { <span class="a">display</span>: block; }
         </div>
       </section>
 
-      <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+      <section class="slot" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
         <p><b>기본 단</b>이 플랫폼마다 다릅니다.</p>
         <div class="platforms">
           <div class="plat">

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax14 import ax
 from _t14 import ba, one, btn
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -21,7 +20,6 @@ D = dict(
   slug="datetime", ko="날짜와 시간 쓰기", en="Writing dates & times",
   desc="상대 시간과 절대 시간을 각각 언제 쓰는지, 요일과 오전·오후, 기계가 읽는 형식까지 함께 다룹니다.",
   lede="같은 시각이라도 지금부터 <b>얼마나 지났는지</b>에 따라 적는 방법이 달라집니다. 예를 들어 ‘3분 전’은 언제인지 바로 알 수 있지만, ‘8개월 전’만 보고는 정확히 언제인지 알기 어렵습니다.",
-  axes_lede="화면 문구는 사용자가 <b>무엇을 하면 되는지</b> 알려 줍니다. 아래 네 가지로 문구마다 다른 점을 봅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>막대를 끌어 <b>얼마나 지난 시각</b>인지 바꿔 보세요. 그 시각에 맞는 표기법이 표에서 <b>밝게 표시</b>됩니다.<br>
           <b>상대 시간</b>은 방금 일어난 일을 읽기 쉽게 보여 주지만 오래된 일에 쓰면 언제인지 알기 어렵고,
@@ -40,8 +38,6 @@ D = dict(
      "<b>날짜 선택기</b> — 날짜를 고르는 부품이고, 이 항목은 날짜를 <b>적는 법</b>을 다룹니다.<br>"
      "<b>숫자 꼴</b> — <a href=\"../items/numerals.html\">숫자 꼴</a>은 숫자의 <b>자릿수를 맞추는</b> 조판을 다룹니다."),
   ]),
-  axes=ax("날짜와 시간 쓰기"),
-  oneline="<b>일주일 안이면 상대 시간, 일주일을 넘으면 절대 시간으로 적습니다.</b> 화면에 보이는 글자와 기계가 읽는 <code>datetime</code> 속성은 따로 둡니다.",
   s4_title="지난 시간에 따른 표기", s4_hint="얼마나 지났는지에 따라 달라지는 표기",
   states=states([
     (row('방금', "1분 안", True, "초는 적지 않음"), "1분이 안 지났을 때", "'37초 전'은 필요 이상으로 <b>자세합니다</b>"),

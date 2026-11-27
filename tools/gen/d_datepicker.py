@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax4 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -58,8 +57,6 @@ D = dict(
      "<b>시간 선택기</b> — <a href=\"timepicker.html\">시간 선택기</a>는 날짜가 아니라 <b>시각</b>을 고릅니다.<br>"
      "<b>달력 화면</b> — 일정을 보는 달력은 날짜를 고르는 부품이 아니라 일정을 <b>보여 주는</b> 화면입니다."),
   ]),
-  axes=ax("날짜 선택기"),
-  oneline="<b>날짜를 칸에 쳐서도 넣을 수 있게 합니다.</b> 달력만 두면 먼 날짜를 고를 때 달을 너무 여러 번 넘겨야 합니다.",
   states=states([
     (cal(12, 14, 0, "", "고른 날과 오늘이 다르게 보임", True), "평소 상태", "<b>고른 날과 오늘</b>을 다르게 표시합니다"),
     (cal(12, 14, 10, "", "지난 정산 기간은 막혀 있음", True), "못 고르는 날을 막았을 때", "<b>흐리게</b> 두고 고를 수 없게 막습니다"),

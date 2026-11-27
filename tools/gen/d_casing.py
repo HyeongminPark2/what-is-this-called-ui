@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax3 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -18,7 +17,6 @@ D = dict(
   slug="casing", ko="대소문자", en="Letter case",
   desc="영어 대소문자의 네 가지 꼴과 각각을 쓰는 자리, 대소문자 구분이 없는 한국어와 섞어 쓸 때 생기는 문제를 보여 주는 항목입니다.",
   lede="영어 글자에는 대소문자를 섞는 방식에 따라 <b>네 가지 꼴</b>이 있고, 자리마다 쓰는 관례가 다릅니다. 한국어에는 <b>대소문자 구분이 없어서</b>, 두 언어를 한 줄에 섞으면 영어만 꼴이 바뀌어 모양이 어긋납니다.",
-  axes_lede="글자 항목은 모두 글을 잘 읽히게 하려고 씁니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>꼴을 바꿔 가며 네 자리를 살펴보세요. 요즘 OS 지침은 <b>문장형</b>을 기본으로 권하는데,
           읽기 쉽고 번역해도 덜 어색하기 때문입니다.<br>
@@ -38,8 +36,6 @@ D = dict(
      "<b>캡스락</b> — 키보드 키의 이름이라서, 글자 꼴을 가리키는 말과는 다릅니다.<br>"
      "<b>대문자화</b> — <code>capitalize</code>는 <b>단어마다 첫 글자</b>를 대문자로 바꿀 뿐이라서, 관사를 소문자로 두는 제목형의 규칙까지는 처리하지 못합니다."),
   ]),
-  axes=ax("대소문자"),
-  oneline="<b>문장형을 기본으로</b> 씁니다. 전부 대문자로 쓰면 눈에 띄기는 하지만 <b>단어의 윤곽</b>이 사라져 읽는 속도가 느려집니다.",
   s4_title="네 가지 꼴", s4_hint="꼴마다 알맞은 자리",
   states=states([
     (one(txt('Export settlements', "13px"), "문장형", True, "읽기 쉽고 번역해도 덜 어색함"), "첫 글자만 대문자인 문장형", "<b>요즘 OS 지침에서 기본으로 권하는</b> 꼴입니다"),

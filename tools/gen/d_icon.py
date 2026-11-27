@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from ax5 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
-
-L5 = "표시 부품은 모두 보여 주기만 합니다. 아래 네 가지로 서로 가릅니다."
 
 def ic(glyph, label, note="", ok=None, w="152px", withText=False):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -32,7 +29,6 @@ D = dict(
   slug="icon", ko="아이콘", en="Icon",
   desc="아이콘이 무엇인지, 보자마자 뜻이 통하는 아이콘과 배워야 아는 아이콘이 어떻게 다른지, 아이콘에 이름을 붙이는 법을 보여 주는 항목입니다.",
   lede="아이콘은 뜻을 그림 하나로 줄인 표시로, 보자마자 <b>뜻이 통하는 것과 배워야 아는 것</b>으로 나뉩니다. 두 가지가 섞인 화면에서는 사용자가 어느 아이콘을 알아볼지 알 수 없으므로 <b>글자를 함께 적어야</b> 합니다.",
-  axes_lede=L5,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>돋보기나 휴지통처럼 현실의 물건을 그린 아이콘은 보자마자 뜻이 통하지만, 톱니바퀴나 점 세 개는
           <b>배워야</b> 아는 아이콘입니다. 데모는 글자 없이 뜻이 통하는 아이콘이 몇 개인지 세어 적습니다.<br>
@@ -52,8 +48,6 @@ D = dict(
      "<b>아이콘 글꼴</b> — <a href=\"iconfont.html\">아이콘 글꼴</a>은 아이콘 그림을 <b>글자로</b> 다루는 방식을 가리킵니다.<br>"
      "<b>이미지</b> — 작게 줄인 사진은 <a href=\"thumbnail.html\">썸네일</a>이라고 부르고, 아이콘은 뜻을 나타내는 <b>기호</b>입니다."),
   ]),
-  axes=ax("아이콘"),
-  oneline="<b>아이콘만 두고 싶다면 그 아이콘이 글자 없이도 뜻이 통하는지 먼저 확인하세요.</b> 대부분의 아이콘은 글자 없이는 뜻이 통하지 않습니다.",
   s4_title="아이콘의 종류", s4_hint="뜻이 통하는 정도와 이름에 따라 나눈 모습",
   states=states([
     (ic("🔍", "검색", "현실의 돋보기", True), "보자마자 뜻이 통하는 돋보기", "<b>거의 모든 사람이</b> 뜻을 압니다"),

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax1 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 TXT = "상자보다 글이 길어지면 무엇을 할지는 고르는 것이지 저절로 정해지지 않습니다."
@@ -26,7 +25,6 @@ D = dict(
   slug="overflow", ko="넘침", en="Overflow",
   desc="overflow 네 값의 차이와 말줄임, 그리고 가로 스크롤이 생기는 실제 원인을 실물과 해부도로 보여 주는 항목입니다.",
   lede="넘침은 상자보다 내용이 클 때 넘친 부분을 <b>어떻게 처리할지 고르는 일</b>입니다. 아무것도 고르지 않으면 기본값인 visible이 적용되어 내용이 상자 밖으로 삐져나옵니다.",
-  axes_lede="뼈대 항목은 눈에 보이지 않고 자리만 정해서 생김새로는 가를 수 없습니다. 아래 네 가지로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>같은 글을 네 가지 <code>overflow</code> 값으로 나란히 두었습니다.
           <code>scroll</code>은 글이 <b>넘치지 않아도 스크롤바 자리를 잡는다</b>는 점을 눈여겨보세요.<br>
@@ -47,8 +45,6 @@ D = dict(
      "<b><code>auto</code>와 <code>scroll</code></b> — auto는 넘칠 때만 스크롤바 자리를 잡고, scroll은 <b>항상</b> 잡습니다.<br>"
      "<b>'가로 스크롤이 생겼다'</b> — overflow 설정 문제가 아니라 <b>안쪽에 줄어들지 않는 요소가 있다</b>는 뜻입니다."),
   ]),
-  axes=ax("넘침"),
-  oneline="넘침은 넘친 내용을 어떻게 할지 <b>고르는 일</b>입니다. 아무것도 고르지 않으면 내용이 삐져나오고, <code>hidden</code>을 고르면 잘린 내용은 읽지 못해도 된다고 정한 셈이 됩니다.",
   s4_title="넘친 내용을 처리하는 방법", s4_hint="값마다 달라지는 넘친 내용의 모습",
   do_title="넘침 처리를 정해 둬야 하는 경우",
   dont_title="넘침을 다룰 때 피할 것",

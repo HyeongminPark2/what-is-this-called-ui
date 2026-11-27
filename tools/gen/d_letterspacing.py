@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax3 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def ls(v, label, note="", size=14, txt="정산이 확정되었습니다", w="150px", extra=""):
@@ -25,7 +24,6 @@ D = dict(
   slug="letterspacing", ko="자간", en="Letter spacing · tracking",
   desc="자간을 언제 조정하고 언제 그대로 두는지, 한글에서 특히 조심해야 하는 이유를 실물과 해부도로 보여 주는 항목입니다.",
   lede="자간은 글자와 글자 사이의 거리입니다. 글꼴에 이미 알맞은 값이 들어 있어서, <b>본문에서는 거의 건드리지 않는 것</b>이 맞습니다.",
-  axes_lede="글자 항목은 값 하나가 글 전체를 바꿉니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>막대를 양 끝으로 밀어 보세요. 음수로 가면 <b>글자가 서로 닿고</b>, 양수로 가면 글자 사이가 벌어져 <b>낱글자로 흩어져</b> 보입니다.
           지금 값이 어느 범위에 드는지는 아래에 알려 줍니다.<br>
@@ -44,8 +42,6 @@ D = dict(
      "<b>행간</b> — 글이 답답해 보이는 이유는 대개 자간이 아니라 <b>행간</b>이기 때문에, 자간부터 고쳐서는 나아지지 않습니다.<br>"
      "<b>단어 간격</b> — 띄어쓰기 폭은 자간과 별개로 <code>word-spacing</code>으로 정합니다."),
   ]),
-  axes=ax("자간"),
-  oneline="자간은 <b>기본값을 그대로 두는 것이 맞는</b> 드문 속성입니다. 값을 바꾸는 곳은 아주 큰 제목과 작은 대문자 라벨, 두 군데뿐입니다.",
   s4_title="자간 값에 따른 차이", s4_hint="같은 글을 자간만 바꿔 본 모습",
   states=states([
     (ls("-0.05em", "-0.05em", "글자가 닿음"), "너무 좁게 잡았을 때", "획이 서로 붙어서 <b>글자를 구별할 수 없습니다</b>"),

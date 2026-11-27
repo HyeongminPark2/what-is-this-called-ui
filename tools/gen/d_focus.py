@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax12 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def btn(style="", label="저장", w=""):
@@ -22,7 +21,6 @@ D = dict(
   slug="focus", ko="포커스", en="Focus · focus indicator",
   desc="포커스가 무엇인지, 포커스 테두리를 왜 지우면 안 되는지 보여 주고 포커스 순서와 건너뛰기 링크까지 다루는 항목입니다.",
   lede="포커스는 키보드가 <b>지금 가리키고 있는 요소</b>입니다. 마우스를 쓰지 못하는 사람은 포커스 표시를 보고 화면의 어디에서 작업하고 있는지 알기 때문에, 포커스 표시가 마우스 커서 역할을 합니다.",
-  axes_lede="접근성은 눈에 안 보이는 부분까지 챙기는 일입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><kbd>Tab</kbd>을 눌러 보세요. 포커스가 어디로 갔는지, 그리고 <b>테두리가 보이는지</b>가 기록에 남습니다.<br>
           테두리를 <b>아예 없애기</b>로 바꾸면 포커스는 그대로 옮겨 가는데도 <b>화면에는 아무 표시가 나타나지 않습니다</b>.
@@ -43,8 +41,6 @@ D = dict(
      "<b>선택</b> — 마우스로 글자를 끌어서 칠한 것은 포커스가 아니라 선택(selection)입니다.<br>"
      "<b><code>:focus</code>와 <code>:focus-visible</code></b> — <code>:focus</code>는 <b>마우스로 눌렀을 때도</b> 적용되고, <code>:focus-visible</code>은 키보드로 포커스가 왔을 때만 적용됩니다."),
   ]),
-  axes=ax("포커스"),
-  oneline="포커스 테두리는 키보드로 화면을 쓰는 사람에게 <b>지금 어느 요소에 있는지</b> 알려 주는 표시입니다. 이 테두리를 지우면 키보드만 쓰는 사람은 어느 요소를 누르게 될지 모르는 채로 화면을 다뤄야 합니다.",
   s4_title="상태", s4_hint="같은 버튼이 상태마다 달리 보이는 모습",
   states=states([
     (btn(), "평소 상태", "아무 표시도 없습니다"),

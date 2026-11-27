@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax15 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -30,7 +29,6 @@ D = dict(
   slug="versioning", ko="버전 관리", en="Versioning",
   desc="시안 파일이 바뀌어 온 기록을 다루는 항목입니다. 어느 것이 지금 쓰는 파일인지, 무엇이 왜 바뀌었는지를 남기는 방법을 보여 줍니다.",
   lede="시안도 고칠 때마다 바뀐 기록이 쌓입니다. 이 기록에서 꼭 남겨야 할 것은 <b>어느 것이 지금 것인가</b>와 <b>무엇이 왜 바뀌었나</b>, 두 가지입니다.",
-  axes_lede="현장 용어는 부품이 아니라 디자인과 개발이 <b>함께 일하는 단계</b>를 가리킵니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>이름 짓는 법을 바꿔 보세요. <code>v3</code>나 <code>final</code> 같은 이름으로는
           <b>두 질문 어느 쪽에도 답할 수 없습니다</b>.<br>
@@ -50,8 +48,6 @@ D = dict(
      "<b>릴리스 버전</b> — 제품의 1.2.0 같은 번호는 사용자에게 <b>밖으로 알리는</b> 이름이라서 시안의 버전 기록과는 다릅니다.<br>"
      "<b>브랜치</b> — 원본에서 갈라져 나와 따로 작업하는 것을 말하며, 시안 도구에도 비슷한 기능이 있습니다."),
   ]),
-  axes=ax("버전 관리"),
-  oneline="<b>버전을 파일 이름에 적지 마세요.</b> 시안 도구의 버전 기록을 쓰고, 버전 이름에는 <b>무엇이 바뀌었는지</b>를 적으세요.",
   s4_title="버전 이름 짓는 방식", s4_hint="지금 것과 바뀐 내용을 알 수 있는지",
   states=states([
     (files(['11-07 첫 구조 — 목록과 상세', '11-10 상태를 칩으로', '11-14 빈 화면 추가'], "152px", "무엇이 바뀌었는지 남음", True, 2),

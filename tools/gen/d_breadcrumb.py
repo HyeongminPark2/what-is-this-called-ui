@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from ax7 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:12px">
@@ -33,8 +32,6 @@ D = dict(
      "<b>스테퍼</b> — 스테퍼는 1-2-3처럼 순서가 있는 <b>단계 진행</b>을 보여 줍니다.<br>"
      "<b>내비게이션</b> — 브레드크럼은 갈 곳을 새로 고르는 메뉴가 아니라 <b>지금 위치</b>를 알리는 표시입니다."),
   ]),
-  axes=ax("브레드크럼"),
-  oneline="브레드크럼은 <b>이력</b>이 아니라 <b>계층</b>을 보여 줍니다. 그래서 검색으로 깊은 곳에 바로 들어와도 메뉴를 따라 들어왔을 때와 같은 줄이 나와야 합니다.",
   states=states([
     (mini('<div style="margin-top:12px;padding:0 6px;font-size:5.5px;color:var(--fg-muted)">위키 › 팀 문서 › <b style="color:var(--fg)">회고</b></div>', bars="", label="짧은 브레드크럼"), "두세 단계로 짧을 때", "두세 단계일 때가 가장 읽기 좋습니다"),
     (mini('<div style="margin-top:12px;padding:0 6px;font-size:5px;color:var(--fg-muted);line-height:1.8">위키 › 팀 문서 › 플랫폼 › 결제 › <b style="color:var(--fg)">회고</b></div>', bars="", label="다섯 단계"), "다섯 단계까지 늘어났을 때", "다섯 단계 정도가 한 줄에 들어가는 한계입니다"),

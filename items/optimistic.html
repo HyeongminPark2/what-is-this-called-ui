@@ -29,7 +29,7 @@
     <h1>낙관적 UI</h1>
     <p class="en">Optimistic UI</p>
     <p class="lede" style="margin-top:var(--s3)">낙관적 UI는 서버 응답을 <b>기다리지 않고 화면부터 먼저 바꾸는</b> 방식입니다. 거의 항상 성공하는 일에 쓰고, 서버가 거절하면 바꾼 화면을 <b>되돌립니다</b>.</p>
-    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 상태</a><a href="#s4">④ 해부도</a><a href="#s5">⑤ 쓸 때</a><a href="#s6">⑥ 사례</a><a href="#s7">⑦ 마크업</a><a href="#s8">⑧ 백엔드 메모</a><a href="#s9">⑨ 플랫폼</a></nav>
   </div>
 
   <div class="card-layout">
@@ -71,26 +71,7 @@
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제 부품과 견주는 네 가지 기준</span></h2>
-        <p>겹쳐 뜨는 부품은 생김새로는 가르기 어렵습니다. 아래 네 가지로 가릅니다.</p>
-        <div class="scroll-x">
-        <table class="grid axes">
-          <thead><tr><th></th><th>끝나는 때를 아는가</th><th>들어올 내용의 자리를 미리 잡는가</th><th>사용자가 기다려야 하는가</th><th>내용이 들어올 때 화면이 덜컥거리는가</th></tr></thead>
-          <tbody>
-            <tr><td>스피너</td><td class="none">모름</td><td>잡지 않음</td><td>기다림</td><td>덜컥거림</td></tr>
-            <tr><td>스켈레톤</td><td class="none">모름</td><td>잡아 둠</td><td>기다림</td><td>덜컥거리지 않음</td></tr>
-            <tr><td>프로그레스 바</td><td>알고 있음</td><td>잡기도 함</td><td>기다림</td><td>덜컥거리지 않음</td></tr>
-            <tr class="me"><td><b>낙관적 UI</b></td><td class="none">해당 없음</td><td>잡아 둠</td><td>기다리지 않음</td><td>덜컥거리지 않음</td></tr>
-          </tbody>
-        </table>
-        </div>
-        <div class="note" style="margin-bottom:0">
-          <p><b>낙관적 UI를 한 줄로 정리하면</b> — 스피너나 프로그레스 바가 기다림을 보여 주는 방법이라면, 낙관적 UI는 기다림을 <b>없애는</b> 방법입니다. 그래서 기다리는 동안 무엇을 보여 줄지보다 <b>실패하면 어떻게 되돌릴지</b>를 설계하는 데 대부분의 노력이 들어갑니다.</p>
-        </div>
-      </section>
-
-      <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">상태마다 달라지는 모습</span></h2>
+        <h2 class="slot-label"><span class="n">3</span> 상태<span class="hint">상태마다 달라지는 모습</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -131,8 +112,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
             <div class="anat" role="img" aria-label="낙관적 UI의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
@@ -169,8 +150,8 @@
           되돌릴 수 없다면 낙관적 UI를 쓸 수 없습니다.</p>
       </section>
 
-      <section class="slot" id="s6">
-        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
             <h3>낙관적 UI를 쓰는 경우</h3>
@@ -193,8 +174,8 @@
         <p style="margin:var(--s4) 0 0"><b>낙관적 UI 대신 다른 것을 써야 하는 경우</b> — 서버가 확정할 때까지 기다려야 하는 일이면 <a href="spinner.html">스피너</a>나 <a href="progress.html">프로그레스 바</a>로 기다림을 보여 줍니다. 사용자에게 되돌릴 틈을 주려면 <a href="toast.html">되돌리기 토스트</a>를 쓰고, 실패를 알릴 때는 <a href="error.html">에러 상태</a>를 씁니다.</p>
       </section>
 
-      <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -217,8 +198,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 최소 마크업과 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
         <p>구현할 때는 순서가 중요합니다. <b>화면을 먼저 바꾸고, 서버에 보내고, 거절당하면 되돌립니다.</b> 그리고 그보다 앞서, 되돌릴 때 쓸 원래 값을 챙겨 두는 일이 코드의 첫 줄에 옵니다.</p>
 <pre class="code"><span class="a">const</span> before = state.starred;       <span class="c">// 1) 되돌릴 값을 챙긴다</span>
 setStarred(!before);                  <span class="c">// 2) 화면을 먼저 바꾼다</span>
@@ -247,8 +228,8 @@ setStarred(!before);                  <span class="c">// 2) 화면을 먼저 바
         </div>
       </section>
 
-      <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
+      <section class="slot slot--backend" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
@@ -262,8 +243,8 @@ setStarred(!before);                  <span class="c">// 2) 화면을 먼저 바
         </div>
       </section>
 
-      <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+      <section class="slot" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
         <p>낙관적 UI는 화면 부품이 아니라 <b>구현 방식</b>이라서 플랫폼 지침에 부품으로 실려 있지 않습니다.</p>
         <div class="platforms">
           <div class="plat">

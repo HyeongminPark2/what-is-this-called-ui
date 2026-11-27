@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from ax13 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
-
-L13 = "화면 단위 패턴은 사용자가 <b>끝내야 하는 일</b> 하나로 나눕니다. 아래 네 가지로 서로 가릅니다."
 
 def card(fields, who, w="152px", note="", ok=None, act="메시지 보내기", av="길동"):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -44,7 +41,6 @@ D = dict(
   slug="profile", ko="프로필", en="Profile page",
   desc="같은 주소인데 보는 사람에 따라 다르게 보이는 화면입니다. 공개 범위, 주 동작, 빈 프로필을 다루는 법을 설명합니다.",
   lede="프로필은 주소는 하나지만 <b>보는 사람에 따라 여러 화면</b>이 됩니다. 내가 볼 때와 같은 팀이 볼 때, 남이 볼 때 보이는 칸과 버튼이 모두 다릅니다.",
-  axes_lede=L13,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>보는 사람을 바꿔 보세요. 같은 주소인데 나에게는 '수정' 버튼이, 남에게는 '메시지' 버튼이 뜹니다.
           데모는 <b>지금 몇 칸이 보이는지</b>와 <b>보이면 안 되는 칸이 몇 개 드러나 있는지</b>를 세어 보여 줍니다.<br>
@@ -64,8 +60,6 @@ D = dict(
      "<b>계정</b> — 계정은 프로필보다 <b>로그인 수단과 보안</b>에 가까운 개념입니다.<br>"
      "<b>아바타</b> — <a href=\"avatar.html\">아바타</a>는 프로필 화면 안에 들어가는 <b>부품</b> 하나입니다."),
   ]),
-  axes=ax("프로필"),
-  oneline="<b>'누가 보고 있나'를 먼저 정하세요.</b> 보는 사람의 종류를 정해 두지 않으면 칸마다 공개 범위를 정할 수 없습니다.",
   do_title="프로필 화면을 만들 때 할 일",
   dont_title="프로필 화면을 잘못 만드는 경우",
   instead_title="함께 보면 좋은 항목",

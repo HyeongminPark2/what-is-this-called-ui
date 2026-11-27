@@ -29,7 +29,7 @@
     <h1>타임라인</h1>
     <p class="en">Timeline · activity feed · stepper</p>
     <p class="lede" style="margin-top:var(--s3)">타임라인은 사건들을 <b>일어난 순서대로 이어 놓은</b> 세로 목록입니다. 배송 추적, 결재 단계, 활동 기록이 모두 이 모양으로 그려집니다.</p>
-    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 상태</a><a href="#s4">④ 해부도</a><a href="#s5">⑤ 쓸 때</a><a href="#s6">⑥ 사례</a><a href="#s7">⑦ 마크업</a><a href="#s8">⑧ 백엔드 메모</a><a href="#s9">⑨ 플랫폼</a></nav>
   </div>
 
   <div class="card-layout">
@@ -72,37 +72,7 @@
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제 부품과 견주는 네 가지 기준</span></h2>
-        <p>표시 부품은 모두 보여 주기만 합니다. 아래 네 가지로 서로 가릅니다.</p>
-        <div class="scroll-x">
-        <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 담는가</th><th>부품 전체를 누를 수 있는가</th><th>여러 개가 어떻게 모이는가</th><th>내용이 길어지면 어떻게 하는가</th></tr></thead>
-          <tbody>
-            <tr><td>카드</td><td><b>한 덩어리</b></td><td>보통 눌림</td><td>그리드로 늘어섬</td><td>높이가 늘어남</td></tr>
-            <tr><td>리스트 아이템</td><td>한 건</td><td>보통 눌림</td><td>세로 목록으로 쌓임</td><td><b>말줄임</b>함</td></tr>
-            <tr><td>아바타</td><td>사람·조직 하나</td><td>눌리지 않음</td><td>겹쳐 쌓음</td><td>크기는 고정하고 넘치면 <b>+N</b>으로 줄임</td></tr>
-            <tr><td>배지</td><td>숫자나 한 낱말</td><td>눌리지 않음</td><td><b>혼자 놓이지 않고</b> 다른 요소에 붙음</td><td>크기는 고정하고 넘치면 <b>99+</b>로 줄임</td></tr>
-            <tr><td>칩</td><td>한 낱말</td><td><b>눌림</b></td><td>가로로 늘어서다 줄을 바꿈</td><td>말줄임하거나 줄을 넘김</td></tr>
-            <tr><td>스탯 타일</td><td>숫자 하나</td><td>가끔 눌림</td><td>가로 한 줄로 늘어섬</td><td>단위를 줄인다(1.2만)</td></tr>
-            <tr class="me"><td><b>타임라인</b></td><td>사건들의 순서</td><td>항목만 눌림</td><td>세로 선으로 이음</td><td>아래로 길어짐</td></tr>
-            <tr><td>별점</td><td>점수 하나</td><td>읽기용은 눌리지 않음</td><td>줄 안에 들어감</td><td>별 다섯 개로 고정됨</td></tr>
-            <tr><td>아이콘</td><td><b>뜻 하나</b></td><td>혼자서는 눌리지 않음</td><td>글자 옆에 붙음</td><td>아이콘은 그대로 두고 옆 글자가 길어짐</td></tr>
-            <tr><td>썸네일</td><td><b>그림 하나</b></td><td>보통 눌림</td><td>격자로 늘어섬</td><td>칸은 고정하고 사진을 자르거나 여백을 남김</td></tr>
-            <tr><td>테이블 행</td><td>한 건의 <b>여러 값</b></td><td>행 전체나 주 열만 눌림</td><td>세로로 쌓임</td><td><b>말줄임</b>함</td></tr>
-            <tr><td>키-값 목록</td><td>이름과 값의 <b>짝</b></td><td>눌리지 않음</td><td>세로로 쌓임</td><td><b>값이 먼저</b> 잘림</td></tr>
-            <tr><td>미디어 오브젝트</td><td><b>그림과 글</b></td><td>보통 눌림</td><td>세로 목록으로 쌓임</td><td>글 쪽만 늘어남</td></tr>
-            <tr><td>접히는 글</td><td>제목과 <b>본문</b></td><td>제목이 눌림</td><td>세로로 쌓음</td><td><b>접어 둠</b></td></tr>
-            <tr><td>태그</td><td>한 낱말</td><td>눌리지 않음</td><td>가로로 늘어서다 줄을 바꿈</td><td>말줄임하거나 <b>+N</b>으로 접음</td></tr>
-          </tbody>
-        </table>
-        </div>
-        <div class="note" style="margin-bottom:0">
-          <p><b>타임라인을 한 줄로 정리하면</b> — 타임라인은 <b>순서 자체가 내용인 목록</b>입니다. 항목 순서를 바꿔도 뜻이 달라지지 않는다면 그건 타임라인이 아니라 리스트입니다.</p>
-        </div>
-      </section>
-
-      <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">흐름의 진행에 따라 달라지는 모습</span></h2>
+        <h2 class="slot-label"><span class="n">3</span> 상태<span class="hint">흐름의 진행에 따라 달라지는 모습</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -149,8 +119,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
             <div class="anat" role="img" aria-label="타임라인의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
@@ -205,8 +175,8 @@
           뒤에 <b>단계가 더 있는 것처럼</b> 보여서, 실제로 "다음 단계가 안 보여요"라는 제보가 들어옵니다.</p>
       </section>
 
-      <section class="slot" id="s6">
-        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
             <h3>타임라인을 쓰는 경우</h3>
@@ -229,8 +199,8 @@
         <p style="margin:var(--s4) 0 0"><b>타임라인 대신 다른 것을 써야 하는 경우</b> — 끝이 정해진 단계를 보여 주려면 스테퍼(7부)를 쓰고, 얼마나 진행됐는지만 알리면 되면 <a href="../items/progress.html">프로그레스 바</a>를 씁니다. 항목의 순서가 상관없다면 <a href="listitem.html">리스트 아이템</a>이 맞습니다.</p>
       </section>
 
-      <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -253,8 +223,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 규칙<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 최소 마크업과 규칙<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
         <p>순서 자체가 정보이므로 순서 있는 목록인 <code>&lt;ol&gt;</code>을 씁니다. 지금 단계를 알리는 데는 <code>aria-current="step"</code> 하나면 충분합니다.</p>
 <pre class="code">&lt;<span class="t">ol</span> <span class="a">class</span>=<span class="s">"tl"</span>&gt;
   &lt;<span class="t">li</span>&gt;
@@ -284,8 +254,8 @@
         </div>
       </section>
 
-      <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
+      <section class="slot slot--backend" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
@@ -299,8 +269,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+      <section class="slot" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
         <p>세 플랫폼 모두 타임라인 전용 부품은 없고, 플랫폼마다 비슷한 부품이 조금씩 다릅니다.</p>
         <div class="platforms">
           <div class="plat">

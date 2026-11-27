@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax12 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def sr(visual, said, ok=True, w="168px"):
@@ -35,7 +34,6 @@ D = dict(
   slug="screenreader", ko="스크린 리더가 읽는 것", en="What screen readers announce",
   desc="스크린 리더가 역할, 이름, 상태 세 가지로 화면을 읽는다는 것과, 화면의 상태를 말로 옮겨 주는 aria 속성을 보여 주는 항목입니다.",
   lede="스크린 리더는 화면의 요소마다 <b>세 가지</b>를 읽습니다. 그 요소가 무엇인지 알려 주는 <b>역할</b>, 무엇이라고 부르는지 알려 주는 <b>이름</b>, 지금 어떤 상태인지 알려 주는 <b>상태</b>입니다.",
-  axes_lede="접근성은 눈에 안 보이는 부분까지 챙기는 일입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>스위치를 켜고 '자세히'를 펼쳐 보세요. 아래 접근성 트리에서 <b>상태가 바로 바뀝니다</b>.<br>
           <b>role·state를 빼고 보기</b>를 켜면 트리에 이름만 남기 때문에, '이메일 알림'이
@@ -56,8 +54,6 @@ D = dict(
      "<b><code>role</code>을 붙이면 동작이 생긴다</b> — 동작은 <b>생기지 않습니다.</b> 스크린 리더가 읽는 역할만 바뀌고, 키 처리는 직접 짜야 합니다.<br>"
      "<b>읽기 전용</b> — <code>aria-hidden</code>은 스크린 리더가 <b>읽지 않게</b> 하는 속성이고, 화면에서 숨기지는 않습니다."),
   ]),
-  axes=ax("스크린 리더가 읽는 것"),
-  oneline="화면에서 <b>색과 위치로만</b> 표현한 정보는 스크린 리더가 소리로 전달하지 못합니다. 그래서 요소의 상태는 <b>속성으로 따로 적어</b> 둬야 합니다.",
   s4_title="읽히는 말과 읽히지 않는 말", s4_hint="속성에 따라 스크린 리더가 읽는 말이 달라지는 모습",
   states=states([
     (sr(sw(False), '"이메일 알림, 스위치, 꺼짐"'), "역할·이름·상태가 모두 있을 때", "세 가지가 모두 있습니다. <b>모든 요소가 갖춰야 하는 기본</b>입니다"),

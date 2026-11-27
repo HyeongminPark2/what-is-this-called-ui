@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax1 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def box(w=86, p=10, b=3, m=8, label="내용", mb="color-mix(in srgb,var(--warn) 22%,transparent)"):
@@ -26,7 +25,6 @@ D = dict(
   slug="box", ko="박스 모델", en="Box model",
   desc="상자 하나를 이루는 네 겹(내용·패딩·테두리·마진)과 box-sizing에 따른 차이를 실물과 해부도로 보여 주는 항목입니다.",
   lede="화면에 놓이는 요소는 모두 내용, 안쪽 여백, 테두리, 바깥 여백으로 이루어진 <b>네 겹짜리 상자</b>입니다. 레이아웃이 어긋나는 일은 대부분 이 네 겹을 잘못 셈하는 데서 시작합니다.",
-  axes_lede="뼈대 항목은 눈에 보이지 않고 자리만 정해서 생김새로는 가를 수 없습니다. 아래 네 가지로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>막대를 움직여 네 겹의 크기가 어떻게 바뀌는지 보세요. 아래 줄에는 CSS에 <b>적은 값</b>과
           상자가 <b>실제로 차지하는 자리</b>가 함께 나옵니다.<br>
@@ -48,8 +46,6 @@ D = dict(
      "<b>width</b> — width에 적은 값이 곧 상자 너비라고 생각하기 쉽지만, 실제 너비는 <code>box-sizing</code> 값에 따라 달라집니다.<br>"
      "<b>여백</b> — 디자인에서 말하는 여백(white space)은 패딩·마진보다 넓은 뜻으로 씁니다."),
   ]),
-  axes=ax("박스 모델"),
-  oneline="박스 모델에서 따질 것은 <b>CSS에 적은 값이 어느 겹까지의 크기인가</b>입니다. 그 답은 <code>box-sizing</code> 한 줄에 따라 달라집니다.",
   s4_title="상자를 이루는 네 겹", s4_hint="겹을 하나씩 더할 때마다 커지는 크기",
   do_title="박스 모델을 따져 봐야 하는 경우",
   dont_title="박스 모델을 다룰 때 피할 것",

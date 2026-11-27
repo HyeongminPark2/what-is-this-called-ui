@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from ax7 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
-
-LEDE7 = "길 안내 부품은 모두 누르면 다른 곳으로 옮겨 갑니다. 아래 네 가지로 서로 가릅니다."
 
 def bar(label, title, note="", ok=None, w="152px", dead=False):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -45,7 +42,6 @@ D = dict(
   slug="backnav", ko="뒤로가기", en="Back · up navigation",
   desc="화면 안에 두는 뒤로가기 단추를 다루고, 방문 기록을 되돌리는 '뒤로'와 상위 화면으로 가는 '위로'가 어떻게 다른지 보여 주는 항목입니다.",
   lede="뒤로가기 단추는 겉보기에는 하나지만 실제로는 두 가지입니다. 하나는 <b>들어온 길</b>을 따라 되돌아가는 '뒤로'이고, 다른 하나는 어디서 들어왔든 <b>늘 상위 화면</b>으로 가는 '위로'입니다.",
-  axes_lede=LEDE7,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>같은 화면이라도 <b>어떻게 들어왔는지</b>에 따라 '뒤로'를 눌렀을 때 가는 곳이 달라집니다.
           받은 링크로 바로 들어오면 방문 기록에 앞 화면이 없어서 <b>돌아갈 곳이 없습니다</b>.
@@ -67,8 +63,6 @@ D = dict(
      "<b>시스템 백</b> — <a href=\"systemback.html\">시스템 백</a>은 <b>OS가 처리하는</b> 동작이고, 뒤로가기는 화면 안에 둔 단추입니다.<br>"
      "<b>취소</b> — 취소는 화면을 옮기는 것이 아니라 <b>하던 일을 없던 일로 되돌리는</b> 동작입니다."),
   ]),
-  axes=ax("뒤로가기"),
-  oneline="<b>단추 하나에는 동작 하나만 맡기세요.</b> '뒤로'라고 적었으면 방문 기록대로 돌아가고, '목록으로'라고 적었으면 늘 목록으로 가야 합니다.",
   states=states([
     (bar("주문 목록", "주문 상세", "목록에서 눌러 들어옴", True),
      "목록에서 들어왔을 때", "목록에서 들어왔으면 뒤로와 위로가 <b>같은 곳으로 갑니다</b>"),

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax11 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def phone(bar, panel_h, note, warn=False, w="112px"):
@@ -33,7 +32,6 @@ D = dict(
   slug="viewport", ko="뷰포트 단위", en="Viewport units",
   desc="폰에서 100vh가 가리키는 높이가 주소창에 따라 달라지는 까닭과 svh·lvh·dvh의 차이, 바닥 버튼이 잘리는 이유를 보여 주는 항목입니다.",
   lede="폰 브라우저에서는 주소창이 숨었다 나타나기 때문에, <b>100vh 같은 뷰포트 단위가 가리키는 높이도 그때그때 달라집니다.</b>",
-  axes_lede="PC와 폰은 기계보다 <b>쓰는 전제</b>가 다릅니다. 아래 네 가지로 두 환경을 견줍니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>세 폰은 같은 화면을 각각 <code>100vh</code>·<code>100svh</code>·<code>100dvh</code>로 그린 것입니다.
           <b>주소창 보이기</b>를 켜 보면 <code>100vh</code>로 그린 폰에서만 바닥의 '다음' 버튼이 잘립니다.<br>
@@ -54,8 +52,6 @@ D = dict(
      "<b>100%</b> — <code>100%</code>는 <b>부모 요소</b>의 높이를 기준으로 하고, <code>100vh</code>는 창의 높이를 기준으로 하므로 서로 다른 값입니다.<br>"
      "<b>풀스크린</b> — 화면 전체를 쓰게 하는 전체 화면 API와는 상관이 없습니다."),
   ]),
-  axes=ax("뷰포트 단위"),
-  oneline="<b>바닥에 버튼 같은 것이 붙는 화면이라면 <code>100dvh</code></b>를 씁니다. <code>100vh</code>는 주소창이 숨지 않는 PC에서만 화면 높이와 맞습니다.",
   s4_title="주소창에 따라 달라지는 높이", s4_hint="같은 100이 가리키는 네 가지 높이",
   dont_title="뷰포트 단위를 잘못 쓰는 경우",
   states=states([

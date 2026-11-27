@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from tmpl import axis_table, siblings, states, cases, pins, plats, rows, ul, kbd
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" data-pin="1" style="background:var(--surface);border:1px solid var(--line);border-radius:var(--r2);padding:12px;position:relative;min-height:188px">
                 <div style="font-size:10.5px;color:var(--fg-muted);line-height:1.9">이관 자체는 예정보다 이틀 빨리 끝났지만,<br>장애 대응 절차가 문서로 남아 있지 않아<br>새벽에 연락이 두 번 더 오갔다.</div>
@@ -37,8 +37,6 @@ D = dict(
      "<b>팝업</b> — 브라우저가 새로 여는 팝업 창과 이름이 겹쳐서 헷갈립니다.<br>"
      "<b>창</b> — 운영체제의 윈도와 헷갈립니다. 다이얼로그는 별도의 창이 아니라 페이지 안에 그려집니다."),
   ]),
-  axes=axis_table("다이얼로그"),
-  oneline="다이얼로그는 모달과 비모달을 함께 이르는 <b>상위 개념</b>이고, 뒤쪽 화면을 막느냐에 따라 둘로 나뉩니다. 코드에서는 <code>showModal()</code>로 여느냐 <code>show()</code>로 여느냐만 다릅니다.",
   states=states([
     (mini(trigger("찾기"), bars="684", label="다이얼로그가 닫힌 화면"), "닫혀 있을 때", "트리거만 보입니다"),
     (mini('<div class="mini__pop" style="right:5px;top:14px;width:70px"><b style="font-size:8.5px;display:block;margin-bottom:3px">찾기</b><i>결제 ▸ 4곳</i></div>', bars="684", label="비모달 다이얼로그가 열린 모습"), "비모달로 열었을 때", "<b>스크림이 없어서</b> 뒤쪽 글이 그대로 밝게 보이고, 누르거나 선택할 수도 있습니다"),

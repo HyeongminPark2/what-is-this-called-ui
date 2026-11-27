@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax13 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def nrow(who, what, when, read=False, n=0):
@@ -37,7 +36,6 @@ D = dict(
   slug="notifications", ko="알림 센터", en="Notification center",
   desc="놓친 소식을 따라잡는 화면입니다. 언제 읽음으로 처리할지, 같은 알림을 어떻게 묶을지, 배지 숫자를 목록과 어떻게 맞출지 다룹니다.",
   lede="알림 센터는 사용자가 놓친 소식을 <b>따라잡는</b> 화면입니다. 목록을 그리는 일보다 <b>언제 읽음으로 처리할지</b> 정하는 일이 더 까다롭습니다.",
-  axes_lede="화면 단위 패턴은 사용자가 <b>끝내야 하는 일</b> 하나로 나눕니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>열면 전부 읽음</b>으로 바꿔 보세요. 배지는 0이 되지만 사용자가 <b>실제로 무엇을 봤는지는 알 수 없습니다</b>.
           목록을 훑다가 닫으면 안 본 알림도 읽음으로 바뀌어서 나중에 다시 찾을 방법이 없습니다.<br>
@@ -57,8 +55,6 @@ D = dict(
      "<b>토스트</b> — <a href=\"../items/toast.html\">토스트</a>는 잠깐 떴다가 사라지지만, 알림 센터의 알림은 <b>남아 있습니다</b>.<br>"
      "<b>메일함</b> — 답장이 오가면 메일함이고, 알림은 <b>한 방향</b>으로만 전달됩니다."),
   ]),
-  axes=ax("알림 센터"),
-  oneline="<b>알림 센터를 연 것과 알림을 본 것은 다릅니다.</b> 열었다고 전부 읽음으로 처리하면 배지는 사라지지만, 사용자는 안 본 알림을 놓치게 됩니다.",
   do_title="알림 센터를 두면 좋은 경우",
   dont_title="알림 센터를 잘못 만드는 경우",
   instead_title="알림 센터 말고 다른 곳에서 다룰 것",

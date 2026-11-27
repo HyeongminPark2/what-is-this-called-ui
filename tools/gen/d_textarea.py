@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax4 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -49,8 +48,6 @@ D = dict(
      "<b>에디터</b> — 굵게나 목록 같은 서식이 들어가면 여러 줄 입력이 아니라 <b>리치 텍스트</b> 편집기입니다.<br>"
      "<b>코드 칸</b> — 코드를 받는 칸은 들여쓰기와 Tab 키를 다르게 처리해야 해서 따로 만듭니다."),
   ]),
-  axes=ax("여러 줄 입력"),
-  oneline="<b>글이 한도를 넘으면 자르지 말고 알려 주세요.</b> 한번 잘려 나간 글은 사용자가 되찾을 수 없습니다.",
   states=states([
     (ta(['100%', '70%'], "118자 남음", "", "처음 연 모습", True), "평소 상태", "<b>두세 줄</b> 높이로 시작합니다"),
     (ta(['100%', '100%', '100%', '85%'], "12자 남음", "", "내용만큼 늘어남", True),

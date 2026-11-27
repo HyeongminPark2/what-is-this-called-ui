@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 from _tx import one, code, txt, mono
-from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
-
-OFF = table(
-  ["끊긴 동안 쓴 내용이 남는가", "끊긴 동안 읽을 수 있는가", "쓴 내용은 언제 서버로 가는가", "사용자가 상황을 알 수 있는가"],
-  [["쌓아 두기", "<b>남음</b>", "받아 둔 것은 읽을 수 있음", "연결되면 저절로 보냄", "띠로 알림"],
-   ["못 누르게 막기", "해당 없음", "읽을 수 있음", "연결된 뒤 다시 눌러야 함", "<b>버튼이 꺼져 있어 알 수 있음</b>"],
-   ["그때마다 실패", "<b>사라짐</b>", "읽을 수 있음", "다시 써서 보내야 함", "오류만 뜸"],
-   ["아무 대비 없음", "사라짐", "<b>읽을 수 없음</b>", "보낼 것이 없음", "빈 화면만 보임"]],
-  me="오프라인")
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
@@ -45,7 +37,6 @@ D = dict(
   slug="offline", ko="오프라인", en="Offline handling",
   desc="연결이 끊겼을 때의 화면을 다룹니다. 쓴 것을 쌓아 두는 법과 읽기는 되게 두는 법, 다시 연결됐을 때의 처리를 보여 주는 항목입니다.",
   lede="오프라인 처리는 네트워크 연결이 끊긴 동안 화면이 어떻게 동작할지 정하는 일입니다. 끊긴 동안 사용자가 <b>쓴 내용이 사라지는 것</b>이 가장 큰 사고이므로, 쓴 내용은 쌓아 두었다가 연결되면 보냅니다.",
-  axes_lede="연결이 끊겼을 때의 대처 방법들입니다. 아래 네 가지로 견줍니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>'연결됨'을 꺼 보세요. 끊긴 동안 저장을 누르면 방식에 따라 <b>쌓아 두거나</b>, <b>버튼을 못 누르게 막거나</b>,
           <b>누를 때마다 실패하는</b> 세 가지 가운데 하나가 일어납니다.
@@ -67,8 +58,6 @@ D = dict(
      "<b>캐시</b> — 캐시는 <b>빠르게 읽으려고</b> 데이터를 두는 것이고, 오프라인 처리는 <b>연결이 없을 때를 대비</b>하는 것입니다.<br>"
      "<b>에러 상태</b> — <a href=\"error.html\">에러 상태</a>는 연결 끊김을 포함해 여러 실패를 아우르는 더 넓은 말입니다."),
   ]),
-  axes=OFF,
-  oneline="오프라인 처리에서는 <b>사용자가 쓴 내용을 절대로 잃지 않게</b> 하는 것이 먼저입니다. 서버로 보내는 일은 연결된 뒤에 해도 됩니다.",
   s4_title="상태", s4_hint="방식에 따라 쓴 내용이 남는지 사라지는지",
   states=states([
     (scr("● 연결됨", "on", '<span style="display:block;font-size:8px;color:var(--fg-muted)">바로 보냄</span>',

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax3 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 LONG = "환불 확인 요청 — 카드 승인 취소가 늦어져 고객이 두 번 문의했고 담당자가 바뀌면서 한 번 더 늦어진 건입니다."
@@ -26,7 +25,6 @@ D = dict(
   slug="truncate", ko="말줄임", en="Truncation · line clamp",
   desc="한 줄 말줄임과 여러 줄 line-clamp, 글이 잘렸는지 알아내는 법과 전체를 보여 줄 방법을 다루는 항목입니다.",
   lede="말줄임은 칸을 넘친 글의 끝을 <code>…</code>으로 줄여 보여 주는 방식입니다. 잘린 부분은 화면에서 <b>보이지 않게 되므로</b>, '어디서 자를지'보다 '전체를 어떻게 보게 할지'를 먼저 정해야 합니다.",
-  axes_lede="글자 항목은 값 하나가 글 전체를 바꿉니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>한 줄로 줄이기</b>, <b>여러 줄까지 보여 주기</b>, <b>끝을 흐리게 지우기</b>, 세 가지 방식을 나란히 두었습니다.
           줄 수 막대를 움직이면 상자 높이가 따라 바뀝니다.<br>
@@ -45,8 +43,6 @@ D = dict(
      "<b>글자 수로 자르기</b> — <code>slice(0, 20)</code>은 <b>화면 폭과 상관없이</b> 자르기 때문에, 넓은 화면에서도 똑같이 잘립니다.<br>"
      "<b><code>text-overflow</code></b> — 이 속성 하나만으로는 아무 변화도 일어나지 않습니다."),
   ]),
-  axes=ax("말줄임"),
-  oneline="한 줄 말줄임에는 <b>세 속성이 한 세트</b>로 필요합니다. 그보다 더 중요한 것은 잘린 글의 <b>전체를 볼 방법</b>을 남겨 두는 것입니다.",
   s4_title="글을 줄이는 여러 방법", s4_hint="방법마다 달라지는 모습",
   states=states([
     (tb("overflow:hidden;text-overflow:ellipsis;white-space:nowrap", label="한 줄"),

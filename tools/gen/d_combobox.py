@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from ax4 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2);padding:12px">
@@ -36,8 +35,6 @@ D = dict(
      "<b>검색창</b> — 검색창은 검색 결과 <b>화면</b>으로 넘어가지만, 콤보박스는 <b>그 자리에서 값 하나를</b> 정합니다.<br>"
      "<b>드롭다운</b> — 아래로 펼쳐지는 것을 두루 가리키는 말이라서, 이렇게 부르면 셀렉트와 메뉴, 콤보박스를 구별할 수 없습니다."),
   ]),
-  axes=ax("콤보박스"),
-  oneline="콤보박스는 <b>글자를 입력해 선택지를 좁힐 수 있는 셀렉트</b>입니다. 목록에 없는 값을 받을지는 따로 정해야 하는데, 이 설정에 따라 서버가 받는 값과 검증 방식까지 달라집니다.",
   states=states([
     (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 4px;font-size:6px;color:var(--fg-faint)">이름을 입력하세요</div></div>', bars="", label="닫힌 콤보박스"), "목록이 닫혀 있을 때", "입력칸처럼 보이며, 자리글로 <b>글자를 입력하라</b>고 알려 줍니다"),
     (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--accent);border-radius:3px"></div><div style="border:1px solid var(--line);border-radius:3px;margin-top:3px;padding:3px;background:var(--surface);box-shadow:0 2px 6px rgba(0,0,0,.15)"><div style="font-size:6px;padding:1px 3px">모란상회 1호</div><div style="font-size:6px;padding:1px 3px;color:var(--fg-muted)">모란김밥 2호</div></div></div>', bars="", label="열린 콤보박스"), "목록을 열었을 때", "아직 아무것도 입력하지 않았다면 선택지 가운데 <b>앞쪽 몇 개</b>를 보여 줍니다"),

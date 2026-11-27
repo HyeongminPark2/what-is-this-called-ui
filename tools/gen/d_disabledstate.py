@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax4 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -63,8 +62,6 @@ D = dict(
      "<b>로딩</b> — 불러오기를 기다리는 중이라면 비활성이 아니라 <a href=\"skeleton.html\">스켈레톤</a>이나 <a href=\"spinner.html\">스피너</a>를 씁니다.<br>"
      "<b>숨김</b> — 내용을 안 보이게 접어 두는 것은 <a href=\"accordion.html\">아코디언</a>입니다."),
   ]),
-  axes=ax("비활성과 읽기 전용"),
-  oneline="<b>값을 서버로 보내야 하면 <code>readonly</code>를 쓰세요.</b> <code>disabled</code>인 칸의 값은 폼을 보낼 때 빠집니다.",
   states=states([
     (fd("모란상회", "on", "고칠 수 있음", True, "152px", "보통"), "평소 상태", "값을 <b>고칠 수 있고 폼과 함께 보냅니다</b>"),
     (fd("123-45-67890", "off", "값이 서버로 안 감", False, "152px", "disabled"), "비활성 칸", "폼을 보낼 때 값이 <b>빠집니다</b>"),

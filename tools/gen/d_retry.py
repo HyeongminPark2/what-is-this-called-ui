@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 from _tx import one, code, txt, mono
-from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
-
-RT = table(
-  ["누가 다시 보내는가", "다시 보내는 간격", "서버에 주는 부담", "언제 쓰는가"],
-  [["바로바로", "앱이 자동으로", "<b>거의 없음</b>", "<b>가장 큼</b>", "쓰지 않음"],
-   ["같은 간격", "앱이 자동으로", "1초 · 1초 · 1초", "중간", "연결이 잠깐씩 끊길 때"],
-   ["지수 백오프", "앱이 자동으로", "<b>1 · 2 · 4 · 8초</b>", "<b>작음</b>", "거의 모든 경우"],
-   ["사용자가 직접 누르기", "<b>사용자</b>", "사용자가 누를 때마다", "가장 작음", "자동 재시도가 실패한 뒤"]],
-  me="지수 백오프")
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
@@ -36,7 +28,6 @@ D = dict(
   slug="retry", ko="재시도", en="Retry · backoff",
   desc="실패한 요청을 다시 보내는 방법을 다룹니다. 지수 백오프와 다시 보내도 되는 요청, 재시도를 사용자에게 보여 주는 방법을 보여 주는 항목입니다.",
   lede="재시도는 실패한 요청을 다시 보내는 것입니다. 멈춘 서버에 요청을 <b>쉬지 않고 계속 보내면</b> 부하가 쌓여 서버가 복구되기 더 어려워지므로, 다시 보내는 간격을 <b>두 배씩</b> 늘리는 것이 기본입니다.",
-  axes_lede="요청을 다시 보내는 방법들입니다. 아래 네 가지로 견줍니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>서버가 잠깐 멈췄다가 돌아오는 상황이라고 가정해 보겠습니다. 실패하자마자 <b>바로바로</b> 다시 보내면
           짧은 시간에 요청이 수십 번 나가는데, 데모는 <b>보낸 횟수</b>와
@@ -58,8 +49,6 @@ D = dict(
      "<b>폴링</b> — 폴링은 <b>실패와 상관없이</b> 일정한 주기로 서버에 묻는 것입니다.<br>"
      "<b>오프라인 큐</b> — <a href=\"offline.html\">오프라인</a> 큐는 <b>연결이 없을 때</b> 요청을 쌓아 두는 것이고, 재시도는 연결된 상태에서 실패한 요청을 다시 보내는 것입니다."),
   ]),
-  axes=RT,
-  oneline="재시도는 <b>간격을 두 배씩 늘리다가 다섯 번쯤에서 멈추고, 그 뒤에는 사용자에게 다시 시도 버튼을 줍니다.</b>",
   s4_title="상태", s4_hint="간격에 따라 달라지는 결과",
   states=states([
     (track([(8, 'f'), (8, 'f'), (8, 'f'), (8, 'f'), (8, 'f'), (8, 'f'), (8, 'f'), (8, 'f'), (8, 'f'), (8, 'f')],

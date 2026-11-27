@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from ax5 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
-
-L5 = "표시 부품은 모두 보여 주기만 합니다. 아래 네 가지로 서로 가릅니다."
 
 def acc(items, label, note="", ok=None, w="152px"):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -38,7 +35,6 @@ D = dict(
   slug="accordion", ko="접히는 글", en="Accordion · disclosure",
   desc="제목만 보이고 본문은 접어 두는 부품을 다루며, 접힌 글이 찾기에 걸리지 않는 문제와 한 번에 하나만 여는 방식의 단점을 보여 주는 항목입니다.",
   lede="접히는 글은 긴 글을 <b>제목만 남기고</b> 접어 두는 부품입니다. 화면은 짧아지지만, 접힌 글은 브라우저 <b>찾기에 걸리지 않습니다</b>.",
-  axes_lede=L5,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>접힌 글은 화면에 보이지 않기 때문에 브라우저의 찾기(Ctrl+F)로도 찾을 수 없습니다.
           찾는 말을 넣어 보면 데모가 <b>지금 보이는 글에서 몇 건</b>,
@@ -60,8 +56,6 @@ D = dict(
      "<b>트리뷰</b> — <a href=\"treeview.html\">트리뷰</a>는 하위 항목이 이어진 <b>계층을 펴는</b> 것이고, 접히는 글은 <b>본문 내용을 펴는</b> 것입니다.<br>"
      "<b>드롭다운</b> — 드롭다운은 다른 내용 <b>위에 떠서</b> 열리므로 페이지의 자리를 차지하지 않습니다."),
   ]),
-  axes=ax("접히는 글"),
-  oneline="<b>글을 접기 전에 이 글을 찾아야 하는 사람이 있는지 먼저 물어보세요.</b> 그런 사람이 있다면 접으면 안 됩니다.",
   states=states([
     (acc(Q, "하나 펴짐", "제목은 늘 보임", True), "처음에 하나만 펴 둔 모습", "처음에는 <b>하나만</b> 펴 둡니다"),
     (acc([("정산은 언제", "매주 수요일에 보냅니다.", True), ("수수료는", "카드 2.8% 입니다.", True), ("환불은", "", False)],

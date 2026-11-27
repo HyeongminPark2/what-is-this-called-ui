@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax2 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -27,7 +26,6 @@ D = dict(
   slug="radius", ko="모서리", en="Border radius · corner scale",
   desc="모서리 둥글기를 단으로 정해 두는 방법과, 겹친 상자의 안쪽 모서리 값을 구하는 공식을 보여 주는 항목입니다.",
   lede="모서리 둥글기는 몇 가지 <b>단으로 정해 두고</b> 그 단만 씁니다. 자리마다 <code>8px</code> 같은 값을 직접 적기 시작하면 화면마다 둥글기가 조금씩 어긋납니다.",
-  axes_lede="토큰은 부품이 아니라 <b>값을 쓰는 규칙</b>입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>겹친 상자의 <b>안쪽 모서리</b>는 바깥 모서리보다 여백만큼 작아야 두 곡선이 나란히 이어집니다.
           식으로 쓰면 <code>안쪽 = 바깥 − 여백</code>입니다. 공식을 끄면 모서리에서 두 곡선 사이가 벌어져
@@ -47,8 +45,6 @@ D = dict(
      "<b>그림자</b> — 모서리는 <a href=\"elevation.html\">고도</a>와 함께 쓰이는 일이 많지만, 둘은 따로 정하는 값입니다.<br>"
      "<b>50%</b> — <code>50%</code>를 주면 정사각형에서만 동그라미가 되고, 직사각형에서는 <b>타원</b>이 됩니다."),
   ]),
-  axes=ax("모서리"),
-  oneline="모서리 값은 <b>정해 둔 단 안에서만</b> 고르세요. 네댓 단이면 화면 전체에 필요한 둥글기를 모두 나타낼 수 있어서, 단에 없는 값은 대부분 실수로 들어간 것입니다.",
   s4_title="모서리 단계별 쓰는 부품", s4_hint="단마다 그 둥글기를 주는 부품",
   states=states([
     (box("0", "0", "표 · 전폭 띠"), "0단, 각진 모서리", "화면 끝에 붙는 것은 <b>각지게</b> 둡니다"),

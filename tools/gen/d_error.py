@@ -1,13 +1,6 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
-
-LEVELS = table(
-  ["무엇이 실패했는가", "에러를 붙이는 자리", "사용자가 할 수 있는 일", "나머지 화면은 어떻게 되는가"],
-  [["칸 하나", "입력값 하나가 규칙에 맞지 않음", "<b>그 칸 바로 아래</b>", "고쳐서 다시 보냄", "그대로 쓸 수 있음"],
-   ["폼 전체", "보내기 자체가 실패함", "<b>폼 맨 위</b>", "다시 시도하거나 나중에 다시 함", "입력값을 지우지 않고 그대로 둠"],
-   ["화면 전체", "화면을 그리지 못함", "<b>화면 한가운데</b>", "다시 불러오거나 이전 화면으로 돌아감", "쓸 수 없음"],
-   ["연결 끊김", "서버에 연결하지 못함", "<b>앱 맨 위의 띠</b>", "기다리거나 오프라인으로 씀", "읽기는 그대로 되게 둠"]])
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:12px">
                 <div data-pin="1" style="background:color-mix(in srgb,var(--danger) 8%,var(--surface));border:1px solid color-mix(in srgb,var(--danger) 40%,transparent);border-radius:8px;padding:14px 26px 16px">
@@ -39,8 +32,6 @@ D = dict(
      "<b>토스트</b> — 에러를 토스트로만 알리면 <b>토스트가 금방 사라져서 사용자가 다 읽지 못합니다.</b> 사용자가 고쳐야 하는 에러는 화면에 남아 있어야 합니다.<br>"
      "<b>빈 상태</b> — 비어 있다고 해서 무언가 잘못된 것은 아니므로 빈 상태는 빨갛게 칠하지 않습니다."),
   ]),
-  axes=LEVELS,
-  oneline="에러는 사용자가 <b>문제를 고칠 수 있는 가장 가까운 자리</b>에 붙입니다. 꼭 필요하지 않으면 에러의 단계를 올리지 않습니다.",
   states=states([
     (mini('<div style="margin-top:8px;padding:0 6px"><div style="height:11px;border:1px solid var(--danger);border-radius:3px"></div><div style="font-size:6.5px;color:var(--danger);font-weight:700;margin-top:3px">자릿수가 모자랍니다</div></div>', bars="4", label="칸 하나 에러"), "입력 칸 하나가 틀렸을 때", "틀린 칸 바로 아래에 붙이고, <b>무엇이 틀렸고 어떻게 고치는지</b>까지 적습니다"),
     (mini('<div style="margin-top:7px;padding:0 6px"><div style="border:1px solid color-mix(in srgb,var(--danger) 45%,transparent);background:color-mix(in srgb,var(--danger) 8%,var(--surface));border-radius:3px;padding:4px 5px"><div style="font-size:7px;font-weight:700">등록하지 못했습니다</div><div style="font-size:6px;color:var(--fg-muted)">잠시 뒤 다시 해 주세요</div></div><div style="height:9px;border:1px solid var(--line-strong);border-radius:3px;margin-top:5px"></div></div>', bars="", label="폼 전체 에러"), "폼 보내기가 실패했을 때", "폼 맨 위에 띄웁니다. <b>사용자가 입력한 값은 지우지 말고 그대로 둡니다</b>"),

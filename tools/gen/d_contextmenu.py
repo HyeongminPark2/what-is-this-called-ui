@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from _tx import one, code, txt, mono
-from tmpl import axis_table, siblings, states, cases, pins, plats, rows, ul, kbd
-
-L6 = "겹쳐 뜨는 부품은 생김새로는 가르기 어렵습니다. 아래 네 가지로 가릅니다."
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def cm(label, note="", ok=None, w="152px", dots=True, menu=True, at=(40, 22)):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -42,7 +40,6 @@ D = dict(
   slug="contextmenu", ko="컨텍스트 메뉴", en="Context menu",
   desc="마우스 오른쪽 버튼이나 길게 누르기로 여는 메뉴입니다. 여는 길이 화면에 보이지 않아 생기는 문제와 브라우저 기본 메뉴를 막을 때 생기는 일을 다룹니다.",
   lede="컨텍스트 메뉴는 마우스 오른쪽 버튼으로 누르거나 손가락으로 길게 누른 <b>그 자리</b>에 뜨는 메뉴입니다. 화면에 여는 단추가 보이지 않고 그 동작으로만 열리기 때문에, 사용자가 <b>메뉴가 있는 줄도 모르고</b> 지나치기 쉽습니다.",
-  axes_lede=L6,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>목록의 줄 위에서 <b>마우스 오른쪽 버튼</b>을 눌러 보세요(폰에서는 길게 누릅니다).
           같은 메뉴를 여는 <b>길이 몇 개인지</b> 데모가 세어 적습니다.<br>
@@ -63,8 +60,6 @@ D = dict(
      "<b>액션 시트</b> — 화면 <b>아래에서</b> 올라오는 동작 목록은 <a href=\"actionsheet.html\">액션 시트</a>입니다.<br>"
      "<b>팝오버</b> — 메뉴 항목만이 아니라 <b>아무 내용</b>이나 담을 수 있는 상자는 <a href=\"popover.html\">팝오버</a>입니다."),
   ]),
-  axes=axis_table("컨텍스트 메뉴"),
-  oneline="<b>숨은 길만 두지 마세요.</b> 오른쪽 버튼으로 메뉴를 연다는 것을 모르는 사람은 그 메뉴에만 있는 기능을 쓸 방법이 없습니다.",
   states=states([
     (cm("", "줄마다 ⋯ 단추가 있음", True, "152px", True, False), "닫혀 있을 때", "줄마다 ⋯ 단추가 있어 메뉴를 여는 <b>보이는 길</b>이 있습니다"),
     (cm("", "누른 자리에 뜸", True), "누른 자리에 열렸을 때", "메뉴가 <b>누른 자리</b>에 뜹니다"),

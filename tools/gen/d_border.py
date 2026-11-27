@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax2 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -32,7 +31,6 @@ D = dict(
   slug="border", ko="테두리와 구분선", en="Border · divider",
   desc="칸을 가르는 선을 쓰는 법과 함께, 테두리와 구분선의 차이, 맞닿은 테두리가 만드는 2px 이음선, box-sizing 때문에 생기는 치수 문제를 보여 주는 항목입니다.",
   lede="선은 칸을 가르는 방법 가운데 <b>눈에 가장 강하게 띄는 방법</b>입니다. 그래서 선을 적게 쓸수록 화면이 덜 어수선해집니다.",
-  axes_lede="토큰은 부품이 아니라 <b>값을 쓰는 규칙</b>입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>가르는 법 네 가지를 바꿔 보세요. <b>줄마다 테두리</b>를 두르면 맞닿은 자리에서 선이
           두 겹이 되어 <b>2px 이음선</b>이 생기는데, 데모는 맞닿은 두 테두리의 두께를 실제로 더해 보여 줍니다.<br>
@@ -53,8 +51,6 @@ D = dict(
      "<b>그림자</b> — 그림자로 나타내는 <a href=\"elevation.html\">고도</a>는 <b>높이</b>를 보여 주고, 선은 <b>경계</b>를 보여 줍니다.<br>"
      "<b>모서리</b> — <a href=\"radius.html\">모서리</a>는 상자의 모양이고, 테두리와 구분선은 선입니다."),
   ]),
-  axes=ax("테두리와 구분선"),
-  oneline="선을 긋기 전에 <b>여백만으로 나눌 수 있는지</b> 먼저 보세요. 선은 여백만으로 구역이 나뉘지 않을 때만 씁니다.",
   s4_title="칸을 가르는 방법", s4_hint="눈에 강하게 띄는 것부터 약한 것까지",
   states=states([
     (rowbox("border:1px solid var(--line);margin-bottom:-1px", "줄마다 테두리", "이음선 2px", False),

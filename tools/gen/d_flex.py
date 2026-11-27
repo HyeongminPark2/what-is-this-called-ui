@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax1 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def row(style="", items=("앞", "가운데", "뒤"), mid_style="", w="180px"):
@@ -33,7 +32,6 @@ D = dict(
   slug="flex", ko="플렉스", en="Flexbox · flex layout",
   desc="플렉스의 주축과 교차축, flex:1, 그리고 min-width:0을 빠뜨려서 생기는 문제를 실물과 해부도로 보여 주는 항목입니다.",
   lede="플렉스는 자식 요소들을 <b>한 줄(또는 한 열)에 늘어놓는</b> 방법입니다. 화면에서 요소를 가로로 늘어놓는 배치는 대부분 플렉스로 만듭니다.",
-  axes_lede="뼈대 항목은 눈에 보이지 않고 자리만 정해서 생김새로는 가를 수 없습니다. 아래 네 가지로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>방향을 <code>column</code>으로 바꿔 보세요. <b><code>justify-content</code>와 <code>align-items</code>가 맡는 방향이 서로 뒤바뀝니다</b>.
           두 속성은 가로·세로가 아니라 <b>주축·교차축</b>을 기준으로 하기 때문입니다.<br>
@@ -53,8 +51,6 @@ D = dict(
      "<b>가로 정렬</b> — <code>justify-content</code>는 방향에 따라 세로 정렬이 되기도 하므로, <b>주축</b> 정렬이라고 불러야 헷갈리지 않습니다.<br>"
      "<b>flex: 1</b> — '너비 100%'가 아니라 <b>남은 자리를 한 몫 나눠 받으라</b>는 뜻입니다."),
   ]),
-  axes=ax("플렉스"),
-  oneline="플렉스는 요소를 <b>한 줄에 늘어놓는</b> 방법입니다. 줄과 열을 서로 맞춰야 한다면 그건 플렉스가 아니라 <a href=\"grid.html\">그리드</a>로 할 일입니다.",
   s4_title="자주 쓰는 여섯 가지 배치", s4_hint="속성 값에 따라 달라지는 자식의 자리",
   states=states([
     (row(), "아무 값도 주지 않았을 때", "자식이 <b>내용만큼</b> 자리를 차지하고 왼쪽부터 붙습니다"),

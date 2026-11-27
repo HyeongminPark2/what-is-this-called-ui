@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from ax13 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
-
-L13 = "화면 단위 패턴은 사용자가 <b>끝내야 하는 일</b> 하나로 나눕니다. 아래 네 가지로 서로 가릅니다."
 
 def panel(opts, link, who, warn="", w="152px", ok=None):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -42,7 +39,6 @@ D = dict(
   slug="share", ko="공유하기", en="Share · permissions",
   desc="남에게 보여 주는 범위를 정하는 화면입니다. 범위의 기본값, 권한, 이미 나간 링크를 다루는 법을 설명합니다.",
   lede="공유 화면에서 생기는 사고는 거의 언제나 <b>공유 범위의 기본값이 너무 넓어서</b> 일어납니다.",
-  axes_lede=L13,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>범위를 바꿔 보세요. 데모는 지금 범위에서 <b>볼 수 있는 사람 수</b>를 어림해 적고,
           사내 밖까지 열리면 경고를 띄웁니다.<br>
@@ -65,8 +61,6 @@ D = dict(
      "<b>게시</b> — 게시는 다른 사람이 검색이나 목록으로 <b>찾을 수 있게</b> 만드는 것이고, 링크 공유는 링크를 모르면 <b>찾을 수 없습니다</b>.<br>"
      "<b>내보내기</b> — <a href=\"exportdata.html\">내보내기</a>는 데이터를 <b>파일로 떼어 주는</b> 일입니다."),
   ]),
-  axes=ax("공유하기"),
-  oneline="<b>공유 범위의 기본값은 가장 좁게 둡니다.</b> 범위를 넓히기는 쉽지만, 넓은 범위로 이미 퍼진 링크를 거둬들이기는 어렵기 때문입니다.",
   do_title="공유 화면을 만들 때 할 일",
   dont_title="공유 화면을 잘못 만드는 경우",
   instead_title="함께 보면 좋은 항목",

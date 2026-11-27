@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax12 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def lv(visual, said, kind="ok", w="168px"):
@@ -27,7 +26,6 @@ D = dict(
   slug="live", ko="라이브 리전", en="Live region",
   desc="사용자가 보고 있지 않은 사이에 바뀐 화면 내용을 소리로 알리는 방법과, 리전을 미리 만들어 두어야 하는 이유를 보여 주는 항목입니다.",
   lede="라이브 리전은 화면 내용이 <b>저절로 바뀌었을 때</b> 스크린 리더가 그 내용을 소리로 읽어 주게 하는 영역입니다. 화면에 새로 뜬 내용은 눈으로는 바로 보이지만, 라이브 리전이 없으면 스크린 리더는 아무것도 읽지 않습니다.",
-  axes_lede="접근성은 눈에 안 보이는 부분까지 챙기는 일입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>세 버튼을 눌러 보세요. <b>조용히 바꾸기</b>를 누르면 화면의 숫자만 바뀌고
           아래 기록에는 아무것도 남지 않습니다. 화면을 보지 못하는 사람은 <b>무엇이 바뀌었는지 전혀 알 수 없습니다</b>.<br>
@@ -48,8 +46,6 @@ D = dict(
      "<b>알림</b>(notification) — 브라우저가 띄우는 알림은 라이브 리전과 다른 기능입니다.<br>"
      "<b><code>alert()</code></b> — <code>role=\"alert\"</code>는 자바스크립트의 <code>alert()</code> 함수와 아무 상관이 없습니다."),
   ]),
-  axes=ax("라이브 리전"),
-  oneline="라이브 리전은 <b>처음부터 빈 채로 화면에 두어야</b> 합니다. 알릴 때가 되어서야 리전을 새로 만들면 스크린 리더가 읽지 않는데, 이것이 가장 흔한 실수입니다.",
   s4_title="알리는 방식", s4_hint="바뀐 내용을 언제 어떻게 알리는지",
   states=states([
     (lv(toast(), '리전이 없어 읽지 않음', "no"), "라이브 리전이 없을 때", "화면에는 토스트가 떴지만 <b>스크린 리더는 아무것도 읽지 않습니다</b>"),

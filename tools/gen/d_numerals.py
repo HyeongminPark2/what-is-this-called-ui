@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax3 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def nums(style="", vals=("1,284,000", "9,827,500", "1,111,100"), w="150px", label=""):
@@ -24,7 +23,6 @@ D = dict(
   slug="numerals", ko="숫자 꼴", en="Numerals · tabular figures",
   desc="숫자 너비가 글꼴마다 다른 이유와 tabular-nums를 켜도 효과가 없는 경우를 직접 재서 보여 주는 항목입니다.",
   lede="숫자 꼴은 숫자 하나하나가 차지하는 <b>너비</b>를 다룹니다. 세로로 쌓이는 표나 1초마다 바뀌는 값에서 숫자마다 너비가 다르면 자릿수가 흔들려 읽기 어렵습니다.",
-  axes_lede="글자 항목은 값 하나가 글 전체를 바꿉니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>가운데 표는 <b>글꼴마다 숫자 너비를 직접 재서</b> '원래 고름'인지, '켜니 고르게 됨'인지,
           <b>'켜도 안 바뀌니 기능 없음'</b>인지 알려 줍니다.<br>
@@ -44,8 +42,6 @@ D = dict(
      "<b><code>text-align: right</code></b> — 오른쪽 맞춤은 숫자를 <b>끝자리에서</b> 맞출 뿐이고, 숫자의 너비 자체는 바꾸지 않습니다.<br>"
      "<b>천 단위 쉼표</b> — 자릿수를 읽기 쉽게 해 주지만, 숫자 너비가 달라 생기는 <b>흔들림은 막지 못합니다</b>."),
   ]),
-  axes=ax("숫자 꼴"),
-  oneline="<code>tabular-nums</code>는 <b>글꼴이 지원할 때만</b> 효과가 있습니다. 그래서 숫자가 중요한 자리라면 켜 두기만 하지 말고, 숫자 너비를 <b>직접 재 보고</b> 정해야 합니다.",
   s4_title="숫자 자리가 맞는 경우와 어긋나는 경우", s4_hint="글꼴과 설정에 따라 달라지는 결과",
   states=states([
     (nums("font-variant-numeric:tabular-nums", label="고른 숫자"), "숫자 너비가 고를 때", "자릿수가 <b>세로로 맞습니다.</b> 표에서는 이 상태가 기본입니다"),

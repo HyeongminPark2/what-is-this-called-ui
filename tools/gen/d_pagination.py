@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from ax7 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:12px">
@@ -31,8 +30,6 @@ D = dict(
      "<b>스테퍼</b> — 스테퍼는 <b>순서가 있는 단계</b>를 거쳐 가는 부품이고, 페이지네이션은 <b>같은 목록의 다른 쪽</b>으로 옮겨 가는 부품입니다.<br>"
      "<b>캐러셀</b> — 캐러셀은 목록의 쪽이 아니라 카드나 사진 같은 내용을 가로로 넘겨 보는 부품입니다."),
   ]),
-  axes=ax("페이지네이션"),
-  oneline="페이지네이션은 <b>지금 몇 쪽이고 전부 얼마인지</b>를 알려 줍니다. 사용자에게 이 두 가지 정보가 필요 없다면 무한 스크롤이 더 편합니다.",
   states=states([
     (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:2px;align-items:center"><span style="border:1px solid var(--line);border-radius:2px;padding:0 3px;font-size:5px;color:var(--fg-faint)">‹</span><span style="background:var(--accent);color:#fff;border-radius:2px;padding:0 3px;font-size:5px">1</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">2</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">3</span></div>', bars="", label="첫 쪽"), "첫 쪽을 보고 있을 때", "이전 버튼은 <b>누를 수 없게</b> 막습니다. 버튼을 숨기지 말고 비활성 상태로 둡니다"),
     (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:2px;align-items:center"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">‹</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">1</span><span style="background:var(--accent);color:#fff;border-radius:2px;padding:0 3px;font-size:5px">2</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">3</span></div>', bars="", label="가운데 쪽"), "가운데 쪽을 보고 있을 때", "지금 쪽이 분명히 드러나야 합니다. <b>색만 바꾸면 구별하기 어렵습니다</b>"),

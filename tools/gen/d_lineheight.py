@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax3 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def lh(v, label, note="", size=11, w="150px"):
@@ -28,7 +27,6 @@ D = dict(
   slug="lineheight", ko="행간", en="Line height · leading",
   desc="행간을 배수로 적는 이유와 제목·본문에 맞는 범위, 한글에서 행간을 더 넓혀야 하는 까닭을 실물과 해부도로 보여 주는 항목입니다.",
   lede="행간은 글줄과 글줄 사이의 거리입니다. 글이 <b>얼마나 잘 읽히는지</b>는 어떤 글꼴을 고르느냐보다 행간을 어떻게 잡느냐에 더 크게 좌우됩니다.",
-  axes_lede="글자 항목은 값 하나가 글 전체를 바꿉니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>글자 크기를 키워 보세요. 행간을 <b>배수로 적었기 때문에 줄 높이도 따라 커집니다</b>.
           <code>28px</code>처럼 고정값으로 적었다면 글자만 커지고 줄 높이는 그대로라서 줄이 겹쳤을 것입니다.<br>
@@ -47,8 +45,6 @@ D = dict(
      "<b>문단 간격</b> — 문단과 문단 사이의 거리는 행간이 아니라 <code>margin</code>으로 정합니다.<br>"
      "<b><code>line-height: 1.5em</code></b> — 단위를 붙이면 부모에서 계산한 픽셀 값이 그대로 <b>자식에게 물려지기</b> 때문에, 자식 글자 크기가 달라도 줄 높이가 바뀌지 않습니다."),
   ]),
-  axes=ax("행간"),
-  oneline="행간은 <b>단위 없이 배수로</b> 적습니다. 그래야 글자 크기가 바뀌어도 줄 높이가 같은 비율로 따라 바뀝니다.",
   s4_title="행간 값에 따른 차이", s4_hint="같은 글을 행간만 바꿔 본 모습",
   states=states([
     (lh(1.0, "1.0", "줄이 거의 닿음"), "1.0으로 너무 좁을 때", "윗줄과 아랫줄이 <b>거의 닿아서</b> 읽기 어렵습니다"),

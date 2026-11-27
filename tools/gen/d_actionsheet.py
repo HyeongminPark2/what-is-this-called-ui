@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from _tx import one, code, txt, mono
-from tmpl import axis_table, siblings, states, cases, pins, plats, rows, ul, kbd
-
-L6 = "겹쳐 뜨는 부품은 생김새로는 가르기 어렵습니다. 아래 네 가지로 가릅니다."
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def sheet(items, label, note="", ok=None, w="152px", sep=True, cancel=True):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -39,7 +37,6 @@ D = dict(
   slug="actionsheet", ko="액션 시트", en="Action sheet",
   desc="지금 고른 것에 할 수 있는 일을 화면 아래에서 올려 보여 주는 겹침 부품입니다. 위험한 항목과 취소 버튼을 어디에 두는지 다룹니다.",
   lede="액션 시트는 <b>지금 고른 것</b>에 할 수 있는 일을 화면 아래에서 올려 보여 줍니다. 화면 아래쪽은 폰을 쥔 손가락이 쉽게 닿는 자리라서 폰에서 특히 잘 맞습니다.",
-  axes_lede=L6,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>항목 수를 늘려 보세요. 데모가 <b>시트가 화면의 몇 %를 덮는지</b> 재서 적어 줍니다.
           시트가 화면의 절반을 넘게 덮으면 시트보다 <b>화면 한 장</b>으로 만드는 편이 낫습니다.<br>
@@ -59,8 +56,6 @@ D = dict(
      "<b>드롭다운 메뉴</b> — <a href=\"menu.html\">드롭다운 메뉴</a>는 화면 아래가 아니라 <b>누른 단추 옆에</b> 붙어 뜹니다.<br>"
      "<b>다이얼로그</b> — <a href=\"dialog.html\">다이얼로그</a>는 할 일을 늘어놓는 대신 사용자에게 <b>묻고 답을 받습니다</b>."),
   ]),
-  axes=axis_table("액션 시트"),
-  oneline="액션 시트에는 <b>동작을 셋에서 다섯 개 두는 것이 알맞습니다.</b> 그보다 많으면 시트가 화면을 너무 많이 덮기 때문에 화면 한 장으로 만듭니다.",
   states=states([
     (sheet([("영수증 다시 보내기", False), ("이름 바꾸기", False), ("지우기", True)], "", "셋이면 알맞음", True),
      "동작 수가 알맞을 때", "<b>셋에서 다섯 개</b>가 알맞습니다"),

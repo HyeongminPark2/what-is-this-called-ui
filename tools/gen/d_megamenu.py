@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from ax7 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
-
-LEDE7 = "길 안내 부품은 모두 누르면 다른 곳으로 옮겨 갑니다. 아래 네 가지로 서로 가릅니다."
 
 def menu(open_i, cols, w="152px", note="", ok=None, heads=("의류", "생활용품", "식품")):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -42,7 +39,6 @@ D = dict(
   slug="megamenu", ko="메가 메뉴", en="Mega menu",
   desc="분류가 많은 사이트에서 쓰는 큰 드롭다운인 메가 메뉴를, 대각선 문제와 지연으로 해결하는 방법, 키보드 처리까지 함께 다루는 항목입니다.",
   lede="메가 메뉴는 분류가 <b>수십 개</b>인 사이트에서 여러 단의 항목을 한 번에 펼쳐 보여 주는 큰 메뉴입니다. 설계할 때는 항목 배치만큼 마우스가 지나가는 <b>경로</b>를 신경 써야 합니다.",
-  axes_lede=LEDE7,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>메가 메뉴에서 가장 자주 생기는 문제는 <b>대각선</b> 이동입니다. 머리글자에서 패널 오른쪽 아래 항목으로
           마우스를 곧장 옮기면 마우스가 <b>옆 머리글자 위를 지나가면서</b> 메뉴가 바뀌고, 가려던 항목이 사라집니다.
@@ -63,8 +59,6 @@ D = dict(
      "<b>셀렉트</b> — <a href=\"select.html\">셀렉트</a>는 <b>값을 고르는</b> 입력 부품이고, 다른 화면으로 가는 길 안내 부품이 아닙니다.<br>"
      "<b>사이드바</b> — <a href=\"sidebar.html\">사이드바</a>는 화면 옆에 <b>늘 보이는</b> 메뉴이고, 메가 메뉴는 필요할 때만 펼쳐집니다."),
   ]),
-  axes=ax("메가 메뉴"),
-  oneline="대각선 문제는 열기 100ms, 닫기 300ms <b>두 가지 지연만으로 대부분 해결됩니다</b>. 그래도 해결되지 않으면 눌러야 열리게 하세요.",
   states=states([
     (menu(-1, None, "152px", "닫혀 있음", True), "닫혀 있을 때", "머리글자만 보입니다"),
     (menu(0, [("아우터", ["패딩", "코트"]), ("상의", ["티셔츠", "셔츠"]), ("하의", ["청바지"])], "152px", "한 분류가 펼쳐짐", True),

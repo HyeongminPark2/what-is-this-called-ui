@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""항목 카드 열 칸 틀. 모든 항목이 같은 틀을 써야 100번째에서도 어디를 볼지 안다."""
+"""항목 카드 아홉 칸 틀. 모든 항목이 같은 틀을 써야 100번째에서도 어디를 볼지 안다."""
 
 PARTS = {
     "15부 현장 용어": [
@@ -103,38 +103,6 @@ PARTS = {
     ],
 }
 
-AXES = [
-    ("모달",            "막음",          "가둠",          "잠김",        "가운데"),
-    ("다이얼로그(비모달)", "안 막음",        "안 가둠",        "그대로 움직임", "가운데에 띄워 둔 채"),
-    ("바텀시트",         "막을 때도 있음",    "뒤를 막을 때만",    "뒤를 막을 때만",  "아래에서 올라옴"),
-    ("드로어",           "보통 막음",      "가둠",          "잠김",        "옆에서 밀려 나옴"),
-    ("팝오버",           "안 막음",        "가두기도 함",     "그대로 움직임", "누른 것 옆"),
-    ("툴팁",            "안 막음",        "안 가둠",        "그대로 움직임", "가리킨 것 옆"),
-    ("토스트",          "안 막음",        "안 가둠",        "그대로 움직임", "구석에 떴다 저절로 사라짐"),
-]
-NONE = {"안 막음", "안 가둠", "그대로", "그대로 움직임", "모름", "안 잡음", "없음", "해당 없음", "—", "안 됨", "없음", "안 보여 줌", "안 막는다", "안 가둔다", "그대로", "그대로 움직인다", "모른다", "안 잡는다", "없다", "해당 없음", "—", "안 된다", "없음", "안 보여 준다"}
-
-
-def axis_table(me):
-    rows = []
-    for name, a, b, c, d in AXES:
-        cells = "".join(
-            '<td%s>%s</td>' % (' class="none"' if v in NONE else "", v)
-            for v in (a, b, c, d)
-        )
-        label = "<b>%s</b>" % name if name.startswith(me) else name
-        rows.append("            <tr%s><td>%s</td>%s</tr>" %
-                    (' class="me"' if name.startswith(me) else "", label, cells))
-    return """        <div class="scroll-x">
-        <table class="grid axes">
-          <thead><tr><th></th><th>뒤쪽 화면을 막는가</th><th>포커스를 안에 가두는가</th><th>뒤쪽 화면의 스크롤은</th><th>화면 어디에서 뜨는가</th></tr></thead>
-          <tbody>
-%s
-          </tbody>
-        </table>
-        </div>""" % "\n".join(rows)
-
-
 def part_of(me):
     for part, items in PARTS.items():
         if any(slug == me for slug, _ in items):
@@ -151,25 +119,6 @@ def siblings(me):
             continue
         rows.append('        <li><a href="%s.html"><b>%s</b><em>%s</em></a></li>' % (slug, ko, short))
     return "\n".join(rows)
-
-
-def table(heads, body, me=None):
-    """제목줄과 내용줄로 표 하나. me 와 첫 칸이 같은 줄은 굵게."""
-    hs = "".join("<th>%s</th>" % h for h in heads)
-    rows = []
-    for cells in body:
-        hit = me is not None and cells[0].startswith(me)
-        tds = "".join('<td%s>%s</td>' % (' class="none"' if v in NONE else "", v) for v in cells[1:])
-        label = "<b>%s</b>" % cells[0] if hit else cells[0]
-        rows.append('            <tr%s><td>%s</td>%s</tr>' % (' class="me"' if hit else "", label, tds))
-    return """        <div class="scroll-x">
-        <table class="grid axes">
-          <thead><tr><th></th>%s</tr></thead>
-          <tbody>
-%s
-          </tbody>
-        </table>
-        </div>""" % (hs, "\n".join(rows))
 
 
 def states(items):
@@ -241,20 +190,13 @@ def eul(word):
     return word + ("를" if any(word.endswith(w) for w in _NO_BATCHIM) else "을")
 
 
-SLOTS = ["실물", "이름", "가르는 기준", "상태", "해부도", "쓸 때", "사례", "마크업", "백엔드 메모", "플랫폼"]
+SLOTS = ["실물", "이름", "상태", "해부도", "쓸 때", "사례", "마크업", "백엔드 메모", "플랫폼"]
 
 
 def page(d):
     d = dict(d)
     d.setdefault("part", part_of(d["slug"]))
     # 칸 이름은 부마다 조금씩 다르다. 토큰에는 '키보드'도 '상태'도 그대로 맞지 않는다.
-    # 부마다 비교 축의 첫 줄이 다르다. 안 적은 카드는 그 부의 것을 쓴다.
-    PART_LEDE = {
-        "4부 조작 부품": "조작 부품은 모두 값을 받습니다. 아래 네 가지로 서로 가릅니다.",
-        "6부 겹치는 것들": "겹쳐 뜨는 부품은 생김새로는 가르기 어렵습니다. 아래 네 가지로 가릅니다.",
-    }
-    d.setdefault("axes_lede", PART_LEDE.get(d["part"],
-                 "겹쳐 뜨는 부품은 생김새로는 가르기 어렵습니다. 아래 네 가지로 가릅니다."))
     d.setdefault("s4_title", "상태")
     d.setdefault("s4_hint", "상태마다 달라지는 모습")
     d.setdefault("s8_title", "최소 마크업과 키보드")
@@ -265,7 +207,7 @@ def page(d):
     d.setdefault("do_title", d["ko_eul"] + " 쓰는 경우")
     d.setdefault("dont_title", d["ko_eul"] + " 쓰지 않는 경우")
     d.setdefault("instead_title", d["ko"] + " 대신 다른 것을 써야 하는 경우")
-    jump = "".join('<a href="#s%d">%s %s</a>' % (i + 1, "①②③④⑤⑥⑦⑧⑨⑩"[i], n)
+    jump = "".join('<a href="#s%d">%s %s</a>' % (i + 1, "①②③④⑤⑥⑦⑧⑨"[i], n)
                    for i, n in enumerate(SLOTS))
     return '''<!doctype html>
 <html lang="ko">
@@ -333,23 +275,14 @@ def page(d):
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제 부품과 견주는 네 가지 기준</span></h2>
-        <p>{axes_lede}</p>
-{axes}
-        <div class="note" style="margin-bottom:0">
-          <p><b>{ko_eul} 한 줄로 정리하면</b> — {oneline}</p>
-        </div>
-      </section>
-
-      <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> {s4_title}<span class="hint">{s4_hint}</span></h2>
+        <h2 class="slot-label"><span class="n">3</span> {s4_title}<span class="hint">{s4_hint}</span></h2>
         <div class="states">
 {states}
         </div>
       </section>
 
-      <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
             <div class="anat" role="img" aria-label="{ko}의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
@@ -363,8 +296,8 @@ def page(d):
 {anat_note}
       </section>
 
-      <section class="slot" id="s6">
-        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
             <h3>{do_title}</h3>
@@ -382,15 +315,15 @@ def page(d):
         <p style="margin:var(--s4) 0 0"><b>{instead_title}</b> — {instead}</p>
       </section>
 
-      <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
 {cases}
         </div>
       </section>
 
-      <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> {s8_title}<span class="hint">{s8_hint}</span></h2>
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> {s8_title}<span class="hint">{s8_hint}</span></h2>
         <p>{code_lede}</p>
 <pre class="code">{code}</pre>
         <div class="scroll-x">
@@ -403,8 +336,8 @@ def page(d):
         </div>
       </section>
 
-      <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
+      <section class="slot slot--backend" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
@@ -414,8 +347,8 @@ def page(d):
         </div>
       </section>
 
-      <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+      <section class="slot" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
         <p>{plat_lede}</p>
         <div class="platforms">
 {plats}

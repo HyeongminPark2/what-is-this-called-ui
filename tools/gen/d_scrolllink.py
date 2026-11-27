@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax9 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -30,7 +29,6 @@ D = dict(
   slug="scrolllink", ko="스크롤 연동", en="Scroll-linked animation",
   desc="스크롤에 맞춰 움직이는 것들을 다루는 항목입니다. 쓸모 있는 두 가지와 조심해야 할 두 가지, 그리고 스크롤 가로채기를 쓰지 않는 이유를 보여 줍니다.",
   lede="스크롤 연동은 사용자가 스크롤하는 만큼에 <b>맞춰</b> 요소를 움직이는 것입니다. 같은 이름 아래에 쓸모 있는 것과 멀미를 일으키는 것이 섞여 있습니다.",
-  axes_lede="움직임은 무엇이 바뀌었는지 <b>알려 주는</b> 수단입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>스크롤해 보세요. <b>읽은 만큼 막대</b>와 <b>붙박이 머리말</b>은 사용자가 글의 어디쯤에 있는지 알려 주기 때문에
           쓸모가 분명합니다.<br>
@@ -51,8 +49,6 @@ D = dict(
      "<b>무한 스크롤</b> — <a href=\"../items/infinite.html\">무한 스크롤</a>은 스크롤이 끝에 닿으면 자료를 <b>더 받아오는</b> 기능입니다.<br>"
      "<b>애니메이션</b> — 시간에 따라 재생되는 애니메이션과 <b>스크롤 위치에 따라</b> 움직이는 것은 다릅니다."),
   ]),
-  axes=ax("스크롤 연동"),
-  oneline="<b>스크롤은 사용자가 직접 하는 조작입니다.</b> 스크롤 위치에 맞춰 무언가를 움직이는 것은 괜찮지만, 스크롤한 만큼 화면이 움직이지 않도록 <b>가로채면</b> 안 됩니다.",
   s4_title="스크롤에 맞춰 움직이는 것들", s4_hint="쓸모 있는 것과 조심하거나 피할 것",
   states=states([
     (box('<span style="position:absolute;left:0;right:0;top:0;height:4px;background:var(--line)"></span>'

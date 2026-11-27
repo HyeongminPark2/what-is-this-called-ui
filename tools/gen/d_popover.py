@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from tmpl import axis_table, siblings, states, cases, pins, plats, rows, ul, kbd
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2);padding:6px 10px 10px">
                 <div data-pin="1" style="display:inline-block;border:1px solid var(--line-strong);border-radius:6px;padding:7px 13px;font-size:11.5px;font-weight:700;background:var(--surface)">필터 ▾</div>
@@ -35,8 +35,6 @@ D = dict(
      "<b>모달</b> — 모달은 뒤쪽 화면을 막지만 팝오버는 막지 않습니다.<br>"
      "<b>팝업</b> — 브라우저가 새로 띄우는 팝업 창과 이름이 겹쳐서 헷갈립니다."),
   ]),
-  axes=axis_table("팝오버"),
-  oneline="팝오버와 툴팁은 <b>안에 누를 것이 있느냐</b>로 갈립니다. 안에 누를 것이 생기는 순간 그건 툴팁이 아니라 팝오버입니다.",
   states=states([
     (mini('<div style="margin-top:8px"><span class="mini__trigger">필터 ▾</span></div>', bars="684", label="팝오버가 닫힌 모습"), "닫혀 있을 때", "앵커만 보이고, 앵커의 <code>aria-expanded</code> 값은 <code>\"false\"</code>입니다"),
     (mini('<div style="margin-top:8px"><span class="mini__trigger" style="border-color:var(--accent);color:var(--accent)">필터 ▾</span></div>' + pop(["☑ 승인", "☐ 실패"], pos="left:8px;top:32px", head="상태"), bars="684", label="팝오버가 열린 모습"), "열렸을 때", "앵커 바로 아래에 뜨고, 앵커도 눌린 상태로 보입니다"),

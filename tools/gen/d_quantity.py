@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax4 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -51,8 +50,6 @@ D = dict(
      "<b>슬라이더</b> — <a href=\"slider.html\">슬라이더</a>는 손잡이를 끌어 <b>범위 안에서</b> 값을 고릅니다.<br>"
      "<b>숫자 입력</b> — <a href=\"numberinput.html\">숫자 입력</a>은 −·＋ 단추 없이 <b>칸만</b> 있는 부품입니다."),
   ]),
-  axes=ax("수량 스테퍼"),
-  oneline="<b>가운데 칸을 잠그지 마세요.</b> 단추로는 하나씩만 바뀌기 때문에, 큰 수를 넣으려면 가운데 칸에 쳐서 넣는 수밖에 없습니다.",
   states=states([
     (q("1", "", "1에서는 −가 꺼짐", True, "152px", False, True), "최소값에 닿았을 때", "더 줄일 수 없으므로 <b>−가 꺼집니다</b>"),
     (q("3", "", "두 단추가 모두 눌림", True), "평소 상태", "두 단추가 모두 눌리고, 가운데 칸에도 <b>쳐서 넣을 수 있습니다</b>"),

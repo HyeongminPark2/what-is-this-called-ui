@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax4 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -59,8 +58,6 @@ D = dict(
      "<b>색 토큰</b> — <a href=\"tokenname.html\">토큰 이름</a>은 색을 고르는 일이 아니라 색에 <b>이름을 붙이는</b> 일입니다.<br>"
      "<b>상태 색</b> — <a href=\"statecolor.html\">상태 색</a>은 사용자가 고르는 색이 아니라 뜻이 정해진 색입니다."),
   ]),
-  axes=ax("색 고르기"),
-  oneline="<b>정해 둔 색에서 고르게 하세요.</b> 아무 색이나 고를 수 있게 열어 두면 글자를 읽을 수 없는 색이 들어옵니다.",
   states=states([
     (sw("#1f6feb", "대비비 4.7:1이라 쓸 수 있음", True), "흰 글자가 잘 읽히는 색", "흰 글자를 올려도 <b>잘 읽힙니다</b>"),
     (sw("#f2d024", "대비비 1.6:1이라 못 읽음", False), "흰 글자를 못 읽는 밝은 색", "흰 글자를 읽을 수 없으므로 <b>막아야</b> 합니다"),

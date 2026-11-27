@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax12 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def land(tag, text, bad=False, w="160px"):
@@ -24,7 +23,6 @@ D = dict(
   slug="semantics", ko="시맨틱 태그", en="Semantic HTML · landmarks",
   desc="시맨틱 태그를 쓰면 생기는 구역 목록과 역할, 키보드 동작을 보여 주고, div로만 쌓았을 때 무엇이 사라지는지 보여 주는 항목입니다.",
   lede="시맨틱 태그는 태그 이름만 보고도 <b>그 자리가 무슨 내용인지</b> 알 수 있는 태그입니다. 알맞은 태그를 쓰면 역할과 키보드 동작, 문서 구조가 <b>따로 코드를 쓰지 않아도</b> 함께 들어옵니다.",
-  axes_lede="접근성은 눈에 안 보이는 부분까지 챙기는 일입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>아래에 <b>스크린 리더의 구역 목록</b>이 나옵니다. 스크린 리더 사용자는 이 목록을 띄워 놓고
           '내비게이션'이나 '메인' 같은 구역으로 바로 건너뜁니다.<br>
@@ -44,8 +42,6 @@ D = dict(
      "<b><code>role</code>을 붙이면 같다</b> — <code>role</code>을 붙이면 역할만 같아지고 <b>키보드 동작은 따라오지 않습니다</b>.<br>"
      "<b><code>&lt;section&gt;</code></b> — <code>&lt;section&gt;</code>은 <b>이름이 있어야</b> 구역으로 인정되고, 이름 없이 쓰면 div와 같습니다."),
   ]),
-  axes=ax("시맨틱 태그"),
-  oneline="<b>ARIA 사용 규칙의 첫 번째는 \"ARIA를 쓰지 않는 것\"</b>입니다. 알맞은 태그가 있으면 ARIA 속성을 붙이지 말고 그 태그를 씁니다.",
   s4_title="태그별로 생기는 구조", s4_hint="태그 하나를 쓰면 저절로 생기는 역할과 구조",
   states=states([
     (land("header", "로고와 검색"), "header", "구역 목록에 <b>'배너'</b>로 올라갑니다"),

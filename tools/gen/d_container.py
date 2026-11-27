@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax1 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def cont(inner_w="60%", w="170px", label="", mark=""):
@@ -26,7 +25,6 @@ D = dict(
   slug="container", ko="컨테이너와 최대 폭", en="Container · max-width",
   desc="내용이 들어가는 가운데 칸을 만드는 두 줄과 글줄 길이 상한, width와 max-width의 차이를 보여 주는 항목입니다.",
   lede="컨테이너는 화면에서 내용이 들어가는 <b>가운데 칸</b>입니다. 대부분의 사이트가 폭에 상한을 걸고 가운데에 두는 <b>같은 두 줄</b>로 이 칸을 만듭니다.",
-  axes_lede="뼈대 항목은 눈에 보이지 않고 자리만 정해서 생김새로는 가를 수 없습니다. 아래 네 가지로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>막대를 움직이면 <b>한 줄에 실제로 몇 글자가 들어가는지</b> 재서 알려 줍니다.
           읽는 글은 한 줄에 <b>45~75자</b>일 때 읽기 편합니다.<br>
@@ -48,8 +46,6 @@ D = dict(
      "<b>컨테이너 쿼리</b> — 부모 폭에 따라 스타일을 바꾸는 기능으로, 이름만 비슷하고 컨테이너와는 다른 것입니다.<br>"
      "<b>컨테이너</b>(도커) — 서버에서 쓰는 도커 컨테이너는 이름만 같고 전혀 다른 개념입니다."),
   ]),
-  axes=ax("컨테이너와 최대 폭"),
-  oneline="컨테이너는 내용 폭이 <b>일정한 값보다 넓어지지 않게</b> 막는 칸입니다. <code>width</code>로 폭을 고정하면 좁은 화면에서 레이아웃이 깨지지만, <code>max-width</code>로 상한만 걸면 좁은 화면에서는 알아서 줄어듭니다.",
   s4_title="화면 폭에 따른 모습", s4_hint="화면 폭과 상한에 따라 달라지는 칸의 너비",
   instead_title="컨테이너와 함께 보면 좋은 항목",
   states=states([

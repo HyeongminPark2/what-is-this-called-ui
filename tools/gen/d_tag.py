@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from ax5 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
-
-L5 = "표시 부품은 모두 보여 주기만 합니다. 아래 네 가지로 서로 가릅니다."
 
 def tags(items, label, note="", ok=None, w="152px"):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -39,7 +36,6 @@ D = dict(
   slug="tag", ko="태그", en="Tag",
   desc="분류를 보여 주는 작은 알약 모양의 태그를 배지·칩과 가르는 세 가지 질문, 그리고 입력 태그를 지우는 법을 보여 주는 항목입니다.",
   lede="태그는 배지, 칩과 생김새가 거의 같아서 특히 많이 섞여 쓰입니다. 셋을 가르려면 <b>누를 수 있나, 지울 수 있나, 다른 요소에 붙지 않고 혼자 놓이나</b>를 물어보면 됩니다.",
-  axes_lede=L5,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>무엇을 만들지 골라 보세요. 데모가 고른 부품이 세 가지 질문에 어떻게 답하는지 표로 적습니다.<br>
           <b>태그</b>는 분류를 보여 주기만 합니다. <b>칩</b>은 눌러서 목록을 거르고,
@@ -58,8 +54,6 @@ D = dict(
      "<b>배지</b> — <a href=\"badge.html\">배지</a>는 늘 다른 요소에 붙어서 쓰고 <b>혼자 놓이지 않습니다</b>.<br>"
      "<b>버튼</b> — 알약처럼 생겼다고 해서 버튼은 아닙니다. 누르면 <b>동작이 일어나야</b> 버튼입니다."),
   ]),
-  axes=ax("태그"),
-  oneline="<b>누를 수 있나, 지울 수 있나, 혼자 놓이나.</b> 이 세 가지만 물으면 배지와 칩과 태그를 가를 수 있습니다.",
   s4_title="비슷한 부품과 상태", s4_hint="태그와 닮은 부품, 그리고 태그가 많거나 길 때의 모습",
   states=states([
     (tags([("정산", ""), ("카드", ""), ("지연", "")], "태그", "분류만 보여 주고 눌리지 않음", True),

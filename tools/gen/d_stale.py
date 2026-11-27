@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 from _tx import one, code, txt, mono
-from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
-
-ST = table(
-  ["다시 받는 동안 읽을 수 있는가", "기준 시각을 적어야 하는가", "틀린 값을 보일 위험", "쓰기 알맞은 자리"],
-  [["옛 값을 보임", "<b>읽을 수 있음</b>", "적어야 함", "있어서 기준 시각을 적음", "목록 · 대시보드"],
-   ["비우고 스피너", "<b>아무것도 읽을 수 없음</b>", "필요 없음", "없음", "처음 들어올 때"],
-   ["<a href=\"skeleton.html\">스켈레톤</a>", "자리만 보임", "필요 없음", "없음", "처음 들어올 때"],
-   ["옛 값을 흐리게 보임", "읽을 수 있음", "적어야 함", "바뀌는 중임이 보여 작음", "<b>거의 모든 경우</b>"]],
-  me="오래된 데이터")
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
@@ -41,7 +33,6 @@ D = dict(
   slug="stale", ko="오래된 데이터", en="Stale data",
   desc="데이터를 다시 받는 동안 옛 값을 그대로 보여 주는 방식과, 그 값이 언제 기준인지 적는 법, 이 방식의 한계를 보여 주는 항목입니다.",
   lede="오래된 데이터는 새 값을 받기 전까지 화면에 남겨 두는 이전 값입니다. 다시 받는 동안 <b>화면을 비우면</b> 사용자는 그동안 아무것도 읽을 수 없으므로, 옛 값을 그대로 두되 그 값이 <b>언제 기준인지</b> 함께 적습니다.",
-  axes_lede="데이터를 다시 받는 동안 보여 주는 방법들입니다. 아래 네 가지로 견줍니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>다시 받는 동안 화면을 비우면 사용자는 그동안 <b>아무것도 읽을 수 없습니다</b>. 데모는 <b>숫자가 사라져 있던 시간(ms)</b>을
           재서 적는데, 옛 값을 그대로 두면 이 시간이 <b>0</b>이 됩니다.<br>
@@ -61,8 +52,6 @@ D = dict(
      "<b>낙관적 UI</b> — <a href=\"optimistic.html\">낙관적 UI</a>는 <b>앞으로 바뀔 값</b>을 미리 보여 주고, 오래된 데이터는 <b>이미 받아 둔 지난 값</b>을 보여 줍니다.<br>"
      "<b>오프라인</b> — <a href=\"offline.html\">오프라인</a> 처리는 <b>연결이 없을 때</b>의 대응이고, 오래된 데이터는 연결된 상태에서 새 값을 기다리는 동안의 표시입니다."),
   ]),
-  axes=ST,
-  oneline="새 값을 받는 동안에는 <b>옛 값이라도 보여 줍니다.</b> 대신 그 값이 언제 기준인지를 반드시 적습니다.",
   s4_title="상태", s4_hint="빈 화면이 생기는지에 따른 차이",
   states=states([
     (val("1,284만", "방금 기준", "", "막 받은 값", True), "값을 막 받았을 때", "<b>가장 좋은</b> 상태입니다"),

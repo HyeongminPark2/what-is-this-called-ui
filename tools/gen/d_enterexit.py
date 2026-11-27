@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax9 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def stage(inner, w="150px", h="76px"):
@@ -28,7 +27,6 @@ D = dict(
   slug="enterexit", ko="진입과 퇴장", en="Enter / Exit",
   desc="들어올 때와 나갈 때는 길이도 곡선도 달라야 합니다. 나온 자리로 돌아가기, 나간 뒤에 지우기, 초점을 옮기는 순서를 보여 주는 항목입니다.",
   lede="진입과 퇴장은 요소가 들어올 때와 나갈 때의 움직임을 <b>따로</b> 정하는 일입니다. 두 값을 같게 맞추면 닫을 때마다 사용자가 <b>필요 없이 더 기다리게 됩니다</b>.",
-  axes_lede="움직임은 무엇이 바뀌었는지 <b>알려 주는</b> 수단입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>열고 닫기를 되풀이해 보세요. 기본값은 <b>들어올 때 260ms ease-out</b>,
           <b>나갈 때 180ms ease-in</b>입니다.<br>
@@ -48,8 +46,6 @@ D = dict(
      "<b>페이드</b> — 투명도를 바꾸는 것은 여러 방법 가운데 하나일 뿐이고, 보통은 자리와 크기도 함께 움직입니다.<br>"
      "<b>모달</b> — <a href=\"../items/modal.html\">모달</a>은 부품 이름이고, 진입과 퇴장은 그 부품이 <b>어떻게 들어오고 나가는지</b>를 가리킵니다."),
   ]),
-  axes=ax("진입과 퇴장"),
-  oneline="<b>나가는 움직임을 더 짧게</b> 줍니다. 들어오는 것은 어디서 왔는지 보여 줘야 하지만, 나가는 것은 사용자가 이미 다 본 것이기 때문입니다.",
   s4_title="열리고 닫히는 동안의 단계", s4_hint="같은 패널이 들어오고 나가는 동안 거치는 모습",
   states=states([
     (stage(panel("100%", "0")), "닫혀 있을 때", "화면 아래에 숨어 있습니다. <code>display:none</code>은 <b>아직</b> 걸지 않습니다"),

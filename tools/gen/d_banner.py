@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from _tx import one, code, txt, mono
-from tmpl import axis_table, siblings, states, cases, pins, plats, rows, ul, kbd
-
-L6 = "겹쳐 뜨는 부품은 생김새로는 가르기 어렵습니다. 아래 네 가지로 가릅니다."
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def bn(items, label, note="", ok=None, w="152px", body=True):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -44,7 +42,6 @@ D = dict(
   slug="banner", ko="배너", en="Banner",
   desc="화면 꼭대기에 자리를 차지하고 계속 남아 있는 알림입니다. 토스트와 어떻게 다른지, 여러 개가 쌓일 때와 닫을 때 무엇을 챙기는지 다룹니다.",
   lede="배너는 화면 꼭대기에 뜨는 알림으로, 토스트와 달리 저절로 <b>사라지지 않습니다</b>. 사용자가 닫을 때까지 남아 있기 때문에 다 읽은 뒤에는 <b>치울 수</b> 있어야 합니다.",
-  axes_lede=L6,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>배너가 여러 개 쌓이면 그만큼 화면 자리를 차지합니다. 배너 수를 늘려 보면
           데모가 <b>배너가 화면의 몇 %를 차지하는지</b> 재서 적어 줍니다.<br>
@@ -66,8 +63,6 @@ D = dict(
      "<b>인라인 얼럿</b> — <a href=\"inlinealert.html\">인라인 얼럿</a>은 화면 전체가 아니라 <b>그 자리</b>에 해당하는 사정을 알립니다.<br>"
      "<b>광고 배너</b> — 같은 낱말을 쓰지만 알림 배너와는 <b>전혀 다른 것</b>입니다."),
   ]),
-  axes=axis_table("배너"),
-  oneline="배너는 <b>한 번에 하나만</b> 띄웁니다. 두 개가 쌓이면 사용자는 둘 다 읽지 않고 넘어가기 쉽습니다.",
   states=states([
     (bn([("11월 15일 02:00~04:00 점검", "warn", True)], "", "하나면 알맞음", True),
      "배너가 하나일 때", "사용자가 <b>읽습니다</b>"),

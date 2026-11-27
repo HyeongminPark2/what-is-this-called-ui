@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax12 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def ct(fg, bg, ratio, verdict, size="14px", weight="400", label="정산 확정", w="150px", border=""):
@@ -29,7 +28,6 @@ D = dict(
   slug="contrast", ko="대비비", en="Color contrast",
   desc="대비비 기준 세 가지(4.5:1, 3:1)와, 같은 색이라도 글자 크기에 따라 판정이 달라지는 모습을 직접 재서 보여 주는 항목입니다.",
   lede="대비비는 글자색과 바탕색의 <b>밝기 차이</b>를 1에서 21 사이의 값으로 잰 것입니다. 이 부의 항목 가운데 <b>눈으로 보고 확인할 수 있는 것</b>은 대비비 하나뿐입니다.",
-  axes_lede="접근성은 눈에 안 보이는 부분까지 챙기는 일입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>색을 바꾸면 <b>세 가지 크기의 글자가 각각 기준을 통과하는지</b> 바로 나옵니다.
           같은 색인데도 큰 글자는 통과하고 본문 글자는 미달하는 경우를 살펴보세요.
@@ -48,8 +46,6 @@ D = dict(
      "<b>AA와 AAA</b> — AAA는 AA보다 엄격한 기준으로, 필요할 때 골라서 적용합니다. 보통은 <b>AA를 목표</b>로 합니다.<br>"
      "<b>'보기에 충분한'</b> — 보기에 충분한지는 모니터와 화면 밝기, 보는 사람의 나이에 따라 달라지므로 <b>직접 재야</b> 알 수 있습니다."),
   ]),
-  axes=ax("대비비"),
-  oneline="대비비 기준은 <b>본문 4.5:1, 큰 글자 3:1, 테두리와 아이콘 3:1</b> 세 가지입니다. 통과 여부는 눈으로 판단하지 않고 도구로 재서 확인합니다.",
   s4_title="글자 크기와 쓰임별 판정", s4_hint="같은 색이라도 글자 크기에 따라 판정이 달라지는 모습",
   states=states([
     (ct("#14161a", "#ffffff", "16.1:1", "통과", "14px", "400", "본문", "150px", "border:1px solid var(--line)"),

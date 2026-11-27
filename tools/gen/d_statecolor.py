@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax2 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -32,7 +31,6 @@ D = dict(
   slug="statecolor", ko="상태 색", en="Semantic status colors",
   desc="성공·주의·오류·정보 네 가지 상태 색을 토큰으로 정해 두는 방법과, 색만으로는 상태를 구별하지 못하는 사람이 있다는 점을 보여 주는 항목입니다.",
   lede="상태 색은 <b>네 가지면 충분</b>합니다. 다만 색만으로는 상태를 알아보지 못하는 사람이 있으므로, 색은 <b>다른 단서와 함께</b> 써야 합니다.",
-  axes_lede="토큰은 부품이 아니라 <b>값을 쓰는 규칙</b>입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>색만으로 상태를 가르면 <b>적록 색각인 사람에게는 성공과 오류가 거의 같은 색</b>으로 보입니다.
           데모는 두 색이 얼마나 다른지를 거리로 재서 적어 줍니다. 색각 흉내 변환은 <b>어림한 값</b>이라서
@@ -53,8 +51,6 @@ D = dict(
      "<b>빨강은 삭제 색</b> — 빨강은 <b>되돌릴 수 없는 일</b>을 나타내는 색이지, 삭제에만 쓰는 색이 아닙니다.<br>"
      "<b>초록은 켜짐 색</b> — <a href=\"switch.html\">스위치</a>가 켜진 상태에는 보통 <b>주된 색</b>을 씁니다."),
   ]),
-  axes=ax("상태 색"),
-  oneline="<b>색은 두 번째 단서로 써야 합니다.</b> 모양이나 말로 먼저 상태를 알리고, 색은 같은 내용을 한 번 더 보여 주는 데 씁니다.",
   s4_title="상태를 알리는 네 가지 색", s4_hint="무슨 일이 생겼는지 알리는 색",
   states=states([
     (alert("#1a7f37", "✓", "정산이 들어왔습니다", "success", "끝남 · 맞음", True), "성공을 알릴 때", "사용자가 더 <b>할 일이 없습니다</b>"),

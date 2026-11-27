@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax12 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def nm(visual, said, ok=True, w="168px"):
@@ -26,7 +25,6 @@ D = dict(
   slug="name", ko="이름 붙이기", en="Accessible name",
   desc="접근 이름이 무엇이고 어떤 순서로 정해지는지, 자리글은 왜 이름이 될 수 없는지 보여 주는 항목입니다.",
   lede="화면을 보지 못하는 사람은 버튼을 <b>이름으로만</b> 구별합니다. 버튼에 이름이 없으면 스크린 리더는 그냥 '버튼'이라고만 읽습니다.",
-  axes_lede="접근성은 눈에 안 보이는 부분까지 챙기는 일입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>각 줄의 오른쪽에 적힌 것이 <b>스크린 리더가 읽는 말</b>입니다. 빨간 줄은 이름이 아예 없는 요소입니다.<br>
           그중 <b>아이콘만 있는 버튼</b>과 <b>label 없는 입력칸</b>이 가장 흔한 사고입니다.
@@ -44,8 +42,6 @@ D = dict(
      "<b><code>title</code></b> — 다른 방법이 없을 때 마지막으로 쓰는 수단입니다. 마우스를 올려야 보이고 터치 화면에서는 보이지 않습니다.<br>"
      "<b><code>alt</code></b> — 그림에만 쓰는 속성입니다. 버튼의 이름은 <code>aria-label</code>로 줍니다."),
   ]),
-  axes=ax("이름 붙이기"),
-  oneline="이름은 정해진 <b>순서대로</b> 찾습니다. <code>aria-labelledby</code>를 먼저 보고, 없으면 <code>aria-label</code>, <code>&lt;label&gt;</code>, 요소 안의 글자, <code>title</code> 순서로 내려가며 처음 찾은 것을 이름으로 씁니다.",
   s4_title="무엇이 이름이 되는가", s4_hint="요소에 따라 이름이 정해지는 모습",
   states=states([
     (nm('<span style="display:inline-block;padding:7px 13px;border-radius:6px;border:1px solid var(--line-strong);background:var(--surface);font-size:12px">저장</span>', '"저장, 버튼"'),

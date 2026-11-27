@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from ax13 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
-
-L13 = "화면 단위 패턴은 사용자가 <b>끝내야 하는 일</b> 하나로 나눕니다. 아래 네 가지로 서로 가릅니다."
 
 def tile(name, val, delta, cmp_, link, big=False, w="72px", bad=False):
     col = 'var(--danger)' if bad else ('#1a7f37' if delta.startswith('+') else ('var(--danger)' if delta.startswith('-') else 'var(--fg-muted)'))
@@ -40,7 +37,6 @@ D = dict(
   slug="dashboard", ko="대시보드", en="Dashboard",
   desc="지금 괜찮은지 한눈에 판단하는 화면입니다. 지표를 몇 개 둘지, 견줄 값을 어떻게 붙일지, 다음 할 일로 어떻게 이어 줄지 다룹니다.",
   lede="대시보드가 답해야 하는 질문은 <b>지금 괜찮은가</b> 하나입니다. 그런데 숫자를 늘릴수록 어느 숫자를 먼저 봐야 할지 흐려져서 이 질문에 답하기 어려워집니다.",
-  axes_lede=L13,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>지표를 늘려 보세요. 데모는 <b>맨 위 칸이 전체 높이에서 차지하는 몫</b>을 재서
           으뜸 지표가 다른 지표에 묻혔는지 알려 줍니다. 지표가 열두 개쯤 되면 어느 것부터 봐야 할지 정할 수 없습니다.<br>
@@ -61,8 +57,6 @@ D = dict(
      "<b>데이터 테이블</b> — <a href=\"table.html\">데이터 테이블</a>은 데이터를 <b>한 줄씩 다루는</b> 화면입니다.<br>"
      "<b>차트</b> — 차트는 대시보드 안에 들어가는 <b>부품</b>이고, 고르는 법은 <a href=\"chart.html\">차트 고르기</a>에서 다룹니다."),
   ]),
-  axes=ax("대시보드"),
-  oneline="<b>지표가 다섯 개를 넘으면 정말 다 필요한지 다시 따져 보세요.</b> 숫자를 더 넣는 대신 '그래서 무엇을 하면 되는지'를 알려 주는 링크를 붙입니다.",
   do_title="대시보드를 만들 때 할 일",
   dont_title="대시보드를 잘못 만드는 경우",
   instead_title="함께 보면 좋은 항목",

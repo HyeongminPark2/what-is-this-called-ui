@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from ax7 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2);padding:12px">
@@ -36,8 +35,6 @@ D = dict(
      "<b>메뉴</b> — 메뉴는 실행할 동작을 고르는 부품이고, 사이드바는 다른 화면으로 옮겨 가는 부품입니다.<br>"
      "<b>패널</b> — 패널은 보조 내용을 담는 칸이고, 사이드바는 다른 화면으로 가는 링크를 담습니다."),
   ]),
-  axes=ax("사이드바"),
-  oneline="사이드바는 <b>늘 보이는 내비게이션</b>입니다. 화면 폭 일부를 차지하는 대신 '지금 어디인지'와 '어디로 갈 수 있는지'를 계속 보여 줍니다.",
   states=states([
     (mini('<div style="position:absolute;left:0;top:0;bottom:0;width:42%;background:var(--bg);border-right:1px solid var(--line);padding:5px 4px"><div style="font-size:5.5px;background:var(--accent-soft);color:var(--accent);border-radius:2px;padding:1px 3px;margin-bottom:3px">거래 내역</div><div style="font-size:5.5px;color:var(--fg-muted);padding:1px 3px">정산</div></div>', bars="", label="기본 사이드바"), "가장 흔한 기본 모습", "현재 위치가 강조돼 있고, 메뉴가 <b>늘 보입니다</b>"),
     (mini('<div style="position:absolute;left:0;top:0;bottom:0;width:20%;background:var(--bg);border-right:1px solid var(--line);padding:5px 3px"><div style="width:8px;height:8px;border-radius:2px;background:var(--accent);margin:0 auto 4px"></div><div style="width:8px;height:8px;border-radius:2px;background:var(--line-strong);margin:0 auto"></div></div>', bars="", label="레일"), "아이콘만 남긴 레일", "아이콘만 남겨 폭을 줄이면서도 <b>다른 화면으로 가는 링크는 그대로 둡니다</b>"),

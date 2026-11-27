@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax4 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -53,8 +52,6 @@ D = dict(
      "<b>자동 서식 입력</b> — 치는 동안 <b>하이픈을 넣어 주는</b> 칸은 <a href=\"formatted.html\">자동 서식 입력</a>입니다.<br>"
      "<b>슬라이더</b> — <a href=\"slider.html\">슬라이더</a>는 숫자를 치지 않고 손잡이를 끌어 <b>범위 안에서</b> 고릅니다."),
   ]),
-  axes=ax("숫자 입력"),
-  oneline="<b>세어서 쓰지 않는 숫자는 <code>text</code> 칸으로 받으세요.</b> 돈, 전화번호, 카드번호가 여기에 해당합니다.",
   states=states([
     (ni("1,284,000", "원", "", "쉼표가 보여도 값은 숫자만 남음", True), "<code>text</code> + inputmode로 받을 때", "쉼표를 보여 주면서 값도 지킬 수 있는 <b>안전한 기본</b>입니다"),
     (ni("1284000", "원", "", "스피너 화살표가 붙음", None, "152px", False, True), "<code>type=number</code>로 받을 때", "스피너 화살표가 붙는데 <b>너무 작아서</b> 누르기 어렵습니다"),

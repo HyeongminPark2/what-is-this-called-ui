@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax12 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -28,7 +27,6 @@ D = dict(
   slug="alttext", ko="대체 텍스트", en="Alt text",
   desc="그림을 글로 대신하는 대체 텍스트를 다루는 항목입니다. 무엇을 적을지는 '이 그림이 없으면 무엇을 잃나'라는 기준 하나로 정합니다.",
   lede="대체 텍스트는 그림을 볼 수 없는 사람에게 그림 대신 읽어 주는 글입니다. 무엇을 적을지는 <b>이 그림이 없으면 무엇을 잃나</b>라는 기준 하나로 정합니다.",
-  axes_lede="접근성은 다 만든 뒤가 아니라 <b>만드는 동안</b> 챙깁니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>여덟 가지 그림을 <b>스크린 리더로 읽어</b> 보면 차이가 바로 드러납니다.<br>
           없어도 아무것도 잃지 않는 그림은 <code>alt=""</code>로 비워서 <b>건너뛰게</b> 하고, 없으면 뜻을 잃는 그림은 그 뜻을 적습니다.
@@ -47,8 +45,6 @@ D = dict(
      "<b>타이틀</b> — <code>title</code> 속성은 마우스를 올렸을 때만 뜨기 때문에 <a href=\"hover.html\">폰에서는 보이지 않습니다</a>.<br>"
      "<b>이름 붙이기</b> — <a href=\"../items/name.html\">이름</a>은 누를 수 있는 요소를 부르는 말이고, alt는 <b>그림이 전하는 뜻</b>을 적은 글입니다."),
   ]),
-  axes=ax("대체 텍스트"),
-  oneline="<b>그림을 가렸을 때 그 자리에 어떤 글을 써야 뜻이 통하는지</b> 생각해 보면 대부분 알맞은 대체 텍스트를 쓸 수 있습니다.",
   s4_title="그림 종류별 대체 텍스트", s4_hint="그림이 없으면 무엇을 잃는지에 따라 달라지는 alt",
   states=states([
     (pic('🌿', 'alt=""  → 아무것도 읽지 않음', "장식", True, "없어도 잃는 것이 없음"),

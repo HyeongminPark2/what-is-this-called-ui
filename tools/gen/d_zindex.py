@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax2 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def layer(z, name, use, bg="var(--surface)", fg="var(--fg)"):
@@ -27,7 +26,6 @@ D = dict(
   slug="zindex", ko="z-index", en="z-index · stacking order",
   desc="z-index 값을 미리 정해 둔 층 목록에서만 고르는 방법과, 쌓임 맥락 때문에 z-index가 적용되지 않는 이유를 보여 주는 항목입니다.",
   lede="z-index는 겹친 요소들의 <b>앞뒤 순서</b>를 정하는 값입니다. 아무 숫자나 적는 칸이 아니라, 미리 정해 둔 <b>층 목록</b>에서 골라 쓰는 값입니다.",
-  axes_lede="토큰은 부품이 아니라 <b>값을 쓰는 규칙</b>입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>100, 300, 500처럼 층 사이를 <b>띄워</b> 두면 나중에 층을 하나 끼워 넣을 자리가 남습니다.<br>
           <b>아무 값이나 쓰기</b>를 켜면 토스트가 9999가 됩니다. 당장은 맨 위로 올라오지만,
@@ -47,8 +45,6 @@ D = dict(
      "<b>레이어</b> — 디자인 도구의 레이어 패널과는 다릅니다. 브라우저에서는 순서를 <b>같은 맥락 안에서만</b> 비교합니다.<br>"
      "<b>position</b> — <code>position</code>이 <code>static</code>이면 z-index는 <b>아예 적용되지 않습니다</b>."),
   ]),
-  axes=ax("z-index"),
-  oneline="z-index는 <b>큰 숫자를 겨루는 값이 아니라 층의 이름</b>입니다. 코드에 9999가 보인다면 그 화면에는 정해 둔 층 목록이 없거나 지켜지지 않고 있다는 뜻입니다.",
   s4_title="층 목록과 층마다 놓이는 부품", s4_hint="숫자 대신 이름으로 부르는 층",
   states=states([
     (layer("auto", "본문", "그리는 순서대로"), "본문 층", "z-index 번호를 주지 않습니다. <b>대부분의 요소가 이 층에</b> 있어야 합니다"),

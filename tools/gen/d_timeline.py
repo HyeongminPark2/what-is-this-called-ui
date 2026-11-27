@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax5 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def tl(items, w="180px"):
@@ -61,7 +60,6 @@ D = dict(
   slug="timeline", ko="타임라인", en="Timeline · activity feed · stepper",
   desc="타임라인의 레일과 점, 지금 단계를 표시하는 법, 흐름이 중간에 멈췄을 때의 처리를 실물과 해부도로 보여 주는 항목입니다.",
   lede="타임라인은 사건들을 <b>일어난 순서대로 이어 놓은</b> 세로 목록입니다. 배송 추적, 결재 단계, 활동 기록이 모두 이 모양으로 그려집니다.",
-  axes_lede="표시 부품은 모두 보여 주기만 합니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>다음 단계로 넘기기</b>를 눌러 보세요. 지난 단계는 눈에 덜 띄게, <b>지금 단계</b>는 또렷하게,
           앞으로 올 단계는 흐리게 그립니다. 화면을 보지 못하는 사람에게는 <code>aria-current="step"</code>이 지금 단계를 알려 줍니다.<br>
@@ -80,8 +78,6 @@ D = dict(
      "<b>프로그레스 바</b> — 프로그레스 바는 <b>얼마나 진행됐는지</b>를 막대 하나로 보여 주고, 타임라인은 <b>그동안 무슨 일이 있었는지</b>를 보여 줍니다.<br>"
      "<b>리스트</b> — 리스트는 항목 순서를 바꿔도 되지만, 타임라인은 <b>순서 자체가 정보</b>라서 바꿀 수 없습니다."),
   ]),
-  axes=ax("타임라인"),
-  oneline="타임라인은 <b>순서 자체가 내용인 목록</b>입니다. 항목 순서를 바꿔도 뜻이 달라지지 않는다면 그건 타임라인이 아니라 리스트입니다.",
   s4_title="상태", s4_hint="흐름의 진행에 따라 달라지는 모습",
   states=states([
     (tl([("14:02", "정산 요청", "done", False), ("14:03", "자동 검증", "done", False), ("09:21", "담당자 검토", "now", False), ("예정", "승인", "next", True)], w="170px"),

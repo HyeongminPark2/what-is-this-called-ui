@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 from _tx import one, code, txt, mono
-from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
-
-HOW = table(
-  ["알림이 어디에 뜨는가", "알림이 얼마나 오래 남는가", "사용자가 놓칠 수 있는가", "되돌리기를 붙일 수 있는가"],
-  [["토스트", "화면 구석", "몇 초", "<b>놓치기 쉬움</b>", "붙이기 좋음"],
-   ["누른 자리에 남기는 글", "<b>누른 곳 옆</b>", "다음 동작까지", "놓치지 않음", "붙일 수 있음"],
-   ["화면 전환", "<b>화면 전체</b>", "다음 화면까지", "놓치지 않음", "다음 할 일을 함께 둠"],
-   ["아무것도 알리지 않음", "뜨지 않음", "남지 않음", "<b>됐는지 알 수 없음</b>", "붙일 곳이 없음"]],
-  me="성공 확인")
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
@@ -51,7 +43,6 @@ D = dict(
   slug="success", ko="성공 확인", en="Success feedback",
   desc="작업이 끝났다는 것을 알리는 세 가지 방법과, 알리지 않았을 때 생기는 중복 제출을 보여 주는 항목입니다.",
   lede="성공 확인은 사용자가 요청한 작업이 끝났다고 알려 주는 표시입니다. 알려 주지 않으면 사용자는 <b>작업이 됐는지 알 수 없어서</b> 버튼을 다시 누릅니다. 알림은 <b>사용자가 누른 곳 가까이</b>에 띄우는 것이 기본입니다.",
-  axes_lede="성공을 알리는 방법들입니다. 아래 네 가지로 견줍니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>저장</b>을 눌러 보세요. 아무것도 알리지 않으면 저장됐는지 알 수 없어서 다시 누르게 되는데,
           데모는 <b>같은 요청을 몇 번 보냈는지</b> 셉니다.<br>
@@ -73,8 +64,6 @@ D = dict(
      "<b>알림</b> — <a href=\"notifications.html\">알림 센터</a>는 쌓인 소식을 <b>나중에 모아 보는</b> 곳이고, 성공 확인은 작업 직후 바로 보여 줍니다.<br>"
      "<b>낙관적 UI</b> — <a href=\"optimistic.html\">낙관적 UI</a>는 작업이 <b>끝나기 전에</b> 결과를 먼저 보여 주고, 성공 확인은 끝난 뒤에 알립니다."),
   ]),
-  axes=HOW,
-  oneline="성공 알림은 <b>사용자가 누른 곳 가까이에 남겨 둡니다.</b> 화면 구석에 몇 초 떴다 사라지면 보지 못하고 지나치는 사람이 생깁니다.",
   s4_title="성공을 알리는 방법", s4_hint="방법마다 다른, 알림을 놓칠 가능성",
   states=states([
     (msg("inline", "저장했습니다", "누른 곳 옆에 남음", True), "누른 자리에 글로 알릴 때", "글이 남아 있어서 <b>놓치지 않습니다</b>"),

@@ -29,7 +29,7 @@
     <h1>뷰포트 단위</h1>
     <p class="en">Viewport units</p>
     <p class="lede" style="margin-top:var(--s3)">폰 브라우저에서는 주소창이 숨었다 나타나기 때문에, <b>100vh 같은 뷰포트 단위가 가리키는 높이도 그때그때 달라집니다.</b></p>
-    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 상태</a><a href="#s4">④ 해부도</a><a href="#s5">⑤ 쓸 때</a><a href="#s6">⑥ 사례</a><a href="#s7">⑦ 마크업</a><a href="#s8">⑧ 백엔드 메모</a><a href="#s9">⑨ 플랫폼</a></nav>
   </div>
 
   <div class="card-layout">
@@ -72,30 +72,7 @@
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제 부품과 견주는 네 가지 기준</span></h2>
-        <p>PC와 폰은 기계보다 <b>쓰는 전제</b>가 다릅니다. 아래 네 가지로 두 환경을 견줍니다.</p>
-        <div class="scroll-x">
-        <table class="grid axes">
-          <thead><tr><th></th><th>두 환경에서 다른 점</th><th>폰에서는</th><th>PC에서는</th><th>챙기지 않으면 생기는 일</th></tr></thead>
-          <tbody>
-            <tr><td>브레이크포인트</td><td>폭에 따른 <b>배치</b></td><td>한 단</td><td>여러 단</td><td>중간 폭에서 배치가 깨짐</td></tr>
-            <tr><td>터치 타깃</td><td>누를 수 있는 <b>넓이</b></td><td>44px 이상</td><td>24px도 괜찮음</td><td>옆의 것이 눌림</td></tr>
-            <tr><td>호버가 없는 세계</td><td><b>올려놓기</b>가 되는지</td><td class="none">안 됨</td><td>됨</td><td>끝내 볼 수 없는 정보가 생김</td></tr>
-            <tr><td>시스템 백</td><td><b>뒤로 가는</b> 길</td><td>OS가 제공함</td><td>브라우저의 ← 버튼</td><td>모달 대신 <b>앱이 꺼짐</b></td></tr>
-            <tr><td>화면 밀도</td><td>1px의 <b>실제 화소 수</b></td><td>2~3배</td><td>1~2배</td><td>그림이 뭉개짐</td></tr>
-            <tr class="me"><td><b>뷰포트 단위</b></td><td><b>100vh</b>가 가리키는 높이</td><td>주소창 때문에 달라짐</td><td>하나로 정해짐</td><td>바닥 버튼이 잘림</td></tr>
-            <tr><td>폰 키보드</td><td>키보드가 <b>올라와 덮는</b> 자리</td><td>화면의 절반</td><td>덮지 않음</td><td>입력칸이 가려짐</td></tr>
-            <tr><td>HIG와 Material의 차이</td><td>OS마다 다른 <b>관례</b></td><td>OS마다 다름</td><td>웹 관례를 따름</td><td>어느 쪽에서도 어색함</td></tr>
-          </tbody>
-        </table>
-        </div>
-        <div class="note" style="margin-bottom:0">
-          <p><b>뷰포트 단위를 한 줄로 정리하면</b> — <b>바닥에 버튼 같은 것이 붙는 화면이라면 <code>100dvh</code></b>를 씁니다. <code>100vh</code>는 주소창이 숨지 않는 PC에서만 화면 높이와 맞습니다.</p>
-        </div>
-      </section>
-
-      <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 주소창에 따라 달라지는 높이<span class="hint">같은 100이 가리키는 네 가지 높이</span></h2>
+        <h2 class="slot-label"><span class="n">3</span> 주소창에 따라 달라지는 높이<span class="hint">같은 100이 가리키는 네 가지 높이</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -147,8 +124,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
             <div class="anat" role="img" aria-label="뷰포트 단위의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
@@ -181,8 +158,8 @@
           흔들림과 잘림을 둘 다 피하고 싶다면 <code>100svh</code>를 쓰고, 주소창이 숨었을 때 <b>아래가 조금 비는 것</b>은 감수합니다.</p>
       </section>
 
-      <section class="slot" id="s6">
-        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
             <h3>뷰포트 단위를 쓰는 경우</h3>
@@ -205,8 +182,8 @@
         <p style="margin:var(--s4) 0 0"><b>뷰포트 단위 대신 다른 것을 써야 하는 경우</b> — 부모 요소의 높이를 꽉 채우려면 <code>100%</code>를 쓰고, 바닥에 붙이려면 <a href="../items/sticky.html">스티키</a>나 <code>position:fixed</code>를 씁니다. 글줄 길이를 묶을 때는 <a href="../items/container.html">컨테이너</a>가 맞습니다.</p>
       </section>
 
-      <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -238,8 +215,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 지킬 규칙<span class="hint">빠뜨리기 쉬운 설정까지 담은 규칙</span></h2>
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 최소 코드와 지킬 규칙<span class="hint">빠뜨리기 쉬운 설정까지 담은 규칙</span></h2>
         <p>먼저 <code>meta viewport</code>를 적고, 높이는 옛 단위와 새 단위를 두 줄로 겹쳐 적습니다.</p>
 <pre class="code">&lt;<span class="t">meta</span> <span class="a">name</span>=<span class="s">"viewport"</span> <span class="a">content</span>=<span class="s">"width=device-width, initial-scale=1"</span>&gt;
 
@@ -272,8 +249,8 @@ visualViewport.addEventListener(<span class="s">'resize'</span>, () =&gt; {
         </div>
       </section>
 
-      <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
+      <section class="slot slot--backend" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
@@ -284,8 +261,8 @@ visualViewport.addEventListener(<span class="s">'resize'</span>, () =&gt; {
         </div>
       </section>
 
-      <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+      <section class="slot" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
         <p>앱에는 주소창이 없기 때문에, 높이가 흔들리는 것은 <b>웹에만 있는 문제</b>입니다.</p>
         <div class="platforms">
           <div class="plat">

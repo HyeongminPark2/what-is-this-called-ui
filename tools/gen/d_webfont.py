@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax3 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def fb(style="", label="", txt="정산이 확정되었습니다", w="150px", note=""):
@@ -24,7 +23,6 @@ D = dict(
   slug="webfont", ko="웹폰트", en="Web font · font loading",
   desc="웹폰트를 받는 동안 글이 어떻게 보이는지(FOIT·FOUT)와 한글 폰트의 파일 크기 문제를 보여 주는 항목입니다.",
   lede="웹폰트는 글꼴 파일을 서버에서 <b>받아 와서</b> 쓰는 방식입니다. 파일을 받는 데 시간이 걸리기 때문에, 받는 동안 글을 어떻게 보여 줄지까지 정해야 합니다.",
-  axes_lede="글자 항목은 값 하나가 글 전체를 바꿉니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>버튼을 눌러 <b>느린 네트워크</b>를 흉내 내 보세요. 위 칸은 <b>글이 아예 보이지 않고</b>(FOIT),
           아래 칸은 <b>기본 글꼴로 먼저 보이다가 바뀝니다</b>(FOUT).<br>
@@ -44,8 +42,6 @@ D = dict(
      "<b>시스템 폰트</b> — 기기에 이미 깔려 있는 글꼴입니다. <b>받을 파일이 없어서</b> 웹폰트의 로딩 문제가 아예 생기지 않습니다.<br>"
      "<b>woff와 woff2</b> — 지금은 <b>woff2 하나만</b> 준비해도 충분합니다."),
   ]),
-  axes=ax("웹폰트"),
-  oneline="웹폰트를 쓸 때는 파일과 함께 <b>'받는 동안 글이 어떻게 보일지'</b>도 정해야 합니다. 정하지 않으면 브라우저가 기본 동작으로 대신 정합니다.",
   s4_title="글꼴을 받는 동안의 상태", s4_hint="받는 동안 화면에 보이는 것",
   states=states([
     (fb("visibility:hidden", "block · FOIT", note="글이 아예 안 보임"), "글을 숨기는 FOIT", "<b>최대 3초</b> 동안 글을 전혀 읽을 수 없습니다"),

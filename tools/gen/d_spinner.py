@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
-
-WAIT = table(
-  ["끝나는 때를 아는가", "들어올 내용의 자리를 미리 잡는가", "사용자가 기다려야 하는가", "내용이 들어올 때 화면이 덜컥거리는가"],
-  [["스피너", "모름", "잡지 않음", "기다림", "덜컥거림"],
-   ["스켈레톤", "모름", "잡아 둠", "기다림", "덜컥거리지 않음"],
-   ["프로그레스 바", "알고 있음", "잡기도 함", "기다림", "덜컥거리지 않음"],
-   ["낙관적 UI", "해당 없음", "잡아 둠", "기다리지 않음", "덜컥거리지 않음"]],
-  me="스피너")
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2);padding:10px">
                 <div data-pin="1" style="background:var(--surface);border:1px solid var(--line);border-radius:8px;min-height:120px;display:grid;place-items:center;gap:11px;padding:20px">
@@ -38,8 +30,6 @@ D = dict(
      "<b>로딩</b> — '로딩 띄워 주세요'라고만 하면 스피너를 말하는지 스켈레톤을 말하는지 알 수 없습니다.<br>"
      "<b>버퍼링</b> — 영상 재생이 잠깐 끊겼을 때만 쓰는 말입니다."),
   ]),
-  axes=WAIT,
-  oneline="스피너는 기다리는 동안 <b>알려 줄 정보가 없을 때</b> 씁니다. 들어올 내용의 모양을 알면 스켈레톤이, 끝나는 때를 알면 프로그레스 바가 더 알맞습니다.",
   states=states([
     (mini('<div style="margin-top:14px;text-align:center;font-size:8px;color:var(--fg-faint)">아무것도 띄우지 않음</div>', bars="684", label="0.3초 안에는 아무 표시도 없음"), "0.3초가 지나기 전", "<b>아무것도 띄우지 않습니다.</b> 이 사이에 끝나는 일에 스피너를 띄우면 깜빡임만 남습니다"),
     (mini('<div style="position:absolute;inset:0;display:grid;place-items:center"><span class="spn spn--sm"></span></div>', bars="", label="스피너가 떠 있는 모습"), "0.3초가 지난 뒤", "0.3초가 지나면 그때 띄우고, 띄운 뒤에는 최소 0.5초 동안 둡니다"),

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax10 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def chip(t, on=False):
@@ -34,7 +33,6 @@ D = dict(
   slug="filter", ko="필터와 패싯", en="Filter / Facet",
   desc="조건으로 목록을 거르는 화면을 묶음 안의 OR와 묶음 사이의 AND, 조건별 개수, 주소에 담기까지 다루는 항목입니다.",
   lede="필터는 목록을 <b>조건으로 걸러</b> 원하는 건만 남기는 장치입니다. 지금 고른 조건이 화면에 보이고 그 조건을 <b>바로 지울 수 있어야</b> 필터로서 제 역할을 합니다.",
-  axes_lede="데이터 화면은 '건수가 늘면 어떻게 되나'부터 따집니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>조건을 여럿 골라 보세요. <b>같은 묶음 안은 OR</b>, <b>묶음끼리는 AND</b>로 걸립니다.
           이 규칙을 어기고 같은 묶음 안을 AND로 걸면 '승인됨과 대기를 둘 다 골랐는데 0건'이 나옵니다.<br>
@@ -52,8 +50,6 @@ D = dict(
      "<b>정렬</b> — 정렬은 순서만 바꾸기 때문에 <b>건수가 줄지 않지만</b>, 필터는 조건에 맞지 않는 건을 빼서 건수가 줄어듭니다.<br>"
      "<b>탭</b> — <a href=\"../items/tabs.html\">탭</a>도 목록을 거르는 것처럼 보이지만 <b>하나만</b> 고를 수 있고, 탭끼리 보여 주는 내용이 보통 겹치지 않습니다."),
   ]),
-  axes=ax("필터와 패싯"),
-  oneline="필터에서 가장 중요한 일은 <b>지금 어떤 조건이 걸려 있는지 보여 주는 것</b>입니다. 결과만 바뀌고 조건이 보이지 않으면 사용자는 목록이 왜 줄었는지, 어떻게 되돌리는지 알 수 없습니다.",
   s4_title="상태", s4_hint="고른 조건이 보여야 합니다",
   states=states([
     (facet([("승인됨", "128", False), ("대기", "14", False), ("반려", "3", False)]),

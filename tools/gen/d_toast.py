@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from tmpl import axis_table, siblings, states, cases, pins, plats, rows, ul, kbd
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:4px">
                 <div data-pin="1" style="display:flex;flex-direction:column;gap:7px">
@@ -41,8 +41,6 @@ D = dict(
      "<b>알림</b> — 이렇게 부르면 운영체제가 띄우는 푸시 알림(notification)과 헷갈립니다. 토스트는 앱 화면 안에서만 뜹니다.<br>"
      "<b>얼럿</b> — 얼럿은 사용자의 답을 받으려고 화면을 막는 것이고, 토스트는 알리기만 합니다."),
   ]),
-  axes=axis_table("토스트"),
-  oneline="토스트인지 아닌지는 <b>저절로 사라지느냐</b>로 가릅니다. 사용자가 닫지 않아도 없어지기 때문에 <b>못 읽고 지나가도 되는 말만</b> 담을 수 있습니다.",
   states=states([
     (mini(trigger(), bars="486", label="토스트가 없는 목록 화면"), "토스트가 없을 때", "트리거만 보입니다"),
     (mini(toast("지웠습니다", "", "transform:translateY(8px);opacity:.45"), bars="486", label="토스트가 올라오는 중"), "아래에서 떠오르는 중", "0.2초 동안 아래에서 떠오릅니다"),

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from tmpl import axis_table, siblings, states, cases, pins, plats, rows, ul, kbd
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2);padding:16px 10px 10px;text-align:center">
                 <div style="display:inline-block;position:relative">
@@ -34,8 +34,6 @@ D = dict(
      "<b>팝업</b> — 화면 위에 뜨는 것을 모두 팝업이라고 부르면 툴팁과 팝오버, 모달을 서로 구별할 수 없게 됩니다.<br>"
      "<b>title 속성</b> — <code>title=\"…\"</code> 속성을 달면 브라우저가 <b>기본 툴팁</b>을 띄워 주지만, 지연 시간과 모양을 바꿀 수 없고 모바일에서는 뜨지 않습니다."),
   ]),
-  axes=axis_table("툴팁"),
-  oneline="툴팁은 대상을 <b>설명하는 글만</b> 담습니다. 안에 누를 것이 생기는 순간 그건 툴팁이 아니라 팝오버이고, 그때부터는 여닫는 방식과 포커스 처리, 스크린 리더에 알리는 방식이 모두 달라집니다.",
   states=states([
     (mini('<div style="margin-top:10px"><span class="mini__trigger">↺</span></div>', bars="684", label="툴팁이 없는 상태"), "평소 상태", "툴팁 없이 아이콘만 보입니다"),
     (mini('<div style="margin-top:10px"><span class="mini__trigger" style="border-color:var(--accent)">↺</span></div><div style="position:absolute;left:8px;top:40px;font-size:7.5px;color:var(--fg-muted)">0.4초 대기…</div>', bars="684", label="툴팁이 뜨기를 기다리는 중"), "뜨기를 기다리는 중", "마우스가 지나가기만 할 때는 뜨지 않도록 0.3~0.5초 기다립니다"),

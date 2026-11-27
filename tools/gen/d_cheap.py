@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax9 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def band(label, stages, cost, warn=False, w="152px"):
@@ -34,7 +33,6 @@ D = dict(
   slug="cheap", ko="무엇을 움직이나", en="Cheap vs expensive properties",
   desc="transform과 opacity는 배치를 다시 계산하지 않지만 left와 width는 다시 계산합니다. 화면이 버벅이는 원인 대부분이 이 차이에서 나온다는 것을 보여 주는 항목입니다.",
   lede="같은 움직임이라도 <b>어떤 속성을 바꾸느냐</b>에 따라 브라우저가 치르는 비용이 다릅니다. 움직임이 버벅이는 원인은 대부분 여기에 있습니다.",
-  axes_lede="움직임은 무엇이 바뀌었는지 <b>알려 주는</b> 수단입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>네 가지 방법으로 같은 거리를 움직이면서 <b>한 프레임을 만드는 데 걸린 시간</b>을 잽니다.<br>
           상자 수를 늘리면 차이가 벌어지는데, <code>transform</code>과 <code>opacity</code>는
@@ -54,8 +52,6 @@ D = dict(
      "<b>FPS</b> — 초당 프레임 수는 결과로 나타나는 숫자이고, 그 원인은 <b>프레임 하나를 만드는 데 든 시간</b>입니다.<br>"
      "<b>최적화</b> — 속성을 고르는 일은 나중에 하는 최적화가 아니라 <b>처음부터 맞게 써야</b> 하는 기본입니다."),
   ]),
-  axes=ax("무엇을 움직이나"),
-  oneline="<b>자리를 옮길 때는 <code>transform</code>, 나타나거나 사라질 때는 <code>opacity</code></b>를 씁니다. 이 두 속성으로 만들 수 없는 움직임이라면 대개 움직임 설계를 다시 보는 편이 빠릅니다.",
   s4_title="속성마다 다른 비용", s4_hint="속성을 바꿨을 때 어느 단계부터 다시 하는지",
   states=states([
     (band("transform", PIPE(1, 0, 0, 1), "배치와 칠하기를 건너뛰어 가장 쌈"), "transform으로 자리 옮기기", "<code>translate</code>·<code>scale</code>·<code>rotate</code>로 자리와 크기, 각도를 바꿉니다"),

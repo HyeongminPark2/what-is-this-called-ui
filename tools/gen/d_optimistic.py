@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
-
-WAIT = table(
-  ["끝나는 때를 아는가", "들어올 내용의 자리를 미리 잡는가", "사용자가 기다려야 하는가", "내용이 들어올 때 화면이 덜컥거리는가"],
-  [["스피너", "모름", "잡지 않음", "기다림", "덜컥거림"],
-   ["스켈레톤", "모름", "잡아 둠", "기다림", "덜컥거리지 않음"],
-   ["프로그레스 바", "알고 있음", "잡기도 함", "기다림", "덜컥거리지 않음"],
-   ["낙관적 UI", "해당 없음", "잡아 둠", "기다리지 않음", "덜컥거리지 않음"]],
-  me="낙관적")
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:10px">
                 <div style="display:grid;gap:14px">
@@ -47,8 +39,6 @@ D = dict(
      "<b>즉시 반영</b> — 말은 통하지만, 실패했을 때 <b>되돌리는 처리가 핵심</b>이라는 점이 빠집니다.<br>"
      "<b>로컬 상태</b> — 화면 상태만 바꾸고 끝나는 로컬 상태와 달리, 낙관적 UI는 변경을 <b>서버에 보낸 뒤 응답에 맞춰 화면을 확정하거나 되돌려야</b> 합니다."),
   ]),
-  axes=WAIT,
-  oneline="스피너나 프로그레스 바가 기다림을 보여 주는 방법이라면, 낙관적 UI는 기다림을 <b>없애는</b> 방법입니다. 그래서 기다리는 동안 무엇을 보여 줄지보다 <b>실패하면 어떻게 되돌릴지</b>를 설계하는 데 대부분의 노력이 들어갑니다.",
   states=states([
     (mini('<div style="margin-top:12px;text-align:right;padding-right:6px;font-size:13px;color:var(--fg-faint)">★</div>', bars="68", label="누르기 전"), "누르기 전", "별이 꺼져 있습니다"),
     (mini('<div style="margin-top:12px;text-align:right;padding-right:6px;font-size:15px;color:#f0a500">★</div><div style="position:absolute;left:6px;top:30px;font-size:7px;color:var(--accent);font-weight:800">0ms 만에 바로 바뀜</div>', bars="68", label="누른 직후 바로 바뀐 모습"), "누른 직후", "누르자마자(<b>0ms</b>) 바뀌고 스피너가 뜨지 않습니다. 낙관적 UI를 쓰는 목적이 이 즉시 반응입니다"),

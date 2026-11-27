@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from tmpl import axis_table, siblings, states, cases, pins, plats, rows, ul, kbd
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" data-pin="1" style="background:rgba(14,16,20,.5);border-radius:var(--r2);padding:12px 60px 12px 12px;min-height:200px">
                 <div data-pin="2" style="background:var(--surface);border-radius:8px;padding:12px 26px 16px;box-shadow:var(--e3)">
@@ -35,8 +35,6 @@ D = dict(
      "<b>햄버거 메뉴</b> — ☰는 드로어를 <b>여는 버튼</b>의 별명이고, 그 버튼을 눌러 나온 판이 드로어입니다.<br>"
      "<b>슬라이드 메뉴</b> — 말은 통하지만 문서에는 드로어로 적어야 오해가 없습니다."),
   ]),
-  axes=axis_table("드로어"),
-  oneline="드로어인지 아닌지는 <b>옆에서 밀려 나오느냐</b>로 정해집니다. 같은 판이라도 늘 보이면 사이드바이고, 숨어 있다가 나오면 드로어입니다.",
   states=states([
     (mini(trigger("☰ 메뉴"), bars="684", label="드로어가 닫힌 화면"), "닫혀 있을 때", "☰ 버튼만 보입니다"),
     (mini(drawer("메일", ["받은 메일", "보낸 메일"]).replace('class="mini__drawer"', 'class="mini__drawer" style="transform:translateX(-45%)"'), bars="684", label="드로어가 밀려 나오는 중"), "옆에서 밀려 나오는 중", "0.25초 동안 옆에서 밀려 들어옵니다"),

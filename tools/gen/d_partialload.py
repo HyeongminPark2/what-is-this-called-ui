@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 from _tx import one, code, txt, mono
-from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
-
-WAIT2 = table(
-  ["기다리는 동안 무엇을 가리는가", "사용자가 하던 일이 끊기는가", "초점이 그대로 남는가", "구현하기 쉬운가"],
-  [["전체 스피너", "<b>화면 전부</b>", "끊김", "사라짐", "가장 쉬움"],
-   ["부분 로딩", "<b>바뀌는 곳만</b>", "끊기지 않음", "남음", "손이 더 감"],
-   ["버튼 안 표시", "누른 버튼만", "끊기지 않음", "남음", "쉬움"],
-   ["<a href=\"skeleton.html\">스켈레톤</a>", "들어올 내용의 자리", "처음 그릴 때만", "해당 없음", "쉬움"]],
-  me="부분 로딩")
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
@@ -49,7 +41,6 @@ D = dict(
   slug="partialload", ko="부분 로딩", en="Partial loading",
   desc="화면 전체가 아니라 바뀌는 곳만 다시 그리는 방식과, 그렇게 해서 초점과 입력값을 지키는 방법을 보여 주는 항목입니다.",
   lede="부분 로딩은 데이터가 바뀐 곳만 다시 그리는 방식입니다. 바뀐 것은 한 줄인데 <b>화면 전체를 다시 그리면</b> 사용자가 치던 글과 커서까지 함께 사라집니다.",
-  axes_lede="기다림을 보여 주는 방법들입니다. 아래 네 가지로 견줍니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>검색 칸에 커서를 둔 채 <b>정산 상태 바꾸기</b>를 눌러 보세요.
           <b>화면 전체</b>를 다시 그리면 검색 칸이 통째로 새로 만들어지기 때문에
@@ -71,8 +62,6 @@ D = dict(
      "<b>무한 스크롤</b> — <a href=\"infinite.html\">무한 스크롤</a>은 목록 <b>뒤에 항목을 더 붙이는</b> 것이고, 이미 있는 줄을 바꾸지 않습니다.<br>"
      "<b>낙관적 UI</b> — <a href=\"optimistic.html\">낙관적 UI</a>는 응답을 아예 <b>기다리지 않는</b> 방식이라 기다리는 자리를 표시하는 부분 로딩과 다릅니다."),
   ]),
-  axes=WAIT2,
-  oneline="<b>데이터가 바뀐 곳만 다시 그립니다.</b> 화면 전체를 갈아 끼우면 초점과 사용자가 치던 글까지 함께 사라집니다.",
   s4_title="상태", s4_hint="방식마다 가려지는 범위",
   states=states([
     (panel(R, -1, False, "", "평소", True), "평소 상태", "모든 줄을 읽을 수 있습니다"),

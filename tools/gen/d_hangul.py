@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax3 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def krbox(style="", txt="정산 요청이 승인되면 영업일 기준 2일 안에 입금됩니다.", w="146px"):
@@ -24,7 +23,6 @@ D = dict(
   slug="hangul", ko="한글 조판", en="Korean typography",
   desc="한글 줄바꿈(word-break: keep-all)과 행간, 영문 혼용, lang 속성까지 한국어 화면에서 지킬 글자 규칙을 보여 주는 항목입니다.",
   lede="브라우저의 기본 줄바꿈 규칙은 <b>영문 기준</b>이라서, 설정을 그대로 두면 한글은 <b>어절 한가운데서</b> 줄이 넘어갑니다.",
-  axes_lede="글자 항목은 값 하나가 글 전체를 바꿉니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>칸 너비를 줄여 보세요. 세 상자 아래에 <b>어절이 몇 군데 쪼개졌는지</b> 재서 알려 줍니다.
           기본값(normal)과 <code>break-all</code>은 '입금됩 / 니다'처럼 어절 중간에서 끊기고,
@@ -45,8 +43,6 @@ D = dict(
      "<b><code>white-space: nowrap</code></b> — 줄바꿈을 <b>아예 막는</b> 속성이라서, 어절에서만 줄을 넘기는 어절 보호와는 다릅니다.<br>"
      "<b>자간</b> — 한글이 답답해 보이는 이유는 대개 자간이 아니라 <b>행간</b>입니다."),
   ]),
-  axes=ax("한글 조판"),
-  oneline="한국어 화면이면 <b><code>word-break: keep-all</code>을 기본으로 설정하고</b> 시작합니다. 설정하지 않으면 모든 문단이 어절 한가운데서 끊깁니다.",
   s4_title="줄바꿈 설정에 따른 차이", s4_hint="같은 글을 줄바꿈 설정만 바꿔 본 모습",
   states=states([
     (krbox(), "기본값(normal)을 그대로 둘 때", "<b>'입금됩 / 니다'</b>처럼 어절 한가운데서 끊깁니다"),

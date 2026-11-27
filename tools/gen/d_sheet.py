@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from tmpl import axis_table, siblings, states, cases, pins, plats, rows, ul, kbd
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" data-pin="1" style="background:rgba(14,16,20,.5);border-radius:var(--r2);padding:30px 10px 0">
                 <div data-pin="2" style="background:var(--surface);border-radius:12px 12px 0 0;padding:0 26px;box-shadow:0 -6px 20px rgba(0,0,0,.25)">
@@ -32,8 +32,6 @@ D = dict(
      "<b>모달</b> — 좁은 화면에서 모달이 시트 모양으로 바뀌는 것은 맞지만, 두 이름은 가리키는 것이 다릅니다. 시트는 <b>어디서 뜨는가</b>를, 모달은 <b>뒤를 막는가</b>를 가리킵니다.<br>"
      "<b>액션 시트</b> — iOS에서 선택지를 늘어놓는 시트만 가리키는 좁은 말이라, 바텀시트 전체를 부르는 이름으로 쓰면 범위가 맞지 않습니다."),
   ]),
-  axes=axis_table("바텀시트"),
-  oneline="시트인지 아닌지는 <b>아래에서 올라오느냐</b>로 정해집니다. 뒤쪽 화면을 막는지는 이와 <b>따로</b> 정하기 때문에, 뒤를 막는 시트와 막지 않는 시트가 모두 있습니다.",
   states=states([
     (mini(trigger("⋯ 더 보기"), bars="684", label="시트가 닫힌 목록 화면"), "닫혀 있을 때", "트리거만 보입니다"),
     (mini(sheet("해질녘 공원", ["공유하기", "내려받기"], style="transform:translateY(40%);opacity:.6"), bars="684", label="시트가 올라오는 중"), "아래에서 올라오는 중", "0.25초 동안 아래에서 밀려 올라옵니다"),

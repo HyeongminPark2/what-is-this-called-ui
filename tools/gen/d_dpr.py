@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax11 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def grid(px, w="150px", note="", warn=False, blur=False):
@@ -37,7 +36,6 @@ D = dict(
   slug="dpr", ko="화면 밀도", en="Device pixel ratio",
   desc="CSS의 1px이 화소가 아니라 길이 단위라는 점과, 화면 배율에 따라 그림을 몇 배 크기로 받아야 하는지, 머리카락처럼 가는 선은 어떻게 긋는지를 보여 주는 항목입니다.",
   lede="<b>CSS의 1px은 화소가 아니라 길이 단위입니다.</b> 그래서 배율이 3배인 화면에서는 CSS 1px 길이를 기기 화소 세 개로 그립니다.",
-  axes_lede="PC와 폰은 기계보다 <b>쓰는 전제</b>가 다릅니다. 아래 네 가지로 두 환경을 견줍니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>배율을 바꾸면 캔버스의 <b>실제 화소 수</b>가 함께 바뀝니다.<br>
           <b>1배짜리 그림</b>은 3배 화면에서 세 배로 늘어나 뭉개지지만, <b>배율만큼 크게 받은 그림</b>과
@@ -58,8 +56,6 @@ D = dict(
      "<b>화면 크기</b> — <a href=\"breakpoint.html\">브레이크포인트</a>가 기준으로 삼는 폭은 <b>CSS px</b>로 재기 때문에 밀도와 상관이 없습니다.<br>"
      "<b>DPI</b> — 인쇄에서 쓰는 단위이고, 화면에서는 밀도를 배율로 다룹니다."),
   ]),
-  axes=ax("화면 밀도"),
-  oneline="<b>선과 글자는 브라우저가 배율에 맞춰 그려 주지만, 비트맵 그림은 그렇지 않습니다.</b> 그래서 화면 밀도 때문에 챙길 일은 거의 전부 <b>그림</b>에 관한 것입니다.",
   s4_title="배율에 따라 달라지는 것", s4_hint="배율에 따라 바뀌는 것과 바뀌지 않는 것",
   do_title="화면 밀도를 챙겨야 하는 경우",
   dont_title="화면 밀도를 잘못 다루는 경우",

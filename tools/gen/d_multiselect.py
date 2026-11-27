@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax4 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -57,8 +56,6 @@ D = dict(
      "<b>콤보박스</b> — <a href=\"combobox.html\">콤보박스</a>는 <b>하나</b>만 고릅니다.<br>"
      "<b>태그</b> — <a href=\"tag.html\">태그</a>는 고르는 부품이 아니라 값을 <b>보여 주는</b> 부품입니다."),
   ]),
-  axes=ax("여러 개 고르기"),
-  oneline="<b>무엇을 골랐는지 보이게 하세요.</b> 개수만 보여 주면 사용자는 고른 것을 확인하려고 목록을 다시 열어야 합니다.",
   states=states([
     (ms(["모란상회", "한빛아웃도어"], 0, "", "둘을 고름", True), "조금 골랐을 때", "고른 것의 <b>이름이</b> 모두 보입니다"),
     (ms(["모란상회", "한빛아웃도어", "새벽상사"], 5, "", "넘치는 것은 +N으로 접음", True), "많이 골랐을 때", "넘치는 것은 <b>+N</b>으로 접습니다"),

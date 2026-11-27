@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from ax4 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2);padding:12px">
@@ -40,8 +39,6 @@ D = dict(
      "<b>셀렉트</b> — 똑같이 하나를 고르지만, 셀렉트는 선택지가 접혀 있어서 펼치기 전에는 보이지 않습니다.<br>"
      "<b>토글</b> — 켜고 끄는 것을 두루 가리키는 말이라서, 이렇게 부르면 라디오와 체크박스, 스위치를 구별할 수 없습니다."),
   ]),
-  axes=ax("라디오 그룹"),
-  oneline="라디오는 <b>선택지를 모두 보여 주면서 하나만</b> 고르게 하는 부품입니다. 선택지를 다 보여 줄 자리가 없으면 셀렉트를, 여럿을 고르게 하려면 체크박스를 씁니다.",
   states=states([
     (mini('<div style="margin-top:12px;padding:0 6px;display:grid;gap:4px"><div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1.5px solid var(--line-strong);border-radius:50%"></span><span style="font-size:6.5px">매일</span></div><div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1.5px solid var(--line-strong);border-radius:50%"></span><span style="font-size:6.5px">주 1회</span></div></div>', bars="", label="아직 안 고른 상태"), "아직 고르지 않았을 때", "기본값을 함부로 넣지 않습니다. 사용자가 <b>직접 고르게 하는 것</b>이 목적이라면 비워 둡니다"),
     (mini('<div style="margin-top:12px;padding:0 6px;display:grid;gap:4px"><div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1.5px solid var(--accent);border-radius:50%;display:grid;place-items:center"><span style="width:4px;height:4px;border-radius:50%;background:var(--accent)"></span></span><span style="font-size:6.5px">매일</span></div><div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1.5px solid var(--line-strong);border-radius:50%"></span><span style="font-size:6.5px">주 1회</span></div></div>', bars="", label="하나 고른 상태"), "하나를 골랐을 때", "하나를 켜면 나머지는 저절로 꺼집니다"),

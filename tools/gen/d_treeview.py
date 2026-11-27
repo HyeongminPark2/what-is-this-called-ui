@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from ax7 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
-
-LEDE7 = "길 안내 부품은 모두 누르면 다른 곳으로 옮겨 갑니다. 아래 네 가지로 서로 가릅니다."
 
 def tree(items, w="152px", note="", ok=None):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -37,7 +34,6 @@ D = dict(
   slug="treeview", ko="트리뷰", en="Tree view",
   desc="계층을 펴고 접으며 옮겨 다니는 트리뷰를, 깊이 제한과 화살표 키 조작, 들여쓰기가 차지하는 폭까지 함께 다루는 항목입니다.",
   lede="트리뷰는 폴더와 파일처럼 <b>부모와 자식</b> 관계가 있는 항목들을 가지 단위로 펴고 접으며 찾아가는 부품입니다. 깊이가 <b>세 단</b>을 넘으면 다른 길 안내 방식을 쓰는 편이 낫습니다.",
-  axes_lede=LEDE7,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>트리는 깊어질수록 <b>들여쓰기가 가로 폭을 많이 차지합니다</b>. 데모는 가장 깊은 줄에서
           이름을 적을 자리가 얼마나 남았는지 재서 보여 줍니다. 들여쓰기를 키우거나 가지를 더 펼치면 이름부터 잘립니다.<br>
@@ -58,8 +54,6 @@ D = dict(
      "<b>사이드바</b> — <a href=\"sidebar.html\">사이드바</a>는 화면 옆이라는 <b>자리</b>를 가리키는 이름이고, 그 안에 트리가 들어가기도 합니다.<br>"
      "<b>브레드크럼</b> — <a href=\"breadcrumb.html\">브레드크럼</a>은 지금 위치까지 이어진 <b>한 줄기만</b> 보여 주고, 트리는 여러 가지를 함께 보여 줍니다."),
   ]),
-  axes=ax("트리뷰"),
-  oneline="<b>깊이가 세 단, 가지가 스무 개</b>를 넘으면 트리만으로는 원하는 항목을 찾기 어려우므로 검색을 함께 붙입니다.",
   states=states([
     (tree([(0, "▸", "의류", False), (0, "▸", "생활용품", False), (0, "▸", "식품", False)], "152px", "모두 접힘", True),
      "모두 접혀 있을 때", "최상위 가지만 보여서 <b>한눈에</b> 전체 구성이 보입니다"),

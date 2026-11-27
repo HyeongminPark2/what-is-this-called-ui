@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax13 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def dlg(title, sub, b1, b2, w="152px", note="", warn=False, os=True):
@@ -36,7 +35,6 @@ D = dict(
   slug="permission", ko="권한 요청", en="Permission request",
   desc="OS 권한을 묻는 순간을 다룹니다. 한 번뿐인 OS 창을 아껴 두는 앞선 설명과, 거절당한 뒤 사용자에게 보여 줄 길을 설명합니다.",
   lede="OS 권한 창은 <b>한 번만</b> 띄울 수 있습니다. 사용자가 거절하면 앱이 그 창을 다시 띄울 방법이 없습니다.",
-  axes_lede="화면 단위 패턴은 사용자가 <b>끝내야 하는 일</b> 하나로 나눕니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>앞선 설명 띄우기</b>를 켜면 OS 창을 띄우기 전에 우리 화면에서 먼저 묻습니다. 여기서 '나중에'를 고르면
           <b>OS 창은 아직 쓰지 않은 채</b>로 남기 때문에, 다음에 다시 물어볼 수 있습니다.<br>
@@ -57,8 +55,6 @@ D = dict(
      "<b>로그인</b> — 누구인지 확인하는 일과 기기 기능을 쓰는 일은 서로 다릅니다.<br>"
      "<b>설정</b> — 앱의 <a href=\"settings.html\">설정</a>에서 기능을 끌 수는 있지만, 한 번 거절한 권한을 다시 켜는 일은 <b>OS 설정 앱</b>에서만 됩니다."),
   ]),
-  axes=ax("권한 요청"),
-  oneline="권한은 <b>사용자가 그 기능을 쓰려는 순간에, 왜 필요한지 먼저 말한 뒤</b> 묻습니다. 첫 화면에서 권한 다섯 개를 한꺼번에 묻는 것이 가장 나쁜 방식입니다.",
   do_title="권한을 물어도 되는 때",
   dont_title="권한을 이렇게 물으면 안 되는 경우",
   instead_title="상황에 따라 함께 볼 항목",

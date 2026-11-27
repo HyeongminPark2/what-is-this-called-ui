@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax15 import ax
 from _t15 import code, card, btn
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -28,7 +27,6 @@ D = dict(
   slug="designsystem", ko="디자인 시스템", en="Design system",
   desc="디자인 시스템을 이루는 토큰과 부품, 패턴, 문서의 네 겹을 보여 주고, 스타일 가이드나 컴포넌트 라이브러리와 무엇이 다른지 가르는 항목입니다.",
   lede="디자인 시스템은 <b>토큰과 부품, 패턴, 문서</b>가 네 겹으로 쌓인 묶음입니다. 넷 중 하나라도 빠지면 스타일 가이드나 컴포넌트 라이브러리처럼 다른 이름으로 불러야 합니다.",
-  axes_lede="현장 용어는 부품이 아니라 디자인과 개발이 <b>함께 일하는 단계</b>를 가리킵니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>색을 바꿔 보세요. <b>토큰 하나</b>를 고치면 그 토큰을 참조하는 부품과 패턴의 색이 함께 바뀌는데,
           디자인 시스템이 하는 일은 대부분 이것입니다.<br>
@@ -48,8 +46,6 @@ D = dict(
      "<b>컴포넌트 라이브러리</b> — 부품은 있어도 각 부품을 <b>언제 쓰는지</b> 적은 문서가 없으면 사람마다 아무 부품이나 골라 쓰게 됩니다.<br>"
      "<b>UI 킷</b> — 대개 시안 파일만 가리킵니다. 같은 부품이 <b>코드로 함께 있지 않으면</b> 디자인 쪽에서만 쓸 수 있는 묶음에 그칩니다."),
   ]),
-  axes=ax("디자인 시스템"),
-  oneline="디자인 시스템에서 가장 먼저 확인할 것은 <b>시안과 코드가 같은 토큰을 참조하고 있는지</b>입니다. 서로 다른 값을 쓰고 있으면 고칠 때마다 시안과 실제 화면이 조금씩 달라집니다.",
   s4_title="디자인 시스템의 네 겹", s4_hint="한 겹이 빠지면 생기는 문제",
   states=states([
     (layer('① 토큰', SW + ' <span style="font-family:var(--mono);font-size:8.5px">--accent: #2f6df6</span>', "152px", "이름 붙인 값", True),

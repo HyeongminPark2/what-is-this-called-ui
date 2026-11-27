@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax9 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -33,7 +32,6 @@ D = dict(
   slug="sharedelement", ko="공유 요소 전환", en="Shared element transition",
   desc="두 화면에 있는 같은 요소를 이어서 움직이는 전환입니다. 두 화면의 관계를 눈으로 보여 주지만 구현 비용이 크다는 점을 다루는 항목입니다.",
   lede="공유 요소 전환은 두 화면에 있는 <b>같은 요소</b>를 이어서 움직이는 전환입니다. 두 화면이 어떤 관계인지 설명하는 글 없이 <b>움직임으로</b> 보여 줍니다.",
-  axes_lede="움직임은 무엇이 바뀌었는지 <b>알려 주는</b> 수단입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>목록의 작은 그림이 상세 화면의 큰 그림으로 <b>이어서</b> 커집니다.<br>
           <b>이어서 움직이기</b>를 끄면 목록이 사라진 뒤 상세 화면이 따로 나타나는데, 같은 자료인데도
@@ -52,8 +50,6 @@ D = dict(
      "<b>확대 애니메이션</b> — 요소가 그냥 커지는 것과 <b>두 화면을 이어 주는</b> 것은 다릅니다.<br>"
      "<b>모프</b> — 모프는 모양이 변형되는 연출을 가리키기도 해서 공유 요소 전환과 자주 섞어 부릅니다."),
   ]),
-  axes=ax("공유 요소 전환"),
-  oneline="공유 요소 전환은 두 화면의 요소가 <b>같은 것이라는 사실을 코드가 알아야</b> 만들 수 있습니다. 그만한 구현 비용을 들일 만한 자리인지 먼저 따져 보세요.",
   s4_title="이어지는 전환의 단계", s4_hint="같은 그림이 목록에서 상세 화면으로 커지는 과정",
   states=states([
     (stage(ROWS + th('6px', '6px', '18px', '18px'), "152px", "76px", "목록의 작은 그림"),

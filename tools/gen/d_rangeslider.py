@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax4 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -58,8 +57,6 @@ D = dict(
      "<b>날짜 범위</b> — <a href=\"daterange.html\">날짜 범위</a>는 숫자가 아니라 <b>날짜</b>의 범위를 고릅니다.<br>"
      "<b>필터</b> — <a href=\"filter.html\">필터와 패싯</a>은 부품 하나가 아니라 조건을 고르는 <b>화면 전체</b>의 설계입니다."),
   ]),
-  axes=ax("범위 슬라이더"),
-  oneline="<b>숫자 칸을 같이 두세요.</b> 손잡이를 끌어서 넣을 수 있는 값 가운데 원하는 값이 없을 때가 많습니다.",
   states=states([
     (rs(100, 300, "", "범위를 고른 모습", True), "평소 상태", "<b>두 손잡이</b>로 최소와 최대를 정합니다"),
     (rs(380, 120, "", "최소가 최대보다 큼", False, "152px", True, True), "두 손잡이가 서로 지나쳤을 때", "최소가 최대보다 커지지 않도록 <b>막아야</b> 합니다"),

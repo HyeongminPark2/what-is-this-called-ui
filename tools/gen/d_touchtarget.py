@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax11 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def tgt(seen, hit, note, warn=False, w="152px"):
@@ -28,7 +27,6 @@ D = dict(
   slug="touchtarget", ko="터치 타깃", en="Touch target",
   desc="손가락으로 누를 수 있는 넓이와, 보이는 크기와 눌리는 넓이를 따로 두는 법, 이웃과의 간격, 화면 가장자리 처리를 보여 주는 항목입니다.",
   lede="터치 타깃은 화면에서 <b>손가락으로 누를 수 있는 넓이</b>입니다. 눈에 보이는 크기와 같을 필요가 없고, 작은 아이콘이라면 대개 보이는 크기보다 넓게 잡아야 합니다.",
-  axes_lede="PC와 폰은 기계보다 <b>쓰는 전제</b>가 다릅니다. 아래 네 가지로 두 환경을 견줍니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>점선 원은 <b>손가락 끝이 닿는 넓이</b>(약 9mm ≈ 44px)입니다. 네모가 원보다 작으면
           손가락이 네모 바깥까지 닿아서 옆의 것을 누르게 됩니다.<br>
@@ -48,8 +46,6 @@ D = dict(
      "<b>패딩</b> — 패딩은 눌리는 넓이를 키우는 여러 방법 가운데 하나이고, <code>::before</code>로 넓히는 방법도 있습니다.<br>"
      "<b>아이콘 크기</b> — 아이콘 크기는 <b>보이는 크기</b>를 가리킵니다. 아이콘 크기와 눌리는 넓이를 같은 값으로 묶으면 아이콘이 커져서 화면이 둔해 보입니다."),
   ]),
-  axes=ax("터치 타깃"),
-  oneline="<b>보이는 크기와 눌리는 넓이를 따로 두세요.</b> 아이콘은 24px로 두고 눌리는 넓이만 44px로 잡으면, 작은 버튼이 잘 안 눌리는 문제는 대부분 해결됩니다.",
   s4_title="크기별로 비교한 누르는 넓이", s4_hint="손가락 원보다 네모가 넓은지 비교",
   do_title="터치 타깃을 챙겨야 하는 경우",
   dont_title="터치 타깃을 잘못 다루는 경우",

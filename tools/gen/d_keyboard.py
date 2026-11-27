@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax12 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def row(tag, ok_focus, ok_key, note, w="168px"):
@@ -27,7 +26,6 @@ D = dict(
   slug="keyboard", ko="키보드 조작", en="Keyboard operability",
   desc="마우스 없이 모든 조작이 되는지, div로 만든 버튼은 왜 키보드로 쓸 수 없는지를 실물로 보여 주는 항목입니다.",
   lede="키보드 조작은 화면의 모든 기능을 <b>마우스 없이 키보드만으로도 쓸 수 있어야</b> 한다는 요구입니다. 손을 자유롭게 쓰지 못하는 사람뿐 아니라 마우스가 고장 난 사람에게도 해당합니다.",
-  axes_lede="접근성은 눈에 안 보이는 부분까지 챙기는 일입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>세 버튼은 똑같아 보이지만 <b>키보드로 다뤄 보면 전혀 다르게 동작합니다.</b>
           마우스는 쓰지 말고 <kbd>Tab</kbd>·<kbd>Enter</kbd>·<kbd>Space</kbd>로만 눌러 보세요.<br>
@@ -46,8 +44,6 @@ D = dict(
      "<b>포커스</b> — 포커스는 '지금 어디에 있는가'를 말하고, 키보드 조작은 '<b>거기서 무엇을 할 수 있는가</b>'를 말합니다.<br>"
      "<b>키보드 트랩</b> — 포커스가 빠져나오지 못하는 사고를 말합니다. 모달이 일부러 거는 포커스 트랩과 헷갈리지 않아야 합니다."),
   ]),
-  axes=ax("키보드 조작"),
-  oneline="<b>누르는 것은 <code>&lt;button&gt;</code>으로, 다른 곳으로 이동하는 것은 <code>&lt;a href&gt;</code>로</b> 만듭니다. 같은 동작을 div로 만들면 브라우저가 해 주던 다섯 가지를 직접 짜야 합니다.",
   s4_title="태그에 따라 달라지는 키보드 동작", s4_hint="모양이 같은 버튼이 태그마다 다르게 동작하는 모습",
   states=states([
     (row("&lt;button&gt;", True, True, "기본으로 모두 됨"), "button 태그로 만든 버튼", "<b>포커스, Enter, Space, 비활성 처리</b>가 모두 기본으로 들어 있습니다"),

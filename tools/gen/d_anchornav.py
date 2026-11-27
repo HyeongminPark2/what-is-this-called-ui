@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from ax7 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
-
-LEDE7 = "길 안내 부품은 모두 누르면 다른 곳으로 옮겨 갑니다. 아래 네 가지로 서로 가릅니다."
 
 def toc(items, w="152px", note="", ok=None):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -33,7 +30,6 @@ D = dict(
   slug="anchornav", ko="앵커 내비", en="Anchor navigation · on-page nav",
   desc="한 문서 안에서 원하는 절로 바로 이동하는 목차를, 고정 머리에 제목이 가려지는 문제와 지금 보는 절을 표시하는 방법까지 함께 다루는 항목입니다.",
   lede="앵커 내비는 <b>같은 문서 안</b>에서만 이동하는 목차입니다. 다른 화면으로 바꾸지 않고, 누른 절이 있는 곳까지 문서를 <b>스크롤해서</b> 보여 줍니다.",
-  axes_lede=LEDE7,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>목차를 눌러 보세요. 위쪽에 <b>고정 머리</b>가 있는 문서에서는 앵커로 이동하면 절 제목이
           머리 <b>밑에 가려집니다</b>. 데모는 이동한 뒤 제목의 위치를 재서 가려졌는지 적어 줍니다.
@@ -54,8 +50,6 @@ D = dict(
      "<b>사이드바</b> — <a href=\"sidebar.html\">사이드바</a>는 <b>다른 화면</b>으로 옮겨 가고, 앵커 내비는 같은 문서 안에서만 움직입니다.<br>"
      "<b>브레드크럼</b> — <a href=\"breadcrumb.html\">브레드크럼</a>은 계층에서 <b>위 단계로</b> 가는 링크이고, 앵커 내비는 같은 문서의 다른 절로 가는 링크입니다."),
   ]),
-  axes=ax("앵커 내비"),
-  oneline="<b>문서가 스크롤되며 이동하는 과정이 보이게 하세요.</b> 화면이 한 번에 바뀌면 문서의 어디로 왔는지 알기 어렵습니다.",
   states=states([
     (toc([("정산 주기", True), ("수수료", False), ("세금계산서", False), ("환불", False)], "152px", "첫 절을 보는 중", True),
      "문서 맨 위에 있을 때", "문서 맨 위에서는 첫 항목이 강조됩니다"),

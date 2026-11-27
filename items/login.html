@@ -29,7 +29,7 @@
     <h1>로그인</h1>
     <p class="en">Sign in</p>
     <p class="lede" style="margin-top:var(--s3)">로그인은 누구나 한 번쯤 만들어 본 화면이지만, 오류 문구나 응답 시간 같은 사소한 곳으로 <b>계정 정보가 가장 자주 새어 나가는</b> 화면이기도 합니다.</p>
-    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 상태</a><a href="#s4">④ 해부도</a><a href="#s5">⑤ 쓸 때</a><a href="#s6">⑥ 사례</a><a href="#s7">⑦ 마크업</a><a href="#s8">⑧ 백엔드 메모</a><a href="#s9">⑨ 플랫폼</a></nav>
   </div>
 
   <div class="card-layout">
@@ -73,34 +73,7 @@
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제 부품과 견주는 네 가지 기준</span></h2>
-        <p>화면 단위 패턴은 사용자가 <b>끝내야 하는 일</b> 하나로 나눕니다. 아래 네 가지로 서로 가릅니다.</p>
-        <div class="scroll-x">
-        <table class="grid axes">
-          <thead><tr><th></th><th>사용자가 끝내야 하는 일</th><th>사용자가 자주 막히는 곳</th><th>중간에 떠나면 생기는 일</th><th>서버가 맡아 두는 것</th></tr></thead>
-          <tbody>
-            <tr class="me"><td><b>로그인</b></td><td>내가 <b>누구인지</b> 증명하기</td><td>비밀번호를 잊음</td><td>아무 일도 일어나지 않음</td><td>세션 · 토큰</td></tr>
-            <tr><td>온보딩</td><td><b>처음 쓸 수 있는</b> 상태 만들기</td><td>건너뛸 길이 없음</td><td><b>처음부터 다시 해야 함</b></td><td>어디까지 봤는지</td></tr>
-            <tr><td>검색 결과 화면</td><td>찾는 것을 <b>고르기</b></td><td>결과가 0건일 때</td><td>검색어를 잃음</td><td>질의 · 순위</td></tr>
-            <tr><td>설정 화면</td><td>값을 <b>바꾸기</b></td><td>설정이 어디 있는지 못 찾음</td><td>바꾼 값이 그대로 남음</td><td>계정별 저장</td></tr>
-            <tr><td>결제 흐름</td><td><b>돈을 내기</b></td><td>비용이 뒤늦게 드러남</td><td>장바구니로 돌아감</td><td>주문 · 결제 상태</td></tr>
-            <tr><td>권한 요청</td><td>기기 기능을 <b>쓰기</b></td><td><b>한 번 거절하면 다시 묻기 어려움</b></td><td>그 기능만 못 씀</td><td>기기에만 있어 서버는 모름</td></tr>
-            <tr><td>알림 센터</td><td>놓친 것을 <b>따라잡기</b></td><td>읽음 처리가 안 맞음</td><td>알림이 그대로 쌓임</td><td>읽음 상태 맞추기</td></tr>
-            <tr><td>위험한 동작</td><td>되돌릴 수 <b>없는 일</b> 하기</td><td>확인이 너무 쉬움</td><td><b>아무것도 지워지지 않아 안전함</b></td><td>유예 · 복구 기간</td></tr>
-            <tr><td>프로필</td><td>남에게 <b>나를 보여 주기</b></td><td>공개 범위를 모름</td><td>아무 일도 일어나지 않음</td><td><b>누가 무엇까지</b> 보는지</td></tr>
-            <tr><td>대시보드</td><td><b>지금 괜찮은지</b> 판단하기</td><td>숫자가 너무 많음</td><td>아무 일도 일어나지 않음</td><td>집계 · 기준 시각</td></tr>
-            <tr><td>공유하기</td><td>남에게 <b>보여 주기</b></td><td>범위를 잘못 고름</td><td>링크가 전달되지 않음</td><td><b>링크 토큰과 공유 범위</b></td></tr>
-            <tr><td>파일 올리기</td><td>파일을 <b>건네주기</b></td><td>다 올리고 거절당함</td><td><b>올리던 파일이 사라짐</b></td><td>크기 · 형식 · 보관</td></tr>
-          </tbody>
-        </table>
-        </div>
-        <div class="note" style="margin-bottom:0">
-          <p><b>로그인을 한 줄로 정리하면</b> — 오류 문구로 <b>계정이 있는지 알려 주지 말고</b>, 자동완성도 막지 마세요. 두 가지 모두 '보안'을 이유로 정반대로 만드는 경우가 흔합니다.</p>
-        </div>
-      </section>
-
-      <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 로그인 화면의 상태<span class="hint">여섯 가지 모두 만들어야 하는 상태</span></h2>
+        <h2 class="slot-label"><span class="n">3</span> 로그인 화면의 상태<span class="hint">여섯 가지 모두 만들어야 하는 상태</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -141,8 +114,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
             <div class="anat" role="img" aria-label="로그인의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
@@ -177,8 +150,8 @@
           이 방식을 쓰려면 계정이 없어도 <b>다음 단계로 똑같이 넘어가게</b> 만들어야 합니다.</p>
       </section>
 
-      <section class="slot" id="s6">
-        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
             <h3>로그인 화면을 만들 때 지킬 것</h3>
@@ -201,8 +174,8 @@
         <p style="margin:var(--s4) 0 0"><b>로그인 화면에서 다루지 않는 일</b> — 계정을 새로 만드는 일은 가입 화면이 맡습니다. 입력한 값을 검사하는 방법은 <a href="validation.html">입력 검증</a>에서, 입력 칸을 묶어 배치하는 방법은 <a href="form.html">폼 설계</a>에서 다룹니다.</p>
       </section>
 
-      <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -228,8 +201,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 최소 마크업과 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
         <p>입력 칸을 <code>&lt;form&gt;</code>으로 감싸고, 각 칸에 <b>자동완성 힌트</b>를 적습니다.</p>
 <pre class="code">&lt;<span class="t">form</span> <span class="a">method</span>=<span class="s">"post"</span> <span class="a">action</span>=<span class="s">"/login"</span>&gt;
   &lt;<span class="t">label</span> <span class="a">for</span>=<span class="s">"id"</span>&gt;아이디&lt;/<span class="t">label</span>&gt;
@@ -260,8 +233,8 @@
         </div>
       </section>
 
-      <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
+      <section class="slot slot--backend" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
@@ -276,8 +249,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+      <section class="slot" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
         <p>플랫폼마다 로그인 화면이 <b>OS의 비밀번호 관리자</b>와 얼마나 잘 맞물리는지가 다릅니다.</p>
         <div class="platforms">
           <div class="plat">

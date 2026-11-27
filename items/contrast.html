@@ -29,7 +29,7 @@
     <h1>대비비</h1>
     <p class="en">Color contrast</p>
     <p class="lede" style="margin-top:var(--s3)">대비비는 글자색과 바탕색의 <b>밝기 차이</b>를 1에서 21 사이의 값으로 잰 것입니다. 이 부의 항목 가운데 <b>눈으로 보고 확인할 수 있는 것</b>은 대비비 하나뿐입니다.</p>
-    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 상태</a><a href="#s4">④ 해부도</a><a href="#s5">⑤ 쓸 때</a><a href="#s6">⑥ 사례</a><a href="#s7">⑦ 마크업</a><a href="#s8">⑧ 백엔드 메모</a><a href="#s9">⑨ 플랫폼</a></nav>
   </div>
 
   <div class="card-layout">
@@ -72,32 +72,7 @@
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제 부품과 견주는 네 가지 기준</span></h2>
-        <p>접근성은 눈에 안 보이는 부분까지 챙기는 일입니다. 아래 네 가지로 서로 가릅니다.</p>
-        <div class="scroll-x">
-        <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 돕는가</th><th>화면에 눈으로 보이는가</th><th>챙기지 않으면 누가 막히는가</th><th>어떻게 확인하는가</th></tr></thead>
-          <tbody>
-            <tr><td>포커스</td><td><b>지금 어디에 있는지</b> 보여 주기</td><td><b>보여야 함</b></td><td>키보드만 쓰는 사람</td><td>Tab을 눌러 보기</td></tr>
-            <tr><td>포커스 트랩</td><td>포커스를 모달 안에 가두기</td><td>보이지 않음</td><td>키보드나 스크린 리더 사용자</td><td>모달을 열고 Tab을 계속 눌러 보기</td></tr>
-            <tr><td>키보드 조작</td><td>마우스 없이 <b>모든 기능</b> 쓰기</td><td>보이지 않음</td><td>마우스를 못 쓰는 사람</td><td>마우스를 치우고 써 보기</td></tr>
-            <tr><td>이름 붙이기</td><td>요소를 뭐라고 <b>부르는지</b> 정하기</td><td>보이지 않음</td><td>화면을 못 보는 사람</td><td>접근성 트리를 살펴보기</td></tr>
-            <tr><td>스크린 리더가 읽는 것</td><td>역할 · 이름 · <b>상태</b> 전하기</td><td>보이지 않음</td><td>화면을 못 보는 사람</td><td>스크린 리더로 직접 들어 보기</td></tr>
-            <tr><td>라이브 리전</td><td><b>저절로 바뀐 내용</b> 알리기</td><td>보이지 않음</td><td>화면을 못 보는 사람</td><td>내용을 바꾼 뒤 들어 보기</td></tr>
-            <tr class="me"><td><b>대비비</b></td><td>글자가 <b>잘 읽히는지</b> 따지기</td><td><b>보임</b></td><td>저시력 사용자, 햇빛 아래나 값싼 화면으로 보는 사람</td><td><b>도구로 재 보기</b>(숫자로 나옴)</td></tr>
-            <tr><td>시맨틱 태그</td><td>화면의 <b>구조</b> 알리기</td><td>보이지 않음</td><td><b>거의 모든 사용자</b></td><td>구역 목록을 열어 보기</td></tr>
-            <tr><td>대체 텍스트</td><td>그림의 <b>뜻</b> 전하기</td><td>보이지 않음</td><td>화면을 눈으로 보지 않는 사람</td><td>이미지를 끄고 읽어 보기</td></tr>
-            <tr><td>확대와 글자 크기</td><td><b>키웠을 때</b>도 쓸 수 있는지 따지기</td><td>보이지 않음</td><td>저시력 사용자</td><td>200%로 키워 보기</td></tr>
-          </tbody>
-        </table>
-        </div>
-        <div class="note" style="margin-bottom:0">
-          <p><b>대비비를 한 줄로 정리하면</b> — 대비비 기준은 <b>본문 4.5:1, 큰 글자 3:1, 테두리와 아이콘 3:1</b> 세 가지입니다. 통과 여부는 눈으로 판단하지 않고 도구로 재서 확인합니다.</p>
-        </div>
-      </section>
-
-      <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 글자 크기와 쓰임별 판정<span class="hint">같은 색이라도 글자 크기에 따라 판정이 달라지는 모습</span></h2>
+        <h2 class="slot-label"><span class="n">3</span> 글자 크기와 쓰임별 판정<span class="hint">같은 색이라도 글자 크기에 따라 판정이 달라지는 모습</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -143,8 +118,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
             <div class="anat" role="img" aria-label="대비비의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
@@ -180,8 +155,8 @@
           그러니 예외 규정이 있더라도 비활성 요소를 지나치게 흐리게 두지 않는 편이 낫습니다.</p>
       </section>
 
-      <section class="slot" id="s6">
-        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
             <h3>대비비를 재야 하는 경우</h3>
@@ -205,8 +180,8 @@
         <p style="margin:var(--s4) 0 0"><b>대비비와 이어지는 주제는 다른 항목에서 다룹니다</b> — 색을 쓰임별로 정리하는 방법은 <a href="../items/color.html">색 토큰</a>에서, 밝은 색과 어두운 색 두 벌을 관리하는 방법은 <a href="../items/dark.html">다크 모드</a>에서 다룹니다. 글자 크기를 정하는 기준은 <a href="../items/typescale.html">타입 스케일</a>을 보세요.</p>
       </section>
 
-      <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -234,8 +209,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">대비비를 재는 방법과 기준</span></h2>
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 최소 코드와 규칙<span class="hint">대비비를 재는 방법과 기준</span></h2>
         <p>대비비는 브라우저 개발자 도구에서 색을 누르면 바로 나옵니다. 코드로 재야 할 때도 아래처럼 짧은 공식으로 계산할 수 있습니다.</p>
 <pre class="code"><span class="c">// 상대 밝기를 구한 뒤 대비비를 계산한다. WCAG 공식 그대로다</span>
 <span class="t">const</span> lum = (hex) =&gt; {
@@ -266,8 +241,8 @@ ratio(<span class="s">'#697180'</span>, <span class="s">'#ffffff'</span>);   <sp
         </div>
       </section>
 
-      <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
+      <section class="slot slot--backend" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
@@ -280,8 +255,8 @@ ratio(<span class="s">'#697180'</span>, <span class="s">'#ffffff'</span>);   <sp
         </div>
       </section>
 
-      <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+      <section class="slot" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
         <p>웹, iOS, 안드로이드 모두 WCAG 기준을 따르고, 재는 도구만 다릅니다.</p>
         <div class="platforms">
           <div class="plat">

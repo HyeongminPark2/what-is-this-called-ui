@@ -29,7 +29,7 @@
     <h1>가상 스크롤</h1>
     <p class="en">Virtual scrolling</p>
     <p class="lede" style="margin-top:var(--s3)">가상 스크롤은 목록이 수만 줄이어도 화면에 <b>보이는 줄만</b> 그려서 브라우저가 느려지지 않게 하는 기법입니다. 대신 안 그린 줄은 찾기·인쇄·스크린 리더에서 빠지므로 <b>잃는 것</b>도 분명합니다.</p>
-    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 상태</a><a href="#s4">④ 해부도</a><a href="#s5">⑤ 쓸 때</a><a href="#s6">⑥ 사례</a><a href="#s7">⑦ 마크업</a><a href="#s8">⑧ 백엔드 메모</a><a href="#s9">⑨ 플랫폼</a></nav>
   </div>
 
   <div class="card-layout">
@@ -72,32 +72,7 @@
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제 부품과 견주는 네 가지 기준</span></h2>
-        <p>데이터 화면은 '건수가 늘면 어떻게 되나'부터 따집니다. 아래 네 가지로 서로 가릅니다.</p>
-        <div class="scroll-x">
-        <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 다루는가</th><th>건수가 늘면 어떻게 하는가</th><th>상태를 주소에 담는가</th><th>서버가 맡는 일</th></tr></thead>
-          <tbody>
-            <tr><td>데이터 테이블</td><td>여러 열의 <b>행들</b></td><td>쪽을 나눔</td><td><b>담는다</b>(정렬·쪽)</td><td>페이징 · 정렬</td></tr>
-            <tr><td>필터와 패싯</td><td>거르는 <b>조건</b></td><td>조건이 늘어남</td><td><b>담음</b></td><td>조건별 개수 세기</td></tr>
-            <tr><td>검색</td><td><b>질의어</b></td><td>결과가 늘어남</td><td><b>담음</b></td><td>색인 · 순위</td></tr>
-            <tr><td>폼 설계</td><td>입력 <b>묶음</b></td><td>단계를 나눔</td><td>안 담음</td><td>저장 · 임시 저장</td></tr>
-            <tr><td>입력 검증</td><td><b>틀린 값</b></td><td class="none">해당 없음</td><td>안 담음</td><td><b>서버가 다시 검사</b></td></tr>
-            <tr><td>일괄 선택</td><td><b>고른 것들</b></td><td>'전체'가 모호해짐</td><td>안 담음</td><td>묶음 처리 · 되돌리기</td></tr>
-            <tr class="me"><td><b>가상 스크롤</b></td><td><b>긴 목록</b></td><td><b>이 기법으로 해결함</b></td><td>안 담음</td><td>커서 페이징</td></tr>
-            <tr><td>차트 고르기</td><td>숫자들의 <b>관계</b></td><td>점이 뭉침</td><td>담기도 함</td><td>집계 · 구간 나누기</td></tr>
-            <tr><td>내보내기</td><td><b>파일</b>로 꺼내기</td><td>그 자리에서 바로 주지 못함</td><td>담기도 함</td><td><b>비동기 작업</b></td></tr>
-            <tr><td>날짜 범위</td><td><b>기간</b> 고르기</td><td class="none">해당 없음</td><td><b>담음</b></td><td>경계 시각 맞추기</td></tr>
-          </tbody>
-        </table>
-        </div>
-        <div class="note" style="margin-bottom:0">
-          <p><b>가상 스크롤을 한 줄로 정리하면</b> — 가상 스크롤은 다른 방법이 통하지 않을 때 꺼내는 <b>마지막 수단</b>입니다. 줄 수를 줄이거나 쪽을 나눠서 해결된다면 언제나 그쪽이 낫습니다.</p>
-        </div>
-      </section>
-
-      <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">줄이 늘어날 때 일어나는 일</span></h2>
+        <h2 class="slot-label"><span class="n">3</span> 상태<span class="hint">줄이 늘어날 때 일어나는 일</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -146,8 +121,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
             <div class="anat" role="img" aria-label="가상 스크롤의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
@@ -180,8 +155,8 @@
           그래서 <b>공개 페이지에는 거의 쓰지 않고</b> 로그인한 뒤에 쓰는 관리 도구에만 씁니다.</p>
       </section>
 
-      <section class="slot" id="s6">
-        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
             <h3>가상 스크롤을 쓰는 경우</h3>
@@ -204,8 +179,8 @@
         <p style="margin:var(--s4) 0 0"><b>가상 스크롤 대신 다른 것을 써야 하는 경우</b> — 목록을 쪽으로 끊어 보여 줘도 되면 <a href="../items/pagination.html">페이지네이션</a>을 쓰고, 스크롤하는 대로 데이터를 이어서 받아야 하면 <a href="../items/infinite.html">무한 스크롤</a>이 맞습니다. 줄이 몇백 개 정도라면 평범한 <a href="table.html">데이터 테이블</a>로 전부 그려도 됩니다.</p>
       </section>
 
-      <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -228,8 +203,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">가상 스크롤을 만들 때 꼭 갖출 것</span></h2>
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 최소 마크업과 키보드<span class="hint">가상 스크롤을 만들 때 꼭 갖출 것</span></h2>
         <p>받침대로 전체 길이를 만들고, 보이는 구간만 그린 뒤 <code>transform</code>으로 그 자리까지 내려 둡니다.</p>
 <pre class="code">&lt;<span class="t">div</span> <span class="a">class</span>=<span class="s">"scroller"</span> <span class="a">role</span>=<span class="s">"list"</span>
      <span class="a">aria-label</span>=<span class="s">"정산 20,000건"</span>&gt;
@@ -262,8 +237,8 @@ scroller.onscroll = () =&gt; {
         </div>
       </section>
 
-      <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
+      <section class="slot slot--backend" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
@@ -277,8 +252,8 @@ scroller.onscroll = () =&gt; {
         </div>
       </section>
 
-      <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+      <section class="slot" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
         <p><b>iOS와 안드로이드는 처음부터 목록 부품이 이 방식으로 동작</b>하고, 웹만 직접 만들어야 합니다.</p>
         <div class="platforms">
           <div class="plat">

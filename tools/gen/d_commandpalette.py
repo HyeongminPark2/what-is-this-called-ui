@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from _tx import one, code, txt, mono
-from tmpl import axis_table, siblings, states, cases, pins, plats, rows, ul, kbd
-
-L6 = "겹쳐 뜨는 부품은 생김새로는 가르기 어렵습니다. 아래 네 가지로 가릅니다."
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def pal(q, items, label, note="", ok=None, w="152px", grp=""):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -39,7 +37,6 @@ D = dict(
   slug="commandpalette", ko="커맨드 팔레트", en="Command palette",
   desc="Ctrl+K로 열고 글자를 쳐서 기능을 찾는 겹침 부품입니다. 띄엄띄엄 친 글자로 찾기, 최근 쓴 것 먼저 보여 주기, 팔레트에만 숨은 기능의 함정을 다룹니다.",
   lede="커맨드 팔레트는 <b>글자를 쳐서 기능을 찾는 메뉴</b>입니다. 기능이 수십 개를 넘어가면 메뉴를 하나씩 여는 것보다 빠르지만, 팔레트가 <b>있는 줄 모르는 사람</b>은 그 안의 기능을 쓸 수 없습니다.",
-  axes_lede=L6,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>팔레트를 열고 <b>정내</b>처럼 글자를 띄엄띄엄 쳐 보세요.
           '띄엄띄엄 쳐도 찾기'를 켜 두면 <b>정산 내역 내보내기</b>가 목록에 잡히고, 끄면 잡히지 않습니다.
@@ -59,8 +56,6 @@ D = dict(
      "<b>콤보박스</b> — <a href=\"combobox.html\">콤보박스</a>는 목록에서 <b>값을 골라 칸을 채우는</b> 부품이고, 팔레트는 고른 명령을 실행합니다.<br>"
      "<b>모달</b> — 팔레트도 모달의 한 종류이지만, 기능을 찾아 실행하는 일로 쓰임이 아주 좁게 정해져 있습니다."),
   ]),
-  axes=axis_table("커맨드 팔레트"),
-  oneline="<b>팔레트에만 있는 기능을 두지 마세요.</b> 팔레트는 메뉴로도 갈 수 있는 기능에 <b>더 빨리 닿는 길</b>이어야 하고, 유일한 길이 되면 안 됩니다.",
   states=states([
     (pal("", [("정산 내역 내보내기", "", True), ("새 가게 등록", "", False)], "", "치기 전에도 고를 것이 보임", True, "152px", "최근 쓴 것"),
      "열자마자 보이는 목록", "글자를 치기 전에 <b>최근 쓴 것</b>부터 보여 줍니다"),

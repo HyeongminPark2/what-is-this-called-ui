@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax1 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def mini_list(head="붙박이 머리말", head_style="", w="150px", rows_n=3, sec=None):
@@ -35,7 +34,6 @@ D = dict(
   slug="sticky", ko="스티키", en="Sticky positioning",
   desc="position: sticky가 어떻게 동작하는지, 그리고 왜 작동하지 않는지(세 가지 원인)를 실물과 해부도로 보여 주는 항목입니다.",
   lede="스티키는 평소에는 문서 흐름을 따라 움직이다가, 스크롤되어 <b>정해진 선에 닿으면 그 자리에 붙어 있는</b> 요소입니다. 붙박이 머리말과 묶음 머리글은 모두 스티키로 만듭니다.",
-  axes_lede="뼈대 항목은 눈에 보이지 않고 자리만 정해서 생김새로는 가를 수 없습니다. 아래 네 가지로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>목록을 스크롤해 보세요. 머리말은 맨 위에 계속 붙어 있지만, <b>'11월 1주' 같은 묶음 머리글은 하나씩 번갈아</b> 붙습니다.
           스티키는 <b>자기 부모 안에서만</b> 붙어 있기 때문입니다.<br>
@@ -55,8 +53,6 @@ D = dict(
      "<b>float</b> — 스티키와는 전혀 다른 속성으로, 요소 옆으로 글이 흐르게 하는 옛 방식입니다.<br>"
      "<b>스크롤 스파이</b> — 지금 보고 있는 구역을 메뉴에 표시하는 기능으로, 스티키와는 다른 것입니다."),
   ]),
-  axes=ax("스티키"),
-  oneline="스티키는 <b>부모 안에서만 붙는 fixed</b>라고 보면 됩니다. fixed와 다른 점은 부모가 화면 밖으로 지나가면 함께 사라진다는 것 하나입니다.",
   s4_title="상태", s4_hint="붙기 전과 붙은 뒤에 달라지는 모습",
   states=states([
     (mini_list("붙박이 머리말"), "아직 붙기 전", "맨 위에 있을 때는 <b>평범한 요소</b>와 똑같이 보입니다"),

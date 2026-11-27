@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax11 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def stack(items, w="152px", note="", warn=False):
@@ -27,7 +26,6 @@ D = dict(
   slug="systemback", ko="시스템 백", en="System back",
   desc="OS가 제공하는 뒤로가기와, 모달이나 시트를 방문 기록에 넣어 뒤로가기로 닫히게 하는 법을 보여 주는 항목입니다.",
   lede="폰에는 앱과 상관없이 <b>OS가 제공하는 뒤로가기</b>가 있고, 사용자는 이 뒤로가기로 <b>모달도 닫으려고 합니다</b>.",
-  axes_lede="PC와 폰은 기계보다 <b>쓰는 전제</b>가 다릅니다. 아래 네 가지로 두 환경을 견줍니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>모달을 뒤로가기 기록에 넣기</b>를 끄고 시트를 연 뒤 <b>← 뒤로</b>를 눌러 보세요.
           시트는 그대로 남고 <b>그 아래 화면이 사라지며</b>, 한 번 더 누르면 앱을 나갑니다.<br>
@@ -46,8 +44,6 @@ D = dict(
      "<b>닫기</b> — 닫기는 그 부품만 화면에서 치우고, 뒤로가기는 <b>기록을 하나 되돌립니다</b>. 화면에 보이는 결과가 같아도 기록에 남는 상태가 다릅니다.<br>"
      "<b>취소</b> — 취소는 <b>하던 일을 무르는</b> 것이라 뒤로가기보다 뜻이 셉니다."),
   ]),
-  axes=ax("시스템 백"),
-  oneline="<b>화면을 덮는 것은 기록에 넣으세요.</b> 모달이나 시트, 전체 화면 사진 보기 같은 것을 사용자는 모두 뒤로가기로 닫으려 하기 때문입니다.",
   s4_title="뒤로가기 기록과 화면", s4_hint="기록과 화면이 어긋날 때 생기는 문제",
   do_title="뒤로가기 기록을 쌓아야 하는 경우",
   dont_title="뒤로가기 기록을 잘못 다루는 경우",

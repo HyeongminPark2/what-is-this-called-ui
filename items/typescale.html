@@ -29,7 +29,7 @@
     <h1>타입 스케일</h1>
     <p class="en">Type scale · typographic scale</p>
     <p class="lede" style="margin-top:var(--s3)">타입 스케일은 기준 글자 크기에 <b>일정한 비율을 거듭 곱해 만든 크기 단계</b>입니다. 글자 크기가 필요할 때마다 17, 19, 23처럼 그때그때 고르지 않고, 미리 정해 둔 단 가운데서 고릅니다.</p>
-    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 상태</a><a href="#s4">④ 해부도</a><a href="#s5">⑤ 쓸 때</a><a href="#s6">⑥ 사례</a><a href="#s7">⑦ 마크업</a><a href="#s8">⑧ 백엔드 메모</a><a href="#s9">⑨ 플랫폼</a></nav>
   </div>
 
   <div class="card-layout">
@@ -71,34 +71,7 @@
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제 부품과 견주는 네 가지 기준</span></h2>
-        <p>토큰은 부품이 아니라 <b>값을 쓰는 규칙</b>입니다. 아래 네 가지로 서로 가릅니다.</p>
-        <div class="scroll-x">
-        <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하는가</th><th>몇 단으로 두면 좋은가</th><th>값을 바꾸면 어디가 바뀌는가</th><th>잘못 정했을 때 나타나는 증상</th></tr></thead>
-          <tbody>
-            <tr><td>색 토큰</td><td>색의 <b>쓰임</b></td><td>쓰임 10여 개</td><td>브랜드 색 전체</td><td>같은 파랑이 화면마다 조금씩 다릅니다</td></tr>
-            <tr><td>다크 모드</td><td><b>두 벌</b>의 값</td><td>2벌, 고대비까지 두면 3벌</td><td>화면 전체의 바탕과 글자</td><td>어두운 화면에 흰 상자 하나만 남아 눈이 부십니다</td></tr>
-            <tr class="me"><td><b>타입 스케일</b></td><td>글자 크기 <b>단계</b></td><td>6~8단</td><td>제목과 본문의 크기</td><td>무엇이 더 중요한지 알아보기 어렵습니다</td></tr>
-            <tr><td>간격 체계</td><td>여백의 <b>단위</b></td><td>6~8단(4·8의 배수)</td><td>모든 패딩과 줄 간격</td><td>딱 집어 말하기 어렵지만 어수선해 보입니다</td></tr>
-            <tr><td>고도</td><td>그림자의 <b>세기</b></td><td>4~5단</td><td>떠 있는 부품들</td><td>무엇이 위에 있는지 알 수 없습니다</td></tr>
-            <tr><td>z-index</td><td>쌓이는 <b>순서</b></td><td>5~6층</td><td>겹치는 것들의 앞뒤</td><td>토스트가 모달에 가려 보이지 않습니다</td></tr>
-            <tr><td>모서리</td><td><b>둥근 정도</b></td><td>4~6단</td><td>카드 · 버튼 · 입력칸 전부</td><td>안팎 곡선이 어긋나 안쪽이 네모져 보입니다</td></tr>
-            <tr><td>테두리와 구분선</td><td><b>가르는 선</b></td><td>선 1~2종</td><td>목록 · 카드 · 표</td><td>선이 두 겹이 되고 화면이 어수선해집니다</td></tr>
-            <tr><td>불투명도</td><td><b>흐린 정도</b></td><td>2~3단</td><td>비활성 · 가림막 · 흐린 글</td><td>글이 잘 읽히지 않고 z-index가 적용되지 않습니다</td></tr>
-            <tr><td>아이콘 크기</td><td>그림의 <b>크기</b></td><td>3~4단(16·20·24)</td><td>버튼 · 목록 · 앱바</td><td>선이 흐리고 글자와 가운데가 맞지 않습니다</td></tr>
-            <tr><td>상태 색</td><td>성공 · 주의 · 오류 · 정보</td><td>4가지, 색마다 3자리</td><td>알림 · 배지 · 입력 오류</td><td>색을 구별하지 못하면 상태를 알 수 없습니다</td></tr>
-            <tr><td>토큰 이름 짓기</td><td>이름의 <b>규칙</b></td><td>층 3겹</td><td>토큰 전부</td><td>이름과 값이 어긋나 어느 토큰을 고쳐야 할지 알 수 없습니다</td></tr>
-          </tbody>
-        </table>
-        </div>
-        <div class="note" style="margin-bottom:0">
-          <p><b>타입 스케일을 한 줄로 정리하면</b> — 타입 스케일의 핵심은 <b>크기 목록이 아니라 비율</b>입니다. 이웃한 두 단을 나란히 놓았을 때 큰 쪽이 늘 작은 쪽의 같은 배수라면 스케일이고, 배수가 들쭉날쭉하면 스케일이 아니라 크기 값을 모아 둔 목록입니다.</p>
-        </div>
-      </section>
-
-      <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 크기 단계별 쓰임<span class="hint">단마다 정해 둔 크기와 그 크기를 쓰는 자리</span></h2>
+        <h2 class="slot-label"><span class="n">3</span> 크기 단계별 쓰임<span class="hint">단마다 정해 둔 크기와 그 크기를 쓰는 자리</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -139,8 +112,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
             <div class="anat" role="img" aria-label="타입 스케일의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
@@ -169,8 +142,8 @@
           크기와 행간을 함께 담아 둡니다.</p>
       </section>
 
-      <section class="slot" id="s6">
-        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
             <h3>타입 스케일을 쓰는 경우</h3>
@@ -193,8 +166,8 @@
         <p style="margin:var(--s4) 0 0"><b>타입 스케일과 함께 정하는 규칙</b> — 글줄과 글줄 묶음 사이의 간격은 <a href="spacing.html">간격 체계</a>에서 정하고, 글자색으로 주는 위계는 <a href="color.html">색 토큰</a>에서 정합니다.</p>
       </section>
 
-      <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -230,8 +203,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 지킬 규칙<span class="hint">스케일을 코드로 옮기는 방법</span></h2>
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 최소 코드와 지킬 규칙<span class="hint">스케일을 코드로 옮기는 방법</span></h2>
         <p>단마다 <b>크기와 행간을 한 묶음</b>으로 둡니다. 크기만 토큰으로 두면 쓰는 쪽에서 행간을 매번 다시 고르게 됩니다.</p>
 <pre class="code"><span class="t">:root</span> {
   <span class="c">/* 16px 에 1.25 를 거듭 곱한다 */</span>
@@ -264,8 +237,8 @@
         </div>
       </section>
 
-      <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
+      <section class="slot slot--backend" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
@@ -278,8 +251,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+      <section class="slot" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
         <p>세 플랫폼 모두 이름을 붙인 단을 쓰지만, 그 이름과 개수는 서로 다릅니다.</p>
         <div class="platforms">
           <div class="plat">

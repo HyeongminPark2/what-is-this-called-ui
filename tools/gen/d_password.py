@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax4 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -54,8 +53,6 @@ D = dict(
      "<b>PIN</b> — 네 자리 숫자 비밀번호는 비밀번호 칸이 아닌 <b>다른 부품</b>으로 만드는 편이 낫습니다.<br>"
      "<b>OTP</b> — 일회용 번호를 받는 칸에는 <code>autocomplete=\"one-time-code\"</code>를 씁니다."),
   ]),
-  axes=ax("비밀번호 칸"),
-  oneline="<b>비밀번호의 세기는 길이로 판단하세요.</b> 대문자·숫자·기호 같은 갈래를 강제하면 규칙만 겨우 맞춘 짧고 뻔한 비밀번호가 늘어납니다.",
   states=states([
     (pw("••••••••••••", 3, "", "길어서 셈", True, "152px", "보기", "12자라 길이 규칙 통과"),
      "길고 센 비밀번호", "비밀번호가 <b>길수록</b> 셉니다"),

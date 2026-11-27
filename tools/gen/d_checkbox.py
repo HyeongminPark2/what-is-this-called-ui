@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from ax4 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2);padding:12px">
@@ -41,8 +40,6 @@ D = dict(
      "<b>라디오</b> — 라디오는 묶음에서 <b>하나만</b> 고릅니다. 하나만 고르게 하려면 체크박스가 아니라 라디오를 씁니다.<br>"
      "<b>토글</b> — '토글'은 켜고 끄는 것을 두루 가리키는 말이라서, 이렇게 부르면 체크박스와 스위치를 구별할 수 없습니다."),
   ]),
-  axes=ax("체크박스"),
-  oneline="체크박스는 <b>여러 항목을 각각</b> 고르는 부품이고, <b>저장을 눌러야</b> 적용됩니다. 누르는 즉시 적용되면 스위치, 하나만 고르면 라디오입니다.",
   states=states([
     (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1px solid var(--line-strong);border-radius:2px"></span><span style="font-size:6.5px">정산 확정</span></div>', bars="", label="꺼진 체크박스"), "꺼져 있을 때", "빈 네모입니다. 테두리가 또렷해야 그 자리에 체크박스가 있는 줄 압니다"),
     (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;background:var(--accent);border-radius:2px;display:grid;place-items:center;color:#fff;font-size:6px;font-weight:800">✓</span><span style="font-size:6.5px">정산 확정</span></div>', bars="", label="켜진 체크박스"), "켜져 있을 때", "체크 표시가 나타납니다. 색만 바꿔서 알리지 않습니다"),

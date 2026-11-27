@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax3 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def hi(flat=False, no_size=False, no_weight=False, no_color=False, w="160px", label=""):
@@ -35,7 +34,6 @@ D = dict(
   slug="hierarchy", ko="글자 위계", en="Typographic hierarchy",
   desc="크기·굵기·색 세 도구로 읽는 순서를 만드는 법과, 도구를 하나씩 뺐을 때 위계가 어떻게 흐려지는지 보여 주는 항목입니다.",
   lede="글자 위계는 글자의 크기와 굵기, 색을 달리해서 무엇부터 읽어야 하는지를 <b>글자 모양으로 알려 주는 방법</b>입니다. 화면을 꾸미려는 것이 아니라 읽는 순서를 정해 주려고 씁니다.",
-  axes_lede="글자 항목은 값 하나가 글 전체를 바꿉니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>세 도구를 <b>하나씩 꺼 보세요</b>. 아래에 '구별되는 층'이 몇 개로 줄어드는지 세어 줍니다.<br>
           <b>색을 끄면 층이 가장 많이 줄어듭니다</b>. 보조 글이 본문과 같은 진하기가 되면
@@ -55,8 +53,6 @@ D = dict(
      "<b>강조</b> — 강조는 한 군데를 눈에 띄게 하는 것이고, 위계는 화면 <b>전체를 읽는 순서</b>를 정하는 것입니다.<br>"
      "<b>타입 스케일</b> — 타입 스케일은 미리 정해 둔 <b>글자 크기 단계</b>이고, 위계는 그 단계를 <b>어느 글에 쓸지</b> 정하는 일입니다."),
   ]),
-  axes=ax("글자 위계"),
-  oneline="위계를 만드는 도구는 <b>크기·굵기·색 셋뿐</b>입니다. 하나를 크게 바꾸는 것보다 셋을 조금씩 함께 바꾸는 편이 늘 낫습니다.",
   s4_title="도구를 하나씩 뺐을 때의 위계", s4_hint="빠진 도구에 따라 흐려지는 층",
   states=states([
     (hi(label="셋 다"), "세 도구를 모두 쓸 때", "크기와 굵기, 색을 모두 써서 <b>읽는 순서가 잘 보입니다</b>"),

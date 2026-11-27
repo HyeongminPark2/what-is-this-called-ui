@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from ax4 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:12px">
@@ -35,8 +34,6 @@ D = dict(
      "<b>스위치</b> — 손잡이가 움직인다고 모두 슬라이더는 아닙니다. 스위치는 켜고 끄는 일만 합니다.<br>"
      "<b>캐러셀</b> — 밀어서 움직이는 동작은 닮았지만, 캐러셀은 값을 고르지 않고 내용을 넘깁니다."),
   ]),
-  axes=ax("슬라이더"),
-  oneline="슬라이더는 값을 <b>대략 맞추기</b>에는 좋지만 <b>정확히 맞추기</b>에는 알맞지 않습니다. 그래서 정확한 값이 필요하면 숫자 칸을 옆에 함께 둡니다.",
   states=states([
     (mini('<div style="margin-top:14px;padding:0 6px"><span style="display:block;position:relative;height:3px;border-radius:99px;background:var(--line)"><span style="position:absolute;left:0;top:0;bottom:0;width:30%;background:var(--accent);border-radius:99px"></span><span style="position:absolute;left:30%;top:50%;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:var(--surface);border:1.5px solid var(--accent)"></span></span></div>', bars="", label="기본 슬라이더"), "평소 상태", "채운 쪽과 채우지 않은 쪽이 구분되어야 합니다"),
     (mini('<div style="margin-top:14px;padding:0 6px"><span style="display:block;position:relative;height:3px;border-radius:99px;background:var(--line)"><span style="position:absolute;left:0;top:0;bottom:0;width:62%;background:var(--accent);border-radius:99px"></span><span style="position:absolute;left:62%;top:50%;width:9px;height:9px;margin:-4.5px 0 0 -4.5px;border-radius:50%;background:var(--surface);border:1.5px solid var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent)"></span></span></div>', bars="", label="끄는 중"), "손잡이를 끄는 중", "손잡이가 커지고 둘레에 링이 생깁니다. 손가락에 가려도 지금 끌고 있다는 것을 알 수 있게 하려는 표시입니다"),

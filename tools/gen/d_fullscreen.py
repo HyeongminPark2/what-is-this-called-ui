@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from _tx import one, code, txt, mono
-from tmpl import axis_table, siblings, states, cases, pins, plats, rows, ul, kbd
-
-L6 = "겹쳐 뜨는 부품은 생김새로는 가르기 어렵습니다. 아래 네 가지로 가릅니다."
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def fs(kind, label, note="", ok=None, w="152px"):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -51,7 +49,6 @@ D = dict(
   slug="fullscreen", ko="전체 화면 레이어", en="Full-screen layer",
   desc="화면 전체를 덮는 겹침 부품입니다. 모달과 가르는 기준인 화면 폭, 그리고 닫기 단추와 시스템 백 처리를 다룹니다.",
   lede="전체 화면 레이어는 화면 전체를 덮기 때문에 <b>새 화면처럼 보이지만 실제로 화면이 바뀐 것은 아닙니다</b>. 뒤에 하던 화면이 그대로 남아 있어서, 레이어를 닫으면 그 화면으로 돌아옵니다.",
-  axes_lede=L6,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>같은 '새 가게 등록'이라도 <b>넓은 화면에서는 모달</b>로, <b>좁은 화면에서는 전체 화면</b>으로 띄우는 것이 맞습니다.
           390px 폭에 모달을 띄우면 모달 둘레에 여백이 생기는 만큼 내용을 담을 칸이 더 좁아지기 때문입니다.
@@ -72,8 +69,6 @@ D = dict(
      "<b>새 화면</b> — 실제로 화면이 바뀌면 <b>주소가 바뀌고 앞의 화면은 사라집니다</b>. 전체 화면 레이어는 뒤의 화면이 남아 있다는 점이 다릅니다.<br>"
      "<b>바텀시트</b> — 화면 <b>아래에서</b> 올라오고 보통 화면을 다 덮지 않으면 <a href=\"sheet.html\">바텀시트</a>입니다."),
   ]),
-  axes=axis_table("전체 화면 레이어"),
-  oneline="같은 내용이라도 화면 폭에 따라 <b>폰에서는 전체 화면으로, PC에서는 모달로</b> 바꿔 띄웁니다.",
   states=states([
     (fs("none", "", "평소에 보는 목록", True), "레이어를 열기 전", "레이어를 열기 전, 뒤에 있던 목록 화면입니다"),
     (fs("full", "", "화면을 다 덮음", True), "전체 화면으로 띄웠을 때", "<b>폰처럼 좁은 화면에서</b> 맞는 방식입니다"),

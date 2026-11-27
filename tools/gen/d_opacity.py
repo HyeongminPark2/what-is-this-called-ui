@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax2 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -30,7 +29,6 @@ D = dict(
   slug="opacity", ko="불투명도", en="Opacity",
   desc="요소를 흐리게 하는 세 가지 방법의 차이와, opacity가 대비비와 z-index에 일으키는 부작용을 보여 주는 항목입니다.",
   lede="<code>opacity</code>는 <b>상자 안의 모든 것</b>을 한꺼번에 흐리게 합니다. 쓰기는 간단하지만 영향이 미치는 범위가 넓어서, 흔히 쓰는 만큼 잘못 쓰는 일도 많습니다.",
-  axes_lede="토큰은 부품이 아니라 <b>값을 쓰는 규칙</b>입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>데모는 글자의 <b>대비비를 재서 적어 줍니다</b>. 흰 바탕 위 글자를 <code>opacity: .5</code>로
           흐리면 대비비가 4.5:1 아래로 떨어지기 때문에, 비활성 상태를 이렇게 만들면 <b>읽기 어려운 글</b>이 됩니다.<br>
@@ -50,8 +48,6 @@ D = dict(
      "<b>display: none</b> — 요소가 화면에서 아예 빠지고, 스크린 리더도 읽어 주지 않습니다.<br>"
      "<b>disabled</b> — <a href=\"field.html\">비활성</a>은 요소의 <b>상태</b>이고, 흐리게 하는 것은 그 상태를 보여 주는 여러 방법 가운데 하나입니다."),
   ]),
-  axes=ax("불투명도"),
-  oneline="<b>비활성 상태는 opacity로 만들지 마세요.</b> 대비비를 맞춘 흐린 색 토큰을 따로 두면, 흐리게 보이면서도 대비비를 지킬 수 있습니다.",
   s4_title="요소를 흐리게 하는 방법", s4_hint="방법마다 다른 범위와 부작용",
   states=states([
     (card("", "그대로", "대비비 통과", True), "흐리지 않은 기준", "비교할 기준입니다"),

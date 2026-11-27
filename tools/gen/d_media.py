@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from ax5 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
-
-L5 = "표시 부품은 모두 보여 주기만 합니다. 아래 네 가지로 서로 가릅니다."
 
 def mo(label, note="", ok=None, w="152px", col=False, imgw="26px", title="한빛아웃도어", body="2026-11-12 정산 · 842,500원", wrap=False):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -41,7 +38,6 @@ D = dict(
   slug="media", ko="미디어 오브젝트", en="Media object",
   desc="그림 하나 옆에 글 한 덩어리를 붙이는 미디어 오브젝트를 flex와 float의 차이, 그림 크기를 지키는 법으로 나눠 보여 주는 항목입니다.",
   lede="미디어 오브젝트는 <b>왼쪽에 그림, 오른쪽에 글</b>을 두는 묶음으로, 화면에서 특히 많이 씁니다. 그런데도 이런 이름이 있다는 것을 모르고 쓰는 사람이 많습니다.",
-  axes_lede=L5,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><code>float</code>으로 그림을 붙이면 글이 길어질 때 <b>그림 아래쪽까지 감싸며 흘러내립니다</b>.
           데모는 글줄이 그림 아래까지 내려왔는지 재서 알려 줍니다.
@@ -62,8 +58,6 @@ D = dict(
      "<b>카드</b> — <a href=\"card.html\">카드</a>는 <b>테두리를 두른 상자</b>이고, 미디어 오브젝트는 테두리 없이 그림과 글을 붙이는 배치입니다.<br>"
      "<b>썸네일</b> — <a href=\"thumbnail.html\">썸네일</a>은 미디어 오브젝트 안에 들어가는 <b>그림 부품</b>입니다."),
   ]),
-  axes=ax("미디어 오브젝트"),
-  oneline="<b>그림에는 <code>flex: none</code>, 글에는 <code>min-width: 0</code>을 줍니다.</b> 미디어 오브젝트는 대부분 이 두 줄로 만들 수 있습니다.",
   s4_title="붙이는 방식과 상태", s4_hint="붙이는 방식과 폭에 따라 달라지는 모습",
   states=states([
     (mo("flex", "글이 한 단으로 놓임", True), "<code>flex</code>로 붙였을 때", "요즘 쓰는 방식입니다"),

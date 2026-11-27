@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax2 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -26,7 +25,6 @@ D = dict(
   slug="tokenname", ko="토큰 이름 짓기", en="Token naming",
   desc="토큰 이름을 값이 아니라 쓰임으로 짓는 방법과, 원시·의미·부품 세 층, 이름을 이루는 낱말의 차례를 보여 주는 항목입니다.",
   lede="토큰 이름에는 <b>값이 아니라 쓰임</b>을 적습니다. 예를 들어 <code>--blue</code>라는 이름은 어두운 모드에서 값이 다른 색으로 바뀌면 <b>실제 색과 맞지 않게</b> 됩니다.",
-  axes_lede="토큰은 부품이 아니라 <b>값을 쓰는 규칙</b>입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>데모는 토큰 이름을 <b>세 가지 규칙으로 따져 봅니다</b>. ①이름에 값이 들어 있는지,
           ②무엇에 쓰는지가 드러나는지, ③어느 층의 이름인지를 보고, 이름을 직접 넣어 보면 그 자리에서 판정해 줍니다.<br>
@@ -46,8 +44,6 @@ D = dict(
      "<b>테마</b> — 테마는 토큰에 넣을 <b>값 한 벌</b>이고, 토큰 이름은 테마가 바뀌어도 그대로여야 합니다.<br>"
      "<b>클래스 이름</b> — BEM 같은 규칙은 <b>마크업</b>에 붙이는 이름이고, 토큰 이름은 <b>값</b>에 붙이는 이름입니다."),
   ]),
-  axes=ax("토큰 이름 짓기"),
-  oneline="좋은 토큰 이름은 <b>이름만 보고 어디에 쓰는지 알 수 있는 이름</b>입니다. 이름에 값이 적혀 있다면 이미 잘못 지은 것입니다.",
   s4_title="토큰의 세 층과 잘못 지은 이름", s4_hint="층마다 이름이 가리키는 것",
   states=states([
     (nm("--blue-500", "값에 붙인 이름", "원시", None),

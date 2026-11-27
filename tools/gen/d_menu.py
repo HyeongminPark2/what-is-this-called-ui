@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from _tx import one, code, txt, mono
-from tmpl import axis_table, siblings, states, cases, pins, plats, rows, ul, kbd
-
-L6 = "겹쳐 뜨는 부품은 생김새로는 가르기 어렵습니다. 아래 네 가지로 가릅니다."
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def mn(items, label, note="", ok=None, w="152px", up=False, trigger="더 보기 ▾"):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -40,7 +38,6 @@ D = dict(
   slug="menu", ko="드롭다운 메뉴", en="Dropdown menu",
   desc="단추에 붙어 열리는 동작 목록입니다. 값을 고르는 셀렉트와 어떻게 다른지, 자리가 없을 때 위로 뒤집기, 키보드 조작을 다룹니다.",
   lede="드롭다운 메뉴는 항목을 누르면 <b>무슨 일이 일어나는</b> 목록입니다. 항목을 눌러도 <b>값이 정해질 뿐</b>인 셀렉트와 생김새가 같아서 가장 많이 헷갈리는 짝입니다.",
-  axes_lede=L6,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>동작 목록</b>과 <b>값 고르기</b>는 생김새가 같아서 가장 많이 헷갈리는 짝입니다.
           데모는 두 목록의 역할과 키보드 조작, 표시를 나눠서 보여 줍니다.<br>
@@ -61,8 +58,6 @@ D = dict(
      "<b>팝오버</b> — <a href=\"popover.html\">팝오버</a>는 동작 목록에 한정되지 않고 <b>어떤 내용</b>이든 담습니다.<br>"
      "<b>컨텍스트 메뉴</b> — <a href=\"contextmenu.html\">컨텍스트 메뉴</a>는 단추를 누르는 대신 대상을 <b>오른쪽 버튼으로 눌러</b> 엽니다."),
   ]),
-  axes=axis_table("드롭다운 메뉴"),
-  oneline="<b>누르면 일이 일어나면 메뉴이고, 값만 정해지면 셀렉트입니다.</b> 두 부품은 마크업에 쓰는 역할 이름부터 다릅니다.",
   states=states([
     (mn([("이름 바꾸기", "", True, False), ("복사본 만들기", "⌘D", False, False),
          ("SEP", "", False, False), ("지우기", "⌫", False, True)], "", "동작 목록", True),

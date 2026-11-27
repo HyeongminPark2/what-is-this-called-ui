@@ -29,7 +29,7 @@
     <h1>오프라인</h1>
     <p class="en">Offline handling</p>
     <p class="lede" style="margin-top:var(--s3)">오프라인 처리는 네트워크 연결이 끊긴 동안 화면이 어떻게 동작할지 정하는 일입니다. 끊긴 동안 사용자가 <b>쓴 내용이 사라지는 것</b>이 가장 큰 사고이므로, 쓴 내용은 쌓아 두었다가 연결되면 보냅니다.</p>
-    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 상태</a><a href="#s4">④ 해부도</a><a href="#s5">⑤ 쓸 때</a><a href="#s6">⑥ 사례</a><a href="#s7">⑦ 마크업</a><a href="#s8">⑧ 백엔드 메모</a><a href="#s9">⑨ 플랫폼</a></nav>
   </div>
 
   <div class="card-layout">
@@ -74,26 +74,7 @@
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제 부품과 견주는 네 가지 기준</span></h2>
-        <p>연결이 끊겼을 때의 대처 방법들입니다. 아래 네 가지로 견줍니다.</p>
-        <div class="scroll-x">
-        <table class="grid axes">
-          <thead><tr><th></th><th>끊긴 동안 쓴 내용이 남는가</th><th>끊긴 동안 읽을 수 있는가</th><th>쓴 내용은 언제 서버로 가는가</th><th>사용자가 상황을 알 수 있는가</th></tr></thead>
-          <tbody>
-            <tr><td>쌓아 두기</td><td><b>남음</b></td><td>받아 둔 것은 읽을 수 있음</td><td>연결되면 저절로 보냄</td><td>띠로 알림</td></tr>
-            <tr><td>못 누르게 막기</td><td class="none">해당 없음</td><td>읽을 수 있음</td><td>연결된 뒤 다시 눌러야 함</td><td><b>버튼이 꺼져 있어 알 수 있음</b></td></tr>
-            <tr><td>그때마다 실패</td><td><b>사라짐</b></td><td>읽을 수 있음</td><td>다시 써서 보내야 함</td><td>오류만 뜸</td></tr>
-            <tr><td>아무 대비 없음</td><td>사라짐</td><td><b>읽을 수 없음</b></td><td>보낼 것이 없음</td><td>빈 화면만 보임</td></tr>
-          </tbody>
-        </table>
-        </div>
-        <div class="note" style="margin-bottom:0">
-          <p><b>오프라인을 한 줄로 정리하면</b> — 오프라인 처리에서는 <b>사용자가 쓴 내용을 절대로 잃지 않게</b> 하는 것이 먼저입니다. 서버로 보내는 일은 연결된 뒤에 해도 됩니다.</p>
-        </div>
-      </section>
-
-      <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">방식에 따라 쓴 내용이 남는지 사라지는지</span></h2>
+        <h2 class="slot-label"><span class="n">3</span> 상태<span class="hint">방식에 따라 쓴 내용이 남는지 사라지는지</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -134,8 +115,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
             <div class="anat" role="img" aria-label="오프라인의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
@@ -171,8 +152,8 @@
           중간에 하나가 실패하면 <b>그 뒤의 작업은 보내면 안 됩니다</b>.</p>
       </section>
 
-      <section class="slot" id="s6">
-        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
             <h3>연결이 끊겼을 때 지킬 것</h3>
@@ -195,8 +176,8 @@
         <p style="margin:var(--s4) 0 0"><b>함께 보면 좋은 항목</b> — 연결은 되어 있는데 요청이 실패하는 경우는 <a href="retry.html">재시도</a> 항목에서, 실패 화면은 <a href="error.html">에러 상태</a> 항목에서 다룹니다. 기다리는 동안 보여 줄 표시는 <a href="spinner.html">스피너</a>에, 실패를 알리는 문구는 <a href="errortext.html">오류 문구</a>에 정리되어 있습니다.</p>
       </section>
 
-      <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -219,8 +200,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 최소 코드와 규칙<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
         <p>요청이 실패하면 그것을 신호로 삼아 작업을 쌓아 두고, 연결되면 <b>순서대로</b> 보냅니다.</p>
 <pre class="code"><span class="c">&lt;!-- 끊김 띠는 화면 꼭대기에 한 줄 --&gt;</span>
 &lt;<span class="t">p</span> <span class="a">role</span>=<span class="s">"status"</span> <span class="a">class</span>=<span class="s">"offline-bar"</span>&gt;
@@ -257,8 +238,8 @@
         </div>
       </section>
 
-      <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
+      <section class="slot slot--backend" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
@@ -271,8 +252,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+      <section class="slot" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
         <p>오프라인 대비는 웹보다 <b>네이티브 앱 쪽이 훨씬 잘 갖춰져</b> 있습니다.</p>
         <div class="platforms">
           <div class="plat">

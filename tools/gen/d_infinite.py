@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from ax7 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:12px">
@@ -34,8 +33,6 @@ D = dict(
      "<b>가상 스크롤</b> — 가상 스크롤은 화면에 <b>그리는 양</b>을 줄이는 기법이고, 무한 스크롤은 데이터를 <b>불러오는 방식</b>입니다. 둘을 함께 쓰기도 합니다.<br>"
      "<b>지연 로딩</b> — 지연 로딩은 이미지처럼 <b>개별 자원</b>을 필요할 때 늦게 받는 기법이고, 목록의 다음 묶음을 불러오는 무한 스크롤과는 다릅니다."),
   ]),
-  axes=ax("무한 스크롤"),
-  oneline="무한 스크롤을 쓰면 멈추지 않고 계속 내려 볼 수 있는 대신, <b>목록의 끝과 지금 위치를 알 수 없게 됩니다</b>. 그래서 항목을 찾아서 다시 돌아와야 하는 목록에는 맞지 않습니다.",
   states=states([
     (mini('<div class="mini__bg"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div></div>', bars="", label="첫 묶음"), "첫 묶음을 받았을 때", "목록 전체를 한 번에 받지 않고 보통 10~30건씩 받습니다"),
     (mini('<div class="mini__bg"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div></div><div style="position:absolute;left:0;right:0;bottom:8px;display:grid;place-items:center"><span class="spn spn--sm" style="width:9px;height:9px;border-width:1.5px"></span></div>', bars="", label="더 불러오는 중"), "다음 묶음을 불러오는 중", "끝에 가까워지면 다음 묶음을 미리 요청합니다. <b>끝에 닿기 전에</b> 요청하면 스크롤이 멈추지 않고 이어집니다"),

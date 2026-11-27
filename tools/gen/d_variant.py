@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax15 import ax
 from _t15 import code, card, btn
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -35,7 +34,6 @@ D = dict(
   slug="variant", ko="배리언트와 프롭", en="Variants & props",
   desc="같은 부품에 미리 정해 둔 변형을 다루고, 변형의 축을 하나 늘릴 때마다 칸 수가 곱으로 늘어나는 모습을 보여 주는 항목입니다.",
   lede="배리언트는 같은 부품에 미리 <b>정해 둔 변형</b>입니다. 크기나 강조 같은 변형의 축을 하나 늘릴 때마다 만들어야 할 칸이 <b>곱으로</b> 늘어납니다.",
-  axes_lede="현장 용어는 부품이 아니라 디자인과 개발이 <b>함께 일하는 단계</b>를 가리킵니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>축을 켜고 끄면서 칸 수가 어떻게 바뀌는지 보세요. 축이 늘 때마다 <b>9 → 18 → 54</b>로 늘어납니다.<br>
           <b>시안에서는 54칸을 손으로 만들어야 하고, 고칠 때마다 54칸을 모두 손대야 합니다.</b>
@@ -54,8 +52,6 @@ D = dict(
      "<b>컴포넌트</b> — <a href=\"component.html\">컴포넌트</a>는 부품 자체를 가리키고, 배리언트는 <b>그 부품 안의 변형</b>을 가리킵니다.<br>"
      "<b>스타일</b> — 색이나 글꼴만 바뀌는 변형뿐 아니라 <b>구조가 바뀌는 변형</b>도 배리언트입니다."),
   ]),
-  axes=ax("배리언트와 프롭"),
-  oneline="<b>축을 늘리기 전에 칸 수를 곱해 보세요.</b> 3×3×2는 18칸이지만, 값이 세 개인 축을 하나만 더해도 54칸이 됩니다.",
   s4_title="축 수에 따라 늘어나는 칸", s4_hint="축을 하나씩 더할 때의 칸 수",
   states=states([
     (mat(chip('저장', 'primary', 'sm') + chip('저장', 'primary') + chip('저장', 'primary', 'lg'), "152px", "축 1개 · 3칸"),

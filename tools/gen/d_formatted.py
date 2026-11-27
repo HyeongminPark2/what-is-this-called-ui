@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax4 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -47,8 +46,6 @@ D = dict(
      "<b>입력 검증</b> — <a href=\"validation.html\">입력 검증</a>은 값이 <b>맞는지 확인하는</b> 일이고, 자동 서식 입력은 값의 <b>모양을 맞춰 주는</b> 일입니다.<br>"
      "<b>숫자 입력</b> — <a href=\"numberinput.html\">숫자 입력</a>은 하이픈 같은 서식을 넣지 않습니다."),
   ]),
-  axes=ax("자동 서식 입력"),
-  oneline="<b>보이는 값과 보낼 값을 나누세요.</b> 하이픈 같은 서식은 화면에서만 붙이고, 서버에는 숫자만 보냅니다.",
   states=states([
     (fm("123-45-67890", "1234567890", "", "서식이 들어감", True), "다 쳤을 때", "칸에는 서식이 든 <b>보이는 값</b>이, 서버에는 숫자만 든 보낼 값이 갑니다"),
     (fm("123-45-678", "123456780", "", "아직 자릿수가 덜 참", None), "치는 중일 때", "몇 자리를 쳤는지 <b>세어 보여 줍니다</b>"),

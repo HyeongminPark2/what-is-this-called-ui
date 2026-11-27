@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax1 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -28,7 +27,6 @@ D = dict(
   slug="sizing", ko="크기 정하기", en="Sizing",
   desc="width·max-width와 min-content·max-content·fit-content·clamp를 비교하고, 칸이 좁아질 때 어떤 값이 줄어들지 않고 넘치는지 보여 주는 항목입니다.",
   lede="크기를 정하는 값은 여럿이지만, 서로 갈리는 지점은 <b>칸이 좁아질 때 함께 줄어드는가</b> 하나입니다.",
-  axes_lede="뼈대는 눈에 보이지 않지만 <b>모든 배치</b>를 정합니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>칸 폭을 좁히면서 <b>어떤 값이 넘치는지</b> 보세요. 넘친 줄은 빨갛게 표시됩니다.<br>
           <code>width: 300px</code>은 줄어들지 않아서 넘치고, <code>max-width: 300px</code>은 칸과 함께 줄어듭니다.
@@ -47,8 +45,6 @@ D = dict(
      "<b>종횡비</b> — <a href=\"aspectratio.html\">종횡비</a>는 폭에 따라 <b>높이</b>를 정하는 값입니다.<br>"
      "<b>컨테이너</b> — <a href=\"../items/container.html\">컨테이너와 최대 폭</a>은 이 값들을 활용하는 <b>패턴 하나</b>입니다."),
   ]),
-  axes=ax("크기 정하기"),
-  oneline="<b>폭은 대부분 <code>width</code>가 아니라 <code>max-width</code>로 적습니다.</b> 이 차이 하나로 반응형 화면에서 생기는 넘침 문제의 상당수가 해결됩니다.",
   s4_title="크기를 정하는 여섯 가지 값", s4_hint="칸이 좁아질 때 값마다 달라지는 결과",
   do_title="상황에 맞는 크기 값 고르기",
   dont_title="크기를 정할 때 피할 것",

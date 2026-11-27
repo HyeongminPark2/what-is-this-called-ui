@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax4 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -63,8 +62,6 @@ D = dict(
      "<b>메뉴</b> — <a href=\"menu.html\">메뉴</a>는 화살표를 눌렀을 때 열리는 동작 목록 자체를 가리킵니다.<br>"
      "<b>세그먼티드</b> — <a href=\"segmented.html\">세그먼티드 컨트롤</a>은 동작을 실행하지 않고 <b>보기를 바꾸는</b> 부품입니다."),
   ]),
-  axes=ax("분할 버튼"),
-  oneline="<b>왼쪽에 어떤 동작이 걸려 있는지 이름으로 적으세요.</b> 이름이 없으면 무엇이 일어날지 몰라서 사용자가 누르지 않습니다.",
   states=states([
     (sb("CSV 로 내보내기", True, "한 번 누르면 끝남", True), "평소 상태", "왼쪽에 걸린 <b>주 동작</b>이 이름으로 보입니다"),
     (sb("내보내기", True, "무엇이 일어날지 모름", False), "왼쪽 이름이 모호할 때", "무엇이 일어날지 몰라서 <b>누르지 않습니다</b>"),

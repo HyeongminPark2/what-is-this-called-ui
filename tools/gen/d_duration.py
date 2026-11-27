@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax9 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def lane(pct, label, warn=False, w="150px"):
@@ -24,7 +23,6 @@ D = dict(
   slug="duration", ko="지속 시간", en="Duration",
   desc="움직임의 길이를 정하는 기준표입니다. 거리와 크기에 따라 100~350ms 사이에서 고르고, 자주 보는 것일수록 짧게 둡니다.",
   lede="지속 시간은 움직임이 <b>얼마나 걸릴지</b>를 정합니다. 처음 볼 때는 멋있던 길이도 <b>백 번째 볼 때는</b> 답답하게 느껴집니다.",
-  axes_lede="움직임은 무엇이 바뀌었는지 <b>알려 주는</b> 수단입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>막대를 끌어 길이만 바꿔 보세요. <b>같은 움직임</b>인데도 길이에 따라 전혀 다르게 느껴집니다.<br>
           <b>0ms</b>에서는 요소가 순간이동하듯 바로 바뀌어 무엇이 어디서 왔는지 알 수 없고, <b>100ms 아래</b>에서는 깜빡인 것처럼 보이며,
@@ -42,8 +40,6 @@ D = dict(
      "<b>딜레이</b> — 늦게 시작하는 것과 오래 걸리는 것은 다릅니다. 딜레이는 <a href=\"stagger.html\">차례로</a> 들어오게 할 때 씁니다.<br>"
      "<b>FPS</b> — 초당 프레임 수는 움직임이 얼마나 <b>매끄러운지</b>의 문제라서 <a href=\"cheap.html\">무엇을 움직이나</a>에서 다룹니다."),
   ]),
-  axes=ax("지속 시간"),
-  oneline="길이는 움직이는 <b>거리와 크기</b>에 맞춰 정하고, <b>자주 보는 것일수록 짧게</b> 둡니다. 기준표는 이 두 가지 규칙으로 이루어져 있습니다.",
   s4_title="길이에 따라 달라지는 느낌", s4_hint="같은 움직임을 길이만 바꿔 본 모습",
   states=states([
     (lane(100, "0ms는 어디서 왔는지 모름", True), "0ms일 때", "순간이동하듯 바로 바뀌어서 <b>무엇이 바뀌었는지</b> 눈으로 쫓을 수 없습니다"),

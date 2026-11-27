@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax1 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def gr(tpl, n=6, w="180px", gap="5px", labels=None, extra=""):
@@ -32,7 +31,6 @@ D = dict(
   slug="grid", ko="그리드", en="CSS Grid · grid layout",
   desc="그리드의 트랙과 거터, 1fr과 auto-fit minmax, 그리고 1fr 칸이 긴 글에 밀려 어긋나는 문제와 이를 푸는 minmax(0,1fr)를 실물과 해부도로 보여 주는 항목입니다.",
   lede="그리드는 <b>판을 먼저 칸으로 나누고 그 칸에 자식을 넣는</b> 방법입니다. 플렉스가 자식을 한 줄로 늘어놓는 방법이라면, 그리드는 가로와 세로로 칸을 나누는 방법입니다.",
-  axes_lede="뼈대 항목은 눈에 보이지 않고 자리만 정해서 생김새로는 가를 수 없습니다. 아래 네 가지로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>판을 짜는 방법을 <b>칸이 알아서 접히게 하기</b>로 두고 위의 폭 토글로 화면 폭을 바꿔 보세요.
           <code>auto-fit</code>과 <code>minmax</code>를 함께 쓰면 <b>미디어 쿼리 없이도</b> 폭에 맞춰 열 수가 줄어들기 때문에,
@@ -53,8 +51,6 @@ D = dict(
      "<b>테이블</b> — 표는 <b>데이터</b>를 담는 것이고 그리드는 <b>배치</b>를 정하는 것입니다. 배치에 표를 쓰면 스크린 리더가 그 영역을 '표'라고 읽습니다.<br>"
      "<b>플렉스</b> — 플렉스는 한 방향, 그리드는 두 방향으로 배치합니다. 위아래 줄의 칸이 서로 맞아야 하면 그리드를 씁니다."),
   ]),
-  axes=ax("그리드"),
-  oneline="그리드는 <b>판을 먼저 정해 두는</b> 방법입니다. 자식이 몇 개가 들어와도 판은 그대로이기 때문에 줄과 열이 서로 맞습니다.",
   s4_title="판을 짜는 여섯 가지 방법", s4_hint="같은 자식을 넣어도 판에 따라 달라지는 배치",
   states=states([
     (gr("1fr 1fr 1fr"), "열 수를 고정할 때", "<code>repeat(3, 1fr)</code>로 적으면 화면 폭과 상관없이 <b>항상 3열</b>입니다"),

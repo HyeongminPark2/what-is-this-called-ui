@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax1 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def ctr(inner_style="", box_style="display:grid;place-items:center", w="150px", h="76px", label="가운데"):
@@ -25,7 +24,6 @@ D = dict(
   slug="center", ko="가운데 맞추기", en="Centering",
   desc="가운데에 놓는 다섯 가지 방법과 방법마다 맞출 수 있는 범위의 차이를 실물과 해부도로 보여 주는 항목입니다.",
   lede="요소를 가운데에 놓는 방법은 다섯 가지나 되지만, 방법마다 <b>가운데로 맞춰지는 범위가 다릅니다.</b> 그래서 다른 레이아웃보다 유독 자주 틀립니다.",
-  axes_lede="뼈대 항목은 눈에 보이지 않고 자리만 정해서 생김새로는 가를 수 없습니다. 아래 네 가지로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>다섯 칸 아래에는 <b>가로·세로가 실제로 맞았는지</b> 재서 표시해 두었습니다.
           처음에는 다섯 칸 모두 맞아 보이지만, <b>글을 두 줄로 늘려 보면</b>
@@ -45,8 +43,6 @@ D = dict(
      "<b><code>text-align: center</code></b> — <b>글만</b> 가운데로 옮기고, 상자 자체는 움직이지 않습니다.<br>"
      "<b><code>align-content</code></b> — items와 content는 옮기는 대상이 다릅니다. items는 자식 하나하나를, content는 <b>줄 덩어리 전체</b>를 옮깁니다."),
   ]),
-  axes=ax("가운데 맞추기"),
-  oneline="외울 것은 <b>부모에 <code>display: grid; place-items: center</code></b>를 주는 방법 하나입니다. 이 한 줄로 가로와 세로를 함께 맞출 수 있습니다.",
   s4_title="가운데에 놓는 방법", s4_hint="방법마다 맞출 수 있는 범위",
   states=states([
     (ctr(), "그리드의 <code>place-items</code>로 맞출 때", "<b>그리드 한 줄</b>로 가로·세로를 함께 맞추며, 자식이 몇 개든 상관없습니다"),

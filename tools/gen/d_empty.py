@@ -1,13 +1,6 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
-
-KINDS = table(
-  ["화면이 비어 있는 이유", "사용자에게 해야 할 말", "두어야 할 버튼", "그림의 분위기"],
-  [["처음 쓸 때", "아직 아무것도 만들지 않음", "<b>첫 걸음</b>을 알려 줌", "만들기 · 가져오기", "밝고 기대감 있게"],
-   ["검색 결과가 없을 때", "검색 조건이 너무 좁음", "<b>조건을 푸는 방법</b>을 알려 줌", "조건 지우기 · 다시 찾기", "차분하게"],
-   ["할 일을 다 끝냈을 때", "<b>일을 다 끝냄</b>", "수고했다고 말해 줌", "처리한 것 보기 (선택)", "성공을 뜻하는 색으로"],
-   ["볼 권한이 없을 때", "볼 권한이 없음", "<b>누구에게 요청</b>할지 알려 줌", "관리자에게 요청", "잠금을 나타내는 그림으로"]])
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2);padding:12px">
                 <div data-pin="1" style="background:var(--surface);border:1px solid var(--line);border-radius:8px;text-align:center;padding:22px 26px 24px">
@@ -39,8 +32,6 @@ D = dict(
      "<b>에러</b> — 비어 있다고 해서 무언가 잘못된 것은 아니므로 에러처럼 빨갛게 칠하면 안 됩니다.<br>"
      "<b>로딩</b> — 데이터가 아직 도착하지 않은 것과 <b>원래 없는 것</b>은 다릅니다. 불러오는 중에 빈 상태를 띄우면 사용자에게 사실과 다른 정보를 주게 됩니다."),
   ]),
-  axes=KINDS,
-  oneline="빈 상태에서 알려 줘야 할 것은 화면이 비었다는 사실보다 <b>왜 비었고 이제 무엇을 하면 되는지</b>입니다. 이 안내가 없으면 사용자는 그 화면에서 더 할 수 있는 일이 없습니다.",
   states=states([
     (mini('<div style="position:absolute;inset:0;display:grid;place-items:center;gap:5px;padding:8px;text-align:center"><span style="width:18px;height:18px;border-radius:5px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-size:9px">＋</span><span style="font-size:7.5px;font-weight:700">아직 없습니다</span><span class="mini__btn" style="font-size:7px;padding:2px 6px">만들기</span></div>', bars="", label="처음 빈 상태"), "처음 쓸 때", "첫 걸음을 알려 줍니다. 빈 상태 가운데 가장 공들일 가치가 있는 화면입니다"),
     (mini('<div style="position:absolute;inset:0;display:grid;place-items:center;gap:5px;padding:8px;text-align:center"><span style="width:18px;height:18px;border-radius:5px;background:var(--bg);color:var(--fg-faint);display:grid;place-items:center;font-size:9px">⌕</span><span style="font-size:7.5px;font-weight:700">맞는 것이 없습니다</span><span style="font-size:6.5px;color:var(--fg-muted)">조건 두 개를 풀어 보세요</span></div>', bars="", label="검색 결과 없음"), "검색 결과가 없을 때", "<b>무엇으로 찾았는지</b>를 다시 보여 주고, 조건을 푸는 방법을 알려 줍니다"),

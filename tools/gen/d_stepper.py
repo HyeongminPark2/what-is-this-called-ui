@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from ax7 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
-
-LEDE7 = "길 안내 부품은 모두 누르면 다른 곳으로 옮겨 갑니다. 아래 네 가지로 서로 가릅니다."
 
 def steps(marks, w="152px", note="", ok=None, col=False):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -50,7 +47,6 @@ D = dict(
   slug="stepper", ko="스테퍼", en="Stepper · wizard",
   desc="여러 단계로 나뉜 흐름에서 어디까지 왔는지 알려 주는 스테퍼를, 되돌아가기와 좁은 화면 처리까지 함께 다루는 항목입니다.",
   lede="스테퍼는 긴 입력 과정을 <b>몇 단계로 나누고</b>, 지금 몇 번째 단계인지와 <b>얼마나 남았는지</b>를 함께 보여 줍니다.",
-  axes_lede=LEDE7,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>단계 이름은 <b>잘리면 안 됩니다</b>. 데모는 칸마다 이름 글자 전체의 폭과 실제로 보이는 폭을 비교해서
           이름이 잘린 단계가 몇 개인지 셉니다. 가로 배치 그대로 폭을 줄이면 단계 이름부터 잘리고,
@@ -71,8 +67,6 @@ D = dict(
      "<b>탭</b> — <a href=\"tabs.html\">탭</a>은 <b>순서 없이</b> 내용 묶음을 바꿔 보여 주는 부품이고, 스테퍼는 정해진 순서대로 나아갑니다.<br>"
      "<b>브레드크럼</b> — <a href=\"breadcrumb.html\">브레드크럼</a>은 <b>계층</b>을 보여 주고, 스테퍼는 <b>차례</b>를 보여 줍니다."),
   ]),
-  axes=ax("스테퍼"),
-  oneline="단계가 <b>셋을 넘으면 정말 그만큼 나눠야 하는지 다시 따져 봅니다.</b> 단계를 늘리기 전에 한 화면에 담을 수 있는지부터 확인합니다.",
   states=states([
     (steps([("장바구니", "done"), ("배송지", "now"), ("결제", ""), ("확인", "")], "152px", "1단계 끝, 2단계 진행 중", True),
      "단계를 진행하는 중", "끝난 단계와 <b>지금 단계</b>가 다르게 보입니다"),

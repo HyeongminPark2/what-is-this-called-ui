@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from ax4 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2);padding:12px">
@@ -35,8 +34,6 @@ D = dict(
      "<b>콤보박스</b> — 글자를 입력해 선택지를 걸러 낼 수 있으면 셀렉트가 아니라 콤보박스입니다.<br>"
      "<b>스피너</b> — 안드로이드에서는 셀렉트를 Spinner라고 부르는데, 웹에서 스피너라고 하는 로딩 표시와는 전혀 다른 부품입니다."),
   ]),
-  axes=ax("셀렉트"),
-  oneline="셀렉트는 <b>선택지를 접어서 감추는</b> 대신 자리를 아낍니다. 그래서 선택지가 셋뿐이면 접어서 아낄 자리가 거의 없고, 수십 개가 넘으면 펼쳐도 눈으로 찾기 어렵습니다.",
   states=states([
     (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 4px;font-size:6px"><span style="flex:1;color:var(--fg-faint)">고르세요</span>▾</div></div>', bars="", label="아직 안 고른 셀렉트"), "아직 고르지 않았을 때", "기본값을 함부로 넣지 않습니다. 사용자가 확인하지 않은 기본값이 그대로 저장될 수 있기 때문입니다"),
     (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 4px;font-size:6px"><span style="flex:1">신한</span>▾</div></div>', bars="", label="고른 셀렉트"), "값을 골랐을 때", "고른 값이 접힌 칸에 보입니다"),

@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from ax5 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
-
-L5 = "표시 부품은 모두 보여 주기만 합니다. 아래 네 가지로 서로 가릅니다."
 
 def kv(pairs, label, note="", ok=None, w="152px", kw="52px", stack=False, cut=True):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -44,7 +41,6 @@ D = dict(
   slug="keyvalue", ko="키-값 목록", en="Key-value list · description list",
   desc="이름과 값의 짝을 줄줄이 보여 주는 키-값 목록의 라벨 폭과 값 잘림, 화면이 좁을 때 세로로 바꾸는 법을 보여 주는 항목입니다.",
   lede="키-값 목록은 줄마다 이름 하나와 값 하나를 <b>짝</b>으로 보여 주는 부품으로, 여러 건을 열로 세우는 표와는 다릅니다. 상세 화면의 절반쯤이 이 부품으로 채워집니다.",
-  axes_lede=L5,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>라벨 폭을 고정</b>하면 값이 세로로 가지런히 줄을 맞춥니다.
           대신 칸이 좁아지면 <b>값이 먼저 잘리는데</b>, 데모는 잘린 줄 수를 세어 적습니다.<br>
@@ -66,8 +62,6 @@ D = dict(
      "<b>폼</b> — <a href=\"form.html\">폼</a>은 값을 <b>고치는</b> 화면이고, 키-값 목록은 값을 <b>읽는</b> 화면입니다.<br>"
      "<b>리스트 아이템</b> — <a href=\"listitem.html\">리스트 아이템</a>은 <b>한 건 전체</b>를 한 줄에 담고, 키-값 목록은 한 건의 속성 하나를 한 줄에 담습니다."),
   ]),
-  axes=ax("키-값 목록"),
-  oneline="<b>키-값 목록은 한 건의 속성을 읽는 자리입니다.</b> 값을 고칠 수 있게 만들어야 한다면 키-값 목록이 아니라 폼을 씁니다.",
   states=states([
     (kv(P, "기본", "라벨 폭을 고정함", True), "라벨 폭을 고정했을 때", "값이 세로로 <b>가지런히</b> 줄을 맞춥니다"),
     (kv(PLONG, "좁음", "값이 잘림", False), "칸이 좁을 때", "라벨보다 <b>값이 먼저</b> 잘립니다"),

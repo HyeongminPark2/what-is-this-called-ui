@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from _tx import one, code, txt, mono
-from tmpl import axis_table, siblings, states, cases, pins, plats, rows, ul, kbd
-
-L6 = "겹쳐 뜨는 부품은 생김새로는 가르기 어렵습니다. 아래 네 가지로 가릅니다."
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def cc(tips, label, note="", ok=None, w="152px", skip=True, hole=True):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -47,7 +45,6 @@ D = dict(
   slug="coachmark", ko="코치마크", en="Coach mark · product tour",
   desc="처음 쓰는 사람에게 화면의 한 곳을 짚어 설명하는 겹침 부품입니다. 한 번만 띄우는 법과 건너뛸 길을 두어야 하는 이유를 다룹니다.",
   lede="코치마크는 처음 쓰는 사람에게 화면의 <b>한 곳을 짚어</b> 그 기능을 설명하는 말풍선입니다. 한 번에 여러 곳을 짚으면 읽을 말풍선이 한꺼번에 늘어나서 <b>어느 것도 제대로 읽히지 않습니다</b>.",
-  axes_lede=L6,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>한 번에 짚는 수를 늘려 보세요. <b>한꺼번에 읽어야 하는 말풍선 수</b>를 데모가 세어 적습니다.
           말풍선이 둘을 넘으면 사람들은 <b>어느 것도 제대로 읽지 않습니다</b>.<br>
@@ -68,8 +65,6 @@ D = dict(
      "<b>온보딩</b> — <a href=\"onboarding.html\">온보딩</a>은 처음 쓰는 사람을 안내하는 <b>흐름 전체</b>를 가리키고, 코치마크는 그 흐름에 쓰는 방법 가운데 하나입니다.<br>"
      "<b>모달</b> — 처음 들어왔을 때 한 장 띄우는 설명 화면은 코치마크가 아니라 <b>모달</b>입니다."),
   ]),
-  axes=axis_table("코치마크"),
-  oneline="코치마크는 <b>한 번에 하나씩, 모두 합쳐 셋까지</b>만 띄웁니다. 그보다 많으면 사람들이 끝까지 읽지 않습니다.",
   states=states([
     (cc([(16, 26, '여기서 내보내요', '엑셀로 받을 수 있습니다')], "", "하나만 짚음", True),
      "한 곳만 짚었을 때", "한 곳만 짚으면 말풍선이 <b>읽힙니다</b>"),

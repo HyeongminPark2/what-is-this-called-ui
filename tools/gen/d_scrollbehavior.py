@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax1 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -29,7 +28,6 @@ D = dict(
   slug="scrollbehavior", ko="스크롤 동작", en="Scroll behavior",
   desc="스냅, 체이닝, 부드러운 스크롤, scroll-margin처럼 스크롤 자체를 다루는 CSS 네 가지를 보여 주는 항목입니다.",
   lede="스크롤 동작은 스크롤 자체를 다루는 CSS 값들입니다. 스크롤이 <b>칸 단위로 멈추게</b> 하거나 <b>바깥 페이지까지 밀리지 않게</b> 하는 일을 CSS 한 줄로 할 수 있습니다.",
-  axes_lede="뼈대는 눈에 보이지 않지만 <b>모든 배치</b>를 정합니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>스냅</b>을 켜면 세로 상자와 가로 줄 모두에서 스크롤이 칸 단위로 멈춥니다.<br>
           <b>바깥 페이지도 밀리게 하기</b>를 끄면 안쪽을 끝까지 스크롤해도 <b>바깥 페이지가 따라 움직이지 않는데</b>,
@@ -49,8 +47,6 @@ D = dict(
      "<b>무한 스크롤</b> — <a href=\"../items/infinite.html\">무한 스크롤</a>은 목록 끝에 닿으면 데이터를 더 받아오는 일입니다.<br>"
      "<b>스크롤 가로채기</b> — 사용자가 스크롤한 양과 다르게 화면을 움직이는 것으로, <b>이 항목에서 다루는 값들과는 다릅니다</b>."),
   ]),
-  axes=ax("스크롤 동작"),
-  oneline="<b>스크롤은 사용자가 조작하는 것</b>입니다. 멈추는 자리를 정하거나 바깥으로 이어지지 않게 막을 수는 있어도, 스크롤되는 <b>양을 바꾸면</b> 안 됩니다.",
   s4_title="스크롤을 다루는 값", s4_hint="값마다 달라지는 스크롤의 움직임",
   do_title="스크롤 동작을 따로 정하는 경우",
   dont_title="스크롤 동작을 다룰 때 피할 것",

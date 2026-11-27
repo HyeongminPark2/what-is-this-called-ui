@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax2 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -31,7 +30,6 @@ D = dict(
   slug="iconsize", ko="아이콘 크기", en="Icon size scale",
   desc="아이콘 크기를 단으로 정해 두는 방법과 함께, 아이콘을 줄이면 선 굵기도 함께 줄어드는 문제와 아이콘을 글자와 가운데로 맞추는 법을 보여 주는 항목입니다.",
   lede="아이콘 크기는 <b>글자 크기가 아니라 줄 높이</b>에 맞춥니다. 또 아이콘의 <b>그림 크기와 누르는 자리의 크기</b>는 따로 정하는 값입니다.",
-  axes_lede="토큰은 부품이 아니라 <b>값을 쓰는 규칙</b>입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>이 아이콘은 <code>viewBox 24</code>에 <b>선 굵기 1.5</b>로 그렸습니다.
           그대로 줄이면 선도 함께 얇아져서 <b>12px에서는 0.75px</b>이 되는데,
@@ -51,8 +49,6 @@ D = dict(
      "<b>아이콘 글꼴</b> — <a href=\"iconfont.html\">아이콘 글꼴</a>은 크기가 아니라 그림을 <b>글자로</b> 다루는 방식을 가리킵니다.<br>"
      "<b>파비콘</b> — 파비콘은 브라우저 탭에 쓰는 아이콘이라 화면 안 아이콘의 크기 단과는 별개입니다."),
   ]),
-  axes=ax("아이콘 크기"),
-  oneline="아이콘 크기는 16 · 20 · 24, <b>세 단이면 충분합니다</b>. 그리고 누르는 자리는 그림 크기와 상관없이 언제나 44px입니다.",
   s4_title="아이콘 크기 단계별 쓰는 자리", s4_hint="자리마다 쓰는 크기",
   states=states([
     (ic(12, "12px", "거의 쓰지 않음", False, "1.5"), "너무 작은 12px", "선 굵기가 <b>1px 아래</b>로 줄어 흐려 보입니다"),

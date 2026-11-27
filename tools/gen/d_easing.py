@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax9 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 A = "var(--accent)"
@@ -32,7 +31,6 @@ D = dict(
   slug="easing", ko="이징 곡선", en="Easing",
   desc="같은 거리를 같은 시간 동안 움직여도 속도를 어떻게 나눠 쓰느냐에 따라 느낌이 달라집니다. 대표적인 곡선 네 가지와 각각을 쓰는 자리를 보여 주는 항목입니다.",
   lede="이징 곡선은 움직이는 동안 속도를 <b>어떻게 나눠 쓸지</b> 정하는 곡선입니다. 거리와 시간이 같아도 곡선이 다르면 움직임의 <b>느낌</b>이 달라집니다.",
-  axes_lede="움직임은 무엇이 바뀌었는지 <b>알려 주는</b> 수단입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>네 공이 <b>같은 거리를 같은 시간 동안</b> 달립니다. 속도를 나눠 쓰는 방식만 다른데도
           움직임의 느낌은 완전히 다릅니다.<br>
@@ -52,8 +50,6 @@ D = dict(
      "<b>딜레이</b> — 딜레이는 움직임의 시작을 늦추는 값으로, <a href=\"stagger.html\">차례로 들어오기</a>에서 씁니다.<br>"
      "<b>스프링</b> — <a href=\"spring.html\">스프링</a>은 곡선이 아니라 <b>물리 계산</b>으로 움직임을 만들기 때문에 끝나는 시점이 미리 정해져 있지 않습니다."),
   ]),
-  axes=ax("이징 곡선"),
-  oneline="<b>들어오는 것에는 ease-out, 나가는 것에는 ease-in</b>을 씁니다. 이 규칙만 지켜도 대부분의 화면에서 움직임이 자연스러워집니다.",
   s4_title="대표적인 곡선 여섯 가지", s4_hint="대각선에서 벗어난 정도에 따라 달라지는 느낌",
   states=states([
     (curve(LIN, "128px", "linear 곡선"), "linear", "처음부터 끝까지 속도가 같아서 <b>기계적으로</b> 보입니다"),

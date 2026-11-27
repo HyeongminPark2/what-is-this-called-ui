@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from ax7 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:12px">
@@ -32,8 +31,6 @@ D = dict(
      "<b>바텀 탭바</b> — 이름은 비슷하지만 바텀 탭바는 <b>앱 전체</b>의 화면 사이를 오가고, 탭은 한 화면 안에서 내용만 바꿉니다.<br>"
      "<b>아코디언</b> — 탭은 한 번에 내용 하나만 보이지만, 아코디언은 여러 칸을 동시에 펼칠 수 있습니다."),
   ]),
-  axes=ax("탭"),
-  oneline="탭은 <b>한 화면 안</b>에서 내용을 바꿉니다. 누른 뒤에도 제목과 주소, 브레드크럼이 그대로면 탭이고, 이것들이 바뀌면 화면 이동입니다.",
   states=states([
     (mini('<div style="margin-top:9px;padding:0 6px"><div style="display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:2px"><span style="font-size:5.5px;color:var(--accent);font-weight:800;border-bottom:1.5px solid var(--accent);padding-bottom:1px">개요</span><span style="font-size:5.5px;color:var(--fg-muted)">거래</span><span style="font-size:5.5px;color:var(--fg-muted)">정산</span></div></div>', bars="", label="기본 탭"), "가장 흔한 기본 모습", "고른 탭에 밑줄이 있습니다. 탭은 <b>늘 하나가 골라져 있습니다</b>"),
     (mini('<div style="margin-top:9px;padding:0 6px"><div style="display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:2px"><span style="font-size:5.5px;color:var(--fg-muted)">개요</span><span style="font-size:5.5px;color:var(--accent);font-weight:800;border-bottom:1.5px solid var(--accent);padding-bottom:1px">거래</span></div><div style="font-size:5.5px;color:var(--fg-muted);margin-top:4px">TX-8812 · ₩48,000</div></div>', bars="", label="다른 탭으로 옮긴 모습"), "다른 탭으로 옮겼을 때", "아래 내용만 바뀝니다. 밑줄이 옆 탭으로 움직이는 애니메이션을 넣으면 어느 탭에서 어느 탭으로 옮겼는지 보입니다"),

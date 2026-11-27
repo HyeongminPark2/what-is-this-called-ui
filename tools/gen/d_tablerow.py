@@ -1,9 +1,6 @@
 # -*- coding: utf-8 -*-
-from ax5 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
-
-L5 = "표시 부품은 모두 보여 주기만 합니다. 아래 네 가지로 서로 가릅니다."
 
 def row(cells, label, note="", ok=None, w="152px", pad="5px 6px", sel=False):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -38,7 +35,6 @@ D = dict(
   slug="tablerow", ko="테이블 행", en="Table row",
   desc="표의 줄 하나에 들어가는 고르기·주 열·값·동작의 자리와 밀도, 그리고 행 전체를 누를 수 있게 만들 때 생기는 문제를 보여 주는 항목입니다.",
   lede="테이블 행은 표의 줄 하나로, 보통 <b>고르기 · 주 열 · 값 · 동작</b> 네 가지가 들어갑니다. 줄마다 이 네 가지의 자리가 다르면 사용자가 줄을 바꿀 때마다 원하는 값을 다시 찾아야 합니다.",
-  axes_lede=L5,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>밀도를 바꾸면 한 화면에 들어가는 줄 수가 달라지는데, 데모는
           <b>480px 높이에 몇 줄이 들어가는지</b> 재서 적습니다.<br>
@@ -59,8 +55,6 @@ D = dict(
      "<b>리스트 아이템</b> — <a href=\"listitem.html\">리스트 아이템</a>은 <b>열 구분이 없는</b> 한 건입니다.<br>"
      "<b>카드</b> — <a href=\"card.html\">카드</a>는 내용을 <b>상자 하나로</b> 묶고, 테이블 행은 값을 열에 맞춰 <b>한 줄로</b> 늘어놓습니다."),
   ]),
-  axes=ax("테이블 행"),
-  oneline="<b>행 전체를 누를 수 있게 하려면 안쪽 단추의 눌림이 행으로 전달되지 않게 먼저 막으세요.</b> 막지 않으면 단추 동작과 행 이동이 함께 일어납니다.",
   s4_title="상태와 밀도", s4_hint="상태와 밀도에 따라 달라지는 줄 모습",
   states=states([
     (row([cell("모란상회", "1,284,000")], "기본", "네 자리가 제자리에 있음", True),

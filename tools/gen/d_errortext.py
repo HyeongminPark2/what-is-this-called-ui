@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax14 import ax
 from _t14 import ba, one, btn
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -18,7 +17,6 @@ D = dict(
   slug="errortext", ko="오류 문구", en="Error message",
   desc="오류 문구에 무엇이 안 됐고 왜 그런지, 어떻게 하면 되는지를 적는 방법을 다룹니다. 셋 가운데 마지막 것이 가장 자주 빠집니다.",
   lede="오류 문구에는 <b>무엇이 · 왜 · 어떻게</b> 세 가지를 적습니다. 그 가운데 사용자가 다음에 할 일을 알려 주는 <b>어떻게</b>가 가장 중요한데도 가장 자주 빠집니다.",
-  axes_lede="화면 문구는 사용자가 <b>무엇을 하면 되는지</b> 알려 줍니다. 아래 네 가지로 문구마다 다른 점을 봅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>상황을 바꿔 가며 <b>흔한 문구</b>와 <b>고친 문구</b>를 견줘 보세요.
           아래에는 고친 문구를 무엇이 · 왜 · 어떻게로 나눠 놓았습니다.<br>
@@ -37,8 +35,6 @@ D = dict(
      "<b>검증</b> — <a href=\"validation.html\">입력 검증</a>은 값이 맞는지 판단하는 일이고, 오류 문구는 판단 결과를 사용자에게 <b>전하는</b> 일입니다.<br>"
      "<b>경고</b> — 경고는 아직 일어나지 않은 일을 미리 알리고, 오류는 <b>이미 실패한 일</b>을 알립니다."),
   ]),
-  axes=ax("오류 문구"),
-  oneline="오류 문구에는 <b>사용자가 지금 할 수 있는 일</b>을 적으세요. 할 일이 빠진 문구는 실패했다는 사실만 알릴 뿐 사용자를 도와주지 못합니다.",
   s4_title="오류 상황별 문구 비교", s4_hint="사용자가 할 수 있는 일을 알려 주는지",
   states=states([
     (ba('네트워크 오류가 발생했습니다. (ERR_CONNECTION_TIMED_OUT)',

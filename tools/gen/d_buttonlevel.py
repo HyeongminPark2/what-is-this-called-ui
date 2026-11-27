@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax4 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -62,8 +61,6 @@ D = dict(
      "<b>크기</b> — 버튼 크기로 위계를 나누면 작은 버튼이 <a href=\"touchtarget.html\">터치 타깃</a> 기준에 못 미치게 됩니다.<br>"
      "<b>링크</b> — <a href=\"linkbutton.html\">링크와 버튼</a>은 세기가 아니라 <b>뜻</b>이 다릅니다."),
   ]),
-  axes=ax("버튼 위계"),
-  oneline="<b>한 화면에 진한 버튼은 하나만 둡니다.</b> 진한 버튼을 둘 쓰고 싶다면 그중 하나를 보조 버튼으로 내립니다.",
   states=states([
     (row([btn('저장'), btn('취소', 'ghost')], "", "주 버튼 하나와 보조 하나", True),
      "주 버튼 하나와 보조 버튼 하나", "<b>하나만</b> 진합니다"),

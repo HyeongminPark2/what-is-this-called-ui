@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax11 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def box(inner, note, w="152px"):
@@ -26,7 +25,6 @@ D = dict(
   slug="platformdiff", ko="HIG와 Material의 차이", en="HIG vs Material",
   desc="같은 화면을 iOS와 안드로이드, 웹이 어떻게 다르게 그리는지, 버튼의 자리와 차례가 어디서 갈리고 그중 무엇을 따라야 하는지 보여 주는 항목입니다.",
   lede="같은 화면이라도 iOS와 안드로이드, 웹에서 그리면 버튼이 놓이는 <b>자리가 달라집니다.</b> 어느 쪽이 옳다기보다, 각 플랫폼 사용자가 <b>이미 익숙해진 자리</b>가 서로 다릅니다.",
-  axes_lede="PC와 폰은 기계보다 <b>쓰는 전제</b>가 다릅니다. 아래 네 가지로 두 환경을 견줍니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>보고 싶은 것을 골라 보세요. <b>뒤로 가는 방법 · 주 동작 버튼의 자리 · 켜고 끄는 부품 ·
           알림 창의 버튼 차례 · 아래 탭의 모양</b>이 세 플랫폼에서 어떻게 다른지 나란히 보여 줍니다.<br>
@@ -45,8 +43,6 @@ D = dict(
      "<b>머티리얼</b> — 머티리얼은 구글 제품의 모양일 뿐, 안드로이드 앱이 꼭 따라야 하는 유일한 모양은 아닙니다.<br>"
      "<b>네이티브</b> — 스위프트나 코틀린 같은 개발 기술을 가리킬 때도 있고 OS 고유의 <b>모양</b>을 가리킬 때도 있어서, 대화에서 뜻이 자주 엇갈립니다."),
   ]),
-  axes=ax("HIG와 Material의 차이"),
-  oneline="<b>웹에는 iOS나 안드로이드와 다른 웹만의 관례가 있습니다.</b> 두 OS의 모양을 다 흉내 내다 보면 어느 쪽에서도 어색해지므로, 웹에서는 <b>웹의 관례</b>를 지키는 편이 낫습니다.",
   s4_title="플랫폼마다 다른 버튼 자리", s4_hint="같은 화면에서 버튼이 놓이는 자리",
   do_title="플랫폼 관례를 다룰 때 지킬 것",
   dont_title="플랫폼 관례에서 피할 것",

@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
-
-WAIT = table(
-  ["끝나는 때를 아는가", "들어올 내용의 자리를 미리 잡는가", "사용자가 기다려야 하는가", "내용이 들어올 때 화면이 덜컥거리는가"],
-  [["스피너", "모름", "잡지 않음", "기다림", "덜컥거림"],
-   ["스켈레톤", "모름", "잡아 둠", "기다림", "덜컥거리지 않음"],
-   ["프로그레스 바", "알고 있음", "잡기도 함", "기다림", "덜컥거리지 않음"],
-   ["낙관적 UI", "해당 없음", "잡아 둠", "기다리지 않음", "덜컥거리지 않음"]],
-  me="스켈레톤")
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:10px">
                 <div data-pin="1" style="background:var(--surface);border:1px solid var(--line);border-radius:8px;height:76px;display:flex;align-items:center;gap:26px;padding:0 26px">
@@ -39,8 +31,6 @@ D = dict(
      "<b>와이어프레임</b> — 와이어프레임은 설계 단계에서 그리는 그림이고, 스켈레톤은 <b>실제로 돌아가는 화면의 한 상태</b>입니다.<br>"
      "<b>더미 데이터</b> — 자리에 가짜 글자를 채워 넣는 더미 데이터와 달리, 스켈레톤에는 <b>글자를 넣지 않습니다</b>."),
   ]),
-  axes=WAIT,
-  oneline="스켈레톤은 <b>들어올 내용의 모양을 알 때만</b> 쓸 수 있습니다. 모양을 모르는 채로 아무 뼈대나 깔아 두면 실제 내용과 크기가 맞지 않아, 내용이 들어올 때 결국 화면이 덜컥거립니다.",
   states=states([
     (mini('<div style="margin-top:8px;display:grid;gap:6px"><div class="skl" style="height:7px;width:70%"></div><div class="skl" style="height:7px;width:50%"></div><div class="skl" style="height:7px;width:62%"></div></div>', bars="", label="스켈레톤이 깔린 모습"), "뼈대를 깔아 둔 상태", "들어올 줄 수와 줄 길이만큼 미리 자리를 잡아 둡니다"),
     (mini('<div style="margin-top:8px;display:grid;gap:6px"><div class="skl" style="height:7px;width:70%"></div><div class="skl" style="height:7px;width:50%"></div></div><div style="position:absolute;right:6px;top:8px;font-size:7px;color:var(--accent);font-weight:800">빛이 지나감</div>', bars="", label="시머가 지나가는 모습"), "시머가 지나갈 때", "빛이 한 방향으로 지나가면서 화면이 멈춘 것이 아니라 불러오는 중이라는 것을 알립니다"),

@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 from _tx import one, code, txt, mono
-from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
-
-SAFE = table(
-  ["사용자를 언제 멈춰 세우는가", "언제 되돌릴 수 있는가", "몇 번 멈춰 세우는가", "되돌릴 수 없는 일에 맞는가"],
-  [["되돌리기", "<b>멈춰 세우지 않음</b>", "몇 초 안에만 가능", "0번", "맞지 않음"],
-   ["되묻기", "<b>실행하기 전에</b>", "되묻는 순간에만", "<b>실행할 때마다</b>", "맞음"],
-   ["이름 적어 확인", "실행하기 전에", "'아니오'를 고르면", "실행할 때마다", "<b>가장 강한 확인 방법</b>"],
-   ["유예 기간", "멈춰 세우지 않음", "<b>며칠 동안</b>", "0번", "계정 삭제 같은 일에 맞음"]],
-  me="되돌리기")
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
@@ -37,7 +29,6 @@ D = dict(
   slug="undo", ko="되돌리기", en="Undo",
   desc="지운 뒤에 되돌릴 기회를 주는 방식을 다룹니다. 되묻기와는 어떻게 다른지, 되돌릴 수 있는 시간은 얼마인지, 어떤 한계가 있는지를 보여 주는 항목입니다.",
   lede="되돌리기는 지운 뒤 잠깐 띠를 띄워, 방금 한 일을 무를 기회를 주는 방식입니다. 되묻기는 사용자를 <b>지울 때마다 멈춰 세우지만</b>, 되돌리기는 멈춰 세우지 않는 대신 <b>몇 초 안에만</b> 되돌릴 수 있습니다.",
-  axes_lede="되돌릴 수 없는 일을 다루는 방법들입니다. 아래 네 가지로 견줍니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>되묻기는 지울 때마다 <b>사용자를 멈춰 세우기</b> 때문에, 열 번 지우면 열 번 멈춥니다. 데모는 지우는 동안 몇 번 멈춰 세웠는지 셉니다.<br>
           되돌리기는 멈춰 세우지 않는 대신 <b>시간이 지나면 더는 되돌릴 수 없습니다</b>.
@@ -58,8 +49,6 @@ D = dict(
      "<b>되묻기</b> — <a href=\"destructive.html\">위험한 동작</a>의 확인은 실행하기 전에 <b>사용자를 멈춰 세우는</b> 방식이라 되돌리기와 다릅니다.<br>"
      "<b>휴지통</b> — 휴지통은 지운 것을 <b>며칠</b> 동안 남겨 두는 유예 기간이고, 되돌리기는 <b>몇 초</b> 동안만 기회를 줍니다."),
   ]),
-  axes=SAFE,
-  oneline="<b>되돌릴 수 있는 일이라면 미리 묻지 않습니다.</b> 실행하기 전에 되물어야 하는 것은 되돌릴 수 없는 일뿐입니다.",
   s4_title="상태", s4_hint="시간이 지나면 닫히는 되돌리기 띠",
   states=states([
     (bar("영수증을 지웠습니다", "되돌리기", "5초", "152px", "누르면 돌아옴", True),

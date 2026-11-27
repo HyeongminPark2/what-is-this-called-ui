@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax4 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -50,8 +49,6 @@ D = dict(
      "<b>지속 시간</b> — '30분 동안'은 시각이 아니라 <b>길이</b>를 나타내는 값이라서 다른 부품으로 받습니다.<br>"
      "<b>타이머</b> — 타이머는 시간이 <b>흘러가는 것</b>을 보여 주는 부품이고, 시각을 고르는 부품이 아닙니다."),
   ]),
-  axes=ax("시간 선택기"),
-  oneline="<b>쓰는 간격을 먼저 정하세요.</b> 1분 간격으로 목록을 만들면 1,440줄이나 되어서 원하는 시각을 굴려 찾기 어렵습니다.",
   states=states([
     (tl([("14:00", False, False), ("14:30", True, False), ("15:00", False, False)], "", "30분 간격이면 48줄", True),
      "간격이 알맞을 때", "<b>예약은 30분</b> 간격이면 하루가 48줄이라 찾기 쉽습니다"),

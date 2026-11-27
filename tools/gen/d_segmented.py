@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from ax4 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:14px 12px">
@@ -30,8 +29,6 @@ D = dict(
      "<b>버튼 그룹</b> — 버튼 그룹은 칸마다 <b>동작</b>을 실행하기 때문에 고른 상태가 남지 않습니다.<br>"
      "<b>필터</b> — 필터는 이 부품을 쓰는 목적을 가리키는 말이고, 부품 이름은 아닙니다."),
   ]),
-  axes=ax("세그먼티드"),
-  oneline="세그먼티드 컨트롤은 <b>값을 고르는</b> 부품이고, 탭은 <b>화면을 바꾸는</b> 부품입니다. 누른 뒤에도 같은 화면에 머물면 세그먼티드 컨트롤입니다.",
   states=states([
     (mini('<div style="margin-top:12px;padding:0 6px"><span style="display:flex;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:1.5px;gap:1px"><span style="flex:1;background:var(--accent-soft);color:var(--accent);border-radius:99px;font-size:5.5px;text-align:center;padding:2px 0;font-weight:700">전체</span><span style="flex:1;font-size:5.5px;text-align:center;padding:2px 0;color:var(--fg-muted)">카드</span><span style="flex:1;font-size:5.5px;text-align:center;padding:2px 0;color:var(--fg-muted)">계좌</span></span></div>', bars="", label="첫 칸이 골라진 모습"), "한 칸을 골랐을 때", "고른 칸만 도드라져 보입니다. <b>늘 하나는 골라져 있습니다</b>"),
     (mini('<div style="margin-top:12px;padding:0 6px"><span style="display:flex;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:1.5px;gap:1px"><span style="flex:1;font-size:5.5px;text-align:center;padding:2px 0;color:var(--fg-muted)">전체</span><span style="flex:1;background:var(--accent-soft);color:var(--accent);border-radius:99px;font-size:5.5px;text-align:center;padding:2px 0;font-weight:700">카드</span><span style="flex:1;font-size:5.5px;text-align:center;padding:2px 0;color:var(--fg-muted)">계좌</span></span></div>', bars="", label="가운데 칸으로 옮긴 모습"), "다른 칸으로 옮길 때", "선택 표시가 옆 칸으로 부드럽게 옮겨 가서, 어느 칸에서 어느 칸으로 바뀌었는지 보입니다"),

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from ax7 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:12px">
@@ -37,8 +36,6 @@ D = dict(
      "<b>푸터</b> — 푸터는 스크롤 끝에 나오는 정보 영역이고, 탭바는 스크롤과 상관없이 늘 화면 아래에 떠 있습니다.<br>"
      "<b>툴바</b> — 툴바는 실행할 동작 버튼을 모아 두고, 탭바는 앱을 갈 곳 몇 개로 나눠 둡니다."),
   ]),
-  axes=ax("바텀 탭바"),
-  oneline="바텀 탭바는 앱을 <b>서너 개의 주요 영역</b>으로 나눕니다. 영역이 여섯 개를 넘으면 칸을 더 좁게 나눌 것이 아니라 <b>앱 구조를 다시 짜야 합니다</b>.",
   states=states([
     (mini('<div style="position:absolute;left:0;right:0;bottom:0;display:flex;border-top:1px solid var(--line);padding:3px 2px 5px"><span style="flex:1;text-align:center"><span style="display:block;width:8px;height:8px;border-radius:2px;background:var(--accent);margin:0 auto 1px"></span><span style="font-size:4.5px;color:var(--accent);font-weight:700">거래</span></span><span style="flex:1;text-align:center"><span style="display:block;width:8px;height:8px;border-radius:2px;background:var(--line-strong);margin:0 auto 1px"></span><span style="font-size:4.5px;color:var(--fg-muted)">정산</span></span></div>', bars="684", label="기본 탭바"), "가장 흔한 기본 모습", "고른 칸만 색이 다릅니다. 탭바는 <b>늘 한 칸이 골라져 있습니다</b>"),
     (mini('<div style="position:absolute;left:0;right:0;bottom:0;display:flex;border-top:1px solid var(--line);padding:3px 2px 5px"><span style="flex:1;text-align:center"><span style="display:block;width:8px;height:8px;border-radius:2px;background:var(--line-strong);margin:0 auto 1px;position:relative"><span style="position:absolute;top:-2px;right:-3px;background:var(--danger);color:#fff;border-radius:99px;font-size:3.5px;padding:0 2px">3</span></span><span style="font-size:4.5px;color:var(--fg-muted)">정산</span></span><span style="flex:1;text-align:center"><span style="display:block;width:8px;height:8px;border-radius:2px;background:var(--accent);margin:0 auto 1px"></span><span style="font-size:4.5px;color:var(--accent);font-weight:700">거래</span></span></div>', bars="684", label="배지가 붙은 탭바"), "처리할 건수를 붙일 때", "처리할 것이 몇 건인지 보여 줍니다. 건수를 보여 줄 필요가 없으면 점만 찍기도 합니다"),

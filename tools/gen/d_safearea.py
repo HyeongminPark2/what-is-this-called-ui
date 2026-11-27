@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax1 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def ph(inner, label="", h="140px", w="86px"):
@@ -53,7 +52,6 @@ D = dict(
   slug="safearea", ko="세이프 에어리어", en="Safe area · safe area insets",
   desc="노치와 홈 인디케이터가 차지하는 영역, env(safe-area-inset-*), 그리고 viewport-fit=cover를 빠뜨려서 생기는 문제를 보여 주는 항목입니다.",
   lede="세이프 에어리어는 화면에서 <b>무엇을 놓아도 안전한 영역</b>입니다. 그 바깥은 노치와 홈 막대가 차지하고 있어서, 글자나 버튼을 두면 가려지거나 눌리지 않습니다.",
-  axes_lede="뼈대 항목은 눈에 보이지 않고 자리만 정해서 생김새로는 가를 수 없습니다. 아래 네 가지로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>빨간 띠는 내용을 <b>놓으면 안 되는 자리</b>입니다. 체크를 켜면 상단 바 글자가 노치 아래로 내려오고,
           탭바가 홈 인디케이터 위로 올라옵니다.<br>
@@ -75,8 +73,6 @@ D = dict(
      "<b>패딩</b> — <code>padding-top: 44px</code>처럼 숫자로 고정하면 기기마다 어긋나기 때문에 OS에 <b>값을 물어봐야</b> 합니다.<br>"
      "<b>뷰포트</b> — 화면 크기와 안전 영역은 다릅니다. 안전 영역은 화면 전체보다 안쪽에 있습니다."),
   ]),
-  axes=ax("세이프 에어리어"),
-  oneline="세이프 에어리어는 <b>개발자가 정하는 값이 아니라 OS에 물어보는 값</b>입니다. 숫자로 고정해 두면 그 값과 맞지 않는 기기에서 화면이 깨집니다.",
   s4_title="화면 모양에 따라 챙길 자리", s4_hint="기기와 화면 방향마다 달라지는 인셋",
   do_title="세이프 에어리어를 챙겨야 하는 경우",
   dont_title="세이프 에어리어를 다룰 때 피할 것",

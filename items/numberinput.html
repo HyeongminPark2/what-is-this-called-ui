@@ -29,7 +29,7 @@
     <h1>숫자 입력</h1>
     <p class="en">Number input</p>
     <p class="lede" style="margin-top:var(--s3)"><code>type="number"</code>는 숫자 칸을 쉽게 만들어 주는 것처럼 보이지만 <b>문제가 많습니다</b>. 마우스 휠을 굴리면 값이 바뀌고, 쉼표가 들어가면 값 전체가 사라집니다.</p>
-    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 가르는 기준</a><a href="#s4">④ 상태</a><a href="#s5">⑤ 해부도</a><a href="#s6">⑥ 쓸 때</a><a href="#s7">⑦ 사례</a><a href="#s8">⑧ 마크업</a><a href="#s9">⑨ 백엔드 메모</a><a href="#s10">⑩ 플랫폼</a></nav>
+    <nav class="jump" aria-label="이 항목 안에서 이동"><a href="#s1">① 실물</a><a href="#s2">② 이름</a><a href="#s3">③ 상태</a><a href="#s4">④ 해부도</a><a href="#s5">⑤ 쓸 때</a><a href="#s6">⑥ 사례</a><a href="#s7">⑦ 마크업</a><a href="#s8">⑧ 백엔드 메모</a><a href="#s9">⑨ 플랫폼</a></nav>
   </div>
 
   <div class="card-layout">
@@ -74,44 +74,7 @@
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제 부품과 견주는 네 가지 기준</span></h2>
-        <p>조작 부품은 모두 값을 받습니다. 아래 네 가지로 서로 가릅니다.</p>
-        <div class="scroll-x">
-        <table class="grid axes">
-          <thead><tr><th></th><th>한 번에 몇 개를 고르나</th><th>선택지가 미리 보이나</th><th>고르면 바로 적용되나</th><th>글자를 쳐서 넣을 수 있나</th></tr></thead>
-          <tbody>
-            <tr><td>텍스트 필드</td><td>고르지 않고 직접 적음</td><td class="none">해당 없음</td><td>저장을 눌러야 적용</td><td>됨</td></tr>
-            <tr><td>셀렉트</td><td>하나</td><td>펼쳐야 보임</td><td>저장을 눌러야 적용</td><td class="none">안 됨</td></tr>
-            <tr><td>콤보박스</td><td>하나</td><td>펼치면 보이고 <b>걸러짐</b></td><td>저장을 눌러야 적용</td><td>됨</td></tr>
-            <tr><td>체크박스</td><td><b>여럿</b></td><td>다 보임</td><td>저장을 눌러야 적용</td><td class="none">안 됨</td></tr>
-            <tr><td>라디오 그룹</td><td>하나</td><td>다 보임</td><td>저장을 눌러야 적용</td><td class="none">안 됨</td></tr>
-            <tr><td>스위치</td><td>켬과 끔 중 하나</td><td class="none">해당 없음</td><td><b>바로</b> 적용</td><td class="none">안 됨</td></tr>
-            <tr><td>세그먼티드 컨트롤</td><td>하나</td><td>다 보임</td><td>보통 바로 적용</td><td class="none">안 됨</td></tr>
-            <tr><td>슬라이더</td><td>범위에서 하나</td><td>범위가 보임</td><td>보통 바로 적용</td><td class="none">안 됨</td></tr>
-            <tr><td>버튼 위계</td><td><b>동작 하나</b></td><td class="none">해당 없음</td><td><b>바로</b> 적용</td><td class="none">안 됨</td></tr>
-            <tr><td>링크와 버튼</td><td>동작 또는 이동</td><td class="none">해당 없음</td><td>바로 적용</td><td class="none">안 됨</td></tr>
-            <tr><td>날짜 선택기</td><td>날짜 하나</td><td>달력으로 보임</td><td>저장을 눌러야 적용</td><td><b>돼야 함</b></td></tr>
-            <tr><td>시간 선택기</td><td>시각 하나</td><td>목록으로 보임</td><td>저장을 눌러야 적용</td><td><b>돼야 함</b></td></tr>
-            <tr><td>수량 스테퍼</td><td>숫자 하나</td><td class="none">해당 없음</td><td>저장을 눌러야 적용</td><td><b>돼야 함</b></td></tr>
-            <tr><td>여러 줄 입력</td><td>고르지 않고 직접 적음</td><td class="none">해당 없음</td><td>저장을 눌러야 적용</td><td>됨</td></tr>
-            <tr><td>비밀번호 칸</td><td>고르지 않고 직접 적음</td><td><b>가려져 있음</b></td><td>저장을 눌러야 적용</td><td>됨</td></tr>
-            <tr class="me"><td><b>숫자 입력</b></td><td>숫자 하나</td><td class="none">해당 없음</td><td>저장을 눌러야 적용</td><td>됨</td></tr>
-            <tr><td>자동 서식 입력</td><td>고르지 않고 직접 적음</td><td class="none">해당 없음</td><td>저장을 눌러야 적용</td><td>됨</td></tr>
-            <tr><td>여러 개 고르기</td><td><b>여럿</b></td><td>펼쳐야 보임</td><td>저장을 눌러야 적용</td><td>되기도 함</td></tr>
-            <tr><td>범위 슬라이더</td><td><b>두 값</b></td><td>범위가 보임</td><td>보통 바로 적용</td><td>칸을 두면 됨</td></tr>
-            <tr><td>색 고르기</td><td>색 하나</td><td>견본이 보임</td><td>보통 바로 적용</td><td>색 코드로 됨</td></tr>
-            <tr><td>비활성과 읽기 전용</td><td class="none">해당 없음</td><td>값은 보임</td><td class="none">해당 없음</td><td><b>안 됨</b></td></tr>
-            <tr><td>분할 버튼</td><td>동작 하나</td><td>펼쳐야 보임</td><td><b>바로</b> 적용</td><td class="none">안 됨</td></tr>
-          </tbody>
-        </table>
-        </div>
-        <div class="note" style="margin-bottom:0">
-          <p><b>숫자 입력을 한 줄로 정리하면</b> — <b>세어서 쓰지 않는 숫자는 <code>text</code> 칸으로 받으세요.</b> 돈, 전화번호, 카드번호가 여기에 해당합니다.</p>
-        </div>
-      </section>
-
-      <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">상태마다 달라지는 모습</span></h2>
+        <h2 class="slot-label"><span class="n">3</span> 상태<span class="hint">상태마다 달라지는 모습</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -152,8 +115,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s5">
-        <h2 class="slot-label"><span class="n">5</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
+      <section class="slot" id="s4">
+        <h2 class="slot-label"><span class="n">4</span> 해부도<span class="hint">부분마다 붙은 이름</span></h2>
         <div class="anatomy">
           <div class="pinboard">
             <div class="anat" role="img" aria-label="숫자 입력의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
@@ -187,8 +150,8 @@
           계산할 일이 없으면 <code>text</code> 칸을 씁니다.</p>
       </section>
 
-      <section class="slot" id="s6">
-        <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
+      <section class="slot" id="s5">
+        <h2 class="slot-label"><span class="n">5</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
             <h3>숫자 입력을 쓰는 경우</h3>
@@ -211,8 +174,8 @@
         <p style="margin:var(--s4) 0 0"><b>숫자 입력 대신 다른 것을 써야 하는 경우</b> — 칸 양옆에 − ＋ 단추를 붙여 하나씩 고치게 하려면 <a href="quantity.html">수량 스테퍼</a>를, 치는 동안 하이픈을 넣어 주어야 하면 <a href="formatted.html">자동 서식 입력</a>을 씁니다. 정해진 범위 안에서 고르게 하려면 <a href="slider.html">슬라이더</a>가 맞고, 숫자를 화면에 어떤 형식으로 적을지는 <a href="numbertext.html">숫자와 단위 쓰기</a>에서 다룹니다.</p>
       </section>
 
-      <section class="slot" id="s7">
-        <h2 class="slot-label"><span class="n">7</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
+      <section class="slot" id="s6">
+        <h2 class="slot-label"><span class="n">6</span> 자주 보는 모습<span class="hint">구조만 따라 그린 재현 그림</span></h2>
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -235,8 +198,8 @@
         </div>
       </section>
 
-      <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
+      <section class="slot" id="s7">
+        <h2 class="slot-label"><span class="n">7</span> 최소 마크업과 키보드<span class="hint">구현할 때 지킬 최소 규칙</span></h2>
         <p>세어서 쓰지 않는 숫자는 <code>text</code> 칸으로 받고, 값을 읽을 때 숫자만 뽑아 씁니다.</p>
 <pre class="code"><span class="c">&lt;!-- 돈 · 전화번호 · 카드번호처럼 계산하지 않는 숫자 --&gt;</span>
 &lt;<span class="t">label</span> <span class="a">for</span>=<span class="s">"amount"</span>&gt;정산 금액&lt;/<span class="t">label</span>&gt;
@@ -266,8 +229,8 @@ el.addEventListener(<span class="s">'wheel'</span>, e =&gt; el === document.acti
         </div>
       </section>
 
-      <section class="slot slot--backend" id="s9">
-        <h2 class="slot-label"><span class="n">9</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
+      <section class="slot slot--backend" id="s8">
+        <h2 class="slot-label"><span class="n">8</span> 서버 쪽으로 치면<span class="hint">백엔드 개념과 짝지어 보기</span></h2>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
@@ -279,8 +242,8 @@ el.addEventListener(<span class="s">'wheel'</span>, e =&gt; el === document.acti
         </div>
       </section>
 
-      <section class="slot" id="s10">
-        <h2 class="slot-label"><span class="n">10</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
+      <section class="slot" id="s9">
+        <h2 class="slot-label"><span class="n">9</span> 플랫폼마다 다른 이름<span class="hint">웹 · iOS · 안드로이드에서 부르는 이름</span></h2>
         <p><b>숫자 자판</b>을 띄우는 방법은 플랫폼마다 다릅니다.</p>
         <div class="platforms">
           <div class="plat">

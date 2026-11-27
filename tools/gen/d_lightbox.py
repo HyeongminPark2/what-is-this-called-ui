@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 from _tx import one, code, txt, mono
-from tmpl import axis_table, siblings, states, cases, pins, plats, rows, ul, kbd
-
-L6 = "겹쳐 뜨는 부품은 생김새로는 가르기 어렵습니다. 아래 네 가지로 가릅니다."
+from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def lb(label, note="", ok=None, w="152px", nav=True, cnt="3 / 8", grid=False):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
@@ -46,7 +44,6 @@ D = dict(
   slug="lightbox", ko="라이트박스", en="Lightbox",
   desc="그림 하나를 크게 보는 동안 뒤 화면을 덮는 겹침 부품입니다. 닫은 뒤 초점 돌려주기와 주소에 남기기를 다룹니다.",
   lede="라이트박스는 그림 <b>하나를 크게 보는 동안</b> 뒤 화면을 덮는 부품입니다. 모달과 같은 규칙을 따르고, 여기에 그림을 <b>앞뒤로 넘기는 기능</b>이 더해집니다.",
-  axes_lede=L6,
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>그림을 눌러 크게 열어 보세요. ← →로 그림을 옮기고 Esc로 닫습니다.<br>
           라이트박스를 닫으면 <b>초점이 눌렀던 칸으로 돌아가야</b> 합니다. 그렇지 않으면 키보드 사용자의 초점이
@@ -67,8 +64,6 @@ D = dict(
      "<b>캐러셀</b> — 캐러셀도 그림을 넘기지만, 화면 위에 <b>겹쳐 뜨지 않고</b> 화면 안의 제자리에서 넘깁니다.<br>"
      "<b>썸네일</b> — <a href=\"thumbnail.html\">썸네일</a>은 라이트박스를 열기 전 목록에 보이는 <b>작은 그림</b>을 가리킵니다."),
   ]),
-  axes=axis_table("라이트박스"),
-  oneline="<b>모달의 규칙을 그대로 지키세요.</b> 그림을 보여 주는 부품이라고 해서 초점 관리와 Esc 닫기, 주소에 남기기를 빼도 되는 것은 아닙니다.",
   states=states([
     (lb("", "목록에는 작은 그림만", True, "152px", True, "", True), "닫혀 있을 때", "목록에 <b>작은 그림</b>만 보입니다"),
     (lb("", "뒤를 덮고 그림만 보임", True), "그림을 열었을 때", "<b>어두운 가림막</b>으로 뒤를 덮습니다"),

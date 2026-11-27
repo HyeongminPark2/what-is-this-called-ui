@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from parts import *
-from ax4 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:12px">
@@ -43,8 +42,6 @@ D = dict(
      "<b>토글</b> — 넓은 뜻으로는 맞는 말이지만, 토글은 켜고 끄는 <b>모든 것</b>을 가리키기 때문에 토글 버튼이나 세그먼티드 컨트롤까지 함께 섞입니다.<br>"
      "<b>슬라이더</b> — 손잡이가 움직인다고 모두 슬라이더는 아닙니다. 슬라이더는 <b>범위 안에서</b> 값을 고르는 부품입니다."),
   ]),
-  axes=ax("스위치"),
-  oneline="스위치는 <b>누르는 즉시</b> 적용됩니다. 그래서 저장 버튼이 있는 화면에 스위치를 두면 사용자는 무엇이 이미 저장됐는지 알 수 없습니다.",
   states=states([
     (mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6.5px">주간 요약</span><span style="width:16px;height:9px;border-radius:99px;background:var(--line-strong);position:relative"><span style="position:absolute;top:1.5px;left:1.5px;width:6px;height:6px;border-radius:50%;background:#fff"></span></span></div>', bars="", label="꺼진 스위치"), "꺼져 있을 때", "손잡이가 왼쪽에 있고 트랙은 회색입니다"),
     (mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6.5px">주간 요약</span><span style="width:16px;height:9px;border-radius:99px;background:var(--accent);position:relative"><span style="position:absolute;top:1.5px;left:8.5px;width:6px;height:6px;border-radius:50%;background:#fff"></span></span></div>', bars="", label="켜진 스위치"), "켜져 있을 때", "손잡이가 오른쪽으로 옮겨 갑니다. <b>누르는 순간</b> 바로 이 모습이 됩니다"),

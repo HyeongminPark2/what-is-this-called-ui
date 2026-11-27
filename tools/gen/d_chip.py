@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax5 import ax
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 def chip(txt, on=False, x=False, static=False, style=""):
@@ -35,7 +34,6 @@ D = dict(
   slug="chip", ko="칩", en="Chip · tag · pill",
   desc="필터 칩·입력 칩·표시 칩 세 갈래와 배지와의 차이, 칩을 지울 때 포커스를 어디로 옮기는지를 실물과 해부도로 보여 주는 항목입니다.",
   lede="칩은 한 낱말을 담은 작은 알약 모양의 부품입니다. 생김새는 하나인데 필터 칩, 입력 칩, 표시 칩 <b>세 가지가 서로 다른 일</b>을 하기 때문에 특히 많이 헷갈립니다.",
-  axes_lede="표시 부품은 모두 보여 주기만 합니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>위는 눌러서 목록을 거르는 <b>필터 칩</b>, 가운데는 사용자가 넣은 값이라 뗄 수 있는 <b>입력 칩</b>,
           아래는 라벨일 뿐이라 눌리지 않는 <b>표시 칩</b>입니다.<br>
@@ -54,8 +52,6 @@ D = dict(
      "<b>버튼</b> — 칩도 누를 수 있지만, 칩을 누르면 <b>값이 켜지거나 꺼질</b> 뿐 저장이나 전송 같은 동작이 일어나지는 않습니다.<br>"
      "<b>세그먼티드 컨트롤</b> — 세그먼티드 컨트롤은 칸이 서로 붙어 있고 <b>하나만</b> 고를 수 있는 반면, 필터 칩은 여럿을 함께 고를 수 있습니다."),
   ]),
-  axes=ax("칩"),
-  oneline="칩은 <b>누르거나 뗄 수 있습니다.</b> 누를 수도 뗄 수도 없다면 그건 칩이 아니라 <a href=\"badge.html\">배지</a>이거나 그냥 글자입니다.",
   s4_title="칩의 종류와 상태", s4_hint="종류와 상태마다 달라지는 칩 모습",
   states=states([
     (box(chip("검토 중")), "꺼져 있는 필터 칩", "눌러서 켤 수 있습니다. 테두리만 있고 바탕은 비어 있습니다"),

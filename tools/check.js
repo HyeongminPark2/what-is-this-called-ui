@@ -248,7 +248,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
     const r = await page.evaluate(() => {
       const bad = [];
       const slots = document.querySelectorAll('section.slot').length;
-      if (slots !== 10) bad.push(`칸이 ${slots}개 (10 기대)`);
+      if (slots !== 9) bad.push(`칸이 ${slots}개 (9 기대)`);
 
       // 해부도: 그림의 번호와 목록이 1대1인가
       const npin = document.querySelectorAll('.anat [data-pin]').length;

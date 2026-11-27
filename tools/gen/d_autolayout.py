@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from ax15 import ax
 from _t15 import code, card, btn
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
@@ -30,7 +29,6 @@ D = dict(
   slug="autolayout", ko="오토 레이아웃", en="Auto layout",
   desc="시안 도구의 자동 배치 기능인 오토 레이아웃이 CSS 플렉스박스와 같은 개념이고 부르는 이름만 다르다는 것을 대응표로 보여 주는 항목입니다.",
   lede="<b>오토 레이아웃은 플렉스박스입니다.</b> 시안 도구와 CSS에서 부르는 이름만 다를 뿐 같은 개념이라서, 두 이름을 짝지은 대응표 하나만 있으면 디자이너와 개발자의 대화가 짧아집니다.",
-  axes_lede="현장 용어는 부품이 아니라 디자인과 개발이 <b>함께 일하는 단계</b>를 가리킵니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>조작기를 움직이면 같은 설정이 아래에 <b>CSS 코드로</b> 그대로 나옵니다. 이름만 다를 뿐 같은 설정이기 때문입니다.<br>
           이 대응표를 알고 있으면 <b>“여백이 자동이에요”</b>는 <code>gap</code>이고
@@ -49,8 +47,6 @@ D = dict(
      "<b>프레임</b> — 그냥 상자를 뜻하기도 하고, 오토 레이아웃을 적용한 상자를 뜻하기도 합니다.<br>"
      "<b>레이아웃 그리드</b> — 화면을 세로 단으로 나눠 보여 주는 안내선이라서 오토 레이아웃과는 전혀 다른 기능입니다."),
   ]),
-  axes=ax("오토 레이아웃"),
-  oneline="<b>대응표 한 장만 있으면 시안의 말을 CSS로 바로 옮길 수 있습니다.</b> 채우기는 <code>flex: 1</code>, 감싸기는 <code>fit-content</code>, 간격은 <code>gap</code>입니다.",
   s4_title="설정마다 대응하는 CSS", s4_hint="시안의 설정을 CSS로 옮기면",
   states=states([
     (box('gap:6px', I + I + I, "152px", "flex-direction: row"), "가로", "<code>row</code>에 해당하며, 플렉스의 기본값입니다"),
