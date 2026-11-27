@@ -122,3 +122,19 @@ NODE_PATH=/data/work/verbatim/node_modules /data/tools/node20/bin/node tools/che
 포커스 갇힘은 iframe 밖에서만 검사할 수 있어서 `demos/modal.html`을 직접 연다.
 
 **단정문이 전부 통과해도 스크린샷을 눈으로 본다.**
+
+# 카드 생성기
+
+`items/*.html` 항목 카드는 `tools/gen/`의 생성기로 찍는다. 찍힌 HTML이 레포의 진짜 파일이고,
+생성기는 열 칸 틀을 어긋나지 않게 다시 찍기 위해 둔다.
+
+```sh
+python3 tools/gen/build.py tooltip popover    # d_tooltip.py, d_popover.py → items/
+```
+
+- `tmpl.py` — 열 칸 카드의 틀과 칸마다 쓰는 조각 함수. `parts.py`는 공용 조각.
+- `d_<이름>.py` — 항목 하나의 데이터. `items/modal.html`만 데이터 파일 없이 손으로 쓴 첫 카드다.
+- `ax<부>.py` — 그 부가 같이 쓰는 비교 축 표. **축에 줄을 더하면 그 부의 카드를 전부 다시 찍는다.**
+- `_t14.py`, `_t15.py`, `_tx.py` — 몇몇 부 카드가 같이 쓰는 작은 조각.
+
+카드 HTML을 손으로 고쳤다면 데이터 파일도 같이 고친다. 다시 찍었을 때 `git diff`가 비어야 한다.
