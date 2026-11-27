@@ -42,7 +42,7 @@ D = dict(
   slug="checkout", ko="결제 흐름", en="Checkout",
   desc="돈을 내기까지 거치는 여러 단계입니다. 비용을 처음부터 보여 주는 법, 이전 단계로 돌아가도 값을 남기는 법, 결제 버튼이 두 번 눌리는 일을 막는 법을 다룹니다.",
   lede="결제 흐름에서는 실제로 돈이 오가기 때문에, 여기서 생긴 사고는 화면 오류로 끝나지 않고 <b>이중 결제나 환불 같은 돈 문제</b>로 남습니다.",
-  axes_lede="화면 단위 패턴은 부품 하나가 아니라 사용자가 <b>끝내야 하는 일</b> 하나를 기준으로 나눕니다. 그래서 아래 네 가지를 따져 보면 화면끼리 구별할 수 있습니다.",
+  axes_lede="화면 단위 패턴은 사용자가 <b>끝내야 하는 일</b> 하나로 나눕니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>단계를 오가며 <b>이전</b>으로 돌아가 보세요. 앞에서 적은 값이 그대로 남아 있어야 합니다.<br>
           <b>금액을 늘 보여 주기</b>를 끄면 마지막 단계에서야 총액이 나옵니다. 배송비가 그때 처음 드러나면
@@ -115,7 +115,7 @@ D = dict(
     ('''              <div style="width:100%;max-width:150px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px">
                 <span style="font-size:9px;font-weight:700">한 화면에 다 넣기</span>
                 <span style="font-size:8.5px;color:var(--fg-muted)">배송 · 결제 · 확인이 한 장에</span>
-                <span style="font-size:8px;color:var(--fg-muted)">입력이 적을 때는 이쪽이 빠르다</span>
+                <span style="font-size:8px;color:var(--fg-muted)">입력이 적을 때는 이쪽이 빠름</span>
               </div>''',
      "한 화면에 모은 원페이지 결제", "입력 칸이 적으면 <b>단계를 나누지 않는 편</b>이 낫습니다"),
     ('''              <div style="width:100%;max-width:150px;font-family:var(--mono);font-size:9px;color:var(--fg-muted);display:grid;gap:2px">

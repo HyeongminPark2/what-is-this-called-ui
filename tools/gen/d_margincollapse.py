@@ -32,7 +32,7 @@ D = dict(
   slug="margincollapse", ko="여백 붕괴", en="Margin collapse",
   desc="맞닿은 세로 여백이 겹쳐 큰 쪽만 남는 규칙을 다루는 항목입니다. 두 여백을 더한 값이 왜 나오지 않는지, gap이 왜 더 나은지 보여 줍니다.",
   lede="맞닿은 세로 여백은 <b>더해지지 않고 겹칩니다</b>. 그래서 24px과 16px이 맞닿으면 간격은 40px이 아니라 큰 쪽인 <b>24px</b>이 됩니다.",
-  axes_lede="뼈대는 눈에 보이지 않지만 <b>모든 화면의 배치</b>를 정합니다. 아래 네 가지를 물어 보면 서로 갈립니다.",
+  axes_lede="뼈대는 눈에 보이지 않지만 <b>모든 배치</b>를 정합니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>여백을 주는 방법을 바꿔 가며 <b>실제 간격을 잰 값</b>을 보세요. 두 값을 더하면 40px이지만
           <code>margin</code>으로 붙이면 <b>24px</b>로 나옵니다.<br>

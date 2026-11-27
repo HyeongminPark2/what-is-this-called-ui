@@ -24,7 +24,7 @@ D = dict(
   slug="hangul", ko="한글 조판", en="Korean typography",
   desc="한글 줄바꿈(word-break: keep-all)과 행간, 영문 혼용, lang 속성까지 한국어 화면에서 지킬 글자 규칙을 보여 주는 항목입니다.",
   lede="브라우저의 기본 줄바꿈 규칙은 <b>영문 기준</b>이라서, 설정을 그대로 두면 한글은 <b>어절 한가운데서</b> 줄이 넘어갑니다.",
-  axes_lede="글자를 다루는 항목들은 값 하나를 바꾸면 글 전체가 함께 바뀐다는 점이 같습니다. 서로 구별하려면 아래 네 가지를 물어보면 됩니다.",
+  axes_lede="글자 항목은 값 하나가 글 전체를 바꿉니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>칸 너비를 줄여 보세요. 세 상자 아래에 <b>어절이 몇 군데 쪼개졌는지</b> 재서 알려 줍니다.
           기본값(normal)과 <code>break-all</code>은 '입금됩 / 니다'처럼 어절 중간에서 끊기고,

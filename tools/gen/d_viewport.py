@@ -33,7 +33,7 @@ D = dict(
   slug="viewport", ko="뷰포트 단위", en="Viewport units",
   desc="폰에서 100vh가 가리키는 높이가 주소창에 따라 달라지는 까닭과 svh·lvh·dvh의 차이, 바닥 버튼이 잘리는 이유를 보여 주는 항목입니다.",
   lede="폰 브라우저에서는 주소창이 숨었다 나타나기 때문에, <b>100vh 같은 뷰포트 단위가 가리키는 높이도 그때그때 달라집니다.</b>",
-  axes_lede="PC와 폰의 차이는 기계 자체보다 화면을 쓰는 <b>전제</b>에 있습니다. 아래 네 가지를 물어보면 두 환경이 어디서 갈리는지 알 수 있습니다.",
+  axes_lede="PC와 폰은 기계보다 <b>쓰는 전제</b>가 다릅니다. 아래 네 가지로 두 환경을 견줍니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>세 폰은 같은 화면을 각각 <code>100vh</code>·<code>100svh</code>·<code>100dvh</code>로 그린 것입니다.
           <b>주소창 보이기</b>를 켜 보면 <code>100vh</code>로 그린 폰에서만 바닥의 '다음' 버튼이 잘립니다.<br>

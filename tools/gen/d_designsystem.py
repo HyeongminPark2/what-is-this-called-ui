@@ -28,7 +28,7 @@ D = dict(
   slug="designsystem", ko="디자인 시스템", en="Design system",
   desc="디자인 시스템을 이루는 토큰과 부품, 패턴, 문서의 네 겹을 보여 주고, 스타일 가이드나 컴포넌트 라이브러리와 무엇이 다른지 가르는 항목입니다.",
   lede="디자인 시스템은 <b>토큰과 부품, 패턴, 문서</b>가 네 겹으로 쌓인 묶음입니다. 넷 중 하나라도 빠지면 스타일 가이드나 컴포넌트 라이브러리처럼 다른 이름으로 불러야 합니다.",
-  axes_lede="15부에서 다루는 현장 용어는 화면 부품의 이름 대신 디자인과 개발이 <b>함께 일하는 단계</b>를 가리킵니다. 아래 네 가지를 물어보면 이 용어들을 서로 구별할 수 있습니다.",
+  axes_lede="현장 용어는 부품이 아니라 디자인과 개발이 <b>함께 일하는 단계</b>를 가리킵니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>색을 바꿔 보세요. <b>토큰 하나</b>를 고치면 그 토큰을 참조하는 부품과 패턴의 색이 함께 바뀌는데,
           디자인 시스템이 하는 일은 대부분 이것입니다.<br>
@@ -59,7 +59,7 @@ D = dict(
     (layer('③ 패턴', '<span style="font-size:8.5px;font-weight:700">모란상회</span>'
            '<div style="display:flex;gap:4px">' + btn('정산 보기') + btn('내역', False) + '</div>', "152px", "부품을 모은 화면 조각", True),
      "패턴", "카드와 폼, 표처럼 <b>부품을 조립</b>해 만든 화면 단위입니다"),
-    (layer('④ 문서', '<span style="font-size:8.5px">주 동작에만 쓴다</span>'
+    (layer('④ 문서', '<span style="font-size:8.5px">주 동작에만 씀</span>'
            '<span style="font-size:8px;color:var(--fg-muted)">한 화면에 하나. 취소는 약하게</span>', "152px", "언제 쓰고 언제 안 쓰는지", True),
      "문서", "부품을 언제 쓰는지 적습니다. <b>문서가 빠지면</b> 사람마다 아무 부품이나 골라 씁니다"),
     (layer('규칙만', '<span style="font-size:8.5px;color:var(--fg-muted)">주 색은 #2f6df6<br>본문은 15px</span>', "152px", "가져다 쓸 부품이 없음", False),
@@ -105,7 +105,7 @@ D = dict(
     (layer('버튼', btn('저장') + ' ' + btn('취소', False) + ' ' + btn('삭제'), "150px", "변형을 미리 정해 둠"),
      "부품의 변형 정해 두기", "정해 둔 변형을 <a href=\"variant.html\">배리언트</a>로 묶어 둡니다"),
     (layer('쓰는 법', '<span style="font-size:8.5px">주 동작에만 · 한 화면에 하나</span>'
-           '<span style="font-size:8px;color:var(--danger)">취소에는 쓰지 않는다</span>', "150px", "두 줄이면 충분함"),
+           '<span style="font-size:8px;color:var(--danger)">취소에는 쓰지 않음</span>', "150px", "두 줄이면 충분함"),
      "부품 쓰는 법 적어 두기", "부품을 <b>언제 쓰고 언제 안 쓰는지</b> 적습니다"),
   ]),
   s8_title="최소 구조와 규칙", s8_hint="토큰과 부품을 나눠 두는 법",

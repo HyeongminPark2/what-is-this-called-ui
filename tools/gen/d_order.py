@@ -39,7 +39,7 @@ D = dict(
   slug="order", ko="보이는 순서와 읽는 순서", en="Visual order vs DOM order",
   desc="눈에 보이는 차례와 Tab·스크린 리더가 따라가는 차례를 비교하고, CSS로 자리를 바꾸면 왜 두 차례가 어긋나는지 보여 주는 항목입니다.",
   lede="CSS로는 <b>보이는 자리</b>만 바꿀 수 있습니다. <b>Tab으로 옮겨 가는 차례와 스크린 리더가 읽어 주는 차례</b>는 CSS와 상관없이 마크업 순서를 따릅니다.",
-  axes_lede="뼈대는 눈에 보이지 않지만 <b>모든 화면의 배치</b>를 정합니다. 아래 네 가지를 물어 보면 서로 갈립니다.",
+  axes_lede="뼈대는 눈에 보이지 않지만 <b>모든 배치</b>를 정합니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>보이는 차례를 바꾸는 방법을 고른 뒤 <b>Tab으로 차례대로 옮겨 보기</b>를 누르면 초점이 옮겨 간 차례가 적힙니다.<br>
           <code>row-reverse</code>나 <code>order</code>로 뒤집으면 눈에는 <b>취소</b>가 먼저 보이지만

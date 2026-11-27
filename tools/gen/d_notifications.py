@@ -37,7 +37,7 @@ D = dict(
   slug="notifications", ko="알림 센터", en="Notification center",
   desc="놓친 소식을 따라잡는 화면입니다. 언제 읽음으로 처리할지, 같은 알림을 어떻게 묶을지, 배지 숫자를 목록과 어떻게 맞출지 다룹니다.",
   lede="알림 센터는 사용자가 놓친 소식을 <b>따라잡는</b> 화면입니다. 목록을 그리는 일보다 <b>언제 읽음으로 처리할지</b> 정하는 일이 더 까다롭습니다.",
-  axes_lede="화면 단위 패턴은 부품 하나가 아니라 사용자가 <b>끝내야 하는 일</b> 하나를 기준으로 나눕니다. 그래서 아래 네 가지를 따져 보면 화면끼리 구별할 수 있습니다.",
+  axes_lede="화면 단위 패턴은 사용자가 <b>끝내야 하는 일</b> 하나로 나눕니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>열면 전부 읽음</b>으로 바꿔 보세요. 배지는 0이 되지만 사용자가 <b>실제로 무엇을 봤는지는 알 수 없습니다</b>.
           목록을 훑다가 닫으면 안 본 알림도 읽음으로 바뀌어서 나중에 다시 찾을 방법이 없습니다.<br>
@@ -113,7 +113,7 @@ D = dict(
      "묶어서 보여 주기", "<b>한 줄에 건수를 붙여</b> 보여 주면 목록이 짧아져 훑어보기 쉽습니다"),
     ('''              <div style="width:100%;max-width:150px;display:grid;gap:4px">
                 <div style="display:flex;gap:4px;font-size:8.5px"><span style="background:var(--accent);color:#fff;border-radius:999px;padding:1px 7px">전체</span><span style="border:1px solid var(--line);border-radius:999px;padding:1px 7px">정산</span><span style="border:1px solid var(--line);border-radius:999px;padding:1px 7px">공지</span></div>
-                <span style="font-size:8px;color:var(--fg-muted)">갈래로 나눠 두면 광고가 섞여도 덜 밉다</span>
+                <span style="font-size:8px;color:var(--fg-muted)">갈래를 나눠 두면 광고가 섞여도 덜 거슬림</span>
               </div>''',
      "중요한 알림과 소식 나눠 두기", "중요한 알림과 일반 소식을 <b>나눠</b> 둡니다"),
     ('''              <div style="width:100%;max-width:150px;display:grid;gap:4px">

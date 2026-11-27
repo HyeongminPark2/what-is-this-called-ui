@@ -104,15 +104,15 @@ PARTS = {
 }
 
 AXES = [
-    ("모달",            "막는다",          "가둔다",          "잠긴다",        "가운데"),
-    ("다이얼로그(비모달)", "안 막는다",        "안 가둔다",        "그대로 움직인다", "가운데에 띄워 둔 채"),
-    ("바텀시트",         "막을 때도 있다",    "뒤를 막을 때만",    "뒤를 막을 때만",  "아래에서 올라옴"),
-    ("드로어",           "보통 막는다",      "가둔다",          "잠긴다",        "옆에서 밀려 나옴"),
-    ("팝오버",           "안 막는다",        "가두기도 한다",     "그대로 움직인다", "누른 것 옆"),
-    ("툴팁",            "안 막는다",        "안 가둔다",        "그대로 움직인다", "가리킨 것 옆"),
-    ("토스트",          "안 막는다",        "안 가둔다",        "그대로 움직인다", "구석에 떴다 저절로 사라짐"),
+    ("모달",            "막음",          "가둠",          "잠김",        "가운데"),
+    ("다이얼로그(비모달)", "안 막음",        "안 가둠",        "그대로 움직임", "가운데에 띄워 둔 채"),
+    ("바텀시트",         "막을 때도 있음",    "뒤를 막을 때만",    "뒤를 막을 때만",  "아래에서 올라옴"),
+    ("드로어",           "보통 막음",      "가둠",          "잠김",        "옆에서 밀려 나옴"),
+    ("팝오버",           "안 막음",        "가두기도 함",     "그대로 움직임", "누른 것 옆"),
+    ("툴팁",            "안 막음",        "안 가둠",        "그대로 움직임", "가리킨 것 옆"),
+    ("토스트",          "안 막음",        "안 가둠",        "그대로 움직임", "구석에 떴다 저절로 사라짐"),
 ]
-NONE = {"안 막는다", "안 가둔다", "그대로", "그대로 움직인다", "모른다", "안 잡는다", "없다", "해당 없음", "—", "안 된다", "없음", "안 보여 준다"}
+NONE = {"안 막음", "안 가둠", "그대로", "그대로 움직임", "모름", "안 잡음", "없음", "해당 없음", "—", "안 됨", "없음", "안 보여 줌", "안 막는다", "안 가둔다", "그대로", "그대로 움직인다", "모른다", "안 잡는다", "없다", "해당 없음", "—", "안 된다", "없음", "안 보여 준다"}
 
 
 def axis_table(me):
@@ -250,11 +250,11 @@ def page(d):
     # 칸 이름은 부마다 조금씩 다르다. 토큰에는 '키보드'도 '상태'도 그대로 맞지 않는다.
     # 부마다 비교 축의 첫 줄이 다르다. 안 적은 카드는 그 부의 것을 쓴다.
     PART_LEDE = {
-        "4부 조작 부품": "조작 부품은 모두 사용자에게서 값을 받는다는 점은 같지만, 아래 네 가지를 따져 보면 서로 구별할 수 있습니다.",
-        "6부 겹치는 것들": "겹쳐 뜨는 부품들은 모양만 보고는 구별하기 어렵지만, 아래 네 가지를 따져 보면 어느 부품인지 가려낼 수 있습니다.",
+        "4부 조작 부품": "조작 부품은 모두 값을 받습니다. 아래 네 가지로 서로 가릅니다.",
+        "6부 겹치는 것들": "겹쳐 뜨는 부품은 생김새로는 가르기 어렵습니다. 아래 네 가지로 가릅니다.",
     }
     d.setdefault("axes_lede", PART_LEDE.get(d["part"],
-                 "겹쳐 뜨는 부품들은 모양만 보고는 구별하기 어렵지만, 아래 네 가지를 따져 보면 어느 부품인지 가려낼 수 있습니다."))
+                 "겹쳐 뜨는 부품은 생김새로는 가르기 어렵습니다. 아래 네 가지로 가릅니다."))
     d.setdefault("s4_title", "상태")
     d.setdefault("s4_hint", "상태마다 달라지는 모습")
     d.setdefault("s8_title", "최소 마크업과 키보드")
@@ -272,7 +272,7 @@ def page(d):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{ko} — 이름표</title>
+<title>{ko} · What Is This Called? — UI</title>
 <meta name="description" content="{desc}">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
@@ -282,7 +282,7 @@ def page(d):
 <a class="skip" href="#main">본문으로</a>
 
 <header class="topbar">
-  <a class="brand" href="../index.html">이름표<small>화면 속 그게 뭔지 알려주는 도감</small></a>
+  <a class="brand" href="../index.html">What Is This Called?&nbsp;—&nbsp;UI<small>화면 속 그게 뭔지 알려주는 도감</small></a>
   <nav>
     <a href="../index.html#map">화면 지도</a>
     <a href="../index.html#pairs">혼동 쌍</a>
@@ -294,7 +294,7 @@ def page(d):
 <main id="main" class="wrap">
 
   <div class="item-head">
-    <p class="crumb"><a href="../index.html">이름표</a> › <a href="../index.html#toc">{part}</a> › {ko}</p>
+    <p class="crumb"><a href="../index.html">What Is This Called? — UI</a> › <a href="../index.html#toc">{part}</a> › {ko}</p>
     <h1>{ko}</h1>
     <p class="en">{en}</p>
     <p class="lede" style="margin-top:var(--s3)">{lede}</p>
@@ -333,7 +333,7 @@ def page(d):
       </section>
 
       <section class="slot" id="s3">
-        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">헷갈리는 형제 부품과 견주는 네 가지 기준</span></h2>
+        <h2 class="slot-label"><span class="n">3</span> 가르는 기준<span class="hint">형제 부품과 견주는 네 가지 기준</span></h2>
         <p>{axes_lede}</p>
 {axes}
         <div class="note" style="margin-bottom:0">
@@ -436,13 +436,13 @@ def page(d):
       <ol>
 {related}
       </ol>
-      <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
+      <p style="font-size:12.5px;color:var(--fg-muted)">회색 이름은 아직 카드가 없는 항목입니다.</p>
     </aside>
   </div>
 </main>
 
 <footer class="site-foot wrap">
-  <p>이름표 — 화면 속 그게 뭔지 알려주는 도감. 모든 그림은 직접 그린 재현이며, 특정 제품의 화면을 캡처한 것이 아닙니다.</p>
+  <p>What Is This Called? — UI. 화면 속 그게 뭔지 알려주는 도감입니다. 그림은 모두 직접 그린 재현입니다.</p>
 </footer>
 
 <script src="../assets/card.js"></script>

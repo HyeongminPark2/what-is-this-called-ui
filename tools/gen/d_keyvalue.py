@@ -3,7 +3,7 @@ from ax5 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
-L5 = "표시 부품은 모두 무언가를 보여 주기만 한다는 점이 같아서, 아래 네 가지를 물어봐야 서로 구별됩니다."
+L5 = "표시 부품은 모두 보여 주기만 합니다. 아래 네 가지로 서로 가릅니다."
 
 def kv(pairs, label, note="", ok=None, w="152px", kw="52px", stack=False, cut=True):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")

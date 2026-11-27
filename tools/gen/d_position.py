@@ -35,7 +35,7 @@ D = dict(
   slug="position", ko="포지션", en="Position",
   desc="포지션의 다섯 값이 자리를 차지하는지, 무엇을 기준으로 움직이는지를 보여 주고, absolute의 기준을 찾는 법과 fixed가 화면에 붙지 않는 함정을 다루는 항목입니다.",
   lede="포지션의 다섯 값은 요소가 <b>자리를 차지하는가</b>와 <b>무엇을 기준으로 움직이는가</b>, 이 두 가지를 정합니다.",
-  axes_lede="뼈대는 눈에 보이지 않지만 <b>모든 화면의 배치</b>를 정합니다. 아래 네 가지를 물어 보면 서로 갈립니다.",
+  axes_lede="뼈대는 눈에 보이지 않지만 <b>모든 배치</b>를 정합니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>값을 바꿔 가며 <b>점선 칸</b>을 보세요. <code>absolute</code>와 <code>fixed</code>는
           흐름에서 빠지기 때문에 <b>자리를 차지하지 않습니다</b>.<br>

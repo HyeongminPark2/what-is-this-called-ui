@@ -34,7 +34,7 @@ D = dict(
   slug="cheap", ko="무엇을 움직이나", en="Cheap vs expensive properties",
   desc="transform과 opacity는 배치를 다시 계산하지 않지만 left와 width는 다시 계산합니다. 화면이 버벅이는 원인 대부분이 이 차이에서 나온다는 것을 보여 주는 항목입니다.",
   lede="같은 움직임이라도 <b>어떤 속성을 바꾸느냐</b>에 따라 브라우저가 치르는 비용이 다릅니다. 움직임이 버벅이는 원인은 대부분 여기에 있습니다.",
-  axes_lede="움직임은 화면에서 무엇이 바뀌었는지 사용자에게 <b>알려 주는</b> 역할을 합니다. 아래 네 가지를 따져 보면 움직임을 다루는 항목들을 서로 구별할 수 있습니다.",
+  axes_lede="움직임은 무엇이 바뀌었는지 <b>알려 주는</b> 수단입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>네 가지 방법으로 같은 거리를 움직이면서 <b>한 프레임을 만드는 데 걸린 시간</b>을 잽니다.<br>
           상자 수를 늘리면 차이가 벌어지는데, <code>transform</code>과 <code>opacity</code>는

@@ -2,7 +2,7 @@
 from _tx import one, code, txt, mono
 from tmpl import axis_table, siblings, states, cases, pins, plats, rows, ul, kbd
 
-L6 = "겹쳐 뜨는 부품들은 모양만 보고는 구별하기 어렵지만, 아래 네 가지를 따져 보면 어느 부품인지 가려낼 수 있습니다."
+L6 = "겹쳐 뜨는 부품은 생김새로는 가르기 어렵습니다. 아래 네 가지로 가릅니다."
 
 def fs(kind, label, note="", ok=None, w="152px"):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")

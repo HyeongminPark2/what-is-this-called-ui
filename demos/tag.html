@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>태그 데모 — 이름표</title>
+<title>태그 데모 · What Is This Called? — UI</title>
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/demo.css">
 <style>
@@ -94,7 +94,7 @@
     document.getElementById('verdict').innerHTML = Q.map(function (q) {
       return '<div class="tgv__r" data-q="' + q[0] + '"><span class="q">' + q[0] + '</span>' +
         '<span style="color:' + (q[1] ? 'var(--accent)' : 'var(--fg-muted)') + '">' +
-        (q[1] ? '그렇다' : '아니다') + '</span></div>';
+        (q[1] ? '예' : '아니요') + '</span></div>';
     }).join('');
 
     var rd = document.getElementById('read');

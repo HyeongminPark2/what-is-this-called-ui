@@ -26,7 +26,7 @@ D = dict(
   slug="color", ko="색 토큰", en="Color tokens · semantic color",
   desc="색을 #2f6df6 같은 값 대신 --accent 같은 쓰임의 이름으로 정해 두는 방법을 실물과 해부도로 보여 주는 항목입니다.",
   lede="색 토큰은 색을 <b>값</b> 대신 <b>쓰임</b>의 이름으로 부르기로 정해 둔 것입니다. 화면 코드에는 <code>#2f6df6</code> 같은 값을 적지 않고 <code>--accent</code> 같은 이름만 적습니다.",
-  axes_lede="토큰은 눈에 보이는 부품이 아니라 값을 어떻게 쓸지 <b>정해 둔 규칙</b>입니다. 그래서 생김새 대신 아래 네 가지를 물어보면 토큰끼리 무엇이 다른지 가려집니다.",
+  axes_lede="토큰은 부품이 아니라 <b>값을 쓰는 규칙</b>입니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>1단은 색 자체의 이름(<code>blue-500</code>), 2단은 쓰임의 이름(<code>--accent</code>), 3단은 부품 전용 이름(<code>button-bg</code>)입니다.
           <b>어두운 화면으로</b>를 켜면 2단의 <b>화살표만</b> 다른 색을 가리키도록 바뀝니다.

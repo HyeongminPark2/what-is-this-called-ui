@@ -28,7 +28,7 @@ D = dict(
   slug="sizing", ko="크기 정하기", en="Sizing",
   desc="width·max-width와 min-content·max-content·fit-content·clamp를 비교하고, 칸이 좁아질 때 어떤 값이 줄어들지 않고 넘치는지 보여 주는 항목입니다.",
   lede="크기를 정하는 값은 여럿이지만, 서로 갈리는 지점은 <b>칸이 좁아질 때 함께 줄어드는가</b> 하나입니다.",
-  axes_lede="뼈대는 눈에 보이지 않지만 <b>모든 화면의 배치</b>를 정합니다. 아래 네 가지를 물어 보면 서로 갈립니다.",
+  axes_lede="뼈대는 눈에 보이지 않지만 <b>모든 배치</b>를 정합니다. 아래 네 가지로 서로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>칸 폭을 좁히면서 <b>어떤 값이 넘치는지</b> 보세요. 넘친 줄은 빨갛게 표시됩니다.<br>
           <code>width: 300px</code>은 줄어들지 않아서 넘치고, <code>max-width: 300px</code>은 칸과 함께 줄어듭니다.

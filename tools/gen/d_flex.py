@@ -33,7 +33,7 @@ D = dict(
   slug="flex", ko="플렉스", en="Flexbox · flex layout",
   desc="플렉스의 주축과 교차축, flex:1, 그리고 min-width:0을 빠뜨려서 생기는 문제를 실물과 해부도로 보여 주는 항목입니다.",
   lede="플렉스는 자식 요소들을 <b>한 줄(또는 한 열)에 늘어놓는</b> 방법입니다. 화면에서 요소를 가로로 늘어놓는 배치는 대부분 플렉스로 만듭니다.",
-  axes_lede="뼈대를 다루는 항목들은 눈에 보이지 않으면서 요소의 자리를 정한다는 점이 같아서 생김새로는 구별하기 어렵습니다. 대신 아래 네 가지를 물어 보면 서로 갈립니다.",
+  axes_lede="뼈대 항목은 눈에 보이지 않고 자리만 정해서 생김새로는 가를 수 없습니다. 아래 네 가지로 가릅니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>방향을 <code>column</code>으로 바꿔 보세요. <b><code>justify-content</code>와 <code>align-items</code>가 맡는 방향이 서로 뒤바뀝니다</b>.
           두 속성은 가로·세로가 아니라 <b>주축·교차축</b>을 기준으로 하기 때문입니다.<br>

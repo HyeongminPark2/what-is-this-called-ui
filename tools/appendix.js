@@ -76,8 +76,8 @@ const page = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>색인 — 이름표</title>
-<meta name="description" content="이름표에 실린 ${rows.length}개 항목을 가나다순으로 모은 색인입니다. 한국어 이름과 영어 이름으로 찾을 수 있습니다.">
+<title>색인 · What Is This Called? — UI</title>
+<meta name="description" content="이 도감에 실린 ${rows.length}개 항목을 가나다순으로 모은 색인입니다. 한국어 이름과 영어 이름으로 찾을 수 있습니다.">
 <link rel="stylesheet" href="assets/base.css">
 <link rel="stylesheet" href="assets/card.css">
 <link rel="stylesheet" href="assets/demo.css">
@@ -86,7 +86,7 @@ const page = `<!doctype html>
 <a class="skip" href="#main">본문으로</a>
 
 <header class="topbar">
-  <a class="brand" href="index.html">이름표<small>화면 속 그게 뭔지 알려주는 도감</small></a>
+  <a class="brand" href="index.html">What Is This Called?&nbsp;—&nbsp;UI<small>화면 속 그게 뭔지 알려주는 도감</small></a>
   <nav>
     <a href="index.html#map">화면 지도</a>
     <a href="index.html#pairs">혼동 쌍</a>
@@ -96,10 +96,10 @@ const page = `<!doctype html>
 
 <main id="main" class="wrap">
   <div class="card-head">
-    <p class="crumb"><a href="index.html">이름표</a> › 색인</p>
+    <p class="crumb"><a href="index.html">What Is This Called? — UI</a> › 색인</p>
     <h1>색인</h1>
     <p class="en">Index</p>
-    <p class="lede" style="margin-top:var(--s3)">${rows.length}개 항목을 가나다순으로 모았습니다. <b>이름을 이미 아는 사람</b>이 바로 찾아가는 곳이라서, 이름을 모르면 <a href="index.html#map">화면 지도</a>에서 생김새로 찾는 편이 빠릅니다.</p>
+    <p class="lede" style="margin-top:var(--s3)">${rows.length}개 항목을 가나다순으로 모았습니다. 이름을 모르면 <a href="index.html#map">화면 지도</a>에서 찾으세요.</p>
   </div>
 
   <div class="ix__bar">
@@ -118,7 +118,7 @@ ${body}
 </main>
 
 <footer class="foot">
-  <p><a href="index.html">← 이름표</a> · 직접 그린 재현만 씁니다. 남의 제품 화면 캡처는 쓰지 않습니다.</p>
+  <p><a href="index.html">← 처음으로</a> · 직접 그린 재현만 씁니다. 남의 제품 화면 캡처는 쓰지 않습니다.</p>
 </footer>
 
 <script>

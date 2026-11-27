@@ -148,6 +148,11 @@ kbd {
 .topbar nav { margin-left: auto; display: flex; gap: var(--s4); font-size: 14px; }
 .topbar nav a { color: var(--fg-muted); text-decoration: none; }
 .topbar nav a:hover { color: var(--fg); }
+@media (max-width: 560px) {
+  .topbar { gap: var(--s3); padding: var(--s3) var(--s4); }
+  .topbar .brand { font-size: 15px; white-space: normal; min-width: 0; }
+  .topbar nav { gap: var(--s3); font-size: 13px; flex-shrink: 0; }
+}
 
 .lede {
   font-size: clamp(17px, 2.2vw, 20px);

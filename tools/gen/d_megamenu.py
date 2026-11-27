@@ -3,7 +3,7 @@ from ax7 import ax
 from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
-LEDE7 = "길 안내 부품은 모두 누르면 다른 곳으로 옮겨 간다는 점이 같습니다. 그래서 아래 네 가지를 물어보면 서로 구별할 수 있습니다."
+LEDE7 = "길 안내 부품은 모두 누르면 다른 곳으로 옮겨 갑니다. 아래 네 가지로 서로 가릅니다."
 
 def menu(open_i, cols, w="152px", note="", ok=None, heads=("의류", "생활용품", "식품")):
     c = "var(--accent)" if ok else ("var(--danger)" if ok is False else "var(--line)")
