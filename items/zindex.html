@@ -76,10 +76,10 @@
         <p>토큰은 눈에 보이는 부품이 아니라 값을 어떻게 쓸지 <b>정해 둔 규칙</b>입니다. 그래서 생김새 대신 아래 네 가지를 물어보면 토큰끼리 무엇이 다른지 가려집니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하나</th><th>몇 단이 좋나</th><th>바꾸면 어디가 바뀌나</th><th>틀렸을 때 증상</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 정하는가</th><th>몇 단으로 두면 좋은가</th><th>값을 바꾸면 어디가 바뀌는가</th><th>잘못 정했을 때 나타나는 증상</th></tr></thead>
           <tbody>
             <tr><td>색 토큰</td><td>색의 <b>쓰임</b></td><td>쓰임 10여 개</td><td>브랜드 색 전체</td><td>같은 파랑이 화면마다 조금씩 다릅니다</td></tr>
-            <tr><td>다크 모드</td><td><b>두 벌</b>의 값</td><td>2벌(+고대비)</td><td>화면 전체의 바탕과 글자</td><td>어두운 화면에 흰 상자 하나만 남아 눈이 부십니다</td></tr>
+            <tr><td>다크 모드</td><td><b>두 벌</b>의 값</td><td>2벌, 고대비까지 두면 3벌</td><td>화면 전체의 바탕과 글자</td><td>어두운 화면에 흰 상자 하나만 남아 눈이 부십니다</td></tr>
             <tr><td>타입 스케일</td><td>글자 크기 <b>단계</b></td><td>6~8단</td><td>제목과 본문의 크기</td><td>무엇이 더 중요한지 알아보기 어렵습니다</td></tr>
             <tr><td>간격 체계</td><td>여백의 <b>단위</b></td><td>6~8단(4·8의 배수)</td><td>모든 패딩과 줄 간격</td><td>딱 집어 말하기 어렵지만 어수선해 보입니다</td></tr>
             <tr><td>고도</td><td>그림자의 <b>세기</b></td><td>4~5단</td><td>떠 있는 부품들</td><td>무엇이 위에 있는지 알 수 없습니다</td></tr>
@@ -88,7 +88,7 @@
             <tr><td>테두리와 구분선</td><td><b>가르는 선</b></td><td>선 1~2종</td><td>목록 · 카드 · 표</td><td>선이 두 겹이 되고 화면이 어수선해집니다</td></tr>
             <tr><td>불투명도</td><td><b>흐린 정도</b></td><td>2~3단</td><td>비활성 · 가림막 · 흐린 글</td><td>글이 잘 읽히지 않고 z-index가 적용되지 않습니다</td></tr>
             <tr><td>아이콘 크기</td><td>그림의 <b>크기</b></td><td>3~4단(16·20·24)</td><td>버튼 · 목록 · 앱바</td><td>선이 흐리고 글자와 가운데가 맞지 않습니다</td></tr>
-            <tr><td>상태 색</td><td>성공 · 주의 · 오류 · 정보</td><td>4가지 × 3자리</td><td>알림 · 배지 · 입력 오류</td><td>색을 구별하지 못하면 상태를 알 수 없습니다</td></tr>
+            <tr><td>상태 색</td><td>성공 · 주의 · 오류 · 정보</td><td>4가지, 색마다 3자리</td><td>알림 · 배지 · 입력 오류</td><td>색을 구별하지 못하면 상태를 알 수 없습니다</td></tr>
             <tr><td>토큰 이름 짓기</td><td>이름의 <b>규칙</b></td><td>층 3겹</td><td>토큰 전부</td><td>이름과 값이 어긋나 어느 토큰을 고쳐야 할지 알 수 없습니다</td></tr>
           </tbody>
         </table>
@@ -99,43 +99,43 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 층<span class="hint">숫자 대신 이름으로 부르는 층</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 층 목록과 층마다 놓이는 부품<span class="hint">숫자 대신 이름으로 부르는 층</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:7px;justify-items:center;width:100%"><span style="display:block;width:100%;max-width:120px;border-radius:8px;background:var(--surface);color:var(--fg);border:1px solid var(--line);padding:9px 10px;font-size:11px;text-align:center">본문</span><span style="font-family:var(--mono);font-size:10.5px;color:var(--accent);font-weight:700">z: auto</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">그리는 순서대로</span></div>
             </div>
-            <figcaption>본문<span>z-index 번호를 주지 않습니다. <b>대부분의 요소가 이 층에</b> 있어야 합니다</span></figcaption>
+            <figcaption>본문 층<span>z-index 번호를 주지 않습니다. <b>대부분의 요소가 이 층에</b> 있어야 합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:7px;justify-items:center;width:100%"><span style="display:block;width:100%;max-width:120px;border-radius:8px;background:var(--surface);color:var(--fg);border:1px solid var(--line);padding:9px 10px;font-size:11px;text-align:center">상단 바</span><span style="font-family:var(--mono);font-size:10.5px;color:var(--accent);font-weight:700">z: 100</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">스크롤해도 붙어 있는 것</span></div>
             </div>
-            <figcaption>붙박이<span>머리말과 꼬리말이 놓이는 층으로, 본문보다는 위이고 나머지 층보다는 아래입니다</span></figcaption>
+            <figcaption>붙박이 머리말 층<span>머리말과 꼬리말이 놓이는 층으로, 본문보다는 위이고 나머지 층보다는 아래입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:7px;justify-items:center;width:100%"><span style="display:block;width:100%;max-width:120px;border-radius:8px;background:var(--surface);color:var(--fg);border:1px solid var(--line);padding:9px 10px;font-size:11px;text-align:center">드롭다운</span><span style="font-family:var(--mono);font-size:10.5px;color:var(--accent);font-weight:700">z: 300</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">눌러서 연 것</span></div>
             </div>
-            <figcaption>떠 있는 것<span>팝오버나 툴팁처럼 <b>곧 닫히는</b> 부품이 놓입니다</span></figcaption>
+            <figcaption>잠깐 떠 있는 부품 층<span>팝오버나 툴팁처럼 <b>곧 닫히는</b> 부품이 놓입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:7px;justify-items:center;width:100%"><span style="display:block;width:100%;max-width:120px;border-radius:8px;background:rgba(14,16,20,.55);color:#fff;border:1px solid var(--line);padding:9px 10px;font-size:11px;text-align:center">가림막</span><span style="font-family:var(--mono);font-size:10.5px;color:var(--accent);font-weight:700">z: 500</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">뒤를 덮는 막</span></div>
             </div>
-            <figcaption>가림막<span>모달 바로 아래 한 칸에 둡니다</span></figcaption>
+            <figcaption>가림막 층<span>모달 바로 아래 한 칸에 둡니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:7px;justify-items:center;width:100%"><span style="display:block;width:100%;max-width:120px;border-radius:8px;background:var(--surface);color:var(--fg);border:1px solid var(--line);padding:9px 10px;font-size:11px;text-align:center">모달</span><span style="font-family:var(--mono);font-size:10.5px;color:var(--accent);font-weight:700">z: 600</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">화면을 가로막은 것</span></div>
             </div>
-            <figcaption>모달<span>가림막보다 <b>딱 한 칸</b> 위에 둡니다</span></figcaption>
+            <figcaption>모달 층<span>가림막보다 <b>딱 한 칸</b> 위에 둡니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:7px;justify-items:center;width:100%"><span style="display:block;width:100%;max-width:120px;border-radius:8px;background:var(--ink-900);color:#fff;border:1px solid var(--line);padding:9px 10px;font-size:11px;text-align:center">토스트</span><span style="font-family:var(--mono);font-size:10.5px;color:var(--accent);font-weight:700">z: 800</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">모달 위에도 떠야 하는 것</span></div>
             </div>
-            <figcaption>토스트<span>가장 위층입니다. 이보다 높은 층은 <b>만들지 않습니다</b></span></figcaption>
+            <figcaption>토스트 층<span>가장 위층입니다. 이보다 높은 층은 <b>만들지 않습니다</b></span></figcaption>
           </figure>
         </div>
       </section>
@@ -154,7 +154,7 @@
                       <div class="pin-out" data-pin="4" style="background:var(--accent-soft);color:var(--accent);border-radius:7px;padding:7px 10px;font-size:11px;font-weight:700">자식 · z-index: 9999</div>
                     </div>
                   </div>
-                  <div class="pin-out" data-pin="5" style="background:var(--ink-900);color:#fff;border-radius:7px;padding:7px 10px;font-size:11px">형제 · z-index: 1 — 이쪽이 위에 그려집니다</div>
+                  <div class="pin-out" data-pin="5" style="background:var(--ink-900);color:#fff;border-radius:7px;padding:7px 10px;font-size:11px">형제 · z-index: 1, 이쪽이 위에 그려짐</div>
                 </div>
               </div>
             </div>
@@ -195,7 +195,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>z-index 대신 다른 것을 써야 하는 경우</b> — 요소가 떠 <b>보이게</b> 하는 일은 <a href="elevation.html">고도</a>에서 다루고, 어떤 부품이 뒤 화면을 막는지는 <a href="../items/modal.html">모달</a>·<a href="../items/toast.html">토스트</a>에 정리돼 있습니다.</p>
+        <p style="margin:var(--s4) 0 0"><b>z-index와 함께 보면 좋은 항목</b> — 요소가 떠 <b>보이게</b> 하는 방법은 <a href="elevation.html">고도</a> 항목에서 다루고, 어떤 부품이 뒤 화면을 막는지는 <a href="../items/modal.html">모달</a> 항목과 <a href="../items/toast.html">토스트</a> 항목에 정리돼 있습니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -211,7 +211,7 @@
                 <span style="color:var(--accent);font-family:var(--mono);text-align:right">800</span><span>토스트</span>
               </div>
             </div>
-            <figcaption><b>층 목록</b>층 목록을 한 파일에 모아 두고, <b>목록에 없는 숫자는 쓰지 않습니다</b></figcaption>
+            <figcaption><b>층 목록을 한 파일에 모으기</b>층 목록을 한 파일에 모아 두고, <b>목록에 없는 숫자는 쓰지 않습니다</b></figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -220,22 +220,22 @@
                 <span style="position:absolute;left:12px;top:30px;width:116px;border-radius:7px;background:var(--surface);border:1px solid var(--line);padding:7px 9px;font-size:10.5px;box-shadow:0 4px 12px rgba(20,22,26,.1)">계정 메뉴</span>
               </div>
             </div>
-            <figcaption><b>메뉴와 머리말</b>메뉴(300)가 머리말(100)보다 위에 놓입니다. <b>순서가 반대면</b> 메뉴가 머리말에 가려 잘려 보입니다</figcaption>
+            <figcaption><b>메뉴를 머리말보다 위에 두기</b>메뉴(300)가 머리말(100)보다 위에 놓입니다. <b>순서가 반대면</b> 메뉴가 머리말에 가려 잘려 보입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:200px;display:grid;gap:6px">
                 <span style="display:block;border-radius:7px;background:var(--surface);border:1px dashed var(--danger);padding:8px;font-size:10.5px">부모 · transform 있음</span>
-                <span style="display:block;border-radius:7px;background:var(--danger-soft, #fdeceb);color:var(--danger);padding:8px;font-size:10.5px;font-weight:700">자식 z: 9999 — 그래도 아래</span>
+                <span style="display:block;border-radius:7px;background:var(--danger-soft, #fdeceb);color:var(--danger);padding:8px;font-size:10.5px;font-weight:700">자식 z: 9999라도 아래에 깔림</span>
               </div>
             </div>
-            <figcaption><b>안 먹는 z-index</b>숫자를 잘못 준 것이 아니라 <b>쌓임 맥락</b> 때문에 생긴 문제입니다</figcaption>
+            <figcaption><b>z-index가 적용되지 않는 경우</b>숫자를 잘못 준 것이 아니라 <b>쌓임 맥락</b> 때문에 생긴 문제입니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">층을 코드로 옮기는 법</span></h2>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 지킬 규칙<span class="hint">층 목록을 코드로 옮기는 방법</span></h2>
         <p>층을 <b>이름으로</b> 정해 두고 코드에서는 그 이름만 씁니다. 숫자를 직접 적는 곳이 한 군데라도 생기면 층 목록과 실제 값이 어긋나기 시작합니다.</p>
 <pre class="code"><span class="t">:root</span> {
   <span class="a">--z-sticky</span>: <span class="s">100</span>;
@@ -256,14 +256,14 @@
 &lt;<span class="t">dialog</span>&gt;, [<span class="a">popover</span>]</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>규칙</th><th>지켜야 하는 것</th></tr></thead>
+          <thead><tr><th>지킬 규칙</th><th>지키는 방법과 이유</th></tr></thead>
           <tbody>
-            <tr><td>층을 먼저 정한다</td><td>다섯~여섯 층이면 충분합니다. 층 사이를 100씩 띄워 나중에 끼워 넣을 자리를 남깁니다</td></tr>
-            <tr><td>숫자를 직접 안 쓴다</td><td><code>var(--z-modal)</code>처럼 이름만 씁니다. 코드에 숫자가 보이면 리뷰에서 막습니다</td></tr>
-            <tr><td><code>position</code>을 함께</td><td><code>position</code>이 <code>static</code>이면 z-index가 무시됩니다. 'z-index가 안 먹어요'라는 문제의 두 번째로 흔한 원인입니다</td></tr>
-            <tr><td>맥락을 의심한다</td><td>z-index가 적용되지 않으면 숫자를 올리지 말고 부모에 걸린 <code>transform · opacity · filter</code>부터 찾습니다</td></tr>
-            <tr><td>가림막과 모달은 한 칸 차이</td><td>500과 600처럼 바로 이웃한 층에 둡니다. 둘 사이에 다른 층이 끼면 그 층의 요소가 가림막 위로 드러납니다</td></tr>
-            <tr><td><code>&lt;dialog&gt;</code>·<code>popover</code> 를 먼저</td><td>브라우저가 <b>최상위 레이어</b>에 그려 주기 때문에 쌓임 맥락 문제가 아예 생기지 않습니다</td></tr>
+            <tr><td>층 목록부터 정하기</td><td>다섯~여섯 층이면 충분합니다. 층 사이를 100씩 띄워 나중에 끼워 넣을 자리를 남깁니다</td></tr>
+            <tr><td>코드에 숫자를 직접 쓰지 않기</td><td><code>var(--z-modal)</code>처럼 이름만 씁니다. 코드에 숫자가 보이면 리뷰에서 막습니다</td></tr>
+            <tr><td><code>position</code>을 함께 지정하기</td><td><code>position</code>이 <code>static</code>이면 z-index가 무시됩니다. 'z-index가 안 먹어요'라는 문제의 두 번째로 흔한 원인입니다</td></tr>
+            <tr><td>쌓임 맥락부터 확인하기</td><td>z-index가 적용되지 않으면 숫자를 올리지 말고 부모에 걸린 <code>transform · opacity · filter</code>부터 찾습니다</td></tr>
+            <tr><td>가림막과 모달은 한 칸 차이로 두기</td><td>500과 600처럼 바로 이웃한 층에 둡니다. 둘 사이에 다른 층이 끼면 그 층의 요소가 가림막 위로 드러납니다</td></tr>
+            <tr><td><code>&lt;dialog&gt;</code>와 <code>popover</code>를 먼저 쓰기</td><td>브라우저가 <b>최상위 레이어</b>에 그려 주기 때문에 쌓임 맥락 문제가 아예 생기지 않습니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -274,10 +274,10 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>z 스케일 = 우선순위 상수</th><td>미들웨어 순서나 이벤트 핸들러 우선순위와 같은 구조입니다. 값 사이를 비워 두는 이유도 <b>나중에 끼워 넣기 위해서</b>라는 점에서 같습니다.</td></tr>
-            <tr><th>왜 9999 가 생기나</th><td>급할 때 가장 손쉽게 쓸 수 있는 해결책이기 때문입니다. 코드 리뷰에서 <b>숫자 리터럴을 막는</b> 규칙 하나만 두어도 이 문제는 대부분 사라집니다.</td></tr>
-            <tr><th>서드파티 위젯</th><td>채팅 상담이나 결제창 같은 외부 스크립트는 <b>미리 알 수 없는 큰 값</b>을 씁니다. 그래서 우리 층 목록의 맨 위층을 그보다 높게 잡거나, 해당 구역을 따로 감싸 둡니다.</td></tr>
-            <tr><th>디버깅</th><td>브라우저 개발자 도구의 <b>Layers</b> 패널에서 쌓임 맥락을 볼 수 있습니다. 숫자를 바꿔 보기 전에 이 패널부터 열어 보면 원인을 더 빨리 찾을 수 있습니다.</td></tr>
+            <tr><th>우선순위 상수와 같은 구조</th><td>미들웨어 순서나 이벤트 핸들러 우선순위와 같은 구조입니다. 값 사이를 비워 두는 이유도 <b>나중에 끼워 넣기 위해서</b>라는 점에서 같습니다.</td></tr>
+            <tr><th>9999 같은 값이 생기는 이유</th><td>급할 때 가장 손쉽게 쓸 수 있는 해결책이기 때문입니다. 코드 리뷰에서 <b>숫자 리터럴을 막는</b> 규칙 하나만 두어도 이 문제는 대부분 사라집니다.</td></tr>
+            <tr><th>외부 위젯이 쓰는 큰 값</th><td>채팅 상담이나 결제창 같은 외부 스크립트는 <b>미리 알 수 없는 큰 값</b>을 씁니다. 그래서 우리 층 목록의 맨 위층을 그보다 높게 잡거나, 해당 구역을 따로 감싸 둡니다.</td></tr>
+            <tr><th>쌓임 맥락을 확인하는 방법</th><td>브라우저 개발자 도구의 <b>Layers</b> 패널에서 쌓임 맥락을 볼 수 있습니다. 숫자를 바꿔 보기 전에 이 패널부터 열어 보면 원인을 더 빨리 찾을 수 있습니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -336,7 +336,7 @@
         <li><a href="../items/toast.html"><b>토스트 · 스낵바</b><em>6부</em></a></li>
         <li><a href="../items/popover.html"><b>팝오버</b><em>6부</em></a></li>
         <li><a href="../items/appbar.html"><b>앱바 · 헤더</b><em>7부</em></a></li>
-        <li><span class="na"><b>스티키</b><em>1부</em></span></li>
+        <li><a href="sticky.html"><b>스티키</b><em>1부</em></a></li>
       </ol>
       <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>

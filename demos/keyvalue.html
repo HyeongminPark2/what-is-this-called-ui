@@ -19,10 +19,10 @@
 <body>
 <div class="bar">
   <b>키-값 목록</b>
-  <label>칸 폭 <input type="range" id="w" min="180" max="420" step="20" value="340" style="width:96px"><span class="ruler" id="wv"></span></label>
+  <label>목록 칸의 폭 <input type="range" id="w" min="180" max="420" step="20" value="340" style="width:96px"><span class="ruler" id="wv"></span></label>
   <label>라벨 폭 <input type="range" id="k" min="60" max="150" step="10" value="90" style="width:84px"><span class="ruler" id="kvv"></span></label>
-  <label><input type="checkbox" id="cut" checked> 넘치면 말줄임</label>
-  <label><input type="checkbox" id="stack"> 좁으면 위아래로</label>
+  <label><input type="checkbox" id="cut" checked> 넘치는 값은 말줄임하기</label>
+  <label><input type="checkbox" id="stack"> 좁으면 라벨을 위로 올리기</label>
 </div>
 
 <div class="pad">
@@ -37,7 +37,7 @@
   키-값 목록에서 <b>라벨 폭을 고정</b>하면 값이 세로로 가지런히 줄을 맞춥니다.
   대신 칸이 좁아지면 <b>값이 먼저 잘리는데</b>, 데모는 라벨과 값 가운데
   <b>잘린 칸이 몇 개인지</b> 세어 적습니다.<br>
-  '좁으면 위아래로'를 켜면 라벨을 값 위에 올립니다. 값의 시작 위치가 가지런하지는 않지만
+  '좁으면 라벨을 위로 올리기'를 켜면 라벨을 값 위에 올립니다. 값의 시작 위치가 가지런하지는 않지만
   <b>아무것도 잘리지 않아서</b>, 폰 화면에서 흔히 씁니다.<br>
   태그는 <code>&lt;dl&gt;</code> · <code>&lt;dt&gt;</code> · <code>&lt;dd&gt;</code>를 씁니다.
   키-값 목록은 표가 아니라 <b>이름과 값의 짝</b>이라서, 스크린 리더로 읽을 때도 짝이 유지됩니다.
@@ -85,7 +85,7 @@
 
     var rd = document.getElementById('read');
     rd.innerHTML = '칸 <b>' + w + 'px</b> · 라벨 <b>' + k + 'px</b> · ' +
-      (stack ? '<b>위아래</b>로' : '좌우로') +
+      (stack ? '<b>위아래</b>로 배치' : '좌우로 배치') +
       '<br>잘린 줄 <b>' + over + '개</b>' +
       (over ? ' <span class="warn">(값을 끝까지 읽을 수 없습니다)</span>' : '');
     rd.dataset.over = String(over);

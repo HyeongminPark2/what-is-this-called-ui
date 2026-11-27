@@ -22,12 +22,12 @@
 
 <div class="bar">
   <b>상태 색</b>
-  <label>단서 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>색과 함께 쓰는 단서 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="color">색만</option>
-    <option value="icon">색 + 모양</option>
-    <option value="text" selected>색 + 모양 + 말</option>
+    <option value="icon">색과 모양</option>
+    <option value="text" selected>색과 모양, 말</option>
   </select></label>
-  <label><input type="checkbox" id="cvd"> 적록 색각 흉내</label>
+  <label><input type="checkbox" id="cvd"> 적록 색각 흉내 내기</label>
 </div>
 
 <div class="pad">
@@ -83,19 +83,19 @@
     var same = d1 < 40;
 
     var rd = document.getElementById('read');
-    rd.innerHTML = '성공과 오류의 색 거리 — 그대로 <b>' + Math.round(d0) + '</b>, 적록 흉내 <b>' + Math.round(d1) + '</b>' +
-      (same ? ' <span class="warn">— 구별하기 어렵습니다</span>' : '') +
-      '<br>색 말고 쓰는 단서 <b>' + (cues - 1) + '가지</b>' +
-      (cues === 1 ? ' <span class="warn">— 색 하나뿐입니다</span>' : '');
+    rd.innerHTML = '성공과 오류의 색 거리는 원래 색에서 <b>' + Math.round(d0) + '</b>, 적록 흉내에서 <b>' + Math.round(d1) + '</b>' +
+      (same ? ' <span class="warn">(구별하기 어렵습니다)</span>' : '') +
+      '<br>색 말고 쓰는 단서는 <b>' + (cues - 1) + '가지</b>' +
+      (cues === 1 ? ' <span class="warn">(색 하나뿐입니다)</span>' : '');
     rd.dataset.d0 = String(Math.round(d0));
     rd.dataset.d1 = String(Math.round(d1));
     rd.dataset.same = same ? '1' : '0';
     rd.dataset.cues = String(cues - 1);
 
     document.getElementById('note').innerHTML = {
-      color: '<span class="warn">색만 씁니다</span> — 색을 구별하지 못하면 네 줄이 모두 같아 보입니다',
-      icon: '모양을 더했습니다 — 색 없이도 <b>성공과 오류</b>를 가를 수 있습니다',
-      text: '<b>말까지 적었습니다</b> — 스크린 리더가 읽어 주는 소리만 들어도 상태를 알 수 있습니다'
+      color: '<span class="warn">색만 쓰면</span> 색을 구별하지 못하는 사람에게는 네 줄이 모두 같아 보입니다',
+      icon: '모양을 더해서 색 없이도 <b>성공과 오류</b>를 가를 수 있습니다',
+      text: '<b>말까지 적어서</b> 스크린 리더가 읽어 주는 소리만 들어도 상태를 알 수 있습니다'
     }[k];
   }
 

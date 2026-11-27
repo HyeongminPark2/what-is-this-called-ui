@@ -18,7 +18,7 @@
 <body>
 <div class="bar">
   <b>드롭다운 메뉴</b>
-  <label>누르면 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>목록의 종류 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="menu" selected>동작 목록 (메뉴)</option>
     <option value="select">값 고르기 (셀렉트)</option>
   </select></label>
@@ -119,10 +119,10 @@
     }
     var kind = document.getElementById('k').value;
     var rd = document.getElementById('read');
-    rd.innerHTML = (open ? '열림' : '닫힘') + ' · <b>' + (kind === 'menu' ? '동작 목록' : '값 고르기') + '</b>' +
+    rd.innerHTML = (open ? '목록이 열려 있음' : '목록이 닫혀 있음') + ' · <b>' + (kind === 'menu' ? '동작 목록' : '값 고르기') + '</b>' +
       '<br>역할 <b>' + (kind === 'menu' ? 'menu / menuitem' : 'listbox / option') + '</b>' +
       '<br>화면 밖으로 나간 양 <b>' + over + 'px</b>' +
-      (over > 0 ? ' <span class="warn">— 잘립니다</span>' : (flipped ? ' — <b>위로 뒤집었습니다</b>' : '')) +
+      (over > 0 ? '. <span class="warn">그만큼 메뉴가 잘립니다</span>' : (flipped ? '. 자리가 없어 <b>위로 뒤집었습니다</b>' : '')) +
       (kind === 'select' ? '<br>고른 값 <b>' + chosen + '</b>' : '') +
       (why ? '<br>' + why : '');
     rd.dataset.open = open ? '1' : '0';

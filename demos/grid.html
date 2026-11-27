@@ -20,16 +20,16 @@
 
 <div class="pad lab">
   <div class="lab__ctrl">
-    <label>짜는 법
+    <label>판을 짜는 방법
       <select class="sel" id="mode">
-        <option value="fixed">열 수를 못 박기 — repeat(3, 1fr)</option>
-        <option value="auto" selected>칸이 알아서 접히기 — auto-fit minmax</option>
-        <option value="side">사이드바 + 본문 — 240px 1fr</option>
+        <option value="fixed">열 수를 고정하기 (repeat(3, 1fr))</option>
+        <option value="auto" selected>칸이 알아서 접히게 하기 (auto-fit minmax)</option>
+        <option value="side">사이드바와 본문으로 나누기 (240px 1fr)</option>
       </select></label>
     <label id="colwrap">열 수 <input type="range" id="cols" class="sld" min="1" max="5" value="3" style="width:90px"><output id="colso">3</output></label>
     <label>gap <input type="range" id="gap" class="sld" min="0" max="28" value="12" style="width:90px"><output id="gapo">12</output>px</label>
     <label><input type="checkbox" id="long"> 긴 글 넣기</label>
-    <label><input type="checkbox" id="minmax0"> <code>minmax(0, 1fr)</code> 로 고치기</label>
+    <label><input type="checkbox" id="minmax0"> <code>minmax(0, 1fr)</code>로 고치기</label>
   </div>
 
   <div class="lab__stage">
@@ -104,7 +104,7 @@
         ruler.innerHTML = '<span style="color:var(--danger);font-weight:700">칸 너비가 ' + gap2 + 'px 어긋났습니다</span>' +
           '. 1fr은 minmax(<b>auto</b>, 1fr)이라서 긴 칸이 <b>옆 칸의 자리를 빼앗습니다</b>';
       } else {
-        ruler.innerHTML = '칸이 고릅니다 · 각 ' + Math.round(cw[0]) + 'px';
+        ruler.innerHTML = '칸 너비가 모두 ' + Math.round(cw[0]) + 'px로 고릅니다';
       }
     });
   }

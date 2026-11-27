@@ -10,7 +10,7 @@ ANAT = '''              <div class="anat--wide" style="background:var(--bg);bord
                     <span data-pin="3" style="font-size:11.5px;color:var(--fg-muted);padding-bottom:9px">거래</span>
                     <span class="pin-tr" data-pin="4" style="font-size:11.5px;color:var(--fg-muted);padding-bottom:9px">문의 <b style="background:var(--danger);color:#fff;border-radius:99px;padding:0 5px;font-size:9px">3</b></span>
                   </div>
-                  <div class="pin-out" data-pin="5" style="font-size:11px;color:var(--fg-muted);padding-top:18px">고른 탭의 내용이 여기 나옵니다 — 위의 가맹점 이름은 안 바뀝니다</div>
+                  <div class="pin-out" data-pin="5" style="font-size:11px;color:var(--fg-muted);padding-top:18px">고른 탭의 내용이 여기 나오고, 위의 가맹점 이름은 그대로입니다</div>
                 </div>
               </div>'''
 
@@ -35,12 +35,12 @@ D = dict(
   axes=ax("탭"),
   oneline="탭은 <b>한 화면 안</b>에서 내용을 바꿉니다. 누른 뒤에도 제목과 주소, 브레드크럼이 그대로면 탭이고, 이것들이 바뀌면 화면 이동입니다.",
   states=states([
-    (mini('<div style="margin-top:9px;padding:0 6px"><div style="display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:2px"><span style="font-size:5.5px;color:var(--accent);font-weight:800;border-bottom:1.5px solid var(--accent);padding-bottom:1px">개요</span><span style="font-size:5.5px;color:var(--fg-muted)">거래</span><span style="font-size:5.5px;color:var(--fg-muted)">정산</span></div></div>', bars="", label="기본 탭"), "기본", "고른 탭에 밑줄이 있습니다. 탭은 <b>늘 하나가 골라져 있습니다</b>"),
-    (mini('<div style="margin-top:9px;padding:0 6px"><div style="display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:2px"><span style="font-size:5.5px;color:var(--fg-muted)">개요</span><span style="font-size:5.5px;color:var(--accent);font-weight:800;border-bottom:1.5px solid var(--accent);padding-bottom:1px">거래</span></div><div style="font-size:5.5px;color:var(--fg-muted);margin-top:4px">TX-8812 · ₩48,000</div></div>', bars="", label="다른 탭으로 옮긴 모습"), "옮김", "아래 내용만 바뀝니다. 밑줄이 옆 탭으로 움직이는 애니메이션을 넣으면 어느 탭에서 어느 탭으로 옮겼는지 보입니다"),
-    (mini('<div style="margin-top:9px;padding:0 6px"><div style="display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:2px"><span style="font-size:5.5px;color:var(--fg-muted)">개요</span><span style="font-size:5.5px;color:var(--fg-muted);display:flex;gap:2px">문의<b style="background:var(--danger);color:#fff;border-radius:99px;padding:0 2px;font-size:4.5px">3</b></span></div></div>', bars="", label="배지가 붙은 탭"), "배지", "처리할 것이 있는 탭에 건수를 붙입니다. 숫자는 탭 이름보다 작게 씁니다"),
-    (mini('<div style="margin-top:9px;padding:0 6px;overflow:hidden"><div style="display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:2px;white-space:nowrap"><span style="font-size:5.5px;color:var(--accent);font-weight:800">개요</span><span style="font-size:5.5px;color:var(--fg-muted)">거래</span><span style="font-size:5.5px;color:var(--fg-muted)">정산</span><span style="font-size:5.5px;color:var(--fg-muted)">문의</span><span style="font-size:5.5px;color:var(--fg-muted)">설정</span><span style="font-size:5.5px;color:var(--fg-muted)">이력</span></div><div style="font-size:4.5px;color:var(--fg-muted);margin-top:3px">→ 옆으로 밀어 봅니다</div></div>', bars="", label="넘치는 탭"), "넘침", "넘치는 탭을 <b>잘라서 숨기지 않습니다.</b> 가로로 밀 수 있게 두고, 끝 탭이 잘려 보이게 해서 더 있다는 것을 알립니다"),
-    (mini('<div style="margin-top:9px;padding:0 6px"><div style="display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:2px"><span style="font-size:5.5px;color:var(--accent);font-weight:800;border-bottom:1.5px solid var(--accent);padding-bottom:1px">개요</span><span style="font-size:5.5px;color:var(--fg-faint);opacity:.5">정산 🔒</span></div></div>', bars="", label="비활성 탭"), "비활성", "권한이 없는 탭입니다. 숨길지 흐리게 둘지 정해야 합니다"),
-    (mini('<div style="margin-top:9px;padding:0 6px"><div style="display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:2px"><span style="font-size:5.5px;color:var(--fg-muted)">개요</span><span style="font-size:5.5px;color:var(--accent);font-weight:800;border-bottom:1.5px solid var(--accent);padding-bottom:1px">거래</span></div><div style="margin-top:5px;display:grid;gap:3px"><div class="skl" style="height:5px;width:70%"></div><div class="skl" style="height:5px;width:50%"></div></div></div>', bars="", label="탭 내용 로딩"), "내용 로딩", "탭 줄은 그대로 두고 <b>내용만</b> 뼈대 모양으로 보여 줍니다. 탭 줄까지 사라지면 사용자가 어느 탭을 눌렀는지 알 수 없습니다"),
+    (mini('<div style="margin-top:9px;padding:0 6px"><div style="display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:2px"><span style="font-size:5.5px;color:var(--accent);font-weight:800;border-bottom:1.5px solid var(--accent);padding-bottom:1px">개요</span><span style="font-size:5.5px;color:var(--fg-muted)">거래</span><span style="font-size:5.5px;color:var(--fg-muted)">정산</span></div></div>', bars="", label="기본 탭"), "가장 흔한 기본 모습", "고른 탭에 밑줄이 있습니다. 탭은 <b>늘 하나가 골라져 있습니다</b>"),
+    (mini('<div style="margin-top:9px;padding:0 6px"><div style="display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:2px"><span style="font-size:5.5px;color:var(--fg-muted)">개요</span><span style="font-size:5.5px;color:var(--accent);font-weight:800;border-bottom:1.5px solid var(--accent);padding-bottom:1px">거래</span></div><div style="font-size:5.5px;color:var(--fg-muted);margin-top:4px">TX-8812 · ₩48,000</div></div>', bars="", label="다른 탭으로 옮긴 모습"), "다른 탭으로 옮겼을 때", "아래 내용만 바뀝니다. 밑줄이 옆 탭으로 움직이는 애니메이션을 넣으면 어느 탭에서 어느 탭으로 옮겼는지 보입니다"),
+    (mini('<div style="margin-top:9px;padding:0 6px"><div style="display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:2px"><span style="font-size:5.5px;color:var(--fg-muted)">개요</span><span style="font-size:5.5px;color:var(--fg-muted);display:flex;gap:2px">문의<b style="background:var(--danger);color:#fff;border-radius:99px;padding:0 2px;font-size:4.5px">3</b></span></div></div>', bars="", label="배지가 붙은 탭"), "처리할 건수를 붙일 때", "처리할 것이 있는 탭에 건수를 붙입니다. 숫자는 탭 이름보다 작게 씁니다"),
+    (mini('<div style="margin-top:9px;padding:0 6px;overflow:hidden"><div style="display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:2px;white-space:nowrap"><span style="font-size:5.5px;color:var(--accent);font-weight:800">개요</span><span style="font-size:5.5px;color:var(--fg-muted)">거래</span><span style="font-size:5.5px;color:var(--fg-muted)">정산</span><span style="font-size:5.5px;color:var(--fg-muted)">문의</span><span style="font-size:5.5px;color:var(--fg-muted)">설정</span><span style="font-size:5.5px;color:var(--fg-muted)">이력</span></div><div style="font-size:4.5px;color:var(--fg-muted);margin-top:3px">→ 옆으로 밀어 봅니다</div></div>', bars="", label="넘치는 탭"), "탭이 넘칠 때", "넘치는 탭을 <b>잘라서 숨기지 않습니다.</b> 가로로 밀 수 있게 두고, 끝 탭이 잘려 보이게 해서 더 있다는 것을 알립니다"),
+    (mini('<div style="margin-top:9px;padding:0 6px"><div style="display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:2px"><span style="font-size:5.5px;color:var(--accent);font-weight:800;border-bottom:1.5px solid var(--accent);padding-bottom:1px">개요</span><span style="font-size:5.5px;color:var(--fg-faint);opacity:.5">정산 🔒</span></div></div>', bars="", label="비활성 탭"), "권한이 없어 비활성일 때", "권한이 없는 탭입니다. 숨길지 흐리게 둘지 정해야 합니다"),
+    (mini('<div style="margin-top:9px;padding:0 6px"><div style="display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:2px"><span style="font-size:5.5px;color:var(--fg-muted)">개요</span><span style="font-size:5.5px;color:var(--accent);font-weight:800;border-bottom:1.5px solid var(--accent);padding-bottom:1px">거래</span></div><div style="margin-top:5px;display:grid;gap:3px"><div class="skl" style="height:5px;width:70%"></div><div class="skl" style="height:5px;width:50%"></div></div></div>', bars="", label="탭 내용 로딩"), "탭 내용을 불러오는 중", "탭 줄은 그대로 두고 <b>내용만</b> 뼈대 모양으로 보여 줍니다. 탭 줄까지 사라지면 사용자가 어느 탭을 눌렀는지 알 수 없습니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -64,14 +64,14 @@ D = dict(
     "아예 다른 화면으로 갈 때. 사이드바나 탭바를 씁니다",
     "탭 안에 또 탭을 넣을 때. 지금 어느 탭의 어느 탭을 보고 있는지 금세 헷갈립니다",
   ]),
-  instead='같은 목록을 거르면 <a href="segmented.html">세그먼티드</a>, 화면을 옮기면 <a href="sidebar.html">사이드바</a>·<a href="bottomnav.html">바텀 탭바</a>, 동시에 펼쳐야 하면 아코디언(2부).',
+  instead='같은 목록을 조건으로 거르려면 <a href="segmented.html">세그먼티드 컨트롤</a>을 쓰고, 아예 다른 화면으로 옮겨 가려면 <a href="sidebar.html">사이드바</a>나 <a href="bottomnav.html">바텀 탭바</a>를 씁니다. 여러 칸을 동시에 펼쳐 봐야 하면 아코디언(2부)이 맞습니다.',
   cases=cases([
     (mini('<div style="margin-top:9px;padding:0 6px"><div style="display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:2px"><span style="font-size:5.5px;color:var(--accent);font-weight:800;border-bottom:1.5px solid var(--accent);padding-bottom:1px">개요</span><span style="font-size:5.5px;color:var(--fg-muted)">거래</span><span style="font-size:5.5px;color:var(--fg-muted)">정산</span></div></div>', bars="", tall=False, label="상세 화면 탭 재현"),
-     "상세 화면", "탭을 가장 흔하게 쓰는 곳입니다. 한 대상의 여러 면을 나눠 보여 줍니다"),
+     "상세 화면을 여러 면으로 나누기", "탭을 가장 흔하게 쓰는 곳입니다. 한 대상의 여러 면을 나눠 보여 줍니다"),
     (mini('<div style="margin-top:9px;padding:0 6px"><div style="display:flex;gap:4px"><span style="font-size:5.5px;background:var(--accent-soft);color:var(--accent);border-radius:99px;padding:1px 5px;font-weight:700">전체</span><span style="font-size:5.5px;color:var(--fg-muted);border-radius:99px;padding:1px 5px">미처리</span></div></div>', bars="", tall=False, label="알약형 탭 재현"),
-     "알약형", "밑줄 대신 알약 모양으로 고른 탭을 표시합니다. 세그먼티드 컨트롤과 더 헷갈리므로 탭이라는 역할이 분명히 드러나게 합니다"),
+     "고른 탭을 알약 모양으로 표시하기", "밑줄 대신 알약 모양으로 고른 탭을 표시합니다. 세그먼티드 컨트롤과 더 헷갈리므로 탭이라는 역할이 분명히 드러나게 합니다"),
     (mini('<div style="margin-top:9px;padding:0 6px"><div style="display:flex;gap:5px;border-bottom:1px solid var(--line);padding-bottom:2px"><span style="font-size:5.5px;color:var(--accent);font-weight:800;border-bottom:1.5px solid var(--accent);padding-bottom:1px">코드</span><span style="font-size:5.5px;color:var(--fg-muted)">미리보기</span></div><div style="font-size:4.5px;color:var(--fg-muted);margin-top:4px;font-family:var(--mono)">const x = 1;</div></div>', bars="", tall=False, label="코드/미리보기 탭 재현"),
-     "코드 · 미리보기", "같은 내용을 두 방식으로 봅니다. 한 대상의 여러 면을 보여 준다는 탭의 쓰임에 가장 잘 맞습니다"),
+     "코드와 미리보기를 오가기", "같은 내용을 두 방식으로 봅니다. 한 대상의 여러 면을 보여 준다는 탭의 쓰임에 가장 잘 맞습니다"),
   ]),
   code_lede="핵심은 <b>로빙 탭인덱스</b>입니다. 고른 탭 하나만 <kbd>Tab</kbd> 순서에 넣기 때문에 탭 줄 전체를 <kbd>Tab</kbd> 한 번에 지나가고, 탭 줄 안에서는 화살표로 움직입니다.",
   code='''&lt;<span class="t">div</span> <span class="a">role</span>=<span class="s">"tablist"</span> <span class="a">aria-label</span>=<span class="s">"가맹점 상세"</span>&gt;
@@ -88,13 +88,13 @@ tabs.forEach(t =&gt; t.tabIndex = (t === sel) ? <span class="a">0</span> : -<spa
     ("<kbd>←</kbd><kbd>→</kbd>", "탭을 옮기며, <b>옮기는 즉시</b> 내용이 바뀝니다"),
     ("<kbd>Home</kbd><kbd>End</kbd>", "첫 탭이나 마지막 탭으로 갑니다"),
     ("<code>aria-controls</code>", "탭과 내용을 연결합니다. 스크린 리더는 '탭 2/5'처럼 읽습니다"),
-    ("패널", "<code>tabindex=\"0\"</code>을 줘서 포커스가 내용으로 들어갈 수 있게 합니다"),
+    ("탭 패널로 들어갈 때", "<code>tabindex=\"0\"</code>을 줘서 포커스가 내용으로 들어갈 수 있게 합니다"),
   ]),
   backend=rows([
-    ("탭 = 같은 리소스의 다른 표현", "탭들은 보통 같은 ID를 가진 리소스의 서로 다른 필드를 보여 줍니다. 모든 탭의 데이터를 한 번에 받아 두면 탭을 바로 바꿀 수 있고, 탭마다 따로 받으면 첫 화면을 빨리 띄울 수 있습니다. <b>어느 쪽이 나은지는 탭 수와 데이터 크기를 보고 정합니다.</b>"),
-    ("주소에 담을 것인가", "<code>/merchant/12?tab=tx</code>처럼 고른 탭을 주소에 담으면 링크로 공유할 수 있고 뒤로가기도 탭 단위로 됩니다. 주소에 담지 않으면 새로고침할 때마다 첫 탭으로 돌아갑니다."),
-    ("지연 로드", "열어 보지 않은 탭의 데이터는 요청하지 않는 것이 기본입니다. 다만 <b>한 번 연 탭의 데이터를 기억</b>해 두면 탭을 오갈 때 다시 받지 않아 빨라집니다."),
-    ("배지 숫자", "탭마다 건수를 보여 주려면 아직 열지 않은 탭의 건수도 알아야 합니다. 탭마다 따로 묻기보다 요약 응답 하나로 묶어 받으면 요청 수가 줄어듭니다."),
+    ("같은 리소스를 다르게 보여 주는 탭", "탭들은 보통 같은 ID를 가진 리소스의 서로 다른 필드를 보여 줍니다. 모든 탭의 데이터를 한 번에 받아 두면 탭을 바로 바꿀 수 있고, 탭마다 따로 받으면 첫 화면을 빨리 띄울 수 있습니다. <b>어느 쪽이 나은지는 탭 수와 데이터 크기를 보고 정합니다.</b>"),
+    ("고른 탭을 주소에 담을지 정하기", "<code>/merchant/12?tab=tx</code>처럼 고른 탭을 주소에 담으면 링크로 공유할 수 있고 뒤로가기도 탭 단위로 됩니다. 주소에 담지 않으면 새로고침할 때마다 첫 탭으로 돌아갑니다."),
+    ("열어 본 탭만 불러오기(지연 로드)", "열어 보지 않은 탭의 데이터는 요청하지 않는 것이 기본입니다. 다만 <b>한 번 연 탭의 데이터를 기억</b>해 두면 탭을 오갈 때 다시 받지 않아 빨라집니다."),
+    ("배지에 보여 줄 건수 받기", "탭마다 건수를 보여 주려면 아직 열지 않은 탭의 건수도 알아야 합니다. 탭마다 따로 묻기보다 요약 응답 하나로 묶어 받으면 요청 수가 줄어듭니다."),
   ]),
   plat_lede="웹과 안드로이드에는 '한 화면 안의 탭'이 분명히 있지만, iOS는 같은 자리에 다른 부품을 씁니다.",
   plats=plats([
@@ -112,6 +112,6 @@ tabs.forEach(t =&gt; t.tabIndex = (t === sel) ? <span class="a">0</span> : -<spa
   siblings=siblings("tabs"),
   related='''        <li><a href="../items/segmented.html"><b>세그먼티드 컨트롤</b><em>4부</em></a></li>
         <li><a href="../items/skeleton.html"><b>스켈레톤</b><em>8부</em></a></li>
-        <li><span class="na"><b>배지</b><em>5부</em></span></li>
-        <li><span class="na"><b>아코디언</b><em>2부</em></span></li>''',
+        <li><a href="badge.html"><b>배지</b><em>5부</em></a></li>
+        <li><a href="accordion.html"><b>아코디언</b><em>5부</em></a></li>''',
 )

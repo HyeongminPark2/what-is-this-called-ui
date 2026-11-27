@@ -13,10 +13,10 @@ ANAT = '''              <div class="anat--wide" style="background:var(--bg);bord
                 <div style="padding-left:26px;display:grid;gap:13px">
                   <div class="pin-out" data-pin="1" style="max-width:230px;border:1px dashed var(--line-strong);border-radius:6px;padding:7px 9px"><span style="font-family:var(--mono);font-size:10px;color:var(--accent);display:block">&lt;header&gt;</span><span style="font-size:11px">로고와 검색</span></div>
                   <div class="pin-out" data-pin="2" style="max-width:230px;border:1px dashed var(--line-strong);border-radius:6px;padding:7px 9px"><span style="font-family:var(--mono);font-size:10px;color:var(--accent);display:block">&lt;nav&gt;</span><span style="font-size:11px">홈 · 정산 · 설정</span></div>
-                  <div class="pin-out" data-pin="3" style="max-width:230px;border:1px dashed var(--line-strong);border-radius:6px;padding:7px 9px"><span style="font-family:var(--mono);font-size:10px;color:var(--accent);display:block">&lt;main&gt;</span><span style="font-size:11px">정산 목록 — 화면에 하나만</span></div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">h1 → h2 → h3   — 건너뛰지 않는다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">ul · ol   — "항목 12개" 가 읽힌다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">div 로만 쌓으면 구역 목록이 빈다</div>
+                  <div class="pin-out" data-pin="3" style="max-width:230px;border:1px dashed var(--line-strong);border-radius:6px;padding:7px 9px"><span style="font-family:var(--mono);font-size:10px;color:var(--accent);display:block">&lt;main&gt;</span><span style="font-size:11px">정산 목록(화면에 하나만 둠)</span></div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">h1 → h2 → h3   — 단계를 건너뛰지 않음</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">ul · ol   — "항목 12개"처럼 개수가 읽힘</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">div로만 쌓으면 구역 목록이 비어 버림</div>
                 </div>
               </div>'''
 
@@ -28,7 +28,7 @@ D = dict(
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>아래에 <b>스크린 리더의 구역 목록</b>이 나옵니다. 스크린 리더 사용자는 이 목록을 띄워 놓고
           '내비게이션'이나 '메인' 같은 구역으로 바로 건너뜁니다.<br>
-          <b>전부 div 로 바꾸기</b>를 켜 보세요. 화면은 똑같은데 <b>구역 목록이 모두 비어 버려서</b>,
+          <b>모든 구역을 div로 바꾸기</b>를 켜 보세요. 화면은 똑같은데 <b>구역 목록이 모두 비어 버려서</b>,
           페이지를 처음부터 끝까지 순서대로 읽는 방법밖에 남지 않습니다.</p>
         </div>''',
   names=rows([
@@ -46,7 +46,7 @@ D = dict(
   ]),
   axes=ax("시맨틱 태그"),
   oneline="<b>ARIA 사용 규칙의 첫 번째는 \"ARIA를 쓰지 않는 것\"</b>입니다. 알맞은 태그가 있으면 ARIA 속성을 붙이지 말고 그 태그를 씁니다.",
-  s4_title="갈래", s4_hint="태그 하나가 주는 것",
+  s4_title="태그별로 생기는 구조", s4_hint="태그 하나를 쓰면 저절로 생기는 역할과 구조",
   states=states([
     (land("header", "로고와 검색"), "header", "구역 목록에 <b>'배너'</b>로 올라갑니다"),
     (land("nav", "홈 · 정산 · 설정"), "nav", "구역 목록에 <b>'내비게이션'</b>으로 올라갑니다. 여러 개라면 각각 이름을 붙입니다"),
@@ -73,7 +73,7 @@ D = dict(
     ("메인", "&lt;main&gt;", "그 화면의 본문입니다. <b>하나만</b> 두고, 건너뛰기 링크를 누르면 이곳으로 옵니다"),
     ("제목 구조", "h1 ~ h6", "제목 단계는 <b>건너뛰지 않습니다.</b> 화면에 보이는 크기는 CSS로 따로 정합니다"),
     ("목록", "&lt;ul&gt; · &lt;ol&gt;", "'항목 12개'처럼 개수가 저절로 읽힙니다. <code>&lt;div&gt;</code>로 쌓으면 몇 건인지 알 수 없습니다"),
-    ("div 만 쌓기", "&lt;div&gt;", "<b>구역 목록이 비어 버려서</b> 처음부터 끝까지 순서대로 읽는 수밖에 없습니다"),
+    ("div로만 쌓은 화면", "&lt;div&gt;", "<b>구역 목록이 비어 버려서</b> 처음부터 끝까지 순서대로 읽는 수밖에 없습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           알맞은 태그 하나를 쓰면 요소가 무엇인지 알려 주는 역할, 키보드로 누를 수 있는 동작,
@@ -92,29 +92,31 @@ D = dict(
     "<code>h1</code> 다음에 바로 <code>h4</code>를 쓸 때. 제목 구조로 만든 목차의 단계가 어긋납니다",
     "표가 아닌 내용을 <b>배치하려고</b> <code>&lt;table&gt;</code>을 쓸 때. 스크린 리더가 '표, 3열 5행'으로 읽습니다",
   ]),
-  instead='키보드로 되는지는 <a href="keyboard.html">키보드 조작</a>, 역할·상태는 <a href="screenreader.html">스크린 리더가 읽는 것</a>, 보이는 위계는 <a href="../items/hierarchy.html">글자 위계</a>.',
+  dont_title="시맨틱 태그를 빠뜨리거나 잘못 쓰는 경우",
+  instead_title="시맨틱 태그와 이어지는 주제는 다른 항목에서 다룹니다",
+  instead='요소를 키보드로 쓸 수 있는지는 <a href="keyboard.html">키보드 조작</a>에서, 역할과 상태가 어떻게 읽히는지는 <a href="screenreader.html">스크린 리더가 읽는 것</a>에서 다룹니다. 눈으로 보이는 제목의 크기 차이는 <a href="../items/hierarchy.html">글자 위계</a>를 보세요.',
   cases=cases([
     ('''              <div style="width:100%;max-width:190px;display:grid;gap:4px">
                 ''' + land("header", "로고 · 검색", False, "100%").replace('              ','') +
        land("nav", "홈 · 정산 · 설정", False, "100%").replace('              ','') +
        land("main", "정산 목록", False, "100%").replace('              ','') + '''
               </div>''',
-     "화면 뼈대", "header, nav, main 세 가지만 있어도 <b>구역 목록이 생깁니다</b>"),
+     "화면의 큰 구역 나누기", "header, nav, main 세 가지만 있어도 <b>구역 목록이 생깁니다</b>"),
     ('''              <div style="width:100%;max-width:190px;display:grid;gap:4px">
                 <span style="font-family:var(--mono);font-size:9.5px;color:var(--accent)">&lt;nav aria-label="주 메뉴"&gt;</span>
                 <span style="font-family:var(--mono);font-size:9.5px;color:var(--accent)">&lt;nav aria-label="빵부스러기"&gt;</span>
-                <span style="font-size:10.5px;color:var(--fg-muted)">둘 다 '내비게이션'이면 구별이 안 된다</span>
+                <span style="font-size:10.5px;color:var(--fg-muted)">둘 다 '내비게이션'이면 구별할 수 없음</span>
               </div>''',
-     "nav 가 여럿", "구역 목록에서 구별할 수 있도록 <b>각각 이름</b>을 붙입니다"),
+     "nav가 여러 개일 때 이름 붙이기", "구역 목록에서 구별할 수 있도록 <b>각각 이름</b>을 붙입니다"),
     ('''              <div style="width:100%;max-width:190px;display:grid;gap:4px">
                 <span style="font-family:var(--mono);font-size:9.5px;color:var(--danger)">&lt;div onclick&gt;저장&lt;/div&gt;</span>
                 <span style="font-family:var(--mono);font-size:9.5px;color:#1f8a4c">&lt;button&gt;저장&lt;/button&gt;</span>
-                <span style="font-size:10.5px;color:var(--fg-muted)">아래 한 줄이 다섯 가지를 대신한다</span>
+                <span style="font-size:10.5px;color:var(--fg-muted)">아래 한 줄로 다섯 가지가 해결됨</span>
               </div>''',
-     "버튼", "<b>button 태그 하나로</b> 역할, 포커스, Enter, Space, 비활성 처리가 모두 들어옵니다"),
+     "버튼을 button 태그로 만들기", "<b>button 태그 하나로</b> 역할, 포커스, Enter, Space, 비활성 처리가 모두 들어옵니다"),
   ]),
-  s8_title="최소 마크업과 규칙", s8_hint="태그부터 고른다",
-  keys_heads="<th>규칙</th><th>지켜야 하는 것</th>",
+  s8_title="최소 마크업과 규칙", s8_hint="CSS보다 태그를 먼저 고르는 규칙",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법</th>",
   code_lede="화면의 틀을 잡을 때는 <b>태그부터</b> 고르고, CSS는 그다음에 씁니다.",
   code='''&lt;<span class="t">body</span>&gt;
   &lt;<span class="t">a</span> <span class="a">href</span>=<span class="s">"#main"</span> <span class="a">class</span>=<span class="s">"skip"</span>&gt;본문으로 건너뛰기&lt;/<span class="t">a</span>&gt;
@@ -133,18 +135,18 @@ D = dict(
   &lt;<span class="t">footer</span>&gt;…&lt;/<span class="t">footer</span>&gt;
 &lt;/<span class="t">body</span>&gt;''',
   keys=kbd([
-    ("태그부터 고른다", "알맞은 태그를 쓰면 <b>역할, 동작, 구조</b>가 한꺼번에 들어옵니다"),
-    ("<code>&lt;main&gt;</code>은 하나", "건너뛰기 링크를 누르면 도착하는 곳이므로 하나만 둡니다"),
-    ("제목을 건너뛰지 않는다", "h1, h2, h3 순서로 내려갑니다. 화면에 보이는 크기는 CSS로 따로 정합니다"),
-    ("<code>&lt;nav&gt;</code>가 여럿이면 이름", "<code>aria-label</code>로 이름을 붙여 서로 구별합니다"),
-    ("<code>&lt;section&gt;</code>에는 이름", "이름이 없는 section은 <b>div와 같습니다</b>"),
-    ("배치에 <code>&lt;table&gt;</code>을 안 쓴다", "배치용 표도 스크린 리더는 '표, 3열 5행'으로 읽습니다"),
+    ("태그부터 고르기", "알맞은 태그를 쓰면 <b>역할, 동작, 구조</b>가 한꺼번에 들어옵니다"),
+    ("<code>&lt;main&gt;</code>은 하나만 두기", "건너뛰기 링크를 누르면 도착하는 곳이므로 하나만 둡니다"),
+    ("제목 단계를 건너뛰지 않기", "h1, h2, h3 순서로 내려갑니다. 화면에 보이는 크기는 CSS로 따로 정합니다"),
+    ("<code>&lt;nav&gt;</code>가 여럿이면 이름 붙이기", "<code>aria-label</code>로 이름을 붙여 서로 구별합니다"),
+    ("<code>&lt;section&gt;</code>에는 이름 붙이기", "이름이 없는 section은 <b>div와 같습니다</b>"),
+    ("배치용으로 <code>&lt;table&gt;</code>을 쓰지 않기", "배치용 표도 스크린 리더는 '표, 3열 5행'으로 읽습니다"),
   ]),
   backend=rows([
-    ("템플릿에서 한 번", "레이아웃 컴포넌트에 <code>&lt;header&gt;</code>와 <code>&lt;main&gt;</code>을 넣어 두면 그 레이아웃을 쓰는 <b>모든 화면에 구역이 저절로</b> 생깁니다."),
-    ("제목 단계는 화면이 정한다", "같은 컴포넌트라도 어떤 화면에서는 <code>h2</code>, 어떤 화면에서는 <code>h3</code>이 되어야 합니다. 그래서 <b>제목 단계를 props로</b> 받도록 설계하는 경우가 많습니다."),
-    ("SEO 와 겹친다", "문서 구조가 또렷하면 검색 엔진도 페이지를 잘 읽기 때문에, <b>한 번의 작업으로 접근성과 검색 노출을 함께</b> 챙길 수 있습니다."),
-    ("자동 검사", "랜드마크가 있는지, <code>h1</code>이 몇 개인지, 제목 단계를 건너뛰었는지는 <b>모두 자동 검사로</b> 찾을 수 있어서 CI에 넣기 쉽습니다."),
+    ("레이아웃 템플릿에 한 번 넣기", "레이아웃 컴포넌트에 <code>&lt;header&gt;</code>와 <code>&lt;main&gt;</code>을 넣어 두면 그 레이아웃을 쓰는 <b>모든 화면에 구역이 저절로</b> 생깁니다."),
+    ("제목 단계를 화면에서 정하기", "같은 컴포넌트라도 어떤 화면에서는 <code>h2</code>, 어떤 화면에서는 <code>h3</code>이 되어야 합니다. 그래서 <b>제목 단계를 props로</b> 받도록 설계하는 경우가 많습니다."),
+    ("검색 노출에도 도움이 됨", "문서 구조가 또렷하면 검색 엔진도 페이지를 잘 읽기 때문에, <b>한 번의 작업으로 접근성과 검색 노출을 함께</b> 챙길 수 있습니다."),
+    ("문서 구조 자동 검사", "랜드마크가 있는지, <code>h1</code>이 몇 개인지, 제목 단계를 건너뛰었는지는 <b>모두 자동 검사로</b> 찾을 수 있어서 CI에 넣기 쉽습니다."),
   ]),
   plat_lede="앱에는 HTML 태그가 없는 대신 <b>표준 부품마다 역할</b>이 정해져 있습니다.",
   plats=plats([

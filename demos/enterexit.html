@@ -20,7 +20,7 @@
 <div class="bar">
   <b>진입과 퇴장</b>
   <button class="ui-btn" id="toggle">열기</button>
-  <label><input type="checkbox" id="same"> 들어올 때와 나갈 때를 같게</label>
+  <label><input type="checkbox" id="same"> 들어올 때와 나갈 때 길이를 같게 맞추기</label>
 </div>
 
 <div class="pad">
@@ -68,7 +68,7 @@
     panel.style.transform = 'translateY(0)'; dim.style.opacity = '1';
     busy = true;
     setTimeout(function () { busy = false; }, s.ms);
-    log.innerHTML = '들어옴 — <b>' + s.ms + 'ms ' + s.name + '</b>';
+    log.innerHTML = '들어올 때 <b>' + s.ms + 'ms ' + s.name + '</b>으로 움직였습니다';
   }
 
   function hide() {
@@ -80,8 +80,8 @@
     setTimeout(function () {
       panel.hidden = true; dim.hidden = true; busy = false;
     }, s.ms);
-    log.innerHTML = '나감 — <b>' + s.ms + 'ms ' + s.name + '</b>' +
-      (s.ms >= 260 ? ' <span class="warn">· 닫는 데 기다리게 된다</span>' : '');
+    log.innerHTML = '나갈 때 <b>' + s.ms + 'ms ' + s.name + '</b>으로 움직였습니다' +
+      (s.ms >= 260 ? ' <span class="warn">· 닫을 때도 열 때만큼 기다리게 됩니다</span>' : '');
   }
 
   btn.addEventListener('click', function () {
@@ -93,10 +93,10 @@
   function ruler() {
     var s = spec();
     document.getElementById('ruler').innerHTML =
-      '들어올 때 <b>' + s.inn.ms + 'ms ' + s.inn.name + '</b> · 나갈 때 ' +
+      '들어올 때 <b>' + s.inn.ms + 'ms ' + s.inn.name + '</b>, 나갈 때 ' +
       (s.out.ms > s.inn.ms * 0.9
-        ? '<span class="warn">' + s.out.ms + 'ms ' + s.out.name + ' — 같다</span>'
-        : '<b>' + s.out.ms + 'ms ' + s.out.name + '</b> — 더 짧다');
+        ? '<span class="warn">' + s.out.ms + 'ms ' + s.out.name + '으로 길이가 같습니다</span>'
+        : '<b>' + s.out.ms + 'ms ' + s.out.name + '</b>으로 나가는 쪽이 더 짧습니다');
   }
   document.getElementById('same').addEventListener('change', ruler);
   ruler();

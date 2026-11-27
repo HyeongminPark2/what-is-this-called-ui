@@ -75,20 +75,20 @@
         <p>겹쳐 뜨는 부품들은 모양만 보고는 구별하기 어렵지만, 아래 네 가지를 따져 보면 어느 부품인지 가려낼 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>자리</th><th>데려가는 곳</th><th>지금 위치</th><th>감당하는 개수</th></tr></thead>
+          <thead><tr><th></th><th>화면에 놓이는 자리</th><th>누르면 데려가는 곳</th><th>지금 위치를 알리는 방법</th><th>담을 수 있는 항목 수</th></tr></thead>
           <tbody>
-            <tr><td>앱바 · 헤더</td><td>화면 위</td><td>전역 · 상위</td><td>제목으로</td><td class="none">해당 없음</td></tr>
-            <tr><td>사이드바 내비게이션</td><td>화면 옆</td><td>전역</td><td>강조로</td><td>10~20</td></tr>
-            <tr><td>바텀 탭바</td><td>화면 아래</td><td>전역</td><td>아이콘 강조</td><td><b>3~5</b></td></tr>
+            <tr><td>앱바 · 헤더</td><td>화면 위</td><td>전역 또는 상위 화면</td><td>제목으로</td><td class="none">해당 없음</td></tr>
+            <tr><td>사이드바 내비게이션</td><td>화면 옆</td><td>전역</td><td>항목 강조로</td><td>10~20</td></tr>
+            <tr><td>바텀 탭바</td><td>화면 아래</td><td>전역</td><td>아이콘 강조로</td><td><b>3~5</b></td></tr>
             <tr><td>탭</td><td>내용 위</td><td><b>같은 화면 안</b></td><td>밑줄로</td><td>2~6</td></tr>
-            <tr class="me"><td><b>브레드크럼</b></td><td>내용 위</td><td>상위로</td><td><b>계층 전체</b></td><td>3~5단계</td></tr>
+            <tr class="me"><td><b>브레드크럼</b></td><td>내용 위</td><td>상위 단계</td><td><b>계층 전체</b>를 보여 줌</td><td>3~5단계</td></tr>
             <tr><td>페이지네이션</td><td>목록 아래</td><td>같은 목록의 다른 쪽</td><td>쪽 번호로</td><td>제한 없음</td></tr>
-            <tr><td>무한 스크롤</td><td>목록 끝</td><td>같은 목록 이어서</td><td class="none">안 보여 준다</td><td>제한 없음</td></tr>
+            <tr><td>무한 스크롤</td><td>목록 끝</td><td>같은 목록의 다음 묶음</td><td>보여 주지 않음</td><td>제한 없음</td></tr>
             <tr><td>스테퍼</td><td>내용 위 · 옆</td><td><b>같은 흐름</b>의 다음 단계</td><td>번호와 완료 표시로</td><td>3~5단계</td></tr>
             <tr><td>트리뷰</td><td>화면 옆</td><td>계층 <b>아래로</b></td><td>펼친 가지로</td><td>깊이 3단까지</td></tr>
-            <tr><td>앵커 내비</td><td>내용 옆</td><td><b>같은 문서 안</b></td><td>보는 절을 밝혀</td><td>5~12</td></tr>
-            <tr><td>뒤로가기</td><td>화면 왼쪽 위</td><td>바로 <b>앞 화면</b></td><td class="none">안 보여 준다</td><td>하나</td></tr>
-            <tr><td>메가 메뉴</td><td>앱바 아래</td><td>전역 · 여러 갈래</td><td>열린 갈래로</td><td>20~60</td></tr>
+            <tr><td>앵커 내비</td><td>내용 옆</td><td><b>같은 문서 안</b></td><td>보는 절을 강조해</td><td>5~12</td></tr>
+            <tr><td>뒤로가기</td><td>화면 왼쪽 위</td><td>바로 <b>앞 화면</b></td><td>보여 주지 않음</td><td>하나</td></tr>
+            <tr><td>메가 메뉴</td><td>앱바 아래</td><td>전역, 여러 분류</td><td>열린 분류로</td><td>20~60</td></tr>
           </tbody>
         </table>
         </div>
@@ -104,37 +104,37 @@
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="짧은 브레드크럼"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px;font-size:5.5px;color:var(--fg-muted)">위키 › 팀 문서 › <b style="color:var(--fg)">회고</b></div></div>
             </div>
-            <figcaption>짧음<span>두세 단계일 때가 가장 읽기 좋습니다</span></figcaption>
+            <figcaption>두세 단계로 짧을 때<span>두세 단계일 때가 가장 읽기 좋습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="다섯 단계"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px;font-size:5px;color:var(--fg-muted);line-height:1.8">위키 › 팀 문서 › 플랫폼 › 결제 › <b style="color:var(--fg)">회고</b></div></div>
             </div>
-            <figcaption>다섯 단계<span>다섯 단계 정도가 한 줄에 들어가는 한계입니다</span></figcaption>
+            <figcaption>다섯 단계까지 늘어났을 때<span>다섯 단계 정도가 한 줄에 들어가는 한계입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="접힌 브레드크럼"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px;font-size:5px;color:var(--fg-muted)">위키 › <span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 2px">…</span> › 결제 › <b style="color:var(--fg)">회고</b></div></div>
             </div>
-            <figcaption>접힘<span>가운데 단계를 <b>…</b>로 줄이고, 처음과 끝 칸은 남깁니다</span></figcaption>
+            <figcaption>가운데 단계를 접었을 때<span>가운데 단계를 <b>…</b>로 줄이고, 처음과 끝 칸은 남깁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="두 줄로 넘어간 브레드크럼"><div class="mini__bg"></div><div style="margin-top:9px;padding:0 6px;font-size:5px;color:var(--fg-muted)">위키 ›</div><div style="padding:0 6px;font-size:5px;color:var(--fg-muted)">팀 문서 › <b style="color:var(--fg)">회고</b></div></div>
             </div>
-            <figcaption>줄바꿈<span>좁은 화면에서는 넘치는 칸을 <b>잘라 숨기지 말고</b> 가운데를 접거나 줄을 바꿉니다</span></figcaption>
+            <figcaption>좁은 화면에서 줄을 바꿀 때<span>좁은 화면에서는 넘치는 칸을 <b>잘라 숨기지 말고</b> 가운데를 접거나 줄을 바꿉니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="형제 목록이 열리는 브레드크럼"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px;font-size:5px;color:var(--fg-muted)">위키 › 팀 문서 › <span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 2px">결제 ▾</span> › <b style="color:var(--fg)">회고</b></div></div>
             </div>
-            <figcaption>형제 열기<span>칸을 누르면 목록이 열려 <b>같은 층의 다른 항목</b>으로 바로 갈 수 있게 한 변형입니다</span></figcaption>
+            <figcaption>같은 층의 항목 목록을 열 때<span>칸을 누르면 목록이 열려 <b>같은 층의 다른 항목</b>으로 바로 갈 수 있게 한 변형입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="로딩 중 브레드크럼"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px"><div class="skl" style="height:5px;width:60%"></div></div></div>
             </div>
-            <figcaption>로딩<span>계층 정보는 리소스 데이터에서 나옵니다. 데이터를 아직 받지 못했을 때는 뼈대 모양으로 보여 줍니다</span></figcaption>
+            <figcaption>계층 정보를 불러오는 중<span>계층 정보는 리소스 데이터에서 나옵니다. 데이터를 아직 받지 못했을 때는 뼈대 모양으로 보여 줍니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -192,7 +192,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>브레드크럼 대신 다른 것을 써야 하는 경우</b> — 단계 진행이면 스테퍼(7부), 같은 화면의 다른 면이면 <a href="tabs.html">탭</a>, 길을 새로 고르면 <a href="sidebar.html">사이드바</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>브레드크럼 대신 다른 것을 써야 하는 경우</b> — 순서가 있는 단계 진행을 보여 주려면 스테퍼(7부)를 쓰고, 같은 화면의 다른 면을 보여 주려면 <a href="tabs.html">탭</a>을 씁니다. 사용자가 갈 곳을 새로 골라야 하면 <a href="sidebar.html">사이드바</a>가 맞습니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -202,19 +202,19 @@
             <div class="shot">
               <div class="mini" role="img" aria-label="쇼핑몰 브레드크럼 재현"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px;font-size:5px;color:var(--fg-muted)">홈 › 가구 › 소파 › <b style="color:var(--fg)">리넨 3인</b></div></div>
             </div>
-            <figcaption><b>쇼핑몰</b>상품의 카테고리 계층을 보여 줍니다. 검색으로 상품에 바로 들어온 사람에게 특히 쓸모가 있습니다</figcaption>
+            <figcaption><b>쇼핑몰의 상품 카테고리 보여 주기</b>상품의 카테고리 계층을 보여 줍니다. 검색으로 상품에 바로 들어온 사람에게 특히 쓸모가 있습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div class="mini" role="img" aria-label="문서 도구 브레드크럼 재현"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px;font-size:5px;color:var(--fg-muted)">위키 › <span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 2px">…</span> › <b style="color:var(--fg)">회고 초안</b></div></div>
             </div>
-            <figcaption><b>문서 도구</b>폴더가 깊어서 가운데 단계를 접어야 하는 경우가 대부분입니다</figcaption>
+            <figcaption><b>깊은 문서 폴더 경로 보여 주기</b>폴더가 깊어서 가운데 단계를 접어야 하는 경우가 대부분입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div class="mini" role="img" aria-label="관리 도구 브레드크럼 재현"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px;font-size:5px;color:var(--fg-muted)">결제 › <b style="color:var(--fg)">거래 내역</b></div></div>
             </div>
-            <figcaption><b>관리 도구</b>사이드바가 이미 위치를 알려 주므로 두 단 정도로 짧게 둡니다</figcaption>
+            <figcaption><b>관리 도구에서 짧게 두기</b>사이드바가 이미 위치를 알려 주므로 두 단 정도로 짧게 둡니다</figcaption>
           </figure>
         </div>
       </section>
@@ -234,13 +234,13 @@
 li + li::before <span class="a">{</span> <span class="t">content</span>: <span class="s">"›"</span>; <span class="t">color</span>: var(--fg-faint); <span class="a">}</span></pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td><kbd>Tab</kbd></td><td>칸마다 포커스가 한 번씩 거쳐 갑니다. 보통 서너 번이면 지나가서 부담이 적습니다</td></tr>
             <tr><td><code>aria-label</code></td><td><code>"현재 위치"</code>처럼 이름을 붙여 두면 내비게이션이 여러 개일 때 서로 구별됩니다</td></tr>
             <tr><td><code>aria-current</code></td><td>마지막 칸에 <code>"page"</code> 값을 달고, 링크로 두지 않습니다</td></tr>
-            <tr><td>구분자</td><td>CSS <code>::before</code>로 넣습니다. 글자로 넣으면 스크린 리더가 칸마다 '꺾쇠'를 읽습니다</td></tr>
-            <tr><td>접힘</td><td><b>…</b>은 버튼으로 만들어서 눌러 펼칠 수 있게 합니다</td></tr>
+            <tr><td>칸 사이의 구분자</td><td>CSS <code>::before</code>로 넣습니다. 글자로 넣으면 스크린 리더가 칸마다 '꺾쇠'를 읽습니다</td></tr>
+            <tr><td>가운데 단계를 접었을 때</td><td><b>…</b>은 버튼으로 만들어서 눌러 펼칠 수 있게 합니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -251,10 +251,10 @@ li + li::before <span class="a">{</span> <span class="t">content</span>: <span c
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>브레드크럼 = 계층 질의</th><td>브레드크럼을 그리려면 리소스의 <b>조상 목록</b>이 필요합니다. 상세 응답에 <code>ancestors: [...]</code>를 함께 내려 주면 화면이 따로 요청하지 않아도 됩니다.</td></tr>
-            <tr><th>이력이 아니다</th><td>사용자가 어떤 경로로 들어왔든 같은 줄이 나와야 하므로 세션이나 리퍼러 정보에 기대지 않습니다. <b>리소스 하나만 알면 그릴 수 있어야</b> 합니다.</td></tr>
-            <tr><th>깊이 제한</th><td>계층이 깊어질수록 조상을 찾는 질의가 비싸집니다. 그래서 리소스에 전체 경로를 <b>미리 저장</b>(materialized path)해 두는 방법을 흔히 씁니다.</td></tr>
-            <tr><th>이름이 바뀔 때</th><td>상위 폴더 이름이 바뀌면 브레드크럼에 보이는 이름도 바뀌어야 합니다. 경로를 캐시해 뒀다면 이때 캐시를 무효화해야 합니다.</td></tr>
+            <tr><th>조상 목록을 함께 내려 주기</th><td>브레드크럼을 그리려면 리소스의 <b>조상 목록</b>이 필요합니다. 상세 응답에 <code>ancestors: [...]</code>를 함께 내려 주면 화면이 따로 요청하지 않아도 됩니다.</td></tr>
+            <tr><th>이력이 아니라 계층으로 그리기</th><td>사용자가 어떤 경로로 들어왔든 같은 줄이 나와야 하므로 세션이나 리퍼러 정보에 기대지 않습니다. <b>리소스 하나만 알면 그릴 수 있어야</b> 합니다.</td></tr>
+            <tr><th>계층이 깊을 때 늘어나는 질의 비용</th><td>계층이 깊어질수록 조상을 찾는 질의가 비싸집니다. 그래서 리소스에 전체 경로를 <b>미리 저장</b>(materialized path)해 두는 방법을 흔히 씁니다.</td></tr>
+            <tr><th>상위 항목의 이름이 바뀔 때</th><td>상위 폴더 이름이 바뀌면 브레드크럼에 보이는 이름도 바뀌어야 합니다. 경로를 캐시해 뒀다면 이때 캐시를 무효화해야 합니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -311,9 +311,9 @@ li + li::before <span class="a">{</span> <span class="t">content</span>: <span c
       <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="../items/appbar.html"><b>앱바 · 헤더</b><em>7부</em></a></li>
-        <li><span class="na"><b>스테퍼(위저드)</b><em>7부</em></span></li>
-        <li><span class="na"><b>말줄임</b><em>3부</em></span></li>
-        <li><span class="na"><b>시스템 백</b><em>11부</em></span></li>
+        <li><a href="stepper.html"><b>스테퍼(위저드)</b><em>7부</em></a></li>
+        <li><a href="truncate.html"><b>말줄임</b><em>3부</em></a></li>
+        <li><a href="systemback.html"><b>시스템 백</b><em>11부</em></a></li>
       </ol>
       <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>

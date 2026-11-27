@@ -28,12 +28,12 @@ def mo(label, note="", ok=None, w="152px", col=False, imgw="26px", title="한빛
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">그림 — flex: none 으로 크기를 지킨다</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">글 — min-width: 0 이어야 줄어든다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--danger)">float 로 붙이면 글이 그림 밑으로 돈다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">align-items: flex-start — 위를 맞춘다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">좁으면 위아래로 — 글 칸이 모자랄 때</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">전체를 누르게 하려면 바깥을 링크로</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">그림은 flex: none으로 크기를 지킴</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">글은 min-width: 0이어야 줄어듦</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--danger)">float로 붙이면 글이 그림 밑까지 흘러내림</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">align-items: flex-start로 위쪽을 맞춤</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">글 칸이 모자라면 위아래로 쌓음</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">전체를 누르게 하려면 바깥을 링크로 만듦</div>
                 </div>
               </div>'''
 
@@ -64,24 +64,25 @@ D = dict(
   ]),
   axes=ax("미디어 오브젝트"),
   oneline="<b>그림에는 <code>flex: none</code>, 글에는 <code>min-width: 0</code>을 줍니다.</b> 미디어 오브젝트는 대부분 이 두 줄로 만들 수 있습니다.",
+  s4_title="붙이는 방식과 상태", s4_hint="붙이는 방식과 폭에 따라 달라지는 모습",
   states=states([
-    (mo("flex", "글이 한 기둥으로 선다", True), "<code>flex</code>", "요즘 쓰는 방식입니다"),
-    (mo("float", "글이 그림 밑으로 돈다", False, "152px", False, "26px", "한빛아웃도어",
+    (mo("flex", "글이 한 단으로 놓임", True), "<code>flex</code>로 붙였을 때", "요즘 쓰는 방식입니다"),
+    (mo("float", "글이 그림 밑까지 흘러내림", False, "152px", False, "26px", "한빛아웃도어",
         "2026-11-12 정산 · 842,500원 · 세 건이 묶여 들어왔습니다", True),
-     "<code>float</code>", "<b>예전 방식</b>으로, 글 길이에 따라 모양이 달라집니다"),
-    (mo("좁음", "글 칸만 줄어든다", True, "118px"), "좁을 때", "글 칸만 줄어들고 <b>그림은 그대로</b>입니다"),
-    (mo("위아래로", "아주 좁으면 바꾼다", True, "118px", True), "더 좁을 때", "그림과 글을 <b>세로</b>로 쌓습니다"),
-    (mo("큰 그림", "그림이 주인공일 때", None, "152px", False, "40px"), "그림이 클 때", "그림이 중심이 되고 글은 <b>보조 설명</b>이 됩니다"),
-    (mo("찌그러짐", "flex: none 이 없다", False, "118px", False, "14px"), "크기를 안 지킴", "폭이 좁아지면 <b>그림이 먼저</b> 줄어듭니다"),
+     "<code>float</code>로 붙였을 때", "<b>예전 방식</b>으로, 글 길이에 따라 모양이 달라집니다"),
+    (mo("좁음", "글 칸만 줄어듦", True, "118px"), "폭이 좁을 때", "글 칸만 줄어들고 <b>그림은 그대로</b>입니다"),
+    (mo("위아래로", "아주 좁으면 세로로 쌓음", True, "118px", True), "폭이 아주 좁을 때", "그림과 글을 <b>세로</b>로 쌓습니다"),
+    (mo("큰 그림", "그림이 중심일 때", None, "152px", False, "40px"), "그림이 클 때", "그림이 중심이 되고 글은 <b>보조 설명</b>이 됩니다"),
+    (mo("찌그러짐", "flex: none이 없음", False, "118px", False, "14px"), "그림 크기를 지키지 않았을 때", "폭이 좁아지면 <b>그림이 먼저</b> 줄어듭니다"),
   ]),
   anat=ANAT,
   pins=pins([
     ("그림", "<code>flex: none</code>", "그림 크기를 <b>지킵니다</b>"),
     ("글", "<code>min-width: 0</code>", "이 값이 없으면 글 칸이 <b>줄어들지 않습니다</b>"),
-    ("<code>float</code>", "글이 돌아 흐름", "글 줄 수에 따라 <b>모양이 달라집니다</b>"),
+    ("<code>float</code>", "글이 그림을 감싸며 흐르는 방식", "글 줄 수에 따라 <b>모양이 달라집니다</b>"),
     ("위 맞춤", "<code>flex-start</code>", "글이 길어져도 <b>그림은 위쪽</b>에 맞춰 둡니다"),
-    ("세로 전환", "아주 좁을 때", "글 칸이 모자라면 위아래로 바꿉니다"),
-    ("전체 누름", "바깥을 링크로", "안에 단추가 있으면 단추의 눌림을 <b>따로</b> 막습니다"),
+    ("세로 전환", "아주 좁을 때의 배치", "글 칸이 모자라면 위아래로 바꿉니다"),
+    ("전체 누름", "바깥을 링크로 감싸기", "안에 단추가 있으면 단추의 눌림을 <b>따로</b> 막습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <b><code>min-width: 0</code></b> 은 플렉스에서 특히 자주 빠뜨리는 한 줄입니다.
@@ -91,8 +92,10 @@ D = dict(
           <code>float</code>은 지금도 동작하지만 <b>글의 줄 수에 따라 모양이 달라집니다</b>.
           글이 두 줄이면 그림 옆에 가지런히 놓이고, 네 줄이면 그림 아래까지 감싸며 흘러내립니다.
           이렇게 <b>내용에 따라 모양이 달라지기</b> 때문에 요즘은 미디어 오브젝트에 쓰지 않습니다.</p>''',
+  do_title="미디어 오브젝트를 만들 때 지킬 것", dont_title="미디어 오브젝트를 만들 때 피할 것",
+  instead_title="미디어 오브젝트 대신 쓸 부품과 함께 볼 항목",
   do=ul([
-    "그림에 <b><code>flex: none</code></b>, 글에 <b><code>min-width: 0</code></b>",
+    "그림에는 <b><code>flex: none</code></b>, 글에는 <b><code>min-width: 0</code></b> 주기",
     "<code>align-items: flex-start</code>로 <b>위쪽을 맞추기</b>",
     "아주 좁으면 <b>위아래</b>로 바꾸기",
   ]),
@@ -102,12 +105,13 @@ D = dict(
     "<code>min-width: 0</code>을 빠뜨리기. 말줄임이 <b>적용되지 않습니다</b>",
     "그림과 글을 <b>각각</b> 링크로 두기. 같은 곳으로 가는 링크가 둘로 나뉩니다",
   ]),
-  instead='목록의 한 건이면 <a href="listitem.html">리스트 아이템</a>, 테두리를 두르면 <a href="card.html">카드</a>, 그림 자체는 <a href="thumbnail.html">썸네일</a>, 줄 세우기는 <a href="flex.html">플렉스</a>.',
+  instead='목록의 한 건 전체를 다루려면 <a href="listitem.html">리스트 아이템</a>을, 테두리를 둘러 상자로 묶으려면 <a href="card.html">카드</a>를 씁니다. 그림 부품 자체는 <a href="thumbnail.html">썸네일</a>에서, 요소를 한 줄로 늘어놓는 방법은 <a href="flex.html">플렉스</a>에서 다룹니다.',
   cases=cases([
-    (mo("댓글", "", True, "150px"), "댓글", "아바타 옆에 댓글을 붙입니다"),
-    (mo("알림", "", True, "150px"), "알림 목록", "아이콘 옆에 알림 내용을 붙입니다"),
-    (mo("상품", "", True, "150px", False, "40px"), "상품 줄", "<b>그림을 크게</b> 둡니다"),
+    (mo("댓글", "", True, "150px"), "아바타 옆에 댓글 붙이기", "아바타 옆에 댓글을 붙입니다"),
+    (mo("알림", "", True, "150px"), "아이콘 옆에 알림 붙이기", "아이콘 옆에 알림 내용을 붙입니다"),
+    (mo("상품", "", True, "150px", False, "40px"), "상품 사진을 크게 두기", "<b>그림을 크게</b> 둡니다"),
   ]),
+  keys_heads="<th>키와 마크업</th><th>지켜야 할 점</th>",
   code_lede="그림은 줄어들지 않고 글만 줄어들게 하는 두 줄이 핵심입니다.",
   code='''&lt;<span class="t">a</span> <span class="a">class</span>=<span class="s">"media"</span> <span class="a">href</span>=<span class="s">"/s/2411"</span>&gt;
   &lt;<span class="t">img</span> <span class="a">class</span>=<span class="s">"media__img"</span> <span class="a">src</span>=<span class="s">"/t/2411.jpg"</span> <span class="a">width</span>=<span class="s">"56"</span> <span class="a">height</span>=<span class="s">"56"</span> <span class="a">alt</span>=<span class="s">""</span>&gt;
@@ -123,16 +127,16 @@ D = dict(
 
 @media (max-width: <span class="a">380px</span>) { .media { <span class="a">flex-direction</span>: column; } }''',
   keys=kbd([
-    ("바깥을 링크로", "그림과 글이 <b>한 번에</b> 눌리고, Tab 포커스도 한 번만 멈춥니다"),
-    ("<code>alt=\"\"</code>", "옆에 같은 내용의 글이 있으면 그림은 <b>읽지 않게</b> 둡니다"),
-    ("안쪽 단추", "링크 안에 단추를 넣지 않고 <b>링크 바깥에</b> 따로 둡니다"),
-    ("<code>min-width: 0</code>", "말줄임이 적용되지 않을 때 <b>가장 먼저</b> 확인합니다"),
-    ("<code>gap</code>", "margin 대신 씁니다. 첫 요소와 마지막 요소를 따로 처리할 필요가 없습니다"),
-    ("확인하는 법", "아주 긴 이름을 넣어 보고 <b>칸 밖으로 넘치는지</b> 봅니다"),
+    ("바깥을 링크로 감싸기", "그림과 글이 <b>한 번에</b> 눌리고, Tab 포커스도 한 번만 멈춥니다"),
+    ("그림에 <code>alt=\"\"</code> 두기", "옆에 같은 내용의 글이 있으면 그림은 <b>읽지 않게</b> 둡니다"),
+    ("안쪽 단추는 링크 바깥에 두기", "링크 안에 단추를 넣지 않고 <b>링크 바깥에</b> 따로 둡니다"),
+    ("글 칸의 <code>min-width: 0</code>", "말줄임이 적용되지 않을 때 <b>가장 먼저</b> 확인합니다"),
+    ("간격은 <code>gap</code>으로 주기", "margin 대신 씁니다. 첫 요소와 마지막 요소를 따로 처리할 필요가 없습니다"),
+    ("확인하는 방법", "아주 긴 이름을 넣어 보고 <b>칸 밖으로 넘치는지</b> 봅니다"),
   ]),
   backend=rows([
     ("그림이 없을 때", "<code>thumb: null</code>이면 화면에서 <b>이니셜이나 기본 그림</b>으로 대신하고, 빈 네모를 두지 않습니다."),
-    ("글 길이", "제목과 설명이 <b>대략 얼마나 긴지</b> 알면 몇 줄에서 자를지 정할 수 있습니다. 자르는 것은 서버가 아니라 화면에서 말줄임으로 합니다."),
+    ("제목과 설명의 길이 알려 주기", "제목과 설명이 <b>대략 얼마나 긴지</b> 알면 몇 줄에서 자를지 정할 수 있습니다. 자르는 것은 서버가 아니라 화면에서 말줄임으로 합니다."),
   ]),
   plat_lede="미디어 오브젝트라는 이름은 웹에서 생겼지만, <b>같은 배치는 어느 플랫폼에나</b> 있습니다.",
   plats=plats([

@@ -3,11 +3,11 @@ from parts import *
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
 
 WAIT = table(
-  ["끝나는 때를 아나", "들어올 자리를 잡나", "사용자가 기다리나", "화면이 덜컥거리나"],
-  [["스피너", "모른다", "안 잡는다", "기다린다", "덜컥거린다"],
-   ["스켈레톤", "모른다", "잡는다", "기다린다", "안 덜컥거린다"],
-   ["프로그레스 바", "안다", "잡기도 한다", "기다린다", "안 덜컥거린다"],
-   ["낙관적 UI", "해당 없음", "잡는다", "안 기다린다", "안 덜컥거린다"]],
+  ["끝나는 때를 아는가", "들어올 내용의 자리를 미리 잡는가", "사용자가 기다려야 하는가", "내용이 들어올 때 화면이 덜컥거리는가"],
+  [["스피너", "모름", "잡지 않음", "기다림", "덜컥거림"],
+   ["스켈레톤", "모름", "잡아 둠", "기다림", "덜컥거리지 않음"],
+   ["프로그레스 바", "알고 있음", "잡기도 함", "기다림", "덜컥거리지 않음"],
+   ["낙관적 UI", "해당 없음", "잡아 둠", "기다리지 않음", "덜컥거리지 않음"]],
   me="프로그레스")
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:10px">
@@ -45,12 +45,12 @@ D = dict(
   axes=WAIT,
   oneline="프로그레스 바는 <b>끝나는 때를 알 때만</b> 씁니다. 진행률을 모르면서 퍼센트를 보여 주면 막대가 90% 근처에서 멈춰 버리는 일이 생기고, 사용자는 아무 표시가 없을 때보다 더 답답해합니다.",
   states=states([
-    (mini('<div style="margin-top:12px"><span style="display:block;height:5px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:0%;background:var(--accent);border-radius:99px"></i></span></div>', bars="68", label="아직 시작 안 한 막대"), "0%", "막 시작한 상태입니다. 막대가 0에서 한동안 움직이지 않으면 사용자는 멈춘 줄 압니다"),
-    (mini('<div style="margin-top:12px"><span style="display:block;height:5px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:62%;background:var(--accent);border-radius:99px"></i></span><div style="font-size:7px;color:var(--fg-muted);margin-top:4px">62% · 12초 남음</div></div>', bars="68", label="진행 중인 결정형 막대"), "결정형", "퍼센트와 남은 시간을 함께 보여 줍니다"),
-    (mini('<div style="margin-top:12px"><span style="display:block;height:5px;border-radius:99px;background:var(--line);overflow:hidden"><i style="display:block;height:100%;width:36%;margin-left:28%;background:var(--accent);border-radius:99px"></i></span><div style="font-size:7px;color:var(--fg-muted);margin-top:4px">변환 중… (끝을 모름)</div></div>', bars="68", label="비결정형 막대"), "비결정형", "끝을 모르는 단계에서는 <b>퍼센트를 지우고</b> 막대가 좌우로 왔다 갔다 합니다"),
-    (mini('<div style="margin-top:12px"><span style="display:block;height:5px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:100%;background:#1f8a4c;border-radius:99px"></i></span><div style="font-size:7px;color:#1f8a4c;margin-top:4px;font-weight:700">✓ 끝났습니다</div></div>', bars="68", label="끝난 막대"), "끝남", "100%에서 잠깐 머문 뒤 결과 화면으로 바뀝니다"),
-    (mini('<div style="margin-top:12px"><span style="display:block;height:5px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:48%;background:var(--danger);border-radius:99px"></i></span><div style="font-size:7px;color:var(--danger);margin-top:4px;font-weight:700">실패 · 다시 시도</div></div>', bars="68", label="실패한 막대"), "실패", "멈춘 자리에서 막대가 빨갛게 바뀌므로 어디까지 진행됐었는지 알 수 있습니다"),
-    (mini('<div style="margin-top:10px;display:grid;gap:5px"><span style="display:block;height:4px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:100%;background:#1f8a4c;border-radius:99px"></i></span><span style="display:block;height:4px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:44%;background:var(--accent);border-radius:99px"></i></span><span style="display:block;height:4px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:0%;background:var(--accent);border-radius:99px"></i></span></div>', bars="6", label="여러 개가 동시에 도는 모습"), "여러 개", "작업마다 막대를 하나씩 둡니다. 전체 진행률 막대를 따로 둘지도 정해야 합니다"),
+    (mini('<div style="margin-top:12px"><span style="display:block;height:5px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:0%;background:var(--accent);border-radius:99px"></i></span></div>', bars="68", label="아직 시작 안 한 막대"), "막 시작했을 때(0%)", "막 시작한 상태입니다. 막대가 0에서 한동안 움직이지 않으면 사용자는 멈춘 줄 압니다"),
+    (mini('<div style="margin-top:12px"><span style="display:block;height:5px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:62%;background:var(--accent);border-radius:99px"></i></span><div style="font-size:7px;color:var(--fg-muted);margin-top:4px">62% · 12초 남음</div></div>', bars="68", label="진행 중인 결정형 막대"), "진행률을 알 때(결정형)", "퍼센트와 남은 시간을 함께 보여 줍니다"),
+    (mini('<div style="margin-top:12px"><span style="display:block;height:5px;border-radius:99px;background:var(--line);overflow:hidden"><i style="display:block;height:100%;width:36%;margin-left:28%;background:var(--accent);border-radius:99px"></i></span><div style="font-size:7px;color:var(--fg-muted);margin-top:4px">변환 중… (끝을 모름)</div></div>', bars="68", label="비결정형 막대"), "끝을 모르는 단계(비결정형)", "끝을 모르는 단계에서는 <b>퍼센트를 지우고</b> 막대가 좌우로 왔다 갔다 합니다"),
+    (mini('<div style="margin-top:12px"><span style="display:block;height:5px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:100%;background:#1f8a4c;border-radius:99px"></i></span><div style="font-size:7px;color:#1f8a4c;margin-top:4px;font-weight:700">✓ 끝났습니다</div></div>', bars="68", label="끝난 막대"), "작업이 끝났을 때", "100%에서 잠깐 머문 뒤 결과 화면으로 바뀝니다"),
+    (mini('<div style="margin-top:12px"><span style="display:block;height:5px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:48%;background:var(--danger);border-radius:99px"></i></span><div style="font-size:7px;color:var(--danger);margin-top:4px;font-weight:700">실패 · 다시 시도</div></div>', bars="68", label="실패한 막대"), "작업이 실패했을 때", "멈춘 자리에서 막대가 빨갛게 바뀌므로 어디까지 진행됐었는지 알 수 있습니다"),
+    (mini('<div style="margin-top:10px;display:grid;gap:5px"><span style="display:block;height:4px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:100%;background:#1f8a4c;border-radius:99px"></i></span><span style="display:block;height:4px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:44%;background:var(--accent);border-radius:99px"></i></span><span style="display:block;height:4px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:0%;background:var(--accent);border-radius:99px"></i></span></div>', bars="6", label="여러 개가 동시에 도는 모습"), "여러 작업이 함께 진행될 때", "작업마다 막대를 하나씩 둡니다. 전체 진행률 막대를 따로 둘지도 정해야 합니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -75,14 +75,14 @@ D = dict(
     "채움이 <b>뒤로 가게</b> 둘 때. 한 번만 줄어들어도 사용자가 막대를 믿지 않게 됩니다",
     "여러 작업을 막대 하나에 묶어 보여 줄 때. 어느 작업이 막혔는지 알 수 없습니다",
   ]),
-  instead='끝을 모르면 <a href="spinner.html">스피너</a>, 들어올 모양만 알면 <a href="skeleton.html">스켈레톤</a>, 기다림 자체를 없앨 수 있으면 <a href="optimistic.html">낙관적 UI</a>, 실패했으면 <a href="error.html">에러 상태</a>.',
+  instead='끝나는 때를 모르면 <a href="spinner.html">스피너</a>를 쓰고, 들어올 내용의 모양만 안다면 <a href="skeleton.html">스켈레톤</a>을 씁니다. 기다림 자체를 없앨 수 있으면 <a href="optimistic.html">낙관적 UI</a>가 낫고, 작업이 실패했다면 <a href="error.html">에러 상태</a>로 알립니다.',
   cases=cases([
     (mini('<div style="margin-top:10px"><div style="font-size:7px;margin-bottom:3px">거래내역.csv · 62%</div><span style="display:block;height:5px;border-radius:99px;background:var(--line)"><i style="display:block;height:100%;width:62%;background:var(--accent);border-radius:99px"></i></span></div>', bars="68", tall=False, label="업로드 진행 재현"),
-     "파일 올리기", "전체 바이트 수를 알기 때문에 진행률을 정확하게 보여 줄 수 있습니다"),
+     "파일을 올리는 진행률 보여 주기", "전체 바이트 수를 알기 때문에 진행률을 정확하게 보여 줄 수 있습니다"),
     (mini('<div style="margin-top:12px;display:flex;align-items:center;gap:4px"><span style="flex:1;height:4px;border-radius:99px;background:var(--accent)"></span><span style="flex:1;height:4px;border-radius:99px;background:var(--accent)"></span><span style="flex:1;height:4px;border-radius:99px;background:var(--line)"></span></div><div style="font-size:7px;color:var(--fg-muted);margin-top:4px;text-align:center">3단계 중 2단계</div>', bars="68", tall=False, label="단계 표시 재현"),
-     "단계 표시", "진행률을 퍼센트 대신 칸으로 보여 줍니다. 위저드나 가입 흐름에서 흔히 씁니다"),
+     "몇 단계 중 몇 번째인지 보여 주기", "진행률을 퍼센트 대신 칸으로 보여 줍니다. 위저드나 가입 흐름에서 흔히 씁니다"),
     (mini('<div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--line)"><i style="display:block;height:100%;width:44%;background:var(--accent)"></i></div>', bars="684", tall=False, label="꼭대기 띠 재현"),
-     "꼭대기 띠", "화면을 전환할 때 씁니다. 내용이 들어갈 자리를 차지하지 않고, 결정형과 비결정형 모두로 쓸 수 있습니다"),
+     "화면 전환을 맨 위 띠로 알리기", "화면을 전환할 때 씁니다. 내용이 들어갈 자리를 차지하지 않고, 결정형과 비결정형 모두로 쓸 수 있습니다"),
   ]),
   code_lede="HTML에는 <code>&lt;progress&gt;</code> 요소가 있지만 모양을 바꾸기가 까다롭습니다. 그래서 막대를 직접 그리고 <code>role</code>과 값을 붙이는 방식을 많이 씁니다.",
   code='''<span class="c">&lt;!-- 값을 빼면 비결정형이 된다 --&gt;</span>
@@ -98,18 +98,19 @@ bar.classList.add(<span class="s">'prg--ind'</span>);
 
 <span class="c">// 채움은 뒤로 가지 않게 한다</span>
 p = Math.max(p, next);''',
+  keys_heads="<th>상황</th><th>그때 일어나야 하는 일</th>",
   keys=kbd([
     ("<kbd>Tab</kbd>", "막대 자체는 <b>포커스를 받지 않고</b>, 취소 버튼만 포커스를 받습니다"),
-    ("스크린 리더", "<code>role=\"progressbar\"</code>와 <code>aria-valuenow</code>를 씁니다. 값이 바뀔 때마다 읽어 주면 너무 시끄러우므로 10% 단위로 끊어서 알립니다"),
-    ("비결정형", "<code>aria-valuenow</code>를 <b>지웁니다.</b> 값을 남겨 두면 그 값에서 멈춘 것처럼 읽힙니다"),
-    ("취소", "<kbd>Esc</kbd>로도 취소할 수 있게 하면 좋습니다"),
+    ("스크린 리더로 읽을 때", "<code>role=\"progressbar\"</code>와 <code>aria-valuenow</code>를 씁니다. 값이 바뀔 때마다 읽어 주면 너무 시끄러우므로 10% 단위로 끊어서 알립니다"),
+    ("비결정형으로 바뀌었을 때", "<code>aria-valuenow</code>를 <b>지웁니다.</b> 값을 남겨 두면 그 값에서 멈춘 것처럼 읽힙니다"),
+    ("작업을 취소할 때", "<kbd>Esc</kbd>로도 취소할 수 있게 하면 좋습니다"),
     ("끝났을 때", "막대를 결과로 바꿉니다. 100%가 된 막대를 그대로 남겨 두지 않습니다"),
   ]),
   backend=rows([
-    ("결정형 = 전체 크기를 아는 전송", "응답에 <code>Content-Length</code>가 있으면 결정형으로, 스트리밍이라 전체 크기를 모르면 비결정형으로 그립니다. <b>막대의 모양이 서버 응답에 전체 크기가 있는지를 그대로 보여 주는 셈입니다.</b>"),
-    ("단계마다 성질이 바뀐다", "업로드(결정형)를 마치면 서버 변환(비결정형)을 거쳐 저장(결정형)으로 넘어가는 것처럼, 한 작업 안에서도 단계마다 결정형과 비결정형이 바뀝니다. 데모의 두 번째 파일이 이런 경우입니다."),
-    ("남은 시간 = 추정치", "남은 시간은 남은 양을 최근 전송 속도로 나눈 추정치라서, 네트워크 속도가 들쭉날쭉하면 금방 틀립니다. <b>틀린 추정치는 보여 주지 않는 편이 낫습니다.</b>"),
-    ("취소 = 중단 신호", "취소를 누르면 AbortController 등으로 요청을 실제로 끊어야 합니다. 화면에서 막대만 지우고 서버는 작업을 계속하면 쓸데없이 비용과 자원을 씁니다."),
+    ("전체 크기를 아는 전송이면 결정형", "응답에 <code>Content-Length</code>가 있으면 결정형으로, 스트리밍이라 전체 크기를 모르면 비결정형으로 그립니다. <b>막대의 모양이 서버 응답에 전체 크기가 있는지를 그대로 보여 주는 셈입니다.</b>"),
+    ("단계마다 바뀌는 결정형과 비결정형", "업로드(결정형)를 마치면 서버 변환(비결정형)을 거쳐 저장(결정형)으로 넘어가는 것처럼, 한 작업 안에서도 단계마다 결정형과 비결정형이 바뀝니다. 데모의 두 번째 파일이 이런 경우입니다."),
+    ("남은 시간은 추정치라는 점", "남은 시간은 남은 양을 최근 전송 속도로 나눈 추정치라서, 네트워크 속도가 들쭉날쭉하면 금방 틀립니다. <b>틀린 추정치는 보여 주지 않는 편이 낫습니다.</b>"),
+    ("취소하면 요청도 실제로 끊기", "취소를 누르면 AbortController 등으로 요청을 실제로 끊어야 합니다. 화면에서 막대만 지우고 서버는 작업을 계속하면 쓸데없이 비용과 자원을 씁니다."),
   ]),
   plat_lede="플랫폼 대부분은 결정형과 비결정형을 <b>한 부품의 두 모드</b>로 다룹니다.",
   plats=plats([
@@ -125,8 +126,8 @@ p = Math.max(p, next);''',
   ]),
   plat_note="iOS에서는 <b>끝을 아는 표시와 모르는 표시의 이름이 다르고</b>(프로그레스 바와 액티비티 인디케이터), 안드로이드에서는 <b>같은 이름의 부품에 두 모드</b>가 있습니다. 그래서 iOS 개발자에게 \"프로그레스 띄워 주세요\"라고 하면 '퍼센트를 알 수 있느냐'는 질문이 먼저 돌아옵니다.",
   siblings=siblings("progress"),
-  related='''        <li><span class="na"><b>슬라이더</b><em>4부</em></span></li>
-        <li><span class="na"><b>파일 업로더와 드롭존</b><em>4부</em></span></li>
-        <li><span class="na"><b>스테퍼(위저드)</b><em>7부</em></span></li>
+  related='''        <li><a href="slider.html"><b>슬라이더</b><em>4부</em></a></li>
+        <li><a href="upload.html"><b>파일 업로더와 드롭존</b><em>13부</em></a></li>
+        <li><a href="stepper.html"><b>스테퍼(위저드)</b><em>7부</em></a></li>
         <li><span class="na"><b>미터</b><em>5부</em></span></li>''',
 )

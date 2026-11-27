@@ -18,9 +18,9 @@
 <body>
 <div class="bar">
   <b>범위 슬라이더</b>
-  <label><input type="checkbox" id="cross" checked> 두 손잡이가 안 넘어가게</label>
+  <label><input type="checkbox" id="cross" checked> 두 손잡이가 서로 넘어가지 않게 막기</label>
   <label><input type="checkbox" id="fields" checked> 숫자 칸도 같이 두기</label>
-  <label>눈금 <select class="sel" id="step" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>눈금 간격 <select class="sel" id="step" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="1">1만원</option>
     <option value="10" selected>10만원</option>
     <option value="50">50만원</option>
@@ -88,12 +88,12 @@
     var exact = (a % step !== 0) || (b % step !== 0);
     var rd = document.getElementById('read');
     rd.innerHTML = '범위 <b>' + left + ' ~ ' + right + '만원</b>' +
-      (flipped ? ' <span class="warn">— 최소가 최대보다 큽니다</span>' : '') +
-      (exact ? ' <span style="color:var(--accent)">— 눈금에 없는 값입니다</span>' : '') +
-      '<br>눈금 <b>' + step + '만원</b> · 끌어서 넣을 수 있는 값 <b>' + choices + '가지</b>' +
-      (choices < 15 ? ' <span class="warn">— 끌어서는 원하는 값이 없을 수도 있습니다</span>' : '') +
-      '<br>숫자 칸 <b>' + (document.getElementById('fields').checked ? '있음' : '없음') + '</b>' +
-      (document.getElementById('fields').checked ? '' : ' <span class="warn">— 정확한 값을 넣을 수 없습니다</span>') +
+      (flipped ? ' <span class="warn">최소가 최대보다 큽니다</span>' : '') +
+      (exact ? ' <span style="color:var(--accent)">지금 값은 눈금에 없는 값입니다</span>' : '') +
+      '<br>눈금이 <b>' + step + '만원</b>이면 끌어서 넣을 수 있는 값은 <b>' + choices + '가지</b>입니다' +
+      (choices < 15 ? ' <span class="warn">그래서 끌어서는 원하는 값이 없을 수도 있습니다</span>' : '') +
+      '<br>숫자 칸이 <b>' + (document.getElementById('fields').checked ? '있습니다' : '없습니다') + '</b>' +
+      (document.getElementById('fields').checked ? '' : ' <span class="warn">그래서 정확한 값을 넣을 수 없습니다</span>') +
       (why ? '<br>' + why : '');
     rd.dataset.lo = String(a);
     rd.dataset.hi = String(b);

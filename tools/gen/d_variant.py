@@ -22,12 +22,12 @@ def chip(label, tone="primary", size="md", off=False):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">축 — 크기 · 강조 · 상태. 각각 값이 몇 개인가</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">축은 크기 · 강조 · 상태, 축마다 값 개수를 셈</div>
                   <div class="pin-out" data-pin="2" style="max-width:220px">''' + mat(chip('저장', 'primary', 'sm') + chip('저장', 'primary') + chip('저장', 'primary', 'lg'), "220px").strip() + '''</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">칸 수 = 축의 값을 모두 곱한 것</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">축을 하나 늘리면 칸이 몇 배가 된다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">코드로는 props — 같은 축, 같은 값</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">상태(호버·누름)는 배리언트로 안 만들기도 한다</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">칸 수는 축마다 값 개수를 모두 곱한 수</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">축을 하나 늘리면 칸이 몇 배로 늘어남</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">코드에서는 같은 축과 값을 props로 씀</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">상태(호버·누름)는 배리언트로 안 만들기도 함</div>
                 </div>
               </div>'''
 
@@ -56,31 +56,31 @@ D = dict(
   ]),
   axes=ax("배리언트와 프롭"),
   oneline="<b>축을 늘리기 전에 칸 수를 곱해 보세요.</b> 3×3×2는 18칸이지만, 값이 세 개인 축을 하나만 더해도 54칸이 됩니다.",
-  s4_title="축을 늘리면", s4_hint="칸이 몇 개가 되나",
+  s4_title="축 수에 따라 늘어나는 칸", s4_hint="축을 하나씩 더할 때의 칸 수",
   states=states([
     (mat(chip('저장', 'primary', 'sm') + chip('저장', 'primary') + chip('저장', 'primary', 'lg'), "152px", "축 1개 · 3칸"),
-     "크기만", "작게, 보통, 크게의 세 칸입니다"),
+     "크기 축만 둘 때", "작게, 보통, 크게의 세 칸입니다"),
     (mat(chip('저장', 'primary') + chip('저장', 'ghost') + chip('저장', 'danger'), "152px", "축 2개 · 9칸"),
-     "강조를 더하면", "3 × 3 = <b>9칸</b>이 됩니다"),
+     "강조 축을 더했을 때", "3 × 3 = <b>9칸</b>이 됩니다"),
     (mat(chip('저장', 'primary') + chip('저장', 'primary', 'md', True) + chip('저장', 'ghost') + chip('저장', 'ghost', 'md', True), "152px", "축 3개 · 18칸"),
-     "상태를 더하면", "3 × 3 × 2 = <b>18칸</b>이 됩니다"),
+     "상태 축까지 더했을 때", "3 × 3 × 2 = <b>18칸</b>이 됩니다"),
     (mat(''.join(chip('저장', t, s) for t in ['primary', 'ghost', 'danger'] for s in ['sm', 'md']), "152px", "축 4개 · 54칸", False),
-     "아이콘까지", "3 × 3 × 2 × 3 = <b>54칸</b>이 됩니다"),
+     "아이콘 축까지 더했을 때", "3 × 3 × 2 × 3 = <b>54칸</b>이 됩니다"),
     (card('<span style="font-size:9px">호버 · 누름 · 초점</span>'
-          '<span style="font-size:8.5px;color:var(--fg-muted)">사용자가 만드는 것이라 CSS 에 맡긴다</span>', "152px", "축에서 뺀다"),
-     "상태는 뺀다", "상태를 <b>:hover 같은 CSS에 맡기면</b> 칸이 늘지 않습니다"),
+          '<span style="font-size:8.5px;color:var(--fg-muted)">사용자 조작으로 생겨 CSS에 맡김</span>', "152px", "축에서 뺌"),
+     "상태를 축에서 빼기", "상태를 <b>:hover 같은 CSS에 맡기면</b> 칸이 늘지 않습니다"),
     (card('<span style="font-size:9px">아이콘 버튼은 따로</span>'
-          '<span style="font-size:8.5px;color:var(--fg-muted)">모양이 많이 다르면 부품을 쪼갠다</span>', "152px", "축을 줄이는 또 한 수"),
-     "쪼개기", "모양이 많이 다르면 <b>한 부품에 모두 넣지 않고</b> 따로 만듭니다"),
+          '<span style="font-size:8.5px;color:var(--fg-muted)">모양이 많이 다르면 부품을 쪼갬</span>', "152px", "축을 줄이는 다른 방법"),
+     "부품을 둘로 쪼개기", "모양이 많이 다르면 <b>한 부품에 모두 넣지 않고</b> 따로 만듭니다"),
   ]),
   anat=ANAT,
   pins=pins([
     ("축", "크기 · 강조 · 상태", "축마다 <b>값이 몇 개</b>인지 셉니다"),
     ("칸", "축의 곱", "칸 수는 축마다 값 개수를 곱한 수입니다. 3 × 3 × 2 = 18"),
-    ("곱의 무서움", "+1 축 = ×N", "축을 하나 더하면 칸 수가 그 축의 값 개수만큼 <b>몇 배</b>로 늘어납니다"),
-    ("코드로는", "props", "시안의 축은 코드의 <code>props</code>에 해당합니다"),
-    ("상태는 빼기", ":hover · :active", "사용자의 조작으로 <b>생기는</b> 상태는 CSS에 맡깁니다"),
-    ("쪼개기", "다른 부품으로", "모양이 많이 다르면 다른 부품으로 <b>따로 만듭니다</b>"),
+    ("칸 수 증가", "+1 축 = ×N", "축을 하나 더하면 칸 수가 그 축의 값 개수만큼 <b>몇 배</b>로 늘어납니다"),
+    ("코드에서는", "props", "시안의 축은 코드의 <code>props</code>에 해당합니다"),
+    ("상태 빼기", ":hover · :active", "사용자의 조작으로 <b>생기는</b> 상태는 CSS에 맡깁니다"),
+    ("부품 쪼개기", "다른 부품으로", "모양이 많이 다르면 다른 부품으로 <b>따로 만듭니다</b>"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <b>축을 줄이는 방법은 두 가지</b>입니다.
@@ -90,10 +90,12 @@ D = dict(
           크기와 여백, 접근성 규칙이 모두 달라서 같은 부품의 변형으로 두면
           예외 조건이 계속 늘어납니다.
           <b>'이게 정말 같은 부품인가'</b>를 한 번 물어보는 것만으로 축 하나를 없앨 수 있는 경우가 흔합니다.</p>''',
+  do_title="배리언트를 설계할 때 지킬 것",
+  dont_title="배리언트를 설계할 때 피할 것",
   do=ul([
-    "축을 늘리기 전에 칸 수를 <b>곱해 볼</b> 때",
-    "<b>상태</b>를 축에서 빼고 CSS에 맡길 때",
-    "모양이 많이 달라서 <b>부품을 쪼갤</b> 때",
+    "축을 늘리기 전에 칸 수를 <b>곱해 봅니다</b>",
+    "<b>상태</b>는 축에서 빼고 CSS에 맡깁니다",
+    "모양이 많이 다르면 <b>부품을 쪼갭니다</b>",
   ]),
   dont=ul([
     "축을 다섯 개나 둘 때. 칸이 <b>백 칸</b>을 넘습니다",
@@ -101,16 +103,17 @@ D = dict(
     "모양이 많이 다른 것까지 한 부품에 모두 넣을 때. 예외 조건이 <b>계속 늘어납니다</b>",
     "쓰지 않을 칸을 만들 때. '혹시 몰라서' 만든 칸이 <b>절반을 차지</b>하기도 합니다",
   ]),
-  instead='부품 자체는 <a href="component.html">컴포넌트와 인스턴스</a>, 값 묶음은 <a href="designsystem.html">디자인 시스템</a>, 배치는 <a href="autolayout.html">오토 레이아웃</a>.',
+  instead_title="관련 주제는 다른 항목에서 다룹니다",
+  instead='부품 자체는 <a href="component.html">컴포넌트와 인스턴스</a>에서, 값 묶음은 <a href="designsystem.html">디자인 시스템</a>에서, 상자 안의 배치는 <a href="autolayout.html">오토 레이아웃</a>에서 다룹니다.',
   cases=cases([
     (mat(chip('저장', 'primary') + chip('저장', 'ghost') + chip('저장', 'danger'), "150px", "강조 3"),
-     "강조", "<b>주, 약하게, 위험</b>의 세 가지면 충분합니다"),
+     "강조 축은 세 가지로", "<b>주, 약하게, 위험</b>의 세 가지면 충분합니다"),
     (mat(chip('저장', 'primary', 'sm') + chip('저장', 'primary') + chip('저장', 'primary', 'lg'), "150px", "크기 3"),
-     "크기", "<b>표 안, 본문, 주 동작</b>에 맞춰 세 가지를 둡니다"),
+     "크기 축도 세 가지로", "<b>표 안, 본문, 주 동작</b>에 맞춰 세 가지를 둡니다"),
     (card('<span style="font-size:9px;font-weight:700">쓰지 않는 칸</span>'
           '<span style="font-size:8.5px;color:var(--danger)">위험 × 작게 × 꺼짐</span>'
-          '<span style="font-size:8px;color:var(--fg-muted)">만들어 뒀지만 아무도 안 쓴다</span>', "150px"),
-     "안 쓰는 칸", "만들어 둔 칸의 <b>절반이 이런 칸</b>인 경우가 많습니다"),
+          '<span style="font-size:8px;color:var(--fg-muted)">만들어 뒀지만 아무도 안 씀</span>', "150px"),
+     "아무도 안 쓰는 칸 찾기", "만들어 둔 칸의 <b>절반이 이런 칸</b>인 경우가 많습니다"),
   ]),
   s8_title="코드와 맞춰 보기", s8_hint="시안의 축과 코드의 props",
   code_lede="시안의 축은 코드의 <code>props</code>가 되고, 호버나 누름 같은 <b>상태는 CSS</b>가 처리합니다.",
@@ -125,17 +128,18 @@ D = dict(
 
 <span class="c">// 모양이 많이 다르면 쪼갠다 — 조건이 안 붙는다</span>
 &lt;<span class="t">IconButton</span> <span class="a">icon</span>=<span class="s">"trash"</span> <span class="a">label</span>=<span class="s">"삭제"</span> /&gt;''',
+  keys_heads="<th>지킬 규칙</th><th>그렇게 하는 이유</th>",
   keys=kbd([
-    ("상태는 <b>CSS</b>로", "호버, 누름, 초점, 비활성은 CSS로 처리합니다. 이것들을 축으로 만들면 <b>칸만 늘어납니다</b>"),
+    ("상태는 <b>CSS</b>로 처리하기", "호버, 누름, 초점, 비활성은 CSS로 처리합니다. 이것들을 축으로 만들면 <b>칸만 늘어납니다</b>"),
     ("<code>:focus-visible</code>", "포커스 표시는 <b>키보드로 옮겼을 때만</b> 보여야 해서 배리언트로는 만들 수 없습니다"),
-    ("<code>disabled</code>는 축일 수도", "모양이 아주 다르면 칸으로 두기도 합니다. 그래도 누를 수 없게 하는 <b>동작은 CSS와 속성</b>이 맡습니다"),
-    ("이름을 쓰임으로", "<code>tone=\"danger\"</code>가 <code>color=\"red\"</code>보다 낫습니다. <b>다크 모드에서는 위험 색이 빨강이 아닐 수도</b> 있기 때문입니다"),
-    ("쪼갠 부품에도 접근성", "<code>IconButton</code>에는 글자가 없으니 <code>aria-label</code>이 <b>꼭 필요합니다</b>(<a href=\"../items/name.html\">이름 붙이기</a> 참고)"),
+    ("<code>disabled</code>를 축으로 둘 때", "모양이 아주 다르면 칸으로 두기도 합니다. 그래도 누를 수 없게 하는 <b>동작은 CSS와 속성</b>이 맡습니다"),
+    ("이름은 쓰임에 따라 짓기", "<code>tone=\"danger\"</code>가 <code>color=\"red\"</code>보다 낫습니다. <b>다크 모드에서는 위험 색이 빨강이 아닐 수도</b> 있기 때문입니다"),
+    ("쪼갠 부품에도 접근성 챙기기", "<code>IconButton</code>에는 글자가 없으니 <code>aria-label</code>이 <b>꼭 필요합니다</b>(<a href=\"../items/name.html\">이름 붙이기</a> 참고)"),
     ("안 쓰는 칸 찾기", "코드에서는 <b>검색으로</b> 실제로 쓰인 조합을 셀 수 있습니다"),
   ]),
   backend=rows([
-    ("축 이름을 맞춘다", "시안의 <code>강조</code>와 코드의 <code>tone</code>처럼 축 이름이 다르면, 이야기할 때마다 <b>두 이름을 옮겨 가며</b> 맞춰야 합니다."),
-    ("값도 맞춘다", "시안의 값이 <code>주/약하게/위험</code>이고 코드의 값이 <code>primary/secondary/danger</code>면, 둘을 짝지은 <b>대응표를 하나 더</b> 관리해야 합니다."),
+    ("시안과 코드의 축 이름 맞추기", "시안의 <code>강조</code>와 코드의 <code>tone</code>처럼 축 이름이 다르면, 이야기할 때마다 <b>두 이름을 옮겨 가며</b> 맞춰야 합니다."),
+    ("축의 값 이름도 맞추기", "시안의 값이 <code>주/약하게/위험</code>이고 코드의 값이 <code>primary/secondary/danger</code>면, 둘을 짝지은 <b>대응표를 하나 더</b> 관리해야 합니다."),
     ("안 쓰는 조합 지우기", "실제로 쓰인 조합을 세어 보면 만들어 둔 조합의 <b>절반이 쓰이지 않는</b> 경우가 많으니, 쓰지 않는 조합은 지웁니다."),
   ]),
   plat_lede="플랫폼마다 이름은 달라도 정해 둔 변형을 <b>props</b>처럼 골라 쓰는 방식은 같습니다.",

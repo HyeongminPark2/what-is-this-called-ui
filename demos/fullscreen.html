@@ -99,9 +99,9 @@
     var inner = stage.querySelector('.fsl__body, .mdl-fake');
     var usable = inner ? Math.round(inner.getBoundingClientRect().width) : 0;
     var rd = document.getElementById('read');
-    rd.innerHTML = '화면 폭 <b>' + w + 'px</b> · ' + (open ? (full ? '<b>전체 화면</b>' : '<b>모달</b>') : '닫힘') +
+    rd.innerHTML = '화면 폭 <b>' + w + 'px</b> · ' + (open ? (full ? '<b>전체 화면</b>으로 띄움' : '<b>모달</b>로 띄움') : '레이어가 닫혀 있음') +
       (open ? '<br>내용이 쓸 수 있는 폭 <b>' + usable + 'px</b>' +
-        (!full && w <= 400 ? ' <span class="warn">— 좁은 화면에 모달을 띄워서 내용 칸이 더 좁습니다</span>' : '') : '') +
+        (!full && w <= 400 ? '. <span class="warn">좁은 화면에 모달을 띄워서 내용 칸이 더 좁습니다</span>' : '') : '') +
       (why ? '<br>' + why : '');
     rd.dataset.open = open ? '1' : '0';
     rd.dataset.full = full ? '1' : '0';

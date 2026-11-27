@@ -20,12 +20,12 @@ def phone(bar, panel_h, note, warn=False, w="112px"):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">100lvh — 큰 쪽. 주소창이 숨었을 때</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">100svh — 작은 쪽. 주소창이 보일 때</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">100dvh — 지금 보이는 만큼. 굴리면 바뀐다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">100vh = 100lvh — 주소창이 보이면 삐져나간다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">100vw 는 세로 막대 폭을 안 뺀다 — 가로로 넘친다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">meta viewport 가 없으면 전부 헛돈다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">100lvh는 주소창이 숨었을 때의 큰 높이</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">100svh는 주소창이 보일 때의 작은 높이</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">100dvh는 지금 보이는 높이라 굴리면 바뀜</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">100vh는 100lvh와 같아 주소창이 보이면 넘침</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">100vw는 세로 막대 폭을 빼지 않아 가로로 넘침</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">meta viewport가 없으면 모두 다르게 계산됨</div>
                 </div>
               </div>'''
 
@@ -56,36 +56,37 @@ D = dict(
   ]),
   axes=ax("뷰포트 단위"),
   oneline="<b>바닥에 버튼 같은 것이 붙는 화면이라면 <code>100dvh</code></b>를 씁니다. <code>100vh</code>는 주소창이 숨지 않는 PC에서만 화면 높이와 맞습니다.",
-  s4_title="주소창에 따라", s4_hint="같은 100%가 네 가지",
+  s4_title="주소창에 따라 달라지는 높이", s4_hint="같은 100이 가리키는 네 가지 높이",
+  dont_title="뷰포트 단위를 잘못 쓰는 경우",
   states=states([
-    (phone(0, 120, "주소창 없음 — 셋이 같다"), "굴려서 숨었을 때", "이때의 높이가 <b>lvh</b>이고, <b>vh</b>도 이 높이입니다"),
-    (phone(16, 120, "100vh — 아래가 잘린다", True), "주소창이 보일 때", "<b>vh는 큰 쪽 높이로 고정</b>되어 있어서 화면 아래로 넘칩니다"),
-    (phone(16, 104, "100svh — 늘 안전하다"), "svh", "작은 쪽 높이입니다. 주소창이 숨으면 <b>아래에 빈 공간이 남습니다</b>"),
-    (phone(16, 104, "100dvh — 지금 보이는 만큼"), "dvh", "화면을 굴리면 높이가 따라 바뀌어서 <b>바닥에 딱 맞게 붙습니다</b>"),
+    (phone(0, 120, "주소창이 없으면 셋이 같음"), "굴려서 주소창이 숨었을 때", "이때의 높이가 <b>lvh</b>이고, <b>vh</b>도 이 높이입니다"),
+    (phone(16, 120, "100vh는 아래가 잘림", True), "주소창이 보일 때 vh로 그리면", "<b>vh는 큰 쪽 높이로 고정</b>되어 있어서 화면 아래로 넘칩니다"),
+    (phone(16, 104, "100svh는 넘치지 않음"), "svh로 그렸을 때", "작은 쪽 높이입니다. 주소창이 숨으면 <b>아래에 빈 공간이 남습니다</b>"),
+    (phone(16, 104, "100dvh는 보이는 만큼"), "dvh로 그렸을 때", "화면을 굴리면 높이가 따라 바뀌어서 <b>바닥에 딱 맞게 붙습니다</b>"),
     ('''              <div style="width:100%;max-width:112px;display:grid;gap:5px;justify-items:center">
                 <div style="width:72px;height:120px;border:2px solid var(--line-strong);border-radius:10px;background:var(--surface);position:relative;overflow:hidden">
                   <div style="position:absolute;left:0;right:0;top:0;bottom:52px;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;margin:3px"></div>
                   <div style="position:absolute;left:0;right:0;bottom:0;height:52px;background:var(--ink-100);border-top:1px solid var(--line-strong)"></div>
                 </div>
-                <span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted);text-align:center">키보드가 올라오면 또 줄어든다</span>
+                <span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted);text-align:center">키보드가 올라오면 또 줄어듦</span>
               </div>''',
-     "키보드까지 더하면", "<a href=\"softkeyboard.html\">폰 키보드</a>가 차지하는 높이는 <code>dvh</code>에도 반영되지 않습니다"),
+     "키보드까지 올라왔을 때", "<a href=\"softkeyboard.html\">폰 키보드</a>가 차지하는 높이는 <code>dvh</code>에도 반영되지 않습니다"),
     ('''              <div style="width:100%;max-width:112px;display:grid;gap:5px;justify-items:center">
                 <div style="width:72px;height:120px;border:2px solid var(--line-strong);border-radius:10px;background:var(--surface);position:relative;overflow:hidden">
                   <div style="position:absolute;left:3px;top:3px;width:84px;height:40px;background:var(--accent-soft);border:1px solid var(--danger);border-radius:4px"></div>
                 </div>
-                <span style="font-family:var(--mono);font-size:9px;color:var(--danger);text-align:center">100vw — 세로 막대 폭을 안 뺀다</span>
+                <span style="font-family:var(--mono);font-size:9px;color:var(--danger);text-align:center">100vw는 세로 막대 폭을 빼지 않음</span>
               </div>''',
-     "가로도 함정이 있다", "<code>100vw</code>는 <b>스크롤 막대</b> 폭까지 포함합니다"),
+     "가로 폭을 100vw로 잡았을 때", "<code>100vw</code>는 <b>스크롤 막대</b> 폭까지 포함합니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("큰 쪽", "lvh", "주소창이 숨었을 때의 높이로, <code>vh</code>와 같습니다"),
-    ("작은 쪽", "svh", "주소창이 보일 때의 높이입니다. 화면 밖으로 넘치지 않아 <b>늘 안전</b>하지만, 주소창이 숨으면 아래가 남습니다"),
-    ("지금", "dvh", "지금 보이는 만큼의 높이라서 <b>화면을 굴리면 따라 바뀝니다</b>"),
-    ("vh 의 정체", "= lvh", "큰 쪽 높이로 고정되어 있어서 <b>주소창이 보이면 화면 아래로 넘칩니다</b>"),
-    ("가로의 함정", "100vw", "세로 스크롤 막대 폭을 <b>빼지 않기</b> 때문에 PC에서 가로로 넘칩니다"),
-    ("전제", "meta viewport", "이 태그가 없으면 폰 브라우저가 화면을 <b>폭 980px짜리 창</b>으로 여기고 그려서, 뷰포트 단위와 미디어 쿼리가 모두 의도와 다르게 계산됩니다"),
+    ("큰 쪽 높이", "lvh", "주소창이 숨었을 때의 높이로, <code>vh</code>와 같습니다"),
+    ("작은 쪽 높이", "svh", "주소창이 보일 때의 높이입니다. 화면 밖으로 넘치지 않아 <b>늘 안전</b>하지만, 주소창이 숨으면 아래가 남습니다"),
+    ("지금 보이는 높이", "dvh", "지금 보이는 만큼의 높이라서 <b>화면을 굴리면 따라 바뀝니다</b>"),
+    ("vh가 가리키는 높이", "lvh와 같음", "큰 쪽 높이로 고정되어 있어서 <b>주소창이 보이면 화면 아래로 넘칩니다</b>"),
+    ("가로 폭 단위", "100vw", "세로 스크롤 막대 폭을 <b>빼지 않기</b> 때문에 PC에서 가로로 넘칩니다"),
+    ("먼저 넣을 태그", "meta viewport", "이 태그가 없으면 폰 브라우저가 화면을 <b>폭 980px짜리 창</b>으로 여기고 그려서, 뷰포트 단위와 미디어 쿼리가 모두 의도와 다르게 계산됩니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <code>100dvh</code>에도 단점이 있습니다.
@@ -104,7 +105,7 @@ D = dict(
     "<code>&lt;meta name=\"viewport\"&gt;</code>를 빠뜨렸을 때",
     "키보드가 올라오는 문제까지 <code>dvh</code>로 해결될 거라고 여길 때. <a href=\"softkeyboard.html\">폰 키보드</a> 항목을 봅니다",
   ]),
-  instead='부모 높이를 꽉 채우려면 <code>100%</code>를 쓰고, 바닥에 붙이려면 <a href="../items/sticky.html">스티키</a>나 <code>position:fixed</code>, 글줄 길이를 묶으려면 <a href="../items/container.html">컨테이너</a>를 씁니다.',
+  instead='부모 요소의 높이를 꽉 채우려면 <code>100%</code>를 쓰고, 바닥에 붙이려면 <a href="../items/sticky.html">스티키</a>나 <code>position:fixed</code>를 씁니다. 글줄 길이를 묶을 때는 <a href="../items/container.html">컨테이너</a>가 맞습니다.',
   cases=cases([
     ('''              <div style="width:100%;max-width:150px;font-family:var(--mono);font-size:9px;color:var(--fg-muted);display:grid;gap:2px">
                 <span>.screen {</span>
@@ -112,16 +113,17 @@ D = dict(
                 <span>&nbsp;&nbsp;<span style="color:var(--accent)">min-height: 100dvh;</span></span>
                 <span>}</span>
               </div>''',
-     "두 줄로 적는다", "옛 브라우저는 앞줄을, dvh를 아는 브라우저는 <b>뒷줄</b>을 씁니다"),
+     "옛 단위와 새 단위를 두 줄로 적기", "옛 브라우저는 앞줄을, dvh를 아는 브라우저는 <b>뒷줄</b>을 씁니다"),
     ('''              <div style="width:100%;max-width:150px;font-family:var(--mono);font-size:9px;color:var(--fg-muted);display:grid;gap:2px">
                 <span style="color:var(--danger)">width: 100vw;</span>
                 <span style="color:var(--accent)">width: 100%;</span>
-                <span style="font-size:8.5px">세로 막대가 있으면 vw 가 더 넓다</span>
+                <span style="font-size:8.5px">세로 막대가 있으면 vw가 더 넓음</span>
               </div>''',
-     "가로는 100%", "전체 폭이 필요해도 <code>100vw</code> 대신 <code>100%</code>를 씁니다"),
-    (phone(16, 104, "100dvh — 바닥에 딱", False, "150px"), "한 화면짜리 폼", "주소창이 보이든 숨든 <b>다음 버튼이 늘 보입니다</b>"),
+     "가로 폭은 100%로 잡기", "전체 폭이 필요해도 <code>100vw</code> 대신 <code>100%</code>를 씁니다"),
+    (phone(16, 104, "100dvh로 바닥에 맞춤", False, "150px"), "한 화면짜리 폼의 바닥 버튼", "주소창이 보이든 숨든 <b>다음 버튼이 늘 보입니다</b>"),
   ]),
-  s8_title="최소 코드와 규칙", s8_hint="빠뜨리기 쉬운 설정까지",
+  s8_title="최소 코드와 지킬 규칙", s8_hint="빠뜨리기 쉬운 설정까지 담은 규칙",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법과 까닭</th>",
   code_lede="먼저 <code>meta viewport</code>를 적고, 높이는 옛 단위와 새 단위를 두 줄로 겹쳐 적습니다.",
   code='''&lt;<span class="t">meta</span> <span class="a">name</span>=<span class="s">"viewport"</span> <span class="a">content</span>=<span class="s">"width=device-width, initial-scale=1"</span>&gt;
 
@@ -140,16 +142,16 @@ visualViewport.addEventListener(<span class="s">'resize'</span>, () =&gt; {
   document.documentElement.style.setProperty(<span class="s">'--vvh'</span>, visualViewport.height + <span class="s">'px'</span>);
 });''',
   keys=kbd([
-    ("<code>meta viewport</code>", "이 태그가 없으면 폰 브라우저가 화면을 <b>폭 980px짜리 창</b>으로 여기고 그립니다. 반응형 화면은 이 한 줄이 있어야 작동합니다"),
-    ("<code>user-scalable=no</code>를 쓰지 않는다", "확대를 막으면 <b>저시력 사용자가 글을 읽을 수 없어서</b> 접근성 기준에 어긋납니다"),
-    ("<code>maximum-scale</code>도 마찬가지", "확대 배율은 5배까지 허용해 둡니다"),
+    ("<code>meta viewport</code> 넣기", "이 태그가 없으면 폰 브라우저가 화면을 <b>폭 980px짜리 창</b>으로 여기고 그립니다. 반응형 화면은 이 한 줄이 있어야 작동합니다"),
+    ("<code>user-scalable=no</code>를 쓰지 않기", "확대를 막으면 <b>저시력 사용자가 글을 읽을 수 없어서</b> 접근성 기준에 어긋납니다"),
+    ("<code>maximum-scale</code>로 확대를 막지 않기", "확대 배율은 5배까지 허용해 둡니다"),
     ("두 줄로 겹쳐 적기", "브라우저는 모르는 단위가 나오는 줄을 <b>통째로 무시</b>하므로, 옛 단위 줄을 먼저 적어 두면 옛 브라우저에서도 그 줄이 적용됩니다"),
-    ("<code>svh</code>·<code>dvh</code> 지원", "2022년 이후에 나온 브라우저가 지원합니다. 그 전 브라우저에서는 <code>vh</code> 줄이 적용됩니다"),
-    ("<code>100vw</code> 대신 <code>100%</code>", "세로 스크롤 막대가 있는 PC에서 <b>가로 스크롤</b>이 생기는 흔한 원인이 <code>100vw</code>입니다"),
+    ("<code>svh</code>·<code>dvh</code>를 지원하는 브라우저", "2022년 이후에 나온 브라우저가 지원합니다. 그 전 브라우저에서는 <code>vh</code> 줄이 적용됩니다"),
+    ("<code>100vw</code> 대신 <code>100%</code> 쓰기", "세로 스크롤 막대가 있는 PC에서 <b>가로 스크롤</b>이 생기는 흔한 원인이 <code>100vw</code>입니다"),
   ]),
   backend=rows([
-    ("서버는 높이를 모른다", "창 높이는 <b>요청에 담겨 오지 않습니다.</b> 그래서 서버에서 HTML을 미리 그려 보낼 때는 높이 처리를 CSS에 맡깁니다."),
-    ("첫 그림이 흔들린다", "자바스크립트로 높이를 재서 넣으면 화면을 <b>한 번 그린 뒤에</b> 높이가 바뀌어 화면이 덜컥거립니다. CSS 단위로 해결할 수 있으면 CSS로 처리합니다."),
+    ("서버가 알 수 없는 창 높이", "창 높이는 <b>요청에 담겨 오지 않습니다.</b> 그래서 서버에서 HTML을 미리 그려 보낼 때는 높이 처리를 CSS에 맡깁니다."),
+    ("자바스크립트로 높이를 잴 때 생기는 흔들림", "자바스크립트로 높이를 재서 넣으면 화면을 <b>한 번 그린 뒤에</b> 높이가 바뀌어 화면이 덜컥거립니다. CSS 단위로 해결할 수 있으면 CSS로 처리합니다."),
   ]),
   plat_lede="앱에는 주소창이 없기 때문에, 높이가 흔들리는 것은 <b>웹에만 있는 문제</b>입니다.",
   plats=plats([

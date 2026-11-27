@@ -23,7 +23,7 @@
   <b>프로토타입</b>
   <label><input type="checkbox" id="hotspots" checked> 이어 둔 자리 보이기</label>
   <label><input type="checkbox" id="real"> 진짜 데이터처럼 보이기</label>
-  <button class="ui-btn ui-btn--ghost" id="reset">처음부터</button>
+  <button class="ui-btn ui-btn--ghost" id="reset">처음 화면으로 되돌리기</button>
 </div>
 
 <div class="pad">
@@ -32,7 +32,7 @@
     <div class="scr__body" id="body"></div>
   </div>
   <p class="ruler" id="log"></p>
-  <p class="stamp" id="stamp">이 화면은 그림입니다 — 눌리는 자리만 이어 뒀고, 나머지는 아무 일도 하지 않습니다.</p>
+  <p class="stamp" id="stamp">이 화면은 그림입니다. 눌리는 자리만 이어 뒀고, 나머지는 눌러도 아무 일도 하지 않습니다.</p>
 </div>
 
 <p class="hint">
@@ -98,7 +98,7 @@
     }
     misses++;
     document.getElementById('log').innerHTML =
-      '<span class="warn">여기는 안 이어 뒀다 — 아무 일도 안 일어난다 (' + misses + '번째)</span>';
+      '<span class="warn">여기는 이어 두지 않은 자리라서 눌러도 아무 일도 일어나지 않습니다 (' + misses + '번째)</span>';
     document.getElementById('log').dataset.miss = String(misses);
   });
 

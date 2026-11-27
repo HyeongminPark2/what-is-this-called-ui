@@ -50,9 +50,9 @@
           <iframe src="../demos/timeline.html" title="타임라인 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>다음 단계로</b>를 눌러 보세요. 지난 단계는 눈에 덜 띄게, <b>지금 단계</b>는 또렷하게,
+          <p><b>다음 단계로 넘기기</b>를 눌러 보세요. 지난 단계는 눈에 덜 띄게, <b>지금 단계</b>는 또렷하게,
           앞으로 올 단계는 흐리게 그립니다. 화면을 보지 못하는 사람에게는 <code>aria-current="step"</code>이 지금 단계를 알려 줍니다.<br>
-          <b>거절당하기</b>도 눌러 보세요. 흐름이 늘 끝까지 가는 것은 아니어서, 중간에 멈추면
+          <b>거절된 경우 보기</b>도 눌러 보세요. 흐름이 늘 끝까지 가는 것은 아니어서, 중간에 멈추면
           <b>멈춘 단계</b>에 그 이유를 바로 적어 둡니다. 그래야 사용자가 어디서 멈췄는지 따로 찾지 않아도 됩니다.</p>
         </div>
       </section>
@@ -76,23 +76,23 @@
         <p>표시 부품은 모두 무언가를 보여 주기만 한다는 점이 같아서, 아래 네 가지를 물어봐야 서로 구별됩니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 담나</th><th>전체가 눌리나</th><th>어떻게 모이나</th><th>내용이 길어지면</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 담는가</th><th>부품 전체를 누를 수 있는가</th><th>여러 개가 어떻게 모이는가</th><th>내용이 길어지면 어떻게 하는가</th></tr></thead>
           <tbody>
-            <tr><td>카드</td><td><b>한 덩어리</b></td><td>보통 눌린다</td><td>그리드로</td><td>높이가 늘어난다</td></tr>
-            <tr><td>리스트 아이템</td><td>한 건</td><td>보통 눌린다</td><td>세로 목록으로</td><td><b>말줄임</b>한다</td></tr>
-            <tr><td>아바타</td><td>사람·조직 하나</td><td>안 눌린다</td><td>겹쳐 쌓는다</td><td>고정 — 넘치면 <b>+N</b></td></tr>
-            <tr><td>배지</td><td>숫자나 한 낱말</td><td>안 눌린다</td><td><b>혼자 안 선다</b> — 붙는다</td><td>고정 — 넘치면 <b>99+</b></td></tr>
-            <tr><td>칩</td><td>한 낱말</td><td><b>눌린다</b></td><td>가로로 줄바꿈</td><td>말줄임하거나 줄을 넘긴다</td></tr>
-            <tr><td>스탯 타일</td><td>숫자 하나</td><td>가끔 눌린다</td><td>가로 한 줄로</td><td>단위를 줄인다(1.2만)</td></tr>
-            <tr class="me"><td><b>타임라인</b></td><td>사건들의 순서</td><td>항목만</td><td>세로로 꿴다</td><td>아래로 길어진다</td></tr>
-            <tr><td>별점</td><td>점수 하나</td><td>읽기용은 안 눌린다</td><td>줄 안에 들어간다</td><td>고정 — 별 다섯</td></tr>
-            <tr><td>아이콘</td><td><b>뜻 하나</b></td><td>혼자서는 안 눌린다</td><td>글자 옆에 붙는다</td><td>고정 — 글자가 대신 길어진다</td></tr>
-            <tr><td>썸네일</td><td><b>그림 하나</b></td><td>보통 눌린다</td><td>격자로</td><td>고정 — 잘리거나 여백이 남는다</td></tr>
-            <tr><td>테이블 행</td><td>한 건의 <b>여러 값</b></td><td>전체 또는 주 열만</td><td>세로로 쌓인다</td><td><b>말줄임</b>한다</td></tr>
-            <tr><td>키-값 목록</td><td>이름과 값의 <b>짝</b></td><td>안 눌린다</td><td>세로로 쌓인다</td><td><b>값이 먼저</b> 잘린다</td></tr>
-            <tr><td>미디어 오브젝트</td><td><b>그림 + 글</b></td><td>보통 눌린다</td><td>세로 목록으로</td><td>글 쪽만 늘어난다</td></tr>
-            <tr><td>접히는 글</td><td>제목과 <b>본문</b></td><td>제목이 눌린다</td><td>세로로 포갠다</td><td><b>접어 둔다</b></td></tr>
-            <tr><td>태그</td><td>한 낱말</td><td>안 눌린다</td><td>가로로 줄바꿈</td><td>말줄임하거나 <b>+N</b></td></tr>
+            <tr><td>카드</td><td><b>한 덩어리</b></td><td>보통 눌린다</td><td>그리드로 늘어선다</td><td>높이가 늘어난다</td></tr>
+            <tr><td>리스트 아이템</td><td>한 건</td><td>보통 눌린다</td><td>세로 목록으로 쌓인다</td><td><b>말줄임</b>한다</td></tr>
+            <tr><td>아바타</td><td>사람·조직 하나</td><td>눌리지 않는다</td><td>겹쳐 쌓는다</td><td>크기는 고정하고 넘치면 <b>+N</b>으로 줄인다</td></tr>
+            <tr><td>배지</td><td>숫자나 한 낱말</td><td>눌리지 않는다</td><td><b>혼자 놓이지 않고</b> 다른 요소에 붙는다</td><td>크기는 고정하고 넘치면 <b>99+</b>로 줄인다</td></tr>
+            <tr><td>칩</td><td>한 낱말</td><td><b>눌린다</b></td><td>가로로 늘어서다 줄을 바꾼다</td><td>말줄임하거나 줄을 넘긴다</td></tr>
+            <tr><td>스탯 타일</td><td>숫자 하나</td><td>가끔 눌린다</td><td>가로 한 줄로 늘어선다</td><td>단위를 줄인다(1.2만)</td></tr>
+            <tr class="me"><td><b>타임라인</b></td><td>사건들의 순서</td><td>항목만 눌린다</td><td>세로 선으로 잇는다</td><td>아래로 길어진다</td></tr>
+            <tr><td>별점</td><td>점수 하나</td><td>읽기용은 눌리지 않는다</td><td>줄 안에 들어간다</td><td>별 다섯 개로 고정된다</td></tr>
+            <tr><td>아이콘</td><td><b>뜻 하나</b></td><td>혼자서는 눌리지 않는다</td><td>글자 옆에 붙는다</td><td>아이콘은 그대로 두고 옆 글자가 길어진다</td></tr>
+            <tr><td>썸네일</td><td><b>그림 하나</b></td><td>보통 눌린다</td><td>격자로 늘어선다</td><td>칸은 고정하고 사진을 자르거나 여백을 남긴다</td></tr>
+            <tr><td>테이블 행</td><td>한 건의 <b>여러 값</b></td><td>행 전체나 주 열만 눌린다</td><td>세로로 쌓인다</td><td><b>말줄임</b>한다</td></tr>
+            <tr><td>키-값 목록</td><td>이름과 값의 <b>짝</b></td><td>눌리지 않는다</td><td>세로로 쌓인다</td><td><b>값이 먼저</b> 잘린다</td></tr>
+            <tr><td>미디어 오브젝트</td><td><b>그림과 글</b></td><td>보통 눌린다</td><td>세로 목록으로 쌓인다</td><td>글 쪽만 늘어난다</td></tr>
+            <tr><td>접히는 글</td><td>제목과 <b>본문</b></td><td>제목이 눌린다</td><td>세로로 쌓는다</td><td><b>접어 둔다</b></td></tr>
+            <tr><td>태그</td><td>한 낱말</td><td>눌리지 않는다</td><td>가로로 늘어서다 줄을 바꾼다</td><td>말줄임하거나 <b>+N</b>으로 접는다</td></tr>
           </tbody>
         </table>
         </div>
@@ -102,31 +102,31 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">그림 한 장으로는 못 배운다</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">흐름의 진행에 따라 달라지는 모습</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:170px"><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">14:02</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:5px;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:10px;display:block">정산 요청</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">14:03</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:10px;display:block">자동 검증</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">09:21</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)"></span></span><span style="font-size:10.5px;font-weight:700;padding-bottom:10px;display:block">담당자 검토</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px;opacity:.45"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">예정</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:auto;height:5px;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:0;display:block">승인</span></div></div>
             </div>
-            <figcaption>진행 중<span>지난 단계, <b>지금 단계</b>, 앞으로 올 단계가 서로 다르게 보여야 합니다</span></figcaption>
+            <figcaption>단계가 진행 중일 때<span>지난 단계, <b>지금 단계</b>, 앞으로 올 단계가 서로 다르게 보여야 합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:170px"><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">14:02</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:5px;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:10px;display:block">정산 요청</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">14:03</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:10px;display:block">자동 검증</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">09:21</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--danger)"></span></span><span style="font-size:10.5px;font-weight:700;padding-bottom:10px;display:block">거절됨</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px;opacity:.45"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">—</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:auto;height:5px;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:0;display:block">승인</span></div></div>
             </div>
-            <figcaption>멈춤<span>멈춘 단계가 <b>그 자리에서</b> 빨갛게 바뀝니다. 맨 아래에 따로 적지 않습니다</span></figcaption>
+            <figcaption>흐름이 중간에 멈췄을 때<span>멈춘 단계가 <b>그 자리에서</b> 빨갛게 바뀝니다. 맨 아래에 따로 적지 않습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:170px"><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">14:02</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:5px;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:10px;display:block">정산 요청</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">14:03</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:10px;display:block">자동 검증</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">10:40</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:auto;height:5px;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:0;display:block">입금 완료</span></div></div>
             </div>
-            <figcaption>끝남<span>마지막 점까지 모두 칠해지고, <b>레일도 마지막 점에서 끝납니다</b></span></figcaption>
+            <figcaption>모든 단계가 끝났을 때<span>마지막 점까지 모두 칠해지고, <b>레일도 마지막 점에서 끝납니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:170px"><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">방금</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:5px;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)"></span></span><span style="font-size:10.5px;font-weight:700;padding-bottom:10px;display:block">홍길동이 금액을 고쳤습니다</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">1시간 전</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:10px;display:block">김철수가 댓글을 남겼습니다</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">어제</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:auto;height:5px;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:0;display:block">정산이 등록되었습니다</span></div></div>
             </div>
-            <figcaption>활동 피드<span>끝이 없이 쌓이고, 진행 단계와는 방향이 반대로 <b>최근 기록이 위</b>에 옵니다</span></figcaption>
+            <figcaption>기록이 계속 쌓이는 활동 피드<span>끝이 없이 쌓이고, 진행 단계와는 방향이 반대로 <b>최근 기록이 위</b>에 옵니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -135,7 +135,7 @@
                 <div style="display:flex;gap:7px;align-items:flex-start"><span class="skl" style="width:8px;height:8px;border-radius:99px;margin-top:3px;flex:none"></span><span class="skl" style="height:9px;width:70%"></span></div>
               </div>
             </div>
-            <figcaption>로딩<span>점과 글줄의 뼈대만 그리고, 항목이 몇 개 올지 모르므로 <b>레일은 그리지 않습니다</b></span></figcaption>
+            <figcaption>기록을 불러오는 중<span>점과 글줄의 뼈대만 그리고, 항목이 몇 개 올지 모르므로 <b>레일은 그리지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -144,7 +144,7 @@
                 <span style="font-size:9.5px;color:var(--fg-faint)">정산을 올리면 여기에 쌓입니다</span>
               </div>
             </div>
-            <figcaption>빈 상태<span>기록이 하나도 없을 때입니다. <b>무엇을 하면 기록이 쌓이는지</b>를 적어 줍니다</span></figcaption>
+            <figcaption>기록이 하나도 없을 때<span>기록이 하나도 없을 때입니다. <b>무엇을 하면 기록이 쌓이는지</b>를 적어 줍니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -175,14 +175,14 @@
                       <span style="font-size:12px;font-weight:600;opacity:.5">승인</span>
                     </div>
                   </div>
-                  <div class="pin-out" data-pin="2" style="font-size:10.5px;color:var(--fg-muted);font-variant-numeric:tabular-nums">11월 8일 09:21 — <b style="color:var(--fg)">왼쪽에 가지런히</b></div>
+                  <div class="pin-out" data-pin="2" style="font-size:10.5px;color:var(--fg-muted);font-variant-numeric:tabular-nums">11월 8일 09:21처럼 <b style="color:var(--fg)">왼쪽에 맞춤</b></div>
                   <div class="pin-out" data-pin="3" style="display:flex;align-items:center;gap:10px;font-size:11px;color:var(--fg-muted)">
                     <span style="display:block;width:2px;height:22px;background:var(--line-strong);flex:none;margin-left:10px"></span>
-                    <span>점들을 잇는 선 — <b style="color:var(--fg)">양 끝을 자른다</b></span>
+                    <span>점들을 잇는 선은 <b style="color:var(--fg)">양 끝을 자름</b></span>
                   </div>
                   <div class="pin-out" data-pin="4" style="display:flex;align-items:center;gap:10px;font-size:11px;color:var(--fg-muted)">
                     <span style="width:9px;height:9px;border-radius:99px;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);flex:none;margin-left:7px"></span>
-                    <span>사건 하나 — 지금은 테를 두른다</span>
+                    <span>사건 하나, 지금 단계는 테를 두름</span>
                   </div>
                   <div class="pin-out" data-pin="5" style="font-size:12px;font-weight:700">담당자 검토</div>
                   <div class="pin-out" data-pin="6" style="font-size:10.5px;color:var(--fg-muted)">홍길동이 보고 있습니다</div>
@@ -219,14 +219,14 @@
           <div class="dont">
             <h3>타임라인을 쓰지 않는 경우</h3>
             <ul>
-              <li>순서가 상관없는 목록일 때.  <a href="listitem.html">리스트 아이템</a>을 씁니다</li>
+              <li>순서가 상관없는 목록일 때. <a href="listitem.html">리스트 아이템</a>을 씁니다</li>
               <li>단계가 둘뿐일 때. 선으로 이어 보여 줄 만큼 단계가 많지 않습니다</li>
-              <li>진행률만 알면 될 때.  <a href="../items/progress.html">프로그레스 바</a> 한 줄이 더 낫습니다</li>
+              <li>진행률만 알면 될 때. <a href="../items/progress.html">프로그레스 바</a> 한 줄이 더 낫습니다</li>
               <li>수백 건을 한 번에 보여 줘야 할 때. 이럴 때는 <b>묶어서 접어 두거나</b> 날짜별로 나눕니다</li>
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>타임라인 대신 다른 것을 써야 하는 경우</b> — 끝이 정해진 단계면 스테퍼(7부), 진행률이면 <a href="../items/progress.html">프로그레스 바</a>, 순서가 상관없으면 <a href="listitem.html">리스트 아이템</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>타임라인 대신 다른 것을 써야 하는 경우</b> — 끝이 정해진 단계를 보여 주려면 스테퍼(7부)를 쓰고, 얼마나 진행됐는지만 알리면 되면 <a href="../items/progress.html">프로그레스 바</a>를 씁니다. 항목의 순서가 상관없다면 <a href="listitem.html">리스트 아이템</a>이 맞습니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -236,19 +236,19 @@
             <div class="shot">
               <div style="width:100%;max-width:180px"><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">11월 7일</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:5px;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:10px;display:block">주문 접수</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">11월 8일</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:10px;display:block">상품 준비</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">11월 9일</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)"></span></span><span style="font-size:10.5px;font-weight:700;padding-bottom:10px;display:block">배송 중</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px;opacity:.45"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">예정</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:auto;height:5px;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:0;display:block">배송 완료</span></div></div>
             </div>
-            <figcaption><b>배송 추적</b>타임라인을 가장 흔히 보는 자리입니다. 사용자는 무엇보다 택배가 <b>지금 어디 있는지</b>를 궁금해합니다</figcaption>
+            <figcaption><b>택배 배송 추적하기</b>타임라인을 가장 흔히 보는 자리입니다. 사용자는 무엇보다 택배가 <b>지금 어디 있는지</b>를 궁금해합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px"><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">방금</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:5px;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)"></span></span><span style="font-size:10.5px;font-weight:700;padding-bottom:10px;display:block">홍길동이 승인했습니다</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">2시간 전</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:10px;display:block">김철수가 금액을 고쳤습니다</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">어제</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:auto;height:5px;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:0;display:block">이영희가 등록했습니다</span></div></div>
             </div>
-            <figcaption><b>활동 기록</b><b>최근 기록이 위</b>에 옵니다. 점은 모두 같은 모양이고 기록은 끝없이 쌓입니다</figcaption>
+            <figcaption><b>누가 무엇을 했는지 기록하기</b><b>최근 기록이 위</b>에 옵니다. 점은 모두 같은 모양이고 기록은 끝없이 쌓입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px"><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">1단계</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:5px;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:10px;display:block">계정 정보</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">2단계</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:0;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)"></span></span><span style="font-size:10.5px;font-weight:700;padding-bottom:10px;display:block">계좌 확인</span></div><div style="display:grid;grid-template-columns:44px 12px 1fr;gap:0 6px;opacity:.45"><span style="font-size:9px;color:var(--fg-muted);text-align:right;padding-top:1px">3단계</span><span style="position:relative;display:flex;justify-content:center"><span style="position:absolute;top:0;bottom:auto;height:5px;width:2px;background:var(--line)"></span><span style="position:relative;width:8px;height:8px;border-radius:99px;margin-top:3px;background:var(--line-strong)"></span></span><span style="font-size:10.5px;padding-bottom:0;display:block">완료</span></div></div>
             </div>
-            <figcaption><b>스테퍼</b>끝이 정해져 있어서 <b>남은 단계가 몇 개인지</b> 보입니다</figcaption>
+            <figcaption><b>끝이 정해진 단계 보여 주기</b>끝이 정해져 있어서 <b>남은 단계가 몇 개인지</b> 보입니다</figcaption>
           </figure>
         </div>
       </section>
@@ -271,14 +271,14 @@
 <span class="t">li</span>:last-child  <span class="t">.tl__rail</span>::<span class="t">before</span> { <span class="a">bottom</span>: auto; <span class="a">height</span>: <span class="a">7px</span>; }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>규칙</th><th>지켜야 하는 것</th></tr></thead>
+          <thead><tr><th>지킬 규칙</th><th>지키는 방법</th></tr></thead>
           <tbody>
-            <tr><td><code>&lt;ol&gt;</code>로 감싼다</td><td>순서가 정보이기 때문입니다. <code>&lt;ul&gt;</code>로 만들면 순서 없는 목록으로 읽힙니다</td></tr>
-            <tr><td><code>aria-current="step"</code></td><td>지금 단계 <b>하나</b>에만 붙입니다. 두 곳에 붙이면 어느 쪽이 지금 단계인지 알 수 없습니다</td></tr>
-            <tr><td><code>&lt;time datetime&gt;</code></td><td>프로그램이 읽을 수 있는 시각을 따로 적어 둡니다. '방금'이라고만 적혀 있으면 실제로 언제인지 알 수 없습니다</td></tr>
-            <tr><td>점은 숨긴다</td><td><code>aria-hidden</code>을 붙입니다. 동그라미에는 스크린 리더가 읽어 줄 내용이 없습니다</td></tr>
-            <tr><td>멈춘 자리에 이유를</td><td>맨 아래에 따로 적지 말고 <b>멈춘 항목 안에</b> 씁니다</td></tr>
-            <tr><td>레일 끝을 자른다</td><td>첫 점 위와 마지막 점 아래에 선을 남겨 두면 <b>단계가 더 있는 것처럼</b> 보입니다</td></tr>
+            <tr><td><code>&lt;ol&gt;</code>로 감싸기</td><td>순서가 정보이기 때문입니다. <code>&lt;ul&gt;</code>로 만들면 순서 없는 목록으로 읽힙니다</td></tr>
+            <tr><td><code>aria-current="step"</code>로 지금 단계 알리기</td><td>지금 단계 <b>하나</b>에만 붙입니다. 두 곳에 붙이면 어느 쪽이 지금 단계인지 알 수 없습니다</td></tr>
+            <tr><td><code>&lt;time datetime&gt;</code>으로 시각 적기</td><td>프로그램이 읽을 수 있는 시각을 따로 적어 둡니다. '방금'이라고만 적혀 있으면 실제로 언제인지 알 수 없습니다</td></tr>
+            <tr><td>점은 스크린 리더에서 숨기기</td><td><code>aria-hidden</code>을 붙입니다. 동그라미에는 스크린 리더가 읽어 줄 내용이 없습니다</td></tr>
+            <tr><td>멈춘 자리에 이유 적기</td><td>맨 아래에 따로 적지 말고 <b>멈춘 항목 안에</b> 씁니다</td></tr>
+            <tr><td>레일의 양 끝 자르기</td><td>첫 점 위와 마지막 점 아래에 선을 남겨 두면 <b>단계가 더 있는 것처럼</b> 보입니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -289,11 +289,11 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>타임라인 = 이벤트 로그</th><td>상태를 <code>status</code> 칸 하나에 덮어쓰면 <b>이전 상태 기록이 남지 않습니다.</b> 상태가 바뀔 때마다 한 줄씩 쌓는 표가 따로 있어야 타임라인을 그릴 수 있습니다.</td></tr>
-            <tr><th>시각은 UTC 로</th><td>시각은 UTC로 저장하고, 화면에 보여 줄 때 사용자 시간대로 바꿉니다. 두 방식이 섞이면 <b>같은 사건이 서로 다른 두 시각으로</b> 보입니다.</td></tr>
-            <tr><th>'방금'은 화면에서</th><td>서버가 '2시간 전'이라는 글을 보내면, 화면을 오래 켜 둔 사람에게는 시간이 지나면서 틀린 정보가 됩니다. 그래서 서버는 <b>절대 시각</b>을 보내고, 화면에서 '2시간 전' 같은 표현으로 바꿔 적습니다.</td></tr>
-            <tr><th>몇 개까지</th><td>활동 기록은 끝없이 쌓이므로 최근 20건만 먼저 보내고, 나머지는 <b>더 보기</b>로 이어 받게 합니다.  <a href="../items/infinite.html">무한 스크롤</a>에서 다루는 것과 같은 문제입니다.</td></tr>
-            <tr><th>누가 했는지</th><td>시스템이 한 일과 사람이 한 일을 데이터에서 구별해 두면, '자동 검증'과 '담당자 검토'를 화면에서 <b>다르게 그릴</b> 수 있습니다.</td></tr>
+            <tr><th>상태 변화를 쌓은 이벤트 로그</th><td>상태를 <code>status</code> 칸 하나에 덮어쓰면 <b>이전 상태 기록이 남지 않습니다.</b> 상태가 바뀔 때마다 한 줄씩 쌓는 표가 따로 있어야 타임라인을 그릴 수 있습니다.</td></tr>
+            <tr><th>시각은 UTC로 저장하기</th><td>시각은 UTC로 저장하고, 화면에 보여 줄 때 사용자 시간대로 바꿉니다. 두 방식이 섞이면 <b>같은 사건이 서로 다른 두 시각으로</b> 보입니다.</td></tr>
+            <tr><th>'방금' 같은 말은 화면에서 만들기</th><td>서버가 '2시간 전'이라는 글을 보내면, 화면을 오래 켜 둔 사람에게는 시간이 지나면서 틀린 정보가 됩니다. 그래서 서버는 <b>절대 시각</b>을 보내고, 화면에서 '2시간 전' 같은 표현으로 바꿔 적습니다.</td></tr>
+            <tr><th>한 번에 보낼 기록 수</th><td>활동 기록은 끝없이 쌓이므로 최근 20건만 먼저 보내고, 나머지는 <b>더 보기</b>로 이어 받게 합니다. <a href="../items/infinite.html">무한 스크롤</a>에서 다루는 것과 같은 문제입니다.</td></tr>
+            <tr><th>시스템과 사람이 한 일 구별하기</th><td>시스템이 한 일과 사람이 한 일을 데이터에서 구별해 두면, '자동 검증'과 '담당자 검토'를 화면에서 <b>다르게 그릴</b> 수 있습니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -365,7 +365,7 @@
         <li><a href="../items/progress.html"><b>프로그레스 바</b><em>8부</em></a></li>
         <li><a href="../items/listitem.html"><b>리스트 아이템</b><em>5부</em></a></li>
         <li><a href="../items/empty.html"><b>빈 상태</b><em>8부</em></a></li>
-        <li><span class="na"><b>스테퍼</b><em>7부</em></span></li>
+        <li><a href="stepper.html"><b>스테퍼</b><em>7부</em></a></li>
       </ol>
       <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>

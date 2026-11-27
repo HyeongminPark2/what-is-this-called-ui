@@ -23,7 +23,7 @@
 </head>
 <body>
 
-<div class="bar"><b>이름 붙이기</b><span style="font-size:13px;color:var(--fg-muted)">스크린 리더가 뭐라고 읽을지</span></div>
+<div class="bar"><b>이름 붙이기</b><span style="font-size:13px;color:var(--fg-muted)">스크린 리더가 각 요소를 뭐라고 읽는지 살펴봅니다</span></div>
 
 <div class="pad a11y">
   <div class="a11y__stage">
@@ -33,28 +33,28 @@
       <span class="said" data-for="0"></span>
     </div>
     <div class="nm-row">
-      <span class="what">아이콘만 · 이름 없음</span>
+      <span class="what">아이콘만 있고 이름이 없는 버튼</span>
       <button class="ic"><span aria-hidden="true">🗑</span></button>
       <span class="said" data-for="1"></span>
     </div>
     <div class="nm-row">
-      <span class="what">아이콘 + aria-label</span>
+      <span class="what">아이콘에 aria-label을 단 버튼</span>
       <button class="ic" aria-label="정산 요청 #4821 지우기"><span aria-hidden="true">🗑</span></button>
       <span class="said" data-for="2"></span>
     </div>
     <div class="nm-row">
-      <span class="what">입력칸 · label 없음</span>
+      <span class="what">label이 없는 입력칸</span>
       <input class="f" style="width:140px" placeholder="계좌번호">
       <span class="said" data-for="3"></span>
     </div>
     <div class="nm-row">
-      <span class="what">입력칸 + label</span>
+      <span class="what">label을 붙인 입력칸</span>
       <span><label for="acc" style="font-size:12px;color:var(--fg-muted);display:block;margin-bottom:3px">계좌번호</label>
       <input class="f" id="acc" style="width:140px" placeholder="- 없이 입력"></span>
       <span class="said" data-for="4"></span>
     </div>
     <div class="nm-row">
-      <span class="what">링크 · 더 보기</span>
+      <span class="what">'더 보기' 링크</span>
       <a href="#" style="font-size:13px">더 보기</a>
       <span class="said" data-for="5"></span>
     </div>
@@ -110,7 +110,7 @@
     var name = accName(el);
     said.innerHTML = name
       ? '<span class="ok">"' + name + ', ' + roleOf(el) + '"</span>'
-      : '<span class="no">"' + roleOf(el) + '" — 이름이 없습니다</span>';
+      : '<span class="no">"' + roleOf(el) + '"만 읽힙니다. 이름이 없습니다</span>';
   });
 })();
 </script>

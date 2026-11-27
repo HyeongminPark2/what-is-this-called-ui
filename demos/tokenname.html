@@ -18,15 +18,15 @@
 <body>
 <div class="bar">
   <b>토큰 이름 짓기</b>
-  <label>직접 넣어 보기 <input class="ui-input" id="n" style="width:190px;min-height:32px;font-size:12.5px;font-family:var(--mono)" placeholder="--color-text-danger"></label>
-  <label><input type="checkbox" id="dark"> 어두운 모드로</label>
+  <label>토큰 이름을 직접 넣어 보기 <input class="ui-input" id="n" style="width:190px;min-height:32px;font-size:12.5px;font-family:var(--mono)" placeholder="--color-text-danger"></label>
+  <label><input type="checkbox" id="dark"> 어두운 모드로 바꾸기</label>
 </div>
 
 <div class="pad">
   <div class="tn__set" id="set"></div>
   <p class="ruler" id="verdict"></p>
   <div id="lie" hidden>
-    <p class="ruler"><span class="warn">이름과 값이 어긋났습니다</span> — <code id="lien"></code>의 실제 값은
+    <p class="ruler"><span class="warn">이름과 값이 어긋났습니다</span>. <code id="lien"></code>의 실제 값은
       <span id="lieswatch" style="display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;border:1px solid var(--line)"></span>
       <code id="liev"></code>입니다</p>
   </div>
@@ -37,7 +37,7 @@
   ②무엇에 쓰는지가 드러나는지(<code>text</code> · <code>bg</code> · <code>border</code>),
   ③어느 층의 이름인지(원시 · 의미 · 부품)를 봅니다.<br>
   이름에 값을 넣으면 <b>어두운 모드에서 이름과 실제 값이 어긋납니다</b>.
-  위의 '어두운 모드로'를 켜고 <code>--blue</code>의 실제 값을 보세요. 이름은 파랑인데 실제 색은 파랑이 아닙니다.
+  위의 '어두운 모드로 바꾸기'를 켜고 <code>--blue</code>의 실제 값을 보세요. 이름은 파랑인데 실제 색은 파랑이 아닙니다.
 </p>
 
 <script>
@@ -85,7 +85,7 @@
 
     var bad = list.filter(function (j) { return j.bad; }).length;
     var v = document.getElementById('verdict');
-    v.innerHTML = '매긴 이름 <b>' + list.length + '개</b> 가운데 고칠 것 <b>' + bad + '개</b>' +
+    v.innerHTML = '판정한 이름 <b>' + list.length + '개</b> 가운데 고칠 것은 <b>' + bad + '개</b>' +
       (mine ? ' · 넣은 이름은 ' + (mine.bad ? '<span class="warn">고쳐야 합니다</span>' : '<b>써도 됩니다</b>') : '');
     v.dataset.bad = String(bad);
     v.dataset.mine = mine ? (mine.bad ? 'bad' : 'ok') : '';

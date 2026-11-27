@@ -23,9 +23,9 @@ ANAT = '''              <div class="anat--wide" style="background:var(--bg);bord
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="display:flex;gap:5px;flex-wrap:wrap">''' + chip('승인됨 ✕', True) + chip('11월 ✕', True) + '''<span style="font-size:9.5px;color:var(--accent);align-self:center">모두 지우기</span></div>
                   <div class="pin-out" data-pin="2" style="max-width:190px">''' + facet([("승인됨", "128", True), ("대기", "14", False), ("반려", "0", False)], "190px").strip() + '''</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">같은 묶음 안은 OR — 승인됨 <b>또는</b> 대기</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">묶음끼리는 AND — 상태 <b>그리고</b> 기간</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">반려 0건 — 눌러도 아무것도 안 나온다</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">같은 묶음 안은 OR로, 승인됨 <b>또는</b> 대기</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">묶음끼리는 AND로, 상태 <b>그리고</b> 기간</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">반려는 0건이라 눌러도 결과가 없음</div>
                   <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">?status=approved&amp;month=11</div>
                 </div>
               </div>'''
@@ -59,21 +59,21 @@ D = dict(
     (facet([("승인됨", "128", False), ("대기", "14", False), ("반려", "3", False)]),
      "아무것도 안 골랐을 때", "전체 목록이 보입니다. 조건 옆 개수는 <b>지금 결과를 기준으로</b> 셉니다"),
     (facet([("승인됨", "128", True), ("대기", "14", False), ("반려", "3", False)]),
-     "하나 고름", "결과가 줄어들고, 고른 조건이 <b>칩</b>으로 나타납니다"),
+     "조건을 하나 골랐을 때", "결과가 줄어들고, 고른 조건이 <b>칩</b>으로 나타납니다"),
     (facet([("승인됨", "128", True), ("대기", "14", True), ("반려", "3", False)]),
-     "같은 묶음에 둘", "<b>OR</b>로 걸려서 두 조건의 결과가 모두 보입니다. AND로 걸면 0건이 됩니다"),
+     "같은 묶음에서 둘을 골랐을 때", "<b>OR</b>로 걸려서 두 조건의 결과가 모두 보입니다. AND로 걸면 0건이 됩니다"),
     (facet([("승인됨", "128", False), ("대기", "0", False), ("반려", "0", False)]),
-     "0건짜리", "<b>흐리게</b> 표시하거나 숨깁니다. 눌렀을 때 빈 화면이 나오는 조건을 눌러 보게 두지 않습니다"),
+     "결과가 0건인 조건", "<b>흐리게</b> 표시하거나 숨깁니다. 눌렀을 때 빈 화면이 나오는 조건을 눌러 보게 두지 않습니다"),
     ('''              <div style="width:100%;max-width:150px;display:grid;gap:4px">
                 <div style="display:flex;gap:4px;flex-wrap:wrap">''' + chip('승인됨 ✕', True) + chip('11월 ✕', True) + '''</div>
                 <span style="font-size:9.5px;color:var(--accent)">모두 지우기</span>
               </div>''',
-     "칩으로 요약", "조건 목록이 접혀 있어도 <b>어떤 조건이 걸렸는지</b> 보입니다"),
+     "고른 조건을 칩으로 모아 보일 때", "조건 목록이 접혀 있어도 <b>어떤 조건이 걸렸는지</b> 보입니다"),
     ('''              <div style="width:100%;max-width:150px;border:1px dashed var(--line);border-radius:6px;padding:12px 8px;text-align:center">
                 <span style="font-size:10px;color:var(--fg-muted);display:block">조건에 맞는 것이 없습니다</span>
                 <span style="font-size:9.5px;color:var(--accent)">조건 지우기</span>
               </div>''',
-     "0건", "결과가 없다고만 하지 말고 <b>어느 조건을 풀면 결과가 나오는지</b>까지 알려 주면 더 좋습니다"),
+     "거른 결과가 0건일 때", "결과가 없다고만 하지 말고 <b>어느 조건을 풀면 결과가 나오는지</b>까지 알려 주면 더 좋습니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -100,19 +100,19 @@ D = dict(
     "고른 조건을 <b>보여 주지 않을</b> 때. 필터에서 가장 흔하게 생기는 문제입니다",
     "조건을 누를 때마다 서버에 요청을 보낼 때. 여러 번 누른 것을 <b>묶어서</b> 보내거나 '적용' 버튼을 둡니다",
   ]),
-  instead='자유롭게 입력하는 글자면 <a href="search.html">검색</a>, 하나만 고르면 <a href="../items/tabs.html">탭</a>을 쓰고, 조건이 복잡하면 <a href="../items/drawer.html">드로어</a>에 담습니다.',
+  instead='사용자가 글자를 자유롭게 입력해야 하면 <a href="search.html">검색</a>을 쓰고, 값을 하나만 고르면 되는 경우에는 <a href="../items/tabs.html">탭</a>이 맞습니다. 조건이 많고 복잡하면 <a href="../items/drawer.html">드로어</a>에 담아 필요할 때 엽니다.',
   cases=cases([
     (facet([("승인됨", "128", True), ("대기", "14", False), ("반려", "3", False)]),
-     "왼쪽 패싯", "PC에서 가장 흔한 배치로, 조건 목록이 늘 펼쳐져 있습니다"),
+     "왼쪽에 조건 목록을 펼쳐 두기", "PC에서 가장 흔한 배치로, 조건 목록이 늘 펼쳐져 있습니다"),
     ('''              <div style="width:100%;max-width:170px;display:flex;gap:4px;flex-wrap:wrap">''' + chip('상태 ▾') + chip('기간 ▾') + chip('지역 ▾') + '''</div>''',
-     "가로 드롭다운", "조건이 적을 때 씁니다. 드롭다운을 <b>열어 조건을 고르면 닫힙니다</b>"),
+     "조건을 가로 드롭다운으로 늘어놓기", "조건이 적을 때 씁니다. 드롭다운을 <b>열어 조건을 고르면 닫힙니다</b>"),
     ('''              <div class="phone" role="img" aria-label="폰 필터 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:4px;right:4px;top:28px;display:flex;gap:3px"><span style="font-size:6px;background:var(--accent);color:#fff;padding:2px 5px;border-radius:999px">승인됨</span><span style="font-size:6px;border:1px solid var(--line);padding:2px 5px;border-radius:999px">기간</span></div>
                 <div style="position:absolute;left:0;right:0;bottom:0;height:46%;background:var(--surface);border-top:1px solid var(--line);border-radius:8px 8px 0 0;padding:6px"><div style="width:22px;height:2px;background:var(--line);border-radius:2px;margin:0 auto 5px"></div><div style="font-size:6px">상태 · 기간 · 지역</div></div>
               </div></div>''',
-     "폰은 시트로", "<a href=\"../items/drawer.html\">바텀 시트</a>를 열어 조건을 고른 뒤 <b>'적용'</b>을 눌러 닫습니다"),
+     "폰에서 시트를 열어 조건 고르기", "<a href=\"../items/drawer.html\">바텀 시트</a>를 열어 조건을 고른 뒤 <b>'적용'</b>을 눌러 닫습니다"),
   ]),
-  s8_title="최소 마크업과 키보드", s8_hint="필터가 꼭 갖출 것",
+  s8_title="최소 마크업과 키보드", s8_hint="필터를 만들 때 꼭 갖출 것",
   code_lede="조건 묶음은 <code>&lt;fieldset&gt;</code>으로 묶고, 결과 개수는 <code>aria-live</code>로 알립니다.",
   code='''&lt;<span class="t">fieldset</span>&gt;
   &lt;<span class="t">legend</span>&gt;상태&lt;/<span class="t">legend</span>&gt;
@@ -127,16 +127,16 @@ D = dict(
     ("<kbd>Tab</kbd>", "조건 하나하나로 옮겨 갑니다. 체크박스는 <kbd>Space</kbd>로 켭니다"),
     ("<code>&lt;fieldset&gt;&lt;legend&gt;</code>", "스크린 리더가 '상태 묶음, 승인됨 체크박스'처럼 읽습니다. 묶음 이름이 없으면 무엇에 대한 조건인지 알 수 없습니다"),
     ("<code>role=\"status\"</code>", "'128건'처럼 결과 개수가 바뀐 것을 <b>하던 일을 끊지 않고</b> 알립니다. <code>alert</code>는 읽던 내용을 끊고 바로 읽어서 이 용도에는 지나칩니다"),
-    ("0건은 <code>disabled</code>", "눌러도 결과가 없는 조건은 탭 순서에서 빠지는 편이 낫습니다"),
-    ("칩의 ✕", "<code>&lt;button aria-label=\"승인됨 조건 지우기\"&gt;</code>처럼 이름을 붙입니다. ✕만 있으면 무엇을 지우는 버튼인지 알 수 없습니다"),
-    ("주소를 바꾼다", "<code>history.replaceState</code>로 바꿉니다. 조건을 바꿀 때마다 방문 기록을 쌓으면 뒤로가기를 조건 수만큼 눌러야 필터 화면을 벗어날 수 있습니다"),
+    ("0건인 조건은 <code>disabled</code>로 두기", "눌러도 결과가 없는 조건은 탭 순서에서 빠지는 편이 낫습니다"),
+    ("칩의 ✕ 버튼에 이름 붙이기", "<code>&lt;button aria-label=\"승인됨 조건 지우기\"&gt;</code>처럼 이름을 붙입니다. ✕만 있으면 무엇을 지우는 버튼인지 알 수 없습니다"),
+    ("조건이 바뀔 때 주소를 고치는 방법", "<code>history.replaceState</code>로 바꿉니다. 조건을 바꿀 때마다 방문 기록을 쌓으면 뒤로가기를 조건 수만큼 눌러야 필터 화면을 벗어날 수 있습니다"),
   ]),
   backend=rows([
-    ("개수는 한 번에", "조건마다 <code>COUNT</code>를 따로 보내면 조건이 열 개일 때 요청도 열 번 갑니다. 그래서 한 번의 <b>집계 질의</b>(facet aggregation)로 모든 개수를 함께 받아 옵니다."),
-    ("개수의 기준", "'승인됨 128'은 <b>다른 조건을 적용한 뒤</b>에 센 숫자여야 합니다. 전체 데이터를 기준으로 세면 그 조건을 눌렀을 때 나오는 건수와 숫자가 맞지 않습니다."),
-    ("같은 축은 제외하고 센다", "상태 묶음의 개수를 셀 때는 <b>상태 조건만 빼고</b> 나머지 조건을 적용해 셉니다. 상태 조건까지 넣고 세면 이미 고른 값 말고는 모두 0건으로 나옵니다."),
-    ("조건 값은 허용 목록으로", "<code>?status=</code> 값을 그대로 질의에 넘기면 주입 공격을 당할 수 있습니다. 미리 정해 둔 값만 받습니다."),
-    ("색인", "자주 거르는 열에 색인이 없으면 조건을 더할수록 질의가 느려집니다. 패싯이 많다면 데이터베이스 대신 <b>검색 엔진</b>(Elasticsearch 등)으로 옮기는 편이 낫습니다."),
+    ("조건별 개수는 한 번에 받기", "조건마다 <code>COUNT</code>를 따로 보내면 조건이 열 개일 때 요청도 열 번 갑니다. 그래서 한 번의 <b>집계 질의</b>(facet aggregation)로 모든 개수를 함께 받아 옵니다."),
+    ("개수를 세는 기준", "'승인됨 128'은 <b>다른 조건을 적용한 뒤</b>에 센 숫자여야 합니다. 전체 데이터를 기준으로 세면 그 조건을 눌렀을 때 나오는 건수와 숫자가 맞지 않습니다."),
+    ("같은 묶음의 조건은 빼고 세기", "상태 묶음의 개수를 셀 때는 <b>상태 조건만 빼고</b> 나머지 조건을 적용해 셉니다. 상태 조건까지 넣고 세면 이미 고른 값 말고는 모두 0건으로 나옵니다."),
+    ("조건 값은 허용 목록으로 받기", "<code>?status=</code> 값을 그대로 질의에 넘기면 주입 공격을 당할 수 있습니다. 미리 정해 둔 값만 받습니다."),
+    ("자주 거르는 열의 색인", "자주 거르는 열에 색인이 없으면 조건을 더할수록 질의가 느려집니다. 패싯이 많다면 데이터베이스 대신 <b>검색 엔진</b>(Elasticsearch 등)으로 옮기는 편이 낫습니다."),
   ]),
   plat_lede="세 플랫폼 모두 <b>폰에서는 화면을 덮는 시트를 띄워</b> 조건을 고르게 합니다.",
   plats=plats([

@@ -75,12 +75,12 @@
         <p>겹쳐 뜨는 부품들은 모양만 보고는 구별하기 어렵지만, 아래 네 가지를 따져 보면 어느 부품인지 가려낼 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>끝나는 때를 아나</th><th>들어올 자리를 잡나</th><th>사용자가 기다리나</th><th>화면이 덜컥거리나</th></tr></thead>
+          <thead><tr><th></th><th>끝나는 때를 아는가</th><th>들어올 내용의 자리를 미리 잡는가</th><th>사용자가 기다려야 하는가</th><th>내용이 들어올 때 화면이 덜컥거리는가</th></tr></thead>
           <tbody>
-            <tr class="me"><td><b>스피너</b></td><td class="none">모른다</td><td class="none">안 잡는다</td><td>기다린다</td><td>덜컥거린다</td></tr>
-            <tr><td>스켈레톤</td><td class="none">모른다</td><td>잡는다</td><td>기다린다</td><td>안 덜컥거린다</td></tr>
-            <tr><td>프로그레스 바</td><td>안다</td><td>잡기도 한다</td><td>기다린다</td><td>안 덜컥거린다</td></tr>
-            <tr><td>낙관적 UI</td><td class="none">해당 없음</td><td>잡는다</td><td>안 기다린다</td><td>안 덜컥거린다</td></tr>
+            <tr class="me"><td><b>스피너</b></td><td>모름</td><td>잡지 않음</td><td>기다림</td><td>덜컥거림</td></tr>
+            <tr><td>스켈레톤</td><td>모름</td><td>잡아 둠</td><td>기다림</td><td>덜컥거리지 않음</td></tr>
+            <tr><td>프로그레스 바</td><td>알고 있음</td><td>잡기도 함</td><td>기다림</td><td>덜컥거리지 않음</td></tr>
+            <tr><td>낙관적 UI</td><td class="none">해당 없음</td><td>잡아 둠</td><td>기다리지 않음</td><td>덜컥거리지 않음</td></tr>
           </tbody>
         </table>
         </div>
@@ -94,39 +94,39 @@
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div class="mini mini--tall" role="img" aria-label="0.3초 안에는 아무 표시가 없다"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div style="margin-top:14px;text-align:center;font-size:8px;color:var(--fg-faint)">아무 표시 없음</div></div>
+              <div class="mini mini--tall" role="img" aria-label="0.3초 안에는 아무 표시도 없음"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div style="margin-top:14px;text-align:center;font-size:8px;color:var(--fg-faint)">아무것도 띄우지 않음</div></div>
             </div>
-            <figcaption>0 ~ 0.3초<span><b>아무것도 띄우지 않습니다.</b> 이 사이에 끝나는 일에 스피너를 띄우면 깜빡임만 남습니다</span></figcaption>
+            <figcaption>0.3초가 지나기 전<span><b>아무것도 띄우지 않습니다.</b> 이 사이에 끝나는 일에 스피너를 띄우면 깜빡임만 남습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="스피너가 떠 있는 모습"><div class="mini__bg"></div><div style="position:absolute;inset:0;display:grid;place-items:center"><span class="spn spn--sm"></span></div></div>
             </div>
-            <figcaption>0.3초 ~<span>0.3초가 지나면 그때 띄우고, 띄운 뒤에는 최소 0.5초 동안 둡니다</span></figcaption>
+            <figcaption>0.3초가 지난 뒤<span>0.3초가 지나면 그때 띄우고, 띄운 뒤에는 최소 0.5초 동안 둡니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="문구가 붙은 스피너"><div class="mini__bg"></div><div style="position:absolute;inset:0;display:grid;place-items:center;gap:5px"><span class="spn spn--sm"></span><span style="font-size:7.5px;color:var(--fg-muted)">불러오는 중…</span></div></div>
             </div>
-            <figcaption>문구를 붙인 것<span>무엇을 기다리는지 적어 주면 사용자가 훨씬 덜 답답해합니다</span></figcaption>
+            <figcaption>안내 문구를 붙였을 때<span>무엇을 기다리는지 적어 주면 사용자가 훨씬 덜 답답해합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="버튼 안의 작은 스피너"><div class="mini__bg"><div class="mini__bar mini__bar--w40"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div></div><div style="margin-top:9px"><span class="mini__btn" style="opacity:.75">저장 중…</span></div></div>
             </div>
-            <figcaption>버튼 안<span>사용자가 누른 버튼 자리에서 돌고, 버튼이 두 번 눌리는 것도 함께 막습니다</span></figcaption>
+            <figcaption>버튼 안에서 돌 때<span>사용자가 누른 버튼 자리에서 돌고, 버튼이 두 번 눌리는 것도 함께 막습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="오래 걸릴 때 문구가 바뀐 모습"><div class="mini__bg"></div><div style="position:absolute;inset:0;display:grid;place-items:center;gap:5px"><span class="spn spn--sm"></span><span style="font-size:7px;color:var(--fg-muted)">조금 오래 걸리고 있습니다</span></div></div>
             </div>
-            <figcaption>10초 넘김<span>문구를 바꿔 줍니다. 같은 화면이 10초 넘게 그대로면 사용자는 화면이 멈춘 줄 압니다</span></figcaption>
+            <figcaption>10초를 넘겼을 때<span>문구를 바꿔 줍니다. 같은 화면이 10초 넘게 그대로면 사용자는 화면이 멈춘 줄 압니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="실패로 끝난 모습"><div class="mini__bg"></div><div style="position:absolute;inset:0;display:grid;place-items:center;gap:4px;padding:8px"><span style="font-size:8px;color:var(--danger);font-weight:700">불러오지 못했습니다</span><span class="mini__btn" style="font-size:7.5px;padding:2px 6px">다시 시도</span></div></div>
             </div>
-            <figcaption>실패로 끝남<span>스피너가 <b>끝없이 돌게 두면 안 됩니다.</b> 실패했을 때 실패 화면으로 바뀌는 경로를 반드시 둡니다</span></figcaption>
+            <figcaption>실패로 끝났을 때<span>스피너가 <b>끝없이 돌게 두면 안 됩니다.</b> 실패했을 때 실패 화면으로 바뀌는 경로를 반드시 둡니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -180,7 +180,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>스피너 대신 다른 것을 써야 하는 경우</b> — 들어올 모양을 알면 <a href="skeleton.html">스켈레톤</a>, 끝나는 때를 알면 <a href="progress.html">프로그레스 바</a>, 기다림 자체를 없앨 수 있으면 <a href="optimistic.html">낙관적 UI</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>스피너 대신 다른 것을 써야 하는 경우</b> — 들어올 내용의 모양을 알면 <a href="skeleton.html">스켈레톤</a>을 쓰고, 끝나는 때를 알면 <a href="progress.html">프로그레스 바</a>를 씁니다. 기다림 자체를 없앨 수 있다면 <a href="optimistic.html">낙관적 UI</a>가 더 낫습니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -190,19 +190,19 @@
             <div class="shot">
               <div class="mini" role="img" aria-label="영역 스피너 재현"><div class="mini__bg"></div><div style="position:absolute;inset:0;display:grid;place-items:center;gap:5px"><span class="spn spn--sm"></span><span style="font-size:7.5px;color:var(--fg-muted)">불러오는 중…</span></div></div>
             </div>
-            <figcaption><b>영역 안</b>화면의 한 칸만 바뀔 때 씁니다. 나머지 화면은 기다리는 동안에도 그대로 쓸 수 있습니다</figcaption>
+            <figcaption><b>화면의 한 영역만 불러오기</b>화면의 한 칸만 바뀔 때 씁니다. 나머지 화면은 기다리는 동안에도 그대로 쓸 수 있습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div class="mini" role="img" aria-label="버튼 안 스피너 재현"><div class="mini__bg"><div class="mini__bar mini__bar--w40"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div></div><div style="margin-top:12px;text-align:center"><span class="mini__btn" style="opacity:.75">저장 중…</span></div></div>
             </div>
-            <figcaption><b>버튼 안</b>누른 버튼 자리에서 돌고, 그동안 버튼이 두 번 눌리지 않습니다</figcaption>
+            <figcaption><b>버튼을 누른 뒤 처리 기다리기</b>누른 버튼 자리에서 돌고, 그동안 버튼이 두 번 눌리지 않습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div class="mini" role="img" aria-label="맨 위 얇은 띠 재현"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--line)"><i style="display:block;height:100%;width:38%;background:var(--accent)"></i></div></div>
             </div>
-            <figcaption><b>꼭대기 띠</b>화면을 전환할 때 흔히 씁니다. 화면 맨 위의 얇은 띠라서 내용이 들어갈 자리를 차지하지 않습니다</figcaption>
+            <figcaption><b>화면 전환을 맨 위 띠로 알리기</b>화면을 전환할 때 흔히 씁니다. 화면 맨 위의 얇은 띠라서 내용이 들어갈 자리를 차지하지 않습니다</figcaption>
           </figure>
         </div>
       </section>
@@ -227,13 +227,13 @@
 @media (prefers-reduced-motion: reduce) <span class="a">{</span> .spn <span class="a">{</span> <span class="t">animation-duration</span>: 2.4s; <span class="a">}</span> <span class="a">}</span></pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>상황</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td>포커스</td><td>스피너가 <b>포커스를 가져가지 않게 합니다.</b> 포커스를 가져가면 사용자가 하던 입력이 끊깁니다</td></tr>
-            <tr><td>스크린 리더</td><td><code>aria-busy="true"</code>를 내용이 바뀌는 영역에 걸고, 안내 문구는 <code>role="status"</code>로 알립니다</td></tr>
+            <tr><td>포커스를 다룰 때</td><td>스피너가 <b>포커스를 가져가지 않게 합니다.</b> 포커스를 가져가면 사용자가 하던 입력이 끊깁니다</td></tr>
+            <tr><td>스크린 리더로 읽을 때</td><td><code>aria-busy="true"</code>를 내용이 바뀌는 영역에 걸고, 안내 문구는 <code>role="status"</code>로 알립니다</td></tr>
             <tr><td>끝났을 때</td><td><code>aria-busy</code>를 지웁니다. 바뀐 내용 쪽으로 포커스를 옮길지는 화면에 맞게 따로 정합니다</td></tr>
-            <tr><td>움직임 줄이기</td><td><code>prefers-reduced-motion</code>이 켜져 있으면 천천히 돌리거나 움직이지 않는 표시로 바꿉니다</td></tr>
-            <tr><td>실패</td><td>스피너가 돌다가 그대로 멈추면 안 되고, <b>실패 화면으로 바뀌어야</b> 합니다</td></tr>
+            <tr><td>움직임 줄이기 설정이 켜져 있을 때</td><td><code>prefers-reduced-motion</code>이 켜져 있으면 천천히 돌리거나 움직이지 않는 표시로 바꿉니다</td></tr>
+            <tr><td>불러오기에 실패했을 때</td><td>스피너가 돌다가 그대로 멈추면 안 되고, <b>실패 화면으로 바뀌어야</b> 합니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -244,10 +244,10 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>스피너 = 진행률 없는 폴링</th><td>스피너는 응답이 올 때까지 진행 정보를 하나도 받지 못한 상태를 나타냅니다. 서버가 진행률을 알려 줄 수 있다면 그 값을 받아 <b>프로그레스 바로 바꾸는 편</b>이 언제나 낫습니다.</td></tr>
-            <tr><th>지연 = 디바운스</th><td>0.3초 안에 끝날 일에는 표시를 띄우지 않습니다. 짧은 요청까지 일일이 로그로 남기지 않는 것처럼, 금방 끝나는 일에는 표시를 아끼는 셈입니다.</td></tr>
-            <tr><th>최소 표시 시간 = 안정화</th><td>깜빡임을 막으려고 스피너를 치우는 시점을 일부러 늦춥니다. 지표가 요동칠 때 일정한 시간 창을 두고 평균을 내서 값을 안정시키는 것과 같은 방법입니다.</td></tr>
-            <tr><th>타임아웃</th><td>스피너 자체는 끝없이 돌 수 있기 때문에 요청 쪽에 시간 상한을 두어야 합니다. 상한이 없으면 응답이 오지 않을 때 사용자는 <b>멈춘 화면</b>을 계속 보게 됩니다.</td></tr>
+            <tr><th>진행률 없이 응답만 기다리는 상태</th><td>스피너는 응답이 올 때까지 진행 정보를 하나도 받지 못한 상태를 나타냅니다. 서버가 진행률을 알려 줄 수 있다면 그 값을 받아 <b>프로그레스 바로 바꾸는 편</b>이 언제나 낫습니다.</td></tr>
+            <tr><th>지연은 디바운스와 같은 원리</th><td>0.3초 안에 끝날 일에는 표시를 띄우지 않습니다. 짧은 요청까지 일일이 로그로 남기지 않는 것처럼, 금방 끝나는 일에는 표시를 아끼는 셈입니다.</td></tr>
+            <tr><th>최소 표시 시간으로 깜빡임 막기</th><td>깜빡임을 막으려고 스피너를 치우는 시점을 일부러 늦춥니다. 지표가 요동칠 때 일정한 시간 창을 두고 평균을 내서 값을 안정시키는 것과 같은 방법입니다.</td></tr>
+            <tr><th>요청 쪽에 시간 상한 두기</th><td>스피너 자체는 끝없이 돌 수 있기 때문에 요청 쪽에 시간 상한을 두어야 합니다. 상한이 없으면 응답이 오지 않을 때 사용자는 <b>멈춘 화면</b>을 계속 보게 됩니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -304,8 +304,8 @@
       <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><span class="na"><b>레이아웃 시프트</b><em>1부</em></span></li>
-        <li><span class="na"><b>모션 줄이기</b><em>9부</em></span></li>
-        <li><span class="na"><b>라이브 리전</b><em>12부</em></span></li>
+        <li><a href="reducedmotion.html"><b>모션 줄이기</b><em>9부</em></a></li>
+        <li><a href="live.html"><b>라이브 리전</b><em>12부</em></a></li>
         <li><a href="../index.html#toc"><b>한 화면의 다섯 얼굴</b><em>8부</em></a></li>
       </ol>
       <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>

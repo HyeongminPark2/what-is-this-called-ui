@@ -19,7 +19,7 @@
 <div class="bar">
   <b>아이콘 글꼴</b>
   <label><input type="checkbox" id="fail"> 글꼴을 못 받았을 때</label>
-  <label>색 <input type="color" id="c" value="#2f6df6" style="width:40px;height:28px;padding:0;border:1px solid var(--line);border-radius:4px;background:none"></label>
+  <label>아이콘 색 <input type="color" id="c" value="#2f6df6" style="width:40px;height:28px;padding:0;border:1px solid var(--line);border-radius:4px;background:none"></label>
 </div>
 
 <div class="pad">
@@ -54,17 +54,17 @@
 
     var v = document.getElementById('verdict');
     v.innerHTML = fail
-      ? '<span class="warn">글꼴을 못 받으면 아이콘 자리에 엉뚱한 글자가 남습니다</span>. SVG는 그대로입니다'
+      ? '<span class="warn">글꼴을 못 받으면 아이콘 자리에 엉뚱한 글자가 남습니다</span>. SVG는 그대로 보입니다'
       : '둘 다 색이 <b>' + c + '</b>를 따라갑니다. 아이콘 글꼴은 <code>color</code>, SVG는 <code>stroke</code>로 색을 정합니다';
     v.dataset.fail = fail ? '1' : '0';
 
     document.getElementById('cmp').innerHTML = [
-      ['색을 CSS 로 바꾼다', true, true, '둘 다 됩니다'],
-      ['필요한 것만 받는다', false, true, '글꼴은 <b>안 쓰는 아이콘까지</b> 통째로 받습니다'],
-      ['못 받아도 안 깨진다', false, true, '글꼴이 없으면 <b>네모나 엉뚱한 글자</b>가 남습니다'],
-      ['여러 색을 한 아이콘에', false, true, '글꼴은 <b>한 색</b>만 낼 수 있습니다'],
-      ['자리를 미리 잡는다', false, true, '글꼴은 받기 전까지 <b>아이콘 너비를 알 수 없습니다</b>'],
-      ['요청이 적다', true, false, '글꼴은 <b>한 파일</b>이고, SVG는 묶지 않으면 여러 개를 받습니다']
+      ['CSS로 색 바꾸기', true, true, '둘 다 됩니다'],
+      ['쓰는 아이콘만 받기', false, true, '글꼴은 <b>안 쓰는 아이콘까지</b> 통째로 받습니다'],
+      ['못 받아도 깨지지 않기', false, true, '글꼴이 없으면 <b>네모나 엉뚱한 글자</b>가 남습니다'],
+      ['한 아이콘에 여러 색 쓰기', false, true, '글꼴은 <b>한 색</b>만 낼 수 있습니다'],
+      ['받기 전에 자리 잡아 두기', false, true, '글꼴은 받기 전까지 <b>아이콘 너비를 알 수 없습니다</b>'],
+      ['요청 수 줄이기', true, false, '글꼴은 <b>한 파일</b>이고, SVG는 묶지 않으면 여러 개를 받습니다']
     ].map(function (r) {
       return '<div class="verd__row ' + (r[2] ? 'ok' : 'no') + '">' +
         '<span class="t">' + r[0] + '</span>' +

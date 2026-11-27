@@ -20,11 +20,11 @@ BOUNCE = "M 0,120 C 24,10 34,-14 60,6 C 74,16 78,-4 120,0"
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="max-width:150px">''' + curve(OUT, "150px", "ease-out 곡선").strip() + '''</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">가로 = 시간 0 → 1</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">세로 = 간 거리 0 → 1</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">가파른 곳 = 빠른 구간</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">가로축은 시간 0에서 1</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">세로축은 간 거리 0에서 1</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">가파른 곳일수록 빠름</div>
                   <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">cubic-bezier(.22, .9, .3, 1)</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">대각선 = linear — 기계가 미는 움직임</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">대각선은 linear, 속도가 일정함</div>
                 </div>
               </div>'''
 
@@ -54,7 +54,7 @@ D = dict(
   ]),
   axes=ax("이징 곡선"),
   oneline="<b>들어오는 것에는 ease-out, 나가는 것에는 ease-in</b>을 씁니다. 이 규칙만 지켜도 대부분의 화면에서 움직임이 자연스러워집니다.",
-  s4_title="곡선 여섯", s4_hint="대각선에서 얼마나 벗어났나",
+  s4_title="대표적인 곡선 여섯 가지", s4_hint="대각선에서 벗어난 정도에 따라 달라지는 느낌",
   states=states([
     (curve(LIN, "128px", "linear 곡선"), "linear", "처음부터 끝까지 속도가 같아서 <b>기계적으로</b> 보입니다"),
     (curve(EASE, "128px", "ease 곡선"), "ease", "브라우저 기본값입니다. 무난하지만 <b>끝부분이 길게</b> 늘어집니다"),
@@ -77,6 +77,9 @@ D = dict(
           <code>linear</code> 움직임은 물체보다는 기계의 움직임으로 보여 어색합니다.
           반대로 <b>계속 도는 것</b>(스피너)과 <b>진행 막대</b>에는 <code>linear</code>가 맞습니다.
           이런 요소는 속도가 바뀌면 작업이 꾸준히 진행되는 것이 아니라 중간에 막혔다가 풀린 것처럼 보이기 때문입니다.</p>''',
+  do_title="이징 곡선을 정해서 쓰는 경우",
+  dont_title="이징 곡선을 고를 때 피할 것",
+  instead_title="이징 곡선 대신 쓰거나 함께 정할 것",
   do=ul([
     "자리·크기·투명도가 <b>바뀌는 모든 것</b>에 쓸 기본 곡선을 정해 둘 때",
     "들어오는 것에 <b>ease-out</b>, 나가는 것에 <b>ease-in</b>을 줄 때",
@@ -88,23 +91,23 @@ D = dict(
     "본문이나 목록에 <b>튀는 곡선</b>을 쓸 때. 글을 읽으려는 사이에 또 움직여서 읽기 어렵습니다",
     "들어오는 것에 ease-in을 쓸 때. 출발이 느려서 <b>굼떠 보이는데</b>, 이런 실수가 가장 흔합니다",
   ]),
-  instead='끝나는 시점을 정하지 않고 손으로 민 듯한 움직임을 내려면 <a href="spring.html">스프링</a>, 얼마나 걸릴지는 <a href="duration.html">지속 시간</a>, 들어오고 나가는 움직임의 짝은 <a href="enterexit.html">진입과 퇴장</a>.',
+  instead='끝나는 시점을 정하지 않고 손으로 민 듯한 움직임을 내려면 <a href="spring.html">스프링</a>을 씁니다. 움직임이 얼마나 걸릴지는 <a href="duration.html">지속 시간</a>에서, 들어오고 나가는 움직임을 짝짓는 방법은 <a href="enterexit.html">진입과 퇴장</a>에서 다룹니다.',
   cases=cases([
     ('''              <div style="width:100%;max-width:150px;display:grid;gap:5px">
                 <div style="height:22px;border-radius:999px;background:var(--bg);border:1px solid var(--line);position:relative"><span style="position:absolute;top:3px;right:4px;width:14px;height:14px;border-radius:50%;background:var(--accent)"></span></div>
                 <span style="font-family:var(--mono);font-size:9px;color:var(--accent)">--ease-out: cubic-bezier(.22,.9,.3,1)</span>
               </div>''',
-     "토큰으로 둔다", "곡선도 <a href=\"../items/color.html\">색</a>처럼 <b>이름을 붙인 토큰</b>으로 정해 두고 씁니다"),
+     "곡선을 토큰으로 정해 두기", "곡선도 <a href=\"../items/color.html\">색</a>처럼 <b>이름을 붙인 토큰</b>으로 정해 두고 씁니다"),
     ('''              <div style="width:100%;max-width:150px;display:grid;gap:4px">
-                <span style="font-size:9.5px;color:var(--fg-muted)">들어옴</span>''' + curve(OUT, "100%", "ease-out").strip() + '''
-                <span style="font-size:9.5px;color:var(--fg-muted)">나감</span>''' + curve(IN_, "100%", "ease-in").strip() + '''
+                <span style="font-size:9.5px;color:var(--fg-muted)">들어올 때</span>''' + curve(OUT, "100%", "ease-out").strip() + '''
+                <span style="font-size:9.5px;color:var(--fg-muted)">나갈 때</span>''' + curve(IN_, "100%", "ease-in").strip() + '''
               </div>''',
-     "들고 날 때 짝으로", "들어올 때와 나갈 때의 곡선을 한 벌로 정해 두면 화면마다 <b>헷갈리지 않습니다</b>"),
+     "들어올 때와 나갈 때 곡선 짝짓기", "들어올 때와 나갈 때의 곡선을 한 벌로 정해 두면 화면마다 <b>헷갈리지 않습니다</b>"),
     ('''              <div style="width:100%;max-width:150px;display:grid;gap:5px;place-items:center">
                 <span style="width:22px;height:22px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--accent);display:block"></span>
                 <span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">animation: spin 1s linear infinite</span>
               </div>''',
-     "linear 가 맞는 자리", "도는 것과 진행 막대에 씁니다. 이런 요소는 <b>속도가 변하면 고장 난 것처럼</b> 보입니다"),
+     "linear를 써야 하는 자리", "도는 것과 진행 막대에 씁니다. 이런 요소는 <b>속도가 변하면 고장 난 것처럼</b> 보입니다"),
   ]),
   s8_title="최소 코드와 규칙", s8_hint="구현할 때 지킬 최소 규칙",
   code_lede="곡선을 <b>이름 붙인 토큰</b>으로 정의해 두고, 들어올 때와 나갈 때에 짝지어 씁니다.",
@@ -119,18 +122,19 @@ D = dict(
 
 <span class="c">/* 도는 것만 linear */</span>
 .spinner { <span class="a">animation</span>: spin <span class="a">1s</span> linear infinite; }''',
+  keys_heads="<th>알아 둘 규칙</th><th>자세한 내용</th>",
   keys=kbd([
-    ("기본값은 <code>ease</code>", "<code>transition: transform 200ms</code>처럼 곡선을 적지 않으면 <code>ease</code>가 적용됩니다"),
+    ("곡선을 적지 않았을 때", "<code>transition: transform 200ms</code>처럼 곡선을 적지 않으면 <code>ease</code>가 적용됩니다"),
     ("<code>cubic-bezier</code>의 네 숫자", "<b>x1 y1 x2 y2</b> 순서입니다. x는 0~1을 벗어날 수 없지만 y는 벗어나도 되고, y가 1을 넘으면 목표를 지나쳤다가 돌아옵니다"),
     ("<code>steps(n)</code>", "연속으로 움직이지 않고 n단계로 끊어서 갑니다. 스프라이트 애니메이션이나 숫자 카운터에 씁니다"),
-    ("곡선은 <b>속성마다</b> 따로", "<code>transition: transform 260ms var(--ease-out), opacity 180ms linear</code>처럼 속성마다 다른 곡선을 줄 수 있습니다"),
-    ("<code>linear</code>는 도는 것에만", "스피너와 진행 막대에 씁니다. 그 밖의 자리에서는 대부분 맞지 않습니다"),
-    ("<a href=\"reducedmotion.html\">모션 줄이기</a>에서", "곡선은 그대로 둬도 됩니다. 줄여야 하는 것은 움직이는 <b>거리와 지속 시간</b>입니다"),
+    ("속성마다 곡선을 <b>따로</b> 주기", "<code>transition: transform 260ms var(--ease-out), opacity 180ms linear</code>처럼 속성마다 다른 곡선을 줄 수 있습니다"),
+    ("<code>linear</code>는 도는 것에만 쓰기", "스피너와 진행 막대에 씁니다. 그 밖의 자리에서는 대부분 맞지 않습니다"),
+    ("<a href=\"reducedmotion.html\">모션 줄이기</a>를 켰을 때", "곡선은 그대로 둬도 됩니다. 줄여야 하는 것은 움직이는 <b>거리와 지속 시간</b>입니다"),
   ]),
   backend=rows([
-    ("서버는 곡선을 모른다", "이징은 모두 화면 쪽에서 처리합니다. 다만 <b>움직임이 끝나기를 기다렸다가</b> 요청을 보내면 응답도 그만큼 늦게 오기 때문에, 요청은 움직임을 시작할 때 먼저 보냅니다."),
-    ("응답이 먼저 와도", "데이터가 50ms 만에 와도 애니메이션이 400ms 걸리면 사용자는 400ms를 기다립니다. 화면이 느리게 느껴질 때 <b>원인이 서버가 아닐 수도 있습니다.</b>"),
-    ("측정에 섞인다", "화면이 뜨기까지 걸린 시간을 재는 지표(LCP 등)에는 애니메이션 시간도 들어갑니다. 그래서 <b>요소가 늦게 나타나는 연출</b>은 점수를 깎습니다."),
+    ("곡선은 화면 쪽에서만 처리", "이징은 모두 화면 쪽에서 처리합니다. 다만 <b>움직임이 끝나기를 기다렸다가</b> 요청을 보내면 응답도 그만큼 늦게 오기 때문에, 요청은 움직임을 시작할 때 먼저 보냅니다."),
+    ("응답이 애니메이션보다 먼저 왔을 때", "데이터가 50ms 만에 와도 애니메이션이 400ms 걸리면 사용자는 400ms를 기다립니다. 화면이 느리게 느껴질 때 <b>원인이 서버가 아닐 수도 있습니다.</b>"),
+    ("성능 지표에 들어가는 연출 시간", "화면이 뜨기까지 걸린 시간을 재는 지표(LCP 등)에는 애니메이션 시간도 들어갑니다. 그래서 <b>요소가 늦게 나타나는 연출</b>은 점수를 깎습니다."),
   ]),
   plat_lede="세 플랫폼 모두 <b>빠르게 출발해 천천히 멈추는 움직임</b>을 권합니다.",
   plats=plats([

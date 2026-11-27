@@ -23,7 +23,7 @@ ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2)
                   </div>
                   <div class="pin-out" data-pin="3" style="display:flex;align-items:center;gap:10px">
                     <span style="width:40px;height:40px;border-radius:9px;background:var(--accent-soft);color:var(--accent);font-size:13px;font-weight:700;display:grid;place-items:center;flex:none">모란</span>
-                    <span style="font-size:11px;color:var(--fg-muted)">사각은 사람이 아니라 조직·상품</span>
+                    <span style="font-size:11px;color:var(--fg-muted)">사각형은 조직이나 상품에 씀</span>
                   </div>
                   <div class="pin-out" data-pin="4" style="display:flex;align-items:center;gap:10px">
                     <span style="position:relative;flex:none;line-height:0"><span style="width:40px;height:40px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-size:14px;font-weight:700;display:grid;place-items:center">철수</span><span style="position:absolute;right:-1px;bottom:-1px;width:12px;height:12px;border-radius:99px;background:#1f8a4c;box-shadow:0 0 0 2px var(--bg)"></span></span>
@@ -35,7 +35,7 @@ ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2)
                       <span style="width:32px;height:32px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-size:11px;font-weight:700;display:grid;place-items:center;box-shadow:0 0 0 2px var(--bg);margin-left:-8px">철수</span>
                       <span style="width:32px;height:32px;border-radius:99px;background:var(--ink-100);color:var(--fg-muted);font-size:11px;font-weight:700;display:grid;place-items:center;box-shadow:0 0 0 2px var(--bg);margin-left:-8px">+6</span>
                     </span>
-                    <span style="font-size:11px;color:var(--fg-muted)">겹쳐 쌓고 나머지는 +N</span>
+                    <span style="font-size:11px;color:var(--fg-muted)">겹쳐 쌓고 나머지는 +N으로 줄임</span>
                   </div>
                 </div>
               </div>'''
@@ -46,7 +46,7 @@ D = dict(
   lede="아바타는 사람이나 조직 <b>하나를 가리키는 작은 그림</b>입니다. 화면을 꾸미려고 두는 것이 아니라, 이 내용이 누구의 것인지 알려 주려고 둡니다.",
   axes_lede="표시 부품은 모두 무언가를 보여 주기만 한다는 점이 같아서, 아래 네 가지를 물어봐야 서로 구별됩니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
-          <p><b>사진이 깨진 상태로</b>를 켜 보세요. 사진이 사라지면 깨진 그림 아이콘 대신 <b>밑에 깔아 둔 이니셜</b>이 드러납니다.
+          <p><b>사진이 깨진 상태로 보기</b>를 켜 보세요. 사진이 사라지면 깨진 그림 아이콘 대신 <b>밑에 깔아 둔 이니셜</b>이 드러납니다.
           아바타의 기본값은 사진이 아니라 이니셜이고, 사진은 그 위에 덮어 두는 것이기 때문입니다.<br>
           사람 수를 늘려 보면 그림은 <b>셋까지만</b> 늘어나고 나머지는 <code>+N</code>으로 표시됩니다.
           이때 화면 아래의 '읽히는 말'도 함께 바뀌는 것을 확인해 보세요.</p>
@@ -65,19 +65,19 @@ D = dict(
   ]),
   axes=ax("아바타"),
   oneline="아바타는 <b>누구인지를 작은 그림 하나로 보여 주는 것</b>입니다. 사진이 없어도 누구인지 알려 줄 수 있어야 하기 때문에, 아바타의 기본값은 사진이 아니라 이니셜입니다.",
-  s4_title="갈래", s4_hint="사진이 있는 경우가 오히려 드물다",
+  s4_title="아바타의 종류", s4_hint="종류마다 달라지는 아바타 모습",
   states=states([
-    (wrap(av('<span style="position:absolute;inset:0;background:linear-gradient(135deg,#9fc0ff,#5b90f9 60%,#2254c7)"></span>')), "사진", "사진이 있으면 가장 좋지만, <b>사진이 없는 경우가 많습니다</b>"),
-    (wrap(av("길동")), "이니셜", "이름에서 딴 한두 글자를 씁니다. <b>한글 이름은 두 글자, 영문 이름은 머리글자</b>를 씁니다"),
-    (wrap(av("모란", sq=True)), "사각", "조직, 상품, 공간처럼 사람이 아닌 대상에 씁니다. <b>모양만 보고도 종류를 알 수 있습니다</b>"),
+    (wrap(av('<span style="position:absolute;inset:0;background:linear-gradient(135deg,#9fc0ff,#5b90f9 60%,#2254c7)"></span>')), "사진이 있을 때", "사진이 있으면 가장 좋지만, <b>사진이 없는 경우가 많습니다</b>"),
+    (wrap(av("길동")), "사진 대신 이니셜을 쓸 때", "이름에서 딴 한두 글자를 씁니다. <b>한글 이름은 두 글자, 영문 이름은 머리글자</b>를 씁니다"),
+    (wrap(av("모란", sq=True)), "사람이 아닌 대상의 사각형", "조직, 상품, 공간처럼 사람이 아닌 대상에 씁니다. <b>모양만 보고도 종류를 알 수 있습니다</b>"),
     (wrap(av("철수", extra='<span style="position:absolute;right:-1px;bottom:-1px;width:12px;height:12px;border-radius:99px;background:#1f8a4c;box-shadow:0 0 0 2px var(--surface)"></span>', style="position:relative")),
-     "상태 점", "접속 중, 자리 비움 같은 상태를 보여 줍니다. <b>색만으로 알리지 않고</b> 글로도 적습니다"),
+     "상태 점을 붙였을 때", "접속 중, 자리 비움 같은 상태를 보여 줍니다. <b>색만으로 알리지 않고</b> 글로도 적습니다"),
     (wrap('<span style="display:flex">' + av("길동", 30, style="box-shadow:0 0 0 2px var(--surface)") +
           av("철수", 30, style="box-shadow:0 0 0 2px var(--surface);margin-left:-7px") +
           av("+6", 30, style="box-shadow:0 0 0 2px var(--surface);margin-left:-7px;background:var(--ink-100);color:var(--fg-muted)") + '</span>'),
-     "겹침", "<b>셋까지</b> 보여 주고 나머지는 +N으로 줄입니다. 스크린 리더에서는 한 묶음으로 한 번 읽힙니다"),
+     "여럿을 겹쳐 쌓을 때", "<b>셋까지</b> 보여 주고 나머지는 +N으로 줄입니다. 스크린 리더에서는 한 묶음으로 한 번 읽힙니다"),
     (wrap('<span class="skl" style="width:40px;height:40px;border-radius:99px;display:block"></span>'),
-     "로딩", "뼈대도 <b>동그랗게</b> 그립니다. 네모로 두면 사진이 들어오는 순간 모양이 바뀝니다"),
+     "사진을 불러오는 중", "뼈대도 <b>동그랗게</b> 그립니다. 네모로 두면 사진이 들어오는 순간 모양이 바뀝니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -103,7 +103,7 @@ D = dict(
     "목록의 모든 줄에 큰 아바타를 넣을 때. 사진을 많이 받느라 목록이 느려지고 글이 옆으로 밀립니다",
     "접속 상태를 <b>색 점 하나로만</b> 알릴 때",
   ]),
-  instead='사람이 아니라 기능이면 아이콘(5부), 내용의 축소판이면 썸네일, 숫자를 알리려면 <a href="badge.html">배지</a>.',
+  instead='사람이 아니라 기능을 가리킨다면 아이콘(5부)을 쓰고, 사진이나 영상 같은 내용을 줄여 보여 주려면 썸네일을 씁니다. 숫자를 알리는 것이 목적이라면 <a href="badge.html">배지</a>가 맞습니다.',
   cases=cases([
     ('''              <div style="display:flex;align-items:flex-start;gap:8px;width:100%;max-width:200px">
                 ''' + av("철수", 30) + '''
@@ -112,23 +112,23 @@ D = dict(
                   <span style="font-size:11px;background:var(--bg);border-radius:9px;padding:6px 8px">네, 오후에 확인해 볼게요</span>
                 </div>
               </div>''',
-     "대화", "<b>말한 사람</b>을 가리킵니다. 같은 사람이 이어서 말하면 두 번째 말부터는 아바타를 생략하기도 합니다"),
+     "대화에서 말한 사람 표시하기", "<b>말한 사람</b>을 가리킵니다. 같은 사람이 이어서 말하면 두 번째 말부터는 아바타를 생략하기도 합니다"),
     ('''              <div style="display:flex;align-items:center;gap:7px;width:100%;max-width:200px;font-size:11px">
                 <span style="display:flex">''' + av("길동", 26, style="box-shadow:0 0 0 2px var(--surface)") +
        av("철수", 26, style="box-shadow:0 0 0 2px var(--surface);margin-left:-6px") +
        av("영희", 26, style="box-shadow:0 0 0 2px var(--surface);margin-left:-6px") + '''</span>
                 <span style="color:var(--fg-muted)">외 6명이 보는 중</span>
               </div>''',
-     "함께 있는 사람", "협업 도구 화면 위쪽에서 흔히 봅니다. 아바타를 <b>겹쳐 쌓고 남은 사람은 숫자로</b> 보여 줍니다"),
+     "함께 보고 있는 사람 표시하기", "협업 도구 화면 위쪽에서 흔히 봅니다. 아바타를 <b>겹쳐 쌓고 남은 사람은 숫자로</b> 보여 줍니다"),
     ('''              <div style="display:grid;justify-items:center;gap:7px;width:100%;max-width:200px">
                 ''' + av("길동", 56) + '''
                 <span style="font-size:12px;font-weight:700">홍길동</span>
                 <span style="font-size:10.5px;color:var(--fg-muted)">모란상회 · 대표</span>
               </div>''',
-     "프로필", "아바타를 가장 크게 보여 주는 자리입니다. 프로필 화면에서만 아바타가 <b>화면의 중심</b>이 됩니다"),
+     "프로필 화면에 크게 보여 주기", "아바타를 가장 크게 보여 주는 자리입니다. 프로필 화면에서만 아바타가 <b>화면의 중심</b>이 됩니다"),
   ]),
   s8_title="최소 마크업과 규칙",
-  keys_heads="<th>규칙</th><th>지켜야 하는 것</th>",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법</th>",
   code_lede="이니셜을 먼저 깔고 사진을 그 위에 덮는 <b>순서</b>가 중요합니다. 순서를 반대로 하면 사진이 깨졌을 때 아무것도 남지 않습니다.",
   code='''&lt;<span class="t">span</span> <span class="a">class</span>=<span class="s">"av"</span> <span class="a">aria-hidden</span>=<span class="s">"true"</span>&gt;길동
   &lt;<span class="t">img</span> <span class="a">src</span>=<span class="s">"/u/12.jpg"</span> <span class="a">alt</span>=<span class="s">""</span>
@@ -144,26 +144,26 @@ D = dict(
 <span class="c">&lt;!-- 겹친 아바타 무리는 한 번에 읽힌다 --&gt;</span>
 &lt;<span class="t">span</span> <span class="a">role</span>=<span class="s">"img"</span> <span class="a">aria-label</span>=<span class="s">"참여자 9명: 홍길동, 김철수, …"</span>&gt;…&lt;/<span class="t">span</span>&gt;''',
   keys=kbd([
-    ("이니셜을 먼저", "사진은 이니셜 위에 덮어 둡니다. 순서를 바꾸면 사진이 깨졌을 때 <b>빈 동그라미</b>만 남습니다"),
+    ("이니셜을 먼저 깔기", "사진은 이니셜 위에 덮어 둡니다. 순서를 바꾸면 사진이 깨졌을 때 <b>빈 동그라미</b>만 남습니다"),
     ("<code>object-fit: cover</code>", "세로 사진이든 가로 사진이든 동그라미를 꽉 채웁니다. 쓰지 않으면 사진이 찌그러집니다"),
-    ("이름이 옆에 있으면 숨긴다", "<code>aria-hidden=\"true\"</code>을 붙입니다. 그러지 않으면 스크린 리더가 같은 이름을 두 번 읽습니다"),
-    ("겹친 무리는 하나로", "<code>role=\"img\"</code> + <code>aria-label</code>로 묶어 무리 전체가 한 번만 읽히게 합니다"),
-    ("상태 점은 말로도", "초록 점에 <code>title</code>을 달거나 화면에 보이지 않는 글로 '접속 중'이라고 적습니다"),
-    ("누를 수 있으면 <code>&lt;button&gt;</code>", "프로필로 이동하는 아바타는 <b>실제 버튼이나 링크</b>로 만들어야 키보드로 누를 수 있습니다"),
+    ("이름이 옆에 있으면 아바타를 숨기기", "<code>aria-hidden=\"true\"</code>을 붙입니다. 그러지 않으면 스크린 리더가 같은 이름을 두 번 읽습니다"),
+    ("겹친 무리를 한 번에 읽히기", "<code>role=\"img\"</code> + <code>aria-label</code>로 묶어 무리 전체가 한 번만 읽히게 합니다"),
+    ("상태 점을 말로도 알리기", "초록 점에 <code>title</code>을 달거나 화면에 보이지 않는 글로 '접속 중'이라고 적습니다"),
+    ("누를 수 있으면 <code>&lt;button&gt;</code>으로 만들기", "프로필로 이동하는 아바타는 <b>실제 버튼이나 링크</b>로 만들어야 키보드로 누를 수 있습니다"),
   ]),
   backend=rows([
-    ("사진은 없을 수 있다", "가입할 때 사진이 필수가 아니면 <b>대부분의 사용자에게 사진이 없습니다.</b> 그래서 이니셜 바닥을 기본 화면으로 보고, 사진은 있으면 더 좋은 것으로 다룹니다."),
-    ("이니셜과 색은 서버가 정하지 않는다", "이름에서 이니셜을 따는 규칙과 바탕색은 화면 쪽에서 정합니다. 다만 <b>같은 사람에게는 늘 같은 색</b>이 나오도록 이름을 해시한 값으로 색을 고릅니다."),
-    ("크기별로 잘라 둔다", "목록의 28px 자리에 2,000px짜리 원본을 보내면 받는 데 오래 걸려 화면이 느려집니다. 그래서 업로드할 때 <b>몇 가지 크기로 미리 줄여</b> 두고, 화면에서 자리에 맞는 크기를 골라 씁니다."),
-    ("캐시와 바뀐 사진", "사진을 바꿔도 주소가 같으면 캐시된 예전 사진이 보입니다. 그래서 파일 이름에 <b>버전이나 해시</b>를 넣어 사진이 바뀔 때 주소도 바뀌게 합니다."),
-    ("지운 사용자", "탈퇴한 사람의 아바타는 <b>익명 바닥</b>으로 바꿔야 합니다. 이니셜이나 이름이 그대로 남아 있으면 그 사람의 정보를 다 지운 것이 아니기 때문입니다."),
+    ("사진이 없는 경우를 기본으로 보기", "가입할 때 사진이 필수가 아니면 <b>대부분의 사용자에게 사진이 없습니다.</b> 그래서 이니셜 바닥을 기본 화면으로 보고, 사진은 있으면 더 좋은 것으로 다룹니다."),
+    ("이니셜과 색은 화면 쪽에서 정하기", "이름에서 이니셜을 따는 규칙과 바탕색은 화면 쪽에서 정합니다. 다만 <b>같은 사람에게는 늘 같은 색</b>이 나오도록 이름을 해시한 값으로 색을 고릅니다."),
+    ("사진을 크기별로 줄여 두기", "목록의 28px 자리에 2,000px짜리 원본을 보내면 받는 데 오래 걸려 화면이 느려집니다. 그래서 업로드할 때 <b>몇 가지 크기로 미리 줄여</b> 두고, 화면에서 자리에 맞는 크기를 골라 씁니다."),
+    ("사진을 바꿨는데 예전 사진이 보일 때", "사진을 바꿔도 주소가 같으면 캐시된 예전 사진이 보입니다. 그래서 파일 이름에 <b>버전이나 해시</b>를 넣어 사진이 바뀔 때 주소도 바뀌게 합니다."),
+    ("탈퇴한 사용자의 아바타", "탈퇴한 사람의 아바타는 <b>익명 바닥</b>으로 바꿔야 합니다. 이니셜이나 이름이 그대로 남아 있으면 그 사람의 정보를 다 지운 것이 아니기 때문입니다."),
   ]),
   plat_lede="세 플랫폼 모두 아바타를 동그란 사람 그림으로 그린다는 점은 같고, 정식 부품으로 정해져 있는지가 다릅니다.",
   plats=plats([
     ("웹", "표준 부품 없음",
      '              <div style="display:grid;place-items:center">' + av("길동", 34) + '</div>',
      "<code>&lt;img&gt;</code>에 <code>border-radius: 50%</code>를 주어 동그랗게 만들 뿐, 폴백은 직접 만들어야 합니다."),
-    ("iOS", "SF Symbols · 직접 그림",
+    ("iOS", "SF Symbols · 직접 그리기",
      '''              <div class="phone" role="img" aria-label="iOS 아바타 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:8px;right:8px;top:30px;display:flex;align-items:center;gap:6px">
                   <span style="width:18px;height:18px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-size:7px;font-weight:700;display:grid;place-items:center">길동</span>
@@ -182,6 +182,6 @@ D = dict(
   siblings=siblings("avatar"),
   related='''        <li><a href="../items/listitem.html"><b>리스트 아이템</b><em>5부</em></a></li>
         <li><a href="../items/skeleton.html"><b>스켈레톤</b><em>8부</em></a></li>
-        <li><span class="na"><b>아이콘</b><em>5부</em></span></li>
-        <li><span class="na"><b>스크린 리더가 읽는 것</b><em>12부</em></span></li>''',
+        <li><a href="icon.html"><b>아이콘</b><em>5부</em></a></li>
+        <li><a href="screenreader.html"><b>스크린 리더가 읽는 것</b><em>12부</em></a></li>''',
 )

@@ -81,9 +81,9 @@
     var v = ratio(fg, bg);
     verdict.innerHTML =
       '대비비 <b>' + v.toFixed(2) + ':1</b><br>' +
-      '큰 글자 19px 굵게 — ' + tag(v, 3) + '<br>' +
-      '본문 14px — ' + tag(v, 4.5) + '<br>' +
-      '작은 글자 11.5px — ' + tag(v, 4.5);
+      '큰 글자 19px 굵게는 ' + tag(v, 3) + '<br>' +
+      '본문 14px는 ' + tag(v, 4.5) + '<br>' +
+      '작은 글자 11.5px는 ' + tag(v, 4.5);
   }
   ['fg', 'bg'].forEach(function (id) { document.getElementById(id).addEventListener('input', draw); });
   draw();

@@ -76,22 +76,22 @@
         <p>뼈대를 다루는 항목들은 눈에 보이지 않으면서 요소의 자리를 정한다는 점이 같아서 생김새로는 구별하기 어렵습니다. 대신 아래 네 가지를 물어 보면 서로 갈립니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하나</th><th>방향</th><th>넘치면</th><th>누가 값을 정하나</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 정하는가</th><th>어느 방향에 작용하는가</th><th>넘치면 어떻게 되는가</th><th>누가 값을 정하는가</th></tr></thead>
           <tbody>
-            <tr><td>박스 모델</td><td><b>상자 한 개</b>의 크기</td><td class="none">해당 없음</td><td>밖으로 삐져나온다</td><td>내가</td></tr>
-            <tr class="me"><td><b>플렉스</b></td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나온다</td><td>나 + 내용</td></tr>
-            <tr><td>그리드</td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗는다</td><td>나 + 내용</td></tr>
-            <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>나</td></tr>
-            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목이 정한다</b></td><td>나</td></tr>
-            <tr><td>스티키</td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 간다</td><td>나</td></tr>
-            <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남는다</td><td>나</td></tr>
-            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 안 눌린다</td><td><b>OS가</b></td></tr>
-            <tr><td>포지션</td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 안 차지한다</td><td>기준이 되는 조상</td></tr>
-            <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안이 잘린다</td><td>비를 적은 쪽</td></tr>
-            <tr><td>스크롤 동작</td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥까지 밀린다</td><td>굴리는 상자</td></tr>
-            <tr><td>크기 정하기</td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나간다</td><td>내용 또는 적은 값</td></tr>
-            <tr><td>여백 붕괴</td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어든다</td><td>큰 쪽 하나</td></tr>
-            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab이 어긋난다</td><td>마크업 순서</td></tr>
+            <tr><td>박스 모델</td><td><b>상자 한 개</b>의 크기</td><td class="none">해당 없음</td><td>밖으로 삐져나옴</td><td>요소 자신</td></tr>
+            <tr class="me"><td><b>플렉스</b></td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나옴</td><td>요소 자신과 내용</td></tr>
+            <tr><td>그리드</td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗음</td><td>요소 자신과 내용</td></tr>
+            <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>요소 자신</td></tr>
+            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목에서 정함</b></td><td>요소 자신</td></tr>
+            <tr><td>스티키</td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 나감</td><td>요소 자신</td></tr>
+            <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남음</td><td>요소 자신</td></tr>
+            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 눌리지 않음</td><td><b>OS</b></td></tr>
+            <tr><td>포지션</td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 차지하지 않음</td><td>기준이 되는 조상</td></tr>
+            <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안쪽 내용이 잘림</td><td>비를 적은 쪽</td></tr>
+            <tr><td>스크롤 동작</td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥 페이지까지 밀림</td><td>스크롤되는 상자</td></tr>
+            <tr><td>크기 정하기</td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나감</td><td>내용 또는 적은 값</td></tr>
+            <tr><td>여백 붕괴</td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어듦</td><td>둘 중 큰 여백</td></tr>
+            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab 차례가 어긋남</td><td>마크업 순서</td></tr>
           </tbody>
         </table>
         </div>
@@ -101,43 +101,43 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 갈래<span class="hint">같은 속성도 방향에 따라 다르게 적용된다</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 자주 쓰는 여섯 가지 배치<span class="hint">속성 값에 따라 달라지는 자식의 자리</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;display:flex;background:var(--surface);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;min-height:54px;"><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">앞</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">가운데</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">뒤</span></div>
             </div>
-            <figcaption>기본<span>자식이 <b>내용만큼</b> 자리를 차지하고 왼쪽부터 붙습니다</span></figcaption>
+            <figcaption>아무 값도 주지 않았을 때<span>자식이 <b>내용만큼</b> 자리를 차지하고 왼쪽부터 붙습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;display:flex;background:var(--surface);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;min-height:54px;justify-content:space-between"><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">앞</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">가운데</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">뒤</span></div>
             </div>
-            <figcaption>space-between<span>양 끝에 붙이고 <b>사이 간격을 똑같이</b> 나눕니다</span></figcaption>
+            <figcaption><code>space-between</code>으로 나눌 때<span>양 끝에 붙이고 <b>사이 간격을 똑같이</b> 나눕니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;display:flex;background:var(--surface);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;min-height:54px;justify-content:center;gap:6px"><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">앞</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">가운데</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">뒤</span></div>
             </div>
-            <figcaption>center + gap<span>가운데로 모으고 사이를 띄웁니다</span></figcaption>
+            <figcaption><code>center</code>와 <code>gap</code>을 함께 줄 때<span>가운데로 모으고 사이를 띄웁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;display:flex;background:var(--surface);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;min-height:54px;"><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">앞</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;background:var(--warn-soft);color:var(--warn);border-color:color-mix(in srgb,var(--warn) 35%,transparent);flex:1;min-width:0">가운데</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">뒤</span></div>
             </div>
-            <figcaption>flex: 1<span>가운데 칸만 <b>남은 자리를 모두 차지합니다</b></span></figcaption>
+            <figcaption>가운데 칸에 <code>flex: 1</code>을 줄 때<span>가운데 칸만 <b>남은 자리를 모두 차지합니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;display:flex;background:var(--surface);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;min-height:54px;flex-direction:column;gap:5px;align-items:flex-start"><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">앞</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">가운데</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">뒤</span></div>
             </div>
-            <figcaption>column<span>방향을 바꾸면 <b>justify-content가 세로 정렬</b>을 맡습니다</span></figcaption>
+            <figcaption>방향을 <code>column</code>으로 바꿀 때<span>방향을 바꾸면 <b>justify-content가 세로 정렬</b>을 맡습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;display:flex;background:var(--surface);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;min-height:54px;flex-wrap:wrap;gap:5px"><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">앞</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">가운데</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">뒤</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">넷</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">다섯</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">여섯</span></div>
             </div>
-            <figcaption>wrap<span>자리가 모자라면 다음 줄로 넘깁니다. <b>켜지 않으면 모든 칸이 좁게 찌그러집니다</b></span></figcaption>
+            <figcaption><code>wrap</code>으로 줄을 넘길 때<span>자리가 모자라면 다음 줄로 넘깁니다. <b>켜지 않으면 모든 칸이 좁게 찌그러집니다</b></span></figcaption>
           </figure>
         </div>
       </section>
@@ -157,8 +157,8 @@
                   <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">flex-direction: row  ←→</div>
                   <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">justify-content  ←→  (주축)</div>
                   <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">align-items  ↑↓  (교차축)</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">flex: 1   — 남은 자리를 먹는다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">min-width: 0   — 이게 없으면 안 줄어든다</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">flex: 1   남은 자리를 차지함</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">min-width: 0   없으면 줄어들지 않음</div>
                 </div>
               </div>
             </div>
@@ -200,7 +200,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>플렉스 대신 다른 것을 써야 하는 경우</b> — 두 방향이면 <a href="grid.html">그리드</a>, 가운데만 놓으면 <a href="center.html">가운데 맞추기</a>, 넘친 뒤 처리는 <a href="overflow.html">넘침</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>플렉스 대신 다른 것을 써야 하는 경우</b> — 가로와 세로 두 방향을 함께 맞춰야 하면 <a href="grid.html">그리드</a>를 쓰고, 요소 하나를 가운데에 놓기만 하면 되는 경우는 <a href="center.html">가운데 맞추기</a>에서 다룹니다. 내용이 넘친 뒤 어떻게 처리할지는 <a href="overflow.html">넘침</a>에서 봅니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -210,19 +210,19 @@
             <div class="shot">
               <div style="width:100%;max-width:200px;display:flex;background:var(--surface);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;min-height:54px;align-items:center;gap:7px"><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">☰</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;background:var(--warn-soft);color:var(--warn);border-color:color-mix(in srgb,var(--warn) 35%,transparent);flex:1;min-width:0">모란상회</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">설정</span></div>
             </div>
-            <figcaption><b>상단 바</b><b>앞 · 가운데(늘어남) · 뒤</b>로 나눈, 가장 흔한 짜임입니다</figcaption>
+            <figcaption><b>상단 바를 앞·가운데·뒤로 나누기</b><b>앞 · 가운데(늘어남) · 뒤</b>로 나눈, 가장 흔한 짜임입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:200px;display:flex;background:var(--surface);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;min-height:54px;align-items:center;gap:7px"><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">아바타</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;background:var(--warn-soft);color:var(--warn);border-color:color-mix(in srgb,var(--warn) 35%,transparent);flex:1;min-width:0">제목과 보조 글</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">₩48,000</span></div>
             </div>
-            <figcaption><b>리스트 아이템</b>상단 바와 같은 짜임으로 목록의 한 줄을 만듭니다</figcaption>
+            <figcaption><b>리스트 아이템 한 줄 만들기</b>상단 바와 같은 짜임으로 목록의 한 줄을 만듭니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:200px;display:flex;background:var(--surface);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;min-height:54px;justify-content:flex-end;gap:6px"><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">취소</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:6px 8px;">저장</span></div>
             </div>
-            <figcaption><b>버튼 줄</b>버튼을 오른쪽에 모으고, <b>주 동작 버튼을 바깥쪽</b>에 둡니다</figcaption>
+            <figcaption><b>버튼 줄을 오른쪽에 모으기</b>버튼을 오른쪽에 모으고, <b>주 동작 버튼을 바깥쪽</b>에 둡니다</figcaption>
           </figure>
         </div>
       </section>
@@ -248,14 +248,14 @@
 <span class="t">.bar__end</span> { <span class="a">margin-left</span>: auto; }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>규칙</th><th>지켜야 하는 것</th></tr></thead>
+          <thead><tr><th>지킬 규칙</th><th>지키는 방법</th></tr></thead>
           <tbody>
-            <tr><td><code>gap</code>을 쓴다</td><td>자식에 마진을 주면 <b>첫 칸과 끝 칸</b>의 바깥 여백을 따로 처리해야 하지만, gap은 칸 사이에만 들어갑니다</td></tr>
-            <tr><td><code>min-width: 0</code></td><td>줄어들어야 하는 칸에는 거의 항상 필요합니다. <b>이 도감에서 가장 자주 나오는 한 줄</b>입니다</td></tr>
-            <tr><td><code>margin-left: auto</code></td><td>한 칸만 오른쪽 끝으로 밀 때 씁니다. 자리를 채우려고 빈 <code>&lt;div&gt;</code>를 넣지 않습니다</td></tr>
-            <tr><td><code>flex-wrap</code>을 생각한다</td><td>기본값이 <code>nowrap</code>이라서 화면이 좁아지면 <b>모든 칸이 찌그러집니다</b></td></tr>
-            <tr><td>순서를 바꾸지 않는다</td><td><code>order</code>나 <code>row-reverse</code>를 쓰면 <b>보이는 순서와 탭 순서가 어긋납니다</b></td></tr>
-            <tr><td><code>align-items: stretch</code>가 기본</td><td>자식 높이가 저절로 같아지기 때문에, 아이콘이 세로로 늘어나 보이면 대개 이 기본값이 원인입니다</td></tr>
+            <tr><td>간격은 <code>gap</code>으로 주기</td><td>자식에 마진을 주면 <b>첫 칸과 끝 칸</b>의 바깥 여백을 따로 처리해야 하지만, gap은 칸 사이에만 들어갑니다</td></tr>
+            <tr><td>줄어들 칸에 <code>min-width: 0</code> 주기</td><td>줄어들어야 하는 칸에는 거의 항상 필요합니다. <b>이 도감에서 가장 자주 나오는 한 줄</b>입니다</td></tr>
+            <tr><td>끝으로 밀 때는 <code>margin-left: auto</code> 쓰기</td><td>한 칸만 오른쪽 끝으로 밀 때 씁니다. 자리를 채우려고 빈 <code>&lt;div&gt;</code>를 넣지 않습니다</td></tr>
+            <tr><td><code>flex-wrap</code>이 필요한지 따져 보기</td><td>기본값이 <code>nowrap</code>이라서 화면이 좁아지면 <b>모든 칸이 찌그러집니다</b></td></tr>
+            <tr><td>CSS로 순서를 바꾸지 않기</td><td><code>order</code>나 <code>row-reverse</code>를 쓰면 <b>보이는 순서와 탭 순서가 어긋납니다</b></td></tr>
+            <tr><td><code>align-items</code>의 기본값이 <code>stretch</code>라는 점 기억하기</td><td>자식 높이가 저절로 같아지기 때문에, 아이콘이 세로로 늘어나 보이면 대개 이 기본값이 원인입니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -266,10 +266,10 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>플렉스 = 남은 자리 나누기</th><td><code>flex: 1</code>은 남은 폭을 비율대로 나누라는 뜻입니다. 고정 칸의 폭을 먼저 빼고 나머지를 나눠 주기 때문에, <b>총량이 정해진 자원을 배분</b>하는 계산과 같습니다.</td></tr>
-            <tr><th>내용 길이가 배치를 바꾼다</th><td>이름이 길면 옆 칸이 밀려납니다. 그래서 <b>가장 긴 값</b>과 <b>빈 값</b>을 하나씩 넣고 화면을 그려 보는 것이 최소한의 테스트입니다.</td></tr>
-            <tr><th>개수가 바뀌는 경우</th><td>서버가 버튼을 3개 보낼지 7개 보낼지 미리 알 수 없다면 <code>flex-wrap: wrap</code>을 켜 둡니다. 켜지 않으면 좁은 화면에서 버튼이 모두 찌그러집니다.</td></tr>
-            <tr><th>순서와 접근성</th><td><code>order</code>로 눈에 보이는 순서를 바꿔도 <b>키보드 순서는 바뀌지 않습니다.</b> 그래서 화면에서 순서를 바꾸기보다 서버가 내려 주는 순서를 그대로 쓰는 편이 안전합니다.</td></tr>
+            <tr><th>남은 자리를 비율대로 나누는 계산</th><td><code>flex: 1</code>은 남은 폭을 비율대로 나누라는 뜻입니다. 고정 칸의 폭을 먼저 빼고 나머지를 나눠 주기 때문에, <b>총량이 정해진 자원을 배분</b>하는 계산과 같습니다.</td></tr>
+            <tr><th>내용 길이에 따라 달라지는 배치</th><td>이름이 길면 옆 칸이 밀려납니다. 그래서 <b>가장 긴 값</b>과 <b>빈 값</b>을 하나씩 넣고 화면을 그려 보는 것이 최소한의 테스트입니다.</td></tr>
+            <tr><th>버튼 개수가 바뀌는 경우</th><td>서버가 버튼을 3개 보낼지 7개 보낼지 미리 알 수 없다면 <code>flex-wrap: wrap</code>을 켜 둡니다. 켜지 않으면 좁은 화면에서 버튼이 모두 찌그러집니다.</td></tr>
+            <tr><th>보이는 순서와 키보드 순서</th><td><code>order</code>로 눈에 보이는 순서를 바꿔도 <b>키보드 순서는 바뀌지 않습니다.</b> 그래서 화면에서 순서를 바꾸기보다 서버가 내려 주는 순서를 그대로 쓰는 편이 안전합니다.</td></tr>
           </tbody>
         </table>
         </div>

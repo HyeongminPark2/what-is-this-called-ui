@@ -17,12 +17,12 @@ def cal(start, end, w="152px", note="", ok=None):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">자주 쓰는 기간 — 오늘 · 지난 7일 · 이번 달</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">달력은 그 뒤 — 대부분은 버튼으로 끝난다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">고른 범위를 한 줄로 다시 적는다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">끝날을 포함한다고 화면에 적는다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">서버에는 &lt; 다음 날 00:00 으로 보낸다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">같은 날짜인데 하루가 적은 사고</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">자주 쓰는 기간은 오늘 · 지난 7일 · 이번 달</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">달력은 그 뒤에, 대부분 버튼으로 고름</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">고른 범위를 한 줄로 다시 적음</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">끝날을 포함한다고 화면에 적음</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">서버에는 &lt; 다음 날 00:00으로 보냄</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">같은 날짜인데 하루가 적게 잡히는 오류</div>
                 </div>
               </div>'''
 
@@ -52,29 +52,29 @@ D = dict(
   ]),
   axes=ax("날짜 범위"),
   oneline="<b>자주 쓰는 기간 버튼을 먼저 두고, 달력은 그 뒤에 둡니다.</b> 그리고 끝날을 포함하는지 화면에 적어 두세요.",
-  s4_title="고르는 네 토막", s4_hint="대부분은 버튼만으로 고릅니다",
+  s4_title="기간을 고르는 과정", s4_hint="대부분은 버튼만으로 고릅니다",
   states=states([
     (one('<div style="display:flex;gap:3px;flex-wrap:wrap">'
          + ''.join('<span style="border:1px solid var(--line);border-radius:999px;padding:2px 7px;font-size:8px">' + t + '</span>'
                    for t in ['오늘', '지난 7일', '이번 달', '지난 달'])
-         + '</div>', "자주 쓰는 기간", True, "실제로 대부분을 끝낸다"),
-     "프리셋", "버튼 한 번으로 고를 수 있어서 <b>달력보다 빠릅니다</b>"),
-    (cal(0, 0, "152px", "아직 안 골랐다"), "비었을 때", "<b>무엇을 고르는 칸인지</b>만 보입니다"),
-    (cal(3, 3, "152px", "시작일을 골랐다"), "하나 골랐을 때", "다음에 누르는 날짜가 <b>끝날</b>이 됩니다"),
-    (cal(3, 9, "152px", "11월 3일 ~ 9일 · 7일간", True), "둘 다 골랐을 때", "시작일과 끝날 사이가 <b>칠해집니다</b>"),
-    (one(txt('11월 1일 ~ 11월 7일 · <b>7일간</b><br><span style="color:var(--fg-muted)">끝날 포함</span>', "9.5px"), "다시 적기", True, "고른 범위를 한 줄로"),
-     "확인 줄", "고른 범위가 <b>며칠간인지</b>까지 적습니다"),
-    (one(txt('11월 1일 ~ 11월 7일 · <b>6일간</b><br><span style="color:var(--danger)">끝날 제외</span>', "9.5px"), "끝날을 빼면", False, "같은 날짜인데 하루가 적다"),
-     "숨은 함정", "끝날을 빼면 같은 날짜라도 하루가 줄어드는데, 화면에 <b>적어 두지 않으면 알 수 없습니다</b>"),
+         + '</div>', "자주 쓰는 기간", True, "대부분 이 버튼으로 고름"),
+     "자주 쓰는 기간 버튼", "버튼 한 번으로 고를 수 있어서 <b>달력보다 빠릅니다</b>"),
+    (cal(0, 0, "152px", "아직 고르지 않음"), "아직 고르지 않았을 때", "<b>무엇을 고르는 칸인지</b>만 보입니다"),
+    (cal(3, 3, "152px", "시작일만 고름"), "시작일만 골랐을 때", "다음에 누르는 날짜가 <b>끝날</b>이 됩니다"),
+    (cal(3, 9, "152px", "11월 3일 ~ 9일 · 7일간", True), "시작일과 끝날을 모두 골랐을 때", "시작일과 끝날 사이가 <b>칠해집니다</b>"),
+    (one(txt('11월 1일 ~ 11월 7일 · <b>7일간</b><br><span style="color:var(--fg-muted)">끝날 포함</span>', "9.5px"), "범위 다시 적기", True, "고른 범위를 한 줄로 적음"),
+     "고른 범위를 다시 적은 확인 줄", "고른 범위가 <b>며칠간인지</b>까지 적습니다"),
+    (one(txt('11월 1일 ~ 11월 7일 · <b>6일간</b><br><span style="color:var(--danger)">끝날 제외</span>', "9.5px"), "끝날을 빼면", False, "같은 날짜인데 하루가 적음"),
+     "끝날을 빼고 계산했을 때", "끝날을 빼면 같은 날짜라도 하루가 줄어드는데, 화면에 <b>적어 두지 않으면 알 수 없습니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
     ("프리셋", "오늘 · 지난 7일", "<b>대부분은 이 버튼만으로 고릅니다.</b> 그래서 달력보다 먼저 둡니다"),
-    ("달력", "그 뒤", "정확한 날짜를 골라야 할 때만 씁니다"),
+    ("달력", "프리셋 다음", "정확한 날짜를 골라야 할 때만 씁니다"),
     ("확인 줄", "며칠간", "고른 범위를 <b>글로 다시</b> 적어 보여 줍니다"),
-    ("끝날 포함", "화면에 적는다", "<b>놓치기 쉬운 부분입니다.</b> 화면에 적지 않으면 끝날이 포함되는지 아무도 알 수 없습니다"),
-    ("서버로는", "&lt; 다음 날 00:00", "자료에 시·분·초가 붙어 있어도 끝날의 자료가 <b>빠지지 않습니다</b>"),
-    ("하루 차이", "가장 흔한 사고", "정산·마감 화면에서는 이 하루 때문에 <b>금액이 틀립니다</b>"),
+    ("끝날 포함", "화면에 적기", "<b>놓치기 쉬운 부분입니다.</b> 화면에 적지 않으면 끝날이 포함되는지 아무도 알 수 없습니다"),
+    ("서버로 보내는 끝 경계", "&lt; 다음 날 00:00", "자료에 시·분·초가 붙어 있어도 끝날의 자료가 <b>빠지지 않습니다</b>"),
+    ("하루 차이", "끝날 누락", "정산·마감 화면에서는 이 하루 때문에 <b>금액이 틀립니다</b>"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           기간의 경계는 <b>두 군데에서 틀리기 쉽습니다</b>.
@@ -85,6 +85,9 @@ D = dict(
           <b>7일 낮에 생긴 자료가 모두 빠집니다</b>.
           <code>&lt; 11월 8일 00:00</code>으로 적으면 두 문제가 함께 해결되고,
           <a href="datetime.html">시간대</a>까지 맞추면 날짜가 하루 어긋나는 일도 없어집니다.</p>''',
+  do_title="날짜 범위를 만들 때 지킬 것",
+  dont_title="날짜 범위를 만들 때 피할 것",
+  instead_title="날짜 범위 대신 쓸 것과 함께 볼 항목",
   do=ul([
     "<b>자주 쓰는 기간</b> 버튼을 달력보다 먼저 보여 주기",
     "고른 범위가 <b>며칠간인지</b>까지 적기",
@@ -96,18 +99,18 @@ D = dict(
     "시작일이 끝날보다 뒤인데도 <b>바로잡지 않고 두기</b>",
     "기간 제한을 두지 않기. <b>3년치</b>를 한 번에 조회하면 서버가 응답하지 못할 만큼 느려집니다",
   ]),
-  instead='하루만 고르면 날짜 선택기, 기간 말고 다른 조건까지 거르려면 <a href="filter.html">필터와 패싯</a>, 날짜를 화면에 적는 법은 <a href="datetime.html">날짜와 시간 쓰기</a>를 봅니다.',
+  instead='하루만 고르면 되는 경우에는 날짜 선택기를 쓰고, 기간 말고 다른 조건까지 함께 거르려면 <a href="filter.html">필터와 패싯</a>을 씁니다. 고른 날짜를 화면에 어떻게 적을지는 <a href="datetime.html">날짜와 시간 쓰기</a>에서 다룹니다.',
   cases=cases([
     (one('<div style="display:flex;gap:3px;flex-wrap:wrap">'
          + ''.join('<span style="border:1px solid var(--line);border-radius:999px;padding:2px 7px;font-size:8px">' + t + '</span>'
                    for t in ['오늘', '지난 7일', '이번 달'])
-         + '</div>', "정산 화면", True, "거의 이 셋으로 끝난다"),
-     "자주 쓰는 기간", "기간 버튼 한 줄이 날짜 범위에서 <b>효과가 가장 큰 부분</b>입니다"),
-    (cal(3, 9, "150px", "달력에서 직접"), "정확한 기간", "마감이나 감사처럼 <b>날짜가 정해진</b> 경우에 달력으로 직접 고릅니다"),
-    (one(mono('?from=2026-11-01&to=2026-11-07', 'var(--accent)'), "주소에 담기", True, "공유·새로고침이 된다"),
-     "주소", "<a href=\"searchresults.html\">검색 결과 화면</a>과 같은 이유로 기간을 주소에 담습니다"),
+         + '</div>', "정산 화면", True, "대부분 이 세 버튼으로 고름"),
+     "정산 화면에 기간 버튼 두기", "기간 버튼 한 줄이 날짜 범위에서 <b>효과가 가장 큰 부분</b>입니다"),
+    (cal(3, 9, "150px", "달력에서 직접"), "정해진 날짜를 달력으로 고르기", "마감이나 감사처럼 <b>날짜가 정해진</b> 경우에 달력으로 직접 고릅니다"),
+    (one(mono('?from=2026-11-01&to=2026-11-07', 'var(--accent)'), "주소에 담기", True, "공유·새로고침에도 유지됨"),
+     "기간을 주소에 담기", "<a href=\"searchresults.html\">검색 결과 화면</a>과 같은 이유로 기간을 주소에 담습니다"),
   ]),
-  s8_title="최소 마크업과 키보드", s8_hint="날짜 범위가 꼭 갖출 것",
+  s8_title="최소 마크업과 키보드", s8_hint="날짜 범위를 만들 때 꼭 갖출 것",
   code_lede="두 날짜는 한 묶음으로 묻고, 서버에는 끝 경계를 <b>다음 날 0시 미만</b>으로 열어 보냅니다.",
   code='''&lt;<span class="t">fieldset</span>&gt;
   &lt;<span class="t">legend</span>&gt;조회 기간&lt;/<span class="t">legend</span>&gt;
@@ -125,16 +128,16 @@ WHERE created_at &gt;= <span class="s">'2026-11-01 00:00'</span>
     ("<code>&lt;fieldset&gt;&lt;legend&gt;</code>", "시작과 끝 두 칸이 <b>한 묶음</b>이라는 것을 알립니다"),
     ("<code>min</code>·<code>max</code>", "시작일이 끝날보다 뒤로 가지 못하게 합니다. 한쪽을 <b>고른 뒤</b> 다른 쪽의 제한을 갱신합니다"),
     ("<code>role=\"status\"</code>", "'7일간'처럼 기간이 바뀐 것을 알립니다. <b>달력만 칠해지면</b> 화면을 보지 못하는 사람은 알 수 없습니다"),
-    ("<code>type=\"date\"</code>를 먼저 본다", "OS 달력은 <b>키보드와 스크린 리더</b>를 이미 지원하므로 먼저 검토합니다"),
-    ("직접 만든 달력", "<kbd>←</kbd><kbd>→</kbd>로 날짜를, <kbd>PageUp</kbd>으로 달을 옮길 수 있어야 합니다"),
-    ("프리셋은 <code>&lt;button&gt;</code>", "버튼을 눌러 범위가 바뀌면 <code>status</code>로 알립니다"),
+    ("<code>type=\"date\"</code>를 먼저 검토하기", "OS 달력은 <b>키보드와 스크린 리더</b>를 이미 지원하므로 먼저 검토합니다"),
+    ("달력을 직접 만들 때", "<kbd>←</kbd><kbd>→</kbd>로 날짜를, <kbd>PageUp</kbd>으로 달을 옮길 수 있어야 합니다"),
+    ("기간 버튼은 <code>&lt;button&gt;</code>으로 만들기", "버튼을 눌러 범위가 바뀌면 <code>status</code>로 알립니다"),
   ]),
   backend=rows([
-    ("경계를 열어 받는다", "<code>&gt;= from</code>, <code>&lt; to+1일</code>로 받으면 <b>시각이 붙은 자료</b>도 빠지지 않습니다."),
-    ("시간대", "'11월 7일'이 어느 시간대 기준인지 정합니다. 자세한 내용은 <a href=\"datetime.html\">날짜와 시간 쓰기</a>에 있습니다."),
-    ("기간 제한", "3년치를 한 번에 조회하면 서버가 응답하지 못할 만큼 느려집니다. 조회할 수 있는 <b>최대 기간</b>을 정하고 화면에도 적습니다."),
-    ("색인", "<code>created_at</code>에 색인이 없으면 기간이 넓어질수록 느려집니다."),
-    ("주소에 담는다", "<code>?from=&to=</code>로 주소에 담아 두면 공유, 새로고침, 뒤로가기를 해도 같은 기간이 유지됩니다."),
+    ("끝 경계를 다음 날 0시 미만으로 받기", "<code>&gt;= from</code>, <code>&lt; to+1일</code>로 받으면 <b>시각이 붙은 자료</b>도 빠지지 않습니다."),
+    ("날짜를 자르는 시간대", "'11월 7일'이 어느 시간대 기준인지 정합니다. 자세한 내용은 <a href=\"datetime.html\">날짜와 시간 쓰기</a>에 있습니다."),
+    ("조회할 수 있는 최대 기간", "3년치를 한 번에 조회하면 서버가 응답하지 못할 만큼 느려집니다. 조회할 수 있는 <b>최대 기간</b>을 정하고 화면에도 적습니다."),
+    ("날짜 열의 색인", "<code>created_at</code>에 색인이 없으면 기간이 넓어질수록 느려집니다."),
+    ("기간을 주소에 담기", "<code>?from=&to=</code>로 주소에 담아 두면 공유, 새로고침, 뒤로가기를 해도 같은 기간이 유지됩니다."),
   ]),
   plat_lede="세 플랫폼은 <b>OS 달력</b>을 그대로 쓸 수 있느냐가 다릅니다.",
   plats=plats([

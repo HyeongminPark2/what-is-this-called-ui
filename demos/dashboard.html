@@ -18,7 +18,7 @@
 <body>
 <div class="bar">
   <b>대시보드</b>
-  <label>싣는 지표 <input type="range" id="n" min="1" max="12" step="1" value="4" style="width:100px"><span class="ruler" id="nv"></span></label>
+  <label>보여 줄 지표 수 <input type="range" id="n" min="1" max="12" step="1" value="4" style="width:100px"><span class="ruler" id="nv"></span></label>
   <label><input type="checkbox" id="cmp" checked> 견줄 값 같이 적기</label>
   <label><input type="checkbox" id="act" checked> 할 일로 이어 주기</label>
 </div>
@@ -97,7 +97,7 @@
     var rd = document.getElementById('read');
     rd.innerHTML = '지표 <b>' + n + '개</b> · 으뜸 지표가 차지한 자리 <b>' + Math.round(share * 100) + '%</b>' +
       (buried ? ' <span class="warn">(다른 지표에 묻혔습니다)</span>' : '') +
-      '<br>견줄 값 <b>' + (cmp ? '있다' : '없다') + '</b> · 다음 할 일 <b>' + (act ? '있다' : '없다') + '</b>' +
+      '<br>견줄 값 <b>' + (cmp ? '있음' : '없음') + '</b> · 다음 할 일 <b>' + (act ? '있음' : '없음') + '</b>' +
       (!cmp ? ' <span class="warn">(숫자만으로는 좋은지 나쁜지 알 수 없습니다)</span>' : '');
     rd.dataset.n = String(n);
     rd.dataset.share = String(Math.round(share * 100));

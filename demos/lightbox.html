@@ -90,9 +90,9 @@
       ? '그림 ' + (+active.dataset.i + 1) + ' 칸'
       : (active && active.id ? active.id : '그 밖');
     var rd = document.getElementById('read');
-    rd.innerHTML = (open >= 0 ? '열림 — 영수증 <b>' + (open + 1) + '</b>' : '닫힘') +
+    rd.innerHTML = (open >= 0 ? '영수증 <b>' + (open + 1) + '</b>을 크게 보는 중' : '라이트박스가 닫혀 있음') +
       '<br>주소 <b>' + url + '</b>' +
-      (useUrl ? '' : ' <span class="warn">— 링크로 보낼 수 없습니다</span>') +
+      (useUrl ? '' : '. <span class="warn">주소에 남기지 않아 링크로 보낼 수 없습니다</span>') +
       '<br>지금 초점 <b>' + where + '</b>' +
       (why ? '<br>' + why : '');
     rd.dataset.open = String(open);

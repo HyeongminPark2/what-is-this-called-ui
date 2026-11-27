@@ -66,7 +66,7 @@
             <tr><th>한국어</th><td>상태 색, 시맨틱 컬러, 의미 색</td></tr>
             <tr><th>영어</th><td>semantic colors, status colors, feedback colors</td></tr>
             <tr><th>같이 쓰는 말</th><td>성공 · 주의 · 오류 · 정보 네 가지를 묶어 <b>피드백 색</b>이라고 부르기도 합니다. 각 색은 보통 <code>--color-danger-bg</code> · <code>-fg</code> · <code>-border</code>처럼 <b>바탕 · 글 · 테두리</b> 세 자리로 나눠 둡니다. 색 하나를 세 자리에 그대로 쓰면 <b>대비비가 맞지 않기</b> 때문입니다.</td></tr>
-            <tr><th>자주 잘못 부르는 이름</th><td><b>브랜드 색</b> — <a href="color.html">색 토큰</a>의 주된 색은 <b>어느 브랜드인지</b>를 나타내고, 상태 색은 <b>무슨 일이 생겼는지</b>를 나타냅니다.<br><b>빨강 = 삭제</b> — 빨강은 <b>되돌릴 수 없는 일</b>을 나타내는 색이지, 삭제에만 쓰는 색이 아닙니다.<br><b>초록 = 켜짐</b> — <a href="switch.html">스위치</a>가 켜진 상태에는 보통 <b>주된 색</b>을 씁니다.</td></tr>
+            <tr><th>자주 잘못 부르는 이름</th><td><b>브랜드 색</b> — <a href="color.html">색 토큰</a>의 주된 색은 <b>어느 브랜드인지</b>를 나타내고, 상태 색은 <b>무슨 일이 생겼는지</b>를 나타냅니다.<br><b>빨강은 삭제 색</b> — 빨강은 <b>되돌릴 수 없는 일</b>을 나타내는 색이지, 삭제에만 쓰는 색이 아닙니다.<br><b>초록은 켜짐 색</b> — <a href="switch.html">스위치</a>가 켜진 상태에는 보통 <b>주된 색</b>을 씁니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -77,10 +77,10 @@
         <p>토큰은 눈에 보이는 부품이 아니라 값을 어떻게 쓸지 <b>정해 둔 규칙</b>입니다. 그래서 생김새 대신 아래 네 가지를 물어보면 토큰끼리 무엇이 다른지 가려집니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하나</th><th>몇 단이 좋나</th><th>바꾸면 어디가 바뀌나</th><th>틀렸을 때 증상</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 정하는가</th><th>몇 단으로 두면 좋은가</th><th>값을 바꾸면 어디가 바뀌는가</th><th>잘못 정했을 때 나타나는 증상</th></tr></thead>
           <tbody>
             <tr><td>색 토큰</td><td>색의 <b>쓰임</b></td><td>쓰임 10여 개</td><td>브랜드 색 전체</td><td>같은 파랑이 화면마다 조금씩 다릅니다</td></tr>
-            <tr><td>다크 모드</td><td><b>두 벌</b>의 값</td><td>2벌(+고대비)</td><td>화면 전체의 바탕과 글자</td><td>어두운 화면에 흰 상자 하나만 남아 눈이 부십니다</td></tr>
+            <tr><td>다크 모드</td><td><b>두 벌</b>의 값</td><td>2벌, 고대비까지 두면 3벌</td><td>화면 전체의 바탕과 글자</td><td>어두운 화면에 흰 상자 하나만 남아 눈이 부십니다</td></tr>
             <tr><td>타입 스케일</td><td>글자 크기 <b>단계</b></td><td>6~8단</td><td>제목과 본문의 크기</td><td>무엇이 더 중요한지 알아보기 어렵습니다</td></tr>
             <tr><td>간격 체계</td><td>여백의 <b>단위</b></td><td>6~8단(4·8의 배수)</td><td>모든 패딩과 줄 간격</td><td>딱 집어 말하기 어렵지만 어수선해 보입니다</td></tr>
             <tr><td>고도</td><td>그림자의 <b>세기</b></td><td>4~5단</td><td>떠 있는 부품들</td><td>무엇이 위에 있는지 알 수 없습니다</td></tr>
@@ -89,7 +89,7 @@
             <tr><td>테두리와 구분선</td><td><b>가르는 선</b></td><td>선 1~2종</td><td>목록 · 카드 · 표</td><td>선이 두 겹이 되고 화면이 어수선해집니다</td></tr>
             <tr><td>불투명도</td><td><b>흐린 정도</b></td><td>2~3단</td><td>비활성 · 가림막 · 흐린 글</td><td>글이 잘 읽히지 않고 z-index가 적용되지 않습니다</td></tr>
             <tr><td>아이콘 크기</td><td>그림의 <b>크기</b></td><td>3~4단(16·20·24)</td><td>버튼 · 목록 · 앱바</td><td>선이 흐리고 글자와 가운데가 맞지 않습니다</td></tr>
-            <tr class="me"><td><b>상태 색</b></td><td>성공 · 주의 · 오류 · 정보</td><td>4가지 × 3자리</td><td>알림 · 배지 · 입력 오류</td><td>색을 구별하지 못하면 상태를 알 수 없습니다</td></tr>
+            <tr class="me"><td><b>상태 색</b></td><td>성공 · 주의 · 오류 · 정보</td><td>4가지, 색마다 3자리</td><td>알림 · 배지 · 입력 오류</td><td>색을 구별하지 못하면 상태를 알 수 없습니다</td></tr>
             <tr><td>토큰 이름 짓기</td><td>이름의 <b>규칙</b></td><td>층 3겹</td><td>토큰 전부</td><td>이름과 값이 어긋나 어느 토큰을 고쳐야 할지 알 수 없습니다</td></tr>
           </tbody>
         </table>
@@ -100,43 +100,43 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 네 색<span class="hint">무슨 일이 생겼는지 알리는 색</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 상태를 알리는 네 가지 색<span class="hint">무슨 일이 생겼는지 알리는 색</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:flex;align-items:center;gap:5px;width:124px;border-radius:6px;padding:5px 7px;background:color-mix(in srgb, #1a7f37 12%, var(--surface));border:1px solid color-mix(in srgb, #1a7f37 40%, transparent)"><span style="display:grid;place-items:center;width:13px;height:13px;border-radius:999px;background:#1a7f37;color:#fff;font-size:8px;line-height:1;flex:none">✓</span><span style="font-size:9px;color:var(--fg)">정산이 들어왔습니다</span></span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">success</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">끝났다 · 맞다</span></div>
+              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:flex;align-items:center;gap:5px;width:124px;border-radius:6px;padding:5px 7px;background:color-mix(in srgb, #1a7f37 12%, var(--surface));border:1px solid color-mix(in srgb, #1a7f37 40%, transparent)"><span style="display:grid;place-items:center;width:13px;height:13px;border-radius:999px;background:#1a7f37;color:#fff;font-size:8px;line-height:1;flex:none">✓</span><span style="font-size:9px;color:var(--fg)">정산이 들어왔습니다</span></span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">success</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">끝남 · 맞음</span></div>
             </div>
-            <figcaption>성공<span>사용자가 더 <b>할 일이 없습니다</b></span></figcaption>
+            <figcaption>성공을 알릴 때<span>사용자가 더 <b>할 일이 없습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:flex;align-items:center;gap:5px;width:124px;border-radius:6px;padding:5px 7px;background:color-mix(in srgb, #9a6700 12%, var(--surface));border:1px solid color-mix(in srgb, #9a6700 40%, transparent)"><span style="display:grid;place-items:center;width:13px;height:13px;border-radius:999px;background:#9a6700;color:#fff;font-size:8px;line-height:1;flex:none">!</span><span style="font-size:9px;color:var(--fg)">정산이 하루 밀렸습니다</span></span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">warning</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">되지만 봐 달라</span></div>
+              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:flex;align-items:center;gap:5px;width:124px;border-radius:6px;padding:5px 7px;background:color-mix(in srgb, #9a6700 12%, var(--surface));border:1px solid color-mix(in srgb, #9a6700 40%, transparent)"><span style="display:grid;place-items:center;width:13px;height:13px;border-radius:999px;background:#9a6700;color:#fff;font-size:8px;line-height:1;flex:none">!</span><span style="font-size:9px;color:var(--fg)">정산이 하루 밀렸습니다</span></span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">warning</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">되지만 확인 필요</span></div>
             </div>
-            <figcaption>주의<span>진행을 막지는 않습니다</span></figcaption>
+            <figcaption>주의를 줄 때<span>진행을 막지는 않습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:flex;align-items:center;gap:5px;width:124px;border-radius:6px;padding:5px 7px;background:color-mix(in srgb, #cf222e 12%, var(--surface));border:1px solid color-mix(in srgb, #cf222e 40%, transparent)"><span style="display:grid;place-items:center;width:13px;height:13px;border-radius:999px;background:#cf222e;color:#fff;font-size:8px;line-height:1;flex:none">✕</span><span style="font-size:9px;color:var(--fg)">계좌가 맞지 않습니다</span></span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">danger</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">안 됐다 · 지운다</span></div>
+              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:flex;align-items:center;gap:5px;width:124px;border-radius:6px;padding:5px 7px;background:color-mix(in srgb, #cf222e 12%, var(--surface));border:1px solid color-mix(in srgb, #cf222e 40%, transparent)"><span style="display:grid;place-items:center;width:13px;height:13px;border-radius:999px;background:#cf222e;color:#fff;font-size:8px;line-height:1;flex:none">✕</span><span style="font-size:9px;color:var(--fg)">계좌가 맞지 않습니다</span></span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">danger</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">실패함 · 지움</span></div>
             </div>
-            <figcaption>오류<span>문제를 <b>고쳐야</b> 다음으로 넘어갈 수 있습니다</span></figcaption>
+            <figcaption>오류를 알릴 때<span>문제를 <b>고쳐야</b> 다음으로 넘어갈 수 있습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:flex;align-items:center;gap:5px;width:124px;border-radius:6px;padding:5px 7px;background:color-mix(in srgb, #0969da 12%, var(--surface));border:1px solid color-mix(in srgb, #0969da 40%, transparent)"><span style="display:grid;place-items:center;width:13px;height:13px;border-radius:999px;background:#0969da;color:#fff;font-size:8px;line-height:1;flex:none">i</span><span style="font-size:9px;color:var(--fg)">다음 정산은 금요일</span></span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">info</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">그냥 알린다</span></div>
+              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:flex;align-items:center;gap:5px;width:124px;border-radius:6px;padding:5px 7px;background:color-mix(in srgb, #0969da 12%, var(--surface));border:1px solid color-mix(in srgb, #0969da 40%, transparent)"><span style="display:grid;place-items:center;width:13px;height:13px;border-radius:999px;background:#0969da;color:#fff;font-size:8px;line-height:1;flex:none">i</span><span style="font-size:9px;color:var(--fg)">다음 정산은 금요일</span></span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">info</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">안내만 함</span></div>
             </div>
-            <figcaption>정보<span>상태가 아니라 안내를 전합니다</span></figcaption>
+            <figcaption>안내를 전할 때<span>상태가 아니라 안내를 전합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:flex;align-items:center;gap:5px;width:124px;border-radius:6px;padding:5px 7px;background:color-mix(in srgb, #1a7f37 12%, var(--surface));border:1px solid color-mix(in srgb, #1a7f37 40%, transparent)"><span style="display:block;width:11px;height:11px;border-radius:999px;background:#1a7f37;flex:none"></span><span style="font-size:9px;color:var(--fg)">정산이 들어왔습니다</span></span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">색만</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">단서가 하나뿐</span></div>
             </div>
-            <figcaption>색만<span><b>색을 구별하지 못하면</b> 상태를 알 수 없습니다</span></figcaption>
+            <figcaption>색만으로 알릴 때<span><b>색을 구별하지 못하면</b> 상태를 알 수 없습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:flex;align-items:center;gap:5px;width:124px;border-radius:6px;padding:5px 7px;background:color-mix(in srgb, #8a8f99 12%, var(--surface));border:1px solid color-mix(in srgb, #8a8f99 40%, transparent)"><span style="display:grid;place-items:center;width:13px;height:13px;border-radius:999px;background:#8a8f99;color:#fff;font-size:8px;line-height:1;flex:none">·</span><span style="font-size:9px;color:var(--fg)">불러오는 중입니다</span></span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">neutral</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">아직 모른다</span></div>
+              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:flex;align-items:center;gap:5px;width:124px;border-radius:6px;padding:5px 7px;background:color-mix(in srgb, #8a8f99 12%, var(--surface));border:1px solid color-mix(in srgb, #8a8f99 40%, transparent)"><span style="display:grid;place-items:center;width:13px;height:13px;border-radius:999px;background:#8a8f99;color:#fff;font-size:8px;line-height:1;flex:none">·</span><span style="font-size:9px;color:var(--fg)">불러오는 중입니다</span></span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">neutral</span><span style="font-size:10px;color:var(--fg-faint);text-align:center">결과를 아직 모름</span></div>
             </div>
-            <figcaption>중립<span>결과가 <b>아직</b> 나오지 않았습니다</span></figcaption>
+            <figcaption>결과를 기다리는 중립 상태<span>결과가 <b>아직</b> 나오지 않았습니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -148,23 +148,23 @@
             <div class="anat" role="img" aria-label="상태 색의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:11px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">--color-success<span style="color:var(--fg-faint)"> ← 끝났다 · 맞다</span></div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">--color-warning<span style="color:var(--fg-faint)"> ← 되지만 봐 달라</span></div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">--color-danger<span style="color:var(--fg-faint)"> ← 안 됐다 · 지운다</span></div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">--color-info<span style="color:var(--fg-faint)"> ← 그냥 알린다</span></div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">--color-success<span style="color:var(--fg-faint)"> ← 끝남 · 맞음</span></div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">--color-warning<span style="color:var(--fg-faint)"> ← 되지만 확인 필요</span></div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">--color-danger<span style="color:var(--fg-faint)"> ← 실패함 · 지움</span></div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">--color-info<span style="color:var(--fg-faint)"> ← 안내만 함</span></div>
                   <div class="pin-out" data-pin="5" style="color:var(--accent)">각각 <b>바탕 · 글 · 테두리</b> 세 자리</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">색만으로는 <b>못 가르는 사람</b>이 있다</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">색만으로는 <b>구별하지 못하는 사람</b>도 있음</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>성공 <em>끝났다</em></b><span>더 할 일이 <b>없다</b>는 뜻입니다</span></li>
-            <li><b>주의 <em>봐 달라</em></b><span>진행을 막지는 <b>않습니다</b></span></li>
-            <li><b>오류 <em>안 됐다</em></b><span>문제를 <b>고쳐야</b> 넘어갈 수 있습니다</span></li>
-            <li><b>정보 <em>알린다</em></b><span>상태가 아니라 <b>안내</b>를 전합니다</span></li>
-            <li><b>세 자리 <em>바탕·글·테두리</em></b><span>같은 색을 세 자리에 <b>그대로 쓰면</b> 대비비가 맞지 않습니다</span></li>
-            <li><b>색만 <em>위험하다</em></b><span>색 옆에 <b>모양과 말</b>을 함께 둡니다</span></li>
+            <li><b>성공 <em>success</em></b><span>더 할 일이 <b>없다</b>는 뜻입니다</span></li>
+            <li><b>주의 <em>warning</em></b><span>진행을 막지는 <b>않습니다</b></span></li>
+            <li><b>오류 <em>danger · error</em></b><span>문제를 <b>고쳐야</b> 넘어갈 수 있습니다</span></li>
+            <li><b>정보 <em>info</em></b><span>상태가 아니라 <b>안내</b>를 전합니다</span></li>
+            <li><b>세 자리 <em>bg · fg · border</em></b><span>같은 색을 세 자리에 <b>그대로 쓰면</b> 대비비가 맞지 않습니다</span></li>
+            <li><b>색만 <em>color only</em></b><span>색 옆에 <b>모양과 말</b>을 함께 둡니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -182,7 +182,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>상태 색을 쓰는 경우</h3>
+            <h3>상태 색을 쓸 때 지킬 것</h3>
             <ul>
               <li>색마다 <b>바탕 · 글 · 테두리</b> 세 값을 따로 두기</li>
               <li>색 옆에 ✓ · ! · ✕ 같은 <b>모양</b>을 두기</li>
@@ -190,7 +190,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>상태 색을 쓰지 않는 경우</h3>
+            <h3>상태 색을 쓸 때 피할 것</h3>
             <ul>
               <li>색 하나로만 상태 알리기. <b>색을 구별하지 못하는 사람</b>에게는 상태가 전해지지 않습니다</li>
               <li>같은 색을 바탕과 글에 <b>그대로</b> 쓰기. 대비비가 맞지 않습니다</li>
@@ -199,7 +199,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>상태 색 대신 다른 것을 써야 하는 경우</b> — 색 체계 전체는 <a href="color.html">색 토큰</a>, 읽히는 밝기는 <a href="contrast.html">대비비</a>, 오류 문구는 <a href="errortext.html">오류 문구</a>, 알림 부품은 <a href="toast.html">토스트</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>함께 보면 좋은 항목</b> — 색 체계 전체는 <a href="color.html">색 토큰</a> 항목에서, 글이 읽히는 밝기는 <a href="contrast.html">대비비</a> 항목에서 다룹니다. 오류를 알리는 글은 <a href="errortext.html">오류 문구</a> 항목에서, 알림을 띄우는 부품은 <a href="toast.html">토스트</a> 항목에서 설명합니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -209,25 +209,25 @@
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:flex;align-items:center;gap:5px;width:124px;border-radius:6px;padding:5px 7px;background:color-mix(in srgb, #cf222e 12%, var(--surface));border:1px solid color-mix(in srgb, #cf222e 40%, transparent)"><span style="display:grid;place-items:center;width:13px;height:13px;border-radius:999px;background:#cf222e;color:#fff;font-size:8px;line-height:1;flex:none">✕</span><span style="font-size:9px;color:var(--fg)">계좌 번호를 확인해 주세요</span></span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">입력 오류</span></div>
             </div>
-            <figcaption><b>입력 오류</b>틀린 입력칸 옆에 <b>붙여서</b> 보여 줍니다</figcaption>
+            <figcaption><b>입력 오류를 입력칸 옆에 알리기</b>틀린 입력칸 옆에 <b>붙여서</b> 보여 줍니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:flex;align-items:center;gap:5px;width:124px;border-radius:6px;padding:5px 7px;background:color-mix(in srgb, #1a7f37 12%, var(--surface));border:1px solid color-mix(in srgb, #1a7f37 40%, transparent)"><span style="display:grid;place-items:center;width:13px;height:13px;border-radius:999px;background:#1a7f37;color:#fff;font-size:8px;line-height:1;flex:none">✓</span><span style="font-size:9px;color:var(--fg)">저장했습니다</span></span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">토스트</span></div>
             </div>
-            <figcaption><b>저장 확인</b>짧게 떴다가 사라집니다</figcaption>
+            <figcaption><b>저장했다고 잠깐 알리기</b>짧게 떴다가 사라집니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:flex;align-items:center;gap:5px;width:124px;border-radius:6px;padding:5px 7px;background:color-mix(in srgb, #9a6700 12%, var(--surface));border:1px solid color-mix(in srgb, #9a6700 40%, transparent)"><span style="display:grid;place-items:center;width:13px;height:13px;border-radius:999px;background:#9a6700;color:#fff;font-size:8px;line-height:1;flex:none">!</span><span style="font-size:9px;color:var(--fg)">3건이 기한을 넘겼습니다</span></span><span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">배지</span></div>
             </div>
-            <figcaption><b>배지</b>숫자와 <b>함께</b> 씁니다</figcaption>
+            <figcaption><b>배지에 숫자와 함께 쓰기</b>숫자와 <b>함께</b> 씁니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">상태 색을 코드로 옮기는 법</span></h2>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 지킬 규칙<span class="hint">상태 색을 코드로 옮기는 방법</span></h2>
         <p>색마다 세 자리의 값을 두고, 마크업에는 <b>모양과 말</b>을 함께 넣습니다.</p>
 <pre class="code"><span class="c">/* 색 하나에 세 자리 값을 둔다 */</span>
 :root {
@@ -246,14 +246,14 @@
 .row.is-error { <span class="a">color</span>: red; }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>속성과 기준</th><th>쓰면 일어나는 일</th></tr></thead>
           <tbody>
             <tr><td><code>role="alert"</code></td><td>오류는 <b>그 자리에서 바로</b> 읽어 줍니다</td></tr>
             <tr><td><code>role="status"</code></td><td>성공과 안내는 스크린 리더가 <b>읽던 내용을 마친 뒤</b> 읽어 줍니다</td></tr>
             <tr><td><code>aria-invalid</code></td><td>틀린 입력칸에 붙입니다. 색과는 <b>별도로</b> 오류 상태가 전해집니다</td></tr>
             <tr><td><code>aria-hidden</code></td><td>✓·✕ 같은 기호는 <b>읽지 않게</b> 하고, 상태는 말로 따로 적습니다</td></tr>
             <tr><td>대비비 4.5:1</td><td>상태를 알리는 글자도 <b>본문과 같은 기준</b>을 지킵니다</td></tr>
-            <tr><td>확인하는 법</td><td>화면을 <b>흑백으로</b> 바꿔도 상태가 읽히는지 봅니다</td></tr>
+            <tr><td>확인하는 방법</td><td>화면을 <b>흑백으로</b> 바꿔도 상태가 읽히는지 봅니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -264,9 +264,9 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>상태는 <b>이름</b>으로</th><td>서버가 <code>status: "failed"</code>처럼 상태 이름을 보내면 화면이 색과 모양을 고릅니다. 서버는 색 코드나 문구를 보내지 않습니다.</td></tr>
-            <tr><th>이유를 같이</th><td><code>reason: "account_mismatch"</code>처럼 이유까지 보내면 화면에 <b>무엇을 고쳐야 하는지</b>까지 적을 수 있습니다.</td></tr>
-            <tr><th>가짓수를 좁게</th><td>상태가 열 가지로 늘어나면 색이 모자랍니다. 그래서 상태는 <b>네 갈래로 묶어</b> 보내고, 자세한 내용은 글로 적습니다.</td></tr>
+            <tr><th>상태는 <b>이름</b>으로 보내기</th><td>서버가 <code>status: "failed"</code>처럼 상태 이름을 보내면 화면이 색과 모양을 고릅니다. 서버는 색 코드나 문구를 보내지 않습니다.</td></tr>
+            <tr><th>상태의 이유도 함께 보내기</th><td><code>reason: "account_mismatch"</code>처럼 이유까지 보내면 화면에 <b>무엇을 고쳐야 하는지</b>까지 적을 수 있습니다.</td></tr>
+            <tr><th>상태 가짓수를 네 갈래로 묶기</th><td>상태가 열 가지로 늘어나면 색이 모자랍니다. 그래서 상태는 <b>네 갈래로 묶어</b> 보내고, 자세한 내용은 글로 적습니다.</td></tr>
           </tbody>
         </table>
         </div>

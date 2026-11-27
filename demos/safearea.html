@@ -22,8 +22,8 @@
 
 <div class="bar">
   <b>세이프 에어리어</b>
-  <label><input type="checkbox" id="safeon"> <code>env(safe-area-inset-*)</code> 적용</label>
-  <label><input type="checkbox" id="show" checked> 못 쓰는 띠 보이기</label>
+  <label><input type="checkbox" id="safeon"> <code>env(safe-area-inset-*)</code> 적용하기</label>
+  <label><input type="checkbox" id="show" checked> 내용을 놓으면 안 되는 띠 보이기</label>
 </div>
 
 <div class="pad">
@@ -72,7 +72,7 @@
       res.className = 'res ' + (bad ? 'no' : 'ok');
       res.textContent = bad
         ? '상단 바 글자가 노치에, 탭바가 홈 인디케이터에 겹칩니다'
-        : '겹치는 데가 없습니다 — 안전한 자리 안에 들어왔습니다';
+        : '겹치는 곳 없이 모두 안전한 자리 안에 들어왔습니다';
     });
   }
   document.getElementById('safeon').addEventListener('change', check);

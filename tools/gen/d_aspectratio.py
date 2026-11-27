@@ -14,12 +14,12 @@ def ar(ratio, label, w="110px", note="", ok=None, fill="var(--accent-soft)"):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">aspect-ratio: 16 / 9 — 폭이 정해지면 높이가 따라온다</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">폭이 바뀌어도 비가 유지된다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">그림이 오기 전에 자리를 잡는다 — 글이 안 덜컥거린다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">object-fit: cover — 잘라서 채운다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">img 에는 width · height 속성도 함께 적는다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">높이가 따로 정해지면 비가 무시된다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">aspect-ratio: 16 / 9   폭에 맞춰 높이가 정해짐</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">폭이 바뀌어도 비가 유지됨</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">그림이 오기 전에 자리를 잡아 글이 밀리지 않음</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">object-fit: cover   넘치는 부분을 잘라 채움</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">img에는 width·height 속성도 함께 적음</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">높이를 따로 정하면 비가 무시됨</div>
                 </div>
               </div>'''
 
@@ -30,7 +30,7 @@ D = dict(
   axes_lede="뼈대는 눈에 보이지 않지만 <b>모든 화면의 배치</b>를 정합니다. 아래 네 가지를 물어 보면 서로 갈립니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>폭이 서로 다른 세 상자가 <b>같은 비</b>를 유지하는지, 아래에 실제로 잰 값이 나옵니다.<br>
-          <b>비를 안 정하고 높이만 주기</b>를 켜면 폭마다 비가 달라집니다. 화면 폭에 따라 칸 폭이 바뀌는 반응형 화면에서 바로 드러나는 차이입니다.</p>
+          <b>비를 정하지 않고 높이만 주기</b>를 켜면 폭마다 비가 달라집니다. 화면 폭에 따라 칸 폭이 바뀌는 반응형 화면에서 바로 드러나는 차이입니다.</p>
         </div>''',
   names=rows([
     ("한국어", "종횡비, 가로세로비, 비율"),
@@ -47,25 +47,28 @@ D = dict(
   ]),
   axes=ax("종횡비"),
   oneline="<b>그림이 들어갈 자리에는 거의 항상 비를 적어 두세요.</b> 그러면 그림이 늦게 도착해도 글이 밀리지 않습니다.",
-  s4_title="비별로", s4_hint="같은 폭, 다른 높이",
+  s4_title="자주 쓰는 비와 자리 잡기", s4_hint="폭이 같아도 비에 따라 달라지는 높이",
+  do_title="종횡비를 정해 두는 경우",
+  dont_title="종횡비를 다룰 때 피할 것",
+  instead_title="종횡비와 함께 보면 좋은 항목",
   states=states([
     (ar("16/9", "16 / 9", "110px", "영상·히어로"), "16 : 9", "<b>가장 흔한</b> 가로형 비입니다"),
     (ar("4/3", "4 / 3", "110px", "옛 사진"), "4 : 3", "사진과 썸네일에 씁니다"),
     (ar("1/1", "1 / 1", "110px", "아바타·상품"), "1 : 1", "<b>정사각형</b>이라서 목록에서 줄이 가지런히 맞습니다"),
     (ar("3/4", "3 / 4", "110px", "세로 사진"), "3 : 4", "폰에서 세로로 찍은 사진의 비입니다"),
     (ar("16/9", "자리만 잡아 둠", "110px", "그림이 오기 전", True, "var(--ink-050)"),
-     "오기 전", "그림이 오기 전에 <b>자리를 미리</b> 잡아 둡니다"),
-    (ar("16/9", "높이가 따로 박힘", "110px", "비가 무시된다", False, "color-mix(in srgb, var(--danger) 10%, transparent)"),
-     "높이가 박히면", "높이가 따로 정해져 있으면 <b>비가 적용되지 않습니다</b>"),
+     "그림이 오기 전", "그림이 오기 전에 <b>자리를 미리</b> 잡아 둡니다"),
+    (ar("16/9", "높이를 따로 정함", "110px", "비가 무시됨", False, "color-mix(in srgb, var(--danger) 10%, transparent)"),
+     "높이를 따로 정했을 때", "높이가 따로 정해져 있으면 <b>비가 적용되지 않습니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
     ("비", "16 / 9", "폭이 정해지면 <b>높이가 따라옵니다</b>"),
-    ("반응형", "비가 유지된다", "칸 폭이 바뀌어도 <b>모양이 같습니다</b>"),
-    ("자리 잡기", "오기 전에", "그림이 늦게 와도 <b>글이 밀리지 않습니다</b>"),
+    ("반응형", "비 유지", "칸 폭이 바뀌어도 <b>모양이 같습니다</b>"),
+    ("자리 잡기", "그림이 오기 전", "그림이 늦게 와도 <b>글이 밀리지 않습니다</b>"),
     ("채우기", "object-fit: cover", "넘치는 부분을 <b>잘라서</b> 채웁니다. contain은 그림 전체가 보이게 넣습니다"),
     ("<code>&lt;img&gt;</code>", "width · height 속성", "속성만 적어도 <b>비가 정해집니다</b>"),
-    ("안 먹을 때", "높이가 따로 박힘", "<code>height</code>가 따로 있으면 <b>비가 무시됩니다</b>"),
+    ("비가 무시되는 경우", "높이를 따로 정함", "<code>height</code>가 따로 있으면 <b>비가 무시됩니다</b>"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <b>그림에 <code>width</code>·<code>height</code> 속성을 적기만 해도</b>
@@ -86,14 +89,15 @@ D = dict(
     "패딩 트릭을 새로 쓸 때. <b>이제는 aspect-ratio 속성이 있습니다</b>",
     "<code>object-fit</code> 없이 그림을 넣을 때. 그림이 <b>찌그러집니다</b>",
   ]),
-  instead='크기 자체는 <a href="sizing.html">크기 정하기</a>, 넘치는 처리는 <a href="../items/overflow.html">넘침</a>, 그림이 오기 전의 자리 표시는 <a href="../items/skeleton.html">스켈레톤</a>.',
+  instead='상자 크기 자체를 정하는 방법은 <a href="sizing.html">크기 정하기</a>에서, 넘친 내용을 처리하는 방법은 <a href="../items/overflow.html">넘침</a>에서 다룹니다. 그림이 오기 전에 그 자리를 어떻게 표시할지는 <a href="../items/skeleton.html">스켈레톤</a>에서 봅니다.',
   cases=cases([
-    (ar("1/1", "아바타", "150px", "목록에서 줄이 선다"), "정사각 썸네일", "<a href=\"../items/listitem.html\">리스트</a>에서 정사각 썸네일로 줄을 맞춥니다"),
-    (ar("16/9", "영상", "150px", "가장 흔한 비"), "영상", "영상을 불러오기 전에 <b>자리를 미리</b> 잡습니다"),
-    (code(['&lt;img src="s.jpg"', '  width="800" height="450"', '  style="width:100%;height:auto"&gt;'], "150px", "속성만으로도 비가 생긴다", True),
-     "속성으로", "속성 두 개만 적는 <b>가장 간단한 방법</b>입니다"),
+    (ar("1/1", "아바타", "150px", "목록에서 줄이 맞음"), "정사각 썸네일로 목록 줄 맞추기", "<a href=\"../items/listitem.html\">리스트</a>에서 정사각 썸네일로 줄을 맞춥니다"),
+    (ar("16/9", "영상", "150px", "가장 흔한 비"), "영상 자리 미리 잡기", "영상을 불러오기 전에 <b>자리를 미리</b> 잡습니다"),
+    (code(['&lt;img src="s.jpg"', '  width="800" height="450"', '  style="width:100%;height:auto"&gt;'], "150px", "속성만으로도 비가 정해짐", True),
+     "img 속성으로 비 정하기", "속성 두 개만 적는 <b>가장 간단한 방법</b>입니다"),
   ]),
   s8_title="최소 마크업과 규칙", s8_hint="종횡비를 쓸 때 지킬 것",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법</th>",
   code_lede="상자에는 <code>aspect-ratio</code>, 그림에는 <b>크기 속성</b>을 적습니다.",
   code='''<span class="c">/* 상자. 폭이 정해지면 높이가 따라온다 */</span>
 .thumb {
@@ -108,17 +112,17 @@ D = dict(
 &lt;<span class="t">img</span> <span class="a">src</span>=<span class="s">"store.jpg"</span> <span class="a">width</span>=<span class="s">"800"</span> <span class="a">height</span>=<span class="s">"450"</span>
      <span class="a">style</span>=<span class="s">"width:100%;height:auto"</span> <span class="a">alt</span>=<span class="s">"모란상회 매장"</span>&gt;''',
   keys=kbd([
-    ("<code>width</code>·<code>height</code> 속성", "<b>지우지 않습니다.</b> 브라우저가 이 속성으로 비를 계산해 자리를 잡습니다"),
-    ("<code>height: auto</code>", "CSS로 폭만 주면 <b>속성에서 계산한 비</b>가 쓰입니다"),
-    ("<code>object-fit: cover</code>", "없으면 그림이 <b>찌그러집니다</b>"),
-    ("<code>alt</code>", "비는 자리만 잡아 줄 뿐이고, 그림의 뜻은 <a href=\"alttext.html\">대체 텍스트</a>로 따로 적습니다"),
-    ("글이 든 상자", "비를 고정하면 <b>글이 넘치므로</b>, 글이 든 상자에는 <code>min-height</code>를 씁니다"),
-    ("SVG", "<code>viewBox</code>에 이미 비가 들어 있습니다. <code>preserveAspectRatio</code>를 <code>none</code>으로 두면 <b>찌그러집니다</b>"),
+    ("<code>width</code>·<code>height</code> 속성 남겨 두기", "<b>지우지 않습니다.</b> 브라우저가 이 속성으로 비를 계산해 자리를 잡습니다"),
+    ("CSS에서는 <code>height: auto</code>로 두기", "CSS로 폭만 주면 <b>속성에서 계산한 비</b>가 쓰입니다"),
+    ("그림에 <code>object-fit: cover</code> 주기", "없으면 그림이 <b>찌그러집니다</b>"),
+    ("<code>alt</code>는 따로 적기", "비는 자리만 잡아 줄 뿐이고, 그림의 뜻은 <a href=\"alttext.html\">대체 텍스트</a>로 따로 적습니다"),
+    ("글이 든 상자에는 비를 고정하지 않기", "비를 고정하면 <b>글이 넘치므로</b>, 글이 든 상자에는 <code>min-height</code>를 씁니다"),
+    ("SVG는 <code>viewBox</code>의 비 따르기", "<code>viewBox</code>에 이미 비가 들어 있습니다. <code>preserveAspectRatio</code>를 <code>none</code>으로 두면 <b>찌그러집니다</b>"),
   ]),
   backend=rows([
-    ("가로·세로를 함께 보낸다", "응답에 <code>{\"w\":800,\"h\":450}</code>처럼 크기가 있으면 화면이 그림을 받기 전에 <b>자리를 미리</b> 잡을 수 있습니다."),
-    ("사진마다 비가 다르다", "사용자가 올린 사진은 비가 제각각이라서, 저장할 때 <b>한 비로 잘라</b> 두거나 응답에 비를 함께 보냅니다."),
-    ("썸네일을 만들어 둔다", "큰 원본을 화면에서 줄여 쓰면 느리기 때문에 썸네일을 따로 만들어 둡니다(<a href=\"dpr.html\">화면 밀도</a>·<a href=\"assets.html\">에셋 내보내기</a> 참고)."),
+    ("가로·세로 크기를 함께 보내기", "응답에 <code>{\"w\":800,\"h\":450}</code>처럼 크기가 있으면 화면이 그림을 받기 전에 <b>자리를 미리</b> 잡을 수 있습니다."),
+    ("사진마다 비가 다를 때", "사용자가 올린 사진은 비가 제각각이라서, 저장할 때 <b>한 비로 잘라</b> 두거나 응답에 비를 함께 보냅니다."),
+    ("썸네일을 미리 만들어 두기", "큰 원본을 화면에서 줄여 쓰면 느리기 때문에 썸네일을 따로 만들어 둡니다(<a href=\"dpr.html\">화면 밀도</a>·<a href=\"assets.html\">에셋 내보내기</a> 참고)."),
   ]),
   plat_lede="<b>비로 자리를 잡는다</b>는 생각은 세 플랫폼 모두 같습니다.",
   plats=plats([

@@ -12,12 +12,12 @@ def inst(label="저장", tag="인스턴스", color="var(--accent)", w="152px", n
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">마스터 — 원본 하나. 여기만 고친다</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">인스턴스 — 복제본. 마스터를 따라간다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">덮어쓰기 — 글자·아이콘만 바꾼다. 연결은 남는다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">떼어내기(디태치) — 연결이 끊긴다. 되돌리기 어렵다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">코드로는 컴포넌트 정의와 사용</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">떼어낸 것은 눈으로 찾아야 한다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">마스터는 원본 하나, 고칠 때는 여기만 고침</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">인스턴스는 마스터를 따라 바뀌는 복제본</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">덮어쓰기는 글자·아이콘만 바꾸고 연결은 남김</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">떼어내기(디태치)는 연결이 끊겨 되돌리기 어려움</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">코드에서는 컴포넌트 정의와 사용에 해당</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">떼어낸 것은 눈으로 찾아야 함</div>
                 </div>
               </div>'''
 
@@ -47,17 +47,17 @@ D = dict(
   ]),
   axes=ax("컴포넌트와 인스턴스"),
   oneline="<b>떼어낸 인스턴스는 떼어냈다는 표시가 남지 않습니다.</b> 그래서 급할 때 떼어낸 하나가 몇 달 뒤 마스터를 고쳤을 때 혼자 옛 모습으로 남아 있게 됩니다.",
-  s4_title="연결 상태", s4_hint="마스터를 따라오나",
+  s4_title="마스터와의 연결 상태", s4_hint="마스터를 고치면 따라 바뀌는지",
   states=states([
-    (inst('저장', '마스터', "var(--accent)", "152px", "여기만 고친다"), "마스터", "<b>원본 하나</b>입니다. 마스터 자체는 화면에 쓰지 않기도 합니다"),
-    (inst('저장', '인스턴스', "var(--accent)", "152px", "마스터를 따라간다"), "인스턴스", "마스터의 복제본입니다. 마스터를 <b>고치면 같이 바뀝니다</b>"),
-    (inst('내보내기', '인스턴스 · 글자만 덮어씀', "var(--accent)", "152px", "연결은 남아 있다"),
-     "덮어쓰기", "글자나 아이콘만 바꿉니다. 마스터와의 <b>연결은 그대로</b> 남습니다"),
-    (inst('저장', '떼어냄', "var(--fg-muted)", "152px", "그때 모습으로 굳었다"), "떼어내기", "마스터와의 <b>연결이 끊긴 상태입니다.</b> 다시 잇기 어렵습니다"),
-    (inst('저장하기', '마스터', "var(--accent)", "152px", "마스터를 고쳤다", "16px"),
-     "마스터를 고치면", "연결된 인스턴스가 <b>모두 같이 바뀝니다</b>"),
-    (inst('저장', '떼어냄', "var(--fg-muted)", "152px", "혼자 옛 모습으로 남았다"),
-     "떼어낸 것은", "마스터를 고쳐도 <b>바뀌지 않습니다.</b> 그런 인스턴스는 눈으로 찾아야 합니다"),
+    (inst('저장', '마스터', "var(--accent)", "152px", "고칠 때는 여기만 고침"), "마스터", "<b>원본 하나</b>입니다. 마스터 자체는 화면에 쓰지 않기도 합니다"),
+    (inst('저장', '인스턴스', "var(--accent)", "152px", "마스터를 따라 바뀜"), "인스턴스", "마스터의 복제본입니다. 마스터를 <b>고치면 같이 바뀝니다</b>"),
+    (inst('내보내기', '인스턴스 · 글자만 덮어씀', "var(--accent)", "152px", "연결은 남아 있음"),
+     "글자만 덮어썼을 때", "글자나 아이콘만 바꿉니다. 마스터와의 <b>연결은 그대로</b> 남습니다"),
+    (inst('저장', '떼어냄', "var(--fg-muted)", "152px", "떼어낸 때 모습 그대로"), "떼어냈을 때", "마스터와의 <b>연결이 끊긴 상태입니다.</b> 다시 잇기 어렵습니다"),
+    (inst('저장하기', '마스터', "var(--accent)", "152px", "마스터를 고침", "16px"),
+     "마스터를 고쳤을 때", "연결된 인스턴스가 <b>모두 같이 바뀝니다</b>"),
+    (inst('저장', '떼어냄', "var(--fg-muted)", "152px", "혼자 옛 모습으로 남음"),
+     "떼어낸 인스턴스가 남은 모습", "마스터를 고쳐도 <b>바뀌지 않습니다.</b> 그런 인스턴스는 눈으로 찾아야 합니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -65,8 +65,8 @@ D = dict(
     ("인스턴스", "복제본", "마스터가 바뀌면 같이 바뀝니다"),
     ("덮어쓰기", "글자 · 아이콘", "글자나 아이콘만 바꾸고 <b>연결은 남겨 둡니다.</b> 인스턴스를 고칠 때는 이렇게 쓰는 것이 정상입니다"),
     ("떼어내기", "연결 끊기", "급할 때 쓰지만, 떼어냈다는 <b>표시가 남지 않습니다</b>"),
-    ("코드로는", "정의와 사용", "<code>function Button()</code>이 마스터, <code>&lt;Button /&gt;</code>이 인스턴스에 해당합니다"),
-    ("찾기", "눈으로", "떼어낸 인스턴스를 <b>목록으로 뽑기 어렵습니다</b>"),
+    ("코드에서는", "정의와 사용", "<code>function Button()</code>이 마스터, <code>&lt;Button /&gt;</code>이 인스턴스에 해당합니다"),
+    ("떼어낸 것 찾기", "눈으로 하나씩", "떼어낸 인스턴스를 <b>목록으로 뽑기 어렵습니다</b>"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           인스턴스를 떼어내고 싶어진다면 <b>대개 마스터에 필요한 자리가 없는 것</b>입니다.
@@ -75,6 +75,7 @@ D = dict(
           코드에서도 마찬가지로, 컴포넌트를 복사해 조금 고친 버전을 만드는 것보다
           <b>props를 하나 추가하는</b> 쪽이 거의 늘 낫습니다.
           이런 판단을 모아 마스터에 변형을 미리 정해 두는 것이 <a href="variant.html">배리언트</a> 설계입니다.</p>''',
+  dont_title="컴포넌트를 다룰 때 피할 것",
   do=ul([
     "같은 모양이 <b>여러 번</b> 나올 때",
     "나중에 <b>한꺼번에 고칠</b> 일이 있을 때",
@@ -86,11 +87,12 @@ D = dict(
     "한 번만 쓰는 것을 컴포넌트로 만들 때. 쓰는 곳에 비해 <b>일이 과합니다</b>",
     "마스터를 <b>화면 안에</b> 그대로 쓸 때. 화면을 고치다가 마스터까지 실수로 고치게 됩니다",
   ]),
-  instead='변형이 여럿이면 <a href="variant.html">배리언트</a>, 값이 흩어지면 <a href="designsystem.html">디자인 시스템</a>의 토큰, 배치는 <a href="autolayout.html">오토 레이아웃</a>.',
+  instead_title="관련 주제는 다른 항목에서 다룹니다",
+  instead='변형이 여럿일 때 묶어 두는 방법은 <a href="variant.html">배리언트</a>에서, 여기저기 흩어진 값을 토큰으로 모으는 방법은 <a href="designsystem.html">디자인 시스템</a>에서, 상자 안의 배치는 <a href="autolayout.html">오토 레이아웃</a>에서 다룹니다.',
   cases=cases([
-    (inst('저장', '마스터', "var(--accent)", "150px", "따로 모아 둔다"), "마스터 모음", "마스터는 <b>화면과 떨어진 자리</b>에 모아 둡니다"),
-    (inst('내보내기', '덮어씀', "var(--accent)", "150px", "글자만 바꿨다"), "정상적인 쓰임", "글자만 덮어쓰고 마스터와의 <b>연결은 유지</b>합니다"),
-    (inst('저장', '떼어냄', "var(--fg-muted)", "150px", "급해서 떼어냈다"), "흔한 사고", "급해서 떼어낸 것이 <b>몇 달 뒤</b> 마스터를 고칠 때 드러납니다"),
+    (inst('저장', '마스터', "var(--accent)", "150px", "따로 모아 둠"), "마스터를 따로 모아 두기", "마스터는 <b>화면과 떨어진 자리</b>에 모아 둡니다"),
+    (inst('내보내기', '덮어씀', "var(--accent)", "150px", "글자만 바꿈"), "글자만 덮어쓰기", "글자만 덮어쓰고 마스터와의 <b>연결은 유지</b>합니다"),
+    (inst('저장', '떼어냄', "var(--fg-muted)", "150px", "급해서 떼어냄"), "급하게 떼어냈다가 생기는 문제", "급해서 떼어낸 것이 <b>몇 달 뒤</b> 마스터를 고칠 때 드러납니다"),
   ]),
   s8_title="코드와 맞춰 보기", s8_hint="시안과 코드의 짝",
   code_lede="시안의 마스터와 인스턴스는 코드에서 컴포넌트를 <b>정의하는 곳과 쓰는 곳</b>에 해당합니다.",
@@ -107,16 +109,17 @@ D = dict(
 <span class="k">function</span> ButtonWithIcon({ label }) {     <span class="c">// 마스터와 멀어진다</span>
   <span class="k">return</span> &lt;<span class="t">button</span> <span class="a">className</span>=<span class="s">"btn btn--primary"</span>&gt;◆ {label}&lt;/<span class="t">button</span>&gt;;
 }''',
+  keys_heads="<th>지킬 규칙</th><th>그렇게 하는 이유</th>",
   keys=kbd([
-    ("마스터는 <b>한 곳</b>에", "화면 안에 두면 화면을 고치다 <b>마스터까지 고치기 쉬우므로</b> 따로 모아 둡니다"),
-    ("덮어쓰기는 <b>props</b>", "글자와 아이콘, 상태는 props로 바꿉니다. 모양 자체를 바꾸려면 마스터를 고칩니다"),
-    ("접근성도 마스터에", "<code>role</code>·<code>aria-*</code>·키보드 동작을 마스터에 넣어 두면 인스턴스를 쓰는 쪽은 <b>따로 손대지 않아도</b> 접근성을 갖추게 됩니다"),
-    ("떼어내면 <b>그것도 끊긴다</b>", "떼어낸 때의 접근성 속성이 그대로 남아서, 마스터에서 고친 접근성이 반영되지 않습니다"),
-    ("이름을 쓰임으로", "<code>Button/Primary</code>보다 <code>Button/주동작</code>처럼 <b>언제 쓰는지</b>가 드러나게 짓습니다"),
-    ("찾기", "코드에서는 <b>검색으로</b> 쓰인 곳을 모두 찾을 수 있지만, 시안에서는 찾기 어렵습니다"),
+    ("마스터는 <b>한 곳</b>에 모으기", "화면 안에 두면 화면을 고치다 <b>마스터까지 고치기 쉬우므로</b> 따로 모아 둡니다"),
+    ("덮어쓰기는 <b>props</b>로 하기", "글자와 아이콘, 상태는 props로 바꿉니다. 모양 자체를 바꾸려면 마스터를 고칩니다"),
+    ("접근성도 마스터에 넣기", "<code>role</code>·<code>aria-*</code>·키보드 동작을 마스터에 넣어 두면 인스턴스를 쓰는 쪽은 <b>따로 손대지 않아도</b> 접근성을 갖추게 됩니다"),
+    ("떼어내면 <b>접근성 연결도 끊김</b>", "떼어낸 때의 접근성 속성이 그대로 남아서, 마스터에서 고친 접근성이 반영되지 않습니다"),
+    ("이름은 쓰임에 따라 짓기", "<code>Button/Primary</code>보다 <code>Button/주동작</code>처럼 <b>언제 쓰는지</b>가 드러나게 짓습니다"),
+    ("쓰인 곳 찾기", "코드에서는 <b>검색으로</b> 쓰인 곳을 모두 찾을 수 있지만, 시안에서는 찾기 어렵습니다"),
   ]),
   backend=rows([
-    ("부품 묶음에 버전", "마스터를 고치면 그 부품을 쓰는 화면이 모두 바뀌므로, 배포할 때 <b>무엇이 바뀌는지</b> 적어 함께 내보냅니다."),
+    ("부품 묶음에 버전 붙이기", "마스터를 고치면 그 부품을 쓰는 화면이 모두 바뀌므로, 배포할 때 <b>무엇이 바뀌는지</b> 적어 함께 내보냅니다."),
     ("쓰인 곳 세기", "코드에서는 부품이 쓰인 곳을 검색으로 셀 수 있으니, 세어 보고 <b>쓰이지 않는 부품</b>은 지웁니다."),
     ("복사된 부품 찾기", "<code>btn-primary-2</code>처럼 비슷한 클래스 이름을 찾아보면 부품을 복사해 고친 곳, 곧 시안의 <b>떼어낸 자리</b>에 해당하는 곳이 드러납니다."),
   ]),

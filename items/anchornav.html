@@ -77,20 +77,20 @@
         <p>길 안내 부품은 모두 누르면 다른 곳으로 옮겨 간다는 점이 같습니다. 그래서 아래 네 가지를 물어보면 서로 구별할 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>자리</th><th>데려가는 곳</th><th>지금 위치</th><th>감당하는 개수</th></tr></thead>
+          <thead><tr><th></th><th>화면에 놓이는 자리</th><th>누르면 데려가는 곳</th><th>지금 위치를 알리는 방법</th><th>담을 수 있는 항목 수</th></tr></thead>
           <tbody>
-            <tr><td>앱바 · 헤더</td><td>화면 위</td><td>전역 · 상위</td><td>제목으로</td><td class="none">해당 없음</td></tr>
-            <tr><td>사이드바 내비게이션</td><td>화면 옆</td><td>전역</td><td>강조로</td><td>10~20</td></tr>
-            <tr><td>바텀 탭바</td><td>화면 아래</td><td>전역</td><td>아이콘 강조</td><td><b>3~5</b></td></tr>
+            <tr><td>앱바 · 헤더</td><td>화면 위</td><td>전역 또는 상위 화면</td><td>제목으로</td><td class="none">해당 없음</td></tr>
+            <tr><td>사이드바 내비게이션</td><td>화면 옆</td><td>전역</td><td>항목 강조로</td><td>10~20</td></tr>
+            <tr><td>바텀 탭바</td><td>화면 아래</td><td>전역</td><td>아이콘 강조로</td><td><b>3~5</b></td></tr>
             <tr><td>탭</td><td>내용 위</td><td><b>같은 화면 안</b></td><td>밑줄로</td><td>2~6</td></tr>
-            <tr><td>브레드크럼</td><td>내용 위</td><td>상위로</td><td><b>계층 전체</b></td><td>3~5단계</td></tr>
+            <tr><td>브레드크럼</td><td>내용 위</td><td>상위 단계</td><td><b>계층 전체</b>를 보여 줌</td><td>3~5단계</td></tr>
             <tr><td>페이지네이션</td><td>목록 아래</td><td>같은 목록의 다른 쪽</td><td>쪽 번호로</td><td>제한 없음</td></tr>
-            <tr><td>무한 스크롤</td><td>목록 끝</td><td>같은 목록 이어서</td><td class="none">안 보여 준다</td><td>제한 없음</td></tr>
+            <tr><td>무한 스크롤</td><td>목록 끝</td><td>같은 목록의 다음 묶음</td><td>보여 주지 않음</td><td>제한 없음</td></tr>
             <tr><td>스테퍼</td><td>내용 위 · 옆</td><td><b>같은 흐름</b>의 다음 단계</td><td>번호와 완료 표시로</td><td>3~5단계</td></tr>
             <tr><td>트리뷰</td><td>화면 옆</td><td>계층 <b>아래로</b></td><td>펼친 가지로</td><td>깊이 3단까지</td></tr>
-            <tr class="me"><td><b>앵커 내비</b></td><td>내용 옆</td><td><b>같은 문서 안</b></td><td>보는 절을 밝혀</td><td>5~12</td></tr>
-            <tr><td>뒤로가기</td><td>화면 왼쪽 위</td><td>바로 <b>앞 화면</b></td><td class="none">안 보여 준다</td><td>하나</td></tr>
-            <tr><td>메가 메뉴</td><td>앱바 아래</td><td>전역 · 여러 갈래</td><td>열린 갈래로</td><td>20~60</td></tr>
+            <tr class="me"><td><b>앵커 내비</b></td><td>내용 옆</td><td><b>같은 문서 안</b></td><td>보는 절을 강조해</td><td>5~12</td></tr>
+            <tr><td>뒤로가기</td><td>화면 왼쪽 위</td><td>바로 <b>앞 화면</b></td><td>보여 주지 않음</td><td>하나</td></tr>
+            <tr><td>메가 메뉴</td><td>앱바 아래</td><td>전역, 여러 분류</td><td>열린 분류로</td><td>20~60</td></tr>
           </tbody>
         </table>
         </div>
@@ -106,37 +106,37 @@
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:1px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:5px"><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid var(--accent);background:var(--accent-soft);color:var(--accent);">정산 주기</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">수수료</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">세금계산서</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">환불</span></div><span style="font-size:8.5px;color:var(--fg-muted)">첫 절을 보는 중</span></div>
             </div>
-            <figcaption>맨 위<span>문서 맨 위에서는 첫 항목이 강조됩니다</span></figcaption>
+            <figcaption>문서 맨 위에 있을 때<span>문서 맨 위에서는 첫 항목이 강조됩니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:1px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:5px"><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">정산 주기</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">수수료</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid var(--accent);background:var(--accent-soft);color:var(--accent);">세금계산서</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">환불</span></div><span style="font-size:8.5px;color:var(--fg-muted)">굴리면 따라 바뀐다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:1px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:5px"><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">정산 주기</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">수수료</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid var(--accent);background:var(--accent-soft);color:var(--accent);">세금계산서</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">환불</span></div><span style="font-size:8.5px;color:var(--fg-muted)">스크롤하면 따라 바뀜</span></div>
             </div>
-            <figcaption>굴리는 중<span>스크롤하는 동안 <b>지금 보는 절</b>이 강조됩니다</span></figcaption>
+            <figcaption>문서를 스크롤하는 중<span>스크롤하는 동안 <b>지금 보는 절</b>이 강조됩니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--danger)">가려짐</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--fg-muted);background:var(--accent-soft);padding:3px 5px;border-radius:3px">고정 머리</span><span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">▲ 제목이 이 밑에 숨었다</span><span style="display:block;font-size:8.5px;margin-top:3px">매주 수요일에 지난주 매출을…</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">scroll-margin-top 이 없다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--danger)">가려짐</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--fg-muted);background:var(--accent-soft);padding:3px 5px;border-radius:3px">고정 머리</span><span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">▲ 제목이 이 밑에 가려짐</span><span style="display:block;font-size:8.5px;margin-top:3px">매주 수요일에 지난주 매출을…</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">scroll-margin-top이 없음</span></div>
             </div>
-            <figcaption>머리에 가려짐<span>고정 머리에 가려 <b>절 제목이 보이지 않습니다</b></span></figcaption>
+            <figcaption>고정 머리에 제목이 가려질 때<span>고정 머리에 가려 <b>절 제목이 보이지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">제대로</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--fg-muted);background:var(--accent-soft);padding:3px 5px;border-radius:3px">고정 머리</span><span style="display:block;font-size:8.5px;font-weight:700;margin-top:4px">세금계산서</span><span style="display:block;font-size:8.5px;color:var(--fg-muted)">매달 1일에 지난달 몫을…</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">머리 높이만큼 떼어 놓았다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">제대로 보임</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--fg-muted);background:var(--accent-soft);padding:3px 5px;border-radius:3px">고정 머리</span><span style="display:block;font-size:8.5px;font-weight:700;margin-top:4px">세금계산서</span><span style="display:block;font-size:8.5px;color:var(--fg-muted)">매달 1일에 지난달 몫을…</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">머리 높이만큼 띄워 둠</span></div>
             </div>
-            <figcaption><code>scroll-margin-top</code><span>머리 높이만큼 여유를 둬서 <b>제목이 보입니다</b></span></figcaption>
+            <figcaption><code>scroll-margin-top</code>을 줬을 때<span>머리 높이만큼 여유를 둬서 <b>제목이 보입니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:1px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:5px"><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">정산 주기</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">수수료</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">세금계산서</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">환불</span></div><span style="font-size:8.5px;color:var(--fg-muted)">어디쯤인지 모른다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:1px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:5px"><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">정산 주기</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">수수료</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">세금계산서</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">환불</span></div><span style="font-size:8.5px;color:var(--fg-muted)">어디쯤인지 알 수 없음</span></div>
             </div>
-            <figcaption>안 밝힘<span>지금 위치를 알 수 없어서 목차가 <b>제 역할을 하지 못합니다</b></span></figcaption>
+            <figcaption>보는 절을 표시하지 않을 때<span>지금 위치를 알 수 없어서 목차가 <b>제 역할을 하지 못합니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:1px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:5px"><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">정산</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">수수료</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">세금</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">환불</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">문의</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">기타</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">약관</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">부록</span></div><span style="font-size:8.5px;color:var(--fg-muted)">너무 많다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:1px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:5px"><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">정산</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">수수료</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">세금</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">환불</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">문의</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">기타</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">약관</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">부록</span></div><span style="font-size:8.5px;color:var(--fg-muted)">항목이 너무 많음</span></div>
             </div>
-            <figcaption>항목이 많음<span>항목이 <b>열두 개</b>를 넘으면 목차를 한눈에 읽기 어렵습니다</span></figcaption>
+            <figcaption>항목이 너무 많을 때<span>항목이 <b>열두 개</b>를 넘으면 목차를 한눈에 읽기 어렵습니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -149,21 +149,21 @@
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
                   <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">&lt;nav aria-label="이 문서 안에서"&gt;</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">href="#s3" — 같은 문서 안의 자리</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--accent)">aria-current="true" — 지금 보는 절</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">scroll-margin-top — 고정 머리만큼 떼기</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">position: sticky — 굴려도 따라온다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">IntersectionObserver — 보는 절을 고른다</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">href="#s3"는 같은 문서 안의 자리</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--accent)">aria-current="true"로 보는 절 표시</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">scroll-margin-top으로 고정 머리만큼 띄움</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">position: sticky로 스크롤해도 따라옴</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">IntersectionObserver로 보는 절을 고름</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b><code>&lt;nav&gt;</code> <em>이름을 붙인다</em></b><span>한 화면에 <b>nav가 여러 개</b> 있으므로 이름을 붙여 구별합니다</span></li>
+            <li><b><code>&lt;nav&gt;</code> <em>이름 붙이기</em></b><span>한 화면에 <b>nav가 여러 개</b> 있으므로 이름을 붙여 구별합니다</span></li>
             <li><b><code>href="#s3"</code> <em>같은 문서</em></b><span>주소에 남기 때문에 그 절을 링크로 <b>공유할 수 있습니다</b></span></li>
             <li><b><code>aria-current</code> <em>보는 절</em></b><span>지금 보는 절을 색뿐 아니라 <b>소리로도</b> 알립니다</span></li>
-            <li><b><code>scroll-margin-top</code> <em>머리만큼 떼기</em></b><span>제목이 가려지는 문제를 CSS <b>한 줄로</b> 고칩니다</span></li>
-            <li><b><code>sticky</code> <em>따라온다</em></b><span>스크롤해도 목차가 <b>화면에서 사라지지 않습니다</b></span></li>
+            <li><b><code>scroll-margin-top</code> <em>머리 높이만큼 띄우기</em></b><span>제목이 가려지는 문제를 CSS <b>한 줄로</b> 고칩니다</span></li>
+            <li><b><code>sticky</code> <em>스크롤해도 따라옴</em></b><span>스크롤해도 목차가 <b>화면에서 사라지지 않습니다</b></span></li>
             <li><b>관찰자 <em>보는 절 고르기</em></b><span><code>IntersectionObserver</code>로 지금 화면에 걸린 절을 찾습니다</span></li>
           </ol>
         </div>
@@ -198,7 +198,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>앵커 내비 대신 다른 것을 써야 하는 경우</b> — 다른 화면으로 가면 <a href="sidebar.html">사이드바</a>, 내용을 갈아 끼우면 <a href="tabs.html">탭</a>, 위로 가면 <a href="breadcrumb.html">브레드크럼</a>, 따라붙는 동작은 <a href="sticky.html">스티키</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>앵커 내비 대신 다른 것을 써야 하는 경우</b> — 다른 화면으로 옮겨 가야 하면 <a href="sidebar.html">사이드바</a>를 쓰고, 보이는 내용을 갈아 끼우려면 <a href="tabs.html">탭</a>을 씁니다. 계층의 위 단계로 올라가는 길은 <a href="breadcrumb.html">브레드크럼</a>이 맡고, 스크롤해도 화면에 따라붙게 만드는 방법은 <a href="sticky.html">스티키</a> 항목에서 다룹니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -208,19 +208,19 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:grid;gap:1px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:5px"><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">설치</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid var(--accent);background:var(--accent-soft);color:var(--accent);">설정</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">API</span></div></div>
             </div>
-            <figcaption><b>문서 사이트</b>목차를 화면 오른쪽에 <b>붙여</b> 둡니다</figcaption>
+            <figcaption><b>문서 사이트 오른쪽에 목차 붙이기</b>목차를 화면 오른쪽에 <b>붙여</b> 둡니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:grid;gap:1px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:5px"><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">요약</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid var(--accent);background:var(--accent-soft);color:var(--accent);">상세</span><span style="display:block;padding:2px 6px;font-size:8.5px;border-left:2px solid transparent;color:var(--fg-muted);">환불 규정</span></div></div>
             </div>
-            <figcaption><b>긴 약관</b>지금 읽고 있는 절을 <b>표시</b>해 줍니다</figcaption>
+            <figcaption><b>긴 약관에서 읽는 절 표시하기</b>지금 읽고 있는 절을 <b>표시</b>해 줍니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">폰</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8.5px;border:1px solid var(--line);border-radius:4px;padding:3px 6px">목차 ▾</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">폰에서는 접어 둔다</span></span></div></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">폰</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8.5px;border:1px solid var(--line);border-radius:4px;padding:3px 6px">목차 ▾</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">폰에서는 접어 둠</span></span></div></div>
             </div>
-            <figcaption><b>폰</b>목차를 <b>접어 두었다가</b> 누르면 펼칩니다</figcaption>
+            <figcaption><b>폰에서 목차 접어 두기</b>목차를 <b>접어 두었다가</b> 누르면 펼칩니다</figcaption>
           </figure>
         </div>
       </section>
@@ -244,14 +244,14 @@
 }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td>Tab · Enter</td><td>평범한 링크이므로 키보드 조작을 위해 <b>따로 붙일 것이 없습니다</b></td></tr>
-            <tr><td>뛴 뒤 초점</td><td>브라우저가 그 절로 <b>포커스도</b> 옮깁니다. 그래서 키보드 사용자가 다음에 <kbd>Tab</kbd>을 누르면 그 절에서부터 이어집니다</td></tr>
+            <tr><td>절로 이동한 뒤의 포커스</td><td>브라우저가 그 절로 <b>포커스도</b> 옮깁니다. 그래서 키보드 사용자가 다음에 <kbd>Tab</kbd>을 누르면 그 절에서부터 이어집니다</td></tr>
             <tr><td><code>tabindex="-1"</code></td><td>제목이 포커스를 받지 못하면 붙여 둡니다</td></tr>
             <tr><td><code>aria-current="true"</code></td><td>지금 보는 절에 답니다. 값은 <code>page</code>가 아니라 <code>true</code>입니다</td></tr>
             <tr><td><code>:target</code></td><td>이동한 절을 CSS로 <b>잠깐 강조할</b> 수 있습니다</td></tr>
-            <tr><td>확인하는 법</td><td>이동한 다음 <b><kbd>Tab</kbd>을 한 번</b> 눌러 포커스가 어디로 가는지 확인합니다</td></tr>
+            <tr><td>제대로 됐는지 확인하는 방법</td><td>이동한 다음 <b><kbd>Tab</kbd>을 한 번</b> 눌러 포커스가 어디로 가는지 확인합니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -262,9 +262,9 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>서버와는 상관없다</th><td>주소에서 <code>#</code> 뒤 부분은 서버로 보내지 않기 때문에, 앵커 이동은 모두 브라우저 안에서 처리됩니다.</td></tr>
-            <tr><th>절 id 를 고정</th><td>문서를 새로 낼 때마다 id가 바뀌면 <b>다른 사람이 공유해 둔 링크로 들어와도 그 절로 이동하지 않습니다</b>. 그래서 id는 제목 글자에서 만들지 말고 <b>바뀌지 않는 키</b>로 만듭니다.</td></tr>
-            <tr><th>긴 문서</th><td>절마다 데이터를 따로 받아 오는 구조라면 <b>이동하기 전에 그 절의 내용을 이미 받았는지</b> 확인해야 합니다.</td></tr>
+            <tr><th>서버를 거치지 않는 이동</th><td>주소에서 <code>#</code> 뒤 부분은 서버로 보내지 않기 때문에, 앵커 이동은 모두 브라우저 안에서 처리됩니다.</td></tr>
+            <tr><th>절 id를 바뀌지 않게 두기</th><td>문서를 새로 낼 때마다 id가 바뀌면 <b>다른 사람이 공유해 둔 링크로 들어와도 그 절로 이동하지 않습니다</b>. 그래서 id는 제목 글자에서 만들지 말고 <b>바뀌지 않는 키</b>로 만듭니다.</td></tr>
+            <tr><th>절마다 따로 받는 긴 문서</th><td>절마다 데이터를 따로 받아 오는 구조라면 <b>이동하기 전에 그 절의 내용을 이미 받았는지</b> 확인해야 합니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -282,7 +282,7 @@
             <footer>이동한 위치가 주소에 남아서 링크로 <b>공유할 수 있다는</b> 점이 웹만의 장점입니다.</footer>
           </div>
           <div class="plat">
-            <header><b>iOS</b><span>없다 — 섹션 인덱스</span></header>
+            <header><b>iOS</b><span>목차 대신 섹션 인덱스</span></header>
             <div class="shot">
               <div class="phone" role="img" aria-label="iOS 색인 띠 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;right:3px;top:26px;display:grid;gap:2px;font-size:4px;color:var(--accent)">
@@ -292,7 +292,7 @@
             <footer>목차 대신 화면 오른쪽 가장자리에 <b>색인 띠</b>(sectionIndexTitles)를 둡니다. 가나다 같은 글자를 눌러 그 글자로 시작하는 절로 이동하는 방식입니다.</footer>
           </div>
           <div class="plat">
-            <header><b>안드로이드</b><span>없다</span></header>
+            <header><b>안드로이드</b><span>정해진 부품 없음</span></header>
             <div class="shot">
               <div class="phone" role="img" aria-label="안드로이드 긴 글 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:26px;height:7px;border-radius:2px;background:var(--accent-soft)"></div>

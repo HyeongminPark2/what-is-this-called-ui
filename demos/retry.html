@@ -18,10 +18,10 @@
 <body>
 <div class="bar">
   <b>재시도</b>
-  <label>간격 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
-    <option value="backoff" selected>점점 길게 (지수 백오프)</option>
-    <option value="fixed">같은 간격으로</option>
-    <option value="none">바로바로 (쉬지 않고)</option>
+  <label>다시 보내는 간격 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="backoff" selected>간격을 점점 늘리기 (지수 백오프)</option>
+    <option value="fixed">같은 간격으로 보내기</option>
+    <option value="none">쉬지 않고 바로바로 보내기</option>
   </select></label>
   <label>서버가 돌아오는 시점 <input type="range" id="w" min="1" max="8" step="1" value="4" style="width:84px"><span class="ruler" id="wv"></span></label>
   <button class="ui-btn" id="go">보내기</button>
@@ -69,7 +69,7 @@
     } else
     document.getElementById('lines').innerHTML = tries.map(function (t, i) {
       return '<span>' + (i + 1) + '번째 · ' + (t.at / 1000).toFixed(1) + '초 · ' +
-        (t.ok ? '성공' : '실패 → ' + (t.gap / 1000).toFixed(1) + '초 뒤 다시') + '</span>';
+        (t.ok ? '성공' : '실패해서 ' + (t.gap / 1000).toFixed(1) + '초 뒤 다시 보냄') + '</span>';
     }).join('');
 
     var span = tries.length ? tries[tries.length - 1].at : 0;

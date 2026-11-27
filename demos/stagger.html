@@ -19,9 +19,9 @@
 
 <div class="bar">
   <b>차례로 들어오기</b>
-  <label>간격 <input type="range" id="gap" class="ui-range" min="0" max="160" step="10" value="40" style="width:150px"> <span class="ruler" id="gv">40ms</span></label>
+  <label>줄 사이 간격 <input type="range" id="gap" class="ui-range" min="0" max="160" step="10" value="40" style="width:150px"> <span class="ruler" id="gv">40ms</span></label>
   <label>줄 수 <input type="range" id="n" class="ui-range" min="4" max="20" step="2" value="8" style="width:110px"> <span class="ruler" id="nv">8줄</span></label>
-  <button class="ui-btn" id="run">다시</button>
+  <button class="ui-btn" id="run">다시 재생</button>
 </div>
 
 <div class="pad">
@@ -63,8 +63,8 @@
     var last = (n - 1) * gap + 200;
     var r = document.getElementById('ruler');
     r.innerHTML = '마지막 줄이 다 보이기까지 ' +
-      (last > 900 ? '<span class="warn">' + last + 'ms — 기다리게 된다</span>' : '<b>' + last + 'ms</b>') +
-      ' · 한 줄 200ms × 간격 ' + gap + 'ms × ' + n + '줄';
+      (last > 900 ? '<span class="warn">' + last + 'ms가 걸려 사용자가 기다리게 됩니다</span>' : '<b>' + last + 'ms</b>가 걸립니다') +
+      ' · 한 줄이 나타나는 데 200ms, 줄 사이 간격 ' + gap + 'ms, 모두 ' + n + '줄';
     r.dataset.last = String(last);
   }
 

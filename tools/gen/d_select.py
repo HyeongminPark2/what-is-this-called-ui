@@ -38,12 +38,12 @@ D = dict(
   axes=ax("셀렉트"),
   oneline="셀렉트는 <b>선택지를 접어서 감추는</b> 대신 자리를 아낍니다. 그래서 선택지가 셋뿐이면 접어서 아낄 자리가 거의 없고, 수십 개가 넘으면 펼쳐도 눈으로 찾기 어렵습니다.",
   states=states([
-    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 4px;font-size:6px"><span style="flex:1;color:var(--fg-faint)">고르세요</span>▾</div></div>', bars="", label="아직 안 고른 셀렉트"), "안 고름", "기본값을 함부로 넣지 않습니다. 사용자가 확인하지 않은 기본값이 그대로 저장될 수 있기 때문입니다"),
-    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 4px;font-size:6px"><span style="flex:1">신한</span>▾</div></div>', bars="", label="고른 셀렉트"), "고름", "고른 값이 접힌 칸에 보입니다"),
-    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--accent);border-radius:3px;box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent)"></div><div style="border:1px solid var(--line);border-radius:3px;box-shadow:0 2px 6px rgba(0,0,0,.15);margin-top:3px;padding:3px;background:var(--surface)"><div style="font-size:6px;background:var(--accent-soft);color:var(--accent);border-radius:2px;padding:1px 3px">신한</div><div style="font-size:6px;color:var(--fg-muted);padding:1px 3px">하나</div></div></div>', bars="", label="펼친 셀렉트"), "펼침", "목록이 펼쳐집니다. 이 목록은 브라우저가 띄우기 때문에 모양을 바꿀 수 없습니다"),
-    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 4px;font-size:6px"><span style="flex:1">서울 1구역</span>▾</div><div style="font-size:5.5px;color:var(--danger);font-weight:700;margin-top:2px">229개 — 눈으로 못 찾음</div></div>', bars="", label="선택지가 너무 많은 셀렉트"), "너무 많음", "목록을 한참 스크롤해야 하고 글자로 걸러 낼 수도 없습니다. <b>콤보박스로 바꿀 때</b>입니다"),
-    (mini('<div style="margin-top:10px;padding:0 6px;opacity:.45"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;background:var(--bg);display:flex;align-items:center;padding:0 4px;font-size:6px"><span style="flex:1">신한</span>▾</div></div>', bars="", label="비활성 셀렉트"), "비활성", "왜 고를 수 없는지 칸 옆에 적습니다"),
-    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--danger);border-radius:3px;display:flex;align-items:center;padding:0 4px;font-size:6px"><span style="flex:1;color:var(--fg-faint)">고르세요</span>▾</div><div style="font-size:5.5px;color:var(--danger);font-weight:700;margin-top:2px">은행을 골라 주세요</div></div>', bars="", label="에러 상태"), "에러", "고르지 않고 보냈을 때 나타나며, 에러 메시지는 칸 아래에 적습니다"),
+    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 4px;font-size:6px"><span style="flex:1;color:var(--fg-faint)">고르세요</span>▾</div></div>', bars="", label="아직 안 고른 셀렉트"), "아직 고르지 않았을 때", "기본값을 함부로 넣지 않습니다. 사용자가 확인하지 않은 기본값이 그대로 저장될 수 있기 때문입니다"),
+    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 4px;font-size:6px"><span style="flex:1">신한</span>▾</div></div>', bars="", label="고른 셀렉트"), "값을 골랐을 때", "고른 값이 접힌 칸에 보입니다"),
+    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--accent);border-radius:3px;box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent)"></div><div style="border:1px solid var(--line);border-radius:3px;box-shadow:0 2px 6px rgba(0,0,0,.15);margin-top:3px;padding:3px;background:var(--surface)"><div style="font-size:6px;background:var(--accent-soft);color:var(--accent);border-radius:2px;padding:1px 3px">신한</div><div style="font-size:6px;color:var(--fg-muted);padding:1px 3px">하나</div></div></div>', bars="", label="펼친 셀렉트"), "목록을 펼쳤을 때", "목록이 펼쳐집니다. 이 목록은 브라우저가 띄우기 때문에 모양을 바꿀 수 없습니다"),
+    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 4px;font-size:6px"><span style="flex:1">서울 1구역</span>▾</div><div style="font-size:5.5px;color:var(--danger);font-weight:700;margin-top:2px">229개라 눈으로 찾기 어려움</div></div>', bars="", label="선택지가 너무 많은 셀렉트"), "선택지가 너무 많을 때", "목록을 한참 스크롤해야 하고 글자로 걸러 낼 수도 없습니다. <b>콤보박스로 바꿀 때</b>입니다"),
+    (mini('<div style="margin-top:10px;padding:0 6px;opacity:.45"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;background:var(--bg);display:flex;align-items:center;padding:0 4px;font-size:6px"><span style="flex:1">신한</span>▾</div></div>', bars="", label="비활성 셀렉트"), "비활성일 때", "왜 고를 수 없는지 칸 옆에 적습니다"),
+    (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--danger);border-radius:3px;display:flex;align-items:center;padding:0 4px;font-size:6px"><span style="flex:1;color:var(--fg-faint)">고르세요</span>▾</div><div style="font-size:5.5px;color:var(--danger);font-weight:700;margin-top:2px">은행을 골라 주세요</div></div>', bars="", label="에러 상태"), "고르지 않고 보냈을 때", "고르지 않고 보냈을 때 나타나며, 에러 메시지는 칸 아래에 적습니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -69,14 +69,14 @@ D = dict(
     "값이 아니라 동작을 고를 때. 이때는 드롭다운 메뉴를 씁니다",
     "모양을 바꾸려고 직접 만들 때. 키보드 조작과 폰 목록을 모두 다시 만들어야 합니다",
   ]),
-  instead='둘셋이면 <a href="radio.html">라디오</a>나 <a href="segmented.html">세그먼티드</a>, 많으면 <a href="combobox.html">콤보박스</a>, 여럿 고르면 <a href="checkbox.html">체크박스</a>.',
+  instead='선택지가 두세 개뿐이면 <a href="radio.html">라디오</a>나 <a href="segmented.html">세그먼티드</a> 컨트롤을 쓰고, 선택지가 많아 글자로 걸러야 하면 <a href="combobox.html">콤보박스</a>를 씁니다. 여러 개를 함께 골라야 하면 <a href="checkbox.html">체크박스</a>가 맞습니다.',
   cases=cases([
     (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 4px;font-size:6px"><span style="flex:1">신한</span>▾</div></div>', bars="", tall=False, label="기본 셀렉트 재현"),
-     "기본", "폼 안에서 가장 흔히 보는 모습입니다"),
+     "폼 안의 기본 셀렉트", "폼 안에서 가장 흔히 보는 모습입니다"),
     (mini('<div style="margin-top:8px;padding:0 6px;display:flex;gap:3px"><div style="flex:1;height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 3px;font-size:5.5px"><span style="flex:1">2026</span>▾</div><div style="flex:1;height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 3px;font-size:5.5px"><span style="flex:1">11월</span>▾</div></div>', bars="", tall=False, label="여러 칸으로 나눈 재현"),
-     "쪼갠 셀렉트", "날짜처럼 여러 단위로 이루어진 값은 단위마다 칸을 나눠 두면 고르기 쉽습니다"),
+     "단위마다 칸을 나눈 셀렉트", "날짜처럼 여러 단위로 이루어진 값은 단위마다 칸을 나눠 두면 고르기 쉽습니다"),
     (mini('<div style="margin-top:10px;padding:0 6px"><div style="height:12px;border:1px solid var(--line-strong);border-radius:3px;display:flex;align-items:center;padding:0 4px;font-size:6px"><span style="flex:1;color:var(--fg-faint)">먼저 은행을 고르세요</span>▾</div></div>', bars="", tall=False, label="연결된 셀렉트 재현"),
-     "묶인 셀렉트", "앞 칸을 골라야 뒤 칸을 고를 수 있으므로, 뒤 칸에는 왜 비활성인지 적어 둡니다"),
+     "앞 칸을 골라야 열리는 셀렉트", "앞 칸을 골라야 뒤 칸을 고를 수 있으므로, 뒤 칸에는 왜 비활성인지 적어 둡니다"),
   ]),
   code_lede="브라우저가 제공하는 <code>&lt;select&gt;</code>를 쓰면 키보드 조작과 폰 목록이 따로 구현하지 않아도 동작합니다. 반면 셀렉트를 직접 만들면 이 기능을 모두 다시 만들어야 합니다.",
   code='''&lt;<span class="t">label</span> <span class="a">for</span>=<span class="s">"bank"</span>&gt;입금 은행&lt;/<span class="t">label</span>&gt;
@@ -93,15 +93,15 @@ select <span class="a">{</span> <span class="t">appearance</span>: none; <span c
   keys=kbd([
     ("<kbd>Space</kbd> · <kbd>Enter</kbd>", "목록을 펼칩니다"),
     ("<kbd>↑</kbd><kbd>↓</kbd>", "선택지를 옮깁니다. 데스크톱에서는 목록을 닫은 채로도 값이 바뀝니다"),
-    ("글자 키", "<b>그 글자로 시작하는 선택지로 건너뜁니다.</b> '하'를 누르면 하나은행으로 갑니다. 셀렉트를 직접 만들 때 특히 자주 빠뜨리는 기능입니다"),
+    ("글자 키를 눌렀을 때", "<b>그 글자로 시작하는 선택지로 건너뜁니다.</b> '하'를 누르면 하나은행으로 갑니다. 셀렉트를 직접 만들 때 특히 자주 빠뜨리는 기능입니다"),
     ("<kbd>Esc</kbd>", "고르지 않고 목록을 닫습니다"),
-    ("폰", "운영체제가 제공하는 큰 목록이나 휠이 뜹니다. 손가락으로 고르기 좋게 이미 만들어져 있습니다"),
+    ("폰에서", "운영체제가 제공하는 큰 목록이나 휠이 뜹니다. 손가락으로 고르기 좋게 이미 만들어져 있습니다"),
   ]),
   backend=rows([
-    ("값과 라벨은 다른 것", "<code>value</code>에는 <code>SHINHAN</code> 같은 코드를 넣고, 화면에 보이는 글자는 사람이 읽는 이름으로 둡니다. 보이는 글자를 그대로 서버에 보내면 <b>은행 이름이 바뀔 때 기존 데이터와 맞지 않게 됩니다.</b>"),
-    ("빈 값 = 안 고름", "<code>value=\"\"</code>인 첫 옵션으로 '아직 고르지 않음'을 나타냅니다. 기본값을 임의로 넣어 두면 <b>사용자가 확인하지 않고 보낸 값</b>이 저장됩니다."),
-    ("선택지 출처", "선택지를 코드에 하드코딩하면 선택지가 바뀔 때마다 다시 배포해야 합니다. 서버에서 받아 오면 다시 배포할 필요는 없지만, 캐시를 관리하고 '저장된 값이 지금 목록에는 없는' 경우를 처리해야 합니다."),
-    ("묶인 셀렉트 = 의존 질의", "앞 칸의 값이 정해져야 뒤 칸의 선택지를 가져올 수 있습니다. 앞 칸을 바꾸면 <b>뒤 칸의 값을 비워야</b> 하는데, 비우지 않으면 서로 맞지 않는 값 한 쌍이 저장됩니다."),
+    ("값과 보이는 이름을 따로 두기", "<code>value</code>에는 <code>SHINHAN</code> 같은 코드를 넣고, 화면에 보이는 글자는 사람이 읽는 이름으로 둡니다. 보이는 글자를 그대로 서버에 보내면 <b>은행 이름이 바뀔 때 기존 데이터와 맞지 않게 됩니다.</b>"),
+    ("빈 값으로 고르지 않은 상태 나타내기", "<code>value=\"\"</code>인 첫 옵션으로 '아직 고르지 않음'을 나타냅니다. 기본값을 임의로 넣어 두면 <b>사용자가 확인하지 않고 보낸 값</b>이 저장됩니다."),
+    ("선택지를 어디서 가져올지", "선택지를 코드에 하드코딩하면 선택지가 바뀔 때마다 다시 배포해야 합니다. 서버에서 받아 오면 다시 배포할 필요는 없지만, 캐시를 관리하고 '저장된 값이 지금 목록에는 없는' 경우를 처리해야 합니다."),
+    ("앞 칸 값에 따라 달라지는 조회", "앞 칸의 값이 정해져야 뒤 칸의 선택지를 가져올 수 있습니다. 앞 칸을 바꾸면 <b>뒤 칸의 값을 비워야</b> 하는데, 비우지 않으면 서로 맞지 않는 값 한 쌍이 저장됩니다."),
   ]),
   plat_lede="셀렉트는 펼친 목록을 <b>운영체제가 그리기</b> 때문에 플랫폼마다 모양 차이가 특히 큽니다.",
   plats=plats([
@@ -117,8 +117,8 @@ select <span class="a">{</span> <span class="t">appearance</span>: none; <span c
   ]),
   plat_note="안드로이드에서 <b>Spinner</b>는 이 항목의 셀렉트를 가리킵니다. 웹에서 \"스피너 넣어 주세요\"라고 하면 <a href=\"spinner.html\">돌아가는 로딩 표시</a>를 뜻하지만, 안드로이드 개발자는 <b>선택 상자</b>로 알아듣습니다. 같은 이름이 플랫폼에 따라 전혀 다른 부품을 가리키므로, 웹 개발자와 안드로이드 개발자가 함께 일할 때 특히 오해가 잦습니다.",
   siblings=siblings("select"),
-  related='''        <li><span class="na"><b>드롭다운 메뉴</b><em>7부</em></span></li>
+  related='''        <li><a href="menu.html"><b>드롭다운 메뉴</b><em>6부</em></a></li>
         <li><a href="../items/spinner.html"><b>스피너</b><em>8부</em></a></li>
-        <li><span class="na"><b>날짜 선택기</b><em>4부</em></span></li>
-        <li><span class="na"><b>폼 설계</b><em>10부</em></span></li>''',
+        <li><a href="datepicker.html"><b>날짜 선택기</b><em>4부</em></a></li>
+        <li><a href="form.html"><b>폼 설계</b><em>10부</em></a></li>''',
 )

@@ -51,7 +51,7 @@
         </div>
         <div class="note" style="margin-bottom:0">
           <p>막대를 끌어 글자를 키워 보세요. 실제로는 사용자가 OS나 브라우저 설정으로 <b>직접</b> 글자를 키웁니다.<br>
-          <b>px 로 박아 두기</b>를 켜면 막대를 끌어도 글자가 커지지 않고, 상자 높이까지 px로 고정하면 <b>글이 잘립니다</b>.
+          <b>글자 크기를 px로 고정하기</b>를 켜면 막대를 끌어도 글자가 커지지 않고, 상자 높이까지 px로 고정하면 <b>글이 잘립니다</b>.
           이 사고는 글자 크기 설정을 켠 사람만 겪기 때문에 <b>개발하는 사람의 화면에서는 드러나지 않습니다</b>.</p>
         </div>
       </section>
@@ -75,18 +75,18 @@
         <p>접근성은 다 만든 뒤에 덧붙이기보다 만드는 동안 <b>빠뜨리지 않고 챙기는 일</b>입니다. 아래 네 가지를 물어보면 이 부의 항목들이 서로 어떻게 다른지 가를 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 돕나</th><th>눈으로 보이나</th><th>안 하면 누가 막히나</th><th>어떻게 확인하나</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 돕는가</th><th>화면에 눈으로 보이는가</th><th>챙기지 않으면 누가 막히는가</th><th>어떻게 확인하는가</th></tr></thead>
           <tbody>
-            <tr><td>포커스</td><td><b>지금 어디인지</b></td><td><b>보여야 한다</b></td><td>키보드만 쓰는 사람</td><td>Tab 을 눌러 본다</td></tr>
-            <tr><td>포커스 트랩</td><td>모달 안에 가두기</td><td>안 보인다</td><td>키보드·스크린 리더</td><td>모달에서 Tab 을 돌려 본다</td></tr>
-            <tr><td>키보드 조작</td><td>마우스 없이 <b>전부</b></td><td>안 보인다</td><td>마우스를 못 쓰는 사람</td><td>마우스를 치우고 해 본다</td></tr>
-            <tr><td>이름 붙이기</td><td>뭐라고 <b>부르나</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>접근성 트리를 본다</td></tr>
-            <tr><td>스크린 리더가 읽는 것</td><td>역할 · 이름 · <b>상태</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>직접 들어 본다</td></tr>
-            <tr><td>라이브 리전</td><td><b>저절로 바뀐 것</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>바꿔 놓고 들어 본다</td></tr>
-            <tr><td>대비비</td><td>글자가 <b>읽히나</b></td><td><b>보인다</b></td><td>저시력 · 밝은 곳 · 싼 화면</td><td><b>재 본다</b>(숫자로 나온다)</td></tr>
-            <tr><td>시맨틱 태그</td><td>화면의 <b>구조</b></td><td>안 보인다</td><td><b>거의 모두</b></td><td>구역 목록을 열어 본다</td></tr>
-            <tr><td>대체 텍스트</td><td>그림의 <b>뜻</b></td><td>안 보인다</td><td>눈으로 안 보는 사람</td><td>이미지를 끄고 읽어 본다</td></tr>
-            <tr class="me"><td><b>확대와 글자 크기</b></td><td><b>키웠을 때</b>도 쓰이나</td><td>안 보인다</td><td>저시력 사용자</td><td>200%로 키워 본다</td></tr>
+            <tr><td>포커스</td><td><b>지금 어디에 있는지</b> 보여 주기</td><td><b>보여야 함</b></td><td>키보드만 쓰는 사람</td><td>Tab을 눌러 보기</td></tr>
+            <tr><td>포커스 트랩</td><td>포커스를 모달 안에 가두기</td><td>보이지 않음</td><td>키보드나 스크린 리더 사용자</td><td>모달을 열고 Tab을 계속 눌러 보기</td></tr>
+            <tr><td>키보드 조작</td><td>마우스 없이 <b>모든 기능</b> 쓰기</td><td>보이지 않음</td><td>마우스를 못 쓰는 사람</td><td>마우스를 치우고 써 보기</td></tr>
+            <tr><td>이름 붙이기</td><td>요소를 뭐라고 <b>부르는지</b> 정하기</td><td>보이지 않음</td><td>화면을 못 보는 사람</td><td>접근성 트리를 살펴보기</td></tr>
+            <tr><td>스크린 리더가 읽는 것</td><td>역할 · 이름 · <b>상태</b> 전하기</td><td>보이지 않음</td><td>화면을 못 보는 사람</td><td>스크린 리더로 직접 들어 보기</td></tr>
+            <tr><td>라이브 리전</td><td><b>저절로 바뀐 내용</b> 알리기</td><td>보이지 않음</td><td>화면을 못 보는 사람</td><td>내용을 바꾼 뒤 들어 보기</td></tr>
+            <tr><td>대비비</td><td>글자가 <b>잘 읽히는지</b> 따지기</td><td><b>보임</b></td><td>저시력 사용자, 햇빛 아래나 값싼 화면으로 보는 사람</td><td><b>도구로 재 보기</b>(숫자로 나옴)</td></tr>
+            <tr><td>시맨틱 태그</td><td>화면의 <b>구조</b> 알리기</td><td>보이지 않음</td><td><b>거의 모든 사용자</b></td><td>구역 목록을 열어 보기</td></tr>
+            <tr><td>대체 텍스트</td><td>그림의 <b>뜻</b> 전하기</td><td>보이지 않음</td><td>화면을 눈으로 보지 않는 사람</td><td>이미지를 끄고 읽어 보기</td></tr>
+            <tr class="me"><td><b>확대와 글자 크기</b></td><td><b>키웠을 때</b>도 쓸 수 있는지 따지기</td><td>보이지 않음</td><td>저시력 사용자</td><td>200%로 키워 보기</td></tr>
           </tbody>
         </table>
         </div>
@@ -96,43 +96,43 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 키웠을 때<span class="hint">무엇이 깨지나</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 글자를 키웠을 때의 모습<span class="hint">배율과 단위에 따라 무엇이 깨지는지</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-weight:700;font-size:10px">모란상회</span><span style="color:var(--fg-muted);font-size:10px;display:block">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 들어갑니다.</span></div><span style="font-size:8.5px;color:var(--fg-muted)">기본 — 100%</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-weight:700;font-size:10px">모란상회</span><span style="color:var(--fg-muted);font-size:10px;display:block">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 들어갑니다.</span></div><span style="font-size:8.5px;color:var(--fg-muted)">기본 크기 100%</span></div>
             </div>
-            <figcaption>기본<span>개발하는 사람이 보통 보는 모습입니다</span></figcaption>
+            <figcaption>기본 크기일 때<span>개발하는 사람이 보통 보는 모습입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-weight:700;font-size:13px">모란상회</span><span style="color:var(--fg-muted);font-size:13px;display:block">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 들어갑니다.</span></div><span style="font-size:8.5px;color:var(--fg-muted)">150% — rem 으로 두면 따라온다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-weight:700;font-size:13px">모란상회</span><span style="color:var(--fg-muted);font-size:13px;display:block">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 들어갑니다.</span></div><span style="font-size:8.5px;color:var(--fg-muted)">150%, rem이면 같이 커짐</span></div>
             </div>
-            <figcaption>150%<span><b>상자가 글자 크기에 맞춰</b> 늘어납니다</span></figcaption>
+            <figcaption>150%로 키웠을 때<span><b>상자가 글자 크기에 맞춰</b> 늘어납니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-weight:700;font-size:17px">모란상회</span><span style="color:var(--fg-muted);font-size:17px;display:block">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 들어갑니다.</span></div><span style="font-size:8.5px;color:var(--fg-muted)">200% — 여기까지는 지켜야 한다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-weight:700;font-size:17px">모란상회</span><span style="color:var(--fg-muted);font-size:17px;display:block">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 들어갑니다.</span></div><span style="font-size:8.5px;color:var(--fg-muted)">200%, 여기까지는 지켜야 함</span></div>
             </div>
-            <figcaption>200%<span>WCAG가 이 배율까지 쓸 수 있어야 한다고 정한 <b>상한</b>입니다</span></figcaption>
+            <figcaption>200%로 키웠을 때<span>WCAG가 이 배율까지 쓸 수 있어야 한다고 정한 <b>상한</b>입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-weight:700;font-size:10px">모란상회</span><span style="color:var(--fg-muted);font-size:10px;display:block">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 들어갑니다.</span></div><span style="font-size:8.5px;color:var(--fg-muted)">px 로 박음 — 설정을 켜도 안 커진다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-weight:700;font-size:10px">모란상회</span><span style="color:var(--fg-muted);font-size:10px;display:block">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 들어갑니다.</span></div><span style="font-size:8.5px;color:var(--fg-muted)">px로 고정해 설정을 켜도 그대로</span></div>
             </div>
-            <figcaption>px 로 박으면<span>글자 크기를 px로 고정하면 <b>설정을 바꿔도 글자가 커지지 않습니다</b></span></figcaption>
+            <figcaption>글자 크기를 px로 고정했을 때<span>글자 크기를 px로 고정하면 <b>설정을 바꿔도 글자가 커지지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-weight:700;font-size:17px">모란상회</span><span style="color:var(--fg-muted);font-size:17px;display:block;height:22px;overflow:hidden">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 들어갑니다.</span></div><span style="font-size:8.5px;color:var(--danger)">높이까지 박음 — 글이 잘렸다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px"><span style="font-weight:700;font-size:17px">모란상회</span><span style="color:var(--fg-muted);font-size:17px;display:block;height:22px;overflow:hidden">11월 1일 ~ 7일 정산이 승인되었습니다. 수수료를 뺀 금액이 들어갑니다.</span></div><span style="font-size:8.5px;color:var(--danger)">높이까지 고정해 글이 잘림</span></div>
             </div>
-            <figcaption>높이까지 박으면<span>커진 글이 상자 밖으로 넘쳐 잘리므로 <b>내용을 잃습니다</b></span></figcaption>
+            <figcaption>상자 높이까지 고정했을 때<span>커진 글이 상자 밖으로 넘쳐 잘리므로 <b>내용을 잃습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--danger)">확대 막기</span><span style="font-family:var(--mono);font-size:9.5px;color:var(--danger)">user-scalable=no</span></div><span style="font-size:8.5px;color:var(--fg-muted)">폰에서 아예 못 키운다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--danger)">확대 막기</span><span style="font-family:var(--mono);font-size:9.5px;color:var(--danger)">user-scalable=no</span></div><span style="font-size:8.5px;color:var(--fg-muted)">폰에서 아예 키울 수 없음</span></div>
             </div>
-            <figcaption>확대를 막으면<span><b>접근성 기준 위반</b>입니다</span></figcaption>
+            <figcaption>확대를 막아 두었을 때<span><b>접근성 기준 위반</b>입니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -144,22 +144,22 @@
             <div class="anat" role="img" aria-label="확대와 글자 크기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">rem · em — 사용자 설정을 따라간다</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">px 로 박으면 설정을 켜도 안 커진다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">높이까지 px 로 박으면 글이 잘린다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">rem · em   — 사용자 설정을 따라감</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">px로 고정하면 설정을 켜도 커지지 않음</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">높이까지 px로 고정하면 글이 잘림</div>
                   <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">200%까지 키워도 내용과 기능을 잃지 않을 것</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">user-scalable=no 를 쓰지 않는다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">글자만 키우는 설정과 화면 전체 확대는 다르다</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">user-scalable=no는 쓰지 않음</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">글자 크기 설정과 화면 전체 확대는 서로 다른 설정</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b><code>rem</code> <em>설정을 따라간다</em></b><span>뿌리 요소(html)의 글자 크기에 곱하는 배수입니다</span></li>
-            <li><b><code>px</code> <em>안 커진다</em></b><span>px로 고정하면 <b>글자 크기 설정을 바꿔도 반영되지 않습니다</b></span></li>
-            <li><b>높이 <em>박지 않는다</em></b><span>높이를 고정하지 않고, 내용이 커지는 만큼 상자도 늘어나게 둡니다</span></li>
+            <li><b><code>rem</code> <em>설정을 따라감</em></b><span>뿌리 요소(html)의 글자 크기에 곱하는 배수입니다</span></li>
+            <li><b><code>px</code> <em>커지지 않음</em></b><span>px로 고정하면 <b>글자 크기 설정을 바꿔도 반영되지 않습니다</b></span></li>
+            <li><b>상자 높이 <em>고정하지 않음</em></b><span>높이를 고정하지 않고, 내용이 커지는 만큼 상자도 늘어나게 둡니다</span></li>
             <li><b>200% <em>지켜야 하는 선</em></b><span>200%까지 키워도 <b>내용과 기능</b>을 잃지 않아야 합니다</span></li>
-            <li><b><code>user-scalable=no</code> <em>쓰지 않는다</em></b><span>핀치 줌을 막는 것은 <b>접근성 기준 위반</b>입니다</span></li>
+            <li><b><code>user-scalable=no</code> <em>쓰지 않음</em></b><span>핀치 줌을 막는 것은 <b>접근성 기준 위반</b>입니다</span></li>
             <li><b>두 가지 설정 <em>글자만 / 화면 전체</em></b><span>두 설정은 따로 켜지므로 <b>둘 다</b> 확인해야 합니다</span></li>
           </ol>
         </div>
@@ -176,7 +176,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>확대와 글자 크기를 쓰는 경우</h3>
+            <h3>글자 크기 설정에 대비해야 하는 경우</h3>
             <ul>
               <li>글자 크기를 정할 때. <b>rem</b> 단위로 정합니다</li>
               <li>상자 높이를 정할 때. 높이를 <b>고정하지 말고</b> <code>min-height</code>로 정합니다</li>
@@ -184,7 +184,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>확대와 글자 크기를 쓰지 않는 경우</h3>
+            <h3>글자를 키울 수 없게 만드는 실수</h3>
             <ul>
               <li><code>user-scalable=no</code>나 <code>maximum-scale=1</code>로 확대를 막을 때. <b>접근성 기준 위반</b>입니다</li>
               <li><code>font-size</code>를 px로 고정할 때</li>
@@ -193,7 +193,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>확대와 글자 크기 대신 다른 것을 써야 하는 경우</b> — 기기의 배율은 <a href="dpr.html">화면 밀도</a>, 폭에 따른 배치는 <a href="breakpoint.html">브레이크포인트</a>, 글줄 길이는 <a href="../items/container.html">컨테이너</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>글자 크기와 이어지는 주제는 다른 항목에서 다룹니다</b> — 기기가 원래 가진 배율은 <a href="dpr.html">화면 밀도</a>에서, 화면 폭에 따라 배치를 바꾸는 방법은 <a href="breakpoint.html">브레이크포인트</a>에서 다룹니다. 한 줄에 들어가는 글의 길이는 <a href="../items/container.html">컨테이너</a>를 보세요.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -201,21 +201,21 @@
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="font-family:var(--mono);font-size:9px;color:var(--accent);line-height:1.7;border:1px solid var(--line);border-radius:5px;background:var(--bg);padding:6px 7px">html { font-size: 100% }<br>.card { font-size: 0.95rem }</div><span style="font-size:8.5px;color:var(--fg-muted)">설정을 그대로 따라간다</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="font-family:var(--mono);font-size:9px;color:var(--accent);line-height:1.7;border:1px solid var(--line);border-radius:5px;background:var(--bg);padding:6px 7px">html { font-size: 100% }<br>.card { font-size: 0.95rem }</div><span style="font-size:8.5px;color:var(--fg-muted)">설정을 그대로 따라감</span></div>
             </div>
-            <figcaption><b>크기</b>글자 크기는 <b>rem</b>으로 정합니다</figcaption>
+            <figcaption><b>글자 크기를 rem으로 정하기</b>글자 크기는 <b>rem</b>으로 정합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="font-family:var(--mono);font-size:9px;color:var(--accent);line-height:1.7;border:1px solid var(--line);border-radius:5px;background:var(--bg);padding:6px 7px">.btn { min-height: 44px }<br>/* height 가 아니다 */</div><span style="font-size:8.5px;color:var(--fg-muted)">글이 커지면 같이 늘어난다</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="font-family:var(--mono);font-size:9px;color:var(--accent);line-height:1.7;border:1px solid var(--line);border-radius:5px;background:var(--bg);padding:6px 7px">.btn { min-height: 44px }<br>/* height 가 아니다 */</div><span style="font-size:8.5px;color:var(--fg-muted)">글이 커지면 같이 늘어남</span></div>
             </div>
-            <figcaption><b>높이</b>높이는 <code>min-height</code>로 정합니다</figcaption>
+            <figcaption><b>상자 높이를 min-height로 정하기</b>높이는 <code>min-height</code>로 정합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">메타 태그</span><span style="font-family:var(--mono);font-size:9.5px;color:var(--accent)">width=device-width, initial-scale=1</span></div><span style="font-size:8.5px;color:var(--fg-muted)">확대를 막는 말을 넣지 않는다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">메타 태그</span><span style="font-family:var(--mono);font-size:9.5px;color:var(--accent)">width=device-width, initial-scale=1</span></div><span style="font-size:8.5px;color:var(--fg-muted)">확대를 막는 값을 넣지 않음</span></div>
             </div>
-            <figcaption><b>뷰포트</b><a href="viewport.html">뷰포트 단위</a>에서 다루는 것과 같은 뷰포트 메타 태그입니다</figcaption>
+            <figcaption><b>뷰포트 메타 태그로 확대 허용하기</b><a href="viewport.html">뷰포트 단위</a>에서 다루는 것과 같은 뷰포트 메타 태그입니다</figcaption>
           </figure>
         </div>
       </section>
@@ -237,14 +237,14 @@
 .row { <span class="a">display</span>: flex; <span class="a">flex-wrap</span>: wrap; <span class="a">gap</span>: <span class="a">var</span>(--s2); }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>지킬 규칙</th><th>지키는 방법</th></tr></thead>
           <tbody>
-            <tr><td><code>rem</code>으로</td><td>뿌리 요소의 글자 크기에 곱하는 배수라서 <b>사용자 설정을 그대로</b> 따라갑니다</td></tr>
-            <tr><td><code>html</code>에 px 을 박지 않는다</td><td>뿌리 요소에 <code>font-size: 16px</code>을 적으면 <b>사용자의 글자 크기 설정이 무시</b>됩니다</td></tr>
-            <tr><td><code>min-height</code></td><td><a href="touchtarget.html">터치 타깃</a> 최소 크기를 지키면서도, 글이 커지면 상자가 같이 늘어납니다</td></tr>
-            <tr><td><code>flex-wrap: wrap</code></td><td>글자가 커져 한 줄에 들어가지 않으면 <b>다음 줄로 넘어가게</b> 둡니다</td></tr>
-            <tr><td><code>user-scalable=no</code></td><td>쓰지 않습니다. <b>WCAG 1.4.4 위반</b>입니다</td></tr>
-            <tr><td>확인하는 법</td><td>브라우저는 <b>200%</b>로 확대하고, 폰은 <b>글자 크기를 최대</b>로 두고 화면을 열어 봅니다</td></tr>
+            <tr><td>글자 크기는 <code>rem</code>으로</td><td>뿌리 요소의 글자 크기에 곱하는 배수라서 <b>사용자 설정을 그대로</b> 따라갑니다</td></tr>
+            <tr><td><code>html</code>에 px을 고정하지 않기</td><td>뿌리 요소에 <code>font-size: 16px</code>을 적으면 <b>사용자의 글자 크기 설정이 무시</b>됩니다</td></tr>
+            <tr><td>높이는 <code>min-height</code>로</td><td><a href="touchtarget.html">터치 타깃</a> 최소 크기를 지키면서도, 글이 커지면 상자가 같이 늘어납니다</td></tr>
+            <tr><td><code>flex-wrap: wrap</code>으로 줄 넘기기</td><td>글자가 커져 한 줄에 들어가지 않으면 <b>다음 줄로 넘어가게</b> 둡니다</td></tr>
+            <tr><td><code>user-scalable=no</code> 쓰지 않기</td><td>확대를 막으면 <b>WCAG 1.4.4 위반</b>입니다</td></tr>
+            <tr><td>확인하는 방법</td><td>브라우저는 <b>200%</b>로 확대하고, 폰은 <b>글자 크기를 최대</b>로 두고 화면을 열어 봅니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -255,8 +255,8 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>서버는 설정을 모른다</th><td>사용자의 글자 크기 설정은 <b>서버로 오는 요청에 담기지 않으므로</b>, 화면 쪽에서 CSS로만 다룹니다.</td></tr>
-            <tr><th>글이 길어지는 것과 같은 문제</th><td>글자를 키웠을 때 깨지는 자리는 번역해서 글이 길어질 때 깨지는 자리와 <b>거의 같아서</b>, 한 번 고치면 두 문제가 함께 해결됩니다.</td></tr>
+            <tr><th>서버로 전달되지 않는 설정</th><td>사용자의 글자 크기 설정은 <b>서버로 오는 요청에 담기지 않으므로</b>, 화면 쪽에서 CSS로만 다룹니다.</td></tr>
+            <tr><th>번역으로 글이 길어질 때와 같은 문제</th><td>글자를 키웠을 때 깨지는 자리는 번역해서 글이 길어질 때 깨지는 자리와 <b>거의 같아서</b>, 한 번 고치면 두 문제가 함께 해결됩니다.</td></tr>
           </tbody>
         </table>
         </div>

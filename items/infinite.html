@@ -76,20 +76,20 @@
         <p>겹쳐 뜨는 부품들은 모양만 보고는 구별하기 어렵지만, 아래 네 가지를 따져 보면 어느 부품인지 가려낼 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>자리</th><th>데려가는 곳</th><th>지금 위치</th><th>감당하는 개수</th></tr></thead>
+          <thead><tr><th></th><th>화면에 놓이는 자리</th><th>누르면 데려가는 곳</th><th>지금 위치를 알리는 방법</th><th>담을 수 있는 항목 수</th></tr></thead>
           <tbody>
-            <tr><td>앱바 · 헤더</td><td>화면 위</td><td>전역 · 상위</td><td>제목으로</td><td class="none">해당 없음</td></tr>
-            <tr><td>사이드바 내비게이션</td><td>화면 옆</td><td>전역</td><td>강조로</td><td>10~20</td></tr>
-            <tr><td>바텀 탭바</td><td>화면 아래</td><td>전역</td><td>아이콘 강조</td><td><b>3~5</b></td></tr>
+            <tr><td>앱바 · 헤더</td><td>화면 위</td><td>전역 또는 상위 화면</td><td>제목으로</td><td class="none">해당 없음</td></tr>
+            <tr><td>사이드바 내비게이션</td><td>화면 옆</td><td>전역</td><td>항목 강조로</td><td>10~20</td></tr>
+            <tr><td>바텀 탭바</td><td>화면 아래</td><td>전역</td><td>아이콘 강조로</td><td><b>3~5</b></td></tr>
             <tr><td>탭</td><td>내용 위</td><td><b>같은 화면 안</b></td><td>밑줄로</td><td>2~6</td></tr>
-            <tr><td>브레드크럼</td><td>내용 위</td><td>상위로</td><td><b>계층 전체</b></td><td>3~5단계</td></tr>
+            <tr><td>브레드크럼</td><td>내용 위</td><td>상위 단계</td><td><b>계층 전체</b>를 보여 줌</td><td>3~5단계</td></tr>
             <tr><td>페이지네이션</td><td>목록 아래</td><td>같은 목록의 다른 쪽</td><td>쪽 번호로</td><td>제한 없음</td></tr>
-            <tr class="me"><td><b>무한 스크롤</b></td><td>목록 끝</td><td>같은 목록 이어서</td><td class="none">안 보여 준다</td><td>제한 없음</td></tr>
+            <tr class="me"><td><b>무한 스크롤</b></td><td>목록 끝</td><td>같은 목록의 다음 묶음</td><td>보여 주지 않음</td><td>제한 없음</td></tr>
             <tr><td>스테퍼</td><td>내용 위 · 옆</td><td><b>같은 흐름</b>의 다음 단계</td><td>번호와 완료 표시로</td><td>3~5단계</td></tr>
             <tr><td>트리뷰</td><td>화면 옆</td><td>계층 <b>아래로</b></td><td>펼친 가지로</td><td>깊이 3단까지</td></tr>
-            <tr><td>앵커 내비</td><td>내용 옆</td><td><b>같은 문서 안</b></td><td>보는 절을 밝혀</td><td>5~12</td></tr>
-            <tr><td>뒤로가기</td><td>화면 왼쪽 위</td><td>바로 <b>앞 화면</b></td><td class="none">안 보여 준다</td><td>하나</td></tr>
-            <tr><td>메가 메뉴</td><td>앱바 아래</td><td>전역 · 여러 갈래</td><td>열린 갈래로</td><td>20~60</td></tr>
+            <tr><td>앵커 내비</td><td>내용 옆</td><td><b>같은 문서 안</b></td><td>보는 절을 강조해</td><td>5~12</td></tr>
+            <tr><td>뒤로가기</td><td>화면 왼쪽 위</td><td>바로 <b>앞 화면</b></td><td>보여 주지 않음</td><td>하나</td></tr>
+            <tr><td>메가 메뉴</td><td>앱바 아래</td><td>전역, 여러 분류</td><td>열린 분류로</td><td>20~60</td></tr>
           </tbody>
         </table>
         </div>
@@ -105,37 +105,37 @@
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="첫 묶음"><div class="mini__bg"></div><div class="mini__bg"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div></div></div>
             </div>
-            <figcaption>첫 묶음<span>목록 전체를 한 번에 받지 않고 보통 10~30건씩 받습니다</span></figcaption>
+            <figcaption>첫 묶음을 받았을 때<span>목록 전체를 한 번에 받지 않고 보통 10~30건씩 받습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="더 불러오는 중"><div class="mini__bg"></div><div class="mini__bg"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div></div><div style="position:absolute;left:0;right:0;bottom:8px;display:grid;place-items:center"><span class="spn spn--sm" style="width:9px;height:9px;border-width:1.5px"></span></div></div>
             </div>
-            <figcaption>불러오는 중<span>끝에 가까워지면 다음 묶음을 미리 요청합니다. <b>끝에 닿기 전에</b> 요청하면 스크롤이 멈추지 않고 이어집니다</span></figcaption>
+            <figcaption>다음 묶음을 불러오는 중<span>끝에 가까워지면 다음 묶음을 미리 요청합니다. <b>끝에 닿기 전에</b> 요청하면 스크롤이 멈추지 않고 이어집니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="더 보기 버튼"><div class="mini__bg"></div><div class="mini__bg"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div></div><div style="position:absolute;left:0;right:0;bottom:7px;text-align:center"><span class="mini__btn mini__btn--ghost" style="font-size:6px;padding:2px 6px">더 보기</span></div></div>
             </div>
-            <figcaption>더 보기<span>언제 더 불러올지를 사용자가 정합니다. 그래서 <b>푸터까지 내려갈 수 있습니다</b></span></figcaption>
+            <figcaption>더 보기 버튼으로 바꿨을 때<span>언제 더 불러올지를 사용자가 정합니다. 그래서 <b>푸터까지 내려갈 수 있습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="끝에 닿음"><div class="mini__bg"></div><div class="mini__bg"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div></div><div style="position:absolute;left:0;right:0;bottom:7px;text-align:center;font-size:5.5px;color:var(--fg-muted);border-top:1px solid var(--line);padding-top:4px">여기까지입니다</div></div>
             </div>
-            <figcaption>끝<span><b>끝 표시를 꼭 둡니다.</b> 끝 표시가 없으면 사용자는 더 불러올 것이 남았는지 몰라 계속 기다립니다</span></figcaption>
+            <figcaption>목록 끝에 닿았을 때<span><b>끝 표시를 꼭 둡니다.</b> 끝 표시가 없으면 사용자는 더 불러올 것이 남았는지 몰라 계속 기다립니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="불러오기 실패"><div class="mini__bg"></div><div class="mini__bg"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div></div><div style="position:absolute;left:0;right:0;bottom:7px;text-align:center;font-size:5.5px;color:var(--danger);font-weight:700">불러오지 못했습니다 · 다시</div></div>
             </div>
-            <figcaption>실패<span>실패한 자리에서 다시 시도할 수 있게 합니다. 이미 불러온 목록은 그대로 둡니다</span></figcaption>
+            <figcaption>불러오기에 실패했을 때<span>실패한 자리에서 다시 시도할 수 있게 합니다. 이미 불러온 목록은 그대로 둡니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="푸터에 닿지 못하는 문제"><div class="mini__bg"></div><div class="mini__bg" style="opacity:.45"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div></div><div style="position:absolute;left:6px;bottom:6px;font-size:5.5px;color:var(--danger);font-weight:700">푸터에 못 닿음</div></div>
             </div>
-            <figcaption>푸터 문제<span>끝에 닿을 때마다 아래에 항목이 더 붙기 때문에 <b>푸터까지 내려갈 수 없습니다</b></span></figcaption>
+            <figcaption>푸터에 닿지 못하는 문제<span>끝에 닿을 때마다 아래에 항목이 더 붙기 때문에 <b>푸터까지 내려갈 수 없습니다</b></span></figcaption>
           </figure>
         </div>
       </section>
@@ -193,7 +193,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>무한 스크롤 대신 다른 것을 써야 하는 경우</b> — 돌아와야 하면 <a href="pagination.html">페이지네이션</a>, 멈출 자리를 주려면 <b>더 보기</b> 버튼, 그리는 양이 문제면 가상 스크롤(10부), 결과가 없으면 <a href="empty.html">빈 상태</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>무한 스크롤 대신 다른 것을 써야 하는 경우</b> — 항목을 찾아 다시 돌아와야 하는 목록이면 <a href="pagination.html">페이지네이션</a>을 쓰고, 사용자에게 멈출 자리를 주려면 <b>더 보기</b> 버튼을 둡니다. 화면에 그리는 양이 문제라면 가상 스크롤(10부)을 함께 쓰고, 결과가 하나도 없으면 <a href="empty.html">빈 상태</a>를 보여 줍니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -203,19 +203,19 @@
             <div class="shot">
               <div class="mini" role="img" aria-label="피드 무한 스크롤 재현"><div class="mini__bg"></div><div class="mini__bg"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div></div><div style="position:absolute;left:0;right:0;bottom:8px;display:grid;place-items:center"><span class="spn spn--sm" style="width:9px;height:9px;border-width:1.5px"></span></div></div>
             </div>
-            <figcaption><b>피드</b>훑어보는 화면이라서 무한 스크롤이 가장 잘 맞습니다</figcaption>
+            <figcaption><b>훑어보는 피드</b>훑어보는 화면이라서 무한 스크롤이 가장 잘 맞습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div class="mini" role="img" aria-label="더 보기 재현"><div class="mini__bg"></div><div class="mini__bg"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div></div><div style="position:absolute;left:0;right:0;bottom:7px;text-align:center"><span class="mini__btn mini__btn--ghost" style="font-size:6px;padding:2px 6px">더 보기</span></div></div>
             </div>
-            <figcaption><b>더 보기</b><b>무한 스크롤과 페이지네이션의 중간</b>입니다. 버튼을 눌러야 해서 흐름이 조금 끊기지만 푸터에 닿을 수 있고 키보드로도 쓸 수 있습니다</figcaption>
+            <figcaption><b>더 보기 버튼으로 불러오기</b><b>무한 스크롤과 페이지네이션의 중간</b>입니다. 버튼을 눌러야 해서 흐름이 조금 끊기지만 푸터에 닿을 수 있고 키보드로도 쓸 수 있습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div class="mini" role="img" aria-label="진행 표시가 붙은 재현"><div class="mini__bg"></div><div class="mini__bg"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div></div><div style="position:absolute;left:0;right:0;bottom:7px;text-align:center"><span class="mini__btn mini__btn--ghost" style="font-size:5.5px;padding:2px 5px">더 보기</span><div style="font-size:5px;color:var(--fg-muted);margin-top:2px">48 / 1,284</div></div></div>
             </div>
-            <figcaption><b>개수 표시</b>불러온 건수와 전체 건수를 함께 보여 줘서, 전체 규모를 알 수 없다는 무한 스크롤의 약점을 보완합니다</figcaption>
+            <figcaption><b>불러온 건수와 전체 건수 보여 주기</b>불러온 건수와 전체 건수를 함께 보여 줘서, 전체 규모를 알 수 없다는 무한 스크롤의 약점을 보완합니다</figcaption>
           </figure>
         </div>
       </section>
@@ -236,12 +236,12 @@
 <span class="a">if</span> (busy || done) <span class="a">return</span>;</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td><kbd>Tab</kbd></td><td>자동 로드는 <b>키보드 사용자에게 불리합니다</b>. 목록 끝을 지나 그 아래로 갈 방법이 없는데, 더 보기 버튼을 두면 이 문제가 해결됩니다</td></tr>
             <tr><td><code>aria-live</code></td><td>'12건 더 불러왔습니다'처럼 알립니다. 알리지 않으면 스크린 리더 사용자는 목록이 늘어난 것을 모릅니다</td></tr>
-            <tr><td>더 보기 버튼</td><td>버튼을 누른 뒤 <b>새로 들어온 첫 항목으로</b> 포커스를 옮기면 이어서 읽을 수 있습니다</td></tr>
-            <tr><td>끝</td><td>'여기까지입니다'처럼 글로 끝을 알립니다</td></tr>
+            <tr><td>더 보기 버튼을 눌렀을 때</td><td>버튼을 누른 뒤 <b>새로 들어온 첫 항목으로</b> 포커스를 옮기면 이어서 읽을 수 있습니다</td></tr>
+            <tr><td>목록 끝에 닿았을 때</td><td>'여기까지입니다'처럼 글로 끝을 알립니다</td></tr>
             <tr><td><code>prefers-reduced-motion</code></td><td>이 설정이 켜져 있으면 새 묶음이 나타나는 애니메이션을 끕니다</td></tr>
           </tbody>
         </table>
@@ -253,11 +253,11 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>커서가 거의 필수</th><td>오프셋으로 이어 붙이면 묶음을 받는 사이에 새 항목이 들어왔을 때 <b>같은 항목이 두 번</b> 보입니다. 마지막으로 받은 항목의 ID나 시각을 커서로 넘기면 이 문제가 생기지 않습니다.</td></tr>
-            <tr><th>중복 요청 잠금</th><td>스크롤이 빠르면 센티널이 짧은 사이에 여러 번 감지됩니다. 요청 중임을 나타내는 <code>busy</code> 플래그가 없으면 같은 묶음을 서너 번 요청하게 되는데, 무한 스크롤에서 <b>가장 흔한 버그</b>입니다.</td></tr>
+            <tr><th>오프셋 대신 커서로 이어 붙이기</th><td>오프셋으로 이어 붙이면 묶음을 받는 사이에 새 항목이 들어왔을 때 <b>같은 항목이 두 번</b> 보입니다. 마지막으로 받은 항목의 ID나 시각을 커서로 넘기면 이 문제가 생기지 않습니다.</td></tr>
+            <tr><th>같은 묶음을 두 번 요청하지 않게 잠그기</th><td>스크롤이 빠르면 센티널이 짧은 사이에 여러 번 감지됩니다. 요청 중임을 나타내는 <code>busy</code> 플래그가 없으면 같은 묶음을 서너 번 요청하게 되는데, 무한 스크롤에서 <b>가장 흔한 버그</b>입니다.</td></tr>
             <tr><th>끝을 어떻게 아나</th><td>응답에 <code>hasMore</code>를 담아 더 있는지 알려 줍니다. '받은 수 &lt; 요청 수'로 끝을 추측하면 남은 항목 수가 묶음 크기와 정확히 맞아떨어질 때 틀립니다.</td></tr>
-            <tr><th>쌓이는 비용</th><td>1,000건을 이어 붙이면 DOM과 메모리도 그만큼 커집니다. 그래서 <b>가상 스크롤</b>로 화면에 보이는 만큼만 그리거나, 앞쪽 항목을 버리고 일정 개수만 유지하는 창(window) 방식을 씁니다.</td></tr>
-            <tr><th>돌아올 자리</th><td>뒤로가기로 돌아왔을 때 보던 자리를 되살리려면 <b>받아 둔 묶음과 스크롤 위치</b>를 함께 저장해야 합니다. 페이지네이션은 주소에 쪽 번호만 담으면 되지만, 무한 스크롤에서는 이 일을 직접 구현해야 합니다.</td></tr>
+            <tr><th>이어 붙일수록 쌓이는 비용</th><td>1,000건을 이어 붙이면 DOM과 메모리도 그만큼 커집니다. 그래서 <b>가상 스크롤</b>로 화면에 보이는 만큼만 그리거나, 앞쪽 항목을 버리고 일정 개수만 유지하는 창(window) 방식을 씁니다.</td></tr>
+            <tr><th>돌아왔을 때 보던 자리 되살리기</th><td>뒤로가기로 돌아왔을 때 보던 자리를 되살리려면 <b>받아 둔 묶음과 스크롤 위치</b>를 함께 저장해야 합니다. 페이지네이션은 주소에 쪽 번호만 담으면 되지만, 무한 스크롤에서는 이 일을 직접 구현해야 합니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -313,7 +313,7 @@
       </ol>
       <h2>함께 보면 좋은 항목</h2>
       <ol>
-        <li><span class="na"><b>가상 스크롤</b><em>10부</em></span></li>
+        <li><a href="virtual.html"><b>가상 스크롤</b><em>10부</em></a></li>
         <li><a href="../items/skeleton.html"><b>스켈레톤</b><em>8부</em></a></li>
         <li><span class="na"><b>당겨 새로고침</b><em>9부</em></span></li>
         <li><a href="../items/empty.html"><b>빈 상태</b><em>8부</em></a></li>

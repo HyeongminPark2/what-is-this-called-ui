@@ -18,12 +18,12 @@
 <body>
 <div class="bar">
   <b>테이블 행</b>
-  <label>밀도 <select class="sel" id="d" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>줄의 밀도 <select class="sel" id="d" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="dense">빽빽하게</option>
     <option value="">보통</option>
     <option value="loose">넉넉하게</option>
   </select></label>
-  <label><input type="checkbox" id="whole"> 행 전체를 눌리게</label>
+  <label><input type="checkbox" id="whole"> 행 전체를 누를 수 있게 만들기</label>
 </div>
 
 <div class="pad">
@@ -74,8 +74,8 @@
     var n = Object.keys(sel).filter(function (k) { return sel[k]; }).length;
 
     var rd = document.getElementById('read');
-    rd.innerHTML = '한 줄 높이 <b>' + Math.round(h) + 'px</b> · 480px 에 <b>' + fit + '줄</b>' +
-      '<br>행 전체 누름 <b>' + (whole ? '켬' : '끔') + '</b> · 단추를 눌렀는데 행까지 이동한 횟수 <b>' + strayNav + '회</b>' +
+    rd.innerHTML = '한 줄 높이 <b>' + Math.round(h) + 'px</b> · 480px 높이에 <b>' + fit + '줄</b>이 들어감' +
+      '<br>행 전체를 누를 수 있게 만들기 <b>' + (whole ? '켬' : '끔') + '</b> · 단추를 눌렀는데 행까지 이동한 횟수 <b>' + strayNav + '회</b>' +
       (strayNav ? ' <span class="warn">(안쪽 단추의 눌림이 행까지 전달됩니다)</span>' : '') +
       (n ? '<br>고른 줄 <b>' + n + '개</b>' : '');
     rd.dataset.h = String(Math.round(h));

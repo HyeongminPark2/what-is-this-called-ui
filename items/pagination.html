@@ -75,20 +75,20 @@
         <p>겹쳐 뜨는 부품들은 모양만 보고는 구별하기 어렵지만, 아래 네 가지를 따져 보면 어느 부품인지 가려낼 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>자리</th><th>데려가는 곳</th><th>지금 위치</th><th>감당하는 개수</th></tr></thead>
+          <thead><tr><th></th><th>화면에 놓이는 자리</th><th>누르면 데려가는 곳</th><th>지금 위치를 알리는 방법</th><th>담을 수 있는 항목 수</th></tr></thead>
           <tbody>
-            <tr><td>앱바 · 헤더</td><td>화면 위</td><td>전역 · 상위</td><td>제목으로</td><td class="none">해당 없음</td></tr>
-            <tr><td>사이드바 내비게이션</td><td>화면 옆</td><td>전역</td><td>강조로</td><td>10~20</td></tr>
-            <tr><td>바텀 탭바</td><td>화면 아래</td><td>전역</td><td>아이콘 강조</td><td><b>3~5</b></td></tr>
+            <tr><td>앱바 · 헤더</td><td>화면 위</td><td>전역 또는 상위 화면</td><td>제목으로</td><td class="none">해당 없음</td></tr>
+            <tr><td>사이드바 내비게이션</td><td>화면 옆</td><td>전역</td><td>항목 강조로</td><td>10~20</td></tr>
+            <tr><td>바텀 탭바</td><td>화면 아래</td><td>전역</td><td>아이콘 강조로</td><td><b>3~5</b></td></tr>
             <tr><td>탭</td><td>내용 위</td><td><b>같은 화면 안</b></td><td>밑줄로</td><td>2~6</td></tr>
-            <tr><td>브레드크럼</td><td>내용 위</td><td>상위로</td><td><b>계층 전체</b></td><td>3~5단계</td></tr>
+            <tr><td>브레드크럼</td><td>내용 위</td><td>상위 단계</td><td><b>계층 전체</b>를 보여 줌</td><td>3~5단계</td></tr>
             <tr class="me"><td><b>페이지네이션</b></td><td>목록 아래</td><td>같은 목록의 다른 쪽</td><td>쪽 번호로</td><td>제한 없음</td></tr>
-            <tr><td>무한 스크롤</td><td>목록 끝</td><td>같은 목록 이어서</td><td class="none">안 보여 준다</td><td>제한 없음</td></tr>
+            <tr><td>무한 스크롤</td><td>목록 끝</td><td>같은 목록의 다음 묶음</td><td>보여 주지 않음</td><td>제한 없음</td></tr>
             <tr><td>스테퍼</td><td>내용 위 · 옆</td><td><b>같은 흐름</b>의 다음 단계</td><td>번호와 완료 표시로</td><td>3~5단계</td></tr>
             <tr><td>트리뷰</td><td>화면 옆</td><td>계층 <b>아래로</b></td><td>펼친 가지로</td><td>깊이 3단까지</td></tr>
-            <tr><td>앵커 내비</td><td>내용 옆</td><td><b>같은 문서 안</b></td><td>보는 절을 밝혀</td><td>5~12</td></tr>
-            <tr><td>뒤로가기</td><td>화면 왼쪽 위</td><td>바로 <b>앞 화면</b></td><td class="none">안 보여 준다</td><td>하나</td></tr>
-            <tr><td>메가 메뉴</td><td>앱바 아래</td><td>전역 · 여러 갈래</td><td>열린 갈래로</td><td>20~60</td></tr>
+            <tr><td>앵커 내비</td><td>내용 옆</td><td><b>같은 문서 안</b></td><td>보는 절을 강조해</td><td>5~12</td></tr>
+            <tr><td>뒤로가기</td><td>화면 왼쪽 위</td><td>바로 <b>앞 화면</b></td><td>보여 주지 않음</td><td>하나</td></tr>
+            <tr><td>메가 메뉴</td><td>앱바 아래</td><td>전역, 여러 분류</td><td>열린 분류로</td><td>20~60</td></tr>
           </tbody>
         </table>
         </div>
@@ -104,37 +104,37 @@
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="첫 쪽"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px;display:flex;gap:2px;align-items:center"><span style="border:1px solid var(--line);border-radius:2px;padding:0 3px;font-size:5px;color:var(--fg-faint)">‹</span><span style="background:var(--accent);color:#fff;border-radius:2px;padding:0 3px;font-size:5px">1</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">2</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">3</span></div></div>
             </div>
-            <figcaption>첫 쪽<span>이전 버튼은 <b>누를 수 없게</b> 막습니다. 버튼을 숨기지 말고 비활성 상태로 둡니다</span></figcaption>
+            <figcaption>첫 쪽을 보고 있을 때<span>이전 버튼은 <b>누를 수 없게</b> 막습니다. 버튼을 숨기지 말고 비활성 상태로 둡니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="가운데 쪽"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px;display:flex;gap:2px;align-items:center"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">‹</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">1</span><span style="background:var(--accent);color:#fff;border-radius:2px;padding:0 3px;font-size:5px">2</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">3</span></div></div>
             </div>
-            <figcaption>가운데<span>지금 쪽이 분명히 드러나야 합니다. <b>색만 바꾸면 구별하기 어렵습니다</b></span></figcaption>
+            <figcaption>가운데 쪽을 보고 있을 때<span>지금 쪽이 분명히 드러나야 합니다. <b>색만 바꾸면 구별하기 어렵습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="접힌 페이지네이션"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px;display:flex;gap:2px;align-items:center"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">1</span><span style="font-size:5px;color:var(--fg-muted)">…</span><span style="background:var(--accent);color:#fff;border-radius:2px;padding:0 3px;font-size:5px">9</span><span style="font-size:5px;color:var(--fg-muted)">…</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">18</span></div></div>
             </div>
-            <figcaption>접힘<span>첫 쪽과 끝 쪽, 지금 쪽 주변만 보여 줍니다. 쪽이 많을 때 기본으로 쓰는 형태입니다</span></figcaption>
+            <figcaption>쪽이 많아 가운데를 접었을 때<span>첫 쪽과 끝 쪽, 지금 쪽 주변만 보여 줍니다. 쪽이 많을 때 기본으로 쓰는 형태입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="이전 다음만 있는 꼴"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px;display:flex;gap:3px;align-items:center;justify-content:center"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 4px;font-size:5px">‹ 이전</span><span style="font-size:5px;color:var(--fg-muted)">2 / 18</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 4px;font-size:5px">다음 ›</span></div></div>
             </div>
-            <figcaption>이전 · 다음<span>좁은 화면이나 커서 방식에서 씁니다. <b>원하는 쪽으로 건너뛸 수는 없습니다</b></span></figcaption>
+            <figcaption>이전과 다음 버튼만 둘 때<span>좁은 화면이나 커서 방식에서 씁니다. <b>원하는 쪽으로 건너뛸 수는 없습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="쪽을 불러오는 중"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px;display:flex;gap:2px;align-items:center;opacity:.6"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">‹</span><span class="spn spn--sm" style="width:7px;height:7px;border-width:1.5px"></span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">›</span></div></div>
             </div>
-            <figcaption>불러오는 중<span><b>목록 부분만</b> 로딩 상태로 바꿉니다. 쪽 번호 줄까지 사라지면 다른 쪽으로 옮길 방법이 없어집니다</span></figcaption>
+            <figcaption>새 쪽을 불러오는 중<span><b>목록 부분만</b> 로딩 상태로 바꿉니다. 쪽 번호 줄까지 사라지면 다른 쪽으로 옮길 방법이 없어집니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="쪽당 줄 수"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px;display:flex;gap:3px;align-items:center;font-size:5px;color:var(--fg-muted)"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px">쪽당 20 ▾</span><span style="margin-left:auto">1–20 / 137</span></div></div>
             </div>
-            <figcaption>쪽당 줄 수<span>사용자가 바꿀 수 있게 두면 좋습니다. 줄 수를 바꾸면 <b>1쪽으로 돌아갑니다</b></span></figcaption>
+            <figcaption>쪽당 줄 수를 고르게 할 때<span>사용자가 바꿀 수 있게 두면 좋습니다. 줄 수를 바꾸면 <b>1쪽으로 돌아갑니다</b></span></figcaption>
           </figure>
         </div>
       </section>
@@ -190,7 +190,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>페이지네이션 대신 다른 것을 써야 하는 경우</b> — 흘러가는 피드면 <a href="infinite.html">무한 스크롤</a>, 결과가 없으면 <a href="empty.html">빈 상태</a>, 쪽을 바꾸는 동안은 <a href="skeleton.html">스켈레톤</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>페이지네이션 대신 다른 것을 써야 하는 경우</b> — 새 글이 계속 올라오는 피드라면 <a href="infinite.html">무한 스크롤</a>이 맞습니다. 결과가 하나도 없으면 쪽 번호 대신 <a href="empty.html">빈 상태</a>를 보여 주고, 쪽을 바꾸는 동안에는 목록 자리에 <a href="skeleton.html">스켈레톤</a>을 띄웁니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -200,19 +200,19 @@
             <div class="shot">
               <div class="mini" role="img" aria-label="숫자형 재현"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px;display:flex;gap:2px;align-items:center"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">1</span><span style="font-size:5px">…</span><span style="background:var(--accent);color:#fff;border-radius:2px;padding:0 3px;font-size:5px">9</span><span style="font-size:5px">…</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">18</span></div></div>
             </div>
-            <figcaption><b>숫자형</b>가장 흔한 형태로, 원하는 쪽으로 바로 건너뛸 수 있습니다</figcaption>
+            <figcaption><b>쪽 번호를 늘어놓는 숫자형</b>가장 흔한 형태로, 원하는 쪽으로 바로 건너뛸 수 있습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div class="mini" role="img" aria-label="이전 다음만 재현"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px;display:flex;gap:3px;align-items:center;justify-content:center"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 4px;font-size:5px">‹ 이전</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 4px;font-size:5px">다음 ›</span></div></div>
             </div>
-            <figcaption><b>이전 · 다음</b>커서 방식에서 씁니다. <b>전체 쪽 수를 모를 때</b>도 쓸 수 있습니다</figcaption>
+            <figcaption><b>이전과 다음 버튼만 두기</b>커서 방식에서 씁니다. <b>전체 쪽 수를 모를 때</b>도 쓸 수 있습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div class="mini" role="img" aria-label="표 아래 재현"><div class="mini__bg"></div><div style="margin-top:12px;padding:0 6px;display:flex;gap:3px;align-items:center;font-size:5px;color:var(--fg-muted)"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px">쪽당 20 ▾</span><span style="margin-left:auto">1–20 / 137</span></div></div>
             </div>
-            <figcaption><b>표 아래</b>쪽당 줄 수와 전체 건수를 함께 보여 줍니다. 관리 도구에서 표준처럼 쓰는 형태입니다</figcaption>
+            <figcaption><b>표 아래에 쪽당 줄 수와 함께 두기</b>쪽당 줄 수와 전체 건수를 함께 보여 줍니다. 관리 도구에서 표준처럼 쓰는 형태입니다</figcaption>
           </figure>
         </div>
       </section>
@@ -233,12 +233,12 @@
 history.pushState(<span class="a">null</span>, <span class="s">''</span>, <span class="s">'?page='</span> + at);</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td><kbd>Tab</kbd></td><td>쪽 번호마다 포커스가 한 번씩 거쳐 갑니다. 그래서 가운데 번호를 <b>접어</b> 두면 키보드 사용자도 덜 누르게 됩니다</td></tr>
             <tr><td><code>aria-current</code></td><td>지금 쪽에 <code>"page"</code> 값을 답니다. 색만으로는 스크린 리더에 전해지지 않습니다</td></tr>
             <tr><td><code>aria-label</code></td><td><b>‹</b> 같은 기호 버튼에는 '이전 쪽'처럼 이름을 붙입니다</td></tr>
-            <tr><td>비활성</td><td>첫 쪽과 끝 쪽에서는 <code>disabled</code>로 둡니다. 버튼을 없애면 쪽 번호들의 위치가 밀립니다</td></tr>
+            <tr><td>첫 쪽과 끝 쪽의 비활성 버튼</td><td>첫 쪽과 끝 쪽에서는 <code>disabled</code>로 둡니다. 버튼을 없애면 쪽 번호들의 위치가 밀립니다</td></tr>
             <tr><td>쪽을 바꾼 뒤</td><td>목록 맨 위로 <b>포커스를 옮기거나</b> 스크롤을 올립니다. 그러지 않으면 사용자는 화면의 어디가 바뀌었는지 알 수 없습니다</td></tr>
           </tbody>
         </table>
@@ -250,10 +250,10 @@ history.pushState(<span class="a">null</span>, <span class="s">''</span>, <span 
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>오프셋 vs 커서</th><td><code>?page=9</code>는 앞에서 몇 건을 건너뛸지 정하는 <b>오프셋</b> 방식입니다. 구현은 쉽지만 뒤쪽 쪽일수록 질의가 느려지고, 쪽을 넘기는 사이에 새 항목이 들어오면 <b>같은 항목을 두 번</b> 보게 됩니다. 마지막으로 본 항목을 기준으로 다음 묶음을 가져오는 <b>커서</b> 방식은 이런 문제가 없지만, 특정 쪽으로 건너뛸 수 없어서 '이전/다음'만 쓸 수 있습니다.</td></tr>
-            <tr><th>전체 건수의 값</th><td>큰 표에서 <code>COUNT(*)</code>는 비용이 큽니다. 그래서 '약 1,200건'처럼 근사치를 보여 주거나, 전체 건수를 아예 보여 주지 않고 <b>이전/다음</b>만 두는 방법도 있습니다.</td></tr>
-            <tr><th>쪽당 줄 수 = 상한</th><td>쪽당 줄 수는 사용자가 정하게 두되 <b>서버에서 상한</b>을 겁니다. <code>?per=100000</code> 같은 요청을 그대로 받으면 서버에 큰 부하를 주는 공격 수단이 됩니다.</td></tr>
-            <tr><th>주소가 곧 상태</th><td>쪽 번호와 정렬, 필터가 모두 주소에 들어 있으면 화면이 이 상태를 따로 저장하지 않아도 됩니다. 공유와 뒤로가기, 새로고침도 따로 구현할 필요 없이 제대로 동작합니다.</td></tr>
+            <tr><th>오프셋 방식과 커서 방식</th><td><code>?page=9</code>는 앞에서 몇 건을 건너뛸지 정하는 <b>오프셋</b> 방식입니다. 구현은 쉽지만 뒤쪽 쪽일수록 질의가 느려지고, 쪽을 넘기는 사이에 새 항목이 들어오면 <b>같은 항목을 두 번</b> 보게 됩니다. 마지막으로 본 항목을 기준으로 다음 묶음을 가져오는 <b>커서</b> 방식은 이런 문제가 없지만, 특정 쪽으로 건너뛸 수 없어서 '이전/다음'만 쓸 수 있습니다.</td></tr>
+            <tr><th>전체 건수를 세는 비용</th><td>큰 표에서 <code>COUNT(*)</code>는 비용이 큽니다. 그래서 '약 1,200건'처럼 근사치를 보여 주거나, 전체 건수를 아예 보여 주지 않고 <b>이전/다음</b>만 두는 방법도 있습니다.</td></tr>
+            <tr><th>쪽당 줄 수에 서버 상한 걸기</th><td>쪽당 줄 수는 사용자가 정하게 두되 <b>서버에서 상한</b>을 겁니다. <code>?per=100000</code> 같은 요청을 그대로 받으면 서버에 큰 부하를 주는 공격 수단이 됩니다.</td></tr>
+            <tr><th>화면 상태를 주소에 담기</th><td>쪽 번호와 정렬, 필터가 모두 주소에 들어 있으면 화면이 이 상태를 따로 저장하지 않아도 됩니다. 공유와 뒤로가기, 새로고침도 따로 구현할 필요 없이 제대로 동작합니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -311,8 +311,8 @@ history.pushState(<span class="a">null</span>, <span class="s">''</span>, <span 
       <ol>
         <li><a href="../items/skeleton.html"><b>스켈레톤</b><em>8부</em></a></li>
         <li><a href="../items/empty.html"><b>빈 상태</b><em>8부</em></a></li>
-        <li><span class="na"><b>데이터 테이블</b><em>10부</em></span></li>
-        <li><span class="na"><b>가상 스크롤</b><em>10부</em></span></li>
+        <li><a href="table.html"><b>데이터 테이블</b><em>10부</em></a></li>
+        <li><a href="virtual.html"><b>가상 스크롤</b><em>10부</em></a></li>
       </ol>
       <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>

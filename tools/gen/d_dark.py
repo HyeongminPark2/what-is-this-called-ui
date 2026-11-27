@@ -31,7 +31,7 @@ D = dict(
   axes_lede="토큰은 눈에 보이는 부품이 아니라 값을 어떻게 쓸지 <b>정해 둔 규칙</b>입니다. 그래서 생김새 대신 아래 네 가지를 물어보면 토큰끼리 무엇이 다른지 가려집니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>위 카드는 토큰만 쓰고, 아래 카드는 <code>#ffffff</code>를 코드에 <b>직접 적어</b> 두었습니다.
-          <b>어둡게 켜기</b>를 눌러 보면 아래 카드만 하얗게 남는데, 다크 모드가 깨졌다는 제보는 대부분 이렇게 색을 직접 적어 둔 자리에서 나옵니다.
+          <b>어두운 모드로 바꾸기</b>를 눌러 보면 아래 카드만 하얗게 남는데, 다크 모드가 깨졌다는 제보는 대부분 이렇게 색을 직접 적어 둔 자리에서 나옵니다.
           모드를 바꿀 때마다 글자의 대비비도 다시 재서 보여 줍니다.</p>
         </div>''',
   names=rows([
@@ -48,19 +48,19 @@ D = dict(
   ]),
   axes=ax("다크 모드"),
   oneline="다크 모드는 <b>색을 뒤집는 일이 아니라 값을 한 벌 더 만드는 일</b>입니다. 그래서 값만 바꿔 끼워 어두운 화면으로 바꿀 수 있는 것은 처음부터 토큰을 쓴 화면뿐입니다.",
-  s4_title="모드", s4_hint="쓰임마다 달라지는 규칙",
+  s4_title="쓰임별로 정한 두 모드의 값", s4_hint="쓰임마다 밝은 쪽과 어두운 쪽 값을 고르는 규칙",
   states=states([
-    (pair("#ffffff", "#15181e", "--bg", "바탕"), "바탕", "순검정(<code>#000</code>)은 눈이 쉽게 피로해지므로 <b>#121~#18</b> 언저리의 색을 씁니다"),
-    (pair("#f6f8fb", "#1c2029", "--surface", "떠 있는 면"), "면", "밝은 쪽에서는 더 희게, <b>어두운 쪽에서는 더 밝게</b> 칠해서 방향이 뒤집힙니다"),
-    (pair("#14161a", "#e8ebf0", "--fg", "본문 글"), "글", "어두운 쪽 글자는 순백(<code>#fff</code>)보다 밝기를 살짝 낮춥니다"),
-    (pair("#2f6df6", "#6f9bff", "--accent", "강조"), "강조", "밝은 쪽과 같은 파랑을 쓰면 어두운 바탕에서 <b>대비가 모자랍니다</b>"),
-    (pair("#e4e8ee", "#272c35", "--line", "선"), "선", "어두운 쪽에서는 선을 긋는 것보다 <b>면의 밝기 차</b>로 나누는 편이 더 잘 보입니다"),
+    (pair("#ffffff", "#15181e", "--bg", "바탕"), "페이지 바탕", "순검정(<code>#000</code>)은 눈이 쉽게 피로해지므로 <b>#121~#18</b> 언저리의 색을 씁니다"),
+    (pair("#f6f8fb", "#1c2029", "--surface", "떠 있는 면"), "떠 있는 면", "밝은 쪽에서는 더 희게, <b>어두운 쪽에서는 더 밝게</b> 칠해서 방향이 뒤집힙니다"),
+    (pair("#14161a", "#e8ebf0", "--fg", "본문 글"), "본문 글자", "어두운 쪽 글자는 순백(<code>#fff</code>)보다 밝기를 살짝 낮춥니다"),
+    (pair("#2f6df6", "#6f9bff", "--accent", "강조"), "강조색", "밝은 쪽과 같은 파랑을 쓰면 어두운 바탕에서 <b>대비가 모자랍니다</b>"),
+    (pair("#e4e8ee", "#272c35", "--line", "선"), "구분선", "어두운 쪽에서는 선을 긋는 것보다 <b>면의 밝기 차</b>로 나누는 편이 더 잘 보입니다"),
     ('''              <div style="display:grid;gap:7px;width:100%;max-width:150px">
                 <span style="display:block;height:34px;border-radius:8px;background:#ffffff;border:1px solid var(--line);box-shadow:0 6px 14px rgba(20,22,26,.16)"></span>
                 <span style="display:block;height:34px;border-radius:8px;background:#1c2029;border:1px solid #2b313b"></span>
                 <span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted);text-align:center">--e2</span>
                 <span style="font-size:10.5px;color:var(--fg-faint);text-align:center">그림자</span></div>''',
-     "그림자", "어두운 바탕에서는 그림자가 <b>잘 보이지 않습니다</b>. 그래서 그림자 대신 면을 밝게 칠해 높이를 나타냅니다"),
+     "그림자로 높이를 나타낼 때", "어두운 바탕에서는 그림자가 <b>잘 보이지 않습니다</b>. 그래서 그림자 대신 면을 밝게 칠해 높이를 나타냅니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -87,30 +87,31 @@ D = dict(
     "인쇄용 화면이나 문서일 때",
     "'요즘 다들 하니까'라는 이유뿐일 때. 두 벌을 <b>계속 관리할</b> 사람이 없으면 한쪽 값이 고쳐지지 않은 채 남아 화면이 어긋납니다",
   ]),
-  instead='색을 쓰임으로 먼저 정리하는 것이 <a href="color.html">색 토큰</a>이고, 어두운 쪽의 높이 표현은 <a href="elevation.html">고도</a>에서 이어집니다.',
+  instead_title="다크 모드와 함께 보면 좋은 항목",
+  instead='다크 모드를 만들기 전에 색을 쓰임별로 정리하는 방법은 <a href="color.html">색 토큰</a> 항목에서 다루고, 어두운 화면에서 높이를 나타내는 방법은 <a href="elevation.html">고도</a> 항목에서 이어서 설명합니다.',
   cases=cases([
     ('''              <div style="display:grid;gap:8px;width:100%;max-width:220px;font-size:12px">
                 <label style="display:flex;align-items:center;gap:8px"><input type="radio" disabled checked style="accent-color:var(--accent)"> 시스템 설정 따름</label>
                 <label style="display:flex;align-items:center;gap:8px"><input type="radio" disabled> 밝게</label>
                 <label style="display:flex;align-items:center;gap:8px"><input type="radio" disabled> 어둡게</label>
               </div>''',
-     "세 갈래 설정", "설정을 <b>따름 / 밝게 / 어둡게</b> 세 가지로 둡니다. 켬과 끔 두 가지만 두면 OS 설정을 따르게 할 방법이 없습니다"),
+     "모드 설정을 세 가지로 두기", "설정을 <b>따름 / 밝게 / 어둡게</b> 세 가지로 둡니다. 켬과 끔 두 가지만 두면 OS 설정을 따르게 할 방법이 없습니다"),
     ('''              <div style="display:grid;gap:0;width:100%;max-width:220px;border-radius:10px;overflow:hidden;border:1px solid var(--line)">
-                <div style="background:#fff;color:#14161a;padding:10px;font-size:12px">밝은 쪽 — 위로 갈수록 <b>그림자</b>가 짙어진다</div>
-                <div style="background:#15181e;color:#e8ebf0;padding:10px;font-size:12px">어두운 쪽 — 위로 갈수록 <b>면이 밝아진다</b></div>
+                <div style="background:#fff;color:#14161a;padding:10px;font-size:12px">밝은 쪽은 위로 갈수록 <b>그림자</b>가 짙어짐</div>
+                <div style="background:#15181e;color:#e8ebf0;padding:10px;font-size:12px">어두운 쪽은 위로 갈수록 <b>면이 밝아짐</b></div>
               </div>''',
-     "높이의 방향", "같은 높이를 두 모드가 서로 다른 방법으로 나타냅니다"),
+     "두 모드에서 높이를 나타내는 방법", "같은 높이를 두 모드가 서로 다른 방법으로 나타냅니다"),
     ('''              <div style="display:grid;gap:6px;width:100%;max-width:220px">
                 <div style="background:#15181e;border-radius:8px;padding:9px;display:grid;gap:6px">
                   <span style="display:block;height:22px;border-radius:5px;background:#1c2029"></span>
                   <span style="display:block;height:22px;border-radius:5px;background:#ffffff"></span>
                 </div>
-                <span style="font-size:11px;color:var(--danger)">아래 칸만 색이 박혀 있다</span>
+                <span style="font-size:11px;color:var(--danger)">아래 칸만 색을 직접 적어 둠</span>
               </div>''',
-     "안 따라오는 한 칸", "다크 모드 오류 제보는 대부분 이런 경우입니다. <b>토큰을 쓰지 않은 자리</b>만 밝은 색으로 남습니다"),
+     "모드를 따라 바뀌지 않는 칸", "다크 모드 오류 제보는 대부분 이런 경우입니다. <b>토큰을 쓰지 않은 자리</b>만 밝은 색으로 남습니다"),
   ]),
-  s8_title="최소 코드와 규칙", s8_hint="두 벌을 어떻게 갈아 끼우나",
-  keys_heads="<th>규칙</th><th>지켜야 하는 것</th>",
+  s8_title="최소 코드와 지킬 규칙", s8_hint="두 벌의 값을 바꿔 끼우는 방법",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법과 이유</th>",
   code_lede="기본으로는 OS 설정을 따르고, 사용자가 직접 고른 값이 있으면 그 값을 우선합니다. 마지막으로 페이지를 처음 그릴 때 흰 화면이 잠깐 보이는 <b>깜빡임</b>을 막아야 합니다.",
   code='''<span class="c">/* 1) OS 설정을 기본으로 따른다 */</span>
 <span class="t">:root</span> { <span class="a">color-scheme</span>: light dark; <span class="a">--bg</span>: <span class="s">#fff</span>; <span class="a">--fg</span>: <span class="s">#14161a</span>; }
@@ -126,17 +127,17 @@ D = dict(
 <span class="t">document</span>.documentElement.dataset.theme =
   localStorage.getItem(<span class="s">'theme'</span>) ?? <span class="s">''</span>;''',
   keys=kbd([
-    ("<code>color-scheme</code>를 적는다", "스크롤바나 입력창처럼 <b>브라우저가 그리는 부품</b>까지 어두운 색으로 바뀌게 합니다. 이 속성 하나만 적어도 해결되는 제보가 많습니다"),
-    ("OS 를 기본으로", "<code>prefers-color-scheme</code>을 기본으로 따르고, 사용자가 고른 값이 있으면 그 위에 덮어씁니다"),
-    ("첫 칠을 먼저", "저장된 설정을 <code>&lt;head&gt;</code>에서 읽어 바로 적용합니다. 본문을 그린 뒤에 적용하면 <b>흰 화면이 한 번 번쩍</b>입니다"),
-    ("대비를 다시 잰다", "밝은 쪽에서 대비비 기준을 통과한 회색이 어두운 쪽에서도 통과한다는 보장은 없으므로 <b>두 벌 모두</b> 잽니다"),
-    ("사진과 아이콘", "흰 바탕이 들어 있는 그림이나 로고는 어두운 쪽 전용 그림을 따로 준비하거나 밝기를 낮춥니다"),
+    ("<code>color-scheme</code> 속성 적기", "스크롤바나 입력창처럼 <b>브라우저가 그리는 부품</b>까지 어두운 색으로 바뀌게 합니다. 이 속성 하나만 적어도 해결되는 제보가 많습니다"),
+    ("OS 설정을 기본으로 따르기", "<code>prefers-color-scheme</code>을 기본으로 따르고, 사용자가 고른 값이 있으면 그 위에 덮어씁니다"),
+    ("본문을 그리기 전에 모드 적용하기", "저장된 설정을 <code>&lt;head&gt;</code>에서 읽어 바로 적용합니다. 본문을 그린 뒤에 적용하면 <b>흰 화면이 한 번 번쩍</b>입니다"),
+    ("두 모드에서 대비비를 따로 재기", "밝은 쪽에서 대비비 기준을 통과한 회색이 어두운 쪽에서도 통과한다는 보장은 없으므로 <b>두 벌 모두</b> 잽니다"),
+    ("사진과 아이콘을 어두운 쪽에 맞추기", "흰 바탕이 들어 있는 그림이나 로고는 어두운 쪽 전용 그림을 따로 준비하거나 밝기를 낮춥니다"),
   ]),
   backend=rows([
-    ("설정은 어디에 두나", "모드 설정은 기기마다 다를 수 있어서 <b>기기에 저장하는 것이 기본</b>입니다. 계정에 저장하면 기기를 바꿔도 설정이 따라오지만, 밤에만 어둡게 쓰는 사람에게는 오히려 불편할 수 있습니다."),
-    ("서버 렌더링", "서버는 사용자의 OS 설정을 알 수 없기 때문에 첫 HTML은 늘 한쪽 모드의 색으로 만들어집니다. 브라우저는 이 HTML을 받은 뒤 <b>설정에 맞게 한 번 고쳐</b> 그리는데, 고쳐 그리기 전 잠깐 보이는 화면이 번쩍임입니다."),
-    ("메일 · PDF 처럼 밖으로 나가는 것", "메일 클라이언트는 다크 모드에서 보낸 쪽이 정한 색을 <b>자기 규칙대로 바꿉니다.</b> 그래서 중요한 내용은 색에만 기대지 않도록 만듭니다."),
-    ("이미지 두 벌", "로고처럼 모드마다 달라야 하는 그림은 <code>&lt;picture&gt;</code>로 두 벌을 보내거나 SVG 안에서 <code>currentColor</code>를 씁니다."),
+    ("모드 설정을 저장하는 곳", "모드 설정은 기기마다 다를 수 있어서 <b>기기에 저장하는 것이 기본</b>입니다. 계정에 저장하면 기기를 바꿔도 설정이 따라오지만, 밤에만 어둡게 쓰는 사람에게는 오히려 불편할 수 있습니다."),
+    ("서버 렌더링에서 생기는 번쩍임", "서버는 사용자의 OS 설정을 알 수 없기 때문에 첫 HTML은 늘 한쪽 모드의 색으로 만들어집니다. 브라우저는 이 HTML을 받은 뒤 <b>설정에 맞게 한 번 고쳐</b> 그리는데, 고쳐 그리기 전 잠깐 보이는 화면이 번쩍임입니다."),
+    ("메일과 PDF처럼 밖으로 보내는 문서", "메일 클라이언트는 다크 모드에서 보낸 쪽이 정한 색을 <b>자기 규칙대로 바꿉니다.</b> 그래서 중요한 내용은 색에만 기대지 않도록 만듭니다."),
+    ("모드마다 이미지를 따로 보내기", "로고처럼 모드마다 달라야 하는 그림은 <code>&lt;picture&gt;</code>로 두 벌을 보내거나 SVG 안에서 <code>currentColor</code>를 씁니다."),
   ]),
   plat_lede="iOS와 안드로이드에는 다크 모드가 <b>시스템 기능</b>으로 들어 있습니다. 그래서 앱은 시스템 설정을 거스르지 않고 따르기만 하면 됩니다.",
   plats=plats([
@@ -153,7 +154,7 @@ D = dict(
   plat_note="\"다크 모드 해 주세요\"라는 요청은 플랫폼마다 드는 비용이 크게 다릅니다. iOS와 안드로이드에서는 <b>시맨틱 색만 썼다면 추가 작업이 거의 없지만</b>, 웹에서 색 값을 직접 적어 두었다면 화면 전부를 다시 살펴봐야 합니다. 그래서 일정을 이야기할 때 이 차이부터 확인하는 편이 좋습니다.",
   siblings=siblings("dark"),
   related='''        <li><a href="../items/modal.html"><b>모달</b><em>6부</em></a></li>
-        <li><span class="na"><b>대비비</b><em>12부</em></span></li>
-        <li><span class="na"><b>모션 줄이기</b><em>9부</em></span></li>
-        <li><span class="na"><b>설정 화면</b><em>13부</em></span></li>''',
+        <li><a href="contrast.html"><b>대비비</b><em>12부</em></a></li>
+        <li><a href="reducedmotion.html"><b>모션 줄이기</b><em>9부</em></a></li>
+        <li><a href="settings.html"><b>설정 화면</b><em>13부</em></a></li>''',
 )

@@ -38,12 +38,12 @@ D = dict(
   axes=axis_table("팝오버"),
   oneline="팝오버와 툴팁은 <b>안에 누를 것이 있느냐</b>로 갈립니다. 안에 누를 것이 생기는 순간 그건 툴팁이 아니라 팝오버입니다.",
   states=states([
-    (mini('<div style="margin-top:8px"><span class="mini__trigger">필터 ▾</span></div>', bars="684", label="팝오버가 닫힌 모습"), "닫힘", "앵커만 보이고, 앵커의 <code>aria-expanded</code> 값은 <code>\"false\"</code>입니다"),
-    (mini('<div style="margin-top:8px"><span class="mini__trigger" style="border-color:var(--accent);color:var(--accent)">필터 ▾</span></div>' + pop(["☑ 승인", "☐ 실패"], pos="left:8px;top:32px", head="상태"), bars="684", label="팝오버가 열린 모습"), "열림", "앵커 바로 아래에 뜨고, 앵커도 눌린 상태로 보입니다"),
-    (mini('<div style="margin-top:8px;text-align:right"><span class="mini__trigger">계정 ▾</span></div>' + pop(["로그아웃"], pos="right:8px;top:32px", tail="right:10px;top:-4px"), bars="684", label="오른쪽 가장자리에서 뒤집힌 팝오버"), "뒤집힘", "화면 밖으로 나갈 것 같으면 반대쪽으로 뒤집어 엽니다. 이것을 <b>플립</b>이라고 합니다"),
-    (mini('<div style="margin-top:8px"><span class="mini__trigger">필터 ▾</span></div>' + pop(["☑ 승인", "☐ 실패"], pos="left:2px;top:32px", tail="left:14px;top:-4px"), bars="684", label="가장자리에서 밀린 팝오버"), "밀림", "꼬리는 앵커를 가리킨 채로 두고 판만 화면 안쪽으로 옮깁니다. 이것을 <b>시프트</b>라고 합니다"),
-    (mini('<div style="margin-top:8px"><span class="mini__trigger">필터 ▾</span></div>' + pop(["☑ 승인", "☐ 실패"], pos="left:8px;top:32px", head="상태") + '<div style="position:absolute;right:6px;bottom:6px;font-size:8px;color:var(--fg-muted)">바깥 누름 ↘</div>', bars="684", label="바깥을 눌러 닫히는 팝오버"), "바깥 누름", "스크림이 없어서 바깥을 누를 때 닫는 처리를 <b>직접</b> 만들어야 합니다"),
-    (mini('<div style="margin-top:8px;opacity:.3"><span class="mini__trigger">필터 ▾</span></div>', bars="684", label="앵커가 스크롤로 사라진 모습"), "앵커가 사라짐", "스크롤해서 앵커가 화면 밖으로 나가면 팝오버도 함께 닫습니다"),
+    (mini('<div style="margin-top:8px"><span class="mini__trigger">필터 ▾</span></div>', bars="684", label="팝오버가 닫힌 모습"), "닫혀 있을 때", "앵커만 보이고, 앵커의 <code>aria-expanded</code> 값은 <code>\"false\"</code>입니다"),
+    (mini('<div style="margin-top:8px"><span class="mini__trigger" style="border-color:var(--accent);color:var(--accent)">필터 ▾</span></div>' + pop(["☑ 승인", "☐ 실패"], pos="left:8px;top:32px", head="상태"), bars="684", label="팝오버가 열린 모습"), "열렸을 때", "앵커 바로 아래에 뜨고, 앵커도 눌린 상태로 보입니다"),
+    (mini('<div style="margin-top:8px;text-align:right"><span class="mini__trigger">계정 ▾</span></div>' + pop(["로그아웃"], pos="right:8px;top:32px", tail="right:10px;top:-4px"), bars="684", label="오른쪽 가장자리에서 뒤집힌 팝오버"), "반대쪽으로 뒤집혔을 때", "화면 밖으로 나갈 것 같으면 반대쪽으로 뒤집어 엽니다. 이것을 <b>플립</b>이라고 합니다"),
+    (mini('<div style="margin-top:8px"><span class="mini__trigger">필터 ▾</span></div>' + pop(["☑ 승인", "☐ 실패"], pos="left:2px;top:32px", tail="left:14px;top:-4px"), bars="684", label="가장자리에서 밀린 팝오버"), "안쪽으로 밀렸을 때", "꼬리는 앵커를 가리킨 채로 두고 판만 화면 안쪽으로 옮깁니다. 이것을 <b>시프트</b>라고 합니다"),
+    (mini('<div style="margin-top:8px"><span class="mini__trigger">필터 ▾</span></div>' + pop(["☑ 승인", "☐ 실패"], pos="left:8px;top:32px", head="상태") + '<div style="position:absolute;right:6px;bottom:6px;font-size:8px;color:var(--fg-muted)">바깥을 누름 ↘</div>', bars="684", label="바깥을 눌러 닫히는 팝오버"), "바깥을 눌렀을 때", "스크림이 없어서 바깥을 누를 때 닫는 처리를 <b>직접</b> 만들어야 합니다"),
+    (mini('<div style="margin-top:8px;opacity:.3"><span class="mini__trigger">필터 ▾</span></div>', bars="684", label="앵커가 스크롤로 사라진 모습"), "스크롤로 앵커가 사라졌을 때", "스크롤해서 앵커가 화면 밖으로 나가면 팝오버도 함께 닫습니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -69,14 +69,14 @@ D = dict(
     "모바일에서 손가락으로 누르기 어려울 만큼 작을 때. 바텀시트로 바꿉니다",
     "팝오버 안에서 팝오버를 또 열 때. 어느 팝오버의 바깥을 눌렀는지 가리는 처리가 금방 엉킵니다",
   ]),
-  instead='꼭 답을 받아야 하면 <a href="modal.html">모달</a>, 설명만이면 <a href="tooltip.html">툴팁</a>, 폰에서는 <a href="sheet.html">바텀시트</a>, 긴 작업이면 <a href="drawer.html">드로어</a>.',
+  instead='사용자의 답을 꼭 받아야 하면 <a href="modal.html">모달</a>을 쓰고, 누를 것 없이 설명만 보여 주면 되면 <a href="tooltip.html">툴팁</a>으로 충분합니다. 폰에서는 <a href="sheet.html">바텀시트</a>로 바꾸고, 작업이 길면 <a href="drawer.html">드로어</a>에 담습니다.',
   cases=cases([
     (mini('<div style="margin-top:8px"><span class="mini__trigger">필터 ▾</span></div>' + pop(["☑ 승인", "☐ 실패", "☐ 대기"], pos="left:8px;top:32px", head="상태"), bars="684", tall=False, label="필터 팝오버 재현"),
-     "필터", "목록을 보면서 조건만 바꿉니다. 팝오버를 가장 흔하게 쓰는 자리입니다"),
+     "목록을 보면서 필터 바꾸기", "목록을 보면서 조건만 바꿉니다. 팝오버를 가장 흔하게 쓰는 자리입니다"),
     (mini('<div style="margin-top:8px"><span class="mini__trigger">2026-11-13</span></div>' + '<div class="mini__pop" style="left:8px;top:32px;width:86px"><span class="tail" style="left:10px;top:-4px"></span><b style="font-size:8px;display:block;margin-bottom:3px">11월</b><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;font-size:6.5px;color:var(--fg-muted);text-align:center">' + "".join('<span%s>%d</span>' % (' style="background:var(--accent);color:#fff;border-radius:2px"' if d == 13 else "", d) for d in range(8, 29)) + '</div></div>', bars="684", tall=False, label="날짜 선택 팝오버 재현"),
-     "날짜 선택기", "입력 칸에 붙어서 뜨고, 안에 누를 수 있는 날짜가 가득합니다"),
+     "입력 칸에 붙여 날짜 고르기", "입력 칸에 붙어서 뜨고, 안에 누를 수 있는 날짜가 가득합니다"),
     (mini('<div style="margin-top:8px;text-align:right"><span class="mini__trigger">길동</span></div>' + '<div class="mini__pop" style="right:8px;top:32px;width:84px"><span class="tail" style="right:10px;top:-4px"></span><b style="font-size:8.5px;display:block">홍길동</b><i>gildong@example.com</i><i style="color:var(--accent);font-weight:700;margin-top:3px">로그아웃</i></div>', bars="684", tall=False, label="사용자 카드 팝오버 재현"),
-     "사용자 카드", "앵커가 화면 오른쪽 끝에 있어서 반대쪽으로 뒤집혀 열립니다"),
+     "오른쪽 끝에서 사용자 카드 열기", "앵커가 화면 오른쪽 끝에 있어서 반대쪽으로 뒤집혀 열립니다"),
   ]),
   code_lede="팝오버에는 스크림이 없기 때문에 <b>바깥 클릭과 <kbd>Esc</kbd>를 직접 처리</b>해야 합니다. 모달에서는 <code>&lt;dialog&gt;</code> 요소가 알아서 해 주던 일을 여기서는 코드로 직접 만듭니다.",
   code='''&lt;<span class="t">button</span> <span class="a">aria-expanded</span>=<span class="s">"false"</span> <span class="a">aria-controls</span>=<span class="s">"p1"</span>&gt;필터 ▾&lt;/<span class="t">button</span>&gt;
@@ -93,15 +93,15 @@ document.addEventListener(<span class="s">'keydown'</span>, e =&gt; <span class=
   keys=kbd([
     ("<kbd>Esc</kbd>", "팝오버가 닫히고 포커스가 앵커로 돌아갑니다"),
     ("<kbd>Tab</kbd>", "포커스가 팝오버 안을 지나 뒤쪽 화면으로 이어집니다. 메뉴 항목만 든 팝오버라면 포커스를 안에 가두고 화살표 키로 옮깁니다"),
-    ("바깥 누름", "팝오버가 닫힙니다. 팝오버 안쪽을 누를 때는 이벤트 전파를 멈춰서 닫히지 않게 합니다"),
-    ("열릴 때", "포커스가 팝오버의 첫 요소로 옮겨 가고, 앵커의 <code>aria-expanded</code> 값이 <code>true</code>로 바뀝니다"),
-    ("스크롤", "앵커가 화면 밖으로 나가면 팝오버도 함께 닫습니다. 닫지 않으면 팝오버만 가리킬 대상 없이 화면에 남습니다"),
+    ("바깥을 눌렀을 때", "팝오버가 닫힙니다. 팝오버 안쪽을 누를 때는 이벤트 전파를 멈춰서 닫히지 않게 합니다"),
+    ("팝오버가 열릴 때", "포커스가 팝오버의 첫 요소로 옮겨 가고, 앵커의 <code>aria-expanded</code> 값이 <code>true</code>로 바뀝니다"),
+    ("화면을 스크롤할 때", "앵커가 화면 밖으로 나가면 팝오버도 함께 닫습니다. 닫지 않으면 팝오버만 가리킬 대상 없이 화면에 남습니다"),
   ]),
   backend=rows([
-    ("열 때 가져오기", "팝오버 내용은 팝오버를 열기 전에는 필요하지 않으므로, 열 때 가져오는 <b>지연 로드</b>를 쓰면 첫 화면이 가벼워집니다. 다만 열 때마다 서버를 다시 부르지 않도록 받아 온 내용은 캐시에 둡니다."),
-    ("바깥 클릭 = 전파 차단", "팝오버 안쪽을 눌러도 문서 전체에 걸어 둔 닫기 처리가 함께 실행되어 팝오버가 닫혀 버립니다. 그래서 안쪽 클릭에서 <code>stopPropagation</code>을 부르는데, 이벤트 버스에서 이벤트에 <b>처리 완료 표시</b>를 해서 더 퍼지지 않게 하는 것과 같습니다."),
-    ("플립·시프트 = 경계 검사", "팝오버를 띄울 때마다 '화면 밖으로 나가는가'를 계산합니다. 값이 범위를 벗어나면 범위 안으로 되돌리는 clamp와 같은 일입니다."),
-    ("낙관적 적용", "체크를 바꾸자마자 목록을 걸러 보여 주고, 서버 응답은 나중에 받아 맞춰도 됩니다. 팝오버에서 바꾸는 필터 같은 값은 틀렸을 때 되돌리기 쉬워서 낙관적 처리가 잘 맞습니다."),
+    ("열 때 내용 가져오기", "팝오버 내용은 팝오버를 열기 전에는 필요하지 않으므로, 열 때 가져오는 <b>지연 로드</b>를 쓰면 첫 화면이 가벼워집니다. 다만 열 때마다 서버를 다시 부르지 않도록 받아 온 내용은 캐시에 둡니다."),
+    ("바깥 클릭 처리는 이벤트 전파 차단", "팝오버 안쪽을 눌러도 문서 전체에 걸어 둔 닫기 처리가 함께 실행되어 팝오버가 닫혀 버립니다. 그래서 안쪽 클릭에서 <code>stopPropagation</code>을 부르는데, 이벤트 버스에서 이벤트에 <b>처리 완료 표시</b>를 해서 더 퍼지지 않게 하는 것과 같습니다."),
+    ("플립과 시프트는 경계 검사", "팝오버를 띄울 때마다 '화면 밖으로 나가는가'를 계산합니다. 값이 범위를 벗어나면 범위 안으로 되돌리는 clamp와 같은 일입니다."),
+    ("바꾼 값을 먼저 반영하는 낙관적 적용", "체크를 바꾸자마자 목록을 걸러 보여 주고, 서버 응답은 나중에 받아 맞춰도 됩니다. 팝오버에서 바꾸는 필터 같은 값은 틀렸을 때 되돌리기 쉬워서 낙관적 처리가 잘 맞습니다."),
   ]),
   plat_lede="팝오버는 웹에서 가장 자유롭게 쓰지만, 모바일에서는 기기에 따라 다른 부품으로 바뀝니다.",
   plats=plats([
@@ -117,8 +117,8 @@ document.addEventListener(<span class="s">'keydown'</span>, e =&gt; <span class=
   ]),
   plat_note="iOS의 팝오버는 <b>아이폰에서 자동으로 시트로 바뀝니다.</b> 그래서 디자인 검토를 아이패드에서만 하면, 아이폰에서는 검토 때와 전혀 다른 모양을 보게 됩니다. 팝오버 이야기를 할 때는 어느 기기를 기준으로 말하는지부터 맞추세요.",
   siblings=siblings("popover"),
-  related='''        <li><span class="na"><b>드롭다운 메뉴</b><em>7부</em></span></li>
+  related='''        <li><a href="menu.html"><b>드롭다운 메뉴</b><em>6부</em></a></li>
         <li><span class="na"><b>고도와 z-index</b><em>2부</em></span></li>
-        <li><span class="na"><b>날짜 선택기</b><em>4부</em></span></li>
-        <li><span class="na"><b>필터와 패싯</b><em>10부</em></span></li>''',
+        <li><a href="datepicker.html"><b>날짜 선택기</b><em>4부</em></a></li>
+        <li><a href="filter.html"><b>필터와 패싯</b><em>10부</em></a></li>''',
 )

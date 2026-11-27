@@ -17,12 +17,12 @@ LINES = ''.join('<span style="position:absolute;left:6px;right:6px;top:' + str(t
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">읽은 만큼 막대 — 내가 어디쯤인가</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">붙박이 머리말 — position: sticky</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--warn)">시차 배경 — 배경이 다른 속도로</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">스크롤 가로채기 — 굴린 만큼 안 간다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">읽은 만큼 막대로 위치를 알려 줌</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">붙박이 머리말은 position: sticky</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--warn)">시차 배경은 배경이 다른 속도로 움직임</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">스크롤 가로채기는 굴린 만큼 안 내려감</div>
                   <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">scroll-timeline · IntersectionObserver</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">모션 줄이기에서 연출만 끄고 막대는 남긴다</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">모션 줄이기에서는 연출만 끄고 막대는 남김</div>
                 </div>
               </div>'''
 
@@ -53,39 +53,39 @@ D = dict(
   ]),
   axes=ax("스크롤 연동"),
   oneline="<b>스크롤은 사용자가 직접 하는 조작입니다.</b> 스크롤 위치에 맞춰 무언가를 움직이는 것은 괜찮지만, 스크롤한 만큼 화면이 움직이지 않도록 <b>가로채면</b> 안 됩니다.",
-  s4_title="네 가지", s4_hint="쓸모 있는 것과 아닌 것",
+  s4_title="스크롤에 맞춰 움직이는 것들", s4_hint="쓸모 있는 것과 조심하거나 피할 것",
   states=states([
     (box('<span style="position:absolute;left:0;right:0;top:0;height:4px;background:var(--line)"></span>'
          '<span style="position:absolute;left:0;top:0;width:62%;height:4px;background:var(--accent)"></span>' + LINES,
-         "152px", "72px", "읽은 비율을 그대로", True),
+         "152px", "72px", "읽은 비율을 그대로 보여 줌", True),
      "읽은 만큼 막대 ✓", "<b>자리 이동이 거의 없어서</b> 모션 줄이기에서도 남깁니다"),
     (box('<span style="position:absolute;left:0;right:0;top:0;height:14px;background:var(--bg);border-bottom:1px solid var(--line);font-size:7px;color:var(--fg-muted);display:grid;place-items:center">11월 정산</span>' + LINES,
          "152px", "72px", "position: sticky", True),
      "붙박이 머리말 ✓", "움직이는 것이 아니라 제자리에 <b>고정</b>된 것입니다"),
     (box('<span style="position:absolute;left:0;right:0;top:-8px;height:34px;background:var(--accent);opacity:.8"></span>'
          '<span style="position:absolute;left:6px;right:6px;top:30px;height:5px;border-radius:2px;background:var(--ink-100)"></span>',
-         "152px", "72px", "배경이 다른 속도로"),
+         "152px", "72px", "배경이 다른 속도로 움직임"),
      "시차 배경 △", "크게 움직이면 <b>멀미를 일으킵니다</b>"),
     (box(LINES + '<span style="position:absolute;right:4px;top:4px;font-size:7px;color:var(--danger)">↓ 한 장씩</span>',
-         "152px", "72px", "굴린 만큼 안 간다", False),
-     "가로채기 ✕", "스크롤한 만큼 내려가지 않아서 <b>기기가 고장 난 것처럼</b> 느껴집니다"),
+         "152px", "72px", "굴린 만큼 안 내려감", False),
+     "스크롤 가로채기 ✕", "스크롤한 만큼 내려가지 않아서 <b>기기가 고장 난 것처럼</b> 느껴집니다"),
     (box('<span style="position:absolute;left:6px;top:14px;width:22px;height:22px;border-radius:4px;background:var(--accent);opacity:.35"></span>'
          '<span style="position:absolute;left:34px;top:14px;width:22px;height:22px;border-radius:4px;background:var(--accent)"></span>' ,
-         "152px", "72px", "화면에 들어오면 나타난다"),
-     "들어올 때 나타나기", "<b>한 번만</b> 나타나게 합니다. 다시 스크롤할 때마다 나타나면 방해가 됩니다"),
+         "152px", "72px", "화면에 들어오면 나타남"),
+     "화면에 들어올 때 나타나기", "<b>한 번만</b> 나타나게 합니다. 다시 스크롤할 때마다 나타나면 방해가 됩니다"),
     (box('<span style="position:absolute;left:0;right:0;top:0;height:4px;background:var(--line)"></span>'
          '<span style="position:absolute;left:0;top:0;width:62%;height:4px;background:var(--accent)"></span>' + LINES,
-         "152px", "72px", "줄이기 — 막대는 남는다", True),
-     "모션 줄이기에서", "연출은 끄고 <b>위치를 알려 주는 것은 남깁니다</b>"),
+         "152px", "72px", "모션 줄이기에서도 막대는 남음", True),
+     "모션 줄이기를 켰을 때", "연출은 끄고 <b>위치를 알려 주는 것은 남깁니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
     ("읽은 만큼 막대", "진행 비율", "<b>자리 이동이 없어서</b> 가장 안전합니다"),
-    ("붙박이", "position: sticky", "지금 어느 묶음을 보고 있는지 알려 줍니다. 자세한 내용은 <a href=\"../items/sticky.html\">스티키</a>에 있습니다"),
-    ("시차", "다른 속도", "크게 움직이면 <b>멀미</b>를 일으키므로 모션 줄이기에서 끕니다"),
-    ("가로채기", "굴린 만큼 안 감", "<b>쓰지 않습니다.</b> 사용자가 스크롤한 만큼 화면이 움직이지 않기 때문입니다"),
-    ("재는 법", "scroll-timeline", "CSS로도 만들 수 있고 <code>IntersectionObserver</code>로도 만들 수 있습니다"),
-    ("줄이기", "연출만 끈다", "막대와 붙박이 머리말은 <b>남깁니다</b>"),
+    ("붙박이 머리말", "position: sticky", "지금 어느 묶음을 보고 있는지 알려 줍니다. 자세한 내용은 <a href=\"../items/sticky.html\">스티키</a>에 있습니다"),
+    ("시차 배경", "다른 속도", "크게 움직이면 <b>멀미</b>를 일으키므로 모션 줄이기에서 끕니다"),
+    ("스크롤 가로채기", "굴린 만큼 안 내려감", "<b>쓰지 않습니다.</b> 사용자가 스크롤한 만큼 화면이 움직이지 않기 때문입니다"),
+    ("만드는 방법", "scroll-timeline", "CSS로도 만들 수 있고 <code>IntersectionObserver</code>로도 만들 수 있습니다"),
+    ("모션 줄이기", "연출만 끔", "막대와 붙박이 머리말은 <b>남깁니다</b>"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <b>스크롤은 사용자가 화면을 직접 다루는 몇 안 되는 조작입니다.</b>
@@ -105,15 +105,15 @@ D = dict(
     "스크롤할 때마다 다시 나타나게 할 때. <b>두 번째부터는 방해</b>가 됩니다",
     "스크롤해야 나타나는 요소에 <b>읽는 데 꼭 필요한</b> 정보를 담을 때",
   ]),
-  instead='화면에 붙어 있기만 하면 <a href="../items/sticky.html">스티키</a>, 자료를 더 받아오면 <a href="../items/infinite.html">무한 스크롤</a>, 작업 진행을 알리면 <a href="../items/progress.html">프로그레스 바</a>.',
+  instead='화면에 붙어 있기만 하면 되는 것은 <a href="../items/sticky.html">스티키</a>로 충분합니다. 스크롤이 끝에 닿을 때 자료를 더 받아오는 것은 <a href="../items/infinite.html">무한 스크롤</a>이고, 작업이 얼마나 진행됐는지 알리려면 <a href="../items/progress.html">프로그레스 바</a>를 씁니다.',
   cases=cases([
     (box('<span style="position:absolute;left:0;right:0;top:0;height:4px;background:var(--line)"></span>'
          '<span style="position:absolute;left:0;top:0;width:40%;height:4px;background:var(--accent)"></span>' + LINES, "150px", "68px"),
-     "긴 글", "글이 <b>얼마나 남았는지</b> 알려 줍니다"),
+     "긴 글에 읽은 만큼 막대 달기", "글이 <b>얼마나 남았는지</b> 알려 줍니다"),
     (box('<span style="position:absolute;left:0;right:0;top:0;height:14px;background:var(--bg);border-bottom:1px solid var(--line);font-size:7px;color:var(--fg-muted);display:grid;place-items:center">11월</span>' + LINES, "150px", "68px"),
-     "날짜별 목록", "지금 <b>어느 달</b>을 보고 있는지 알려 줍니다"),
+     "날짜별 목록에 붙박이 머리말 두기", "지금 <b>어느 달</b>을 보고 있는지 알려 줍니다"),
     (box('<span style="position:absolute;inset:6px;border:1px dashed var(--danger);border-radius:5px;display:grid;place-items:center;font-size:8px;color:var(--danger)">가로채기</span>', "150px", "68px"),
-     "안 쓰는 것", "<b>스크롤을 가로채지 않습니다</b>"),
+     "스크롤 가로채기는 쓰지 않기", "<b>스크롤을 가로채지 않습니다</b>"),
   ]),
   s8_title="최소 코드와 규칙", s8_hint="구현할 때 지킬 최소 규칙",
   code_lede="CSS로 애니메이션을 스크롤 위치에 연결하고, 연출은 <b>모션 줄이기에서 끕니다</b>.",
@@ -135,18 +135,19 @@ D = dict(
   .parallax { <span class="a">transform</span>: none !important; }
   .reveal   { <span class="a">opacity</span>: <span class="a">1</span>; <span class="a">transform</span>: none; }
 }''',
+  keys_heads="<th>알아 둘 규칙</th><th>자세한 내용</th>",
   keys=kbd([
-    ("굴림을 가로채지 않는다", "<code>preventDefault</code>로 스크롤을 막으면 <b>키보드로 하는 스크롤까지</b> 막힙니다"),
+    ("스크롤을 가로채지 않기", "<code>preventDefault</code>로 스크롤을 막으면 <b>키보드로 하는 스크롤까지</b> 막힙니다"),
     ("<code>animation-timeline: scroll()</code>", "CSS만으로 애니메이션을 스크롤 위치에 연결합니다. <b>자바스크립트로 만들 때보다 매끄럽습니다</b>"),
     ("<code>IntersectionObserver</code>", "<code>scroll</code> 이벤트를 매번 받아 처리하는 것보다 가볍습니다"),
-    ("한 번만", "한 번 나타난 뒤에는 <code>unobserve</code>로 관찰을 끊습니다. 스크롤할 때마다 나타나면 <b>읽기를 방해</b>합니다"),
-    ("<a href=\"reducedmotion.html\">모션 줄이기</a>", "시차는 끄고 <b>막대와 붙박이 머리말은 남깁니다</b>"),
-    ("읽는 데 필요한 것은 매달지 않는다", "스크롤해야 나타나는 글은 <b>스크린 리더에서도</b> 나타나지 않을 수 있습니다"),
+    ("한 번만 나타나게 하기", "한 번 나타난 뒤에는 <code>unobserve</code>로 관찰을 끊습니다. 스크롤할 때마다 나타나면 <b>읽기를 방해</b>합니다"),
+    ("<a href=\"reducedmotion.html\">모션 줄이기</a>를 켰을 때", "시차는 끄고 <b>막대와 붙박이 머리말은 남깁니다</b>"),
+    ("읽는 데 필요한 글은 스크롤에 매달지 않기", "스크롤해야 나타나는 글은 <b>스크린 리더에서도</b> 나타나지 않을 수 있습니다"),
   ]),
   backend=rows([
-    ("굴림으로 더 받을 때", "<a href=\"../items/infinite.html\">무한 스크롤</a>과 함께 쓰면 문서 <b>높이가 계속 바뀌어서</b> 읽은 만큼 막대가 갑자기 줄어듭니다."),
-    ("들어올 때 받기", "화면에 들어온 것만 받으면 가볍지만, <b>빠르게 스크롤하면</b> 요청이 한꺼번에 몰립니다. 그래서 디바운스를 겁니다."),
-    ("검색 엔진", "스크롤해야 나타나는 내용은 검색 엔진에 <b>보이지 않을 수</b> 있습니다. 중요한 글은 처음부터 화면에 둡니다."),
+    ("스크롤하며 자료를 더 받을 때", "<a href=\"../items/infinite.html\">무한 스크롤</a>과 함께 쓰면 문서 <b>높이가 계속 바뀌어서</b> 읽은 만큼 막대가 갑자기 줄어듭니다."),
+    ("화면에 들어온 것만 받을 때", "화면에 들어온 것만 받으면 가볍지만, <b>빠르게 스크롤하면</b> 요청이 한꺼번에 몰립니다. 그래서 디바운스를 겁니다."),
+    ("검색 엔진에 보이지 않는 내용", "스크롤해야 나타나는 내용은 검색 엔진에 <b>보이지 않을 수</b> 있습니다. 중요한 글은 처음부터 화면에 둡니다."),
   ]),
   plat_lede="스크롤 연동은 <b>웹에서 가장 흔하고, 웹에서 가장 자주 지나치게 쓰입니다</b>.",
   plats=plats([

@@ -41,11 +41,11 @@
 <script>
 (function () {
   var CARDS = [
-    ['사진 — 1배짜리',  'bitmap1', '100화소 그림을 늘려 쓴다'],
-    ['사진 — 배율만큼', 'bitmapN', 'srcset 으로 알맞은 것을 받는다'],
-    ['아이콘 — SVG',    'vector',  '배율과 상관없이 선명하다'],
-    ['선 — 1px',        'line1',   '어느 배율에서나 같은 굵기'],
-    ['선 — 머리카락',   'hair',    '화소 하나. 배율이 높을수록 가늘다']
+    ['1배짜리로 받은 사진',   'bitmap1', '100화소짜리 그림을 늘려서 씀'],
+    ['배율만큼 크게 받은 사진', 'bitmapN', 'srcset으로 알맞은 크기를 골라 받음'],
+    ['SVG로 만든 아이콘',     'vector',  '배율과 상관없이 선명함'],
+    ['1px로 그은 선',         'line1',   '어느 배율에서나 같은 굵기로 보임'],
+    ['머리카락처럼 가는 선',   'hair',    '화소 하나 굵기라 배율이 높을수록 가늘어짐']
   ];
   var row = document.getElementById('row');
   row.innerHTML = CARDS.map(function (c) {
@@ -82,8 +82,8 @@
         g.imageSmoothingEnabled = true;
         g.drawImage(src, 0, 0, src.width, src.height,
                     Math.round((cssW - 120) / 2 * r), 2 * r, 120 * r, 52 * r);
-        note = '원본 ' + src.width + '×' + src.height + '화소 → ' +
-               Math.round(120 * r) + '×' + Math.round(52 * r) + '화소 자리';
+        note = '원본 ' + src.width + '×' + src.height + '화소를 ' +
+               Math.round(120 * r) + '×' + Math.round(52 * r) + '화소 자리에 그림';
         if (k === 'bitmap1' && r > 1) note += ' · <b style="color:var(--danger)">' + r + '배로 늘어남</b>';
       } else if (k === 'vector') {
         g.setTransform(r, 0, 0, r, 0, 0);
@@ -93,7 +93,7 @@
         g.moveTo(cx - 16, cy + 8); g.lineTo(cx - 4, cy - 10); g.lineTo(cx + 6, cy + 2); g.lineTo(cx + 16, cy - 12);
         g.stroke();
         g.beginPath(); g.arc(cx, cy, 20, 0, Math.PI * 2); g.strokeStyle = '#aeb6c2'; g.lineWidth = 1; g.stroke();
-        note = '그릴 때마다 다시 계산 — 화소 수와 무관';
+        note = '그릴 때마다 다시 계산해서 화소 수와 상관없음';
       } else {
         g.setTransform(1, 0, 0, 1, 0, 0);
         g.fillStyle = '#14161a';
@@ -102,8 +102,8 @@
           g.fillRect(Math.round(cssW * 0.12 * r), Math.round((14 + i * 14) * r), Math.round(cssW * 0.76 * r), thick);
         }
         note = (k === 'line1')
-          ? 'CSS 1px = 기기 화소 <b>' + r + '개</b> — 굵기가 같아 보인다'
-          : '기기 화소 <b>1개</b> = CSS ' + (1 / r).toFixed(2) + 'px — 배율이 높을수록 가늘다';
+          ? 'CSS 1px을 기기 화소 <b>' + r + '개</b>로 그려 굵기가 같아 보임'
+          : '기기 화소 <b>1개</b>는 CSS ' + (1 / r).toFixed(2) + 'px이라 배율이 높을수록 가늘어짐';
       }
       cv.parentElement.querySelector('.num').innerHTML = note;
     });
@@ -114,7 +114,7 @@
       : '배율 <b>' + r + '배</b>에서는 CSS 100px 자리를 기기 화소 <b>' + (100 * r) + '개</b>로 그립니다. ' +
         '그래서 1배짜리 그림은 ' + r + '배로 늘어나 <span class="warn">뭉개집니다</span>';
     rl.dataset.r = String(r);
-    document.getElementById('sys').textContent = '이 화면의 실제 배율: ' + window.devicePixelRatio;
+    document.getElementById('sys').textContent = '지금 보는 화면의 실제 배율 ' + window.devicePixelRatio + '배';
   }
 
   document.getElementById('r').addEventListener('input', draw);

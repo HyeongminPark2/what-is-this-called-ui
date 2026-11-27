@@ -19,9 +19,9 @@ ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2)
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:11px">
                   <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">opacity<span style="color:var(--fg-faint)"> ← 상자와 자식 <b>전부</b></span></div>
                   <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">rgba(…, .5)<span style="color:var(--fg-faint)"> ← 그 색 하나만</span></div>
-                  <div class="pin-out" data-pin="3" style="color:var(--danger)">1 미만이면 <b>쌓임 문맥</b>이 생긴다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">자식의 z-index 가 그 안에 갇힌다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--danger)">대비비가 같이 떨어진다</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--danger)">1 미만이면 <b>쌓임 문맥</b>이 생김</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">자식의 z-index가 그 안에 갇힘</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--danger)">대비비도 같이 떨어짐</div>
                   <div class="pin-out" data-pin="6" style="color:var(--accent)">흐린 색 토큰<span style="color:var(--fg-faint)"> ← 미리 맞춰 둔 값</span></div>
                 </div>
               </div>'''
@@ -52,24 +52,24 @@ D = dict(
   ]),
   axes=ax("불투명도"),
   oneline="<b>비활성 상태는 opacity로 만들지 마세요.</b> 대비비를 맞춘 흐린 색 토큰을 따로 두면, 흐리게 보이면서도 대비비를 지킬 수 있습니다.",
-  s4_title="흐리게 하는 법", s4_hint="방법마다 다른 범위와 부작용",
+  s4_title="요소를 흐리게 하는 방법", s4_hint="방법마다 다른 범위와 부작용",
   states=states([
-    (card("", "그대로", "대비비 통과", True), "기본", "비교할 기준입니다"),
-    (card(".5", "opacity: .5", "전부 흐려진다", False), "상자 전체", "<b>글과 버튼, 배지까지</b> 함께 흐려집니다"),
-    (card("", "rgba(…, .5)", "글자만 흐려진다", None, "rgba(32,35,42,.5)"),
-     "색에만", "그 색만 흐려지고 쌓임 문맥은 <b>생기지 않습니다</b>"),
+    (card("", "그대로", "대비비 통과", True), "흐리지 않은 기준", "비교할 기준입니다"),
+    (card(".5", "opacity: .5", "전부 흐려짐", False), "상자 전체에 opacity를 걸 때", "<b>글과 버튼, 배지까지</b> 함께 흐려집니다"),
+    (card("", "rgba(…, .5)", "글자만 흐려짐", None, "rgba(32,35,42,.5)"),
+     "색에만 알파를 걸 때", "그 색만 흐려지고 쌓임 문맥은 <b>생기지 않습니다</b>"),
     (card("", "--fg-muted", "미리 맞춰 둔 값", True, "var(--fg-muted)"),
-     "흐린 색 토큰", "미리 맞춰 둔 값이라 <b>대비비를 지킵니다</b>"),
+     "흐린 색 토큰을 쓸 때", "미리 맞춰 둔 값이라 <b>대비비를 지킵니다</b>"),
     ('''              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0">
                 <span style="display:block;position:relative;width:116px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px 8px">
                   <span style="display:block;font-size:9.5px">정산 2건이 밀렸습니다</span>
                   <span style="position:absolute;inset:0;border-radius:6px;background:color-mix(in srgb, var(--fg) 45%, transparent)"></span>
                 </span>
                 <span style="font-family:var(--mono);font-size:10px;color:var(--fg-muted)">가림막</span>
-                <span style="font-size:10px;color:var(--fg-faint);text-align:center">위에 반투명 판을 덮는다</span>
+                <span style="font-size:10px;color:var(--fg-faint);text-align:center">위에 반투명 판을 덮음</span>
               </div>''',
-     "가림막", "아래 내용을 흐린 것이 아니라 반투명 판으로 <b>덮은</b> 것입니다"),
-    (card(".4", "opacity: .4", "z-index 가 갇힌다", False), "쌓임 문맥", "<b>안쪽 요소가 바깥 요소 위로 올라가지 못합니다</b>"),
+     "가림막으로 덮을 때", "아래 내용을 흐린 것이 아니라 반투명 판으로 <b>덮은</b> 것입니다"),
+    (card(".4", "opacity: .4", "z-index가 갇힘", False), "쌓임 문맥이 생길 때", "<b>안쪽 요소가 바깥 요소 위로 올라가지 못합니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -88,6 +88,8 @@ D = dict(
           비활성 상태에서도 opacity는 문제를 일으킵니다. <code>opacity: .5</code>는 <b>글자뿐 아니라</b>
           테두리와 아이콘까지 함께 흐려서 모두의 대비비를 떨어뜨립니다.
           그래서 <b>흐린 색을 토큰으로 따로 두는 것</b>이 해결책입니다.</p>''',
+  do_title="불투명도를 다룰 때 지킬 것",
+  dont_title="불투명도를 다룰 때 피할 것",
   do=ul([
     "비활성은 <b>흐린 색 토큰</b>으로 만들기",
     "흐리게 할 것이 하나면 <b>알파</b>로 색에만 걸기",
@@ -99,17 +101,19 @@ D = dict(
     "<code>opacity: 0</code>으로 숨기기. 보이지 않아도 <b>여전히 눌리고 스크린 리더가 읽습니다</b>",
     "흐린 글을 <b>본문</b>에 쓰기. 읽으라고 쓴 글은 흐리게 두지 않습니다",
   ]),
-  instead='감추는 방법은 <a href="semantics.html">시맨틱 태그</a>, 겹침은 <a href="zindex.html">z-index</a>, 읽히는 밝기는 <a href="contrast.html">대비비</a>, 색 자체는 <a href="color.html">색 토큰</a>.',
+  instead_title="함께 보면 좋은 항목",
+  instead='요소를 감추는 올바른 방법은 <a href="semantics.html">시맨틱 태그</a> 항목에서, 요소가 겹치는 순서는 <a href="zindex.html">z-index</a> 항목에서 다룹니다. 글이 읽히는 밝기는 <a href="contrast.html">대비비</a> 항목에서, 색 자체를 정하는 방법은 <a href="color.html">색 토큰</a> 항목에서 설명합니다.',
   cases=cases([
     (card("", "비활성", "흐린 색 토큰 + aria-disabled", True, "var(--fg-muted)"),
-     "비활성", "opacity 대신 <b>색으로</b> 흐리게 만듭니다"),
+     "버튼의 비활성 상태 만들기", "opacity 대신 <b>색으로</b> 흐리게 만듭니다"),
     (one(txt('<span style="display:block;position:relative;height:30px;border-radius:5px;background:var(--surface);border:1px solid var(--line)">'
              '<span style="position:absolute;inset:0;border-radius:5px;background:color-mix(in srgb, var(--fg) 45%, transparent)"></span></span>'),
-         "가림막", True, "모달 뒤를 덮는다", "116px"),
-     "가림막", "흐리게 하는 것이 아니라 위에 덮는 <b>덮개</b>로 다룹니다"),
-    (card("", "지도 위 글", "읽을 글은 안 흐린다", True), "겹친 글", "읽어야 할 글은 흐리지 않고, 글 아래에 바탕을 <b>깔고</b> 씁니다"),
+         "가림막", True, "모달 뒤를 덮음", "116px"),
+     "모달 뒤에 가림막 깔기", "흐리게 하는 것이 아니라 위에 덮는 <b>덮개</b>로 다룹니다"),
+    (card("", "지도 위 글", "읽을 글은 흐리지 않음", True), "지도 위에 글 얹기", "읽어야 할 글은 흐리지 않고, 글 아래에 바탕을 <b>깔고</b> 씁니다"),
   ]),
-  s8_title="최소 코드와 규칙", s8_hint="불투명도를 코드로 옮기는 법",
+  s8_title="최소 코드와 지킬 규칙", s8_hint="불투명도를 코드로 옮기는 방법",
+  keys_heads="<th>값과 개념</th><th>알아 둘 점</th>",
   code_lede="흐린 색을 토큰으로 정해 두면 대비비를 처음 한 번만 재면 됩니다.",
   code='''<span class="c">/* 미리 대비비를 맞춰 둔 흐린 색 */</span>
 :root {
@@ -131,11 +135,11 @@ D = dict(
     ("<code>color-mix()</code>", "요즘 브라우저에서 색에 <b>알파를 깔끔하게</b> 섞는 방법입니다"),
     ("대비비 4.5:1", "본문 글의 기준입니다. <b>흐린 글도 이 기준을 지켜야</b> 합니다"),
     ("<code>aria-disabled</code>", "스크린 리더 사용자에게도 비활성 상태를 <b>소리로</b> 알립니다"),
-    ("확인하는 법", "개발자 도구의 <b>대비비 검사</b>로 흐린 글을 찍어 봅니다"),
+    ("확인하는 방법", "개발자 도구의 <b>대비비 검사</b>로 흐린 글을 찍어 봅니다"),
   ]),
   backend=rows([
-    ("서버와는 상관없다", "흐리게 보이는 방식은 화면 쪽에서 정합니다. 다만 <b>무엇이 비활성인지</b>는 서버가 정합니다."),
-    ("비활성의 이유", "서버가 권한이 없어서인지, 조건이 맞지 않아서인지를 함께 보내 주면 화면은 버튼을 <b>흐리게만 두지 않고 이유를 설명</b>할 수 있습니다."),
+    ("서버와 관계없는 화면 쪽 표현", "흐리게 보이는 방식은 화면 쪽에서 정합니다. 다만 <b>무엇이 비활성인지</b>는 서버가 정합니다."),
+    ("서버가 비활성 이유를 함께 보내기", "서버가 권한이 없어서인지, 조건이 맞지 않아서인지를 함께 보내 주면 화면은 버튼을 <b>흐리게만 두지 않고 이유를 설명</b>할 수 있습니다."),
   ]),
   plat_lede="이름과 적용 범위는 세 플랫폼이 같지만, <b>쌓임 문맥 문제</b>는 웹에만 있습니다.",
   plats=plats([

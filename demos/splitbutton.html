@@ -19,11 +19,11 @@
 <body>
 <div class="bar">
   <b>분할 버튼</b>
-  <label>만드는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>단추를 만드는 방식 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="split" selected>주 동작 + 화살표 (분할)</option>
-    <option value="whole">전체가 메뉴를 연다</option>
+    <option value="whole">단추 전체가 메뉴를 열기</option>
   </select></label>
-  <label><input type="checkbox" id="remember" checked> 마지막에 고른 것을 기본으로</label>
+  <label><input type="checkbox" id="remember" checked> 마지막에 고른 동작을 기본으로 삼기</label>
 </div>
 
 <div class="pad">
@@ -78,9 +78,9 @@
     var toMain = k === 'split' ? 1 : 2;
     var focusables = document.querySelectorAll('.spb button').length;
     var rd = document.getElementById('read');
-    rd.innerHTML = '만드는 법 <b>' + (k === 'split' ? '분할 버튼' : '전체가 메뉴') + '</b>' +
+    rd.innerHTML = '지금 방식은 <b>' + (k === 'split' ? '분할 버튼' : '단추 전체가 메뉴를 여는 방식') + '</b>입니다' +
       '<br>주 동작까지 누르는 횟수 <b>' + toMain + '번</b>' +
-      (toMain > 1 ? ' <span class="warn">— 늘 두 번 눌러야 합니다</span>' : '') +
+      (toMain > 1 ? ' <span class="warn">이 방식은 늘 두 번 눌러야 합니다</span>' : '') +
       '<br>따로 초점을 받는 자리 <b>' + focusables + '개</b>' +
       '<br>지금 걸린 주 동작 <b>' + OPTS[cur] + '</b>' +
       '<br>실제로 누른 횟수 <b>' + clicks + '번</b>' +
@@ -112,7 +112,7 @@
       if (document.getElementById('remember').checked) cur = i;
       open = false; render();
       document.getElementById('log').innerHTML = '<b>' + OPTS[i] + '</b>를 실행했습니다' +
-        (document.getElementById('remember').checked ? ' — 다음부터는 이 동작이 기본이 됩니다' : '');
+        (document.getElementById('remember').checked ? '. 다음부터는 이 동작이 기본이 됩니다' : '');
       return;
     }
     if (open && !e.target.closest('.spb')) { open = false; render(); }

@@ -35,8 +35,8 @@
 
 <div class="bar">
   <b>다크 모드</b>
-  <button class="ui-btn ui-btn--ghost" id="toggle" style="min-height:36px;padding:8px 13px;font-size:13px" aria-pressed="false">어둡게 켜기</button>
-  <span style="font-size:13px;color:var(--fg-muted)" id="mode">지금: 밝게</span>
+  <button class="ui-btn ui-btn--ghost" id="toggle" style="min-height:36px;padding:8px 13px;font-size:13px" aria-pressed="false">어두운 모드로 바꾸기</button>
+  <span style="font-size:13px;color:var(--fg-muted)" id="mode">지금은 밝은 모드</span>
 </div>
 
 <div class="stage">
@@ -58,11 +58,11 @@
 <p class="ratio">
   <span>본문 대비비 <b id="r1"></b> <span id="s1"></span></span>
   <span>보조 글 대비비 <b id="r2"></b> <span id="s2"></span></span>
-  <span style="color:var(--fg-muted)">AA 기준 4.5:1</span>
+  <span style="color:var(--fg-muted)">AA 기준은 4.5:1 이상</span>
 </p>
 
 <p class="hint">
-  <b>어둡게 켜기</b>를 눌러 보세요. 위 카드는 토큰을 써서 함께 바뀌지만,
+  <b>어두운 모드로 바꾸기</b>를 눌러 보세요. 위 카드는 토큰을 써서 함께 바뀌지만,
   아래 카드는 <code>#ffffff</code>를 <b>직접 적어 두어서</b> 어두운 화면에서도 하얗게 남습니다.
   다크 모드가 깨지는 경우는 거의 모두 이렇게 색을 직접 적어 둔 자리에서 생깁니다.<br>
   다크 모드는 <b>색을 뒤집는 것이 아니라</b> <b>두 벌의 값</b>을 따로 정하는 것입니다. 순수한 검정(#000)을 바탕에 쓰면 눈이 쉽게 피로하고,
@@ -93,11 +93,11 @@
       var v = p[2];
       document.getElementById(p[0]).textContent = v.toFixed(2) + ':1';
       var s = document.getElementById(p[1]);
-      s.textContent = v >= 4.5 ? '통과' : '모자람';
+      s.textContent = v >= 4.5 ? '통과' : '기준 미달';
       s.className = v >= 4.5 ? 'ok' : 'no';
     });
-    mode.textContent = '지금: ' + (on ? '어둡게' : '밝게');
-    btn.textContent = on ? '밝게 켜기' : '어둡게 켜기';
+    mode.textContent = '지금은 ' + (on ? '어두운 모드' : '밝은 모드');
+    btn.textContent = on ? '밝은 모드로 바꾸기' : '어두운 모드로 바꾸기';
     btn.setAttribute('aria-pressed', String(on));
   }
 

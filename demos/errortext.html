@@ -23,7 +23,7 @@
 
 <div class="bar">
   <b>오류 문구</b>
-  <label>어떤 오류
+  <label>오류 상황 고르기
     <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
       <option value="net">연결이 끊겼을 때</option>
       <option value="val">값이 틀렸을 때</option>
@@ -37,7 +37,7 @@
 <div class="pad">
   <div class="ba" id="ba"></div>
   <div>
-    <p class="ruler" style="margin:0 0 6px">고친 문구를 셋으로 뜯어보면</p>
+    <p class="ruler" style="margin:0 0 6px">고친 문구를 나누어 보면 다음과 같습니다</p>
     <div class="parts" id="parts"></div>
   </div>
   <p class="ruler" id="len"></p>
@@ -113,7 +113,7 @@
         '<span class="ba__why">' + e.badwhy + '</span></div>' +
       '<div class="ba__c good"><span class="ba__tag">고친 문구</span>' +
         '<span class="ba__txt" id="goodtxt">' + good + '</span>' +
-        (e.act ? '<span class="ba__why">버튼: <b>' + e.act + '</b></span>' : '') +
+        (e.act ? '<span class="ba__why">함께 둘 버튼은 <b>' + e.act + '</b>입니다</span>' : '') +
       '</div>';
 
     document.getElementById('parts').innerHTML =
@@ -125,8 +125,8 @@
 
     var l = document.getElementById('len');
     var n = good.length;
-    l.innerHTML = '고친 문구 <b>' + n + '자</b>' +
-      (s ? ' · <span class="warn">사과가 ' + s.length + '자를 더했지만 할 수 있는 일은 그대로입니다</span>' : '');
+    l.innerHTML = '고친 문구는 <b>' + n + '자</b>입니다' +
+      (s ? '. <span class="warn">사과가 ' + s.length + '자를 더했지만 할 수 있는 일은 그대로입니다</span>' : '');
     l.dataset.len = String(n);
     l.dataset.sorry = s ? '1' : '0';
   }

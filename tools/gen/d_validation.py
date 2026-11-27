@@ -14,12 +14,12 @@ def fld(lab, val="", msg="", kind="", w="160px"):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">치는 동안엔 가만둔다 — 다 치기 전에 틀렸다고 하지 않는다</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">칸을 떠날 때(blur) 검사한다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">치는 동안에는 다 치기 전이라 틀렸다고 하지 않음</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">칸을 떠날 때(blur) 검사함</div>
                   <div class="pin-out" data-pin="3" style="max-width:220px">''' + fld('사업자번호', '124', '10자리를 채워 주세요', 'err', '220px').strip() + '''</div>
                   <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">aria-invalid="true" + aria-describedby="no-err"</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">한번 틀린 칸은 <b>고치는 즉시</b> 다시 검사한다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">제출하면 <b>첫 오류 칸으로 초점</b>을 옮긴다</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">한번 틀린 칸은 <b>고치는 즉시</b> 다시 검사함</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">제출하면 <b>첫 오류 칸으로 초점</b>을 옮김</div>
                 </div>
               </div>'''
 
@@ -52,19 +52,19 @@ D = dict(
   oneline="입력 검증에서는 <b>사용자가 값을 다 치기 전에 틀렸다고 하지 않습니다.</b> 반대로 <b>한 번 틀렸다고 알린 칸은 사용자가 고치는 즉시 오류 표시를 풉니다.</b>",
   s4_title="상태", s4_hint="검사하는 시점에 따라 달라지는 상태",
   states=states([
-    (fld('사업자번호', '', '- 없이 10자리'), "치기 전", "입력 규칙을 <b>미리</b> 알려 줍니다. 틀린 뒤에 알려 주는 것보다 낫습니다"),
-    (fld('사업자번호', '124'), "치는 중", "아직 다 입력하지 않았으므로 <b>아무것도 표시하지 않습니다</b>"),
-    (fld('사업자번호', '124', '10자리를 채워 주세요', 'err'), "떠날 때", "칸을 벗어나는 시점에 오류를 알립니다. 검사 시점은 이것을 기본으로 삼습니다"),
-    (fld('사업자번호', '1248100998', '확인됨', 'ok'), "고쳐짐", "한번 틀린 칸은 사용자가 <b>고치는 즉시</b> 오류 표시를 풉니다"),
+    (fld('사업자번호', '', '- 없이 10자리'), "입력하기 전", "입력 규칙을 <b>미리</b> 알려 줍니다. 틀린 뒤에 알려 주는 것보다 낫습니다"),
+    (fld('사업자번호', '124'), "입력하는 중", "아직 다 입력하지 않았으므로 <b>아무것도 표시하지 않습니다</b>"),
+    (fld('사업자번호', '124', '10자리를 채워 주세요', 'err'), "칸을 떠날 때", "칸을 벗어나는 시점에 오류를 알립니다. 검사 시점은 이것을 기본으로 삼습니다"),
+    (fld('사업자번호', '1248100998', '확인됨', 'ok'), "틀린 값을 고쳤을 때", "한번 틀린 칸은 사용자가 <b>고치는 즉시</b> 오류 표시를 풉니다"),
     (fld('사업자번호', '1248100998', '확인하는 중…', 'warn'), "서버에 물어보는 중", "중복 확인처럼 서버에 물어야 하는 검사입니다. <b>확인하는 중이라는 표시</b>를 보여 줍니다"),
-    (fld('사업자번호', '1248100998', '이미 등록된 번호입니다', 'err'), "서버가 거절", "브라우저에서는 잡을 수 없는 오류입니다. 다른 오류와 <b>같은 자리</b>에 같은 모양으로 붙입니다"),
+    (fld('사업자번호', '1248100998', '이미 등록된 번호입니다', 'err'), "서버가 값을 거절했을 때", "브라우저에서는 잡을 수 없는 오류입니다. 다른 오류와 <b>같은 자리</b>에 같은 모양으로 붙입니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("치는 중엔 조용히", "on input: 안 함", "두 글자만 쳤는데 칸이 빨개지면 사용자는 <b>재촉받는다고</b> 느낍니다"),
+    ("치는 중에는 표시하지 않기", "on input: 안 함", "두 글자만 쳤는데 칸이 빨개지면 사용자는 <b>재촉받는다고</b> 느낍니다"),
     ("떠날 때 검사", "on blur", "칸을 벗어나는 때를 입력을 마친 시점으로 보고, 이때 검사하는 것을 기본으로 삼습니다"),
     ("메시지는 칸 밑", "같은 자리", "메시지가 칸에서 멀리 떨어져 있으면 <b>어느 칸에 대한 말인지</b> 알기 어렵습니다"),
-    ("기계에게 알리기", "aria-invalid / describedby", "빨간 테두리는 <b>눈으로만</b> 알 수 있으므로 스크린 리더에도 틀렸음을 알립니다"),
+    ("스크린 리더에 알리기", "aria-invalid / describedby", "빨간 테두리는 <b>눈으로만</b> 알 수 있으므로 스크린 리더에도 틀렸음을 알립니다"),
     ("고치면 즉시 풀기", "re-validate on input", "한번 틀린 칸에만 적용합니다. 이미 틀린 칸은 칠 때마다 검사해도 사용자가 거슬려 하지 않습니다"),
     ("제출하면 초점 이동", "focus first error", "오류 칸이 화면 밖에 있으면 제출을 눌러도 <b>아무 일도 일어나지 않은 것</b>처럼 보이므로 첫 오류 칸으로 포커스를 옮깁니다"),
   ]),
@@ -74,6 +74,9 @@ D = dict(
           처음부터 칠 때마다 검사하면 다 치기 전에 칸이 빨개져서 사용자가 재촉받는 느낌을 받습니다.
           반대로 고친 뒤에도 칸을 떠날 때까지 빨간 채로 두면 <b>고쳤는데도 아직 틀렸다고 하는</b> 것처럼 보입니다.
           대부분의 폼 라이브러리가 이 두 단계 방식을 기본값으로 둡니다.</p>''',
+  do_title="입력 검증이 필요한 경우",
+  dont_title="입력 검증에서 피할 것",
+  instead_title="입력 검증과 함께 보면 좋은 항목",
   do=ul([
     "번호 자릿수, 날짜, 전자우편처럼 <b>형식이 정해진</b> 값을 받을 때",
     "중복, 잔액, 권한처럼 <b>서버만 알 수 있는</b> 조건을 확인할 때",
@@ -85,18 +88,18 @@ D = dict(
     "색만으로 알릴 때. 빨간 테두리만으로는 색을 구별하지 못하는 사람이 오류를 알아챌 수 없습니다",
     "브라우저 검사만 믿을 때. <b>서버가 다시</b> 검사해야 합니다",
   ]),
-  instead='오류를 보여 주는 방법은 <a href="../items/error.html">오류 메시지</a>, 확인만 받으려면 <a href="../items/dialog.html">다이얼로그</a>, 처리 결과를 알리려면 <a href="../items/toast.html">토스트</a>를 봅니다.',
+  instead='검사 결과를 화면에 어떻게 보여 줄지는 <a href="../items/error.html">오류 메시지</a>에서 다룹니다. 값을 검사하지 않고 확인만 받으려면 <a href="../items/dialog.html">다이얼로그</a>를, 처리 결과를 알리려면 <a href="../items/toast.html">토스트</a>를 봅니다.',
   cases=cases([
-    (fld('사업자번호', '124', '10자리를 채워 주세요', 'err', '150px'), "칸 밑에", "가장 흔하게 쓰고, 어느 칸의 오류인지 헷갈릴 일이 가장 적은 방식입니다"),
+    (fld('사업자번호', '124', '10자리를 채워 주세요', 'err', '150px'), "칸 바로 밑에 메시지 붙이기", "가장 흔하게 쓰고, 어느 칸의 오류인지 헷갈릴 일이 가장 적은 방식입니다"),
     ('''              <div style="width:100%;max-width:150px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;font-size:9.5px">
                 <b style="display:block;margin-bottom:3px">2개 칸을 확인해 주세요</b>
                 <span style="color:var(--accent);text-decoration:underline;display:block">사업자번호 — 10자리</span>
                 <span style="color:var(--accent);text-decoration:underline;display:block">계좌 — 은행을 고르세요</span>
               </div>''',
-     "맨 위 요약", "긴 폼에서 씁니다. 요약의 각 줄을 <b>누르면 해당 칸으로</b> 갈 수 있어야 합니다"),
-    (fld('비밀번호', '••••••', '8자 이상 · 숫자 포함', '', '150px'), "미리 알려 주기", "<b>틀리기 전에</b> 입력 규칙을 보여 주는 편이 언제나 낫습니다"),
+     "폼 맨 위에 오류 요약 보여 주기", "긴 폼에서 씁니다. 요약의 각 줄을 <b>누르면 해당 칸으로</b> 갈 수 있어야 합니다"),
+    (fld('비밀번호', '••••••', '8자 이상 · 숫자 포함', '', '150px'), "입력 규칙 미리 알려 주기", "<b>틀리기 전에</b> 입력 규칙을 보여 주는 편이 언제나 낫습니다"),
   ]),
-  s8_title="최소 마크업과 키보드", s8_hint="검증이 꼭 갖출 것",
+  s8_title="최소 마크업과 키보드", s8_hint="검증을 만들 때 꼭 갖출 것",
   code_lede="칸에 <code>aria-invalid</code>를 달아 값이 틀렸음을 알리고, <code>aria-describedby</code>로 <b>무엇이</b> 틀렸는지 적은 메시지를 연결합니다.",
   code='''&lt;<span class="t">label</span> <span class="a">for</span>=<span class="s">"no"</span>&gt;사업자번호&lt;/<span class="t">label</span>&gt;
 &lt;<span class="t">input</span> <span class="a">id</span>=<span class="s">"no"</span> <span class="a">inputmode</span>=<span class="s">"numeric"</span>
@@ -112,17 +115,17 @@ form.querySelector(<span class="s">'[aria-invalid="true"]'</span>)?.focus();''',
   keys=kbd([
     ("<code>aria-invalid=\"true\"</code>", "스크린 리더가 '잘못된 값'이라고 읽습니다. 값을 고치면 속성을 <b>지웁니다</b>"),
     ("<code>aria-describedby</code>", "메시지를 칸에 연결합니다. 칸에 포커스가 가면 메시지까지 함께 읽습니다"),
-    ("제출 뒤 <kbd>Tab</kbd> 없이", "제출하면 첫 오류 칸으로 <b>포커스를 옮깁니다.</b> 옮기지 않으면 사용자가 어느 칸이 문제인지 직접 찾아야 합니다"),
-    ("색 + 글자", "빨간 테두리에 <b>✕ 표시와 문장</b>을 함께 붙입니다. 색만으로는 알리지 않습니다"),
+    ("제출한 뒤 <kbd>Tab</kbd> 없이 오류 칸으로", "제출하면 첫 오류 칸으로 <b>포커스를 옮깁니다.</b> 옮기지 않으면 사용자가 어느 칸이 문제인지 직접 찾아야 합니다"),
+    ("색과 글자로 함께 알리기", "빨간 테두리에 <b>✕ 표시와 문장</b>을 함께 붙입니다. 색만으로는 알리지 않습니다"),
     ("<code>required</code>·<code>pattern</code>", "브라우저가 알아서 제출을 막아 주지만, 메시지가 <b>영어</b>로 나올 수 있습니다"),
     ("<code>novalidate</code>", "메시지를 직접 그리려면 이 속성으로 브라우저 기본 말풍선을 끕니다"),
   ]),
   backend=rows([
-    ("서버가 최종 판단", "브라우저 검사는 사용자를 돕는 <b>안내</b>입니다. <code>curl</code> 명령 한 줄로 요청을 보내면 브라우저 검사를 모두 건너뛸 수 있으므로 서버가 최종 판단을 내립니다."),
-    ("같은 규칙을 두 곳에 쓰지 않는다", "화면과 서버가 규칙을 따로 가지고 있으면 '화면은 통과했는데 서버가 거절'하는 일이 생깁니다. 규칙을 <b>한 곳에 적고</b> 화면과 서버가 함께 쓰게 합니다."),
-    ("오류는 칸 이름과 함께", "<code>{\"field\":\"no\",\"message\":\"10자리여야 합니다\"}</code>처럼 보냅니다. 문장만 보내면 화면이 그 메시지를 어느 칸에 붙여야 할지 알 수 없습니다."),
-    ("중복 확인은 경합한다", "'쓸 수 있는 번호'라고 확인한 뒤 저장하기 전까지 다른 사람이 그 번호를 먼저 등록할 수 있습니다. 그래서 <b>저장할 때 다시</b> 확인하고, DB에도 유일 제약을 겁니다."),
-    ("확인 요청을 아낀다", "글자를 칠 때마다 서버에 물으면 요청이 한꺼번에 많이 몰립니다. <a href=\"search.html\">검색</a>에서처럼 디바운스를 겁니다."),
+    ("최종 판단은 서버에서 하기", "브라우저 검사는 사용자를 돕는 <b>안내</b>입니다. <code>curl</code> 명령 한 줄로 요청을 보내면 브라우저 검사를 모두 건너뛸 수 있으므로 서버가 최종 판단을 내립니다."),
+    ("같은 규칙을 두 곳에 따로 적지 않기", "화면과 서버가 규칙을 따로 가지고 있으면 '화면은 통과했는데 서버가 거절'하는 일이 생깁니다. 규칙을 <b>한 곳에 적고</b> 화면과 서버가 함께 쓰게 합니다."),
+    ("오류를 칸 이름과 함께 보내기", "<code>{\"field\":\"no\",\"message\":\"10자리여야 합니다\"}</code>처럼 보냅니다. 문장만 보내면 화면이 그 메시지를 어느 칸에 붙여야 할지 알 수 없습니다."),
+    ("중복 확인과 저장 사이의 경합", "'쓸 수 있는 번호'라고 확인한 뒤 저장하기 전까지 다른 사람이 그 번호를 먼저 등록할 수 있습니다. 그래서 <b>저장할 때 다시</b> 확인하고, DB에도 유일 제약을 겁니다."),
+    ("서버 확인 요청 줄이기", "글자를 칠 때마다 서버에 물으면 요청이 한꺼번에 많이 몰립니다. <a href=\"search.html\">검색</a>에서처럼 디바운스를 겁니다."),
   ]),
   plat_lede="세 플랫폼은 오류 메시지를 <b>어디에 띄우는지</b>가 다릅니다.",
   plats=plats([

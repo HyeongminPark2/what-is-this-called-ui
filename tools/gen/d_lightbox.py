@@ -33,12 +33,12 @@ def lb(label, note="", ok=None, w="152px", nav=True, cnt="3 / 8", grid=False):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">어두운 가림막 — 그림에 눈이 가게</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">어두운 가림막으로 그림을 돋보이게 함</div>
                   <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">닫기(✕) · ← → · 몇 번째인지</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--accent)">닫으면 눌렀던 칸으로 초점이 돌아간다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--accent)">주소에 남긴다 — 링크로 보낼 수 있다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">Esc · 가림막 · ✕ — 닫는 길 셋</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">작은 그림을 억지로 늘리지 않는다</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--accent)">닫으면 눌렀던 칸으로 초점이 돌아감</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--accent)">주소에 남겨 링크로 보낼 수 있음</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">Esc · 가림막 · ✕ 세 가지로 닫음</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">작은 그림을 억지로 늘리지 않음</div>
                 </div>
               </div>'''
 
@@ -70,26 +70,26 @@ D = dict(
   axes=axis_table("라이트박스"),
   oneline="<b>모달의 규칙을 그대로 지키세요.</b> 그림을 보여 주는 부품이라고 해서 초점 관리와 Esc 닫기, 주소에 남기기를 빼도 되는 것은 아닙니다.",
   states=states([
-    (lb("", "목록 — 작은 그림들", True, "152px", True, "", True), "닫힘", "목록에 <b>작은 그림</b>만 보입니다"),
-    (lb("", "뒤를 덮고 그림만 보인다", True), "열림", "<b>어두운 가림막</b>으로 뒤를 덮습니다"),
-    (lb("", "앞뒤로 넘긴다", True, "152px", True, "3 / 8"), "여러 장", "<b>← →</b> 버튼과 몇 번째 그림인지를 보여 줍니다"),
-    (lb("", "한 장뿐이면 화살표를 안 둔다", True, "152px", False, ""), "한 장", "<b>넘길 그림이 없으니</b> 화살표를 두지 않습니다"),
-    (one(txt('<span style="display:block;font-size:8px;color:var(--fg-muted)">닫았다</span>'
-             '<span style="display:block;font-size:8px;margin-top:2px">초점이 <b>눌렀던 칸</b>으로</span>'),
+    (lb("", "목록에는 작은 그림만", True, "152px", True, "", True), "닫혀 있을 때", "목록에 <b>작은 그림</b>만 보입니다"),
+    (lb("", "뒤를 덮고 그림만 보임", True), "그림을 열었을 때", "<b>어두운 가림막</b>으로 뒤를 덮습니다"),
+    (lb("", "앞뒤로 넘김", True, "152px", True, "3 / 8"), "여러 장을 넘길 때", "<b>← →</b> 버튼과 몇 번째 그림인지를 보여 줍니다"),
+    (lb("", "한 장뿐이면 화살표를 두지 않음", True, "152px", False, ""), "그림이 한 장뿐일 때", "<b>넘길 그림이 없으니</b> 화살표를 두지 않습니다"),
+    (one(txt('<span style="display:block;font-size:8px;color:var(--fg-muted)">닫음</span>'
+             '<span style="display:block;font-size:8px;margin-top:2px">초점이 <b>눌렀던 칸</b>으로 돌아감</span>'),
          "닫은 뒤", True, "", "152px"),
-     "닫은 뒤", "눌렀던 칸으로 <b>초점을 돌려줍니다</b>"),
+     "닫은 뒤의 초점", "눌렀던 칸으로 <b>초점을 돌려줍니다</b>"),
     (one(txt('<span style="display:block;font-size:7.5px;font-family:var(--mono)">/receipts?photo=3</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">링크로 보낼 수 있다</span>'),
-         "주소", True, "뒤로가기로도 닫힌다", "152px"),
-     "주소에 남김", "주소를 보내면 같은 그림을 <b>공유할 수 있습니다</b>"),
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">링크로 보낼 수 있음</span>'),
+         "주소", True, "뒤로가기로도 닫힘", "152px"),
+     "주소에 남겼을 때", "주소를 보내면 같은 그림을 <b>공유할 수 있습니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("가림막", "어둡게", "뒤 화면을 어둡게 덮어 <b>그림에 눈이 가게</b> 합니다"),
+    ("가림막", "어둡게 덮음", "뒤 화면을 어둡게 덮어 <b>그림에 눈이 가게</b> 합니다"),
     ("조작", "✕ · ← → · 몇/몇", "마우스나 손가락으로도, 키보드로도 <b>모두</b> 다룰 수 있어야 합니다"),
-    ("초점", "돌려주기", "닫으면 눌렀던 칸으로 초점을 돌려줍니다"),
-    ("주소", "남기기", "주소에 남겨 두면 <b>링크로</b> 보낼 수 있습니다"),
-    ("닫는 길", "셋", "Esc, 가림막, ✕ 세 가지로 닫을 수 있습니다"),
+    ("초점", "닫을 때 돌려주기", "닫으면 눌렀던 칸으로 초점을 돌려줍니다"),
+    ("주소", "주소에 남기기", "주소에 남겨 두면 <b>링크로</b> 보낼 수 있습니다"),
+    ("닫는 방법", "세 가지", "Esc, 가림막, ✕ 세 가지로 닫을 수 있습니다"),
     ("크기", "원본까지만", "작은 그림을 원본보다 <b>억지로</b> 늘리지 않습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -100,6 +100,8 @@ D = dict(
           반면 <b>주소에 남기기</b>는 들이는 품에 비해 얻는 것이 많습니다.
           그림을 링크로 보낼 수 있고, 폰에서는 <b>시스템 백</b>으로 닫히며,
           새로 고침해도 같은 그림이 열려 있습니다.</p>''',
+  do_title="라이트박스를 만들 때 지킬 것",
+  dont_title="라이트박스를 만들 때 피할 것",
   do=ul([
     "닫으면 <b>눌렀던 칸</b>으로 초점 돌려주기",
     "<b>주소에 남겨</b> 링크 공유와 뒤로가기 닫기가 되게 하기",
@@ -111,11 +113,11 @@ D = dict(
     "한 장뿐인데 <b>화살표</b> 두기",
     "그림 설명(<code>alt</code>)을 <b>빠뜨리기</b>",
   ]),
-  instead='더 넓은 겹침은 <a href="modal.html">모달</a>, 작은 그림은 <a href="thumbnail.html">썸네일</a>, 이어 붙는 움직임은 <a href="sharedelement.html">공유 요소 전환</a>, 전체 화면이면 <a href="fullscreen.html">전체 화면 레이어</a>.',
+  instead='그림이 아닌 내용을 겹쳐 띄우려면 <a href="modal.html">모달</a>을 쓰고, 목록에 작게 보여 주는 그림은 <a href="thumbnail.html">썸네일</a>에서 다룹니다. 작은 그림이 커지며 이어지는 움직임은 <a href="sharedelement.html">공유 요소 전환</a>을 보고, 화면 전체를 덮어야 하면 <a href="fullscreen.html">전체 화면 레이어</a>를 씁니다.',
   cases=cases([
-    (lb("", "", True, "150px", True, "3 / 8"), "영수증 보기", "<b>여러 장</b>을 넘겨 봅니다"),
-    (lb("", "", True, "150px", False, ""), "증빙 한 장", "한 장뿐이라 <b>화살표 없이</b> 보여 줍니다"),
-    (lb("", "", True, "150px", True, "1 / 24", True), "사진첩", "목록에서 <b>골라 엽니다</b>"),
+    (lb("", "", True, "150px", True, "3 / 8"), "영수증 여러 장 넘겨 보기", "<b>여러 장</b>을 넘겨 봅니다"),
+    (lb("", "", True, "150px", False, ""), "증빙 한 장만 크게 보기", "한 장뿐이라 <b>화살표 없이</b> 보여 줍니다"),
+    (lb("", "", True, "150px", True, "1 / 24", True), "사진첩에서 골라 열기", "목록에서 <b>골라 엽니다</b>"),
   ]),
   code_lede="<code>&lt;dialog&gt;</code>를 쓰면 초점 가둠과 Esc 닫기를 <b>따로 만들지 않아도</b> 됩니다.",
   code='''&lt;<span class="t">dialog</span> <span class="a">id</span>=<span class="s">"lb"</span> <span class="a">aria-label</span>=<span class="s">"영수증 3"</span>&gt;
@@ -137,18 +139,18 @@ lb.addEventListener(<span class="s">'close'</span>, () =&gt; last &amp;&amp; las
     ("Esc", "라이트박스를 닫습니다. <code>&lt;dialog&gt;</code>를 쓰면 <b>저절로</b> 됩니다"),
     ("← →", "앞뒤 그림으로 넘깁니다. 이 키는 <b>직접</b> 붙여야 합니다"),
     ("Tab", "초점이 라이트박스 안에 <b>갇혀</b> 밖으로 나가지 않습니다"),
-    ("초점", "열면 <b>닫기</b> 버튼으로, 닫으면 <b>눌렀던 칸</b>으로 옮깁니다"),
+    ("열고 닫을 때의 초점", "열면 <b>닫기</b> 버튼으로, 닫으면 <b>눌렀던 칸</b>으로 옮깁니다"),
     ("<code>alt</code>", "크게 보는 그림에도 <b>설명이 필요</b>합니다"),
-    ("확인하는 법", "세 번째 그림을 Tab으로 찾아 열었다 닫은 뒤 <b>초점이 어디에 있는지</b> 봅니다"),
+    ("확인하는 방법", "세 번째 그림을 Tab으로 찾아 열었다 닫은 뒤 <b>초점이 어디에 있는지</b> 봅니다"),
   ]),
   backend=rows([
-    ("큰 그림은 따로", "목록에는 작은 그림을, 라이트박스에는 <b>큰 그림</b>을 따로 내려 줍니다."),
-    ("이웃 그림", "지금 보는 그림의 <b>앞뒤 한 장씩</b>을 미리 받아 두면 넘길 때 기다리지 않습니다."),
-    ("원본 크기", "그림의 원본 <code>width</code>·<code>height</code>를 함께 내려 주면 원본보다 <b>억지로 늘리는 것</b>을 막을 수 있습니다."),
+    ("큰 그림은 따로 내려 주기", "목록에는 작은 그림을, 라이트박스에는 <b>큰 그림</b>을 따로 내려 줍니다."),
+    ("앞뒤 그림 미리 받아 두기", "지금 보는 그림의 <b>앞뒤 한 장씩</b>을 미리 받아 두면 넘길 때 기다리지 않습니다."),
+    ("원본 크기 함께 내려 주기", "그림의 원본 <code>width</code>·<code>height</code>를 함께 내려 주면 원본보다 <b>억지로 늘리는 것</b>을 막을 수 있습니다."),
   ]),
   plat_lede="라이트박스는 <b>어느 플랫폼에서나 생김새가 같고</b>, 폰에서는 손짓 조작이 더해집니다.",
   plats=plats([
-    ("웹", "&lt;dialog&gt; 또는 직접",
+    ("웹", "&lt;dialog&gt; 또는 직접 만듦",
      lb("", "", True, "110px", True, "3 / 8"),
      "<code>&lt;dialog&gt;</code>를 쓰면 초점 가둠과 Esc 닫기가 함께 따라옵니다."),
     ("iOS", "QuickLook · 사진",

@@ -14,9 +14,9 @@ ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2)
                   <div class="pin-out" data-pin="1" style="font-size:17px;font-weight:400">정산이 확정되었습니다</div>
                   <div class="pin-out" data-pin="2" style="font-size:17px;font-weight:500">정산이 확정되었습니다</div>
                   <div class="pin-out" data-pin="3" style="font-size:17px;font-weight:700">정산이 확정되었습니다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">@font-face { font-weight: 400 }   — 굵기마다 파일 한 벌</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">가짜 굵게(synthetic bold)   — 파일이 없으면 흉내 낸다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">가변 글꼴(variable)   — 한 파일로 100~900</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">@font-face { font-weight: 400 }   굵기마다 파일이 한 벌씩</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">가짜 굵게(synthetic bold)   파일이 없어 흉내 낸 굵기</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">가변 글꼴(variable)   파일 하나로 100~900</div>
                 </div>
               </div>'''
 
@@ -47,19 +47,19 @@ D = dict(
   ]),
   axes=ax("글자 굵기"),
   oneline="굵기는 400·500·700, <b>세 단이면 충분합니다</b>. 단을 하나 늘릴 때마다 내려받을 글꼴 파일도 한 벌씩 늘어나기 때문입니다.",
-  s4_title="단", s4_hint="실제로 쓰는 것은 세 단",
+  s4_title="굵기 단계별 쓰임", s4_hint="실제로 쓰는 굵기는 세 단",
   states=states([
-    (wt(400, "400 · Regular", "본문"), "400", "기본 굵기입니다. <b>글의 대부분</b>을 이 굵기로 씁니다"),
-    (wt(500, "500 · Medium", "살짝 강조"), "500", "라벨과 줄 제목에 써서 <b>살짝 강조</b>합니다"),
-    (wt(700, "700 · Bold", "제목 · 버튼"), "700", "제목과 버튼에 씁니다. 이보다 더 굵게 쓸 일은 드뭅니다"),
-    (wt(300, "300 · Light", "얇게"), "300", "큰 제목에만 씁니다. <b>본문에 쓰면 글자가 흐려 보입니다</b>"),
-    (wt(900, "900 · Black", "아주 굵게", 18), "900", "표지나 큰 숫자에 씁니다. 한글은 획이 많아서 조금만 굵어져도 <b>뭉개져 보입니다</b>"),
+    (wt(400, "400 · Regular", "본문"), "400으로 쓰는 본문", "기본 굵기입니다. <b>글의 대부분</b>을 이 굵기로 씁니다"),
+    (wt(500, "500 · Medium", "살짝 강조"), "500으로 하는 가벼운 강조", "라벨과 줄 제목에 써서 <b>살짝 강조</b>합니다"),
+    (wt(700, "700 · Bold", "제목 · 버튼"), "700으로 쓰는 제목과 버튼", "제목과 버튼에 씁니다. 이보다 더 굵게 쓸 일은 드뭅니다"),
+    (wt(300, "300 · Light", "얇게"), "300은 큰 제목에만", "큰 제목에만 씁니다. <b>본문에 쓰면 글자가 흐려 보입니다</b>"),
+    (wt(900, "900 · Black", "아주 굵게", 18), "900은 표지와 큰 숫자에만", "표지나 큰 숫자에 씁니다. 한글은 획이 많아서 조금만 굵어져도 <b>뭉개져 보입니다</b>"),
     ('''              <div style="display:grid;gap:5px;justify-items:center;text-align:center">
                 <span style="font-size:16px;font-weight:700;-webkit-text-stroke:0.3px currentColor">정산 확정</span>
                 <span style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">가짜 굵게</span>
                 <span style="font-size:10px;color:var(--fg-faint)">파일이 없어 흉내 낸 것</span>
               </div>''',
-     "가짜 굵게", "획이 <b>뭉개지고 번져</b> 보이는데, 획이 많은 한글에서 특히 눈에 띕니다"),
+     "파일 없이 흉내 낸 가짜 굵게", "획이 <b>뭉개지고 번져</b> 보이는데, 획이 많은 한글에서 특히 눈에 띕니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -85,27 +85,27 @@ D = dict(
     "중요한 내용을 <code>&lt;b&gt;</code>로 굵게만 할 때. 중요하다는 뜻을 담으려면 <code>&lt;strong&gt;</code>을 씁니다",
     "받아 오지 않는 굵기를 시안에 적을 때. 화면에서는 그 굵기가 <b>가짜 굵게</b>로 그려집니다",
   ]),
-  instead='크기로 위계를 만들려면 <a href="../items/typescale.html">타입 스케일</a>, 크기·굵기·색을 함께 쓰려면 <a href="hierarchy.html">글자 위계</a>, 파일 문제는 <a href="webfont.html">웹폰트</a>.',
+  instead='글자 크기의 차이로 위계를 만들려면 <a href="../items/typescale.html">타입 스케일</a>을 쓰고, 크기·굵기·색을 함께 써서 읽는 순서를 정하려면 <a href="hierarchy.html">글자 위계</a>를 봅니다. 굵기별 글꼴 파일을 받아 오는 문제는 <a href="webfont.html">웹폰트</a>에서 다룹니다.',
   cases=cases([
     ('''              <div style="width:100%;max-width:180px;display:grid;gap:3px">
                 <span style="font-size:14px;font-weight:700">정산 요청 #4821</span>
                 <span style="font-size:12px;font-weight:400;color:var(--fg-muted)">11월 1일 ~ 11월 7일</span>
               </div>''',
-     "줄 제목", "<b>700과 400</b> 두 단만으로도 제목과 부가 정보의 위계를 만들 수 있습니다"),
+     "줄 제목과 부가 정보 나누기", "<b>700과 400</b> 두 단만으로도 제목과 부가 정보의 위계를 만들 수 있습니다"),
     ('''              <div style="width:100%;max-width:180px;display:flex;gap:6px">
                 <span style="background:var(--accent);color:#fff;border-radius:6px;padding:7px 13px;font-size:12px;font-weight:700">확정</span>
                 <span style="border:1px solid var(--line-strong);border-radius:6px;padding:7px 13px;font-size:12px;font-weight:500">나중에</span>
               </div>''',
-     "버튼", "주 버튼은 700, 보조 버튼은 500으로 써서 <b>색뿐 아니라 굵기로도</b> 둘을 나눕니다"),
+     "주 버튼과 보조 버튼 나누기", "주 버튼은 700, 보조 버튼은 500으로 써서 <b>색뿐 아니라 굵기로도</b> 둘을 나눕니다"),
     ('''              <div style="width:100%;max-width:180px;display:grid;gap:4px;font-size:11.5px">
                 <span style="font-weight:700;color:var(--fg-muted);letter-spacing:.04em">가맹점</span>
                 <span style="font-weight:400">모란상회</span>
                 <span style="font-weight:400">한빛아웃도어</span>
               </div>''',
-     "표 머리글", "머리글만 굵게 씁니다. 굵기를 바꿔도 <b>줄 높이가 그대로라</b> 표의 행 높이가 흔들리지 않습니다"),
+     "표 머리글만 굵게 쓰기", "머리글만 굵게 씁니다. 굵기를 바꿔도 <b>줄 높이가 그대로라</b> 표의 행 높이가 흔들리지 않습니다"),
   ]),
   s8_title="최소 코드와 규칙", s8_hint="굵기를 적고 받아 오는 규칙",
-  keys_heads="<th>규칙</th><th>지켜야 하는 것</th>",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법</th>",
   code_lede="굵기는 <b>숫자로</b> 적습니다. <code>bold</code>는 700을 가리키는 다른 이름이라서 500이나 600 같은 중간 단은 나타낼 수 없습니다.",
   code='''<span class="c">/* 받아 올 굵기만 적는다. 굵기 하나에 파일 하나가 필요하다 */</span>
 <span class="t">@font-face</span> {
@@ -124,18 +124,18 @@ D = dict(
 <span class="c">/* 브라우저가 가짜 굵게를 만들지 못하게 막을 수도 있다 */</span>
 <span class="t">body</span> { <span class="a">font-synthesis</span>: none; }''',
   keys=kbd([
-    ("숫자로 적는다", "<code>700</code>처럼 숫자로 씁니다. <code>bold</code>로는 중간 단을 가리킬 수 없기 때문입니다"),
-    ("쓸 굵기만 받는다", "굵기 하나마다 <b>파일이 하나</b>씩 필요하고, 한글 글꼴은 한 벌이 수백 KB나 됩니다"),
-    ("가변 글꼴을 본다", "파일 하나로 모든 굵기를 낼 수 있으면 <b>굵기를 늘려도 내려받을 파일이 늘지 않습니다</b>"),
-    ("<code>&lt;strong&gt;</code>은 뜻", "굵게 보이게만 하려면 CSS로 굵기를 주고, <b>중요하다는 뜻</b>을 담을 때만 strong을 씁니다"),
-    ("가짜 굵게를 확인한다", "파일이 없는 굵기를 쓰면 <b>한글이 뭉개지므로</b>, 화면에서 직접 눈으로 확인합니다"),
-    ("단을 세 개로", "400·500·700 세 단으로 시작하고, 단을 늘리기 전에 화면에서 <b>정말 구별되는지</b> 확인합니다"),
+    ("굵기는 숫자로 적기", "<code>700</code>처럼 숫자로 씁니다. <code>bold</code>로는 중간 단을 가리킬 수 없기 때문입니다"),
+    ("쓸 굵기의 파일만 받아 오기", "굵기 하나마다 <b>파일이 하나</b>씩 필요하고, 한글 글꼴은 한 벌이 수백 KB나 됩니다"),
+    ("가변 글꼴을 쓸 수 있는지 보기", "파일 하나로 모든 굵기를 낼 수 있으면 <b>굵기를 늘려도 내려받을 파일이 늘지 않습니다</b>"),
+    ("<code>&lt;strong&gt;</code>은 뜻을 담을 때만", "굵게 보이게만 하려면 CSS로 굵기를 주고, <b>중요하다는 뜻</b>을 담을 때만 strong을 씁니다"),
+    ("가짜 굵게가 생기는지 확인하기", "파일이 없는 굵기를 쓰면 <b>한글이 뭉개지므로</b>, 화면에서 직접 눈으로 확인합니다"),
+    ("세 단으로 시작하기", "400·500·700 세 단으로 시작하고, 단을 늘리기 전에 화면에서 <b>정말 구별되는지</b> 확인합니다"),
   ]),
   backend=rows([
-    ("굵기 = 파일 수", "굵기를 하나 늘리면 내려받을 글꼴 파일도 한 벌 늘어납니다. 한글 글꼴은 한 벌이 <b>수백 KB</b>나 되기 때문에, 굵기를 늘릴수록 첫 화면이 뜨는 속도가 느려집니다."),
-    ("가변 글꼴의 손익", "가변 글꼴은 파일 하나로 모든 굵기를 내지만, 굵기 하나짜리 파일보다 <b>파일 자체가 더 큽니다.</b> 그래서 굵기를 셋 이상 쓸 때부터 이득입니다."),
-    ("시안과 현실", "디자인 도구에서는 글꼴의 모든 굵기를 고를 수 있지만, 웹 화면에는 받아 온 굵기만 제대로 나옵니다. <b>실제로 받아 오는 굵기 목록</b>을 디자이너와 먼저 합의해 두면 '세미볼드가 안 나와요' 같은 일이 생기지 않습니다."),
-    ("메일·PDF", "메일이나 PDF처럼 웹폰트를 쓸 수 없는 곳에서는 <b>굵기 두 단</b>(400·700)만 제대로 나온다고 보고 화면을 짭니다."),
+    ("굵기 수만큼 늘어나는 글꼴 파일", "굵기를 하나 늘리면 내려받을 글꼴 파일도 한 벌 늘어납니다. 한글 글꼴은 한 벌이 <b>수백 KB</b>나 되기 때문에, 굵기를 늘릴수록 첫 화면이 뜨는 속도가 느려집니다."),
+    ("가변 글꼴이 이득이 되는 경우", "가변 글꼴은 파일 하나로 모든 굵기를 내지만, 굵기 하나짜리 파일보다 <b>파일 자체가 더 큽니다.</b> 그래서 굵기를 셋 이상 쓸 때부터 이득입니다."),
+    ("시안과 실제 화면의 차이", "디자인 도구에서는 글꼴의 모든 굵기를 고를 수 있지만, 웹 화면에는 받아 온 굵기만 제대로 나옵니다. <b>실제로 받아 오는 굵기 목록</b>을 디자이너와 먼저 합의해 두면 '세미볼드가 안 나와요' 같은 일이 생기지 않습니다."),
+    ("메일과 PDF에서 쓸 수 있는 굵기", "메일이나 PDF처럼 웹폰트를 쓸 수 없는 곳에서는 <b>굵기 두 단</b>(400·700)만 제대로 나온다고 보고 화면을 짭니다."),
   ]),
   plat_lede="세 플랫폼 모두 굵기를 단으로 나누지만, 기본 글꼴에 들어 있는 단의 수가 서로 다릅니다.",
   plats=plats([

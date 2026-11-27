@@ -21,17 +21,19 @@ def r(items, label, note="", ok=None, w="152px"):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">주소가 바뀌면 &lt;a href&gt; — 이동</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">그 자리에서 일이 일어나면 &lt;button&gt; — 동작</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">링크는 새 탭 · 복사 · 공유가 된다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">버튼은 Space 로도 눌린다 — 링크는 Enter 만</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--danger)">div + onclick — Tab 이 안 멈추고 Enter 가 안 먹는다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">생김새는 자유다 — 뜻만 지킨다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">주소가 바뀌는 이동이면 &lt;a href&gt;</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">그 자리에서 일어나는 동작이면 &lt;button&gt;</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">링크는 새 탭 열기 · 복사 · 공유가 됨</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">버튼은 Space 로도 눌리고 링크는 Enter 로만 열림</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--danger)">div + onclick 은 Tab 도 Enter 도 받지 못함</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">생김새는 자유롭게, 뜻은 태그로 지킴</div>
                 </div>
               </div>'''
 
 D = dict(
   slug="linkbutton", ko="링크와 버튼", en="Link vs button",
+  s4_title="만드는 방식", s4_hint="어떤 태그로 만드느냐에 따라 달라지는 동작",
+  do_title="링크와 버튼을 고를 때 지킬 것", dont_title="링크와 버튼을 만들 때 피할 것", instead_title="함께 보면 좋은 항목",
   desc="이동인지 동작인지에 따라 링크와 버튼 태그를 고르는 규칙과, div+onclick으로 만들거나 둘을 서로 바꿔 썼을 때 생기는 문제를 보여 주는 항목입니다.",
   lede="링크와 버튼은 누른 결과가 <b>다른 곳으로 이동하는지, 그 자리에서 동작하는지</b>로 가릅니다. 생김새는 자유롭게 꾸며도 되지만 <b>태그는 이 뜻을 따라야</b> 합니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
@@ -56,31 +58,31 @@ D = dict(
   axes=ax("링크와 버튼"),
   oneline="<b>누른 뒤 주소가 바뀌면 링크, 그렇지 않으면 버튼</b>을 씁니다. 링크와 버튼을 가르는 기준은 이것 하나입니다.",
   states=states([
-    (r([("주문 상세 보기", "a", False), ("저장", "button", False)], "", "뜻에 맞다", True),
-     "맞게 씀", "<b>뜻에 맞게</b> 썼습니다"),
-    (r([("주문 상세 보기", "button", True), ("저장", "a", True)], "", "서로 바꿔 썼다", False),
-     "바꿔 씀", "겉으로는 <b>티가 나지 않지만</b> 문제가 생깁니다"),
-    (r([("주문 상세 보기", "div", True), ("저장", "div", True)], "", "Tab 이 안 멈춘다", False),
-     "<code>div</code> 로", "<b>키보드로 쓸 수 없습니다</b>"),
+    (r([("주문 상세 보기", "a", False), ("저장", "button", False)], "", "뜻에 맞게 씀", True),
+     "뜻에 맞게 썼을 때", "<b>뜻에 맞게</b> 썼습니다"),
+    (r([("주문 상세 보기", "button", True), ("저장", "a", True)], "", "서로 바꿔 씀", False),
+     "서로 바꿔 썼을 때", "겉으로는 <b>티가 나지 않지만</b> 문제가 생깁니다"),
+    (r([("주문 상세 보기", "div", True), ("저장", "div", True)], "", "Tab 이 멈추지 않음", False),
+     "<code>div</code> 로 만들었을 때", "<b>키보드로 쓸 수 없습니다</b>"),
     (one(txt('<span style="display:block;font-size:8px">⌘ + 클릭 · 가운데 버튼</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">링크만 새 탭으로 열린다</span>'),
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">링크만 새 탭으로 열림</span>'),
          "새 탭", True, "", "152px"),
-     "새 탭", "<b>링크만</b> 새 탭으로 열 수 있습니다"),
+     "새 탭으로 열 때", "<b>링크만</b> 새 탭으로 열 수 있습니다"),
     (one(txt('<span style="display:block;font-size:8px">Space 로 눌림</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">버튼만 된다 — 링크는 Enter 만</span>'),
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">버튼만 되고 링크는 Enter 로만 열림</span>'),
          "키보드", True, "", "152px"),
-     "키보드", "링크와 버튼은 <b>누르는 키가 다릅니다</b>"),
-    (r([("도움말 보기", "a", False), ("도움말 보기", "button", False)], "", "둘 다 밑줄이어도 된다", None),
-     "생김새", "생김새는 <b>자유롭게</b> 꾸며도 됩니다"),
+     "키보드로 누를 때", "링크와 버튼은 <b>누르는 키가 다릅니다</b>"),
+    (r([("도움말 보기", "a", False), ("도움말 보기", "button", False)], "", "둘 다 밑줄이어도 됨", None),
+     "생김새를 꾸밀 때", "생김새는 <b>자유롭게</b> 꾸며도 됩니다"),
   ]),
   anat=ANAT,
   pins=pins([
     ("이동", "<code>&lt;a href&gt;</code>", "누르면 주소가 바뀝니다"),
     ("동작", "<code>&lt;button&gt;</code>", "그 자리에서 일이 일어납니다"),
-    ("링크만", "새 탭 · 복사", "링크는 오른쪽 클릭 메뉴가 버튼과 다릅니다"),
-    ("버튼만", "Space", "Space 는 버튼만 누르고, 링크는 <b>Enter 로만</b> 열립니다"),
-    ("<code>div</code>", "둘 다 안 됨", "Tab 도 멈추지 않고 Enter 로도 눌리지 않습니다"),
-    ("생김새", "자유", "생김새는 자유롭게 하고 <b>뜻만</b> 지킵니다"),
+    ("링크만 되는 것", "새 탭 · 복사", "링크는 오른쪽 클릭 메뉴가 버튼과 다릅니다"),
+    ("버튼만 받는 키", "Space", "Space 는 버튼만 누르고, 링크는 <b>Enter 로만</b> 열립니다"),
+    ("<code>div</code>로 만든 줄", "키보드로 쓸 수 없음", "Tab 도 멈추지 않고 Enter 로도 눌리지 않습니다"),
+    ("생김새", "자유롭게 꾸밈", "생김새는 자유롭게 하고 <b>뜻만</b> 지킵니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           링크와 버튼을 서로 바꿔 쓰는 실수는 <code>div</code> 로 만드는 것보다 더 흔하고, 겉으로 드러나지 않아서 더 늦게 발견됩니다.
@@ -92,7 +94,7 @@ D = dict(
           모달을 열 때 주소를 바꾸기도 하는데, 그럴 때는 <a href="lightbox.html">라이트박스</a>처럼
           <b>링크로 두는 편</b>이 공유도 되고 뒤로가기도 됩니다.</p>''',
   do=ul([
-    "주소가 바뀌면 <b>링크</b>, 아니면 <b>버튼</b>",
+    "주소가 바뀌면 <b>링크</b>, 그렇지 않으면 <b>버튼</b>으로 만들기",
     "폼 안의 버튼에는 <b><code>type=\"button\"</code></b> 적기",
     "<code>div</code> 에 <code>onclick</code> 을 달지 않기",
   ]),
@@ -102,11 +104,11 @@ D = dict(
     "<code>&lt;a href=\"#\"&gt;</code> 에 <code>onclick</code> 달기. 누를 때마다 주소 끝에 <code>#</code>이 붙습니다",
     "<code>role=\"button\"</code> 만 붙이고 <b>키보드를 안 붙이기</b>",
   ]),
-  instead='세기는 <a href="buttonlevel.html">버튼 위계</a>, 갈래가 붙으면 <a href="splitbutton.html">분할 버튼</a>, 문구는 <a href="buttontext.html">버튼 문구</a>, 차례는 <a href="order.html">보이는 순서와 읽는 순서</a>.',
+  instead='버튼의 세기를 나누는 일은 <a href="buttonlevel.html">버튼 위계</a>에서, 버튼에 다른 동작 갈래가 붙는 경우는 <a href="splitbutton.html">분할 버튼</a>에서 다룹니다. 버튼에 적을 문구는 <a href="buttontext.html">버튼 문구</a>, 초점이 멈추는 차례는 <a href="order.html">보이는 순서와 읽는 순서</a> 항목에 있습니다.',
   cases=cases([
-    (r([("주문 상세 보기", "a", False)], "", "", True, "150px"), "목록의 줄", "누르면 주소가 바뀌므로 <b>링크</b>입니다"),
-    (r([("저장", "button", False)], "", "", True, "150px"), "폼의 제출", "그 자리에서 폼을 보내므로 <b>버튼</b>입니다"),
-    (r([("영수증 내려받기", "a", False)], "", "", True, "150px"), "파일 받기", "파일에도 주소가 있으므로 <b>링크</b>입니다"),
+    (r([("주문 상세 보기", "a", False)], "", "", True, "150px"), "목록에서 상세로 가는 줄", "누르면 주소가 바뀌므로 <b>링크</b>입니다"),
+    (r([("저장", "button", False)], "", "", True, "150px"), "폼을 제출하는 버튼", "그 자리에서 폼을 보내므로 <b>버튼</b>입니다"),
+    (r([("영수증 내려받기", "a", False)], "", "", True, "150px"), "파일 내려받기", "파일에도 주소가 있으므로 <b>링크</b>입니다"),
   ]),
   code_lede="생김새는 클래스로 정하고 뜻은 태그로 정해서, 둘을 <b>따로</b> 다룹니다.",
   code='''<span class="c">&lt;!-- 이동. 버튼처럼 보여도 링크다 --&gt;</span>
@@ -127,11 +129,11 @@ D = dict(
     ("⌘ · Ctrl + 클릭", "<b>링크만</b> 새 탭으로 열립니다"),
     ("<code>type=\"button\"</code>", "폼 안에서 적지 않으면 누를 때 폼이 <b>제출</b>됩니다"),
     ("<code>role=\"button\"</code>", "이 속성을 붙였다면 <b>Enter·Space</b> 처리도 직접 만들어 붙여야 합니다"),
-    ("확인하는 법", "Tab 으로 화면을 훑으며 <b>초점이 멈추지 않는 자리</b>가 있는지 봅니다"),
+    ("제대로 만들었는지 확인하는 방법", "Tab 으로 화면을 훑으며 <b>초점이 멈추지 않는 자리</b>가 있는지 봅니다"),
   ]),
   backend=rows([
-    ("이동이면 주소를", "응답에 <code>url</code> 을 담아 주면 화면이 그 주소로 바로 <b>링크를</b> 만들 수 있습니다. 반면 id 만 주면 화면이 주소를 직접 조립해야 합니다."),
-    ("동작이면 결과를", "버튼이 부르는 API 가 <b>무엇이 바뀌었는지</b> 돌려줘야 화면이 <a href=\"partialload.html\">부분 로딩</a>으로 바뀐 곳만 다시 그릴 수 있습니다."),
+    ("이동이면 응답에 주소 담기", "응답에 <code>url</code> 을 담아 주면 화면이 그 주소로 바로 <b>링크를</b> 만들 수 있습니다. 반면 id 만 주면 화면이 주소를 직접 조립해야 합니다."),
+    ("동작이면 바뀐 결과 돌려주기", "버튼이 부르는 API 가 <b>무엇이 바뀌었는지</b> 돌려줘야 화면이 <a href=\"partialload.html\">부분 로딩</a>으로 바뀐 곳만 다시 그릴 수 있습니다."),
   ]),
   plat_lede="링크와 버튼은 <b>웹에만 있는 구분</b>입니다. 앱 화면에는 주소가 없기 때문입니다.",
   plats=plats([

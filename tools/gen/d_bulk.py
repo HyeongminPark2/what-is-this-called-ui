@@ -28,11 +28,11 @@ BAR = ('<div style="display:flex;align-items:center;gap:6px;padding:5px 8px;back
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="max-width:230px">''' + hrow('mid', '가맹점') + '''</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">indeterminate — 일부만 골랐을 때의 세 번째 모양</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">indeterminate는 일부만 골랐을 때의 세 번째 모양</div>
                   <div class="pin-out" data-pin="3" style="max-width:230px">''' + BAR + '''</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">'이 쪽 5건' 과 '조건에 맞는 128건' 은 다른 말이다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">쪽을 넘기면 선택이 풀리는가 — 먼저 정한다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">끝난 뒤 "5건 승인됨 · 되돌리기"</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">'이 쪽 5건'과 '조건에 맞는 128건'은 범위가 다름</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">쪽을 넘길 때 선택을 풀지 먼저 정함</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">처리가 끝나면 "5건 승인됨 · 되돌리기"</div>
                 </div>
               </div>'''
 
@@ -66,20 +66,20 @@ D = dict(
     (tbl(hrow('off', '가맹점'), [rrow('off', '모란상회'), rrow('off', '한빛아웃도어')]),
      "아무것도 안 골랐을 때", "동작 막대는 <b>보이지 않습니다</b>. 막대가 나타날 자리는 미리 비워 둡니다"),
     (tbl(hrow('mid', '가맹점'), [rrow('on', '모란상회'), rrow('off', '한빛아웃도어')]),
-     "일부", "맨 위 체크박스는 켜짐도 꺼짐도 아닌 <b>반쯤 켜진</b> 모양이 됩니다"),
+     "일부만 골랐을 때", "맨 위 체크박스는 켜짐도 꺼짐도 아닌 <b>반쯤 켜진</b> 모양이 됩니다"),
     (tbl(hrow('on', '가맹점'), [rrow('on', '모란상회'), rrow('on', '한빛아웃도어')]),
-     "이 쪽 전부", "맨 위 체크박스가 켜지지만, 고른 범위는 아직 <b>이 쪽</b>뿐입니다"),
+     "이 쪽을 전부 골랐을 때", "맨 위 체크박스가 켜지지만, 고른 범위는 아직 <b>이 쪽</b>뿐입니다"),
     ('''              <div style="width:100%;max-width:180px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden">'''
      + hrow('on', '가맹점')
      + '<div style="padding:5px 8px;font-size:9px;background:var(--warn-soft);border-top:1px solid var(--line)">이 쪽 5건을 골랐습니다 · <b style="color:var(--accent);text-decoration:underline">조건에 맞는 128건 모두 고르기</b></div>'
      + rrow('on', '모란상회') + '</div>',
-     "전체로 넓히기", "사용자에게 <b>물어본 뒤에</b> 범위를 넓힙니다. 저절로 넓히지 않습니다"),
+     "조건에 맞는 전체로 넓힐 때", "사용자에게 <b>물어본 뒤에</b> 범위를 넓힙니다. 저절로 넓히지 않습니다"),
     (tbl(BAR, [rrow('on', '모란상회'), rrow('on', '한빛아웃도어')]),
-     "동작 막대", "고른 <b>건수</b>와 할 수 있는 <b>동작</b>을 보여 줍니다. 위든 아래든 한 자리에 고정합니다"),
+     "동작 막대가 떴을 때", "고른 <b>건수</b>와 할 수 있는 <b>동작</b>을 보여 줍니다. 위든 아래든 한 자리에 고정합니다"),
     ('''              <div style="width:100%;max-width:180px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;font-size:9.5px">
                 <b>5건 승인됨</b> · <span style="color:var(--accent);text-decoration:underline">되돌리기</span>
               </div>''',
-     "끝난 뒤", "<b>몇 건이</b> 어떻게 처리됐는지 알리고, 되돌리기 버튼을 함께 둡니다"),
+     "처리가 끝난 뒤", "<b>몇 건이</b> 어떻게 처리됐는지 알리고, 되돌리기 버튼을 함께 둡니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -108,21 +108,21 @@ D = dict(
     "고른 것이 없는데 동작 막대를 띄울 때",
     "쪽을 넘겼을 때 선택이 <b>아무 안내 없이</b> 풀릴 때",
   ]),
-  instead='한 건만 처리하면 줄 안의 <a href="../items/card.html">카드</a>·메뉴 버튼, 거르기만 하면 <a href="filter.html">필터</a>, 확인이 필요하면 <a href="../items/dialog.html">다이얼로그</a>를 씁니다.',
+  instead='한 건씩만 처리하면 되는 경우에는 줄 안의 <a href="../items/card.html">카드</a>나 메뉴 버튼으로 충분하고, 목록을 거르기만 하려면 <a href="filter.html">필터</a>를 씁니다. 처리하기 전에 사용자의 확인을 받아야 하면 <a href="../items/dialog.html">다이얼로그</a>를 띄웁니다.',
   cases=cases([
-    (tbl(BAR, [rrow('on', '모란상회')], "150px"), "위 고정 막대", "표 위에 두고, 표를 스크롤해도 같은 자리에 머뭅니다"),
+    (tbl(BAR, [rrow('on', '모란상회')], "150px"), "표 위에 동작 막대 고정하기", "표 위에 두고, 표를 스크롤해도 같은 자리에 머뭅니다"),
     ('''              <div style="width:100%;max-width:150px;position:relative;height:60px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden">
                 <div style="padding:5px 8px;font-size:10px">모란상회</div>
                 <div style="position:absolute;left:4px;right:4px;bottom:4px;background:var(--fg);color:var(--surface);border-radius:999px;padding:4px 8px;font-size:9px;display:flex;gap:5px"><span style="flex:1">5건</span><span>승인</span></div>
               </div>''',
-     "아래 떠 있는 막대", "폰에서 씁니다. <b>엄지가 닿는 자리</b>에 둡니다"),
+     "폰 화면 아래에 막대 띄우기", "폰에서 씁니다. <b>엄지가 닿는 자리</b>에 둡니다"),
     ('''              <div style="width:100%;max-width:150px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;font-size:9.5px">
                 정말 <b>128건</b>을 반려하시겠습니까?<br>
                 <span style="color:var(--fg-muted);font-size:8.5px">되돌릴 수 없습니다</span>
               </div>''',
-     "큰 범위는 되묻기", "확인 문구 <b>안에 건수를</b> 적어서 몇 건을 처리하는지 다시 보여 줍니다"),
+     "범위가 크면 건수를 넣어 되묻기", "확인 문구 <b>안에 건수를</b> 적어서 몇 건을 처리하는지 다시 보여 줍니다"),
   ]),
-  s8_title="최소 마크업과 키보드", s8_hint="일괄 선택이 꼭 갖출 것",
+  s8_title="최소 마크업과 키보드", s8_hint="일괄 선택을 만들 때 꼭 갖출 것",
   code_lede="<code>indeterminate</code>는 HTML 속성이 아니라 <b>자바스크립트 프로퍼티</b>입니다.",
   code='''&lt;<span class="t">input</span> <span class="a">type</span>=<span class="s">"checkbox"</span> <span class="a">id</span>=<span class="s">"all"</span> <span class="a">aria-label</span>=<span class="s">"이 쪽 전체 선택"</span>&gt;
 …
@@ -141,14 +141,14 @@ all.indeterminate = n &gt; <span class="a">0</span> &amp;&amp; n &lt; rows.lengt
     ("<code>indeterminate</code>", "스크린 리더는 'mixed'로 읽습니다. 자바스크립트로만 켤 수 있고, 사용자가 체크박스를 <b>누르면 사라집니다</b>"),
     ("<code>aria-label</code>", "맨 위 체크박스에 답니다. 글자 없이 빈 칸만 있으면 무엇을 고르는 체크박스인지 알 수 없습니다"),
     ("<code>role=\"status\"</code>", "'5건 선택됨'처럼 알립니다. 동작 막대가 떠도 화면을 보지 않는 사람은 알아챌 수 없기 때문입니다"),
-    ("막대가 뜨며 <b>초점을 뺏지 않는다</b>", "포커스가 고르던 자리에 그대로 있어야 다음 줄을 이어서 고를 수 있습니다"),
+    ("막대가 떠도 <b>포커스는 그대로 두기</b>", "포커스가 고르던 자리에 그대로 있어야 다음 줄을 이어서 고를 수 있습니다"),
   ]),
   backend=rows([
-    ("'전체'는 <b>조건</b>으로 보낸다", "128건의 ID를 전부 담아 보내면 건수가 늘수록 요청이 지나치게 커집니다. <code>{\"filter\":{\"status\":\"pending\"}}</code>처럼 <b>조건</b>을 보내고 대상은 서버가 고르게 합니다."),
-    ("일부만 성공할 수 있다", "128건 가운데 3건이 실패하면 <b>어느 건이 실패했는지</b> 돌려줘야 합니다. 일부 실패를 허용할지, 전부 성공하거나 전부 실패하도록 묶을지도 미리 정해야 합니다."),
-    ("오래 걸린다", "수천 건이면 요청 하나가 끝나기를 기다릴 수 없습니다. 서버가 <b>작업 번호를 먼저 돌려주고</b>, 화면은 그 번호로 진행률을 따로 묻게 합니다."),
-    ("되돌리기", "묶음 처리를 되돌리려면 <b>처리 전 상태를 기록</b>해 두어야 합니다. 기록 없이 처리한 뒤에는 되돌리기 기능을 붙이기가 거의 불가능합니다."),
-    ("두 번 눌림", "동작 막대의 버튼도 두 번 눌릴 수 있습니다. <a href=\"form.html\">폼</a>에서처럼 요청마다 <b>고유 키</b>를 붙입니다."),
+    ("'전체'는 ID 목록 대신 <b>조건</b>으로 보내기", "128건의 ID를 전부 담아 보내면 건수가 늘수록 요청이 지나치게 커집니다. <code>{\"filter\":{\"status\":\"pending\"}}</code>처럼 <b>조건</b>을 보내고 대상은 서버가 고르게 합니다."),
+    ("일부만 성공했을 때 알려 주기", "128건 가운데 3건이 실패하면 <b>어느 건이 실패했는지</b> 돌려줘야 합니다. 일부 실패를 허용할지, 전부 성공하거나 전부 실패하도록 묶을지도 미리 정해야 합니다."),
+    ("오래 걸리는 묶음 처리", "수천 건이면 요청 하나가 끝나기를 기다릴 수 없습니다. 서버가 <b>작업 번호를 먼저 돌려주고</b>, 화면은 그 번호로 진행률을 따로 묻게 합니다."),
+    ("되돌리기를 위한 기록", "묶음 처리를 되돌리려면 <b>처리 전 상태를 기록</b>해 두어야 합니다. 기록 없이 처리한 뒤에는 되돌리기 기능을 붙이기가 거의 불가능합니다."),
+    ("버튼이 두 번 눌리는 문제", "동작 막대의 버튼도 두 번 눌릴 수 있습니다. <a href=\"form.html\">폼</a>에서처럼 요청마다 <b>고유 키</b>를 붙입니다."),
   ]),
   plat_lede="폰에서는 항목을 <b>길게 누르거나 편집을 눌러 선택 모드로 들어가는</b> 방식이 표준입니다.",
   plats=plats([

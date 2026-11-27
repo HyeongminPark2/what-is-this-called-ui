@@ -51,7 +51,7 @@
         </div>
         <div class="note" style="margin-bottom:0">
           <p><b>스냅</b>을 켜면 세로 상자와 가로 줄 모두에서 스크롤이 칸 단위로 멈춥니다.<br>
-          <b>끝에서 바깥까지 밀리기</b>를 끄면 안쪽을 끝까지 스크롤해도 <b>바깥 페이지가 따라 움직이지 않는데</b>,
+          <b>바깥 페이지도 밀리게 하기</b>를 끄면 안쪽을 끝까지 스크롤해도 <b>바깥 페이지가 따라 움직이지 않는데</b>,
           이 설정은 <a href="../items/modal.html">모달</a> 안에서 특히 쓸모가 있습니다.</p>
         </div>
       </section>
@@ -75,22 +75,22 @@
         <p>뼈대는 눈에 보이지 않지만 <b>모든 화면의 배치</b>를 정합니다. 아래 네 가지를 물어 보면 서로 갈립니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하나</th><th>방향</th><th>넘치면</th><th>누가 값을 정하나</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 정하는가</th><th>어느 방향에 작용하는가</th><th>넘치면 어떻게 되는가</th><th>누가 값을 정하는가</th></tr></thead>
           <tbody>
-            <tr><td>박스 모델</td><td><b>상자 한 개</b>의 크기</td><td class="none">해당 없음</td><td>밖으로 삐져나온다</td><td>내가</td></tr>
-            <tr><td>플렉스</td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나온다</td><td>나 + 내용</td></tr>
-            <tr><td>그리드</td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗는다</td><td>나 + 내용</td></tr>
-            <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>나</td></tr>
-            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목이 정한다</b></td><td>나</td></tr>
-            <tr><td>스티키</td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 간다</td><td>나</td></tr>
-            <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남는다</td><td>나</td></tr>
-            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 안 눌린다</td><td><b>OS가</b></td></tr>
-            <tr><td>포지션</td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 안 차지한다</td><td>기준이 되는 조상</td></tr>
-            <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안이 잘린다</td><td>비를 적은 쪽</td></tr>
-            <tr class="me"><td><b>스크롤 동작</b></td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥까지 밀린다</td><td>굴리는 상자</td></tr>
-            <tr><td>크기 정하기</td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나간다</td><td>내용 또는 적은 값</td></tr>
-            <tr><td>여백 붕괴</td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어든다</td><td>큰 쪽 하나</td></tr>
-            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab이 어긋난다</td><td>마크업 순서</td></tr>
+            <tr><td>박스 모델</td><td><b>상자 한 개</b>의 크기</td><td class="none">해당 없음</td><td>밖으로 삐져나옴</td><td>요소 자신</td></tr>
+            <tr><td>플렉스</td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나옴</td><td>요소 자신과 내용</td></tr>
+            <tr><td>그리드</td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗음</td><td>요소 자신과 내용</td></tr>
+            <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>요소 자신</td></tr>
+            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목에서 정함</b></td><td>요소 자신</td></tr>
+            <tr><td>스티키</td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 나감</td><td>요소 자신</td></tr>
+            <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남음</td><td>요소 자신</td></tr>
+            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 눌리지 않음</td><td><b>OS</b></td></tr>
+            <tr><td>포지션</td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 차지하지 않음</td><td>기준이 되는 조상</td></tr>
+            <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안쪽 내용이 잘림</td><td>비를 적은 쪽</td></tr>
+            <tr class="me"><td><b>스크롤 동작</b></td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥 페이지까지 밀림</td><td>스크롤되는 상자</td></tr>
+            <tr><td>크기 정하기</td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나감</td><td>내용 또는 적은 값</td></tr>
+            <tr><td>여백 붕괴</td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어듦</td><td>둘 중 큰 여백</td></tr>
+            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab 차례가 어긋남</td><td>마크업 순서</td></tr>
           </tbody>
         </table>
         </div>
@@ -100,43 +100,43 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 네 가지 값<span class="hint">무엇을 다루나</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 스크롤을 다루는 값<span class="hint">값마다 달라지는 스크롤의 움직임</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:74px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="height:36px;border-bottom:1px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--fg-muted)">1</div><div style="height:36px;border-bottom:1px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--fg-muted)">2</div><div style="height:36px;border-bottom:1px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--fg-muted)">3</div><div style="height:36px;border-bottom:1px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--fg-muted)">4</div></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">scroll-snap-type: none</span></div>
             </div>
-            <figcaption>스냅 없음<span><b>아무 위치에서나</b> 멈춥니다</span></figcaption>
+            <figcaption>스냅을 걸지 않았을 때<span><b>아무 위치에서나</b> 멈춥니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:74px;position:relative;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><div style="height:36px;border-bottom:1px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--fg-muted)">1</div><div style="height:36px;border-bottom:1px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--fg-muted)">2</div><div style="height:36px;border-bottom:1px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--fg-muted)">3</div><div style="height:36px;border-bottom:1px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--fg-muted)">4</div></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">y mandatory — 칸 단위로</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:74px;position:relative;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><div style="height:36px;border-bottom:1px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--fg-muted)">1</div><div style="height:36px;border-bottom:1px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--fg-muted)">2</div><div style="height:36px;border-bottom:1px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--fg-muted)">3</div><div style="height:36px;border-bottom:1px solid var(--line);display:grid;place-items:center;font-size:11px;color:var(--fg-muted)">4</div></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">y mandatory로 칸 단위 멈춤</span></div>
             </div>
-            <figcaption>세로 스냅<span><b>한 장씩</b> 멈춥니다</span></figcaption>
+            <figcaption>세로로 스냅을 걸었을 때<span><b>한 장씩</b> 멈춥니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:74px;position:relative;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><div style="display:flex;gap:5px;padding:18px 6px;overflow:hidden"><span style="flex:none;width:48px;height:34px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)"></span><span style="flex:none;width:48px;height:34px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)"></span><span style="flex:none;width:48px;height:34px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)"></span><span style="flex:none;width:48px;height:34px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)"></span></div></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">x mandatory — 가로 캐러셀</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:74px;position:relative;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><div style="display:flex;gap:5px;padding:18px 6px;overflow:hidden"><span style="flex:none;width:48px;height:34px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)"></span><span style="flex:none;width:48px;height:34px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)"></span><span style="flex:none;width:48px;height:34px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)"></span><span style="flex:none;width:48px;height:34px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)"></span></div></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">x mandatory로 가로 캐러셀</span></div>
             </div>
-            <figcaption>가로 스냅<span>사진첩이나 <b>캐러셀</b>에 씁니다</span></figcaption>
+            <figcaption>가로로 스냅을 걸었을 때<span>사진첩이나 <b>캐러셀</b>에 씁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:74px;position:relative;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><div style="position:absolute;inset:6px;border:1px solid var(--accent);border-radius:4px;display:grid;place-items:center;font-size:9px;color:var(--accent)">contain</div></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">바깥이 안 밀린다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:74px;position:relative;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><div style="position:absolute;inset:6px;border:1px solid var(--accent);border-radius:4px;display:grid;place-items:center;font-size:9px;color:var(--accent)">contain</div></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">바깥이 밀리지 않음</span></div>
             </div>
-            <figcaption>체이닝 막기<span><a href="../items/modal.html">모달</a> 안에서 씁니다</span></figcaption>
+            <figcaption>바깥으로 이어지는 스크롤을 막을 때<span><a href="../items/modal.html">모달</a> 안에서 씁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:74px;position:relative;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><div style="position:absolute;left:0;right:0;top:0;height:16px;background:var(--bg);border-bottom:1px solid var(--line);font-size:8px;color:var(--fg-muted);display:grid;place-items:center">붙박이 머리말</div><div style="position:absolute;left:6px;right:6px;top:22px;height:12px;border-radius:3px;background:var(--accent-soft);border:1px solid var(--accent)"></div></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">scroll-margin-top 으로 띄운다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:74px;position:relative;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><div style="position:absolute;left:0;right:0;top:0;height:16px;background:var(--bg);border-bottom:1px solid var(--line);font-size:8px;color:var(--fg-muted);display:grid;place-items:center">붙박이 머리말</div><div style="position:absolute;left:6px;right:6px;top:22px;height:12px;border-radius:3px;background:var(--accent-soft);border:1px solid var(--accent)"></div></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">scroll-margin-top으로 띄움</span></div>
             </div>
-            <figcaption>scroll-margin<span>앵커로 이동했을 때 목표가 머리말에 <b>가리지 않게</b> 합니다</span></figcaption>
+            <figcaption><code>scroll-margin</code>으로 띄울 때<span>앵커로 이동했을 때 목표가 머리말에 <b>가리지 않게</b> 합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:74px;position:relative;border:1px solid var(--danger);border-radius:6px;background:var(--surface);overflow:hidden"><div style="position:absolute;inset:6px;border:1px dashed var(--danger);border-radius:4px;display:grid;place-items:center;font-size:8.5px;color:var(--danger)">굴림을 가로챔</div></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">굴린 만큼 안 간다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:74px;position:relative;border:1px solid var(--danger);border-radius:6px;background:var(--surface);overflow:hidden"><div style="position:absolute;inset:6px;border:1px dashed var(--danger);border-radius:4px;display:grid;place-items:center;font-size:8.5px;color:var(--danger)">스크롤을 가로챔</div></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">스크롤한 만큼 움직이지 않음</span></div>
             </div>
-            <figcaption>가로채기<span><b>쓰지 않습니다</b>. 자세한 내용은 <a href="scrolllink.html">스크롤 연동</a>에서 다룹니다</span></figcaption>
+            <figcaption>스크롤을 가로챌 때<span><b>쓰지 않습니다</b>. 자세한 내용은 <a href="scrolllink.html">스크롤 연동</a>에서 다룹니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -148,12 +148,12 @@
             <div class="anat" role="img" aria-label="스크롤 동작의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">scroll-snap-type — 칸 단위로 멎게 한다</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">scroll-snap-align — 어디에 맞춰 멎나 (start · center)</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">overscroll-behavior: contain — 바깥까지 안 밀린다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">scroll-behavior: smooth — 뛸 때 부드럽게</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">scroll-margin — 붙박이 머리말에 가리지 않게</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">굴림을 가로채지 않는다 — 매달기만 한다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">scroll-snap-type   칸 단위로 멈추게 함</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">scroll-snap-align   멈출 기준 (start·center)</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">overscroll-behavior: contain   바깥이 밀리지 않음</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">scroll-behavior: smooth   이동할 때 부드럽게</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">scroll-margin   붙박이 머리말에 가리지 않게 띄움</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">스크롤 양은 두고 멈출 자리만 정함</div>
                 </div>
               </div>
             </div>
@@ -162,9 +162,9 @@
             <li><b>스냅 <em>scroll-snap-type</em></b><span>스크롤이 <b>칸 단위</b>로 멈춥니다. 축과 세기를 함께 적습니다</span></li>
             <li><b>맞춤 <em>scroll-snap-align</em></b><span>칸의 <b>어디에</b> 맞춰 멈출지 start · center 같은 값으로 정합니다</span></li>
             <li><b>체이닝 <em>overscroll-behavior</em></b><span><code>contain</code>으로 두면 <b>바깥이 밀리지 않습니다</b></span></li>
-            <li><b>부드럽게 <em>scroll-behavior</em></b><span>앵커나 버튼으로 이동할 때만 적용되고, <b>사용자가 직접 스크롤할 때는 영향을 주지 않습니다</b></span></li>
-            <li><b>scroll-margin <em>가리지 않게</em></b><span><a href="../items/sticky.html">붙박이 머리말</a> 높이만큼 띄웁니다</span></li>
-            <li><b>가로채기 <em>하지 않는다</em></b><span>사용자가 스크롤한 <b>양</b>을 바꾸면 화면이 고장 난 것처럼 느껴집니다</span></li>
+            <li><b>부드러운 이동 <em>scroll-behavior</em></b><span>앵커나 버튼으로 이동할 때만 적용되고, <b>사용자가 직접 스크롤할 때는 영향을 주지 않습니다</b></span></li>
+            <li><b>scroll-margin <em>가리지 않게 띄우기</em></b><span><a href="../items/sticky.html">붙박이 머리말</a> 높이만큼 띄웁니다</span></li>
+            <li><b>가로채기 <em>쓰지 않음</em></b><span>사용자가 스크롤한 <b>양</b>을 바꾸면 화면이 고장 난 것처럼 느껴집니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -181,7 +181,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>스크롤 동작을 쓰는 경우</h3>
+            <h3>스크롤 동작을 따로 정하는 경우</h3>
             <ul>
               <li><b>캐러셀이나 사진첩</b>에 스냅을 걸 때</li>
               <li><a href="../items/modal.html">모달</a>·<a href="../items/drawer.html">드로어</a> 안의 스크롤이 바깥으로 이어지지 않게 할 때. <code>overscroll-behavior: contain</code>을 씁니다</li>
@@ -189,7 +189,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>스크롤 동작을 쓰지 않는 경우</h3>
+            <h3>스크롤 동작을 다룰 때 피할 것</h3>
             <ul>
               <li>긴 글에 스냅을 걸 때. 읽는 도중에 <b>스크롤이 칸 단위로 멈춰서 답답합니다</b></li>
               <li>스크롤되는 <b>양</b>을 바꿀 때. 화면이 고장 난 것처럼 느껴집니다</li>
@@ -198,7 +198,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>스크롤 동작 대신 다른 것을 써야 하는 경우</b> — 스크롤 위치에 따라 무언가를 움직이는 것은 <a href="scrolllink.html">스크롤 연동</a>, 붙는 머리말은 <a href="../items/sticky.html">스티키</a>, 더 받아오면 <a href="../items/infinite.html">무한 스크롤</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>스크롤 동작 대신 다른 것을 써야 하는 경우</b> — 스크롤 위치에 따라 다른 요소를 움직이려면 <a href="scrolllink.html">스크롤 연동</a>을, 머리말을 위에 붙여 두려면 <a href="../items/sticky.html">스티키</a>를 봅니다. 목록 끝에 닿았을 때 데이터를 더 받아오는 일은 <a href="../items/infinite.html">무한 스크롤</a>에서 다룹니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -208,19 +208,19 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="height:70px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="display:flex;gap:5px;padding:18px 6px;overflow:hidden"><span style="flex:none;width:48px;height:34px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)"></span><span style="flex:none;width:48px;height:34px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)"></span><span style="flex:none;width:48px;height:34px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)"></span><span style="flex:none;width:48px;height:34px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)"></span></div></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">x mandatory + center</span></div>
             </div>
-            <figcaption><b>가로 캐러셀</b>스냅이 <b>가장 잘 맞는</b> 자리입니다</figcaption>
+            <figcaption><b>가로 캐러셀을 칸 단위로 멈추기</b>스냅이 <b>가장 잘 맞는</b> 자리입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="height:70px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="position:absolute;inset:6px;background:var(--surface);border:1px solid var(--line);border-radius:4px"></div></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">모달 안 contain</span></div>
             </div>
-            <figcaption><b>모달 안 목록</b>목록을 끝까지 스크롤해도 바깥 페이지가 <b>밀리지 않습니다</b></figcaption>
+            <figcaption><b>모달 안 목록의 스크롤 가두기</b>목록을 끝까지 스크롤해도 바깥 페이지가 <b>밀리지 않습니다</b></figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="font-family:var(--mono);font-size:9px;color:var(--accent);line-height:1.7;border:1px solid var(--line);border-radius:5px;background:var(--bg);padding:6px 7px">h2 { scroll-margin-top: 64px }</div><span style="font-size:8.5px;color:var(--fg-muted)">머리말 높이만큼</span></div>
             </div>
-            <figcaption><b>앵커로 뛸 때</b>목표가 머리말에 <b>가리지 않습니다</b></figcaption>
+            <figcaption><b>앵커로 이동한 목표가 가리지 않게 하기</b>목표가 머리말에 <b>가리지 않습니다</b></figcaption>
           </figure>
         </div>
       </section>
@@ -243,14 +243,14 @@
 @media (prefers-reduced-motion: reduce) { <span class="t">html</span> { <span class="a">scroll-behavior</span>: auto; } }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 설정</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td><kbd>PageDown</kbd>·<kbd>Home</kbd></td><td>스냅을 걸어도 <b>키보드로 하는 스크롤은 그대로</b> 동작해야 합니다</td></tr>
-            <tr><td>가로 캐러셀의 <kbd>Tab</kbd></td><td>칸 안에 누를 것이 있으면 <b>초점이 옮겨 갈 때 저절로 스크롤됩니다</b></td></tr>
-            <tr><td><code>scroll-margin</code></td><td><a href="../items/focus.html">초점</a>이 머리말에 가리는 것도 함께 막습니다</td></tr>
-            <tr><td><code>scroll-behavior: smooth</code></td><td><a href="reducedmotion.html">모션 줄이기</a> 설정에서는 <code>auto</code>로 되돌립니다</td></tr>
-            <tr><td><code>overscroll-behavior: none</code></td><td><b>당겨서 새로고침</b>까지 막기 때문에 본문에는 쓰지 않습니다</td></tr>
-            <tr><td><code>mandatory</code>와 <code>proximity</code></td><td><code>mandatory</code>는 항상 칸에 맞춰 멈추기 때문에, 칸이 화면보다 크면 <b>지나갈 수 없는</b> 자리가 생길 수 있습니다</td></tr>
+            <tr><td>가로 캐러셀에서 <kbd>Tab</kbd>을 누를 때</td><td>칸 안에 누를 것이 있으면 <b>초점이 옮겨 갈 때 저절로 스크롤됩니다</b></td></tr>
+            <tr><td><code>scroll-margin</code>을 주었을 때</td><td><a href="../items/focus.html">초점</a>이 머리말에 가리는 것도 함께 막습니다</td></tr>
+            <tr><td><code>scroll-behavior: smooth</code>를 쓸 때</td><td><a href="reducedmotion.html">모션 줄이기</a> 설정에서는 <code>auto</code>로 되돌립니다</td></tr>
+            <tr><td><code>overscroll-behavior: none</code>을 쓸 때</td><td><b>당겨서 새로고침</b>까지 막기 때문에 본문에는 쓰지 않습니다</td></tr>
+            <tr><td><code>mandatory</code>와 <code>proximity</code> 중에 고를 때</td><td><code>mandatory</code>는 항상 칸에 맞춰 멈추기 때문에, 칸이 화면보다 크면 <b>지나갈 수 없는</b> 자리가 생길 수 있습니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -261,8 +261,8 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>스냅과 더 받아오기</th><td><a href="../items/infinite.html">무한 스크롤</a>과 함께 쓰면 <b>칸이 늘어날 때마다</b> 멈추는 자리가 바뀝니다.</td></tr>
-            <tr><th>굴린 자리 복원</th><td>화면에 돌아왔을 때 스크롤 위치를 되살리려면 목록을 <b>다 그린 뒤에</b> 해야 합니다(<a href="searchresults.html">검색 결과 화면</a> 참고).</td></tr>
+            <tr><th>스냅과 무한 스크롤을 함께 쓸 때</th><td><a href="../items/infinite.html">무한 스크롤</a>과 함께 쓰면 <b>칸이 늘어날 때마다</b> 멈추는 자리가 바뀝니다.</td></tr>
+            <tr><th>돌아왔을 때 스크롤 위치 되살리기</th><td>화면에 돌아왔을 때 스크롤 위치를 되살리려면 목록을 <b>다 그린 뒤에</b> 해야 합니다(<a href="searchresults.html">검색 결과 화면</a> 참고).</td></tr>
           </tbody>
         </table>
         </div>
@@ -273,7 +273,7 @@
         <p><b>스냅은 웹보다 앱에서 먼저</b> 흔하게 쓰였습니다.</p>
         <div class="platforms">
           <div class="plat">
-            <header><b>웹</b><span>CSS 로</span></header>
+            <header><b>웹</b><span>CSS 스크롤 스냅</span></header>
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="height:56px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="display:flex;gap:4px;padding:12px 5px;overflow:hidden"><span style="flex:none;width:48px;height:34px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)"></span><span style="flex:none;width:48px;height:34px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)"></span><span style="flex:none;width:48px;height:34px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)"></span><span style="flex:none;width:48px;height:34px;border-radius:4px;background:var(--accent-soft);border:1px solid var(--accent)"></span></div></div></div>
             </div>

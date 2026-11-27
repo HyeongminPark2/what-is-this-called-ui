@@ -23,7 +23,7 @@
 
 <div class="bar">
   <b>한국어 UI</b>
-  <label>이름 <input class="ui-input" id="word" value="모란상회" style="width:150px;min-height:34px;font-size:13px"></label>
+  <label>조사를 붙일 이름 <input class="ui-input" id="word" value="모란상회" style="width:150px;min-height:34px;font-size:13px"></label>
   <label><input type="checkbox" id="naive"> 조사를 하나로 박아 두기</label>
 </div>
 
@@ -87,7 +87,7 @@
       : (naive
         ? '<span class="warn">받침을 보지 않고 조사를 하나로 박았습니다</span>. 괄호가 붙어 읽기에 불편합니다'
         : '마지막 글자 <b>‘' + w[w.length - 1] + '’</b>에 받침이 ' + (fin ? '<b>있습니다</b>' : '<b>없습니다</b>') +
-          '. 붙일 조사는 ' + (fin ? '을 · 이 · 은 · 과 · 으로' : '를 · 가 · 는 · 와 · 로'));
+          '. 붙일 조사는 ' + (fin ? '을 · 이 · 은 · 과 · 으로' : '를 · 가 · 는 · 와 · 로') + ' 쪽입니다');
     r.dataset.fin = fin === null ? 'null' : (fin ? '1' : '0');
 
     document.getElementById('ba').innerHTML = [

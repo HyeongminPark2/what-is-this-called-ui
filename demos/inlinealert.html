@@ -20,7 +20,7 @@
 <body>
 <div class="bar">
   <b>인라인 얼럿</b>
-  <label>어디에 붙일까 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>메시지를 붙일 자리 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="field" selected>틀린 칸 바로 아래</option>
     <option value="top">폼 맨 위에 모아서</option>
     <option value="toast">토스트로 띄워서</option>
@@ -89,9 +89,9 @@
     rd.innerHTML = '붙인 자리 <b>' +
       ({ field: '칸 바로 아래', top: '폼 맨 위', toast: '토스트' }[k]) + '</b>' +
       (msg ? '<br>틀린 칸에서 메시지까지 <b>' + dist + 'px</b>' +
-        (dist > 100 ? ' <span class="warn">— 칸과 멀어서 찾아 내려가야 합니다</span>' : '') : '') +
-      '<br>칸과 메시지 묶음 <b>' + (tied ? '묶임' : '안 묶임') + '</b>' +
-      (tied ? '' : ' <span class="warn">— 스크린 리더로는 어느 칸의 메시지인지 알 수 없습니다</span>') +
+        (dist > 100 ? '. <span class="warn">칸과 멀어서 찾아 내려가야 합니다</span>' : '') : '') +
+      '<br>칸과 메시지가 <b>' + (tied ? '묶여 있습니다' : '묶여 있지 않습니다') + '</b>' +
+      (tied ? '' : '. <span class="warn">스크린 리더로는 어느 칸의 메시지인지 알 수 없습니다</span>') +
       (gone ? '<br><span class="warn">몇 초 뒤 사라집니다</span>. 사라지면 다시 볼 수 없습니다' : '') +
       (why ? '<br>' + why : '');
     rd.dataset.dist = String(dist);

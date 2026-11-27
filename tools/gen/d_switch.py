@@ -46,12 +46,12 @@ D = dict(
   axes=ax("스위치"),
   oneline="스위치는 <b>누르는 즉시</b> 적용됩니다. 그래서 저장 버튼이 있는 화면에 스위치를 두면 사용자는 무엇이 이미 저장됐는지 알 수 없습니다.",
   states=states([
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6.5px">주간 요약</span><span style="width:16px;height:9px;border-radius:99px;background:var(--line-strong);position:relative"><span style="position:absolute;top:1.5px;left:1.5px;width:6px;height:6px;border-radius:50%;background:#fff"></span></span></div>', bars="", label="꺼진 스위치"), "끔", "손잡이가 왼쪽에 있고 트랙은 회색입니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6.5px">주간 요약</span><span style="width:16px;height:9px;border-radius:99px;background:var(--accent);position:relative"><span style="position:absolute;top:1.5px;left:8.5px;width:6px;height:6px;border-radius:50%;background:#fff"></span></span></div>', bars="", label="켜진 스위치"), "켬", "손잡이가 오른쪽으로 옮겨 갑니다. <b>누르는 순간</b> 바로 이 모습이 됩니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6.5px">주간 요약</span><span style="width:16px;height:9px;border-radius:99px;background:var(--accent);opacity:.65;position:relative"><span style="position:absolute;top:1.5px;left:8.5px;width:6px;height:6px;border-radius:50%;background:#fff"></span></span></div><div style="position:absolute;left:6px;bottom:6px;font-size:5.5px;color:var(--fg-muted)">서버에 보내는 중</div>', bars="", label="보류 중"), "보류 중", "서버 응답을 기다리는 동안 아주 옅게만 표시합니다. <b>표시가 눈에 띄면 사용자가 응답을 기다리게 됩니다</b>"),
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6.5px">제품 소식</span><span style="width:16px;height:9px;border-radius:99px;background:var(--line-strong);position:relative"><span style="position:absolute;top:1.5px;left:1.5px;width:6px;height:6px;border-radius:50%;background:#fff"></span></span></div>' + toast("바꾸지 못해 되돌렸습니다", ""), bars="", label="되돌아간 스위치"), "되돌림", "서버가 거절하면 원래 상태로 되돌립니다. 이때 <b>아무 말 없이 되돌리지 않고</b> 이유를 알립니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px;opacity:.45"><span style="flex:1;font-size:6.5px">보안 경고</span><span style="width:16px;height:9px;border-radius:99px;background:var(--accent);position:relative"><span style="position:absolute;top:1.5px;left:8.5px;width:6px;height:6px;border-radius:50%;background:#fff"></span></span></div><div style="position:absolute;left:6px;bottom:6px;font-size:5.5px;color:var(--fg-muted)">끌 수 없음 — 이유를 적을 것</div>', bars="", label="비활성 스위치"), "비활성", "켠 채로 끄지 못하게 막아 두는 경우가 많은데, 그럴 때는 이유를 적습니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6.5px">주간 요약</span><span style="width:16px;height:9px;border-radius:99px;background:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent);position:relative"><span style="position:absolute;top:1.5px;left:8.5px;width:6px;height:6px;border-radius:50%;background:#fff"></span></span></div>', bars="", label="포커스"), "포커스", "<kbd>Space</kbd>로 켜고 끕니다. 포커스 링을 지우지 않습니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6.5px">주간 요약</span><span style="width:16px;height:9px;border-radius:99px;background:var(--line-strong);position:relative"><span style="position:absolute;top:1.5px;left:1.5px;width:6px;height:6px;border-radius:50%;background:#fff"></span></span></div>', bars="", label="꺼진 스위치"), "꺼져 있을 때", "손잡이가 왼쪽에 있고 트랙은 회색입니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6.5px">주간 요약</span><span style="width:16px;height:9px;border-radius:99px;background:var(--accent);position:relative"><span style="position:absolute;top:1.5px;left:8.5px;width:6px;height:6px;border-radius:50%;background:#fff"></span></span></div>', bars="", label="켜진 스위치"), "켜져 있을 때", "손잡이가 오른쪽으로 옮겨 갑니다. <b>누르는 순간</b> 바로 이 모습이 됩니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6.5px">주간 요약</span><span style="width:16px;height:9px;border-radius:99px;background:var(--accent);opacity:.65;position:relative"><span style="position:absolute;top:1.5px;left:8.5px;width:6px;height:6px;border-radius:50%;background:#fff"></span></span></div><div style="position:absolute;left:6px;bottom:6px;font-size:5.5px;color:var(--fg-muted)">서버에 보내는 중</div>', bars="", label="보류 중"), "서버 응답을 기다릴 때", "서버 응답을 기다리는 동안 아주 옅게만 표시합니다. <b>표시가 눈에 띄면 사용자가 응답을 기다리게 됩니다</b>"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6.5px">제품 소식</span><span style="width:16px;height:9px;border-radius:99px;background:var(--line-strong);position:relative"><span style="position:absolute;top:1.5px;left:1.5px;width:6px;height:6px;border-radius:50%;background:#fff"></span></span></div>' + toast("바꾸지 못해 되돌렸습니다", ""), bars="", label="되돌아간 스위치"), "서버가 거절해 되돌렸을 때", "서버가 거절하면 원래 상태로 되돌립니다. 이때 <b>아무 말 없이 되돌리지 않고</b> 이유를 알립니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px;opacity:.45"><span style="flex:1;font-size:6.5px">보안 경고</span><span style="width:16px;height:9px;border-radius:99px;background:var(--accent);position:relative"><span style="position:absolute;top:1.5px;left:8.5px;width:6px;height:6px;border-radius:50%;background:#fff"></span></span></div><div style="position:absolute;left:6px;bottom:6px;font-size:5.5px;color:var(--fg-muted)">끌 수 없는 이유를 적어 둠</div>', bars="", label="비활성 스위치"), "비활성일 때", "켠 채로 끄지 못하게 막아 두는 경우가 많은데, 그럴 때는 이유를 적습니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6.5px">주간 요약</span><span style="width:16px;height:9px;border-radius:99px;background:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent);position:relative"><span style="position:absolute;top:1.5px;left:8.5px;width:6px;height:6px;border-radius:50%;background:#fff"></span></span></div>', bars="", label="포커스"), "포커스를 받았을 때", "<kbd>Space</kbd>로 켜고 끕니다. 포커스 링을 지우지 않습니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -76,14 +76,14 @@ D = dict(
     "켜고 끄는 것이 아니라 둘 중 하나를 고를 때. 라디오나 세그먼티드 컨트롤을 씁니다",
     "되돌리기 어려운 일을 할 때. 즉시 적용되므로 사용자가 다시 확인할 기회가 없습니다",
   ]),
-  instead='저장을 눌러야 하면 <a href="checkbox.html">체크박스</a>, 둘 중 하나를 고르면 <a href="segmented.html">세그먼티드</a>나 <a href="radio.html">라디오</a>, 되돌릴 틈이 필요하면 <a href="toast.html">되돌리기 토스트</a>.',
+  instead='저장을 눌러야 적용되는 폼이면 <a href="checkbox.html">체크박스</a>를 쓰고, 켜고 끄는 것이 아니라 둘 중 하나를 고르는 값이면 <a href="segmented.html">세그먼티드</a> 컨트롤이나 <a href="radio.html">라디오</a>를 씁니다. 잘못 눌렀을 때 되돌릴 틈이 필요하면 <a href="toast.html">되돌리기 토스트</a>를 함께 띄웁니다.',
   cases=cases([
     (mini('<div style="margin-top:10px;padding:0 6px;display:grid;gap:5px"><div style="display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6px">멘션과 답글</span><span style="width:15px;height:8px;border-radius:99px;background:var(--accent);position:relative"><span style="position:absolute;top:1.5px;left:8px;width:5px;height:5px;border-radius:50%;background:#fff"></span></span></div><div style="display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6px">주간 요약</span><span style="width:15px;height:8px;border-radius:99px;background:var(--line-strong);position:relative"><span style="position:absolute;top:1.5px;left:1.5px;width:5px;height:5px;border-radius:50%;background:#fff"></span></span></div></div>', bars="", tall=False, label="설정 목록 재현"),
-     "설정 목록", "스위치를 가장 흔히 쓰는 곳으로, 저장 버튼이 아예 없습니다"),
+     "설정 화면의 목록", "스위치를 가장 흔히 쓰는 곳으로, 저장 버튼이 아예 없습니다"),
     (mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6px">다크 모드</span><span style="font-size:5.5px;color:var(--fg-muted)">켬</span><span style="width:15px;height:8px;border-radius:99px;background:var(--accent);position:relative"><span style="position:absolute;top:1.5px;left:8px;width:5px;height:5px;border-radius:50%;background:#fff"></span></span></div>', bars="", tall=False, label="상태 글자가 붙은 재현"),
-     "상태 글자", "켬/끔을 글자로도 적습니다. 색만으로는 상태가 모든 사람에게 전해지지 않습니다"),
+     "켬/끔 글자를 함께 적기", "켬/끔을 글자로도 적습니다. 색만으로는 상태가 모든 사람에게 전해지지 않습니다"),
     (mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6px">공개</span><span style="width:15px;height:8px;border-radius:99px;background:var(--accent);opacity:.6;position:relative"><span style="position:absolute;top:1.5px;left:8px;width:5px;height:5px;border-radius:50%;background:#fff"></span></span></div><div style="position:absolute;left:6px;bottom:6px;font-size:5.5px;color:var(--accent);font-weight:700">바뀌는 중…</div>', bars="", tall=False, label="보류 중 재현"),
-     "보류 중", "서버 응답을 받기 전의 모습입니다. 옅게만 표시하고 스피너는 띄우지 않습니다"),
+     "서버 응답을 기다리는 동안", "서버 응답을 받기 전의 모습입니다. 옅게만 표시하고 스피너는 띄우지 않습니다"),
   ]),
   code_lede="HTML 에는 네이티브 스위치가 없습니다. 체크박스를 스위치 모양으로 꾸미는 것보다 <code>&lt;button role=\"switch\"&gt;</code>로 만드는 편이 스위치라는 뜻을 더 분명하게 전합니다.",
   code='''&lt;<span class="t">button</span> <span class="a">role</span>=<span class="s">"switch"</span> <span class="a">aria-checked</span>=<span class="s">"true"</span>
@@ -102,19 +102,19 @@ btn.setAttribute(<span class="s">'aria-checked'</span>, String(!was));
   keys=kbd([
     ("<kbd>Space</kbd>", "켜고 끕니다. <code>&lt;button&gt;</code>으로 만들면 <kbd>Enter</kbd>로도 바뀝니다"),
     ("<kbd>Tab</kbd>", "스위치마다 한 번씩 멈춥니다"),
-    ("스크린 리더", "<code>role=\"switch\"</code> + <code>aria-checked</code> 를 달면 '켜짐/꺼짐'으로 읽습니다. 체크박스는 '선택됨'으로 읽어서 전해지는 뜻이 다릅니다"),
+    ("스크린 리더로 읽을 때", "<code>role=\"switch\"</code> + <code>aria-checked</code> 를 달면 '켜짐/꺼짐'으로 읽습니다. 체크박스는 '선택됨'으로 읽어서 전해지는 뜻이 다릅니다"),
     ("되돌릴 때", "라이브 리전으로 되돌린 이유를 알립니다. 손잡이만 되돌리면 화면에서 눈을 뗀 사람은 되돌아간 줄 모릅니다"),
-    ("라벨", "<code>aria-label</code>이나 연결된 라벨 글자가 꼭 있어야 합니다. 손잡이와 트랙만으로는 무엇을 켜는 스위치인지 알 수 없습니다"),
+    ("라벨을 붙일 때", "<code>aria-label</code>이나 연결된 라벨 글자가 꼭 있어야 합니다. 손잡이와 트랙만으로는 무엇을 켜는 스위치인지 알 수 없습니다"),
   ]),
   backend=rows([
-    ("스위치 = 즉시 쓰기", "스위치는 누를 때마다 요청을 한 번씩 보냅니다. 여러 번 빠르게 누르면 요청이 쌓이므로 <b>마지막 요청만</b> 반영하고, 요청마다 멱등 키를 붙입니다."),
-    ("되돌림이 설계의 전부", "<a href=\"optimistic.html\">낙관적 UI</a>와 같은 구조로, 화면을 먼저 바꾸고 서버가 거절하면 되돌립니다. 그래서 되돌릴 수 없는 일에는 스위치를 쓰면 안 됩니다."),
-    ("저장 시점이 다르다", "체크박스는 폼을 보낼 때 한 번 저장하고, 스위치는 누를 때마다 저장합니다. 그래서 체크박스는 PUT 한 번, 스위치는 PATCH 여러 번이 되어 <b>API 형태가 아예 달라집니다</b>."),
-    ("기본값과 상속", "'시스템 설정 따르기'처럼 켬과 끔 말고 세 번째 상태가 필요하면 스위치로는 나타낼 수 없습니다. 이때는 선택지가 셋인 라디오를 씁니다."),
+    ("누를 때마다 바로 저장하는 요청", "스위치는 누를 때마다 요청을 한 번씩 보냅니다. 여러 번 빠르게 누르면 요청이 쌓이므로 <b>마지막 요청만</b> 반영하고, 요청마다 멱등 키를 붙입니다."),
+    ("거절당했을 때 되돌리는 처리", "<a href=\"optimistic.html\">낙관적 UI</a>와 같은 구조로, 화면을 먼저 바꾸고 서버가 거절하면 되돌립니다. 그래서 되돌릴 수 없는 일에는 스위치를 쓰면 안 됩니다."),
+    ("체크박스와 다른 저장 시점", "체크박스는 폼을 보낼 때 한 번 저장하고, 스위치는 누를 때마다 저장합니다. 그래서 체크박스는 PUT 한 번, 스위치는 PATCH 여러 번이 되어 <b>API 형태가 아예 달라집니다</b>."),
+    ("켬과 끔 말고 세 번째 상태가 필요할 때", "'시스템 설정 따르기'처럼 켬과 끔 말고 세 번째 상태가 필요하면 스위치로는 나타낼 수 없습니다. 이때는 선택지가 셋인 라디오를 씁니다."),
   ]),
   plat_lede="스위치는 <b>iOS 에서 자리 잡은 부품</b>이라서, 모바일 설정 화면에서는 기본 부품처럼 쓰입니다.",
   plats=plats([
-    ("웹", "표준 부품 없음",
+    ("웹", "표준 부품이 없음",
      mini('<div style="margin-top:12px;padding:0 6px;display:flex;align-items:center;gap:4px"><span style="flex:1;font-size:6.5px">주간 요약</span><span style="width:16px;height:9px;border-radius:99px;background:var(--accent);position:relative"><span style="position:absolute;top:1.5px;left:8.5px;width:6px;height:6px;border-radius:50%;background:#fff"></span></span></div>', bars="", label="웹 스위치 재현"),
      "<b>스위치</b> · 네이티브 부품이 없어서 직접 만들며, 이때 <code>role=\"switch\"</code>를 꼭 붙여야 합니다."),
     ("iOS", "Apple HIG",
@@ -128,6 +128,6 @@ btn.setAttribute(<span class="s">'aria-checked'</span>, String(!was));
   siblings=siblings("switch"),
   related='''        <li><a href="../items/optimistic.html"><b>낙관적 UI</b><em>8부</em></a></li>
         <li><a href="../items/toast.html"><b>토스트</b><em>6부</em></a></li>
-        <li><span class="na"><b>다크 모드</b><em>2부</em></span></li>
-        <li><span class="na"><b>대비비</b><em>12부</em></span></li>''',
+        <li><a href="dark.html"><b>다크 모드</b><em>2부</em></a></li>
+        <li><a href="contrast.html"><b>대비비</b><em>12부</em></a></li>''',
 )

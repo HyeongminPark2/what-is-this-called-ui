@@ -13,11 +13,11 @@ def nm(name, why, level, ok=None, w="150px"):
 
 ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:11px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">--blue-500<span style="color:var(--fg-faint)"> ← 원시 : 값에 붙인 이름</span></div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">--color-text-danger<span style="color:var(--fg-faint)"> ← 의미 : 쓰임에 붙인 이름</span></div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">--btn-bg<span style="color:var(--fg-faint)"> ← 부품 : 한 부품만의 이름</span></div>
-                  <div class="pin-out" data-pin="4" style="color:var(--accent)">화면에서는 <b>의미 층만</b> 쓴다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--danger)">--blue 를 어두운 모드에 쓰면 <b>이름이 거짓</b></div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">--blue-500<span style="color:var(--fg-faint)"> ← 원시 층, 값에 붙인 이름</span></div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">--color-text-danger<span style="color:var(--fg-faint)"> ← 의미 층, 쓰임에 붙인 이름</span></div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">--btn-bg<span style="color:var(--fg-faint)"> ← 부품 층, 한 부품만의 이름</span></div>
+                  <div class="pin-out" data-pin="4" style="color:var(--accent)">화면에서는 <b>의미 층만</b> 씀</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--danger)">--blue는 어두운 모드에서 <b>이름과 색이 어긋남</b></div>
                   <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">갈래-쓰임-자리-상태<span style="color:var(--fg-faint)"> ← 이름의 차례</span></div>
                 </div>
               </div>'''
@@ -30,7 +30,7 @@ D = dict(
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>데모는 토큰 이름을 <b>세 가지 규칙으로 따져 봅니다</b>. ①이름에 값이 들어 있는지,
           ②무엇에 쓰는지가 드러나는지, ③어느 층의 이름인지를 보고, 이름을 직접 넣어 보면 그 자리에서 판정해 줍니다.<br>
-          '어두운 모드로'를 켜면 <code>--blue</code>의 실제 값이 나오는데, 이름은 파랑인데 실제 색은 파랑이 아닙니다.
+          '어두운 모드로 바꾸기'를 켜면 <code>--blue</code>의 실제 값이 나오는데, 이름은 파랑인데 실제 색은 파랑이 아닙니다.
           <b>이름에 값을 넣으면</b> 이런 일이 생깁니다.</p>
         </div>''',
   names=rows([
@@ -48,20 +48,20 @@ D = dict(
   ]),
   axes=ax("토큰 이름 짓기"),
   oneline="좋은 토큰 이름은 <b>이름만 보고 어디에 쓰는지 알 수 있는 이름</b>입니다. 이름에 값이 적혀 있다면 이미 잘못 지은 것입니다.",
-  s4_title="층", s4_hint="층마다 이름이 가리키는 것",
+  s4_title="토큰의 세 층과 잘못 지은 이름", s4_hint="층마다 이름이 가리키는 것",
   states=states([
     (nm("--blue-500", "값에 붙인 이름", "원시", None),
-     "원시", "<b>화면 코드에서는 직접 쓰지 않습니다</b>"),
+     "원시 층", "<b>화면 코드에서는 직접 쓰지 않습니다</b>"),
     (nm("--color-text-danger", "쓰임에 붙인 이름", "의미", True),
-     "의미", "화면 코드에서는 <b>이 층만</b> 씁니다"),
+     "의미 층", "화면 코드에서는 <b>이 층만</b> 씁니다"),
     (nm("--btn-bg", "한 부품만의 이름", "부품", True),
-     "부품", "그 부품만 <b>다른 값을 써야 할 때</b> 만듭니다"),
-    (nm("--red", "어디에 쓰는지가 없다", "원시", False),
-     "쓰임 없음", "쓰임이 정해져 있지 않아 <b>아무 데나</b> 쓰이게 됩니다"),
-    (nm("--color-primary", "무엇의 primary 인가", "의미", False),
-     "두루뭉술", "글자색인지 바탕색인지 <b>알 수 없습니다</b>"),
-    (nm("--font-14", "값이 숫자로 박힘", "원시", False),
-     "값이 박힘", "값을 16으로 바꾸면 <b>이름과 값이 어긋납니다</b>"),
+     "부품 층", "그 부품만 <b>다른 값을 써야 할 때</b> 만듭니다"),
+    (nm("--red", "어디에 쓰는지 없음", "원시", False),
+     "쓰임이 빠진 이름", "쓰임이 정해져 있지 않아 <b>아무 데나</b> 쓰이게 됩니다"),
+    (nm("--color-primary", "무엇의 primary인지 모호함", "의미", False),
+     "쓰임이 모호한 이름", "글자색인지 바탕색인지 <b>알 수 없습니다</b>"),
+    (nm("--font-14", "값이 숫자로 들어 있음", "원시", False),
+     "값이 들어간 이름", "값을 16으로 바꾸면 <b>이름과 값이 어긋납니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -69,7 +69,7 @@ D = dict(
     ("의미", "<code>--color-text-danger</code>", "<b>쓰임</b>에 붙인 이름입니다"),
     ("부품", "<code>--btn-bg</code>", "한 부품에서만 쓰는 이름입니다"),
     ("쓰는 층", "의미만", "화면 코드에는 <b>의미 층만</b> 나와야 합니다"),
-    ("거짓 이름", "<code>--blue</code>", "어두운 모드에서는 실제 색이 <b>파랑이 아닙니다</b>"),
+    ("색 이름이 든 토큰", "<code>--blue</code>", "어두운 모드에서는 실제 색이 <b>파랑이 아닙니다</b>"),
     ("차례", "갈래-쓰임-자리-상태", "<code>color-text-danger-hover</code>처럼 짓습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -80,6 +80,8 @@ D = dict(
           화면 코드에 <code>--blue-500</code>이 한 번이라도 나오면
           그 자리는 어두운 모드로 바꿔도 색이 바뀌지 않습니다.
           그래서 지킬 규칙은 <b>화면 코드에서는 의미 층만 쓴다</b>는 것 하나입니다.</p>''',
+  do_title="토큰 이름을 지을 때 지킬 것",
+  dont_title="토큰 이름을 지을 때 피할 것",
   do=ul([
     "이름에 <code>text</code>·<code>bg</code>·<code>border</code> 같은 <b>쓰임</b>을 적기",
     "차례를 <b>갈래-쓰임-자리-상태</b>로 고정하기",
@@ -91,13 +93,15 @@ D = dict(
     "<code>--color-primary</code> 하나로 여러 자리를 채우기. <b>글자색인지 바탕색인지</b> 알 수 없습니다",
     "부품 토큰을 <b>먼저</b> 만들기. 부품마다 값을 따로 정하게 되어 의미 층이 비게 됩니다",
   ]),
-  instead='값 자체는 <a href="color.html">색 토큰</a>, 두 벌로 두는 법은 <a href="dark.html">다크 모드</a>, 크기 단은 <a href="typescale.html">타입 스케일</a>·<a href="spacing.html">간격 체계</a>.',
+  instead_title="함께 보면 좋은 항목",
+  instead='토큰에 넣을 색 값은 <a href="color.html">색 토큰</a> 항목에서, 값을 두 벌로 두는 방법은 <a href="dark.html">다크 모드</a> 항목에서 다룹니다. 크기의 단은 <a href="typescale.html">타입 스케일</a> 항목과 <a href="spacing.html">간격 체계</a> 항목에서 설명합니다.',
   cases=cases([
-    (nm("--color-bg-surface", "바탕 · 카드 면", "의미", True), "바탕", "쓰임이 분명합니다"),
-    (nm("--color-border-muted", "테두리 · 흐린 선", "의미", True), "선", "쓰임에 더해 자리까지 이름에 적혀 있습니다"),
-    (nm("--space-4", "간격 · 4번째 단", "의미", True), "간격", "값이 아니라 간격 체계의 <b>단</b>을 가리킵니다"),
+    (nm("--color-bg-surface", "바탕 · 카드 면", "의미", True), "카드 바탕색에 이름 붙이기", "쓰임이 분명합니다"),
+    (nm("--color-border-muted", "테두리 · 흐린 선", "의미", True), "흐린 테두리 색에 이름 붙이기", "쓰임에 더해 자리까지 이름에 적혀 있습니다"),
+    (nm("--space-4", "간격 · 4번째 단", "의미", True), "간격 단에 이름 붙이기", "값이 아니라 간격 체계의 <b>단</b>을 가리킵니다"),
   ]),
-  s8_title="최소 코드와 규칙", s8_hint="이름을 코드로 옮기는 법",
+  s8_title="최소 코드와 지킬 규칙", s8_hint="이름을 코드로 옮기는 방법",
+  keys_heads="<th>이름의 부분과 점검 방법</th><th>들어가는 낱말과 설명</th>",
   code_lede="원시 토큰을 먼저 정의하고 의미 토큰이 원시 토큰을 가리키게 한 뒤, 화면 코드에서는 의미 토큰만 씁니다.",
   code='''<span class="c">/* 1층 원시. 값에 붙인 이름이라 화면에서 직접 쓰지 않는다 */</span>
 :root {
@@ -121,16 +125,16 @@ D = dict(
 <span class="c">/* ✕ 어두운 모드를 안 따라온다 */</span>
 .field-error { <span class="a">color</span>: <span class="a">var</span>(--red-500); }''',
   keys=kbd([
-    ("갈래", "<code>color</code>·<code>space</code>·<code>radius</code>·<code>shadow</code>"),
-    ("쓰임", "<code>text</code>·<code>bg</code>·<code>border</code>·<code>icon</code>"),
-    ("자리", "<code>danger</code>·<code>muted</code>·<code>brand</code>"),
-    ("상태", "<code>hover</code>·<code>active</code>·<code>disabled</code>. 이름의 <b>맨 뒤</b>에 붙입니다"),
-    ("찾는 법", "이름이 <code>--color-</code>로 시작하면 편집기 <b>자동완성</b>에서 색 토큰끼리 묶여 나옵니다"),
-    ("확인하는 법", "화면 코드에서 <code>--blue</code>나 <code>-500</code>을 <b>검색</b>해 봅니다"),
+    ("첫째, 갈래", "<code>color</code>·<code>space</code>·<code>radius</code>·<code>shadow</code>"),
+    ("둘째, 쓰임", "<code>text</code>·<code>bg</code>·<code>border</code>·<code>icon</code>"),
+    ("셋째, 자리", "<code>danger</code>·<code>muted</code>·<code>brand</code>"),
+    ("넷째, 상태", "<code>hover</code>·<code>active</code>·<code>disabled</code>. 이름의 <b>맨 뒤</b>에 붙입니다"),
+    ("토큰을 찾는 방법", "이름이 <code>--color-</code>로 시작하면 편집기 <b>자동완성</b>에서 색 토큰끼리 묶여 나옵니다"),
+    ("확인하는 방법", "화면 코드에서 <code>--blue</code>나 <code>-500</code>을 <b>검색</b>해 봅니다"),
   ]),
   backend=rows([
-    ("서버와는 상관없다", "토큰은 화면 쪽에서 쓰는 규칙입니다. 다만 <b>이름 짓는 원칙</b>은 서버에도 그대로 들어맞습니다."),
-    ("같은 원리", "서버가 <code>status</code>를 <code>red</code>가 아니라 <code>failed</code>로 보내는 것과 같은 원리로, <b>값이 아니라 뜻</b>을 이름으로 삼습니다."),
+    ("화면 쪽에서 쓰는 규칙", "토큰은 화면 쪽에서 쓰는 규칙입니다. 다만 <b>이름 짓는 원칙</b>은 서버에도 그대로 들어맞습니다."),
+    ("서버 상태 이름과 같은 원리", "서버가 <code>status</code>를 <code>red</code>가 아니라 <code>failed</code>로 보내는 것과 같은 원리로, <b>값이 아니라 뜻</b>을 이름으로 삼습니다."),
   ]),
   plat_lede="토큰을 <b>층으로 나누는 생각</b>은 세 플랫폼이 같습니다.",
   plats=plats([

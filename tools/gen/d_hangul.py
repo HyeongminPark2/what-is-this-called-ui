@@ -14,9 +14,9 @@ ANAT = '''              <div class="anat--wide" style="background:var(--bg);bord
                   </div>
                   <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">word-break: keep-all</div>
                   <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">overflow-wrap: break-word</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">line-height: 1.8   — 받침 때문에 더 넓게</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">letter-spacing: 0   — 한글은 건드리지 않는다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">lang="ko"   — 줄바꿈·글꼴 고르기의 기준</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">line-height: 1.8   받침 때문에 더 넓게 잡음</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">letter-spacing: 0   한글은 건드리지 않음</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">lang="ko"   줄바꿈과 글꼴을 고르는 기준</div>
                 </div>
               </div>'''
 
@@ -47,15 +47,15 @@ D = dict(
   ]),
   axes=ax("한글 조판"),
   oneline="한국어 화면이면 <b><code>word-break: keep-all</code>을 기본으로 설정하고</b> 시작합니다. 설정하지 않으면 모든 문단이 어절 한가운데서 끊깁니다.",
-  s4_title="갈래", s4_hint="같은 글, 다른 줄바꿈",
+  s4_title="줄바꿈 설정에 따른 차이", s4_hint="같은 글을 줄바꿈 설정만 바꿔 본 모습",
   states=states([
-    (krbox(), "기본값", "<b>'입금됩 / 니다'</b>처럼 어절 한가운데서 끊깁니다"),
-    (krbox("word-break:keep-all"), "keep-all", "<b>어절을 지킵니다.</b> 한국어 화면에서는 이 값을 기본으로 씁니다"),
-    (krbox("word-break:break-all"), "break-all", "아무 데서나 쪼갭니다. <b>이름과 달리</b> 단어를 지키지 않습니다"),
+    (krbox(), "기본값(normal)을 그대로 둘 때", "<b>'입금됩 / 니다'</b>처럼 어절 한가운데서 끊깁니다"),
+    (krbox("word-break:keep-all"), "keep-all로 어절을 지킬 때", "<b>어절을 지킵니다.</b> 한국어 화면에서는 이 값을 기본으로 씁니다"),
+    (krbox("word-break:break-all"), "break-all을 썼을 때", "아무 데서나 쪼갭니다. <b>이름과 달리</b> 단어를 지키지 않습니다"),
     (krbox("word-break:keep-all;overflow-wrap:normal", "확인 코드는 TX99120KR2026SETTLEMENTCONFIRM 입니다."),
-     "긴 영문", "<b>keep-all만으로는 넘침을 막지 못합니다.</b> 띄어쓰기 없는 영문 덩어리가 칸을 밀어냅니다"),
+     "긴 영문이 섞였을 때", "<b>keep-all만으로는 넘침을 막지 못합니다.</b> 띄어쓰기 없는 영문 덩어리가 칸을 밀어냅니다"),
     (krbox("word-break:keep-all;overflow-wrap:anywhere", "확인 코드는 TX99120KR2026SETTLEMENTCONFIRM 입니다."),
-     "+ overflow-wrap", "<b>한글은 어절 단위로 넘기고, 칸에 들어가지 않는 영문만</b> 쪼갭니다"),
+     "overflow-wrap을 함께 썼을 때", "<b>한글은 어절 단위로 넘기고, 칸에 들어가지 않는 영문만</b> 쪼갭니다"),
     (krbox("word-break:keep-all;line-height:1.35"), "행간이 좁을 때",
      "줄바꿈이 맞아도 <b>행간이 좁으면</b> 여전히 답답해 보입니다"),
   ]),
@@ -84,17 +84,19 @@ D = dict(
     "자간을 벌려 '시원하게' 보이게 하려 할 때. 한글은 흩어져 보입니다",
     "<code>lang</code>을 적지 않을 때. 브라우저가 어느 언어의 규칙을 써야 할지 알 수 없습니다",
   ]),
-  instead='줄 사이는 <a href="lineheight.html">행간</a>, 글자 사이는 <a href="letterspacing.html">자간</a>, 넘친 글의 끝은 <a href="truncate.html">말줄임</a>이 맡습니다.',
+  do_title="한글 조판 규칙을 적용할 때", dont_title="한글 조판에서 피할 것",
+  instead_title="한글 조판과 이어지는 주제를 다루는 항목",
+  instead='줄과 줄 사이의 거리는 <a href="lineheight.html">행간</a>에서, 글자와 글자 사이의 거리는 <a href="letterspacing.html">자간</a>에서 다룹니다. 칸을 넘친 글의 끝을 처리하는 방법은 <a href="truncate.html">말줄임</a>에 있습니다.',
   cases=cases([
     (krbox("word-break:keep-all", "환불 확인 요청 — 카드 승인 취소가 늦어진 건", "160px"),
-     "카드 제목", "칸이 좁을수록 줄바꿈 차이가 크게 드러나는데, <b>어절이 지켜져야</b> 제대로 읽힙니다"),
+     "좁은 카드 제목에서 어절 지키기", "칸이 좁을수록 줄바꿈 차이가 크게 드러나는데, <b>어절이 지켜져야</b> 제대로 읽힙니다"),
     (krbox("word-break:keep-all;line-height:1.85", "정산 요청이 승인되면 영업일 기준 2일 안에 등록하신 계좌로 입금됩니다.", "160px"),
-     "안내 문구", "줄바꿈과 행간이 함께 맞아야 <b>읽기 편합니다</b>"),
+     "긴 안내 문구를 읽기 편하게", "줄바꿈과 행간이 함께 맞아야 <b>읽기 편합니다</b>"),
     (krbox("word-break:keep-all;overflow-wrap:anywhere", "코드 TX99120KR2026SETTLE 를 입력하세요.", "160px"),
-     "코드가 섞인 글", "<b>두 속성을 함께</b> 써서 한글은 어절 단위로 넘기고, 코드만 쪼갭니다"),
+     "코드가 섞인 글 줄바꿈하기", "<b>두 속성을 함께</b> 써서 한글은 어절 단위로 넘기고, 코드만 쪼갭니다"),
   ]),
   s8_title="최소 코드와 규칙", s8_hint="한국어 화면에 먼저 적는 두 줄",
-  keys_heads="<th>규칙</th><th>지켜야 하는 것</th>",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법</th>",
   code_lede="한글 조판은 CSS <b>두 줄</b>로 대부분 해결됩니다. 문서 맨 위에 한 번 적어 두고 시작합니다.",
   code='''&lt;<span class="t">html</span> <span class="a">lang</span>=<span class="s">"ko"</span>&gt;   <span class="c">&lt;!-- 줄바꿈·글꼴·발음의 기준 --&gt;</span>
 
@@ -110,19 +112,19 @@ D = dict(
 <span class="c">/* 본문 자간은 건드리지 않는다 */</span>
 <span class="t">p</span> { <span class="a">letter-spacing</span>: <span class="a">0</span>; }''',
   keys=kbd([
-    ("<code>keep-all</code>을 깐다", "한국어 화면이면 <b>예외 없이</b> 씁니다. 이름이 헷갈리는 <code>break-all</code>과는 반대로 동작합니다"),
-    ("<code>overflow-wrap</code>을 함께", "둘 중 하나만 쓰면 어절 쪼개짐과 영문 넘침 가운데 <b>하나만</b> 해결됩니다"),
-    ("<code>lang=\"ko\"</code>", "브라우저가 이 값을 보고 줄바꿈 규칙과 글꼴, 스크린 리더 발음을 정합니다"),
-    ("행간을 한 단계 넓게", "영문 기준이 1.5라면 한글은 1.7~1.8을 씁니다"),
-    ("<code>&lt;br&gt;</code>로 끊지 않는다", "화면 폭이 바뀌면 <b>엉뚱한 자리</b>에서 끊기므로, 줄바꿈은 브라우저에 맡깁니다"),
-    ("자간은 0", "본문에서 벌리면 <b>낱글자로 흩어져</b> 보입니다. 큰 제목만 조금 좁힙니다"),
+    ("<code>keep-all</code>을 기본으로 적기", "한국어 화면이면 <b>예외 없이</b> 씁니다. 이름이 헷갈리는 <code>break-all</code>과는 반대로 동작합니다"),
+    ("<code>overflow-wrap</code>을 함께 적기", "둘 중 하나만 쓰면 어절 쪼개짐과 영문 넘침 가운데 <b>하나만</b> 해결됩니다"),
+    ("<code>lang=\"ko\"</code> 적어 두기", "브라우저가 이 값을 보고 줄바꿈 규칙과 글꼴, 스크린 리더 발음을 정합니다"),
+    ("행간을 한 단계 넓게 잡기", "영문 기준이 1.5라면 한글은 1.7~1.8을 씁니다"),
+    ("<code>&lt;br&gt;</code>로 직접 끊지 않기", "화면 폭이 바뀌면 <b>엉뚱한 자리</b>에서 끊기므로, 줄바꿈은 브라우저에 맡깁니다"),
+    ("본문 자간은 0으로 두기", "본문에서 벌리면 <b>낱글자로 흩어져</b> 보입니다. 큰 제목만 조금 좁힙니다"),
   ]),
   backend=rows([
-    ("글 길이는 데이터가 정한다", "'가맹점명'이 3자일 때와 30자일 때는 화면이 달라집니다. 그래서 적어도 한 번은 <b>가장 긴 값</b>을 넣어 화면을 그려 봐야 합니다."),
-    ("문장을 쪼개 보내지 않는다", "'…되면'과 '입금됩니다'를 따로 내려보내 화면에서 이어 붙이면 <b>번역과 줄바꿈이 둘 다 어긋납니다.</b> 그래서 문장은 한 덩어리로 보냅니다."),
-    ("다국어", "같은 문장이라도 영어로는 길이가 1.3배쯤 되고, 일본어로는 비슷합니다. 칸 크기를 한국어 기준으로만 잡으면 <b>다른 언어에서는 글이 칸을 넘칩니다.</b>"),
-    ("검색과 정렬", "한글은 <code>localeCompare('ko')</code>로 정렬해야 'ㄱㄴㄷ' 순이 됩니다. 바이트 순으로 정렬하면 자모 순서가 뒤섞입니다."),
-    ("글꼴 파일", "한글은 완성형만 1만 1172자라서 글꼴 <b>파일이 수 MB</b>나 됩니다. 그래서 쓰는 글자만 남기는 서브셋이 거의 필수입니다. 자세한 내용은 <a href=\"webfont.html\">웹폰트</a> 항목을 보세요."),
+    ("데이터에 따라 달라지는 글 길이", "'가맹점명'이 3자일 때와 30자일 때는 화면이 달라집니다. 그래서 적어도 한 번은 <b>가장 긴 값</b>을 넣어 화면을 그려 봐야 합니다."),
+    ("문장을 한 덩어리로 보내기", "'…되면'과 '입금됩니다'를 따로 내려보내 화면에서 이어 붙이면 <b>번역과 줄바꿈이 둘 다 어긋납니다.</b> 그래서 문장은 한 덩어리로 보냅니다."),
+    ("언어마다 다른 글 길이", "같은 문장이라도 영어로는 길이가 1.3배쯤 되고, 일본어로는 비슷합니다. 칸 크기를 한국어 기준으로만 잡으면 <b>다른 언어에서는 글이 칸을 넘칩니다.</b>"),
+    ("한글을 가나다순으로 정렬하기", "한글은 <code>localeCompare('ko')</code>로 정렬해야 'ㄱㄴㄷ' 순이 됩니다. 바이트 순으로 정렬하면 자모 순서가 뒤섞입니다."),
+    ("한글 글꼴 파일의 크기", "한글은 완성형만 1만 1172자라서 글꼴 <b>파일이 수 MB</b>나 됩니다. 그래서 쓰는 글자만 남기는 서브셋이 거의 필수입니다. 자세한 내용은 <a href=\"webfont.html\">웹폰트</a> 항목을 보세요."),
   ]),
   plat_lede="두 OS는 한글 줄바꿈을 <b>기본 설정에서 맞게</b> 처리하기 때문에, 따로 설정이 필요한 것은 웹뿐입니다.",
   plats=plats([
@@ -145,5 +147,5 @@ D = dict(
   related='''        <li><a href="../items/lineheight.html"><b>행간</b><em>3부</em></a></li>
         <li><a href="../items/webfont.html"><b>웹폰트</b><em>3부</em></a></li>
         <li><a href="../items/container.html"><b>컨테이너와 최대 폭</b><em>1부</em></a></li>
-        <li><span class="na"><b>한국어 UI 문구</b><em>14부</em></span></li>''',
+        <li><a href="koreanui.html"><b>한국어 UI 문구</b><em>14부</em></a></li>''',
 )

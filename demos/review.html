@@ -18,7 +18,7 @@
 <body>
 <div class="bar">
   <b>디자인 리뷰</b>
-  <label>어느 단계 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>리뷰하는 단계 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="wire">와이어프레임</option>
     <option value="visual" selected>시안</option>
     <option value="built">만든 뒤</option>
@@ -54,9 +54,9 @@
     ['제 취향은 아니지만요', { wire: 0, visual: 0, built: 0 }, '취향은 기준이 될 수 없으니, 무엇을 해치는지 말해야 합니다']
   ];
   var HEAD = {
-    wire: '<b>와이어프레임</b> 리뷰 — 이 단계에서는 <b>구조</b>를 묻습니다',
-    visual: '<b>시안</b> 리뷰 — 이 단계에서는 <b>마감</b>을 묻습니다',
-    built: '<b>만든 뒤</b> 리뷰 — 이 단계에서는 <b>실제로 되는지</b>를 묻습니다'
+    wire: '<b>와이어프레임</b> 리뷰에서는 <b>구조</b>를 묻습니다',
+    visual: '<b>시안</b> 리뷰에서는 <b>마감</b>을 묻습니다',
+    built: '<b>만든 뒤</b> 하는 리뷰에서는 <b>실제로 되는지</b>를 묻습니다'
   };
 
   function draw() {

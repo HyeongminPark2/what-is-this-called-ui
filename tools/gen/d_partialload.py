@@ -3,21 +3,21 @@ from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
 
 WAIT2 = table(
-  ["무엇을 가리나", "하던 일이 끊기나", "초점이 남나", "쓰기 쉬운가"],
-  [["전체 스피너", "<b>화면 전부</b>", "끊긴다", "날아간다", "가장 쉽다"],
-   ["부분 로딩", "<b>바뀌는 곳만</b>", "안 끊긴다", "남는다", "손이 더 간다"],
-   ["버튼 안 표시", "그 단추만", "안 끊긴다", "남는다", "쉽다"],
-   ["<a href=\"skeleton.html\">스켈레톤</a>", "들어올 자리", "처음에만", "해당 없음", "쉽다"]],
+  ["기다리는 동안 무엇을 가리는가", "사용자가 하던 일이 끊기는가", "초점이 그대로 남는가", "구현하기 쉬운가"],
+  [["전체 스피너", "<b>화면 전부</b>", "끊김", "사라짐", "가장 쉬움"],
+   ["부분 로딩", "<b>바뀌는 곳만</b>", "끊기지 않음", "남음", "손이 더 감"],
+   ["버튼 안 표시", "누른 버튼만", "끊기지 않음", "남음", "쉬움"],
+   ["<a href=\"skeleton.html\">스켈레톤</a>", "들어올 내용의 자리", "처음 그릴 때만", "해당 없음", "쉬움"]],
   me="부분 로딩")
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">바뀌는 곳만 다시 그린다</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">그 줄만 흐리게 — 나머지는 읽을 수 있다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--danger)">전체를 다시 그리면 입력칸이 새로 만들어진다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">초점과 치던 글이 함께 날아간다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">단추 안 표시 — 그 단추만 기다린다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">aria-busy — 바뀌는 중임을 알린다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">바뀌는 곳만 다시 그림</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">그 줄만 흐려져 나머지는 계속 읽을 수 있음</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--danger)">전체를 다시 그리면 입력칸이 새로 만들어짐</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">초점과 치던 글이 함께 사라짐</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">버튼 안에 표시해 그 버튼만 기다림</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">aria-busy로 바뀌는 중임을 알림</div>
                 </div>
               </div>'''
 
@@ -75,26 +75,26 @@ D = dict(
   oneline="<b>데이터가 바뀐 곳만 다시 그립니다.</b> 화면 전체를 갈아 끼우면 초점과 사용자가 치던 글까지 함께 사라집니다.",
   s4_title="상태", s4_hint="방식마다 가려지는 범위",
   states=states([
-    (panel(R, -1, False, "", "평소", True), "평소", "모든 줄을 읽을 수 있습니다"),
-    (panel(R, 0, False, "", "그 줄만 흐려졌다", True), "부분 로딩", "바뀌는 줄만 흐려지고 <b>나머지는 그대로</b> 보입니다"),
-    (panel(R, -1, True, "", "화면이 통째로 가려졌다", False), "전체 스피너", "<b>바뀌지 않는 부분까지</b> 가립니다"),
+    (panel(R, -1, False, "", "평소", True), "평소 상태", "모든 줄을 읽을 수 있습니다"),
+    (panel(R, 0, False, "", "그 줄만 흐려짐", True), "바뀌는 줄만 흐리게 할 때", "바뀌는 줄만 흐려지고 <b>나머지는 그대로</b> 보입니다"),
+    (panel(R, -1, True, "", "화면이 통째로 가려짐", False), "전체 스피너로 가릴 때", "<b>바뀌지 않는 부분까지</b> 가립니다"),
     (one(txt('<span style="display:flex;gap:5px;align-items:center;font-size:8.5px">'
              '<span style="border:1px solid var(--accent);border-radius:4px;padding:2px 7px;color:var(--accent)">'
              '○ 저장 중…</span></span>'),
-         "단추 안 표시", True, "그 단추만 기다린다", "152px"),
-     "단추 안", "기다림을 표시하는 범위가 <b>가장 좁습니다</b>"),
-    (panel(R, -1, False, "", "검색 칸이 새로 만들어졌다", False, "152px", ""),
-     "전체를 갈아 끼움", "검색 칸이 새로 만들어져서 <b>치던 글이 사라집니다</b>"),
-    (panel(R, 0, False, "", "aria-busy 로 알린다", True), "소리로 알림", "스크린 리더에 그 줄이 <b>바뀌는 중</b>이라고 알립니다"),
+         "버튼 안 표시", True, "그 버튼만 기다림", "152px"),
+     "버튼 안에만 표시할 때", "기다림을 표시하는 범위가 <b>가장 좁습니다</b>"),
+    (panel(R, -1, False, "", "검색 칸이 새로 만들어짐", False, "152px", ""),
+     "화면 전체를 새로 만들 때", "검색 칸이 새로 만들어져서 <b>치던 글이 사라집니다</b>"),
+    (panel(R, 0, False, "", "aria-busy로 알림", True), "스크린 리더에 알릴 때", "스크린 리더에 그 줄이 <b>바뀌는 중</b>이라고 알립니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("바뀌는 곳만", "다시 그리기", "데이터가 바뀐 <b>그 줄</b>만 다시 그립니다"),
-    ("흐리게", "그 줄만", "기다리는 줄만 흐리게 하므로 나머지는 <b>계속 읽을 수 있습니다</b>"),
-    ("전체 교체", "위험", "전체를 다시 그리면 입력칸이 <b>새로 만들어집니다</b>"),
-    ("초점", "날아감", "입력칸이 새로 만들어지면 초점과 치던 글이 <b>함께</b> 사라집니다"),
-    ("단추 안", "가장 좁게", "누른 버튼만 기다리는 상태로 둡니다"),
-    ("<code>aria-busy</code>", "소리로", "스크린 리더에 그 자리가 바뀌는 중임을 알립니다"),
+    ("바뀌는 줄", "다시 그리기", "데이터가 바뀐 <b>그 줄</b>만 다시 그립니다"),
+    ("흐려진 줄", "그 줄만 흐림", "기다리는 줄만 흐리게 하므로 나머지는 <b>계속 읽을 수 있습니다</b>"),
+    ("전체 교체", "피해야 할 방식", "전체를 다시 그리면 입력칸이 <b>새로 만들어집니다</b>"),
+    ("초점", "치던 글과 함께 사라짐", "입력칸이 새로 만들어지면 초점과 치던 글이 <b>함께</b> 사라집니다"),
+    ("버튼 안 표시", "가장 좁은 범위", "누른 버튼만 기다리는 상태로 둡니다"),
+    ("<code>aria-busy</code>", "스크린 리더에 알림", "스크린 리더에 그 자리가 바뀌는 중임을 알립니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           '다시 그린다'는 말이 <b>DOM을 새로 만드는 것</b>을 뜻하는지,
@@ -116,14 +116,14 @@ D = dict(
     "열쇠로 <b>순서 번호</b>를 쓸 때. 정렬이 바뀌면 열쇠와 줄이 어긋납니다",
     "바뀌는 동안 <b>아무 표시도</b> 하지 않을 때",
   ]),
-  instead='처음 그릴 때는 <a href="skeleton.html">스켈레톤</a>, 안 기다리게 하려면 <a href="optimistic.html">낙관적 UI</a>, 얼마나 남았는지는 <a href="progress.html">프로그레스 바</a>, 끝을 모르면 <a href="spinner.html">스피너</a>.',
+  instead='화면을 처음 그릴 때는 <a href="skeleton.html">스켈레톤</a>으로 자리를 잡아 두고, 사용자를 아예 기다리지 않게 하려면 <a href="optimistic.html">낙관적 UI</a>를 씁니다. 얼마나 남았는지 알려 줄 수 있으면 <a href="progress.html">프로그레스 바</a>를, 끝나는 때를 모르면 <a href="spinner.html">스피너</a>를 씁니다.',
   cases=cases([
-    (panel(R, 0, False, "", "", True), "줄 상태 바꾸기", "상태를 바꾼 <b>그 줄만</b> 다시 그립니다"),
+    (panel(R, 0, False, "", "", True), "목록에서 한 줄의 상태 바꾸기", "상태를 바꾼 <b>그 줄만</b> 다시 그립니다"),
     (one(txt('<span style="display:flex;gap:5px;align-items:center;font-size:8.5px">'
              '<span style="border:1px solid var(--accent);border-radius:4px;padding:2px 7px;color:var(--accent)">○ 보내는 중…</span></span>'),
          "보내기", True, "", "150px"),
-     "폼 보내기", "보내는 중이라는 표시를 <b>버튼 안</b>에 둡니다"),
-    (panel(R, -1, False, "", "", True, "150px", "모란"), "검색 결과", "검색 칸은 그대로 두고 <b>결과 목록만</b> 바꿉니다"),
+     "폼을 보내는 동안 버튼만 기다리게 하기", "보내는 중이라는 표시를 <b>버튼 안</b>에 둡니다"),
+    (panel(R, -1, False, "", "", True, "150px", "모란"), "검색 결과 목록만 바꾸기", "검색 칸은 그대로 두고 <b>결과 목록만</b> 바꿉니다"),
   ]),
   s8_title="최소 마크업과 키보드", s8_hint="구현할 때 지킬 최소 규칙",
   code_lede="다시 그리는 자리를 <b>좁게</b> 잡고, 그 자리에만 <code>aria-busy</code>를 붙입니다.",
@@ -143,16 +143,16 @@ row.removeAttribute(<span class="s">'aria-busy'</span>);
 list.innerHTML = rows.map(renderRow).join(<span class="s">''</span>);''',
   keys=kbd([
     ("<code>aria-busy</code>", "그 자리가 <b>바뀌는 중</b>임을 알립니다"),
-    ("초점", "다시 그린 뒤 초점을 <b>원래 있던 자리</b>로 되돌려 줍니다"),
+    ("다시 그린 뒤의 초점", "다시 그린 뒤 초점을 <b>원래 있던 자리</b>로 되돌려 줍니다"),
     ("<code>aria-live</code>", "결과만 짧게 알립니다. <b>진행 중</b>이라는 사실은 읽히지 않습니다"),
-    ("단추 잠금", "<code>disabled</code>를 쓰면 버튼이 초점을 잃으므로, <code>aria-disabled</code>를 써서 <b>초점을 그대로 둡니다</b>"),
-    ("열쇠", "<code>key</code>에 <b>순서 번호</b>를 쓰지 않습니다"),
-    ("확인하는 법", "입력칸에 글을 치다가 갱신을 일으킨 뒤 <b>글이 남아 있는지</b> 봅니다"),
+    ("버튼을 잠글 때", "<code>disabled</code>를 쓰면 버튼이 초점을 잃으므로, <code>aria-disabled</code>를 써서 <b>초점을 그대로 둡니다</b>"),
+    ("목록의 열쇠(key)", "<code>key</code>에 <b>순서 번호</b>를 쓰지 않습니다"),
+    ("확인하는 방법", "입력칸에 글을 치다가 갱신을 일으킨 뒤 <b>글이 남아 있는지</b> 봅니다"),
   ]),
   backend=rows([
-    ("바뀐 것만 돌려준다", "줄 하나를 바꿨다면 응답에 <b>그 줄만</b> 담으면 되고, 목록 전체를 다시 보낼 필요는 없습니다."),
-    ("열쇠", "응답에 줄의 <code>id</code>가 있어야 화면이 <b>어느 줄을 고칠지</b> 압니다."),
-    ("버전", "응답에 <code>updated_at</code>이 있으면 이미 더 새 값을 받은 뒤에 <b>늦게 도착한 옛 응답</b>을 가려내 버릴 수 있습니다."),
+    ("바뀐 줄만 응답에 담기", "줄 하나를 바꿨다면 응답에 <b>그 줄만</b> 담으면 되고, 목록 전체를 다시 보낼 필요는 없습니다."),
+    ("응답에 줄의 id 담기", "응답에 줄의 <code>id</code>가 있어야 화면이 <b>어느 줄을 고칠지</b> 압니다."),
+    ("늦게 온 응답을 가려낼 버전 값", "응답에 <code>updated_at</code>이 있으면 이미 더 새 값을 받은 뒤에 <b>늦게 도착한 옛 응답</b>을 가려내 버릴 수 있습니다."),
   ]),
   plat_lede="부분 갱신은 <b>프레임워크가 처리하는</b> 영역이라서 플랫폼마다 부르는 이름이 제각각입니다.",
   plats=plats([

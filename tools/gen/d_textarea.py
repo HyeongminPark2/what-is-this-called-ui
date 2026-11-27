@@ -16,12 +16,12 @@ def ta(lines, cnt="", label="", note="", ok=None, w="152px", over=False):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">rows — 처음 보이는 줄 수</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">내용만큼 늘어나기 — 작은 창에서 안 굴린다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">남은 글자 수 — 넘치기 전에 보인다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">maxlength — 붙여넣은 글이 소리 없이 잘린다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">resize — 세로만 열어 두는 편이 안전하다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">Enter 로 보내기와 줄바꿈은 같이 못 쓴다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">rows는 처음 보이는 줄 수</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">내용만큼 늘어나 작은 창에서 굴리지 않음</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">남은 글자 수는 넘치기 전에 보여 줌</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">maxlength는 붙여넣은 글을 안내 없이 자름</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">resize는 세로만 열어 두는 편이 안전함</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">Enter 하나로 보내기와 줄바꿈을 같이 못 씀</div>
                 </div>
               </div>'''
 
@@ -30,7 +30,7 @@ D = dict(
   desc="줄바꿈이 들어가는 글을 받는 여러 줄 입력에서 자동 높이와 글자 수, 넘친 글을 잘랐을 때 생기는 문제를 다루는 항목입니다.",
   lede="입력 칸에 줄바꿈이 들어가면 한 줄 칸과는 <b>다른 부품</b>이 됩니다. 글이 길어지면 높이가 변하고, 글자 수 한도를 다뤄야 하고, Enter를 눌렀을 때 하는 일도 달라집니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
-          <p>'<b>160자짜리 글 붙여넣기</b>'를 눌러 보세요. '아예 못 치게'를 켜 두면
+          <p>'<b>160자짜리 글 붙여넣기</b>'를 눌러 보세요. '넘치면 아예 못 치게 막기'를 켜 두면
           <b>붙여넣은 글이 아무 안내 없이 잘리고</b>, 데모가 <b>잘려 나간 글자 수</b>를 세어 적어 줍니다.
           한도를 넘더라도 <b>글은 그대로 두고 빨갛게 알리는</b> 편이 사용자가 고치기 쉽습니다.<br>
           <b>내용만큼 늘어나기</b>를 켜면 줄이 늘 때 칸도 함께 커집니다.
@@ -52,28 +52,28 @@ D = dict(
   axes=ax("여러 줄 입력"),
   oneline="<b>글이 한도를 넘으면 자르지 말고 알려 주세요.</b> 한번 잘려 나간 글은 사용자가 되찾을 수 없습니다.",
   states=states([
-    (ta(['100%', '70%'], "118자 남음", "", "평소", True), "기본", "<b>두세 줄</b> 높이로 시작합니다"),
-    (ta(['100%', '100%', '100%', '85%'], "12자 남음", "", "내용만큼 늘어났다", True),
-     "늘어남", "칸이 내용만큼 커져서 <b>굴리지 않아도</b> 됩니다"),
-    (ta(['100%', '80%'], "20자 넘음", "", "넘쳤다고 알린다", True, "152px", True),
-     "넘침", "한도를 넘어도 <b>계속 치게 두고</b> 넘쳤다고 알립니다"),
-    (ta(['100%', '60%'], "0자 남음", "", "붙여넣은 20자가 사라졌다", False),
-     "잘림", "한도를 넘은 글이 <b>아무 안내 없이</b> 사라집니다"),
-    (ta(['100%', '70%'], "", "", "남은 글자 수가 없다", None),
-     "글자 수 없음", "남은 글자 수가 안 보여서 <b>넘친 뒤에야</b> 알게 됩니다"),
+    (ta(['100%', '70%'], "118자 남음", "", "처음 연 모습", True), "평소 상태", "<b>두세 줄</b> 높이로 시작합니다"),
+    (ta(['100%', '100%', '100%', '85%'], "12자 남음", "", "내용만큼 늘어남", True),
+     "내용이 길어져 칸이 늘어났을 때", "칸이 내용만큼 커져서 <b>굴리지 않아도</b> 됩니다"),
+    (ta(['100%', '80%'], "20자 넘음", "", "넘쳤다고 알림", True, "152px", True),
+     "한도를 넘었을 때 알리기", "한도를 넘어도 <b>계속 치게 두고</b> 넘쳤다고 알립니다"),
+    (ta(['100%', '60%'], "0자 남음", "", "붙여넣은 20자가 사라짐", False),
+     "넘친 글을 잘랐을 때", "한도를 넘은 글이 <b>아무 안내 없이</b> 사라집니다"),
+    (ta(['100%', '70%'], "", "", "남은 글자 수가 안 보임", None),
+     "남은 글자 수를 보여 주지 않을 때", "남은 글자 수가 안 보여서 <b>넘친 뒤에야</b> 알게 됩니다"),
     (one(txt('<span style="display:block;font-size:8px">Enter 로 보내기</span>'
-             '<span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">줄바꿈을 못 한다</span>'),
+             '<span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">줄바꿈을 못 함</span>'),
          "Enter", False, "", "152px"),
-     "Enter 로 보내기", "Enter 하나로 보내기와 줄바꿈을 <b>둘 다 할 수는 없습니다</b>"),
+     "Enter에 보내기를 걸었을 때", "Enter 하나로 보내기와 줄바꿈을 <b>둘 다 할 수는 없습니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("<code>rows</code>", "처음 줄 수", "처음에는 두세 줄 높이로 시작합니다"),
-    ("자동 높이", "안 굴림", "칸이 내용만큼 커지므로 작은 창 안에서 굴리지 않아도 됩니다"),
-    ("글자 수", "미리 보임", "남은 글자 수를 넘치기 <b>전에</b> 보여 줍니다"),
-    ("<code>maxlength</code>", "소리 없이 잘림", "한도를 넘는 글을 자르는데, <b>붙여넣기</b>에서 특히 문제가 됩니다"),
-    ("<code>resize</code>", "세로만", "가로로 늘리게 두면 <b>칸이 레이아웃을 깨뜨립니다</b>"),
-    ("Enter", "둘 중 하나", "Enter에는 보내기 <b>또는</b> 줄바꿈 중 하나만 맡깁니다"),
+    ("<code>rows</code>", "처음 보이는 줄 수", "처음에는 두세 줄 높이로 시작합니다"),
+    ("자동 높이", "굴리지 않게 하기", "칸이 내용만큼 커지므로 작은 창 안에서 굴리지 않아도 됩니다"),
+    ("글자 수", "미리 보여 주기", "남은 글자 수를 넘치기 <b>전에</b> 보여 줍니다"),
+    ("<code>maxlength</code>", "안내 없이 잘림", "한도를 넘는 글을 자르는데, <b>붙여넣기</b>에서 특히 문제가 됩니다"),
+    ("<code>resize</code>", "세로로만 늘리기", "가로로 늘리게 두면 <b>칸이 레이아웃을 깨뜨립니다</b>"),
+    ("Enter", "한 가지 일만 맡기기", "Enter에는 보내기 <b>또는</b> 줄바꿈 중 하나만 맡깁니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <code>maxlength</code>는 쓰기 쉬워 보이지만 <b>붙여넣기에서 문제가 가장 큽니다</b>.
@@ -94,11 +94,11 @@ D = dict(
     "높이를 <b>한 줄</b>로 두기. 쓰는 동안 앞에 쓴 내용이 보이지 않습니다",
     "글자 수가 넘쳤다는 사실을 <b>보낸 뒤에</b> 알리기",
   ]),
-  instead='한 줄만 받으면 <a href="field.html">텍스트 필드</a>, 서식이 들어가면 리치 텍스트 편집기, 검사 규칙은 <a href="validation.html">입력 검증</a>, 칸 안팎의 안내 문구는 <a href="placeholder.html">자리글과 헬퍼 텍스트</a>.',
+  instead='한 줄만 받으면 되는 칸에는 <a href="field.html">텍스트 필드</a>를 쓰고, 굵게나 목록 같은 서식이 들어가야 하면 리치 텍스트 편집기를 씁니다. 글자 수 같은 검사 규칙은 <a href="validation.html">입력 검증</a>에서, 칸 안팎에 적는 안내 문구는 <a href="placeholder.html">자리글과 헬퍼 텍스트</a>에서 다룹니다.',
   cases=cases([
-    (ta(['100%', '70%'], "118자 남음", "", "", True, "150px"), "메모", "여러 줄로 적어야 하므로 <b>줄바꿈</b>이 필요합니다"),
-    (ta(['100%'], "", "", "", True, "150px"), "댓글", "<b>한 줄</b> 높이로 시작해 글이 길어지면 늘어납니다"),
-    (ta(['100%', '100%', '80%'], "", "", "", True, "150px"), "문의 내용", "긴 글이 들어올 자리라서 처음부터 <b>넉넉한 높이</b>로 엽니다"),
+    (ta(['100%', '70%'], "118자 남음", "", "", True, "150px"), "메모 적기", "여러 줄로 적어야 하므로 <b>줄바꿈</b>이 필요합니다"),
+    (ta(['100%'], "", "", "", True, "150px"), "댓글 달기", "<b>한 줄</b> 높이로 시작해 글이 길어지면 늘어납니다"),
+    (ta(['100%', '100%', '80%'], "", "", "", True, "150px"), "문의 내용 받기", "긴 글이 들어올 자리라서 처음부터 <b>넉넉한 높이</b>로 엽니다"),
   ]),
   code_lede="자동 높이는 CSS <code>field-sizing</code> 한 줄로 만들 수 있고, 이 속성을 지원하지 않는 브라우저에서는 <code>scrollHeight</code>를 재서 높이를 맞춥니다.",
   code='''&lt;<span class="t">label</span> <span class="a">for</span>=<span class="s">"memo"</span>&gt;정산 메모&lt;/<span class="t">label</span>&gt;
@@ -118,12 +118,12 @@ el.addEventListener(<span class="s">'input'</span>, () =&gt; {
     ("Tab", "다음 칸으로 넘어갑니다. <b>들여쓰기가 아닙니다</b>"),
     ("<code>aria-describedby</code>", "글자 수 안내를 칸과 <b>연결해</b> 둡니다"),
     ("<code>role=\"status\"</code>", "남은 글자 수를 입력을 방해하지 않고 <b>조용히</b> 알립니다"),
-    ("확인하는 법", "긴 글을 <b>붙여넣어</b> 보고 잘리는지 확인합니다"),
+    ("확인하는 방법", "긴 글을 <b>붙여넣어</b> 보고 잘리는지 확인합니다"),
   ]),
   backend=rows([
-    ("한도는 서버에도", "화면에 보이는 한도는 사용자를 돕는 안내이고, 실제로 넘친 글을 막는 일은 <b>서버 검사</b>가 맡아야 합니다."),
-    ("줄바꿈 보존", "저장하거나 보여 줄 때 줄바꿈이 사라지면 사용자가 <b>쓴 모양</b>과 달라집니다. 화면에 보여 줄 때는 <code>white-space: pre-wrap</code>이 필요합니다."),
-    ("글자 수 세는 법", "이모지나 한글을 <b>코드 단위</b>로 세면 사람이 보는 글자 수와 어긋납니다. 서버와 화면이 <b>같은 방식</b>으로 세야 한도가 맞습니다."),
+    ("글자 수 한도는 서버에서도 검사하기", "화면에 보이는 한도는 사용자를 돕는 안내이고, 실제로 넘친 글을 막는 일은 <b>서버 검사</b>가 맡아야 합니다."),
+    ("줄바꿈을 그대로 지키기", "저장하거나 보여 줄 때 줄바꿈이 사라지면 사용자가 <b>쓴 모양</b>과 달라집니다. 화면에 보여 줄 때는 <code>white-space: pre-wrap</code>이 필요합니다."),
+    ("글자 수를 세는 방법 맞추기", "이모지나 한글을 <b>코드 단위</b>로 세면 사람이 보는 글자 수와 어긋납니다. 서버와 화면이 <b>같은 방식</b>으로 세야 한도가 맞습니다."),
   ]),
   plat_lede="플랫폼마다 <b>자동 높이</b>를 누가 맡는지가 다릅니다.",
   plats=plats([

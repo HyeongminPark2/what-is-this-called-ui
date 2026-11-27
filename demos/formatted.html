@@ -18,7 +18,7 @@
 <body>
 <div class="bar">
   <b>자동 서식 입력</b>
-  <label>무엇을 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>받을 번호 종류 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="biz" selected>사업자번호 000-00-00000</option>
     <option value="phone">전화번호 010-0000-0000</option>
     <option value="card">카드번호 0000 0000 0000 0000</option>
@@ -80,8 +80,8 @@
     rd.innerHTML = '칸에 보이는 글자 <b>‘' + f.value + '’</b>' +
       '<br>서버로 갈 값 <b>‘' + raw + '’</b> (' + raw.length + ' / ' + spec.len + '자리)' +
       (/[^\d]/.test(f.value) && !document.getElementById('auto').checked
-        ? ' <span class="warn">— 기호가 섞여 있습니다</span>' : '') +
-      '<br>커서 자리 <b>' + (f.selectionStart === null ? '-' : f.selectionStart) + '</b>' +
+        ? ' <span class="warn">보이는 글자에 기호가 섞여 있습니다</span>' : '') +
+      '<br>지금 커서 자리 <b>' + (f.selectionStart === null ? '-' : f.selectionStart) + '</b>' +
       (why ? '<br>' + why : '');
     rd.dataset.shown = f.value;
     rd.dataset.raw = raw;
@@ -120,7 +120,7 @@
     } else {
       f.value = spec.dirty;
       draw('<span class="warn">기호가 그대로 남았습니다</span>');
-      document.getElementById('log').innerHTML = '<span class="warn">그대로 들어갔습니다</span> — 서버가 거절합니다';
+      document.getElementById('log').innerHTML = '<span class="warn">기호가 그대로 들어갔습니다</span>. 이대로 보내면 서버가 거절합니다';
     }
   });
   ['k', 'auto', 'strip'].forEach(function (id) {

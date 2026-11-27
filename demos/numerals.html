@@ -72,7 +72,7 @@
   세로로 쌓이는 표나 1초마다 바뀌는 숫자에서 <b>자릿수가 흔들리면</b> 읽기 어렵습니다.
   이 흔들림을 막는 속성이 <code>font-variant-numeric: tabular-nums</code>입니다.<br>
   <b>그런데 이 속성은 글꼴에 그 기능이 있을 때만 효과가 있습니다.</b> 위 표는 글꼴마다 숫자 너비를 직접 재서
-  '켜도 안 바뀜'인지 '켜니 고르게 됨'인지 알려 줍니다. 세리프 계열 글꼴에는 대개 그 기능이 없어서
+  '켜도 안 바뀌니 기능 없음'인지 '켜니 고르게 됨'인지 알려 줍니다. 세리프 계열 글꼴에는 대개 그 기능이 없어서
   <b>켜도 아무 변화가 없습니다.</b><br>
   그래서 금액이나 시간, 카운트다운에는 <b>그 기능이 있는 글꼴을 쓰거나</b>,
   숫자만 <b>등폭 글꼴</b>로 바꾸는 두 방법 가운데 하나를 씁니다. 한글 글꼴에는 이 기능이 없는 경우가 많으니 <b>반드시 재 보고</b> 정하세요.
@@ -97,7 +97,7 @@
       lastW = w;
       meter.innerHTML = '글자 너비 <b>' + w.toFixed(1) + 'px</b> · 지금까지 흔들린 폭 ' +
         (maxJitter < 0.5
-          ? '<span class="good">0px — 안 떨립니다</span>'
+          ? '<span class="good">0px이라 안 떨립니다</span>'
           : '<span class="bad">' + maxJitter.toFixed(1) + 'px</span>');
     });
   }
@@ -136,7 +136,7 @@
       var off = spread(f[1], false), on = spread(f[1], true);
       var verdict = on < 0.5
         ? (off < 0.5 ? '<span class="good">원래 고름</span>' : '<span class="good">켜니 고르게 됨</span>')
-        : '<span class="bad">켜도 안 바뀜 — 기능 없음</span>';
+        : '<span class="bad">켜도 안 바뀌니 기능 없음</span>';
       return '<tr><td>' + f[0] + '</td><td class="n">' + off.toFixed(1) + 'px</td>' +
              '<td class="n">' + on.toFixed(1) + 'px</td><td>' + verdict + '</td></tr>';
     }).join('');

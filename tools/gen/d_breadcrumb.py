@@ -36,12 +36,12 @@ D = dict(
   axes=ax("브레드크럼"),
   oneline="브레드크럼은 <b>이력</b>이 아니라 <b>계층</b>을 보여 줍니다. 그래서 검색으로 깊은 곳에 바로 들어와도 메뉴를 따라 들어왔을 때와 같은 줄이 나와야 합니다.",
   states=states([
-    (mini('<div style="margin-top:12px;padding:0 6px;font-size:5.5px;color:var(--fg-muted)">위키 › 팀 문서 › <b style="color:var(--fg)">회고</b></div>', bars="", label="짧은 브레드크럼"), "짧음", "두세 단계일 때가 가장 읽기 좋습니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px;font-size:5px;color:var(--fg-muted);line-height:1.8">위키 › 팀 문서 › 플랫폼 › 결제 › <b style="color:var(--fg)">회고</b></div>', bars="", label="다섯 단계"), "다섯 단계", "다섯 단계 정도가 한 줄에 들어가는 한계입니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px;font-size:5px;color:var(--fg-muted)">위키 › <span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 2px">…</span> › 결제 › <b style="color:var(--fg)">회고</b></div>', bars="", label="접힌 브레드크럼"), "접힘", "가운데 단계를 <b>…</b>로 줄이고, 처음과 끝 칸은 남깁니다"),
-    (mini('<div style="margin-top:9px;padding:0 6px;font-size:5px;color:var(--fg-muted)">위키 ›</div><div style="padding:0 6px;font-size:5px;color:var(--fg-muted)">팀 문서 › <b style="color:var(--fg)">회고</b></div>', bars="", label="두 줄로 넘어간 브레드크럼"), "줄바꿈", "좁은 화면에서는 넘치는 칸을 <b>잘라 숨기지 말고</b> 가운데를 접거나 줄을 바꿉니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px;font-size:5px;color:var(--fg-muted)">위키 › 팀 문서 › <span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 2px">결제 ▾</span> › <b style="color:var(--fg)">회고</b></div>', bars="", label="형제 목록이 열리는 브레드크럼"), "형제 열기", "칸을 누르면 목록이 열려 <b>같은 층의 다른 항목</b>으로 바로 갈 수 있게 한 변형입니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px"><div class="skl" style="height:5px;width:60%"></div></div>', bars="", label="로딩 중 브레드크럼"), "로딩", "계층 정보는 리소스 데이터에서 나옵니다. 데이터를 아직 받지 못했을 때는 뼈대 모양으로 보여 줍니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;font-size:5.5px;color:var(--fg-muted)">위키 › 팀 문서 › <b style="color:var(--fg)">회고</b></div>', bars="", label="짧은 브레드크럼"), "두세 단계로 짧을 때", "두세 단계일 때가 가장 읽기 좋습니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;font-size:5px;color:var(--fg-muted);line-height:1.8">위키 › 팀 문서 › 플랫폼 › 결제 › <b style="color:var(--fg)">회고</b></div>', bars="", label="다섯 단계"), "다섯 단계까지 늘어났을 때", "다섯 단계 정도가 한 줄에 들어가는 한계입니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;font-size:5px;color:var(--fg-muted)">위키 › <span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 2px">…</span> › 결제 › <b style="color:var(--fg)">회고</b></div>', bars="", label="접힌 브레드크럼"), "가운데 단계를 접었을 때", "가운데 단계를 <b>…</b>로 줄이고, 처음과 끝 칸은 남깁니다"),
+    (mini('<div style="margin-top:9px;padding:0 6px;font-size:5px;color:var(--fg-muted)">위키 ›</div><div style="padding:0 6px;font-size:5px;color:var(--fg-muted)">팀 문서 › <b style="color:var(--fg)">회고</b></div>', bars="", label="두 줄로 넘어간 브레드크럼"), "좁은 화면에서 줄을 바꿀 때", "좁은 화면에서는 넘치는 칸을 <b>잘라 숨기지 말고</b> 가운데를 접거나 줄을 바꿉니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;font-size:5px;color:var(--fg-muted)">위키 › 팀 문서 › <span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 2px">결제 ▾</span> › <b style="color:var(--fg)">회고</b></div>', bars="", label="형제 목록이 열리는 브레드크럼"), "같은 층의 항목 목록을 열 때", "칸을 누르면 목록이 열려 <b>같은 층의 다른 항목</b>으로 바로 갈 수 있게 한 변형입니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px"><div class="skl" style="height:5px;width:60%"></div></div>', bars="", label="로딩 중 브레드크럼"), "계층 정보를 불러오는 중", "계층 정보는 리소스 데이터에서 나옵니다. 데이터를 아직 받지 못했을 때는 뼈대 모양으로 보여 줍니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -66,14 +66,14 @@ D = dict(
     "단계 진행을 보여 주려고 할 때. 스테퍼(위저드)를 씁니다",
     "마지막 칸을 링크로 둘 때. 지금 보고 있는 화면이라 눌러도 갈 곳이 없습니다",
   ]),
-  instead='단계 진행이면 스테퍼(7부), 같은 화면의 다른 면이면 <a href="tabs.html">탭</a>, 길을 새로 고르면 <a href="sidebar.html">사이드바</a>.',
+  instead='순서가 있는 단계 진행을 보여 주려면 스테퍼(7부)를 쓰고, 같은 화면의 다른 면을 보여 주려면 <a href="tabs.html">탭</a>을 씁니다. 사용자가 갈 곳을 새로 골라야 하면 <a href="sidebar.html">사이드바</a>가 맞습니다.',
   cases=cases([
     (mini('<div style="margin-top:12px;padding:0 6px;font-size:5px;color:var(--fg-muted)">홈 › 가구 › 소파 › <b style="color:var(--fg)">리넨 3인</b></div>', bars="", tall=False, label="쇼핑몰 브레드크럼 재현"),
-     "쇼핑몰", "상품의 카테고리 계층을 보여 줍니다. 검색으로 상품에 바로 들어온 사람에게 특히 쓸모가 있습니다"),
+     "쇼핑몰의 상품 카테고리 보여 주기", "상품의 카테고리 계층을 보여 줍니다. 검색으로 상품에 바로 들어온 사람에게 특히 쓸모가 있습니다"),
     (mini('<div style="margin-top:12px;padding:0 6px;font-size:5px;color:var(--fg-muted)">위키 › <span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 2px">…</span> › <b style="color:var(--fg)">회고 초안</b></div>', bars="", tall=False, label="문서 도구 브레드크럼 재현"),
-     "문서 도구", "폴더가 깊어서 가운데 단계를 접어야 하는 경우가 대부분입니다"),
+     "깊은 문서 폴더 경로 보여 주기", "폴더가 깊어서 가운데 단계를 접어야 하는 경우가 대부분입니다"),
     (mini('<div style="margin-top:12px;padding:0 6px;font-size:5px;color:var(--fg-muted)">결제 › <b style="color:var(--fg)">거래 내역</b></div>', bars="", tall=False, label="관리 도구 브레드크럼 재현"),
-     "관리 도구", "사이드바가 이미 위치를 알려 주므로 두 단 정도로 짧게 둡니다"),
+     "관리 도구에서 짧게 두기", "사이드바가 이미 위치를 알려 주므로 두 단 정도로 짧게 둡니다"),
   ]),
   code_lede="목록 마크업에 <code>aria-label</code>과 <code>aria-current</code>만 붙이면 됩니다. 구분자는 <b>CSS로</b> 넣어서 스크린 리더가 읽지 않게 합니다.",
   code='''&lt;<span class="t">nav</span> <span class="a">aria-label</span>=<span class="s">"현재 위치"</span>&gt;
@@ -90,14 +90,14 @@ li + li::before <span class="a">{</span> <span class="t">content</span>: <span c
     ("<kbd>Tab</kbd>", "칸마다 포커스가 한 번씩 거쳐 갑니다. 보통 서너 번이면 지나가서 부담이 적습니다"),
     ("<code>aria-label</code>", "<code>\"현재 위치\"</code>처럼 이름을 붙여 두면 내비게이션이 여러 개일 때 서로 구별됩니다"),
     ("<code>aria-current</code>", "마지막 칸에 <code>\"page\"</code> 값을 달고, 링크로 두지 않습니다"),
-    ("구분자", "CSS <code>::before</code>로 넣습니다. 글자로 넣으면 스크린 리더가 칸마다 '꺾쇠'를 읽습니다"),
-    ("접힘", "<b>…</b>은 버튼으로 만들어서 눌러 펼칠 수 있게 합니다"),
+    ("칸 사이의 구분자", "CSS <code>::before</code>로 넣습니다. 글자로 넣으면 스크린 리더가 칸마다 '꺾쇠'를 읽습니다"),
+    ("가운데 단계를 접었을 때", "<b>…</b>은 버튼으로 만들어서 눌러 펼칠 수 있게 합니다"),
   ]),
   backend=rows([
-    ("브레드크럼 = 계층 질의", "브레드크럼을 그리려면 리소스의 <b>조상 목록</b>이 필요합니다. 상세 응답에 <code>ancestors: [...]</code>를 함께 내려 주면 화면이 따로 요청하지 않아도 됩니다."),
-    ("이력이 아니다", "사용자가 어떤 경로로 들어왔든 같은 줄이 나와야 하므로 세션이나 리퍼러 정보에 기대지 않습니다. <b>리소스 하나만 알면 그릴 수 있어야</b> 합니다."),
-    ("깊이 제한", "계층이 깊어질수록 조상을 찾는 질의가 비싸집니다. 그래서 리소스에 전체 경로를 <b>미리 저장</b>(materialized path)해 두는 방법을 흔히 씁니다."),
-    ("이름이 바뀔 때", "상위 폴더 이름이 바뀌면 브레드크럼에 보이는 이름도 바뀌어야 합니다. 경로를 캐시해 뒀다면 이때 캐시를 무효화해야 합니다."),
+    ("조상 목록을 함께 내려 주기", "브레드크럼을 그리려면 리소스의 <b>조상 목록</b>이 필요합니다. 상세 응답에 <code>ancestors: [...]</code>를 함께 내려 주면 화면이 따로 요청하지 않아도 됩니다."),
+    ("이력이 아니라 계층으로 그리기", "사용자가 어떤 경로로 들어왔든 같은 줄이 나와야 하므로 세션이나 리퍼러 정보에 기대지 않습니다. <b>리소스 하나만 알면 그릴 수 있어야</b> 합니다."),
+    ("계층이 깊을 때 늘어나는 질의 비용", "계층이 깊어질수록 조상을 찾는 질의가 비싸집니다. 그래서 리소스에 전체 경로를 <b>미리 저장</b>(materialized path)해 두는 방법을 흔히 씁니다."),
+    ("상위 항목의 이름이 바뀔 때", "상위 폴더 이름이 바뀌면 브레드크럼에 보이는 이름도 바뀌어야 합니다. 경로를 캐시해 뒀다면 이때 캐시를 무효화해야 합니다."),
   ]),
   plat_lede="브레드크럼은 데스크톱 웹에서 쓰는 부품이라서 모바일 지침에서는 거의 다루지 않습니다.",
   plats=plats([
@@ -114,7 +114,7 @@ li + li::before <span class="a">{</span> <span class="t">content</span>: <span c
   plat_note="모바일에서는 가로 자리가 모자라기 때문에 브레드크럼을 거의 쓰지 않고, 그 역할을 <b>뒤로 버튼 하나</b>가 대신합니다. 다만 뒤로 버튼은 바로 위 <b>한 단</b>만 알려 주므로, 계층이 깊은 앱에서는 지금 어디쯤 있는지를 화면 제목으로 보완해야 합니다.",
   siblings=siblings("breadcrumb"),
   related='''        <li><a href="../items/appbar.html"><b>앱바 · 헤더</b><em>7부</em></a></li>
-        <li><span class="na"><b>스테퍼(위저드)</b><em>7부</em></span></li>
-        <li><span class="na"><b>말줄임</b><em>3부</em></span></li>
-        <li><span class="na"><b>시스템 백</b><em>11부</em></span></li>''',
+        <li><a href="stepper.html"><b>스테퍼(위저드)</b><em>7부</em></a></li>
+        <li><a href="truncate.html"><b>말줄임</b><em>3부</em></a></li>
+        <li><a href="systemback.html"><b>시스템 백</b><em>11부</em></a></li>''',
 )

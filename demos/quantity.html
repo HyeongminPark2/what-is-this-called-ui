@@ -20,7 +20,7 @@
   <b>수량 스테퍼</b>
   <label>목표 수량 <input type="number" id="goal" value="24" min="1" max="99" style="width:68px" class="ui-input"></label>
   <label><input type="checkbox" id="typing" checked> 가운데 칸에 쳐서 넣기</label>
-  <label><input type="checkbox" id="small"> 단추를 작게(24px)</label>
+  <label><input type="checkbox" id="small"> 단추를 작게(24px) 두기</label>
 </div>
 
 <div class="pad">
@@ -67,12 +67,12 @@
     var goal = +document.getElementById('goal').value;
 
     var rd = document.getElementById('read');
-    rd.innerHTML = '지금 수량 <b>' + v + '</b> · 목표 <b>' + goal + '</b>' +
-      '<br>＋ 를 누른 횟수 <b>' + clicks + '번</b>' +
-      (clicks >= 10 ? ' <span class="warn">— 쳐서 넣으면 한 번에 끝납니다</span>' : '') +
-      '<br>단추 크기 <b>' + hit + 'px</b>' + (hit < 44 ? ' <span class="warn">— 44px에 못 미칩니다</span>' : '') +
+    rd.innerHTML = '지금 수량 <b>' + v + '</b> · 목표 수량 <b>' + goal + '</b>' +
+      '<br>＋를 누른 횟수 <b>' + clicks + '번</b>' +
+      (clicks >= 10 ? ' <span class="warn">가운데 칸에 쳐서 넣으면 한 번에 끝납니다</span>' : '') +
+      '<br>단추 크기 <b>' + hit + 'px</b>' + (hit < 44 ? ' <span class="warn">터치 타깃 기준인 44px에 못 미칩니다</span>' : '') +
       '<br>가운데 칸은 <b>' + (typing ? '쳐서 넣을 수 있습니다' : '잠겨 있습니다') + '</b>' +
-      (typing ? '' : ' <span class="warn">— 큰 수를 넣을 방법이 없습니다</span>') +
+      (typing ? '' : ' <span class="warn">그래서 큰 수를 넣을 방법이 없습니다</span>') +
       (why ? '<br>' + why : '');
     rd.dataset.v = String(v);
     rd.dataset.clicks = String(clicks);

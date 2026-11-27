@@ -78,15 +78,15 @@
         <p>겹쳐 뜨는 부품들은 모양만 보고는 구별하기 어렵지만, 아래 네 가지를 따져 보면 어느 부품인지 가려낼 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>뒤를 막나</th><th>포커스를 가두나</th><th>배경 스크롤</th><th>어디서 뜨나</th></tr></thead>
+          <thead><tr><th></th><th>뒤쪽 화면을 막는가</th><th>포커스를 안에 가두는가</th><th>뒤쪽 화면의 스크롤은</th><th>화면 어디에서 뜨는가</th></tr></thead>
           <tbody>
             <tr><td>모달</td><td>막는다</td><td>가둔다</td><td>잠긴다</td><td>가운데</td></tr>
-            <tr><td>다이얼로그(비모달)</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로</td><td>가운데 · 띄워 둠</td></tr>
-            <tr><td>바텀시트</td><td>막거나 안 막는다</td><td>막을 때만</td><td>막을 때만</td><td>아래에서</td></tr>
-            <tr><td>드로어</td><td>보통 막는다</td><td>가둔다</td><td>잠긴다</td><td>옆에서</td></tr>
-            <tr><td>팝오버</td><td class="none">안 막는다</td><td>가두기도 한다</td><td class="none">그대로</td><td>누른 것 옆에</td></tr>
-            <tr><td>툴팁</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로</td><td>가리킨 것 옆에</td></tr>
-            <tr><td>토스트</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로</td><td>구석 · 저절로 사라짐</td></tr>
+            <tr><td>다이얼로그(비모달)</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로 움직인다</td><td>가운데에 띄워 둔 채</td></tr>
+            <tr><td>바텀시트</td><td>막을 때도 있다</td><td>뒤를 막을 때만</td><td>뒤를 막을 때만</td><td>아래에서 올라옴</td></tr>
+            <tr><td>드로어</td><td>보통 막는다</td><td>가둔다</td><td>잠긴다</td><td>옆에서 밀려 나옴</td></tr>
+            <tr><td>팝오버</td><td class="none">안 막는다</td><td>가두기도 한다</td><td class="none">그대로 움직인다</td><td>누른 것 옆</td></tr>
+            <tr><td>툴팁</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로 움직인다</td><td>가리킨 것 옆</td></tr>
+            <tr><td>토스트</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로 움직인다</td><td>구석에 떴다 저절로 사라짐</td></tr>
           </tbody>
         </table>
         </div>
@@ -100,39 +100,39 @@
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:grid;gap:3px;padding:6px"><span style="font-size:7.5px;font-weight:700">가게 목록</span><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:72%;border-radius:2px;background:var(--bg)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">평소 — 목록</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:grid;gap:3px;padding:6px"><span style="font-size:7.5px;font-weight:700">가게 목록</span><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:72%;border-radius:2px;background:var(--bg)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">평소에 보는 목록</span></div>
             </div>
-            <figcaption>닫힘<span>레이어를 열기 전, 뒤에 있던 목록 화면입니다</span></figcaption>
+            <figcaption>레이어를 열기 전<span>레이어를 열기 전, 뒤에 있던 목록 화면입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;inset:0;background:var(--surface)"><span style="display:flex;gap:5px;align-items:center;padding:4px 6px;border-bottom:1px solid var(--line);font-size:7.5px"><span style="color:var(--accent)">✕</span><b>새 가게 등록</b><span style="margin-left:auto;color:var(--accent);font-weight:700">저장</span></span><span style="display:grid;gap:3px;padding:6px"><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:80%;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:65%;border-radius:2px;background:var(--bg)"></span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">화면을 다 덮는다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;inset:0;background:var(--surface)"><span style="display:flex;gap:5px;align-items:center;padding:4px 6px;border-bottom:1px solid var(--line);font-size:7.5px"><span style="color:var(--accent)">✕</span><b>새 가게 등록</b><span style="margin-left:auto;color:var(--accent);font-weight:700">저장</span></span><span style="display:grid;gap:3px;padding:6px"><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:80%;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:65%;border-radius:2px;background:var(--bg)"></span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">화면을 다 덮음</span></div>
             </div>
-            <figcaption>전체 화면<span><b>폰처럼 좁은 화면에서</b> 맞는 방식입니다</span></figcaption>
+            <figcaption>전체 화면으로 띄웠을 때<span><b>폰처럼 좁은 화면에서</b> 맞는 방식입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;inset:0;background:color-mix(in srgb, var(--fg) 40%, transparent)"></span><span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:72%;border-radius:5px;background:var(--surface);padding:5px;display:grid;gap:3px"><span style="display:flex;gap:4px;font-size:7.5px"><b>새 가게 등록</b><span style="margin-left:auto;color:var(--fg-muted)">✕</span></span><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:75%;border-radius:2px;background:var(--bg)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">가림막 위에 작게</span></div>
             </div>
-            <figcaption>모달<span><b>PC처럼 넓은 화면에서</b> 맞는 방식입니다</span></figcaption>
+            <figcaption>모달로 띄웠을 때<span><b>PC처럼 넓은 화면에서</b> 맞는 방식입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--danger)">폭을 안 따짐</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--danger)">폰인데 모달</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">내용 칸이 더 좁아진다</span></span></div></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--danger)">폭을 따지지 않음</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--danger)">폰에서 모달로 띄움</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">내용 칸이 더 좁아짐</span></span></div></div>
             </div>
-            <figcaption>폰에 모달<span>폰에 모달을 띄우면 둘레 여백 때문에 내용 <b>칸이 더 좁아집니다</b></span></figcaption>
+            <figcaption>폰에서 모달로 띄웠을 때<span>폰에 모달을 띄우면 둘레 여백 때문에 내용 <b>칸이 더 좁아집니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">머리 줄</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px">✕ 닫기 · 저장</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">‹ 뒤로가 아니다</span></span></div></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">머리 줄</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px">✕ 닫기 · 저장</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">‹ 뒤로 단추는 두지 않음</span></span></div></div>
             </div>
-            <figcaption>닫기 vs 뒤로<span>화면 위를 덮고 올라온 레이어이므로 <b>✕가 맞습니다</b></span></figcaption>
+            <figcaption>닫기 단추와 뒤로 단추 고르기<span>화면 위를 덮고 올라온 레이어이므로 <b>✕가 맞습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">기록</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px">시스템 백</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">기록에 넣으면 이것으로도 닫힌다</span></span></div></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">기록</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px">시스템 백</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">기록에 넣으면 이것으로도 닫힘</span></span></div></div>
             </div>
-            <figcaption>시스템 백<span>폰 사용자는 <b>시스템 백으로도 닫히기를</b> 기대합니다</span></figcaption>
+            <figcaption>시스템 백을 눌렀을 때<span>폰 사용자는 <b>시스템 백으로도 닫히기를</b> 기대합니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -144,23 +144,23 @@
             <div class="anat" role="img" aria-label="전체 화면 레이어의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">화면을 다 덮는다 — 가림막이 안 보인다</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">닫기(✕)이지 뒤로가기가 아니다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">제목 — 무엇을 하는 중인지</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">주 동작은 오른쪽 위 — 저장 · 완료</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--accent)">기록에 넣으면 시스템 백으로도 닫힌다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">화면처럼 보이지만 화면이 아니다 — 뒤가 남아 있다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">화면을 다 덮어 가림막이 보이지 않음</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">뒤로가기가 아니라 닫기(✕)를 둠</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">제목으로 무엇을 하는 중인지 알림</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">저장 · 완료 같은 주 동작은 오른쪽 위에</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--accent)">기록에 넣으면 시스템 백으로도 닫힘</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">새 화면처럼 보여도 뒤 화면이 남아 있음</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>다 덮음 <em>가림막 없음</em></b><span>화면을 다 덮어서 뒤의 화면이 <b>보이지 않습니다</b></span></li>
+            <li><b>덮는 범위 <em>화면 전체, 가림막 없음</em></b><span>화면을 다 덮어서 뒤의 화면이 <b>보이지 않습니다</b></span></li>
             <li><b>닫기 <em>✕</em></b><span><b>뒤로가기(‹)가 아니라</b> 닫기 단추(✕)를 둡니다</span></li>
-            <li><b>제목 <em>무엇을 하는 중</em></b><span>'새 가게 등록'처럼 지금 무엇을 하는 중인지 적습니다</span></li>
+            <li><b>제목 <em>무엇을 하는 중인지</em></b><span>'새 가게 등록'처럼 지금 무엇을 하는 중인지 적습니다</span></li>
             <li><b>주 동작 <em>오른쪽 위</em></b><span>저장이나 완료 같은 주 동작은 오른쪽 위에 둡니다</span></li>
-            <li><b>기록 <em>넣어 두기</em></b><span>열 때 기록에 한 칸을 넣어 두면 <b>시스템 백</b>으로도 닫힙니다</span></li>
-            <li><b>화면 아님 <em>뒤가 남음</em></b><span>뒤의 화면이 그대로 남아 있어서 닫으면 그 화면으로 <b>돌아옵니다</b></span></li>
+            <li><b>기록 <em>기록에 넣어 두기</em></b><span>열 때 기록에 한 칸을 넣어 두면 <b>시스템 백</b>으로도 닫힙니다</span></li>
+            <li><b>뒤에 남은 화면 <em>닫으면 돌아옴</em></b><span>뒤의 화면이 그대로 남아 있어서 닫으면 그 화면으로 <b>돌아옵니다</b></span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -177,7 +177,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>전체 화면 레이어를 쓰는 경우</h3>
+            <h3>전체 화면 레이어를 만들 때 지킬 것</h3>
             <ul>
               <li>화면이 <b>좁으면 전체 화면, 넓으면 모달</b>로 바꾸기</li>
               <li><b>✕(닫기)</b>를 쓰고 주 동작은 오른쪽 위에 두기</li>
@@ -185,7 +185,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>전체 화면 레이어를 쓰지 않는 경우</h3>
+            <h3>전체 화면 레이어를 만들 때 피할 것</h3>
             <ul>
               <li>폰에서 <b>모달</b>로 띄우기. 둘레 여백 때문에 내용 칸이 더 좁아집니다</li>
               <li><b>‹(뒤로)</b>를 쓰기. 누르면 어디로 가는지 알기 어렵습니다</li>
@@ -194,7 +194,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>전체 화면 레이어 대신 다른 것을 써야 하는 경우</b> — 가림막 위에 작게 뜨면 <a href="modal.html">모달</a>, 아래에서 올라오면 <a href="sheet.html">바텀시트</a>, 진짜 화면 전환이면 주소를 바꾸고, 뒤로가기 처리는 <a href="systemback.html">시스템 백</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>전체 화면 레이어 대신 다른 것을 써야 하는 경우</b> — 가림막 위에 작게 띄우려면 <a href="modal.html">모달</a>을 쓰고, 화면 아래에서 올라오게 하려면 <a href="sheet.html">바텀시트</a>가 맞습니다. 실제로 화면을 바꾸는 것이라면 레이어 대신 주소를 바꾸고, 뒤로가기 처리는 <a href="systemback.html">시스템 백</a>에서 다룹니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -204,19 +204,19 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;inset:0;background:var(--surface)"><span style="display:flex;gap:5px;align-items:center;padding:4px 6px;border-bottom:1px solid var(--line);font-size:7.5px"><span style="color:var(--accent)">✕</span><b>새 가게 등록</b><span style="margin-left:auto;color:var(--accent);font-weight:700">저장</span></span><span style="display:grid;gap:3px;padding:6px"><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:80%;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:65%;border-radius:2px;background:var(--bg)"></span></span></span></div></div>
             </div>
-            <figcaption><b>새로 만들기</b>입력 칸이 <b>여러 개</b>인 등록 화면에 씁니다</figcaption>
+            <figcaption><b>입력 칸이 많은 등록 화면</b>입력 칸이 <b>여러 개</b>인 등록 화면에 씁니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;inset:0;background:var(--surface)"><span style="display:flex;gap:5px;align-items:center;padding:4px 6px;border-bottom:1px solid var(--line);font-size:7.5px"><span style="color:var(--accent)">✕</span><b>새 가게 등록</b><span style="margin-left:auto;color:var(--accent);font-weight:700">저장</span></span><span style="display:grid;gap:3px;padding:6px"><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:80%;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:65%;border-radius:2px;background:var(--bg)"></span></span></span></div></div>
             </div>
-            <figcaption><b>긴 폼</b>모달에 <b>다 들어가지 않는</b> 긴 내용에 씁니다</figcaption>
+            <figcaption><b>모달에 다 들어가지 않는 긴 폼</b>모달에 <b>다 들어가지 않는</b> 긴 내용에 씁니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;inset:0;background:color-mix(in srgb, var(--fg) 40%, transparent)"></span><span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:72%;border-radius:5px;background:var(--surface);padding:5px;display:grid;gap:3px"><span style="display:flex;gap:4px;font-size:7.5px"><b>새 가게 등록</b><span style="margin-left:auto;color:var(--fg-muted)">✕</span></span><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:75%;border-radius:2px;background:var(--bg)"></span></span></div></div>
             </div>
-            <figcaption><b>PC 에서 같은 일</b>넓은 화면에서는 같은 내용이 <b>모달</b>로 바뀝니다</figcaption>
+            <figcaption><b>PC에서는 같은 내용을 모달로</b>넓은 화면에서는 같은 내용이 <b>모달</b>로 바뀝니다</figcaption>
           </figure>
         </div>
       </section>
@@ -241,14 +241,14 @@ dialog { <span class="a">width</span>: min(<span class="a">520px</span>, <span c
 }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td>Esc</td><td>레이어를 닫습니다. 이때 적던 내용은 <b>저장되지 않습니다</b></td></tr>
             <tr><td>Tab</td><td>초점이 레이어 밖으로 나가지 않고 <b>안에서만</b> 돕니다</td></tr>
-            <tr><td>초점</td><td>열면 초점을 <b>닫기 단추나 첫 입력 칸</b>으로 옮기고, 닫으면 레이어를 <b>부른 자리</b>로 돌려놓습니다</td></tr>
+            <tr><td>열고 닫을 때의 초점</td><td>열면 초점을 <b>닫기 단추나 첫 입력 칸</b>으로 옮기고, 닫으면 레이어를 <b>부른 자리</b>로 돌려놓습니다</td></tr>
             <tr><td><code>aria-modal="true"</code></td><td>보조 기술에 뒤의 화면은 <b>읽히지 않는다</b>고 알립니다</td></tr>
             <tr><td><code>100dvh</code></td><td>폰에서 주소창이 숨어도 레이어 높이가 <b>흔들리지 않습니다</b></td></tr>
-            <tr><td>확인하는 법</td><td>폰 폭에서 레이어를 열고 <b>시스템 백</b>을 눌러 레이어만 닫히는지 확인합니다</td></tr>
+            <tr><td>확인하는 방법</td><td>폰 폭에서 레이어를 열고 <b>시스템 백</b>을 눌러 레이어만 닫히는지 확인합니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -259,8 +259,8 @@ dialog { <span class="a">width</span>: min(<span class="a">520px</span>, <span c
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>초안 저장</th><td>폼이 길면 <b>중간 저장</b>을 두어, 레이어가 닫혀도 적던 내용이 사라지지 않게 합니다.</td></tr>
-            <tr><th>닫을 때 확인</th><td>사용자가 적은 내용이 있으면 <b>그냥 닫지 않고</b> 닫을지 한 번 묻습니다. <a href="destructive.html">위험한 동작</a>을 확인받는 것과 같은 이유입니다.</td></tr>
+            <tr><th>적던 내용을 초안으로 저장하기</th><td>폼이 길면 <b>중간 저장</b>을 두어, 레이어가 닫혀도 적던 내용이 사라지지 않게 합니다.</td></tr>
+            <tr><th>닫기 전에 한 번 묻기</th><td>사용자가 적은 내용이 있으면 <b>그냥 닫지 않고</b> 닫을지 한 번 묻습니다. <a href="destructive.html">위험한 동작</a>을 확인받는 것과 같은 이유입니다.</td></tr>
           </tbody>
         </table>
         </div>

@@ -52,7 +52,7 @@
         <div class="note" style="margin-bottom:0">
           <p>목록을 스크롤해 보세요. 머리말은 맨 위에 계속 붙어 있지만, <b>'11월 1주' 같은 묶음 머리글은 하나씩 번갈아</b> 붙습니다.
           스티키는 <b>자기 부모 안에서만</b> 붙어 있기 때문입니다.<br>
-          <b>안 먹게 만들어 보기</b>를 켜면 머리말이 붙지 않고 그냥 올라갑니다. 실무에서 '스티키가 안 먹어요'라는 문제는
+          <b>스티키가 작동하지 않게 만들어 보기</b>를 켜면 머리말이 붙지 않고 그냥 올라갑니다. 실무에서 '스티키가 안 먹어요'라는 문제는
           거의 항상 <code>top</code>을 적지 않았거나, 조상에 <code>overflow</code>가 걸렸거나,
           부모 높이가 내용과 같은 경우 셋 가운데 하나입니다.</p>
         </div>
@@ -77,22 +77,22 @@
         <p>뼈대를 다루는 항목들은 눈에 보이지 않으면서 요소의 자리를 정한다는 점이 같아서 생김새로는 구별하기 어렵습니다. 대신 아래 네 가지를 물어 보면 서로 갈립니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하나</th><th>방향</th><th>넘치면</th><th>누가 값을 정하나</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 정하는가</th><th>어느 방향에 작용하는가</th><th>넘치면 어떻게 되는가</th><th>누가 값을 정하는가</th></tr></thead>
           <tbody>
-            <tr><td>박스 모델</td><td><b>상자 한 개</b>의 크기</td><td class="none">해당 없음</td><td>밖으로 삐져나온다</td><td>내가</td></tr>
-            <tr><td>플렉스</td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나온다</td><td>나 + 내용</td></tr>
-            <tr><td>그리드</td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗는다</td><td>나 + 내용</td></tr>
-            <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>나</td></tr>
-            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목이 정한다</b></td><td>나</td></tr>
-            <tr class="me"><td><b>스티키</b></td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 간다</td><td>나</td></tr>
-            <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남는다</td><td>나</td></tr>
-            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 안 눌린다</td><td><b>OS가</b></td></tr>
-            <tr><td>포지션</td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 안 차지한다</td><td>기준이 되는 조상</td></tr>
-            <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안이 잘린다</td><td>비를 적은 쪽</td></tr>
-            <tr><td>스크롤 동작</td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥까지 밀린다</td><td>굴리는 상자</td></tr>
-            <tr><td>크기 정하기</td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나간다</td><td>내용 또는 적은 값</td></tr>
-            <tr><td>여백 붕괴</td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어든다</td><td>큰 쪽 하나</td></tr>
-            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab이 어긋난다</td><td>마크업 순서</td></tr>
+            <tr><td>박스 모델</td><td><b>상자 한 개</b>의 크기</td><td class="none">해당 없음</td><td>밖으로 삐져나옴</td><td>요소 자신</td></tr>
+            <tr><td>플렉스</td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나옴</td><td>요소 자신과 내용</td></tr>
+            <tr><td>그리드</td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗음</td><td>요소 자신과 내용</td></tr>
+            <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>요소 자신</td></tr>
+            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목에서 정함</b></td><td>요소 자신</td></tr>
+            <tr class="me"><td><b>스티키</b></td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 나감</td><td>요소 자신</td></tr>
+            <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남음</td><td>요소 자신</td></tr>
+            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 눌리지 않음</td><td><b>OS</b></td></tr>
+            <tr><td>포지션</td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 차지하지 않음</td><td>기준이 되는 조상</td></tr>
+            <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안쪽 내용이 잘림</td><td>비를 적은 쪽</td></tr>
+            <tr><td>스크롤 동작</td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥 페이지까지 밀림</td><td>스크롤되는 상자</td></tr>
+            <tr><td>크기 정하기</td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나감</td><td>내용 또는 적은 값</td></tr>
+            <tr><td>여백 붕괴</td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어듦</td><td>둘 중 큰 여백</td></tr>
+            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab 차례가 어긋남</td><td>마크업 순서</td></tr>
           </tbody>
         </table>
         </div>
@@ -102,31 +102,31 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">붙기 전과 붙은 뒤가 다르다</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">붙기 전과 붙은 뒤에 달라지는 모습</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="background:var(--surface);border-bottom:1px solid var(--line);padding:5px 7px;font-size:10px;font-weight:700;">붙박이 머리말</div><div style="padding:5px 7px;font-size:9.5px;border-bottom:1px solid var(--line)">#4821 · ₩1,245,480</div><div style="padding:5px 7px;font-size:9.5px;border-bottom:1px solid var(--line)">#4820 · ₩953,025</div><div style="padding:5px 7px;font-size:9.5px;border-bottom:1px solid var(--line)">#4829 · ₩412,000</div></div>
             </div>
-            <figcaption>안 붙음<span>맨 위에 있을 때는 <b>평범한 요소</b>와 똑같이 보입니다</span></figcaption>
+            <figcaption>아직 붙기 전<span>맨 위에 있을 때는 <b>평범한 요소</b>와 똑같이 보입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="background:var(--surface);border-bottom:1px solid var(--line);padding:5px 7px;font-size:10px;font-weight:700;box-shadow:0 2px 6px rgba(20,22,26,.12)">붙박이 머리말</div><div style="padding:5px 7px;font-size:9.5px;border-bottom:1px solid var(--line)">#4821 · ₩1,245,480</div><div style="padding:5px 7px;font-size:9.5px;border-bottom:1px solid var(--line)">#4820 · ₩953,025</div><div style="padding:5px 7px;font-size:9.5px;border-bottom:1px solid var(--line)">#4829 · ₩412,000</div></div>
             </div>
-            <figcaption>붙음(stuck)<span>붙은 뒤에는 <b>그림자나 선</b>을 넣어 내용 위에 떠 있다는 것을 알립니다</span></figcaption>
+            <figcaption>위에 붙었을 때(stuck)<span>붙은 뒤에는 <b>그림자나 선</b>을 넣어 내용 위에 떠 있다는 것을 알립니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="background:var(--surface);border-bottom:1px solid var(--line);padding:5px 7px;font-size:10px;font-weight:700;background:var(--bg);color:var(--fg-muted);font-size:9.5px">11월 1주</div><div style="padding:5px 7px;font-size:9.5px;border-bottom:1px solid var(--line)">#4821 · ₩1,245,480</div><div style="padding:5px 7px;font-size:9.5px;border-bottom:1px solid var(--line)">#4820 · ₩953,025</div><div style="padding:5px 7px;font-size:9.5px;border-bottom:1px solid var(--line)">#4829 · ₩412,000</div></div>
             </div>
-            <figcaption>묶음 머리글<span>묶음마다 부모가 달라서 머리글이 하나씩 <b>번갈아</b> 붙습니다</span></figcaption>
+            <figcaption>묶음 머리글이 번갈아 붙을 때<span>묶음마다 부모가 달라서 머리글이 하나씩 <b>번갈아</b> 붙습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="background:var(--surface);border-bottom:1px solid var(--line);padding:5px 7px;font-size:10px;font-weight:700;opacity:.5">안 붙는 머리말</div><div style="padding:5px 7px;font-size:9.5px;border-bottom:1px solid var(--line)">#4821 · ₩1,245,480</div><div style="padding:5px 7px;font-size:9.5px;border-bottom:1px solid var(--line)">#4820 · ₩953,025</div><div style="padding:5px 7px;font-size:9.5px;border-bottom:1px solid var(--line)">#4829 · ₩412,000</div></div>
             </div>
-            <figcaption>안 먹음<span><code>top</code>이 없거나, 조상에 <code>overflow</code>가 있거나, 부모 높이가 내용과 같은 경우입니다</span></figcaption>
+            <figcaption>스티키가 작동하지 않을 때<span><code>top</code>이 없거나, 조상에 <code>overflow</code>가 있거나, 부모 높이가 내용과 같은 경우입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -136,7 +136,7 @@
                 <div style="padding:5px 7px;font-size:9.5px">#4821</div>
               </div>
             </div>
-            <figcaption>두 겹 쌓기<span><code>top: 0</code>과 <code>top: 29px</code>로 묶음 머리글을 <b>머리말 아래에</b> 붙입니다</span></figcaption>
+            <figcaption>두 겹으로 쌓아 붙일 때<span><code>top: 0</code>과 <code>top: 29px</code>로 묶음 머리글을 <b>머리말 아래에</b> 붙입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -146,7 +146,7 @@
                 <div style="background:var(--surface);border-top:1px solid var(--line);padding:6px 7px;font-size:10px;font-weight:700;box-shadow:0 -2px 6px rgba(20,22,26,.1)">합계 ₩2,198,505</div>
               </div>
             </div>
-            <figcaption>아래에 붙기<span><code>bottom: 0</code>으로 아래에 붙입니다. 표의 합계 줄이나 폼의 저장 버튼에 씁니다</span></figcaption>
+            <figcaption>아래쪽에 붙일 때<span><code>bottom: 0</code>으로 아래에 붙입니다. 표의 합계 줄이나 폼의 저장 버튼에 씁니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -167,10 +167,10 @@
                     <div style="padding:6px 9px;font-size:10.5px">#4818 · ₩820,500</div>
                   </div></div>
                   <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">position: sticky</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">top: 0   — 없으면 아무 일도 안 일어난다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">스크롤되는 조상 — 여기 안에서만 붙는다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">top: 29px   — 머리말 아래에 쌓기</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">z-index   — 지나가는 줄보다 위로</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">top: 0   없으면 붙지 않음</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">스크롤되는 조상 안에서만 붙음</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">top: 29px   머리말 아래에 쌓음</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">z-index   지나가는 줄보다 위에 둠</div>
                 </div>
               </div>
             </div>
@@ -213,7 +213,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>스티키 대신 다른 것을 써야 하는 경우</b> — 화면에 완전히 고정하려면 <code>position: fixed</code>, 머리말 자체는 <a href="../items/appbar.html">앱바</a>, 안쪽만 스크롤하려면 <a href="overflow.html">넘침</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>스티키 대신 다른 것을 써야 하는 경우</b> — 부모와 상관없이 화면에 완전히 고정하려면 <code>position: fixed</code>를 씁니다. 화면 맨 위 머리말을 어떻게 꾸밀지는 <a href="../items/appbar.html">앱바</a>에서, 상자 안쪽만 스크롤하게 만드는 방법은 <a href="overflow.html">넘침</a>에서 다룹니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -223,7 +223,7 @@
             <div class="shot">
               <div style="width:100%;max-width:190px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="background:var(--surface);border-bottom:1px solid var(--line);padding:5px 7px;font-size:10px;font-weight:700;box-shadow:0 2px 6px rgba(20,22,26,.1)">정산 목록</div><div style="padding:5px 7px;font-size:9.5px;border-bottom:1px solid var(--line)">#4821 · ₩1,245,480</div><div style="padding:5px 7px;font-size:9.5px;border-bottom:1px solid var(--line)">#4820 · ₩953,025</div><div style="padding:5px 7px;font-size:9.5px;border-bottom:1px solid var(--line)">#4829 · ₩412,000</div></div>
             </div>
-            <figcaption><b>목록 머리말</b>스티키를 가장 흔하게 쓰는 자리입니다. 붙은 뒤에는 <b>그림자</b>로 붙었다는 것을 알립니다</figcaption>
+            <figcaption><b>목록 머리말 붙여 두기</b>스티키를 가장 흔하게 쓰는 자리입니다. 붙은 뒤에는 <b>그림자</b>로 붙었다는 것을 알립니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -233,7 +233,7 @@
                 <div style="display:flex;padding:5px 8px;font-size:10px"><span style="flex:1">#4820</span><span>₩953,025</span></div>
               </div>
             </div>
-            <figcaption><b>표의 열 이름</b><code>thead th</code>에 sticky를 걸면 긴 표를 내려가도 <b>무슨 열인지</b> 알 수 있습니다</figcaption>
+            <figcaption><b>표의 열 이름 붙여 두기</b><code>thead th</code>에 sticky를 걸면 긴 표를 내려가도 <b>무슨 열인지</b> 알 수 있습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -244,13 +244,13 @@
                   <span style="background:var(--accent);color:#fff;border-radius:5px;padding:4px 10px;font-size:10px;font-weight:700">저장</span></div>
               </div>
             </div>
-            <figcaption><b>저장 바</b><code>bottom: 0</code>으로 붙여 두면 긴 폼에서 <b>끝까지 내려가지 않아도</b> 저장할 수 있습니다</figcaption>
+            <figcaption><b>긴 폼 아래에 저장 바 붙이기</b><code>bottom: 0</code>으로 붙여 두면 긴 폼에서 <b>끝까지 내려가지 않아도</b> 저장할 수 있습니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">안 먹을 때 볼 목록</span></h2>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">스티키가 작동하지 않을 때 확인할 것</span></h2>
         <p>스티키는 <b>두 줄</b>이면 됩니다. 그런데도 작동하지 않는다면 그 두 줄이 아니라 <b>조상</b> 요소를 살펴봐야 합니다.</p>
 <pre class="code"><span class="t">.table-head</span> {
   <span class="a">position</span>: sticky;
@@ -267,14 +267,14 @@
 <span class="t">.table-head</span>:is(.is-stuck) { <span class="a">box-shadow</span>: <span class="a">0 2px 6px</span> rgba(<span class="a">20,22,26,.1</span>); }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>규칙</th><th>지켜야 하는 것</th></tr></thead>
+          <thead><tr><th>지킬 규칙</th><th>지키는 방법</th></tr></thead>
           <tbody>
-            <tr><td><code>top</code>(또는 <code>bottom</code>)을 적는다</td><td>적지 않으면 <b>아무 일도 일어나지 않습니다</b>. 작동하지 않는 원인 가운데 가장 흔합니다</td></tr>
-            <tr><td>조상의 <code>overflow</code>를 의심한다</td><td>스크롤되는 조상에 걸려 있으면 <b>그 상자를 기준</b>으로 붙습니다. 세 원인 가운데 가장 찾기 어렵습니다</td></tr>
-            <tr><td>부모 높이를 본다</td><td>부모 높이가 내용과 같으면 <b>붙어 있을 구간이 없습니다</b></td></tr>
-            <tr><td><code>z-index</code>와 배경</td><td>둘 다 없으면 목록 줄이 머리말 위로 지나가고, 머리말 뒤가 비쳐 보입니다</td></tr>
-            <tr><td>키보드도 생각한다</td><td>붙박이 머리말이 <code>Tab</code>으로 옮겨 간 요소를 <b>가릴 수 있으므로</b>, <code>scroll-margin-top</code>으로 그만큼 띄웁니다</td></tr>
-            <tr><td>높이를 못 박는다</td><td>머리말 높이가 바뀌면 아래 겹의 <code>top</code> 값도 어긋나기 때문입니다</td></tr>
+            <tr><td><code>top</code>(또는 <code>bottom</code>) 적기</td><td>적지 않으면 <b>아무 일도 일어나지 않습니다</b>. 작동하지 않는 원인 가운데 가장 흔합니다</td></tr>
+            <tr><td>조상의 <code>overflow</code> 확인하기</td><td>스크롤되는 조상에 걸려 있으면 <b>그 상자를 기준</b>으로 붙습니다. 세 원인 가운데 가장 찾기 어렵습니다</td></tr>
+            <tr><td>부모 높이 확인하기</td><td>부모 높이가 내용과 같으면 <b>붙어 있을 구간이 없습니다</b></td></tr>
+            <tr><td><code>z-index</code>와 배경 함께 주기</td><td>둘 다 없으면 목록 줄이 머리말 위로 지나가고, 머리말 뒤가 비쳐 보입니다</td></tr>
+            <tr><td>키보드 포커스가 가려지지 않게 하기</td><td>붙박이 머리말이 <code>Tab</code>으로 옮겨 간 요소를 <b>가릴 수 있으므로</b>, <code>scroll-margin-top</code>으로 그만큼 띄웁니다</td></tr>
+            <tr><td>머리말 높이 고정하기</td><td>머리말 높이가 바뀌면 아래 겹의 <code>top</code> 값도 어긋나기 때문입니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -285,10 +285,10 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>스티키는 순수 CSS다</th><td>예전에는 스크롤 이벤트로 스티키를 흉내 냈지만, 지금은 <b>JS가 전혀 필요 없어서</b> 스크롤이 훨씬 부드럽습니다.</td></tr>
+            <tr><th>JS 없이 CSS만으로 동작함</th><td>예전에는 스크롤 이벤트로 스티키를 흉내 냈지만, 지금은 <b>JS가 전혀 필요 없어서</b> 스크롤이 훨씬 부드럽습니다.</td></tr>
             <tr><th>붙은 상태를 알아야 할 때</th><td>붙었을 때만 그림자를 넣으려면 <code>IntersectionObserver</code>로 붙었는지 감시합니다. 스크롤 이벤트마다 위치를 재면 화면이 느려지기 때문입니다.</td></tr>
-            <tr><th>가상 스크롤과 함께</th><td>화면 밖으로 나간 줄을 지웠다가 다시 그리는 목록에서는 <b>머리말이 그 안에 들어가면</b> 줄과 함께 사라집니다. 그래서 머리말은 가상 스크롤 영역 <b>밖</b>에 둡니다.</td></tr>
-            <tr><th>표 열 이름</th><td>sticky는 <code>&lt;thead&gt;</code> 자체가 아니라 <code>&lt;th&gt;</code>에 걸어야 합니다. 브라우저마다 다르게 동작하던 예전 사정 때문입니다.</td></tr>
+            <tr><th>가상 스크롤과 함께 쓸 때</th><td>화면 밖으로 나간 줄을 지웠다가 다시 그리는 목록에서는 <b>머리말이 그 안에 들어가면</b> 줄과 함께 사라집니다. 그래서 머리말은 가상 스크롤 영역 <b>밖</b>에 둡니다.</td></tr>
+            <tr><th>표 열 이름에 걸 때</th><td>sticky는 <code>&lt;thead&gt;</code> 자체가 아니라 <code>&lt;th&gt;</code>에 걸어야 합니다. 브라우저마다 다르게 동작하던 예전 사정 때문입니다.</td></tr>
           </tbody>
         </table>
         </div>

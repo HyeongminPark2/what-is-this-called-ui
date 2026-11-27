@@ -76,7 +76,7 @@
         <p>데이터를 다루는 화면을 설계할 때는 '건수가 늘면 어떻게 되나'부터 따져야 합니다. 아래 네 가지를 물어보면 이 부의 항목들이 서로 어떻게 다른지 드러납니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 다루나</th><th>건수가 늘면</th><th>주소에 담나</th><th>서버가 할 일</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 다루는가</th><th>건수가 늘면 어떻게 하는가</th><th>상태를 주소에 담는가</th><th>서버가 맡는 일</th></tr></thead>
           <tbody>
             <tr><td>데이터 테이블</td><td>여러 열의 <b>행들</b></td><td>쪽을 나눈다</td><td><b>담는다</b>(정렬·쪽)</td><td>페이징 · 정렬</td></tr>
             <tr><td>필터와 패싯</td><td>거르는 <b>조건</b></td><td>조건이 늘어난다</td><td><b>담는다</b></td><td>조건별 개수 세기</td></tr>
@@ -86,7 +86,7 @@
             <tr class="me"><td><b>일괄 선택</b></td><td><b>고른 것들</b></td><td>'전체'가 모호해진다</td><td>안 담는다</td><td>묶음 처리 · 되돌리기</td></tr>
             <tr><td>가상 스크롤</td><td><b>긴 목록</b></td><td><b>이 기법으로 푼다</b></td><td>안 담는다</td><td>커서 페이징</td></tr>
             <tr><td>차트 고르기</td><td>숫자들의 <b>관계</b></td><td>점이 뭉친다</td><td>담기도 한다</td><td>집계 · 구간 나누기</td></tr>
-            <tr><td>내보내기</td><td><b>파일</b>로 꺼내기</td><td>그 자리에서 못 준다</td><td>담기도 한다</td><td><b>비동기 작업</b></td></tr>
+            <tr><td>내보내기</td><td><b>파일</b>로 꺼내기</td><td>그 자리에서 바로 주지 못한다</td><td>담기도 한다</td><td><b>비동기 작업</b></td></tr>
             <tr><td>날짜 범위</td><td><b>기간</b> 고르기</td><td class="none">해당 없음</td><td><b>담는다</b></td><td>경계 시각 맞추기</td></tr>
           </tbody>
         </table>
@@ -109,25 +109,25 @@
             <div class="shot">
               <div style="width:100%;max-width:180px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="display:flex;align-items:center;gap:6px;padding:5px 8px;background:var(--bg);font-size:9.5px;font-weight:700;color:var(--fg-muted)"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;border:1px solid var(--line);vertical-align:-1px;background:var(--accent);border-color:var(--accent);position:relative"><span style="position:absolute;left:2px;right:2px;top:4px;height:1.5px;background:#fff"></span></span><span>가맹점</span></div><div style="display:flex;align-items:center;gap:6px;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);background:var(--accent-soft);"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;border:1px solid var(--line);vertical-align:-1px;background:var(--accent);border-color:var(--accent);color:#fff;font-size:7px;line-height:9px;text-align:center">✓</span><span>모란상회</span></div><div style="display:flex;align-items:center;gap:6px;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;border:1px solid var(--line);vertical-align:-1px;"></span><span>한빛아웃도어</span></div></div>
             </div>
-            <figcaption>일부<span>맨 위 체크박스는 켜짐도 꺼짐도 아닌 <b>반쯤 켜진</b> 모양이 됩니다</span></figcaption>
+            <figcaption>일부만 골랐을 때<span>맨 위 체크박스는 켜짐도 꺼짐도 아닌 <b>반쯤 켜진</b> 모양이 됩니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="display:flex;align-items:center;gap:6px;padding:5px 8px;background:var(--bg);font-size:9.5px;font-weight:700;color:var(--fg-muted)"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;border:1px solid var(--line);vertical-align:-1px;background:var(--accent);border-color:var(--accent);color:#fff;font-size:7px;line-height:9px;text-align:center">✓</span><span>가맹점</span></div><div style="display:flex;align-items:center;gap:6px;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);background:var(--accent-soft);"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;border:1px solid var(--line);vertical-align:-1px;background:var(--accent);border-color:var(--accent);color:#fff;font-size:7px;line-height:9px;text-align:center">✓</span><span>모란상회</span></div><div style="display:flex;align-items:center;gap:6px;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);background:var(--accent-soft);"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;border:1px solid var(--line);vertical-align:-1px;background:var(--accent);border-color:var(--accent);color:#fff;font-size:7px;line-height:9px;text-align:center">✓</span><span>한빛아웃도어</span></div></div>
             </div>
-            <figcaption>이 쪽 전부<span>맨 위 체크박스가 켜지지만, 고른 범위는 아직 <b>이 쪽</b>뿐입니다</span></figcaption>
+            <figcaption>이 쪽을 전부 골랐을 때<span>맨 위 체크박스가 켜지지만, 고른 범위는 아직 <b>이 쪽</b>뿐입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="display:flex;align-items:center;gap:6px;padding:5px 8px;background:var(--bg);font-size:9.5px;font-weight:700;color:var(--fg-muted)"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;border:1px solid var(--line);vertical-align:-1px;background:var(--accent);border-color:var(--accent);color:#fff;font-size:7px;line-height:9px;text-align:center">✓</span><span>가맹점</span></div><div style="padding:5px 8px;font-size:9px;background:var(--warn-soft);border-top:1px solid var(--line)">이 쪽 5건을 골랐습니다 · <b style="color:var(--accent);text-decoration:underline">조건에 맞는 128건 모두 고르기</b></div><div style="display:flex;align-items:center;gap:6px;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);background:var(--accent-soft);"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;border:1px solid var(--line);vertical-align:-1px;background:var(--accent);border-color:var(--accent);color:#fff;font-size:7px;line-height:9px;text-align:center">✓</span><span>모란상회</span></div></div>
             </div>
-            <figcaption>전체로 넓히기<span>사용자에게 <b>물어본 뒤에</b> 범위를 넓힙니다. 저절로 넓히지 않습니다</span></figcaption>
+            <figcaption>조건에 맞는 전체로 넓힐 때<span>사용자에게 <b>물어본 뒤에</b> 범위를 넓힙니다. 저절로 넓히지 않습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="display:flex;align-items:center;gap:6px;padding:5px 8px;background:var(--accent);color:#fff;font-size:9.5px"><span style="flex:1">5건 선택됨</span><span style="text-decoration:underline">승인</span><span style="text-decoration:underline">내보내기</span></div><div style="display:flex;align-items:center;gap:6px;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);background:var(--accent-soft);"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;border:1px solid var(--line);vertical-align:-1px;background:var(--accent);border-color:var(--accent);color:#fff;font-size:7px;line-height:9px;text-align:center">✓</span><span>모란상회</span></div><div style="display:flex;align-items:center;gap:6px;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);background:var(--accent-soft);"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;border:1px solid var(--line);vertical-align:-1px;background:var(--accent);border-color:var(--accent);color:#fff;font-size:7px;line-height:9px;text-align:center">✓</span><span>한빛아웃도어</span></div></div>
             </div>
-            <figcaption>동작 막대<span>고른 <b>건수</b>와 할 수 있는 <b>동작</b>을 보여 줍니다. 위든 아래든 한 자리에 고정합니다</span></figcaption>
+            <figcaption>동작 막대가 떴을 때<span>고른 <b>건수</b>와 할 수 있는 <b>동작</b>을 보여 줍니다. 위든 아래든 한 자리에 고정합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -135,7 +135,7 @@
                 <b>5건 승인됨</b> · <span style="color:var(--accent);text-decoration:underline">되돌리기</span>
               </div>
             </div>
-            <figcaption>끝난 뒤<span><b>몇 건이</b> 어떻게 처리됐는지 알리고, 되돌리기 버튼을 함께 둡니다</span></figcaption>
+            <figcaption>처리가 끝난 뒤<span><b>몇 건이</b> 어떻게 처리됐는지 알리고, 되돌리기 버튼을 함께 둡니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -148,11 +148,11 @@
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="max-width:230px"><div style="display:flex;align-items:center;gap:6px;padding:5px 8px;background:var(--bg);font-size:9.5px;font-weight:700;color:var(--fg-muted)"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;border:1px solid var(--line);vertical-align:-1px;background:var(--accent);border-color:var(--accent);position:relative"><span style="position:absolute;left:2px;right:2px;top:4px;height:1.5px;background:#fff"></span></span><span>가맹점</span></div></div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">indeterminate — 일부만 골랐을 때의 세 번째 모양</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">indeterminate는 일부만 골랐을 때의 세 번째 모양</div>
                   <div class="pin-out" data-pin="3" style="max-width:230px"><div style="display:flex;align-items:center;gap:6px;padding:5px 8px;background:var(--accent);color:#fff;font-size:9.5px"><span style="flex:1">5건 선택됨</span><span style="text-decoration:underline">승인</span><span style="text-decoration:underline">내보내기</span></div></div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">'이 쪽 5건' 과 '조건에 맞는 128건' 은 다른 말이다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">쪽을 넘기면 선택이 풀리는가 — 먼저 정한다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">끝난 뒤 "5건 승인됨 · 되돌리기"</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">'이 쪽 5건'과 '조건에 맞는 128건'은 범위가 다름</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">쪽을 넘길 때 선택을 풀지 먼저 정함</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">처리가 끝나면 "5건 승인됨 · 되돌리기"</div>
                 </div>
               </div>
             </div>
@@ -196,7 +196,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>일괄 선택 대신 다른 것을 써야 하는 경우</b> — 한 건만 처리하면 줄 안의 <a href="../items/card.html">카드</a>·메뉴 버튼, 거르기만 하면 <a href="filter.html">필터</a>, 확인이 필요하면 <a href="../items/dialog.html">다이얼로그</a>를 씁니다.</p>
+        <p style="margin:var(--s4) 0 0"><b>일괄 선택 대신 다른 것을 써야 하는 경우</b> — 한 건씩만 처리하면 되는 경우에는 줄 안의 <a href="../items/card.html">카드</a>나 메뉴 버튼으로 충분하고, 목록을 거르기만 하려면 <a href="filter.html">필터</a>를 씁니다. 처리하기 전에 사용자의 확인을 받아야 하면 <a href="../items/dialog.html">다이얼로그</a>를 띄웁니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -206,7 +206,7 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="display:flex;align-items:center;gap:6px;padding:5px 8px;background:var(--accent);color:#fff;font-size:9.5px"><span style="flex:1">5건 선택됨</span><span style="text-decoration:underline">승인</span><span style="text-decoration:underline">내보내기</span></div><div style="display:flex;align-items:center;gap:6px;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);background:var(--accent-soft);"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;border:1px solid var(--line);vertical-align:-1px;background:var(--accent);border-color:var(--accent);color:#fff;font-size:7px;line-height:9px;text-align:center">✓</span><span>모란상회</span></div></div>
             </div>
-            <figcaption><b>위 고정 막대</b>표 위에 두고, 표를 스크롤해도 같은 자리에 머뭅니다</figcaption>
+            <figcaption><b>표 위에 동작 막대 고정하기</b>표 위에 두고, 표를 스크롤해도 같은 자리에 머뭅니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -215,7 +215,7 @@
                 <div style="position:absolute;left:4px;right:4px;bottom:4px;background:var(--fg);color:var(--surface);border-radius:999px;padding:4px 8px;font-size:9px;display:flex;gap:5px"><span style="flex:1">5건</span><span>승인</span></div>
               </div>
             </div>
-            <figcaption><b>아래 떠 있는 막대</b>폰에서 씁니다. <b>엄지가 닿는 자리</b>에 둡니다</figcaption>
+            <figcaption><b>폰 화면 아래에 막대 띄우기</b>폰에서 씁니다. <b>엄지가 닿는 자리</b>에 둡니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -224,13 +224,13 @@
                 <span style="color:var(--fg-muted);font-size:8.5px">되돌릴 수 없습니다</span>
               </div>
             </div>
-            <figcaption><b>큰 범위는 되묻기</b>확인 문구 <b>안에 건수를</b> 적어서 몇 건을 처리하는지 다시 보여 줍니다</figcaption>
+            <figcaption><b>범위가 크면 건수를 넣어 되묻기</b>확인 문구 <b>안에 건수를</b> 적어서 몇 건을 처리하는지 다시 보여 줍니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">일괄 선택이 꼭 갖출 것</span></h2>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">일괄 선택을 만들 때 꼭 갖출 것</span></h2>
         <p><code>indeterminate</code>는 HTML 속성이 아니라 <b>자바스크립트 프로퍼티</b>입니다.</p>
 <pre class="code">&lt;<span class="t">input</span> <span class="a">type</span>=<span class="s">"checkbox"</span> <span class="a">id</span>=<span class="s">"all"</span> <span class="a">aria-label</span>=<span class="s">"이 쪽 전체 선택"</span>&gt;
 …
@@ -245,14 +245,14 @@ all.indeterminate = n &gt; <span class="a">0</span> &amp;&amp; n &lt; rows.lengt
 <span class="k">if</span> (all.checked &amp;&amp; total &gt; rows.length) showScopeBanner(total);</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td><kbd>Space</kbd></td><td>체크박스를 켭니다. <code>&lt;input type="checkbox"&gt;</code>를 쓰면 따로 만들지 않아도 됩니다</td></tr>
             <tr><td><kbd>Shift</kbd>+클릭</td><td>마지막으로 누른 줄과 지금 누른 줄 <b>사이를 전부</b> 고릅니다. 긴 목록에서는 거의 반드시 있어야 하는 기능입니다</td></tr>
             <tr><td><code>indeterminate</code></td><td>스크린 리더는 'mixed'로 읽습니다. 자바스크립트로만 켤 수 있고, 사용자가 체크박스를 <b>누르면 사라집니다</b></td></tr>
             <tr><td><code>aria-label</code></td><td>맨 위 체크박스에 답니다. 글자 없이 빈 칸만 있으면 무엇을 고르는 체크박스인지 알 수 없습니다</td></tr>
             <tr><td><code>role="status"</code></td><td>'5건 선택됨'처럼 알립니다. 동작 막대가 떠도 화면을 보지 않는 사람은 알아챌 수 없기 때문입니다</td></tr>
-            <tr><td>막대가 뜨며 <b>초점을 뺏지 않는다</b></td><td>포커스가 고르던 자리에 그대로 있어야 다음 줄을 이어서 고를 수 있습니다</td></tr>
+            <tr><td>막대가 떠도 <b>포커스는 그대로 두기</b></td><td>포커스가 고르던 자리에 그대로 있어야 다음 줄을 이어서 고를 수 있습니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -263,11 +263,11 @@ all.indeterminate = n &gt; <span class="a">0</span> &amp;&amp; n &lt; rows.lengt
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>'전체'는 <b>조건</b>으로 보낸다</th><td>128건의 ID를 전부 담아 보내면 건수가 늘수록 요청이 지나치게 커집니다. <code>{"filter":{"status":"pending"}}</code>처럼 <b>조건</b>을 보내고 대상은 서버가 고르게 합니다.</td></tr>
-            <tr><th>일부만 성공할 수 있다</th><td>128건 가운데 3건이 실패하면 <b>어느 건이 실패했는지</b> 돌려줘야 합니다. 일부 실패를 허용할지, 전부 성공하거나 전부 실패하도록 묶을지도 미리 정해야 합니다.</td></tr>
-            <tr><th>오래 걸린다</th><td>수천 건이면 요청 하나가 끝나기를 기다릴 수 없습니다. 서버가 <b>작업 번호를 먼저 돌려주고</b>, 화면은 그 번호로 진행률을 따로 묻게 합니다.</td></tr>
-            <tr><th>되돌리기</th><td>묶음 처리를 되돌리려면 <b>처리 전 상태를 기록</b>해 두어야 합니다. 기록 없이 처리한 뒤에는 되돌리기 기능을 붙이기가 거의 불가능합니다.</td></tr>
-            <tr><th>두 번 눌림</th><td>동작 막대의 버튼도 두 번 눌릴 수 있습니다. <a href="form.html">폼</a>에서처럼 요청마다 <b>고유 키</b>를 붙입니다.</td></tr>
+            <tr><th>'전체'는 ID 목록 대신 <b>조건</b>으로 보내기</th><td>128건의 ID를 전부 담아 보내면 건수가 늘수록 요청이 지나치게 커집니다. <code>{"filter":{"status":"pending"}}</code>처럼 <b>조건</b>을 보내고 대상은 서버가 고르게 합니다.</td></tr>
+            <tr><th>일부만 성공했을 때 알려 주기</th><td>128건 가운데 3건이 실패하면 <b>어느 건이 실패했는지</b> 돌려줘야 합니다. 일부 실패를 허용할지, 전부 성공하거나 전부 실패하도록 묶을지도 미리 정해야 합니다.</td></tr>
+            <tr><th>오래 걸리는 묶음 처리</th><td>수천 건이면 요청 하나가 끝나기를 기다릴 수 없습니다. 서버가 <b>작업 번호를 먼저 돌려주고</b>, 화면은 그 번호로 진행률을 따로 묻게 합니다.</td></tr>
+            <tr><th>되돌리기를 위한 기록</th><td>묶음 처리를 되돌리려면 <b>처리 전 상태를 기록</b>해 두어야 합니다. 기록 없이 처리한 뒤에는 되돌리기 기능을 붙이기가 거의 불가능합니다.</td></tr>
+            <tr><th>버튼이 두 번 눌리는 문제</th><td>동작 막대의 버튼도 두 번 눌릴 수 있습니다. <a href="form.html">폼</a>에서처럼 요청마다 <b>고유 키</b>를 붙입니다.</td></tr>
           </tbody>
         </table>
         </div>

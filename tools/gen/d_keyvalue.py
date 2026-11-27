@@ -31,12 +31,12 @@ PLONG = [("주문번호", "2411-0042-88231", True), ("가게", "한빛아웃도�
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">&lt;dl&gt; — 이름과 값의 짝</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">&lt;dt&gt; 이름 · &lt;dd&gt; 값 — 둘을 묶는다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--accent)">라벨 폭 고정 — 값이 한 줄로 선다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">좁아지면 값이 먼저 잘린다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">좁으면 라벨을 위로 — 가지런함은 잃는다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">값이 없으면 '—' 가 아니라 왜 없는지</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">&lt;dl&gt;은 이름과 값의 짝을 담음</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">&lt;dt&gt; 이름과 &lt;dd&gt; 값을 한 짝으로 묶음</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--accent)">라벨 폭을 고정하면 값이 가지런히 맞음</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">좁아지면 값이 먼저 잘림</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">좁으면 라벨을 위로 올리고 가지런함은 포기함</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">값이 없으면 '—' 대신 없는 이유를 적음</div>
                 </div>
               </div>'''
 
@@ -48,7 +48,7 @@ D = dict(
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>라벨 폭을 고정</b>하면 값이 세로로 가지런히 줄을 맞춥니다.
           대신 칸이 좁아지면 <b>값이 먼저 잘리는데</b>, 데모는 잘린 줄 수를 세어 적습니다.<br>
-          '좁으면 위아래로'를 켜면 라벨을 값 위에 올립니다. 값의 시작 위치가 가지런하지는 않지만
+          '좁으면 라벨을 위로 올리기'를 켜면 라벨을 값 위에 올립니다. 값의 시작 위치가 가지런하지는 않지만
           <b>아무것도 잘리지 않아서</b>, 폰 화면에서 흔히 씁니다.<br>
           태그는 <code>&lt;dl&gt;</code>·<code>&lt;dt&gt;</code>·<code>&lt;dd&gt;</code>를 씁니다.
           그래서 스크린 리더로 읽을 때도 이름과 값이 <b>짝으로 전해집니다</b>.</p>
@@ -69,28 +69,28 @@ D = dict(
   axes=ax("키-값 목록"),
   oneline="<b>키-값 목록은 한 건의 속성을 읽는 자리입니다.</b> 값을 고칠 수 있게 만들어야 한다면 키-값 목록이 아니라 폼을 씁니다.",
   states=states([
-    (kv(P, "기본", "라벨 폭을 고정했다", True), "기본", "값이 세로로 <b>가지런히</b> 줄을 맞춥니다"),
-    (kv(PLONG, "좁음", "값이 잘렸다", False), "좁을 때", "라벨보다 <b>값이 먼저</b> 잘립니다"),
+    (kv(P, "기본", "라벨 폭을 고정함", True), "라벨 폭을 고정했을 때", "값이 세로로 <b>가지런히</b> 줄을 맞춥니다"),
+    (kv(PLONG, "좁음", "값이 잘림", False), "칸이 좁을 때", "라벨보다 <b>값이 먼저</b> 잘립니다"),
     (kv([("주문번호", "2411-0042-88231", False), ("가게", "한빛아웃도어 영등포타임스퀘어점", False)],
-        "위아래로", "아무것도 안 잘린다", True, "152px", "52px", True),
-     "세로로", "값의 <b>가지런함</b>을 포기하는 대신 잘리지 않습니다"),
+        "위아래로", "아무것도 잘리지 않음", True, "152px", "52px", True),
+     "라벨을 값 위로 올렸을 때", "값의 <b>가지런함</b>을 포기하는 대신 잘리지 않습니다"),
     (kv([("주문번호", "2411-0042-88231", False), ("가게", "모란상회", False), ("정산일", "— 아직 정해지지 않았습니다", False)],
-        "빈 값", "'—' 뒤에 이유를 적는다", True),
+        "빈 값", "'—' 뒤에 이유를 적음", True),
      "값이 없을 때", "값이 <b>왜 없는지</b>까지 적습니다"),
     (kv([("주문번호", "2411-0042-88231", False), ("상태", "정산 대기", False)], "짧게", "꼭 필요한 것만", True),
      "줄이 적을 때", "<b>세 줄</b>이면 충분한 화면도 많습니다"),
     (kv([("주", "A", False), ("문", "B", False), ("번", "C", False), ("호", "D", False), ("가", "E", False), ("게", "F", False)],
-        "너무 많음", "열 줄을 넘으면 묶는다", False),
+        "너무 많음", "열 줄을 넘으면 묶음", False),
      "줄이 많을 때", "관련된 줄끼리 <b>묶어서</b> 접어 둡니다"),
   ]),
   anat=ANAT,
   pins=pins([
     ("<code>&lt;dl&gt;</code>", "짝의 목록", "표가 아니라 이름과 값의 <b>짝</b>을 담습니다"),
     ("<code>&lt;dt&gt;·&lt;dd&gt;</code>", "이름과 값", "스크린 리더로 읽을 때도 <b>짝으로 전해집니다</b>"),
-    ("라벨 폭", "고정", "값이 세로로 <b>가지런히</b> 맞춰집니다"),
-    ("좁을 때", "값이 잘림", "말줄임으로 <b>줄 높이</b>를 지킵니다"),
-    ("세로 전환", "라벨을 위로", "<b>폰</b> 화면에서 흔히 씁니다"),
-    ("빈 값", "이유까지", "'—' 하나만 두지 않습니다"),
+    ("라벨 폭", "고정한 폭", "값이 세로로 <b>가지런히</b> 맞춰집니다"),
+    ("좁을 때", "값이 잘리는 경우", "말줄임으로 <b>줄 높이</b>를 지킵니다"),
+    ("세로 전환", "라벨을 값 위로 올리는 배치", "<b>폰</b> 화면에서 흔히 씁니다"),
+    ("빈 값", "없는 이유까지 적는 칸", "'—' 하나만 두지 않고 값이 왜 없는지 적습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           가장 먼저 정할 것은 라벨 폭을 <b>고정할지 내용에 맞출지</b>입니다.
@@ -100,6 +100,7 @@ D = dict(
           값이 비었을 때 <b>'—' 하나만</b> 두는 경우도 흔한데,
           그러면 아직 정해지지 않은 것인지 해당 사항이 없는 것인지 알 수 없습니다.
           짧게라도 값이 <b>왜 없는지</b>를 적어 두면 문의가 줄어듭니다.</p>''',
+  do_title="키-값 목록을 만들 때 지킬 것", dont_title="키-값 목록을 만들 때 피할 것",
   do=ul([
     "<code>&lt;dl&gt;</code>·<code>&lt;dt&gt;</code>·<code>&lt;dd&gt;</code>로 적기",
     "줄이 다섯 개를 넘으면 <b>라벨 폭을 고정</b>하기",
@@ -111,14 +112,15 @@ D = dict(
     "값을 <b>고칠 수 있는</b> 칸을 섞어 두기. 고치는 화면은 폼으로 만듭니다",
     "줄을 열다섯 개씩 늘어놓기. 관련된 줄끼리 <b>묶어서</b> 접어 둡니다",
   ]),
-  instead='여러 건을 줄로 세우면 <a href="table.html">데이터 테이블</a>, 고치는 화면은 <a href="form.html">폼 설계</a>, 묶어서 접으면 <a href="accordion.html">접히는 글</a>, 한 건 전체가 한 줄이면 <a href="listitem.html">리스트 아이템</a>.',
+  instead='여러 건을 줄로 세워야 하면 <a href="table.html">데이터 테이블</a>을 쓰고, 값을 고치는 화면은 <a href="form.html">폼 설계</a>를 따릅니다. 관련된 줄끼리 묶어 접어 두려면 <a href="accordion.html">접히는 글</a>을, 한 건 전체를 한 줄에 담으려면 <a href="listitem.html">리스트 아이템</a>을 씁니다.',
   cases=cases([
-    (kv(P, "주문 상세", "", True), "주문 상세", "키-값 목록을 <b>가장 흔히</b> 보는 자리입니다"),
+    (kv(P, "주문 상세", "", True), "주문 상세 정보 보여 주기", "키-값 목록을 <b>가장 흔히</b> 보는 자리입니다"),
     (kv([("사업자번호", "000-00-00000", False), ("대표자", "홍길동", False)], "가게 정보", "", True),
-     "가게 정보", "읽기만 하고 고치지 않는 값들을 보여 줍니다"),
+     "읽기만 하는 가게 정보 보여 주기", "읽기만 하고 고치지 않는 값들을 보여 줍니다"),
     (kv([("크기", "1.2MB", False), ("올린 날", "2026-11-12", False)], "파일 속성", "", True),
-     "파일 속성", "두 줄로 <b>짧게</b> 보여 줍니다"),
+     "파일 속성을 짧게 보여 주기", "두 줄로 <b>짧게</b> 보여 줍니다"),
   ]),
+  keys_heads="<th>키와 마크업</th><th>지켜야 할 점</th>",
   code_lede="<code>&lt;dl&gt;</code> 안에서 <code>&lt;div&gt;</code>로 이름과 값을 한 짝씩 묶으면 CSS 격자로 배치하기 쉽습니다.",
   code='''&lt;<span class="t">dl</span> <span class="a">class</span>=<span class="s">"kv"</span>&gt;
   &lt;<span class="t">div</span>&gt;&lt;<span class="t">dt</span>&gt;주문번호&lt;/<span class="t">dt</span>&gt;&lt;<span class="t">dd</span>&gt;2411-0042-88231&lt;/<span class="t">dd</span>&gt;&lt;/<span class="t">div</span>&gt;
@@ -134,17 +136,17 @@ D = dict(
   .kv &gt; div { <span class="a">grid-template-columns</span>: <span class="a">1fr</span>; }   <span class="c">/* 라벨을 값 위로 */</span>
 }''',
   keys=kbd([
-    ("<code>&lt;dl&gt;</code>", "스크린 리더로 읽을 때 <b>이름과 값이 짝으로</b> 전해집니다"),
-    ("<code>&lt;div&gt;</code>로 묶기", "HTML 규칙에서 <b>허용하는</b> 방식이고, CSS 격자로 배치하기 쉽습니다"),
+    ("<code>&lt;dl&gt;</code>로 적기", "스크린 리더로 읽을 때 <b>이름과 값이 짝으로</b> 전해집니다"),
+    ("짝마다 <code>&lt;div&gt;</code>로 묶기", "HTML 규칙에서 <b>허용하는</b> 방식이고, CSS 격자로 배치하기 쉽습니다"),
     ("Tab", "읽기용이라 포커스가 <b>멈추지 않고</b>, 값에 링크가 있을 때만 멈춥니다"),
-    ("말줄임", "잘린 값은 <code>title</code>로 <b>전체 값</b>을 띄워 줍니다"),
-    ("복사", "<code>user-select</code>를 막지 않습니다. 주문번호 같은 값은 사용자가 <b>복사해서 쓰는</b> 경우가 많습니다"),
-    ("확인하는 법", "화면을 390px로 줄여 <b>값이 몇 줄 잘리는지</b> 셉니다"),
+    ("값이 말줄임으로 잘렸을 때", "잘린 값은 <code>title</code>로 <b>전체 값</b>을 띄워 줍니다"),
+    ("값을 복사할 수 있게 두기", "<code>user-select</code>를 막지 않습니다. 주문번호 같은 값은 사용자가 <b>복사해서 쓰는</b> 경우가 많습니다"),
+    ("확인하는 방법", "화면을 390px로 줄여 <b>값이 몇 줄 잘리는지</b> 셉니다"),
   ]),
   backend=rows([
-    ("온전한 값을 준다", "서버가 값을 미리 잘라 보내면 잘린 부분은 <b>복사도 검색도</b> 할 수 없습니다. 값을 줄여 보이는 일은 화면에서 합니다."),
-    ("빈 값의 뜻", "<code>null</code>(아직 모름)과 <code>\"\"</code>(없음)을 구별해서 보내 주면 화면에서 두 경우에 <b>다른 문구</b>를 쓸 수 있습니다."),
-    ("차례", "응답에 담긴 키 순서는 보장되지 않을 수 있으므로 <b>화면에서 차례를 정합니다</b>. 중요한 값이 위에 오도록 화면이 순서를 정해 둡니다."),
+    ("서버는 자르지 않은 값 보내기", "서버가 값을 미리 잘라 보내면 잘린 부분은 <b>복사도 검색도</b> 할 수 없습니다. 값을 줄여 보이는 일은 화면에서 합니다."),
+    ("값이 빈 이유 구별해 보내기", "<code>null</code>(아직 모름)과 <code>\"\"</code>(없음)을 구별해서 보내 주면 화면에서 두 경우에 <b>다른 문구</b>를 쓸 수 있습니다."),
+    ("줄의 차례는 화면에서 정하기", "응답에 담긴 키 순서는 보장되지 않을 수 있으므로 <b>화면에서 차례를 정합니다</b>. 중요한 값이 위에 오도록 화면이 순서를 정해 둡니다."),
   ]),
   plat_lede="이름과 값을 <b>짝</b>으로 보여 준다는 점은 세 플랫폼이 모두 같습니다.",
   plats=plats([

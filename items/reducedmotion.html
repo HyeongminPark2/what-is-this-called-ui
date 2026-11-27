@@ -50,7 +50,7 @@
           <iframe src="../demos/reducedmotion.html" title="모션 줄이기 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>여섯 가지 요소가 움직이고 있습니다. <b>줄이기를 켠 사람으로 보기</b>를 누르면
+          <p>여섯 가지 요소가 움직이고 있습니다. <b>모션 줄이기를 켠 사람의 화면으로 보기</b>를 누르면
           셋은 멈추고 셋은 그대로 움직입니다.<br>
           멈추는 쪽은 <b>큰 거리를 지나가는 이동, 확대, 끝없이 도는 것</b>이고,
           남는 쪽은 <b>투명도, 색, 아주 짧은 미끄러짐</b>입니다.
@@ -77,18 +77,18 @@
         <p>움직임은 화면에서 무엇이 바뀌었는지 사용자에게 <b>알려 주는</b> 역할을 합니다. 아래 네 가지를 따져 보면 움직임을 다루는 항목들을 서로 구별할 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하나</th><th>사람이 읽는 뜻</th><th>과하면</th><th>모션 줄이기에서</th></tr></thead>
+          <thead><tr><th></th><th>이 항목이 정하는 것</th><th>사용자가 움직임에서 읽어 내는 것</th><th>지나치게 쓰면 생기는 일</th><th>모션 줄이기를 켰을 때</th></tr></thead>
           <tbody>
-            <tr><td>이징 곡선</td><td>속도를 <b>나눠 쓰는</b> 방식</td><td>무게와 재질</td><td>끈적해 보인다</td><td>그대로 둔다</td></tr>
-            <tr><td>지속 시간</td><td><b>얼마나</b> 걸리나</td><td>거리와 크기</td><td><b>기다리게</b> 된다</td><td>짧게 하거나 0</td></tr>
-            <tr><td>진입과 퇴장</td><td>들고 나는 <b>방식</b></td><td>어디서 왔나</td><td>닫는 데 붙잡힌다</td><td>퇴장은 거의 0</td></tr>
-            <tr><td>무엇을 움직이나</td><td>어떤 <b>속성</b>을 바꾸나</td><td>매끄러움 그 자체</td><td><b>버벅인다</b></td><td class="none">해당 없음</td></tr>
-            <tr><td>스프링</td><td>지나쳤다 <b>돌아오는</b> 정도</td><td>손으로 민 느낌</td><td>어지럽다</td><td>튕김을 0으로</td></tr>
-            <tr><td>차례로 들어오기</td><td>줄 사이 <b>지연</b></td><td>순서와 묶음</td><td>마지막이 <b>늦는다</b></td><td>한꺼번에 띄운다</td></tr>
-            <tr><td>제스처</td><td>손가락을 <b>따라가는</b> 규칙</td><td>내가 조작한다</td><td>실수로 닫힌다</td><td>그대로 둔다</td></tr>
-            <tr class="me"><td><b>모션 줄이기</b></td><td>무엇을 <b>끄나</b></td><td>배려받고 있다</td><td>다 꺼서 변화를 못 읽는다</td><td><b>이게 그 기준이다</b></td></tr>
-            <tr><td>공유 요소 전환</td><td>두 화면의 <b>같은 것</b></td><td>어디서 왔나</td><td>자리가 어긋나면 더 헷갈린다</td><td>자리 이동 없이</td></tr>
-            <tr><td>스크롤 연동</td><td>굴림에 <b>맞춰</b> 움직이기</td><td>내가 어디쯤인가</td><td><b>멀미를 부른다</b></td><td>연출만 끈다</td></tr>
+            <tr><td>이징 곡선</td><td>속도를 <b>나눠 쓰는</b> 방식</td><td>무게와 재질</td><td>끈적해 보임</td><td>그대로 둠</td></tr>
+            <tr><td>지속 시간</td><td><b>얼마나</b> 걸리는지</td><td>거리와 크기</td><td>사용자를 <b>기다리게</b> 함</td><td>짧게 줄이거나 0으로</td></tr>
+            <tr><td>진입과 퇴장</td><td>들고 나는 <b>방식</b></td><td>어디서 왔는지</td><td>닫힐 때까지 붙잡혀 기다림</td><td>퇴장 시간을 거의 0으로</td></tr>
+            <tr><td>무엇을 움직이나</td><td>어떤 <b>속성</b>을 바꾸는지</td><td>움직임이 매끄러운지</td><td>화면이 <b>버벅임</b></td><td class="none">해당 없음</td></tr>
+            <tr><td>스프링</td><td>지나쳤다 <b>돌아오는</b> 정도</td><td>손으로 민 듯한 느낌</td><td>어지러움</td><td>튕김을 0으로</td></tr>
+            <tr><td>차례로 들어오기</td><td>줄과 줄 사이의 <b>지연</b></td><td>순서와 묶음</td><td>마지막 줄이 <b>늦게</b> 나타남</td><td>한꺼번에 띄움</td></tr>
+            <tr><td>제스처</td><td>손가락을 <b>따라가는</b> 규칙</td><td>내가 조작하고 있다는 느낌</td><td>실수로 닫히기 쉬움</td><td>그대로 둠</td></tr>
+            <tr class="me"><td><b>모션 줄이기</b></td><td>무엇을 <b>끄는지</b></td><td>배려받고 있다는 느낌</td><td>다 꺼 버려 무엇이 바뀌었는지 알 수 없음</td><td><b>이 항목이 그 기준</b></td></tr>
+            <tr><td>공유 요소 전환</td><td>두 화면에 함께 있는 <b>같은 요소</b></td><td>어디서 왔는지</td><td>자리가 어긋나면 오히려 헷갈림</td><td>자리 이동 없이 전환</td></tr>
+            <tr><td>스크롤 연동</td><td>스크롤에 <b>맞춰</b> 움직이는 방식</td><td>지금 어디쯤 읽고 있는지</td><td><b>멀미를 일으킴</b></td><td>연출만 끔</td></tr>
           </tbody>
         </table>
         </div>
@@ -98,43 +98,43 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 끌 것과 남길 것<span class="hint">전부 끄는 것이 아니다</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 끌 움직임과 남길 움직임<span class="hint">멀미를 일으키는지에 따라 가른 여섯 가지 움직임</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:52px;border-radius:6px;background:var(--bg);border:1px solid var(--line);position:relative;overflow:hidden"><span style="position:absolute;top:14px;left:12px;width:22px;height:22px;border-radius:5px;background:var(--accent)"></span><span style="position:absolute;top:23px;left:40px;right:40px;height:2px;background:var(--danger)"></span><span style="position:absolute;top:19px;right:38px;width:8px;height:8px;border-top:2px solid var(--danger);border-right:2px solid var(--danger);transform:rotate(45deg)"></span><span style="position:absolute;top:14px;right:12px;width:22px;height:22px;border-radius:5px;background:var(--accent)"></span></div><span style="font-size:9.5px;font-weight:700;color:var(--danger)">끈다 — 큰 거리를 빠르게</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:52px;border-radius:6px;background:var(--bg);border:1px solid var(--line);position:relative;overflow:hidden"><span style="position:absolute;top:14px;left:12px;width:22px;height:22px;border-radius:5px;background:var(--accent)"></span><span style="position:absolute;top:23px;left:40px;right:40px;height:2px;background:var(--danger)"></span><span style="position:absolute;top:19px;right:38px;width:8px;height:8px;border-top:2px solid var(--danger);border-right:2px solid var(--danger);transform:rotate(45deg)"></span><span style="position:absolute;top:14px;right:12px;width:22px;height:22px;border-radius:5px;background:var(--accent)"></span></div><span style="font-size:9.5px;font-weight:700;color:var(--danger)">큰 거리를 빠르게 가서 끔</span></div>
             </div>
-            <figcaption>가로지르는 이동<span><b>멀미를 일으키는 가장 큰 원인</b>입니다</span></figcaption>
+            <figcaption>화면을 가로지르는 이동<span><b>멀미를 일으키는 가장 큰 원인</b>입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:52px;border-radius:6px;background:var(--bg);border:1px solid var(--line);position:relative;overflow:hidden"><span style="position:absolute;inset:6px;border-radius:6px;background:var(--accent);opacity:.9"></span><span style="position:absolute;inset:16px;border-radius:5px;border:2px dashed var(--surface)"></span></div><span style="font-size:9.5px;font-weight:700;color:var(--danger)">끈다 — 덮쳐 오는 느낌</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:52px;border-radius:6px;background:var(--bg);border:1px solid var(--line);position:relative;overflow:hidden"><span style="position:absolute;inset:6px;border-radius:6px;background:var(--accent);opacity:.9"></span><span style="position:absolute;inset:16px;border-radius:5px;border:2px dashed var(--surface)"></span></div><span style="font-size:9.5px;font-weight:700;color:var(--danger)">화면이 다가오는 듯해서 끔</span></div>
             </div>
             <figcaption>확대하며 열기<span>화면이 <b>앞으로 다가오는</b> 것처럼 보여서 어지럽습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:52px;border-radius:6px;background:var(--bg);border:1px solid var(--line);position:relative;overflow:hidden"><span style="position:absolute;left:50%;top:14px;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--accent)"></span></div><span style="font-size:9.5px;font-weight:700;color:var(--danger)">줄인다 — 계속 도는 것</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:52px;border-radius:6px;background:var(--bg);border:1px solid var(--line);position:relative;overflow:hidden"><span style="position:absolute;left:50%;top:14px;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--accent)"></span></div><span style="font-size:9.5px;font-weight:700;color:var(--danger)">계속 돌기 때문에 줄임</span></div>
             </div>
             <figcaption>끝없이 도는 스피너<span><b>세 점이 차례로 밝아지는</b> 모양으로 바꿉니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:52px;border-radius:6px;background:var(--bg);border:1px solid var(--line);position:relative;overflow:hidden"><span style="position:absolute;inset:12px;border-radius:5px;background:var(--accent);opacity:.3"></span></div><span style="font-size:9.5px;font-weight:700;color:var(--accent)">남긴다 — 자리를 안 옮긴다</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:52px;border-radius:6px;background:var(--bg);border:1px solid var(--line);position:relative;overflow:hidden"><span style="position:absolute;inset:12px;border-radius:5px;background:var(--accent);opacity:.3"></span></div><span style="font-size:9.5px;font-weight:700;color:var(--accent)">자리를 안 옮겨서 남김</span></div>
             </div>
-            <figcaption>투명도만 바뀜<span><b>페이드는 멀미를 일으키지 않으므로</b> 남겨야 합니다</span></figcaption>
+            <figcaption>투명도만 바뀔 때<span><b>페이드는 멀미를 일으키지 않으므로</b> 남겨야 합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:52px;border-radius:6px;background:var(--bg);border:1px solid var(--line);position:relative;overflow:hidden"><span style="position:absolute;inset:12px;border-radius:5px;background:var(--warn)"></span></div><span style="font-size:9.5px;font-weight:700;color:var(--accent)">남긴다 — 움직임이 아니다</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:52px;border-radius:6px;background:var(--bg);border:1px solid var(--line);position:relative;overflow:hidden"><span style="position:absolute;inset:12px;border-radius:5px;background:var(--warn)"></span></div><span style="font-size:9.5px;font-weight:700;color:var(--accent)">움직임이 아니라서 남김</span></div>
             </div>
-            <figcaption>색 바뀜 · 테두리<span>상태가 바뀌었다는 것을 알릴 <b>유일한 방법</b>일 수도 있습니다</span></figcaption>
+            <figcaption>색이나 테두리가 바뀔 때<span>상태가 바뀌었다는 것을 알릴 <b>유일한 방법</b>일 수도 있습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:52px;border-radius:6px;background:var(--bg);border:1px solid var(--line);position:relative;overflow:hidden"><span style="position:absolute;top:14px;left:18px;width:22px;height:22px;border-radius:5px;background:var(--accent)"></span><span style="position:absolute;top:14px;left:28px;width:22px;height:22px;border-radius:5px;background:var(--accent);opacity:.25"></span></div><span style="font-size:9.5px;font-weight:700;color:var(--accent)">남겨도 된다 — 8px 남짓</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:52px;border-radius:6px;background:var(--bg);border:1px solid var(--line);position:relative;overflow:hidden"><span style="position:absolute;top:14px;left:18px;width:22px;height:22px;border-radius:5px;background:var(--accent)"></span><span style="position:absolute;top:14px;left:28px;width:22px;height:22px;border-radius:5px;background:var(--accent);opacity:.25"></span></div><span style="font-size:9.5px;font-weight:700;color:var(--accent)">8px 남짓이라 남겨도 됨</span></div>
             </div>
-            <figcaption>짧은 미끄러짐<span>거리를 더 줄이거나 그대로 둡니다</span></figcaption>
+            <figcaption>짧은 거리를 미끄러질 때<span>거리를 더 줄이거나 그대로 둡니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -147,11 +147,11 @@
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">@media (prefers-reduced-motion: reduce)</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">끈다 — 큰 거리 이동 · 확대 축소 · 시차 스크롤</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--warn)">줄인다 — 끝없이 도는 것 · 자동 재생</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">남긴다 — 투명도 · 색 · 아주 짧은 미끄러짐</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">기본값은 no-preference — 켠 사람만 reduce</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">*{animation:none} 으로 다 끄면 변화를 못 읽는다</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">큰 거리 이동·확대 축소·시차 스크롤은 끔</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--warn)">끝없이 도는 것·자동 재생은 줄임</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">투명도·색·아주 짧은 미끄러짐은 남김</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">기본값은 no-preference이고 켠 사람만 reduce</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">*{animation:none}으로 다 끄면 변화를 알 수 없음</div>
                 </div>
               </div>
             </div>
@@ -162,7 +162,7 @@
             <li><b>줄이는 것 <em>도는 것 · 자동 재생</em></b><span>아예 없애면 작업이 <b>진행 중</b>이라는 것을 알 수 없습니다</span></li>
             <li><b>남기는 것 <em>투명도 · 색</em></b><span>자리를 옮기지 않아서 <b>멀미를 일으키지 않고</b>, 변화를 알리는 데 필요합니다</span></li>
             <li><b>기본값 <em>no-preference</em></b><span>설정을 <b>켠 사람만</b> reduce입니다. 설정을 알 수 없으면 켜지 않은 것으로 봅니다</span></li>
-            <li><b>과잉 대응 <em>전부 끄기</em></b><span><code>*{animation:none}</code>으로 다 끄면 사용자가 <b>무엇이 바뀌었는지 알 수 없습니다</b></span></li>
+            <li><b>한 줄로 모두 끄는 코드 <em>전부 끄기</em></b><span><code>*{animation:none}</code>으로 다 끄면 사용자가 <b>무엇이 바뀌었는지 알 수 없습니다</b></span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -178,7 +178,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>모션 줄이기를 쓰는 경우</h3>
+            <h3>모션 줄이기를 챙겨야 하는 때</h3>
             <ul>
               <li><b>움직이는 것을 만들 때마다</b> 함께 챙길 때. 나중에 몰아서 하면 빠뜨립니다</li>
               <li>자동 재생 영상이나 배너가 있을 때. 처음부터 <b>멈춰 둡니다</b></li>
@@ -186,7 +186,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>모션 줄이기를 쓰지 않는 경우</h3>
+            <h3>모션 줄이기에 대응할 때 피할 것</h3>
             <ul>
               <li>움직임을 <b>전부 끌</b> 때. 무엇이 바뀌었는지 알 수 없게 됩니다</li>
               <li>줄이기를 켠 사람에게 <b>기능을 덜 줄</b> 때</li>
@@ -195,7 +195,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>모션 줄이기 대신 다른 것을 써야 하는 경우</b> — 길이를 줄이는 방법은 <a href="duration.html">지속 시간</a>, 흔들림을 없애는 방법은 <a href="spring.html">스프링</a>의 튕김 0, 자동으로 도는 것은 <a href="../items/spinner.html">스피너</a>에서 다룹니다.</p>
+        <p style="margin:var(--s4) 0 0"><b>모션 줄이기와 함께 볼 항목</b> — 길이를 줄이는 방법은 <a href="duration.html">지속 시간</a>에서 다루고, 흔들림을 없애려면 <a href="spring.html">스프링</a>의 튕김을 0으로 둡니다. 자동으로 도는 것을 바꾸는 방법은 <a href="../items/spinner.html">스피너</a>에 있습니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -209,7 +209,7 @@
                 <span>}</span>
               </div>
             </div>
-            <figcaption><b>변수 두 개로</b>거리와 길이를 변수로 두면 <b>한 곳만</b> 고치면 됩니다</figcaption>
+            <figcaption><b>변수 두 개로 한꺼번에 줄이기</b>거리와 길이를 변수로 두면 <b>한 곳만</b> 고치면 됩니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -218,7 +218,7 @@
                 <span style="font-size:8.5px;color:var(--fg-muted)">줄이기에서는 처음부터 멈춤</span>
               </div>
             </div>
-            <figcaption><b>멈출 길을 둔다</b>자동으로 움직이는 것에는 <b>멈춤 버튼</b>이 함께 있어야 합니다</figcaption>
+            <figcaption><b>자동 재생에 멈춤 버튼 두기</b>자동으로 움직이는 것에는 <b>멈춤 버튼</b>이 함께 있어야 합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -226,10 +226,10 @@
                 <span style="width:7px;height:7px;border-radius:50%;background:var(--accent)"></span>
                 <span style="width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:.5"></span>
                 <span style="width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:.2"></span>
-                <span style="font-size:9px;color:var(--fg-muted)">도는 대신 밝아지기</span>
+                <span style="font-size:9px;color:var(--fg-muted)">돌지 않고 차례로 밝아짐</span>
               </div>
             </div>
-            <figcaption><b>도는 것을 바꾼다</b><b>없애지 말고</b> 돌지 않는 모양으로 바꿉니다</figcaption>
+            <figcaption><b>도는 것을 돌지 않는 모양으로 바꾸기</b><b>없애지 말고</b> 돌지 않는 모양으로 바꿉니다</figcaption>
           </figure>
         </div>
       </section>
@@ -253,14 +253,14 @@
 <span class="k">else</span> el.scrollIntoView({ behavior: <span class="s">'smooth'</span> });</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>알아 둘 규칙</th><th>자세한 내용</th></tr></thead>
           <tbody>
-            <tr><td><code>matchMedia</code>로 물어본다</td><td>CSS 밖의 애니메이션(캔버스·자바스크립트)도 <b>같이 줄여야</b> 합니다</td></tr>
+            <tr><td><code>matchMedia</code>로 설정 확인하기</td><td>CSS 밖의 애니메이션(캔버스·자바스크립트)도 <b>같이 줄여야</b> 합니다</td></tr>
             <tr><td><code>scroll-behavior: smooth</code></td><td>부드러운 스크롤도 멀미를 일으킵니다. 모션 줄이기에서는 <code>auto</code>로 바꿉니다</td></tr>
             <tr><td><code>.addEventListener('change')</code></td><td>설정은 사용자가 <b>화면을 쓰는 중에도</b> 바뀔 수 있으므로, 한 번 읽고 끝내지 않습니다</td></tr>
-            <tr><td>켠 사람에게 <b>덜 주지 않는다</b></td><td>기능은 그대로 두고 <b>움직임만</b> 줄입니다</td></tr>
-            <tr><td>자동 재생에는 멈춤 버튼</td><td>WCAG는 5초 넘게 자동으로 움직이는 것에 <b>멈출 방법</b>을 두도록 요구합니다</td></tr>
-            <tr><td>시험하는 법</td><td>개발자 도구에서 <code>prefers-reduced-motion</code> 값을 <b>바꿔 가며</b> 시험할 수 있습니다</td></tr>
+            <tr><td>켠 사람에게도 기능은 <b>그대로</b> 주기</td><td>기능은 그대로 두고 <b>움직임만</b> 줄입니다</td></tr>
+            <tr><td>자동 재생에는 멈춤 버튼 두기</td><td>WCAG는 5초 넘게 자동으로 움직이는 것에 <b>멈출 방법</b>을 두도록 요구합니다</td></tr>
+            <tr><td>설정을 바꿔 시험하는 방법</td><td>개발자 도구에서 <code>prefers-reduced-motion</code> 값을 <b>바꿔 가며</b> 시험할 수 있습니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -271,9 +271,9 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>서버는 알 수 없다</th><td>모션 줄이기 설정은 <b>요청 헤더에 실려 오지 않습니다.</b> 그래서 서버가 미리 렌더링해 보내는 화면에서는 CSS 질의로만 처리할 수 있습니다.</td></tr>
+            <tr><th>서버가 알 수 없는 설정</th><td>모션 줄이기 설정은 <b>요청 헤더에 실려 오지 않습니다.</b> 그래서 서버가 미리 렌더링해 보내는 화면에서는 CSS 질의로만 처리할 수 있습니다.</td></tr>
             <tr><th>클라이언트 힌트</th><td><code>Sec-CH-Prefers-Reduced-Motion</code> 헤더가 있기는 하지만 <b>브라우저마다 지원이 달라서</b> 여기에 기대지 않는 편이 낫습니다.</td></tr>
-            <tr><th>자동 재생 영상</th><td>줄이기를 켠 사람에게 <b>포스터 이미지만</b> 보내면 데이터도 아낄 수 있습니다.</td></tr>
+            <tr><th>자동 재생 영상 대신 포스터 보내기</th><td>줄이기를 켠 사람에게 <b>포스터 이미지만</b> 보내면 데이터도 아낄 수 있습니다.</td></tr>
           </tbody>
         </table>
         </div>

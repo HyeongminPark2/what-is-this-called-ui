@@ -23,9 +23,9 @@
 
 <div class="pad a11y">
   <div class="a11y__stage">
-    <h4>같은 모양, 다른 속</h4>
+    <h4>모양은 같고 만든 태그만 다른 세 버튼</h4>
     <ul class="kb-list">
-      <li><span class="who">진짜 버튼</span>
+      <li><span class="who">button 태그</span>
         <button class="kb-fake" data-k="button">저장하기</button>
         <span id="v1" style="font-size:12px;color:var(--fg-muted)"></span></li>
       <li><span class="who">div + onclick</span>
@@ -62,7 +62,7 @@
   // 세 버튼이 키보드로 되는지 미리 재서 옆에 적어 둔다
   var checks = [
     ['v1', true, true, '포커스 ○ · Enter ○ · Space ○'],
-    ['v2', false, false, '포커스 ✕ — 키보드로 못 감'],
+    ['v2', false, false, '포커스 ✕ · 키보드로 갈 수 없음'],
     ['v3', true, false, '포커스 ○ · Enter ✕ · Space ✕']
   ];
   checks.forEach(function (c) {
@@ -72,7 +72,7 @@
 
   document.querySelector('.a11y__stage').addEventListener('click', function (e) {
     var el = e.target.closest('[data-k]');
-    if (el) note('눌림 — ' + el.dataset.k, 'ok');
+    if (el) note('눌림 (' + el.dataset.k + ')', 'ok');
   });
 
   document.addEventListener('keydown', function (e) {
@@ -81,14 +81,14 @@
     if (e.key === 'Enter' || e.key === ' ') {
       // 진짜 button 은 브라우저가 click 을 만들어 준다. div 는 아무 일도 안 일어난다.
       if (el.tagName !== 'BUTTON') {
-        note(el.dataset.k + ' 에서 ' + (e.key === ' ' ? 'Space' : 'Enter') + ' — <b>아무 일도 안 일어남</b>', 'no');
+        note(el.dataset.k + '에서 ' + (e.key === ' ' ? 'Space' : 'Enter') + '를 눌렀지만 <b>아무 일도 안 일어남</b>', 'no');
       }
     }
   });
 
   document.addEventListener('focusin', function (e) {
     var el = e.target;
-    if (el.dataset && el.dataset.k) note('포커스 — ' + el.dataset.k);
+    if (el.dataset && el.dataset.k) note(el.dataset.k + '에 포커스가 옴');
   });
 
   document.getElementById('fake').addEventListener('click', function () { note('마우스로는 눌립니다', ''); });

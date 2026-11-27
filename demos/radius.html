@@ -18,9 +18,9 @@
 <body>
 <div class="bar">
   <b>모서리</b>
-  <label>바깥 <input type="range" id="r" min="0" max="28" step="2" value="12" style="width:84px"><span class="ruler" id="rv"></span></label>
+  <label>바깥 모서리 <input type="range" id="r" min="0" max="28" step="2" value="12" style="width:84px"><span class="ruler" id="rv"></span></label>
   <label>안쪽 여백 <input type="range" id="p" min="0" max="20" step="2" value="10" style="width:84px"><span class="ruler" id="pv"></span></label>
-  <label><input type="checkbox" id="fit" checked> 안쪽을 공식대로</label>
+  <label><input type="checkbox" id="fit" checked> 안쪽 모서리를 공식대로 계산</label>
   <label><input type="checkbox" id="clip" checked> overflow: hidden</label>
 </div>
 
@@ -46,7 +46,7 @@
 
 <script>
 (function () {
-  var SCALE = [[0, '없음'], [4, '작게'], [8, '보통'], [12, '카드'], [16, '시트'], [999, '알약']];
+  var SCALE = [[0, '각지게'], [4, '작게'], [8, '보통'], [12, '카드'], [16, '시트'], [999, '알약']];
   document.getElementById('scale').innerHTML = SCALE.map(function (s) {
     return '<span style="border-radius:' + s[0] + 'px">' + (s[0] === 999 ? '999' : s[0]) +
       '<small style="display:block;font-size:8px;color:var(--fg-muted)">' + s[1] + '</small></span>';

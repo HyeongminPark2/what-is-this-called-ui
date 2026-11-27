@@ -19,7 +19,7 @@
 <body>
 <div class="bar">
   <b>트리뷰</b>
-  <label>들여쓰기 <input type="range" id="ind" min="8" max="28" step="4" value="16" style="width:84px"><span class="ruler" id="indv"></span></label>
+  <label>들여쓰기 폭 <input type="range" id="ind" min="8" max="28" step="4" value="16" style="width:84px"><span class="ruler" id="indv"></span></label>
   <label><input type="checkbox" id="deep"> 깊은 가지까지 펼치기</label>
   <button class="ui-btn ui-btn--ghost" id="kb">키보드로 훑어보기</button>
 </div>
@@ -94,7 +94,7 @@
     });
 
     var rd = document.getElementById('read');
-    rd.innerHTML = '가장 깊은 줄 · 깊이 <b>' + (+deepest.dataset.d + 1) + '단</b> · 이름 자리 <b>' + left + 'px</b>' +
+    rd.innerHTML = '가장 깊은 줄의 깊이 <b>' + (+deepest.dataset.d + 1) + '단</b> · 남은 이름 자리 <b>' + left + 'px</b>' +
       ' (필요한 폭 ' + want + 'px)' + (cut ? ' <span class="warn">· ' + cut + '줄의 이름이 잘렸습니다</span>' : '');
     rd.dataset.left = String(left);
     rd.dataset.cut = String(cut);
@@ -143,7 +143,7 @@
     (function step() {
       if (i >= Math.min(rows.length, 5) - 1) {
         var el = document.getElementById('log');
-        el.innerHTML = '↓ 키로 지나간 차례 · <b>' + seen.join(' → ') + '</b>';
+        el.innerHTML = '↓ 키로 지나간 줄을 차례대로 적으면 <b>' + seen.join(' → ') + '</b>';
         el.dataset.seen = seen.join(',');
         return;
       }

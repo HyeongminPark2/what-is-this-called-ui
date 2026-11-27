@@ -25,11 +25,11 @@ def card(inner, w="152px"):
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="max-width:200px">''' + steps(4, 1, "200px").strip() + '''</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">끝이 보인다 — 2 / 4</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">건너뛰기 · 나중에 하기 — 나가는 대신 누른다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">어디까지 왔는지 서버에 적어 둔다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">건너뛴 것은 설정에서 마저 채울 수 있다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">단계마다 15%가 떠나면 여섯 단계는 절반 아래</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">2 / 4로 끝이 어디인지 보임</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">건너뛰기 · 나중에 하기를 나가는 대신 누름</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">어디까지 왔는지 서버에 적어 둠</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">건너뛴 것은 설정에서 마저 채울 수 있음</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">단계마다 15%가 떠나면 여섯 단계 뒤 절반 아래만 남음</div>
                 </div>
               </div>'''
 
@@ -58,24 +58,27 @@ D = dict(
   ]),
   axes=ax("온보딩"),
   oneline="온보딩을 고칠 때는 <b>단계를 줄이는 일</b>부터 합니다. 단계를 더 잘 다듬는 것보다 <b>단계를 아예 지우는</b> 편이 거의 언제나 효과가 큽니다.",
-  s4_title="흐름", s4_hint="끝이 보이나",
+  do_title="온보딩에서 다루면 좋은 경우",
+  dont_title="온보딩에서 피해야 하는 경우",
+  instead_title="상황에 따라 함께 볼 항목",
+  s4_title="온보딩 흐름의 단계", s4_hint="끝이 어디인지 보이는가",
   states=states([
-    (steps(4, 0, "152px", "1 / 4 — 끝이 보인다"), "시작", "전체가 <b>몇 단계인지</b> 처음부터 알려 줍니다"),
-    (steps(4, 2, "152px", "3 / 4 — 두 개 끝냈다"), "진행 중", "지나온 단계에 ✓를 표시하고, 그 단계로 <b>돌아갈 수</b> 있게 합니다"),
+    (steps(4, 0, "152px", "1 / 4로 끝이 보임"), "처음 시작할 때", "전체가 <b>몇 단계인지</b> 처음부터 알려 줍니다"),
+    (steps(4, 2, "152px", "3 / 4, 두 단계 끝냄"), "단계를 진행하는 중", "지나온 단계에 ✓를 표시하고, 그 단계로 <b>돌아갈 수</b> 있게 합니다"),
     (card('<span style="font-size:9.5px">어떤 일을 하시나요?</span>'
           '<div style="border:1px solid var(--line);border-radius:4px;padding:3px 6px;font-size:9px;color:var(--fg-muted)">입력</div>'
           '<div style="display:flex;gap:4px"><span style="flex:1;text-align:center;background:var(--accent);color:#fff;border-radius:4px;padding:3px 0;font-size:9px">다음</span>'
           '<span style="text-align:center;border:1px solid var(--line);border-radius:4px;padding:3px 8px;font-size:9px">건너뛰기</span></div>'),
-     "건너뛸 길 ✓", "막힌 사용자가 앱을 <b>나가는 대신 누릅니다</b>"),
+     "건너뛸 길을 둔 화면 ✓", "막힌 사용자가 앱을 <b>나가는 대신 누릅니다</b>"),
     (card('<span style="font-size:9.5px">어떤 일을 하시나요?</span>'
           '<div style="border:1px solid var(--line);border-radius:4px;padding:3px 6px;font-size:9px;color:var(--fg-muted)">입력</div>'
           '<span style="display:block;text-align:center;background:var(--accent);color:#fff;border-radius:4px;padding:3px 0;font-size:9px">다음</span>'
-          '<span style="font-size:8px;color:var(--danger)">나갈 길이 없다</span>'),
-     "건너뛸 길 ✕", "막힌 사용자는 <b>앱을 닫고 떠납니다</b>"),
+          '<span style="font-size:8px;color:var(--danger)">나갈 길이 없음</span>'),
+     "건너뛸 길이 없는 화면 ✕", "막힌 사용자는 <b>앱을 닫고 떠납니다</b>"),
     (card('<span style="font-size:9.5px;font-weight:700">거의 다 됐습니다</span>'
           '<span style="font-size:8.5px;color:var(--fg-muted)">설정에서 언제든 바꿀 수 있어요</span>'
           '<span style="display:block;text-align:center;background:var(--accent);color:#fff;border-radius:4px;padding:3px 0;font-size:9px">시작하기</span>'),
-     "끝", "<b>무엇이 남았는지</b>, 나중에 바꿀 수 있다는 것을 알려 줍니다"),
+     "마지막 단계", "<b>무엇이 남았는지</b>, 나중에 바꿀 수 있다는 것을 알려 줍니다"),
     (card('<span style="font-size:9.5px">2단계까지 하셨어요</span>'
           '<span style="display:block;text-align:center;background:var(--accent);color:#fff;border-radius:4px;padding:3px 0;font-size:9px">이어서 하기</span>'),
      "다시 들어왔을 때", "<b>어디까지 했는지</b> 기억해 둡니다. 처음부터 다시 하라고 하면 사용자가 하지 않습니다"),
@@ -86,8 +89,8 @@ D = dict(
     ("돌아가기", "← 이전", "이전 단계로 돌아가도 적은 값은 <b>그대로 남아</b> 있어야 합니다"),
     ("건너뛸 길", "나중에 하기", "버튼 하나만 더하면 되는 <b>가장 손쉬운 개선</b>입니다. 막힌 사용자가 나가는 대신 누릅니다"),
     ("이어 하기", "서버에 기록", "서버에 기록해 두어야 다시 들어왔을 때 <b>처음부터</b> 하지 않아도 됩니다"),
-    ("나중에 채우기", "설정에서", "건너뛴 항목을 나중에 <b>어디서</b> 채우는지 알려 줍니다"),
-    ("단계 수", "적을수록 좋다", "단계마다 일부가 떠나기 때문에 남는 사람은 <b>곱셈으로 줄어듭니다</b>"),
+    ("나중에 채우기", "설정 화면에서", "건너뛴 항목을 나중에 <b>어디서</b> 채우는지 알려 줍니다"),
+    ("단계 수", "적을수록 좋음", "단계마다 일부가 떠나기 때문에 남는 사람은 <b>곱셈으로 줄어듭니다</b>"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           온보딩에서 가장 자주 섞이는 두 가지가 <b>'우리가 알고 싶은 것'</b>과
@@ -107,19 +110,20 @@ D = dict(
     "건너뛸 길을 두지 않을 때. 막힌 사용자는 <b>앱을 닫습니다</b>",
     "다시 들어온 사용자에게 처음부터 다시 하게 할 때. 이어서 할 수 있도록 진행 상황을 <b>기록</b>해 둡니다",
   ]),
-  instead='칸이 여럿이면 <a href="form.html">폼 설계</a>, 첫 화면이 비면 <a href="../items/empty.html">빈 상태</a>, 기능을 짚어 주려면 <a href="../items/popover.html">팝오버</a>.',
+  instead='받을 입력 칸이 여럿이면 <a href="form.html">폼 설계</a>를, 첫 화면이 비어 있으면 <a href="../items/empty.html">빈 상태</a>를 함께 봅니다. 기능을 하나씩 짚어 주려면 <a href="../items/popover.html">팝오버</a>를 씁니다.',
   cases=cases([
-    (steps(3, 1, "150px", "3단계 — 알맞다"), "짧은 위저드", "단계가 셋을 넘으면 사용자가 <b>끝이 어디인지 가늠하기 어렵습니다</b>"),
+    (steps(3, 1, "150px", "3단계면 알맞음"), "세 단계로 끝나는 짧은 위저드", "단계가 셋을 넘으면 사용자가 <b>끝이 어디인지 가늠하기 어렵습니다</b>"),
     (card('<span style="font-size:9.5px;font-weight:700">첫 가맹점을 만들어 볼까요?</span>'
           '<span style="font-size:8.5px;color:var(--fg-muted)">예시로 하나 만들어 뒀습니다</span>'
           '<span style="display:block;text-align:center;background:var(--accent);color:#fff;border-radius:4px;padding:3px 0;font-size:9px">보러 가기</span>', "150px"),
-     "빈 화면 대신", "사용자에게 묻는 대신 예시를 <b>먼저 만들어 줍니다.</b> 온보딩 방식 가운데 가장 효과가 좋습니다"),
+     "빈 화면 대신 예시 만들어 주기", "사용자에게 묻는 대신 예시를 <b>먼저 만들어 줍니다.</b> 온보딩 방식 가운데 가장 효과가 좋습니다"),
     (card('<div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border-radius:50%;border:1px solid var(--accent)"></span><span style="font-size:9px">프로필 채우기</span></div>'
           '<div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border-radius:50%;background:var(--accent)"></span><span style="font-size:9px;color:var(--fg-muted)">가맹점 등록</span></div>'
           '<span style="font-size:8px;color:var(--fg-muted)">3개 중 1개 끝</span>', "150px"),
-     "할 일 목록으로", "화면을 막지 않고 할 일을 <b>옆에 두는</b> 방식으로, 요즘 많이 씁니다"),
+     "할 일 목록으로 옆에 두기", "화면을 막지 않고 할 일을 <b>옆에 두는</b> 방식으로, 요즘 많이 씁니다"),
   ]),
   s8_title="최소 마크업과 키보드", s8_hint="구현할 때 지킬 최소 규칙",
+  keys_heads="<th>키와 마크업</th><th>처리하는 방법</th>",
   code_lede="단계마다 <b>주소를 바꾸고</b>, 어디까지 왔는지 서버에 적어 둡니다.",
   code='''&lt;<span class="t">nav</span> <span class="a">aria-label</span>=<span class="s">"시작하기 단계"</span>&gt;
   &lt;<span class="t">ol</span>&gt;
@@ -137,19 +141,19 @@ D = dict(
 <span class="k">await</span> fetch(<span class="s">'/api/onboarding'</span>, { method: <span class="s">'PATCH'</span>,
   body: JSON.stringify({ step: <span class="a">2</span>, skipped: [<span class="s">'team'</span>] }) });''',
   keys=kbd([
-    ("단계마다 주소를 바꾼다", "<code>/start/2</code>처럼 단계마다 주소를 두면 <b>뒤로가기</b>를 눌렀을 때 전 단계로 갑니다(<a href=\"systemback.html\">시스템 백</a>)"),
+    ("단계마다 주소 바꾸기", "<code>/start/2</code>처럼 단계마다 주소를 두면 <b>뒤로가기</b>를 눌렀을 때 전 단계로 갑니다(<a href=\"systemback.html\">시스템 백</a>)"),
     ("<code>aria-current=\"step\"</code>", "지금 단계를 알립니다. 색으로만 표시하면 스크린 리더가 읽지 못합니다"),
     ("<code>role=\"status\"</code>", "'3단계 중 2단계'처럼 단계가 바뀐 것을 <b>화면을 눈으로 보지 않는 사람</b>에게도 알립니다"),
-    ("초점", "단계가 바뀌면 <b>새 제목</b>으로 초점을 옮깁니다. 옮기지 않으면 Tab을 눌렀을 때 페이지 처음부터 다시 돕니다"),
-    ("건너뛰기는 <code>&lt;button&gt;</code>", "눈에 덜 띄게 만들더라도 <b>Tab으로 갈 수 있어야</b> 합니다"),
-    ("자동으로 넘기지 않는다", "고르자마자 다음 단계로 넘어가 버리면 잘못 고른 값을 <b>고치러 돌아올 수</b> 없습니다"),
+    ("초점을 옮길 자리", "단계가 바뀌면 <b>새 제목</b>으로 초점을 옮깁니다. 옮기지 않으면 Tab을 눌렀을 때 페이지 처음부터 다시 돕니다"),
+    ("건너뛰기를 <code>&lt;button&gt;</code>으로 만들기", "눈에 덜 띄게 만들더라도 <b>Tab으로 갈 수 있어야</b> 합니다"),
+    ("다음 단계로 저절로 넘기지 않기", "고르자마자 다음 단계로 넘어가 버리면 잘못 고른 값을 <b>고치러 돌아올 수</b> 없습니다"),
   ]),
   backend=rows([
-    ("어디까지 했는지 저장", "진행 상황을 브라우저에만 저장하면 기기를 바꿨을 때 <b>처음부터</b> 다시 해야 합니다. 그래서 계정에 붙여 저장합니다."),
-    ("건너뛴 것도 기록", "'안 한 것'과 '건너뛴 것'은 따로 기록합니다. 건너뛴 것으로 남겨 두면 <b>나중에 다시 권할</b> 수 있습니다."),
-    ("부분 저장", "단계마다 서버로 보내 두면 중간에 끊겨도 앞 단계의 값이 남습니다. 반면 마지막에 한 번에 보내면 끊겼을 때 <b>입력한 값을 전부 잃습니다</b>."),
-    ("필수 값이 비어 있을 수 있다", "건너뛸 길을 두면 <b>그 칸이 빈 계정</b>이 생깁니다. 그래서 뒤에 나오는 화면들은 그 값이 비어 있어도 문제없이 동작해야 합니다."),
-    ("퍼널을 남긴다", "단계마다 지나간 사람 수를 기록해 두면 <b>어느 단계에서 많이 떠나는지</b> 알 수 있습니다. 이 기록이 없으면 어느 단계를 고쳐야 할지 판단할 근거가 없습니다."),
+    ("어디까지 했는지 계정에 저장하기", "진행 상황을 브라우저에만 저장하면 기기를 바꿨을 때 <b>처음부터</b> 다시 해야 합니다. 그래서 계정에 붙여 저장합니다."),
+    ("건너뛴 단계도 따로 기록하기", "'안 한 것'과 '건너뛴 것'은 따로 기록합니다. 건너뛴 것으로 남겨 두면 <b>나중에 다시 권할</b> 수 있습니다."),
+    ("단계마다 나눠 저장하기", "단계마다 서버로 보내 두면 중간에 끊겨도 앞 단계의 값이 남습니다. 반면 마지막에 한 번에 보내면 끊겼을 때 <b>입력한 값을 전부 잃습니다</b>."),
+    ("필수 값이 빈 계정도 감안하기", "건너뛸 길을 두면 <b>그 칸이 빈 계정</b>이 생깁니다. 그래서 뒤에 나오는 화면들은 그 값이 비어 있어도 문제없이 동작해야 합니다."),
+    ("단계별 퍼널 기록 남기기", "단계마다 지나간 사람 수를 기록해 두면 <b>어느 단계에서 많이 떠나는지</b> 알 수 있습니다. 이 기록이 없으면 어느 단계를 고쳐야 할지 판단할 근거가 없습니다."),
   ]),
   plat_lede="플랫폼에 따라 온보딩에 들어오는 횟수가 다릅니다. <b>앱은 한 번, 웹은 여러 번</b> 들어옵니다.",
   plats=plats([

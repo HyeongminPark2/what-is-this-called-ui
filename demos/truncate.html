@@ -31,20 +31,20 @@
   <div class="row">
     <div>
       <div class="tr-box is-one" id="one" title="환불 확인 요청 — 카드 승인 취소가 늦어져 고객이 두 번 문의했고 담당자가 바뀌면서 한 번 더 늦어진 건입니다">환불 확인 요청 — 카드 승인 취소가 늦어져 고객이 두 번 문의했고 담당자가 바뀌면서 한 번 더 늦어진 건입니다</div>
-      <span class="cap"><b>한 줄</b> · <code>text-overflow: ellipsis</code><br>마우스를 올리면 전체가 뜹니다(<code>title</code>)</span>
+      <span class="cap"><b>한 줄로 줄이기</b> · <code>text-overflow: ellipsis</code><br>마우스를 올리면 전체가 뜹니다(<code>title</code>)</span>
     </div>
     <div>
       <div class="tr-box is-clamp" id="clamp">환불 확인 요청 — 카드 승인 취소가 늦어져 고객이 두 번 문의했고 담당자가 바뀌면서 한 번 더 늦어진 건입니다. 지금은 은행 점검 시간이라 확인이 더 늦어지고 있습니다.</div>
-      <span class="cap"><b>여러 줄</b> · <code>-webkit-line-clamp</code><br>끝에 <code>…</code>이 붙습니다</span>
+      <span class="cap"><b>여러 줄까지 보여 주기</b> · <code>-webkit-line-clamp</code><br>끝에 <code>…</code>이 붙습니다</span>
     </div>
     <div>
       <div class="tr-box is-fade">환불 확인 요청 — 카드 승인 취소가 늦어져 고객이 두 번 문의했고 담당자가 바뀌면서 한 번 더 늦어진 건입니다. 지금은 은행 점검 시간이라 확인이 더 늦어지고 있습니다.</div>
-      <span class="cap"><b>흐려서 끊기</b> · 그라데이션<br><code>…</code> 없이 <b>뒤에 글이 더 있다</b>는 것만 알려 줍니다</span>
+      <span class="cap"><b>끝을 흐리게 지우기</b> · 그라데이션<br><code>…</code> 없이 <b>뒤에 글이 더 있다</b>는 것만 알려 줍니다</span>
     </div>
   </div>
 
   <div class="ty">
-    <span class="ty__tag">잘린 것을 어떻게 알려 주나</span>
+    <span class="ty__tag">글이 잘렸는지 재서 알려 주는 결과</span>
     <p class="meter" id="meter"></p>
   </div>
 </div>
@@ -72,10 +72,10 @@
       var oneCut = one.scrollWidth > one.clientWidth + 1;
       var clampCut = clamp.scrollHeight > clamp.clientHeight + 1;
       meter.innerHTML =
-        '한 줄 — scrollWidth <b>' + one.scrollWidth + '</b> / clientWidth <b>' + one.clientWidth + '</b> → ' +
-        (oneCut ? '잘림 <b>툴팁을 붙인다</b>' : '안 잘림 툴팁 없음') + '<br>' +
-        '여러 줄 — scrollHeight <b>' + clamp.scrollHeight + '</b> / clientHeight <b>' + clamp.clientHeight + '</b> → ' +
-        (clampCut ? '잘림 <b>더 보기를 붙인다</b>' : '안 잘림 그대로 둔다');
+        '한 줄 말줄임은 scrollWidth <b>' + one.scrollWidth + '</b> / clientWidth <b>' + one.clientWidth + '</b>이므로 ' +
+        (oneCut ? '잘렸습니다. <b>툴팁을 붙입니다</b>' : '잘리지 않아 툴팁을 붙이지 않습니다') + '<br>' +
+        '여러 줄 말줄임은 scrollHeight <b>' + clamp.scrollHeight + '</b> / clientHeight <b>' + clamp.clientHeight + '</b>이므로 ' +
+        (clampCut ? '잘렸습니다. <b>더 보기를 붙입니다</b>' : '잘리지 않아 그대로 둡니다');
     });
   }
   document.getElementById('n').addEventListener('input', draw);

@@ -24,12 +24,12 @@ def box(inner, badge=None, w="152px", note="", warn=False):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">배지 — 안 읽은 수. 센 기준이 화면과 같아야 한다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">배지의 안 읽은 수는 목록과 같은 기준으로 셈</div>
                   <div class="pin-out" data-pin="2" style="max-width:220px">''' + box(nrow('모란상회', '정산이 승인되었습니다', '방금', False, 3), 6, "220px").strip() + '''</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">누른 것만 읽음 — 열었다고 전부 읽음으로 치지 않는다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">같은 것끼리 묶는다 — 다섯 줄이 한 줄로</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">모두 읽음 — 사용자가 직접 고르는 길</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">기기 사이에 읽음 상태가 안 맞으면 배지가 유령이 된다</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">열었다고 전부가 아니라 누른 것만 읽음 처리</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">같은 알림 다섯 줄을 한 줄로 묶음</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">모두 읽음은 사용자가 직접 고를 때만</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">기기 사이에 읽음 상태가 안 맞으면 배지가 남음</div>
                 </div>
               </div>'''
 
@@ -41,7 +41,7 @@ D = dict(
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>열면 전부 읽음</b>으로 바꿔 보세요. 배지는 0이 되지만 사용자가 <b>실제로 무엇을 봤는지는 알 수 없습니다</b>.
           목록을 훑다가 닫으면 안 본 알림도 읽음으로 바뀌어서 나중에 다시 찾을 방법이 없습니다.<br>
-          그래서 기본값은 <b>누른 것만 읽음</b>이 맞습니다. <b>같은 것 묶기</b>를 끄면 한 곳에서 온 알림 다섯 개가
+          그래서 기본값은 <b>누른 것만 읽음</b>이 맞습니다. <b>같은 알림 묶기</b>를 끄면 한 곳에서 온 알림 다섯 개가
           다섯 줄을 차지하는데, 배지 숫자가 갑자기 크게 늘어나는 흔한 이유가 이것입니다.</p>
         </div>''',
   names=rows([
@@ -59,22 +59,25 @@ D = dict(
   ]),
   axes=ax("알림 센터"),
   oneline="<b>알림 센터를 연 것과 알림을 본 것은 다릅니다.</b> 열었다고 전부 읽음으로 처리하면 배지는 사라지지만, 사용자는 안 본 알림을 놓치게 됩니다.",
-  s4_title="상태", s4_hint="읽음을 언제 찍나",
+  do_title="알림 센터를 두면 좋은 경우",
+  dont_title="알림 센터를 잘못 만드는 경우",
+  instead_title="알림 센터 말고 다른 곳에서 다룰 것",
+  s4_title="알림 센터의 상태", s4_hint="언제 읽음으로 처리하는가",
   states=states([
     (box(nrow('모란상회', '정산이 승인되었습니다', '방금', False, 3) + nrow('한빛아웃도어', '새 주문 12건', '10분'), 6),
-     "안 읽음 있음", "<b>배지 숫자</b>와 점으로 표시합니다. 묶어서 보여 줘도 배지는 <b>건수로</b> 셉니다"),
+     "안 읽은 알림이 있을 때", "<b>배지 숫자</b>와 점으로 표시합니다. 묶어서 보여 줘도 배지는 <b>건수로</b> 셉니다"),
     (box(nrow('모란상회', '정산이 승인되었습니다', '방금', True, 3) + nrow('한빛아웃도어', '새 주문 12건', '10분'), 3),
-     "누른 것만 읽음 ✓", "<b>누르지 않은 알림은 안 읽음으로 남아서</b> 이어서 볼 수 있습니다"),
+     "누른 것만 읽음으로 처리할 때 ✓", "<b>누르지 않은 알림은 안 읽음으로 남아서</b> 이어서 볼 수 있습니다"),
     (box(nrow('모란상회', '정산이 승인되었습니다', '방금', True, 3) + nrow('한빛아웃도어', '새 주문 12건', '10분', True), None,
-         "152px", "열자마자 배지가 0 — 무엇을 봤는지는 모른다", True),
-     "열면 전부 읽음 ✕", "배지가 사라져 <b>정리된 것처럼 보이지만</b> 안 본 알림을 놓칩니다"),
+         "152px", "열자마자 배지가 0, 무엇을 봤는지 모름", True),
+     "열자마자 전부 읽음으로 처리할 때 ✕", "배지가 사라져 <b>정리된 것처럼 보이지만</b> 안 본 알림을 놓칩니다"),
     (box(nrow('모란상회', '정산이 승인되었습니다', '방금') + nrow('모란상회', '정산이 승인되었습니다', '1분')
          + nrow('모란상회', '정산이 승인되었습니다', '2분'), 6, "152px", "안 묶으면 같은 줄이 세 번", True),
-     "안 묶었을 때", "<b>한 곳에서 온 알림</b>이 목록을 가득 채웁니다"),
+     "같은 알림을 묶지 않았을 때", "<b>한 곳에서 온 알림</b>이 목록을 가득 채웁니다"),
     (box('<div style="padding:10px 0;text-align:center;font-size:8.5px;color:var(--fg-muted)">새 알림이 없습니다</div>', None),
-     "빈 상태", "배지도 표시하지 않습니다. 화면은 <a href=\"../items/empty.html\">빈 상태</a>로 보여 줍니다"),
-    (box(nrow('모란상회', '정산이 승인되었습니다', '방금', True, 3), None, "152px", "다른 기기에서 읽었다"),
-     "기기 사이", "기기 사이에 <b>읽음 상태가 맞지 않으면</b> 다 읽었는데도 배지가 남습니다"),
+     "새 알림이 없을 때", "배지도 표시하지 않습니다. 화면은 <a href=\"../items/empty.html\">빈 상태</a>로 보여 줍니다"),
+    (box(nrow('모란상회', '정산이 승인되었습니다', '방금', True, 3), None, "152px", "다른 기기에서 읽음"),
+     "다른 기기에서 읽었을 때", "기기 사이에 <b>읽음 상태가 맞지 않으면</b> 다 읽었는데도 배지가 남습니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -82,8 +85,8 @@ D = dict(
     ("안 읽음 표시", "점 · 바탕", "읽음과 안 읽음을 색만으로 구별하지 않습니다"),
     ("읽음 시점", "누른 것만", "센터를 <b>열었다고 전부</b> 읽음으로 처리하지 않습니다"),
     ("묶기", "같은 것끼리", "같은 알림 다섯 줄을 <b>한 줄 + 5건</b>으로 묶습니다"),
-    ("모두 읽음", "직접 고르는 길", "사용자가 <b>스스로</b> 골라서 한꺼번에 읽음으로 바꾸는 것은 괜찮습니다"),
-    ("기기 사이", "읽음 맞추기", "기기 사이에 읽음 상태가 맞지 않으면 <b>사라지지 않는 배지</b>가 생깁니다"),
+    ("모두 읽음", "사용자가 직접 고를 때", "사용자가 <b>스스로</b> 골라서 한꺼번에 읽음으로 바꾸는 것은 괜찮습니다"),
+    ("기기 사이 동기화", "읽음 맞추기", "기기 사이에 읽음 상태가 맞지 않으면 <b>사라지지 않는 배지</b>가 생깁니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <b>배지 숫자는 실제와 쉽게 어긋납니다.</b>
@@ -104,7 +107,7 @@ D = dict(
     "중요한 알림과 광고를 <b>같은 목록</b>에 섞을 때. 사용자가 알림 전체를 보지 않게 됩니다",
     "배지만 띄우고, 알림을 <b>눌러도 해당 화면으로</b> 가지 않을 때",
   ]),
-  instead='지나가도 되는 것은 <a href="../items/toast.html">토스트</a>, 화면 안의 급한 알림은 인라인 얼럿, 설정은 <a href="settings.html">설정 화면</a>.',
+  instead='잠깐 보여 주고 지나가도 되는 소식은 <a href="../items/toast.html">토스트</a>로 띄우고, 지금 보는 화면 안의 급한 알림은 인라인 얼럿으로 보여 줍니다. 어떤 알림을 받을지 정하는 일은 <a href="settings.html">설정 화면</a>에서 다룹니다.',
   cases=cases([
     (box(nrow('모란상회', '정산이 승인되었습니다', '방금', False, 3), 6, "150px"),
      "묶어서 보여 주기", "<b>한 줄에 건수를 붙여</b> 보여 주면 목록이 짧아져 훑어보기 쉽습니다"),
@@ -112,14 +115,15 @@ D = dict(
                 <div style="display:flex;gap:4px;font-size:8.5px"><span style="background:var(--accent);color:#fff;border-radius:999px;padding:1px 7px">전체</span><span style="border:1px solid var(--line);border-radius:999px;padding:1px 7px">정산</span><span style="border:1px solid var(--line);border-radius:999px;padding:1px 7px">공지</span></div>
                 <span style="font-size:8px;color:var(--fg-muted)">갈래로 나눠 두면 광고가 섞여도 덜 밉다</span>
               </div>''',
-     "갈래 나누기", "중요한 알림과 일반 소식을 <b>나눠</b> 둡니다"),
+     "중요한 알림과 소식 나눠 두기", "중요한 알림과 일반 소식을 <b>나눠</b> 둡니다"),
     ('''              <div style="width:100%;max-width:150px;display:grid;gap:4px">
                 <span style="font-size:9px">알림을 누르면 <b>그 화면</b>으로</span>
                 <span style="font-family:var(--mono);font-size:8.5px;color:var(--accent)">/settlements/2026-11-07</span>
               </div>''',
-     "눌렀을 때", "<b>목록 맨 위</b>가 아니라 그 알림이 가리키는 건으로 바로 갑니다"),
+     "누르면 해당 건으로 바로 가기", "<b>목록 맨 위</b>가 아니라 그 알림이 가리키는 건으로 바로 갑니다"),
   ]),
   s8_title="최소 마크업과 키보드", s8_hint="구현할 때 지킬 최소 규칙",
+  keys_heads="<th>키와 마크업</th><th>처리하는 방법</th>",
   code_lede="목록은 <code>&lt;ol&gt;</code>로 적고, 배지는 스크린 리더가 <b>읽을 수 있는 이름</b>과 함께 둡니다.",
   code='''&lt;<span class="t">button</span> <span class="a">aria-label</span>=<span class="s">"알림, 안 읽음 6건"</span>&gt;
   🔔 &lt;<span class="t">span</span> <span class="a">aria-hidden</span>=<span class="s">"true"</span>&gt;6&lt;/<span class="t">span</span>&gt;
@@ -138,19 +142,19 @@ D = dict(
 <span class="c">// 누른 것만 읽음으로</span>
 link.addEventListener(<span class="s">'click'</span>, () =&gt; markRead(group.ids));''',
   keys=kbd([
-    ("배지 숫자는 <code>aria-hidden</code>", "'6'만 읽히면 무슨 숫자인지 알 수 없으므로 <b>버튼 이름에 '안 읽음 6건'</b>을 적습니다"),
-    ("안 읽음은 <b>글자로도</b>", "점과 색만으로는 스크린 리더가 읽지 못하므로 <code>sr-only</code>로 '안 읽음'을 넣습니다"),
+    ("배지 숫자에 <code>aria-hidden</code> 달기", "'6'만 읽히면 무슨 숫자인지 알 수 없으므로 <b>버튼 이름에 '안 읽음 6건'</b>을 적습니다"),
+    ("안 읽음을 <b>글자로도</b> 알리기", "점과 색만으로는 스크린 리더가 읽지 못하므로 <code>sr-only</code>로 '안 읽음'을 넣습니다"),
     ("<code>&lt;ol&gt;</code>", "알림은 순서에 뜻이 있어서 순서 있는 목록으로 적습니다. 최신 알림이 위에 있다는 것도 정보입니다"),
     ("<code>&lt;time datetime&gt;</code>", "'방금'은 사람이 읽는 글자이고, <code>datetime</code> 속성은 기계가 읽는 값입니다"),
-    ("줄 전체가 링크", "줄 전체를 링크로 만들면 <a href=\"touchtarget.html\">터치 타깃</a>이 따로 손대지 않아도 커집니다"),
+    ("줄 전체를 링크로 만들기", "줄 전체를 링크로 만들면 <a href=\"touchtarget.html\">터치 타깃</a>이 따로 손대지 않아도 커집니다"),
     ("<code>role=\"status\"</code>", "새 알림이 오면 읽던 것을 끊지 않고 알립니다. 새 알림은 급한 내용이 아니라서 <code>alert</code>는 지나칩니다"),
   ]),
   backend=rows([
-    ("읽음은 서버가 쥔다", "기기마다 읽음 상태를 따로 세면 <b>한쪽에서 읽어도 다른 쪽 배지가</b> 줄어들지 않습니다. 그래서 읽음 상태는 서버에 둡니다."),
-    ("묶기는 서버에서", "화면마다 다르게 묶으면 배지와 목록이 어긋납니다. 그래서 서버가 <b>묶은 결과를</b> 내려보냅니다."),
-    ("푸시와 센터를 같이 만든다", "푸시만 보내면 푸시를 받지 못한 사람은 그 소식을 끝내 모릅니다. 그래서 푸시를 <b>보낼 때 센터에도 쌓습니다</b>."),
-    ("오래된 것은 지운다", "알림이 쌓이기만 하면 목록이 끝없이 길어집니다. 그래서 <b>보관 기간</b>을 정해 두고 지난 알림은 지웁니다."),
-    ("배지 수를 따로 주지 않는다", "목록과 다른 방식으로 배지 숫자를 계산하면 언젠가는 반드시 어긋납니다. 그래서 목록과 <b>같은 질의</b>로 셉니다."),
+    ("읽음 상태는 서버에 두기", "기기마다 읽음 상태를 따로 세면 <b>한쪽에서 읽어도 다른 쪽 배지가</b> 줄어들지 않습니다. 그래서 읽음 상태는 서버에 둡니다."),
+    ("알림 묶기는 서버에서 하기", "화면마다 다르게 묶으면 배지와 목록이 어긋납니다. 그래서 서버가 <b>묶은 결과를</b> 내려보냅니다."),
+    ("푸시를 보낼 때 센터에도 쌓기", "푸시만 보내면 푸시를 받지 못한 사람은 그 소식을 끝내 모릅니다. 그래서 푸시를 <b>보낼 때 센터에도 쌓습니다</b>."),
+    ("보관 기간이 지난 알림 지우기", "알림이 쌓이기만 하면 목록이 끝없이 길어집니다. 그래서 <b>보관 기간</b>을 정해 두고 지난 알림은 지웁니다."),
+    ("배지 수를 목록과 같은 질의로 세기", "목록과 다른 방식으로 배지 숫자를 계산하면 언젠가는 반드시 어긋납니다. 그래서 목록과 <b>같은 질의</b>로 셉니다."),
   ]),
   plat_lede="<b>OS가 표시하는 배지</b>와 앱 안의 배지는 또 따로 관리됩니다.",
   plats=plats([

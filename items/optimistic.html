@@ -50,7 +50,7 @@
           <iframe src="../demos/optimistic.html" title="낙관적 UI 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>'서버를 느리게'를 켜고 별을 눌러 보세요.</b> 서버가 느려져도 누를 때의 느낌은 똑같습니다. 화면이 서버 응답을 기다리지 않기 때문에 사용자는 기다림을 겪지 않습니다.
+          <p><b>'서버 응답을 1.5초 늦추기'를 켜고 별을 눌러 보세요.</b> 서버가 느려져도 누를 때의 느낌은 똑같습니다. 화면이 서버 응답을 기다리지 않기 때문에 사용자는 기다림을 겪지 않습니다.
           <b>세 번째 줄(권한 없음)</b>은 서버가 거절하므로 별이 원래대로 <b>되돌아가고</b>, 되돌린 이유를 알려 줍니다.
           낙관적 UI는 이렇게 되돌려도 문제가 없는 일에만 쓸 수 있습니다.</p>
         </div>
@@ -75,12 +75,12 @@
         <p>겹쳐 뜨는 부품들은 모양만 보고는 구별하기 어렵지만, 아래 네 가지를 따져 보면 어느 부품인지 가려낼 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>끝나는 때를 아나</th><th>들어올 자리를 잡나</th><th>사용자가 기다리나</th><th>화면이 덜컥거리나</th></tr></thead>
+          <thead><tr><th></th><th>끝나는 때를 아는가</th><th>들어올 내용의 자리를 미리 잡는가</th><th>사용자가 기다려야 하는가</th><th>내용이 들어올 때 화면이 덜컥거리는가</th></tr></thead>
           <tbody>
-            <tr><td>스피너</td><td class="none">모른다</td><td class="none">안 잡는다</td><td>기다린다</td><td>덜컥거린다</td></tr>
-            <tr><td>스켈레톤</td><td class="none">모른다</td><td>잡는다</td><td>기다린다</td><td>안 덜컥거린다</td></tr>
-            <tr><td>프로그레스 바</td><td>안다</td><td>잡기도 한다</td><td>기다린다</td><td>안 덜컥거린다</td></tr>
-            <tr class="me"><td><b>낙관적 UI</b></td><td class="none">해당 없음</td><td>잡는다</td><td>안 기다린다</td><td>안 덜컥거린다</td></tr>
+            <tr><td>스피너</td><td>모름</td><td>잡지 않음</td><td>기다림</td><td>덜컥거림</td></tr>
+            <tr><td>스켈레톤</td><td>모름</td><td>잡아 둠</td><td>기다림</td><td>덜컥거리지 않음</td></tr>
+            <tr><td>프로그레스 바</td><td>알고 있음</td><td>잡기도 함</td><td>기다림</td><td>덜컥거리지 않음</td></tr>
+            <tr class="me"><td><b>낙관적 UI</b></td><td class="none">해당 없음</td><td>잡아 둠</td><td>기다리지 않음</td><td>덜컥거리지 않음</td></tr>
           </tbody>
         </table>
         </div>
@@ -100,7 +100,7 @@
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div class="mini mini--tall" role="img" aria-label="누른 직후 바로 바뀐 모습"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div></div><div style="margin-top:12px;text-align:right;padding-right:6px;font-size:15px;color:#f0a500">★</div><div style="position:absolute;left:6px;top:30px;font-size:7px;color:var(--accent);font-weight:800">0ms — 벌써 바뀜</div></div>
+              <div class="mini mini--tall" role="img" aria-label="누른 직후 바로 바뀐 모습"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div></div><div style="margin-top:12px;text-align:right;padding-right:6px;font-size:15px;color:#f0a500">★</div><div style="position:absolute;left:6px;top:30px;font-size:7px;color:var(--accent);font-weight:800">0ms 만에 바로 바뀜</div></div>
             </div>
             <figcaption>누른 직후<span>누르자마자(<b>0ms</b>) 바뀌고 스피너가 뜨지 않습니다. 낙관적 UI를 쓰는 목적이 이 즉시 반응입니다</span></figcaption>
           </figure>
@@ -108,25 +108,25 @@
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="보류 중인 모습"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div></div><div style="margin-top:12px;text-align:right;padding-right:6px;font-size:13px;color:#f0a500;opacity:.7">★</div><div style="position:absolute;left:6px;top:30px;font-size:7px;color:var(--fg-muted)">서버에 보내는 중</div></div>
             </div>
-            <figcaption>보류 중<span>서버에 보내는 중이라는 표시는 아주 옅게만 합니다. <b>표시가 눈에 띄면 사용자가 결국 기다리게 됩니다</b></span></figcaption>
+            <figcaption>서버 응답을 기다리는 중<span>서버에 보내는 중이라는 표시는 아주 옅게만 합니다. <b>표시가 눈에 띄면 사용자가 결국 기다리게 됩니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="서버가 받아들인 모습"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div></div><div style="margin-top:12px;text-align:right;padding-right:6px;font-size:13px;color:#f0a500">★</div><div style="position:absolute;left:6px;top:30px;font-size:7px;color:#1f8a4c;font-weight:700">확정</div></div>
             </div>
-            <figcaption>확정<span>서버가 받아들여도 <b>화면에는 아무 변화가 없습니다.</b> 이미 맞는 화면을 보여 주고 있기 때문입니다</span></figcaption>
+            <figcaption>서버가 받아들였을 때<span>서버가 받아들여도 <b>화면에는 아무 변화가 없습니다.</b> 이미 맞는 화면을 보여 주고 있기 때문입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="거절당해 되돌아간 모습"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div></div><div style="margin-top:12px;text-align:right;padding-right:6px;font-size:13px;color:var(--fg-faint)">★</div><div style="position:absolute;left:6px;top:30px;font-size:7px;color:var(--danger);font-weight:700">되돌림</div><div class="mini__toast">권한이 없어 되돌렸습니다<b>다시 시도</b></div></div>
             </div>
-            <figcaption>되돌림<span>원래대로 돌아가면서 <b>되돌린 이유를 알려 줍니다</b>. 아무 알림 없이 되돌리면 안 됩니다</span></figcaption>
+            <figcaption>서버가 거절해 되돌렸을 때<span>원래대로 돌아가면서 <b>되돌린 이유를 알려 줍니다</b>. 아무 알림 없이 되돌리면 안 됩니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div class="mini mini--tall" role="img" aria-label="오프라인에서 보류된 모습"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div></div><div style="margin-top:12px;text-align:right;padding-right:6px;font-size:13px;color:#f0a500;opacity:.55">★</div><div style="position:absolute;left:6px;top:30px;font-size:7px;color:var(--warn);font-weight:700">연결 끊김 · 보류</div></div>
+              <div class="mini mini--tall" role="img" aria-label="오프라인에서 보류된 모습"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div></div><div style="margin-top:12px;text-align:right;padding-right:6px;font-size:13px;color:#f0a500;opacity:.55">★</div><div style="position:absolute;left:6px;top:30px;font-size:7px;color:var(--warn);font-weight:700">연결이 끊겨 보류</div></div>
             </div>
-            <figcaption>오프라인<span>보내지 못한 변경을 쌓아 두었다가 연결이 돌아오면 보냅니다</span></figcaption>
+            <figcaption>연결이 끊겼을 때<span>보내지 못한 변경을 쌓아 두었다가 연결이 돌아오면 보냅니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -144,7 +144,7 @@
                     <span class="pin-tr" data-pin="2" style="font-size:9.5px;color:var(--fg-faint)">보냄</span>
                   </div>
                   <div style="background:var(--surface);border:1px solid color-mix(in srgb,var(--danger) 40%,transparent);border-radius:8px;padding:11px 26px;display:flex;align-items:center;gap:26px">
-                    <span style="flex:1;font-size:11px;color:var(--fg-muted)">서버가 거절</span>
+                    <span style="flex:1;font-size:11px;color:var(--fg-muted)">서버가 거절함</span>
                     <span class="pin-out" data-pin="3" style="color:var(--fg-faint);font-size:16px;line-height:1">★</span>
                     <span class="pin-tr" data-pin="4" style="font-size:9.5px;color:var(--danger);font-weight:700">되돌림</span>
                   </div>
@@ -190,7 +190,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>낙관적 UI 대신 다른 것을 써야 하는 경우</b> — 확정을 기다려야 하면 <a href="spinner.html">스피너</a>나 <a href="progress.html">프로그레스 바</a>, 되돌릴 틈을 주려면 <a href="toast.html">되돌리기 토스트</a>, 실패를 알릴 때는 <a href="error.html">에러 상태</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>낙관적 UI 대신 다른 것을 써야 하는 경우</b> — 서버가 확정할 때까지 기다려야 하는 일이면 <a href="spinner.html">스피너</a>나 <a href="progress.html">프로그레스 바</a>로 기다림을 보여 줍니다. 사용자에게 되돌릴 틈을 주려면 <a href="toast.html">되돌리기 토스트</a>를 쓰고, 실패를 알릴 때는 <a href="error.html">에러 상태</a>를 씁니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -200,19 +200,19 @@
             <div class="shot">
               <div class="mini" role="img" aria-label="즐겨찾기 재현"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div></div><div style="margin-top:12px;text-align:right;padding-right:6px;font-size:14px;color:#f0a500">★</div></div>
             </div>
-            <figcaption><b>좋아요 · 즐겨찾기</b>낙관적 UI를 가장 흔하게 쓰는 자리입니다. 실패해도 값 하나만 되돌리면 되기 때문입니다</figcaption>
+            <figcaption><b>좋아요와 즐겨찾기 바로 반영하기</b>낙관적 UI를 가장 흔하게 쓰는 자리입니다. 실패해도 값 하나만 되돌리면 되기 때문입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div class="mini" role="img" aria-label="순서 바꾸기 재현"><div class="mini__bg"></div><div style="margin-top:8px;display:grid;gap:4px"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60" style="background:var(--accent-soft)"></div><div class="mini__bar mini__bar--w40"></div></div><div style="position:absolute;right:6px;top:22px;font-size:7px;color:var(--accent);font-weight:800">↕ 옮기는 중</div></div>
             </div>
-            <figcaption><b>순서 바꾸기</b>끌어다 놓은 자리에 항목을 바로 둡니다. 서버가 거절하면 항목이 원래 자리로 돌아갑니다</figcaption>
+            <figcaption><b>끌어다 놓아 순서 바꾸기</b>끌어다 놓은 자리에 항목을 바로 둡니다. 서버가 거절하면 항목이 원래 자리로 돌아갑니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div class="mini" role="img" aria-label="메시지 선반영 재현"><div class="mini__bg"></div><div style="margin-top:8px;display:grid;gap:5px"><div class="mini__bar mini__bar--w80"></div><div style="background:var(--accent-soft);border-radius:3px;padding:3px 5px;font-size:7px;color:var(--accent);opacity:.75">보내는 중…</div></div></div>
             </div>
-            <figcaption><b>메시지 보내기</b>말풍선을 먼저 띄워 옅게 두고, 전송에 실패하면 느낌표를 붙입니다</figcaption>
+            <figcaption><b>보낸 메시지를 먼저 띄우기</b>말풍선을 먼저 띄워 옅게 두고, 전송에 실패하면 느낌표를 붙입니다</figcaption>
           </figure>
         </div>
       </section>
@@ -235,13 +235,13 @@ setStarred(!before);                  <span class="c">// 2) 화면을 먼저 바
 <span class="a">if</span> (seq !== latest) <span class="a">return</span>;</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>상황</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
-            <tr><td>누름</td><td><b>바로</b> 바뀝니다. 포커스는 누른 자리에 그대로 둡니다</td></tr>
-            <tr><td>스크린 리더</td><td>바뀐 상태를 <code>aria-pressed</code>로 알립니다. 되돌릴 때는 라이브 리전으로 이유를 읽어 줍니다</td></tr>
+            <tr><td>버튼을 눌렀을 때</td><td><b>바로</b> 바뀝니다. 포커스는 누른 자리에 그대로 둡니다</td></tr>
+            <tr><td>스크린 리더로 읽을 때</td><td>바뀐 상태를 <code>aria-pressed</code>로 알립니다. 되돌릴 때는 라이브 리전으로 이유를 읽어 줍니다</td></tr>
             <tr><td>되돌릴 때</td><td><b>알림 없이 되돌리지 않습니다.</b> 화면에서 눈을 떼고 있던 사용자는 값이 되돌아간 줄도 모릅니다</td></tr>
-            <tr><td>빠른 연타</td><td>마지막으로 누른 것만 반영합니다. 응답 순서가 뒤섞이면 화면과 서버의 값이 어긋나기 때문입니다</td></tr>
-            <tr><td>오프라인</td><td>보내지 못한 변경은 보류함에 쌓아 두었다가 연결되면 보냅니다. 보류함에 쌓인 변경이 있다는 표시를 화면에 남깁니다</td></tr>
+            <tr><td>빠르게 여러 번 눌렀을 때</td><td>마지막으로 누른 것만 반영합니다. 응답 순서가 뒤섞이면 화면과 서버의 값이 어긋나기 때문입니다</td></tr>
+            <tr><td>연결이 끊겼을 때</td><td>보내지 못한 변경은 보류함에 쌓아 두었다가 연결되면 보냅니다. 보류함에 쌓인 변경이 있다는 표시를 화면에 남깁니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -252,11 +252,11 @@ setStarred(!before);                  <span class="c">// 2) 화면을 먼저 바
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>낙관적 UI = 낙관적 잠금과 같은 생각</th><td>일단 진행하고 충돌이 나면 되돌린다는 점에서 DB의 optimistic locking과 이름도 발상도 같습니다. <b>충돌이 드물 때만 이득</b>이라는 조건도 같습니다.</td></tr>
-            <tr><th>되돌림 = 보상 트랜잭션</th><td>되돌림은 이미 보여 준 결과를 취소하는 일이라서 사가(saga) 패턴의 보상 단계와 같습니다. 그래서 사가와 마찬가지로 <b>보상할 수 없는 일에는 쓸 수 없습니다.</b></td></tr>
-            <tr><th>연타 = 순서 뒤섞임</th><td>빠르게 두 번 누르면 두 요청의 응답이 보낸 순서와 거꾸로 도착할 수 있습니다. 그래서 요청에 일련번호를 붙여 <b>마지막 것만</b> 반영합니다. 분산 시스템의 last-write-wins와 같은 문제입니다.</td></tr>
-            <tr><th>멱등성</th><td>같은 요청이 두 번 가도 결과가 같아야 안심하고 재시도할 수 있습니다. 요청에 멱등 키를 붙여 두면 되돌리는 처리도 단순해집니다.</td></tr>
-            <tr><th>오프라인 = 아웃박스</th><td>오프라인 보류함은 보내지 못한 변경을 쌓아 두는 큐입니다. 큐가 길어질수록 실패했을 때 되돌리기가 어려워지므로 쌓을 수 있는 양에 상한을 둡니다.</td></tr>
+            <tr><th>낙관적 잠금과 같은 발상</th><td>일단 진행하고 충돌이 나면 되돌린다는 점에서 DB의 optimistic locking과 이름도 발상도 같습니다. <b>충돌이 드물 때만 이득</b>이라는 조건도 같습니다.</td></tr>
+            <tr><th>되돌림은 보상 트랜잭션과 같은 일</th><td>되돌림은 이미 보여 준 결과를 취소하는 일이라서 사가(saga) 패턴의 보상 단계와 같습니다. 그래서 사가와 마찬가지로 <b>보상할 수 없는 일에는 쓸 수 없습니다.</b></td></tr>
+            <tr><th>연타하면 응답 순서가 뒤섞이는 문제</th><td>빠르게 두 번 누르면 두 요청의 응답이 보낸 순서와 거꾸로 도착할 수 있습니다. 그래서 요청에 일련번호를 붙여 <b>마지막 것만</b> 반영합니다. 분산 시스템의 last-write-wins와 같은 문제입니다.</td></tr>
+            <tr><th>요청을 멱등하게 만들기</th><td>같은 요청이 두 번 가도 결과가 같아야 안심하고 재시도할 수 있습니다. 요청에 멱등 키를 붙여 두면 되돌리는 처리도 단순해집니다.</td></tr>
+            <tr><th>오프라인 보류함은 아웃박스 큐</th><td>오프라인 보류함은 보내지 못한 변경을 쌓아 두는 큐입니다. 큐가 길어질수록 실패했을 때 되돌리기가 어려워지므로 쌓을 수 있는 양에 상한을 둡니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -313,9 +313,9 @@ setStarred(!before);                  <span class="c">// 2) 화면을 먼저 바
       <h2>함께 보면 좋은 항목</h2>
       <ol>
         <li><a href="toast.html"><b>되돌리기 토스트</b><em>6부</em></a></li>
-        <li><span class="na"><b>비활성 · 읽기 전용</b><em>8부</em></span></li>
-        <li><span class="na"><b>스위치</b><em>4부</em></span></li>
-        <li><span class="na"><b>제스처</b><em>9부</em></span></li>
+        <li><a href="disabledstate.html"><b>비활성 · 읽기 전용</b><em>4부</em></a></li>
+        <li><a href="switch.html"><b>스위치</b><em>4부</em></a></li>
+        <li><a href="gesture.html"><b>제스처</b><em>9부</em></a></li>
       </ol>
       <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>

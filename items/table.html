@@ -76,7 +76,7 @@
         <p>데이터를 다루는 화면을 설계할 때는 '건수가 늘면 어떻게 되나'부터 따져야 합니다. 아래 네 가지를 물어보면 이 부의 항목들이 서로 어떻게 다른지 드러납니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 다루나</th><th>건수가 늘면</th><th>주소에 담나</th><th>서버가 할 일</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 다루는가</th><th>건수가 늘면 어떻게 하는가</th><th>상태를 주소에 담는가</th><th>서버가 맡는 일</th></tr></thead>
           <tbody>
             <tr class="me"><td><b>데이터 테이블</b></td><td>여러 열의 <b>행들</b></td><td>쪽을 나눈다</td><td><b>담는다</b>(정렬·쪽)</td><td>페이징 · 정렬</td></tr>
             <tr><td>필터와 패싯</td><td>거르는 <b>조건</b></td><td>조건이 늘어난다</td><td><b>담는다</b></td><td>조건별 개수 세기</td></tr>
@@ -86,7 +86,7 @@
             <tr><td>일괄 선택</td><td><b>고른 것들</b></td><td>'전체'가 모호해진다</td><td>안 담는다</td><td>묶음 처리 · 되돌리기</td></tr>
             <tr><td>가상 스크롤</td><td><b>긴 목록</b></td><td><b>이 기법으로 푼다</b></td><td>안 담는다</td><td>커서 페이징</td></tr>
             <tr><td>차트 고르기</td><td>숫자들의 <b>관계</b></td><td>점이 뭉친다</td><td>담기도 한다</td><td>집계 · 구간 나누기</td></tr>
-            <tr><td>내보내기</td><td><b>파일</b>로 꺼내기</td><td>그 자리에서 못 준다</td><td>담기도 한다</td><td><b>비동기 작업</b></td></tr>
+            <tr><td>내보내기</td><td><b>파일</b>로 꺼내기</td><td>그 자리에서 바로 주지 못한다</td><td>담기도 한다</td><td><b>비동기 작업</b></td></tr>
             <tr><td>날짜 범위</td><td><b>기간</b> 고르기</td><td class="none">해당 없음</td><td><b>담는다</b></td><td>경계 시각 맞추기</td></tr>
           </tbody>
         </table>
@@ -103,31 +103,31 @@
             <div class="shot">
               <div style="width:100%;max-width:180px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface);"><div style="display:flex;background:var(--bg);padding:5px 8px;font-size:9.5px;font-weight:700;color:var(--fg-muted)"><span style="flex:1">가맹점</span><span style="width:62px;text-align:right">매출</span></div><div style="display:flex;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);"><span style="flex:1;min-width:0">한빛아웃도어</span><span style="width:62px;text-align:right;font-variant-numeric:tabular-nums">9,827,500</span></div><div style="display:flex;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);"><span style="flex:1;min-width:0">모란상회</span><span style="width:62px;text-align:right;font-variant-numeric:tabular-nums">1,284,000</span></div></div>
             </div>
-            <figcaption>기본<span>열 이름 줄 아래에 행이 이어집니다. <b>숫자는 오른쪽</b>으로 붙여 자릿수를 맞춥니다</span></figcaption>
+            <figcaption>평소 상태<span>열 이름 줄 아래에 행이 이어집니다. <b>숫자는 오른쪽</b>으로 붙여 자릿수를 맞춥니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface);"><div style="display:flex;background:var(--bg);padding:5px 8px;font-size:9.5px;font-weight:700;color:var(--fg-muted)"><span style="flex:1">가맹점</span><span style="width:62px;text-align:right;color:var(--accent)">매출 ▼</span></div><div style="display:flex;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);"><span style="flex:1;min-width:0">한빛아웃도어</span><span style="width:62px;text-align:right;font-variant-numeric:tabular-nums">9,827,500</span></div><div style="display:flex;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);"><span style="flex:1;min-width:0">모란상회</span><span style="width:62px;text-align:right;font-variant-numeric:tabular-nums">1,284,000</span></div></div>
             </div>
-            <figcaption>정렬됨<span><b>어느 열을 기준으로 어느 방향으로</b> 정렬했는지 보여야 합니다</span></figcaption>
+            <figcaption>열을 눌러 정렬했을 때<span><b>어느 열을 기준으로 어느 방향으로</b> 정렬했는지 보여야 합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface);"><div style="display:flex;background:var(--bg);padding:5px 8px;font-size:9.5px;font-weight:700;color:var(--fg-muted)"><span style="flex:1">가맹점</span><span style="width:62px;text-align:right">매출</span></div><div style="display:flex;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);background:var(--accent-soft);"><span style="flex:1;min-width:0">한빛아웃도어</span><span style="width:62px;text-align:right;font-variant-numeric:tabular-nums">9,827,500</span></div><div style="display:flex;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);"><span style="flex:1;min-width:0">모란상회</span><span style="width:62px;text-align:right;font-variant-numeric:tabular-nums">1,284,000</span></div></div>
             </div>
-            <figcaption>줄 선택<span>고른 줄은 바탕색이 바뀝니다. 여러 줄을 골라 한꺼번에 처리하는 <a href="bulk.html">일괄 선택</a>으로 이어집니다</span></figcaption>
+            <figcaption>줄을 골랐을 때<span>고른 줄은 바탕색이 바뀝니다. 여러 줄을 골라 한꺼번에 처리하는 <a href="bulk.html">일괄 선택</a>으로 이어집니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface);"><div style="display:flex;background:var(--bg);padding:5px 8px;font-size:9.5px;font-weight:700;color:var(--fg-muted)"><span style="flex:1">가맹점</span><span style="width:62px;text-align:right">매출</span></div><div style="padding:7px 8px;border-top:1px solid var(--line);display:grid;gap:4px"><span class="skl" style="height:8px;width:70%"></span><span class="skl" style="height:8px;width:55%"></span></div></div>
             </div>
-            <figcaption>로딩<span>실제 줄과 <b>같은 높이</b>로 뼈대를 그립니다. 높이가 다르면 데이터가 들어오는 순간 줄 위치가 밀립니다</span></figcaption>
+            <figcaption>데이터를 불러오는 중<span>실제 줄과 <b>같은 높이</b>로 뼈대를 그립니다. 높이가 다르면 데이터가 들어오는 순간 줄 위치가 밀립니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface);"><div style="display:flex;background:var(--bg);padding:5px 8px;font-size:9.5px;font-weight:700;color:var(--fg-muted)"><span style="flex:1">가맹점</span><span style="width:62px;text-align:right">매출</span></div><div style="padding:16px 8px;border-top:1px solid var(--line);text-align:center;font-size:10px;color:var(--fg-muted)">조건에 맞는 것이 없습니다</div></div>
             </div>
-            <figcaption>빈 결과<span>결과가 없다는 안내와 함께 <b>조건을 지우는 방법</b>을 보여 줍니다</span></figcaption>
+            <figcaption>조건에 맞는 결과가 없을 때<span>결과가 없다는 안내와 함께 <b>조건을 지우는 방법</b>을 보여 줍니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -153,9 +153,9 @@
                    </div>
                   </div>
                   <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">thead th { position: sticky; top: 0 }</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">aria-sort="descending"   — 무엇으로 정렬했나</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">숫자는 오른쪽 + tabular-nums</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">첫 열 고정 — 누구 줄인지 안 잊게</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">aria-sort="descending"   정렬 기준을 알림</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">숫자는 오른쪽 정렬과 tabular-nums</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">첫 열을 고정해 누구 줄인지 보이게</div>
                   <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">?sort=amount&dir=desc&page=2</div>
                 </div>
               </div>
@@ -198,7 +198,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>데이터 테이블 대신 다른 것을 써야 하는 경우</b> — 건마다 내용이 다르면 <a href="../items/card.html">카드</a>, 한 줄이면 <a href="../items/listitem.html">리스트 아이템</a>, 아주 길면 <a href="virtual.html">가상 스크롤</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>데이터 테이블 대신 다른 것을 써야 하는 경우</b> — 건마다 보여 줄 내용이 다르면 <a href="../items/card.html">카드</a>를 쓰고, 한 건이 한 줄로 끝나면 <a href="../items/listitem.html">리스트 아이템</a>으로 충분합니다. 건수가 아주 많아 목록이 길어지면 <a href="virtual.html">가상 스크롤</a>을 함께 씁니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -208,13 +208,13 @@
             <div class="shot">
               <div style="width:100%;max-width:190px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface);"><div style="display:flex;background:var(--bg);padding:5px 8px;font-size:9.5px;font-weight:700;color:var(--fg-muted)"><span style="flex:1">가맹점</span><span style="width:62px;text-align:right">매출</span></div><div style="display:flex;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);"><span style="flex:1;min-width:0">한빛아웃도어</span><span style="width:62px;text-align:right;font-variant-numeric:tabular-nums">9,827,500</span></div><div style="display:flex;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);"><span style="flex:1;min-width:0">모란상회</span><span style="width:62px;text-align:right;font-variant-numeric:tabular-nums">1,284,000</span></div><div style="display:flex;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);"><span style="flex:1;min-width:0">새벽상사</span><span style="width:62px;text-align:right;font-variant-numeric:tabular-nums">11,100</span></div></div>
             </div>
-            <figcaption><b>정산 목록</b>관리 도구에서 가장 흔한 표 화면입니다</figcaption>
+            <figcaption><b>정산 목록 보여 주기</b>관리 도구에서 가장 흔한 표 화면입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:190px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface);"><div style="display:flex;background:var(--bg);padding:5px 8px;font-size:9.5px;font-weight:700;color:var(--fg-muted)"><span style="width:20px"></span><span style="flex:1">가맹점</span><span style="width:52px;text-align:right">매출</span></div><div style="display:flex;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);background:var(--accent-soft);"><span style="width:20px">☑</span><span style="flex:1">한빛아웃도어</span><span style="width:52px;text-align:right;font-variant-numeric:tabular-nums">9,827,500</span></div><div style="display:flex;padding:5px 8px;font-size:10.5px;border-top:1px solid var(--line);"><span style="width:20px">☐</span><span style="flex:1">모란상회</span><span style="width:52px;text-align:right;font-variant-numeric:tabular-nums">1,284,000</span></div></div>
             </div>
-            <figcaption><b>선택이 붙은 표</b>줄 맨 앞에 체크박스를 두고, 고른 줄을 <a href="bulk.html">일괄 선택</a>으로 한꺼번에 처리합니다</figcaption>
+            <figcaption><b>여러 줄을 골라 한꺼번에 처리하기</b>줄 맨 앞에 체크박스를 두고, 고른 줄을 <a href="bulk.html">일괄 선택</a>으로 한꺼번에 처리합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -224,13 +224,13 @@
                 <span style="font-size:9.5px;color:var(--fg-muted)">11월 1일 ~ 7일 · 승인됨</span>
               </div>
             </div>
-            <figcaption><b>폰에서는 카드로</b>폰에서는 열 다섯 개를 가로로 밀어 보게 하기보다 <b>한 건을 카드 한 장으로</b> 바꾸는 편이 읽기 쉽습니다</figcaption>
+            <figcaption><b>폰에서 한 건을 카드 한 장으로 보여 주기</b>폰에서는 열 다섯 개를 가로로 밀어 보게 하기보다 <b>한 건을 카드 한 장으로</b> 바꾸는 편이 읽기 쉽습니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">표가 꼭 갖출 것</span></h2>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">표를 만들 때 꼭 갖출 것</span></h2>
         <p>마크업은 <code>&lt;table&gt;</code>로 쓰고, 정렬 상태는 <code>aria-sort</code>와 주소 양쪽에 함께 적습니다.</p>
 <pre class="code">&lt;<span class="t">table</span>&gt;
   &lt;<span class="t">caption</span> <span class="a">class</span>=<span class="s">"sr-only"</span>&gt;정산 목록, 20건 중 1~5&lt;/<span class="t">caption</span>&gt;
@@ -249,14 +249,14 @@
 <span class="t">td</span>.num { <span class="a">text-align</span>: right; <span class="a">font-variant-numeric</span>: tabular-nums; }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td><kbd>Tab</kbd></td><td>정렬 버튼과 줄 안의 누를 수 있는 것들로 옮겨 갑니다. <b>셀마다 멈추지는 않습니다</b></td></tr>
-            <tr><td><code>scope</code>를 적는다</td><td><code>col</code>·<code>row</code>를 적어 두면 스크린 리더가 '매출 열, 1,284,000'처럼 열 이름을 붙여 읽습니다</td></tr>
+            <tr><td><code>scope</code> 속성 적기</td><td><code>col</code>·<code>row</code>를 적어 두면 스크린 리더가 '매출 열, 1,284,000'처럼 열 이름을 붙여 읽습니다</td></tr>
             <tr><td><code>aria-sort</code></td><td>정렬 기준인 열 <b>하나</b>에만 달고, 화살표와 함께 씁니다</td></tr>
             <tr><td><code>&lt;caption&gt;</code></td><td>표가 무엇인지 한 줄로 적습니다. 화면에는 보이지 않게 둬도 됩니다</td></tr>
-            <tr><td>정렬은 <code>&lt;button&gt;</code>으로</td><td><code>&lt;th&gt;</code>에 onclick을 걸면 키보드로 누를 수 없습니다</td></tr>
-            <tr><td>줄 높이를 맞춘다</td><td>긴 글자는 말줄임으로 잘라 한 줄로 고정합니다. 줄 높이가 같은 것은 <a href="virtual.html">가상 스크롤</a>의 전제 조건이기도 합니다</td></tr>
+            <tr><td>정렬 단추는 <code>&lt;button&gt;</code>으로 만들기</td><td><code>&lt;th&gt;</code>에 onclick을 걸면 키보드로 누를 수 없습니다</td></tr>
+            <tr><td>모든 줄의 높이를 똑같이 맞추기</td><td>긴 글자는 말줄임으로 잘라 한 줄로 고정합니다. 줄 높이가 같은 것은 <a href="virtual.html">가상 스크롤</a>의 전제 조건이기도 합니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -267,11 +267,11 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>정렬은 서버에서</th><td>화면에 받아 둔 20건만 정렬하면 <b>쪽을 넘길 때마다 순서가 이어지지 않습니다.</b> 서버가 전체 데이터를 기준으로 정렬한 뒤 해당 쪽만 잘라 보내야 합니다.</td></tr>
-            <tr><th>정렬 기준을 열어 두지 않는다</th><td><code>?sort=</code> 값을 그대로 SQL에 넣으면 SQL 주입 공격을 당할 수 있습니다. 정렬할 수 있는 열 이름을 <b>허용 목록</b>으로 정해 두고 그 안의 값만 받습니다.</td></tr>
-            <tr><th>같은 값의 순서</th><td>매출이 같은 두 건의 순서가 요청마다 바뀌면 <b>쪽을 넘길 때 같은 줄이 두 번</b> 나옵니다. 그래서 ID를 2차 정렬 기준으로 붙여 순서를 고정합니다.</td></tr>
-            <tr><th>전체 건수</th><td>'20건 중 1~5'처럼 전체 건수를 보여 주려면 <code>COUNT(*)</code>를 따로 돌려야 하는데, 행이 많은 표에서는 이 쿼리가 오래 걸립니다. 그래서 큰 표에서는 <b>'100+ 건'</b>처럼 대략 적거나 커서 방식으로 바꿉니다.</td></tr>
-            <tr><th>열 많은 표</th><td>열이 늘수록 응답 크기도 커집니다. 화면에 <b>보이는 열만</b> 요청하는 방식(필드 선택)을 두면 목록 응답이 가벼워집니다.</td></tr>
+            <tr><th>정렬은 서버에서 하기</th><td>화면에 받아 둔 20건만 정렬하면 <b>쪽을 넘길 때마다 순서가 이어지지 않습니다.</b> 서버가 전체 데이터를 기준으로 정렬한 뒤 해당 쪽만 잘라 보내야 합니다.</td></tr>
+            <tr><th>정렬 기준은 정해 둔 열 이름만 받기</th><td><code>?sort=</code> 값을 그대로 SQL에 넣으면 SQL 주입 공격을 당할 수 있습니다. 정렬할 수 있는 열 이름을 <b>허용 목록</b>으로 정해 두고 그 안의 값만 받습니다.</td></tr>
+            <tr><th>값이 같은 줄의 순서 고정하기</th><td>매출이 같은 두 건의 순서가 요청마다 바뀌면 <b>쪽을 넘길 때 같은 줄이 두 번</b> 나옵니다. 그래서 ID를 2차 정렬 기준으로 붙여 순서를 고정합니다.</td></tr>
+            <tr><th>전체 건수를 세는 비용</th><td>'20건 중 1~5'처럼 전체 건수를 보여 주려면 <code>COUNT(*)</code>를 따로 돌려야 하는데, 행이 많은 표에서는 이 쿼리가 오래 걸립니다. 그래서 큰 표에서는 <b>'100+ 건'</b>처럼 대략 적거나 커서 방식으로 바꿉니다.</td></tr>
+            <tr><th>열이 많은 표의 응답 크기</th><td>열이 늘수록 응답 크기도 커집니다. 화면에 <b>보이는 열만</b> 요청하는 방식(필드 선택)을 두면 목록 응답이 가벼워집니다.</td></tr>
           </tbody>
         </table>
         </div>

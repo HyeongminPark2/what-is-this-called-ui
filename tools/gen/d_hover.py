@@ -13,12 +13,12 @@ DOTS = '<span style="width:18px;height:18px;border-radius:4px;background:var(--b
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">@media (hover: hover) — 올려놓기가 되는 기기</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">(pointer: fine) — 마우스처럼 뾰족한 포인터</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">(pointer: coarse) — 손가락</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">@media (hover: hover)는 올려놓기가 되는 기기</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">(pointer: fine)은 마우스처럼 뾰족한 포인터</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">(pointer: coarse)는 손가락 입력</div>
                   <div class="pin-out" data-pin="4" style="max-width:230px">''' + row('모란상회', X, False, "230px").strip() + '''</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">호버는 <b>덤</b> — 호버로만 되는 일을 두지 않는다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">:hover 만 쓰면 키보드 사용자도 같은 처지가 된다</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">호버는 <b>부가 기능</b>이라 호버로만 되는 일은 없앰</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">:hover만 쓰면 키보드 사용자도 볼 수 없음</div>
                 </div>
               </div>'''
 
@@ -48,31 +48,34 @@ D = dict(
   ]),
   axes=ax("호버가 없는 세계"),
   oneline="<b>호버는 없어도 되는 부가 기능으로 두어야 합니다.</b> 호버로 되는 일은 반드시 <b>눌러서도</b> 할 수 있어야 하고, 그렇게 만들면 키보드 사용자도 같은 기능을 쓸 수 있게 됩니다.",
-  s4_title="호버가 없으면", s4_hint="무엇이 사라지나",
+  s4_title="호버가 없을 때 달라지는 것", s4_hint="사라지는 것과 고친 모습",
+  do_title="호버를 써도 되는 경우",
+  dont_title="호버에 기대면 안 되는 경우",
+  instead_title="호버 대신 쓸 수 있는 방법",
   states=states([
-    (row('모란상회', X), "PC — 줄에 올렸을 때", "✕가 나타납니다. 평소에는 숨어 있어서 <b>깔끔해 보입니다</b>"),
-    (row('모란상회'), "폰 — 올릴 수가 없다", "✕가 나타나지 않으므로 <b>지울 방법이 없습니다</b>"),
-    (row('모란상회', X), "고친 것 ①", "✕를 <b>늘 보여 줍니다.</b> 화면이 조금 복잡해져도 괜찮습니다"),
-    (row('모란상회', DOTS), "고친 것 ②", "<b>⋯를 눌러</b> 메뉴를 엽니다. 줄에는 ⋯만 있어서 깔끔합니다"),
+    (row('모란상회', X), "PC에서 줄에 마우스를 올렸을 때", "✕가 나타납니다. 평소에는 숨어 있어서 <b>깔끔해 보입니다</b>"),
+    (row('모란상회'), "폰에서 마우스를 올릴 수 없을 때", "✕가 나타나지 않으므로 <b>지울 방법이 없습니다</b>"),
+    (row('모란상회', X), "✕를 늘 보이게 고친 모습", "✕를 <b>늘 보여 줍니다.</b> 화면이 조금 복잡해져도 괜찮습니다"),
+    (row('모란상회', DOTS), "⋯ 메뉴로 고친 모습", "<b>⋯를 눌러</b> 메뉴를 엽니다. 줄에는 ⋯만 있어서 깔끔합니다"),
     ('''              <div style="width:100%;max-width:152px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px">
                 <span style="font-size:10px">ⓘ 수수료란?</span>
-                <span style="font-size:9px;color:var(--fg-muted)">눌러서 펼친다</span>
+                <span style="font-size:9px;color:var(--fg-muted)">눌러서 펼침</span>
               </div>''',
-     "툴팁 대신", "설명을 <b>눌러서 펼치게</b> 합니다"),
+     "툴팁 대신 눌러서 펼치기", "설명을 <b>눌러서 펼치게</b> 합니다"),
     ('''              <div style="width:100%;max-width:152px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:3px">
                 <span style="font-size:10px;font-weight:700">한빛아웃도어</span>
                 <span style="font-size:9px;color:var(--danger);font-weight:700">9,820원 <span style="color:var(--fg-muted);font-weight:400;text-decoration:line-through">12,000원</span></span>
               </div>''',
-     "할인가도 마찬가지", "할인가를 호버에 숨기면 <b>폰에서는 볼 수 없습니다</b>"),
+     "할인가를 호버에 숨겼을 때", "할인가를 호버에 숨기면 <b>폰에서는 볼 수 없습니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
     ("기기를 묻는 질의", "@media (hover: hover)", "<b>올려놓기가 되는 기기</b>에만 호버 규칙을 적용합니다"),
     ("뾰족한 포인터", "(pointer: fine)", "마우스나 펜처럼 작은 것도 정확히 누를 수 있는 입력입니다"),
     ("뭉툭한 포인터", "(pointer: coarse)", "손가락 입력입니다. <a href=\"touchtarget.html\">터치 타깃</a>을 키워야 합니다"),
-    ("늘 보이는 길", "버튼·메뉴", "호버로 되는 일은 <b>눌러서도</b> 할 수 있게 둡니다"),
-    ("호버는 덤", "progressive", "호버가 없어도 쓸 수 있고, 있으면 조금 더 편해지는 정도로 둡니다"),
-    ("키보드도 같은 처지", ":focus-visible", "<code>:hover</code>만 쓰면 <b>Tab으로 포커스를 옮긴 사용자</b>도 볼 수 없습니다"),
+    ("늘 보이는 버튼", "버튼·메뉴", "호버로 되는 일은 <b>눌러서도</b> 할 수 있게 둡니다"),
+    ("호버는 부가 기능", "progressive", "호버가 없어도 쓸 수 있고, 있으면 조금 더 편해지는 정도로 둡니다"),
+    ("키보드 포커스", ":focus-visible", "<code>:hover</code>만 쓰면 <b>Tab으로 포커스를 옮긴 사용자</b>도 볼 수 없습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           실제 기기에는 <b>입력 방식이 섞여 있습니다.</b> 터치스크린이 달린 노트북도 있고,
@@ -92,24 +95,25 @@ D = dict(
     "<code>:hover</code>만 쓰고 <code>:focus-visible</code>을 빼먹을 때",
     "화면 폭으로 호버 여부를 가를 때. <b>화면이 큰 태블릿</b>도 손가락으로 씁니다",
   ]),
-  instead='설명이면 눌러서 펼치는 <a href="../items/popover.html">팝오버</a>, 동작이면 ⋯ 메뉴나 <a href="../items/listitem.html">줄 안의 버튼</a>을 쓰고, 미리보기는 <b>없어도 되게</b> 만듭니다.',
+  instead='설명을 보여 줘야 하면 눌러서 펼치는 <a href="../items/popover.html">팝오버</a>를 쓰고, 동작이라면 ⋯ 메뉴나 <a href="../items/listitem.html">줄 안의 버튼</a>으로 꺼내 둡니다. 미리보기는 <b>없어도 쓰는 데 지장이 없게</b> 만듭니다.',
   cases=cases([
-    (row('모란상회', DOTS), "⋯ 로 모으기", "줄이 깔끔하고, 어떤 기기에서든 <b>눌러서 쓸 수</b> 있습니다"),
+    (row('모란상회', DOTS), "동작을 ⋯ 메뉴로 모으기", "줄이 깔끔하고, 어떤 기기에서든 <b>눌러서 쓸 수</b> 있습니다"),
     ('''              <div style="width:100%;max-width:152px;font-family:var(--mono);font-size:9px;color:var(--fg-muted);display:grid;gap:2px">
                 <span>@media (hover: hover) {</span>
                 <span>&nbsp;&nbsp;.row:hover .del {</span>
                 <span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--accent)">opacity: 1</span></span>
                 <span>&nbsp;&nbsp;}</span><span>}</span>
               </div>''',
-     "호버 규칙을 가둔다", "손가락으로 쓰는 기기에는 이 규칙이 <b>아예 적용되지 않습니다</b>"),
+     "호버 규칙을 미디어 쿼리 안에 두기", "손가락으로 쓰는 기기에는 이 규칙이 <b>아예 적용되지 않습니다</b>"),
     ('''              <div style="width:100%;max-width:152px;font-family:var(--mono);font-size:9px;color:var(--fg-muted);display:grid;gap:2px">
                 <span>.row:hover .del,</span>
                 <span><span style="color:var(--accent)">.row:focus-within .del</span> {</span>
                 <span>&nbsp;&nbsp;opacity: 1</span><span>}</span>
               </div>''',
-     "키보드도 같이", "<code>:focus-within</code> 한 줄을 더하면 <b>Tab으로 다니는 사용자</b>도 같은 버튼을 볼 수 있습니다"),
+     "키보드 포커스에도 같이 보여 주기", "<code>:focus-within</code> 한 줄을 더하면 <b>Tab으로 다니는 사용자</b>도 같은 버튼을 볼 수 있습니다"),
   ]),
-  s8_title="최소 코드와 규칙", s8_hint="빠뜨리기 쉬운 설정까지",
+  s8_title="최소 코드와 지킬 규칙", s8_hint="빠뜨리기 쉬운 설정까지 담은 규칙",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법과 까닭</th>",
   code_lede="호버 규칙은 <b>호버가 되는 기기에만</b> 적용하고, 키보드 포커스 규칙을 함께 적습니다.",
   code='''<span class="c">/* 늘 보이는 길은 모든 기기에 준다 */</span>
 .row .del { <span class="a">opacity</span>: <span class="a">1</span>; }
@@ -124,27 +128,27 @@ D = dict(
 <span class="c">// 자바스크립트에서 물어볼 때</span>
 <span class="k">if</span> (matchMedia(<span class="s">'(hover: none)'</span>).matches) showActionsAlways();''',
   keys=kbd([
-    ("<code>:focus-within</code>을 짝으로", "<code>:hover</code>를 쓸 때마다 함께 적습니다. <b>이 한 줄로 키보드 사용자도</b> 같은 것을 볼 수 있습니다"),
-    ("<code>@media (hover: hover)</code>", "손가락으로 쓰는 기기는 이 블록을 적용하지 않으므로 <b>숨기는 규칙이 아예 걸리지 않습니다</b>"),
-    ("<code>(pointer: fine)</code>과 함께", "펜이나 마우스를 가리킵니다. 두 조건을 같이 걸면 터치 노트북에서 덜 어긋납니다"),
-    ("<code>:hover</code>가 손가락에서 남는다", "손가락으로 한 번 누른 뒤 호버 상태가 <b>풀리지 않고 남아</b> 있을 수 있습니다. 호버 규칙을 미디어 쿼리 안에 두면 이 문제가 생기지 않습니다"),
-    ("<code>title</code> 속성", "호버로만 뜨기 때문에 손가락으로 쓰는 기기에서는 보이지 않습니다. <b>설명을 title에만 두지 않습니다</b>"),
-    ("<a href=\"../items/tooltip.html\">툴팁</a>", "호버와 <b>포커스</b> 양쪽에서 떠야 합니다. 포커스로 뜨지 않으면 키보드 사용자는 툴팁을 볼 수 없습니다"),
+    ("<code>:focus-within</code>을 짝으로 적기", "<code>:hover</code>를 쓸 때마다 함께 적습니다. <b>이 한 줄로 키보드 사용자도</b> 같은 것을 볼 수 있습니다"),
+    ("<code>@media (hover: hover)</code> 안에 두기", "손가락으로 쓰는 기기는 이 블록을 적용하지 않으므로 <b>숨기는 규칙이 아예 걸리지 않습니다</b>"),
+    ("<code>(pointer: fine)</code>과 함께 걸기", "펜이나 마우스를 가리킵니다. 두 조건을 같이 걸면 터치 노트북에서 덜 어긋납니다"),
+    ("손가락으로 누른 뒤 남는 <code>:hover</code>", "손가락으로 한 번 누른 뒤 호버 상태가 <b>풀리지 않고 남아</b> 있을 수 있습니다. 호버 규칙을 미디어 쿼리 안에 두면 이 문제가 생기지 않습니다"),
+    ("<code>title</code> 속성으로 띄운 설명", "호버로만 뜨기 때문에 손가락으로 쓰는 기기에서는 보이지 않습니다. <b>설명을 title에만 두지 않습니다</b>"),
+    ("<a href=\"../items/tooltip.html\">툴팁</a>을 띄우는 조건", "호버와 <b>포커스</b> 양쪽에서 떠야 합니다. 포커스로 뜨지 않으면 키보드 사용자는 툴팁을 볼 수 없습니다"),
   ]),
   backend=rows([
-    ("미리 받아 두는 것", "마우스를 올렸을 때 다음 화면의 데이터를 미리 받아 두는 방식은 손가락으로 쓰는 기기에서 <b>아무 효과가 없습니다.</b> 이런 기기를 위해서는 다른 시점에 미리 받는 방법이 필요합니다."),
-    ("쓰임이 다르게 찍힌다", "같은 기능이 폰에서만 거의 쓰이지 않는다면, 그 기능이 <b>호버로만 보이게 숨어 있어서</b>일 수 있습니다. 사용량 숫자만 보고 '안 쓰는 기능'으로 판단해 지우면 잘못된 결정이 됩니다."),
+    ("호버할 때 데이터를 미리 받아 두기", "마우스를 올렸을 때 다음 화면의 데이터를 미리 받아 두는 방식은 손가락으로 쓰는 기기에서 <b>아무 효과가 없습니다.</b> 이런 기기를 위해서는 다른 시점에 미리 받는 방법이 필요합니다."),
+    ("폰에서만 사용량이 낮게 나올 때", "같은 기능이 폰에서만 거의 쓰이지 않는다면, 그 기능이 <b>호버로만 보이게 숨어 있어서</b>일 수 있습니다. 사용량 숫자만 보고 '안 쓰는 기능'으로 판단해 지우면 잘못된 결정이 됩니다."),
   ]),
   plat_lede="호버가 없는 것은 <b>기기가 아니라 입력 방식</b>의 문제라서, 세 플랫폼 모두 사정이 같습니다.",
   plats=plats([
     ("웹", "hover · pointer 질의",
      row('모란상회', X, False, "110px"),
      "브라우저가 hover·pointer 미디어 쿼리로 <b>입력 방식을 물어볼 방법</b>을 줍니다. 다만 입력 방식이 섞인 기기가 많아서 참과 거짓이 늘 명확하지는 않습니다."),
-    ("iOS", "호버가 없다",
+    ("iOS", "호버가 없는 환경",
      '''              <div class="phone" role="img" aria-label="iOS 롱프레스 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
-                <div style="position:absolute;left:5px;right:5px;top:30px;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:4px;font-size:6px">길게 눌러 메뉴</div></div></div>''',
+                <div style="position:absolute;left:5px;right:5px;top:30px;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:4px;font-size:6px">길게 눌러 열기</div></div></div>''',
      "숨겨 둔 동작은 <b>길게 누르기</b>나 <b>쓸어넘기기</b>로 꺼냅니다. 아이패드에 마우스를 연결하면 호버도 쓸 수 있습니다."),
-    ("안드로이드", "호버가 없다",
+    ("안드로이드", "호버가 없는 환경",
      '''              <div class="phone" role="img" aria-label="안드로이드 오버플로 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <span style="position:absolute;right:6px;top:30px;font-size:9px">⋮</span></div></div>''',
      "숨길 동작은 <b>오버플로 메뉴(⋮)</b>에 모으는 것이 관례입니다."),

@@ -51,7 +51,7 @@
         </div>
         <div class="note" style="margin-bottom:0">
           <p>스위치를 켜고 '자세히'를 펼쳐 보세요. 아래 접근성 트리에서 <b>상태가 바로 바뀝니다</b>.<br>
-          <b>role·state 를 빼고 보기</b>를 켜면 트리에 이름만 남기 때문에, '이메일 알림'이
+          <b>role·state를 빼고 보기</b>를 켜면 트리에 이름만 남기 때문에, '이메일 알림'이
           <b>스위치인지 버튼인지, 켜져 있는지 꺼져 있는지</b> 알 수 없게 됩니다.
           눈으로 보면 모두 알 수 있는 정보인데도 스크린 리더로는 전달되지 않습니다.</p>
         </div>
@@ -76,18 +76,18 @@
         <p>접근성은 눈으로는 보이지 않는 부분까지 챙기는 일입니다. 아래 네 가지를 물어보면 이 부의 항목들이 서로 어떻게 다른지 가를 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 돕나</th><th>눈으로 보이나</th><th>안 하면 누가 막히나</th><th>어떻게 확인하나</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 돕는가</th><th>화면에 눈으로 보이는가</th><th>챙기지 않으면 누가 막히는가</th><th>어떻게 확인하는가</th></tr></thead>
           <tbody>
-            <tr><td>포커스</td><td><b>지금 어디인지</b></td><td><b>보여야 한다</b></td><td>키보드만 쓰는 사람</td><td>Tab 을 눌러 본다</td></tr>
-            <tr><td>포커스 트랩</td><td>모달 안에 가두기</td><td>안 보인다</td><td>키보드·스크린 리더</td><td>모달에서 Tab 을 돌려 본다</td></tr>
-            <tr><td>키보드 조작</td><td>마우스 없이 <b>전부</b></td><td>안 보인다</td><td>마우스를 못 쓰는 사람</td><td>마우스를 치우고 해 본다</td></tr>
-            <tr><td>이름 붙이기</td><td>뭐라고 <b>부르나</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>접근성 트리를 본다</td></tr>
-            <tr class="me"><td><b>스크린 리더가 읽는 것</b></td><td>역할 · 이름 · <b>상태</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>직접 들어 본다</td></tr>
-            <tr><td>라이브 리전</td><td><b>저절로 바뀐 것</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>바꿔 놓고 들어 본다</td></tr>
-            <tr><td>대비비</td><td>글자가 <b>읽히나</b></td><td><b>보인다</b></td><td>저시력 · 밝은 곳 · 싼 화면</td><td><b>재 본다</b>(숫자로 나온다)</td></tr>
-            <tr><td>시맨틱 태그</td><td>화면의 <b>구조</b></td><td>안 보인다</td><td><b>거의 모두</b></td><td>구역 목록을 열어 본다</td></tr>
-            <tr><td>대체 텍스트</td><td>그림의 <b>뜻</b></td><td>안 보인다</td><td>눈으로 안 보는 사람</td><td>이미지를 끄고 읽어 본다</td></tr>
-            <tr><td>확대와 글자 크기</td><td><b>키웠을 때</b>도 쓰이나</td><td>안 보인다</td><td>저시력 사용자</td><td>200%로 키워 본다</td></tr>
+            <tr><td>포커스</td><td><b>지금 어디에 있는지</b> 보여 주기</td><td><b>보여야 함</b></td><td>키보드만 쓰는 사람</td><td>Tab을 눌러 보기</td></tr>
+            <tr><td>포커스 트랩</td><td>포커스를 모달 안에 가두기</td><td>보이지 않음</td><td>키보드나 스크린 리더 사용자</td><td>모달을 열고 Tab을 계속 눌러 보기</td></tr>
+            <tr><td>키보드 조작</td><td>마우스 없이 <b>모든 기능</b> 쓰기</td><td>보이지 않음</td><td>마우스를 못 쓰는 사람</td><td>마우스를 치우고 써 보기</td></tr>
+            <tr><td>이름 붙이기</td><td>요소를 뭐라고 <b>부르는지</b> 정하기</td><td>보이지 않음</td><td>화면을 못 보는 사람</td><td>접근성 트리를 살펴보기</td></tr>
+            <tr class="me"><td><b>스크린 리더가 읽는 것</b></td><td>역할 · 이름 · <b>상태</b> 전하기</td><td>보이지 않음</td><td>화면을 못 보는 사람</td><td>스크린 리더로 직접 들어 보기</td></tr>
+            <tr><td>라이브 리전</td><td><b>저절로 바뀐 내용</b> 알리기</td><td>보이지 않음</td><td>화면을 못 보는 사람</td><td>내용을 바꾼 뒤 들어 보기</td></tr>
+            <tr><td>대비비</td><td>글자가 <b>잘 읽히는지</b> 따지기</td><td><b>보임</b></td><td>저시력 사용자, 햇빛 아래나 값싼 화면으로 보는 사람</td><td><b>도구로 재 보기</b>(숫자로 나옴)</td></tr>
+            <tr><td>시맨틱 태그</td><td>화면의 <b>구조</b> 알리기</td><td>보이지 않음</td><td><b>거의 모든 사용자</b></td><td>구역 목록을 열어 보기</td></tr>
+            <tr><td>대체 텍스트</td><td>그림의 <b>뜻</b> 전하기</td><td>보이지 않음</td><td>화면을 눈으로 보지 않는 사람</td><td>이미지를 끄고 읽어 보기</td></tr>
+            <tr><td>확대와 글자 크기</td><td><b>키웠을 때</b>도 쓸 수 있는지 따지기</td><td>보이지 않음</td><td>저시력 사용자</td><td>200%로 키워 보기</td></tr>
           </tbody>
         </table>
         </div>
@@ -97,43 +97,43 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 갈래<span class="hint">무엇이 읽히고 무엇이 안 읽히나</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 읽히는 말과 읽히지 않는 말<span class="hint">속성에 따라 스크린 리더가 읽는 말이 달라지는 모습</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:168px;display:grid;gap:7px;justify-items:center"><span style="display:inline-flex;align-items:center;gap:6px;font-size:11px"><span style="position:relative;width:34px;height:20px;border-radius:99px;background:var(--line-strong);display:inline-block"><span style="position:absolute;left:2px;top:2px;width:16px;height:16px;border-radius:99px;background:#fff"></span></span>이메일 알림</span><span style="font-family:var(--mono);font-size:10px;color:#1f8a4c;font-weight:700;text-align:center">"이메일 알림, 스위치, 꺼짐"</span></div>
             </div>
-            <figcaption>역할+이름+상태<span>세 가지가 모두 있습니다. <b>모든 요소가 갖춰야 하는 기본</b>입니다</span></figcaption>
+            <figcaption>역할·이름·상태가 모두 있을 때<span>세 가지가 모두 있습니다. <b>모든 요소가 갖춰야 하는 기본</b>입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:168px;display:grid;gap:7px;justify-items:center"><span style="display:inline-flex;align-items:center;gap:6px;font-size:11px"><span style="position:relative;width:34px;height:20px;border-radius:99px;background:var(--accent);display:inline-block"><span style="position:absolute;left:16px;top:2px;width:16px;height:16px;border-radius:99px;background:#fff"></span></span>이메일 알림</span><span style="font-family:var(--mono);font-size:10px;color:#1f8a4c;font-weight:700;text-align:center">"이메일 알림, 스위치, 켜짐"</span></div>
             </div>
-            <figcaption>상태가 바뀜<span><code>aria-checked</code> 값을 바꿔야 <b>스크린 리더가 읽는 말도 바뀝니다</b></span></figcaption>
+            <figcaption>상태가 바뀌었을 때<span><code>aria-checked</code> 값을 바꿔야 <b>스크린 리더가 읽는 말도 바뀝니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:168px;display:grid;gap:7px;justify-items:center"><span style="display:inline-flex;align-items:center;gap:6px;font-size:11px"><span style="position:relative;width:34px;height:20px;border-radius:99px;background:var(--accent);display:inline-block"><span style="position:absolute;left:16px;top:2px;width:16px;height:16px;border-radius:99px;background:#fff"></span></span>이메일 알림</span><span style="font-family:var(--mono);font-size:10px;color:var(--danger);font-weight:700;text-align:center">"이메일 알림" — 역할·상태 없음</span></div>
+              <div style="width:100%;max-width:168px;display:grid;gap:7px;justify-items:center"><span style="display:inline-flex;align-items:center;gap:6px;font-size:11px"><span style="position:relative;width:34px;height:20px;border-radius:99px;background:var(--accent);display:inline-block"><span style="position:absolute;left:16px;top:2px;width:16px;height:16px;border-radius:99px;background:#fff"></span></span>이메일 알림</span><span style="font-family:var(--mono);font-size:10px;color:var(--danger);font-weight:700;text-align:center">"이메일 알림"만 읽히고 역할·상태 없음</span></div>
             </div>
-            <figcaption>속성이 없으면<span>스크린 리더로는 <b>켜졌는지 알 수 없습니다</b>. 눈으로만 확인할 수 있습니다</span></figcaption>
+            <figcaption>역할·상태 속성이 없을 때<span>스크린 리더로는 <b>켜졌는지 알 수 없습니다</b>. 눈으로만 확인할 수 있습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:168px;display:grid;gap:7px;justify-items:center"><span style="display:inline-block;border:1px solid var(--line-strong);border-radius:6px;padding:6px 11px;font-size:11px">자세히</span><span style="font-family:var(--mono);font-size:10px;color:#1f8a4c;font-weight:700;text-align:center">"자세히, 버튼, 접힘"</span></div>
             </div>
-            <figcaption>펼침 상태<span><code>aria-expanded</code>는 <b>버튼을 누르면 무엇이 펼쳐지거나 접히는지</b> 알려 줍니다</span></figcaption>
+            <figcaption>펼침 상태를 알릴 때<span><code>aria-expanded</code>는 <b>버튼을 누르면 무엇이 펼쳐지거나 접히는지</b> 알려 줍니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:168px;display:grid;gap:7px;justify-items:center"><span style="display:inline-block;border:1px solid var(--line-strong);border-radius:6px;padding:6px 11px;font-size:11px;opacity:.45">확정</span><span style="font-family:var(--mono);font-size:10px;color:#1f8a4c;font-weight:700;text-align:center">"확정, 버튼, 흐림"</span></div>
             </div>
-            <figcaption>비활성<span><code>disabled</code>를 달면 버튼이 왜 눌리지 않는지 알려 줍니다</span></figcaption>
+            <figcaption>비활성 버튼일 때<span><code>disabled</code>를 달면 버튼이 왜 눌리지 않는지 알려 줍니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:168px;display:grid;gap:7px;justify-items:center"><span style="display:inline-grid;place-items:center;width:30px;height:30px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-size:10px;font-weight:700">길동</span><span style="font-family:var(--mono);font-size:10px;color:#1f8a4c;font-weight:700;text-align:center">(안 읽힘) — aria-hidden</span></div>
+              <div style="width:100%;max-width:168px;display:grid;gap:7px;justify-items:center"><span style="display:inline-grid;place-items:center;width:30px;height:30px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-size:10px;font-weight:700">길동</span><span style="font-family:var(--mono);font-size:10px;color:#1f8a4c;font-weight:700;text-align:center">(aria-hidden으로 읽지 않음)</span></div>
             </div>
-            <figcaption>일부러 안 읽히기<span>옆에 같은 이름이 글자로 또 있으면 <b>그림은 읽지 않게 뺍니다</b></span></figcaption>
+            <figcaption>일부러 읽지 않게 뺄 때<span>옆에 같은 이름이 글자로 또 있으면 <b>그림은 읽지 않게 뺍니다</b></span></figcaption>
           </figure>
         </div>
       </section>
@@ -150,11 +150,11 @@
                       <span style="position:absolute;left:18px;top:2px;width:18px;height:18px;border-radius:99px;background:#fff"></span>
                     </span>이메일 알림
                   </div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">role="switch"   — 이게 무엇인가</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">이름 "이메일 알림"   — 뭐라고 부르나</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--warn)">aria-checked="true"   — 지금 어떤가</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">role="switch"   — 요소가 무엇인지</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">이름 "이메일 알림"   — 무엇이라고 부르는지</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--warn)">aria-checked="true"   — 지금 어떤 상태인지</div>
                   <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">aria-expanded · disabled · aria-selected</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">색·위치로만 표현한 것은 안 읽힌다</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">색·위치로만 표현한 것은 읽히지 않음</div>
                 </div>
               </div>
             </div>
@@ -165,7 +165,7 @@
             <li><b>이름 <em>accessible name</em></b><span>요소를 무엇이라고 부르는지 나타냅니다. 이름을 정하는 규칙은 <a href="name.html">이름 붙이기</a>에서 다룹니다</span></li>
             <li><b>상태 <em>aria-checked 등</em></b><span>요소가 지금 어떤 상태인지 나타냅니다. 상태가 <b>바뀔 때마다 속성 값도 같이 바꿔야</b> 합니다</span></li>
             <li><b>상태 속성들 <em>expanded · selected · disabled</em></b><span>펼침, 골라짐, 비활성처럼 화면에 모양으로 표현한 상태를 <b>스크린 리더가 읽을 수 있는 말로 옮깁니다</b></span></li>
-            <li><b>안 읽히는 것 <em>색 · 위치 · 굵기</em></b><span>색, 위치, 굵기는 <b>소리로 전달되지 않기</b> 때문에 속성으로 따로 적어야 합니다</span></li>
+            <li><b>읽히지 않는 것 <em>색 · 위치 · 굵기</em></b><span>색, 위치, 굵기는 <b>소리로 전달되지 않기</b> 때문에 속성으로 따로 적어야 합니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -179,7 +179,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>스크린 리더가 읽는 것을 쓰는 경우</h3>
+            <h3>읽히는 말을 챙겨야 하는 경우</h3>
             <ul>
               <li>켜짐, 펼침, 골라짐, 비활성처럼 <b>상태가 바뀌는 요소</b>를 만들 때</li>
               <li>탭, 콤보박스, 스위치를 직접 만들 때. <code>role</code>과 상태 속성이 필요합니다</li>
@@ -187,7 +187,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>스크린 리더가 읽는 것을 쓰지 않는 경우</h3>
+            <h3>역할과 상태를 잘못 전하는 경우</h3>
             <ul>
               <li><b>알맞은 태그가 있는데도</b> <code>role</code>로 흉내 낼 때</li>
               <li>상태 속성을 <b>처음 한 번만</b> 적고 바꾸지 않을 때. 화면과 다른 상태를 읽게 됩니다</li>
@@ -196,7 +196,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>스크린 리더가 읽는 것 대신 다른 것을 써야 하는 경우</b> — 이름만 다루려면 <a href="name.html">이름 붙이기</a>, 태그 고르기는 <a href="semantics.html">시맨틱 태그</a>, 저절로 바뀌는 것은 <a href="live.html">라이브 리전</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>스크린 리더와 이어지는 주제는 다른 항목에서 다룹니다</b> — 이름을 정하는 규칙만 따로 보려면 <a href="name.html">이름 붙이기</a>를, 어떤 태그를 고를지는 <a href="semantics.html">시맨틱 태그</a>를 보세요. 화면이 저절로 바뀐 것을 알리는 방법은 <a href="live.html">라이브 리전</a>에서 다룹니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -206,7 +206,7 @@
             <div class="shot">
               <div style="width:100%;max-width:190px;display:grid;gap:7px;justify-items:center"><span style="display:inline-flex;align-items:center;gap:6px;font-size:11px"><span style="position:relative;width:34px;height:20px;border-radius:99px;background:var(--accent);display:inline-block"><span style="position:absolute;left:16px;top:2px;width:16px;height:16px;border-radius:99px;background:#fff"></span></span>이메일 알림</span><span style="font-family:var(--mono);font-size:10px;color:#1f8a4c;font-weight:700;text-align:center">"이메일 알림, 스위치, 켜짐"</span></div>
             </div>
-            <figcaption><b>스위치</b><code>role="switch"</code>와 <code>aria-checked</code>로 역할과 켜짐 상태를 알립니다</figcaption>
+            <figcaption><b>스위치의 켜짐 상태 알리기</b><code>role="switch"</code>와 <code>aria-checked</code>로 역할과 켜짐 상태를 알립니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -216,7 +216,7 @@
               </div>
               <div style="font-family:var(--mono);font-size:9.5px;color:var(--fg-muted);margin-top:7px;text-align:center">"개요, 탭, 1/2, 선택됨"</div>
             </div>
-            <figcaption><b>탭</b>탭이 <b>몇 개 중 몇 번째</b>인지까지 읽힙니다</figcaption>
+            <figcaption><b>탭의 순서와 선택 상태 알리기</b>탭이 <b>몇 개 중 몇 번째</b>인지까지 읽힙니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -226,13 +226,13 @@
               </div>
               <div style="font-family:var(--mono);font-size:9.5px;color:var(--fg-muted);margin-top:6px;text-align:center">"계좌번호, 편집, 잘못됨"</div>
             </div>
-            <figcaption><b>에러 상태</b><code>aria-invalid</code>로 잘못된 값임을 알리고 <code>aria-describedby</code>로 에러 문구를 연결합니다. <b>빨간 테두리만으로는 스크린 리더에 전달되지 않습니다</b></figcaption>
+            <figcaption><b>입력칸의 에러 상태 알리기</b><code>aria-invalid</code>로 잘못된 값임을 알리고 <code>aria-describedby</code>로 에러 문구를 연결합니다. <b>빨간 테두리만으로는 스크린 리더에 전달되지 않습니다</b></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 규칙<span class="hint">역할·이름·상태 세 줄</span></h2>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 규칙<span class="hint">역할·이름·상태를 적는 방법</span></h2>
         <p>역할과 상태는 <b>태그로 줄 수 있으면 태그로</b> 주고, 태그로 줄 수 없을 때만 <code>role</code>과 <code>aria-*</code>로 채웁니다.</p>
 <pre class="code"><span class="c">&lt;!-- 태그가 역할을 주는 방법이 가장 좋다 --&gt;</span>
 &lt;<span class="t">button</span>&gt;저장&lt;/<span class="t">button</span>&gt;
@@ -249,14 +249,14 @@ el.setAttribute(<span class="s">'aria-checked'</span>, String(on));
 &lt;<span class="t">svg</span> <span class="a">aria-hidden</span>=<span class="s">"true"</span>&gt;…&lt;/<span class="t">svg</span>&gt;</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>규칙</th><th>지켜야 하는 것</th></tr></thead>
+          <thead><tr><th>지킬 규칙</th><th>지키는 방법</th></tr></thead>
           <tbody>
-            <tr><td>태그를 먼저</td><td><code>&lt;button&gt;</code>이나 <code>&lt;input&gt;</code>을 쓰면 역할과 동작이 함께 들어옵니다</td></tr>
-            <tr><td><code>role</code>은 보조 수단</td><td>역할만 바뀌고 <b>키 처리는 따라오지 않습니다</b></td></tr>
-            <tr><td>상태를 같이 바꾼다</td><td>화면에 보이는 상태가 바뀔 때마다 <code>aria-*</code> 값도 바꿉니다</td></tr>
-            <tr><td>장식은 숨긴다</td><td><code>aria-hidden="true"</code>로 숨기되, <b>포커스를 받는 요소에는 걸지 않습니다</b></td></tr>
-            <tr><td>에러는 말로</td><td>빨간 테두리에 더해 <code>aria-invalid</code>와 <code>aria-describedby</code>로 에러를 말로 알립니다</td></tr>
-            <tr><td>트리를 본다</td><td>개발자 도구의 Accessibility 패널에서 <b>실제로 무엇이라고 읽힐지</b> 확인합니다</td></tr>
+            <tr><td>태그를 먼저 쓰기</td><td><code>&lt;button&gt;</code>이나 <code>&lt;input&gt;</code>을 쓰면 역할과 동작이 함께 들어옵니다</td></tr>
+            <tr><td><code>role</code>은 보조 수단으로만 쓰기</td><td>역할만 바뀌고 <b>키 처리는 따라오지 않습니다</b></td></tr>
+            <tr><td>상태 속성을 함께 바꾸기</td><td>화면에 보이는 상태가 바뀔 때마다 <code>aria-*</code> 값도 바꿉니다</td></tr>
+            <tr><td>장식은 읽지 않게 숨기기</td><td><code>aria-hidden="true"</code>로 숨기되, <b>포커스를 받는 요소에는 걸지 않습니다</b></td></tr>
+            <tr><td>에러를 말로 알리기</td><td>빨간 테두리에 더해 <code>aria-invalid</code>와 <code>aria-describedby</code>로 에러를 말로 알립니다</td></tr>
+            <tr><td>접근성 트리로 확인하기</td><td>개발자 도구의 Accessibility 패널에서 <b>실제로 무엇이라고 읽힐지</b> 확인합니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -267,9 +267,9 @@ el.setAttribute(<span class="s">'aria-checked'</span>, String(on));
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>상태는 서버가 아는 것과 다르다</th><td>서버의 <code>status</code>는 데이터이고, <code>aria-expanded</code>는 <b>지금 화면에 보이는 모습</b>입니다. 둘을 혼동하면 화면에서는 접혀 있는 패널을 스크린 리더가 '펼침'으로 읽습니다.</td></tr>
-            <tr><th>목록 개수</th><td><code>&lt;ul&gt;</code>을 쓰면 스크린 리더가 '목록, 항목 12개'처럼 항목 수를 자동으로 읽습니다. <b>무한 스크롤</b>로 항목이 계속 늘어날 때는 <code>aria-setsize</code>로 전체 개수를 알려 주기도 합니다.</td></tr>
-            <tr><th>실제로 들어 본다</th><td>맥에서는 <kbd>Cmd</kbd>+<kbd>F5</kbd>를 누르면 VoiceOver가 켜집니다. VoiceOver로 화면을 <b>10분만 써 봐도</b> 코드만 읽어서는 알 수 없던 문제를 많이 발견합니다.</td></tr>
+            <tr><th>서버의 상태와 화면의 상태 구별하기</th><td>서버의 <code>status</code>는 데이터이고, <code>aria-expanded</code>는 <b>지금 화면에 보이는 모습</b>입니다. 둘을 혼동하면 화면에서는 접혀 있는 패널을 스크린 리더가 '펼침'으로 읽습니다.</td></tr>
+            <tr><th>목록의 항목 수 알리기</th><td><code>&lt;ul&gt;</code>을 쓰면 스크린 리더가 '목록, 항목 12개'처럼 항목 수를 자동으로 읽습니다. <b>무한 스크롤</b>로 항목이 계속 늘어날 때는 <code>aria-setsize</code>로 전체 개수를 알려 주기도 합니다.</td></tr>
+            <tr><th>스크린 리더로 직접 들어 보기</th><td>맥에서는 <kbd>Cmd</kbd>+<kbd>F5</kbd>를 누르면 VoiceOver가 켜집니다. VoiceOver로 화면을 <b>10분만 써 봐도</b> 코드만 읽어서는 알 수 없던 문제를 많이 발견합니다.</td></tr>
             <tr><th>자동 검사의 한계</th><td>검사 도구는 이름이 없는 요소는 찾아내지만, <b>이름이 틀린 요소</b>는 찾지 못합니다. 그래서 사람이 한 번은 직접 들어 봐야 합니다.</td></tr>
           </tbody>
         </table>

@@ -17,12 +17,12 @@ def fld(lab, ph, val="", help="", w="152px", note="", ok=None):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">레이블 — 칸의 이름. 늘 보인다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">레이블은 칸의 이름이라 늘 보임</div>
                   <div class="pin-out" data-pin="2" style="max-width:220px">''' + fld('사업자번호', '1248100998', '', '- 없이 10자리', "220px").strip() + '''</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">자리글 — 형식의 보기. 치면 사라진다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">헬퍼 — 규칙. 틀리기 전에 미리 알려 준다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">오류 — 틀린 뒤. 헬퍼 자리에 들어간다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">자리글을 레이블로 쓰면 치는 순간 이름이 사라진다</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">자리글은 형식의 보기로, 치면 사라짐</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">헬퍼는 규칙을 틀리기 전에 미리 알려 줌</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">오류는 틀린 뒤에 헬퍼 자리로 들어옴</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">자리글을 레이블로 쓰면 치는 순간 이름이 사라짐</div>
                 </div>
               </div>'''
 
@@ -51,20 +51,20 @@ D = dict(
   ]),
   axes=ax("자리글과 헬퍼 텍스트"),
   oneline="<b>자리글은 보기를, 헬퍼는 규칙을, 레이블은 이름을 알려 줍니다.</b> 셋 다 필요하고, 어느 하나가 다른 것을 대신할 수 없습니다.",
-  s4_title="셋을 가르면", s4_hint="무엇이 사라지나",
+  s4_title="레이블·자리글·헬퍼를 나눠 둔 모습", s4_hint="하나를 빼면 사라지는 정보",
   states=states([
-    (fld('사업자번호', '1248100998', '', '- 없이 10자리', "152px", "셋이 다 있다", True),
-     "제대로", "이름과 보기, 규칙이 <b>각자 자리에</b> 있습니다"),
-    (fld('', '사업자번호', '', '', "152px", "레이블을 자리글로 썼다", False),
-     "자리글만", "칸이 비어 있을 때는 문제가 없어 보입니다"),
-    (fld('', '사업자번호', '1248100998', '', "152px", "치는 순간 이름이 사라졌다", False),
-     "치고 나면", "값을 치고 나면 <b>무슨 칸이었는지 알 수 없습니다</b>"),
-    (fld('사업자번호', '', '', '- 없이 10자리', "152px", "보기가 없다"),
-     "자리글 없이", "규칙은 알 수 있지만 값이 <b>어떻게 생겼는지</b>는 알 수 없습니다"),
-    (fld('사업자번호', '1248100998', '', '', "152px", "규칙이 없다"),
-     "헬퍼 없이", "규칙을 <b>틀린 뒤에야</b> 알게 됩니다"),
-    (fld('사업자번호', '', '124', '10자리를 채워 주세요', "152px", "헬퍼 자리에 오류가 들어왔다"),
-     "틀렸을 때", "<a href=\"validation.html\">검증</a> 오류 문구가 헬퍼와 <b>같은 자리</b>에 들어갑니다"),
+    (fld('사업자번호', '1248100998', '', '- 없이 10자리', "152px", "셋이 다 있음", True),
+     "셋을 제대로 나눈 칸", "이름과 보기, 규칙이 <b>각자 자리에</b> 있습니다"),
+    (fld('', '사업자번호', '', '', "152px", "레이블을 자리글로 씀", False),
+     "자리글만 있는 칸", "칸이 비어 있을 때는 문제가 없어 보입니다"),
+    (fld('', '사업자번호', '1248100998', '', "152px", "치는 순간 이름이 사라짐", False),
+     "자리글만 둔 칸에 값을 친 뒤", "값을 치고 나면 <b>무슨 칸이었는지 알 수 없습니다</b>"),
+    (fld('사업자번호', '', '', '- 없이 10자리', "152px", "보기가 없음"),
+     "자리글이 없는 칸", "규칙은 알 수 있지만 값이 <b>어떻게 생겼는지</b>는 알 수 없습니다"),
+    (fld('사업자번호', '1248100998', '', '', "152px", "규칙이 없음"),
+     "헬퍼가 없는 칸", "규칙을 <b>틀린 뒤에야</b> 알게 됩니다"),
+    (fld('사업자번호', '', '124', '10자리를 채워 주세요', "152px", "헬퍼 자리에 오류가 들어옴"),
+     "값이 틀렸을 때", "<a href=\"validation.html\">검증</a> 오류 문구가 헬퍼와 <b>같은 자리</b>에 들어갑니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -72,8 +72,8 @@ D = dict(
     ("자리글", "형식의 보기", "<code>1248100998</code>처럼 <b>진짜 같은 값</b>을 보기로 넣습니다"),
     ("헬퍼", "규칙", "'- 없이 10자리'처럼 지켜야 할 규칙을 <b>틀리기 전에</b> 알려 줍니다"),
     ("오류", "헬퍼 자리에", "값이 틀리면 헬퍼 자리에 오류 문구가 들어오므로 <b>칸이 위아래로 움직이지 않습니다</b>"),
-    ("자리글 색", "흐리게, 그러나", "흐리게 쓰되, 너무 흐리면 <a href=\"../items/contrast.html\">대비비</a> 기준을 지키지 못합니다"),
-    ("자리글을 이름으로", "치면 사라진다", "<b>가장 흔한 실수</b>입니다. 값을 고치러 돌아왔을 때 칸 이름을 읽을 수 없습니다"),
+    ("자리글 색", "흐리되 읽을 수 있게", "흐리게 쓰되, 너무 흐리면 <a href=\"../items/contrast.html\">대비비</a> 기준을 지키지 못합니다"),
+    ("자리글을 이름으로", "치면 사라짐", "<b>가장 흔한 실수</b>입니다. 값을 고치러 돌아왔을 때 칸 이름을 읽을 수 없습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           이 실수가 오래 고쳐지지 않는 까닭은 칸이 <b>비어 있을 때는 멀쩡해 보이기</b> 때문입니다.
@@ -86,17 +86,19 @@ D = dict(
     "자리글에는 <b>진짜 같은 값</b>을 넣기",
     "규칙은 <b>틀리기 전에</b> 보여 주기",
   ]),
+  do_title="자리글과 헬퍼 텍스트를 쓸 때 지킬 것", dont_title="자리글과 헬퍼 텍스트에서 피할 것",
+  instead_title="자리글과 헬퍼 텍스트와 함께 보면 좋은 항목",
   dont=ul([
     "자리글을 레이블 대신 쓸 때. 값을 <b>치면 사라집니다</b>",
     "자리글에 ‘입력하세요’라고 적을 때. <b>아무 정보도 주지 않습니다</b>",
     "설명을 <a href=\"../items/tooltip.html\">툴팁</a>에만 넣을 때. 폰에서는 볼 수 없습니다",
     "자리글을 너무 흐리게 쓸 때. 대비비가 모자랍니다",
   ]),
-  instead='칸 자체는 <a href="../items/field.html">입력 필드</a>, 틀린 뒤 문구는 <a href="validation.html">입력 검증</a>, 칸이 많으면 <a href="form.html">폼 설계</a>.',
+  instead='입력 칸 자체는 <a href="../items/field.html">입력 필드</a>에서, 값이 틀린 뒤에 보여 주는 문구는 <a href="validation.html">입력 검증</a>에서 다룹니다. 칸이 여럿인 화면을 짤 때는 <a href="form.html">폼 설계</a>를 함께 봅니다.',
   cases=cases([
     (fld('정산 계좌', '110-123-456789', '', '예금주가 상호와 같아야 합니다', "150px"), "형식이 있는 칸", "<b>보기와 규칙</b>이 둘 다 필요합니다"),
-    (fld('검색', '가맹점 이름이나 번호', '', '', "150px"), "검색칸", "<b>무엇으로 찾을 수 있는지</b>를 자리글에 보기로 적습니다"),
-    (fld('메모', '', '', '내부에서만 보입니다', "150px"), "자유로운 칸", "형식이 정해지지 않은 칸이라 보기 없이 <b>규칙만</b> 적어도 됩니다"),
+    (fld('검색', '가맹점 이름이나 번호', '', '', "150px"), "검색칸의 자리글", "<b>무엇으로 찾을 수 있는지</b>를 자리글에 보기로 적습니다"),
+    (fld('메모', '', '', '내부에서만 보입니다', "150px"), "형식이 자유로운 칸", "형식이 정해지지 않은 칸이라 보기 없이 <b>규칙만</b> 적어도 됩니다"),
   ]),
   s8_title="최소 마크업과 키보드", s8_hint="코드로 옮길 때 지킬 것",
   code_lede="레이블은 <code>&lt;label&gt;</code>로 칸에 연결하고, 헬퍼는 <code>aria-describedby</code>로 칸에 묶습니다.",
@@ -109,25 +111,26 @@ D = dict(
 
 <span class="c">/* 자리글은 흐리되 읽을 수는 있게 */</span>
 <span class="t">input</span>::placeholder { <span class="a">color</span>: <span class="a">var</span>(--fg-muted); }   <span class="c">/* 4.5:1 을 지킨다 */</span>''',
+  keys_heads="<th>지킬 규칙과 마크업</th><th>지키는 방법과 이유</th>",
   keys=kbd([
     ("<code>&lt;label for&gt;</code>", "보조기기는 레이블을 칸 이름으로 읽으므로 <b>자리글로는 이름을 대신할 수 없습니다</b>"),
     ("<code>aria-describedby</code>", "헬퍼 텍스트를 칸에 연결합니다. 연결하지 않으면 보조기기에게는 칸과 상관없는 <b>그냥 옆에 있는 글</b>이 됩니다"),
-    ("오류와 헬퍼를 같은 자리에", "오류 문구가 헬퍼 자리에 들어가므로 칸이 위아래로 움직이지 않고, <b>글이 밀려 흔들리지도 않습니다</b>"),
-    ("<code>::placeholder</code> 대비비", "브라우저 기본 자리글 색은 대비비가 <b>4.5:1에 못 미치므로</b> 색을 직접 정합니다"),
-    ("자리글에 <b>단위</b>를 넣지 않는다", "'원' 같은 단위를 자리글에 두면 값을 치는 순간 사라지므로 <b>칸 밖에</b> 적습니다"),
-    ("<code>title</code> 속성", "마우스를 올려야만 뜨기 때문에 <a href=\"hover.html\">폰에서는 볼 수 없습니다</a>. 설명은 헬퍼 텍스트로 옮깁니다"),
+    ("오류를 헬퍼와 같은 자리에 두기", "오류 문구가 헬퍼 자리에 들어가므로 칸이 위아래로 움직이지 않고, <b>글이 밀려 흔들리지도 않습니다</b>"),
+    ("<code>::placeholder</code>의 대비비 맞추기", "브라우저 기본 자리글 색은 대비비가 <b>4.5:1에 못 미치므로</b> 색을 직접 정합니다"),
+    ("자리글에 <b>단위</b>를 넣지 않기", "'원' 같은 단위를 자리글에 두면 값을 치는 순간 사라지므로 <b>칸 밖에</b> 적습니다"),
+    ("<code>title</code> 속성에 설명 두지 않기", "마우스를 올려야만 뜨기 때문에 <a href=\"hover.html\">폰에서는 볼 수 없습니다</a>. 설명은 헬퍼 텍스트로 옮깁니다"),
   ]),
   backend=rows([
-    ("형식을 한곳에 적어 둔다", "자리글, 헬퍼, <a href=\"validation.html\">검증</a>, 서버 검사가 형식을 <b>각자 따로 정해 두면</b> 서로 다른 규칙을 말하게 됩니다."),
-    ("서버 오류도 같은 자리에", "서버가 돌려준 오류 문구도 <b>헬퍼 자리</b>에 넣으면 칸이 밀리지 않아 화면이 흔들리지 않습니다."),
-    ("보기 값을 진짜로 쓰지 않는다", "자리글에 넣은 번호가 누군가의 <b>실제 사업자번호</b>이면 곤란하므로, 형식만 맞춘 지어낸 값을 씁니다."),
+    ("형식을 한곳에 적어 두기", "자리글, 헬퍼, <a href=\"validation.html\">검증</a>, 서버 검사가 형식을 <b>각자 따로 정해 두면</b> 서로 다른 규칙을 말하게 됩니다."),
+    ("서버 오류도 헬퍼 자리에 넣기", "서버가 돌려준 오류 문구도 <b>헬퍼 자리</b>에 넣으면 칸이 밀리지 않아 화면이 흔들리지 않습니다."),
+    ("보기에 실제 값을 쓰지 않기", "자리글에 넣은 번호가 누군가의 <b>실제 사업자번호</b>이면 곤란하므로, 형식만 맞춘 지어낸 값을 씁니다."),
   ]),
   plat_lede="플랫폼마다 <b>플로팅 레이블</b>을 쓰는지가 다릅니다.",
   plats=plats([
     ("웹", "label + placeholder",
      fld('사업자번호', '1248100998', '', '- 없이 10자리', "110px"),
      "레이블은 칸 위에, 헬퍼는 칸 밑에 둡니다. 여러 상황에서 <b>가장 덜 깨지는</b> 배치입니다."),
-    ("iOS", "이름을 왼쪽에",
+    ("iOS", "이름을 왼쪽에 두는 배치",
      '''              <div class="phone" role="img" aria-label="iOS 입력 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:30px;display:flex;font-size:6px;border-bottom:1px solid var(--line);padding-bottom:2px"><span style="width:38%;color:var(--fg-muted)">사업자번호</span><span style="color:var(--fg-faint)">1248100998</span></div></div></div>''',
      "설정 화면처럼 <b>왼쪽에 이름, 오른쪽에 값</b>을 두고, 자리글은 값 자리에 흐리게 들어갑니다."),

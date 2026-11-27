@@ -76,9 +76,9 @@
 
   function show() {
     document.getElementById('out').innerHTML =
-      '고른 값 — 은행 <b>' + document.getElementById('bank').value + '</b> · ' +
-      '주기 <b>' + document.getElementById('cycle').value + '</b> · ' +
-      '소재지 <b>' + city.value + '</b>';
+      '지금 고른 값은 은행 <b>' + document.getElementById('bank').value + '</b>, ' +
+      '주기 <b>' + document.getElementById('cycle').value + '</b>, ' +
+      '소재지 <b>' + city.value + '</b>입니다.';
   }
   document.querySelectorAll('select').forEach(function (s) { s.addEventListener('change', show); });
   show();

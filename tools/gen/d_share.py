@@ -29,12 +29,12 @@ def panel(opts, link, who, warn="", w="152px", ok=None):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">범위 — 나만 · 고른 사람 · 사내 · 링크 있는 누구나</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--danger)">기본은 <b>가장 좁게</b> — 넓히는 건 본인이</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">권한 — 볼 수만 · 댓글 · 고칠 수 있음</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">지금 누가 볼 수 있는지 <b>이름으로</b> 보인다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--danger)">좁히면 이미 나간 링크가 막힌다 — 알려야 한다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">만료 · 암호 — 넓은 범위를 덜 위험하게</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">범위는 나만 · 고른 사람 · 사내 · 링크 있는 누구나</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--danger)">기본은 <b>가장 좁게</b> 두고 넓히는 건 본인이 함</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">권한은 볼 수만 · 댓글 · 고칠 수 있음</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">지금 누가 볼 수 있는지 <b>이름으로</b> 보임</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--danger)">좁히면 이미 나간 링크가 막힌다고 알림</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">넓은 범위에는 만료 · 암호를 붙여 위험을 줄임</div>
                 </div>
               </div>'''
 
@@ -67,38 +67,41 @@ D = dict(
   ]),
   axes=ax("공유하기"),
   oneline="<b>공유 범위의 기본값은 가장 좁게 둡니다.</b> 범위를 넓히기는 쉽지만, 넓은 범위로 이미 퍼진 링크를 거둬들이기는 어렵기 때문입니다.",
-  s4_title="범위", s4_hint="넓어질수록 거두기 어렵다",
+  do_title="공유 화면을 만들 때 할 일",
+  dont_title="공유 화면을 잘못 만드는 경우",
+  instead_title="함께 보면 좋은 항목",
+  s4_title="공유 범위", s4_hint="범위가 넓을수록 거두기 어려움",
   states=states([
-    (panel([("나만", "아무도 못 본다", True), ("고른 사람만", "", False), ("링크 있는 누구나", "", False)],
+    (panel([("나만", "아무도 못 봄", True), ("고른 사람만", "", False), ("링크 있는 누구나", "", False)],
             "", "볼 수 있는 사람 1명", "", "152px", True),
-     "나만", "<b>가장 좁은</b> 범위입니다"),
+     "나만 볼 때", "<b>가장 좁은</b> 범위입니다"),
     (panel([("나만", "", False), ("고른 사람만", "홍길동 · 김철수", True), ("링크 있는 누구나", "", False)],
             "example.com/s/2411", "홍길동 · 김철수 · 나", "", "152px", True),
-     "고른 사람만", "볼 사람을 <b>이름으로</b> 골라 건넵니다"),
+     "고른 사람에게만 열 때", "볼 사람을 <b>이름으로</b> 골라 건넵니다"),
     (panel([("고른 사람만", "", False), ("모란상회 구성원", "로그인하면 누구나", True), ("링크 있는 누구나", "", False)],
             "example.com/s/2411", "모란상회 48명", "", "152px", True),
-     "사내 전체", "<b>로그인해야</b> 열리므로 사내 사람만 볼 수 있습니다"),
-    (panel([("모란상회 구성원", "", False), ("링크 있는 누구나", "로그인 없이 열린다", True)],
+     "사내 전체에 열 때", "<b>로그인해야</b> 열리므로 사내 사람만 볼 수 있습니다"),
+    (panel([("모란상회 구성원", "", False), ("링크 있는 누구나", "로그인 없이 열림", True)],
             "example.com/s/2411?t=9fa3", "링크를 받은 누구나",
-            "⚠ 전달되면 막을 수 없다", "152px", False),
-     "링크 있는 누구나", "링크가 전달되면 <b>사내 밖까지</b> 열립니다"),
+            "⚠ 전달되면 막을 수 없음", "152px", False),
+     "링크 있는 누구나 열 수 있을 때", "링크가 전달되면 <b>사내 밖까지</b> 열립니다"),
     (one(txt('<span style="display:block;font-size:8px">볼 수만 ▾</span>'
              '<span style="display:block;font-size:7px;color:var(--fg-muted);margin-top:2px">댓글 · 고칠 수 있음</span>'),
-         "권한", True, "범위와 따로 고른다", "152px"),
-     "권한", "범위와는 <b>따로 정하는 값</b>입니다"),
-    (one(txt('<span style="display:block;font-size:8px;color:var(--danger)">범위를 좁혔다</span>'
+         "권한", True, "범위와 따로 고름", "152px"),
+     "권한을 고를 때", "범위와는 <b>따로 정하는 값</b>입니다"),
+    (one(txt('<span style="display:block;font-size:8px;color:var(--danger)">범위를 좁혔습니다</span>'
              '<span style="display:block;font-size:7px;color:var(--fg-muted);margin-top:2px">이미 나간 링크는 이제 안 열립니다</span>'),
-         "좁힘", None, "되돌림이 아니라 차단이다", "152px"),
-     "좁힐 때", "이미 나간 링크가 막힌다는 것을 <b>알려 줘야</b> 합니다"),
+         "좁힘", None, "되돌리는 게 아니라 차단함", "152px"),
+     "범위를 좁힐 때", "이미 나간 링크가 막힌다는 것을 <b>알려 줘야</b> 합니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("범위", "누가 보나", "범위는 네 가지면 충분합니다"),
+    ("범위", "누가 보는가", "범위는 네 가지면 충분합니다"),
     ("기본값", "가장 좁게", "기본값은 가장 좁게 두고, <b>넓히는 일은 본인이</b> 합니다"),
-    ("권한", "무엇을 하나", "범위와 <b>따로</b> 고르게 합니다"),
-    ("지금 누가", "이름으로", "지금 볼 수 있는 사람을 이름으로 적고 <b>몇 명인지 세어</b> 보여 줍니다"),
-    ("좁힐 때", "차단된다", "'이미 나간 링크가 막힙니다'라고 화면에 적습니다"),
-    ("만료 · 암호", "덜 위험하게", "넓은 범위로 공유할 때는 열 수 있는 <b>기간을 정해</b> 둡니다"),
+    ("권한", "무엇을 할 수 있는가", "범위와 <b>따로</b> 고르게 합니다"),
+    ("지금 볼 수 있는 사람", "이름으로", "지금 볼 수 있는 사람을 이름으로 적고 <b>몇 명인지 세어</b> 보여 줍니다"),
+    ("범위를 좁힐 때", "이미 나간 링크 차단", "'이미 나간 링크가 막힙니다'라고 화면에 적습니다"),
+    ("만료 · 암호", "위험을 줄이는 장치", "넓은 범위로 공유할 때는 열 수 있는 <b>기간을 정해</b> 둡니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           공유 사고는 대개 <b>악의가 아니라 기본값</b> 때문에 일어납니다.
@@ -120,18 +123,19 @@ D = dict(
     "범위를 좁히면서 <b>아무 안내 없이</b> 링크를 막을 때. 링크를 받은 사람은 왜 안 열리는지 알 수 없습니다",
     "링크를 <b>짐작할 수 있게</b> 만들 때. 토큰은 길고 무작위로 만듭니다",
   ]),
-  instead='파일로 떼어 주면 <a href="exportdata.html">내보내기</a>, 남에게 보이는 내 정보는 <a href="profile.html">프로필</a>, 기기 기능은 <a href="permission.html">권한 요청</a>, 되돌릴 수 없는 일은 <a href="destructive.html">위험한 동작</a>.',
+  instead='데이터를 파일로 떼어 주는 일은 <a href="exportdata.html">내보내기</a>에서, 남에게 보이는 내 정보는 <a href="profile.html">프로필</a>에서 다룹니다. 기기 기능을 쓰도록 허락받는 일은 <a href="permission.html">권한 요청</a>에서, 되돌릴 수 없는 일은 <a href="destructive.html">위험한 동작</a>에서 설명합니다.',
   cases=cases([
     (panel([("고른 사람만", "홍길동 · 김철수", True)], "example.com/s/2411", "3명", "", "150px", True),
-     "문서 공유", "볼 사람을 <b>이름으로</b> 골라 건넵니다"),
+     "고른 사람에게 문서 공유하기", "볼 사람을 <b>이름으로</b> 골라 건넵니다"),
     (panel([("링크 있는 누구나", "7일 뒤 만료", True)], "example.com/s/2411?t=9fa3", "링크를 받은 누구나", "", "150px", None),
-     "외부 공유", "링크에 <b>만료</b>를 붙입니다"),
+     "만료를 붙여 외부에 공유하기", "링크에 <b>만료</b>를 붙입니다"),
     (one(txt('<span style="display:block;font-size:8px">공유 시트</span>'
              '<span style="display:block;font-size:7px;color:var(--fg-muted);margin-top:2px">메시지 · 메일 · 복사…</span>'),
-         "폰", True, "OS 가 앱 고르기를 맡는다", "150px"),
-     "폰", "보낼 곳을 고를 때는 <b>OS 공유 시트</b>를 씁니다"),
+         "폰", True, "OS가 앱 고르기를 맡음", "150px"),
+     "폰에서 보낼 곳 고르기", "보낼 곳을 고를 때는 <b>OS 공유 시트</b>를 씁니다"),
   ]),
   s8_title="최소 마크업과 키보드", s8_hint="구현할 때 지킬 최소 규칙",
+  keys_heads="<th>키와 마크업</th><th>처리하는 방법</th>",
   code_lede="범위는 하나만 고르는 값이므로 <b>라디오</b>로 만들고, 기본 선택은 가장 좁은 쪽에 둡니다.",
   code='''&lt;<span class="t">fieldset</span>&gt;
   &lt;<span class="t">legend</span>&gt;누가 볼 수 있나&lt;/<span class="t">legend</span>&gt;
@@ -153,13 +157,13 @@ D = dict(
     ("<code>role=\"status\"</code>", "'복사했습니다'를 스크린 리더로도 <b>소리 내어</b> 알립니다"),
     ("<code>readonly</code>", "링크 칸의 글자를 선택할 수는 있지만 <b>고칠 수는</b> 없게 합니다"),
     ("<code>&lt;fieldset&gt;</code>", "범위 묶음에 이름을 붙여서 무엇을 고르는 자리인지 스크린 리더로도 <b>전해지게</b> 합니다"),
-    ("확인하는 법", "로그아웃한 창에서 <b>복사한 링크</b>를 열어 봅니다"),
+    ("확인하는 방법", "로그아웃한 창에서 <b>복사한 링크</b>를 열어 봅니다"),
   ]),
   backend=rows([
-    ("토큰은 길고 임의로", "짧은 번호를 쓰면 번호를 <b>짐작해서</b> 남의 문서를 열 수 있습니다. 링크 공유에서는 토큰의 길이와 무작위성 말고는 막아 주는 장치가 없습니다."),
-    ("좁히면 즉시 막기", "범위를 좁힌 순간부터 옛 토큰은 <b>거절</b>해야 합니다. 캐시에 남은 응답 때문에 계속 열린다면 범위를 좁힌 효과가 없습니다."),
-    ("만료", "<code>expires_at</code>을 저장해 두고 서버가 요청마다 검사합니다. 만료 날짜를 화면에만 적어 두면 기한이 지나도 링크가 열립니다."),
-    ("누가 열었나", "링크 공유로는 <b>누가 봤는지 알 수 없습니다</b>. 열어 본 사람을 알아야 한다면 로그인을 요구하는 범위를 써야 합니다."),
+    ("토큰은 길고 무작위로 만들기", "짧은 번호를 쓰면 번호를 <b>짐작해서</b> 남의 문서를 열 수 있습니다. 링크 공유에서는 토큰의 길이와 무작위성 말고는 막아 주는 장치가 없습니다."),
+    ("범위를 좁히면 즉시 막기", "범위를 좁힌 순간부터 옛 토큰은 <b>거절</b>해야 합니다. 캐시에 남은 응답 때문에 계속 열린다면 범위를 좁힌 효과가 없습니다."),
+    ("만료 날짜는 서버에서 검사하기", "<code>expires_at</code>을 저장해 두고 서버가 요청마다 검사합니다. 만료 날짜를 화면에만 적어 두면 기한이 지나도 링크가 열립니다."),
+    ("누가 열었는지 알 수 없음", "링크 공유로는 <b>누가 봤는지 알 수 없습니다</b>. 열어 본 사람을 알아야 한다면 로그인을 요구하는 범위를 써야 합니다."),
   ]),
   plat_lede="<b>폰에는 OS 공유 시트</b>가 있어서, 어느 앱으로 보낼지 고르는 일은 OS가 맡습니다.",
   plats=plats([

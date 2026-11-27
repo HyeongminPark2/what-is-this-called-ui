@@ -24,7 +24,7 @@ ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2)
                     <span class="pin-out" data-pin="2" style="font-size:11.5px;color:var(--accent);font-weight:700;margin-left:26px">검토 중</span>
                     <span class="pin-tr" data-pin="3" style="display:grid;place-items:center;width:15px;height:15px;border-radius:99px;background:rgba(47,109,246,.18);color:var(--accent);font-size:9px;line-height:1">×</span>
                   </div>
-                  <div class="pin-out" data-pin="4" style="font-size:11px;color:var(--fg-muted)">켜진 칩은 바탕과 테두리가 함께 바뀐다 — <b style="color:var(--fg)">색만</b> 바꾸면 못 알아본다</div>
+                  <div class="pin-out" data-pin="4" style="font-size:11px;color:var(--fg-muted)">켜진 칩은 바탕과 테두리가 함께 바뀜. <b style="color:var(--fg)">색만</b> 바꾸면 알아보기 어려움</div>
                   <div class="pin-out" data-pin="5" style="display:flex;flex-wrap:wrap;gap:6px">
                     ''' + chip("전체") + chip("검토 중", on=True) + chip("승인됨") + chip("거절됨") + '''
                   </div>
@@ -56,15 +56,15 @@ D = dict(
   ]),
   axes=ax("칩"),
   oneline="칩은 <b>누르거나 뗄 수 있습니다.</b> 누를 수도 뗄 수도 없다면 그건 칩이 아니라 <a href=\"badge.html\">배지</a>이거나 그냥 글자입니다.",
-  s4_title="갈래", s4_hint="같은 모양이 세 가지 일을 한다",
+  s4_title="칩의 종류와 상태", s4_hint="종류와 상태마다 달라지는 칩 모습",
   states=states([
-    (box(chip("검토 중")), "필터 — 꺼짐", "눌러서 켤 수 있습니다. 테두리만 있고 바탕은 비어 있습니다"),
-    (box(chip("검토 중", on=True)), "필터 — 켜짐", "<b>바탕과 테두리가 함께</b> 바뀌고, 코드에는 <code>aria-pressed=\"true\"</code>를 답니다"),
-    (box(chip("홍길동", x=True)), "입력", "사용자가 넣은 값입니다. <b>×로 뗄 수 있습니다</b>"),
-    (box(chip("#정산", static=True)), "표시", "라벨일 뿐인 칩입니다. <b>테두리와 호버 효과를 빼서</b> 사용자가 눌러 보지 않게 합니다"),
-    (box(chip("거절됨", style="opacity:.45")), "비활성", "지금은 고를 수 없는 칩입니다. <b>왜 고를 수 없는지</b>를 옆에 적어 줍니다"),
+    (box(chip("검토 중")), "꺼져 있는 필터 칩", "눌러서 켤 수 있습니다. 테두리만 있고 바탕은 비어 있습니다"),
+    (box(chip("검토 중", on=True)), "켜져 있는 필터 칩", "<b>바탕과 테두리가 함께</b> 바뀌고, 코드에는 <code>aria-pressed=\"true\"</code>를 답니다"),
+    (box(chip("홍길동", x=True)), "사용자가 넣은 입력 칩", "사용자가 넣은 값입니다. <b>×로 뗄 수 있습니다</b>"),
+    (box(chip("#정산", static=True)), "보여 주기만 하는 표시 칩", "라벨일 뿐인 칩입니다. <b>테두리와 호버 효과를 빼서</b> 사용자가 눌러 보지 않게 합니다"),
+    (box(chip("거절됨", style="opacity:.45")), "지금은 고를 수 없을 때", "지금은 고를 수 없는 칩입니다. <b>왜 고를 수 없는지</b>를 옆에 적어 줍니다"),
     (box(chip("전체") + chip("검토 중", on=True) + chip("승인됨") + chip("거절됨")),
-     "무리", "여러 칩이 모여 한 줄을 이룹니다. 줄이 넘치면 <b>다음 줄로 넘기거나 가로로 밀어 보게</b> 합니다"),
+     "여러 칩이 한 줄로 모였을 때", "여러 칩이 모여 한 줄을 이룹니다. 줄이 넘치면 <b>다음 줄로 넘기거나 가로로 밀어 보게</b> 합니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -85,21 +85,21 @@ D = dict(
   ]),
   dont=ul([
     "누르면 동작이 일어나야 할 때. 동작은 버튼으로 만들고, 칩은 <b>값</b>을 다룰 때만 씁니다",
-    "선택지가 열 개를 넘을 때.  <a href=\"../items/combobox.html\">콤보박스</a>나 필터 패널을 씁니다",
-    "하나만 골라야 하고 선택지가 2~4개일 때.  <a href=\"../items/segmented.html\">세그먼티드 컨트롤</a>을 씁니다",
+    "선택지가 열 개를 넘을 때. <a href=\"../items/combobox.html\">콤보박스</a>나 필터 패널을 씁니다",
+    "하나만 골라야 하고 선택지가 2~4개일 때. <a href=\"../items/segmented.html\">세그먼티드 컨트롤</a>을 씁니다",
     "누를 수 없는 칩에 <b>테두리와 호버 효과</b>를 줄 때. 사용자가 누를 수 있는 줄 알고 눌러 봅니다",
   ]),
-  instead='붙어서 알리기만 하면 <a href="badge.html">배지</a>, 하나만 고르면 <a href="../items/segmented.html">세그먼티드</a>, 많으면 <a href="../items/combobox.html">콤보박스</a>.',
+  instead='다른 요소에 붙어서 알리기만 하면 <a href="badge.html">배지</a>를 쓰고, 몇 안 되는 선택지 가운데 하나만 골라야 하면 <a href="../items/segmented.html">세그먼티드 컨트롤</a>을 씁니다. 선택지가 많다면 <a href="../items/combobox.html">콤보박스</a>가 맞습니다.',
   cases=cases([
     (box(chip("전체") + chip("미처리", on=True) + chip("이번 주") + chip("₩10만 이상")),
-     "필터 줄", "목록 바로 위에 놓여서 <b>지금 무엇으로 걸렀는지</b>가 한눈에 보입니다"),
+     "목록 위에서 조건으로 거르기", "목록 바로 위에 놓여서 <b>지금 무엇으로 걸렀는지</b>가 한눈에 보입니다"),
     ('''              <div style="width:100%;max-width:200px;border:1px solid var(--line-strong);border-radius:7px;padding:5px;display:flex;flex-wrap:wrap;gap:5px;align-items:center">
                 ''' + chip("홍길동", x=True) + chip("김철수", x=True) + '''
                 <span style="font-size:11px;color:var(--fg-faint);padding:2px 4px">이름을 쓰고 Enter</span>
               </div>''',
-     "입력칸 속 칩", "메일 받는 사람 칸에서 흔히 봅니다. <b>칩이 입력칸 안에 차례로 쌓입니다</b>"),
+     "입력칸 안에 받는 사람 쌓기", "메일 받는 사람 칸에서 흔히 봅니다. <b>칩이 입력칸 안에 차례로 쌓입니다</b>"),
     (box(chip("#정산", static=True) + chip("#11월", static=True) + chip("#모란상회", static=True)),
-     "태그 줄", "분류를 보여 주기만 합니다. 다만 <b>누르면 그 태그로 목록이 걸러지게</b> 만들기도 합니다"),
+     "글의 분류를 태그로 보여 주기", "분류를 보여 주기만 합니다. 다만 <b>누르면 그 태그로 목록이 걸러지게</b> 만들기도 합니다"),
   ]),
   s8_title="최소 마크업과 키보드",
   code_lede="필터 칩은 <b>켜고 끄는 버튼</b>이므로 <code>aria-pressed</code>로 상태를 알립니다. 입력 칩의 ×에는 <b>무엇을 지우는지</b>까지 이름에 적습니다.",
@@ -121,15 +121,15 @@ chips.splice(i, <span class="a">1</span>); render();
     ("<kbd>Tab</kbd>", "포커스가 칩마다 한 번 멈춥니다. <b>입력 칩에서는 두 번</b>(본체와 ×) 멈춥니다"),
     ("<kbd>Enter</kbd> · <kbd>Space</kbd>", "필터 칩을 켜고 끕니다"),
     ("<kbd>Backspace</kbd>", "입력칸이 비어 있을 때 누르면 <b>마지막 칩</b>을 뺍니다. 메일 앱에서 굳어진 관례입니다"),
-    ("지운 뒤 포커스", "포커스를 <b>다음 칩으로, 다음 칩이 없으면 입력칸으로</b> 옮깁니다. 지운 칩에 두면 포커스가 사라집니다"),
-    ("× 의 이름", "<code>aria-label=\"홍길동 빼기\"</code> 처럼 이름을 붙입니다. 그냥 '삭제'라고 하면 칩 열 개의 ×가 모두 같은 이름이 됩니다"),
-    ("무리에 이름", "<code>role=\"group\"</code> + <code>aria-label</code>로 무엇을 기준으로 거르는 칩인지 알립니다"),
+    ("칩을 지운 뒤의 포커스", "포커스를 <b>다음 칩으로, 다음 칩이 없으면 입력칸으로</b> 옮깁니다. 지운 칩에 두면 포커스가 사라집니다"),
+    ("× 버튼의 이름", "<code>aria-label=\"홍길동 빼기\"</code> 처럼 이름을 붙입니다. 그냥 '삭제'라고 하면 칩 열 개의 ×가 모두 같은 이름이 됩니다"),
+    ("칩 무리의 이름", "<code>role=\"group\"</code> + <code>aria-label</code>로 무엇을 기준으로 거르는 칩인지 알립니다"),
   ]),
   backend=rows([
-    ("필터 칩 = 질의 조건", "켜진 칩은 질의의 <code>WHERE</code> 조건이 됩니다. 칩이 여럿 켜질 수 있으므로 조건을 <b>AND로 묶을지 OR로 묶을지</b> 먼저 정해야 하는데, 보통 같은 갈래의 칩끼리는 OR, 갈래가 다른 칩끼리는 AND로 묶습니다."),
-    ("주소에 담기", "<code>?status=wait,ok&period=week</code>처럼 필터를 주소에 담아 두면 <b>주소 공유와 뒤로가기</b>로도 같은 필터가 유지됩니다. 주소에 담지 않으면 새로고침할 때 필터가 풀립니다."),
-    ("개수 보여 주기", "칩에 '검토 중 7'처럼 건수를 붙이려면 <b>거르기 전의 전체 목록에서</b> 세어야 합니다. 이미 거른 결과에서 세면 지금 켜진 칩에 해당하는 건수만 나옵니다."),
-    ("입력 칩의 값", "화면에는 이름이 보이지만 서버로 보내는 값은 <b>ID</b>입니다. 칩마다 ID를 함께 들고 있어야 이름이 같은 사람끼리 섞이지 않습니다."),
+    ("필터 칩은 질의 조건", "켜진 칩은 질의의 <code>WHERE</code> 조건이 됩니다. 칩이 여럿 켜질 수 있으므로 조건을 <b>AND로 묶을지 OR로 묶을지</b> 먼저 정해야 하는데, 보통 같은 갈래의 칩끼리는 OR, 갈래가 다른 칩끼리는 AND로 묶습니다."),
+    ("필터를 주소에 담기", "<code>?status=wait,ok&period=week</code>처럼 필터를 주소에 담아 두면 <b>주소 공유와 뒤로가기</b>로도 같은 필터가 유지됩니다. 주소에 담지 않으면 새로고침할 때 필터가 풀립니다."),
+    ("칩에 건수를 붙일 때", "칩에 '검토 중 7'처럼 건수를 붙이려면 <b>거르기 전의 전체 목록에서</b> 세어야 합니다. 이미 거른 결과에서 세면 지금 켜진 칩에 해당하는 건수만 나옵니다."),
+    ("입력 칩이 서버로 보내는 값", "화면에는 이름이 보이지만 서버로 보내는 값은 <b>ID</b>입니다. 칩마다 ID를 함께 들고 있어야 이름이 같은 사람끼리 섞이지 않습니다."),
   ]),
   plat_lede="칩은 안드로이드에서는 규격이 또렷하게 정해진 부품이지만, iOS에는 같은 이름의 부품이 없습니다.",
   plats=plats([
@@ -156,5 +156,5 @@ chips.splice(i, <span class="a">1</span>); render();
   related='''        <li><a href="../items/badge.html"><b>배지</b><em>5부</em></a></li>
         <li><a href="../items/segmented.html"><b>세그먼티드 컨트롤</b><em>4부</em></a></li>
         <li><a href="../items/combobox.html"><b>콤보박스</b><em>4부</em></a></li>
-        <li><span class="na"><b>필터와 패싯</b><em>10부</em></span></li>''',
+        <li><a href="filter.html"><b>필터와 패싯</b><em>10부</em></a></li>''',
 )

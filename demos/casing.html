@@ -18,7 +18,7 @@
 <body>
 <div class="bar">
   <b>대소문자</b>
-  <label>꼴 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>영어 글자 꼴 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="sentence">문장형 (Sentence case)</option>
     <option value="title">제목형 (Title Case)</option>
     <option value="upper">대문자 (UPPERCASE)</option>
@@ -72,8 +72,8 @@
     }).join('');
 
     var v = document.getElementById('verdict');
-    v.innerHTML = 'CSS 로는 <b>text-transform: ' + CSS[k] + '</b>' +
-      (showKo ? ' — 한국어 쪽은 <b>아무 변화가 없다</b>' : '');
+    v.innerHTML = '이 꼴을 만드는 CSS는 <b>text-transform: ' + CSS[k] + '</b>입니다.' +
+      (showKo ? ' 한국어 쪽에는 <b>아무 변화가 없다</b>는 점도 함께 보입니다.' : '');
     v.dataset.css = CSS[k];
     document.getElementById('note').innerHTML = NOTE[k];
   }

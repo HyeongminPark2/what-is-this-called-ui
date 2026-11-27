@@ -39,16 +39,16 @@
 <script>
 (function () {
   var ITEMS = [
-    ['간격과 크기', '그림에서 잴 수 있다', true, true],
-    ['색과 글꼴', '그림에서 집을 수 있다', true, true],
-    ['토큰 이름', 'accent-500 인가 brand 인가', false, true],
-    ['상태 — 호버·누름·비활성', '그림은 기본 상태 하나뿐이다', false, true],
-    ['글이 길어지면', '두 줄로 접나, 말줄임인가', false, true],
-    ['폰에서는', '어느 폭에서 한 단이 되나', false, true],
-    ['빈 화면 · 로딩 · 오류', '시안에는 데이터가 가득하다', false, true],
-    ['움직임', '몇 ms 로, 어떤 곡선으로', false, true],
+    ['간격과 크기', '그림에서 잴 수 있음', true, true],
+    ['색과 글꼴', '그림에서 집어낼 수 있음', true, true],
+    ['토큰 이름', 'accent-500인지 brand인지', false, true],
+    ['상태 — 호버·누름·비활성', '그림에는 기본 상태 하나뿐', false, true],
+    ['글이 길어지면', '두 줄로 접을지, 말줄임할지', false, true],
+    ['폰에서는', '어느 폭에서 한 단이 되는지', false, true],
+    ['빈 화면 · 로딩 · 오류', '시안에는 데이터가 가득함', false, true],
+    ['움직임', '몇 ms 동안 어떤 곡선으로 움직이는지', false, true],
     ['문구', '버튼 글자·오류 문장', false, true],
-    ['에셋', '아이콘은 SVG 인가 PNG 인가', false, true]
+    ['에셋', '아이콘이 SVG인지 PNG인지', false, true]
   ];
 
   function draw() {
@@ -58,7 +58,7 @@
       return '<div class="spec__row ' + (has ? 'has' : 'miss') + '" data-k="' + it[0] + '">' +
         '<span class="mark">' + (has ? '✓' : '✕') + '</span>' +
         '<span>' + it[0] + '<span style="display:block;font-size:11px;color:var(--fg-muted)">' + it[1] + '</span></span>' +
-        '<span class="src">' + (has ? (it[2] ? '그림에서' : '스펙에서') : '물어봐야 안다') + '</span></div>';
+        '<span class="src">' + (has ? (it[2] ? '그림에서' : '스펙에서') : '물어봐야 알 수 있음') + '</span></div>';
     });
     document.getElementById('list').innerHTML = rows.join('');
 
@@ -68,7 +68,7 @@
       : '<b>그림만</b> 받았습니다';
     var v = document.getElementById('verdict');
     v.innerHTML = miss
-      ? '<span class="warn">물어봐야 아는 것 ' + miss + '개</span> — 개발하는 동안 하나씩 묻고 답해야 합니다'
+      ? '<span class="warn">물어봐야 알 수 있는 것이 ' + miss + '개</span>이고, 개발하는 동안 하나씩 묻고 답해야 합니다'
       : '열 가지가 모두 넘어왔습니다. <b>물어볼 것이 없습니다</b>';
     v.dataset.miss = String(miss);
 

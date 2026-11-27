@@ -103,11 +103,11 @@
     var ways = (skip ? 1 : 0) + 1;   // 건너뛰기 + 다음
     var rd = document.getElementById('read');
     rd.innerHTML = (step < 0 ? (seen ? '끝났습니다. 다시 띄우지 않습니다' : '아직 띄우지 않았습니다')
-      : '짚는 중 — <b>' + (step + 1) + ' / ' + STEPS.length + '</b>') +
+      : '<b>' + (step + 1) + ' / ' + STEPS.length + '</b> 단계를 짚는 중') +
       '<br>한꺼번에 읽어야 하는 말풍선 <b>' + tips + '개</b>' +
-      (tips > 2 ? ' <span class="warn">— 이만큼 많으면 어느 것도 읽지 않게 됩니다</span>' : '') +
+      (tips > 2 ? '. <span class="warn">이만큼 많으면 어느 것도 읽지 않게 됩니다</span>' : '') +
       '<br>빠져나갈 길 <b>' + ways + '개</b>' +
-      (skip ? '' : ' <span class="warn">— 건너뛸 수 없습니다</span>') +
+      (skip ? '' : '. <span class="warn">건너뛸 수 없습니다</span>') +
       (why ? '<br>' + why : '');
     rd.dataset.step = String(step);
     rd.dataset.tips = String(tips);

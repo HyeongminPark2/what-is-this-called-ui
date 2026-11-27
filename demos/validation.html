@@ -23,7 +23,7 @@
 
 <div class="bar">
   <b>입력 검증</b>
-  <label>언제 검사하나
+  <label>검사하는 시점
     <select class="sel" id="when" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
       <option value="blur">칸을 떠날 때 (권장)</option>
       <option value="input">한 글자마다</option>
@@ -52,7 +52,7 @@
 
 <p class="hint">
   입력 검증에서는 <b>언제 검사하느냐</b>가 가장 중요합니다. <b>한 글자마다</b>를 고르고 계좌번호를 쳐 보세요.
-  다 치기도 전에 칸이 빨개져서 <b>꾸중을 듣는 느낌</b>이 듭니다. 반대로 <b>제출할 때만</b> 검사하면 폼을 다 채우고 나서야
+  다 치기도 전에 칸이 빨개져서 <b>재촉받는 느낌</b>이 듭니다. 반대로 <b>제출할 때만</b> 검사하면 폼을 다 채우고 나서야
   틀린 것을 알게 됩니다.<br>
   그래서 <b>칸을 떠날 때</b> 검사하는 것을 기본으로 삼습니다. 한 번 틀린 칸은 그 뒤로 <b>고치는 동안 바로</b> 검사해서
   값이 맞게 고쳐지는 즉시 오류 표시를 풉니다.<br>
@@ -111,7 +111,7 @@
     touched[input.id] = true;
     if (document.getElementById('when').value === 'blur') {
       var err = check(input.id);
-      note('칸을 떠남 — ' + input.id + (err ? ' : ' + err : ' : 통과'), !!err);
+      note(input.id + ' 칸을 떠날 때 검사함 · ' + (err ? err : '통과'), !!err);
     }
   }, true);
 
@@ -128,7 +128,7 @@
     ['acc', 'email'].forEach(function (n) { var err = check(n); if (err && !bad) bad = n; });
     if (bad) {
       fm.querySelector('#' + bad).focus();     // 첫 번째 틀린 칸으로 보낸다
-      note('제출 막힘 — 첫 번째 틀린 칸(' + bad + ')으로 포커스를 보냄', true);
+      note('제출을 막고 첫 번째 틀린 칸(' + bad + ')으로 포커스를 보냄', true);
     } else {
       note('저장했습니다');
     }

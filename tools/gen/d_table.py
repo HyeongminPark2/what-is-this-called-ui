@@ -26,9 +26,9 @@ ANAT = '''              <div class="anat--wide" style="background:var(--bg);bord
                    </div>
                   </div>
                   <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">thead th { position: sticky; top: 0 }</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">aria-sort="descending"   — 무엇으로 정렬했나</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">숫자는 오른쪽 + tabular-nums</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">첫 열 고정 — 누구 줄인지 안 잊게</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">aria-sort="descending"   정렬 기준을 알림</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">숫자는 오른쪽 정렬과 tabular-nums</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">첫 열을 고정해 누구 줄인지 보이게</div>
                   <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">?sort=amount&dir=desc&page=2</div>
                 </div>
               </div>'''
@@ -62,17 +62,17 @@ D = dict(
   s4_title="상태", s4_hint="건수와 화면 폭에 따라 달라지는 모습",
   states=states([
     (tb(HEAD, row(cells('한빛아웃도어', '9,827,500')) + row(cells('모란상회', '1,284,000'))),
-     "기본", "열 이름 줄 아래에 행이 이어집니다. <b>숫자는 오른쪽</b>으로 붙여 자릿수를 맞춥니다"),
+     "평소 상태", "열 이름 줄 아래에 행이 이어집니다. <b>숫자는 오른쪽</b>으로 붙여 자릿수를 맞춥니다"),
     (tb('<span style="flex:1">가맹점</span><span style="width:62px;text-align:right;color:var(--accent)">매출 ▼</span>',
         row(cells('한빛아웃도어', '9,827,500')) + row(cells('모란상회', '1,284,000'))),
-     "정렬됨", "<b>어느 열을 기준으로 어느 방향으로</b> 정렬했는지 보여야 합니다"),
+     "열을 눌러 정렬했을 때", "<b>어느 열을 기준으로 어느 방향으로</b> 정렬했는지 보여야 합니다"),
     (tb(HEAD, row(cells('한빛아웃도어', '9,827,500'), True) + row(cells('모란상회', '1,284,000'))),
-     "줄 선택", "고른 줄은 바탕색이 바뀝니다. 여러 줄을 골라 한꺼번에 처리하는 <a href=\"bulk.html\">일괄 선택</a>으로 이어집니다"),
+     "줄을 골랐을 때", "고른 줄은 바탕색이 바뀝니다. 여러 줄을 골라 한꺼번에 처리하는 <a href=\"bulk.html\">일괄 선택</a>으로 이어집니다"),
     (tb(HEAD, '<div style="padding:7px 8px;border-top:1px solid var(--line);display:grid;gap:4px">'
         '<span class="skl" style="height:8px;width:70%"></span><span class="skl" style="height:8px;width:55%"></span></div>'),
-     "로딩", "실제 줄과 <b>같은 높이</b>로 뼈대를 그립니다. 높이가 다르면 데이터가 들어오는 순간 줄 위치가 밀립니다"),
+     "데이터를 불러오는 중", "실제 줄과 <b>같은 높이</b>로 뼈대를 그립니다. 높이가 다르면 데이터가 들어오는 순간 줄 위치가 밀립니다"),
     (tb(HEAD, '<div style="padding:16px 8px;border-top:1px solid var(--line);text-align:center;font-size:10px;color:var(--fg-muted)">조건에 맞는 것이 없습니다</div>'),
-     "빈 결과", "결과가 없다는 안내와 함께 <b>조건을 지우는 방법</b>을 보여 줍니다"),
+     "조건에 맞는 결과가 없을 때", "결과가 없다는 안내와 함께 <b>조건을 지우는 방법</b>을 보여 줍니다"),
     (tb('<span style="flex:1">가맹점</span><span style="width:62px;text-align:right">매출</span><span style="width:48px;text-align:right">수수료</span><span style="width:40px">상태</span>',
         row(cells('한빛', '9,827,500') + '<span style="width:48px;text-align:right">294,825</span><span style="width:40px">승인</span>'),
         "180px", "overflow:hidden"),
@@ -103,22 +103,22 @@ D = dict(
     "화면 배치를 잡으려고 <code>&lt;table&gt;</code>을 쓸 때",
     "모든 열에 정렬을 걸 때. 정렬은 <b>정렬해서 볼 뜻이 있는 열</b>에만 겁니다",
   ]),
-  instead='건마다 내용이 다르면 <a href="../items/card.html">카드</a>, 한 줄이면 <a href="../items/listitem.html">리스트 아이템</a>, 아주 길면 <a href="virtual.html">가상 스크롤</a>.',
+  instead='건마다 보여 줄 내용이 다르면 <a href="../items/card.html">카드</a>를 쓰고, 한 건이 한 줄로 끝나면 <a href="../items/listitem.html">리스트 아이템</a>으로 충분합니다. 건수가 아주 많아 목록이 길어지면 <a href="virtual.html">가상 스크롤</a>을 함께 씁니다.',
   cases=cases([
     (tb(HEAD, row(cells('한빛아웃도어', '9,827,500')) + row(cells('모란상회', '1,284,000')) + row(cells('새벽상사', '11,100')), "190px"),
-     "정산 목록", "관리 도구에서 가장 흔한 표 화면입니다"),
+     "정산 목록 보여 주기", "관리 도구에서 가장 흔한 표 화면입니다"),
     (tb('<span style="width:20px"></span><span style="flex:1">가맹점</span><span style="width:52px;text-align:right">매출</span>',
         row('<span style="width:20px">☑</span>' + '<span style="flex:1">한빛아웃도어</span><span style="width:52px;text-align:right;font-variant-numeric:tabular-nums">9,827,500</span>', True) +
         row('<span style="width:20px">☐</span>' + '<span style="flex:1">모란상회</span><span style="width:52px;text-align:right;font-variant-numeric:tabular-nums">1,284,000</span>'), "190px"),
-     "선택이 붙은 표", "줄 맨 앞에 체크박스를 두고, 고른 줄을 <a href=\"bulk.html\">일괄 선택</a>으로 한꺼번에 처리합니다"),
+     "여러 줄을 골라 한꺼번에 처리하기", "줄 맨 앞에 체크박스를 두고, 고른 줄을 <a href=\"bulk.html\">일괄 선택</a>으로 한꺼번에 처리합니다"),
     ('''              <div style="width:100%;max-width:190px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:8px;display:grid;gap:5px">
                 <span style="font-size:10.5px;font-weight:700">한빛아웃도어</span>
                 <span style="font-size:9.5px;color:var(--fg-muted)">매출 9,827,500 · 수수료 294,825</span>
                 <span style="font-size:9.5px;color:var(--fg-muted)">11월 1일 ~ 7일 · 승인됨</span>
               </div>''',
-     "폰에서는 카드로", "폰에서는 열 다섯 개를 가로로 밀어 보게 하기보다 <b>한 건을 카드 한 장으로</b> 바꾸는 편이 읽기 쉽습니다"),
+     "폰에서 한 건을 카드 한 장으로 보여 주기", "폰에서는 열 다섯 개를 가로로 밀어 보게 하기보다 <b>한 건을 카드 한 장으로</b> 바꾸는 편이 읽기 쉽습니다"),
   ]),
-  s8_title="최소 마크업과 키보드", s8_hint="표가 꼭 갖출 것",
+  s8_title="최소 마크업과 키보드", s8_hint="표를 만들 때 꼭 갖출 것",
   code_lede="마크업은 <code>&lt;table&gt;</code>로 쓰고, 정렬 상태는 <code>aria-sort</code>와 주소 양쪽에 함께 적습니다.",
   code='''&lt;<span class="t">table</span>&gt;
   &lt;<span class="t">caption</span> <span class="a">class</span>=<span class="s">"sr-only"</span>&gt;정산 목록, 20건 중 1~5&lt;/<span class="t">caption</span>&gt;
@@ -137,18 +137,18 @@ D = dict(
 <span class="t">td</span>.num { <span class="a">text-align</span>: right; <span class="a">font-variant-numeric</span>: tabular-nums; }''',
   keys=kbd([
     ("<kbd>Tab</kbd>", "정렬 버튼과 줄 안의 누를 수 있는 것들로 옮겨 갑니다. <b>셀마다 멈추지는 않습니다</b>"),
-    ("<code>scope</code>를 적는다", "<code>col</code>·<code>row</code>를 적어 두면 스크린 리더가 '매출 열, 1,284,000'처럼 열 이름을 붙여 읽습니다"),
+    ("<code>scope</code> 속성 적기", "<code>col</code>·<code>row</code>를 적어 두면 스크린 리더가 '매출 열, 1,284,000'처럼 열 이름을 붙여 읽습니다"),
     ("<code>aria-sort</code>", "정렬 기준인 열 <b>하나</b>에만 달고, 화살표와 함께 씁니다"),
     ("<code>&lt;caption&gt;</code>", "표가 무엇인지 한 줄로 적습니다. 화면에는 보이지 않게 둬도 됩니다"),
-    ("정렬은 <code>&lt;button&gt;</code>으로", "<code>&lt;th&gt;</code>에 onclick을 걸면 키보드로 누를 수 없습니다"),
-    ("줄 높이를 맞춘다", "긴 글자는 말줄임으로 잘라 한 줄로 고정합니다. 줄 높이가 같은 것은 <a href=\"virtual.html\">가상 스크롤</a>의 전제 조건이기도 합니다"),
+    ("정렬 단추는 <code>&lt;button&gt;</code>으로 만들기", "<code>&lt;th&gt;</code>에 onclick을 걸면 키보드로 누를 수 없습니다"),
+    ("모든 줄의 높이를 똑같이 맞추기", "긴 글자는 말줄임으로 잘라 한 줄로 고정합니다. 줄 높이가 같은 것은 <a href=\"virtual.html\">가상 스크롤</a>의 전제 조건이기도 합니다"),
   ]),
   backend=rows([
-    ("정렬은 서버에서", "화면에 받아 둔 20건만 정렬하면 <b>쪽을 넘길 때마다 순서가 이어지지 않습니다.</b> 서버가 전체 데이터를 기준으로 정렬한 뒤 해당 쪽만 잘라 보내야 합니다."),
-    ("정렬 기준을 열어 두지 않는다", "<code>?sort=</code> 값을 그대로 SQL에 넣으면 SQL 주입 공격을 당할 수 있습니다. 정렬할 수 있는 열 이름을 <b>허용 목록</b>으로 정해 두고 그 안의 값만 받습니다."),
-    ("같은 값의 순서", "매출이 같은 두 건의 순서가 요청마다 바뀌면 <b>쪽을 넘길 때 같은 줄이 두 번</b> 나옵니다. 그래서 ID를 2차 정렬 기준으로 붙여 순서를 고정합니다."),
-    ("전체 건수", "'20건 중 1~5'처럼 전체 건수를 보여 주려면 <code>COUNT(*)</code>를 따로 돌려야 하는데, 행이 많은 표에서는 이 쿼리가 오래 걸립니다. 그래서 큰 표에서는 <b>'100+ 건'</b>처럼 대략 적거나 커서 방식으로 바꿉니다."),
-    ("열 많은 표", "열이 늘수록 응답 크기도 커집니다. 화면에 <b>보이는 열만</b> 요청하는 방식(필드 선택)을 두면 목록 응답이 가벼워집니다."),
+    ("정렬은 서버에서 하기", "화면에 받아 둔 20건만 정렬하면 <b>쪽을 넘길 때마다 순서가 이어지지 않습니다.</b> 서버가 전체 데이터를 기준으로 정렬한 뒤 해당 쪽만 잘라 보내야 합니다."),
+    ("정렬 기준은 정해 둔 열 이름만 받기", "<code>?sort=</code> 값을 그대로 SQL에 넣으면 SQL 주입 공격을 당할 수 있습니다. 정렬할 수 있는 열 이름을 <b>허용 목록</b>으로 정해 두고 그 안의 값만 받습니다."),
+    ("값이 같은 줄의 순서 고정하기", "매출이 같은 두 건의 순서가 요청마다 바뀌면 <b>쪽을 넘길 때 같은 줄이 두 번</b> 나옵니다. 그래서 ID를 2차 정렬 기준으로 붙여 순서를 고정합니다."),
+    ("전체 건수를 세는 비용", "'20건 중 1~5'처럼 전체 건수를 보여 주려면 <code>COUNT(*)</code>를 따로 돌려야 하는데, 행이 많은 표에서는 이 쿼리가 오래 걸립니다. 그래서 큰 표에서는 <b>'100+ 건'</b>처럼 대략 적거나 커서 방식으로 바꿉니다."),
+    ("열이 많은 표의 응답 크기", "열이 늘수록 응답 크기도 커집니다. 화면에 <b>보이는 열만</b> 요청하는 방식(필드 선택)을 두면 목록 응답이 가벼워집니다."),
   ]),
   plat_lede="표는 <b>PC 화면을 전제로 한 부품</b>이라서, iOS와 안드로이드에서는 대개 다른 모양으로 바꿔 보여 줍니다.",
   plats=plats([

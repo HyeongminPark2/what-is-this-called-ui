@@ -18,7 +18,7 @@
 <body>
 <div class="bar">
   <b>불투명도</b>
-  <label>흐리게 하는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>흐리게 하는 방법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="none">그대로</option>
     <option value="opacity" selected>부모에 opacity</option>
     <option value="alpha">글자색에만 알파</option>
@@ -84,18 +84,18 @@
 
     var rd = document.getElementById('read');
     rd.innerHTML = '글자 대비비 <b>' + cr.toFixed(2) + ':1</b>' +
-      (cr < 4.5 ? ' <span class="warn">— 4.5:1 미달</span>' : ' — 통과') +
-      '<br>겹치는 자리에 있는 것 <b>' + who + '</b>' +
-      (who === '덮개' ? ' <span class="warn">— 배지의 z-index 5가 적용되지 않습니다</span>' : '');
+      (cr < 4.5 ? ' <span class="warn">(4.5:1 기준에 미달)</span>' : ' (기준 통과)') +
+      '<br>겹치는 자리에서 위에 있는 것은 <b>' + who + '</b>입니다' +
+      (who === '덮개' ? '. <span class="warn">배지의 z-index 5가 적용되지 않습니다</span>' : '');
     rd.dataset.cr = cr.toFixed(2);
     rd.dataset.pass = cr >= 4.5 ? '1' : '0';
     rd.dataset.top = who;
 
     document.getElementById('note').innerHTML = {
-      none: '그대로 — 비교할 기준입니다',
-      opacity: '<span class="warn">부모 전체가 흐려집니다</span> — 글과 버튼, 배지까지 함께 흐려지고 쌓임 문맥이 새로 생깁니다',
-      alpha: '글자색만 흐려집니다 — 쌓임 문맥은 <b>생기지 않지만</b> 대비비는 똑같이 떨어집니다',
-      muted: '<b>흐린 색 토큰</b> — 처음부터 대비비를 맞춰 고른 색이라 안전합니다'
+      none: '흐리지 않은 상태로, 비교할 기준입니다',
+      opacity: '<span class="warn">부모 전체가 흐려집니다</span>. 글과 버튼, 배지까지 함께 흐려지고 쌓임 문맥이 새로 생깁니다',
+      alpha: '글자색만 흐려집니다. 쌓임 문맥은 <b>생기지 않지만</b> 대비비는 똑같이 떨어집니다',
+      muted: '<b>흐린 색 토큰</b>은 처음부터 대비비를 맞춰 고른 색이라 안전합니다'
     }[k];
   }
 

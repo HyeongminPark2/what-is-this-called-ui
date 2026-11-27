@@ -3,21 +3,21 @@ from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
 
 RT = table(
-  ["누가 다시 보내나", "간격", "서버에 주는 부담", "언제 쓰나"],
-  [["바로바로", "기계", "<b>거의 없음</b>", "<b>가장 크다</b>", "쓰지 않는다"],
-   ["같은 간격", "기계", "1초 · 1초 · 1초", "중간", "짧게 끊길 때"],
-   ["지수 백오프", "기계", "<b>1 · 2 · 4 · 8초</b>", "<b>작다</b>", "거의 늘 이쪽"],
-   ["사람이 누르기", "<b>사람</b>", "사람 마음", "가장 작다", "자동이 실패한 뒤"]],
+  ["누가 다시 보내는가", "다시 보내는 간격", "서버에 주는 부담", "언제 쓰는가"],
+  [["바로바로", "앱이 자동으로", "<b>거의 없음</b>", "<b>가장 큼</b>", "쓰지 않음"],
+   ["같은 간격", "앱이 자동으로", "1초 · 1초 · 1초", "중간", "연결이 잠깐씩 끊길 때"],
+   ["지수 백오프", "앱이 자동으로", "<b>1 · 2 · 4 · 8초</b>", "<b>작음</b>", "거의 모든 경우"],
+   ["사용자가 직접 누르기", "<b>사용자</b>", "사용자가 누를 때마다", "가장 작음", "자동 재시도가 실패한 뒤"]],
   me="지수 백오프")
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">간격을 두 배씩 — 1 · 2 · 4 · 8초</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">흔들기(jitter) — 다 같이 몰리지 않게</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">최대 횟수 — 다섯 번쯤에서 멈춘다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">다시 보내도 되는 요청인지 먼저 본다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">사람에게 보여 준다 — 몇 번째, 언제 다시</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--accent)">끝내 실패하면 다시 시도 단추를 준다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">간격을 1 · 2 · 4 · 8초로 두 배씩 늘림</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">흔들기(jitter)로 요청이 몰리지 않게 함</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">다섯 번쯤 실패하면 자동 재시도를 멈춤</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">다시 보내도 되는 요청인지 먼저 확인함</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">몇 번째 시도인지, 언제 다시 보내는지 보여 줌</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--accent)">끝내 실패하면 다시 시도 버튼을 줌</div>
                 </div>
               </div>'''
 
@@ -63,33 +63,33 @@ D = dict(
   s4_title="상태", s4_hint="간격에 따라 달라지는 결과",
   states=states([
     (track([(8, 'f'), (8, 'f'), (8, 'f'), (8, 'f'), (8, 'f'), (8, 'f'), (8, 'f'), (8, 'f'), (8, 'f'), (8, 'f')],
-           "바로바로", "짧은 시간에 수십 번", False),
-     "쉬지 않음", "<b>서버 부하를 더 키웁니다</b>"),
-    (track([(10, 'f'), (10, 'f'), (10, 'f'), (10, 'f'), (10, 'ok')], "같은 간격", "1초마다", None),
-     "같은 간격", "연결이 잠깐씩 짧게 끊길 때만 씁니다"),
+           "바로바로", "짧은 시간에 수십 번 보냄", False),
+     "쉬지 않고 다시 보낼 때", "<b>서버 부하를 더 키웁니다</b>"),
+    (track([(10, 'f'), (10, 'f'), (10, 'f'), (10, 'f'), (10, 'ok')], "같은 간격", "1초마다 보냄", None),
+     "같은 간격으로 보낼 때", "연결이 잠깐씩 짧게 끊길 때만 씁니다"),
     (track([(6, 'f'), (11, 'f'), (18, 'f'), (26, 'ok')], "지수 백오프", "1 · 2 · 4초 뒤 성공", True),
-     "지수 백오프", "<b>대부분의 경우</b>에 씁니다"),
+     "간격을 두 배씩 늘릴 때", "<b>대부분의 경우</b>에 씁니다"),
     (one(txt('<span style="display:block;font-size:8.5px">3번째 시도 중…</span>'
              '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">4초 뒤 다시 시도합니다</span>'),
-         "사람에게", True, "몇 번째인지, 언제 다시인지", "152px"),
-     "보여 주기", "재시도를 <b>사용자 모르게</b> 돌리지 않습니다"),
+         "사용자에게 보여 줌", True, "몇 번째인지, 언제 다시 보내는지", "152px"),
+     "재시도 중임을 보여 줄 때", "재시도를 <b>사용자 모르게</b> 돌리지 않습니다"),
     (one(txt('<span style="display:block;font-size:8.5px;color:var(--danger)">보내지 못했습니다</span>'
              '<span style="display:block;font-size:8px;color:var(--accent);margin-top:3px">다시 시도 ›</span>'),
-         "끝내 실패", True, "사람에게 단추를 넘긴다", "152px"),
-     "포기", "자동 재시도를 멈추고 사용자에게 다시 시도 <b>버튼</b>을 줍니다"),
-    (one(txt('<span style="display:block;font-size:8px;color:var(--danger)">결제를 세 번 보냈다</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">멱등 키가 없으면 세 번 결제된다</span>'),
+         "끝내 실패", True, "사용자에게 버튼을 넘김", "152px"),
+     "자동 재시도를 멈출 때", "자동 재시도를 멈추고 사용자에게 다시 시도 <b>버튼</b>을 줍니다"),
+    (one(txt('<span style="display:block;font-size:8px;color:var(--danger)">결제를 세 번 보냄</span>'
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">멱등 키가 없으면 세 번 결제됨</span>'),
          "위험", False, "", "152px"),
-     "멱등하지 않은 요청", "멱등 키 없이 <b>다시 보내면 안 됩니다</b>"),
+     "멱등하지 않은 요청을 다시 보낼 때", "멱등 키 없이 <b>다시 보내면 안 됩니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("간격", "두 배씩", "1 · 2 · 4 · 8초로 간격을 늘립니다"),
+    ("간격", "두 배씩 늘림", "1 · 2 · 4 · 8초로 간격을 늘립니다"),
     ("흔들기", "무작위 섞기", "간격에 무작위 값을 섞어 여러 기기의 요청이 <b>한꺼번에 몰리지</b> 않게 합니다"),
     ("최대 횟수", "다섯 번쯤", "다섯 번쯤 실패하면 자동 재시도를 멈추고 사용자에게 넘깁니다"),
-    ("다시 보내도 되나", "먼저 확인", "다시 보내도 되는 요청인지 먼저 확인합니다. <b>결제는 멱등 키 없이 다시 보내면 안 됩니다</b>"),
-    ("보여 주기", "몇 번째 · 언제", "몇 번째 시도인지, 언제 다시 보내는지 보여 줍니다"),
-    ("포기", "단추", "다시 시도할지는 <b>사용자가</b> 정하게 합니다"),
+    ("다시 보내도 되는지 확인", "보내기 전에 확인", "다시 보내도 되는 요청인지 먼저 확인합니다. <b>결제는 멱등 키 없이 다시 보내면 안 됩니다</b>"),
+    ("진행 상황 표시", "몇 번째 시도인지와 다음 시각", "몇 번째 시도인지, 언제 다시 보내는지 보여 줍니다"),
+    ("자동 재시도 중단", "다시 시도 버튼", "다시 시도할지는 <b>사용자가</b> 정하게 합니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           다시 보내기 전에 <b>이 요청을 두 번 보내도 되는지</b> 꼭 확인해야 합니다.
@@ -111,17 +111,18 @@ D = dict(
     "끝없이 다시 보낼 때. <b>다섯 번쯤</b>에서 멈춥니다",
     "사용자에게 알리지 않고 재시도할 때. 사용자는 화면이 <b>멈춘 줄</b> 압니다",
   ]),
-  instead='연결이 아예 없으면 <a href="offline.html">오프라인</a>, 실패 화면은 <a href="error.html">에러 상태</a>, 기다림 표시는 <a href="spinner.html">스피너</a>, 문구는 <a href="errortext.html">오류 문구</a>.',
+  instead='연결이 아예 없을 때의 처리는 <a href="offline.html">오프라인</a> 항목에서, 실패 화면은 <a href="error.html">에러 상태</a> 항목에서 다룹니다. 기다리는 동안 보여 줄 표시는 <a href="spinner.html">스피너</a>에, 실패를 알리는 문구는 <a href="errortext.html">오류 문구</a>에 정리되어 있습니다.',
+  do_title="재시도를 구현할 때 지킬 것", dont_title="재시도에서 피할 것", instead_title="함께 보면 좋은 항목",
   cases=cases([
-    (track([(6, 'f'), (11, 'f'), (18, 'ok')], "목록 받기", "", True), "목록 받기", "사용자에게 따로 묻지 않고 뒤에서 다시 받아 옵니다"),
+    (track([(6, 'f'), (11, 'f'), (18, 'ok')], "목록 받기", "", True), "목록을 뒤에서 다시 받아 오기", "사용자에게 따로 묻지 않고 뒤에서 다시 받아 옵니다"),
     (one(txt('<span style="display:block;font-size:8.5px;color:var(--danger)">보내지 못했습니다</span>'
              '<span style="display:block;font-size:8px;color:var(--accent);margin-top:3px">다시 시도 ›</span>'),
          "폼 보내기", True, "", "150px"),
-     "폼 보내기", "다시 보낼지는 <b>사용자에게</b> 맡깁니다"),
+     "폼을 다시 보낼지 사용자에게 맡기기", "다시 보낼지는 <b>사용자에게</b> 맡깁니다"),
     (one(txt('<span style="display:block;font-size:8px;color:var(--fg-muted)">Idempotency-Key: 9fa3…</span>'
              '<span style="display:block;font-size:8px;margin-top:2px">두 번 와도 한 번만 처리</span>'),
          "결제", True, "", "150px"),
-     "결제", "다시 보낼 때는 반드시 <b>멱등 키</b>를 붙입니다"),
+     "결제 요청에 멱등 키 붙이기", "다시 보낼 때는 반드시 <b>멱등 키</b>를 붙입니다"),
   ]),
   s8_title="최소 코드와 규칙", s8_hint="구현할 때 지킬 최소 규칙",
   code_lede="간격을 두 배씩 늘리고 무작위 값을 조금 섞습니다. 최대 횟수는 다섯 번이면 충분합니다.",
@@ -142,17 +143,17 @@ D = dict(
 fetch(<span class="s">'/pay'</span>, { headers: { <span class="s">'Idempotency-Key'</span>: orderKey } });''',
   keys=kbd([
     ("<code>role=\"status\"</code>", "'3번째 시도 중'을 <b>스크린 리더로도</b> 알립니다"),
-    ("다시 시도 단추", "자동 재시도를 멈춘 뒤에는 <b>초점을 받을 수 있는</b> 다시 시도 버튼을 둡니다"),
+    ("다시 시도 버튼을 둘 때", "자동 재시도를 멈춘 뒤에는 <b>초점을 받을 수 있는</b> 다시 시도 버튼을 둡니다"),
     ("<code>aria-busy</code>", "다시 받아 오는 동안 그 자리에 붙입니다"),
     ("428 · 429 · 503", "<b>다시 보내도 되는</b> 응답 코드입니다"),
     ("400 · 401 · 404", "다시 보내도 <b>똑같이 실패</b>하므로 재시도하지 않습니다"),
-    ("확인하는 법", "네트워크를 끊었다 다시 켠 뒤 요청을 <b>몇 번 보냈는지</b> 셉니다"),
+    ("확인하는 방법", "네트워크를 끊었다 다시 켠 뒤 요청을 <b>몇 번 보냈는지</b> 셉니다"),
   ]),
   backend=rows([
-    ("<code>Retry-After</code>", "서버가 이 헤더로 <b>언제 다시 보내라</b>고 알려 주면 화면에서 간격을 짐작할 필요가 없습니다."),
-    ("멱등 키", "서버는 같은 키가 붙은 요청을 두 번 받으면 다시 처리하지 않고 <b>처음 결과</b>를 그대로 돌려줍니다."),
-    ("어떤 오류인지", "<code>429</code>(요청이 너무 잦음)는 기다렸다가 다시 보내면 되지만 <code>400</code>(잘못된 요청)은 다시 보내도 실패하므로, 두 오류는 <b>전혀 다르게 대응</b>해야 합니다."),
-    ("서킷 브레이커", "실패가 연달아 쌓이면 <b>잠시 요청 자체를 끊어서</b> 서버가 복구될 시간을 줍니다."),
+    ("<code>Retry-After</code> 헤더로 간격 알려 주기", "서버가 이 헤더로 <b>언제 다시 보내라</b>고 알려 주면 화면에서 간격을 짐작할 필요가 없습니다."),
+    ("멱등 키로 중복 처리 막기", "서버는 같은 키가 붙은 요청을 두 번 받으면 다시 처리하지 않고 <b>처음 결과</b>를 그대로 돌려줍니다."),
+    ("오류 종류에 따라 다르게 대응하기", "<code>429</code>(요청이 너무 잦음)는 기다렸다가 다시 보내면 되지만 <code>400</code>(잘못된 요청)은 다시 보내도 실패하므로, 두 오류는 <b>전혀 다르게 대응</b>해야 합니다."),
+    ("서킷 브레이커로 요청 잠시 끊기", "실패가 연달아 쌓이면 <b>잠시 요청 자체를 끊어서</b> 서버가 복구될 시간을 줍니다."),
   ]),
   plat_lede="재시도의 <b>원리는 플랫폼마다 같고</b>, 쓰는 라이브러리만 다릅니다.",
   plats=plats([

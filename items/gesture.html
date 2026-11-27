@@ -52,8 +52,8 @@
         <div class="note" style="margin-bottom:0">
           <p>시트를 아래로 끌어 보세요. 조금 끌었다 놓으면 <b>제자리로</b> 돌아오고, 절반을 넘기거나
           <b>빠르게 튕기면</b> 닫힙니다.<br>
-          <b>속도도 본다</b>를 끄면 짧게 탁 튕겨 닫는 동작이 듣지 않습니다.
-          <b>손가락을 따라간다</b>를 끄면 규칙은 같은데도 <b>내가 조작하고 있다는 느낌</b>이 사라지는데,
+          <b>내리는 속도도 함께 보기</b>를 끄면 짧게 탁 튕겨 닫는 동작이 듣지 않습니다.
+          <b>손가락을 따라 움직이기</b>를 끄면 규칙은 같은데도 <b>내가 조작하고 있다는 느낌</b>이 사라지는데,
           이것으로 제스처에서 따라가기가 왜 중요한지 알 수 있습니다.</p>
         </div>
       </section>
@@ -77,18 +77,18 @@
         <p>움직임은 화면에서 무엇이 바뀌었는지 사용자에게 <b>알려 주는</b> 역할을 합니다. 아래 네 가지를 따져 보면 움직임을 다루는 항목들을 서로 구별할 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하나</th><th>사람이 읽는 뜻</th><th>과하면</th><th>모션 줄이기에서</th></tr></thead>
+          <thead><tr><th></th><th>이 항목이 정하는 것</th><th>사용자가 움직임에서 읽어 내는 것</th><th>지나치게 쓰면 생기는 일</th><th>모션 줄이기를 켰을 때</th></tr></thead>
           <tbody>
-            <tr><td>이징 곡선</td><td>속도를 <b>나눠 쓰는</b> 방식</td><td>무게와 재질</td><td>끈적해 보인다</td><td>그대로 둔다</td></tr>
-            <tr><td>지속 시간</td><td><b>얼마나</b> 걸리나</td><td>거리와 크기</td><td><b>기다리게</b> 된다</td><td>짧게 하거나 0</td></tr>
-            <tr><td>진입과 퇴장</td><td>들고 나는 <b>방식</b></td><td>어디서 왔나</td><td>닫는 데 붙잡힌다</td><td>퇴장은 거의 0</td></tr>
-            <tr><td>무엇을 움직이나</td><td>어떤 <b>속성</b>을 바꾸나</td><td>매끄러움 그 자체</td><td><b>버벅인다</b></td><td class="none">해당 없음</td></tr>
-            <tr><td>스프링</td><td>지나쳤다 <b>돌아오는</b> 정도</td><td>손으로 민 느낌</td><td>어지럽다</td><td>튕김을 0으로</td></tr>
-            <tr><td>차례로 들어오기</td><td>줄 사이 <b>지연</b></td><td>순서와 묶음</td><td>마지막이 <b>늦는다</b></td><td>한꺼번에 띄운다</td></tr>
-            <tr class="me"><td><b>제스처</b></td><td>손가락을 <b>따라가는</b> 규칙</td><td>내가 조작한다</td><td>실수로 닫힌다</td><td>그대로 둔다</td></tr>
-            <tr><td>모션 줄이기</td><td>무엇을 <b>끄나</b></td><td>배려받고 있다</td><td>다 꺼서 변화를 못 읽는다</td><td><b>이게 그 기준이다</b></td></tr>
-            <tr><td>공유 요소 전환</td><td>두 화면의 <b>같은 것</b></td><td>어디서 왔나</td><td>자리가 어긋나면 더 헷갈린다</td><td>자리 이동 없이</td></tr>
-            <tr><td>스크롤 연동</td><td>굴림에 <b>맞춰</b> 움직이기</td><td>내가 어디쯤인가</td><td><b>멀미를 부른다</b></td><td>연출만 끈다</td></tr>
+            <tr><td>이징 곡선</td><td>속도를 <b>나눠 쓰는</b> 방식</td><td>무게와 재질</td><td>끈적해 보임</td><td>그대로 둠</td></tr>
+            <tr><td>지속 시간</td><td><b>얼마나</b> 걸리는지</td><td>거리와 크기</td><td>사용자를 <b>기다리게</b> 함</td><td>짧게 줄이거나 0으로</td></tr>
+            <tr><td>진입과 퇴장</td><td>들고 나는 <b>방식</b></td><td>어디서 왔는지</td><td>닫힐 때까지 붙잡혀 기다림</td><td>퇴장 시간을 거의 0으로</td></tr>
+            <tr><td>무엇을 움직이나</td><td>어떤 <b>속성</b>을 바꾸는지</td><td>움직임이 매끄러운지</td><td>화면이 <b>버벅임</b></td><td class="none">해당 없음</td></tr>
+            <tr><td>스프링</td><td>지나쳤다 <b>돌아오는</b> 정도</td><td>손으로 민 듯한 느낌</td><td>어지러움</td><td>튕김을 0으로</td></tr>
+            <tr><td>차례로 들어오기</td><td>줄과 줄 사이의 <b>지연</b></td><td>순서와 묶음</td><td>마지막 줄이 <b>늦게</b> 나타남</td><td>한꺼번에 띄움</td></tr>
+            <tr class="me"><td><b>제스처</b></td><td>손가락을 <b>따라가는</b> 규칙</td><td>내가 조작하고 있다는 느낌</td><td>실수로 닫히기 쉬움</td><td>그대로 둠</td></tr>
+            <tr><td>모션 줄이기</td><td>무엇을 <b>끄는지</b></td><td>배려받고 있다는 느낌</td><td>다 꺼 버려 무엇이 바뀌었는지 알 수 없음</td><td><b>이 항목이 그 기준</b></td></tr>
+            <tr><td>공유 요소 전환</td><td>두 화면에 함께 있는 <b>같은 요소</b></td><td>어디서 왔는지</td><td>자리가 어긋나면 오히려 헷갈림</td><td>자리 이동 없이 전환</td></tr>
+            <tr><td>스크롤 연동</td><td>스크롤에 <b>맞춰</b> 움직이는 방식</td><td>지금 어디쯤 읽고 있는지</td><td><b>멀미를 일으킴</b></td><td>연출만 끔</td></tr>
           </tbody>
         </table>
         </div>
@@ -98,43 +98,43 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 끄는 네 토막<span class="hint">손을 떼기 전과 뒤</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 끌어 닫는 동안의 단계<span class="hint">손을 떼기 전과 뗀 뒤의 모습</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><div style="position:absolute;left:0;right:0;top:28%;bottom:-8px;background:var(--surface);border-top:1px solid var(--line);border-radius:7px 7px 0 0;padding:4px"><span style="display:block;width:22px;height:3px;border-radius:2px;background:var(--line-strong);margin:0 auto"></span></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">잡기 전 — 제자리</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><div style="position:absolute;left:0;right:0;top:28%;bottom:-8px;background:var(--surface);border-top:1px solid var(--line);border-radius:7px 7px 0 0;padding:4px"><span style="display:block;width:22px;height:3px;border-radius:2px;background:var(--line-strong);margin:0 auto"></span></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">잡기 전이라 제자리</span></div>
             </div>
-            <figcaption>쉬는 중<span>손잡이(그립)가 <b>끌 수 있다</b>는 것을 알려 줍니다</span></figcaption>
+            <figcaption>잡기 전 평소 상태<span>손잡이(그립)가 <b>끌 수 있다</b>는 것을 알려 줍니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><div style="position:absolute;left:0;right:0;top:44%;bottom:-8px;background:var(--surface);border-top:1px solid var(--line);border-radius:7px 7px 0 0;padding:4px"><span style="display:block;width:22px;height:3px;border-radius:2px;background:var(--line-strong);margin:0 auto"></span></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">끄는 중 — 손가락을 따라간다</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><div style="position:absolute;left:0;right:0;top:44%;bottom:-8px;background:var(--surface);border-top:1px solid var(--line);border-radius:7px 7px 0 0;padding:4px"><span style="display:block;width:22px;height:3px;border-radius:2px;background:var(--line-strong);margin:0 auto"></span></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">끄는 동안 손가락을 따라감</span></div>
             </div>
-            <figcaption>끄는 중<span>손가락을 <b>1:1로 따라갑니다.</b> 제스처에서 가장 중요한 부분입니다</span></figcaption>
+            <figcaption>끌고 있는 동안<span>손가락을 <b>1:1로 따라갑니다.</b> 제스처에서 가장 중요한 부분입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><div style="position:absolute;left:0;right:0;top:34%;bottom:-8px;background:var(--surface);border-top:1px solid var(--line);border-radius:7px 7px 0 0;padding:4px"><span style="display:block;width:22px;height:3px;border-radius:2px;background:var(--line-strong);margin:0 auto"></span></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">조금 끌고 놓음 → 제자리</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><div style="position:absolute;left:0;right:0;top:34%;bottom:-8px;background:var(--surface);border-top:1px solid var(--line);border-radius:7px 7px 0 0;padding:4px"><span style="display:block;width:22px;height:3px;border-radius:2px;background:var(--line-strong);margin:0 auto"></span></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">조금 끌고 놓으면 제자리로</span></div>
             </div>
-            <figcaption>문턱 못 넘음<span><b>제자리로 돌아옵니다.</b> 사용자가 마음을 바꿀 수 있도록 되돌릴 방법이 늘 있어야 합니다</span></figcaption>
+            <figcaption>문턱을 넘기지 못했을 때<span><b>제자리로 돌아옵니다.</b> 사용자가 마음을 바꿀 수 있도록 되돌릴 방법이 늘 있어야 합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><div style="position:absolute;left:0;right:0;top:72%;bottom:-8px;background:var(--surface);border-top:1px solid var(--line);border-radius:7px 7px 0 0;padding:4px"><span style="display:block;width:22px;height:3px;border-radius:2px;background:var(--line-strong);margin:0 auto"></span></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">절반 넘김 → 닫힘</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><div style="position:absolute;left:0;right:0;top:72%;bottom:-8px;background:var(--surface);border-top:1px solid var(--line);border-radius:7px 7px 0 0;padding:4px"><span style="display:block;width:22px;height:3px;border-radius:2px;background:var(--line-strong);margin:0 auto"></span></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">절반을 넘기면 닫힘</span></div>
             </div>
-            <figcaption>문턱 넘음<span>끈 거리로 판단합니다. 흔히 <b>절반</b>을 기준으로 씁니다</span></figcaption>
+            <figcaption>문턱을 넘겼을 때<span>끈 거리로 판단합니다. 흔히 <b>절반</b>을 기준으로 씁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><div style="position:absolute;left:0;right:0;top:40%;bottom:-8px;background:var(--surface);border-top:1px solid var(--line);border-radius:7px 7px 0 0;padding:4px"><span style="display:block;width:22px;height:3px;border-radius:2px;background:var(--line-strong);margin:0 auto"></span></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">빠르게 튕김 → 닫힘</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><div style="position:absolute;left:0;right:0;top:40%;bottom:-8px;background:var(--surface);border-top:1px solid var(--line);border-radius:7px 7px 0 0;padding:4px"><span style="display:block;width:22px;height:3px;border-radius:2px;background:var(--line-strong);margin:0 auto"></span></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">빠르게 튕기면 닫힘</span></div>
             </div>
-            <figcaption>빠르게 튕김<span>끈 거리가 짧아도 <b>속도가 빠르면</b> 닫습니다</span></figcaption>
+            <figcaption>빠르게 튕겼을 때<span>끈 거리가 짧아도 <b>속도가 빠르면</b> 닫습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><div style="position:absolute;left:0;right:0;top:28%;bottom:-8px;background:var(--surface);border-top:1px solid var(--line);border-radius:7px 7px 0 0;padding:4px"><span style="display:block;width:22px;height:3px;border-radius:2px;background:var(--line-strong);margin:0 auto"></span></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--danger)">끝까지 끌어야만 닫힌다</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><div style="position:absolute;left:0;right:0;top:28%;bottom:-8px;background:var(--surface);border-top:1px solid var(--line);border-radius:7px 7px 0 0;padding:4px"><span style="display:block;width:22px;height:3px;border-radius:2px;background:var(--line-strong);margin:0 auto"></span></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--danger)">끝까지 끌어야만 닫힘</span></div>
             </div>
-            <figcaption>속도를 안 볼 때<span>짧게 튕겨도 닫히지 않아서 <b>답답합니다</b></span></figcaption>
+            <figcaption>속도를 보지 않을 때<span>짧게 튕겨도 닫히지 않아서 <b>답답합니다</b></span></figcaption>
           </figure>
         </div>
       </section>
@@ -146,12 +146,12 @@
             <div class="anat" role="img" aria-label="제스처의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">pointerdown — 잡는다 (setPointerCapture)</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">pointerdown에서 잡음 (setPointerCapture)</div>
                   <div class="pin-out" data-pin="2" style="max-width:220px"><div style="width:100%;max-width:220px;display:grid;gap:4px"><div style="height:64px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><div style="position:absolute;left:0;right:0;top:40%;bottom:-8px;background:var(--surface);border-top:1px solid var(--line);border-radius:7px 7px 0 0;padding:4px"><span style="display:block;width:22px;height:3px;border-radius:2px;background:var(--line-strong);margin:0 auto"></span></div></div></div></div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">끄는 동안 손가락을 그대로 따라간다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">문턱 — 절반을 넘겼나</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">속도 — 빠르게 튕겼나 (0.5px/ms)</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">touch-action 을 안 적으면 브라우저가 먼저 가져간다</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">끄는 동안 손가락을 그대로 따라감</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">문턱은 절반을 넘겼는지</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">속도는 빠르게 튕겼는지 (0.5px/ms)</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">touch-action을 안 적으면 브라우저가 먼저 가져감</div>
                 </div>
               </div>
             </div>
@@ -162,7 +162,7 @@
             <li><b>놓기 <em>pointerup</em></b><span>손을 놓은 이 시점에 <b>처음으로</b> 애니메이션이 나옵니다</span></li>
             <li><b>문턱 <em>절반</em></b><span>끈 거리로 판단합니다. 문턱이 너무 작으면 <b>실수로 닫힙니다</b></span></li>
             <li><b>속도 <em>0.5px/ms</em></b><span>짧게 튕겨도 닫히게 합니다. <b>거리만 보면 답답</b>합니다</span></li>
-            <li><b>브라우저와의 자리 다툼 <em>touch-action</em></b><span>이 속성을 적지 않으면 <b>브라우저 스크롤이 먼저</b> 입력을 가져갑니다</span></li>
+            <li><b>브라우저 스크롤과 겹치는 입력 <em>touch-action</em></b><span>이 속성을 적지 않으면 <b>브라우저 스크롤이 먼저</b> 입력을 가져갑니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -194,7 +194,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>제스처 대신 다른 것을 써야 하는 경우</b> — 손을 놓은 뒤의 움직임은 <a href="spring.html">스프링</a>, 들어오고 나가는 움직임의 짝은 <a href="enterexit.html">진입과 퇴장</a>, 같은 일을 버튼으로 하는 방법은 <a href="../items/sheet.html">바텀시트</a>·<a href="../items/dialog.html">다이얼로그</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>제스처와 함께 볼 것</b> — 손을 놓은 뒤에 이어지는 움직임은 <a href="spring.html">스프링</a>에서, 들어오고 나가는 움직임을 짝짓는 방법은 <a href="enterexit.html">진입과 퇴장</a>에서 다룹니다. 같은 일을 버튼으로 하는 방법은 <a href="../items/sheet.html">바텀시트</a>와 <a href="../items/dialog.html">다이얼로그</a> 항목에 있습니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -204,7 +204,7 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:4px"><div style="height:76px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden"><div style="position:absolute;left:0;right:0;top:44%;bottom:-8px;background:var(--surface);border-top:1px solid var(--line);border-radius:7px 7px 0 0;padding:4px"><span style="display:block;width:22px;height:3px;border-radius:2px;background:var(--line-strong);margin:0 auto"></span></div></div></div>
             </div>
-            <figcaption><b>끌어 닫는 시트</b>가장 흔한 제스처입니다. <b>손잡이</b>가 끌 수 있다는 것을 알려 줍니다</figcaption>
+            <figcaption><b>시트를 끌어 닫기</b>가장 흔한 제스처입니다. <b>손잡이</b>가 끌 수 있다는 것을 알려 줍니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -213,7 +213,7 @@
                 <span style="position:absolute;right:8px;top:12px;font-size:9px;color:#fff">삭제</span>
               </div>
             </div>
-            <figcaption><b>쓸어넘겨 지우기</b><b>되돌리기</b>를 함께 제공해야 쓸 수 있습니다</figcaption>
+            <figcaption><b>줄을 쓸어넘겨 지우기</b><b>되돌리기</b>를 함께 제공해야 쓸 수 있습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -249,14 +249,14 @@ sheet.addEventListener(<span class="s">'pointerup'</span>, () =&gt; {
 });</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>알아 둘 규칙</th><th>자세한 내용</th></tr></thead>
           <tbody>
             <tr><td><code>touch-action</code></td><td><code>none</code>이나 <code>pan-y</code>를 적습니다. 적지 않으면 <b>브라우저가 먼저</b> 입력을 가져갑니다</td></tr>
             <tr><td><code>setPointerCapture</code></td><td>손가락이 상자 밖으로 나가도 이벤트가 계속 옵니다. <b>걸지 않으면 중간에 끊깁니다</b></td></tr>
             <tr><td><code>pointercancel</code></td><td>전화가 오거나 브라우저가 입력을 가로채면 이 이벤트가 옵니다. 이때는 <b>제자리로 되돌려야</b> 합니다</td></tr>
-            <tr><td>키보드 길을 반드시</td><td><kbd>Esc</kbd>로 닫기와 <b>닫기 버튼</b>을 둡니다. 제스처는 키보드로 대신할 수 없습니다</td></tr>
+            <tr><td>키보드로 닫는 방법 꼭 두기</td><td><kbd>Esc</kbd>로 닫기와 <b>닫기 버튼</b>을 둡니다. 제스처는 키보드로 대신할 수 없습니다</td></tr>
             <tr><td><code>user-select: none</code></td><td>끄는 동안 글자가 선택되어 파랗게 칠해지는 것을 막습니다</td></tr>
-            <tr><td><a href="reducedmotion.html">모션 줄이기</a></td><td>따라가기는 <b>그대로 둡니다</b>. 사용자의 손가락이 만든 움직임이라 멀미를 일으키지 않기 때문입니다</td></tr>
+            <tr><td><a href="reducedmotion.html">모션 줄이기</a>를 켰을 때</td><td>따라가기는 <b>그대로 둡니다</b>. 사용자의 손가락이 만든 움직임이라 멀미를 일으키지 않기 때문입니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -267,10 +267,10 @@ sheet.addEventListener(<span class="s">'pointerup'</span>, () =&gt; {
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>쓸어서 지우기는 되돌릴 수 있어야</th><td>실수가 잦은 조작이라 <b>바로 지우지 않고</b> 되돌릴 시간을 둡니다. 보통 5초쯤 기다렸다가 실제 삭제 요청을 보냅니다.</td></tr>
-            <tr><th>당겨서 새로고침이 연타된다</th><td>몇 번을 당겨도 요청은 <b>하나만</b> 나가게 막습니다. 그러지 않으면 같은 요청이 여러 번 연달아 갑니다.</td></tr>
-            <tr><th>끄는 중에는 요청하지 않는다</th><td>손을 떼기 전까지는 <b>아무것도 확정되지 않았기</b> 때문에, 끄는 도중의 값으로 서버에 요청하지 않습니다.</td></tr>
-            <tr><th>끊긴 제스처</th><td>앱이 배경으로 가면 <code>pointercancel</code>만 오고 <code>pointerup</code>은 오지 않습니다. 그래서 제스처가 끊겼을 때는 <b>되돌리는 쪽</b>을 기본으로 둡니다.</td></tr>
+            <tr><th>쓸어서 지운 것을 되돌릴 수 있게 하기</th><td>실수가 잦은 조작이라 <b>바로 지우지 않고</b> 되돌릴 시간을 둡니다. 보통 5초쯤 기다렸다가 실제 삭제 요청을 보냅니다.</td></tr>
+            <tr><th>당겨서 새로고침을 여러 번 했을 때</th><td>몇 번을 당겨도 요청은 <b>하나만</b> 나가게 막습니다. 그러지 않으면 같은 요청이 여러 번 연달아 갑니다.</td></tr>
+            <tr><th>끄는 도중에는 요청하지 않기</th><td>손을 떼기 전까지는 <b>아무것도 확정되지 않았기</b> 때문에, 끄는 도중의 값으로 서버에 요청하지 않습니다.</td></tr>
+            <tr><th>제스처가 중간에 끊겼을 때</th><td>앱이 배경으로 가면 <code>pointercancel</code>만 오고 <code>pointerup</code>은 오지 않습니다. 그래서 제스처가 끊겼을 때는 <b>되돌리는 쪽</b>을 기본으로 둡니다.</td></tr>
           </tbody>
         </table>
         </div>

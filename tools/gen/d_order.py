@@ -26,12 +26,12 @@ def twoline(eye, tab, w="152px", ok=None):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">마크업 순서 — Tab · 읽어 주는 차례의 <b>유일한</b> 근거</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">order · row-reverse — <b>보이기만</b> 바꾼다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">position 으로 자리 옮기기 — 역시 보이기만</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">tabindex="0" — 원래 못 받는 것에 초점을 준다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">tabindex="3" 같은 양수 — 차례를 뒤엎는다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">둘을 맞추는 법 — 마크업을 고친다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">마크업 순서   Tab과 읽어 주는 차례의 <b>유일한</b> 근거</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">order·row-reverse   <b>보이는 자리만</b> 바꿈</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">position으로 옮겨도 보이는 자리만 바뀜</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">tabindex="0"   원래 못 받는 요소에 초점을 줌</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">tabindex="3" 같은 양수   차례를 뒤엎음</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">두 차례를 맞추려면 마크업을 고침</div>
                 </div>
               </div>'''
 
@@ -41,7 +41,7 @@ D = dict(
   lede="CSS로는 <b>보이는 자리</b>만 바꿀 수 있습니다. <b>Tab으로 옮겨 가는 차례와 스크린 리더가 읽어 주는 차례</b>는 CSS와 상관없이 마크업 순서를 따릅니다.",
   axes_lede="뼈대는 눈에 보이지 않지만 <b>모든 화면의 배치</b>를 정합니다. 아래 네 가지를 물어 보면 서로 갈립니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
-          <p>뒤집는 법을 고른 뒤 <b>Tab 으로 훑어보기</b>를 누르면 초점이 옮겨 간 차례가 적힙니다.<br>
+          <p>보이는 차례를 바꾸는 방법을 고른 뒤 <b>Tab으로 차례대로 옮겨 보기</b>를 누르면 초점이 옮겨 간 차례가 적힙니다.<br>
           <code>row-reverse</code>나 <code>order</code>로 뒤집으면 눈에는 <b>취소</b>가 먼저 보이지만
           Tab은 <b>저장</b>부터 갑니다. 마우스를 쓰는 사람은 이 차이를 알아챌 일이 없지만,
           키보드를 쓰는 사람은 <b>보이는 차례와 다르게 움직이는 초점</b>을 따라가야 합니다.<br>
@@ -62,43 +62,46 @@ D = dict(
   ]),
   axes=ax("보이는 순서와 읽는 순서"),
   oneline="<b>자리를 바꾸고 싶으면 마크업을 바꾸세요.</b> <code>order</code>와 <code>row-reverse</code>는 보이는 자리만 바꾸고 Tab 차례는 그대로 둡니다.",
-  s4_title="어긋나는 꼴", s4_hint="눈과 Tab이 같은가",
+  s4_title="두 차례가 어긋나는 경우", s4_hint="보이는 차례와 Tab 차례가 같은지 비교",
+  do_title="두 차례를 맞추기 위해 할 일",
+  dont_title="두 차례를 어긋나게 만드는 경우",
+  instead_title="함께 보면 좋은 항목",
   states=states([
-    (chips(["저장", "취소", "삭제"], ["1", "2", "3"], None, "152px", "기본 — 둘이 같다", True),
-     "그대로", "보이는 차례와 Tab 차례가 같습니다"),
+    (chips(["저장", "취소", "삭제"], ["1", "2", "3"], None, "152px", "기본값이라 둘이 같음", True),
+     "아무것도 바꾸지 않았을 때", "보이는 차례와 Tab 차례가 같습니다"),
     ('''              <div style="width:100%;max-width:152px;display:grid;gap:5px">
                 <div style="display:flex;flex-direction:row-reverse;gap:4px;border:1px solid var(--danger);border-radius:6px;background:var(--bg);padding:5px">
                   <span style="border:1px solid var(--line);border-radius:4px;background:var(--surface);padding:3px 5px;font-size:8.5px;text-align:center">저장<small style="display:block;font-size:7px;color:var(--danger)">Tab 1</small></span>
                   <span style="border:1px solid var(--line);border-radius:4px;background:var(--surface);padding:3px 5px;font-size:8.5px;text-align:center">취소<small style="display:block;font-size:7px;color:var(--danger)">Tab 2</small></span>
                   <span style="border:1px solid var(--line);border-radius:4px;background:var(--surface);padding:3px 5px;font-size:8.5px;text-align:center">삭제<small style="display:block;font-size:7px;color:var(--danger)">Tab 3</small></span>
                 </div>
-                <span style="font-size:8.5px;color:var(--fg-muted)">눈은 삭제부터, Tab 은 저장부터</span>
+                <span style="font-size:8.5px;color:var(--fg-muted)">눈은 삭제부터, Tab은 저장부터</span>
               </div>''',
-     "<code>row-reverse</code>", "보이는 차례와 Tab 차례가 <b>어긋납니다</b>"),
+     "<code>row-reverse</code>로 뒤집었을 때", "보이는 차례와 Tab 차례가 <b>어긋납니다</b>"),
     (twoline("취소 → 저장 → 삭제", "저장 → 취소 → 삭제", "152px", False),
-     "<code>order</code>", "한 칸만 옮겨도 <b>어긋납니다</b>"),
+     "<code>order</code>로 한 칸 옮겼을 때", "한 칸만 옮겨도 <b>어긋납니다</b>"),
     (twoline("요약 → 본문", "본문 → 요약", "152px", False),
-     "둘째 단을 위로", "넓은 화면에서만 <b>어긋납니다</b>"),
-    (chips(["취소", "저장", "삭제"], ["1", "2", "3"], None, "152px", "마크업을 바꿨다", True),
-     "마크업 수정", "보이는 차례와 Tab 차례가 <b>다시 같아집니다</b>"),
+     "넓은 화면에서 둘째 단을 위로 올렸을 때", "넓은 화면에서만 <b>어긋납니다</b>"),
+    (chips(["취소", "저장", "삭제"], ["1", "2", "3"], None, "152px", "마크업을 바꿈", True),
+     "마크업 순서를 고쳤을 때", "보이는 차례와 Tab 차례가 <b>다시 같아집니다</b>"),
     ('''              <div style="width:100%;max-width:152px;display:grid;gap:5px">
                 <div style="display:flex;gap:4px;border:1px solid var(--danger);border-radius:6px;background:var(--bg);padding:5px">
                   <span style="border:1px solid var(--line);border-radius:4px;background:var(--surface);padding:3px 5px;font-size:8.5px;text-align:center">저장<small style="display:block;font-size:7px;color:var(--danger)">Tab 3</small></span>
                   <span style="border:1px solid var(--line);border-radius:4px;background:var(--surface);padding:3px 5px;font-size:8.5px;text-align:center">취소<small style="display:block;font-size:7px;color:var(--danger)">Tab 1</small></span>
                   <span style="border:1px solid var(--line);border-radius:4px;background:var(--surface);padding:3px 5px;font-size:8.5px;text-align:center">삭제<small style="display:block;font-size:7px;color:var(--danger)">Tab 2</small></span>
                 </div>
-                <span style="font-size:8.5px;color:var(--fg-muted)">양수 tabindex — 페이지 전체 차례를 뒤엎는다</span>
+                <span style="font-size:8.5px;color:var(--fg-muted)">양수 tabindex는 페이지 전체 차례를 뒤엎음</span>
               </div>''',
-     "<code>tabindex=\"3\"</code>", "페이지 전체 차례를 뒤엎어서 <b>더 나쁩니다</b>"),
+     "양수 <code>tabindex</code>를 주었을 때", "페이지 전체 차례를 뒤엎어서 <b>더 나쁩니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
     ("마크업 순서", "유일한 근거", "Tab과 <b>스크린 리더가 읽어 주는 차례</b>는 마크업 순서만 따릅니다"),
-    ("<code>order</code>·<code>row-reverse</code>", "보이기만", "<b>보이는 자리만</b> 바뀝니다"),
-    ("<code>position</code>", "보이기만", "자리를 옮겨도 차례는 <b>그대로</b>입니다"),
-    ("<code>tabindex=\"0\"</code>", "초점을 준다", "초점을 받는 차례는 마크업의 <b>제자리</b>에서 정해집니다"),
-    ("양수 <code>tabindex</code>", "쓰지 않는다", "페이지 <b>전체</b>의 차례를 뒤엎습니다"),
-    ("맞추는 법", "마크업 수정", "차례를 맞추는 <b>하나뿐인</b> 방법입니다"),
+    ("<code>order</code>·<code>row-reverse</code>", "보이는 자리만 바꿈", "<b>보이는 자리만</b> 바뀝니다"),
+    ("<code>position</code>", "보이는 자리만 바꿈", "자리를 옮겨도 차례는 <b>그대로</b>입니다"),
+    ("<code>tabindex=\"0\"</code>", "초점을 줌", "초점을 받는 차례는 마크업의 <b>제자리</b>에서 정해집니다"),
+    ("양수 <code>tabindex</code>", "쓰지 않음", "페이지 <b>전체</b>의 차례를 뒤엎습니다"),
+    ("두 차례를 맞추는 방법", "마크업 수정", "차례를 맞추는 <b>하나뿐인</b> 방법입니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           두 차례가 어긋나도 <b>마우스로 쓸 때는 전혀 드러나지 않기</b> 때문에,
@@ -117,16 +120,17 @@ D = dict(
     "양수 <code>tabindex</code>로 차례를 고칠 때. <b>페이지 전체</b>의 차례가 망가집니다",
     "<code>position:absolute</code>로 요소를 멀리 옮겨 놓고 마크업은 그대로 둘 때",
   ]),
-  instead='초점 자체는 <a href="focus.html">초점</a>, 갇힘은 <a href="focustrap.html">초점 갇힘</a>, 키보드 조작은 <a href="keyboard.html">키보드 조작</a>, 겹침 순서는 <a href="../items/zindex.html">겹침 순서</a>.',
+  instead='초점이 무엇인지는 <a href="focus.html">초점</a>에서, 창 안에 초점을 가두는 방법은 <a href="focustrap.html">초점 갇힘</a>에서, 키보드로 조작하는 방법은 <a href="keyboard.html">키보드 조작</a>에서 다룹니다. 요소가 위아래로 쌓이는 순서는 <a href="../items/zindex.html">겹침 순서</a>에서 봅니다.',
   cases=cases([
     (twoline("취소 → 저장", "취소 → 저장", "150px", True),
-     "버튼 줄", "마크업을 보이는 차례대로 <b>취소 → 저장</b>으로 적습니다"),
+     "버튼 줄을 보이는 차례대로 적기", "마크업을 보이는 차례대로 <b>취소 → 저장</b>으로 적습니다"),
     (code(['&lt;main&gt;본문&lt;/main&gt;', '&lt;aside&gt;요약&lt;/aside&gt;'], "150px", "요약을 위에 보이고 싶어도 마크업은 본문 먼저", True),
-     "본문과 요약", "보이는 위치보다 읽는 차례를 <b>먼저</b> 정합니다"),
-    (code(['.btn { margin-left: auto; }'], "150px", "오른쪽으로 붙이기 — 차례는 안 건드린다", True),
-     "오른쪽 정렬", "<code>row-reverse</code> 대신 <code>margin-left: auto</code>로 붙입니다"),
+     "본문과 요약의 차례 정하기", "보이는 위치보다 읽는 차례를 <b>먼저</b> 정합니다"),
+    (code(['.btn { margin-left: auto; }'], "150px", "오른쪽으로 붙여도 차례는 그대로", True),
+     "차례를 건드리지 않고 오른쪽 정렬하기", "<code>row-reverse</code> 대신 <code>margin-left: auto</code>로 붙입니다"),
   ]),
   s8_title="최소 코드와 규칙", s8_hint="순서를 다룰 때 지킬 것",
+  keys_heads="<th>키와 속성</th><th>초점이 움직이는 방식</th>",
   code_lede="보이는 차례와 마크업 차례를 <b>같게</b> 두면 지킬 규칙이 하나로 줄어듭니다.",
   code='''<span class="c">&lt;!-- 마크업 순서가 Tab 순서다. 보이고 싶은 차례대로 적는다 --&gt;</span>
 &lt;<span class="t">div</span> <span class="a">class</span>=<span class="s">"row"</span>&gt;
@@ -150,12 +154,12 @@ D = dict(
     ("<code>tabindex=\"0\"</code>", "마크업 자리에서 초점을 받습니다. <b>권장하는</b> 값입니다"),
     ("<code>tabindex=\"-1\"</code>", "Tab으로는 갈 수 없고 <code>focus()</code>로만 초점을 옮길 수 있습니다"),
     ("양수 <code>tabindex</code>", "0인 요소들보다 <b>먼저</b> 모두 돌기 때문에 쓰지 않습니다"),
-    ("확인하는 법", "주소창에서 Tab을 계속 누르며 <b>초점 테두리</b>를 눈으로 따라갑니다"),
+    ("확인하는 방법", "주소창에서 Tab을 계속 누르며 <b>초점 테두리</b>를 눈으로 따라갑니다"),
   ]),
   backend=rows([
-    ("순서대로 보내 준다", "목록 API가 정렬된 배열을 주면 그대로 그려도 차례가 맞습니다. 반면 <b>객체(dict)로 주면</b> 순서가 보장되지 않아 어긋날 수 있습니다."),
-    ("sort 기준을 같이", "<code>?sort=amount.desc</code>처럼 <b>무엇으로 정렬했는지</b>를 응답에도 담아 주면 화면에서 임의로 다시 정렬하는 일이 없습니다."),
-    ("추가되는 줄", "실시간으로 새 줄이 끼어들면 <b>초점이 엉뚱한 줄</b>로 옮겨지기 때문에, 줄을 끼워 넣기 전에 초점 위치를 기억해 둡니다."),
+    ("정렬된 배열로 보내 주기", "목록 API가 정렬된 배열을 주면 그대로 그려도 차례가 맞습니다. 반면 <b>객체(dict)로 주면</b> 순서가 보장되지 않아 어긋날 수 있습니다."),
+    ("정렬 기준도 함께 보내기", "<code>?sort=amount.desc</code>처럼 <b>무엇으로 정렬했는지</b>를 응답에도 담아 주면 화면에서 임의로 다시 정렬하는 일이 없습니다."),
+    ("실시간으로 줄이 추가될 때", "실시간으로 새 줄이 끼어들면 <b>초점이 엉뚱한 줄</b>로 옮겨지기 때문에, 줄을 끼워 넣기 전에 초점 위치를 기억해 둡니다."),
   ]),
   plat_lede="보이는 자리와 초점 차례가 따로 정해진다는 것은 <b>어느 플랫폼에서나 같은 규칙</b>입니다.",
   plats=plats([

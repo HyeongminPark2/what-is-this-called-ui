@@ -26,12 +26,12 @@ def pal(q, items, label, note="", ok=None, w="152px", grp=""):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">Ctrl/⌘ + K — 어디서나 열린다</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">안 쳤을 때 — 최근 쓴 것을 먼저 보인다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">띄엄띄엄 쳐도 찾는다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">단축키를 오른쪽에 적어 가르친다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--accent)">role="combobox" + listbox — 소리로도 쓸 수 있게</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">여기에만 있는 기능을 두지 않는다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">Ctrl/⌘ + K로 어디서나 열림</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">치기 전에는 최근 쓴 것을 먼저 보임</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">띄엄띄엄 쳐도 찾아 줌</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">단축키를 오른쪽에 적어 알려 줌</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--accent)">role="combobox"와 listbox로 스크린 리더 지원</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">여기에만 있는 기능은 두지 않음</div>
                 </div>
               </div>'''
 
@@ -62,27 +62,27 @@ D = dict(
   axes=axis_table("커맨드 팔레트"),
   oneline="<b>팔레트에만 있는 기능을 두지 마세요.</b> 팔레트는 메뉴로도 갈 수 있는 기능에 <b>더 빨리 닿는 길</b>이어야 하고, 유일한 길이 되면 안 됩니다.",
   states=states([
-    (pal("", [("정산 내역 내보내기", "", True), ("새 가게 등록", "", False)], "", "안 쳐도 쓸 게 보인다", True, "152px", "최근 쓴 것"),
-     "열자마자", "글자를 치기 전에 <b>최근 쓴 것</b>부터 보여 줍니다"),
-    (pal("정내", [("정산 내역 내보내기", "내보내기", True)], "", "띄엄띄엄 쳐도 찾는다", True),
-     "띄엄띄엄", "'정내'만 쳐도 <b>정</b>산 <b>내</b>역을 찾습니다"),
-    (pal("정내", [], "", "이어진 글자만 찾으면 안 잡힌다", False),
-     "엄격한 찾기", "글자가 이어져 있어야 찾기 때문에 '정내'로는 <b>놓칩니다</b>"),
+    (pal("", [("정산 내역 내보내기", "", True), ("새 가게 등록", "", False)], "", "치기 전에도 고를 것이 보임", True, "152px", "최근 쓴 것"),
+     "열자마자 보이는 목록", "글자를 치기 전에 <b>최근 쓴 것</b>부터 보여 줍니다"),
+    (pal("정내", [("정산 내역 내보내기", "내보내기", True)], "", "띄엄띄엄 쳐도 찾음", True),
+     "띄엄띄엄 쳤을 때", "'정내'만 쳐도 <b>정</b>산 <b>내</b>역을 찾습니다"),
+    (pal("정내", [], "", "이어진 글자만 찾으면 놓침", False),
+     "이어진 글자만 찾을 때", "글자가 이어져 있어야 찾기 때문에 '정내'로는 <b>놓칩니다</b>"),
     (pal("", [], "", "최근 쓴 것이 없으면 빈 목록", False, "152px", ""),
-     "빈 목록", "보이는 것이 없으니 사용자가 <b>무엇을 칠지</b> 모릅니다"),
-    (pal("ㅋㅋㅋ", [("‘ㅋㅋㅋ’에 맞는 명령이 없습니다", "", False)], "", "다음 할 일을 준다", None),
-     "결과 없음", "맞는 명령이 없다고 알리고 <b>다음에 해 볼 일</b>을 보여 줍니다"),
-    (pal("정산", [("정산 내역 내보내기", "⌘E", True), ("정산 설정 열기", "⌘,", False)], "", "단축키를 가르친다", True),
-     "단축키 표시", "단축키를 적어 두면 <b>다음에는 팔레트를 열지 않고</b> 바로 실행할 수 있습니다"),
+     "목록이 비어 있을 때", "보이는 것이 없으니 사용자가 <b>무엇을 칠지</b> 모릅니다"),
+    (pal("ㅋㅋㅋ", [("‘ㅋㅋㅋ’에 맞는 명령이 없습니다", "", False)], "", "다음에 해 볼 일을 알려 줌", None),
+     "맞는 결과가 없을 때", "맞는 명령이 없다고 알리고 <b>다음에 해 볼 일</b>을 보여 줍니다"),
+    (pal("정산", [("정산 내역 내보내기", "⌘E", True), ("정산 설정 열기", "⌘,", False)], "", "단축키를 알려 줌", True),
+     "단축키를 함께 적었을 때", "단축키를 적어 두면 <b>다음에는 팔레트를 열지 않고</b> 바로 실행할 수 있습니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("Ctrl/⌘ + K", "어디서나", "어느 화면에서든 <b>한 손</b>으로 누를 수 있습니다"),
-    ("최근 쓴 것", "안 쳤을 때", "대부분은 <b>글자를 치지 않고</b> 여기서 고릅니다"),
-    ("띄엄띄엄", "퍼지 검색", "<b>정내</b>만 쳐도 정산 내역을 찾습니다"),
-    ("단축키", "오른쪽에", "단축키를 적어 두면 다음에는 팔레트를 <b>열지 않아도</b> 됩니다"),
+    ("Ctrl/⌘ + K", "어디서나 여는 키", "어느 화면에서든 <b>한 손</b>으로 누를 수 있습니다"),
+    ("최근 쓴 것", "치기 전에 보임", "대부분은 <b>글자를 치지 않고</b> 여기서 고릅니다"),
+    ("띄엄띄엄 찾기", "퍼지 검색", "<b>정내</b>만 쳐도 정산 내역을 찾습니다"),
+    ("단축키", "오른쪽에 적음", "단축키를 적어 두면 다음에는 팔레트를 <b>열지 않아도</b> 됩니다"),
     ("역할", "combobox + listbox", "역할을 붙여 스크린 리더로도 <b>쓸 수 있게</b> 합니다"),
-    ("유일한 길 금지", "메뉴에도 두기", "팔레트가 <b>있는 줄 모르는</b> 사람은 여기에만 있는 기능을 쓸 수 없습니다"),
+    ("다른 길", "메뉴에도 두기", "팔레트가 <b>있는 줄 모르는</b> 사람은 여기에만 있는 기능을 쓸 수 없습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           팔레트에서 가장 빠지기 쉬운 함정은 <b>팔레트에만 있는 기능</b>입니다.
@@ -92,6 +92,8 @@ D = dict(
           단축키를 익히게 하려면 <b>목록 오른쪽에 단축키를 적어 두는 방법</b>이 가장 좋습니다.
           팔레트로 같은 명령을 두어 번 실행하다 보면 옆에 적힌 단축키가 눈에 익고,
           그 뒤로는 팔레트를 열지 않고 단축키로 바로 실행하게 됩니다.</p>''',
+  do_title="커맨드 팔레트를 만들 때 지킬 것",
+  dont_title="커맨드 팔레트를 만들 때 피할 것",
   do=ul([
     "아무것도 치지 않았을 때 <b>최근 쓴 것</b>을 먼저 보여 주기",
     "글자를 <b>띄엄띄엄 쳐도</b> 찾게 하기",
@@ -103,13 +105,13 @@ D = dict(
     "결과가 0건일 때 <b>'없습니다'</b>만 적기. 다음에 해 볼 일을 함께 보여 줍니다",
     "<code>&lt;div&gt;</code>로만 만들기. 역할이 없으면 <b>스크린 리더로는 쓸 수 없습니다</b>",
   ]),
-  instead='내용을 찾으면 <a href="search.html">검색</a>, 값을 고르는 칸이면 <a href="combobox.html">콤보박스</a>, 단추 옆 목록이면 <a href="menu.html">드롭다운 메뉴</a>, 처음 쓰는 사람에게는 <a href="coachmark.html">코치마크</a>.',
+  instead='기능이 아니라 내용을 찾게 하려면 <a href="search.html">검색</a>을 쓰고, 입력칸에서 값을 고르게 하려면 <a href="combobox.html">콤보박스</a>가 맞습니다. 단추 옆에 목록을 띄우려면 <a href="menu.html">드롭다운 메뉴</a>를 쓰고, 처음 쓰는 사람에게 기능을 알려 주려면 <a href="coachmark.html">코치마크</a>를 씁니다.',
   cases=cases([
     (pal("", [("정산 내역 내보내기", "", True), ("새 가게 등록", "", False)], "", "", True, "150px", "최근 쓴 것"),
-     "관리 도구", "<b>기능이 많은</b> 관리 화면에서 씁니다"),
+     "기능이 많은 관리 도구에서 쓰기", "<b>기능이 많은</b> 관리 화면에서 씁니다"),
     (pal("모란", [("모란상회", "가게", True), ("모란상회 2호점", "가게", False)], "", "", True),
-     "데이터도 함께", "<b>기능과 가게 이름</b>을 한 입력칸에서 섞어 찾습니다"),
-    (pal("정산", [("정산 설정 열기", "⌘,", True)], "", "", True), "이동", "고른 <b>화면으로 바로 이동</b>합니다"),
+     "기능과 데이터를 함께 찾기", "<b>기능과 가게 이름</b>을 한 입력칸에서 섞어 찾습니다"),
+    (pal("정산", [("정산 설정 열기", "⌘,", True)], "", "", True), "고른 화면으로 바로 이동하기", "고른 <b>화면으로 바로 이동</b>합니다"),
   ]),
   code_lede="콤보박스 패턴을 그대로 씁니다. 입력칸에 <code>aria-controls</code>를 달아 아래 목록과 연결합니다.",
   code='''&lt;<span class="t">div</span> <span class="a">role</span>=<span class="s">"dialog"</span> <span class="a">aria-modal</span>=<span class="s">"true"</span> <span class="a">aria-label</span>=<span class="s">"명령 찾기"</span>&gt;
@@ -135,24 +137,24 @@ D = dict(
     ("Enter", "고른 명령을 실행합니다"),
     ("Esc", "팔레트를 닫으면 초점이 <b>열기 전 자리</b>로 돌아갑니다"),
     ("<code>aria-activedescendant</code>", "초점을 옮기지 않고도 스크린 리더에 <b>지금 고른 줄</b>을 알립니다"),
-    ("확인하는 법", "화면을 끄고 <b>스크린 리더 소리만</b> 들으며 명령 하나를 실행해 봅니다"),
+    ("확인하는 방법", "화면을 끄고 <b>스크린 리더 소리만</b> 들으며 명령 하나를 실행해 봅니다"),
   ]),
   backend=rows([
-    ("명령 목록", "명령 목록은 화면 쪽 코드에 두어도 되지만, 사용자 <b>권한에 따라</b> 보여 줄 명령이 달라진다면 서버가 걸러서 내려 줍니다."),
-    ("데이터도 섞을 때", "가게·주문처럼 <b>내용</b>까지 함께 찾으려면 검색 API를 같이 씁니다. 이때는 <a href=\"search.html\">검색</a>에서 다루는 디바운스 규칙이 그대로 필요합니다."),
-    ("최근 쓴 것", "최근 쓴 명령을 기기에만 저장하면 기기마다 목록이 달라지므로, <b>계정에 저장</b>해 두면 어느 기기에서나 같은 목록이 보입니다."),
+    ("명령 목록을 내려 주는 곳", "명령 목록은 화면 쪽 코드에 두어도 되지만, 사용자 <b>권한에 따라</b> 보여 줄 명령이 달라진다면 서버가 걸러서 내려 줍니다."),
+    ("데이터도 함께 찾을 때", "가게·주문처럼 <b>내용</b>까지 함께 찾으려면 검색 API를 같이 씁니다. 이때는 <a href=\"search.html\">검색</a>에서 다루는 디바운스 규칙이 그대로 필요합니다."),
+    ("최근 쓴 명령을 저장하는 곳", "최근 쓴 명령을 기기에만 저장하면 기기마다 목록이 달라지므로, <b>계정에 저장</b>해 두면 어느 기기에서나 같은 목록이 보입니다."),
   ]),
   plat_lede="커맨드 팔레트는 <b>PC 화면의 부품</b>입니다. 폰에는 키보드 단축키를 누를 방법이 없기 때문입니다.",
   plats=plats([
     ("웹", "직접 만듦",
      pal("정내", [("정산 내역 내보내기", "⌘E", True)], "", "", True, "110px"),
      "라이브러리가 많지만, 어떤 것을 쓰든 <b>역할과 키보드 조작</b>은 직접 챙겨야 합니다."),
-    ("iOS", "없다 — 검색",
+    ("iOS", "따로 없고 검색이 대신함",
      '''              <div class="phone" role="img" aria-label="iOS 검색 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:24px;height:9px;border-radius:999px;background:var(--bg);border:1px solid var(--line)"></div>
                 <div style="position:absolute;left:5px;right:5px;top:38px;height:6px;border-radius:2px;background:var(--accent-soft)"></div></div></div>''',
      "앱 안에 두는 경우는 드물고, OS의 <b>스포트라이트</b>가 같은 일을 맡습니다."),
-    ("안드로이드", "없다 — 검색",
+    ("안드로이드", "따로 없고 검색이 대신함",
      '''              <div class="phone" role="img" aria-label="안드로이드 검색 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:24px;height:9px;border-radius:999px;background:var(--bg);border:1px solid var(--line)"></div>
                 <div style="position:absolute;left:5px;right:5px;top:38px;height:6px;border-radius:2px;background:var(--accent-soft)"></div></div></div>''',

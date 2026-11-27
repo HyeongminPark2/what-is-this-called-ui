@@ -52,7 +52,7 @@
         <div class="note" style="margin-bottom:0">
           <p>데모는 토큰 이름을 <b>세 가지 규칙으로 따져 봅니다</b>. ①이름에 값이 들어 있는지,
           ②무엇에 쓰는지가 드러나는지, ③어느 층의 이름인지를 보고, 이름을 직접 넣어 보면 그 자리에서 판정해 줍니다.<br>
-          '어두운 모드로'를 켜면 <code>--blue</code>의 실제 값이 나오는데, 이름은 파랑인데 실제 색은 파랑이 아닙니다.
+          '어두운 모드로 바꾸기'를 켜면 <code>--blue</code>의 실제 값이 나오는데, 이름은 파랑인데 실제 색은 파랑이 아닙니다.
           <b>이름에 값을 넣으면</b> 이런 일이 생깁니다.</p>
         </div>
       </section>
@@ -76,10 +76,10 @@
         <p>토큰은 눈에 보이는 부품이 아니라 값을 어떻게 쓸지 <b>정해 둔 규칙</b>입니다. 그래서 생김새 대신 아래 네 가지를 물어보면 토큰끼리 무엇이 다른지 가려집니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하나</th><th>몇 단이 좋나</th><th>바꾸면 어디가 바뀌나</th><th>틀렸을 때 증상</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 정하는가</th><th>몇 단으로 두면 좋은가</th><th>값을 바꾸면 어디가 바뀌는가</th><th>잘못 정했을 때 나타나는 증상</th></tr></thead>
           <tbody>
             <tr><td>색 토큰</td><td>색의 <b>쓰임</b></td><td>쓰임 10여 개</td><td>브랜드 색 전체</td><td>같은 파랑이 화면마다 조금씩 다릅니다</td></tr>
-            <tr><td>다크 모드</td><td><b>두 벌</b>의 값</td><td>2벌(+고대비)</td><td>화면 전체의 바탕과 글자</td><td>어두운 화면에 흰 상자 하나만 남아 눈이 부십니다</td></tr>
+            <tr><td>다크 모드</td><td><b>두 벌</b>의 값</td><td>2벌, 고대비까지 두면 3벌</td><td>화면 전체의 바탕과 글자</td><td>어두운 화면에 흰 상자 하나만 남아 눈이 부십니다</td></tr>
             <tr><td>타입 스케일</td><td>글자 크기 <b>단계</b></td><td>6~8단</td><td>제목과 본문의 크기</td><td>무엇이 더 중요한지 알아보기 어렵습니다</td></tr>
             <tr><td>간격 체계</td><td>여백의 <b>단위</b></td><td>6~8단(4·8의 배수)</td><td>모든 패딩과 줄 간격</td><td>딱 집어 말하기 어렵지만 어수선해 보입니다</td></tr>
             <tr><td>고도</td><td>그림자의 <b>세기</b></td><td>4~5단</td><td>떠 있는 부품들</td><td>무엇이 위에 있는지 알 수 없습니다</td></tr>
@@ -88,7 +88,7 @@
             <tr><td>테두리와 구분선</td><td><b>가르는 선</b></td><td>선 1~2종</td><td>목록 · 카드 · 표</td><td>선이 두 겹이 되고 화면이 어수선해집니다</td></tr>
             <tr><td>불투명도</td><td><b>흐린 정도</b></td><td>2~3단</td><td>비활성 · 가림막 · 흐린 글</td><td>글이 잘 읽히지 않고 z-index가 적용되지 않습니다</td></tr>
             <tr><td>아이콘 크기</td><td>그림의 <b>크기</b></td><td>3~4단(16·20·24)</td><td>버튼 · 목록 · 앱바</td><td>선이 흐리고 글자와 가운데가 맞지 않습니다</td></tr>
-            <tr><td>상태 색</td><td>성공 · 주의 · 오류 · 정보</td><td>4가지 × 3자리</td><td>알림 · 배지 · 입력 오류</td><td>색을 구별하지 못하면 상태를 알 수 없습니다</td></tr>
+            <tr><td>상태 색</td><td>성공 · 주의 · 오류 · 정보</td><td>4가지, 색마다 3자리</td><td>알림 · 배지 · 입력 오류</td><td>색을 구별하지 못하면 상태를 알 수 없습니다</td></tr>
             <tr class="me"><td><b>토큰 이름 짓기</b></td><td>이름의 <b>규칙</b></td><td>층 3겹</td><td>토큰 전부</td><td>이름과 값이 어긋나 어느 토큰을 고쳐야 할지 알 수 없습니다</td></tr>
           </tbody>
         </table>
@@ -99,43 +99,43 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 층<span class="hint">층마다 이름이 가리키는 것</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 토큰의 세 층과 잘못 지은 이름<span class="hint">층마다 이름이 가리키는 것</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-family:var(--mono);font-size:10px;color:var(--fg)">--blue-500</span><span style="font-size:9px;color:var(--fg-muted)">값에 붙인 이름</span><span style="font-size:8.5px;color:var(--fg-faint)">원시</span></div>
             </div>
-            <figcaption>원시<span><b>화면 코드에서는 직접 쓰지 않습니다</b></span></figcaption>
+            <figcaption>원시 층<span><b>화면 코드에서는 직접 쓰지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-family:var(--mono);font-size:10px;color:var(--fg)">--color-text-danger</span><span style="font-size:9px;color:var(--fg-muted)">쓰임에 붙인 이름</span><span style="font-size:8.5px;color:var(--fg-faint)">의미</span></div>
             </div>
-            <figcaption>의미<span>화면 코드에서는 <b>이 층만</b> 씁니다</span></figcaption>
+            <figcaption>의미 층<span>화면 코드에서는 <b>이 층만</b> 씁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-family:var(--mono);font-size:10px;color:var(--fg)">--btn-bg</span><span style="font-size:9px;color:var(--fg-muted)">한 부품만의 이름</span><span style="font-size:8.5px;color:var(--fg-faint)">부품</span></div>
             </div>
-            <figcaption>부품<span>그 부품만 <b>다른 값을 써야 할 때</b> 만듭니다</span></figcaption>
+            <figcaption>부품 층<span>그 부품만 <b>다른 값을 써야 할 때</b> 만듭니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:5px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-family:var(--mono);font-size:10px;color:var(--fg)">--red</span><span style="font-size:9px;color:var(--danger)">어디에 쓰는지가 없다</span><span style="font-size:8.5px;color:var(--fg-faint)">원시</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:5px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-family:var(--mono);font-size:10px;color:var(--fg)">--red</span><span style="font-size:9px;color:var(--danger)">어디에 쓰는지 없음</span><span style="font-size:8.5px;color:var(--fg-faint)">원시</span></div>
             </div>
-            <figcaption>쓰임 없음<span>쓰임이 정해져 있지 않아 <b>아무 데나</b> 쓰이게 됩니다</span></figcaption>
+            <figcaption>쓰임이 빠진 이름<span>쓰임이 정해져 있지 않아 <b>아무 데나</b> 쓰이게 됩니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:5px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-family:var(--mono);font-size:10px;color:var(--fg)">--color-primary</span><span style="font-size:9px;color:var(--danger)">무엇의 primary 인가</span><span style="font-size:8.5px;color:var(--fg-faint)">의미</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:5px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-family:var(--mono);font-size:10px;color:var(--fg)">--color-primary</span><span style="font-size:9px;color:var(--danger)">무엇의 primary인지 모호함</span><span style="font-size:8.5px;color:var(--fg-faint)">의미</span></div>
             </div>
-            <figcaption>두루뭉술<span>글자색인지 바탕색인지 <b>알 수 없습니다</b></span></figcaption>
+            <figcaption>쓰임이 모호한 이름<span>글자색인지 바탕색인지 <b>알 수 없습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:5px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-family:var(--mono);font-size:10px;color:var(--fg)">--font-14</span><span style="font-size:9px;color:var(--danger)">값이 숫자로 박힘</span><span style="font-size:8.5px;color:var(--fg-faint)">원시</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:5px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-family:var(--mono);font-size:10px;color:var(--fg)">--font-14</span><span style="font-size:9px;color:var(--danger)">값이 숫자로 들어 있음</span><span style="font-size:8.5px;color:var(--fg-faint)">원시</span></div>
             </div>
-            <figcaption>값이 박힘<span>값을 16으로 바꾸면 <b>이름과 값이 어긋납니다</b></span></figcaption>
+            <figcaption>값이 들어간 이름<span>값을 16으로 바꾸면 <b>이름과 값이 어긋납니다</b></span></figcaption>
           </figure>
         </div>
       </section>
@@ -147,11 +147,11 @@
             <div class="anat" role="img" aria-label="토큰 이름 짓기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:11px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">--blue-500<span style="color:var(--fg-faint)"> ← 원시 : 값에 붙인 이름</span></div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">--color-text-danger<span style="color:var(--fg-faint)"> ← 의미 : 쓰임에 붙인 이름</span></div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">--btn-bg<span style="color:var(--fg-faint)"> ← 부품 : 한 부품만의 이름</span></div>
-                  <div class="pin-out" data-pin="4" style="color:var(--accent)">화면에서는 <b>의미 층만</b> 쓴다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--danger)">--blue 를 어두운 모드에 쓰면 <b>이름이 거짓</b></div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">--blue-500<span style="color:var(--fg-faint)"> ← 원시 층, 값에 붙인 이름</span></div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">--color-text-danger<span style="color:var(--fg-faint)"> ← 의미 층, 쓰임에 붙인 이름</span></div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">--btn-bg<span style="color:var(--fg-faint)"> ← 부품 층, 한 부품만의 이름</span></div>
+                  <div class="pin-out" data-pin="4" style="color:var(--accent)">화면에서는 <b>의미 층만</b> 씀</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--danger)">--blue는 어두운 모드에서 <b>이름과 색이 어긋남</b></div>
                   <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">갈래-쓰임-자리-상태<span style="color:var(--fg-faint)"> ← 이름의 차례</span></div>
                 </div>
               </div>
@@ -162,7 +162,7 @@
             <li><b>의미 <em><code>--color-text-danger</code></em></b><span><b>쓰임</b>에 붙인 이름입니다</span></li>
             <li><b>부품 <em><code>--btn-bg</code></em></b><span>한 부품에서만 쓰는 이름입니다</span></li>
             <li><b>쓰는 층 <em>의미만</em></b><span>화면 코드에는 <b>의미 층만</b> 나와야 합니다</span></li>
-            <li><b>거짓 이름 <em><code>--blue</code></em></b><span>어두운 모드에서는 실제 색이 <b>파랑이 아닙니다</b></span></li>
+            <li><b>색 이름이 든 토큰 <em><code>--blue</code></em></b><span>어두운 모드에서는 실제 색이 <b>파랑이 아닙니다</b></span></li>
             <li><b>차례 <em>갈래-쓰임-자리-상태</em></b><span><code>color-text-danger-hover</code>처럼 짓습니다</span></li>
           </ol>
         </div>
@@ -180,7 +180,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>토큰 이름 짓기를 쓰는 경우</h3>
+            <h3>토큰 이름을 지을 때 지킬 것</h3>
             <ul>
               <li>이름에 <code>text</code>·<code>bg</code>·<code>border</code> 같은 <b>쓰임</b>을 적기</li>
               <li>차례를 <b>갈래-쓰임-자리-상태</b>로 고정하기</li>
@@ -188,7 +188,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>토큰 이름 짓기를 쓰지 않는 경우</h3>
+            <h3>토큰 이름을 지을 때 피할 것</h3>
             <ul>
               <li><code>--blue</code>·<code>--red</code>처럼 색 이름 쓰기. 어두운 모드에서 <b>이름과 실제 색이 어긋납니다</b></li>
               <li><code>--font-14</code>처럼 값 넣기. 값을 바꾸면 <b>이름과 값이 어긋납니다</b></li>
@@ -197,7 +197,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>토큰 이름 짓기 대신 다른 것을 써야 하는 경우</b> — 값 자체는 <a href="color.html">색 토큰</a>, 두 벌로 두는 법은 <a href="dark.html">다크 모드</a>, 크기 단은 <a href="typescale.html">타입 스케일</a>·<a href="spacing.html">간격 체계</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>함께 보면 좋은 항목</b> — 토큰에 넣을 색 값은 <a href="color.html">색 토큰</a> 항목에서, 값을 두 벌로 두는 방법은 <a href="dark.html">다크 모드</a> 항목에서 다룹니다. 크기의 단은 <a href="typescale.html">타입 스케일</a> 항목과 <a href="spacing.html">간격 체계</a> 항목에서 설명합니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -207,25 +207,25 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-family:var(--mono);font-size:10px;color:var(--fg)">--color-bg-surface</span><span style="font-size:9px;color:var(--fg-muted)">바탕 · 카드 면</span><span style="font-size:8.5px;color:var(--fg-faint)">의미</span></div>
             </div>
-            <figcaption><b>바탕</b>쓰임이 분명합니다</figcaption>
+            <figcaption><b>카드 바탕색에 이름 붙이기</b>쓰임이 분명합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-family:var(--mono);font-size:10px;color:var(--fg)">--color-border-muted</span><span style="font-size:9px;color:var(--fg-muted)">테두리 · 흐린 선</span><span style="font-size:8.5px;color:var(--fg-faint)">의미</span></div>
             </div>
-            <figcaption><b>선</b>쓰임에 더해 자리까지 이름에 적혀 있습니다</figcaption>
+            <figcaption><b>흐린 테두리 색에 이름 붙이기</b>쓰임에 더해 자리까지 이름에 적혀 있습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-family:var(--mono);font-size:10px;color:var(--fg)">--space-4</span><span style="font-size:9px;color:var(--fg-muted)">간격 · 4번째 단</span><span style="font-size:8.5px;color:var(--fg-faint)">의미</span></div>
             </div>
-            <figcaption><b>간격</b>값이 아니라 간격 체계의 <b>단</b>을 가리킵니다</figcaption>
+            <figcaption><b>간격 단에 이름 붙이기</b>값이 아니라 간격 체계의 <b>단</b>을 가리킵니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">이름을 코드로 옮기는 법</span></h2>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 지킬 규칙<span class="hint">이름을 코드로 옮기는 방법</span></h2>
         <p>원시 토큰을 먼저 정의하고 의미 토큰이 원시 토큰을 가리키게 한 뒤, 화면 코드에서는 의미 토큰만 씁니다.</p>
 <pre class="code"><span class="c">/* 1층 원시. 값에 붙인 이름이라 화면에서 직접 쓰지 않는다 */</span>
 :root {
@@ -250,14 +250,14 @@
 .field-error { <span class="a">color</span>: <span class="a">var</span>(--red-500); }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>이름의 부분과 점검 방법</th><th>들어가는 낱말과 설명</th></tr></thead>
           <tbody>
-            <tr><td>갈래</td><td><code>color</code>·<code>space</code>·<code>radius</code>·<code>shadow</code></td></tr>
-            <tr><td>쓰임</td><td><code>text</code>·<code>bg</code>·<code>border</code>·<code>icon</code></td></tr>
-            <tr><td>자리</td><td><code>danger</code>·<code>muted</code>·<code>brand</code></td></tr>
-            <tr><td>상태</td><td><code>hover</code>·<code>active</code>·<code>disabled</code>. 이름의 <b>맨 뒤</b>에 붙입니다</td></tr>
-            <tr><td>찾는 법</td><td>이름이 <code>--color-</code>로 시작하면 편집기 <b>자동완성</b>에서 색 토큰끼리 묶여 나옵니다</td></tr>
-            <tr><td>확인하는 법</td><td>화면 코드에서 <code>--blue</code>나 <code>-500</code>을 <b>검색</b>해 봅니다</td></tr>
+            <tr><td>첫째, 갈래</td><td><code>color</code>·<code>space</code>·<code>radius</code>·<code>shadow</code></td></tr>
+            <tr><td>둘째, 쓰임</td><td><code>text</code>·<code>bg</code>·<code>border</code>·<code>icon</code></td></tr>
+            <tr><td>셋째, 자리</td><td><code>danger</code>·<code>muted</code>·<code>brand</code></td></tr>
+            <tr><td>넷째, 상태</td><td><code>hover</code>·<code>active</code>·<code>disabled</code>. 이름의 <b>맨 뒤</b>에 붙입니다</td></tr>
+            <tr><td>토큰을 찾는 방법</td><td>이름이 <code>--color-</code>로 시작하면 편집기 <b>자동완성</b>에서 색 토큰끼리 묶여 나옵니다</td></tr>
+            <tr><td>확인하는 방법</td><td>화면 코드에서 <code>--blue</code>나 <code>-500</code>을 <b>검색</b>해 봅니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -268,8 +268,8 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>서버와는 상관없다</th><td>토큰은 화면 쪽에서 쓰는 규칙입니다. 다만 <b>이름 짓는 원칙</b>은 서버에도 그대로 들어맞습니다.</td></tr>
-            <tr><th>같은 원리</th><td>서버가 <code>status</code>를 <code>red</code>가 아니라 <code>failed</code>로 보내는 것과 같은 원리로, <b>값이 아니라 뜻</b>을 이름으로 삼습니다.</td></tr>
+            <tr><th>화면 쪽에서 쓰는 규칙</th><td>토큰은 화면 쪽에서 쓰는 규칙입니다. 다만 <b>이름 짓는 원칙</b>은 서버에도 그대로 들어맞습니다.</td></tr>
+            <tr><th>서버 상태 이름과 같은 원리</th><td>서버가 <code>status</code>를 <code>red</code>가 아니라 <code>failed</code>로 보내는 것과 같은 원리로, <b>값이 아니라 뜻</b>을 이름으로 삼습니다.</td></tr>
           </tbody>
         </table>
         </div>

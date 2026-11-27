@@ -21,17 +21,17 @@
 
 <div class="bar">
   <b>터치 타깃</b>
-  <label><input type="checkbox" id="finger" checked> 손가락 크기 보이기 (44px)</label>
+  <label><input type="checkbox" id="finger" checked> 손가락이 닿는 넓이 보이기 (44px)</label>
   <label><input type="checkbox" id="pad"> 보이는 크기는 두고 누를 넓이만 키우기</label>
 </div>
 
 <div class="pad">
   <div class="sec">
-    <h3>같은 아이콘, 다른 누를 넓이</h3>
+    <h3>아이콘 크기별로 눌리는 넓이 비교</h3>
     <div class="tt-row" id="row"></div>
   </div>
   <div class="sec">
-    <h3>붙여 놓으면 더 나빠진다</h3>
+    <h3>버튼을 붙여 놓았을 때와 띄워 놓았을 때</h3>
     <div class="tt-row">
       <div>
         <span class="pair" id="tight"></span>
@@ -39,7 +39,7 @@
       </div>
       <div>
         <span class="pair" id="loose"></span>
-        <p class="tt-note">간격 8px — 손가락 원이 안 겹친다</p>
+        <p class="tt-note">간격이 8px이라 손가락 원이 겹치지 않음</p>
       </div>
     </div>
   </div>
@@ -90,7 +90,7 @@
     }
     document.getElementById('tight').innerHTML = one(0) + one(0);
     document.getElementById('loose').innerHTML = one(8) + one(0);
-    document.getElementById('tightnote').innerHTML = '간격 0px — <b>손가락 원이 겹친다</b>';
+    document.getElementById('tightnote').innerHTML = '간격이 0px이라 <b>손가락 원이 겹침</b>';
     document.getElementById('tightnote').className = 'tt-note bad';
   }
 

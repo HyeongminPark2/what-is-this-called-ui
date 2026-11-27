@@ -34,12 +34,12 @@ D = dict(
   axes=ax("페이지네이션"),
   oneline="페이지네이션은 <b>지금 몇 쪽이고 전부 얼마인지</b>를 알려 줍니다. 사용자에게 이 두 가지 정보가 필요 없다면 무한 스크롤이 더 편합니다.",
   states=states([
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:2px;align-items:center"><span style="border:1px solid var(--line);border-radius:2px;padding:0 3px;font-size:5px;color:var(--fg-faint)">‹</span><span style="background:var(--accent);color:#fff;border-radius:2px;padding:0 3px;font-size:5px">1</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">2</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">3</span></div>', bars="", label="첫 쪽"), "첫 쪽", "이전 버튼은 <b>누를 수 없게</b> 막습니다. 버튼을 숨기지 말고 비활성 상태로 둡니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:2px;align-items:center"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">‹</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">1</span><span style="background:var(--accent);color:#fff;border-radius:2px;padding:0 3px;font-size:5px">2</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">3</span></div>', bars="", label="가운데 쪽"), "가운데", "지금 쪽이 분명히 드러나야 합니다. <b>색만 바꾸면 구별하기 어렵습니다</b>"),
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:2px;align-items:center"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">1</span><span style="font-size:5px;color:var(--fg-muted)">…</span><span style="background:var(--accent);color:#fff;border-radius:2px;padding:0 3px;font-size:5px">9</span><span style="font-size:5px;color:var(--fg-muted)">…</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">18</span></div>', bars="", label="접힌 페이지네이션"), "접힘", "첫 쪽과 끝 쪽, 지금 쪽 주변만 보여 줍니다. 쪽이 많을 때 기본으로 쓰는 형태입니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:3px;align-items:center;justify-content:center"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 4px;font-size:5px">‹ 이전</span><span style="font-size:5px;color:var(--fg-muted)">2 / 18</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 4px;font-size:5px">다음 ›</span></div>', bars="", label="이전 다음만 있는 꼴"), "이전 · 다음", "좁은 화면이나 커서 방식에서 씁니다. <b>원하는 쪽으로 건너뛸 수는 없습니다</b>"),
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:2px;align-items:center;opacity:.6"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">‹</span><span class="spn spn--sm" style="width:7px;height:7px;border-width:1.5px"></span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">›</span></div>', bars="", label="쪽을 불러오는 중"), "불러오는 중", "<b>목록 부분만</b> 로딩 상태로 바꿉니다. 쪽 번호 줄까지 사라지면 다른 쪽으로 옮길 방법이 없어집니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:3px;align-items:center;font-size:5px;color:var(--fg-muted)"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px">쪽당 20 ▾</span><span style="margin-left:auto">1–20 / 137</span></div>', bars="", label="쪽당 줄 수"), "쪽당 줄 수", "사용자가 바꿀 수 있게 두면 좋습니다. 줄 수를 바꾸면 <b>1쪽으로 돌아갑니다</b>"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:2px;align-items:center"><span style="border:1px solid var(--line);border-radius:2px;padding:0 3px;font-size:5px;color:var(--fg-faint)">‹</span><span style="background:var(--accent);color:#fff;border-radius:2px;padding:0 3px;font-size:5px">1</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">2</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">3</span></div>', bars="", label="첫 쪽"), "첫 쪽을 보고 있을 때", "이전 버튼은 <b>누를 수 없게</b> 막습니다. 버튼을 숨기지 말고 비활성 상태로 둡니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:2px;align-items:center"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">‹</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">1</span><span style="background:var(--accent);color:#fff;border-radius:2px;padding:0 3px;font-size:5px">2</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">3</span></div>', bars="", label="가운데 쪽"), "가운데 쪽을 보고 있을 때", "지금 쪽이 분명히 드러나야 합니다. <b>색만 바꾸면 구별하기 어렵습니다</b>"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:2px;align-items:center"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">1</span><span style="font-size:5px;color:var(--fg-muted)">…</span><span style="background:var(--accent);color:#fff;border-radius:2px;padding:0 3px;font-size:5px">9</span><span style="font-size:5px;color:var(--fg-muted)">…</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">18</span></div>', bars="", label="접힌 페이지네이션"), "쪽이 많아 가운데를 접었을 때", "첫 쪽과 끝 쪽, 지금 쪽 주변만 보여 줍니다. 쪽이 많을 때 기본으로 쓰는 형태입니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:3px;align-items:center;justify-content:center"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 4px;font-size:5px">‹ 이전</span><span style="font-size:5px;color:var(--fg-muted)">2 / 18</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 4px;font-size:5px">다음 ›</span></div>', bars="", label="이전 다음만 있는 꼴"), "이전과 다음 버튼만 둘 때", "좁은 화면이나 커서 방식에서 씁니다. <b>원하는 쪽으로 건너뛸 수는 없습니다</b>"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:2px;align-items:center;opacity:.6"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">‹</span><span class="spn spn--sm" style="width:7px;height:7px;border-width:1.5px"></span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">›</span></div>', bars="", label="쪽을 불러오는 중"), "새 쪽을 불러오는 중", "<b>목록 부분만</b> 로딩 상태로 바꿉니다. 쪽 번호 줄까지 사라지면 다른 쪽으로 옮길 방법이 없어집니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:3px;align-items:center;font-size:5px;color:var(--fg-muted)"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px">쪽당 20 ▾</span><span style="margin-left:auto">1–20 / 137</span></div>', bars="", label="쪽당 줄 수"), "쪽당 줄 수를 고르게 할 때", "사용자가 바꿀 수 있게 두면 좋습니다. 줄 수를 바꾸면 <b>1쪽으로 돌아갑니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -64,14 +64,14 @@ D = dict(
     "쪽 번호를 주소에 남기지 않을 때. 뒤로가기로 돌아오면 1쪽으로 돌아갑니다",
     "숫자를 작게 촘촘히 늘어놓을 때. 손가락으로는 원하는 쪽을 정확히 누를 수 없습니다",
   ]),
-  instead='흘러가는 피드면 <a href="infinite.html">무한 스크롤</a>, 결과가 없으면 <a href="empty.html">빈 상태</a>, 쪽을 바꾸는 동안은 <a href="skeleton.html">스켈레톤</a>.',
+  instead='새 글이 계속 올라오는 피드라면 <a href="infinite.html">무한 스크롤</a>이 맞습니다. 결과가 하나도 없으면 쪽 번호 대신 <a href="empty.html">빈 상태</a>를 보여 주고, 쪽을 바꾸는 동안에는 목록 자리에 <a href="skeleton.html">스켈레톤</a>을 띄웁니다.',
   cases=cases([
     (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:2px;align-items:center"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">1</span><span style="font-size:5px">…</span><span style="background:var(--accent);color:#fff;border-radius:2px;padding:0 3px;font-size:5px">9</span><span style="font-size:5px">…</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px;font-size:5px">18</span></div>', bars="", tall=False, label="숫자형 재현"),
-     "숫자형", "가장 흔한 형태로, 원하는 쪽으로 바로 건너뛸 수 있습니다"),
+     "쪽 번호를 늘어놓는 숫자형", "가장 흔한 형태로, 원하는 쪽으로 바로 건너뛸 수 있습니다"),
     (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:3px;align-items:center;justify-content:center"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 4px;font-size:5px">‹ 이전</span><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 4px;font-size:5px">다음 ›</span></div>', bars="", tall=False, label="이전 다음만 재현"),
-     "이전 · 다음", "커서 방식에서 씁니다. <b>전체 쪽 수를 모를 때</b>도 쓸 수 있습니다"),
+     "이전과 다음 버튼만 두기", "커서 방식에서 씁니다. <b>전체 쪽 수를 모를 때</b>도 쓸 수 있습니다"),
     (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:3px;align-items:center;font-size:5px;color:var(--fg-muted)"><span style="border:1px solid var(--line-strong);border-radius:2px;padding:0 3px">쪽당 20 ▾</span><span style="margin-left:auto">1–20 / 137</span></div>', bars="", tall=False, label="표 아래 재현"),
-     "표 아래", "쪽당 줄 수와 전체 건수를 함께 보여 줍니다. 관리 도구에서 표준처럼 쓰는 형태입니다"),
+     "표 아래에 쪽당 줄 수와 함께 두기", "쪽당 줄 수와 전체 건수를 함께 보여 줍니다. 관리 도구에서 표준처럼 쓰는 형태입니다"),
   ]),
   code_lede="구현에서 가장 중요한 일은 쪽 번호를 <b>주소에 담는 것</b>이고, 그다음은 쪽이 많을 때 가운데 번호를 줄이는 규칙을 정하는 것입니다.",
   code='''&lt;<span class="t">nav</span> <span class="a">aria-label</span>=<span class="s">"쪽 이동"</span>&gt;
@@ -89,14 +89,14 @@ history.pushState(<span class="a">null</span>, <span class="s">''</span>, <span 
     ("<kbd>Tab</kbd>", "쪽 번호마다 포커스가 한 번씩 거쳐 갑니다. 그래서 가운데 번호를 <b>접어</b> 두면 키보드 사용자도 덜 누르게 됩니다"),
     ("<code>aria-current</code>", "지금 쪽에 <code>\"page\"</code> 값을 답니다. 색만으로는 스크린 리더에 전해지지 않습니다"),
     ("<code>aria-label</code>", "<b>‹</b> 같은 기호 버튼에는 '이전 쪽'처럼 이름을 붙입니다"),
-    ("비활성", "첫 쪽과 끝 쪽에서는 <code>disabled</code>로 둡니다. 버튼을 없애면 쪽 번호들의 위치가 밀립니다"),
+    ("첫 쪽과 끝 쪽의 비활성 버튼", "첫 쪽과 끝 쪽에서는 <code>disabled</code>로 둡니다. 버튼을 없애면 쪽 번호들의 위치가 밀립니다"),
     ("쪽을 바꾼 뒤", "목록 맨 위로 <b>포커스를 옮기거나</b> 스크롤을 올립니다. 그러지 않으면 사용자는 화면의 어디가 바뀌었는지 알 수 없습니다"),
   ]),
   backend=rows([
-    ("오프셋 vs 커서", "<code>?page=9</code>는 앞에서 몇 건을 건너뛸지 정하는 <b>오프셋</b> 방식입니다. 구현은 쉽지만 뒤쪽 쪽일수록 질의가 느려지고, 쪽을 넘기는 사이에 새 항목이 들어오면 <b>같은 항목을 두 번</b> 보게 됩니다. 마지막으로 본 항목을 기준으로 다음 묶음을 가져오는 <b>커서</b> 방식은 이런 문제가 없지만, 특정 쪽으로 건너뛸 수 없어서 '이전/다음'만 쓸 수 있습니다."),
-    ("전체 건수의 값", "큰 표에서 <code>COUNT(*)</code>는 비용이 큽니다. 그래서 '약 1,200건'처럼 근사치를 보여 주거나, 전체 건수를 아예 보여 주지 않고 <b>이전/다음</b>만 두는 방법도 있습니다."),
-    ("쪽당 줄 수 = 상한", "쪽당 줄 수는 사용자가 정하게 두되 <b>서버에서 상한</b>을 겁니다. <code>?per=100000</code> 같은 요청을 그대로 받으면 서버에 큰 부하를 주는 공격 수단이 됩니다."),
-    ("주소가 곧 상태", "쪽 번호와 정렬, 필터가 모두 주소에 들어 있으면 화면이 이 상태를 따로 저장하지 않아도 됩니다. 공유와 뒤로가기, 새로고침도 따로 구현할 필요 없이 제대로 동작합니다."),
+    ("오프셋 방식과 커서 방식", "<code>?page=9</code>는 앞에서 몇 건을 건너뛸지 정하는 <b>오프셋</b> 방식입니다. 구현은 쉽지만 뒤쪽 쪽일수록 질의가 느려지고, 쪽을 넘기는 사이에 새 항목이 들어오면 <b>같은 항목을 두 번</b> 보게 됩니다. 마지막으로 본 항목을 기준으로 다음 묶음을 가져오는 <b>커서</b> 방식은 이런 문제가 없지만, 특정 쪽으로 건너뛸 수 없어서 '이전/다음'만 쓸 수 있습니다."),
+    ("전체 건수를 세는 비용", "큰 표에서 <code>COUNT(*)</code>는 비용이 큽니다. 그래서 '약 1,200건'처럼 근사치를 보여 주거나, 전체 건수를 아예 보여 주지 않고 <b>이전/다음</b>만 두는 방법도 있습니다."),
+    ("쪽당 줄 수에 서버 상한 걸기", "쪽당 줄 수는 사용자가 정하게 두되 <b>서버에서 상한</b>을 겁니다. <code>?per=100000</code> 같은 요청을 그대로 받으면 서버에 큰 부하를 주는 공격 수단이 됩니다."),
+    ("화면 상태를 주소에 담기", "쪽 번호와 정렬, 필터가 모두 주소에 들어 있으면 화면이 이 상태를 따로 저장하지 않아도 됩니다. 공유와 뒤로가기, 새로고침도 따로 구현할 필요 없이 제대로 동작합니다."),
   ]),
   plat_lede="페이지네이션은 웹에서 쓰는 부품이고, 모바일 앱에서는 거의 쓰지 않습니다.",
   plats=plats([
@@ -114,6 +114,6 @@ history.pushState(<span class="a">null</span>, <span class="s">''</span>, <span 
   siblings=siblings("pagination"),
   related='''        <li><a href="../items/skeleton.html"><b>스켈레톤</b><em>8부</em></a></li>
         <li><a href="../items/empty.html"><b>빈 상태</b><em>8부</em></a></li>
-        <li><span class="na"><b>데이터 테이블</b><em>10부</em></span></li>
-        <li><span class="na"><b>가상 스크롤</b><em>10부</em></span></li>''',
+        <li><a href="table.html"><b>데이터 테이블</b><em>10부</em></a></li>
+        <li><a href="virtual.html"><b>가상 스크롤</b><em>10부</em></a></li>''',
 )

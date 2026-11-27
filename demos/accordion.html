@@ -19,7 +19,7 @@
 <div class="bar">
   <b>접히는 글</b>
   <label><input type="checkbox" id="one"> 한 번에 하나만 열기</label>
-  <label>찾는 말 <input class="ui-input" id="q" style="width:120px;min-height:32px;font-size:12.5px" placeholder="환불"></label>
+  <label>찾을 낱말 <input class="ui-input" id="q" style="width:120px;min-height:32px;font-size:12.5px" placeholder="환불"></label>
 </div>
 
 <div class="pad">
@@ -73,8 +73,8 @@
     var n = Object.keys(open).filter(function (k) { return open[k]; }).length;
     var rd = document.getElementById('read');
     rd.innerHTML = '열린 항목 <b>' + n + ' / ' + ITEMS.length + '</b> · ' +
-      (one ? '한 번에 하나만' : '여러 개 가능') +
-      (q ? '<br>‘' + q + '’ — 보이는 글에서 <b>' + visible + '건</b>, 접힌 글 속에 <b>' + hidden + '건</b>' +
+      (one ? '한 번에 하나만 열림' : '여러 개가 함께 열림') +
+      (q ? '<br>‘' + q + '’은 보이는 글에서 <b>' + visible + '건</b>, 접힌 글 속에서 <b>' + hidden + '건</b>' +
         (hidden ? ' <span class="warn">(브라우저 찾기로는 찾을 수 없습니다)</span>' : '') : '');
     rd.dataset.open = String(n);
     rd.dataset.one = one ? '1' : '0';

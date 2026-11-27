@@ -51,8 +51,8 @@
         </div>
         <div class="note" style="margin-bottom:0">
           <p>네 가지 방식을 바꿔 가며 <b>삭제</b>를 눌러 보세요.<br>
-          <b>바로 지운다</b>는 손가락이 잘못 닿기만 해도 되돌릴 수 없고, <b>한 번 되묻는다</b>는 세 번째쯤부터
-          사용자가 문구를 읽지 않고 누릅니다. <b>이름을 치게 한다</b>는 확실하지만 번거롭습니다.<br>
+          <b>바로 지우기</b>는 손가락이 잘못 닿기만 해도 되돌릴 수 없고, <b>한 번 되묻기</b>는 세 번째쯤부터
+          사용자가 문구를 읽지 않고 누릅니다. <b>이름을 직접 치게 하기</b>는 확실하지만 번거롭습니다.<br>
           대개는 <b>되돌릴 틈을 주는</b> 방식이 가장 낫습니다. 묻지 않으니 빠르고, 실수로 지워도 되살릴 수 있기 때문입니다.</p>
         </div>
       </section>
@@ -76,20 +76,20 @@
         <p>화면 단위 패턴은 부품 하나가 아니라 사용자가 <b>끝내야 하는 일</b> 하나를 기준으로 나눕니다. 그래서 아래 네 가지를 따져 보면 화면끼리 구별할 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 끝내야 하나</th><th>막히는 자리</th><th>중간에 떠나면</th><th>서버가 쥔 것</th></tr></thead>
+          <thead><tr><th></th><th>사용자가 끝내야 하는 일</th><th>사용자가 자주 막히는 곳</th><th>중간에 떠나면 생기는 일</th><th>서버가 맡아 두는 것</th></tr></thead>
           <tbody>
-            <tr><td>로그인</td><td>내가 <b>누구인지</b> 증명</td><td>비밀번호를 잊음</td><td>아무 일도 안 일어남</td><td>세션 · 토큰</td></tr>
-            <tr><td>온보딩</td><td><b>처음 쓸 수</b> 있게</td><td>건너뛸 길이 없음</td><td><b>다시 처음부터</b></td><td>어디까지 봤나</td></tr>
-            <tr><td>검색 결과 화면</td><td>찾는 것을 <b>고름</b></td><td>0건</td><td>질의를 잃는다</td><td>질의 · 순위</td></tr>
-            <tr><td>설정 화면</td><td>값을 <b>바꿈</b></td><td>어디 있는지 못 찾음</td><td>바뀐 채 남는다</td><td>계정별 저장</td></tr>
-            <tr><td>결제 흐름</td><td><b>돈을 냄</b></td><td>비용이 뒤늦게 드러남</td><td>장바구니로 돌아감</td><td>주문 · 결제 상태</td></tr>
-            <tr><td>권한 요청</td><td>기기 기능을 <b>씀</b></td><td><b>한 번 거절하면 끝</b></td><td>그 기능만 못 씀</td><td>모름 — 기기에만 있다</td></tr>
-            <tr><td>알림 센터</td><td>놓친 것을 <b>따라잡음</b></td><td>읽음 처리가 안 맞음</td><td>그대로 쌓인다</td><td>읽음 상태 맞추기</td></tr>
-            <tr class="me"><td><b>위험한 동작</b></td><td>되돌릴 수 <b>없는 일</b></td><td>확인이 너무 쉬움</td><td><b>아무 일도 안 남 — 좋다</b></td><td>유예 · 복구 기간</td></tr>
-            <tr><td>프로필</td><td>남에게 <b>나를 보임</b></td><td>공개 범위를 모름</td><td>아무 일도 안 일어남</td><td><b>누가 무엇까지</b> 보나</td></tr>
-            <tr><td>대시보드</td><td><b>지금 괜찮은지</b> 판단</td><td>숫자가 너무 많음</td><td>아무 일도 안 일어남</td><td>집계 · 기준 시각</td></tr>
-            <tr><td>공유하기</td><td>남에게 <b>보여 줌</b></td><td>범위를 잘못 고름</td><td>링크가 안 나감</td><td><b>열쇠와 범위</b></td></tr>
-            <tr><td>파일 올리기</td><td>파일을 <b>건네줌</b></td><td>다 올리고 거절당함</td><td><b>올린 것이 날아감</b></td><td>크기 · 형식 · 보관</td></tr>
+            <tr><td>로그인</td><td>내가 <b>누구인지</b> 증명하기</td><td>비밀번호를 잊음</td><td>아무 일도 일어나지 않음</td><td>세션 · 토큰</td></tr>
+            <tr><td>온보딩</td><td><b>처음 쓸 수 있는</b> 상태 만들기</td><td>건너뛸 길이 없음</td><td><b>처음부터 다시 해야 함</b></td><td>어디까지 봤는지</td></tr>
+            <tr><td>검색 결과 화면</td><td>찾는 것을 <b>고르기</b></td><td>결과가 0건일 때</td><td>검색어를 잃음</td><td>질의 · 순위</td></tr>
+            <tr><td>설정 화면</td><td>값을 <b>바꾸기</b></td><td>설정이 어디 있는지 못 찾음</td><td>바꾼 값이 그대로 남음</td><td>계정별 저장</td></tr>
+            <tr><td>결제 흐름</td><td><b>돈을 내기</b></td><td>비용이 뒤늦게 드러남</td><td>장바구니로 돌아감</td><td>주문 · 결제 상태</td></tr>
+            <tr><td>권한 요청</td><td>기기 기능을 <b>쓰기</b></td><td><b>한 번 거절하면 다시 묻기 어려움</b></td><td>그 기능만 못 씀</td><td>기기에만 있어 서버는 모름</td></tr>
+            <tr><td>알림 센터</td><td>놓친 것을 <b>따라잡기</b></td><td>읽음 처리가 안 맞음</td><td>알림이 그대로 쌓임</td><td>읽음 상태 맞추기</td></tr>
+            <tr class="me"><td><b>위험한 동작</b></td><td>되돌릴 수 <b>없는 일</b> 하기</td><td>확인이 너무 쉬움</td><td><b>아무것도 지워지지 않아 안전함</b></td><td>유예 · 복구 기간</td></tr>
+            <tr><td>프로필</td><td>남에게 <b>나를 보여 주기</b></td><td>공개 범위를 모름</td><td>아무 일도 일어나지 않음</td><td><b>누가 무엇까지</b> 보는지</td></tr>
+            <tr><td>대시보드</td><td><b>지금 괜찮은지</b> 판단하기</td><td>숫자가 너무 많음</td><td>아무 일도 일어나지 않음</td><td>집계 · 기준 시각</td></tr>
+            <tr><td>공유하기</td><td>남에게 <b>보여 주기</b></td><td>범위를 잘못 고름</td><td>링크가 전달되지 않음</td><td><b>링크 토큰과 공유 범위</b></td></tr>
+            <tr><td>파일 올리기</td><td>파일을 <b>건네주기</b></td><td>다 올리고 거절당함</td><td><b>올리던 파일이 사라짐</b></td><td>크기 · 형식 · 보관</td></tr>
           </tbody>
         </table>
         </div>
@@ -99,43 +99,43 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 확인 방식 넷<span class="hint">무엇을 막고 무엇을 치르나</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 삭제를 확인하는 방식<span class="hint">방식마다 막아 주는 것과 치르는 비용</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:9px">모란상회</span><span style="justify-self:start;border:1px solid var(--danger);color:var(--danger);border-radius:4px;padding:2px 8px;font-size:8.5px">삭제</span></div><span style="font-family:var(--mono);font-size:9px;color:var(--danger)">누르면 바로 지워진다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:9px">모란상회</span><span style="justify-self:start;border:1px solid var(--danger);color:var(--danger);border-radius:4px;padding:2px 8px;font-size:8.5px">삭제</span></div><span style="font-family:var(--mono);font-size:9px;color:var(--danger)">누르면 바로 지워짐</span></div>
             </div>
-            <figcaption>바로 지운다<span>빠르지만 <b>잘못 누르면 되돌릴 수 없습니다</b></span></figcaption>
+            <figcaption>바로 지우기<span>빠르지만 <b>잘못 누르면 되돌릴 수 없습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:9px;font-weight:700;color:var(--danger)">‘모란상회’를 지울까요?</span><span style="font-size:8px;color:var(--fg-muted)">정산 내역 128건이 함께 지워집니다</span><div style="display:flex;gap:5px"><span style="border:1px solid var(--line);border-radius:4px;padding:2px 8px;font-size:8.5px">취소</span><span style="background:var(--danger);color:#fff;border-radius:4px;padding:2px 8px;font-size:8.5px">삭제</span></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">가장 흔하다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:9px;font-weight:700;color:var(--danger)">‘모란상회’를 지울까요?</span><span style="font-size:8px;color:var(--fg-muted)">정산 내역 128건이 함께 지워집니다</span><div style="display:flex;gap:5px"><span style="border:1px solid var(--line);border-radius:4px;padding:2px 8px;font-size:8.5px">취소</span><span style="background:var(--danger);color:#fff;border-radius:4px;padding:2px 8px;font-size:8.5px">삭제</span></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">가장 흔한 방식</span></div>
             </div>
-            <figcaption>한 번 되묻는다<span><b>세 번째쯤부터는</b> 문구를 읽지 않고 누릅니다</span></figcaption>
+            <figcaption>한 번 되묻기<span><b>세 번째쯤부터는</b> 문구를 읽지 않고 누릅니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:9px;font-weight:700;color:var(--danger)">이름을 그대로 쳐 주세요</span><div style="border:1px solid var(--line);border-radius:4px;padding:3px 6px;font-size:8.5px;color:var(--fg-muted)">모란상회</div><div style="display:flex;gap:5px"><span style="border:1px solid var(--line);border-radius:4px;padding:2px 8px;font-size:8.5px">취소</span><span style="background:var(--danger);color:#fff;border-radius:4px;padding:2px 8px;font-size:8.5px">삭제</span></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">확실하지만 번거롭다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:9px;font-weight:700;color:var(--danger)">이름을 그대로 쳐 주세요</span><div style="border:1px solid var(--line);border-radius:4px;padding:3px 6px;font-size:8.5px;color:var(--fg-muted)">모란상회</div><div style="display:flex;gap:5px"><span style="border:1px solid var(--line);border-radius:4px;padding:2px 8px;font-size:8.5px">취소</span><span style="background:var(--danger);color:#fff;border-radius:4px;padding:2px 8px;font-size:8.5px">삭제</span></div></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">확실하지만 번거로움</span></div>
             </div>
-            <figcaption>이름을 치게 한다<span>번거로우므로 <b>정말 위험한 것</b>에만 씁니다</span></figcaption>
+            <figcaption>이름을 직접 치게 하기<span>번거로우므로 <b>정말 위험한 것</b>에만 씁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="display:flex;align-items:center;gap:6px;background:var(--ink-900);color:#fff;border-radius:4px;padding:4px 7px;font-size:8.5px"><span style="flex:1">‘모란상회’ 을(를) 지웠습니다</span><span style="color:#9ec1ff;font-weight:700">되돌리기</span></span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">묻지 않고 지운 뒤 5초</span></div>
             </div>
-            <figcaption>되돌릴 틈을 준다 ✓<span>묻지 않아 <b>빠르면서도 안전해서</b> 대개 이 방식이 낫습니다</span></figcaption>
+            <figcaption>되돌릴 틈 주기 ✓<span>묻지 않아 <b>빠르면서도 안전해서</b> 대개 이 방식이 낫습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:9px;color:var(--fg-muted)">휴지통 · 30일 뒤 완전 삭제</span><span style="font-size:8px;color:var(--accent)">복구하기</span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">소프트 삭제</span></div>
             </div>
-            <figcaption>휴지통<span>크거나 많은 것을 지울 때 씁니다. 지운 것을 보관하므로 <b>저장 공간을 더 씁니다</b></span></figcaption>
+            <figcaption>휴지통에 보관하기<span>크거나 많은 것을 지울 때 씁니다. 지운 것을 보관하므로 <b>저장 공간을 더 씁니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:9px;font-weight:700;color:var(--danger)">계정 삭제</span><span style="font-size:8px;color:var(--fg-muted)">메일로 보낸 링크를 눌러야 끝납니다</span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">한 단계 더</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:9px;font-weight:700;color:var(--danger)">계정 삭제</span><span style="font-size:8px;color:var(--fg-muted)">메일로 보낸 링크를 눌러야 끝납니다</span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">한 단계를 더 거침</span></div>
             </div>
-            <figcaption>되돌릴 수 없는 것<span>메일 링크처럼 <b>다른 통로</b>를 한 번 더 거치게 합니다</span></figcaption>
+            <figcaption>되돌릴 수 없는 것을 지울 때<span>메일 링크처럼 <b>다른 통로</b>를 한 번 더 거치게 합니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -147,23 +147,23 @@
             <div class="anat" role="img" aria-label="위험한 동작의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">무엇이 사라지는지 — ‘정산 내역 128건이 함께’</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">되돌릴 수 있는지 — 있으면 그렇게 적는다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">‘정산 내역 128건이 함께’처럼 사라질 것을 적음</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">되돌릴 수 있는지 없는지 그대로 적음</div>
                   <div class="pin-out" data-pin="3" style="max-width:220px"><div style="display:flex;gap:5px"><span style="border:1px solid var(--line);border-radius:4px;padding:2px 8px;font-size:8.5px">취소</span><span style="background:var(--danger);color:#fff;border-radius:4px;padding:2px 8px;font-size:8.5px">삭제</span></div></div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">버튼 이름은 동사로 — ‘확인’이 아니라 ‘삭제’</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">되돌리기가 있으면 묻지 않아도 된다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">세 번째부터는 읽지 않고 누른다</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">버튼 이름은 ‘확인’ 대신 ‘삭제’처럼 동사로</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">되돌리기가 있으면 묻지 않아도 됨</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">세 번째부터는 읽지 않고 누름</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>무엇이 사라지나 <em>숫자로</em></b><span>'정산 내역 <b>128건</b>이 함께'처럼 숫자로 적습니다. 막연하게 적으면 사용자가 읽지 않습니다</span></li>
-            <li><b>되돌릴 수 있나 <em>그대로 적는다</em></b><span>되돌릴 수 있으면 그렇다고 적고, 없으면 <b>없다고</b> 적습니다</span></li>
+            <li><b>사라지는 대상 <em>숫자로 적기</em></b><span>'정산 내역 <b>128건</b>이 함께'처럼 숫자로 적습니다. 막연하게 적으면 사용자가 읽지 않습니다</span></li>
+            <li><b>되돌릴 수 있는지 안내 <em>있는 그대로 적기</em></b><span>되돌릴 수 있으면 그렇다고 적고, 없으면 <b>없다고</b> 적습니다</span></li>
             <li><b>버튼 두 개 <em>취소 · 삭제</em></b><span>취소를 <b>기본</b> 버튼으로 두되, 눈에 덜 띄게 만듭니다</span></li>
             <li><b>버튼 이름 <em>동사로</em></b><span>'확인'이 아니라 <b>'삭제'</b>처럼 버튼을 누르면 무엇을 하는지 적습니다</span></li>
             <li><b>되돌리기 <em>묻기의 대안</em></b><span>되돌리기가 있으면 <b>묻지 않아도 됩니다.</b> 둘을 함께 쓰면 지나칩니다</span></li>
-            <li><b>길들여짐 <em>세 번째부터</em></b><span>확인 창을 자주 볼수록 사용자는 <b>읽지 않고 누릅니다</b></span></li>
+            <li><b>습관적으로 누르기 <em>세 번째부터</em></b><span>확인 창을 자주 볼수록 사용자는 <b>읽지 않고 누릅니다</b></span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -179,7 +179,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>위험한 동작을 쓰는 경우</h3>
+            <h3>위험한 동작 앞에서 할 일</h3>
             <ul>
               <li>되돌릴 수 있는 일일 때. <b>묻지 말고 되돌리기</b>를 줍니다</li>
               <li>되돌릴 수 없는 일일 때. <b>한 번 묻습니다</b></li>
@@ -187,7 +187,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>위험한 동작을 쓰지 않는 경우</h3>
+            <h3>위험한 동작을 이렇게 다루면 안 되는 경우</h3>
             <ul>
               <li>모든 동작에 확인 창을 띄울 때. 사용자가 <b>읽지 않고 누르게</b> 됩니다</li>
               <li>버튼을 '확인 / 취소'로 적을 때. <b>무엇을 확인하는지</b> 알 수 없습니다</li>
@@ -196,7 +196,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>위험한 동작 대신 다른 것을 써야 하는 경우</b> — 알리기만 하면 <a href="../items/error.html">오류 메시지</a>, 결과와 되돌리기는 <a href="../items/toast.html">토스트</a>, 여러 건이면 <a href="bulk.html">일괄 선택</a>의 범위 확인.</p>
+        <p style="margin:var(--s4) 0 0"><b>함께 보면 좋은 항목</b> — 실수를 막을 필요 없이 상황을 알리기만 하면 되는 경우는 <a href="../items/error.html">오류 메시지</a>에서, 지운 결과와 되돌리기 줄은 <a href="../items/toast.html">토스트</a>에서 다룹니다. 여러 건을 한꺼번에 지울 때는 <a href="bulk.html">일괄 선택</a>의 범위 확인을 함께 봅니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -206,19 +206,19 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="display:flex;align-items:center;gap:6px;background:var(--ink-900);color:#fff;border-radius:4px;padding:4px 7px;font-size:8.5px"><span style="flex:1">1건 삭제됨</span><span style="color:#9ec1ff;font-weight:700">되돌리기</span></span></div></div>
             </div>
-            <figcaption><b>되돌리기 줄</b><b>지메일이 널리 퍼뜨린</b> 방식입니다</figcaption>
+            <figcaption><b>지운 뒤 되돌리기 줄 띄우기</b><b>지메일이 널리 퍼뜨린</b> 방식입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:9px;font-weight:700;color:var(--danger)">128건을 반려할까요?</span><span style="font-size:8px;color:var(--fg-muted)">되돌릴 수 없습니다</span><div style="display:flex;gap:5px"><span style="border:1px solid var(--line);border-radius:4px;padding:2px 8px;font-size:8.5px">취소</span><span style="background:var(--danger);color:#fff;border-radius:4px;padding:2px 8px;font-size:8.5px">반려</span></div></div></div>
             </div>
-            <figcaption><b>큰 범위</b><b>건수를 문장 안에</b> 적습니다(<a href="bulk.html">일괄 선택</a> 참고)</figcaption>
+            <figcaption><b>많은 건을 한꺼번에 지울 때</b><b>건수를 문장 안에</b> 적습니다(<a href="bulk.html">일괄 선택</a> 참고)</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:9px;font-weight:700;color:var(--danger)">위험 구역</span><span style="font-size:8px;color:var(--fg-muted)">계정 삭제 · 조직 나가기</span></div></div>
             </div>
-            <figcaption><b>위험 구역</b><a href="settings.html">설정</a> 맨 아래에 따로 모아 둡니다</figcaption>
+            <figcaption><b>설정 맨 아래에 위험 구역 두기</b><a href="settings.html">설정</a> 맨 아래에 따로 모아 둡니다</figcaption>
           </figure>
         </div>
       </section>
@@ -244,14 +244,14 @@
 }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>처리하는 방법</th></tr></thead>
           <tbody>
-            <tr><td><code>autofocus</code>는 <b>취소</b>에</td><td>창이 열리자마자 엔터를 쳐도 <b>지워지지 않습니다</b></td></tr>
-            <tr><td><kbd>Esc</kbd> = 취소</td><td><code>&lt;dialog&gt;</code>는 이 동작을 기본으로 제공합니다. 위험한 쪽이 기본 동작이 되면 안 됩니다</td></tr>
+            <tr><td><code>autofocus</code>는 <b>취소</b> 버튼에 두기</td><td>창이 열리자마자 엔터를 쳐도 <b>지워지지 않습니다</b></td></tr>
+            <tr><td><kbd>Esc</kbd>를 누르면 취소</td><td><code>&lt;dialog&gt;</code>는 이 동작을 기본으로 제공합니다. 위험한 쪽이 기본 동작이 되면 안 됩니다</td></tr>
             <tr><td><code>aria-describedby</code></td><td>무엇이 사라지는지까지 읽히게 합니다. 제목만 읽히면 무엇이 함께 지워지는지 알 수 없습니다</td></tr>
-            <tr><td>버튼 이름은 동사</td><td>'확인'이라고만 적으면 <b>무엇을 확인하는지</b> 알 수 없습니다</td></tr>
-            <tr><td>되돌리기 줄은 <code>role="status"</code></td><td><a href="../items/toast.html">토스트</a>와 같은 방식으로, 초점을 가져가지 않고 알립니다</td></tr>
-            <tr><td>되돌리기에 닿을 시간</td><td>5초는 키보드·스크린 리더 사용자에게 짧습니다. 그래서 초점이나 마우스가 <b>머무르는 동안에는 시간이 멈추게</b> 합니다</td></tr>
+            <tr><td>버튼 이름은 동사로 적기</td><td>'확인'이라고만 적으면 <b>무엇을 확인하는지</b> 알 수 없습니다</td></tr>
+            <tr><td>되돌리기 줄에 <code>role="status"</code> 달기</td><td><a href="../items/toast.html">토스트</a>와 같은 방식으로, 초점을 가져가지 않고 알립니다</td></tr>
+            <tr><td>되돌리기 버튼까지 갈 시간</td><td>5초는 키보드·스크린 리더 사용자에게 짧습니다. 그래서 초점이나 마우스가 <b>머무르는 동안에는 시간이 멈추게</b> 합니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -262,12 +262,12 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>되돌리기는 <b>안 보내는</b> 것으로</th><td>화면에서 먼저 지우고 5초 뒤에 서버로 보내면, 되돌리기는 <b>타이머를 취소</b>하는 것만으로 끝납니다. 구현 방법 가운데 가장 간단합니다.</td></tr>
+            <tr><th>되돌리기는 요청을 <b>늦게 보내는</b> 방식으로</th><td>화면에서 먼저 지우고 5초 뒤에 서버로 보내면, 되돌리기는 <b>타이머를 취소</b>하는 것만으로 끝납니다. 구현 방법 가운데 가장 간단합니다.</td></tr>
             <tr><th>소프트 삭제</th><td>삭제 요청을 미룰 수 없다면 <code>deleted_at</code>에 시각을 기록해 두고 나중에 실제로 지웁니다. 대신 <b>모든 질의가 그 칸을 확인해야</b> 합니다.</td></tr>
-            <tr><th>딸린 것들</th><td>가맹점을 지우면 거기에 딸린 정산과 사용자도 같이 지워집니다. 그래서 <b>무엇이 함께 지워지는지</b> 화면 문구에도 적습니다.</td></tr>
-            <tr><th>권한을 다시 본다</th><td>삭제 권한은 <b>서버에서 다시 확인</b>합니다. 화면에서 버튼을 숨기는 것만으로는 요청을 직접 보내는 사람을 막을 수 없습니다.</td></tr>
-            <tr><th>기록을 남긴다</th><td>누가 언제 무엇을 지웠는지 기록해 두면 나중에 들어오는 <b>복구 요청</b>에 답할 수 있습니다.</td></tr>
-            <tr><th>되돌릴 수 없는 것</th><td>계정이나 조직을 지울 때는 <b>유예 기간</b>(30일)을 두는 편이 민원이 적습니다.</td></tr>
+            <tr><th>함께 지워지는 데이터</th><td>가맹점을 지우면 거기에 딸린 정산과 사용자도 같이 지워집니다. 그래서 <b>무엇이 함께 지워지는지</b> 화면 문구에도 적습니다.</td></tr>
+            <tr><th>삭제 권한을 서버에서 다시 확인하기</th><td>삭제 권한은 <b>서버에서 다시 확인</b>합니다. 화면에서 버튼을 숨기는 것만으로는 요청을 직접 보내는 사람을 막을 수 없습니다.</td></tr>
+            <tr><th>삭제 기록 남기기</th><td>누가 언제 무엇을 지웠는지 기록해 두면 나중에 들어오는 <b>복구 요청</b>에 답할 수 있습니다.</td></tr>
+            <tr><th>되돌릴 수 없는 삭제에 유예 기간 두기</th><td>계정이나 조직을 지울 때는 <b>유예 기간</b>(30일)을 두는 편이 민원이 적습니다.</td></tr>
           </tbody>
         </table>
         </div>

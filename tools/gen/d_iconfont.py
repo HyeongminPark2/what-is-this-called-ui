@@ -9,11 +9,11 @@ TRASH = ('<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="va
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">글자 자리에 그림을 넣은 글꼴</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">color · font-size 가 그대로 먹는다 — 옛 장점</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">못 받으면 네모나 엉뚱한 글자가 남는다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">스크린 리더가 그 글자를 읽어 버린다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">안 쓰는 아이콘까지 통째로 받는다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">SVG — currentColor 로 색이 따라오고 안 깨진다</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">color · font-size 가 그대로 적용되는 옛 장점</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">못 받으면 네모나 엉뚱한 글자가 남음</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">스크린 리더가 그 글자를 그대로 읽음</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">안 쓰는 아이콘까지 통째로 받음</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">SVG는 currentColor 로 색이 바뀌고 깨지지 않음</div>
                 </div>
               </div>'''
 
@@ -43,29 +43,29 @@ D = dict(
   ]),
   axes=ax("아이콘 글꼴"),
   oneline="<b>새로 만든다면 SVG를 씁니다.</b> 아이콘 글꼴은 이미 쓰고 있는 곳에서만 남겨 둘 이유가 있습니다.",
-  s4_title="두 방식", s4_hint="무엇이 다른가",
+  s4_title="아이콘 글꼴과 SVG의 차이", s4_hint="두 방식을 나란히 본 모습",
   states=states([
-    (one('<span style="font-size:20px;color:var(--accent)">🗑</span>', "아이콘 글꼴", None, "color · font-size 가 먹는다"),
-     "글꼴 — 정상", "글자라서 <b>CSS가 그대로</b> 적용됩니다"),
-    (one('<span style="font-size:16px;color:var(--danger)">&#9633;</span>', "글꼴을 못 받음", False, "네모나 엉뚱한 글자가 남는다"),
-     "글꼴 — 실패", "글꼴을 받지 못하면 <b>아이콘 자리만 깨집니다</b>"),
-    (one(TRASH, "SVG", True, "currentColor 로 색이 따라온다"), "SVG — 정상", "따로 받아 올 글꼴이 없으므로 <b>깨질 일이 없습니다</b>"),
+    (one('<span style="font-size:20px;color:var(--accent)">🗑</span>', "아이콘 글꼴", None, "color · font-size 가 적용됨"),
+     "아이콘 글꼴이 제대로 뜰 때", "글자라서 <b>CSS가 그대로</b> 적용됩니다"),
+    (one('<span style="font-size:16px;color:var(--danger)">&#9633;</span>', "글꼴을 못 받음", False, "네모나 엉뚱한 글자가 남음"),
+     "아이콘 글꼴을 못 받았을 때", "글꼴을 받지 못하면 <b>아이콘 자리만 깨집니다</b>"),
+    (one(TRASH, "SVG", True, "currentColor 로 글자색을 따라감"), "SVG로 그릴 때", "따로 받아 올 글꼴이 없으므로 <b>깨질 일이 없습니다</b>"),
     (one(mono('aria-hidden="true"', 'var(--accent)'), "읽히지 않게", True, "옆에 글자가 있을 때"),
-     "읽는 방식", "아이콘 글꼴은 스크린 리더가 <b>그 글자를 그대로 읽습니다</b>"),
-    (one(mono('icons.woff2 — 320개 중 12개 사용', 'var(--danger)'), "받는 양", False, "안 쓰는 것까지 통째로"),
-     "받는 양", "SVG는 <b>쓰는 아이콘만</b> 받습니다"),
+     "스크린 리더가 읽는 방식", "아이콘 글꼴은 스크린 리더가 <b>그 글자를 그대로 읽습니다</b>"),
+    (one(mono('icons.woff2, 320개 중 12개만 사용', 'var(--danger)'), "받는 양", False, "안 쓰는 것까지 통째로 받음"),
+     "내려받는 양", "SVG는 <b>쓰는 아이콘만</b> 받습니다"),
     (one('<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">'
          '<circle cx="12" cy="12" r="9" fill="var(--accent-soft)"/>'
-         '<path d="M8 12l3 3 5-6" fill="none" stroke="var(--accent)" stroke-width="2"/></svg>', "두 색", True, "글꼴은 한 색뿐이다"),
-     "여러 색", "한 아이콘에 여러 색을 쓰는 것은 SVG만 됩니다"),
+         '<path d="M8 12l3 3 5-6" fill="none" stroke="var(--accent)" stroke-width="2"/></svg>', "두 색", True, "글꼴은 한 색만 가능"),
+     "한 아이콘에 여러 색 쓰기", "한 아이콘에 여러 색을 쓰는 것은 SVG만 됩니다"),
   ]),
   anat=ANAT,
   pins=pins([
     ("글립", "글자 자리의 그림", "<b>글자</b>로 취급되므로 글꼴 규칙을 그대로 따릅니다"),
     ("색 · 크기", "color · font-size", "<b>아이콘 글꼴의 옛 장점</b>이었지만, 지금은 SVG도 똑같이 됩니다"),
-    ("못 받으면", "네모가 남는다", "글꼴이 늦게 오거나 막히면 <b>아이콘 자리만</b> 깨집니다"),
-    ("읽히는 방식", "글자를 읽는다", "<code>aria-hidden</code>이 없으면 스크린 리더가 <b>엉뚱한 글자로 읽습니다</b>"),
-    ("받는 양", "통째로", "320개 가운데 12개만 써도 <b>320개 전부</b>를 받습니다"),
+    ("글꼴을 못 받았을 때", "네모가 남음", "글꼴이 늦게 오거나 막히면 <b>아이콘 자리만</b> 깨집니다"),
+    ("읽히는 방식", "글자를 그대로 읽음", "<code>aria-hidden</code>이 없으면 스크린 리더가 <b>엉뚱한 글자로 읽습니다</b>"),
+    ("받는 양", "통째로 받음", "320개 가운데 12개만 써도 <b>320개 전부</b>를 받습니다"),
     ("SVG", "currentColor", "글자색을 따라 색이 바뀌고, <b>깨질 일이 없습니다</b>"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -87,16 +87,17 @@ D = dict(
     "아이콘 열두 개를 쓰려고 <b>320개짜리</b> 글꼴을 받을 때",
     "두 색이 필요한 아이콘을 만들 때. 글꼴은 한 색만 낼 수 있습니다",
   ]),
-  instead='거의 모든 경우 <a href="assets.html">SVG</a>, 글자용 글꼴은 <a href="../items/webfont.html">웹폰트</a>, 배율 이야기는 <a href="dpr.html">화면 밀도</a>.',
+  instead='거의 모든 경우에는 아이콘 글꼴 대신 <a href="assets.html">SVG</a>를 씁니다. 글자를 그리는 글꼴은 <a href="../items/webfont.html">웹폰트</a>에서, 화면 배율에 따른 차이는 <a href="dpr.html">화면 밀도</a>에서 다룹니다.',
   cases=cases([
     (one(TRASH + ' ' + txt('삭제', "11px"), "글자 옆 아이콘", True, "아이콘은 aria-hidden"),
-     "글자와 함께", "옆에 글자가 있으면 아이콘은 <b>장식</b>이므로 스크린 리더에서 숨깁니다"),
-    (one(TRASH, "아이콘만", True, "버튼에 aria-label 이 필요하다"),
-     "아이콘만", "버튼에 <a href=\"../items/name.html\">이름 붙이기</a>가 꼭 필요합니다"),
-    (code(['&lt;svg aria-hidden="true"', '  fill="currentColor"&gt;', '  &lt;use href="#trash"/&gt;', '&lt;/svg&gt;'], "150px", "스프라이트에서 꺼내 쓴다", True),
-     "SVG 스프라이트", "요청 한 번으로 쓰는 아이콘만 받습니다"),
+     "글자 옆에 놓인 아이콘", "옆에 글자가 있으면 아이콘은 <b>장식</b>이므로 스크린 리더에서 숨깁니다"),
+    (one(TRASH, "아이콘만", True, "버튼에 aria-label 이 필요함"),
+     "아이콘만 있는 버튼", "버튼에 <a href=\"../items/name.html\">이름 붙이기</a>가 꼭 필요합니다"),
+    (code(['&lt;svg aria-hidden="true"', '  fill="currentColor"&gt;', '  &lt;use href="#trash"/&gt;', '&lt;/svg&gt;'], "150px", "스프라이트에서 꺼내 씀", True),
+     "SVG 스프라이트로 모아 쓰기", "요청 한 번으로 쓰는 아이콘만 받습니다"),
   ]),
-  s8_title="최소 마크업과 키보드", s8_hint="아이콘을 읽히는 방식",
+  s8_title="최소 마크업과 규칙", s8_hint="스크린 리더가 아이콘을 읽는 방식 정하기",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법</th>",
   code_lede="글꼴이든 SVG든 스크린 리더에서 아이콘이 <b>어떻게 읽힐지</b>를 정해야 합니다.",
   code='''<span class="c">&lt;!-- 글자 옆이면 아이콘은 장식이다 --&gt;</span>
 &lt;<span class="t">button</span>&gt;
@@ -112,18 +113,18 @@ D = dict(
 <span class="c">&lt;!-- 아이콘 글꼴을 쓴다면 글자가 읽히지 않게 한다 --&gt;</span>
 &lt;<span class="t">i</span> <span class="a">class</span>=<span class="s">"icon icon-trash"</span> <span class="a">aria-hidden</span>=<span class="s">"true"</span>&gt;&lt;/<span class="t">i</span>&gt;''',
   keys=kbd([
-    ("<code>aria-hidden=\"true\"</code>", "글꼴이든 SVG든 <b>장식이면 스크린 리더에서 숨깁니다</b>"),
-    ("아이콘만이면 이름", "아이콘만 있는 버튼에 <code>aria-label</code>이 없으면 <b>이름 없는 버튼</b>이 됩니다"),
-    ("<code>&lt;i&gt;</code> 태그", "원래 뜻은 기울임입니다. 아이콘 자리로 쓰는 것은 관례이고, 태그 자체에 아이콘이라는 <b>의미는 없습니다</b>"),
-    ("<code>currentColor</code>", "아이콘 색이 글자색을 따라가므로 <a href=\"../items/dark.html\">다크 모드</a>에서도 따로 손대지 않아도 됩니다"),
-    ("<a href=\"../items/contrast.html\">대비비</a>", "아이콘도 대비비가 <b>3:1</b>은 넘어야 합니다. 흐린 회색 아이콘이 이 기준을 자주 놓칩니다"),
-    ("<a href=\"touchtarget.html\">눌리는 넓이</a>", "아이콘이 24px이어도 눌리는 넓이는 <b>44px</b>은 되어야 합니다"),
+    ("장식 아이콘에는 <code>aria-hidden=\"true\"</code>", "글꼴이든 SVG든 <b>장식이면 스크린 리더에서 숨깁니다</b>"),
+    ("아이콘만 있으면 이름 붙이기", "아이콘만 있는 버튼에 <code>aria-label</code>이 없으면 <b>이름 없는 버튼</b>이 됩니다"),
+    ("<code>&lt;i&gt;</code> 태그에는 아이콘이라는 뜻이 없음", "원래 뜻은 기울임입니다. 아이콘 자리로 쓰는 것은 관례이고, 태그 자체에 아이콘이라는 <b>의미는 없습니다</b>"),
+    ("<code>currentColor</code>로 글자색 따르기", "아이콘 색이 글자색을 따라가므로 <a href=\"../items/dark.html\">다크 모드</a>에서도 따로 손대지 않아도 됩니다"),
+    ("아이콘도 <a href=\"../items/contrast.html\">대비비</a> 맞추기", "아이콘도 대비비가 <b>3:1</b>은 넘어야 합니다. 흐린 회색 아이콘이 이 기준을 자주 놓칩니다"),
+    ("<a href=\"touchtarget.html\">눌리는 넓이</a>는 넉넉하게", "아이콘이 24px이어도 눌리는 넓이는 <b>44px</b>은 되어야 합니다"),
   ]),
   backend=rows([
-    ("글꼴은 캐시가 잘 먹는다", "모든 아이콘이 한 파일이라 <b>한 번 받으면</b> 캐시에서 계속 씁니다. 이것이 아이콘 글꼴의 옛 장점이었습니다."),
-    ("SVG 스프라이트", "여러 아이콘을 한 파일에 모아 두고 <code>&lt;use&gt;</code>로 꺼내 쓰면 <b>요청이 하나</b>로 줄어듭니다."),
-    ("쓰는 것만 추리기", "빌드 단계에서 실제로 쓰인 아이콘만 모으면 글꼴이든 스프라이트든 <b>파일 크기가 크게 줄어듭니다</b>."),
-    ("받은 SVG 를 훑는다", "다른 사람이 만든 SVG에는 <code>id</code>나 <code>style</code>이 섞여 있어서, 그대로 쓰면 <b>다른 그림의 id나 스타일과 충돌합니다</b>. 그래서 받은 SVG는 한 번 훑어서 정리합니다."),
+    ("한 파일이라 캐시하기 쉬운 글꼴", "모든 아이콘이 한 파일이라 <b>한 번 받으면</b> 캐시에서 계속 씁니다. 이것이 아이콘 글꼴의 옛 장점이었습니다."),
+    ("SVG 스프라이트로 요청 줄이기", "여러 아이콘을 한 파일에 모아 두고 <code>&lt;use&gt;</code>로 꺼내 쓰면 <b>요청이 하나</b>로 줄어듭니다."),
+    ("쓰는 아이콘만 추려 내기", "빌드 단계에서 실제로 쓰인 아이콘만 모으면 글꼴이든 스프라이트든 <b>파일 크기가 크게 줄어듭니다</b>."),
+    ("받은 SVG를 한 번 정리하기", "다른 사람이 만든 SVG에는 <code>id</code>나 <code>style</code>이 섞여 있어서, 그대로 쓰면 <b>다른 그림의 id나 스타일과 충돌합니다</b>. 그래서 받은 SVG는 한 번 훑어서 정리합니다."),
   ]),
   plat_lede="앱은 OS가 제공하는 <b>시스템 아이콘</b>이 있어서 아이콘을 따로 내보낼 일이 적습니다.",
   plats=plats([

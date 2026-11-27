@@ -25,17 +25,18 @@ def cal(sel=12, today=14, blockBefore=0, label="", note="", ok=None, w="152px"):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">쳐서 넣는 칸 — 먼 날짜를 한 번에</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">자주 쓰는 날 단추 — 오늘 · 어제 · 7일 전</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">고른 날 · 오늘 — 서로 다르게 보인다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">못 고르는 날은 흐리게 두고 막는다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">달 넘기기 — 먼 날짜일수록 품이 든다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">화살표 키로 날짜 사이를 옮긴다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">쳐서 넣는 칸으로 먼 날짜도 한 번에</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">자주 쓰는 날 단추(오늘 · 어제 · 7일 전)</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">고른 날과 오늘은 서로 다르게 표시</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">못 고르는 날은 흐리게 두고 막음</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">먼 날짜일수록 달을 여러 번 넘겨야 함</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">화살표 키로 날짜 사이를 옮김</div>
                 </div>
               </div>'''
 
 D = dict(
   slug="datepicker", ko="날짜 선택기", en="Date picker",
+  do_title="날짜 선택기를 만들 때 지킬 것", dont_title="날짜 선택기를 만들 때 피할 것", instead_title="다른 부품이 맞는 경우와 함께 볼 항목",
   desc="달력으로 날짜를 고르는 부품과, 쳐서 넣기·자주 쓰는 날 단추·못 고르는 날을 다루는 방법을 보여 주는 항목입니다.",
   lede="날짜 선택기는 달력에서 날짜를 골라 넣는 부품입니다. 그런데 달력만 두면 <b>먼 날짜를 고를 때 달을 여러 번 넘겨야</b> 하므로, 쳐서 넣는 칸과 자주 쓰는 날 단추를 함께 두는 것이 요령입니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
@@ -60,32 +61,32 @@ D = dict(
   axes=ax("날짜 선택기"),
   oneline="<b>날짜를 칸에 쳐서도 넣을 수 있게 합니다.</b> 달력만 두면 먼 날짜를 고를 때 달을 너무 여러 번 넘겨야 합니다.",
   states=states([
-    (cal(12, 14, 0, "", "고른 날과 오늘이 다르게 보인다", True), "기본", "<b>고른 날과 오늘</b>을 다르게 표시합니다"),
-    (cal(12, 14, 10, "", "지난 정산 기간은 막혔다", True), "막힌 날", "<b>흐리게</b> 두고 고를 수 없게 막습니다"),
-    (cal(12, 14, 0, "", "다 눌린다 — 고른 뒤에 거절당한다", False), "안 막음", "막지 않으면 사용자는 날짜를 <b>고른 뒤</b>에야 안 된다는 것을 압니다"),
+    (cal(12, 14, 0, "", "고른 날과 오늘이 다르게 보임", True), "평소 상태", "<b>고른 날과 오늘</b>을 다르게 표시합니다"),
+    (cal(12, 14, 10, "", "지난 정산 기간은 막혀 있음", True), "못 고르는 날을 막았을 때", "<b>흐리게</b> 두고 고를 수 없게 막습니다"),
+    (cal(12, 14, 0, "", "다 눌려서 고른 뒤에야 거절됨", False), "못 고르는 날을 막지 않았을 때", "막지 않으면 사용자는 날짜를 <b>고른 뒤</b>에야 안 된다는 것을 압니다"),
     (one(txt('<span style="display:block;font-size:8px;font-family:var(--mono)">2026-12-25</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">한 번에 넣었다</span>'),
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">한 번에 넣음</span>'),
          "쳐서 넣기", True, "", "152px"),
-     "쳐서 넣기", "<b>먼 날짜</b>를 넣을 때 씁니다"),
+     "날짜를 쳐서 넣을 때", "<b>먼 날짜</b>를 넣을 때 씁니다"),
     (one(txt('<span style="display:flex;gap:3px;flex-wrap:wrap">'
              '<span style="border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px">오늘</span>'
              '<span style="border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px">어제</span>'
              '<span style="border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px">7일 전</span></span>'),
-         "자주 쓰는 날", True, "대부분을 한 번에 끝낸다", "152px"),
-     "자주 쓰는 날", "단추를 누르면 <b>한 번</b>에 끝납니다"),
-    (one(txt('<span style="display:block;font-size:8px;color:var(--danger)">달을 7번 넘겼다</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">쳐서 넣으면 한 번이다</span>'),
+         "자주 쓰는 날", True, "대부분 한 번에 끝남", "152px"),
+     "자주 쓰는 날 단추를 둘 때", "단추를 누르면 <b>한 번</b>에 끝납니다"),
+    (one(txt('<span style="display:block;font-size:8px;color:var(--danger)">달을 7번 넘김</span>'
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">쳐서 넣으면 한 번에 끝남</span>'),
          "먼 날짜", False, "", "152px"),
-     "먼 날짜", "달력으로 고르면 <b>손이 많이 갑니다</b>"),
+     "먼 날짜를 달력으로 고를 때", "달력으로 고르면 <b>손이 많이 갑니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("쳐서 넣기", "먼 날짜", "먼 날짜도 <b>한 번</b>에 넣을 수 있습니다"),
+    ("쳐서 넣기", "먼 날짜에 알맞음", "먼 날짜도 <b>한 번</b>에 넣을 수 있습니다"),
     ("자주 쓰는 날", "오늘 · 어제", "대부분의 경우를 이 단추로 고를 수 있습니다"),
-    ("고른 날 · 오늘", "다르게", "두 표시가 <b>헷갈리지 않게</b> 다르게 그립니다"),
-    ("막힌 날", "흐리게", "고를 수 없다는 것을 <b>누르기 전에</b> 알립니다"),
-    ("달 넘기기", "품이 듦", "먼 날짜일수록 여러 번 넘겨야 합니다"),
-    ("화살표 키", "날짜 사이", "키보드로도 날짜를 고를 수 있게 합니다"),
+    ("고른 날과 오늘", "다르게 표시", "두 표시가 <b>헷갈리지 않게</b> 다르게 그립니다"),
+    ("막힌 날", "흐리게 표시", "고를 수 없다는 것을 <b>누르기 전에</b> 알립니다"),
+    ("달 넘기기", "먼 날짜일수록 여러 번", "먼 날짜일수록 여러 번 넘겨야 합니다"),
+    ("화살표 키", "날짜 사이 이동", "키보드로도 날짜를 고를 수 있게 합니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           먼저 <b>브라우저 기본 <code>&lt;input type="date"&gt;</code></b> 로 충분한지 보세요.
@@ -105,14 +106,14 @@ D = dict(
     "날짜 형식을 <b>자리마다 다르게</b> 쓰기. <a href=\"datetime.html\">날짜와 시간 쓰기</a>를 따릅니다",
     "달력을 <b>폰 화면에 작게</b> 욱여넣기. 날짜 칸 하나가 44px 이 되지 않습니다",
   ]),
-  instead='두 날짜면 <a href="daterange.html">날짜 범위</a>, 시각이면 <a href="timepicker.html">시간 선택기</a>, 적는 꼴은 <a href="datetime.html">날짜와 시간 쓰기</a>, 겹쳐 뜨면 <a href="popover.html">팝오버</a>.',
+  instead='시작과 끝 두 날짜를 고르게 하려면 <a href="daterange.html">날짜 범위</a>를, 날짜가 아니라 시각을 고르게 하려면 <a href="timepicker.html">시간 선택기</a>를 씁니다. 고른 날짜를 화면에 적는 형식은 <a href="datetime.html">날짜와 시간 쓰기</a>에서, 달력을 칸 위에 겹쳐 띄우는 방식은 <a href="popover.html">팝오버</a>에서 다룹니다.',
   cases=cases([
-    (cal(12, 14, 10, "", "", True, "150px"), "정산 시작일", "이미 <b>지난 기간</b>은 고를 수 없게 막습니다"),
+    (cal(12, 14, 10, "", "", True, "150px"), "지난 기간을 막은 정산 시작일", "이미 <b>지난 기간</b>은 고를 수 없게 막습니다"),
     (one(txt('<span style="display:block;font-size:8px;font-family:var(--mono)">1990-05-02</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">생년월일은 쳐서</span>'),
-         "생년월일", True, "달력으로는 수백 번 넘겨야 한다", "150px"),
-     "생년월일", "<b>달력으로 고르기가 가장 불편한</b> 자리입니다"),
-    (cal(14, 14, 0, "", "", True, "150px"), "예약일", "<b>오늘부터</b>만 고를 수 있게 합니다"),
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">생년월일은 쳐서 넣음</span>'),
+         "생년월일", True, "달력으로는 수백 번 넘겨야 함", "150px"),
+     "생년월일은 쳐서 넣기", "<b>달력으로 고르기가 가장 불편한</b> 자리입니다"),
+    (cal(14, 14, 0, "", "", True, "150px"), "오늘부터 고르는 예약일", "<b>오늘부터</b>만 고를 수 있게 합니다"),
   ]),
   code_lede="브라우저 기본 입력 칸을 쓰고, 모자란 기능만 그 위에 얹습니다.",
   code='''&lt;<span class="t">label</span> <span class="a">for</span>=<span class="s">"from"</span>&gt;정산 시작일&lt;/<span class="t">label</span>&gt;
@@ -133,12 +134,12 @@ input.addEventListener(<span class="s">'change'</span>, () =&gt; sync(input.valu
     ("Home · End", "그 주의 <b>처음과 마지막</b> 날로 갑니다"),
     ("Esc", "달력을 닫고 초점을 <b>입력 칸으로</b> 돌려보냅니다"),
     ("<code>min</code>·<code>max</code>", "고를 수 없는 날을 <b>브라우저가</b> 막아 줍니다"),
-    ("확인하는 법", "마우스를 쓰지 않고 <b>세 달 뒤</b> 날짜를 골라 봅니다"),
+    ("키보드만으로 되는지 확인하는 방법", "마우스를 쓰지 않고 <b>세 달 뒤</b> 날짜를 골라 봅니다"),
   ]),
   backend=rows([
-    ("시간대", "날짜만 쓰는 값은 <code>2026-11-12</code> 처럼 <b>시간대 없이</b> 주고받습니다. UTC 로 바꾸면 시차 때문에 날짜가 하루 밀릴 수 있습니다."),
-    ("고를 수 있는 범위", "서버가 <code>min</code>·<code>max</code> 를 알려 주면 화면이 그 범위 밖의 날을 <b>막을 수</b> 있습니다."),
-    ("공휴일", "서버가 막아야 할 날 목록을 주면 그 날을 <b>달력에 표시</b>할 수 있습니다."),
+    ("시간대를 붙이지 않기", "날짜만 쓰는 값은 <code>2026-11-12</code> 처럼 <b>시간대 없이</b> 주고받습니다. UTC 로 바꾸면 시차 때문에 날짜가 하루 밀릴 수 있습니다."),
+    ("고를 수 있는 범위 알려 주기", "서버가 <code>min</code>·<code>max</code> 를 알려 주면 화면이 그 범위 밖의 날을 <b>막을 수</b> 있습니다."),
+    ("공휴일처럼 막을 날 목록 주기", "서버가 막아야 할 날 목록을 주면 그 날을 <b>달력에 표시</b>할 수 있습니다."),
   ]),
   plat_lede="플랫폼마다 <b>OS 가 띄우는 달력</b>의 모양이 다릅니다.",
   plats=plats([

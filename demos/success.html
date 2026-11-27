@@ -18,11 +18,11 @@
 <body>
 <div class="bar">
   <b>성공 확인</b>
-  <label>알리는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
-    <option value="none">아무것도 안 알림</option>
-    <option value="toast">토스트로</option>
-    <option value="inline" selected>그 자리에 글로</option>
-    <option value="screen">화면을 바꿔서</option>
+  <label>알리는 방법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="none">아무것도 알리지 않기</option>
+    <option value="toast">토스트로 알리기</option>
+    <option value="inline" selected>누른 자리에 글로 알리기</option>
+    <option value="screen">결과 화면으로 바꿔 알리기</option>
   </select></label>
 </div>
 
@@ -39,7 +39,7 @@
   <b>저장</b>을 눌러 보세요. 아무것도 알리지 않으면 <b>저장됐는지 알 수 없어서</b> 다시 누르게 됩니다.
   데모는 <b>같은 요청을 몇 번 보냈는지</b> 세는데, 두 번 누르면 요청도 두 번 갑니다.<br>
   알리는 방법은 세 가지입니다. <b>토스트</b>는 몇 초 뒤 사라져서 놓치기 쉽고,
-  <b>그 자리에 글</b>을 띄우면 글이 남아 있어 확실하게 알 수 있으며, <b>화면 전환</b>은 바뀐 결과 화면 자체가 알림 역할을 합니다.
+  <b>누른 자리에 글</b>을 띄우면 글이 남아 있어 확실하게 알 수 있으며, <b>화면 전환</b>은 바뀐 결과 화면 자체가 알림 역할을 합니다.
   어느 방법을 쓰든 <code>role="status"</code>로 <b>스크린 리더에도</b> 알려야 하며,
   데모는 스크린 리더에 알렸는지도 함께 적습니다.
 </p>
@@ -73,8 +73,8 @@
     var k = document.getElementById('k').value;
     var live = document.querySelectorAll('[role=status]').length;
     var rd = document.getElementById('read');
-    rd.innerHTML = '알리는 법 <b>' +
-      ({ none: '없음', toast: '토스트', inline: '그 자리에 글', screen: '화면 전환' }[k]) + '</b>' +
+    rd.innerHTML = '알리는 방법 <b>' +
+      ({ none: '알리지 않음', toast: '토스트', inline: '누른 자리에 글', screen: '화면 전환' }[k]) + '</b>' +
       '<br>보낸 횟수 <b>' + sent + '회</b>' +
       (sent > 1 ? ' <span class="warn">(같은 요청을 여러 번 보냈습니다)</span>' : '') +
       '<br>소리로 알리는 자리 <b>' + live + '개</b>' +

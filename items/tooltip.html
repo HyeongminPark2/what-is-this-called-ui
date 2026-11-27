@@ -78,15 +78,15 @@
         <p>겹쳐 뜨는 부품들은 모양만 보고는 구별하기 어렵지만, 아래 네 가지를 따져 보면 어느 부품인지 가려낼 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>뒤를 막나</th><th>포커스를 가두나</th><th>배경 스크롤</th><th>어디서 뜨나</th></tr></thead>
+          <thead><tr><th></th><th>뒤쪽 화면을 막는가</th><th>포커스를 안에 가두는가</th><th>뒤쪽 화면의 스크롤은</th><th>화면 어디에서 뜨는가</th></tr></thead>
           <tbody>
             <tr><td>모달</td><td>막는다</td><td>가둔다</td><td>잠긴다</td><td>가운데</td></tr>
-            <tr><td>다이얼로그(비모달)</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로</td><td>가운데 · 띄워 둠</td></tr>
-            <tr><td>바텀시트</td><td>막거나 안 막는다</td><td>막을 때만</td><td>막을 때만</td><td>아래에서</td></tr>
-            <tr><td>드로어</td><td>보통 막는다</td><td>가둔다</td><td>잠긴다</td><td>옆에서</td></tr>
-            <tr><td>팝오버</td><td class="none">안 막는다</td><td>가두기도 한다</td><td class="none">그대로</td><td>누른 것 옆에</td></tr>
-            <tr class="me"><td><b>툴팁</b></td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로</td><td>가리킨 것 옆에</td></tr>
-            <tr><td>토스트</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로</td><td>구석 · 저절로 사라짐</td></tr>
+            <tr><td>다이얼로그(비모달)</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로 움직인다</td><td>가운데에 띄워 둔 채</td></tr>
+            <tr><td>바텀시트</td><td>막을 때도 있다</td><td>뒤를 막을 때만</td><td>뒤를 막을 때만</td><td>아래에서 올라옴</td></tr>
+            <tr><td>드로어</td><td>보통 막는다</td><td>가둔다</td><td>잠긴다</td><td>옆에서 밀려 나옴</td></tr>
+            <tr><td>팝오버</td><td class="none">안 막는다</td><td>가두기도 한다</td><td class="none">그대로 움직인다</td><td>누른 것 옆</td></tr>
+            <tr class="me"><td><b>툴팁</b></td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로 움직인다</td><td>가리킨 것 옆</td></tr>
+            <tr><td>토스트</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로 움직인다</td><td>구석에 떴다 저절로 사라짐</td></tr>
           </tbody>
         </table>
         </div>
@@ -190,7 +190,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>툴팁 대신 다른 것을 써야 하는 경우</b> — 안에 누를 것이 들어가야 하면 <a href="popover.html">팝오버</a>를 쓰고, 꼭 읽혀야 하는 내용이면 화면에 직접 적거나 <a href="../index.html#toc">헬퍼 텍스트</a>로 보여 줍니다. 작업 결과를 알리는 용도라면 <a href="toast.html">토스트</a>가 맞습니다.</p>
+        <p style="margin:var(--s4) 0 0"><b>툴팁 대신 다른 것을 써야 하는 경우</b> — 안에 누를 것이 들어가야 하면 <a href="popover.html">팝오버</a>를 쓰고, 꼭 읽혀야 하는 내용이면 화면에 직접 적거나 <a href="placeholder.html">헬퍼 텍스트</a>로 보여 줍니다. 작업 결과를 알리는 용도라면 <a href="toast.html">토스트</a>가 맞습니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -234,7 +234,7 @@ btn.addEventListener(<span class="s">'focus'</span>, show);
 &lt;<span class="t">span</span> <span class="a">tabindex</span>=<span class="s">"0"</span> <span class="a">aria-describedby</span>=<span class="s">"t5"</span>&gt;&lt;<span class="t">button</span> <span class="a">disabled</span>&gt;게시&lt;/<span class="t">button</span>&gt;&lt;/<span class="t">span</span>&gt;</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td><kbd>Tab</kbd></td><td>포커스가 오면 <b>지연 없이</b> 바로 뜹니다</td></tr>
             <tr><td><kbd>Esc</kbd></td><td>툴팁을 닫습니다. 툴팁이 읽으려는 글자를 가릴 때 씁니다</td></tr>
@@ -313,10 +313,10 @@ btn.addEventListener(<span class="s">'focus'</span>, show);
       </ol>
       <h2>함께 보면 좋은 항목</h2>
       <ol>
-        <li><span class="na"><b>헬퍼 텍스트</b><em>4부</em></span></li>
-        <li><span class="na"><b>비활성 · 숨김 · 읽기 전용</b><em>8부</em></span></li>
-        <li><span class="na"><b>말줄임</b><em>3부</em></span></li>
-        <li><span class="na"><b>호버가 없는 세계</b><em>11부</em></span></li>
+        <li><a href="placeholder.html"><b>헬퍼 텍스트</b><em>14부</em></a></li>
+        <li><a href="disabledstate.html"><b>비활성 · 숨김 · 읽기 전용</b><em>4부</em></a></li>
+        <li><a href="truncate.html"><b>말줄임</b><em>3부</em></a></li>
+        <li><a href="hover.html"><b>호버가 없는 세계</b><em>11부</em></a></li>
       </ol>
       <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>

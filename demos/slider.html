@@ -67,7 +67,7 @@
   function won(n) { return (+n).toLocaleString('ko-KR'); }
 
   function show() {
-    out.innerHTML = '지금 값 — 금액 <b>₩' + won(amt.value) + '</b> · 보관 <b>' + days.value + '일</b> · 글자 <b>' + SIZES[size.value] + '</b>';
+    out.innerHTML = '지금 값은 금액 <b>₩' + won(amt.value) + '</b>, 보관 기간 <b>' + days.value + '일</b>, 글자 크기 <b>' + SIZES[size.value] + '</b>입니다.';
   }
   amt.addEventListener('input', function () { amtn.value = won(amt.value); show(); });
   amtn.addEventListener('input', function () {

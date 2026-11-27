@@ -17,7 +17,7 @@ ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2)
                   <div class="pin-out" data-pin="1" style="font-size:20px;letter-spacing:2px;color:var(--line-strong);line-height:1">★★★★★</div>
                   <div class="pin-out" data-pin="2" style="display:flex;align-items:center;gap:10px">
                     <span style="position:relative;display:inline-block;line-height:1;font-size:20px;letter-spacing:2px;color:var(--line-strong);flex:none">★★★★★<span style="position:absolute;left:0;top:0;overflow:hidden;white-space:nowrap;color:#e8a33d;width:86%">★★★★★</span></span>
-                    <span style="font-size:10.5px;color:var(--fg-muted)">너비 86%만 덮는다</span>
+                    <span style="font-size:10.5px;color:var(--fg-muted)">너비의 86%만 덮음</span>
                   </div>
                   <div class="pin-out" data-pin="3" style="font-size:14px;font-weight:700;font-variant-numeric:tabular-nums">4.3</div>
                   <div class="pin-out" data-pin="4" style="font-size:11px;color:var(--fg-muted)">리뷰 1,284개</div>
@@ -53,20 +53,20 @@ D = dict(
   ]),
   axes=ax("별점"),
   oneline="별점은 점수를 <b>읽는 것</b>과 점수를 <b>주는 것</b>이 서로 다른 부품입니다. 포커스가 가고 화살표 키로 점수를 바꿀 수 있으면 입력용이고, 그렇지 않으면 그림 하나인 읽기용입니다.",
-  s4_title="상태", s4_hint="읽기용과 입력용을 섞지 않는다",
+  s4_title="상태", s4_hint="읽기용과 입력용 별점의 상태별 모습",
   states=states([
-    (stars("86%", "4.3", "리뷰 1,284개"), "읽기용", "<b>부분 별</b>과 숫자, 리뷰 개수를 함께 보여 줍니다. 세 가지가 함께 있어야 점수를 제대로 읽을 수 있습니다"),
-    (stars("86%"), "별만", "숫자가 없으면 4.3인지 4.5인지 <b>알 수 없습니다</b>"),
-    (stars("", "", "아직 리뷰가 없습니다"), "리뷰 없음", "빈 별 다섯 개를 보여 주지 말고 <b>아직 리뷰가 없다</b>고 적습니다"),
-    (stars("100%", "5.0", "리뷰 1개"), "리뷰 1개", "별이 다섯 개라도 <b>리뷰가 1개</b>뿐이면 믿을 만한 점수라고 보기 어렵습니다"),
+    (stars("86%", "4.3", "리뷰 1,284개"), "점수를 읽는 기본 모습", "<b>부분 별</b>과 숫자, 리뷰 개수를 함께 보여 줍니다. 세 가지가 함께 있어야 점수를 제대로 읽을 수 있습니다"),
+    (stars("86%"), "숫자 없이 별만 있을 때", "숫자가 없으면 4.3인지 4.5인지 <b>알 수 없습니다</b>"),
+    (stars("", "", "아직 리뷰가 없습니다"), "리뷰가 아직 없을 때", "빈 별 다섯 개를 보여 주지 말고 <b>아직 리뷰가 없다</b>고 적습니다"),
+    (stars("100%", "5.0", "리뷰 1개"), "리뷰가 1개뿐일 때", "별이 다섯 개라도 <b>리뷰가 1개</b>뿐이면 믿을 만한 점수라고 보기 어렵습니다"),
     ('''              <div style="display:flex;gap:3px;font-size:19px;line-height:1;color:var(--line-strong)">
                 <span style="color:#e8a33d">★</span><span style="color:#e8a33d">★</span><span style="color:#e8a33d">★</span><span style="color:#e8a33d">★</span><span>★</span>
               </div>''',
-     "입력용 — 고름", "점수는 <b>별 한 칸 단위</b>로만 고를 수 있어서 4.3점을 줄 수는 없습니다"),
+     "입력용 별점에서 점수를 골랐을 때", "점수는 <b>별 한 칸 단위</b>로만 고를 수 있어서 4.3점을 줄 수는 없습니다"),
     ('''              <div style="display:flex;gap:3px;font-size:19px;line-height:1;color:var(--line-strong)">
                 <span style="color:#e8a33d;outline:2px solid var(--accent);outline-offset:2px;border-radius:3px">★</span><span>★</span><span>★</span><span>★</span><span>★</span>
               </div>''',
-     "입력용 — 포커스", "키보드로 왔을 때의 모습입니다. 로빙 탭인덱스 방식이라 <b>별 하나에만</b> 포커스 테두리가 생깁니다"),
+     "입력용 별점에 포커스가 왔을 때", "키보드로 왔을 때의 모습입니다. 로빙 탭인덱스 방식이라 <b>별 하나에만</b> 포커스 테두리가 생깁니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -93,7 +93,7 @@ D = dict(
     "별만 보여 주고 <b>숫자와 리뷰 개수를 뺄</b> 때",
     "노란색만으로 칠한 별을 구별할 때. 색을 구별하지 못하면 별 다섯 개가 모두 같아 보입니다",
   ]),
-  instead='이어진 값이면 <a href="../items/slider.html">슬라이더</a>, 켜고 끄는 것이면 좋아요 버튼, 진행이면 <a href="../items/progress.html">프로그레스 바</a>.',
+  instead='이어진 범위에서 값을 골라야 하면 <a href="../items/slider.html">슬라이더</a>를 쓰고, 좋다 나쁘다만 켜고 끄면 되면 좋아요 버튼을 씁니다. 평가가 아니라 진행 정도를 보여 주려면 <a href="../items/progress.html">프로그레스 바</a>가 맞습니다.',
   cases=cases([
     ('''              <div style="width:100%;max-width:170px;border:1px solid var(--line);border-radius:9px;background:var(--surface);overflow:hidden">
                 <span style="display:block;aspect-ratio:4/3;background:repeating-linear-gradient(135deg,var(--ink-100) 0 7px,var(--ink-050) 7px 14px)"></span>
@@ -102,18 +102,18 @@ D = dict(
                   ''' + stars("86%", "4.3", "(1,284)", size=11).replace('              <div', '<div') + '''
                 </div>
               </div>''',
-     "상품 카드 속", "별점을 가장 흔히 보는 자리입니다. <b>작게 그리고 숫자를 함께</b> 적습니다"),
+     "상품 카드 안에 작게 넣기", "별점을 가장 흔히 보는 자리입니다. <b>작게 그리고 숫자를 함께</b> 적습니다"),
     ('''              <div style="width:100%;max-width:190px;display:grid;gap:4px">
                 <span class="rate-bar" style="display:grid;grid-template-columns:22px 1fr 28px;align-items:center;gap:6px;font-size:10px;color:var(--fg-muted)"><span>5점</span><b style="display:block;height:6px;border-radius:99px;background:var(--ink-100);overflow:hidden"><i style="display:block;height:100%;width:57%;background:#e8a33d"></i></b><span style="text-align:right">57%</span></span>
                 <span class="rate-bar" style="display:grid;grid-template-columns:22px 1fr 28px;align-items:center;gap:6px;font-size:10px;color:var(--fg-muted)"><span>4점</span><b style="display:block;height:6px;border-radius:99px;background:var(--ink-100);overflow:hidden"><i style="display:block;height:100%;width:27%;background:#e8a33d"></i></b><span style="text-align:right">27%</span></span>
                 <span class="rate-bar" style="display:grid;grid-template-columns:22px 1fr 28px;align-items:center;gap:6px;font-size:10px;color:var(--fg-muted)"><span>3점</span><b style="display:block;height:6px;border-radius:99px;background:var(--ink-100);overflow:hidden"><i style="display:block;height:100%;width:9%;background:#e8a33d"></i></b><span style="text-align:right">9%</span></span>
               </div>''',
-     "분포", "평균 하나로는 보이지 않는 것을 보여 줍니다. 평균이 같아도 <b>5점과 1점만 많은</b> 상품이 따로 있습니다"),
+     "점수별 분포 보여 주기", "평균 하나로는 보이지 않는 것을 보여 줍니다. 평균이 같아도 <b>5점과 1점만 많은</b> 상품이 따로 있습니다"),
     ('''              <div style="width:100%;max-width:190px;display:grid;gap:7px;justify-items:center">
                 <div style="display:flex;gap:4px;font-size:21px;line-height:1;color:var(--line-strong)"><span style="color:#e8a33d">★</span><span style="color:#e8a33d">★</span><span style="color:#e8a33d">★</span><span style="color:#e8a33d">★</span><span>★</span></div>
                 <span style="font-size:11px;color:var(--fg-muted)">4점 — 좋아요</span>
               </div>''',
-     "점수 주기", "4점이 좋다는 뜻인지 보통이라는 뜻인지 알 수 있도록 <b>별마다 설명을 붙여야</b> 합니다"),
+     "리뷰를 쓰며 점수 주기", "4점이 좋다는 뜻인지 보통이라는 뜻인지 알 수 있도록 <b>별마다 설명을 붙여야</b> 합니다"),
   ]),
   s8_title="최소 마크업과 키보드",
   code_lede="읽기용은 <b>그림</b>으로, 입력용은 <b>라디오 그룹</b>으로 만듭니다. 두 별점을 같은 코드로 만들면 어느 쪽이든 하나는 잘못 만든 것이 됩니다.",
@@ -135,16 +135,16 @@ D = dict(
     ("<kbd>Tab</kbd>", "입력용 별 <b>다섯 개 전체에서 한 번</b>만 멈춥니다. 다섯 번 멈춘다면 잘못 만든 것입니다"),
     ("<kbd>←</kbd><kbd>→</kbd>", "점수를 한 칸씩 올리고 내립니다"),
     ("<kbd>Enter</kbd> · <kbd>Space</kbd>", "지금 고른 점수로 정합니다"),
-    ("별마다 이름", "<code>aria-label=\"4점 — 좋아요\"</code>처럼 이름을 붙입니다. 그냥 '별'이라고 하면 다섯 개가 모두 같은 이름으로 읽힙니다"),
-    ("읽기용은 <code>role=\"img\"</code>", "별 열 개(빈 별 다섯, 칠한 별 다섯)가 하나씩 읽히면 듣기 번거로우므로, '5점 만점에 4.3점'처럼 <b>한 문장으로</b> 묶습니다"),
-    ("지울 수 있게", "잘못 누른 점수를 <b>되돌릴 방법</b>이 있어야 합니다"),
+    ("별마다 이름 붙이기", "<code>aria-label=\"4점 — 좋아요\"</code>처럼 이름을 붙입니다. 그냥 '별'이라고 하면 다섯 개가 모두 같은 이름으로 읽힙니다"),
+    ("읽기용은 <code>role=\"img\"</code>로 묶기", "별 열 개(빈 별 다섯, 칠한 별 다섯)가 하나씩 읽히면 듣기 번거로우므로, '5점 만점에 4.3점'처럼 <b>한 문장으로</b> 묶습니다"),
+    ("고른 점수를 지울 수 있게 하기", "잘못 누른 점수를 <b>되돌릴 방법</b>이 있어야 합니다"),
   ]),
   backend=rows([
-    ("평균은 저장해 둔다", "리뷰가 1,284개인데 화면을 열 때마다 평균을 새로 내면 계산이 낭비됩니다. 그래서 <b>점수 합계와 리뷰 개수</b>를 저장해 두고, 새 리뷰가 들어올 때만 두 값을 고칩니다."),
-    ("소수점 자리", "4.25를 4.3으로 보일지 4.2로 보일지, 반올림을 <b>서버에서 할지 화면에서 할지</b>를 정해 둡니다. 두 방식이 섞이면 같은 상품의 점수가 화면마다 다르게 보입니다."),
-    ("개수가 적을 때", "리뷰가 1개뿐인 5.0점 상품을 그대로 1등으로 올리면 점수순 목록을 믿을 수 없게 됩니다. 그래서 <b>리뷰 개수가 적을수록 평균을 낮춰 잡는</b> 보정(베이즈 평균)을 흔히 씁니다."),
-    ("한 사람 한 번", "같은 사람이 여러 번 점수를 주면 평균이 한쪽으로 쏠립니다. 그래서 점수는 <b>사용자당 하나</b>만 받고, 점수를 고치면 기존 점수를 덮어씁니다."),
-    ("분포도 함께", "평균만 보내면 5점과 1점만 많은 상품을 구별할 수 없습니다. <b>점수별 개수 다섯 개</b>를 함께 보내면 화면에서 분포 막대를 그릴 수 있습니다."),
+    ("평균 대신 합계와 개수 저장하기", "리뷰가 1,284개인데 화면을 열 때마다 평균을 새로 내면 계산이 낭비됩니다. 그래서 <b>점수 합계와 리뷰 개수</b>를 저장해 두고, 새 리뷰가 들어올 때만 두 값을 고칩니다."),
+    ("소수점 반올림을 할 곳", "4.25를 4.3으로 보일지 4.2로 보일지, 반올림을 <b>서버에서 할지 화면에서 할지</b>를 정해 둡니다. 두 방식이 섞이면 같은 상품의 점수가 화면마다 다르게 보입니다."),
+    ("리뷰가 적을 때의 평균 보정", "리뷰가 1개뿐인 5.0점 상품을 그대로 1등으로 올리면 점수순 목록을 믿을 수 없게 됩니다. 그래서 <b>리뷰 개수가 적을수록 평균을 낮춰 잡는</b> 보정(베이즈 평균)을 흔히 씁니다."),
+    ("사용자 한 명에게 점수 하나만 받기", "같은 사람이 여러 번 점수를 주면 평균이 한쪽으로 쏠립니다. 그래서 점수는 <b>사용자당 하나</b>만 받고, 점수를 고치면 기존 점수를 덮어씁니다."),
+    ("점수별 분포도 함께 보내기", "평균만 보내면 5점과 1점만 많은 상품을 구별할 수 없습니다. <b>점수별 개수 다섯 개</b>를 함께 보내면 화면에서 분포 막대를 그릴 수 있습니다."),
   ]),
   plat_lede="두 OS 모두 전용 부품이 있지만 쓰임이 서로 다릅니다.",
   plats=plats([
@@ -169,5 +169,5 @@ D = dict(
   related='''        <li><a href="../items/slider.html"><b>슬라이더</b><em>4부</em></a></li>
         <li><a href="../items/radio.html"><b>라디오 그룹</b><em>4부</em></a></li>
         <li><a href="../items/card.html"><b>카드</b><em>5부</em></a></li>
-        <li><span class="na"><b>폼 설계</b><em>10부</em></span></li>''',
+        <li><a href="form.html"><b>폼 설계</b><em>10부</em></a></li>''',
 )

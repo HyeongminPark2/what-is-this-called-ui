@@ -21,7 +21,7 @@
 
 <div class="bar">
   <b>차트 고르기</b>
-  <label>무엇을 보려고 하나
+  <label>차트로 답할 질문
     <select class="sel" id="q" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
       <option value="compare">항목끼리 비교</option>
       <option value="trend">시간에 따른 변화</option>
@@ -128,7 +128,7 @@
 
   function draw() {
     var q = document.getElementById('q').value;
-    document.getElementById('qline').innerHTML = '질문 — ' + QLINE[q];
+    document.getElementById('qline').innerHTML = '답하려는 질문은 “' + QLINE[q] + '”입니다';
     document.getElementById('grid').innerHTML = CHARTS[q].map(function (c) {
       var keepRatio = c[0].indexOf('원그래프') === 0;
       return '<div class="ch' + (c[3] ? '' : ' is-bad') + '"><h4>' + c[0] + '</h4>' +

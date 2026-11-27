@@ -17,12 +17,12 @@ def tl(items, label, note="", ok=None, w="152px"):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">쓰는 간격을 정한다 — 예약 30분, 알람 1분</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">쳐서도 넣을 수 있게</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--accent)">24시간제 — 12시가 낮인지 밤인지 안 헷갈린다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">안 되는 시간은 흐리게 두고 막는다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">목록이 길면 지금 시각 가까이로 굴려 둔다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">시간대가 있으면 같이 적는다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">예약은 30분, 알람은 1분 간격으로 정함</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">쳐서도 넣을 수 있게 둠</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--accent)">24시간제라 12시가 낮인지 밤인지 안 헷갈림</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">안 되는 시간은 흐리게 두고 막음</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">목록이 길면 지금 시각 근처로 굴려 둠</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">시간대가 섞이면 함께 적음</div>
                 </div>
               </div>'''
 
@@ -53,31 +53,31 @@ D = dict(
   axes=ax("시간 선택기"),
   oneline="<b>쓰는 간격을 먼저 정하세요.</b> 1분 간격으로 목록을 만들면 1,440줄이나 되어서 원하는 시각을 굴려 찾기 어렵습니다.",
   states=states([
-    (tl([("14:00", False, False), ("14:30", True, False), ("15:00", False, False)], "", "30분 간격 — 48줄", True),
-     "알맞은 간격", "<b>예약은 30분</b> 간격이면 하루가 48줄이라 찾기 쉽습니다"),
-    (tl([("00:00", False, False), ("00:01", False, False), ("00:02", False, False)], "", "1분 간격 — 1,440줄", False),
-     "너무 촘촘함", "1분 간격이면 1,440줄이라 <b>굴려서는 찾기 어렵습니다</b>"),
-    (tl([("08:30", False, True), ("09:00", True, False), ("09:30", False, False)], "", "영업 시간 밖은 막혔다", True),
-     "막힌 시간", "고를 수 없는 시간은 <b>흐리게</b> 표시하고 누르지 못하게 막습니다"),
+    (tl([("14:00", False, False), ("14:30", True, False), ("15:00", False, False)], "", "30분 간격이면 48줄", True),
+     "간격이 알맞을 때", "<b>예약은 30분</b> 간격이면 하루가 48줄이라 찾기 쉽습니다"),
+    (tl([("00:00", False, False), ("00:01", False, False), ("00:02", False, False)], "", "1분 간격이면 1,440줄", False),
+     "간격이 너무 촘촘할 때", "1분 간격이면 1,440줄이라 <b>굴려서는 찾기 어렵습니다</b>"),
+    (tl([("08:30", False, True), ("09:00", True, False), ("09:30", False, False)], "", "영업 시간 밖은 막힘", True),
+     "고를 수 없는 시간이 있을 때", "고를 수 없는 시간은 <b>흐리게</b> 표시하고 누르지 못하게 막습니다"),
     (one(txt('<span style="display:block;font-size:8px;font-family:var(--mono)">14:30</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">쳐서 한 번에</span>'),
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">쳐서 한 번에 넣음</span>'),
          "쳐서 넣기", True, "", "152px"),
-     "쳐서 넣기", "시각을 쳐서 넣으면 목록을 <b>굴리지 않아도</b> 됩니다"),
-    (tl([("오전 12:00", False, False), ("오후 12:00", True, False)], "", "둘 중 어느 쪽이 정오인가", False),
-     "오전/오후", "'12시'가 정오인지 자정인지 <b>헷갈립니다</b>"),
+     "시각을 쳐서 넣을 때", "시각을 쳐서 넣으면 목록을 <b>굴리지 않아도</b> 됩니다"),
+    (tl([("오전 12:00", False, False), ("오후 12:00", True, False)], "", "어느 쪽이 정오인지 헷갈림", False),
+     "오전/오후로 적었을 때", "'12시'가 정오인지 자정인지 <b>헷갈립니다</b>"),
     (one(txt('<span style="display:block;font-size:8px;font-family:var(--mono)">14:30 (KST)</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">시간대가 섞이면 적는다</span>'),
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">시간대가 섞이면 함께 적음</span>'),
          "시간대", True, "", "152px"),
-     "시간대", "여러 시간대가 섞이는 화면이면 시간대를 <b>함께 적습니다</b>"),
+     "시간대가 섞일 때", "여러 시간대가 섞이는 화면이면 시간대를 <b>함께 적습니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("간격", "먼저 정하기", "예약은 30분, 알람은 1분처럼 쓰임에 맞춰 간격부터 정합니다"),
-    ("쳐서 넣기", "같이 두기", "입력 칸을 같이 두면 목록을 굴리지 않고 바로 쳐 넣을 수 있습니다"),
-    ("24시간제", "덜 헷갈림", "'12시'가 낮인지 밤인지 헷갈리는 <b>12시 문제</b>가 생기지 않습니다"),
-    ("막힌 시간", "흐리게", "고를 수 없는 시간을 흐리게 표시해 누르기 전에 알립니다"),
-    ("첫 자리", "지금 가까이", "목록이 길면 열 때 지금 시각 근처로 <b>굴려 둡니다</b>"),
-    ("시간대", "섞이면 적기", "시간대가 섞이는 화면이면 '(KST)'처럼 시간대를 적습니다"),
+    ("간격", "가장 먼저 정하기", "예약은 30분, 알람은 1분처럼 쓰임에 맞춰 간격부터 정합니다"),
+    ("쳐서 넣기", "입력 칸 함께 두기", "입력 칸을 같이 두면 목록을 굴리지 않고 바로 쳐 넣을 수 있습니다"),
+    ("24시간제", "12시가 덜 헷갈림", "'12시'가 낮인지 밤인지 헷갈리는 <b>12시 문제</b>가 생기지 않습니다"),
+    ("막힌 시간", "흐리게 표시하기", "고를 수 없는 시간을 흐리게 표시해 누르기 전에 알립니다"),
+    ("첫 자리", "지금 시각 근처에서 열기", "목록이 길면 열 때 지금 시각 근처로 <b>굴려 둡니다</b>"),
+    ("시간대", "섞일 때 적어 주기", "시간대가 섞이는 화면이면 '(KST)'처럼 시간대를 적습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <b>오전 12시 · 오후 12시</b>는 한국어에서 특히 헷갈리는 표기입니다.
@@ -98,14 +98,14 @@ D = dict(
     "고를 수 없는 시간을 <b>눌리게</b> 두기. 누른 뒤에야 안 된다는 것을 알게 됩니다",
     "여러 시간대가 섞이는데 시간대를 <b>적지 않기</b>",
   ]),
-  instead='날을 고르면 <a href="datepicker.html">날짜 선택기</a>, 날짜와 시각을 적는 형식은 <a href="datetime.html">날짜와 시간 쓰기</a>, 기간을 고르면 <a href="daterange.html">날짜 범위</a>, 목록에서 값을 고르는 일반적인 경우는 <a href="select.html">셀렉트</a>.',
+  instead='시각이 아니라 날을 고르려면 <a href="datepicker.html">날짜 선택기</a>를 쓰고, 기간을 고르려면 <a href="daterange.html">날짜 범위</a>를 씁니다. 날짜와 시각을 어떤 형식으로 적을지는 <a href="datetime.html">날짜와 시간 쓰기</a>에서 다루고, 목록에서 값 하나를 고르는 일반적인 경우에는 <a href="select.html">셀렉트</a>가 맞습니다.',
   cases=cases([
-    (tl([("14:00", False, False), ("14:30", True, False)], "", "", True, "150px"), "예약", "예약 시간은 <b>30분</b> 간격으로 고릅니다"),
-    (tl([("07:00", True, False), ("07:01", False, False)], "", "", True, "150px"), "알람", "알람은 분까지 맞춰야 하므로 <b>1분</b> 간격이 필요합니다"),
+    (tl([("14:00", False, False), ("14:30", True, False)], "", "", True, "150px"), "예약 시간 고르기", "예약 시간은 <b>30분</b> 간격으로 고릅니다"),
+    (tl([("07:00", True, False), ("07:01", False, False)], "", "", True, "150px"), "알람 시각 맞추기", "알람은 분까지 맞춰야 하므로 <b>1분</b> 간격이 필요합니다"),
     (one(txt('<span style="display:block;font-size:8px;font-family:var(--mono)">18:00 마감</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">24시간제로 못박는다</span>'),
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">24시간제로 적음</span>'),
          "마감 시각", True, "", "150px"),
-     "마감", "<b>틀리면 안 되는</b> 자리라서 24시간제로 적습니다"),
+     "마감 시각 적기", "<b>틀리면 안 되는</b> 자리라서 24시간제로 적습니다"),
   ]),
   code_lede="브라우저 기본 시간 입력을 쓰면 휴대폰 자판까지 브라우저가 알아서 맞춰 줍니다. 간격은 <code>step</code>으로 정합니다.",
   code='''&lt;<span class="t">label</span> <span class="a">for</span>=<span class="s">"t"</span>&gt;방문 시간&lt;/<span class="t">label</span>&gt;
@@ -123,12 +123,12 @@ D = dict(
     ("숫자 키", "숫자를 바로 쳐 넣습니다. 시각을 넣는 <b>가장 빠른</b> 방법입니다"),
     ("<code>step</code>", "간격을 <b>초 단위</b>로 적습니다. 1800이면 30분 간격입니다"),
     ("<code>min</code>·<code>max</code>", "브라우저가 <b>범위를 막아</b> 줍니다"),
-    ("확인하는 법", "목록을 열었을 때 <b>지금 시각이 보이는지</b> 확인합니다"),
+    ("확인하는 방법", "목록을 열었을 때 <b>지금 시각이 보이는지</b> 확인합니다"),
   ]),
   backend=rows([
-    ("시각만", "시각만 다룰 때는 시간대 없이 <code>\"14:30\"</code>처럼 주고받아야 값이 <b>날짜와 섞이지</b> 않습니다."),
-    ("시각 + 날짜", "날짜와 시각을 함께 다룰 때는 <b>ISO 8601</b> 형식(<code>2026-11-12T14:30+09:00</code>)으로 주는 편이 안전합니다."),
-    ("되는 시간", "서버가 영업 시간이나 예약 가능한 슬롯을 함께 내려 주면, 화면에서 고를 수 없는 시간을 미리 <b>막을 수</b> 있습니다."),
+    ("시각만 주고받을 때", "시각만 다룰 때는 시간대 없이 <code>\"14:30\"</code>처럼 주고받아야 값이 <b>날짜와 섞이지</b> 않습니다."),
+    ("날짜와 시각을 함께 주고받을 때", "날짜와 시각을 함께 다룰 때는 <b>ISO 8601</b> 형식(<code>2026-11-12T14:30+09:00</code>)으로 주는 편이 안전합니다."),
+    ("예약할 수 있는 시간을 서버가 알려 주기", "서버가 영업 시간이나 예약 가능한 슬롯을 함께 내려 주면, 화면에서 고를 수 없는 시간을 미리 <b>막을 수</b> 있습니다."),
   ]),
   plat_lede="시각을 <b>고르는 방식</b>은 플랫폼마다 다릅니다.",
   plats=plats([

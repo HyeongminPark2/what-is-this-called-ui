@@ -25,7 +25,7 @@
   <b>카드</b>
   <label><input type="checkbox" id="long"> 제목이 긴 상품 섞기</label>
   <label><input type="checkbox" id="clip"> 긴 제목을 한 줄로 자르기</label>
-  <label><input type="checkbox" id="row"> 가로형으로</label>
+  <label><input type="checkbox" id="row"> 가로형 카드로 보기</label>
 </div>
 
 <div class="pad">
@@ -87,7 +87,7 @@
       return;
     }
     var card = e.target.closest('.ui-card');
-    if (card) { e.preventDefault(); say('상세로 이동: <b>' + card.dataset.t + '</b>'); }
+    if (card) { e.preventDefault(); say('<b>' + card.dataset.t + '</b> 상세로 이동했습니다'); }
   });
 
   ['long', 'clip', 'row'].forEach(function (id) {

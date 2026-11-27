@@ -18,13 +18,13 @@
 <body>
 <div class="bar">
   <b>스크롤 연동</b>
-  <label>무엇을 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
-    <option value="bar">읽은 만큼 막대 (쓸모 있다)</option>
-    <option value="sticky">붙박이 머리말 (쓸모 있다)</option>
-    <option value="parallax">시차 배경 (조심)</option>
-    <option value="hijack">스크롤 가로채기 (하지 않는다)</option>
+  <label>스크롤에 맞춰 움직일 것 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="bar">읽은 만큼 차는 막대 (쓸모 있음)</option>
+    <option value="sticky">붙박이 머리말 (쓸모 있음)</option>
+    <option value="parallax">시차 배경 (조심해서 씀)</option>
+    <option value="hijack">스크롤 가로채기 (쓰지 않음)</option>
   </select></label>
-  <label><input type="checkbox" id="calm"> 모션 줄이기를 켠 사람으로</label>
+  <label><input type="checkbox" id="calm"> 모션 줄이기를 켠 사람의 화면으로 보기</label>
 </div>
 
 <div class="pad">
@@ -65,7 +65,7 @@
     document.getElementById('inner').innerHTML = h;
     sc.dataset.k = k;
     sc.dataset.calm = calm ? '1' : '0';
-    document.getElementById('note').innerHTML = NOTE[k] + (calm ? ' · <b>줄이기 켜짐</b>' : '');
+    document.getElementById('note').innerHTML = NOTE[k] + (calm ? ' · <b>모션 줄이기가 켜져 있습니다</b>' : '');
     sc.scrollTop = 0;
     onScroll();
   }
@@ -82,8 +82,8 @@
       hero.style.transform = calm ? 'none' : 'translateY(' + (sc.scrollTop * 0.4).toFixed(0) + 'px)';
     }
     var r = document.getElementById('read');
-    r.innerHTML = '읽은 만큼 <b>' + Math.round(p * 100) + '%</b>' +
-      (k === 'hijack' ? ' · <span class="warn">굴린 양보다 적게 간다</span>' : '');
+    r.innerHTML = '지금까지 읽은 비율 <b>' + Math.round(p * 100) + '%</b>' +
+      (k === 'hijack' ? ' · <span class="warn">스크롤한 양보다 적게 내려갑니다</span>' : '');
     r.dataset.p = String(Math.round(p * 100));
   }
 

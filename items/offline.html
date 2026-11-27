@@ -78,12 +78,12 @@
         <p>연결이 끊겼을 때 다루는 방법들을 모았습니다. 아래 네 가지를 물어보면 방법마다 차이가 드러납니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>쓴 것이 남나</th><th>읽기는 되나</th><th>언제 나가나</th><th>사용자가 아나</th></tr></thead>
+          <thead><tr><th></th><th>끊긴 동안 쓴 내용이 남는가</th><th>끊긴 동안 읽을 수 있는가</th><th>쓴 내용은 언제 서버로 가는가</th><th>사용자가 상황을 알 수 있는가</th></tr></thead>
           <tbody>
-            <tr><td>쌓아 두기</td><td><b>남는다</b></td><td>받아 둔 것은 된다</td><td>연결되면 저절로</td><td>띠로 알린다</td></tr>
-            <tr><td>못 누르게 막기</td><td class="none">해당 없음</td><td>된다</td><td>다시 눌러야</td><td><b>단추가 꺼져 있다</b></td></tr>
-            <tr><td>그때마다 실패</td><td><b>사라진다</b></td><td>된다</td><td>다시 써야</td><td>오류만 뜬다</td></tr>
-            <tr><td>아무 대비 없음</td><td>사라진다</td><td><b>안 된다</b></td><td class="none">—</td><td>화면이 빈다</td></tr>
+            <tr><td>쌓아 두기</td><td><b>남음</b></td><td>받아 둔 것은 읽을 수 있음</td><td>연결되면 저절로 보냄</td><td>띠로 알림</td></tr>
+            <tr><td>못 누르게 막기</td><td class="none">해당 없음</td><td>읽을 수 있음</td><td>연결된 뒤 다시 눌러야 함</td><td><b>버튼이 꺼져 있어 알 수 있음</b></td></tr>
+            <tr><td>그때마다 실패</td><td><b>사라짐</b></td><td>읽을 수 있음</td><td>다시 써서 보내야 함</td><td>오류만 뜸</td></tr>
+            <tr><td>아무 대비 없음</td><td>사라짐</td><td><b>읽을 수 없음</b></td><td>보낼 것이 없음</td><td>빈 화면만 보임</td></tr>
           </tbody>
         </table>
         </div>
@@ -93,43 +93,43 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">방식마다 다른, 쓴 내용이 남는지 여부</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">방식에 따라 쓴 내용이 남는지 사라지는지</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border-radius:4px;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #1a7f37 12%, var(--surface));color:#1a7f37;border:1px solid color-mix(in srgb, #1a7f37 35%, transparent);">● 연결됨</span><span style="display:block;font-size:8px;color:var(--fg-muted)">바로 보낸다</span></div><span style="font-size:8.5px;color:var(--fg-muted)">평소</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border-radius:4px;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #1a7f37 12%, var(--surface));color:#1a7f37;border:1px solid color-mix(in srgb, #1a7f37 35%, transparent);">● 연결됨</span><span style="display:block;font-size:8px;color:var(--fg-muted)">바로 보냄</span></div><span style="font-size:8.5px;color:var(--fg-muted)">평소</span></div>
             </div>
-            <figcaption>연결됨<span>평소처럼 바로 보냅니다</span></figcaption>
+            <figcaption>연결되어 있을 때<span>평소처럼 바로 보냅니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border-radius:4px;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border:1px solid color-mix(in srgb, #9a6700 35%, transparent);">● 연결이 끊겼습니다 — 쌓아 뒀다가 보냅니다</span><span style="display:block;border:1px dashed var(--line);border-radius:3px;padding:2px 5px;font-size:7.5px;color:var(--fg-muted)">⏳ 메모 1</span><span style="display:block;border:1px dashed var(--line);border-radius:3px;padding:2px 5px;font-size:7.5px;color:var(--fg-muted)">⏳ 메모 2</span></div><span style="font-size:8.5px;color:var(--fg-muted)">2건이 기다린다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border-radius:4px;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border:1px solid color-mix(in srgb, #9a6700 35%, transparent);">● 연결이 끊겼습니다 — 쌓아 뒀다가 보냅니다</span><span style="display:block;border:1px dashed var(--line);border-radius:3px;padding:2px 5px;font-size:7.5px;color:var(--fg-muted)">⏳ 메모 1</span><span style="display:block;border:1px dashed var(--line);border-radius:3px;padding:2px 5px;font-size:7.5px;color:var(--fg-muted)">⏳ 메모 2</span></div><span style="font-size:8.5px;color:var(--fg-muted)">2건이 기다리는 중</span></div>
             </div>
-            <figcaption>끊김 · 쌓아 둠<span>쓴 내용을 쌓아 두므로 <b>사라지지 않습니다</b></span></figcaption>
+            <figcaption>끊긴 동안 쌓아 둘 때<span>쓴 내용을 쌓아 두므로 <b>사라지지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border-radius:4px;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #1a7f37 12%, var(--surface));color:#1a7f37;border:1px solid color-mix(in srgb, #1a7f37 35%, transparent);">● 연결됨 — 쌓인 2건을 보내는 중</span><span style="display:block;font-size:8px;color:var(--fg-muted)">저절로 나간다</span></div><span style="font-size:8.5px;color:var(--fg-muted)">복구</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border-radius:4px;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #1a7f37 12%, var(--surface));color:#1a7f37;border:1px solid color-mix(in srgb, #1a7f37 35%, transparent);">● 연결됨 — 쌓인 2건을 보내는 중</span><span style="display:block;font-size:8px;color:var(--fg-muted)">저절로 보냄</span></div><span style="font-size:8.5px;color:var(--fg-muted)">복구됨</span></div>
             </div>
-            <figcaption>다시 연결<span>쌓아 둔 작업이 <b>저절로</b> 나갑니다</span></figcaption>
+            <figcaption>다시 연결됐을 때<span>쌓아 둔 작업이 <b>저절로</b> 나갑니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border-radius:4px;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border:1px solid color-mix(in srgb, #9a6700 35%, transparent);">● 연결이 끊겼습니다</span><span style="display:block;border:1px solid var(--line);border-radius:4px;padding:2px 6px;font-size:7.5px;color:var(--fg-faint);text-align:center">메모 저장 (꺼짐)</span></div><span style="font-size:8.5px;color:var(--fg-muted)">아예 못 누른다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border-radius:4px;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border:1px solid color-mix(in srgb, #9a6700 35%, transparent);">● 연결이 끊겼습니다</span><span style="display:block;border:1px solid var(--line);border-radius:4px;padding:2px 6px;font-size:7.5px;color:var(--fg-faint);text-align:center">메모 저장 (꺼짐)</span></div><span style="font-size:8.5px;color:var(--fg-muted)">아예 누를 수 없음</span></div>
             </div>
-            <figcaption>막기<span><b>헛수고는 없지만</b> 끊긴 동안에는 쓸 수 없습니다</span></figcaption>
+            <figcaption>버튼을 막아 둘 때<span><b>헛수고는 없지만</b> 끊긴 동안에는 쓸 수 없습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border-radius:4px;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, var(--danger) 10%, var(--surface));color:var(--danger);border:1px solid color-mix(in srgb, var(--danger) 35%, transparent);">● 보내지 못했습니다</span><span style="display:block;font-size:8px;color:var(--danger)">쓴 글이 사라졌다</span></div><span style="font-size:8.5px;color:var(--fg-muted)">가장 나쁜 쪽</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border-radius:4px;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, var(--danger) 10%, var(--surface));color:var(--danger);border:1px solid color-mix(in srgb, var(--danger) 35%, transparent);">● 보내지 못했습니다</span><span style="display:block;font-size:8px;color:var(--danger)">쓴 글이 사라짐</span></div><span style="font-size:8.5px;color:var(--fg-muted)">가장 나쁜 방식</span></div>
             </div>
-            <figcaption>그때마다 실패<span>사용자가 <b>쓴 내용을 잃습니다</b></span></figcaption>
+            <figcaption>누를 때마다 실패할 때<span>사용자가 <b>쓴 내용을 잃습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border-radius:4px;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border:1px solid color-mix(in srgb, #9a6700 35%, transparent);">● 연결이 끊겼습니다</span><span style="display:block;font-size:8px">받아 둔 목록은 볼 수 있다</span></div><span style="font-size:8.5px;color:var(--fg-muted)">읽기는 된다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border-radius:4px;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border:1px solid color-mix(in srgb, #9a6700 35%, transparent);">● 연결이 끊겼습니다</span><span style="display:block;font-size:8px">받아 둔 목록은 볼 수 있음</span></div><span style="font-size:8.5px;color:var(--fg-muted)">읽기는 됨</span></div>
             </div>
-            <figcaption>읽기<span>연결이 <b>끊겨도</b> 받아 둔 목록은 보입니다</span></figcaption>
+            <figcaption>끊긴 동안 읽을 때<span>연결이 <b>끊겨도</b> 받아 둔 목록은 보입니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -141,23 +141,23 @@
             <div class="anat" role="img" aria-label="오프라인의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">끊김 띠 — 화면 꼭대기에 한 줄</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">쓴 것은 쌓아 둔다 — 사라지지 않게</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">쌓인 것이 몇 건인지 보인다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">읽기는 되게 — 받아 둔 것은 보여 준다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--accent)">연결되면 저절로 나가고 알린다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">그때마다 실패하면 쓴 글이 사라진다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">끊김 띠는 화면 맨 위에 한 줄로</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">쓴 내용은 사라지지 않게 쌓아 둠</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">쌓인 작업이 몇 건인지 보여 줌</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">받아 둔 내용은 계속 읽을 수 있게 둠</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--accent)">연결되면 저절로 보내고 알림</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">그때마다 실패하면 쓴 글이 사라짐</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>끊김 띠 <em>꼭대기 한 줄</em></b><span>보내기가 <b>왜 안 되는지</b> 알립니다</span></li>
-            <li><b>쌓아 두기 <em>쓴 것</em></b><span>쓴 내용이 <b>사라지지 않게</b> 쌓아 둡니다</span></li>
-            <li><b>몇 건인지 <em>보이기</em></b><span>보내기를 기다리는 작업이 있다는 것을 알립니다</span></li>
-            <li><b>읽기 <em>되게 두기</em></b><span>이미 받아 둔 내용은 보여 줍니다</span></li>
-            <li><b>다시 연결 <em>저절로</em></b><span>쌓인 작업을 보낸 뒤 보냈다고 <b>알립니다</b></span></li>
-            <li><b>그때마다 실패 <em>가장 나쁨</em></b><span>누를 때마다 실패하면 <b>쓴 글이 사라집니다</b></span></li>
+            <li><b>끊김 띠 <em>맨 위 한 줄</em></b><span>보내기가 <b>왜 안 되는지</b> 알립니다</span></li>
+            <li><b>쌓아 두기 <em>쓴 내용</em></b><span>쓴 내용이 <b>사라지지 않게</b> 쌓아 둡니다</span></li>
+            <li><b>쌓인 건수 <em>건수 표시</em></b><span>보내기를 기다리는 작업이 있다는 것을 알립니다</span></li>
+            <li><b>읽기 <em>끊겨도 허용</em></b><span>이미 받아 둔 내용은 보여 줍니다</span></li>
+            <li><b>다시 연결 <em>저절로 보냄</em></b><span>쌓인 작업을 보낸 뒤 보냈다고 <b>알립니다</b></span></li>
+            <li><b>그때마다 실패 <em>쓴 글이 사라짐</em></b><span>누를 때마다 실패하면 <b>쓴 글이 사라집니다</b></span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -175,7 +175,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>오프라인을 쓰는 경우</h3>
+            <h3>연결이 끊겼을 때 지킬 것</h3>
             <ul>
               <li>끊긴 동안 쓴 내용을 <b>쌓아 두었다가</b> 연결되면 보낼 때</li>
               <li>끊긴 동안에도 <b>읽기는 되게</b> 둘 때. 이미 받아 둔 내용은 보여 줍니다</li>
@@ -183,7 +183,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>오프라인을 쓰지 않는 경우</h3>
+            <h3>연결이 끊겼을 때 피할 것</h3>
             <ul>
               <li>끊긴 동안 쓴 글을 <b>버릴 때</b></li>
               <li><code>navigator.onLine</code>만 믿을 때. 연결된 것으로 <b>나와도 실제로는 안 될</b> 수 있습니다</li>
@@ -192,7 +192,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>오프라인 대신 다른 것을 써야 하는 경우</b> — 연결은 되는데 실패하면 <a href="retry.html">재시도</a>, 실패 화면은 <a href="error.html">에러 상태</a>, 기다리는 표시는 <a href="spinner.html">스피너</a>, 문구는 <a href="errortext.html">오류 문구</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>함께 보면 좋은 항목</b> — 연결은 되어 있는데 요청이 실패하는 경우는 <a href="retry.html">재시도</a> 항목에서, 실패 화면은 <a href="error.html">에러 상태</a> 항목에서 다룹니다. 기다리는 동안 보여 줄 표시는 <a href="spinner.html">스피너</a>에, 실패를 알리는 문구는 <a href="errortext.html">오류 문구</a>에 정리되어 있습니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -202,19 +202,19 @@
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border-radius:4px;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border:1px solid color-mix(in srgb, #9a6700 35%, transparent);">● 연결이 끊겼습니다</span><span style="display:block;border:1px dashed var(--line);border-radius:3px;padding:2px 5px;font-size:7.5px;color:var(--fg-muted)">⏳ 메모 1</span></div></div>
             </div>
-            <figcaption><b>메모 앱</b>끊긴 동안 쓴 메모를 <b>쌓아 둡니다</b></figcaption>
+            <figcaption><b>끊긴 동안 쓴 메모 쌓아 두기</b>끊긴 동안 쓴 메모를 <b>쌓아 둡니다</b></figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;font-size:8px">받아 둔 목록 12건</span></div></div>
             </div>
-            <figcaption><b>목록 보기</b>연결이 <b>끊겨도</b> 받아 둔 목록을 읽을 수 있습니다</figcaption>
+            <figcaption><b>끊긴 동안 받아 둔 목록 읽기</b>연결이 <b>끊겨도</b> 받아 둔 목록을 읽을 수 있습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:4px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:6px"><span style="display:block;border-radius:4px;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border:1px solid color-mix(in srgb, #9a6700 35%, transparent);">● 연결이 끊겨 결제를 시작할 수 없습니다</span><span style="display:block;font-size:7.5px;color:var(--fg-muted)">연결되면 다시 눌러 주세요</span></div></div>
             </div>
-            <figcaption><b>결제</b>결제는 <b>쌓아 두었다가 나중에 보내면 안 되는</b> 일입니다</figcaption>
+            <figcaption><b>결제는 쌓아 두지 않고 막기</b>결제는 <b>쌓아 두었다가 나중에 보내면 안 되는</b> 일입니다</figcaption>
           </figure>
         </div>
       </section>
@@ -244,14 +244,14 @@
 });</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td><code>role="status"</code></td><td>연결 끊김과 복구를 <b>스크린 리더로도</b> 알립니다</td></tr>
-            <tr><td>단추 잠금</td><td>버튼을 막는다면 <b>왜 꺼졌는지</b>도 함께 적습니다</td></tr>
+            <tr><td>버튼을 막을 때</td><td>버튼을 막는다면 <b>왜 꺼졌는지</b>도 함께 적습니다</td></tr>
             <tr><td><code>online</code>·<code>offline</code></td><td>브라우저가 보내 주는 신호지만 <b>정확하지는 않습니다</b></td></tr>
             <tr><td><code>navigator.onLine</code></td><td>'랜선이 꽂혔다'는 것만 알 뿐 <b>인터넷이 실제로 되는지는 모릅니다</b></td></tr>
-            <tr><td>서비스 워커</td><td>탭이 닫혀도 쌓인 작업을 <b>나중에</b> 보낼 수 있게 해 줍니다</td></tr>
-            <tr><td>확인하는 법</td><td>개발자 도구에서 네트워크를 <b>Offline</b>으로 바꾸고 직접 써 봅니다</td></tr>
+            <tr><td>서비스 워커를 쓸 때</td><td>탭이 닫혀도 쌓인 작업을 <b>나중에</b> 보낼 수 있게 해 줍니다</td></tr>
+            <tr><td>확인하는 방법</td><td>개발자 도구에서 네트워크를 <b>Offline</b>으로 바꾸고 직접 써 봅니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -262,10 +262,10 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>멱등 키</th><td>쌓아 둔 작업을 보내다 보면 같은 요청이 <b>두 번 가는 일</b>이 생기는데, 멱등 키가 있으면 서버가 한 번만 처리합니다.</td></tr>
-            <tr><th>차례</th><td>작업에 <code>created_at</code>이나 순번이 있어야 <b>만든 뒤 고친</b> 순서가 지켜집니다.</td></tr>
-            <tr><th>충돌</th><td>끊긴 동안 다른 사람이 같은 항목을 고쳤다면 <b>어느 쪽 변경을 남길지</b> 정해야 합니다.</td></tr>
-            <tr><th>읽기 캐시</th><td>목록 응답에 <code>ETag</code>가 있으면 <b>바뀐 것만</b> 받아 올 수 있습니다.</td></tr>
+            <tr><th>멱등 키로 중복 전송 막기</th><td>쌓아 둔 작업을 보내다 보면 같은 요청이 <b>두 번 가는 일</b>이 생기는데, 멱등 키가 있으면 서버가 한 번만 처리합니다.</td></tr>
+            <tr><th>쌓인 작업의 순서 지키기</th><td>작업에 <code>created_at</code>이나 순번이 있어야 <b>만든 뒤 고친</b> 순서가 지켜집니다.</td></tr>
+            <tr><th>끊긴 동안 생긴 충돌 정리하기</th><td>끊긴 동안 다른 사람이 같은 항목을 고쳤다면 <b>어느 쪽 변경을 남길지</b> 정해야 합니다.</td></tr>
+            <tr><th>읽기 캐시를 바뀐 것만 갱신하기</th><td>목록 응답에 <code>ETag</code>가 있으면 <b>바뀐 것만</b> 받아 올 수 있습니다.</td></tr>
           </tbody>
         </table>
         </div>

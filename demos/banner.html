@@ -22,8 +22,8 @@
 <div class="bar">
   <b>배너</b>
   <label>띄울 배너 수 <input type="range" id="n" min="0" max="4" step="1" value="1" style="width:90px"><span class="ruler" id="nv"></span></label>
-  <label><input type="checkbox" id="dismiss" checked> 닫을 수 있게</label>
-  <label><input type="checkbox" id="remember" checked> 닫은 것은 다시 안 띄우기</label>
+  <label><input type="checkbox" id="dismiss" checked> 배너를 닫을 수 있게 하기</label>
+  <label><input type="checkbox" id="remember" checked> 닫은 배너는 다시 띄우지 않기</label>
 </div>
 
 <div class="pad">
@@ -42,7 +42,7 @@
   배너는 토스트와 달리 저절로 <b>사라지지 않습니다</b>.
   그래서 여러 개가 쌓이면 그만큼 화면 자리를 차지합니다. 배너 수를 늘려 보면
   데모가 <b>배너가 화면의 몇 %를 차지하는지</b> 재서 적어 줍니다.<br>
-  <b>닫을 수 있게</b>를 끄면 배너를 치울 방법이 없어 계속 남습니다. 또 닫은 배너를 <b>기억하지 않으면</b>
+  <b>배너를 닫을 수 있게 하기</b>를 끄면 배너를 치울 방법이 없어 계속 남습니다. 또 닫은 배너를 <b>기억하지 않으면</b>
   새로 고칠 때마다 다시 뜨는데, 데모가 그렇게 다시 뜬 개수를 세어 보여 줍니다.
   배너는 사용자가 읽고 나서 치울 수 있어야 합니다.<br>
   배너는 <b>화면 전체에 해당하는 사정</b>을 알리는 데 씁니다. 입력 칸 하나의 오류는
@@ -82,10 +82,10 @@
 
     var rd = document.getElementById('read');
     rd.innerHTML = '띄운 배너 <b>' + list.length + '개</b> · 화면에서 차지하는 넓이 <b>' + pct + '%</b>' +
-      (pct > 30 ? ' <span class="warn">— 내용보다 알림이 더 큽니다</span>' : '') +
-      '<br>닫기 버튼 <b>' + (canClose ? '있음' : '없음') + '</b>' +
-      (canClose ? '' : ' <span class="warn">— 치울 수 없어 계속 남습니다</span>') +
-      (reappeared ? '<br><span class="warn">닫았는데 다시 뜬 것 ' + reappeared + '개</span> — 닫은 배너를 기억하지 않습니다' : '') +
+      (pct > 30 ? '. <span class="warn">내용보다 알림이 더 큽니다</span>' : '') +
+      '<br>닫기 버튼이 <b>' + (canClose ? '있습니다' : '없습니다') + '</b>' +
+      (canClose ? '' : '. <span class="warn">그래서 치울 수 없어 계속 남습니다</span>') +
+      (reappeared ? '<br><span class="warn">닫았는데 다시 뜬 배너가 ' + reappeared + '개</span> 있습니다. 닫은 배너를 기억하지 않기 때문입니다' : '') +
       (why ? '<br>' + why : '');
     rd.dataset.count = String(list.length);
     rd.dataset.pct = String(pct);

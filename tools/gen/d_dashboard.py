@@ -27,12 +27,12 @@ def board(tiles, w="152px", note="", ok=None, cols=3):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">으뜸 지표 하나 — 가장 크게</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">견줄 값 — '지난주 대비 +12%'</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">다음 할 일 — '밀린 정산 3건 보기 ›'</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">기준 시각 — '11월 14일 09:00 기준'</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--danger)">지표를 늘릴수록 으뜸이 묻힌다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">빈 상태 — 쌓인 게 없을 때의 화면</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">으뜸 지표 하나를 가장 크게</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">'지난주 대비 +12%' 같은 견줄 값</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">'밀린 정산 3건 보기 ›' 같은 다음 할 일</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">'11월 14일 09:00 기준'처럼 기준 시각 표시</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--danger)">지표를 늘릴수록 으뜸 지표가 묻힘</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">쌓인 게 없을 때 보여 줄 빈 상태</div>
                 </div>
               </div>'''
 
@@ -63,20 +63,23 @@ D = dict(
   ]),
   axes=ax("대시보드"),
   oneline="<b>지표가 다섯 개를 넘으면 정말 다 필요한지 다시 따져 보세요.</b> 숫자를 더 넣는 대신 '그래서 무엇을 하면 되는지'를 알려 주는 링크를 붙입니다.",
-  s4_title="상태", s4_hint="숫자만으로는 못 읽는다",
+  do_title="대시보드를 만들 때 할 일",
+  dont_title="대시보드를 잘못 만드는 경우",
+  instead_title="함께 보면 좋은 항목",
+  s4_title="대시보드의 상태", s4_hint="숫자만으로는 판단할 수 없음",
   states=states([
     (board([tile("이번 주 정산액", "1,284만", "+12%", "지난주 대비", "밀린 정산 보기", True),
             tile("밀린 건수", "3건", "-2건", "어제", ""),
             tile("오류율", "0.4%", "+0.1%p", "지난주", ""),
-            tile("처리 시간", "1.8일", "-0.3일", "지난주", "")], "152px", "으뜸 하나 + 셋", True),
-     "좋은 꼴", "<b>으뜸 지표가 가장 크게</b> 보입니다"),
+            tile("처리 시간", "1.8일", "-0.3일", "지난주", "")], "152px", "으뜸 하나와 보조 셋", True),
+     "잘 짜인 대시보드", "<b>으뜸 지표가 가장 크게</b> 보입니다"),
     (board([tile("정산액", "1,284만", "", "", ""),
             tile("밀린 건수", "3건", "", "", ""),
             tile("오류율", "0.4%", "", "", ""),
             tile("처리 시간", "1.8일", "", "", ""),
             tile("신규 가게", "12곳", "", "", ""),
-            tile("환불액", "47만", "", "", "")], "152px", "숫자만 있다", False),
-     "견줄 값 없음", "숫자만 있어서 <b>좋은지 나쁜지</b> 알 수 없습니다"),
+            tile("환불액", "47만", "", "", "")], "152px", "숫자만 있음", False),
+     "견줄 값이 없을 때", "숫자만 있어서 <b>좋은지 나쁜지</b> 알 수 없습니다"),
     (board([tile("정산액", "1,284만", "+12%", "지난주", ""),
             tile("밀린", "3건", "-2건", "어제", ""),
             tile("오류율", "0.4%", "+0.1%p", "지난주", ""),
@@ -85,28 +88,28 @@ D = dict(
             tile("환불", "47만", "-8%", "지난주", ""),
             tile("카드", "62%", "+1%p", "지난달", ""),
             tile("문의", "9건", "-4건", "어제", ""),
-            tile("계산서", "48장", "0장", "지난달", "")], "152px", "열두 개면 다 비슷해 보인다", False),
-     "너무 많음", "지표가 많아 <b>으뜸 지표가 눈에 띄지 않습니다</b>"),
+            tile("계산서", "48장", "0장", "지난달", "")], "152px", "열두 개면 다 비슷해 보임", False),
+     "지표가 너무 많을 때", "지표가 많아 <b>으뜸 지표가 눈에 띄지 않습니다</b>"),
     (board([tile("이번 주 정산액", "1,284만", "+12%", "지난주 대비", "밀린 정산 3건 보기", True)],
-           "152px", "지표마다 할 일이 붙는다", True, 1),
-     "할 일로 이어짐", "숫자를 <b>보는 데서 끝나지 않고</b> 할 일로 이어집니다"),
+           "152px", "지표마다 할 일이 붙음", True, 1),
+     "할 일로 이어 줄 때", "숫자를 <b>보는 데서 끝나지 않고</b> 할 일로 이어집니다"),
     (one(txt('<span style="display:block;font-size:8.5px;color:var(--fg-muted)">아직 정산이 없습니다</span>'
              '<span style="display:block;font-size:8px;color:var(--accent);margin-top:3px">첫 가게 등록하기 ›</span>'),
-         "빈 상태", True, "숫자가 0 인 화면도 설계한다", "152px"),
-     "빈 상태", "<b>0을 보여 주는 대신</b> 무엇부터 할지 안내합니다"),
+         "빈 상태", True, "숫자가 0인 화면도 설계함", "152px"),
+     "쌓인 데이터가 없을 때", "<b>0을 보여 주는 대신</b> 무엇부터 할지 안내합니다"),
     (one(txt('<span style="display:block;font-size:8px;color:var(--fg-muted)">11월 14일 09:00 기준</span>'
              '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">한 시간마다 새로 집계</span>'),
-         "기준 시각", True, "언제 숫자인지 적는다", "152px"),
-     "기준 시각", "숫자가 <b>실시간이 아니면</b> 언제 기준인지 적습니다"),
+         "기준 시각", True, "언제 기준 숫자인지 적음", "152px"),
+     "기준 시각을 적었을 때", "숫자가 <b>실시간이 아니면</b> 언제 기준인지 적습니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("으뜸 지표", "하나", "하나만 골라 <b>가장 크게</b> 둡니다"),
+    ("으뜸 지표", "하나만", "하나만 골라 <b>가장 크게</b> 둡니다"),
     ("견줄 값", "지난주 대비", "비교할 값이 있어야 숫자가 좋은지 나쁜지 <b>판단</b>할 수 있습니다"),
     ("다음 할 일", "링크", "숫자를 보는 데서 <b>끝나지 않고</b> 할 일로 이어지게 합니다"),
-    ("기준 시각", "언제 숫자인가", "실시간이 아니면 기준 시각을 <b>적어 둡니다</b>"),
+    ("기준 시각", "언제 기준 숫자인지", "실시간이 아니면 기준 시각을 <b>적어 둡니다</b>"),
     ("지표 수", "다섯 안팎", "지표를 늘릴수록 <b>으뜸 지표가 눈에 덜 띕니다</b>"),
-    ("빈 상태", "0 인 화면", "<b>처음 쓰는 사람</b>은 이 화면부터 보게 됩니다"),
+    ("빈 상태", "0인 화면", "<b>처음 쓰는 사람</b>은 이 화면부터 보게 됩니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           대시보드를 만들 때 가장 흔한 요청이 <b>'이 숫자도 넣어 주세요'</b>입니다.
@@ -126,20 +129,21 @@ D = dict(
     "<b>빈 상태</b>를 만들지 않을 때. 처음 쓰는 사람에게는 0만 잔뜩 보입니다",
     "실시간이 아닌데 <b>실시간처럼</b> 보이게 둘 때",
   ]),
-  instead='깊이 파는 화면은 <a href="table.html">데이터 테이블</a>, 그림 고르기는 <a href="chart.html">차트 고르기</a>, 숫자 칸 자체는 <a href="stat.html">스탯 타일</a>, 숫자 표기는 <a href="numbertext.html">숫자와 단위 쓰기</a>.',
+  instead='한 주제를 깊이 파고드는 화면은 <a href="table.html">데이터 테이블</a>에서, 그래프를 고르는 법은 <a href="chart.html">차트 고르기</a>에서 다룹니다. 숫자 칸 하나는 <a href="stat.html">스탯 타일</a>에서, 숫자를 적는 방법은 <a href="numbertext.html">숫자와 단위 쓰기</a>에서 설명합니다.',
   cases=cases([
     (board([tile("이번 주 정산액", "1,284만", "+12%", "지난주 대비", "내역 보기", True)], "150px", "", True, 1),
-     "정산 현황", "<b>으뜸 지표 하나</b>로 시작합니다"),
+     "정산 현황을 보여 주는 대시보드", "<b>으뜸 지표 하나</b>로 시작합니다"),
     (board([tile("오늘 주문", "128건", "+9건", "어제", ""),
             tile("준비 중", "14건", "+2건", "어제", ""),
             tile("지연", "2건", "+2건", "어제", "")], "150px", "", True),
-     "운영 화면", "<b>지금 일어나고 있는</b> 일을 보여 줍니다"),
+     "지금 일을 보여 주는 운영 화면", "<b>지금 일어나고 있는</b> 일을 보여 줍니다"),
     (one(txt('<span style="display:block;font-size:8px;color:var(--fg-muted)">아직 쌓인 게 없습니다</span>'
              '<span style="display:block;font-size:8px;color:var(--accent);margin-top:3px">첫 주문 받아 보기 ›</span>'),
          "빈 상태", True, "", "150px"),
-     "처음 쓰는 사람", "<b>0 대신</b> 무엇부터 할지 안내합니다"),
+     "처음 쓰는 사람에게 보여 줄 화면", "<b>0 대신</b> 무엇부터 할지 안내합니다"),
   ]),
   s8_title="최소 마크업과 키보드", s8_hint="구현할 때 지킬 최소 규칙",
+  keys_heads="<th>키와 마크업</th><th>처리하는 방법</th>",
   code_lede="숫자 칸은 제목·숫자·견줄 값·링크를 <b>한 덩어리로</b> 묶어 둡니다. 마크업에서 읽는 차례는 중요도 순서와 같아야 합니다.",
   code='''&lt;<span class="t">section</span> <span class="a">aria-labelledby</span>=<span class="s">"lead"</span>&gt;
   &lt;<span class="t">h2</span> <span class="a">id</span>=<span class="s">"lead"</span>&gt;이번 주 정산액&lt;/<span class="t">h2</span>&gt;
@@ -158,13 +162,13 @@ D = dict(
     ("<code>&lt;time&gt;</code>", "기준 시각은 기계도 읽을 수 있게 <code>datetime</code> 속성으로 함께 적습니다"),
     ("<code>tabular-nums</code>", "숫자 폭을 고르게 맞춰서 값이 바뀌어도 <b>자릿수가 흔들리지 않습니다</b>"),
     ("<code>aria-live</code>", "저절로 새로 고쳐지는 숫자에만 붙입니다. <b>여기저기 붙이면</b> 스크린 리더가 숫자가 바뀔 때마다 계속 읽습니다"),
-    ("확인하는 법", "제목만 따라 훑어서 <b>중요도 순서</b>대로 나오는지 확인합니다"),
+    ("확인하는 방법", "제목만 따라 훑어서 <b>중요도 순서</b>대로 나오는지 확인합니다"),
   ]),
   backend=rows([
-    ("기준 시각을 같이", "응답에 <code>as_of: \"2026-11-14T09:00\"</code> 같은 값이 있어야 화면이 언제 기준 숫자인지 적을 수 있습니다."),
-    ("견줄 값도 서버에서", "화면이 두 기간의 값을 따로 받아 빼는 것보다 서버가 <code>delta</code>를 같이 주는 편이 비교 <b>기준을 한곳</b>에서 관리할 수 있습니다."),
-    ("무거운 집계", "대시보드 질의는 보통 무겁기 때문에 <b>미리 집계해 둔 표</b>를 읽게 하고, 집계 주기를 화면에 적습니다."),
-    ("0 과 없음", "<code>0</code>과 <code>null</code>은 뜻이 다릅니다. 0은 '없었다'이고, null은 '아직 모른다'입니다."),
+    ("기준 시각도 함께 보내기", "응답에 <code>as_of: \"2026-11-14T09:00\"</code> 같은 값이 있어야 화면이 언제 기준 숫자인지 적을 수 있습니다."),
+    ("견줄 값도 서버에서 계산하기", "화면이 두 기간의 값을 따로 받아 빼는 것보다 서버가 <code>delta</code>를 같이 주는 편이 비교 <b>기준을 한곳</b>에서 관리할 수 있습니다."),
+    ("무거운 집계는 미리 해 두기", "대시보드 질의는 보통 무겁기 때문에 <b>미리 집계해 둔 표</b>를 읽게 하고, 집계 주기를 화면에 적습니다."),
+    ("0과 값 없음 구별하기", "<code>0</code>과 <code>null</code>은 뜻이 다릅니다. 0은 '없었다'이고, null은 '아직 모른다'입니다."),
   ]),
   plat_lede="대시보드는 <b>PC 화면에서 주로 쓰는 패턴</b>이고, 폰에서는 칸을 한 줄씩 쌓아 보여 줍니다.",
   plats=plats([

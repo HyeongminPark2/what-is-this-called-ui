@@ -16,12 +16,12 @@ def card(size, h="", clip=False, w="152px", note="", ok=None):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">rem · em — 사용자 설정을 따라간다</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">px 로 박으면 설정을 켜도 안 커진다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">높이까지 px 로 박으면 글이 잘린다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">rem · em   — 사용자 설정을 따라감</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">px로 고정하면 설정을 켜도 커지지 않음</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">높이까지 px로 고정하면 글이 잘림</div>
                   <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">200%까지 키워도 내용과 기능을 잃지 않을 것</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">user-scalable=no 를 쓰지 않는다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">글자만 키우는 설정과 화면 전체 확대는 다르다</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">user-scalable=no는 쓰지 않음</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">글자 크기 설정과 화면 전체 확대는 서로 다른 설정</div>
                 </div>
               </div>'''
 
@@ -32,7 +32,7 @@ D = dict(
   axes_lede="접근성은 다 만든 뒤에 덧붙이기보다 만드는 동안 <b>빠뜨리지 않고 챙기는 일</b>입니다. 아래 네 가지를 물어보면 이 부의 항목들이 서로 어떻게 다른지 가를 수 있습니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>막대를 끌어 글자를 키워 보세요. 실제로는 사용자가 OS나 브라우저 설정으로 <b>직접</b> 글자를 키웁니다.<br>
-          <b>px 로 박아 두기</b>를 켜면 막대를 끌어도 글자가 커지지 않고, 상자 높이까지 px로 고정하면 <b>글이 잘립니다</b>.
+          <b>글자 크기를 px로 고정하기</b>를 켜면 막대를 끌어도 글자가 커지지 않고, 상자 높이까지 px로 고정하면 <b>글이 잘립니다</b>.
           이 사고는 글자 크기 설정을 켠 사람만 겪기 때문에 <b>개발하는 사람의 화면에서는 드러나지 않습니다</b>.</p>
         </div>''',
   names=rows([
@@ -50,23 +50,23 @@ D = dict(
   ]),
   axes=ax("확대와 글자 크기"),
   oneline="<b>글자 크기는 rem으로 정하고, 상자 높이는 고정하지 않습니다.</b> 그러면 글자 크기 설정을 켠 사람도 화면을 그대로 쓸 수 있습니다.",
-  s4_title="키웠을 때", s4_hint="무엇이 깨지나",
+  s4_title="글자를 키웠을 때의 모습", s4_hint="배율과 단위에 따라 무엇이 깨지는지",
   states=states([
-    (card("10px", note="기본 — 100%"), "기본", "개발하는 사람이 보통 보는 모습입니다"),
-    (card("13px", note="150% — rem 으로 두면 따라온다", ok=True), "150%", "<b>상자가 글자 크기에 맞춰</b> 늘어납니다"),
-    (card("17px", note="200% — 여기까지는 지켜야 한다", ok=True), "200%", "WCAG가 이 배율까지 쓸 수 있어야 한다고 정한 <b>상한</b>입니다"),
-    (card("10px", note="px 로 박음 — 설정을 켜도 안 커진다", ok=False), "px 로 박으면", "글자 크기를 px로 고정하면 <b>설정을 바꿔도 글자가 커지지 않습니다</b>"),
-    (card("17px", h="22px", clip=True, note="높이까지 박음 — 글이 잘렸다", ok=False), "높이까지 박으면", "커진 글이 상자 밖으로 넘쳐 잘리므로 <b>내용을 잃습니다</b>"),
-    (one(mono('user-scalable=no', 'var(--danger)'), "확대 막기", False, "폰에서 아예 못 키운다"),
-     "확대를 막으면", "<b>접근성 기준 위반</b>입니다"),
+    (card("10px", note="기본 크기 100%"), "기본 크기일 때", "개발하는 사람이 보통 보는 모습입니다"),
+    (card("13px", note="150%, rem이면 같이 커짐", ok=True), "150%로 키웠을 때", "<b>상자가 글자 크기에 맞춰</b> 늘어납니다"),
+    (card("17px", note="200%, 여기까지는 지켜야 함", ok=True), "200%로 키웠을 때", "WCAG가 이 배율까지 쓸 수 있어야 한다고 정한 <b>상한</b>입니다"),
+    (card("10px", note="px로 고정해 설정을 켜도 그대로", ok=False), "글자 크기를 px로 고정했을 때", "글자 크기를 px로 고정하면 <b>설정을 바꿔도 글자가 커지지 않습니다</b>"),
+    (card("17px", h="22px", clip=True, note="높이까지 고정해 글이 잘림", ok=False), "상자 높이까지 고정했을 때", "커진 글이 상자 밖으로 넘쳐 잘리므로 <b>내용을 잃습니다</b>"),
+    (one(mono('user-scalable=no', 'var(--danger)'), "확대 막기", False, "폰에서 아예 키울 수 없음"),
+     "확대를 막아 두었을 때", "<b>접근성 기준 위반</b>입니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("<code>rem</code>", "설정을 따라간다", "뿌리 요소(html)의 글자 크기에 곱하는 배수입니다"),
-    ("<code>px</code>", "안 커진다", "px로 고정하면 <b>글자 크기 설정을 바꿔도 반영되지 않습니다</b>"),
-    ("높이", "박지 않는다", "높이를 고정하지 않고, 내용이 커지는 만큼 상자도 늘어나게 둡니다"),
+    ("<code>rem</code>", "설정을 따라감", "뿌리 요소(html)의 글자 크기에 곱하는 배수입니다"),
+    ("<code>px</code>", "커지지 않음", "px로 고정하면 <b>글자 크기 설정을 바꿔도 반영되지 않습니다</b>"),
+    ("상자 높이", "고정하지 않음", "높이를 고정하지 않고, 내용이 커지는 만큼 상자도 늘어나게 둡니다"),
     ("200%", "지켜야 하는 선", "200%까지 키워도 <b>내용과 기능</b>을 잃지 않아야 합니다"),
-    ("<code>user-scalable=no</code>", "쓰지 않는다", "핀치 줌을 막는 것은 <b>접근성 기준 위반</b>입니다"),
+    ("<code>user-scalable=no</code>", "쓰지 않음", "핀치 줌을 막는 것은 <b>접근성 기준 위반</b>입니다"),
     ("두 가지 설정", "글자만 / 화면 전체", "두 설정은 따로 켜지므로 <b>둘 다</b> 확인해야 합니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -87,16 +87,20 @@ D = dict(
     "상자 높이를 px로 고정하고 <code>overflow:hidden</code>을 걸 때",
     "글자를 키우면 버튼이 화면 밖으로 밀려나는 식으로 <b>기능이 사라질</b> 때",
   ]),
-  instead='기기의 배율은 <a href="dpr.html">화면 밀도</a>, 폭에 따른 배치는 <a href="breakpoint.html">브레이크포인트</a>, 글줄 길이는 <a href="../items/container.html">컨테이너</a>.',
+  do_title="글자 크기 설정에 대비해야 하는 경우",
+  dont_title="글자를 키울 수 없게 만드는 실수",
+  instead_title="글자 크기와 이어지는 주제는 다른 항목에서 다룹니다",
+  instead='기기가 원래 가진 배율은 <a href="dpr.html">화면 밀도</a>에서, 화면 폭에 따라 배치를 바꾸는 방법은 <a href="breakpoint.html">브레이크포인트</a>에서 다룹니다. 한 줄에 들어가는 글의 길이는 <a href="../items/container.html">컨테이너</a>를 보세요.',
   cases=cases([
-    (code(['html { font-size: 100% }', '.card { font-size: 0.95rem }'], "150px", "설정을 그대로 따라간다", True),
-     "크기", "글자 크기는 <b>rem</b>으로 정합니다"),
-    (code(['.btn { min-height: 44px }', '/* height 가 아니다 */'], "150px", "글이 커지면 같이 늘어난다", True),
-     "높이", "높이는 <code>min-height</code>로 정합니다"),
-    (one(mono('width=device-width, initial-scale=1', 'var(--accent)'), "메타 태그", True, "확대를 막는 말을 넣지 않는다"),
-     "뷰포트", "<a href=\"viewport.html\">뷰포트 단위</a>에서 다루는 것과 같은 뷰포트 메타 태그입니다"),
+    (code(['html { font-size: 100% }', '.card { font-size: 0.95rem }'], "150px", "설정을 그대로 따라감", True),
+     "글자 크기를 rem으로 정하기", "글자 크기는 <b>rem</b>으로 정합니다"),
+    (code(['.btn { min-height: 44px }', '/* height 가 아니다 */'], "150px", "글이 커지면 같이 늘어남", True),
+     "상자 높이를 min-height로 정하기", "높이는 <code>min-height</code>로 정합니다"),
+    (one(mono('width=device-width, initial-scale=1', 'var(--accent)'), "메타 태그", True, "확대를 막는 값을 넣지 않음"),
+     "뷰포트 메타 태그로 확대 허용하기", "<a href=\"viewport.html\">뷰포트 단위</a>에서 다루는 것과 같은 뷰포트 메타 태그입니다"),
   ]),
   s8_title="최소 코드와 규칙", s8_hint="구현할 때 지킬 최소 규칙",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법</th>",
   code_lede="글자 크기는 <code>rem</code>으로 정하고, 상자 높이는 고정하지 않고 열어 둡니다.",
   code='''&lt;<span class="t">meta</span> <span class="a">name</span>=<span class="s">"viewport"</span>
       <span class="a">content</span>=<span class="s">"width=device-width, initial-scale=1"</span>&gt;
@@ -111,16 +115,16 @@ D = dict(
 <span class="c">/* 글자가 커져 한 줄에 다 들어가지 않으면 다음 줄로 넘긴다 */</span>
 .row { <span class="a">display</span>: flex; <span class="a">flex-wrap</span>: wrap; <span class="a">gap</span>: <span class="a">var</span>(--s2); }''',
   keys=kbd([
-    ("<code>rem</code>으로", "뿌리 요소의 글자 크기에 곱하는 배수라서 <b>사용자 설정을 그대로</b> 따라갑니다"),
-    ("<code>html</code>에 px 을 박지 않는다", "뿌리 요소에 <code>font-size: 16px</code>을 적으면 <b>사용자의 글자 크기 설정이 무시</b>됩니다"),
-    ("<code>min-height</code>", "<a href=\"touchtarget.html\">터치 타깃</a> 최소 크기를 지키면서도, 글이 커지면 상자가 같이 늘어납니다"),
-    ("<code>flex-wrap: wrap</code>", "글자가 커져 한 줄에 들어가지 않으면 <b>다음 줄로 넘어가게</b> 둡니다"),
-    ("<code>user-scalable=no</code>", "쓰지 않습니다. <b>WCAG 1.4.4 위반</b>입니다"),
-    ("확인하는 법", "브라우저는 <b>200%</b>로 확대하고, 폰은 <b>글자 크기를 최대</b>로 두고 화면을 열어 봅니다"),
+    ("글자 크기는 <code>rem</code>으로", "뿌리 요소의 글자 크기에 곱하는 배수라서 <b>사용자 설정을 그대로</b> 따라갑니다"),
+    ("<code>html</code>에 px을 고정하지 않기", "뿌리 요소에 <code>font-size: 16px</code>을 적으면 <b>사용자의 글자 크기 설정이 무시</b>됩니다"),
+    ("높이는 <code>min-height</code>로", "<a href=\"touchtarget.html\">터치 타깃</a> 최소 크기를 지키면서도, 글이 커지면 상자가 같이 늘어납니다"),
+    ("<code>flex-wrap: wrap</code>으로 줄 넘기기", "글자가 커져 한 줄에 들어가지 않으면 <b>다음 줄로 넘어가게</b> 둡니다"),
+    ("<code>user-scalable=no</code> 쓰지 않기", "확대를 막으면 <b>WCAG 1.4.4 위반</b>입니다"),
+    ("확인하는 방법", "브라우저는 <b>200%</b>로 확대하고, 폰은 <b>글자 크기를 최대</b>로 두고 화면을 열어 봅니다"),
   ]),
   backend=rows([
-    ("서버는 설정을 모른다", "사용자의 글자 크기 설정은 <b>서버로 오는 요청에 담기지 않으므로</b>, 화면 쪽에서 CSS로만 다룹니다."),
-    ("글이 길어지는 것과 같은 문제", "글자를 키웠을 때 깨지는 자리는 번역해서 글이 길어질 때 깨지는 자리와 <b>거의 같아서</b>, 한 번 고치면 두 문제가 함께 해결됩니다."),
+    ("서버로 전달되지 않는 설정", "사용자의 글자 크기 설정은 <b>서버로 오는 요청에 담기지 않으므로</b>, 화면 쪽에서 CSS로만 다룹니다."),
+    ("번역으로 글이 길어질 때와 같은 문제", "글자를 키웠을 때 깨지는 자리는 번역해서 글이 길어질 때 깨지는 자리와 <b>거의 같아서</b>, 한 번 고치면 두 문제가 함께 해결됩니다."),
   ]),
   plat_lede="웹, iOS, 안드로이드 모두 글자 크기는 <b>사용자가 직접 켜는 설정</b>입니다.",
   plats=plats([

@@ -14,11 +14,11 @@ ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2)
                   <div class="pin-out" data-pin="1" style="max-width:230px">
                     <div style="height:60px;border:1px solid var(--line-strong);border-radius:6px;background:var(--surface);padding:8px;font-size:11px;line-height:1.7;overflow:auto">상자보다 글이 길어지면 무엇을 할지는 고르는 것이지 저절로 정해지지 않습니다. 네 가지 중 하나를 골라야 합니다.</div>
                   </div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">overflow: visible   — 기본값. 삐져나온다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">overflow: hidden   — 잘린다. 읽을 방법이 없다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">overflow: auto   — 넘칠 때만 스크롤</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">text-overflow: ellipsis   — 한 줄을 … 으로</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">min-width: 0   — 가로 스크롤의 진짜 원인</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">overflow: visible   기본값, 밖으로 삐져나옴</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">overflow: hidden   잘려서 읽을 방법이 없음</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">overflow: auto   넘칠 때만 스크롤</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">text-overflow: ellipsis   한 줄 끝을 …으로 줄임</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">min-width: 0   빠지면 가로 스크롤이 생김</div>
                 </div>
               </div>'''
 
@@ -49,14 +49,17 @@ D = dict(
   ]),
   axes=ax("넘침"),
   oneline="넘침은 넘친 내용을 어떻게 할지 <b>고르는 일</b>입니다. 아무것도 고르지 않으면 내용이 삐져나오고, <code>hidden</code>을 고르면 잘린 내용은 읽지 못해도 된다고 정한 셈이 됩니다.",
-  s4_title="갈래", s4_hint="네 값이 다 다르게 동작한다",
+  s4_title="넘친 내용을 처리하는 방법", s4_hint="값마다 달라지는 넘친 내용의 모습",
+  do_title="넘침 처리를 정해 둬야 하는 경우",
+  dont_title="넘침을 다룰 때 피할 것",
+  instead_title="overflow 값 말고 다른 방법이 필요한 경우",
   states=states([
-    (ob("visible"), "visible", "기본값입니다. 내용이 <b>상자 밖으로 삐져나오고</b>, 부모가 잘라 내면 안 보일 수도 있습니다"),
-    (ob("hidden"), "hidden", "넘친 부분이 <b>잘려서</b> 읽을 방법이 없어집니다"),
-    (ob("auto"), "auto", "넘칠 때<b>만</b> 스크롤바가 생기는, 가장 무난한 값입니다"),
-    (ob("scroll", "짧은 글."), "scroll", "<b>넘치지 않아도</b> 스크롤바 자리를 잡습니다. 레이아웃이 흔들리면 안 될 때 씁니다"),
+    (ob("visible"), "기본값 <code>visible</code>일 때", "기본값입니다. 내용이 <b>상자 밖으로 삐져나오고</b>, 부모가 잘라 내면 안 보일 수도 있습니다"),
+    (ob("hidden"), "<code>hidden</code>으로 자를 때", "넘친 부분이 <b>잘려서</b> 읽을 방법이 없어집니다"),
+    (ob("auto"), "<code>auto</code>로 둘 때", "넘칠 때<b>만</b> 스크롤바가 생기는, 가장 무난한 값입니다"),
+    (ob("scroll", "짧은 글."), "<code>scroll</code>로 둘 때", "<b>넘치지 않아도</b> 스크롤바 자리를 잡습니다. 레이아웃이 흔들리면 안 될 때 씁니다"),
     (ob("hidden", "한 줄이 길어도 끝까지 가지 않고 말줄임", "150px", "34px", "text-overflow:ellipsis;white-space:nowrap"),
-     "말줄임", "overflow, text-overflow, white-space <b>세 속성을 함께</b> 써야 말줄임이 됩니다"),
+     "말줄임으로 줄일 때", "overflow, text-overflow, white-space <b>세 속성을 함께</b> 써야 말줄임이 됩니다"),
     ('''              <div style="width:100%;max-width:150px;height:46px;border:1px solid var(--line-strong);border-radius:5px;background:var(--surface);padding:7px;overflow-x:auto">
                 <div style="display:flex;gap:5px">
                   <span style="flex:none;background:var(--accent-soft);color:var(--accent);border-radius:4px;padding:4px 7px;font-size:10px;white-space:nowrap">칩 하나</span>
@@ -64,7 +67,7 @@ D = dict(
                   <span style="flex:none;background:var(--accent-soft);color:var(--accent);border-radius:4px;padding:4px 7px;font-size:10px;white-space:nowrap">칩 셋</span>
                 </div>
               </div>''',
-     "일부러 가로로", "칩 줄이나 탭 줄은 <b>가로 스크롤로 두는 편이 맞을</b> 때가 있습니다"),
+     "일부러 가로로 밀어 보게 할 때", "칩 줄이나 탭 줄은 <b>가로 스크롤로 두는 편이 맞을</b> 때가 있습니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -91,14 +94,14 @@ D = dict(
     "<code>scroll</code>을 기본으로 쓸 때. 넘치지 않아도 스크롤바 자리가 남습니다",
     "<code>body</code>에 <code>overflow: hidden</code>을 줄 때. 페이지 스크롤이 통째로 막힙니다",
   ]),
-  instead='한 줄로 줄이려면 말줄임, 안 줄어드는 칸은 <a href="flex.html">플렉스</a>·<a href="grid.html">그리드</a>의 <code>min-width: 0</code>, 스크롤하면서 붙여 두려면 <a href="sticky.html">스티키</a>.',
+  instead='글을 한 줄로 줄이고 싶다면 말줄임을 쓰고, 줄어들지 않는 칸 때문에 넘친다면 <a href="flex.html">플렉스</a>·<a href="grid.html">그리드</a> 자식에 <code>min-width: 0</code>을 줍니다. 스크롤하는 동안 요소를 한자리에 붙여 두려면 <a href="sticky.html">스티키</a>를 씁니다.',
   cases=cases([
     (ob("hidden", "환불 확인 요청 — 카드 승인 취소가 늦어져", "190px", "30px", "text-overflow:ellipsis;white-space:nowrap"),
-     "목록 제목", "제목을 한 줄로 자릅니다. 항목마다 <b>줄 높이가 일정해야</b> 목록을 훑어보기 쉽습니다"),
+     "목록 제목을 한 줄로 자르기", "제목을 한 줄로 자릅니다. 항목마다 <b>줄 높이가 일정해야</b> 목록을 훑어보기 쉽습니다"),
     ('''              <div style="width:100%;max-width:190px;height:62px;border:1px solid var(--line-strong);border-radius:5px;background:var(--surface);padding:7px;overflow-y:auto;font-size:10.5px;line-height:1.7">
                 약관 전문은 길어서 상자 안에서 굴립니다. 화면 전체가 길어지는 것보다 낫습니다. 이 글은 일부러 넘치게 적어 둔 것입니다.
               </div>''',
-     "약관 상자", "<code>overflow-y: auto</code>로 상자 안에서 스크롤해서 화면 전체가 길어지지 않게 합니다"),
+     "긴 약관을 상자 안에서 스크롤하기", "<code>overflow-y: auto</code>로 상자 안에서 스크롤해서 화면 전체가 길어지지 않게 합니다"),
     ('''              <div style="width:100%;max-width:190px;overflow-x:auto;border:1px dashed var(--line-strong);border-radius:5px;padding:6px">
                 <div style="display:flex;gap:5px">
                   <span style="flex:none;background:var(--accent);color:#fff;border-radius:99px;padding:4px 9px;font-size:10px">전체</span>
@@ -107,10 +110,10 @@ D = dict(
                   <span style="flex:none;background:var(--surface);border:1px solid var(--line-strong);border-radius:99px;padding:4px 9px;font-size:10px">₩10만 이상</span>
                 </div>
               </div>''',
-     "칩 줄", "폰에서는 <b>일부러</b> 가로로 밀어 보게 합니다. 끝의 칩이 잘려 보여야 사용자가 옆으로 밀 수 있다는 것을 압니다"),
+     "칩 줄을 가로로 밀어 보게 하기", "폰에서는 <b>일부러</b> 가로로 밀어 보게 합니다. 끝의 칩이 잘려 보여야 사용자가 옆으로 밀 수 있다는 것을 압니다"),
   ]),
   s8_title="최소 코드와 규칙", s8_hint="넘침을 다룰 때 지킬 것",
-  keys_heads="<th>규칙</th><th>지켜야 하는 것</th>",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법</th>",
   code_lede="말줄임은 <b>세 줄을 함께</b> 적어야 하고, 하나라도 빠지면 말줄임표가 나오지 않습니다.",
   code='''<span class="c">/* 한 줄 말줄임. 세 줄을 함께 쓴다 */</span>
 <span class="t">.title</span> {
@@ -132,18 +135,18 @@ D = dict(
 [...document.querySelectorAll(<span class="s">'*'</span>)].filter(el =&gt;
   el.scrollWidth &gt; document.documentElement.clientWidth);''',
   keys=kbd([
-    ("말줄임은 세 줄", "<code>overflow</code> + <code>text-overflow</code> + <code>white-space</code>를 함께 써야 하고, 하나만 써서는 말줄임이 되지 않습니다"),
-    ("<code>min-width: 0</code>을 잊지 않는다", "플렉스·그리드 자식은 이 줄이 없으면 <b>말줄임이 걸리지 않습니다</b>"),
-    ("<code>hidden</code> 전에 원인을 본다", "가로 스크롤은 대개 <b>줄어들지 않는 칸</b> 때문에 생깁니다. 원인을 그대로 둔 채 가리면 다른 곳에서 문제가 다시 생깁니다"),
-    ("자른 글은 볼 길을 준다", "<code>title</code> 속성이나 상세 화면으로 전체 글을 보여 줍니다. <b>잘린 채로 두면 사용자는 나머지 내용을 볼 수 없습니다</b>"),
-    ("스크롤 상자에는 높이가 있어야", "<code>overflow: auto</code>만으로는 스크롤이 생기지 않고, <b>높이나 최대 높이</b>를 함께 줘야 합니다"),
-    ("<code>hidden</code>은 부작용이 있다", "안쪽 <code>sticky</code>가 그 상자를 기준으로 붙게 되고, 상자 밖으로 나간 배지·그림자가 잘립니다"),
+    ("말줄임은 세 속성을 함께 쓰기", "<code>overflow</code> + <code>text-overflow</code> + <code>white-space</code>를 함께 써야 하고, 하나만 써서는 말줄임이 되지 않습니다"),
+    ("<code>min-width: 0</code> 빠뜨리지 않기", "플렉스·그리드 자식은 이 줄이 없으면 <b>말줄임이 걸리지 않습니다</b>"),
+    ("<code>hidden</code>으로 가리기 전에 원인 찾기", "가로 스크롤은 대개 <b>줄어들지 않는 칸</b> 때문에 생깁니다. 원인을 그대로 둔 채 가리면 다른 곳에서 문제가 다시 생깁니다"),
+    ("잘린 글 전체를 볼 방법 마련하기", "<code>title</code> 속성이나 상세 화면으로 전체 글을 보여 줍니다. <b>잘린 채로 두면 사용자는 나머지 내용을 볼 수 없습니다</b>"),
+    ("스크롤 상자에 높이 주기", "<code>overflow: auto</code>만으로는 스크롤이 생기지 않고, <b>높이나 최대 높이</b>를 함께 줘야 합니다"),
+    ("<code>hidden</code>의 부작용 알아 두기", "안쪽 <code>sticky</code>가 그 상자를 기준으로 붙게 되고, 상자 밖으로 나간 배지·그림자가 잘립니다"),
   ]),
   backend=rows([
-    ("자르기는 화면에서, 자료는 그대로", "서버가 글을 미리 잘라 보내면 <b>툴팁에도 전체 글을 보여 줄 수 없습니다.</b> 그래서 전체를 보내고 화면에서 줄이는 편이 낫고, 서버에서 자르는 것은 양이 아주 많을 때뿐입니다."),
-    ("가장 긴 값으로 한 번", "말줄임이 제대로 걸리는지는 <b>실제로 긴 데이터</b>를 넣어 봐야 알 수 있습니다. 개발 중에 쓰는 짧은 더미 데이터로는 문제가 드러나지 않습니다."),
-    ("스크롤 상자와 무한 스크롤", "상자 안에서 스크롤하면 <code>window</code>에는 스크롤 이벤트가 오지 않기 때문에, <a href=\"../items/infinite.html\">무한 스크롤</a>을 붙이려면 <b>그 상자를 기준</b>으로 잡아야 합니다."),
-    ("가로 스크롤 자동 검사", "<code>scrollWidth &gt; clientWidth</code> 한 줄로 검사할 수 있습니다. 이 검사를 CI에 넣어 두면 사람이 일일이 보지 않아도 <b>좁은 화면에서 레이아웃이 깨지는 것</b>을 잡아냅니다."),
+    ("자료는 그대로 보내고 화면에서 자르기", "서버가 글을 미리 잘라 보내면 <b>툴팁에도 전체 글을 보여 줄 수 없습니다.</b> 그래서 전체를 보내고 화면에서 줄이는 편이 낫고, 서버에서 자르는 것은 양이 아주 많을 때뿐입니다."),
+    ("가장 긴 값으로 한 번 확인하기", "말줄임이 제대로 걸리는지는 <b>실제로 긴 데이터</b>를 넣어 봐야 알 수 있습니다. 개발 중에 쓰는 짧은 더미 데이터로는 문제가 드러나지 않습니다."),
+    ("스크롤 상자 안에 무한 스크롤을 붙일 때", "상자 안에서 스크롤하면 <code>window</code>에는 스크롤 이벤트가 오지 않기 때문에, <a href=\"../items/infinite.html\">무한 스크롤</a>을 붙이려면 <b>그 상자를 기준</b>으로 잡아야 합니다."),
+    ("가로 스크롤을 자동으로 검사하기", "<code>scrollWidth &gt; clientWidth</code> 한 줄로 검사할 수 있습니다. 이 검사를 CI에 넣어 두면 사람이 일일이 보지 않아도 <b>좁은 화면에서 레이아웃이 깨지는 것</b>을 잡아냅니다."),
   ]),
   plat_lede="넘친 내용을 처리하는 방법은 세 플랫폼 모두 있지만, 기본값이 서로 다릅니다.",
   plats=plats([
@@ -162,5 +165,5 @@ D = dict(
   related='''        <li><a href="../items/listitem.html"><b>리스트 아이템</b><em>5부</em></a></li>
         <li><a href="../items/flex.html"><b>플렉스</b><em>1부</em></a></li>
         <li><a href="../items/zindex.html"><b>z-index</b><em>2부</em></a></li>
-        <li><span class="na"><b>말줄임</b><em>3부</em></span></li>''',
+        <li><a href="truncate.html"><b>말줄임</b><em>3부</em></a></li>''',
 )

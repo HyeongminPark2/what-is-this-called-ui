@@ -40,12 +40,12 @@
 <script>
 (function () {
   var CARDS = [
-    ['삭제 버튼이 호버에만',      '줄에 올려야 ✕ 가 나온다',       false, '폰에서는 지울 방법이 없다'],
-    ['툴팁에만 있는 설명',        '아이콘 뜻이 툴팁에만 있다',     false, '아이콘 뜻을 영영 모른다'],
-    ['호버로만 열리는 메뉴',      '올리면 하위 메뉴가 펼쳐진다',   false, '하위 메뉴에 못 들어간다'],
-    ['호버로만 보이는 가격',      '카드에 올려야 할인가가 뜬다',   false, '할인가를 못 본다'],
-    ['처음부터 보이게',           '✕ 를 늘 보여 준다',             true,  '어디서나 지울 수 있다'],
-    ['눌러서 펼치게',             '⋯ 를 눌러 메뉴를 연다',         true,  '손가락·키보드 모두 된다']
+    ['삭제 버튼을 호버에만 둔 경우', '줄에 마우스를 올려야 ✕가 나타남', false, '폰에서는 지울 방법이 없습니다'],
+    ['툴팁에만 있는 설명',        '아이콘의 뜻이 툴팁에만 적혀 있음', false, '아이콘의 뜻을 알 방법이 없습니다'],
+    ['호버로만 열리는 메뉴',      '마우스를 올리면 하위 메뉴가 펼쳐짐', false, '하위 메뉴에 들어갈 수 없습니다'],
+    ['호버로만 보이는 가격',      '카드에 마우스를 올려야 할인가가 보임', false, '할인가를 볼 수 없습니다'],
+    ['처음부터 보이게 고친 경우', '✕를 늘 보여 줌',                true,  '어느 기기에서나 지울 수 있습니다'],
+    ['눌러서 펼치게 고친 경우',   '⋯를 눌러 메뉴를 엶',            true,  '손가락과 키보드로 모두 쓸 수 있습니다']
   ];
   var grid = document.getElementById('grid');
   grid.innerHTML = CARDS.map(function (c, i) {
@@ -62,7 +62,7 @@
     [].forEach.call(grid.querySelectorAll('.hv'), function (el, i) {
       var fixed = CARDS[i][2];
       var v = el.querySelector('.verdict');
-      if (!off) v.textContent = '마우스를 올리면 보인다';
+      if (!off) v.textContent = '마우스를 올리면 보입니다';
       else if (fixed) v.textContent = '✓ ' + CARDS[i][3];
       else { v.textContent = '✕ ' + CARDS[i][3]; lost++; }
     });
@@ -73,7 +73,7 @@
       : '마우스가 있는 기기에서는 <b>여섯 개 모두</b> 쓸 수 있는 것처럼 보입니다';
     rl.dataset.lost = String(lost);
     document.getElementById('sys').textContent =
-      '이 기기: ' + (matchMedia('(hover: hover)').matches ? 'hover: hover' : 'hover: none') +
+      '지금 보는 기기의 설정 · ' + (matchMedia('(hover: hover)').matches ? 'hover: hover' : 'hover: none') +
       ' · ' + (matchMedia('(pointer: fine)').matches ? 'pointer: fine' : 'pointer: coarse');
   }
   document.getElementById('nohover').addEventListener('change', sync);

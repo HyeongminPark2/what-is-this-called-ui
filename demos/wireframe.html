@@ -69,7 +69,7 @@
     ['proto', '프로토타입', '시안의 화면끼리 이어 두어 눌러 볼 수 있게 만든 것입니다', {
       good: ['이 흐름이 막히는 데가 있나', '사용자가 어디서 헤매나', '단계가 너무 많지 않나'],
       bad: ['이거 이제 거의 다 된 건가요', '그대로 쓰면 되나요'],
-      note: '<b>아직 코드가 아니다.</b> 눌린다고 만들어진 게 아니다'
+      note: '눌러 볼 수는 있지만 <b>아직 코드가 아닙니다.</b> 눌린다고 만들어진 것은 아닙니다.'
     }]
   ];
   var cur = 0;
@@ -94,7 +94,7 @@
             '</div>';
         }).join('') +
       '</div>' +
-      (kind === 'proto' ? '<div style="margin-top:auto;font-size:11px;color:var(--accent)">→ 누르면 상세로 이어 뒀다</div>' : '') +
+      (kind === 'proto' ? '<div style="margin-top:auto;font-size:11px;color:var(--accent)">→ 누르면 상세 화면으로 넘어감</div>' : '') +
       '</div>';
   }
 

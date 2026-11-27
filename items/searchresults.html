@@ -75,20 +75,20 @@
         <p>화면 단위 패턴은 부품 하나가 아니라 사용자가 <b>끝내야 하는 일</b> 하나를 기준으로 나눕니다. 그래서 아래 네 가지를 따져 보면 화면끼리 구별할 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 끝내야 하나</th><th>막히는 자리</th><th>중간에 떠나면</th><th>서버가 쥔 것</th></tr></thead>
+          <thead><tr><th></th><th>사용자가 끝내야 하는 일</th><th>사용자가 자주 막히는 곳</th><th>중간에 떠나면 생기는 일</th><th>서버가 맡아 두는 것</th></tr></thead>
           <tbody>
-            <tr><td>로그인</td><td>내가 <b>누구인지</b> 증명</td><td>비밀번호를 잊음</td><td>아무 일도 안 일어남</td><td>세션 · 토큰</td></tr>
-            <tr><td>온보딩</td><td><b>처음 쓸 수</b> 있게</td><td>건너뛸 길이 없음</td><td><b>다시 처음부터</b></td><td>어디까지 봤나</td></tr>
-            <tr class="me"><td><b>검색 결과 화면</b></td><td>찾는 것을 <b>고름</b></td><td>0건</td><td>질의를 잃는다</td><td>질의 · 순위</td></tr>
-            <tr><td>설정 화면</td><td>값을 <b>바꿈</b></td><td>어디 있는지 못 찾음</td><td>바뀐 채 남는다</td><td>계정별 저장</td></tr>
-            <tr><td>결제 흐름</td><td><b>돈을 냄</b></td><td>비용이 뒤늦게 드러남</td><td>장바구니로 돌아감</td><td>주문 · 결제 상태</td></tr>
-            <tr><td>권한 요청</td><td>기기 기능을 <b>씀</b></td><td><b>한 번 거절하면 끝</b></td><td>그 기능만 못 씀</td><td>모름 — 기기에만 있다</td></tr>
-            <tr><td>알림 센터</td><td>놓친 것을 <b>따라잡음</b></td><td>읽음 처리가 안 맞음</td><td>그대로 쌓인다</td><td>읽음 상태 맞추기</td></tr>
-            <tr><td>위험한 동작</td><td>되돌릴 수 <b>없는 일</b></td><td>확인이 너무 쉬움</td><td><b>아무 일도 안 남 — 좋다</b></td><td>유예 · 복구 기간</td></tr>
-            <tr><td>프로필</td><td>남에게 <b>나를 보임</b></td><td>공개 범위를 모름</td><td>아무 일도 안 일어남</td><td><b>누가 무엇까지</b> 보나</td></tr>
-            <tr><td>대시보드</td><td><b>지금 괜찮은지</b> 판단</td><td>숫자가 너무 많음</td><td>아무 일도 안 일어남</td><td>집계 · 기준 시각</td></tr>
-            <tr><td>공유하기</td><td>남에게 <b>보여 줌</b></td><td>범위를 잘못 고름</td><td>링크가 안 나감</td><td><b>열쇠와 범위</b></td></tr>
-            <tr><td>파일 올리기</td><td>파일을 <b>건네줌</b></td><td>다 올리고 거절당함</td><td><b>올린 것이 날아감</b></td><td>크기 · 형식 · 보관</td></tr>
+            <tr><td>로그인</td><td>내가 <b>누구인지</b> 증명하기</td><td>비밀번호를 잊음</td><td>아무 일도 일어나지 않음</td><td>세션 · 토큰</td></tr>
+            <tr><td>온보딩</td><td><b>처음 쓸 수 있는</b> 상태 만들기</td><td>건너뛸 길이 없음</td><td><b>처음부터 다시 해야 함</b></td><td>어디까지 봤는지</td></tr>
+            <tr class="me"><td><b>검색 결과 화면</b></td><td>찾는 것을 <b>고르기</b></td><td>결과가 0건일 때</td><td>검색어를 잃음</td><td>질의 · 순위</td></tr>
+            <tr><td>설정 화면</td><td>값을 <b>바꾸기</b></td><td>설정이 어디 있는지 못 찾음</td><td>바꾼 값이 그대로 남음</td><td>계정별 저장</td></tr>
+            <tr><td>결제 흐름</td><td><b>돈을 내기</b></td><td>비용이 뒤늦게 드러남</td><td>장바구니로 돌아감</td><td>주문 · 결제 상태</td></tr>
+            <tr><td>권한 요청</td><td>기기 기능을 <b>쓰기</b></td><td><b>한 번 거절하면 다시 묻기 어려움</b></td><td>그 기능만 못 씀</td><td>기기에만 있어 서버는 모름</td></tr>
+            <tr><td>알림 센터</td><td>놓친 것을 <b>따라잡기</b></td><td>읽음 처리가 안 맞음</td><td>알림이 그대로 쌓임</td><td>읽음 상태 맞추기</td></tr>
+            <tr><td>위험한 동작</td><td>되돌릴 수 <b>없는 일</b> 하기</td><td>확인이 너무 쉬움</td><td><b>아무것도 지워지지 않아 안전함</b></td><td>유예 · 복구 기간</td></tr>
+            <tr><td>프로필</td><td>남에게 <b>나를 보여 주기</b></td><td>공개 범위를 모름</td><td>아무 일도 일어나지 않음</td><td><b>누가 무엇까지</b> 보는지</td></tr>
+            <tr><td>대시보드</td><td><b>지금 괜찮은지</b> 판단하기</td><td>숫자가 너무 많음</td><td>아무 일도 일어나지 않음</td><td>집계 · 기준 시각</td></tr>
+            <tr><td>공유하기</td><td>남에게 <b>보여 주기</b></td><td>범위를 잘못 고름</td><td>링크가 전달되지 않음</td><td><b>링크 토큰과 공유 범위</b></td></tr>
+            <tr><td>파일 올리기</td><td>파일을 <b>건네주기</b></td><td>다 올리고 거절당함</td><td><b>올리던 파일이 사라짐</b></td><td>크기 · 형식 · 보관</td></tr>
           </tbody>
         </table>
         </div>
@@ -98,43 +98,43 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 상태<span class="hint">왕복이 되는가</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 결과 화면의 상태<span class="hint">들어갔다 돌아오는 왕복이 매끄러운가</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="padding:5px 8px;border-bottom:1px solid var(--line);background:var(--bg);font-size:9px;font-weight:700">검색 결과</div><div style="padding:7px 8px;display:grid;gap:5px"><div style="display:flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:9.5px"><span aria-hidden="true" style="font-size:8px">🔍</span><span>모란</span></div><span style="font-size:8.5px;color:var(--fg-muted)">‘모란’ · <b>6건</b></span><div style="font-size:9.5px;border-top:1px solid var(--line);padding:4px 0"><b style="background:var(--warn-soft);border-radius:2px;padding:0 1px">모란</b>상회 신길역점<span style="display:block;font-size:8px;color:var(--fg-muted)">1,284,000원 · 승인됨</span></div><div style="font-size:9.5px;border-top:1px solid var(--line);padding:4px 0"><b style="background:var(--warn-soft);border-radius:2px;padding:0 1px">모란</b>김밥 가산점<span style="display:block;font-size:8px;color:var(--fg-muted)">1,284,000원 · 승인됨</span></div></div></div>
             </div>
-            <figcaption>결과 있음<span><b>무엇으로 찾았는지</b>와 건수를 다시 적어 줍니다</span></figcaption>
+            <figcaption>결과가 있을 때<span><b>무엇으로 찾았는지</b>와 건수를 다시 적어 줍니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="padding:5px 8px;border-bottom:1px solid var(--line);background:var(--bg);font-size:9px;font-weight:700">검색 결과</div><div style="padding:7px 8px;display:grid;gap:5px"><div style="display:flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:9.5px"><span aria-hidden="true" style="font-size:8px">🔍</span><span>모란</span></div><div style="display:flex;gap:3px"><span style="background:var(--accent);color:#fff;border-radius:999px;padding:1px 6px;font-size:8px">승인됨 ✕</span></div><span style="font-size:8.5px;color:var(--fg-muted)">‘모란’ · 승인됨 · <b>3건</b></span><div style="font-size:9.5px;border-top:1px solid var(--line);padding:4px 0"><b style="background:var(--warn-soft);border-radius:2px;padding:0 1px">모란</b>상회 신길역점<span style="display:block;font-size:8px;color:var(--fg-muted)">1,284,000원 · 승인됨</span></div></div></div>
             </div>
-            <figcaption>조건이 걸림<span>걸어 둔 <a href="filter.html">필터</a>가 <b>칩</b>으로 보입니다</span></figcaption>
+            <figcaption>필터 조건을 걸었을 때<span>걸어 둔 <a href="filter.html">필터</a>가 <b>칩</b>으로 보입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="padding:5px 8px;border-bottom:1px solid var(--line);background:var(--bg);font-size:9px;font-weight:700">검색 결과</div><div style="padding:7px 8px;display:grid;gap:5px"><div style="display:flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:9.5px"><span aria-hidden="true" style="font-size:8px">🔍</span><span>모란닭강정</span></div><div style="border:1px dashed var(--line);border-radius:5px;padding:8px;text-align:center;font-size:8.5px;color:var(--fg-muted)">맞는 것이 없습니다<br><span style="color:var(--accent)">‘모란’으로 넓혀 보기</span></div></div></div>
             </div>
-            <figcaption>0건<span><b>입력한 글자를 그대로 적고</b> 검색 범위를 넓힐 방법을 알려 줍니다</span></figcaption>
+            <figcaption>결과가 0건일 때<span><b>입력한 글자를 그대로 적고</b> 검색 범위를 넓힐 방법을 알려 줍니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="padding:5px 8px;border-bottom:1px solid var(--line);background:var(--bg);font-size:9px;font-weight:700">검색 결과</div><div style="padding:7px 8px;display:grid;gap:5px"><div style="display:flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:9.5px"><span aria-hidden="true" style="font-size:8px">🔍</span><span>모란</span></div><span style="font-size:8.5px;color:var(--fg-muted)">불러오는 중…</span><div style="display:grid;gap:4px"><span class="skl" style="height:9px"></span><span class="skl" style="height:9px;width:70%"></span></div></div></div>
             </div>
-            <figcaption>불러오는 중<span>새 결과가 올 때까지 <b>이전 결과를 지우지 않습니다</b></span></figcaption>
+            <figcaption>새 결과를 불러오는 중<span>새 결과가 올 때까지 <b>이전 결과를 지우지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="padding:5px 8px;border-bottom:1px solid var(--line);background:var(--bg);font-size:9px;font-weight:700">상세</div><div style="padding:7px 8px;display:grid;gap:5px"><span style="font-size:9.5px;font-weight:700">모란상회 신길역점</span><span style="font-size:8.5px;color:var(--fg-muted)">1,284,000원 · 승인됨</span><span style="font-size:9px;color:var(--accent)">← 결과로 돌아가기</span></div></div>
             </div>
-            <figcaption>들어갔을 때<span>결과로 <b>돌아가는 링크</b>가 화면 안에도 있어야 합니다</span></figcaption>
+            <figcaption>결과 하나에 들어갔을 때<span>결과로 <b>돌아가는 링크</b>가 화면 안에도 있어야 합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="padding:5px 8px;border-bottom:1px solid var(--line);background:var(--bg);font-size:9px;font-weight:700">검색 결과</div><div style="padding:7px 8px;display:grid;gap:5px"><div style="display:flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:9.5px"><span aria-hidden="true" style="font-size:8px">🔍</span><span></span></div><span style="font-size:8.5px;color:var(--danger)">질의를 잃었다 — 처음부터 다시</span></div></div>
+              <div style="width:100%;max-width:152px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="padding:5px 8px;border-bottom:1px solid var(--line);background:var(--bg);font-size:9px;font-weight:700">검색 결과</div><div style="padding:7px 8px;display:grid;gap:5px"><div style="display:flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:9.5px"><span aria-hidden="true" style="font-size:8px">🔍</span><span></span></div><span style="font-size:8.5px;color:var(--danger)">질의를 잃어 처음부터 다시 찾음</span></div></div>
             </div>
-            <figcaption>돌아왔는데 빈 화면<span>검색 상태를 <b>주소에 담지 않았을 때</b> 생기는 일입니다</span></figcaption>
+            <figcaption>돌아왔는데 빈 화면이 뜰 때<span>검색 상태를 <b>주소에 담지 않았을 때</b> 생기는 일입니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -147,22 +147,22 @@
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="max-width:220px"><div style="display:flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:9.5px"><span aria-hidden="true" style="font-size:8px">🔍</span><span>모란</span></div></div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">‘모란’ · 승인됨 · 6건 — 무엇으로 찾았는지 다시 적는다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">?q=모란&amp;f=승인됨&amp;page=2 — 주소에 담는다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">굴린 자리를 기억했다 돌아올 때 되살린다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">0건이면 조건을 지울 길과 다른 질의를 준다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">돌아왔더니 빈 화면 — 가장 흔한 민원</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">‘모란’ · 승인됨 · 6건처럼 찾은 조건을 다시 적음</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">?q=모란&amp;f=승인됨&amp;page=2처럼 주소에 담음</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">굴린 자리를 기억했다가 돌아올 때 되살림</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">0건이면 조건 지우기와 다른 질의를 제안함</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">돌아왔을 때 빈 화면이 가장 흔한 민원</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>질의 상자 <em>친 글자 그대로</em></b><span>입력한 글자가 결과 화면에도 <b>남아 있어야</b> 고쳐서 다시 찾을 수 있습니다</span></li>
+            <li><b>질의 상자 <em>입력한 글자 그대로</em></b><span>입력한 글자가 결과 화면에도 <b>남아 있어야</b> 고쳐서 다시 찾을 수 있습니다</span></li>
             <li><b>요약 줄 <em>‘모란’ · 승인됨 · 6건</em></b><span><b>무엇으로 찾아 몇 건</b>이 나왔는지 적습니다. 0건일 때 특히 중요합니다</span></li>
             <li><b>주소 <em>?q=&f=&page=</em></b><span>상태를 주소에 담으면 <b>공유 · 새로고침 · 뒤로가기</b>가 한꺼번에 해결됩니다</span></li>
             <li><b>굴린 자리 <em>복원</em></b><span>돌아왔을 때 <b>보던 줄</b>부터 이어서 볼 수 있게 합니다</span></li>
-            <li><b>0건의 길 <em>넓히기 · 지우기</em></b><span>결과가 없을 때도 다음에 할 일을 보여 줘서 사용자가 멈추지 않게 합니다</span></li>
-            <li><b>안 담았을 때 <em>빈 화면</em></b><span>사용자가 <b>처음부터 다시</b> 찾아야 해서 가장 흔한 민원이 됩니다</span></li>
+            <li><b>0건일 때 안내 <em>넓히기 · 지우기</em></b><span>결과가 없을 때도 다음에 할 일을 보여 줘서 사용자가 멈추지 않게 합니다</span></li>
+            <li><b>상태를 잃은 화면 <em>빈 화면</em></b><span>사용자가 <b>처음부터 다시</b> 찾아야 해서 가장 흔한 민원이 됩니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -179,7 +179,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>검색 결과 화면을 쓰는 경우</h3>
+            <h3>검색 결과 화면으로 만들면 좋은 경우</h3>
             <ul>
               <li>목록·상품·문서처럼 찾은 뒤 <b>하나를 골라 들어가는</b> 화면일 때</li>
               <li>조건이 여럿 붙는 목록일 때. 조건을 <b>주소에 담아</b> 공유할 수 있게 합니다</li>
@@ -187,7 +187,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>검색 결과 화면을 쓰지 않는 경우</h3>
+            <h3>검색 결과 화면을 잘못 만드는 경우</h3>
             <ul>
               <li>질의를 <b>주소에 담지 않을 때</b>. 공유도 새로고침도 되지 않습니다</li>
               <li>0건일 때 다음에 할 일을 보여 주지 않아 <b>막다른 길</b>을 만들 때</li>
@@ -196,7 +196,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>검색 결과 화면 대신 다른 것을 써야 하는 경우</b> — 입력칸과 응답 처리는 <a href="search.html">검색</a>, 조건 고르기는 <a href="filter.html">필터와 패싯</a>, 줄이 아주 많으면 <a href="virtual.html">가상 스크롤</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>함께 보면 좋은 항목</b> — 검색 입력칸과 응답 처리는 <a href="search.html">검색</a>에서, 조건을 고르는 부품은 <a href="filter.html">필터와 패싯</a>에서 다룹니다. 결과 줄이 아주 많으면 <a href="virtual.html">가상 스크롤</a>도 함께 봅니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -206,7 +206,7 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="padding:5px 8px;border-bottom:1px solid var(--line);background:var(--bg);font-size:9px;font-weight:700">검색 결과</div><div style="padding:7px 8px;display:grid;gap:5px"><div style="display:flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:9.5px"><span aria-hidden="true" style="font-size:8px">🔍</span><span>모란</span></div><span style="font-size:8.5px;color:var(--fg-muted)">6건 · 관련도순</span><div style="font-size:9.5px;border-top:1px solid var(--line);padding:4px 0"><b style="background:var(--warn-soft);border-radius:2px;padding:0 1px">모란</b>상회 신길역점<span style="display:block;font-size:8px;color:var(--fg-muted)">1,284,000원 · 승인됨</span></div></div></div>
             </div>
-            <figcaption><b>건수와 순서</b>결과를 <b>무엇을 기준으로</b> 정렬했는지 적어 둡니다</figcaption>
+            <figcaption><b>건수와 정렬 기준 알려 주기</b>결과를 <b>무엇을 기준으로</b> 정렬했는지 적어 둡니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -214,13 +214,13 @@
                 /search?q=모란&amp;f=승인됨&amp;page=2
               </div>
             </div>
-            <figcaption><b>주소에 담기</b>주소 한 줄에 상태를 담으면 <b>공유·새로고침·뒤로가기</b>가 모두 해결됩니다</figcaption>
+            <figcaption><b>검색 상태를 주소에 담기</b>주소 한 줄에 상태를 담으면 <b>공유·새로고침·뒤로가기</b>가 모두 해결됩니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><div style="padding:5px 8px;border-bottom:1px solid var(--line);background:var(--bg);font-size:9px;font-weight:700">검색 결과</div><div style="padding:7px 8px;display:grid;gap:5px"><div style="display:flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:9.5px"><span aria-hidden="true" style="font-size:8px">🔍</span><span>모란닭강정</span></div><span style="font-size:8.5px;color:var(--fg-muted)">이렇게 찾아보세요</span><span style="font-size:9px;color:var(--accent)">모란 · 닭강정 · 모란상회</span></div></div>
             </div>
-            <figcaption><b>0건의 다음 수</b>범위를 넓힌 질의를 <b>눌러서</b> 바로 검색할 수 있게 합니다</figcaption>
+            <figcaption><b>0건일 때 다른 검색어 제안하기</b>범위를 넓힌 질의를 <b>눌러서</b> 바로 검색할 수 있게 합니다</figcaption>
           </figure>
         </div>
       </section>
@@ -247,14 +247,14 @@ sessionStorage.setItem(<span class="s">'pos'</span>, String(list.scrollTop));
 list.scrollTop = +sessionStorage.getItem(<span class="s">'pos'</span>) || <span class="a">0</span>;</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>처리하는 방법</th></tr></thead>
           <tbody>
             <tr><td><code>role="search"</code></td><td>검색 영역을 하나의 구역으로 알립니다. 스크린 리더 사용자가 그 구역으로 바로 건너뛸 수 있습니다</td></tr>
             <tr><td><code>role="status"</code></td><td>'6건'처럼 건수를 알립니다. 소리 없이 <b>결과만 바뀌면</b> 화면을 눈으로 보지 않는 사람은 바뀐 줄 모릅니다</td></tr>
-            <tr><td><code>&lt;ol&gt;</code>로 적는다</td><td>결과는 순서에 뜻이 있으므로 순서 있는 목록으로 적습니다. 스크린 리더가 '6개 중 2번째'처럼 읽어 줍니다</td></tr>
+            <tr><td>결과를 <code>&lt;ol&gt;</code>로 적기</td><td>결과는 순서에 뜻이 있으므로 순서 있는 목록으로 적습니다. 스크린 리더가 '6개 중 2번째'처럼 읽어 줍니다</td></tr>
             <tr><td><code>replaceState</code>와 <code>pushState</code></td><td>조건만 바뀌었을 때는 방문 기록을 쌓지 않고 <b>갈아끼웁니다</b>(<a href="systemback.html">시스템 백</a>)</td></tr>
             <tr><td><code>scrollRestoration</code></td><td>브라우저 기본 복원과 직접 만든 복원이 함께 돌면 <b>서로 위치를 덮어쓸 수</b> 있으므로 하나만 씁니다</td></tr>
-            <tr><td>초점</td><td>상세 화면에서 돌아오면 <b>눌렀던 줄</b>로 초점을 되돌립니다. 되돌리지 않으면 Tab을 처음부터 다시 눌러야 합니다</td></tr>
+            <tr><td>초점을 되돌릴 자리</td><td>상세 화면에서 돌아오면 <b>눌렀던 줄</b>로 초점을 되돌립니다. 되돌리지 않으면 Tab을 처음부터 다시 눌러야 합니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -265,11 +265,11 @@ list.scrollTop = +sessionStorage.getItem(<span class="s">'pos'</span>) || <span 
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>조건을 주소에서 읽는다</th><td>서버가 <code>?q=</code>·<code>?page=</code>를 그대로 받아 화면을 그리면, <b>공유한 링크를 연 사람도 같은 화면</b>을 봅니다.</td></tr>
-            <tr><th>허용 목록으로</th><td><code>sort</code>·<code>f</code> 값을 그대로 질의에 넣지 않고, 허용한 값인지 확인한 뒤에 씁니다. <a href="table.html">데이터 테이블</a>과 같은 주입 문제가 생기기 때문입니다.</td></tr>
-            <tr><th>같은 값의 순서</th><td>정렬 값이 같은 줄들의 순서가 요청마다 달라지면 <b>쪽을 넘길 때 같은 줄이 두 번</b> 나옵니다. 그래서 ID를 2차 정렬 기준으로 붙입니다.</td></tr>
-            <tr><th>건수는 비싸다</th><td>큰 표에서는 <code>COUNT(*)</code>가 느립니다. 그래서 건수를 <b>'100+ 건'</b>으로 적거나 커서 방식으로 바꿉니다.</td></tr>
-            <tr><th>빈 질의</th><td><code>?q=</code>가 비었을 때 전체를 돌려줄지, 아무것도 돌려주지 않을지 <b>미리 정해 둡니다</b>. 정해 두지 않으면 빈 질의가 들어올 때마다 전체 조회가 돌아 서버에 큰 부하가 걸립니다.</td></tr>
+            <tr><th>검색 조건을 주소에서 읽기</th><td>서버가 <code>?q=</code>·<code>?page=</code>를 그대로 받아 화면을 그리면, <b>공유한 링크를 연 사람도 같은 화면</b>을 봅니다.</td></tr>
+            <tr><th>정렬·필터 값은 허용 목록으로 거르기</th><td><code>sort</code>·<code>f</code> 값을 그대로 질의에 넣지 않고, 허용한 값인지 확인한 뒤에 씁니다. <a href="table.html">데이터 테이블</a>과 같은 주입 문제가 생기기 때문입니다.</td></tr>
+            <tr><th>정렬 값이 같은 줄의 순서 고정하기</th><td>정렬 값이 같은 줄들의 순서가 요청마다 달라지면 <b>쪽을 넘길 때 같은 줄이 두 번</b> 나옵니다. 그래서 ID를 2차 정렬 기준으로 붙입니다.</td></tr>
+            <tr><th>건수를 세는 비용이 큼</th><td>큰 표에서는 <code>COUNT(*)</code>가 느립니다. 그래서 건수를 <b>'100+ 건'</b>으로 적거나 커서 방식으로 바꿉니다.</td></tr>
+            <tr><th>검색어 없이 요청이 왔을 때</th><td><code>?q=</code>가 비었을 때 전체를 돌려줄지, 아무것도 돌려주지 않을지 <b>미리 정해 둡니다</b>. 정해 두지 않으면 빈 질의가 들어올 때마다 전체 조회가 돌아 서버에 큰 부하가 걸립니다.</td></tr>
           </tbody>
         </table>
         </div>

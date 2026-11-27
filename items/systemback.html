@@ -50,9 +50,9 @@
           <iframe src="../demos/systemback.html" title="시스템 백 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>기록에 넣기</b>를 끄고 시트를 연 뒤 <b>← 뒤로</b>를 눌러 보세요.
+          <p><b>모달을 뒤로가기 기록에 넣기</b>를 끄고 시트를 연 뒤 <b>← 뒤로</b>를 눌러 보세요.
           시트는 그대로 남고 <b>그 아래 화면이 사라지며</b>, 한 번 더 누르면 앱을 나갑니다.<br>
-          <b>기록에 넣기</b>를 켜 두면 뒤로가기가 <b>시트만</b> 닫습니다. 기록 줄에서는 무엇이 쌓이고 빠지는지 함께 볼 수 있습니다.</p>
+          이 설정을 켜 두면 뒤로가기가 <b>시트만</b> 닫습니다. 아래 기록 줄에서는 무엇이 쌓이고 빠지는지 함께 볼 수 있습니다.</p>
         </div>
       </section>
 
@@ -75,16 +75,16 @@
         <p>PC와 폰의 차이는 기계 자체보다 화면을 쓰는 <b>전제</b>에 있습니다. 아래 네 가지를 물어보면 두 환경이 어디서 갈리는지 알 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇이 다른가</th><th>폰에서는</th><th>PC에서는</th><th>안 챙기면</th></tr></thead>
+          <thead><tr><th></th><th>두 환경에서 다른 점</th><th>폰에서는</th><th>PC에서는</th><th>챙기지 않으면 생기는 일</th></tr></thead>
           <tbody>
-            <tr><td>브레이크포인트</td><td>폭에 따른 <b>배치</b></td><td>한 단</td><td>여러 단</td><td>중간 폭에서 깨진다</td></tr>
-            <tr><td>터치 타깃</td><td>누를 수 있는 <b>넓이</b></td><td>44px 이상</td><td>24px도 된다</td><td>옆 것이 눌린다</td></tr>
-            <tr><td>호버가 없는 세계</td><td><b>올려놓기</b>가 되나</td><td class="none">없다</td><td>있다</td><td>영영 못 보는 정보가 생긴다</td></tr>
-            <tr class="me"><td><b>시스템 백</b></td><td><b>뒤로 가는</b> 길</td><td>OS가 준다</td><td>브라우저 버튼</td><td>모달 대신 <b>앱이 나간다</b></td></tr>
-            <tr><td>화면 밀도</td><td>1px의 <b>실제 화소 수</b></td><td>2~3배</td><td>1~2배</td><td>그림이 뭉개진다</td></tr>
-            <tr><td>뷰포트 단위</td><td><b>100vh</b>가 가리키는 높이</td><td>주소창 때문에 흔들린다</td><td>고정</td><td>바닥 버튼이 잘린다</td></tr>
-            <tr><td>폰 키보드</td><td><b>올라오는</b> 자리</td><td>화면 절반</td><td class="none">없다</td><td>입력칸이 가려진다</td></tr>
-            <tr><td>HIG와 Material의 차이</td><td>OS의 <b>말투</b></td><td>각자 다르다</td><td>웹 관례</td><td>어느 쪽에서도 어색하다</td></tr>
+            <tr><td>브레이크포인트</td><td>폭에 따른 <b>배치</b></td><td>한 단</td><td>여러 단</td><td>중간 폭에서 배치가 깨짐</td></tr>
+            <tr><td>터치 타깃</td><td>누를 수 있는 <b>넓이</b></td><td>44px 이상</td><td>24px도 괜찮음</td><td>옆의 것이 눌림</td></tr>
+            <tr><td>호버가 없는 세계</td><td><b>올려놓기</b>가 되는지</td><td>안 됨</td><td>됨</td><td>끝내 볼 수 없는 정보가 생김</td></tr>
+            <tr class="me"><td><b>시스템 백</b></td><td><b>뒤로 가는</b> 길</td><td>OS가 제공함</td><td>브라우저의 ← 버튼</td><td>모달 대신 <b>앱이 꺼짐</b></td></tr>
+            <tr><td>화면 밀도</td><td>1px의 <b>실제 화소 수</b></td><td>2~3배</td><td>1~2배</td><td>그림이 뭉개짐</td></tr>
+            <tr><td>뷰포트 단위</td><td><b>100vh</b>가 가리키는 높이</td><td>주소창 때문에 달라짐</td><td>하나로 정해짐</td><td>바닥 버튼이 잘림</td></tr>
+            <tr><td>폰 키보드</td><td>키보드가 <b>올라와 덮는</b> 자리</td><td>화면의 절반</td><td>덮지 않음</td><td>입력칸이 가려짐</td></tr>
+            <tr><td>HIG와 Material의 차이</td><td>OS마다 다른 <b>관례</b></td><td>OS마다 다름</td><td>웹 관례를 따름</td><td>어느 쪽에서도 어색함</td></tr>
           </tbody>
         </table>
         </div>
@@ -94,43 +94,43 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 기록과 화면<span class="hint">둘이 어긋나면 사고가 난다</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 뒤로가기 기록과 화면<span class="hint">기록과 화면이 어긋날 때 생기는 문제</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;flex-wrap:wrap"><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--accent);color:#fff;font-weight:700">목록</span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">첫 화면</span></div>
             </div>
-            <figcaption>처음<span>기록이 하나뿐이라서, 여기서 뒤로가기를 누르면 <b>앱을 나갑니다</b></span></figcaption>
+            <figcaption>첫 화면에 있을 때<span>기록이 하나뿐이라서, 여기서 뒤로가기를 누르면 <b>앱을 나갑니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;flex-wrap:wrap"><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--bg);border:1px solid var(--line);color:var(--fg-muted)">목록</span><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--accent);color:#fff;font-weight:700">상세</span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">화면을 하나 열었다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;flex-wrap:wrap"><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--bg);border:1px solid var(--line);color:var(--fg-muted)">목록</span><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--accent);color:#fff;font-weight:700">상세</span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">화면을 하나 연 상태</span></div>
             </div>
-            <figcaption>들어감<span>기록이 둘이 되어, 뒤로가기를 누르면 목록으로 돌아갑니다</span></figcaption>
+            <figcaption>상세 화면으로 들어갔을 때<span>기록이 둘이 되어, 뒤로가기를 누르면 목록으로 돌아갑니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;flex-wrap:wrap"><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--bg);border:1px solid var(--line);color:var(--fg-muted)">목록</span><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--bg);border:1px solid var(--line);color:var(--fg-muted)">상세</span><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--accent);color:#fff;font-weight:700">시트</span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">시트도 기록에 넣었다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;flex-wrap:wrap"><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--bg);border:1px solid var(--line);color:var(--fg-muted)">목록</span><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--bg);border:1px solid var(--line);color:var(--fg-muted)">상세</span><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--accent);color:#fff;font-weight:700">시트</span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">시트도 기록에 넣은 상태</span></div>
             </div>
-            <figcaption>시트 열림 ✓<span>뒤로가기를 누르면 <b>시트만</b> 닫힙니다</span></figcaption>
+            <figcaption>시트를 기록에 넣어 열었을 때 ✓<span>뒤로가기를 누르면 <b>시트만</b> 닫힙니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;flex-wrap:wrap"><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--bg);border:1px solid var(--line);color:var(--fg-muted)">목록</span><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--accent);color:#fff;font-weight:700">상세</span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">뒤로 — 시트가 빠졌다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;flex-wrap:wrap"><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--bg);border:1px solid var(--line);color:var(--fg-muted)">목록</span><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--accent);color:#fff;font-weight:700">상세</span></div><span style="font-family:var(--mono);font-size:9px;color:var(--fg-muted)">뒤로가기로 시트가 빠짐</span></div>
             </div>
-            <figcaption>뒤로 누름<span>사용자가 <b>기대한 대로</b> 시트만 사라집니다</span></figcaption>
+            <figcaption>그 상태에서 뒤로가기를 눌렀을 때<span>사용자가 <b>기대한 대로</b> 시트만 사라집니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;flex-wrap:wrap"><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--bg);border:1px solid var(--line);color:var(--fg-muted)">목록</span><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--accent);color:#fff;font-weight:700">상세</span></div><span style="font-family:var(--mono);font-size:9px;color:var(--danger)">시트는 기록 밖 — 안 쌓였다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;flex-wrap:wrap"><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--bg);border:1px solid var(--line);color:var(--fg-muted)">목록</span><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--accent);color:#fff;font-weight:700">상세</span></div><span style="font-family:var(--mono);font-size:9px;color:var(--danger)">시트가 기록에 쌓이지 않음</span></div>
             </div>
-            <figcaption>안 넣었을 때<span>화면에는 시트가 있는데 <b>기록에는 없습니다</b></span></figcaption>
+            <figcaption>시트를 기록에 넣지 않았을 때<span>화면에는 시트가 있는데 <b>기록에는 없습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;flex-wrap:wrap"><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--accent);color:#fff;font-weight:700">목록</span></div><span style="font-family:var(--mono);font-size:9px;color:var(--danger)">뒤로 — 시트는 남고 뒤 화면이 사라졌다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;flex-wrap:wrap"><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--accent);color:#fff;font-weight:700">목록</span></div><span style="font-family:var(--mono);font-size:9px;color:var(--danger)">뒤로가기에 시트는 남고 뒤 화면이 사라짐</span></div>
             </div>
-            <figcaption>그 상태로 뒤로<span>시트 대신 그 아래 화면이 사라져서 <b>엉뚱한 것이 닫힙니다</b></span></figcaption>
+            <figcaption>그 상태로 뒤로가기를 눌렀을 때<span>시트 대신 그 아래 화면이 사라져서 <b>엉뚱한 것이 닫힙니다</b></span></figcaption>
           </figure>
         </div>
       </section>
@@ -143,22 +143,22 @@
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="max-width:230px"><div style="width:100%;max-width:230px;display:grid;gap:5px"><div style="display:flex;gap:4px;flex-wrap:wrap"><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--bg);border:1px solid var(--line);color:var(--fg-muted)">목록</span><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--bg);border:1px solid var(--line);color:var(--fg-muted)">상세</span><span style="padding:3px 7px;border-radius:5px;font-size:9px;font-family:var(--mono);background:var(--accent);color:#fff;font-weight:700">시트</span></div></div></div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">열 때 history.pushState — 기록을 하나 쌓는다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">popstate — 뒤로가 눌렸다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">✕ 로 닫을 때는 history.back() — 기록을 되돌린다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">&lt;dialog&gt; 는 Esc 만 — 뒤로가기는 직접 잇는다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">기록에 안 넣으면 뒤로가 앱을 나간다</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">열 때 history.pushState로 기록을 하나 쌓음</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">popstate는 뒤로가기가 눌렸다는 신호</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">✕로 닫을 때는 history.back()으로 기록을 되돌림</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">&lt;dialog&gt;는 Esc만 지원해 뒤로가기는 직접 연결</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">기록에 넣지 않으면 뒤로가기로 앱을 나감</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
             <li><b>기록 <em>history stack</em></b><span>OS와 브라우저가 쌓아 둡니다. 뒤로가기는 <b>화면이 아니라 이 기록</b>을 되돌립니다</span></li>
-            <li><b>쌓기 <em>pushState</em></b><span>화면을 덮는 것을 열 때 기록을 하나 쌓습니다. 주소는 바꾸지 않아도 됩니다</span></li>
-            <li><b>받기 <em>popstate</em></b><span>뒤로가기가 눌렸다는 신호입니다. <b>이 이벤트에서 시트를 닫습니다</b></span></li>
+            <li><b>기록 쌓기 <em>pushState</em></b><span>화면을 덮는 것을 열 때 기록을 하나 쌓습니다. 주소는 바꾸지 않아도 됩니다</span></li>
+            <li><b>뒤로가기 신호 <em>popstate</em></b><span>뒤로가기가 눌렸다는 신호입니다. <b>이 이벤트에서 시트를 닫습니다</b></span></li>
             <li><b>✕ 로 닫을 때 <em>history.back()</em></b><span>시트를 직접 닫지 않고 <b>기록을 되돌립니다.</b> 직접 닫으면 쌓아 둔 기록이 그대로 남습니다</span></li>
-            <li><b><code>&lt;dialog&gt;</code> <em>Esc 만 준다</em></b><span>Esc로 닫히는 기능만 있고 뒤로가기와는 <b>연결되어 있지 않습니다.</b> 뒤로가기로 닫히게 하려면 직접 연결해야 합니다</span></li>
-            <li><b>안 넣으면 <em>앱을 나간다</em></b><span>사용자가 쓰던 화면을 잃어버리는, <b>사용자가 가장 싫어하는 실수</b>입니다</span></li>
+            <li><b><code>&lt;dialog&gt;</code> <em>Esc만 지원</em></b><span>Esc로 닫히는 기능만 있고 뒤로가기와는 <b>연결되어 있지 않습니다.</b> 뒤로가기로 닫히게 하려면 직접 연결해야 합니다</span></li>
+            <li><b>기록에 넣지 않은 경우 <em>앱을 나감</em></b><span>사용자가 쓰던 화면을 잃어버리는, <b>사용자가 가장 싫어하는 실수</b>입니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -174,7 +174,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>시스템 백을 쓰는 경우</h3>
+            <h3>뒤로가기 기록을 쌓아야 하는 경우</h3>
             <ul>
               <li>모달, 바텀시트, 전체 화면 사진처럼 <b>화면을 덮는 것</b>을 열 때</li>
               <li>여러 단계로 된 폼을 만들 때. 단계마다 기록을 쌓으면 <b>뒤로가기가 전 단계로</b> 돌아갑니다</li>
@@ -182,7 +182,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>시스템 백을 쓰지 않는 경우</h3>
+            <h3>뒤로가기 기록을 잘못 다루는 경우</h3>
             <ul>
               <li>조건이나 정렬이 바뀔 때마다 기록을 쌓을 때. 이때는 <code>replaceState</code>를 씁니다</li>
               <li>뒤로가기를 <b>막을</b> 때. 사용자가 가장 싫어하는 동작입니다</li>
@@ -191,7 +191,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>시스템 백 대신 다른 것을 써야 하는 경우</b> — 같은 화면 안에서 값만 바뀌면 <code>replaceState</code>를 쓰고, 어디에 있는지 보여 주려면 <a href="../items/breadcrumb.html">브레드크럼</a>, 방금 한 일을 무르게 하려면 <a href="../items/toast.html">되돌리기</a>를 씁니다.</p>
+        <p style="margin:var(--s4) 0 0"><b>기록을 쌓는 대신 다른 방법이 맞는 경우</b> — 같은 화면 안에서 값만 바뀌면 <code>replaceState</code>를 쓰고, 어디에 있는지 보여 주려면 <a href="../items/breadcrumb.html">브레드크럼</a>, 방금 한 일을 무르게 하려면 <a href="../items/toast.html">되돌리기</a>를 씁니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -204,7 +204,7 @@
                 <span>dialog.showModal()</span>
               </div>
             </div>
-            <figcaption><b>열 때</b><b>기록을 먼저 쌓고, 그다음에</b> 시트를 엽니다</figcaption>
+            <figcaption><b>시트를 열 때</b><b>기록을 먼저 쌓고, 그다음에</b> 시트를 엽니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -213,7 +213,7 @@
                 <span>&nbsp;&nbsp;<span style="color:var(--accent)">dialog.close()</span></span>
               </div>
             </div>
-            <figcaption><b>뒤로가 눌리면</b>시트를 닫기만 합니다. <b>기록은 이미 빠진 상태</b>입니다</figcaption>
+            <figcaption><b>뒤로가기가 눌렸을 때</b>시트를 닫기만 합니다. <b>기록은 이미 빠진 상태</b>입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -222,13 +222,13 @@
                 <span>&nbsp;&nbsp;<span style="color:var(--accent)">history.back()</span></span>
               </div>
             </div>
-            <figcaption><b>✕ 로 닫을 때</b>시트를 직접 닫지 않고 기록을 되돌려서, <b>닫는 경로를 뒤로가기 하나로 모읍니다</b></figcaption>
+            <figcaption><b>✕ 버튼으로 닫을 때</b>시트를 직접 닫지 않고 기록을 되돌려서, <b>닫는 경로를 뒤로가기 하나로 모읍니다</b></figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">빠뜨리기 쉬운 설정까지</span></h2>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 지킬 규칙<span class="hint">빠뜨리기 쉬운 설정까지 담은 규칙</span></h2>
         <p>열 때 기록을 쌓고 <code>popstate</code>에서 닫으며, ✕ 버튼도 <code>back()</code>을 불러 같은 경로로 닫습니다.</p>
 <pre class="code"><span class="k">function</span> openSheet() {
   history.pushState({ sheet: <span class="k">true</span> }, <span class="s">''</span>);   <span class="c">// 기록을 하나 쌓는다</span>
@@ -248,14 +248,14 @@ dialog.addEventListener(<span class="s">'cancel'</span>, e =&gt; { e.preventDefa
 history.replaceState(<span class="k">null</span>, <span class="s">''</span>, <span class="s">'?status=ok&amp;page=2'</span>);</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>지킬 규칙</th><th>지키는 방법과 까닭</th></tr></thead>
           <tbody>
-            <tr><td><kbd>Esc</kbd>와 뒤로를 <b>한 길로</b></td><td><code>cancel</code> 이벤트의 기본 동작을 막고 <code>back()</code>을 부르면, Esc와 뒤로가기가 같은 경로로 닫혀서 기록이 어긋나지 않습니다</td></tr>
-            <tr><td><code>pushState</code>는 주소를 안 바꿔도 된다</td><td>두 번째 인자만 주고 세 번째 인자를 빼면 주소는 그대로 남습니다</td></tr>
-            <tr><td><code>replaceState</code>와 가른다</td><td><b>화면을 덮는 것은 push, 값만 바뀌는 것은 replace</b>로 처리합니다</td></tr>
-            <tr><td>저장 안 한 내용</td><td><code>beforeunload</code>는 뒤로가기에는 작동하지 않을 수 있으므로 <b>확인 다이얼로그</b>를 직접 띄웁니다</td></tr>
-            <tr><td><code>&lt;dialog&gt;</code></td><td>Esc로 닫히는 기능은 따로 만들지 않아도 있지만, <b>뒤로가기로 닫히게 하려면 직접 만들어야 합니다</b></td></tr>
-            <tr><td>초점</td><td>뒤로가기로 닫혔을 때도 <b>시트를 연 버튼</b>으로 포커스를 되돌립니다</td></tr>
+            <tr><td><kbd>Esc</kbd>와 뒤로가기를 <b>같은 경로로</b> 닫기</td><td><code>cancel</code> 이벤트의 기본 동작을 막고 <code>back()</code>을 부르면, Esc와 뒤로가기가 같은 경로로 닫혀서 기록이 어긋나지 않습니다</td></tr>
+            <tr><td><code>pushState</code>로 주소를 바꾸지 않고 쌓기</td><td>두 번째 인자만 주고 세 번째 인자를 빼면 주소는 그대로 남습니다</td></tr>
+            <tr><td><code>replaceState</code>와 구분해 쓰기</td><td><b>화면을 덮는 것은 push, 값만 바뀌는 것은 replace</b>로 처리합니다</td></tr>
+            <tr><td>저장하지 않은 내용 지키기</td><td><code>beforeunload</code>는 뒤로가기에는 작동하지 않을 수 있으므로 <b>확인 다이얼로그</b>를 직접 띄웁니다</td></tr>
+            <tr><td><code>&lt;dialog&gt;</code>를 쓸 때</td><td>Esc로 닫히는 기능은 따로 만들지 않아도 있지만, <b>뒤로가기로 닫히게 하려면 직접 만들어야 합니다</b></td></tr>
+            <tr><td>포커스 되돌리기</td><td>뒤로가기로 닫혔을 때도 <b>시트를 연 버튼</b>으로 포커스를 되돌립니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -266,10 +266,10 @@ history.replaceState(<span class="k">null</span>, <span class="s">''</span>, <sp
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>주소에 담긴 것은 되살아난다</th><td>뒤로가기로 돌아온 화면은 <b>주소를 보고 다시 그립니다.</b> 그래서 조건과 쪽 번호를 <a href="filter.html">주소에 담아</a> 두면 따로 저장하지 않아도 그대로 복원됩니다.</td></tr>
-            <tr><th>뒤로 캐시</th><td>브라우저는 떠난 화면을 메모리에 통째로 보관해 두었다가 뒤로가기를 누르면 그대로 다시 보여 줍니다(bfcache). 그런데 <code>unload</code> 핸들러를 달면 <b>이 캐시를 쓰지 않습니다</b>.</td></tr>
-            <tr><th>되살아난 화면은 낡았다</th><td>bfcache에서 되살아난 목록은 몇 분 전 데이터를 보여 줍니다. <code>pageshow</code> 이벤트의 <code>persisted</code> 값을 보고 데이터를 <b>다시 받을지</b> 정합니다.</td></tr>
-            <tr><th>POST 뒤에는</th><td>폼을 POST로 저장한 뒤 그 화면에 머물면, 뒤로가기를 눌렀을 때 양식을 다시 보낼지 묻는 경고가 뜹니다. 그래서 <b>저장한 뒤에는 다른 주소로</b> 이동시킵니다.</td></tr>
+            <tr><th>주소에 담아 둔 조건은 그대로 복원됨</th><td>뒤로가기로 돌아온 화면은 <b>주소를 보고 다시 그립니다.</b> 그래서 조건과 쪽 번호를 <a href="filter.html">주소에 담아</a> 두면 따로 저장하지 않아도 그대로 복원됩니다.</td></tr>
+            <tr><th>뒤로가기 캐시(bfcache)</th><td>브라우저는 떠난 화면을 메모리에 통째로 보관해 두었다가 뒤로가기를 누르면 그대로 다시 보여 줍니다(bfcache). 그런데 <code>unload</code> 핸들러를 달면 <b>이 캐시를 쓰지 않습니다</b>.</td></tr>
+            <tr><th>캐시에서 되살린 화면의 오래된 데이터</th><td>bfcache에서 되살아난 목록은 몇 분 전 데이터를 보여 줍니다. <code>pageshow</code> 이벤트의 <code>persisted</code> 값을 보고 데이터를 <b>다시 받을지</b> 정합니다.</td></tr>
+            <tr><th>POST로 저장한 뒤의 이동</th><td>폼을 POST로 저장한 뒤 그 화면에 머물면, 뒤로가기를 눌렀을 때 양식을 다시 보낼지 묻는 경고가 뜹니다. 그래서 <b>저장한 뒤에는 다른 주소로</b> 이동시킵니다.</td></tr>
           </tbody>
         </table>
         </div>

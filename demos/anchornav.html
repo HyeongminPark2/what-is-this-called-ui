@@ -19,14 +19,14 @@
 <div class="bar">
   <b>앵커 내비</b>
   <label><input type="checkbox" id="margin"> scroll-margin-top 주기</label>
-  <label><input type="checkbox" id="spy" checked> 보이는 절 밝히기</label>
+  <label><input type="checkbox" id="spy" checked> 지금 보는 절 강조하기</label>
 </div>
 
 <div class="pad">
   <div class="anv">
     <nav class="anv__list" id="nav" aria-label="이 문서 안에서"></nav>
     <div class="anv__doc" id="doc">
-      <div class="anv__head" id="head">고정 머리 — 높이 <span id="hh"></span></div>
+      <div class="anv__head" id="head">고정 머리의 높이 <span id="hh"></span></div>
       <div id="body"></div>
     </div>
   </div>
@@ -98,8 +98,8 @@
     var under = r.top < docTop + h - 1;
     document.getElementById(id).classList.toggle('hidden', under);
     var rd = document.getElementById('read');
-    rd.innerHTML = '이동한 곳 <b>' + id + '</b> · 제목이 문서 위에서 <b>' + Math.round(r.top - docTop) + 'px</b>' +
-      ' (머리 ' + Math.round(h) + 'px)' +
+    rd.innerHTML = '이동한 절 <b>' + id + '</b> · 제목 위치는 문서 위에서 <b>' + Math.round(r.top - docTop) + 'px</b>' +
+      ' (머리 높이 ' + Math.round(h) + 'px)' +
       (under ? ' <span class="warn">· 제목이 머리 밑에 가려졌습니다</span>' : ' · 제목이 보입니다');
     rd.dataset.under = under ? '1' : '0';
     rd.dataset.gap = String(Math.round(r.top - docTop));

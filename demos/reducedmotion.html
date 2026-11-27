@@ -20,7 +20,7 @@
 
 <div class="bar">
   <b>모션 줄이기</b>
-  <label><input type="checkbox" id="rm"> 줄이기를 켠 사람으로 보기</label>
+  <label><input type="checkbox" id="rm"> 모션 줄이기를 켠 사람의 화면으로 보기</label>
   <span class="sys" id="sys"></span>
 </div>
 
@@ -41,12 +41,12 @@
 <script>
 (function () {
   var CARDS = [
-    ['화면을 가로지르는 이동', 'mover', 'drop', '큰 거리를 빠르게 — <b>끈다</b>', '자리만 바꾼다'],
-    ['확대하며 열기',          'zoom',  'drop', '화면이 다가오는 느낌 — <b>끈다</b>', '그냥 나타난다'],
-    ['끝없이 도는 스피너',     'spin',  'drop', '계속 도는 것 — <b>줄인다</b>', '세 점이 차례로 밝아지거나 막대로'],
-    ['투명도만 바뀜',          'fade',  'keep', '자리를 안 옮긴다 — <b>남긴다</b>', '그대로 둔다'],
-    ['색 바뀜 · 테두리',       'tint',  'keep', '움직임이 아니다 — <b>남긴다</b>', '그대로 둔다'],
-    ['짧은 거리 미끄러짐',     'slide', 'keep', '8px 남짓 — <b>남겨도 된다</b>', '거리를 더 줄인다']
+    ['화면을 가로지르는 이동', 'mover', 'drop', '큰 거리를 빠르게 움직여서 <b>끕니다</b>', '자리만 바꿉니다'],
+    ['확대하며 열기',          'zoom',  'drop', '화면이 다가오는 듯 보여서 <b>끕니다</b>', '움직임 없이 나타납니다'],
+    ['끝없이 도는 스피너',     'spin',  'drop', '계속 돌기 때문에 <b>줄입니다</b>', '세 점이 차례로 밝아지게 하거나 막대로 바꿉니다'],
+    ['투명도만 바뀜',          'fade',  'keep', '자리를 옮기지 않아서 <b>남깁니다</b>', '그대로 둡니다'],
+    ['색 바뀜 · 테두리',       'tint',  'keep', '움직임이 아니라서 <b>남깁니다</b>', '그대로 둡니다'],
+    ['짧은 거리 미끄러짐',     'slide', 'keep', '8px 남짓만 움직여서 <b>남겨도 됩니다</b>', '거리를 더 줄입니다']
   ];
   var grid = document.getElementById('grid');
   grid.innerHTML = CARDS.map(function (c) {
@@ -56,7 +56,7 @@
     return '<div class="rm ' + c[2] + '" data-k="' + c[1] + '">' +
       '<h4>' + c[0] + '</h4><div class="stage">' + body + '</div>' +
       '<span class="verdict">' + c[3] + '</span>' +
-      '<span class="why" style="font-size:11.5px;color:var(--fg-muted)">줄이기에서 — ' + c[4] + '</span></div>';
+      '<span class="why" style="font-size:11.5px;color:var(--fg-muted)">모션 줄이기를 켜면 ' + c[4] + '</span></div>';
   }).join('');
 
   var t0 = performance.now();
@@ -95,9 +95,9 @@
     var on = document.getElementById('rm').checked;
     document.documentElement.dataset.reduce = on ? '1' : '0';
     document.getElementById('ruler').innerHTML = on
-      ? '줄이기 <b>켜짐</b> — 끈 것 <b>' + grid.querySelectorAll('.rm.drop').length + '</b>개, 남긴 것 <b>' +
-        grid.querySelectorAll('.rm.keep').length + '</b>개'
-      : '줄이기 <b>꺼짐</b> — 여섯 가지가 모두 움직인다';
+      ? '모션 줄이기가 <b>켜져</b> 있어 <b>' + grid.querySelectorAll('.rm.drop').length + '</b>가지를 끄고 <b>' +
+        grid.querySelectorAll('.rm.keep').length + '</b>가지를 남겼습니다'
+      : '모션 줄이기가 <b>꺼져</b> 있어 여섯 가지가 모두 움직입니다';
     document.getElementById('sys').textContent =
       '이 브라우저의 실제 설정: ' +
       (matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduce' : 'no-preference');

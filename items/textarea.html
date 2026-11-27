@@ -50,7 +50,7 @@
           <iframe src="../demos/textarea.html" title="여러 줄 입력 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>'<b>160자짜리 글 붙여넣기</b>'를 눌러 보세요. '아예 못 치게'를 켜 두면
+          <p>'<b>160자짜리 글 붙여넣기</b>'를 눌러 보세요. '넘치면 아예 못 치게 막기'를 켜 두면
           <b>붙여넣은 글이 아무 안내 없이 잘리고</b>, 데모가 <b>잘려 나간 글자 수</b>를 세어 적어 줍니다.
           한도를 넘더라도 <b>글은 그대로 두고 빨갛게 알리는</b> 편이 사용자가 고치기 쉽습니다.<br>
           <b>내용만큼 늘어나기</b>를 켜면 줄이 늘 때 칸도 함께 커집니다.
@@ -78,30 +78,30 @@
         <p>조작 부품은 모두 사용자에게서 값을 받는다는 점은 같지만, 아래 네 가지를 따져 보면 서로 구별할 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>고르는 개수</th><th>선택지가 보이나</th><th>바로 적용되나</th><th>타이핑</th></tr></thead>
+          <thead><tr><th></th><th>한 번에 몇 개를 고르나</th><th>선택지가 미리 보이나</th><th>고르면 바로 적용되나</th><th>글자를 쳐서 넣을 수 있나</th></tr></thead>
           <tbody>
-            <tr><td>텍스트 필드</td><td>자유 입력</td><td class="none">해당 없음</td><td>저장 눌러야</td><td>된다</td></tr>
-            <tr><td>셀렉트</td><td>하나</td><td>펼쳐야 보인다</td><td>저장 눌러야</td><td class="none">안 된다</td></tr>
-            <tr><td>콤보박스</td><td>하나</td><td>펼치고 <b>걸러진다</b></td><td>저장 눌러야</td><td>된다</td></tr>
-            <tr><td>체크박스</td><td><b>여럿</b></td><td>다 보인다</td><td>저장 눌러야</td><td class="none">안 된다</td></tr>
-            <tr><td>라디오 그룹</td><td>하나</td><td>다 보인다</td><td>저장 눌러야</td><td class="none">안 된다</td></tr>
-            <tr><td>스위치</td><td>켬 · 끔</td><td class="none">해당 없음</td><td><b>바로</b></td><td class="none">안 된다</td></tr>
-            <tr><td>세그먼티드 컨트롤</td><td>하나</td><td>다 보인다</td><td>보통 바로</td><td class="none">안 된다</td></tr>
-            <tr><td>슬라이더</td><td>범위에서 하나</td><td>범위가 보인다</td><td>보통 바로</td><td class="none">안 된다</td></tr>
-            <tr><td>버튼 위계</td><td><b>동작 하나</b></td><td class="none">해당 없음</td><td><b>바로</b></td><td class="none">안 된다</td></tr>
-            <tr><td>링크와 버튼</td><td>동작 또는 이동</td><td class="none">해당 없음</td><td>바로</td><td class="none">안 된다</td></tr>
-            <tr><td>날짜 선택기</td><td>날짜 하나</td><td>달력으로 보인다</td><td>저장 눌러야</td><td><b>돼야 한다</b></td></tr>
-            <tr><td>시간 선택기</td><td>시각 하나</td><td>목록으로 보인다</td><td>저장 눌러야</td><td><b>돼야 한다</b></td></tr>
-            <tr><td>수량 스테퍼</td><td>숫자 하나</td><td class="none">해당 없음</td><td>저장 눌러야</td><td><b>돼야 한다</b></td></tr>
-            <tr class="me"><td><b>여러 줄 입력</b></td><td>자유 입력</td><td class="none">해당 없음</td><td>저장 눌러야</td><td>된다</td></tr>
-            <tr><td>비밀번호 칸</td><td>자유 입력</td><td><b>가려져 있다</b></td><td>저장 눌러야</td><td>된다</td></tr>
-            <tr><td>숫자 입력</td><td>숫자 하나</td><td class="none">해당 없음</td><td>저장 눌러야</td><td>된다</td></tr>
-            <tr><td>자동 서식 입력</td><td>자유 입력</td><td class="none">해당 없음</td><td>저장 눌러야</td><td>된다</td></tr>
-            <tr><td>여러 개 고르기</td><td><b>여럿</b></td><td>펼쳐야 보인다</td><td>저장 눌러야</td><td>되기도 한다</td></tr>
-            <tr><td>범위 슬라이더</td><td><b>두 값</b></td><td>범위가 보인다</td><td>보통 바로</td><td>칸을 두면 된다</td></tr>
-            <tr><td>색 고르기</td><td>색 하나</td><td>견본이 보인다</td><td>보통 바로</td><td>코드로 된다</td></tr>
+            <tr><td>텍스트 필드</td><td>고르지 않고 직접 적는다</td><td class="none">해당 없음</td><td>저장을 눌러야 적용</td><td>된다</td></tr>
+            <tr><td>셀렉트</td><td>하나</td><td>펼쳐야 보인다</td><td>저장을 눌러야 적용</td><td class="none">안 된다</td></tr>
+            <tr><td>콤보박스</td><td>하나</td><td>펼치면 보이고 <b>걸러진다</b></td><td>저장을 눌러야 적용</td><td>된다</td></tr>
+            <tr><td>체크박스</td><td><b>여럿</b></td><td>다 보인다</td><td>저장을 눌러야 적용</td><td class="none">안 된다</td></tr>
+            <tr><td>라디오 그룹</td><td>하나</td><td>다 보인다</td><td>저장을 눌러야 적용</td><td class="none">안 된다</td></tr>
+            <tr><td>스위치</td><td>켬과 끔 중 하나</td><td class="none">해당 없음</td><td><b>바로</b> 적용</td><td class="none">안 된다</td></tr>
+            <tr><td>세그먼티드 컨트롤</td><td>하나</td><td>다 보인다</td><td>보통 바로 적용</td><td class="none">안 된다</td></tr>
+            <tr><td>슬라이더</td><td>범위에서 하나</td><td>범위가 보인다</td><td>보통 바로 적용</td><td class="none">안 된다</td></tr>
+            <tr><td>버튼 위계</td><td><b>동작 하나</b></td><td class="none">해당 없음</td><td><b>바로</b> 적용</td><td class="none">안 된다</td></tr>
+            <tr><td>링크와 버튼</td><td>동작 또는 이동</td><td class="none">해당 없음</td><td>바로 적용</td><td class="none">안 된다</td></tr>
+            <tr><td>날짜 선택기</td><td>날짜 하나</td><td>달력으로 보인다</td><td>저장을 눌러야 적용</td><td><b>돼야 한다</b></td></tr>
+            <tr><td>시간 선택기</td><td>시각 하나</td><td>목록으로 보인다</td><td>저장을 눌러야 적용</td><td><b>돼야 한다</b></td></tr>
+            <tr><td>수량 스테퍼</td><td>숫자 하나</td><td class="none">해당 없음</td><td>저장을 눌러야 적용</td><td><b>돼야 한다</b></td></tr>
+            <tr class="me"><td><b>여러 줄 입력</b></td><td>고르지 않고 직접 적는다</td><td class="none">해당 없음</td><td>저장을 눌러야 적용</td><td>된다</td></tr>
+            <tr><td>비밀번호 칸</td><td>고르지 않고 직접 적는다</td><td><b>가려져 있다</b></td><td>저장을 눌러야 적용</td><td>된다</td></tr>
+            <tr><td>숫자 입력</td><td>숫자 하나</td><td class="none">해당 없음</td><td>저장을 눌러야 적용</td><td>된다</td></tr>
+            <tr><td>자동 서식 입력</td><td>고르지 않고 직접 적는다</td><td class="none">해당 없음</td><td>저장을 눌러야 적용</td><td>된다</td></tr>
+            <tr><td>여러 개 고르기</td><td><b>여럿</b></td><td>펼쳐야 보인다</td><td>저장을 눌러야 적용</td><td>되기도 한다</td></tr>
+            <tr><td>범위 슬라이더</td><td><b>두 값</b></td><td>범위가 보인다</td><td>보통 바로 적용</td><td>칸을 두면 된다</td></tr>
+            <tr><td>색 고르기</td><td>색 하나</td><td>견본이 보인다</td><td>보통 바로 적용</td><td>색 코드로 된다</td></tr>
             <tr><td>비활성과 읽기 전용</td><td class="none">해당 없음</td><td>값은 보인다</td><td class="none">해당 없음</td><td><b>안 된다</b></td></tr>
-            <tr><td>분할 버튼</td><td>동작 하나</td><td>펼쳐야 보인다</td><td><b>바로</b></td><td class="none">안 된다</td></tr>
+            <tr><td>분할 버튼</td><td>동작 하나</td><td>펼쳐야 보인다</td><td><b>바로</b> 적용</td><td class="none">안 된다</td></tr>
           </tbody>
         </table>
         </div>
@@ -115,39 +115,39 @@
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:grid;gap:3px;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:5px"><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:70%"></span></span><span style="font-size:7.5px;text-align:right;color:var(--fg-muted)">118자 남음</span><span style="font-size:8.5px;color:var(--fg-muted)">평소</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:grid;gap:3px;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:5px"><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:70%"></span></span><span style="font-size:7.5px;text-align:right;color:var(--fg-muted)">118자 남음</span><span style="font-size:8.5px;color:var(--fg-muted)">처음 연 모습</span></div>
             </div>
-            <figcaption>기본<span><b>두세 줄</b> 높이로 시작합니다</span></figcaption>
+            <figcaption>평소 상태<span><b>두세 줄</b> 높이로 시작합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:grid;gap:3px;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:5px"><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:85%"></span></span><span style="font-size:7.5px;text-align:right;color:var(--fg-muted)">12자 남음</span><span style="font-size:8.5px;color:var(--fg-muted)">내용만큼 늘어났다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:grid;gap:3px;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:5px"><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:85%"></span></span><span style="font-size:7.5px;text-align:right;color:var(--fg-muted)">12자 남음</span><span style="font-size:8.5px;color:var(--fg-muted)">내용만큼 늘어남</span></div>
             </div>
-            <figcaption>늘어남<span>칸이 내용만큼 커져서 <b>굴리지 않아도</b> 됩니다</span></figcaption>
+            <figcaption>내용이 길어져 칸이 늘어났을 때<span>칸이 내용만큼 커져서 <b>굴리지 않아도</b> 됩니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:grid;gap:3px;border:1px solid var(--danger);border-radius:4px;background:var(--surface);padding:5px"><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:80%"></span></span><span style="font-size:7.5px;text-align:right;color:var(--danger)">20자 넘음</span><span style="font-size:8.5px;color:var(--fg-muted)">넘쳤다고 알린다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:grid;gap:3px;border:1px solid var(--danger);border-radius:4px;background:var(--surface);padding:5px"><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:80%"></span></span><span style="font-size:7.5px;text-align:right;color:var(--danger)">20자 넘음</span><span style="font-size:8.5px;color:var(--fg-muted)">넘쳤다고 알림</span></div>
             </div>
-            <figcaption>넘침<span>한도를 넘어도 <b>계속 치게 두고</b> 넘쳤다고 알립니다</span></figcaption>
+            <figcaption>한도를 넘었을 때 알리기<span>한도를 넘어도 <b>계속 치게 두고</b> 넘쳤다고 알립니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:grid;gap:3px;border:1px solid var(--danger);border-radius:4px;background:var(--surface);padding:5px"><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:60%"></span></span><span style="font-size:7.5px;text-align:right;color:var(--fg-muted)">0자 남음</span><span style="font-size:8.5px;color:var(--fg-muted)">붙여넣은 20자가 사라졌다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:grid;gap:3px;border:1px solid var(--danger);border-radius:4px;background:var(--surface);padding:5px"><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:60%"></span></span><span style="font-size:7.5px;text-align:right;color:var(--fg-muted)">0자 남음</span><span style="font-size:8.5px;color:var(--fg-muted)">붙여넣은 20자가 사라짐</span></div>
             </div>
-            <figcaption>잘림<span>한도를 넘은 글이 <b>아무 안내 없이</b> 사라집니다</span></figcaption>
+            <figcaption>넘친 글을 잘랐을 때<span>한도를 넘은 글이 <b>아무 안내 없이</b> 사라집니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:grid;gap:3px;border:1px solid var(--line);border-radius:4px;background:var(--surface);padding:5px"><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:70%"></span></span><span style="font-size:8.5px;color:var(--fg-muted)">남은 글자 수가 없다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="display:grid;gap:3px;border:1px solid var(--line);border-radius:4px;background:var(--surface);padding:5px"><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:70%"></span></span><span style="font-size:8.5px;color:var(--fg-muted)">남은 글자 수가 안 보임</span></div>
             </div>
-            <figcaption>글자 수 없음<span>남은 글자 수가 안 보여서 <b>넘친 뒤에야</b> 알게 됩니다</span></figcaption>
+            <figcaption>남은 글자 수를 보여 주지 않을 때<span>남은 글자 수가 안 보여서 <b>넘친 뒤에야</b> 알게 됩니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--danger)">Enter</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px">Enter 로 보내기</span><span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">줄바꿈을 못 한다</span></span></div></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--danger)">Enter</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px">Enter 로 보내기</span><span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">줄바꿈을 못 함</span></span></div></div>
             </div>
-            <figcaption>Enter 로 보내기<span>Enter 하나로 보내기와 줄바꿈을 <b>둘 다 할 수는 없습니다</b></span></figcaption>
+            <figcaption>Enter에 보내기를 걸었을 때<span>Enter 하나로 보내기와 줄바꿈을 <b>둘 다 할 수는 없습니다</b></span></figcaption>
           </figure>
         </div>
       </section>
@@ -159,23 +159,23 @@
             <div class="anat" role="img" aria-label="여러 줄 입력의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">rows — 처음 보이는 줄 수</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">내용만큼 늘어나기 — 작은 창에서 안 굴린다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">남은 글자 수 — 넘치기 전에 보인다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">maxlength — 붙여넣은 글이 소리 없이 잘린다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">resize — 세로만 열어 두는 편이 안전하다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">Enter 로 보내기와 줄바꿈은 같이 못 쓴다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">rows는 처음 보이는 줄 수</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">내용만큼 늘어나 작은 창에서 굴리지 않음</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">남은 글자 수는 넘치기 전에 보여 줌</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">maxlength는 붙여넣은 글을 안내 없이 자름</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">resize는 세로만 열어 두는 편이 안전함</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">Enter 하나로 보내기와 줄바꿈을 같이 못 씀</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b><code>rows</code> <em>처음 줄 수</em></b><span>처음에는 두세 줄 높이로 시작합니다</span></li>
-            <li><b>자동 높이 <em>안 굴림</em></b><span>칸이 내용만큼 커지므로 작은 창 안에서 굴리지 않아도 됩니다</span></li>
-            <li><b>글자 수 <em>미리 보임</em></b><span>남은 글자 수를 넘치기 <b>전에</b> 보여 줍니다</span></li>
-            <li><b><code>maxlength</code> <em>소리 없이 잘림</em></b><span>한도를 넘는 글을 자르는데, <b>붙여넣기</b>에서 특히 문제가 됩니다</span></li>
-            <li><b><code>resize</code> <em>세로만</em></b><span>가로로 늘리게 두면 <b>칸이 레이아웃을 깨뜨립니다</b></span></li>
-            <li><b>Enter <em>둘 중 하나</em></b><span>Enter에는 보내기 <b>또는</b> 줄바꿈 중 하나만 맡깁니다</span></li>
+            <li><b><code>rows</code> <em>처음 보이는 줄 수</em></b><span>처음에는 두세 줄 높이로 시작합니다</span></li>
+            <li><b>자동 높이 <em>굴리지 않게 하기</em></b><span>칸이 내용만큼 커지므로 작은 창 안에서 굴리지 않아도 됩니다</span></li>
+            <li><b>글자 수 <em>미리 보여 주기</em></b><span>남은 글자 수를 넘치기 <b>전에</b> 보여 줍니다</span></li>
+            <li><b><code>maxlength</code> <em>안내 없이 잘림</em></b><span>한도를 넘는 글을 자르는데, <b>붙여넣기</b>에서 특히 문제가 됩니다</span></li>
+            <li><b><code>resize</code> <em>세로로만 늘리기</em></b><span>가로로 늘리게 두면 <b>칸이 레이아웃을 깨뜨립니다</b></span></li>
+            <li><b>Enter <em>한 가지 일만 맡기기</em></b><span>Enter에는 보내기 <b>또는</b> 줄바꿈 중 하나만 맡깁니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -209,7 +209,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>여러 줄 입력 대신 다른 것을 써야 하는 경우</b> — 한 줄만 받으면 <a href="field.html">텍스트 필드</a>, 서식이 들어가면 리치 텍스트 편집기, 검사 규칙은 <a href="validation.html">입력 검증</a>, 칸 안팎의 안내 문구는 <a href="placeholder.html">자리글과 헬퍼 텍스트</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>여러 줄 입력 대신 다른 것을 써야 하는 경우</b> — 한 줄만 받으면 되는 칸에는 <a href="field.html">텍스트 필드</a>를 쓰고, 굵게나 목록 같은 서식이 들어가야 하면 리치 텍스트 편집기를 씁니다. 글자 수 같은 검사 규칙은 <a href="validation.html">입력 검증</a>에서, 칸 안팎에 적는 안내 문구는 <a href="placeholder.html">자리글과 헬퍼 텍스트</a>에서 다룹니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -219,19 +219,19 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:4px"><span style="display:grid;gap:3px;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:5px"><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:70%"></span></span><span style="font-size:7.5px;text-align:right;color:var(--fg-muted)">118자 남음</span></div>
             </div>
-            <figcaption><b>메모</b>여러 줄로 적어야 하므로 <b>줄바꿈</b>이 필요합니다</figcaption>
+            <figcaption><b>메모 적기</b>여러 줄로 적어야 하므로 <b>줄바꿈</b>이 필요합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:4px"><span style="display:grid;gap:3px;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:5px"><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span></span></div>
             </div>
-            <figcaption><b>댓글</b><b>한 줄</b> 높이로 시작해 글이 길어지면 늘어납니다</figcaption>
+            <figcaption><b>댓글 달기</b><b>한 줄</b> 높이로 시작해 글이 길어지면 늘어납니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:4px"><span style="display:grid;gap:3px;border:1px solid var(--accent);border-radius:4px;background:var(--surface);padding:5px"><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:100%"></span><span style="display:block;height:4px;border-radius:2px;background:var(--bg);width:80%"></span></span></div>
             </div>
-            <figcaption><b>문의 내용</b>긴 글이 들어올 자리라서 처음부터 <b>넉넉한 높이</b>로 엽니다</figcaption>
+            <figcaption><b>문의 내용 받기</b>긴 글이 들어올 자리라서 처음부터 <b>넉넉한 높이</b>로 엽니다</figcaption>
           </figure>
         </div>
       </section>
@@ -252,14 +252,14 @@ el.addEventListener(<span class="s">'input'</span>, () =&gt; {
 });</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td>Enter</td><td>기본 동작은 <b>줄바꿈</b>입니다</td></tr>
             <tr><td>Shift + Enter</td><td>Enter에 보내기를 걸었다면 줄바꿈을 <b>이 조합으로</b> 옮깁니다</td></tr>
             <tr><td>Tab</td><td>다음 칸으로 넘어갑니다. <b>들여쓰기가 아닙니다</b></td></tr>
             <tr><td><code>aria-describedby</code></td><td>글자 수 안내를 칸과 <b>연결해</b> 둡니다</td></tr>
             <tr><td><code>role="status"</code></td><td>남은 글자 수를 입력을 방해하지 않고 <b>조용히</b> 알립니다</td></tr>
-            <tr><td>확인하는 법</td><td>긴 글을 <b>붙여넣어</b> 보고 잘리는지 확인합니다</td></tr>
+            <tr><td>확인하는 방법</td><td>긴 글을 <b>붙여넣어</b> 보고 잘리는지 확인합니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -270,9 +270,9 @@ el.addEventListener(<span class="s">'input'</span>, () =&gt; {
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>한도는 서버에도</th><td>화면에 보이는 한도는 사용자를 돕는 안내이고, 실제로 넘친 글을 막는 일은 <b>서버 검사</b>가 맡아야 합니다.</td></tr>
-            <tr><th>줄바꿈 보존</th><td>저장하거나 보여 줄 때 줄바꿈이 사라지면 사용자가 <b>쓴 모양</b>과 달라집니다. 화면에 보여 줄 때는 <code>white-space: pre-wrap</code>이 필요합니다.</td></tr>
-            <tr><th>글자 수 세는 법</th><td>이모지나 한글을 <b>코드 단위</b>로 세면 사람이 보는 글자 수와 어긋납니다. 서버와 화면이 <b>같은 방식</b>으로 세야 한도가 맞습니다.</td></tr>
+            <tr><th>글자 수 한도는 서버에서도 검사하기</th><td>화면에 보이는 한도는 사용자를 돕는 안내이고, 실제로 넘친 글을 막는 일은 <b>서버 검사</b>가 맡아야 합니다.</td></tr>
+            <tr><th>줄바꿈을 그대로 지키기</th><td>저장하거나 보여 줄 때 줄바꿈이 사라지면 사용자가 <b>쓴 모양</b>과 달라집니다. 화면에 보여 줄 때는 <code>white-space: pre-wrap</code>이 필요합니다.</td></tr>
+            <tr><th>글자 수를 세는 방법 맞추기</th><td>이모지나 한글을 <b>코드 단위</b>로 세면 사람이 보는 글자 수와 어긋납니다. 서버와 화면이 <b>같은 방식</b>으로 세야 한도가 맞습니다.</td></tr>
           </tbody>
         </table>
         </div>

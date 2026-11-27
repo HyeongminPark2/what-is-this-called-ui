@@ -103,7 +103,7 @@
           return '<button class="chip" data-del="' + c[0] + ':' + c[1] + '">' + c[2] +
             '<span class="chip__x" aria-hidden="true">×</span></button>';
         }).join('') + '<button class="ui-btn ui-btn--ghost ui-btn--sm" id="clear">모두 지우기</button>'
-      : '<span style="font-size:13px;color:var(--fg-muted)">조건 없음 — 모두 ' + DATA.length + '건</span>';
+      : '<span style="font-size:13px;color:var(--fg-muted)">고른 조건이 없어 모두 ' + DATA.length + '건이 보입니다</span>';
 
     var q = [];
     if (on.s.length) q.push('status=' + on.s.join(','));

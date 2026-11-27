@@ -52,10 +52,10 @@ ANAT = '''              <div class="anat--wide" style="background:var(--bg);bord
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="font-size:11.5px;font-weight:700">11월 가맹점별 매출</div>
                   <div class="pin-out" data-pin="2" style="max-width:220px">''' + bars([62, 44, 80, 30], 2, "220px").strip() + '''</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">막대의 밑은 <b>0</b>에서 시작한다 — 잘라내면 거짓말이 된다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">눈금에 단위를 적는다 — 만 원? 건?</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">색은 뜻이 있을 때만. 네 색 쓰면 넷을 외워야 한다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">&lt;table&gt; 를 같이 둔다 — 눈으로 안 보는 사람의 길</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">막대의 밑은 <b>0</b>에서 시작, 자르면 차이가 부풀어 보임</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">눈금에 만 원인지 건인지 단위를 적음</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">색은 뜻이 있을 때만, 네 색이면 넷을 외워야 함</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">&lt;table&gt;을 같이 두어 스크린 리더로도 읽게 함</div>
                 </div>
               </div>'''
 
@@ -84,14 +84,14 @@ D = dict(
   ]),
   axes=ax("차트 고르기"),
   oneline="차트를 고르기 전에 무엇을 묻는지 <b>한 문장</b>으로 적으세요. 같은 데이터라도 '누가 제일 큰가'를 물으면 막대, '언제부터 늘었나'를 물으면 꺾은선처럼 맞는 그림이 달라집니다.",
-  s4_title="질문별로 고르기", s4_hint="그림보다 질문을 먼저 정합니다",
+  s4_title="질문에 따라 고르는 차트", s4_hint="그림보다 질문을 먼저 정합니다",
   states=states([
     (bars([62, 44, 80, 30], 2), "누가 제일 큰가", "<b>막대</b>를 씁니다. 사람의 눈은 길이를 가장 정확하게 견줍니다"),
     (line([20, 28, 26, 44, 52, 70]), "언제부터 늘었나", "<b>선</b>을 씁니다. 시간을 가로축에 놓고 왼쪽에서 오른쪽으로 읽습니다"),
     (dots(), "둘이 같이 움직이나", "<b>산점도</b>를 씁니다. 점이 한곳에 뭉치면 점을 반투명하게 해서 겹친 정도가 보이게 합니다"),
     (pie(), "전체의 몇 할인가", "<b>파이</b>를 씁니다. 다만 조각이 <b>두세 개</b>일 때만 알아보기 쉽습니다"),
-    (stacked(), "묶음 안의 구성", "<b>쌓은 막대</b>를 씁니다. 다만 기준선이 같은 맨 아래 조각만 막대끼리 견주기 쉽습니다"),
-    (line([30, 32, 31, 34, 33, 36], area=True), "대충 흐름만", "<b>스파크라인</b>을 씁니다. 눈금 없이 글 옆에 작게 둡니다"),
+    (stacked(), "묶음 안이 어떻게 나뉘나", "<b>쌓은 막대</b>를 씁니다. 다만 기준선이 같은 맨 아래 조각만 막대끼리 견주기 쉽습니다"),
+    (line([30, 32, 31, 34, 33, 36], area=True), "흐름만 대강 보려면", "<b>스파크라인</b>을 씁니다. 눈금 없이 글 옆에 작게 둡니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -108,6 +108,9 @@ D = dict(
           예를 들어 100·102·104를 98부터 그리면 겨우 2% 차이가 <b>두 배 차이</b>처럼 보입니다.
           선 그래프는 값의 '변화'를 읽는 그림이라 축을 잘라도 되지만,
           이때는 <b>축을 잘랐다는 표시를</b> 해 둡니다.</p>''',
+  do_title="차트를 쓰는 경우",
+  dont_title="차트를 쓰지 않거나 피해야 하는 경우",
+  instead_title="차트 대신 다른 것을 써야 하는 경우",
   do=ul([
     "숫자들 사이의 <b>관계</b>를 한눈에 보여 줘야 할 때",
     "<b>흐름이나 크기 차이</b>가 표로는 잘 보이지 않을 때",
@@ -119,22 +122,22 @@ D = dict(
     "조각이 다섯 개를 넘는 파이를 그릴 때. <b>막대로 바꿉니다</b>",
     "3차원으로 그리거나 기울인 그림을 쓸 때. 보기에만 좋을 뿐 <b>크기를 왜곡</b>합니다",
   ]),
-  instead='정확한 값이 필요하면 <a href="table.html">데이터 테이블</a>, 값 하나만 보여 주면 <a href="../items/stat.html">스탯</a>, 비율 하나만 보여 주면 <a href="../items/progress.html">프로그레스</a>를 씁니다.',
+  instead='정확한 값을 읽어야 하면 <a href="table.html">데이터 테이블</a>로 보여 주고, 값 하나만 크게 보여 주면 되는 경우에는 <a href="../items/stat.html">스탯</a>을 씁니다. 비율 하나만 보여 줄 때는 <a href="../items/progress.html">프로그레스</a> 막대가 더 알아보기 쉽습니다.',
   cases=cases([
-    (bars([62, 44, 80, 30], 2, "150px"), "강조는 하나만", "말하려는 막대만 진하게 칠하고 나머지는 회색으로 둡니다"),
+    (bars([62, 44, 80, 30], 2, "150px"), "강조할 막대 하나만 칠하기", "말하려는 막대만 진하게 칠하고 나머지는 회색으로 둡니다"),
     ('''              <div style="width:100%;max-width:150px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px">
                 <div style="font-size:9px;color:var(--fg-muted)">이번 달 매출</div>
                 <div style="font-size:15px;font-weight:700;font-variant-numeric:tabular-nums">24.7억</div>
                 ''' + line([30, 32, 31, 36, 34, 40], "100%", True).strip() + '''
               </div>''',
-     "스탯 + 스파크라인", "값 하나와 그 값의 <b>흐름</b>을 함께 보여 줍니다. 대시보드에서 가장 흔한 칸입니다"),
+     "스탯과 스파크라인을 함께 두기", "값 하나와 그 값의 <b>흐름</b>을 함께 보여 줍니다. 대시보드에서 가장 흔한 칸입니다"),
     ('''              <div style="width:100%;max-width:150px">
                 ''' + bars([100, 102, 104], None, "100%").strip() + '''
-                <span style="display:block;font-size:8.5px;color:var(--danger);margin-top:3px">같은 숫자를 98부터 그리면 두 배로 보인다</span>
+                <span style="display:block;font-size:8.5px;color:var(--danger);margin-top:3px">같은 숫자도 98부터 그리면 두 배로 보임</span>
               </div>''',
-     "0에서 시작한 막대", "실제 차이가 작으면 그림에서도 <b>차이가 작게 보여야 맞습니다</b>"),
+     "막대를 0에서 시작하기", "실제 차이가 작으면 그림에서도 <b>차이가 작게 보여야 맞습니다</b>"),
   ]),
-  s8_title="최소 마크업과 접근", s8_hint="차트가 꼭 갖출 것",
+  s8_title="최소 마크업과 접근성", s8_hint="차트를 만들 때 꼭 갖출 것",
   code_lede="차트는 <b>그림</b>이므로 무엇을 보여 주는지 이름을 붙이고, 숫자는 표로 한 벌 더 둡니다.",
   code='''&lt;<span class="t">figure</span>&gt;
   &lt;<span class="t">figcaption</span>&gt;11월 가맹점별 매출 (단위: 만 원)&lt;/<span class="t">figcaption</span>&gt;
@@ -150,18 +153,18 @@ D = dict(
 <span class="c">/* 그림은 칸을 따르되 찌그러지지 않게 */</span>
 <span class="t">svg</span> { <span class="a">width</span>: <span class="a">100%</span>; <span class="a">height</span>: auto; }   <span class="c">/* viewBox + xMidYMid meet */</span>''',
   keys=kbd([
-    ("<code>role=\"img\"</code> + <code>aria-label</code>", "<b>그림이 무엇을 보여 주는지</b> 한 문장으로 적습니다. '차트'라고만 적으면 스크린 리더 사용자는 아무 정보도 얻지 못합니다"),
+    ("<code>role=\"img\"</code>와 <code>aria-label</code>", "<b>그림이 무엇을 보여 주는지</b> 한 문장으로 적습니다. '차트'라고만 적으면 스크린 리더 사용자는 아무 정보도 얻지 못합니다"),
     ("<code>&lt;figcaption&gt;</code>", "제목과 <b>단위</b>를 적습니다. 눈으로 보는 사람에게도 필요한 정보입니다"),
-    ("숨은 <code>&lt;table&gt;</code>", "스크린 리더 사용자가 정확한 값을 읽을 수 있는 유일한 방법입니다. <code>sr-only</code>로 화면에서 숨겨 둬도 됩니다"),
-    ("색만으로 구분하지 않는다", "선은 색과 함께 <b>모양</b>(점선·실선)을 다르게 하거나 선 옆에 이름을 직접 붙여 구분합니다"),
+    ("화면에서 숨긴 <code>&lt;table&gt;</code>", "스크린 리더 사용자가 정확한 값을 읽을 수 있는 유일한 방법입니다. <code>sr-only</code>로 화면에서 숨겨 둬도 됩니다"),
+    ("색만으로 구분하지 않기", "선은 색과 함께 <b>모양</b>(점선·실선)을 다르게 하거나 선 옆에 이름을 직접 붙여 구분합니다"),
     ("<code>preserveAspectRatio</code>", "기본값은 <code>xMidYMid meet</code>입니다. <code>none</code>으로 두면 칸 비율에 맞춰 늘어나 <b>원이 타원</b>이 됩니다"),
-    ("움직임", "막대나 선이 자라나며 그려지는 연출은 <code>prefers-reduced-motion</code>이 켜져 있으면 끕니다"),
+    ("그려지는 움직임 끄기", "막대나 선이 자라나며 그려지는 연출은 <code>prefers-reduced-motion</code>이 켜져 있으면 끕니다"),
   ]),
   backend=rows([
-    ("집계는 서버에서", "10만 건을 그대로 보내 브라우저가 더하게 하면 느립니다. 서버가 <b>미리 더한 값</b>을 보냅니다."),
-    ("구간을 정해 보낸다", "일별로 묶을지 주별로 묶을지는 <b>서버가 정해서</b> 보내야 화면마다 눈금이 달라지지 않습니다. 기간이 길면 서버가 알아서 더 큰 단위로 묶습니다."),
-    ("빈 구간을 채운다", "거래가 없는 날은 데이터베이스에 행이 아예 없어서, 그대로 그리면 <b>날짜를 건너뛴 선</b>이 됩니다. 그래서 빈 날짜에는 0을 채워 보냅니다."),
-    ("시간대", "'11월 1일'을 서버 시간대로 자르느냐 보는 사람의 시간대로 자르느냐에 따라 숫자가 달라집니다. 응답에 <b>어느 시간대 기준인지 적어</b> 보냅니다."),
+    ("집계는 서버에서 하기", "10만 건을 그대로 보내 브라우저가 더하게 하면 느립니다. 서버가 <b>미리 더한 값</b>을 보냅니다."),
+    ("묶는 구간은 서버가 정해 보내기", "일별로 묶을지 주별로 묶을지는 <b>서버가 정해서</b> 보내야 화면마다 눈금이 달라지지 않습니다. 기간이 길면 서버가 알아서 더 큰 단위로 묶습니다."),
+    ("거래가 없는 날을 0으로 채우기", "거래가 없는 날은 데이터베이스에 행이 아예 없어서, 그대로 그리면 <b>날짜를 건너뛴 선</b>이 됩니다. 그래서 빈 날짜에는 0을 채워 보냅니다."),
+    ("날짜를 자르는 시간대", "'11월 1일'을 서버 시간대로 자르느냐 보는 사람의 시간대로 자르느냐에 따라 숫자가 달라집니다. 응답에 <b>어느 시간대 기준인지 적어</b> 보냅니다."),
     ("점이 너무 많을 때", "1년치 분 단위 데이터는 50만 점이 넘습니다. 서버에서 점을 <b>솎아</b>(downsample) 보내고, 사용자가 확대하면 그 구간만 자세히 다시 받습니다."),
   ]),
   plat_lede="차트는 표준 부품이 드물어서 <b>대부분 라이브러리</b>를 씁니다.",

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>그리드 — 이름표</title>
-<meta name="description" content="그리드의 트랙과 거터, 1fr과 auto-fit minmax, 그리고 minmax(0,1fr)로 푸는 1fr의 함정을 실물과 해부도로 보여 주는 항목입니다.">
+<meta name="description" content="그리드의 트랙과 거터, 1fr과 auto-fit minmax, 그리고 1fr 칸이 긴 글에 밀려 어긋나는 문제와 이를 푸는 minmax(0,1fr)를 실물과 해부도로 보여 주는 항목입니다.">
 <link rel="stylesheet" href="../assets/base.css">
 <link rel="stylesheet" href="../assets/card.css">
 <link rel="stylesheet" href="../assets/demo.css">
@@ -50,7 +50,7 @@
           <iframe src="../demos/grid.html" title="그리드 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>짜는 법을 <b>칸이 알아서 접히기</b>로 두고 위의 폭 토글로 화면 폭을 바꿔 보세요.
+          <p>판을 짜는 방법을 <b>칸이 알아서 접히게 하기</b>로 두고 위의 폭 토글로 화면 폭을 바꿔 보세요.
           <code>auto-fit</code>과 <code>minmax</code>를 함께 쓰면 <b>미디어 쿼리 없이도</b> 폭에 맞춰 열 수가 줄어들기 때문에,
           요즘 카드 그리드는 대부분 이 방식으로 만듭니다.<br>
           <b>긴 글 넣기</b>를 켜면 너비가 고르던 칸들이 어긋납니다. <code>1fr</code>은 사실
@@ -78,22 +78,22 @@
         <p>뼈대를 다루는 항목들은 눈에 보이지 않으면서 요소의 자리를 정한다는 점이 같아서 생김새로는 구별하기 어렵습니다. 대신 아래 네 가지를 물어 보면 서로 갈립니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하나</th><th>방향</th><th>넘치면</th><th>누가 값을 정하나</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 정하는가</th><th>어느 방향에 작용하는가</th><th>넘치면 어떻게 되는가</th><th>누가 값을 정하는가</th></tr></thead>
           <tbody>
-            <tr><td>박스 모델</td><td><b>상자 한 개</b>의 크기</td><td class="none">해당 없음</td><td>밖으로 삐져나온다</td><td>내가</td></tr>
-            <tr><td>플렉스</td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나온다</td><td>나 + 내용</td></tr>
-            <tr class="me"><td><b>그리드</b></td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗는다</td><td>나 + 내용</td></tr>
-            <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>나</td></tr>
-            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목이 정한다</b></td><td>나</td></tr>
-            <tr><td>스티키</td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 간다</td><td>나</td></tr>
-            <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남는다</td><td>나</td></tr>
-            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 안 눌린다</td><td><b>OS가</b></td></tr>
-            <tr><td>포지션</td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 안 차지한다</td><td>기준이 되는 조상</td></tr>
-            <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안이 잘린다</td><td>비를 적은 쪽</td></tr>
-            <tr><td>스크롤 동작</td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥까지 밀린다</td><td>굴리는 상자</td></tr>
-            <tr><td>크기 정하기</td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나간다</td><td>내용 또는 적은 값</td></tr>
-            <tr><td>여백 붕괴</td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어든다</td><td>큰 쪽 하나</td></tr>
-            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab이 어긋난다</td><td>마크업 순서</td></tr>
+            <tr><td>박스 모델</td><td><b>상자 한 개</b>의 크기</td><td class="none">해당 없음</td><td>밖으로 삐져나옴</td><td>요소 자신</td></tr>
+            <tr><td>플렉스</td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나옴</td><td>요소 자신과 내용</td></tr>
+            <tr class="me"><td><b>그리드</b></td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗음</td><td>요소 자신과 내용</td></tr>
+            <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>요소 자신</td></tr>
+            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목에서 정함</b></td><td>요소 자신</td></tr>
+            <tr><td>스티키</td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 나감</td><td>요소 자신</td></tr>
+            <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남음</td><td>요소 자신</td></tr>
+            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 눌리지 않음</td><td><b>OS</b></td></tr>
+            <tr><td>포지션</td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 차지하지 않음</td><td>기준이 되는 조상</td></tr>
+            <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안쪽 내용이 잘림</td><td>비를 적은 쪽</td></tr>
+            <tr><td>스크롤 동작</td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥 페이지까지 밀림</td><td>스크롤되는 상자</td></tr>
+            <tr><td>크기 정하기</td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나감</td><td>내용 또는 적은 값</td></tr>
+            <tr><td>여백 붕괴</td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어듦</td><td>둘 중 큰 여백</td></tr>
+            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab 차례가 어긋남</td><td>마크업 순서</td></tr>
           </tbody>
         </table>
         </div>
@@ -103,31 +103,31 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 짜는 법<span class="hint">같은 자식, 다른 판</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 판을 짜는 여섯 가지 방법<span class="hint">같은 자식을 넣어도 판에 따라 달라지는 배치</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;background:var(--surface);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;"><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">1</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">2</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">3</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">4</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">5</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">6</span></div>
             </div>
-            <figcaption>열 수 못 박기<span><code>repeat(3, 1fr)</code>로 적으면 화면 폭과 상관없이 <b>항상 3열</b>입니다</span></figcaption>
+            <figcaption>열 수를 고정할 때<span><code>repeat(3, 1fr)</code>로 적으면 화면 폭과 상관없이 <b>항상 3열</b>입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;display:grid;grid-template-columns:repeat(auto-fit, minmax(38px, 1fr));gap:5px;background:var(--surface);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;"><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">1</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">2</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">3</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">4</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">5</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">6</span></div>
             </div>
-            <figcaption>알아서 접기<span><code>auto-fit minmax</code>로 적으면 폭에 따라 열 수가 바뀌어서 <b>미디어 쿼리가 필요 없습니다</b></span></figcaption>
+            <figcaption>폭에 따라 열이 알아서 접힐 때<span><code>auto-fit minmax</code>로 적으면 폭에 따라 열 수가 바뀌어서 <b>미디어 쿼리가 필요 없습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;display:grid;grid-template-columns:70px 1fr;gap:5px;background:var(--surface);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;"><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">사이드바</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">본문</span></div>
             </div>
-            <figcaption>고정 + 유동<span>한쪽 폭만 고정하고 나머지는 <code>1fr</code>로 채웁니다</span></figcaption>
+            <figcaption>고정 폭과 유동 폭을 섞을 때<span>한쪽 폭만 고정하고 나머지는 <code>1fr</code>로 채웁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:180px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;background:var(--surface);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;row-gap:14px"><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">1</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">2</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">3</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">4</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">5</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">6</span></div>
             </div>
-            <figcaption>거터<span><code>gap</code>으로 열 사이와 행 사이 간격을 따로 줄 수 있습니다</span></figcaption>
+            <figcaption>거터로 칸 사이를 띄울 때<span><code>gap</code>으로 열 사이와 행 사이 간격을 따로 줄 수 있습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -138,7 +138,7 @@
                 <span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 0">5</span>
               </div>
             </div>
-            <figcaption>칸 합치기<span><code>grid-column: span 2</code>로 두 칸을 합칩니다. 플렉스로는 할 수 없는 일입니다</span></figcaption>
+            <figcaption>두 칸을 하나로 합칠 때<span><code>grid-column: span 2</code>로 두 칸을 합칩니다. 플렉스로는 할 수 없는 일입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -148,7 +148,7 @@
                 <span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10px;font-weight:700;padding:7px 2px">3</span>
               </div>
             </div>
-            <figcaption>1fr 의 함정<span>긴 글이 든 칸이 <b>옆 칸의 자리를 빼앗습니다</b>. <code>minmax(0,1fr)</code>로 고칩니다</span></figcaption>
+            <figcaption><code>1fr</code> 칸에 긴 글이 들어왔을 때<span>긴 글이 든 칸이 <b>옆 칸의 자리를 빼앗습니다</b>. <code>minmax(0,1fr)</code>로 고칩니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -168,8 +168,8 @@
                   <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">grid-template-columns: 1fr 1fr 1fr</div>
                   <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">gap: 8px  (거터)</div>
                   <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">repeat(auto-fit, minmax(150px, 1fr))</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">minmax(0, 1fr)  — 1fr 의 함정을 푸는 값</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">grid-column: span 2  (한 칸이 두 칸을 먹기)</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">minmax(0, 1fr)  1fr의 문제를 푸는 값</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">grid-column: span 2  (한 칸이 두 칸 차지)</div>
                 </div>
               </div>
             </div>
@@ -178,7 +178,7 @@
             <li><b>그리드 컨테이너 <em>grid container</em></b><span><code>display: grid</code>를 준 부모입니다. 자식은 <b>마크업 순서대로 칸에 들어갑니다</b></span></li>
             <li><b>트랙 <em>track · template</em></b><span>열(과 행)의 크기를 정의합니다. <code>1fr</code>은 <b>남은 자리를 한 몫</b> 나눠 받습니다</span></li>
             <li><b>거터 <em>gap · gutter</em></b><span>칸 사이의 빈 줄입니다. <code>column-gap</code>·<code>row-gap</code>으로 따로 줄 수 있습니다</span></li>
-            <li><b>알아서 접기 <em>auto-fit + minmax</em></b><span>칸이 최소 150px보다 좁아지면 열 수를 줄이라는 뜻입니다. <b>미디어 쿼리 없이</b> 화면 폭에 맞춰집니다</span></li>
+            <li><b>열 자동 접기 <em>auto-fit + minmax</em></b><span>칸이 최소 150px보다 좁아지면 열 수를 줄이라는 뜻입니다. <b>미디어 쿼리 없이</b> 화면 폭에 맞춰집니다</span></li>
             <li><b>minmax(0, 1fr) <em>minmax</em></b><span><code>1fr</code>에 숨은 최소값(auto)을 0으로 바꿔서 <b>칸이 글보다 좁아질 수 있게</b> 합니다</span></li>
             <li><b>칸 합치기 <em>grid-column: span</em></b><span>자식 하나가 여러 칸을 차지합니다. <b>플렉스로는 할 수 없는 일</b>입니다</span></li>
           </ol>
@@ -211,7 +211,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>그리드 대신 다른 것을 써야 하는 경우</b> — 한 방향이면 <a href="flex.html">플렉스</a>, 데이터면 데이터 테이블(10부), 가운데만 놓으면 <a href="center.html">가운데 맞추기</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>그리드 대신 다른 것을 써야 하는 경우</b> — 한 방향으로 늘어놓기만 하면 <a href="flex.html">플렉스</a>로 충분하고, 데이터를 보여 주는 표라면 데이터 테이블(10부)을 씁니다. 요소 하나를 가운데에 놓는 방법은 <a href="center.html">가운데 맞추기</a>에서 다룹니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -221,13 +221,13 @@
             <div class="shot">
               <div style="width:100%;max-width:190px;display:grid;grid-template-columns:repeat(auto-fit, minmax(55px, 1fr));gap:5px;background:var(--surface);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;"><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">1</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">2</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">3</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">4</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">5</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">6</span></div>
             </div>
-            <figcaption><b>카드 그리드</b>폭이 줄면 <b>저절로</b> 3열에서 2열, 1열로 바뀝니다</figcaption>
+            <figcaption><b>카드 그리드의 열 수 줄이기</b>폭이 줄면 <b>저절로</b> 3열에서 2열, 1열로 바뀝니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:190px;display:grid;grid-template-columns:70px 1fr;gap:5px;background:var(--surface);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;"><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">사이드바</span><span style="display:grid;place-items:center;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:5px;font-size:10.5px;font-weight:700;padding:7px 4px;min-width:0;overflow:hidden">본문</span></div>
             </div>
-            <figcaption><b>화면 짜임</b>고정 폭 사이드바와 유동 폭 본문을 <b>코드 한 줄로</b> 짭니다</figcaption>
+            <figcaption><b>사이드바와 본문으로 화면 짜기</b>고정 폭 사이드바와 유동 폭 본문을 <b>코드 한 줄로</b> 짭니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -237,7 +237,7 @@
                 <span style="font-size:10px;color:var(--fg-muted)">›</span>
               </div>
             </div>
-            <figcaption><b>auto 1fr auto</b>앞뒤 칸은 내용만큼, 가운데 칸만 남은 폭을 차지합니다. <b>리스트 한 줄</b>에 많이 씁니다</figcaption>
+            <figcaption><b><code>auto 1fr auto</code>로 리스트 한 줄 짜기</b>앞뒤 칸은 내용만큼, 가운데 칸만 남은 폭을 차지합니다. <b>리스트 한 줄</b>에 많이 씁니다</figcaption>
           </figure>
         </div>
       </section>
@@ -262,14 +262,14 @@
 <span class="t">.cards</span> &gt; <span class="t">.featured</span> { <span class="a">grid-column</span>: span <span class="a">2</span>; }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>규칙</th><th>지켜야 하는 것</th></tr></thead>
+          <thead><tr><th>지킬 규칙</th><th>지키는 방법</th></tr></thead>
           <tbody>
-            <tr><td><code>minmax(0, 1fr)</code></td><td>본문처럼 <b>긴 글이 들어올</b> 칸에는 거의 항상 필요합니다</td></tr>
-            <tr><td><code>auto-fit</code> vs <code>auto-fill</code></td><td>auto-fit은 빈 트랙을 접고 auto-fill은 <b>빈 칸을 남깁니다</b>. 보통은 auto-fit을 씁니다</td></tr>
-            <tr><td><code>gap</code>만 쓴다</td><td>자식에 마진을 줘서 간격을 만들면 판의 <b>가장자리에도</b> 여백이 생깁니다</td></tr>
-            <tr><td><code>auto</code> 트랙</td><td><code>auto 1fr auto</code>는 앞뒤 칸을 내용만큼, 가운데 칸만 유동 폭으로 둡니다. 리스트 한 줄을 짤 때 흔히 씁니다</td></tr>
-            <tr><td>배치에 <code>&lt;table&gt;</code>을 쓰지 않는다</td><td>배치에 표를 쓰면 스크린 리더가 '표, 3열 5행'이라고 읽습니다</td></tr>
-            <tr><td>자식 순서 = 읽는 순서</td><td><code>grid-area</code>로 눈에 보이는 자리를 바꿔도 <b>키보드 순서는 바뀌지 않습니다</b></td></tr>
+            <tr><td>긴 글이 들어올 칸은 <code>minmax(0, 1fr)</code>로 적기</td><td>본문처럼 <b>긴 글이 들어올</b> 칸에는 거의 항상 필요합니다</td></tr>
+            <tr><td><code>auto-fit</code>과 <code>auto-fill</code> 가려 쓰기</td><td>auto-fit은 빈 트랙을 접고 auto-fill은 <b>빈 칸을 남깁니다</b>. 보통은 auto-fit을 씁니다</td></tr>
+            <tr><td>간격은 <code>gap</code>으로만 주기</td><td>자식에 마진을 줘서 간격을 만들면 판의 <b>가장자리에도</b> 여백이 생깁니다</td></tr>
+            <tr><td>내용만큼 차지하는 <code>auto</code> 트랙 쓰기</td><td><code>auto 1fr auto</code>는 앞뒤 칸을 내용만큼, 가운데 칸만 유동 폭으로 둡니다. 리스트 한 줄을 짤 때 흔히 씁니다</td></tr>
+            <tr><td>배치에 <code>&lt;table&gt;</code>을 쓰지 않기</td><td>배치에 표를 쓰면 스크린 리더가 '표, 3열 5행'이라고 읽습니다</td></tr>
+            <tr><td>자식 순서가 곧 읽는 순서라는 점 기억하기</td><td><code>grid-area</code>로 눈에 보이는 자리를 바꿔도 <b>키보드 순서는 바뀌지 않습니다</b></td></tr>
           </tbody>
         </table>
         </div>
@@ -280,10 +280,10 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>그리드 = 판이 먼저</th><td>자식이 몇 개 오든 판은 그대로이기 때문에, <b>응답 개수가 들쭉날쭉해도</b> 레이아웃이 무너지지 않습니다. 이 점이 플렉스와 가장 크게 다릅니다.</td></tr>
-            <tr><th>빈 칸 처리</th><td>마지막 줄이 덜 찼을 때 어떻게 보일지 정해 둬야 합니다. <code>auto-fit</code>이면 남은 칸이 늘어나고, <code>auto-fill</code>이면 빈 자리가 남습니다.</td></tr>
-            <tr><th>페이지 크기</th><td>한 번에 12개를 주면 3열·4열·6열 어디서도 줄이 딱 맞습니다. <b>12의 약수</b>로 페이지 크기를 잡는 관례가 여기서 나왔습니다.</td></tr>
-            <tr><th>이미지 비율</th><td>칸 너비가 바뀌어도 카드 높이가 들쭉날쭉하지 않게 하려면 이미지에 <code>aspect-ratio</code>를 정해 둬야 합니다. 서버가 원본 비율을 함께 내려 주면 더 정확하게 맞출 수 있습니다.</td></tr>
+            <tr><th>판을 먼저 정해 두는 방식</th><td>자식이 몇 개 오든 판은 그대로이기 때문에, <b>응답 개수가 들쭉날쭉해도</b> 레이아웃이 무너지지 않습니다. 이 점이 플렉스와 가장 크게 다릅니다.</td></tr>
+            <tr><th>마지막 줄의 빈 칸 처리</th><td>마지막 줄이 덜 찼을 때 어떻게 보일지 정해 둬야 합니다. <code>auto-fit</code>이면 남은 칸이 늘어나고, <code>auto-fill</code>이면 빈 자리가 남습니다.</td></tr>
+            <tr><th>한 번에 내려 줄 개수 정하기</th><td>한 번에 12개를 주면 3열·4열·6열 어디서도 줄이 딱 맞습니다. <b>12의 약수</b>로 페이지 크기를 잡는 관례가 여기서 나왔습니다.</td></tr>
+            <tr><th>이미지 비율 맞추기</th><td>칸 너비가 바뀌어도 카드 높이가 들쭉날쭉하지 않게 하려면 이미지에 <code>aspect-ratio</code>를 정해 둬야 합니다. 서버가 원본 비율을 함께 내려 주면 더 정확하게 맞출 수 있습니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -344,7 +344,7 @@
         <li><a href="../items/card.html"><b>카드</b><em>5부</em></a></li>
         <li><a href="../items/flex.html"><b>플렉스</b><em>1부</em></a></li>
         <li><a href="../items/spacing.html"><b>간격 체계</b><em>2부</em></a></li>
-        <li><span class="na"><b>브레이크포인트</b><em>11부</em></span></li>
+        <li><a href="breakpoint.html"><b>브레이크포인트</b><em>11부</em></a></li>
       </ol>
       <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>

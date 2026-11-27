@@ -50,7 +50,7 @@
           <iframe src="../demos/margincollapse.html" title="여백 붕괴 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p>붙이는 법을 바꿔 가며 <b>실제 간격을 잰 값</b>을 보세요. 두 값을 더하면 40px이지만
+          <p>여백을 주는 방법을 바꿔 가며 <b>실제 간격을 잰 값</b>을 보세요. 두 값을 더하면 40px이지만
           <code>margin</code>으로 붙이면 <b>24px</b>로 나옵니다.<br>
           <b>flex</b> 안에서는 여백이 겹치지 않아 40px이 그대로 나오고, 부모에 <b>padding</b>이 생겨도
           붕괴가 멈춥니다. 코드를 건드리지 않은 것 같은데 간격이 바뀌는 일은 흔히 이 때문에 생깁니다.</p>
@@ -76,22 +76,22 @@
         <p>뼈대는 눈에 보이지 않지만 <b>모든 화면의 배치</b>를 정합니다. 아래 네 가지를 물어 보면 서로 갈립니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하나</th><th>방향</th><th>넘치면</th><th>누가 값을 정하나</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 정하는가</th><th>어느 방향에 작용하는가</th><th>넘치면 어떻게 되는가</th><th>누가 값을 정하는가</th></tr></thead>
           <tbody>
-            <tr><td>박스 모델</td><td><b>상자 한 개</b>의 크기</td><td class="none">해당 없음</td><td>밖으로 삐져나온다</td><td>내가</td></tr>
-            <tr><td>플렉스</td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나온다</td><td>나 + 내용</td></tr>
-            <tr><td>그리드</td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗는다</td><td>나 + 내용</td></tr>
-            <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>나</td></tr>
-            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목이 정한다</b></td><td>나</td></tr>
-            <tr><td>스티키</td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 간다</td><td>나</td></tr>
-            <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남는다</td><td>나</td></tr>
-            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 안 눌린다</td><td><b>OS가</b></td></tr>
-            <tr><td>포지션</td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 안 차지한다</td><td>기준이 되는 조상</td></tr>
-            <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안이 잘린다</td><td>비를 적은 쪽</td></tr>
-            <tr><td>스크롤 동작</td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥까지 밀린다</td><td>굴리는 상자</td></tr>
-            <tr><td>크기 정하기</td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나간다</td><td>내용 또는 적은 값</td></tr>
-            <tr class="me"><td><b>여백 붕괴</b></td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어든다</td><td>큰 쪽 하나</td></tr>
-            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab이 어긋난다</td><td>마크업 순서</td></tr>
+            <tr><td>박스 모델</td><td><b>상자 한 개</b>의 크기</td><td class="none">해당 없음</td><td>밖으로 삐져나옴</td><td>요소 자신</td></tr>
+            <tr><td>플렉스</td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나옴</td><td>요소 자신과 내용</td></tr>
+            <tr><td>그리드</td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗음</td><td>요소 자신과 내용</td></tr>
+            <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>요소 자신</td></tr>
+            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목에서 정함</b></td><td>요소 자신</td></tr>
+            <tr><td>스티키</td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 나감</td><td>요소 자신</td></tr>
+            <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남음</td><td>요소 자신</td></tr>
+            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 눌리지 않음</td><td><b>OS</b></td></tr>
+            <tr><td>포지션</td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 차지하지 않음</td><td>기준이 되는 조상</td></tr>
+            <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안쪽 내용이 잘림</td><td>비를 적은 쪽</td></tr>
+            <tr><td>스크롤 동작</td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥 페이지까지 밀림</td><td>스크롤되는 상자</td></tr>
+            <tr><td>크기 정하기</td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나감</td><td>내용 또는 적은 값</td></tr>
+            <tr class="me"><td><b>여백 붕괴</b></td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어듦</td><td>둘 중 큰 여백</td></tr>
+            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab 차례가 어긋남</td><td>마크업 순서</td></tr>
           </tbody>
         </table>
         </div>
@@ -101,37 +101,37 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 언제 겹치나<span class="hint">적은 값이 그대로 나오나</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 여백이 겹치는 경우와 겹치지 않는 경우<span class="hint">적은 값이 그대로 나오는지 비교</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);"><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">위 상자</span><span style="display:block;height:24px;background:repeating-linear-gradient(45deg,color-mix(in srgb, var(--accent) 18%, transparent) 0 4px, transparent 4px 8px);font-family:var(--mono);font-size:7.5px;color:var(--accent);display:grid;place-items:center">24px</span><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">아래 상자</span></div><span style="font-size:8.5px;color:var(--fg-muted)">24 + 16 = 40 이 아니다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);"><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">위 상자</span><span style="display:block;height:24px;background:repeating-linear-gradient(45deg,color-mix(in srgb, var(--accent) 18%, transparent) 0 4px, transparent 4px 8px);font-family:var(--mono);font-size:7.5px;color:var(--accent);display:grid;place-items:center">24px</span><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">아래 상자</span></div><span style="font-size:8.5px;color:var(--fg-muted)">24와 16을 더한 40이 아님</span></div>
             </div>
-            <figcaption>margin 끼리<span>두 여백 가운데 <b>큰 쪽만</b> 남습니다</span></figcaption>
+            <figcaption>margin끼리 맞닿을 때<span>두 여백 가운데 <b>큰 쪽만</b> 남습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);display:flex;flex-direction:column;"><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">위 상자</span><span style="display:block;height:40px;background:repeating-linear-gradient(45deg,color-mix(in srgb, var(--accent) 18%, transparent) 0 4px, transparent 4px 8px);font-family:var(--mono);font-size:7.5px;color:var(--accent);display:grid;place-items:center">40px</span><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">아래 상자</span></div><span style="font-size:8.5px;color:var(--fg-muted)">적은 값이 그대로</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);display:flex;flex-direction:column;"><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">위 상자</span><span style="display:block;height:40px;background:repeating-linear-gradient(45deg,color-mix(in srgb, var(--accent) 18%, transparent) 0 4px, transparent 4px 8px);font-family:var(--mono);font-size:7.5px;color:var(--accent);display:grid;place-items:center">40px</span><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">아래 상자</span></div><span style="font-size:8.5px;color:var(--fg-muted)">적은 값이 그대로 나옴</span></div>
             </div>
-            <figcaption>flex 안<span>flex 안에서는 여백이 <b>겹치지 않습니다</b></span></figcaption>
+            <figcaption>flex 안에 있을 때<span>flex 안에서는 여백이 <b>겹치지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);display:grid;"><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">위 상자</span><span style="display:block;height:40px;background:repeating-linear-gradient(45deg,color-mix(in srgb, var(--accent) 18%, transparent) 0 4px, transparent 4px 8px);font-family:var(--mono);font-size:7.5px;color:var(--accent);display:grid;place-items:center">40px</span><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">아래 상자</span></div><span style="font-size:8.5px;color:var(--fg-muted)">격자 안에서도 안 겹친다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);display:grid;"><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">위 상자</span><span style="display:block;height:40px;background:repeating-linear-gradient(45deg,color-mix(in srgb, var(--accent) 18%, transparent) 0 4px, transparent 4px 8px);font-family:var(--mono);font-size:7.5px;color:var(--accent);display:grid;place-items:center">40px</span><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">아래 상자</span></div><span style="font-size:8.5px;color:var(--fg-muted)">grid 안에서도 겹치지 않음</span></div>
             </div>
-            <figcaption>grid 안<span>flex와 마찬가지로 겹치지 않습니다</span></figcaption>
+            <figcaption>grid 안에 있을 때<span>flex와 마찬가지로 겹치지 않습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:1px;"><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">위 상자</span><span style="display:block;height:40px;background:repeating-linear-gradient(45deg,color-mix(in srgb, var(--accent) 18%, transparent) 0 4px, transparent 4px 8px);font-family:var(--mono);font-size:7.5px;color:var(--accent);display:grid;place-items:center">40px</span><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">아래 상자</span></div><span style="font-size:8.5px;color:var(--fg-muted)">부모에 padding 이 생기면 멈춘다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:1px;"><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">위 상자</span><span style="display:block;height:40px;background:repeating-linear-gradient(45deg,color-mix(in srgb, var(--accent) 18%, transparent) 0 4px, transparent 4px 8px);font-family:var(--mono);font-size:7.5px;color:var(--accent);display:grid;place-items:center">40px</span><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">아래 상자</span></div><span style="font-size:8.5px;color:var(--fg-muted)">부모에 padding이 생기면 멈춤</span></div>
             </div>
-            <figcaption>padding 이 생기면<span>부모에 padding이 생기면 붕괴가 멈춰서 <b>예고 없이</b> 간격이 바뀝니다</span></figcaption>
+            <figcaption>부모에 padding이 생겼을 때<span>부모에 padding이 생기면 붕괴가 멈춰서 <b>예고 없이</b> 간격이 바뀝니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);display:flex;flex-direction:column;gap:16px;"><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">위 상자</span><span style="display:block;height:16px;background:repeating-linear-gradient(45deg,color-mix(in srgb, var(--accent) 18%, transparent) 0 4px, transparent 4px 8px);font-family:var(--mono);font-size:7.5px;color:var(--accent);display:grid;place-items:center">16px</span><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">아래 상자</span></div><span style="font-size:8.5px;color:var(--fg-muted)">gap: 16px — 적은 값 그대로</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);display:flex;flex-direction:column;gap:16px;"><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">위 상자</span><span style="display:block;height:16px;background:repeating-linear-gradient(45deg,color-mix(in srgb, var(--accent) 18%, transparent) 0 4px, transparent 4px 8px);font-family:var(--mono);font-size:7.5px;color:var(--accent);display:grid;place-items:center">16px</span><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">아래 상자</span></div><span style="font-size:8.5px;color:var(--fg-muted)">gap: 16px가 그대로 나옴</span></div>
             </div>
-            <figcaption>gap 으로<span>gap으로 간격을 주면 <b>겹칠 일이 없습니다</b></span></figcaption>
+            <figcaption>gap으로 간격을 줄 때<span>gap으로 간격을 주면 <b>겹칠 일이 없습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -140,10 +140,10 @@
                   <span style="position:absolute;left:0;right:0;top:-14px;height:14px;background:repeating-linear-gradient(45deg,color-mix(in srgb, var(--danger) 18%, transparent) 0 4px,transparent 4px 8px)"></span>
                   <span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">첫 자식</span>
                 </div>
-                <span style="font-size:8.5px;color:var(--fg-muted)">자식의 margin 이 부모 밖으로 샜다</span>
+                <span style="font-size:8.5px;color:var(--fg-muted)">자식의 margin이 부모 밖으로 빠짐</span>
               </div>
             </div>
-            <figcaption>부모 밖으로<span>첫 자식의 여백이 부모 밖으로 빠져나가 <b>부모 전체를</b> 밀어냅니다</span></figcaption>
+            <figcaption>첫 자식의 여백이 부모 밖으로 빠질 때<span>첫 자식의 여백이 부모 밖으로 빠져나가 <b>부모 전체를</b> 밀어냅니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -155,23 +155,23 @@
             <div class="anat" role="img" aria-label="여백 붕괴의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">위 24 + 아래 16 = 40 이 아니라 24</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">세로만 겹친다 — 가로는 더해진다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">flex · grid 안에서는 안 겹친다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">부모의 padding · 테두리가 생기면 멈춘다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">첫 자식의 margin 이 부모 밖으로 새기도 한다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">gap 을 쓰면 적은 값이 그대로 나온다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">위 24와 아래 16이 만나면 40이 아닌 24</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">세로만 겹치고 가로는 더해짐</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">flex·grid 안에서는 겹치지 않음</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">부모에 padding·테두리가 생기면 멈춤</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">첫 자식의 margin이 부모 밖으로 빠지기도 함</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">gap을 쓰면 적은 값이 그대로 나옴</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>형제끼리 <em>큰 쪽만</em></b><span>24px과 16px이 맞닿으면 <b>24px</b>만 남습니다</span></li>
-            <li><b>세로만 <em>가로는 더해짐</em></b><span>좌우 여백은 <b>겹치지 않습니다</b></span></li>
-            <li><b>flex · grid <em>안 겹친다</em></b><span>여백이 겹치지 않기 때문에 <code>gap</code>으로 준 간격은 <b>예측할 수 있습니다</b></span></li>
+            <li><b>형제끼리 <em>큰 쪽만 남음</em></b><span>24px과 16px이 맞닿으면 <b>24px</b>만 남습니다</span></li>
+            <li><b>세로 방향 <em>가로는 더해짐</em></b><span>좌우 여백은 <b>겹치지 않습니다</b></span></li>
+            <li><b>flex · grid <em>겹치지 않음</em></b><span>여백이 겹치지 않기 때문에 <code>gap</code>으로 준 간격은 <b>예측할 수 있습니다</b></span></li>
             <li><b>멈추는 조건 <em>padding · 테두리</em></b><span>padding이나 테두리가 생기면 붕괴가 <b>그 자리에서</b> 멈춥니다</span></li>
-            <li><b>부모-자식 <em>밖으로 샌다</em></b><span>첫 자식의 여백이 <b>부모를 밀어냅니다</b></span></li>
-            <li><b>해법 <em>gap</em></b><span>적은 값이 <b>그대로</b> 나옵니다</span></li>
+            <li><b>부모-자식 <em>밖으로 빠짐</em></b><span>첫 자식의 여백이 <b>부모를 밀어냅니다</b></span></li>
+            <li><b>해결 방법 <em>gap</em></b><span>적은 값이 <b>그대로</b> 나옵니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -188,7 +188,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>여백 붕괴를 쓰는 경우</h3>
+            <h3>여백 붕괴를 피해 간격을 주는 방법</h3>
             <ul>
               <li>요소 사이 간격을 줄 때. <b><code>gap</code>으로</b> 줍니다</li>
               <li>꼭 margin을 써야 할 때. <b>한 방향만</b>(아래쪽만) 씁니다</li>
@@ -196,7 +196,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>여백 붕괴를 쓰지 않는 경우</h3>
+            <h3>여백을 줄 때 피할 것</h3>
             <ul>
               <li>위아래 margin을 <b>둘 다</b> 줄 때. 여백이 겹쳐서 계산이 어긋납니다</li>
               <li>간격을 맞추려고 <code>padding</code>을 1px 더할 때. 붕괴가 멈춰서 <b>옆 간격까지</b> 바뀝니다</li>
@@ -205,7 +205,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>여백 붕괴 대신 다른 것을 써야 하는 경우</b> — 간격 값 자체는 <a href="../items/spacing.html">간격 체계</a>, 안쪽 여백은 <a href="../items/box.html">박스 모델</a>, 줄 세우기는 <a href="../items/flex.html">플렉스</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>여백 붕괴와 함께 보면 좋은 항목</b> — 간격을 얼마로 할지는 <a href="../items/spacing.html">간격 체계</a>에서, 안쪽 여백인 패딩은 <a href="../items/box.html">박스 모델</a>에서 다룹니다. 요소를 한 줄로 세우면서 gap으로 띄우는 방법은 <a href="../items/flex.html">플렉스</a>에서 봅니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -215,19 +215,19 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);display:flex;flex-direction:column;gap:16px;"><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">위 상자</span><span style="display:block;height:16px;background:repeating-linear-gradient(45deg,color-mix(in srgb, var(--accent) 18%, transparent) 0 4px, transparent 4px 8px);font-family:var(--mono);font-size:7.5px;color:var(--accent);display:grid;place-items:center">gap: 16px</span><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">아래 상자</span></div><span style="font-size:8.5px;color:var(--fg-muted)">목록 사이</span></div>
             </div>
-            <figcaption><b>목록</b>첫 항목과 마지막 항목을 <b>따로 처리할 필요가 없습니다</b></figcaption>
+            <figcaption><b>목록 항목 사이를 gap으로 띄우기</b>첫 항목과 마지막 항목을 <b>따로 처리할 필요가 없습니다</b></figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);"><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">위 상자</span><span style="display:block;height:24px;background:repeating-linear-gradient(45deg,color-mix(in srgb, var(--accent) 18%, transparent) 0 4px, transparent 4px 8px);font-family:var(--mono);font-size:7.5px;color:var(--accent);display:grid;place-items:center">margin-bottom 만</span><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">아래 상자</span></div><span style="font-size:8.5px;color:var(--fg-muted)">한 방향만 쓰면 덜 헷갈린다</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);"><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">위 상자</span><span style="display:block;height:24px;background:repeating-linear-gradient(45deg,color-mix(in srgb, var(--accent) 18%, transparent) 0 4px, transparent 4px 8px);font-family:var(--mono);font-size:7.5px;color:var(--accent);display:grid;place-items:center">margin-bottom만</span><span style="display:block;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:8.5px">아래 상자</span></div><span style="font-size:8.5px;color:var(--fg-muted)">한 방향만 써서 덜 헷갈림</span></div>
             </div>
-            <figcaption><b>글 사이</b>글 사이 여백은 <b>아래쪽만</b> 줍니다</figcaption>
+            <figcaption><b>글 사이 여백은 아래쪽만 주기</b>글 사이 여백은 <b>아래쪽만</b> 줍니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="font-family:var(--mono);font-size:9px;color:var(--accent);line-height:1.7;border:1px solid var(--line);border-radius:5px;background:var(--bg);padding:6px 7px">.box {<br>  display: flow-root;<br>}</div><span style="font-size:8.5px;color:var(--fg-muted)">붕괴만 막고 잘리지 않는다</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="font-family:var(--mono);font-size:9px;color:var(--accent);line-height:1.7;border:1px solid var(--line);border-radius:5px;background:var(--bg);padding:6px 7px">.box {<br>  display: flow-root;<br>}</div><span style="font-size:8.5px;color:var(--fg-muted)">붕괴만 막고 잘리지 않음</span></div>
             </div>
-            <figcaption><b>붕괴 막기</b>붕괴만 막고 내용을 자르지 않아서 <code>overflow:hidden</code>보다 낫습니다</figcaption>
+            <figcaption><b>flow-root로 붕괴만 막기</b>붕괴만 막고 내용을 자르지 않아서 <code>overflow:hidden</code>보다 낫습니다</figcaption>
           </figure>
         </div>
       </section>
@@ -249,14 +249,14 @@
 .b { <span class="a">margin-top</span>: <span class="a">16px</span>; }    <span class="c">/* 합 40 이 아니라 24 */</span></pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>지킬 규칙</th><th>지키는 방법</th></tr></thead>
           <tbody>
-            <tr><td>세로만 겹친다</td><td>좌우 여백은 <b>그대로 더해집니다</b></td></tr>
-            <tr><td><code>display: flow-root</code></td><td>붕괴만 막습니다. 반면 <code>overflow:hidden</code>은 <b>그림자와 툴팁까지</b> 자릅니다</td></tr>
-            <tr><td><code>gap</code>은 flex·grid 에서만</td><td>일반 블록 흐름에는 아직 적용되지 않습니다</td></tr>
-            <tr><td><code>* + *</code></td><td>첫 요소만 빼고 여백을 붙입니다. <b>한 방향 규칙</b>을 적용하는 흔한 방법입니다</td></tr>
-            <tr><td>빈 요소</td><td>내용이 없는 상자는 <b>자기 위아래 여백끼리</b>도 겹칩니다</td></tr>
-            <tr><td>확인하는 법</td><td>개발자 도구에서 요소를 선택하면 <b>실제 여백</b>이 주황색으로 표시됩니다</td></tr>
+            <tr><td>세로 여백만 겹친다는 점 기억하기</td><td>좌우 여백은 <b>그대로 더해집니다</b></td></tr>
+            <tr><td>붕괴는 <code>display: flow-root</code>로 막기</td><td>붕괴만 막습니다. 반면 <code>overflow:hidden</code>은 <b>그림자와 툴팁까지</b> 자릅니다</td></tr>
+            <tr><td><code>gap</code>은 flex·grid 안에서만 쓰기</td><td>일반 블록 흐름에는 아직 적용되지 않습니다</td></tr>
+            <tr><td><code>* + *</code>로 한 방향 여백 주기</td><td>첫 요소만 빼고 여백을 붙입니다. <b>한 방향 규칙</b>을 적용하는 흔한 방법입니다</td></tr>
+            <tr><td>빈 요소의 여백도 겹친다는 점 기억하기</td><td>내용이 없는 상자는 <b>자기 위아래 여백끼리</b>도 겹칩니다</td></tr>
+            <tr><td>개발자 도구로 실제 여백 확인하기</td><td>개발자 도구에서 요소를 선택하면 <b>실제 여백</b>이 주황색으로 표시됩니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -267,8 +267,8 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>서버와는 상관없다</th><td>여백 붕괴는 모두 CSS 안에서 계산됩니다. 다만 데이터가 없어 <b>내용이 비었을 때</b> 간격이 달라져서 화면이 어색해지는 일이 있습니다.</td></tr>
-            <tr><th>빈 목록</th><td>목록에 줄이 하나도 없으면 여백만 남아 <b>이상한 빈칸</b>이 생기므로 <a href="emptytext.html">빈 상태 문구</a>를 둡니다.</td></tr>
+            <tr><th>CSS 안에서만 계산되는 규칙</th><td>여백 붕괴는 모두 CSS 안에서 계산됩니다. 다만 데이터가 없어 <b>내용이 비었을 때</b> 간격이 달라져서 화면이 어색해지는 일이 있습니다.</td></tr>
+            <tr><th>목록이 비었을 때</th><td>목록에 줄이 하나도 없으면 여백만 남아 <b>이상한 빈칸</b>이 생기므로 <a href="emptytext.html">빈 상태 문구</a>를 둡니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -286,7 +286,7 @@
             <footer>CSS 초기부터 있던 규칙입니다. <b>글 문서</b>를 위해 만든 규칙이라서 UI에서는 자주 방해가 됩니다.</footer>
           </div>
           <div class="plat">
-            <header><b>iOS</b><span>없다</span></header>
+            <header><b>iOS</b><span>여백 붕괴 없음</span></header>
             <div class="shot">
               <div class="phone" role="img" aria-label="iOS 간격 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:28px;height:10px;border-radius:3px;background:var(--accent-soft)"></div>
@@ -295,7 +295,7 @@
             <footer><code>VStack(spacing:)</code>으로 <b>사이 간격</b>을 직접 주기 때문에 겹칠 일이 없습니다.</footer>
           </div>
           <div class="plat">
-            <header><b>안드로이드</b><span>없다</span></header>
+            <header><b>안드로이드</b><span>여백 붕괴 없음</span></header>
             <div class="shot">
               <div class="phone" role="img" aria-label="안드로이드 간격 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:28px;height:10px;border-radius:3px;background:var(--accent-soft)"></div>

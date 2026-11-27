@@ -77,22 +77,22 @@
         <p>뼈대를 다루는 항목들은 눈에 보이지 않으면서 요소의 자리를 정한다는 점이 같아서 생김새로는 구별하기 어렵습니다. 대신 아래 네 가지를 물어 보면 서로 갈립니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하나</th><th>방향</th><th>넘치면</th><th>누가 값을 정하나</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 정하는가</th><th>어느 방향에 작용하는가</th><th>넘치면 어떻게 되는가</th><th>누가 값을 정하는가</th></tr></thead>
           <tbody>
-            <tr><td>박스 모델</td><td><b>상자 한 개</b>의 크기</td><td class="none">해당 없음</td><td>밖으로 삐져나온다</td><td>내가</td></tr>
-            <tr><td>플렉스</td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나온다</td><td>나 + 내용</td></tr>
-            <tr><td>그리드</td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗는다</td><td>나 + 내용</td></tr>
-            <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>나</td></tr>
-            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목이 정한다</b></td><td>나</td></tr>
-            <tr><td>스티키</td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 간다</td><td>나</td></tr>
-            <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남는다</td><td>나</td></tr>
-            <tr class="me"><td><b>세이프 에어리어</b></td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 안 눌린다</td><td><b>OS가</b></td></tr>
-            <tr><td>포지션</td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 안 차지한다</td><td>기준이 되는 조상</td></tr>
-            <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안이 잘린다</td><td>비를 적은 쪽</td></tr>
-            <tr><td>스크롤 동작</td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥까지 밀린다</td><td>굴리는 상자</td></tr>
-            <tr><td>크기 정하기</td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나간다</td><td>내용 또는 적은 값</td></tr>
-            <tr><td>여백 붕괴</td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어든다</td><td>큰 쪽 하나</td></tr>
-            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab이 어긋난다</td><td>마크업 순서</td></tr>
+            <tr><td>박스 모델</td><td><b>상자 한 개</b>의 크기</td><td class="none">해당 없음</td><td>밖으로 삐져나옴</td><td>요소 자신</td></tr>
+            <tr><td>플렉스</td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나옴</td><td>요소 자신과 내용</td></tr>
+            <tr><td>그리드</td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗음</td><td>요소 자신과 내용</td></tr>
+            <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>요소 자신</td></tr>
+            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목에서 정함</b></td><td>요소 자신</td></tr>
+            <tr><td>스티키</td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 나감</td><td>요소 자신</td></tr>
+            <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남음</td><td>요소 자신</td></tr>
+            <tr class="me"><td><b>세이프 에어리어</b></td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 눌리지 않음</td><td><b>OS</b></td></tr>
+            <tr><td>포지션</td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 차지하지 않음</td><td>기준이 되는 조상</td></tr>
+            <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안쪽 내용이 잘림</td><td>비를 적은 쪽</td></tr>
+            <tr><td>스크롤 동작</td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥 페이지까지 밀림</td><td>스크롤되는 상자</td></tr>
+            <tr><td>크기 정하기</td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나감</td><td>내용 또는 적은 값</td></tr>
+            <tr><td>여백 붕괴</td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어듦</td><td>둘 중 큰 여백</td></tr>
+            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab 차례가 어긋남</td><td>마크업 순서</td></tr>
           </tbody>
         </table>
         </div>
@@ -102,25 +102,25 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 갈래<span class="hint">기기와 방향마다 다르다</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 화면 모양에 따라 챙길 자리<span class="hint">기기와 화면 방향마다 달라지는 인셋</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="position:relative;width:86px;height:140px;border-radius:14px;background:var(--ink-900);padding:4px;margin:0 auto" role="img" aria-label="안 챙긴 화면"><div style="position:relative;height:100%;border-radius:11px;background:var(--surface);overflow:hidden"><span style="position:absolute;left:0;right:0;top:0;height:12px;background:color-mix(in srgb,var(--danger) 18%,transparent);z-index:1"></span><span style="position:absolute;left:0;right:0;bottom:0;height:9px;background:color-mix(in srgb,var(--danger) 18%,transparent);z-index:1"></span><span style="position:absolute;left:0;right:0;top:0;background:var(--accent);color:#fff;font-size:7px;font-weight:700;padding:4px 6px;z-index:3;">모란상회</span><span style="position:absolute;left:0;right:0;bottom:0;background:var(--accent);color:#fff;font-size:7px;font-weight:700;padding:4px 6px;z-index:3;">홈 · 정산 · 설정</span><span style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:34px;height:9px;background:var(--ink-900);border-radius:0 0 6px 6px;z-index:5"></span><span style="position:absolute;left:50%;bottom:3px;transform:translateX(-50%);width:34px;height:2px;border-radius:99px;background:var(--ink-900);opacity:.35;z-index:5"></span></div></div>
             </div>
-            <figcaption>안 챙김<span>글자가 <b>노치와 홈 막대에 겹칩니다</b></span></figcaption>
+            <figcaption>인셋을 챙기지 않았을 때<span>글자가 <b>노치와 홈 막대에 겹칩니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="position:relative;width:86px;height:140px;border-radius:14px;background:var(--ink-900);padding:4px;margin:0 auto" role="img" aria-label="챙긴 화면"><div style="position:relative;height:100%;border-radius:11px;background:var(--surface);overflow:hidden"><span style="position:absolute;left:0;right:0;top:0;height:12px;background:color-mix(in srgb,var(--danger) 18%,transparent);z-index:1"></span><span style="position:absolute;left:0;right:0;bottom:0;height:9px;background:color-mix(in srgb,var(--danger) 18%,transparent);z-index:1"></span><span style="position:absolute;left:0;right:0;top:0;background:var(--accent);color:#fff;font-size:7px;font-weight:700;padding:4px 6px;z-index:3;padding-top:14px">모란상회</span><span style="position:absolute;left:0;right:0;bottom:0;background:var(--accent);color:#fff;font-size:7px;font-weight:700;padding:4px 6px;z-index:3;padding-bottom:11px">홈 · 정산 · 설정</span><span style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:34px;height:9px;background:var(--ink-900);border-radius:0 0 6px 6px;z-index:5"></span><span style="position:absolute;left:50%;bottom:3px;transform:translateX(-50%);width:34px;height:2px;border-radius:99px;background:var(--ink-900);opacity:.35;z-index:5"></span></div></div>
             </div>
-            <figcaption>챙김<span>바 자체는 화면 끝까지 두고, <b>내용만</b> 안쪽으로 밉니다</span></figcaption>
+            <figcaption>인셋을 챙겼을 때<span>바 자체는 화면 끝까지 두고, <b>내용만</b> 안쪽으로 밉니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="position:relative;width:86px;height:140px;border-radius:14px;background:var(--ink-900);padding:4px;margin:0 auto" role="img" aria-label="위만 있는 화면"><div style="position:relative;height:100%;border-radius:11px;background:var(--surface);overflow:hidden"><span style="position:absolute;left:0;right:0;top:0;height:12px;background:color-mix(in srgb,var(--danger) 18%,transparent);z-index:1"></span><span style="position:absolute;left:0;right:0;top:0;background:var(--accent);color:#fff;font-size:7px;font-weight:700;padding:4px 6px;z-index:3;padding-top:14px">모란상회</span><span style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:34px;height:9px;background:var(--ink-900);border-radius:0 0 6px 6px;z-index:5"></span><span style="position:absolute;left:50%;bottom:3px;transform:translateX(-50%);width:34px;height:2px;border-radius:99px;background:var(--ink-900);opacity:.35;z-index:5"></span></div></div>
             </div>
-            <figcaption>위만<span>꼬리말이 없으면 위쪽만 챙기면 됩니다</span></figcaption>
+            <figcaption>위쪽만 챙기면 될 때<span>꼬리말이 없으면 위쪽만 챙기면 됩니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -130,17 +130,17 @@
                   <span style="position:absolute;top:0;bottom:0;right:0;width:11px;background:color-mix(in srgb,var(--danger) 18%,transparent)"></span>
                   <span style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:0;height:0"></span>
                   <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:9px;height:30px;background:var(--ink-900);border-radius:0 6px 6px 0"></span>
-                  <span style="position:absolute;left:14px;top:9px;font-size:7.5px;color:var(--fg-muted)">가로로 돌리면 좌우에도 생긴다</span>
+                  <span style="position:absolute;left:14px;top:9px;font-size:7.5px;color:var(--fg-muted)">가로로 돌리면 좌우에도 생김</span>
                 </div>
               </div>
             </div>
-            <figcaption>가로 화면<span>인셋이 <b>좌우에도</b> 생겨서, 위아래만 챙기면 가로 화면에서 깨집니다</span></figcaption>
+            <figcaption>가로로 돌렸을 때<span>인셋이 <b>좌우에도</b> 생겨서, 위아래만 챙기면 가로 화면에서 깨집니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="position:relative;width:86px;height:140px;border-radius:14px;background:var(--ink-900);padding:4px;margin:0 auto" role="img" aria-label="키보드가 올라온 화면"><div style="position:relative;height:100%;border-radius:11px;background:var(--surface);overflow:hidden"><span style="position:absolute;left:0;right:0;bottom:0;height:9px;background:color-mix(in srgb,var(--danger) 18%,transparent);z-index:1"></span><span style="position:absolute;left:0;right:0;bottom:0;background:var(--accent);color:#fff;font-size:7px;font-weight:700;padding:4px 6px;z-index:3;padding-bottom:11px">저장하기</span><span style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:34px;height:9px;background:var(--ink-900);border-radius:0 0 6px 6px;z-index:5"></span><span style="position:absolute;left:50%;bottom:3px;transform:translateX(-50%);width:34px;height:2px;border-radius:99px;background:var(--ink-900);opacity:.35;z-index:5"></span></div></div>
             </div>
-            <figcaption>붙박이 버튼<span>화면 아래 버튼은 <b>홈 막대와 가장 자주 겹칩니다</b></span></figcaption>
+            <figcaption>아래에 버튼을 붙였을 때<span>화면 아래 버튼은 <b>홈 막대와 가장 자주 겹칩니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -148,11 +148,11 @@
                 <div style="position:relative;height:100%;border-radius:11px;background:var(--surface);overflow:hidden">
                   <span style="position:absolute;left:0;right:0;top:0;height:28px;background:repeating-linear-gradient(135deg,var(--ink-100) 0 5px,var(--ink-050) 5px 10px)"></span>
                   <span style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:34px;height:9px;background:var(--ink-900);border-radius:0 0 6px 6px;z-index:5"></span>
-                  <span style="position:absolute;left:4px;top:32px;font-size:7px;color:var(--fg-muted)">사진은 끝까지</span>
+                  <span style="position:absolute;left:4px;top:32px;font-size:7px;color:var(--fg-muted)">사진은 끝까지 채움</span>
                 </div>
               </div>
             </div>
-            <figcaption>배경은 끝까지<span>사진과 배경색은 <b>노치 뒤까지</b> 채우고 글자만 안쪽에 둡니다</span></figcaption>
+            <figcaption>배경을 끝까지 채울 때<span>사진과 배경색은 <b>노치 뒤까지</b> 채우고 글자만 안쪽에 둡니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -176,15 +176,15 @@
                   </div>
                   <div class="pin-out" data-pin="2" style="display:flex;align-items:center;gap:9px;font-size:11px;color:var(--fg-muted)">
                     <span style="display:block;width:44px;height:13px;border-radius:3px;background:color-mix(in srgb,var(--danger) 45%,transparent);flex:none"></span>
-                    <span>위 — 노치가 가져가는 두께</span>
+                    <span>위는 노치가 차지하는 두께</span>
                   </div>
                   <div class="pin-out" data-pin="3" style="display:flex;align-items:center;gap:9px;font-size:11px;color:var(--fg-muted)">
                     <span style="display:block;width:44px;height:10px;border-radius:3px;background:color-mix(in srgb,var(--danger) 45%,transparent);flex:none"></span>
-                    <span>아래 — 홈 막대가 가져가는 두께</span>
+                    <span>아래는 홈 막대가 차지하는 두께</span>
                   </div>
                   <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">env(safe-area-inset-top)</div>
                   <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">env(safe-area-inset-bottom)</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">viewport-fit=cover   — 없으면 값이 늘 0</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">viewport-fit=cover   없으면 값이 늘 0</div>
                 </div>
               </div>
             </div>
@@ -209,7 +209,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>세이프 에어리어를 쓰는 경우</h3>
+            <h3>세이프 에어리어를 챙겨야 하는 경우</h3>
             <ul>
               <li><b>화면 끝까지</b> 그리는 앱이나 웹앱(엣지 투 엣지)을 만들 때</li>
               <li>화면 아래 <b>붙박이 버튼</b>이나 탭바가 있을 때</li>
@@ -218,7 +218,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>세이프 에어리어를 쓰지 않는 경우</h3>
+            <h3>세이프 에어리어를 다룰 때 피할 것</h3>
             <ul>
               <li><b>인셋을 숫자로 고정할</b> 때. <code>padding-top: 44px</code>은 다른 기기에서 맞지 않습니다</li>
               <li><code>env()</code>만 쓰고 <b>최소값을 주지 않을</b> 때. 노치 없는 기기에서 여백이 0이 됩니다</li>
@@ -227,7 +227,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>세이프 에어리어 대신 다른 것을 써야 하는 경우</b> — 아래 붙박이 줄 자체는 <a href="../items/bottomnav.html">바텀 탭바</a>, 위는 <a href="../items/appbar.html">앱바</a>, 스크롤할 때 붙여 두는 일은 <a href="sticky.html">스티키</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>세이프 에어리어와 함께 보면 좋은 항목</b> — 화면 아래에 붙는 탭바 자체는 <a href="../items/bottomnav.html">바텀 탭바</a>에서, 위쪽 바는 <a href="../items/appbar.html">앱바</a>에서 다룹니다. 스크롤하는 동안 요소를 한자리에 붙여 두는 방법은 <a href="sticky.html">스티키</a>에서 봅니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -237,25 +237,25 @@
             <div class="shot">
               <div style="position:relative;width:86px;height:140px;border-radius:14px;background:var(--ink-900);padding:4px;margin:0 auto" role="img" aria-label="탭바 재현"><div style="position:relative;height:100%;border-radius:11px;background:var(--surface);overflow:hidden"><span style="position:absolute;left:0;right:0;bottom:0;height:9px;background:color-mix(in srgb,var(--danger) 18%,transparent);z-index:1"></span><span style="position:absolute;left:0;right:0;bottom:0;background:var(--accent);color:#fff;font-size:7px;font-weight:700;padding:4px 6px;z-index:3;padding-bottom:11px">홈 · 정산 · 설정</span><span style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:34px;height:9px;background:var(--ink-900);border-radius:0 0 6px 6px;z-index:5"></span><span style="position:absolute;left:50%;bottom:3px;transform:translateX(-50%);width:34px;height:2px;border-radius:99px;background:var(--ink-900);opacity:.35;z-index:5"></span></div></div>
             </div>
-            <figcaption><b>바텀 탭바</b>홈 막대와 가장 자주 겹치는 자리입니다. <b>아이콘이 홈 막대에 닿으면 눌리지 않습니다</b></figcaption>
+            <figcaption><b>바텀 탭바를 홈 막대 위로 올리기</b>홈 막대와 가장 자주 겹치는 자리입니다. <b>아이콘이 홈 막대에 닿으면 눌리지 않습니다</b></figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="position:relative;width:86px;height:140px;border-radius:14px;background:var(--ink-900);padding:4px;margin:0 auto" role="img" aria-label="저장 바 재현"><div style="position:relative;height:100%;border-radius:11px;background:var(--surface);overflow:hidden"><span style="position:absolute;left:0;right:0;bottom:0;height:9px;background:color-mix(in srgb,var(--danger) 18%,transparent);z-index:1"></span><span style="position:absolute;left:0;right:0;bottom:0;background:var(--accent);color:#fff;font-size:7px;font-weight:700;padding:4px 6px;z-index:3;padding-bottom:11px">저장하기</span><span style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:34px;height:9px;background:var(--ink-900);border-radius:0 0 6px 6px;z-index:5"></span><span style="position:absolute;left:50%;bottom:3px;transform:translateX(-50%);width:34px;height:2px;border-radius:99px;background:var(--ink-900);opacity:.35;z-index:5"></span></div></div>
             </div>
-            <figcaption><b>붙박이 저장 바</b>긴 폼 아래에 붙인 버튼도 탭바와 같은 문제를 겪습니다</figcaption>
+            <figcaption><b>폼 아래 저장 바를 홈 막대 위로 올리기</b>긴 폼 아래에 붙인 버튼도 탭바와 같은 문제를 겪습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="position:relative;width:86px;height:140px;border-radius:14px;background:var(--ink-900);padding:4px;margin:0 auto" role="img" aria-label="상단 바 재현"><div style="position:relative;height:100%;border-radius:11px;background:var(--surface);overflow:hidden"><span style="position:absolute;left:0;right:0;top:0;height:12px;background:color-mix(in srgb,var(--danger) 18%,transparent);z-index:1"></span><span style="position:absolute;left:0;right:0;top:0;background:var(--accent);color:#fff;font-size:7px;font-weight:700;padding:4px 6px;z-index:3;padding-top:14px">← 상세</span><span style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:34px;height:9px;background:var(--ink-900);border-radius:0 0 6px 6px;z-index:5"></span><span style="position:absolute;left:50%;bottom:3px;transform:translateX(-50%);width:34px;height:2px;border-radius:99px;background:var(--ink-900);opacity:.35;z-index:5"></span></div></div>
             </div>
-            <figcaption><b>상단 바</b>뒤로가기 버튼이 <b>노치에 가려 눌리지 않는</b> 일이 흔합니다</figcaption>
+            <figcaption><b>상단 바를 노치 아래로 내리기</b>뒤로가기 버튼이 <b>노치에 가려 눌리지 않는</b> 일이 흔합니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">두 줄이면 끝난다</span></h2>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">메타 태그 한 줄과 패딩 한 줄</span></h2>
         <p><code>&lt;meta&gt;</code> 한 줄과 <code>padding</code> 한 줄이면 되는데, <b>메타 태그를 먼저</b> 적어야 합니다.</p>
 <pre class="code"><span class="c">&lt;!-- 이 줄이 없으면 env( )가 항상 0이다 --&gt;</span>
 &lt;<span class="t">meta</span> <span class="a">name</span>=<span class="s">"viewport"</span>
@@ -276,14 +276,14 @@
 }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>규칙</th><th>지켜야 하는 것</th></tr></thead>
+          <thead><tr><th>지킬 규칙</th><th>지키는 방법</th></tr></thead>
           <tbody>
-            <tr><td><code>viewport-fit=cover</code> 먼저</td><td>이 한 줄이 없으면 <code>env()</code>가 <b>모두 0</b>이 됩니다. env가 작동하지 않는 가장 흔한 원인입니다</td></tr>
-            <tr><td><code>max()</code>와 함께 쓴다</td><td>노치 없는 기기에서 0이 와도 <b>최소 여백</b>이 남게 합니다</td></tr>
-            <tr><td>배경은 끝까지</td><td>바의 <b>배경은 화면 끝까지</b> 두고 안의 내용만 밉니다. 배경까지 밀면 가장자리에 띠가 생깁니다</td></tr>
-            <tr><td>좌우도 챙긴다</td><td>가로로 돌리면 <code>left</code>·<code>right</code>에 값이 생깁니다</td></tr>
-            <tr><td>숫자를 못 박지 않는다</td><td>44px·34px 같은 값은 <b>특정 기기에서만</b> 맞습니다</td></tr>
-            <tr><td>터치 자리로 확인한다</td><td>눈으로는 가려지지 않은 것 같아도 <b>눌리지 않는</b> 경우가 있으므로 실기기로 눌러 봅니다</td></tr>
+            <tr><td><code>viewport-fit=cover</code>부터 적기</td><td>이 한 줄이 없으면 <code>env()</code>가 <b>모두 0</b>이 됩니다. env가 작동하지 않는 가장 흔한 원인입니다</td></tr>
+            <tr><td><code>max()</code>로 최소 여백 함께 주기</td><td>노치 없는 기기에서 0이 와도 <b>최소 여백</b>이 남게 합니다</td></tr>
+            <tr><td>바 배경은 화면 끝까지 두기</td><td>바의 <b>배경은 화면 끝까지</b> 두고 안의 내용만 밉니다. 배경까지 밀면 가장자리에 띠가 생깁니다</td></tr>
+            <tr><td>가로 화면의 좌우 인셋도 챙기기</td><td>가로로 돌리면 <code>left</code>·<code>right</code>에 값이 생깁니다</td></tr>
+            <tr><td>인셋을 숫자로 고정하지 않기</td><td>44px·34px 같은 값은 <b>특정 기기에서만</b> 맞습니다</td></tr>
+            <tr><td>실기기에서 눌러 보며 확인하기</td><td>눈으로는 가려지지 않은 것 같아도 <b>눌리지 않는</b> 경우가 있으므로 실기기로 눌러 봅니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -294,10 +294,10 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>서버가 할 일은 없다</th><td>세이프 에어리어는 화면에서만 처리하는 일입니다. 다만 <b>웹앱을 홈 화면에 설치</b>해 쓰는 경우라면 매니페스트의 <code>display: standalone</code>과 함께 생각해야 합니다.</td></tr>
-            <tr><th>기기 목록으로 테스트</th><td>노치 있는 기기, 노치 없는 기기, 가로 화면 <b>세 가지</b>가 최소한의 테스트 조합입니다. 브라우저 개발자 도구의 기기 에뮬레이션으로도 문제를 상당 부분 잡을 수 있습니다.</td></tr>
+            <tr><th>화면에서만 처리하는 일</th><td>세이프 에어리어는 화면에서만 처리하는 일입니다. 다만 <b>웹앱을 홈 화면에 설치</b>해 쓰는 경우라면 매니페스트의 <code>display: standalone</code>과 함께 생각해야 합니다.</td></tr>
+            <tr><th>테스트할 기기 조합</th><td>노치 있는 기기, 노치 없는 기기, 가로 화면 <b>세 가지</b>가 최소한의 테스트 조합입니다. 브라우저 개발자 도구의 기기 에뮬레이션으로도 문제를 상당 부분 잡을 수 있습니다.</td></tr>
             <tr><th>키보드가 올라올 때</th><td>입력칸에 포커스가 가면 키보드가 올라와 화면이 줄어듭니다. 그래서 아래 붙박이 버튼은 <b>키보드 위로 올라오게</b> 따로 처리해야 합니다.</td></tr>
-            <tr><th>스크린샷 자동 검사</th><td>글자 상자가 인셋 영역과 겹치는지는 좌표로 잴 수 있기 때문에, 실기기 없이도 <b>회귀를 막을</b> 수 있습니다.</td></tr>
+            <tr><th>스크린샷으로 자동 검사하기</th><td>글자 상자가 인셋 영역과 겹치는지는 좌표로 잴 수 있기 때문에, 실기기 없이도 <b>회귀를 막을</b> 수 있습니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -358,7 +358,7 @@
         <li><a href="../items/bottomnav.html"><b>바텀 탭바</b><em>7부</em></a></li>
         <li><a href="../items/appbar.html"><b>앱바 · 헤더</b><em>7부</em></a></li>
         <li><a href="../items/sheet.html"><b>바텀시트</b><em>6부</em></a></li>
-        <li><span class="na"><b>터치 타깃</b><em>11부</em></span></li>
+        <li><a href="touchtarget.html"><b>터치 타깃</b><em>11부</em></a></li>
       </ol>
       <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>

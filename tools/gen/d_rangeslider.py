@@ -26,12 +26,12 @@ def rs(lo, hi, label="", note="", ok=None, w="152px", fields=True, flipped=False
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">손잡이 둘 — 최소와 최대</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--danger)">서로 지나치면 최소가 최대보다 커진다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--accent)">숫자 칸 — 눈금에 없는 값도 넣는다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">눈금 — 넣을 수 있는 값의 가짓수를 정한다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">두 손잡이가 겹치면 어느 쪽인지 모른다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">Tab 으로 둘을 갈라서 다룬다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">손잡이 둘로 최소와 최대를 정함</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--danger)">서로 지나치면 최소가 최대보다 커짐</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--accent)">숫자 칸으로 눈금에 없는 값도 넣음</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">눈금이 넣을 수 있는 값의 가짓수를 정함</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">두 손잡이가 겹치면 어느 쪽인지 모름</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">Tab으로 두 손잡이를 따로 다룸</div>
                 </div>
               </div>'''
 
@@ -61,21 +61,21 @@ D = dict(
   axes=ax("범위 슬라이더"),
   oneline="<b>숫자 칸을 같이 두세요.</b> 손잡이를 끌어서 넣을 수 있는 값 가운데 원하는 값이 없을 때가 많습니다.",
   states=states([
-    (rs(100, 300, "", "보통", True), "기본", "<b>두 손잡이</b>로 최소와 최대를 정합니다"),
-    (rs(380, 120, "", "최소가 최대보다 크다", False, "152px", True, True), "뒤집힘", "최소가 최대보다 커지지 않도록 <b>막아야</b> 합니다"),
-    (rs(200, 210, "", "두 손잡이가 겹쳤다", None), "겹침", "두 손잡이가 겹치면 <b>어느 쪽인지</b> 알 수 없습니다"),
-    (rs(0, 500, "", "전체 범위", True), "다 고름", "전체 범위를 고르면 조건이 <b>없는 것</b>과 같습니다"),
-    (rs(420, 450, "", "눈금에 없는 값 — 칸으로 넣었다", True), "숫자 칸", "눈금에 없는 값도 숫자 칸으로 <b>정확히</b> 넣습니다"),
-    (rs(100, 300, "", "칸이 없다 — 눈금 값만 된다", False, "152px", False), "칸 없음", "숫자 칸이 없으면 <b>50 단위</b> 눈금 값만 넣을 수 있습니다"),
+    (rs(100, 300, "", "범위를 고른 모습", True), "평소 상태", "<b>두 손잡이</b>로 최소와 최대를 정합니다"),
+    (rs(380, 120, "", "최소가 최대보다 큼", False, "152px", True, True), "두 손잡이가 서로 지나쳤을 때", "최소가 최대보다 커지지 않도록 <b>막아야</b> 합니다"),
+    (rs(200, 210, "", "두 손잡이가 겹침", None), "두 손잡이가 겹쳤을 때", "두 손잡이가 겹치면 <b>어느 쪽인지</b> 알 수 없습니다"),
+    (rs(0, 500, "", "전체 범위", True), "전체 범위를 골랐을 때", "전체 범위를 고르면 조건이 <b>없는 것</b>과 같습니다"),
+    (rs(420, 450, "", "눈금에 없는 값을 칸으로 넣음", True), "숫자 칸으로 넣을 때", "눈금에 없는 값도 숫자 칸으로 <b>정확히</b> 넣습니다"),
+    (rs(100, 300, "", "칸이 없어 눈금 값만 넣을 수 있음", False, "152px", False), "숫자 칸이 없을 때", "숫자 칸이 없으면 <b>50 단위</b> 눈금 값만 넣을 수 있습니다"),
   ]),
   anat=ANAT,
   pins=pins([
     ("손잡이 둘", "최소 · 최대", "손잡이가 둘이라 다룰 문제도 <b>두 배</b>가 됩니다"),
-    ("지나침", "뒤집힘", "한 손잡이가 다른 쪽을 넘으려 하면 <b>밀어내거나</b> 막습니다"),
-    ("숫자 칸", "정확한 값", "눈금에 <b>없는 값</b>도 넣을 수 있습니다"),
-    ("눈금", "가짓수", "눈금이 클수록 끌어서 <b>넣을 수 없는 값</b>이 늘어납니다"),
-    ("겹침", "모호함", "겹친 자리에서는 어느 손잡이를 잡았는지 알기 어렵습니다"),
-    ("Tab", "둘을 갈라서", "키보드로는 두 손잡이를 <b>따로</b> 옮깁니다"),
+    ("지나침", "최소와 최대가 뒤집힘", "한 손잡이가 다른 쪽을 넘으려 하면 <b>밀어내거나</b> 막습니다"),
+    ("숫자 칸", "정확한 값 넣기", "눈금에 <b>없는 값</b>도 넣을 수 있습니다"),
+    ("눈금", "넣을 수 있는 값의 가짓수", "눈금이 클수록 끌어서 <b>넣을 수 없는 값</b>이 늘어납니다"),
+    ("겹침", "어느 손잡이인지 모름", "겹친 자리에서는 어느 손잡이를 잡았는지 알기 어렵습니다"),
+    ("Tab", "두 손잡이를 따로", "키보드로는 두 손잡이를 <b>따로</b> 옮깁니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           범위 슬라이더는 <b>손가락으로 대략 정할 때</b>는 편하지만
@@ -96,11 +96,11 @@ D = dict(
     "눈금을 너무 <b>크게</b> 두기. 원하는 값을 끌어서 고를 수 없게 됩니다",
     "손잡이에 <b>이름을 붙이지 않기</b>. 스크린 리더로 들으면 두 손잡이를 구별할 수 없습니다",
   ]),
-  instead='값 하나만 고르면 <a href="slider.html">슬라이더</a>, 날짜의 범위면 <a href="daterange.html">날짜 범위</a>, 숫자 칸으로만 받으면 <a href="numberinput.html">숫자 입력</a>, 조건으로 목록을 거르는 화면은 <a href="filter.html">필터와 패싯</a>.',
+  instead='범위가 아니라 값 하나만 고르면 <a href="slider.html">슬라이더</a>를 쓰고, 숫자가 아니라 날짜의 범위를 고르면 <a href="daterange.html">날짜 범위</a>를 씁니다. 손잡이 없이 숫자 칸으로만 받으려면 <a href="numberinput.html">숫자 입력</a>이 맞고, 조건을 골라 목록을 거르는 화면 전체는 <a href="filter.html">필터와 패싯</a>에서 다룹니다.',
   cases=cases([
-    (rs(100, 300, "", "", True, "150px"), "금액 범위", "금액을 <b>대략</b> 정할 때 씁니다"),
-    (rs(20, 60, "", "", True, "150px"), "나이대", "범위가 좁아서 눈금이 <b>촘촘해도</b> 괜찮습니다"),
-    (rs(0, 500, "", "", True, "150px"), "조건 없음", "<b>전체</b> 범위를 고르면 조건을 지운 것으로 다룹니다"),
+    (rs(100, 300, "", "", True, "150px"), "금액 범위 고르기", "금액을 <b>대략</b> 정할 때 씁니다"),
+    (rs(20, 60, "", "", True, "150px"), "나이대 고르기", "범위가 좁아서 눈금이 <b>촘촘해도</b> 괜찮습니다"),
+    (rs(0, 500, "", "", True, "150px"), "조건을 걸지 않을 때", "<b>전체</b> 범위를 고르면 조건을 지운 것으로 다룹니다"),
   ]),
   code_lede="<code>&lt;input type=\"range\"&gt;</code> 두 개를 겹쳐 놓고, 그 아래에 숫자 칸을 같이 둡니다.",
   code='''&lt;<span class="t">div</span> <span class="a">class</span>=<span class="s">"range"</span>&gt;
@@ -121,19 +121,19 @@ D = dict(
     ("Tab", "두 손잡이 사이를 오가며 <b>하나씩</b> 다룹니다. 손잡이가 겹쳐 있어도 문제없습니다"),
     ("<code>aria-label</code>", "손잡이마다 <b>이름</b>을 붙입니다"),
     ("<code>aria-valuetext</code>", "'100만원'처럼 <b>단위까지</b> 읽히게 합니다"),
-    ("확인하는 법", "키보드만으로 <b>두 손잡이를 모두</b> 움직여 봅니다"),
+    ("확인하는 방법", "키보드만으로 <b>두 손잡이를 모두</b> 움직여 봅니다"),
   ]),
   backend=rows([
-    ("두 값으로", "범위는 <code>{min: 100, max: 300}</code>처럼 두 값으로 주고받습니다. 최소가 최대보다 큰 값이 오더라도 <b>서버가 바로잡는</b> 편이 안전합니다."),
-    ("열린 범위", "'300만원 이상'처럼 한쪽 끝이 없는 범위는 그쪽 값을 <b><code>null</code></b>로 표현해 둡니다."),
-    ("분포", "서버가 값의 분포를 함께 내려 주면 슬라이더 위에 <b>막대로 그려</b> 어느 구간에 값이 많은지 보여 줄 수 있습니다."),
+    ("범위는 두 값으로 주고받기", "범위는 <code>{min: 100, max: 300}</code>처럼 두 값으로 주고받습니다. 최소가 최대보다 큰 값이 오더라도 <b>서버가 바로잡는</b> 편이 안전합니다."),
+    ("한쪽 끝이 없는 범위", "'300만원 이상'처럼 한쪽 끝이 없는 범위는 그쪽 값을 <b><code>null</code></b>로 표현해 둡니다."),
+    ("값의 분포를 함께 보여 주기", "서버가 값의 분포를 함께 내려 주면 슬라이더 위에 <b>막대로 그려</b> 어느 구간에 값이 많은지 보여 줄 수 있습니다."),
   ]),
   plat_lede="대부분의 플랫폼에 <b>기본 부품이 없어서</b> 직접 만듭니다.",
   plats=plats([
-    ("웹", "range 둘을 겹쳐",
+    ("웹", "range 두 개를 겹쳐 만듦",
      rs(100, 300, "", "", True, "110px"),
      "<code>input[type=range]</code>는 손잡이가 하나뿐이라서 <b>두 개를 겹쳐</b> 만듭니다."),
-    ("iOS", "없다 — 직접",
+    ("iOS", "정식 부품 없이 직접 만듦",
      '''              <div class="phone" role="img" aria-label="iOS 범위 슬라이더 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:6px;right:6px;top:32px;height:3px;border-radius:999px;background:var(--bg)"></div>
                 <div style="position:absolute;left:14px;right:18px;top:32px;height:3px;border-radius:999px;background:var(--accent)"></div></div></div>''',

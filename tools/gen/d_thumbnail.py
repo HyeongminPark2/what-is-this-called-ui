@@ -24,12 +24,12 @@ def pic(w, h, left=0, top=0, sx=1, sy=1):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">칸의 비는 고정 — aspect-ratio</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">object-fit: cover — 잘라 채운다(기본으로 삼는다)</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">object-position — 어디를 남길지</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">fill — 안 잘리지만 찌그러진다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">width·height 를 적어 둔다 — 자리가 안 튄다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">alt — 그림이 뜻을 가지면 적는다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">칸의 비율은 aspect-ratio로 고정</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">object-fit: cover로 잘라 채움(기본으로 삼음)</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">object-position으로 남길 곳을 정함</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">fill은 잘리지 않지만 찌그러짐</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">width·height를 적어 두면 자리가 밀리지 않음</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">alt는 그림에 뜻이 있을 때 적음</div>
                 </div>
               </div>'''
 
@@ -59,30 +59,31 @@ D = dict(
   ]),
   axes=ax("썸네일"),
   oneline="<b>썸네일은 <code>cover</code>를 기본으로 두세요.</b> 대개 여백을 남기는 것보다 잘라 채우는 쪽이 낫고, 사진이 찌그러지는 것은 둘 다보다 나쁩니다.",
+  s4_title="채우는 방식과 상태", s4_hint="채우는 방식과 상태마다 달라지는 썸네일",
   states=states([
-    (box(pic(100, 56, -12, 0), "cover", "칸을 꽉 채운다 — 양옆이 잘렸다", True),
-     "<code>cover</code>", "썸네일의 <b>기본</b>으로 삼습니다"),
-    (box(pic(76, 42, 0, 7), "contain", "비를 지키고 위아래에 여백", None),
-     "<code>contain</code>", "사진 전체가 <b>다 보여야</b> 할 때만 씁니다"),
-    (box(pic(76, 56, 0, 0, 1.8, 0.8), "fill", "안 잘리지만 찌그러졌다", False),
-     "<code>fill</code>", "사진이 찌그러지므로 <b>거의 쓰지 않습니다</b>"),
-    (box(pic(76, 78, 0, -22), "object-position: top", "아래쪽이 잘리고 머리가 남는다", True),
-     "위쪽 남기기", "머리가 잘리지 않도록 <b>인물 사진</b>에 씁니다"),
+    (box(pic(100, 56, -12, 0), "cover", "칸을 꽉 채우고 양옆이 잘림", True),
+     "<code>cover</code>로 잘라 채울 때", "썸네일의 <b>기본</b>으로 삼습니다"),
+    (box(pic(76, 42, 0, 7), "contain", "비율을 지키고 위아래에 여백을 둠", None),
+     "<code>contain</code>으로 여백을 둘 때", "사진 전체가 <b>다 보여야</b> 할 때만 씁니다"),
+    (box(pic(76, 56, 0, 0, 1.8, 0.8), "fill", "잘리지 않지만 찌그러짐", False),
+     "<code>fill</code>로 늘려 맞출 때", "사진이 찌그러지므로 <b>거의 쓰지 않습니다</b>"),
+    (box(pic(76, 78, 0, -22), "object-position: top", "아래쪽이 잘리고 머리가 남음", True),
+     "사진 위쪽을 남길 때", "머리가 잘리지 않도록 <b>인물 사진</b>에 씁니다"),
     (box('<span style="position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,var(--line) 50%,var(--bg) 100%)"></span>',
-         "자리 예약", "크기를 적어 둬 자리가 안 튄다", True),
-     "불러오는 중", "사진이 오기 전에 <b>칸을 미리</b> 잡아 둡니다"),
+         "자리 예약", "크기를 적어 두어 자리가 밀리지 않음", True),
+     "사진을 불러오는 중", "사진이 오기 전에 <b>칸을 미리</b> 잡아 둡니다"),
     (box('<span style="position:absolute;inset:0;display:grid;place-items:center;font-size:8.5px;color:var(--fg-muted)">사진 없음</span>',
-         "빈 자리", "회색 네모가 아니라 말로", None),
-     "그림 없음", "사진이 없으면 <b>대체 그림</b>을 둡니다"),
+         "빈 자리", "회색 네모 대신 말로 알림", None),
+     "사진이 없을 때", "사진이 없으면 <b>대체 그림</b>을 둡니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("칸의 비", "고정", "<code>aspect-ratio</code>로 비율을 고정합니다"),
-    ("<code>cover</code>", "잘라 채움", "<b>기본</b>으로 삼습니다"),
-    ("<code>object-position</code>", "어디를 남길지", "인물 사진은 <code>top</code>으로 둡니다"),
-    ("<code>fill</code>", "찌그러짐", "<b>쓰지 않습니다</b>"),
-    ("<code>width·height</code>", "자리 예약", "사진이 늦게 와도 글이 <b>밀리지 않습니다</b>"),
-    ("<code>alt</code>", "뜻이 있으면", "장식용이면 <b>빈 문자열</b>로 둡니다"),
+    ("칸의 비", "고정된 가로세로 비율", "<code>aspect-ratio</code>로 비율을 고정합니다"),
+    ("<code>cover</code>", "잘라서 채우는 방식", "썸네일의 <b>기본</b>으로 삼습니다"),
+    ("<code>object-position</code>", "남길 곳을 정하는 속성", "인물 사진은 <code>top</code>으로 둡니다"),
+    ("<code>fill</code>", "늘려서 맞추는 방식", "사진이 찌그러지므로 <b>쓰지 않습니다</b>"),
+    ("<code>width·height</code>", "자리를 예약하는 값", "사진이 늦게 와도 글이 <b>밀리지 않습니다</b>"),
+    ("<code>alt</code>", "그림에 뜻이 있을 때 적는 글", "장식용이면 <b>빈 문자열</b>로 둡니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           썸네일에서 특히 흔한 문제는 <b>레이아웃이 갑자기 밀리는 것</b>입니다.
@@ -94,8 +95,10 @@ D = dict(
           두 번째 문제는 <b>너무 큰 원본</b>입니다. 76px 칸에 2000px 사진을 넣으면
           화면에 보이는 모습은 같은데 데이터는 수십 배를 씁니다.
           그래서 <code>srcset</code>으로 <b>칸에 맞는 크기</b>의 사진을 받습니다.</p>''',
+  do_title="썸네일을 만들 때 지킬 것", dont_title="썸네일을 만들 때 피할 것",
+  instead_title="썸네일 대신 쓸 부품과 함께 볼 항목",
   do=ul([
-    "칸에 <b><code>aspect-ratio</code></b> 를 걸고 <code>cover</code>로 채우기",
+    "칸에 <b><code>aspect-ratio</code></b>를 걸고 <code>cover</code>로 채우기",
     "<code>width</code>·<code>height</code>를 적어 <b>자리를 예약</b>하기",
     "<code>srcset</code>으로 <b>칸에 맞는 크기</b> 받기",
   ]),
@@ -105,12 +108,14 @@ D = dict(
     "원본을 그대로 쓰기. 76px 칸에 2000px 사진을 받게 됩니다",
     "빈 자리를 <b>회색 네모</b>로만 두기. 사진이 왜 없는지 한 줄 적어 줍니다",
   ]),
-  instead='사람·조직이면 <a href="avatar.html">아바타</a>, 뜻의 기호면 <a href="icon.html">아이콘</a>, 비율 자체는 <a href="aspectratio.html">종횡비</a>, 불러오는 중은 <a href="skeleton.html">스켈레톤</a>.',
+  instead='사람이나 조직을 가리키는 그림이면 <a href="avatar.html">아바타</a>를, 뜻을 나타내는 기호면 <a href="icon.html">아이콘</a>을 씁니다. 가로세로 비율을 정하는 방법은 <a href="aspectratio.html">종횡비</a>에서, 사진을 불러오는 동안 보여 줄 뼈대는 <a href="skeleton.html">스켈레톤</a>에서 다룹니다.',
   cases=cases([
-    (box(pic(100, 56, -12, 0), "상품 목록", "", True), "상품 목록", "모든 사진을 <b>같은 비율</b>로 가지런히 맞춥니다"),
-    (box(pic(76, 78, 0, -22), "사람 목록", "", True), "사람 목록", "머리가 잘리지 않게 사진 <b>위쪽</b>을 남깁니다"),
-    (box(pic(76, 42, 0, 7), "작품 · 도면", "", None), "원본이 중요할 때", "사진이 잘리면 안 되므로 <b>여백</b>이 생기는 것을 감수합니다"),
+    (box(pic(100, 56, -12, 0), "상품 목록", "", True), "상품 사진을 같은 비율로 맞추기", "모든 사진을 <b>같은 비율</b>로 가지런히 맞춥니다"),
+    (box(pic(76, 78, 0, -22), "사람 목록", "", True), "인물 사진에서 머리 남기기", "머리가 잘리지 않게 사진 <b>위쪽</b>을 남깁니다"),
+    (box(pic(76, 42, 0, 7), "작품 · 도면", "", None), "원본을 자르면 안 되는 그림 보여 주기", "사진이 잘리면 안 되므로 <b>여백</b>이 생기는 것을 감수합니다"),
   ]),
+  s8_title="최소 마크업과 규칙",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법</th>",
   code_lede="칸의 비율을 고정하고 <code>cover</code>로 채웁니다. 이미지에 크기를 적어 두면 브라우저가 그 크기만큼 자리를 예약합니다.",
   code='''&lt;<span class="t">img</span> <span class="a">src</span>=<span class="s">"/p/2411.jpg"</span> <span class="a">width</span>=<span class="s">"320"</span> <span class="a">height</span>=<span class="s">"240"</span>
      <span class="a">srcset</span>=<span class="s">"/p/2411@1x.jpg 320w, /p/2411@2x.jpg 640w"</span>
@@ -124,17 +129,17 @@ D = dict(
   <span class="a">width</span>: <span class="a">100%</span>; <span class="a">background</span>: <span class="a">var</span>(--bg);
 }''',
   keys=kbd([
-    ("<code>alt</code>", "사진에 전할 뜻이 있으면 적고, 장식용이면 <b>빈 문자열</b>로 둡니다"),
-    ("링크 속 썸네일", "같은 링크 안에 글이 있으면 그림의 <code>alt</code>는 <b>비웁니다</b>. 채우면 같은 내용이 두 번 읽힙니다"),
-    ("<code>loading=\"lazy\"</code>", "화면 밖에 있는 그림은 화면에 가까워졌을 때 <b>나중에</b> 받습니다"),
-    ("<code>decoding=\"async\"</code>", "그림 디코딩이 끝나기를 기다리지 않고 화면을 그립니다"),
-    ("<code>aspect-ratio</code>", "크기를 적을 수 없을 때 <b>자리를 잡는</b> 다른 방법입니다"),
-    ("확인하는 법", "네트워크 속도를 느리게 설정하고 사진이 들어올 때 <b>글이 밀리는지</b> 봅니다"),
+    ("<code>alt</code>에 사진의 뜻 적기", "사진에 전할 뜻이 있으면 적고, 장식용이면 <b>빈 문자열</b>로 둡니다"),
+    ("링크 안에 든 썸네일의 <code>alt</code>", "같은 링크 안에 글이 있으면 그림의 <code>alt</code>는 <b>비웁니다</b>. 채우면 같은 내용이 두 번 읽힙니다"),
+    ("<code>loading=\"lazy\"</code>로 나중에 받기", "화면 밖에 있는 그림은 화면에 가까워졌을 때 <b>나중에</b> 받습니다"),
+    ("<code>decoding=\"async\"</code>로 기다리지 않기", "그림 디코딩이 끝나기를 기다리지 않고 화면을 그립니다"),
+    ("<code>aspect-ratio</code>로 자리 잡기", "크기를 적을 수 없을 때 <b>자리를 잡는</b> 다른 방법입니다"),
+    ("확인하는 방법", "네트워크 속도를 느리게 설정하고 사진이 들어올 때 <b>글이 밀리는지</b> 봅니다"),
   ]),
   backend=rows([
-    ("여러 크기로 내려 준다", "원본 하나만 보내면 화면이 <b>큰 그림을 받아 줄여</b> 써야 합니다. 그래서 썸네일 크기의 사진을 서버에서 미리 만들어 두는 편이 낫습니다."),
-    ("크기를 같이", "<code>width</code>·<code>height</code>가 응답에 들어 있으면 화면이 사진을 받기 전에 <b>자리를 예약</b>할 수 있습니다."),
-    ("포컬 포인트", "<code>focal: {x: 0.5, y: 0.3}</code> 같은 값을 함께 보내면 사진을 자를 때 <b>어디를 남길지</b>를 사진마다 다르게 정할 수 있습니다."),
+    ("사진을 여러 크기로 내려 주기", "원본 하나만 보내면 화면이 <b>큰 그림을 받아 줄여</b> 써야 합니다. 그래서 썸네일 크기의 사진을 서버에서 미리 만들어 두는 편이 낫습니다."),
+    ("사진 크기를 응답에 함께 담기", "<code>width</code>·<code>height</code>가 응답에 들어 있으면 화면이 사진을 받기 전에 <b>자리를 예약</b>할 수 있습니다."),
+    ("자를 때 남길 포컬 포인트 보내기", "<code>focal: {x: 0.5, y: 0.3}</code> 같은 값을 함께 보내면 사진을 자를 때 <b>어디를 남길지</b>를 사진마다 다르게 정할 수 있습니다."),
   ]),
   plat_lede="사진을 <b>칸에 맞춰 자른다</b>는 방식은 세 플랫폼이 모두 같습니다.",
   plats=plats([

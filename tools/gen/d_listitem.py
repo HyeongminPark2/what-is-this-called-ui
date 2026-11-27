@@ -26,12 +26,12 @@ ANAT = '''              <div class="anat--wide" style="background:var(--bg);bord
                     <span style="font-size:11px;color:var(--fg-muted);flex:none">₩1,245,480</span>
                     <span style="color:var(--fg-faint);font-size:13px;flex:none">›</span>
                   </div>
-                  <div class="pin-out" data-pin="2" style="font-size:11px;color:var(--fg-muted)">줄 하나가 통째로 <b style="color:var(--fg)">하나의 누를 것</b>이다</div>
+                  <div class="pin-out" data-pin="2" style="font-size:11px;color:var(--fg-muted)">줄 하나 전체가 <b style="color:var(--fg)">하나의 누를 것</b>임</div>
                   <div class="pin-out" data-pin="3" style="display:flex;align-items:center;gap:9px;font-size:11px;color:var(--fg-muted)">
                     <span style="width:26px;height:26px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-size:10px;font-weight:700;display:grid;place-items:center;flex:none">길동</span>
-                    <span>앞자리 — <b style="color:var(--fg)">폭이 고정</b></span>
+                    <span>앞자리는 <b style="color:var(--fg)">폭이 고정됨</b></span>
                   </div>
-                  <div class="pin-out" data-pin="4" style="font-size:11px;color:var(--fg-muted)">가운데 — <b style="color:var(--fg)">여기만 늘어난다</b></div>
+                  <div class="pin-out" data-pin="4" style="font-size:11px;color:var(--fg-muted)">가운데는 <b style="color:var(--fg)">이 자리만 늘어남</b></div>
                   <div class="pin-out" data-pin="5" style="height:1px;background:var(--line-strong)"></div>
                   <div class="pin-out" data-pin="6" style="font-size:10.5px;color:var(--fg-muted);background:var(--surface);border-radius:6px;padding:5px 9px;justify-self:start">이번 주</div>
                 </div>
@@ -43,7 +43,7 @@ D = dict(
   lede="리스트 아이템은 목록에서 <b>한 줄에 한 건</b>을 담는 부품입니다. 담는 내용은 카드와 같지만, 여러 건을 세로로 훑어 비교하기 좋도록 줄을 가지런히 맞춰 둔다는 점이 다릅니다.",
   axes_lede="표시 부품은 모두 무언가를 보여 주기만 한다는 점이 같아서, 아래 네 가지를 물어봐야 서로 구별됩니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
-          <p>줄 수를 바꿔 보고, <b>자르지 말고 접기</b>를 켜 보세요. 글이 모두 보이는 대신
+          <p>줄 수를 바꿔 보고, <b>긴 글을 자르지 말고 접기</b>를 켜 보세요. 글이 모두 보이는 대신
           줄마다 높이가 달라집니다. 목록에서는 보통 <b>자르는 쪽</b>을 고릅니다.
           줄 높이가 일정해야 세로로 훑어 읽기 쉽고, 가상 스크롤도 높이가 일정할 때만 쓸 수 있기 때문입니다.</p>
         </div>''',
@@ -61,23 +61,23 @@ D = dict(
   ]),
   axes=ax("리스트 아이템"),
   oneline="리스트 아이템은 여러 건을 <b>세로로 비교하기 쉽도록</b> 줄을 맞춘 것입니다. 그래서 줄 높이가 제각각이면 세로로 훑어 비교하기 어려워져 리스트를 쓰는 의미가 줄어듭니다.",
-  s4_title="상태", s4_hint="그림 한 장으로는 못 배운다",
+  s4_title="상태", s4_hint="상태마다 달라지는 줄의 모습",
   states=states([
-    (row(AV, "정산 요청 #4821", "11월 1일 ~ 11월 7일", CHEV), "기본", "앞, 가운데, 뒤의 <b>세 자리</b>로 이루어집니다"),
+    (row(AV, "정산 요청 #4821", "11월 1일 ~ 11월 7일", CHEV), "기본 구성", "앞, 가운데, 뒤의 <b>세 자리</b>로 이루어집니다"),
     (row(AV, "정산 요청 #4821", "11월 1일 ~ 11월 7일", CHEV, style="background:var(--bg)"),
-     "호버", "<b>줄 전체</b>의 바탕색이 바뀌어 어디까지가 한 줄인지 알려 줍니다"),
+     "마우스를 올렸을 때", "<b>줄 전체</b>의 바탕색이 바뀌어 어디까지가 한 줄인지 알려 줍니다"),
     (row(AV, "정산 요청 #4821", "11월 1일 ~ 11월 7일", CHEV, style="outline:2px solid var(--accent);outline-offset:-2px"),
-     "포커스", "포커스 테두리를 줄 <b>안쪽</b>에 그립니다. 바깥에 그리면 이웃한 줄을 덮기 때문입니다"),
+     "키보드로 포커스가 왔을 때", "포커스 테두리를 줄 <b>안쪽</b>에 그립니다. 바깥에 그리면 이웃한 줄을 덮기 때문입니다"),
     (row('<span style="width:14px;height:14px;border:1.5px solid var(--accent);background:var(--accent);border-radius:3px;flex:none;display:grid;place-items:center;color:#fff;font-size:9px">✓</span>',
          "정산 요청 #4821", "11월 1일 ~ 11월 7일", "", style="background:var(--accent-soft)"),
-     "고름", "<b>앞자리에 체크박스</b>가 들어오고, 고른 줄은 바탕색이 바뀝니다"),
+     "줄을 골랐을 때", "<b>앞자리에 체크박스</b>가 들어오고, 고른 줄은 바탕색이 바뀝니다"),
     (row(AV, "환불 확인 요청 — 카드 승인 취소가 늦어", "주문 TX-99120 · 승인 취소 대기", CHEV),
-     "긴 글", "글이 한 줄을 넘지 않도록 <b>말줄임표(…)로 자르고</b>, 전체 내용은 상세 화면에서 보여 줍니다"),
+     "글이 길 때", "글이 한 줄을 넘지 않도록 <b>말줄임표(…)로 자르고</b>, 전체 내용은 상세 화면에서 보여 줍니다"),
     ('''              <div style="width:100%;max-width:168px;border:1px solid var(--line);border-radius:8px;background:var(--surface);display:flex;align-items:center;gap:7px;padding:8px 9px">
                 <span class="skl" style="width:22px;height:22px;border-radius:99px;flex:none"></span>
                 <span style="flex:1;display:grid;gap:4px"><span class="skl" style="height:8px;width:70%"></span><span class="skl" style="height:7px;width:45%"></span></span>
               </div>''',
-     "로딩", "뼈대를 <b>실제 줄과 같은 높이</b>로 그립니다. 높이가 다르면 내용이 들어오는 순간 목록이 위아래로 밀립니다"),
+     "내용을 불러오는 중", "뼈대를 <b>실제 줄과 같은 높이</b>로 그립니다. 높이가 다르면 내용이 들어오는 순간 목록이 위아래로 밀립니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -103,16 +103,16 @@ D = dict(
     "열을 기준으로 정렬하거나 여러 값을 비교해야 할 때. 데이터 테이블을 씁니다",
     "줄마다 보여 줄 것이 너무 많을 때. 세 자리에 다 들어가지 않으면 <b>리스트 아이템이 아니라 카드</b>로 만듭니다",
   ]),
-  instead='사진이 중요하면 <a href="card.html">카드</a>, 열로 다루면 데이터 테이블(10부), 눌러서 사라지는 선택지면 메뉴(6부).',
+  instead='사진을 보고 골라야 하면 <a href="card.html">카드</a>를 쓰고, 열을 기준으로 정렬하거나 비교해야 하면 데이터 테이블(10부)을 씁니다. 누르면 닫히는 선택지 모음이라면 메뉴(6부)가 맞습니다.',
   cases=cases([
     (row(AV, "김철수", "네, 오후에 확인해 볼게요", '<span style="font-size:9.5px;color:var(--fg-muted);flex:none">14:02</span>', w="180px"),
-     "대화 목록", "앞에 아바타, 뒤에 보낸 시각을 둡니다. <b>메신저 첫 화면</b>에서 흔히 봅니다"),
+     "메신저의 대화 목록", "앞에 아바타, 뒤에 보낸 시각을 둡니다. <b>메신저 첫 화면</b>에서 흔히 봅니다"),
     (row('<span style="width:22px;height:22px;border-radius:6px;background:var(--bg);flex:none"></span>',
          "알림", "", '<span style="width:30px;height:17px;border-radius:99px;background:var(--accent);flex:none;position:relative"><span style="position:absolute;right:2px;top:2px;width:13px;height:13px;border-radius:99px;background:#fff"></span></span>', w="180px"),
-     "설정 줄", "뒤에 스위치가 옵니다. 줄 전체를 누르게 할지, <b>스위치만</b> 눌리게 할지 정해야 합니다"),
+     "설정 화면의 스위치 줄", "뒤에 스위치가 옵니다. 줄 전체를 누르게 할지, <b>스위치만</b> 눌리게 할지 정해야 합니다"),
     (row('<span style="width:22px;height:22px;border-radius:4px;background:repeating-linear-gradient(135deg,var(--ink-100) 0 5px,var(--ink-050) 5px 10px);flex:none"></span>',
          "접이식 캠핑 의자", "한빛아웃도어 · 1개", '<span style="font-size:10px;font-weight:700;flex:none">₩58,000</span>', w="180px"),
-     "주문 내역", "뒤에 금액이 옵니다. <b>금액은 오른쪽으로 맞추고</b> 자릿수도 맞춥니다"),
+     "주문 내역의 금액 줄", "뒤에 금액이 옵니다. <b>금액은 오른쪽으로 맞추고</b> 자릿수도 맞춥니다"),
   ]),
   s8_title="최소 마크업과 키보드",
   code_lede="목록은 <code>&lt;ul&gt;</code>과 <code>&lt;li&gt;</code>로 만듭니다. 그래야 스크린 리더가 <b>'목록, 항목 3개 중 1번'</b>처럼 몇 번째 건인지 읽어 줍니다.",
@@ -135,15 +135,15 @@ D = dict(
   keys=kbd([
     ("<kbd>Tab</kbd>", "포커스가 줄마다 <b>한 번</b> 멈춥니다. 줄 안에 누를 것이 둘이면 두 번 멈춥니다"),
     ("<kbd>Enter</kbd>", "포커스가 있는 줄을 엽니다"),
-    ("<code>&lt;ul&gt;</code>로 감싼다", "스크린 리더가 '목록, 항목 12개'라고 읽어 줍니다. <code>&lt;div&gt;</code>만 쌓으면 <b>몇 건인지 알 수 없습니다</b>"),
-    ("앞자리 아바타", "<code>aria-hidden=\"true\"</code>을 붙입니다. 바로 옆에 이름이 또 있어서 아바타까지 읽으면 이름을 두 번 듣게 됩니다"),
-    ("뒤의 스위치", "줄 전체를 누르는 동작과 <b>겹치지 않게</b> 합니다. 보통 줄은 눌리지 않게 두고 스위치만 누르게 합니다"),
+    ("<code>&lt;ul&gt;</code>로 감쌌을 때", "스크린 리더가 '목록, 항목 12개'라고 읽어 줍니다. <code>&lt;div&gt;</code>만 쌓으면 <b>몇 건인지 알 수 없습니다</b>"),
+    ("앞자리에 아바타가 있을 때", "<code>aria-hidden=\"true\"</code>을 붙입니다. 바로 옆에 이름이 또 있어서 아바타까지 읽으면 이름을 두 번 듣게 됩니다"),
+    ("뒤에 스위치가 있을 때", "줄 전체를 누르는 동작과 <b>겹치지 않게</b> 합니다. 보통 줄은 눌리지 않게 두고 스위치만 누르게 합니다"),
   ]),
   backend=rows([
-    ("줄 하나 = 레코드 하나", "목록 API가 돌려주는 한 행이 줄 하나가 됩니다. 줄에 보이는 값은 <b>그 행 안에</b> 모두 들어 있어야 하는데, 줄마다 이름을 따로 조회하면 N+1 문제(목록 1번에 줄 수만큼 추가 조회)가 생기기 때문입니다."),
+    ("줄 하나는 레코드 하나", "목록 API가 돌려주는 한 행이 줄 하나가 됩니다. 줄에 보이는 값은 <b>그 행 안에</b> 모두 들어 있어야 하는데, 줄마다 이름을 따로 조회하면 N+1 문제(목록 1번에 줄 수만큼 추가 조회)가 생기기 때문입니다."),
     ("높이가 일정해야 하는 이유", "줄 높이가 같으면 화면에 보이는 줄만 그리는 <b>가상 스크롤</b>을 쓸 수 있어서 수만 줄도 그릴 수 있습니다. 반면 높이가 제각각이면 줄마다 높이를 재야 해서 스크롤 위치가 갑자기 건너뜁니다."),
-    ("커서 페이징", "무한 스크롤로 목록을 이어 붙일 때 <code>offset</code>을 쓰면, 그사이 새 글이 앞에 끼어들어 <b>같은 줄이 두 번</b> 나옵니다. 그래서 마지막 줄의 커서를 넘겨 다음 묶음을 받는 쪽이 안전합니다."),
-    ("빈 목록", "결과가 0건이면 <b>빈 줄 하나</b>를 돌려주지 말고 빈 배열을 돌려준 뒤, 화면에서  <a href=\"../items/empty.html\">빈 상태</a>를 그립니다."),
+    ("무한 스크롤에는 커서 페이징", "무한 스크롤로 목록을 이어 붙일 때 <code>offset</code>을 쓰면, 그사이 새 글이 앞에 끼어들어 <b>같은 줄이 두 번</b> 나옵니다. 그래서 마지막 줄의 커서를 넘겨 다음 묶음을 받는 쪽이 안전합니다."),
+    ("결과가 없을 때 돌려줄 값", "결과가 0건이면 <b>빈 줄 하나</b>를 돌려주지 말고 빈 배열을 돌려준 뒤, 화면에서 <a href=\"../items/empty.html\">빈 상태</a>를 그립니다."),
   ]),
   plat_lede="목록은 세 플랫폼 모두에서 가장 기본이 되는 부품이고, 규격도 특히 또렷하게 정해져 있습니다.",
   plats=plats([
@@ -173,5 +173,5 @@ D = dict(
   related='''        <li><a href="../items/infinite.html"><b>무한 스크롤</b><em>7부</em></a></li>
         <li><a href="../items/skeleton.html"><b>스켈레톤</b><em>8부</em></a></li>
         <li><a href="../items/empty.html"><b>빈 상태</b><em>8부</em></a></li>
-        <li><span class="na"><b>데이터 테이블</b><em>10부</em></span></li>''',
+        <li><a href="table.html"><b>데이터 테이블</b><em>10부</em></a></li>''',
 )

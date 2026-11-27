@@ -76,22 +76,22 @@
         <p>뼈대는 눈에 보이지 않지만 <b>모든 화면의 배치</b>를 정합니다. 아래 네 가지를 물어 보면 서로 갈립니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하나</th><th>방향</th><th>넘치면</th><th>누가 값을 정하나</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 정하는가</th><th>어느 방향에 작용하는가</th><th>넘치면 어떻게 되는가</th><th>누가 값을 정하는가</th></tr></thead>
           <tbody>
-            <tr><td>박스 모델</td><td><b>상자 한 개</b>의 크기</td><td class="none">해당 없음</td><td>밖으로 삐져나온다</td><td>내가</td></tr>
-            <tr><td>플렉스</td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나온다</td><td>나 + 내용</td></tr>
-            <tr><td>그리드</td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗는다</td><td>나 + 내용</td></tr>
-            <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>나</td></tr>
-            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목이 정한다</b></td><td>나</td></tr>
-            <tr><td>스티키</td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 간다</td><td>나</td></tr>
-            <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남는다</td><td>나</td></tr>
-            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 안 눌린다</td><td><b>OS가</b></td></tr>
-            <tr class="me"><td><b>포지션</b></td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 안 차지한다</td><td>기준이 되는 조상</td></tr>
-            <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안이 잘린다</td><td>비를 적은 쪽</td></tr>
-            <tr><td>스크롤 동작</td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥까지 밀린다</td><td>굴리는 상자</td></tr>
-            <tr><td>크기 정하기</td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나간다</td><td>내용 또는 적은 값</td></tr>
-            <tr><td>여백 붕괴</td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어든다</td><td>큰 쪽 하나</td></tr>
-            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab이 어긋난다</td><td>마크업 순서</td></tr>
+            <tr><td>박스 모델</td><td><b>상자 한 개</b>의 크기</td><td class="none">해당 없음</td><td>밖으로 삐져나옴</td><td>요소 자신</td></tr>
+            <tr><td>플렉스</td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나옴</td><td>요소 자신과 내용</td></tr>
+            <tr><td>그리드</td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗음</td><td>요소 자신과 내용</td></tr>
+            <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>요소 자신</td></tr>
+            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목에서 정함</b></td><td>요소 자신</td></tr>
+            <tr><td>스티키</td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 나감</td><td>요소 자신</td></tr>
+            <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남음</td><td>요소 자신</td></tr>
+            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 눌리지 않음</td><td><b>OS</b></td></tr>
+            <tr class="me"><td><b>포지션</b></td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 차지하지 않음</td><td>기준이 되는 조상</td></tr>
+            <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안쪽 내용이 잘림</td><td>비를 적은 쪽</td></tr>
+            <tr><td>스크롤 동작</td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥 페이지까지 밀림</td><td>스크롤되는 상자</td></tr>
+            <tr><td>크기 정하기</td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나감</td><td>내용 또는 적은 값</td></tr>
+            <tr><td>여백 붕괴</td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어듦</td><td>둘 중 큰 여백</td></tr>
+            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab 차례가 어긋남</td><td>마크업 순서</td></tr>
           </tbody>
         </table>
         </div>
@@ -101,43 +101,43 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 다섯 값<span class="hint">자리를 차지하나</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 포지션의 다섯 값<span class="hint">값마다 달라지는 차지하는 자리와 기준</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:78px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden;padding:5px"><span style="position:absolute;left:5px;right:5px;top:5px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">앞 줄</span><span style="position:absolute;left:5px;top:21px"><span style="width:52px;height:14px;border-radius:3px;background:var(--accent);color:#fff;font-size:7px;display:grid;place-items:center;">상자</span></span><span style="position:absolute;left:5px;right:5px;top:37px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">뒷 줄</span></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">static — 흐름대로</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:78px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden;padding:5px"><span style="position:absolute;left:5px;right:5px;top:5px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">앞 줄</span><span style="position:absolute;left:5px;top:21px"><span style="width:52px;height:14px;border-radius:3px;background:var(--accent);color:#fff;font-size:7px;display:grid;place-items:center;">상자</span></span><span style="position:absolute;left:5px;right:5px;top:37px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">뒷 줄</span></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">static은 흐름대로</span></div>
             </div>
-            <figcaption>static<span>기본값입니다. <code>top</code>·<code>left</code>를 줘도 <b>적용되지 않습니다</b></span></figcaption>
+            <figcaption><code>static</code>(기본값)일 때<span>기본값입니다. <code>top</code>·<code>left</code>를 줘도 <b>적용되지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:78px;position:relative;border:1px solid var(--accent);border-radius:6px;background:var(--bg);overflow:hidden;padding:5px"><span style="position:absolute;left:5px;right:5px;top:5px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">앞 줄</span><span style="position:absolute;left:17px;top:27px"><span style="width:52px;height:14px;border-radius:3px;background:var(--accent);color:#fff;font-size:7px;display:grid;place-items:center;">상자</span></span><span style="position:absolute;left:5px;right:5px;top:21px;height:14px;border:1px dashed var(--line-strong);border-radius:3px"></span><span style="position:absolute;left:5px;right:5px;top:37px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">뒷 줄</span></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">relative — 자리는 그대로</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:78px;position:relative;border:1px solid var(--accent);border-radius:6px;background:var(--bg);overflow:hidden;padding:5px"><span style="position:absolute;left:5px;right:5px;top:5px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">앞 줄</span><span style="position:absolute;left:17px;top:27px"><span style="width:52px;height:14px;border-radius:3px;background:var(--accent);color:#fff;font-size:7px;display:grid;place-items:center;">상자</span></span><span style="position:absolute;left:5px;right:5px;top:21px;height:14px;border:1px dashed var(--line-strong);border-radius:3px"></span><span style="position:absolute;left:5px;right:5px;top:37px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">뒷 줄</span></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">relative는 자리를 남김</span></div>
             </div>
-            <figcaption>relative<span>옮겨도 원래 자리가 남아서 <b>뒤 줄이 당겨지지 않습니다</b></span></figcaption>
+            <figcaption><code>relative</code>로 옮길 때<span>옮겨도 원래 자리가 남아서 <b>뒤 줄이 당겨지지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:78px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden;padding:5px"><span style="position:absolute;left:5px;right:5px;top:5px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">앞 줄</span><span style="position:absolute;left:5px;right:5px;top:21px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">뒷 줄</span><span style="position:absolute;right:6px;top:6px"><span style="width:52px;height:14px;border-radius:3px;background:var(--accent);color:#fff;font-size:7px;display:grid;place-items:center;">상자</span></span></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">absolute — 흐름에서 빠짐</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:78px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden;padding:5px"><span style="position:absolute;left:5px;right:5px;top:5px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">앞 줄</span><span style="position:absolute;left:5px;right:5px;top:21px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">뒷 줄</span><span style="position:absolute;right:6px;top:6px"><span style="width:52px;height:14px;border-radius:3px;background:var(--accent);color:#fff;font-size:7px;display:grid;place-items:center;">상자</span></span></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">absolute는 흐름에서 빠짐</span></div>
             </div>
-            <figcaption>absolute<span><b>가장 가까운 positioned 조상</b>을 기준으로 놓입니다</span></figcaption>
+            <figcaption><code>absolute</code>로 흐름에서 뺄 때<span><b>가장 가까운 positioned 조상</b>을 기준으로 놓입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:78px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden;padding:5px"><span style="position:absolute;left:5px;right:5px;top:5px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">앞 줄</span><span style="position:absolute;left:5px;right:5px;top:21px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">뒷 줄</span><span style="position:absolute;right:6px;bottom:6px"><span style="width:52px;height:14px;border-radius:3px;background:var(--accent);color:#fff;font-size:7px;display:grid;place-items:center;">상자</span></span></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">fixed — 화면 기준</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:78px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden;padding:5px"><span style="position:absolute;left:5px;right:5px;top:5px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">앞 줄</span><span style="position:absolute;left:5px;right:5px;top:21px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">뒷 줄</span><span style="position:absolute;right:6px;bottom:6px"><span style="width:52px;height:14px;border-radius:3px;background:var(--accent);color:#fff;font-size:7px;display:grid;place-items:center;">상자</span></span></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">fixed는 화면이 기준</span></div>
             </div>
-            <figcaption>fixed<span>스크롤해도 <b>움직이지 않습니다</b></span></figcaption>
+            <figcaption><code>fixed</code>로 화면에 붙일 때<span>스크롤해도 <b>움직이지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:78px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden;padding:5px"><span style="position:absolute;left:5px;right:5px;top:5px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">굴림</span><span style="position:absolute;left:5px;top:5px"><span style="width:52px;height:14px;border-radius:3px;background:var(--accent);color:#fff;font-size:7px;display:grid;place-items:center;">상자</span></span><span style="position:absolute;left:5px;right:5px;top:21px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">아래</span><span style="position:absolute;left:5px;right:5px;top:37px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">계속</span></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">sticky — 둘 사이</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:78px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden;padding:5px"><span style="position:absolute;left:5px;right:5px;top:5px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">굴림</span><span style="position:absolute;left:5px;top:5px"><span style="width:52px;height:14px;border-radius:3px;background:var(--accent);color:#fff;font-size:7px;display:grid;place-items:center;">상자</span></span><span style="position:absolute;left:5px;right:5px;top:21px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">아래</span><span style="position:absolute;left:5px;right:5px;top:37px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">계속</span></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">sticky는 둘의 중간</span></div>
             </div>
-            <figcaption>sticky<span>자세한 내용은 <a href="../items/sticky.html">스티키</a>에서 다룹니다</span></figcaption>
+            <figcaption><code>sticky</code>로 둘 때<span>자세한 내용은 <a href="../items/sticky.html">스티키</a>에서 다룹니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:78px;position:relative;border:1px solid var(--danger);border-radius:6px;background:var(--bg);overflow:hidden;padding:5px"><span style="position:absolute;inset:5px;border:1px dashed var(--danger);border-radius:4px;display:grid;place-items:center;font-size:7.5px;color:var(--danger)">transform 걸린 조상</span><span style="position:absolute;right:9px;bottom:9px"><span style="width:52px;height:14px;border-radius:3px;background:var(--accent);color:#fff;font-size:7px;display:grid;place-items:center;">상자</span></span></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">fixed 가 화면이 아니라 이 상자를 따른다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="height:78px;position:relative;border:1px solid var(--danger);border-radius:6px;background:var(--bg);overflow:hidden;padding:5px"><span style="position:absolute;inset:5px;border:1px dashed var(--danger);border-radius:4px;display:grid;place-items:center;font-size:7.5px;color:var(--danger)">transform이 걸린 조상</span><span style="position:absolute;right:9px;bottom:9px"><span style="width:52px;height:14px;border-radius:3px;background:var(--accent);color:#fff;font-size:7px;display:grid;place-items:center;">상자</span></span></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">fixed가 화면 대신 이 상자를 따름</span></div>
             </div>
-            <figcaption>fixed 의 함정<span>조상에 <b>transform이 있으면 그 상자가 fixed의 기준</b>이 됩니다</span></figcaption>
+            <figcaption>조상에 transform이 걸려 있을 때<span>조상에 <b>transform이 있으면 그 상자가 fixed의 기준</b>이 됩니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -149,23 +149,23 @@
             <div class="anat" role="img" aria-label="포지션의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">static — 기본. top · left 가 안 먹는다</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">relative — 자리는 그대로, 보이기만 옮긴다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">absolute — 흐름에서 빠진다. 기준은 가까운 positioned 조상</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">fixed — 화면을 기준으로. 굴려도 안 움직인다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">sticky — relative 와 fixed 사이</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">transform 이 걸린 조상은 fixed 의 기준이 되어 버린다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">static   기본값, top·left가 적용되지 않음</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">relative   자리는 남기고 보이는 위치만 옮김</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">absolute   흐름에서 빠지고 가까운 positioned 조상이 기준</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">fixed   화면이 기준이라 스크롤해도 그대로</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">sticky   relative와 fixed의 중간</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">transform이 걸린 조상이 fixed의 기준이 됨</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>static <em>기본</em></b><span>흐름대로 놓이고, <b>오프셋이 적용되지 않습니다</b></span></li>
-            <li><b>relative <em>자리는 그대로</em></b><span>보이는 위치만 옮깁니다. absolute 자식의 <b>기준점</b> 역할도 합니다</span></li>
+            <li><b>static <em>기본값</em></b><span>흐름대로 놓이고, <b>오프셋이 적용되지 않습니다</b></span></li>
+            <li><b>relative <em>자리를 남김</em></b><span>보이는 위치만 옮깁니다. absolute 자식의 <b>기준점</b> 역할도 합니다</span></li>
             <li><b>absolute <em>흐름에서 빠짐</em></b><span><b>가장 가까운 positioned 조상</b>을 기준으로 놓입니다</span></li>
-            <li><b>fixed <em>화면 기준</em></b><span>스크롤해도 움직이지 않습니다</span></li>
-            <li><b>sticky <em>둘 사이</em></b><span>자리를 차지하면서 정해진 선에 <b>붙습니다</b></span></li>
-            <li><b>가로채는 것 <em>transform</em></b><span>transform이 걸린 조상이 <b>fixed의 기준</b>이 됩니다</span></li>
+            <li><b>fixed <em>화면이 기준</em></b><span>스크롤해도 움직이지 않습니다</span></li>
+            <li><b>sticky <em>relative와 fixed의 중간</em></b><span>자리를 차지하면서 정해진 선에 <b>붙습니다</b></span></li>
+            <li><b>기준을 바꾸는 조상 <em>transform</em></b><span>transform이 걸린 조상이 <b>fixed의 기준</b>이 됩니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -200,7 +200,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>포지션 대신 다른 것을 써야 하는 경우</b> — 한 방향 배치는 <a href="../items/flex.html">플렉스</a>, 두 방향은 <a href="../items/grid.html">그리드</a>, 붙었다 떨어지는 것은 <a href="../items/sticky.html">스티키</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>포지션 대신 다른 것을 써야 하는 경우</b> — 요소를 한 방향으로 늘어놓는 배치는 <a href="../items/flex.html">플렉스</a>로, 가로와 세로 두 방향 배치는 <a href="../items/grid.html">그리드</a>로 짭니다. 평소에는 흐름을 따르다가 스크롤하면 붙는 요소는 <a href="../items/sticky.html">스티키</a>를 씁니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -210,19 +210,19 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="height:74px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden;padding:5px"><span style="position:absolute;left:6px;top:20px;width:34px;height:34px;border-radius:5px;background:var(--ink-100)"></span><span style="position:absolute;left:32px;top:16px;width:14px;height:14px;border-radius:50%;background:var(--danger);color:#fff;font-size:7px;display:grid;place-items:center">3</span></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">부모에 relative</span></div>
             </div>
-            <figcaption><b>배지</b>포지션을 <b>가장 흔하게 쓰는</b> 자리입니다</figcaption>
+            <figcaption><b>아이콘 모서리에 배지 붙이기</b>포지션을 <b>가장 흔하게 쓰는</b> 자리입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="height:74px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden;padding:5px"><span style="position:absolute;inset:6px;background:var(--surface);border:1px solid var(--line);border-radius:5px"></span><span style="position:absolute;right:10px;top:10px;width:14px;height:14px;border-radius:3px;background:var(--bg);font-size:8px;display:grid;place-items:center">✕</span></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">모서리에 닫기</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="height:74px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden;padding:5px"><span style="position:absolute;inset:6px;background:var(--surface);border:1px solid var(--line);border-radius:5px"></span><span style="position:absolute;right:10px;top:10px;width:14px;height:14px;border-radius:3px;background:var(--bg);font-size:8px;display:grid;place-items:center">✕</span></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">모서리에 닫기 버튼</span></div>
             </div>
-            <figcaption><b>닫기 버튼</b><a href="../items/modal.html">모달</a> 모서리에 닫기 버튼을 겹쳐 놓습니다</figcaption>
+            <figcaption><b>모달 모서리에 닫기 버튼 놓기</b><a href="../items/modal.html">모달</a> 모서리에 닫기 버튼을 겹쳐 놓습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="height:74px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden;padding:5px"><span style="position:absolute;left:5px;right:5px;top:5px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">본문</span><span style="position:absolute;left:5px;right:5px;top:21px;height:14px;border-radius:3px;background:var(--ink-100);font-size:7.5px;color:var(--fg-muted);display:flex;align-items:center;padding:0 5px">본문</span><span style="position:absolute;left:5px;right:5px;bottom:5px;height:16px;border-radius:3px;background:var(--accent)"></span></div><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">바닥에 고정</span></div>
             </div>
-            <figcaption><b>바닥 막대</b>폰에서는 <a href="softkeyboard.html">키보드</a>가 막대를 덮지 않는지 확인합니다</figcaption>
+            <figcaption><b>화면 바닥에 막대 고정하기</b>폰에서는 <a href="softkeyboard.html">키보드</a>가 막대를 덮지 않는지 확인합니다</figcaption>
           </figure>
         </div>
       </section>
@@ -249,14 +249,14 @@
 .animated-parent { <span class="a">transform</span>: translateY(<span class="a">0</span>); }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>지킬 규칙</th><th>지키는 방법</th></tr></thead>
           <tbody>
-            <tr><td>오프셋만으로는 안 된다</td><td><code>position</code>이 <code>static</code>이면 <code>top</code>·<code>left</code>가 <b>모두 무시됩니다</b></td></tr>
-            <tr><td><code>inset</code></td><td>네 방향 오프셋을 한 줄로 적습니다. <code>inset: 0</code>은 기준 상자를 꽉 채웁니다</td></tr>
-            <tr><td><a href="../items/zindex.html">z-index</a></td><td>positioned 요소에서만 적용되고, <code>static</code>에는 적용되지 않습니다</td></tr>
-            <tr><td>초점 순서는 안 바뀐다</td><td><code>absolute</code>로 자리를 옮겨도 <b>Tab 순서는 마크업 순서</b>를 따릅니다(<a href="order.html">보이는 순서와 읽는 순서</a> 참고)</td></tr>
-            <tr><td><code>fixed</code>와 <code>transform</code></td><td>조상에 transform이 걸려 있으면 <b>fixed의 기준이 그 조상으로 바뀝니다</b></td></tr>
-            <tr><td>폰 바닥</td><td><code>fixed</code>는 <a href="softkeyboard.html">키보드</a>가 올라온 것을 반영하지 않으므로 <code>visualViewport</code>로 위치를 올려 줍니다</td></tr>
+            <tr><td>오프셋을 줄 때 <code>position</code>도 함께 주기</td><td><code>position</code>이 <code>static</code>이면 <code>top</code>·<code>left</code>가 <b>모두 무시됩니다</b></td></tr>
+            <tr><td>네 방향 오프셋은 <code>inset</code>으로 적기</td><td>네 방향 오프셋을 한 줄로 적습니다. <code>inset: 0</code>은 기준 상자를 꽉 채웁니다</td></tr>
+            <tr><td><a href="../items/zindex.html">z-index</a>는 positioned 요소에만 주기</td><td>positioned 요소에서만 적용되고, <code>static</code>에는 적용되지 않습니다</td></tr>
+            <tr><td>자리를 옮겨도 초점 순서는 그대로라는 점 기억하기</td><td><code>absolute</code>로 자리를 옮겨도 <b>Tab 순서는 마크업 순서</b>를 따릅니다(<a href="order.html">보이는 순서와 읽는 순서</a> 참고)</td></tr>
+            <tr><td><code>fixed</code> 요소의 조상에 <code>transform</code>이 있는지 보기</td><td>조상에 transform이 걸려 있으면 <b>fixed의 기준이 그 조상으로 바뀝니다</b></td></tr>
+            <tr><td>폰 바닥에 붙인 요소는 키보드 위로 올리기</td><td><code>fixed</code>는 <a href="softkeyboard.html">키보드</a>가 올라온 것을 반영하지 않으므로 <code>visualViewport</code>로 위치를 올려 줍니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -267,8 +267,8 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>서버와는 상관없다</th><td>포지션은 모두 화면 쪽에서 처리하는 배치입니다. 다만 <b>떠 있는 요소</b>가 많으면 화면을 그리는 부담이 커집니다(<a href="cheap.html">무엇을 움직이나</a> 참고).</td></tr>
-            <tr><th>인쇄</th><td><code>fixed</code> 요소는 인쇄할 때 <b>매 쪽에 찍히거나</b> 아예 사라지기 때문에 인쇄용 스타일을 따로 둡니다.</td></tr>
+            <tr><th>화면 쪽에서만 처리하는 배치</th><td>포지션은 모두 화면 쪽에서 처리하는 배치입니다. 다만 <b>떠 있는 요소</b>가 많으면 화면을 그리는 부담이 커집니다(<a href="cheap.html">무엇을 움직이나</a> 참고).</td></tr>
+            <tr><th>인쇄할 때 fixed 요소 처리</th><td><code>fixed</code> 요소는 인쇄할 때 <b>매 쪽에 찍히거나</b> 아예 사라지기 때문에 인쇄용 스타일을 따로 둡니다.</td></tr>
           </tbody>
         </table>
         </div>

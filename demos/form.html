@@ -85,7 +85,7 @@
     var groups = [].filter.call(fm.querySelectorAll('fieldset'), function (f) { return !f.hidden; }).length;
     meter.innerHTML = '보이는 칸 <b>' + visible.length + '</b>개 · 묶음 <b>' + groups +
       '</b>개 · 필수 <b>3</b>개' +
-      (visible.length > 3 ? ' <span style="color:var(--warn);font-weight:700">— 칸이 늘수록 완료율이 떨어집니다</span>' : '');
+      (visible.length > 3 ? ' · <span style="color:var(--warn);font-weight:700">칸이 늘수록 완료율이 떨어집니다</span>' : '');
   }
 
   document.getElementById('flat').addEventListener('change', function () {

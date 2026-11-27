@@ -22,12 +22,12 @@ def pw(val, bars=2, label="", note="", ok=None, w="152px", eye="보기", kind=""
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">보기 단추 — 눈으로 확인할 유일한 길</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">세기 막대 — 규칙이 아니라 안내</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--danger)">붙여넣기를 막지 않는다 — 관리자를 못 쓰게 된다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--accent)">autocomplete — 관리자가 알아보게 한다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--danger)">갈래 강제는 짧고 뻔한 것을 통과시킨다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">규칙은 치기 전에 적어 둔다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">보기 단추는 눈으로 확인할 유일한 방법</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">세기 막대는 규칙이 아니라 안내</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--danger)">붙여넣기를 막으면 관리자를 못 쓰게 됨</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--accent)">autocomplete로 관리자가 알아보게 함</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--danger)">갈래 강제는 짧고 뻔한 것을 통과시킴</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">규칙은 치기 전에 적어 둠</div>
                 </div>
               </div>'''
 
@@ -57,26 +57,26 @@ D = dict(
   axes=ax("비밀번호 칸"),
   oneline="<b>비밀번호의 세기는 길이로 판단하세요.</b> 대문자·숫자·기호 같은 갈래를 강제하면 규칙만 겨우 맞춘 짧고 뻔한 비밀번호가 늘어납니다.",
   states=states([
-    (pw("••••••••••••", 3, "", "길어서 세다", True, "152px", "보기", "12자 — 길이 규칙 통과"),
-     "길고 센 것", "비밀번호가 <b>길수록</b> 셉니다"),
-    (pw("Passw0rd!", 1, "", "갈래는 맞췄지만 뻔하다", False, "152px", "보기", "9자 — 갈래 규칙 통과"),
-     "짧고 뻔한 것", "뻔한 비밀번호인데도 <b>갈래 규칙</b>은 통과시킵니다"),
-    (pw("그냥길게적은한국어문장입니다", 4, "", "갈래 규칙이 이걸 막는다", False, "152px", "보기", "14자 — 갈래 규칙 미달"),
-     "갈래 강제", "대문자·숫자·기호가 없다는 이유로 길고 <b>센 비밀번호를 막습니다</b>"),
-    (pw("mypassword123", 2, "", "보기로 눈으로 확인한다", True, "152px", "숨기기"),
-     "보기 켬", "친 비밀번호를 <b>눈으로</b> 확인할 수 있습니다"),
-    (pw("(붙여넣기 막힘)", 0, "", "관리자가 넣어 주는 긴 것을 못 쓴다", False),
-     "붙여넣기 막음", "관리자가 만든 긴 비밀번호를 못 쓰게 되어 <b>오히려 약해집니다</b>"),
-    (pw("••••••••••••••••••••", 4, "", "관리자가 만든 20자", True, "152px", "보기", "autocomplete 로 알아본다"),
-     "관리자와 함께", "관리자가 만든 무작위 비밀번호를 쓰는 것이 <b>가장 센</b> 방법입니다"),
+    (pw("••••••••••••", 3, "", "길어서 셈", True, "152px", "보기", "12자라 길이 규칙 통과"),
+     "길고 센 비밀번호", "비밀번호가 <b>길수록</b> 셉니다"),
+    (pw("Passw0rd!", 1, "", "갈래는 맞췄지만 뻔함", False, "152px", "보기", "9자인데도 갈래 규칙 통과"),
+     "짧고 뻔한 비밀번호", "뻔한 비밀번호인데도 <b>갈래 규칙</b>은 통과시킵니다"),
+    (pw("그냥길게적은한국어문장입니다", 4, "", "갈래 규칙에 막힘", False, "152px", "보기", "14자인데도 갈래 규칙 미달"),
+     "갈래 규칙이 긴 문장을 막을 때", "대문자·숫자·기호가 없다는 이유로 길고 <b>센 비밀번호를 막습니다</b>"),
+    (pw("mypassword123", 2, "", "보기를 눌러 눈으로 확인함", True, "152px", "숨기기"),
+     "보기 단추를 눌렀을 때", "친 비밀번호를 <b>눈으로</b> 확인할 수 있습니다"),
+    (pw("(붙여넣기 막힘)", 0, "", "관리자가 만든 긴 비밀번호를 못 씀", False),
+     "붙여넣기를 막았을 때", "관리자가 만든 긴 비밀번호를 못 쓰게 되어 <b>오히려 약해집니다</b>"),
+    (pw("••••••••••••••••••••", 4, "", "관리자가 만든 20자", True, "152px", "보기", "autocomplete로 알아봄"),
+     "비밀번호 관리자로 채웠을 때", "관리자가 만든 무작위 비밀번호를 쓰는 것이 <b>가장 센</b> 방법입니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("보기 단추", "눈으로", "친 비밀번호를 눈으로 확인할 수 있는 <b>유일한</b> 방법입니다"),
-    ("세기 막대", "안내", "세기를 알려 주는 안내이고, 통과 여부를 정하는 규칙이 <b>아닙니다</b>"),
+    ("보기 단추", "눈으로 확인하기", "친 비밀번호를 눈으로 확인할 수 있는 <b>유일한</b> 방법입니다"),
+    ("세기 막대", "규칙이 아닌 안내", "세기를 알려 주는 안내이고, 통과 여부를 정하는 규칙이 <b>아닙니다</b>"),
     ("붙여넣기", "막지 않기", "붙여넣기를 열어 두어야 <b>비밀번호 관리자</b>를 쓸 수 있습니다"),
     ("<code>autocomplete</code>", "관리자가 알아봄", "<code>new-password</code>를 적어 두면 관리자가 새 비밀번호 칸으로 알아봅니다"),
-    ("갈래 강제", "역효과", "짧고 뻔한 비밀번호가 오히려 통과합니다"),
+    ("갈래 강제", "오히려 약해짐", "짧고 뻔한 비밀번호가 오히려 통과합니다"),
     ("규칙", "미리 적기", "규칙은 사용자가 치기 전에 보여 주고, 틀린 뒤에 처음 알리지 않습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -98,12 +98,12 @@ D = dict(
     "규칙을 사용자가 <b>틀린 뒤에</b> 처음 알리기",
     "최대 길이를 <b>짧게</b> 두기. 20자짜리 비밀번호도 못 넣는 칸이 많습니다",
   ]),
-  instead='가리지 않는 한 줄 글이면 <a href="field.html">텍스트 필드</a>, 검사 규칙은 <a href="validation.html">입력 검증</a>, 로그인 화면 전체는 <a href="login.html">로그인</a>, 오류 문구는 <a href="errortext.html">오류 문구</a>.',
+  instead='글자를 가릴 필요가 없는 한 줄 글이면 <a href="field.html">텍스트 필드</a>를 씁니다. 비밀번호 규칙을 어떻게 검사할지는 <a href="validation.html">입력 검증</a>에서, 로그인 화면 전체를 어떻게 짤지는 <a href="login.html">로그인</a>에서, 틀렸을 때 보여 줄 문구는 <a href="errortext.html">오류 문구</a>에서 다룹니다.',
   cases=cases([
-    (pw("••••••••••••", 3, "", "", True, "150px", "보기"), "새 비밀번호", "새로 만드는 비밀번호는 <b>길이</b>로 판단합니다"),
+    (pw("••••••••••••", 3, "", "", True, "150px", "보기"), "새 비밀번호 만들기", "새로 만드는 비밀번호는 <b>길이</b>로 판단합니다"),
     (pw("••••••••", 2, "", "", True, "150px", "보기", "autocomplete=\"current-password\""),
-     "로그인", "이미 있는 비밀번호를 넣는 칸이라서 <b>세기 막대를 두지 않습니다</b>"),
-    (pw("1 2 3 4 5 6", 0, "", "", None, "150px", ""), "일회용 번호", "비밀번호 칸보다 <b>다른 부품</b>이 맞습니다"),
+     "로그인할 때 비밀번호 넣기", "이미 있는 비밀번호를 넣는 칸이라서 <b>세기 막대를 두지 않습니다</b>"),
+    (pw("1 2 3 4 5 6", 0, "", "", None, "150px", ""), "일회용 번호 받기", "비밀번호 칸보다 <b>다른 부품</b>이 맞습니다"),
   ]),
   code_lede="<code>autocomplete</code>를 알맞게 적는 것만으로 비밀번호 관리자가 칸을 알아보고 채워 주기 때문에, 코드에서 가장 큰 차이를 만드는 부분입니다.",
   code='''&lt;<span class="t">label</span> <span class="a">for</span>=<span class="s">"pw"</span>&gt;새 비밀번호&lt;/<span class="t">label</span>&gt;
@@ -112,7 +112,7 @@ D = dict(
        <span class="a">minlength</span>=<span class="s">"12"</span> <span class="a">aria-describedby</span>=<span class="s">"pw-rule"</span>&gt;
 &lt;<span class="t">button</span> <span class="a">type</span>=<span class="s">"button"</span> <span class="a">aria-pressed</span>=<span class="s">"false"</span>
         <span class="a">aria-label</span>=<span class="s">"비밀번호 보기"</span>&gt;보기&lt;/<span class="t">button</span>&gt;
-&lt;<span class="t">p</span> <span class="a">id</span>=<span class="s">"pw-rule"</span>&gt;12자 이상이면 됩니다 — 길수록 셉니다&lt;/<span class="t">p</span>&gt;
+&lt;<span class="t">p</span> <span class="a">id</span>=<span class="s">"pw-rule"</span>&gt;12자 이상이면 되고, 길수록 셉니다&lt;/<span class="t">p</span>&gt;
 
 <span class="c">// ✕ 붙여넣기를 이렇게 막지 않는다</span>
 input.addEventListener(<span class="s">'paste'</span>, e =&gt; e.preventDefault());''',
@@ -122,13 +122,13 @@ input.addEventListener(<span class="s">'paste'</span>, e =&gt; e.preventDefault(
     ("<code>aria-describedby</code>", "비밀번호 규칙 안내를 칸과 <b>연결해</b> 둡니다"),
     ("Caps Lock", "Caps Lock이 켜져 있으면 <b>알려 주는</b> 편이 좋습니다"),
     ("<code>minlength</code>", "브라우저가 <b>길이를 검사</b>해 줍니다"),
-    ("확인하는 법", "비밀번호 관리자로 <b>채워 보고, 직접 붙여넣어</b> 봅니다"),
+    ("확인하는 방법", "비밀번호 관리자로 <b>채워 보고, 직접 붙여넣어</b> 봅니다"),
   ]),
   backend=rows([
-    ("규칙은 서버가 정한다", "화면에서 검사하는 규칙과 서버의 규칙이 다르면, 화면에서는 <b>통과했는데 서버에서 거절</b>당하는 일이 생깁니다."),
-    ("털린 목록", "널리 유출된 비밀번호 목록과 대조하는 방법이 <b>갈래 규칙보다 훨씬</b> 효과가 큽니다."),
-    ("최대 길이", "최대 길이를 짧게 두지 말고 <b>64자 이상</b>을 받는 편이 안전합니다."),
-    ("실패 메시지", "로그인에 실패하면 '아이디 또는 비밀번호가 다릅니다'라고 적어 둘 중 <b>어느 쪽이 틀렸는지 숨깁니다</b>. 자세한 내용은 <a href=\"login.html\">로그인</a> 항목에 있습니다."),
+    ("화면과 서버의 규칙 맞추기", "화면에서 검사하는 규칙과 서버의 규칙이 다르면, 화면에서는 <b>통과했는데 서버에서 거절</b>당하는 일이 생깁니다."),
+    ("유출된 비밀번호 목록과 대조하기", "널리 유출된 비밀번호 목록과 대조하는 방법이 <b>갈래 규칙보다 훨씬</b> 효과가 큽니다."),
+    ("최대 길이를 넉넉하게 두기", "최대 길이를 짧게 두지 말고 <b>64자 이상</b>을 받는 편이 안전합니다."),
+    ("로그인에 실패했을 때 알리는 문구", "로그인에 실패하면 '아이디 또는 비밀번호가 다릅니다'라고 적어 둘 중 <b>어느 쪽이 틀렸는지 숨깁니다</b>. 자세한 내용은 <a href=\"login.html\">로그인</a> 항목에 있습니다."),
   ]),
   plat_lede="앱에서는 <b>비밀번호 관리자와 자동 채움</b>을 운영 체제가 맡습니다.",
   plats=plats([

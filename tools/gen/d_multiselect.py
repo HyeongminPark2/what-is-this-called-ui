@@ -24,12 +24,12 @@ def ms(tokens, more=0, label="", note="", ok=None, w="152px", count=None):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">고른 것 — 알약으로 보이면 무엇인지 안다</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">+N — 넘치면 접어 높이를 지킨다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">목록 — 체크박스가 가장 분명하다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">기본 multiple 셀렉트는 Ctrl 을 눌러야 한다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">숫자만 보이면 높이는 고정이지만 이름을 모른다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">많으면 검색 칸을 붙인다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">고른 것이 알약으로 보이면 무엇인지 앎</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">넘치면 +N으로 접어 높이를 유지함</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">목록은 체크박스가 가장 분명함</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">기본 multiple 셀렉트는 Ctrl을 눌러야 함</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">숫자만 보이면 높이는 고정이지만 이름을 모름</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">항목이 많으면 검색 칸을 붙임</div>
                 </div>
               </div>'''
 
@@ -40,7 +40,7 @@ D = dict(
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>고른 것을 알약으로 늘어놓으면 <b>무엇을 골랐는지</b> 한눈에 보이지만 줄 수가 늘어납니다.
           데모가 <b>고른 것 칸의 높이</b>를 재서 적어 주니 확인해 보세요.<br>
-          '<b>최대 보일 알약</b>'을 줄이면 넘치는 알약이 <code>+N</code>으로 접힙니다.
+          '<b>한 번에 보일 알약 수</b>'를 줄이면 넘치는 알약이 <code>+N</code>으로 접힙니다.
           개수만 숫자로 보여 주면 높이는 변하지 않지만 <b>무엇을 골랐는지 알 수 없습니다</b>.<br>
           브라우저 기본 <code>multiple</code> 셀렉트는 <b>Ctrl을 누른 채</b> 눌러야 여러 개가 골라지기 때문에,
           체크박스 목록으로 만드는 편이 훨씬 알아보기 쉽습니다.</p>
@@ -60,29 +60,29 @@ D = dict(
   axes=ax("여러 개 고르기"),
   oneline="<b>무엇을 골랐는지 보이게 하세요.</b> 개수만 보여 주면 사용자는 고른 것을 확인하려고 목록을 다시 열어야 합니다.",
   states=states([
-    (ms(["모란상회", "한빛아웃도어"], 0, "", "둘을 골랐다", True), "조금", "고른 것의 <b>이름이</b> 모두 보입니다"),
-    (ms(["모란상회", "한빛아웃도어", "새벽상사"], 5, "", "넘치면 +N 으로", True), "많이", "넘치는 것은 <b>+N</b>으로 접습니다"),
-    (ms([], 0, "", "숫자만 — 무엇인지 모른다", False, "152px", "8곳 골랐습니다"),
-     "숫자만", "무엇을 골랐는지 보려면 목록을 <b>다시 열어</b> 봐야 합니다"),
-    (ms([], 0, "", "아직 안 골랐다", None), "빈 상태", "아직 고른 것이 없으면 <b>무엇을 고르는 칸인지</b> 적어 둡니다"),
+    (ms(["모란상회", "한빛아웃도어"], 0, "", "둘을 고름", True), "조금 골랐을 때", "고른 것의 <b>이름이</b> 모두 보입니다"),
+    (ms(["모란상회", "한빛아웃도어", "새벽상사"], 5, "", "넘치는 것은 +N으로 접음", True), "많이 골랐을 때", "넘치는 것은 <b>+N</b>으로 접습니다"),
+    (ms([], 0, "", "숫자만 보여 무엇인지 모름", False, "152px", "8곳 골랐습니다"),
+     "개수만 숫자로 보여 줄 때", "무엇을 골랐는지 보려면 목록을 <b>다시 열어</b> 봐야 합니다"),
+    (ms([], 0, "", "아직 안 고름", None), "아직 아무것도 안 골랐을 때", "아직 고른 것이 없으면 <b>무엇을 고르는 칸인지</b> 적어 둡니다"),
     (one(txt('<span style="display:block;font-size:8px">⌃ Ctrl + 클릭</span>'
-             '<span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">모르는 사람이 많다</span>'),
+             '<span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">모르는 사람이 많음</span>'),
          "기본 셀렉트", False, "", "152px"),
-     "<code>multiple</code>", "여러 개를 고르려면 <b>Ctrl을 누른 채</b> 눌러야 합니다"),
+     "기본 <code>multiple</code> 셀렉트를 쓸 때", "여러 개를 고르려면 <b>Ctrl을 누른 채</b> 눌러야 합니다"),
     (one(txt('<span style="display:block;font-size:8px">🔍 모란</span>'
              '<span style="display:block;font-size:7.5px;color:var(--fg-muted);margin-top:2px">☑ 모란상회</span>'
              '<span style="display:block;font-size:7.5px;color:var(--fg-muted)">☐ 모란상회 2호점</span>'),
-         "많을 때", True, "검색 칸을 붙인다", "152px"),
-     "항목이 많음", "목록 위에 <b>검색</b> 칸을 붙입니다"),
+         "많을 때", True, "검색 칸을 붙임", "152px"),
+     "고를 항목이 많을 때", "목록 위에 <b>검색</b> 칸을 붙입니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("고른 것", "알약으로", "고른 것이 <b>무엇인지</b> 이름으로 보입니다"),
+    ("고른 것", "알약으로 보여 주기", "고른 것이 <b>무엇인지</b> 이름으로 보입니다"),
     ("<code>+N</code>", "넘치면 접기", "넘치는 알약을 접어 칸 높이가 늘어나지 않게 합니다"),
-    ("목록", "체크박스", "무엇이 골라졌는지 가장 <b>분명하게</b> 보입니다"),
-    ("<code>multiple</code>", "Ctrl 필요", "Ctrl을 눌러야 한다는 것을 <b>모르는 사람</b>이 많습니다"),
-    ("숫자만", "높이 고정", "칸 높이는 일정하지만 고른 것의 <b>이름을 알 수 없습니다</b>"),
-    ("검색", "많을 때", "항목이 스무 개를 넘으면 검색 칸을 붙입니다"),
+    ("목록", "체크박스로 만들기", "무엇이 골라졌는지 가장 <b>분명하게</b> 보입니다"),
+    ("<code>multiple</code>", "Ctrl을 눌러야 함", "Ctrl을 눌러야 한다는 것을 <b>모르는 사람</b>이 많습니다"),
+    ("숫자만", "높이는 고정됨", "칸 높이는 일정하지만 고른 것의 <b>이름을 알 수 없습니다</b>"),
+    ("검색", "항목이 많을 때", "항목이 스무 개를 넘으면 검색 칸을 붙입니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           브라우저 기본 <code>&lt;select multiple&gt;</code>은 실제 화면에서 <b>거의 쓰이지 않습니다</b>.
@@ -104,11 +104,11 @@ D = dict(
     "알약을 <b>모두 늘어놓기</b>. 칸이 길어져 화면을 많이 차지합니다",
     "고른 것을 <b>빼는 방법</b>을 주지 않기",
   ]),
-  instead='항목을 모두 늘어놓아도 되면 <a href="checkbox.html">체크박스</a>, 하나만 고르면 <a href="combobox.html">콤보박스</a>, 값을 보여 주기만 하면 <a href="tag.html">태그</a>, 조건으로 목록을 거르는 화면은 <a href="filter.html">필터와 패싯</a>.',
+  instead='항목을 모두 늘어놓아도 자리가 충분하면 <a href="checkbox.html">체크박스</a>를 쓰고, 하나만 고르면 되는 칸에는 <a href="combobox.html">콤보박스</a>를 씁니다. 고르는 기능 없이 값을 보여 주기만 하려면 <a href="tag.html">태그</a>가 맞고, 조건을 골라 목록을 거르는 화면은 <a href="filter.html">필터와 패싯</a>에서 다룹니다.',
   cases=cases([
     (ms(["모란상회", "한빛아웃도어"], 2, "", "", True, "150px"), "가게 고르기", "<b>알약</b>으로 보여 주고 넘치면 <b><code>+N</code></b>으로 접습니다"),
-    (ms(["카드", "계좌이체"], 0, "", "", True, "150px"), "결제 수단", "고를 수 있는 항목이 <b>몇 개 안 되어서</b> 알약을 모두 보여 줍니다"),
-    (ms([], 0, "", "", True, "150px", "조건 3개"), "필터", "개수만 숫자로 보여 줘도 괜찮은 자리입니다"),
+    (ms(["카드", "계좌이체"], 0, "", "", True, "150px"), "결제 수단 고르기", "고를 수 있는 항목이 <b>몇 개 안 되어서</b> 알약을 모두 보여 줍니다"),
+    (ms([], 0, "", "", True, "150px", "조건 3개"), "필터 조건 고르기", "개수만 숫자로 보여 줘도 괜찮은 자리입니다"),
   ]),
   code_lede="체크박스 목록으로 만들면 무엇이 골라졌는지 가장 분명하게 보입니다. 고른 것은 목록 위에 알약으로 쌓습니다.",
   code='''&lt;<span class="t">fieldset</span>&gt;
@@ -129,25 +129,25 @@ D = dict(
     ("Backspace", "토큰 입력에서는 관습적으로 <b>마지막 알약</b>을 지웁니다"),
     ("<code>&lt;fieldset&gt;</code>", "묶음에 이름을 붙여 스크린 리더가 <b>무엇을 고르는 묶음인지</b> 읽어 줍니다"),
     ("<code>aria-label</code>", "✕ 단추에 <b>무엇을 빼는지</b> 적습니다"),
-    ("확인하는 법", "스크린 리더로 들으며 <b>몇 개 골랐는지</b> 알 수 있는지 확인합니다"),
+    ("확인하는 방법", "스크린 리더로 들으며 <b>몇 개 골랐는지</b> 알 수 있는지 확인합니다"),
   ]),
   backend=rows([
-    ("배열로 받는다", "고른 값은 <code>shops: [\"moran\", \"hanbit\"]</code>처럼 배열로 주고받습니다. 쉼표로 이은 문자열로 보내면 <b>이름에 쉼표</b>가 든 값에서 나누는 자리가 틀어집니다."),
-    ("최대 개수", "고를 수 있는 개수에 한도가 있으면 서버가 그 값을 내려 줘야 화면에서 <b>미리 막을 수</b> 있습니다."),
-    ("전체 선택", "'조건에 맞는 전부'를 고를 때는 항목 목록 대신 <b>개수만</b> 주고받는 편이 가볍습니다. 자세한 내용은 <a href=\"bulk.html\">일괄 선택</a> 항목에 있습니다."),
+    ("고른 값은 배열로 주고받기", "고른 값은 <code>shops: [\"moran\", \"hanbit\"]</code>처럼 배열로 주고받습니다. 쉼표로 이은 문자열로 보내면 <b>이름에 쉼표</b>가 든 값에서 나누는 자리가 틀어집니다."),
+    ("고를 수 있는 최대 개수를 서버가 알려 주기", "고를 수 있는 개수에 한도가 있으면 서버가 그 값을 내려 줘야 화면에서 <b>미리 막을 수</b> 있습니다."),
+    ("조건에 맞는 전부를 고를 때", "'조건에 맞는 전부'를 고를 때는 항목 목록 대신 <b>개수만</b> 주고받는 편이 가볍습니다. 자세한 내용은 <a href=\"bulk.html\">일괄 선택</a> 항목에 있습니다."),
   ]),
   plat_lede="여러 개 고르기는 플랫폼이 주는 <b>기본 부품만으로는 부족한</b> 경우가 많습니다.",
   plats=plats([
-    ("웹", "select multiple · 직접",
+    ("웹", "select multiple 또는 직접 만듦",
      ms(["모란상회"], 2, "", "", True, "110px"),
      "기본 부품은 쓰기 어려워서 <b>대부분 직접</b> 만듭니다."),
-    ("iOS", "목록 + 체크",
+    ("iOS", "목록과 체크 표시",
      '''              <div class="phone" role="img" aria-label="iOS 여러 개 고르기 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:26px;height:8px;border-radius:2px;background:var(--accent-soft)"></div>
                 <div style="position:absolute;right:7px;top:27px;font-size:5px;color:var(--accent)">✓</div>
                 <div style="position:absolute;left:5px;right:5px;top:38px;height:8px;border-radius:2px;background:var(--bg)"></div></div></div>''',
      "목록의 각 줄 오른쪽에 <b>체크 표시</b>를 두는 꼴이 표준입니다."),
-    ("안드로이드", "Chip · 체크박스",
+    ("안드로이드", "Chip과 체크박스",
      '''              <div class="phone" role="img" aria-label="안드로이드 여러 개 고르기 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;top:26px;width:20px;height:8px;border-radius:999px;background:var(--accent-soft)"></div>
                 <div style="position:absolute;left:28px;top:26px;width:16px;height:8px;border-radius:999px;border:1px solid var(--line)"></div></div></div>''',

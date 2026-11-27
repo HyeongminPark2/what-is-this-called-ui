@@ -24,12 +24,12 @@ def lines(thick, note, w="150px", warn=False):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">CSS 1px — 길이 단위다. 화소가 아니다</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">devicePixelRatio = 3 — 기기 화소 3개가 CSS 1px</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">그림은 CSS 크기 × 배율 만큼의 화소가 필요하다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">srcset · 2x · 3x — 그 배율에 맞는 것을 받는다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">SVG · 글자는 배율과 상관없다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">머리카락 선 = 1 ÷ 배율 px</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">CSS 1px은 화소가 아닌 길이 단위</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">devicePixelRatio가 3이면 기기 화소 3개가 CSS 1px</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">그림에는 CSS 크기 × 배율만큼의 화소가 필요함</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">srcset의 2x·3x로 배율에 맞는 그림을 받음</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">SVG와 글자는 배율과 상관없음</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">머리카락 선의 굵기는 1 ÷ 배율 px</div>
                 </div>
               </div>'''
 
@@ -60,14 +60,17 @@ D = dict(
   ]),
   axes=ax("화면 밀도"),
   oneline="<b>선과 글자는 브라우저가 배율에 맞춰 그려 주지만, 비트맵 그림은 그렇지 않습니다.</b> 그래서 화면 밀도 때문에 챙길 일은 거의 전부 <b>그림</b>에 관한 것입니다.",
-  s4_title="배율에 따라", s4_hint="무엇이 바뀌고 무엇이 안 바뀌나",
+  s4_title="배율에 따라 달라지는 것", s4_hint="배율에 따라 바뀌는 것과 바뀌지 않는 것",
+  do_title="화면 밀도를 챙겨야 하는 경우",
+  dont_title="화면 밀도를 잘못 다루는 경우",
+  instead_title="함께 살펴볼 것",
   states=states([
-    (grid(9, "150px", "1배 — 화소와 CSS px 이 같다"), "1배", "예전 모니터의 배율입니다. 지금은 드뭅니다"),
-    (grid(9, "150px", "2배 — 같은 자리에 화소 네 배"), "2배", "대부분의 노트북이 2배입니다. 화소는 네 배지만 <b>눈에 보이는 크기는 같습니다</b>"),
-    (grid(9, "150px", "3배 — 화소 아홉 배"), "3배", "요즘 폰의 배율입니다. 그림을 가로세로 <b>세 배 크기로 받아야</b> 선명합니다"),
-    (grid(9, "150px", "1배 그림을 3배 화면에 — 뭉갠다", True, True), "안 맞췄을 때", "그림이 흐릿해집니다. <b>가장 흔하게 일어나는 실수</b>입니다"),
-    (lines("1px", "CSS 1px — 어느 배율에서나 같은 굵기"), "선 — 1px", "브라우저가 <b>배율에 맞게 화소 수를 맞춰</b> 그립니다"),
-    (lines("0.5px", "화소 하나 — 배율이 높을수록 가늘다"), "선 — 머리카락", "굵기를 <b>1 ÷ 배율</b> px로 잡은 선입니다. iOS의 구분선이 이 굵기입니다"),
+    (grid(9, "150px", "1배는 화소와 CSS px이 같음"), "배율이 1배일 때", "예전 모니터의 배율입니다. 지금은 드뭅니다"),
+    (grid(9, "150px", "2배는 같은 자리에 화소가 네 배"), "배율이 2배일 때", "대부분의 노트북이 2배입니다. 화소는 네 배지만 <b>눈에 보이는 크기는 같습니다</b>"),
+    (grid(9, "150px", "3배는 화소가 아홉 배"), "배율이 3배일 때", "요즘 폰의 배율입니다. 그림을 가로세로 <b>세 배 크기로 받아야</b> 선명합니다"),
+    (grid(9, "150px", "1배 그림을 3배 화면에 넣으면 뭉개짐", True, True), "그림을 배율에 맞추지 않았을 때", "그림이 흐릿해집니다. <b>가장 흔하게 일어나는 실수</b>입니다"),
+    (lines("1px", "CSS 1px은 어느 배율에서나 같은 굵기"), "1px로 그은 선", "브라우저가 <b>배율에 맞게 화소 수를 맞춰</b> 그립니다"),
+    (lines("0.5px", "화소 하나 굵기라 배율이 높을수록 가늘어짐"), "머리카락처럼 가는 선", "굵기를 <b>1 ÷ 배율</b> px로 잡은 선입니다. iOS의 구분선이 이 굵기입니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -95,7 +98,7 @@ D = dict(
     "선 굵기를 배율로 계산할 때. <b>1px 선은 브라우저가 이미 맞춰</b> 그립니다",
     "글자 크기를 배율에 따라 바꿀 때. 글자는 배율과 상관없이 선명하므로 바꿀 필요가 없습니다",
   ]),
-  instead='폭에 따른 배치는 <a href="breakpoint.html">브레이크포인트</a>에서 다루고, 그림이 무거우면 포맷(WebP·AVIF)을 바꾸며, 아이콘은 SVG로 만듭니다.',
+  instead='화면 폭에 따라 배치를 바꾸는 일은 <a href="breakpoint.html">브레이크포인트</a>에서 다룹니다. 그림이 무거우면 배율보다 먼저 포맷(WebP·AVIF)을 바꿔 보고, 아이콘은 처음부터 SVG로 만듭니다.',
   cases=cases([
     ('''              <div style="width:100%;max-width:150px;font-family:var(--mono);font-size:9px;color:var(--fg-muted);display:grid;gap:2px">
                 <span>&lt;img</span>
@@ -103,17 +106,18 @@ D = dict(
                 <span>&nbsp;&nbsp;<span style="color:var(--accent)">srcset="logo@2x.png 2x,</span></span>
                 <span>&nbsp;&nbsp;<span style="color:var(--accent)">&nbsp;&nbsp;logo@3x.png 3x"&gt;</span></span>
               </div>''',
-     "배율별로", "브라우저가 화면 배율에 맞는 그림 <b>하나만</b> 받습니다"),
+     "배율별로 그림 나눠 주기", "브라우저가 화면 배율에 맞는 그림 <b>하나만</b> 받습니다"),
     ('''              <div style="width:100%;max-width:150px;font-family:var(--mono);font-size:9px;color:var(--fg-muted);display:grid;gap:2px">
                 <span>cv.width = w * <span style="color:var(--accent)">dpr</span>;</span>
                 <span>cv.style.width = w + 'px';</span>
                 <span>ctx.scale(<span style="color:var(--accent)">dpr, dpr</span>);</span>
               </div>''',
-     "캔버스", "이렇게 맞추지 않으면 화면에서 <b>캔버스만 흐릿하게</b> 보입니다"),
-    (lines("0.5px", "border-width: 0.5px — 3배에선 화소 하나", "150px"),
-     "구분선", "iOS 구분선 같은 <b>가는 선</b>을 긋습니다. 1배 화면에서는 흐려질 수 있습니다"),
+     "캔버스를 배율에 맞추기", "이렇게 맞추지 않으면 화면에서 <b>캔버스만 흐릿하게</b> 보입니다"),
+    (lines("0.5px", "border-width: 0.5px는 3배에서 화소 하나", "150px"),
+     "가는 구분선 긋기", "iOS 구분선 같은 <b>가는 선</b>을 긋습니다. 1배 화면에서는 흐려질 수 있습니다"),
   ]),
-  s8_title="최소 코드와 규칙", s8_hint="빠뜨리기 쉬운 설정까지",
+  s8_title="최소 코드와 지킬 규칙", s8_hint="빠뜨리기 쉬운 설정까지 담은 규칙",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법과 까닭</th>",
   code_lede="그림은 <code>srcset</code>으로 배율별 파일을 주고, 캔버스는 배율을 읽어 화소 수를 직접 맞춥니다.",
   code='''&lt;<span class="t">img</span> <span class="a">src</span>=<span class="s">"logo.png"</span>
      <span class="a">srcset</span>=<span class="s">"logo@2x.png 2x, logo@3x.png 3x"</span>
@@ -129,18 +133,18 @@ cv.width = w * dpr; cv.height = h * dpr;      <span class="c">// 그리는 화�
 cv.style.width = w + <span class="s">'px'</span>;                  <span class="c">// 보이는 크기</span>
 ctx.scale(dpr, dpr);''',
   keys=kbd([
-    ("<code>width</code>·<code>height</code>를 적는다", "밀도와는 별개로, 그림이 들어갈 <b>자리를 미리 잡아</b> 그림이 늦게 뜰 때 글이 밀려 움직이지 않게 합니다"),
-    ("<code>srcset</code>의 <code>2x</code>와 <code>800w</code>", "배율만 다르면 <code>x</code>를 쓰고, <b>표시 폭도 달라지면</b> <code>w</code>와 <code>sizes</code>를 함께 씁니다"),
-    ("<code>alt</code>", "밀도와는 상관없지만 그림을 넣을 때 <b>함께 빠뜨리기 쉽습니다</b>. <a href=\"../items/name.html\">이름 붙이기</a>를 참고합니다"),
+    ("<code>width</code>·<code>height</code> 적기", "밀도와는 별개로, 그림이 들어갈 <b>자리를 미리 잡아</b> 그림이 늦게 뜰 때 글이 밀려 움직이지 않게 합니다"),
+    ("<code>srcset</code>의 <code>2x</code>와 <code>800w</code> 구분하기", "배율만 다르면 <code>x</code>를 쓰고, <b>표시 폭도 달라지면</b> <code>w</code>와 <code>sizes</code>를 함께 씁니다"),
+    ("<code>alt</code> 함께 적기", "밀도와는 상관없지만 그림을 넣을 때 <b>함께 빠뜨리기 쉽습니다</b>. <a href=\"../items/name.html\">이름 붙이기</a>를 참고합니다"),
     ("<code>image-rendering: pixelated</code>", "도트 그림처럼 화소를 일부러 살릴 때만 씁니다. <b>사진에 쓰면 오히려 거칠어집니다</b>"),
     ("<code>0.5px</code> 테두리", "1배 화면에서는 굵기가 반올림되어 <b>사라지거나 흐려질 수</b> 있으므로, 배율을 묻는 미디어 쿼리로 배율이 높은 화면에만 적용합니다"),
-    ("배율로 기기를 짐작하지 않는다", "같은 배율 값이 폰에도 노트북에도 있습니다. 입력 방식이 궁금하면 <a href=\"hover.html\">포인터 질의</a>로 묻습니다"),
+    ("배율로 기기를 짐작하지 않기", "같은 배율 값이 폰에도 노트북에도 있습니다. 입력 방식이 궁금하면 <a href=\"hover.html\">포인터 질의</a>로 묻습니다"),
   ]),
   backend=rows([
-    ("이미지 변환은 서버에서", "원본 하나만 올려 두고 서버가 <b>필요한 크기로 줄여</b> 내려주게 하면, 크기별 파일을 따로 관리하는 것보다 비용이 적게 듭니다."),
-    ("캐시가 갈라진다", "같은 주소에서 기기마다 다른 그림을 내려주면 CDN 캐시가 엉뚱한 그림을 돌려줄 수 있습니다. 그래서 <b>크기마다 주소를 따로</b> 두는 편이 안전합니다."),
-    ("포맷이 더 큰 몫", "같은 그림이라도 WebP나 AVIF로 바꾸면 파일 크기가 절반 아래로 줄어듭니다. 그래서 그림이 무거우면 <b>배율보다 포맷을 먼저</b> 살펴봅니다."),
-    ("업로드한 사진", "요즘 폰으로 찍은 사진은 폭이 4000px을 넘습니다. 업로드를 받자마자 <b>화면에 쓸 크기로 줄여</b> 저장해 두지 않으면, 사진이 여러 장 뜨는 목록 화면 전체가 느려집니다."),
+    ("그림 크기 변환은 서버에서 하기", "원본 하나만 올려 두고 서버가 <b>필요한 크기로 줄여</b> 내려주게 하면, 크기별 파일을 따로 관리하는 것보다 비용이 적게 듭니다."),
+    ("기기별 그림과 CDN 캐시", "같은 주소에서 기기마다 다른 그림을 내려주면 CDN 캐시가 엉뚱한 그림을 돌려줄 수 있습니다. 그래서 <b>크기마다 주소를 따로</b> 두는 편이 안전합니다."),
+    ("배율보다 먼저 살펴볼 그림 포맷", "같은 그림이라도 WebP나 AVIF로 바꾸면 파일 크기가 절반 아래로 줄어듭니다. 그래서 그림이 무거우면 <b>배율보다 포맷을 먼저</b> 살펴봅니다."),
+    ("업로드한 사진은 줄여서 저장하기", "요즘 폰으로 찍은 사진은 폭이 4000px을 넘습니다. 업로드를 받자마자 <b>화면에 쓸 크기로 줄여</b> 저장해 두지 않으면, 사진이 여러 장 뜨는 목록 화면 전체가 느려집니다."),
   ]),
   plat_lede="세 플랫폼 모두 <b>길이 단위와 기기 화소를 나눠</b> 다루고, 부르는 이름만 다릅니다.",
   plats=plats([

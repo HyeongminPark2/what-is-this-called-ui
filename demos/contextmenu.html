@@ -100,12 +100,12 @@
     var vis = document.getElementById('visible').checked;
     var ways = 1 + (vis ? 1 : 0);
     var rd = document.getElementById('read');
-    rd.innerHTML = (open >= 0 ? '열림 — <b>' + ROWS[open] + '</b>' : '닫힘') +
-      '<br>같은 일에 이르는 길 <b>' + ways + '개</b>' +
-      (ways === 1 ? ' <span class="warn">— 숨은 길 하나뿐입니다</span>' : ' — ⋯ 단추와 오른쪽 누르기') +
-      '<br>오른쪽 눌러 연 횟수 <b>' + opened.right + '</b> · ⋯ 로 연 횟수 <b>' + opened.button + '</b>' +
+    rd.innerHTML = (open >= 0 ? '<b>' + ROWS[open] + '</b>의 메뉴가 열려 있음' : '메뉴가 닫혀 있음') +
+      '<br>메뉴를 여는 길 <b>' + ways + '개</b>' +
+      (ways === 1 ? '. <span class="warn">눈에 보이지 않는 오른쪽 버튼 하나뿐입니다</span>' : '(⋯ 단추와 오른쪽 버튼)') +
+      '<br>오른쪽 버튼으로 연 횟수 <b>' + opened.right + '</b> · ⋯ 단추로 연 횟수 <b>' + opened.button + '</b>' +
       (blocked ? '<br>브라우저 기본 메뉴를 막은 횟수 <b>' + blocked + '</b>' +
-        (document.getElementById('keep').checked ? '' : ' <span class="warn">— 복사와 새 탭으로 열기를 쓸 수 없습니다</span>') : '') +
+        (document.getElementById('keep').checked ? '' : '. <span class="warn">복사와 새 탭으로 열기를 쓸 수 없습니다</span>') : '') +
       (why ? '<br>' + why : '');
     rd.dataset.open = String(open);
     rd.dataset.ways = String(ways);

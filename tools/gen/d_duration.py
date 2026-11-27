@@ -11,12 +11,12 @@ def lane(pct, label, warn=False, w="150px"):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">툴팁 · 색 바뀜 — <b>100ms</b></div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">드롭다운 · 토글 — <b>150ms</b></div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">모달 · 시트 열기 — <b>250ms</b></div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">화면 전체 전환 — <b>350ms</b></div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">400ms 넘으면 기다리게 된다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">100ms 아래는 깜빡인 것처럼 보인다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">툴팁과 색 바뀜은 <b>100ms</b></div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">드롭다운과 토글은 <b>150ms</b></div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">모달과 시트를 열 때 <b>250ms</b></div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">화면 전체 전환은 <b>350ms</b></div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">400ms를 넘으면 기다리게 됨</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">100ms 아래는 깜빡인 것처럼 보임</div>
                 </div>
               </div>'''
 
@@ -44,14 +44,14 @@ D = dict(
   ]),
   axes=ax("지속 시간"),
   oneline="길이는 움직이는 <b>거리와 크기</b>에 맞춰 정하고, <b>자주 보는 것일수록 짧게</b> 둡니다. 기준표는 이 두 가지 규칙으로 이루어져 있습니다.",
-  s4_title="길이별로", s4_hint="같은 움직임, 다른 길이",
+  s4_title="길이에 따라 달라지는 느낌", s4_hint="같은 움직임을 길이만 바꿔 본 모습",
   states=states([
-    (lane(100, "0ms — 어디서 왔는지 모른다", True), "0ms", "순간이동하듯 바로 바뀌어서 <b>무엇이 바뀌었는지</b> 눈으로 쫓을 수 없습니다"),
-    (lane(60, "80ms — 깜빡인 것 같다", True), "100ms 아래", "눈이 움직임을 따라가지 못해서 <b>움직임을 넣은 효과가 거의 없습니다</b>"),
-    (lane(45, "150ms — 토글 · 드롭다운"), "100~200ms", "짧은 거리를 움직일 때 씁니다. <b>가장 많이 쓰는</b> 구간입니다"),
-    (lane(30, "250ms — 모달 · 시트"), "200~300ms", "화면의 절반쯤을 움직일 때 씁니다"),
-    (lane(18, "350ms — 화면 전환"), "300~400ms", "화면 하나가 통째로 바뀔 때 씁니다. <b>이 구간이 상한</b>입니다"),
-    (lane(6, "800ms — 기다리게 된다", True), "400ms 위", "연출 효과는 있지만 사용자가 <b>다음 조작을 하지 못하고 기다립니다</b>"),
+    (lane(100, "0ms는 어디서 왔는지 모름", True), "0ms일 때", "순간이동하듯 바로 바뀌어서 <b>무엇이 바뀌었는지</b> 눈으로 쫓을 수 없습니다"),
+    (lane(60, "80ms는 깜빡인 것처럼 보임", True), "100ms보다 짧을 때", "눈이 움직임을 따라가지 못해서 <b>움직임을 넣은 효과가 거의 없습니다</b>"),
+    (lane(45, "150ms는 토글과 드롭다운"), "100~200ms", "짧은 거리를 움직일 때 씁니다. <b>가장 많이 쓰는</b> 구간입니다"),
+    (lane(30, "250ms는 모달과 시트"), "200~300ms", "화면의 절반쯤을 움직일 때 씁니다"),
+    (lane(18, "350ms는 화면 전환"), "300~400ms", "화면 하나가 통째로 바뀔 때 씁니다. <b>이 구간이 상한</b>입니다"),
+    (lane(6, "800ms면 기다리게 됨", True), "400ms보다 길 때", "연출 효과는 있지만 사용자가 <b>다음 조작을 하지 못하고 기다립니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -67,6 +67,9 @@ D = dict(
           온보딩처럼 한 번만 보는 화면은 400ms도 괜찮지만,
           목록에서 하루에 백 번 여는 메뉴가 300ms라면 사용자는 <b>하루에 30초</b>를 기다리는 셈입니다.
           그래서 <b>자주 쓰는 것일수록 짧게</b> 한다는 규칙을 거리나 크기보다 먼저 따집니다.</p>''',
+  do_title="지속 시간을 정할 때 지킬 것",
+  dont_title="지속 시간을 정할 때 피할 것",
+  instead_title="지속 시간과 헷갈리기 쉬운 다른 항목",
   do=ul([
     "fast · base · slow처럼 <b>토큰 서너 개</b>를 정해 두고 그것만 쓸 때",
     "거리가 멀거나 요소가 클 때. 이때는 조금 더 길게 줍니다",
@@ -78,23 +81,23 @@ D = dict(
     "100ms 아래로 줄 때. 움직임이 보이지 않을 바에는 <b>0</b>이 낫습니다",
     "데이터를 기다리는 시간을 애니메이션으로 채울 때. 이럴 때는 <a href=\"../items/skeleton.html\">스켈레톤</a>을 씁니다",
   ]),
-  instead='속도를 나눠 쓰는 방식은 <a href="easing.html">이징</a>, 줄마다 늦게 들어오게 하는 것은 <a href="stagger.html">차례로</a>, 기다림을 보여 주는 것은 <a href="../items/spinner.html">스피너</a>.',
+  instead='속도를 나눠 쓰는 방식은 <a href="easing.html">이징</a>에서, 줄마다 조금씩 늦게 들어오게 하는 방법은 <a href="stagger.html">차례로</a> 들어오기 항목에서 다룹니다. 기다리는 동안 작업이 진행 중임을 보여 주려면 <a href="../items/spinner.html">스피너</a>를 씁니다.',
   cases=cases([
     ('''              <div style="width:100%;max-width:150px;display:grid;gap:3px;font-family:var(--mono);font-size:9.5px">
                 <span style="color:var(--accent)">--dur-fast: 120ms</span>
                 <span style="color:var(--accent)">--dur-base: 220ms</span>
                 <span style="color:var(--accent)">--dur-slow: 340ms</span>
               </div>''',
-     "토큰 셋", "숫자 값이 아니라 <b>토큰 이름</b>을 쓰게 합니다"),
+     "길이를 토큰 세 개로 정해 두기", "숫자 값이 아니라 <b>토큰 이름</b>을 쓰게 합니다"),
     ('''              <div style="width:100%;max-width:150px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;font-size:9.5px">
                 <b>열 때 250ms</b><br><span style="color:var(--fg-muted)">닫을 때 180ms</span>
               </div>''',
-     "들고 날 때 다르게", "열 때와 닫을 때 길이를 다르게 줍니다. 자세한 내용은 <a href=\"enterexit.html\">진입과 퇴장</a>에 있습니다"),
+     "열 때와 닫을 때 길이를 다르게 주기", "열 때와 닫을 때 길이를 다르게 줍니다. 자세한 내용은 <a href=\"enterexit.html\">진입과 퇴장</a>에 있습니다"),
     ('''              <div style="width:100%;max-width:150px;font-family:var(--mono);font-size:9px;color:var(--fg-muted)">
                 @media (prefers-reduced-motion: reduce) {<br>
                 &nbsp;&nbsp;* { <span style="color:var(--accent)">animation-duration: .01ms</span> }<br>}
               </div>''',
-     "줄이기에서는 0 에 가깝게", "길이를 완전히 0으로 두면 <code>animationend</code>가 오지 않는 코드가 있습니다"),
+     "모션 줄이기에서는 0에 가깝게 줄이기", "길이를 완전히 0으로 두면 <code>animationend</code>가 오지 않는 코드가 있습니다"),
   ]),
   s8_title="최소 코드와 규칙", s8_hint="구현할 때 지킬 최소 규칙",
   code_lede="길이도 <b>토큰</b>으로 정의해 두고, 모션 줄이기 설정에서는 거의 0으로 내립니다.",
@@ -109,23 +112,24 @@ D = dict(
 @media (prefers-reduced-motion: reduce) {
   :root { <span class="a">--dur-fast</span>: <span class="a">1ms</span>; <span class="a">--dur-base</span>: <span class="a">1ms</span>; <span class="a">--dur-slow</span>: <span class="a">1ms</span>; }
 }''',
+  keys_heads="<th>알아 둘 규칙</th><th>자세한 내용</th>",
   keys=kbd([
-    ("단위를 빼먹지 않는다", "<code>transition: transform 200</code>처럼 단위를 빼면 선언이 <b>통째로 무시</b>됩니다. <code>200ms</code>나 <code>.2s</code>로 적습니다"),
+    ("단위를 빠뜨리지 않기", "<code>transition: transform 200</code>처럼 단위를 빼면 선언이 <b>통째로 무시</b>됩니다. <code>200ms</code>나 <code>.2s</code>로 적습니다"),
     ("<code>0s</code>와 <code>0.01ms</code>", "길이가 완전히 0이면 <code>transitionend</code>와 <code>animationend</code>가 오지 않아서, 그 이벤트를 기다리는 코드가 멈춥니다"),
-    ("속성마다 다르게", "<code>transition: transform 240ms, opacity 140ms</code>처럼 속성마다 길이를 다르게 줄 수 있고, 투명도는 더 짧아도 됩니다"),
+    ("속성마다 길이를 다르게 주기", "<code>transition: transform 240ms, opacity 140ms</code>처럼 속성마다 길이를 다르게 줄 수 있고, 투명도는 더 짧아도 됩니다"),
     ("<code>prefers-reduced-motion</code>", "길이를 1ms로 내리는 것이 가장 안전한 대응입니다"),
     ("초점이 옮겨 갈 때", "애니메이션이 끝나기를 기다렸다가 초점을 옮기면 그동안 <b>키보드 사용자는 아무것도 할 수 없습니다</b>. 초점은 먼저 옮깁니다"),
-    ("<code>&lt;dialog&gt;</code> 닫기", "<code>close()</code>를 부르면 바로 사라집니다. 나가는 연출을 보여 주려면 연출이 <b>끝난 뒤</b>에 호출합니다"),
+    ("<code>&lt;dialog&gt;</code>를 닫을 때", "<code>close()</code>를 부르면 바로 사라집니다. 나가는 연출을 보여 주려면 연출이 <b>끝난 뒤</b>에 호출합니다"),
   ]),
   backend=rows([
     ("응답보다 애니메이션이 길면", "데이터가 50ms 만에 와도 전환이 400ms 걸리면 사용자는 400ms를 기다립니다. 화면이 느릴 때 <b>원인이 서버가 아닐 수도</b> 있습니다."),
-    ("요청은 먼저 보낸다", "'애니메이션이 끝나면 요청 보내기'로 짜면 애니메이션 길이만큼 응답이 늦어집니다. 요청과 연출은 <b>같이 시작</b>합니다."),
-    ("지표에 섞인다", "LCP나 INP 같은 지표에는 연출 시간이 들어갑니다. 그래서 히어로 영역이 느리게 나타나면 <b>점수가 깎입니다</b>."),
+    ("요청을 연출보다 먼저 보내기", "'애니메이션이 끝나면 요청 보내기'로 짜면 애니메이션 길이만큼 응답이 늦어집니다. 요청과 연출은 <b>같이 시작</b>합니다."),
+    ("성능 지표에 들어가는 연출 시간", "LCP나 INP 같은 지표에는 연출 시간이 들어갑니다. 그래서 히어로 영역이 느리게 나타나면 <b>점수가 깎입니다</b>."),
     ("최소 표시 시간", "스피너가 50ms만 보였다가 사라지면 깜빡인 것처럼 보입니다. <b>한번 띄웠으면 300ms는 유지</b>하는 편이 덜 어지럽습니다."),
   ]),
   plat_lede="세 플랫폼의 권장값은 <b>100~400ms</b>로 거의 같습니다.",
   plats=plats([
-    ("웹", "토큰으로",
+    ("웹", "팀이 정한 토큰",
      lane(40, "220ms", False, "110px"),
      "표준 권장값이 없어서 <b>팀이 정합니다.</b> 그래서 미리 정해 두지 않으면 화면마다 길이가 달라집니다."),
     ("iOS", "0.2~0.35s",

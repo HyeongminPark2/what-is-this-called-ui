@@ -20,7 +20,7 @@
   <b>날짜 선택기</b>
   <label><input type="checkbox" id="typing" checked> 쳐서도 넣을 수 있게</label>
   <label><input type="checkbox" id="limit" checked> 못 고르는 날을 막기</label>
-  <label><input type="checkbox" id="shortcut" checked> 자주 쓰는 날 단추</label>
+  <label><input type="checkbox" id="shortcut" checked> 자주 쓰는 날 단추 두기</label>
 </div>
 
 <div class="pad">
@@ -96,12 +96,12 @@
     // 지금 보고 있는 달에서 고른 날까지 몇 번 넘겨야 하나
     var dist = Math.abs((sel.getFullYear() - view.getFullYear()) * 12 + (sel.getMonth() - view.getMonth()));
     var rd = document.getElementById('read');
-    rd.innerHTML = '고른 날 <b>' + ymd(sel) + '</b> · 보고 있는 달 <b>' + (view.getMonth() + 1) + '월</b>' +
-      '<br>지금까지 달을 넘긴 횟수 <b>' + moves + '번</b>' +
-      (moves >= 3 ? ' <span class="warn">— 쳐서 넣는 쪽이 빠릅니다</span>' : '') +
-      '<br>막힌 날 <b>' + blocked + '일</b>' + (limit ? '' : ' <span class="warn">— 못 고르는 날도 눌립니다</span>') +
-      '<br>쳐서 넣기 <b>' + (document.getElementById('typing').checked ? '된다' : '안 된다') + '</b>' +
-      ' · 자주 쓰는 날 단추 <b>' + (document.getElementById('shortcut').checked ? '있다' : '없다') + '</b>';
+    rd.innerHTML = '고른 날은 <b>' + ymd(sel) + '</b>이고, 지금 보고 있는 달은 <b>' + (view.getMonth() + 1) + '월</b>입니다.' +
+      '<br>지금까지 달을 넘긴 횟수는 <b>' + moves + '번</b>입니다.' +
+      (moves >= 3 ? ' <span class="warn">이만큼 넘겨야 하면 쳐서 넣는 쪽이 빠릅니다.</span>' : '') +
+      '<br>막힌 날은 <b>' + blocked + '일</b>입니다.' + (limit ? '' : ' <span class="warn">막기를 꺼서 못 고르는 날도 눌립니다.</span>') +
+      '<br>쳐서 넣기는 <b>' + (document.getElementById('typing').checked ? '켜져 있고' : '꺼져 있고') + '</b>' +
+      ', 자주 쓰는 날 단추는 <b>' + (document.getElementById('shortcut').checked ? '있습니다' : '없습니다') + '</b>.';
     rd.dataset.sel = ymd(sel);
     rd.dataset.moves = String(moves);
     rd.dataset.blocked = String(blocked);

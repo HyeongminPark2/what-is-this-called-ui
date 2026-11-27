@@ -19,9 +19,9 @@
 <body>
 <div class="bar">
   <b>메가 메뉴</b>
-  <label>여는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
-    <option value="hover">마우스가 닿으면 바로</option>
-    <option value="delay" selected>닿고 100ms 뒤 · 떠나고 300ms 뒤 닫기</option>
+  <label>메뉴를 여는 방법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="hover">마우스가 닿으면 바로 열기</option>
+    <option value="delay" selected>닿고 100ms 뒤 열고, 떠나고 300ms 뒤 닫기</option>
     <option value="click">눌러야 열림</option>
   </select></label>
   <button class="ui-btn ui-btn--ghost" id="run">대각선으로 가 보기</button>
@@ -126,7 +126,7 @@
   });
 
   document.getElementById('k').addEventListener('change', function () {
-    breaks = 0; running = false; setOpen(-1); report('여는 법을 바꿨습니다');
+    breaks = 0; running = false; setOpen(-1); report('여는 방법을 바꿨습니다');
   });
 
   // 대각선 경로를 흉내 낸다. 첫 머리글자에서 패널 오른쪽 아래 항목까지 곧장 간다

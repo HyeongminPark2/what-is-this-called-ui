@@ -95,7 +95,7 @@
     var name = e.target.dataset.n || e.target.tagName;
     var inside = dlg.contains(e.target);
     if (!inside) escaped = true;
-    note(name + (inside ? ' (모달 안)' : ' <b>(모달 밖!)</b>'), inside ? '' : 'no');
+    note(name + (inside ? ' (모달 안에 있음)' : ' <b>(모달 밖으로 나감)</b>'), inside ? '' : 'no');
   });
 })();
 </script>

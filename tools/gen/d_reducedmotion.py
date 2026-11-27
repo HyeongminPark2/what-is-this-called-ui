@@ -17,11 +17,11 @@ ARROW = ('<span style="position:absolute;top:23px;left:40px;right:40px;height:2p
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">@media (prefers-reduced-motion: reduce)</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">끈다 — 큰 거리 이동 · 확대 축소 · 시차 스크롤</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--warn)">줄인다 — 끝없이 도는 것 · 자동 재생</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">남긴다 — 투명도 · 색 · 아주 짧은 미끄러짐</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">기본값은 no-preference — 켠 사람만 reduce</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">*{animation:none} 으로 다 끄면 변화를 못 읽는다</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">큰 거리 이동·확대 축소·시차 스크롤은 끔</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--warn)">끝없이 도는 것·자동 재생은 줄임</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">투명도·색·아주 짧은 미끄러짐은 남김</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">기본값은 no-preference이고 켠 사람만 reduce</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">*{animation:none}으로 다 끄면 변화를 알 수 없음</div>
                 </div>
               </div>'''
 
@@ -31,7 +31,7 @@ D = dict(
   lede="사용자가 OS에서 모션 줄이기를 켜면 브라우저에 \"움직임을 줄여 달라\"는 요청이 전해집니다. 이 요청은 움직임을 <b>전부 끄라는 뜻이 아닙니다.</b>",
   axes_lede="움직임은 화면에서 무엇이 바뀌었는지 사용자에게 <b>알려 주는</b> 역할을 합니다. 아래 네 가지를 따져 보면 움직임을 다루는 항목들을 서로 구별할 수 있습니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
-          <p>여섯 가지 요소가 움직이고 있습니다. <b>줄이기를 켠 사람으로 보기</b>를 누르면
+          <p>여섯 가지 요소가 움직이고 있습니다. <b>모션 줄이기를 켠 사람의 화면으로 보기</b>를 누르면
           셋은 멈추고 셋은 그대로 움직입니다.<br>
           멈추는 쪽은 <b>큰 거리를 지나가는 이동, 확대, 끝없이 도는 것</b>이고,
           남는 쪽은 <b>투명도, 색, 아주 짧은 미끄러짐</b>입니다.
@@ -52,21 +52,21 @@ D = dict(
   ]),
   axes=ax("모션 줄이기"),
   oneline="끌지 말지는 <b>'이 움직임이 멀미를 일으킬까'</b>로 판단합니다. 큰 거리 이동, 확대, 시차, 끝없이 도는 것은 끄고, <b>자리를 거의 옮기지 않는 움직임은 남깁니다</b>.",
-  s4_title="끌 것과 남길 것", s4_hint="전부 끄는 것이 아니다",
+  s4_title="끌 움직임과 남길 움직임", s4_hint="멀미를 일으키는지에 따라 가른 여섯 가지 움직임",
   states=states([
-    (card(BOX + ARROW + BOXR, "끈다 — 큰 거리를 빠르게", False), "가로지르는 이동", "<b>멀미를 일으키는 가장 큰 원인</b>입니다"),
+    (card(BOX + ARROW + BOXR, "큰 거리를 빠르게 가서 끔", False), "화면을 가로지르는 이동", "<b>멀미를 일으키는 가장 큰 원인</b>입니다"),
     (card('<span style="position:absolute;inset:6px;border-radius:6px;background:var(--accent);opacity:.9"></span>'
-          '<span style="position:absolute;inset:16px;border-radius:5px;border:2px dashed var(--surface)"></span>', "끈다 — 덮쳐 오는 느낌", False),
+          '<span style="position:absolute;inset:16px;border-radius:5px;border:2px dashed var(--surface)"></span>', "화면이 다가오는 듯해서 끔", False),
      "확대하며 열기", "화면이 <b>앞으로 다가오는</b> 것처럼 보여서 어지럽습니다"),
-    (card('<span style="position:absolute;left:50%;top:14px;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--accent)"></span>', "줄인다 — 계속 도는 것", False),
+    (card('<span style="position:absolute;left:50%;top:14px;transform:translateX(-50%);width:22px;height:22px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--accent)"></span>', "계속 돌기 때문에 줄임", False),
      "끝없이 도는 스피너", "<b>세 점이 차례로 밝아지는</b> 모양으로 바꿉니다"),
-    (card('<span style="position:absolute;inset:12px;border-radius:5px;background:var(--accent);opacity:.3"></span>', "남긴다 — 자리를 안 옮긴다", True),
-     "투명도만 바뀜", "<b>페이드는 멀미를 일으키지 않으므로</b> 남겨야 합니다"),
-    (card('<span style="position:absolute;inset:12px;border-radius:5px;background:var(--warn)"></span>', "남긴다 — 움직임이 아니다", True),
-     "색 바뀜 · 테두리", "상태가 바뀌었다는 것을 알릴 <b>유일한 방법</b>일 수도 있습니다"),
+    (card('<span style="position:absolute;inset:12px;border-radius:5px;background:var(--accent);opacity:.3"></span>', "자리를 안 옮겨서 남김", True),
+     "투명도만 바뀔 때", "<b>페이드는 멀미를 일으키지 않으므로</b> 남겨야 합니다"),
+    (card('<span style="position:absolute;inset:12px;border-radius:5px;background:var(--warn)"></span>', "움직임이 아니라서 남김", True),
+     "색이나 테두리가 바뀔 때", "상태가 바뀌었다는 것을 알릴 <b>유일한 방법</b>일 수도 있습니다"),
     (card('<span style="position:absolute;top:14px;left:18px;width:22px;height:22px;border-radius:5px;background:var(--accent)"></span>'
-          '<span style="position:absolute;top:14px;left:28px;width:22px;height:22px;border-radius:5px;background:var(--accent);opacity:.25"></span>', "남겨도 된다 — 8px 남짓", True),
-     "짧은 미끄러짐", "거리를 더 줄이거나 그대로 둡니다"),
+          '<span style="position:absolute;top:14px;left:28px;width:22px;height:22px;border-radius:5px;background:var(--accent);opacity:.25"></span>', "8px 남짓이라 남겨도 됨", True),
+     "짧은 거리를 미끄러질 때", "거리를 더 줄이거나 그대로 둡니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -75,7 +75,7 @@ D = dict(
     ("줄이는 것", "도는 것 · 자동 재생", "아예 없애면 작업이 <b>진행 중</b>이라는 것을 알 수 없습니다"),
     ("남기는 것", "투명도 · 색", "자리를 옮기지 않아서 <b>멀미를 일으키지 않고</b>, 변화를 알리는 데 필요합니다"),
     ("기본값", "no-preference", "설정을 <b>켠 사람만</b> reduce입니다. 설정을 알 수 없으면 켜지 않은 것으로 봅니다"),
-    ("과잉 대응", "전부 끄기", "<code>*{animation:none}</code>으로 다 끄면 사용자가 <b>무엇이 바뀌었는지 알 수 없습니다</b>"),
+    ("한 줄로 모두 끄는 코드", "전부 끄기", "<code>*{animation:none}</code>으로 다 끄면 사용자가 <b>무엇이 바뀌었는지 알 수 없습니다</b>"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           인터넷에는 <code>*{animation-duration:.01ms!important}</code>처럼
@@ -84,6 +84,9 @@ D = dict(
           토스트가 번쩍하고 없어지거나 메뉴가 순간이동하듯 바뀝니다.
           제대로 하려면 항목마다 <b>거리는 줄이고 투명도는 남기는</b> 쪽으로 정해야 합니다.
           거리를 CSS 변수 하나로 두고 0에 가깝게 내리는 방법이 가장 손이 덜 갑니다.</p>''',
+  do_title="모션 줄이기를 챙겨야 하는 때",
+  dont_title="모션 줄이기에 대응할 때 피할 것",
+  instead_title="모션 줄이기와 함께 볼 항목",
   do=ul([
     "<b>움직이는 것을 만들 때마다</b> 함께 챙길 때. 나중에 몰아서 하면 빠뜨립니다",
     "자동 재생 영상이나 배너가 있을 때. 처음부터 <b>멈춰 둡니다</b>",
@@ -95,26 +98,26 @@ D = dict(
     "<b>성능 설정</b>으로 오해해서 저사양 기기에만 적용할 때",
     "<code>!important</code>로 모두 덮어쓸 때. 꼭 필요한 전환까지 꺼집니다",
   ]),
-  instead='길이를 줄이는 방법은 <a href="duration.html">지속 시간</a>, 흔들림을 없애는 방법은 <a href="spring.html">스프링</a>의 튕김 0, 자동으로 도는 것은 <a href="../items/spinner.html">스피너</a>에서 다룹니다.',
+  instead='길이를 줄이는 방법은 <a href="duration.html">지속 시간</a>에서 다루고, 흔들림을 없애려면 <a href="spring.html">스프링</a>의 튕김을 0으로 둡니다. 자동으로 도는 것을 바꾸는 방법은 <a href="../items/spinner.html">스피너</a>에 있습니다.',
   cases=cases([
     ('''              <div style="width:100%;max-width:152px;font-family:var(--mono);font-size:9px;color:var(--fg-muted);display:grid;gap:2px">
                 <span>@media (prefers-reduced-motion: reduce) {</span>
                 <span>&nbsp;&nbsp;:root { <span style="color:var(--accent)">--move: 0px; --dur: 1ms</span> }</span>
                 <span>}</span>
               </div>''',
-     "변수 두 개로", "거리와 길이를 변수로 두면 <b>한 곳만</b> 고치면 됩니다"),
+     "변수 두 개로 한꺼번에 줄이기", "거리와 길이를 변수로 두면 <b>한 곳만</b> 고치면 됩니다"),
     ('''              <div style="width:100%;max-width:152px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;font-size:9.5px">
                 <b>자동 재생 중</b> · <span style="color:var(--accent);text-decoration:underline">멈추기</span><br>
                 <span style="font-size:8.5px;color:var(--fg-muted)">줄이기에서는 처음부터 멈춤</span>
               </div>''',
-     "멈출 길을 둔다", "자동으로 움직이는 것에는 <b>멈춤 버튼</b>이 함께 있어야 합니다"),
+     "자동 재생에 멈춤 버튼 두기", "자동으로 움직이는 것에는 <b>멈춤 버튼</b>이 함께 있어야 합니다"),
     ('''              <div style="width:100%;max-width:152px;display:flex;gap:4px;align-items:center">
                 <span style="width:7px;height:7px;border-radius:50%;background:var(--accent)"></span>
                 <span style="width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:.5"></span>
                 <span style="width:7px;height:7px;border-radius:50%;background:var(--accent);opacity:.2"></span>
-                <span style="font-size:9px;color:var(--fg-muted)">도는 대신 밝아지기</span>
+                <span style="font-size:9px;color:var(--fg-muted)">돌지 않고 차례로 밝아짐</span>
               </div>''',
-     "도는 것을 바꾼다", "<b>없애지 말고</b> 돌지 않는 모양으로 바꿉니다"),
+     "도는 것을 돌지 않는 모양으로 바꾸기", "<b>없애지 말고</b> 돌지 않는 모양으로 바꿉니다"),
   ]),
   s8_title="최소 코드와 규칙", s8_hint="구현할 때 지킬 최소 규칙",
   code_lede="거리와 길이를 <b>변수</b>로 두면 미디어 질의 하나로 모두 처리할 수 있습니다.",
@@ -132,18 +135,19 @@ D = dict(
 <span class="k">const</span> calm = matchMedia(<span class="s">'(prefers-reduced-motion: reduce)'</span>);
 <span class="k">if</span> (calm.matches) el.scrollIntoView();
 <span class="k">else</span> el.scrollIntoView({ behavior: <span class="s">'smooth'</span> });''',
+  keys_heads="<th>알아 둘 규칙</th><th>자세한 내용</th>",
   keys=kbd([
-    ("<code>matchMedia</code>로 물어본다", "CSS 밖의 애니메이션(캔버스·자바스크립트)도 <b>같이 줄여야</b> 합니다"),
+    ("<code>matchMedia</code>로 설정 확인하기", "CSS 밖의 애니메이션(캔버스·자바스크립트)도 <b>같이 줄여야</b> 합니다"),
     ("<code>scroll-behavior: smooth</code>", "부드러운 스크롤도 멀미를 일으킵니다. 모션 줄이기에서는 <code>auto</code>로 바꿉니다"),
     ("<code>.addEventListener('change')</code>", "설정은 사용자가 <b>화면을 쓰는 중에도</b> 바뀔 수 있으므로, 한 번 읽고 끝내지 않습니다"),
-    ("켠 사람에게 <b>덜 주지 않는다</b>", "기능은 그대로 두고 <b>움직임만</b> 줄입니다"),
-    ("자동 재생에는 멈춤 버튼", "WCAG는 5초 넘게 자동으로 움직이는 것에 <b>멈출 방법</b>을 두도록 요구합니다"),
-    ("시험하는 법", "개발자 도구에서 <code>prefers-reduced-motion</code> 값을 <b>바꿔 가며</b> 시험할 수 있습니다"),
+    ("켠 사람에게도 기능은 <b>그대로</b> 주기", "기능은 그대로 두고 <b>움직임만</b> 줄입니다"),
+    ("자동 재생에는 멈춤 버튼 두기", "WCAG는 5초 넘게 자동으로 움직이는 것에 <b>멈출 방법</b>을 두도록 요구합니다"),
+    ("설정을 바꿔 시험하는 방법", "개발자 도구에서 <code>prefers-reduced-motion</code> 값을 <b>바꿔 가며</b> 시험할 수 있습니다"),
   ]),
   backend=rows([
-    ("서버는 알 수 없다", "모션 줄이기 설정은 <b>요청 헤더에 실려 오지 않습니다.</b> 그래서 서버가 미리 렌더링해 보내는 화면에서는 CSS 질의로만 처리할 수 있습니다."),
+    ("서버가 알 수 없는 설정", "모션 줄이기 설정은 <b>요청 헤더에 실려 오지 않습니다.</b> 그래서 서버가 미리 렌더링해 보내는 화면에서는 CSS 질의로만 처리할 수 있습니다."),
     ("클라이언트 힌트", "<code>Sec-CH-Prefers-Reduced-Motion</code> 헤더가 있기는 하지만 <b>브라우저마다 지원이 달라서</b> 여기에 기대지 않는 편이 낫습니다."),
-    ("자동 재생 영상", "줄이기를 켠 사람에게 <b>포스터 이미지만</b> 보내면 데이터도 아낄 수 있습니다."),
+    ("자동 재생 영상 대신 포스터 보내기", "줄이기를 켠 사람에게 <b>포스터 이미지만</b> 보내면 데이터도 아낄 수 있습니다."),
   ]),
   plat_lede="세 OS 모두 이 설정이 있고, <b>부르는 이름만 다릅니다</b>.",
   plats=plats([

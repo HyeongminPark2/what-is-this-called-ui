@@ -35,22 +35,22 @@
     </div>
     <div>
       <div class="kr-box" id="b2"><p class="kr kr--keep">정산 요청이 승인되면 영업일 기준 2일 안에 등록하신 계좌로 입금됩니다.</p></div>
-      <span class="cap"><code>word-break: keep-all</code> · 어절을 지킨다<br><b id="r2"></b></span>
+      <span class="cap"><code>word-break: keep-all</code> · 어절을 지킴<br><b id="r2"></b></span>
     </div>
     <div>
       <div class="kr-box" id="b3"><p class="kr kr--break">정산 요청이 승인되면 영업일 기준 2일 안에 등록하신 계좌로 입금됩니다.</p></div>
-      <span class="cap"><code>word-break: break-all</code> · 아무 데서나<br><b id="r3"></b></span>
+      <span class="cap"><code>word-break: break-all</code> · 아무 데서나 쪼갬<br><b id="r3"></b></span>
     </div>
   </div>
 
   <div class="row">
     <div>
       <div class="kr-box" id="b4"><p class="kr kr--keep" style="font-size:13.5px;overflow-wrap:normal">확인 코드는 TX99120KR2026SETTLEMENTCONFIRM 입니다. 띄어쓰기도 기호도 없는 긴 덩어리입니다.</p></div>
-      <span class="cap"><code>keep-all</code> 만 — 긴 영문 덩어리가 <b class="bad">칸을 밀어낸다</b> <span id="r4"></span></span>
+      <span class="cap"><code>keep-all</code>만 쓰면 긴 영문 덩어리가 <b class="bad">칸을 밀어냄</b> <span id="r4"></span></span>
     </div>
     <div>
       <div class="kr-box" id="b5"><p class="kr kr--keep" style="font-size:13.5px;overflow-wrap:anywhere">확인 코드는 TX99120KR2026SETTLEMENTCONFIRM 입니다. 띄어쓰기도 기호도 없는 긴 덩어리입니다.</p></div>
-      <span class="cap"><code>+ overflow-wrap: anywhere</code> — <b class="good">한글은 어절로, 긴 영문만 쪼갠다</b> <span id="r5"></span></span>
+      <span class="cap"><code>overflow-wrap: anywhere</code>를 더하면 <b class="good">한글은 어절 단위로 넘기고 긴 영문만 쪼갬</b> <span id="r5"></span></span>
     </div>
   </div>
 </div>

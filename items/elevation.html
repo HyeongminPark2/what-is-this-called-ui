@@ -52,7 +52,7 @@
         <div class="note" style="margin-bottom:0">
           <p>단이 올라갈수록 그림자는 진해지지 않고 <b>더 멀리, 더 흐리게</b> 퍼집니다.
           빛이 위에서 비춘다고 가정하고 만들기 때문입니다.<br>
-          <b>그림자 대신 테두리로</b>를 켜 보세요. 구역은 여전히 나뉘지만 <b>무엇이 위에 있는지</b>는 알 수 없게 됩니다.
+          <b>그림자 대신 테두리로 나누기</b>를 켜 보세요. 구역은 여전히 나뉘지만 <b>무엇이 위에 있는지</b>는 알 수 없게 됩니다.
           그림자가 잘 보이지 않는 어두운 화면에서도 같은 일이 일어납니다.</p>
         </div>
       </section>
@@ -76,10 +76,10 @@
         <p>토큰은 눈에 보이는 부품이 아니라 값을 어떻게 쓸지 <b>정해 둔 규칙</b>입니다. 그래서 생김새 대신 아래 네 가지를 물어보면 토큰끼리 무엇이 다른지 가려집니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하나</th><th>몇 단이 좋나</th><th>바꾸면 어디가 바뀌나</th><th>틀렸을 때 증상</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 정하는가</th><th>몇 단으로 두면 좋은가</th><th>값을 바꾸면 어디가 바뀌는가</th><th>잘못 정했을 때 나타나는 증상</th></tr></thead>
           <tbody>
             <tr><td>색 토큰</td><td>색의 <b>쓰임</b></td><td>쓰임 10여 개</td><td>브랜드 색 전체</td><td>같은 파랑이 화면마다 조금씩 다릅니다</td></tr>
-            <tr><td>다크 모드</td><td><b>두 벌</b>의 값</td><td>2벌(+고대비)</td><td>화면 전체의 바탕과 글자</td><td>어두운 화면에 흰 상자 하나만 남아 눈이 부십니다</td></tr>
+            <tr><td>다크 모드</td><td><b>두 벌</b>의 값</td><td>2벌, 고대비까지 두면 3벌</td><td>화면 전체의 바탕과 글자</td><td>어두운 화면에 흰 상자 하나만 남아 눈이 부십니다</td></tr>
             <tr><td>타입 스케일</td><td>글자 크기 <b>단계</b></td><td>6~8단</td><td>제목과 본문의 크기</td><td>무엇이 더 중요한지 알아보기 어렵습니다</td></tr>
             <tr><td>간격 체계</td><td>여백의 <b>단위</b></td><td>6~8단(4·8의 배수)</td><td>모든 패딩과 줄 간격</td><td>딱 집어 말하기 어렵지만 어수선해 보입니다</td></tr>
             <tr class="me"><td><b>고도</b></td><td>그림자의 <b>세기</b></td><td>4~5단</td><td>떠 있는 부품들</td><td>무엇이 위에 있는지 알 수 없습니다</td></tr>
@@ -88,7 +88,7 @@
             <tr><td>테두리와 구분선</td><td><b>가르는 선</b></td><td>선 1~2종</td><td>목록 · 카드 · 표</td><td>선이 두 겹이 되고 화면이 어수선해집니다</td></tr>
             <tr><td>불투명도</td><td><b>흐린 정도</b></td><td>2~3단</td><td>비활성 · 가림막 · 흐린 글</td><td>글이 잘 읽히지 않고 z-index가 적용되지 않습니다</td></tr>
             <tr><td>아이콘 크기</td><td>그림의 <b>크기</b></td><td>3~4단(16·20·24)</td><td>버튼 · 목록 · 앱바</td><td>선이 흐리고 글자와 가운데가 맞지 않습니다</td></tr>
-            <tr><td>상태 색</td><td>성공 · 주의 · 오류 · 정보</td><td>4가지 × 3자리</td><td>알림 · 배지 · 입력 오류</td><td>색을 구별하지 못하면 상태를 알 수 없습니다</td></tr>
+            <tr><td>상태 색</td><td>성공 · 주의 · 오류 · 정보</td><td>4가지, 색마다 3자리</td><td>알림 · 배지 · 입력 오류</td><td>색을 구별하지 못하면 상태를 알 수 없습니다</td></tr>
             <tr><td>토큰 이름 짓기</td><td>이름의 <b>규칙</b></td><td>층 3겹</td><td>토큰 전부</td><td>이름과 값이 어긋나 어느 토큰을 고쳐야 할지 알 수 없습니다</td></tr>
           </tbody>
         </table>
@@ -99,37 +99,37 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 단<span class="hint">단마다 쓰는 부품</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 고도 단계별 쓰는 부품<span class="hint">단마다 그 높이를 주는 부품</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:8px;justify-items:center;padding:6px 0"><span class="elev-0" style="display:block;width:74px;height:40px;border-radius:9px;background:var(--surface);border:1px solid transparent"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">elev-0</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">표 · 목록</span></div>
             </div>
-            <figcaption>0단<span>배경에 붙어 있는 단이라 그림자 대신 <b>테두리로</b> 구역을 나눕니다</span></figcaption>
+            <figcaption>0단, 배경에 붙은 면<span>배경에 붙어 있는 단이라 그림자 대신 <b>테두리로</b> 구역을 나눕니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:8px;justify-items:center;padding:6px 0"><span class="elev-1" style="display:block;width:74px;height:40px;border-radius:9px;background:var(--surface);border:1px solid transparent"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">elev-1</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">카드</span></div>
             </div>
-            <figcaption>1단<span>배경에서 살짝 떠 있는 단으로, 가장 많이 씁니다</span></figcaption>
+            <figcaption>1단, 살짝 뜬 면<span>배경에서 살짝 떠 있는 단으로, 가장 많이 씁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:8px;justify-items:center;padding:6px 0"><span class="elev-2" style="display:block;width:74px;height:40px;border-radius:9px;background:var(--surface);border:1px solid transparent"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">elev-2</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">드롭다운 · 팝오버</span></div>
             </div>
-            <figcaption>2단<span>눌러서 열었다가 곧 닫히는 부품에 씁니다</span></figcaption>
+            <figcaption>2단, 눌러서 여는 부품<span>눌러서 열었다가 곧 닫히는 부품에 씁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:8px;justify-items:center;padding:6px 0"><span class="elev-3" style="display:block;width:74px;height:40px;border-radius:9px;background:var(--surface);border:1px solid transparent"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">elev-3</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">모달 · 시트</span></div>
             </div>
-            <figcaption>3단<span>화면을 가로막는 부품에 쓰며, 가림막과 함께 씁니다</span></figcaption>
+            <figcaption>3단, 화면을 가로막는 부품<span>화면을 가로막는 부품에 쓰며, 가림막과 함께 씁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:8px;justify-items:center;padding:6px 0"><span class="elev-4" style="display:block;width:74px;height:40px;border-radius:9px;background:var(--surface);border:1px solid transparent"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">elev-4</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">토스트 · 드래그 중</span></div>
             </div>
-            <figcaption>4단<span>가장 위에 놓이는 단이고, 단은 <b>여기까지만</b> 둡니다</span></figcaption>
+            <figcaption>4단, 가장 위에 놓이는 것<span>가장 위에 놓이는 단이고, 단은 <b>여기까지만</b> 둡니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -138,7 +138,7 @@
                 <span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">border</span>
                 <span style="font-size:10.5px;color:var(--fg-faint);text-align:center">어두운 화면</span></div>
             </div>
-            <figcaption>테두리<span>어두운 바탕에서는 그림자가 잘 보이지 않으므로 <b>면을 밝게 칠해</b> 높이를 나타냅니다</span></figcaption>
+            <figcaption>어두운 화면에서 쓰는 테두리<span>어두운 바탕에서는 그림자가 잘 보이지 않으므로 <b>면을 밝게 칠해</b> 높이를 나타냅니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -198,7 +198,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>고도 대신 다른 것을 써야 하는 경우</b> — 요소의 앞뒤 순서는 <a href="zindex.html">z-index</a>로 정하고, 어두운 화면에서 높이를 나타내는 방법은 <a href="dark.html">다크 모드</a>에서 다룹니다.</p>
+        <p style="margin:var(--s4) 0 0"><b>고도와 함께 보면 좋은 항목</b> — 요소가 쌓이는 앞뒤 순서는 <a href="zindex.html">z-index</a>로 정하고, 어두운 화면에서 높이를 나타내는 방법은 <a href="dark.html">다크 모드</a> 항목에서 다룹니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -211,7 +211,7 @@
                 <span style="position:absolute;left:18px;top:26px;width:120px;border-radius:8px;background:var(--surface);padding:8px 10px;font-size:11px;box-shadow:0 4px 12px rgba(20,22,26,.08), 0 1px 3px rgba(20,22,26,.06)">계정 설정</span>
               </div>
             </div>
-            <figcaption><b>드롭다운</b><b>2단</b>을 씁니다. 눌러서 열었다가 곧 닫히는 부품입니다</figcaption>
+            <figcaption><b>드롭다운에 2단 쓰기</b>눌러서 열었다가 곧 닫히는 부품이므로 <b>2단</b>을 씁니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -220,23 +220,23 @@
                 <span style="position:absolute;left:24px;top:24px;right:24px;border-radius:9px;background:var(--surface);padding:10px;font-size:11px;box-shadow:0 16px 48px rgba(20,22,26,.3)">정산을 확정할까요?</span>
               </div>
             </div>
-            <figcaption><b>모달</b><b>3단에 가림막</b>을 더합니다. 그림자만으로는 모달이 화면을 가로막았다는 것이 드러나지 않습니다</figcaption>
+            <figcaption><b>모달에 3단과 가림막 쓰기</b><b>3단에 가림막</b>을 더합니다. 그림자만으로는 모달이 화면을 가로막았다는 것이 드러나지 않습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:7px;width:100%;max-width:200px">
                 <span style="display:block;height:30px;border-radius:8px;background:var(--surface);box-shadow:0 2px 3px rgba(20,22,26,.35)"></span>
                 <span style="display:block;height:30px;border-radius:8px;background:var(--surface);box-shadow:0 10px 24px rgba(20,22,26,.12)"></span>
-                <span style="font-size:11px;color:var(--fg-muted)">위: 진하기만 올린 것 · 아래: 거리와 번짐을 키운 것</span>
+                <span style="font-size:11px;color:var(--fg-muted)">위는 진하기만 올림 · 아래는 거리와 번짐을 키움</span>
               </div>
             </div>
-            <figcaption><b>흔한 실패</b>진하기만 올리면 떠 보이지 않고 <b>둘레가 지저분하게 어두워진 것</b>처럼 보입니다</figcaption>
+            <figcaption><b>그림자 진하기만 올린 실패</b>진하기만 올리면 떠 보이지 않고 <b>둘레가 지저분하게 어두워진 것</b>처럼 보입니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">고도를 코드로 옮기는 법</span></h2>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 지킬 규칙<span class="hint">고도를 코드로 옮기는 방법</span></h2>
         <p>단마다 그림자를 <b>두 겹</b>으로 둡니다. 가까운 그림자는 가장자리를 또렷하게 하고, 먼 그림자는 높이를 나타냅니다.</p>
 <pre class="code"><span class="t">:root</span> {
   <span class="a">--e1</span>: <span class="s">0 1px 2px rgba(20,22,26,.06), 0 1px 1px rgba(20,22,26,.04)</span>;
@@ -255,14 +255,14 @@
 }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>규칙</th><th>지켜야 하는 것</th></tr></thead>
+          <thead><tr><th>지킬 규칙</th><th>지키는 방법과 이유</th></tr></thead>
           <tbody>
-            <tr><td>단은 네댓 개</td><td>0·1·2·3·4 다섯 단이면 충분합니다. 여섯 단을 넘으면 단끼리 구별되지 않습니다</td></tr>
-            <tr><td>거리와 번짐을 키운다</td><td>진하기는 거의 그대로 두고, 높은 단일수록 그림자를 <b>멀리, 흐리게</b> 둡니다</td></tr>
-            <tr><td>가로 치우침은 0</td><td>빛이 바로 위에 있다고 정해 두면 화면 전체의 그림자 방향이 일관됩니다</td></tr>
-            <tr><td>검정 대신 어두운 바탕색</td><td><code>rgba(0,0,0,.2)</code> 같은 검정보다 바탕색 계열의 어두운 색이 덜 탁해 보입니다</td></tr>
-            <tr><td>어두운 모드는 면으로</td><td>그림자를 <code>none</code>으로 두고 <b>면 색을 한 단 밝힙니다</b></td></tr>
-            <tr><td>부품마다 단을 못 박는다</td><td>'카드는 1단, 팝오버는 2단'처럼 정해 두면 부품을 만들 때마다 단을 고르지 않아도 됩니다</td></tr>
+            <tr><td>단은 네댓 개만 두기</td><td>0·1·2·3·4 다섯 단이면 충분합니다. 여섯 단을 넘으면 단끼리 구별되지 않습니다</td></tr>
+            <tr><td>높은 단일수록 거리와 번짐을 키우기</td><td>진하기는 거의 그대로 두고, 높은 단일수록 그림자를 <b>멀리, 흐리게</b> 둡니다</td></tr>
+            <tr><td>가로 치우침은 0으로 두기</td><td>빛이 바로 위에 있다고 정해 두면 화면 전체의 그림자 방향이 일관됩니다</td></tr>
+            <tr><td>검정 대신 어두운 바탕색 쓰기</td><td><code>rgba(0,0,0,.2)</code> 같은 검정보다 바탕색 계열의 어두운 색이 덜 탁해 보입니다</td></tr>
+            <tr><td>어두운 모드에서는 면 색으로 높이 나타내기</td><td>그림자를 <code>none</code>으로 두고 <b>면 색을 한 단 밝힙니다</b></td></tr>
+            <tr><td>부품마다 쓸 단을 정해 두기</td><td>'카드는 1단, 팝오버는 2단'처럼 정해 두면 부품을 만들 때마다 단을 고르지 않아도 됩니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -273,10 +273,10 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>고도 = 로그 레벨 같은 열거형</th><td>고도는 DEBUG·INFO·WARN처럼 <b>순서가 있는 몇 개의 값</b>입니다. 단과 단 사이에 중간값을 만들고 싶어진다면 단을 잘못 설계했다는 뜻입니다.</td></tr>
-            <tr><th>성능</th><td>브라우저는 화면을 그릴 때마다 그림자를 계산하기 때문에, 긴 목록의 <b>줄마다</b> 큰 그림자를 넣으면 스크롤이 눈에 띄게 끊깁니다. 그래서 목록 줄은 테두리로 나눕니다.</td></tr>
-            <tr><th>캡처·인쇄</th><td>PDF로 뽑거나 메일에 넣는 화면에서는 그림자가 <b>회색 띠</b>로 찍히는 일이 있으므로, 인쇄용 스타일에서는 그림자를 꺼 둡니다.</td></tr>
-            <tr><th>고도와 z-index 를 같이 정의</th><td>눈에 보이는 높이와 실제로 쌓이는 순서가 어긋나면 '위에 있는 것처럼 보이는데 클릭은 아래 요소가 받는' 버그가 생깁니다. 그래서 두 값을 <b>한 표에 함께</b> 적어 둡니다.</td></tr>
+            <tr><th>로그 레벨처럼 순서가 있는 열거형</th><td>고도는 DEBUG·INFO·WARN처럼 <b>순서가 있는 몇 개의 값</b>입니다. 단과 단 사이에 중간값을 만들고 싶어진다면 단을 잘못 설계했다는 뜻입니다.</td></tr>
+            <tr><th>그림자가 스크롤 성능에 주는 영향</th><td>브라우저는 화면을 그릴 때마다 그림자를 계산하기 때문에, 긴 목록의 <b>줄마다</b> 큰 그림자를 넣으면 스크롤이 눈에 띄게 끊깁니다. 그래서 목록 줄은 테두리로 나눕니다.</td></tr>
+            <tr><th>캡처하거나 인쇄할 때의 그림자</th><td>PDF로 뽑거나 메일에 넣는 화면에서는 그림자가 <b>회색 띠</b>로 찍히는 일이 있으므로, 인쇄용 스타일에서는 그림자를 꺼 둡니다.</td></tr>
+            <tr><th>고도와 z-index를 한 표에 정의하기</th><td>눈에 보이는 높이와 실제로 쌓이는 순서가 어긋나면 '위에 있는 것처럼 보이는데 클릭은 아래 요소가 받는' 버그가 생깁니다. 그래서 두 값을 <b>한 표에 함께</b> 적어 둡니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -334,8 +334,8 @@
       <ol>
         <li><a href="../items/popover.html"><b>팝오버</b><em>6부</em></a></li>
         <li><a href="../items/modal.html"><b>모달</b><em>6부</em></a></li>
-        <li><span class="na"><b>카드</b><em>5부</em></span></li>
-        <li><span class="na"><b>모서리</b><em>2부</em></span></li>
+        <li><a href="card.html"><b>카드</b><em>5부</em></a></li>
+        <li><a href="radius.html"><b>모서리</b><em>2부</em></a></li>
       </ol>
       <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>

@@ -28,12 +28,12 @@
 <div class="pad">
   <div class="fo-stage">
     <div class="fo-box" id="b1">
-      <b>font-display: block — 글이 안 보인다(FOIT)</b>
+      <b>font-display: block · 글을 숨기는 방식(FOIT)</b>
       <p id="p1">정산 요청이 승인되면 영업일 기준 2일 안에 입금됩니다.</p>
       <p class="fo-meter" id="m1" style="margin-top:6px"></p>
     </div>
     <div class="fo-box" id="b2">
-      <b>font-display: swap — 먼저 보이고 바뀐다(FOUT)</b>
+      <b>font-display: swap · 먼저 보이고 나중에 바뀌는 방식(FOUT)</b>
       <p id="p2">정산 요청이 승인되면 영업일 기준 2일 안에 입금됩니다.</p>
       <p class="fo-meter" id="m2" style="margin-top:6px"></p>
     </div>
@@ -63,7 +63,7 @@
     m1.innerHTML = '보이기까지 <b>' + ((performance.now() - t0) / 1000).toFixed(1) + '초</b>가 걸렸고, 그동안은 글을 전혀 읽을 수 없습니다';
     var w2 = p2.getBoundingClientRect().width;
     var h2 = p2.getBoundingClientRect().height;
-    m2.innerHTML = '글줄 높이 ' + Math.round(h2) + 'px · 바뀌며 밀린 폭 ' +
+    m2.innerHTML = '글줄 높이 ' + Math.round(h2) + 'px · 글꼴이 바뀌며 밀린 폭 ' +
       (Math.abs(w2 - w2before) < 1
         ? '<span class="noshift">0px</span>'
         : '<span class="shift">' + Math.abs(w2 - w2before).toFixed(1) + 'px</span>');

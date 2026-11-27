@@ -33,14 +33,14 @@
 <div class="pad demo-scope" id="scope">
   <div class="layers">
     <div class="layer">
-      <h4>① 토큰 <em>정해 둔 값. 이름이 있다</em></h4>
+      <h4>① 토큰 <em>이름을 붙여 정해 둔 값</em></h4>
       <div class="row">
         <span class="swatch" id="sw"></span>
         <span class="ruler" id="tok"></span>
       </div>
     </div>
     <div class="layer">
-      <h4>② 부품 <em>토큰을 쓰는 조각들</em></h4>
+      <h4>② 부품 <em>토큰을 쓰는 조각</em></h4>
       <div class="row">
         <button class="b-btn" id="p1">저장</button>
         <span class="b-chip" id="p2">승인됨</span>
@@ -98,7 +98,7 @@
     var stuckN = PARTS.filter(function (id) { return document.getElementById(id).dataset.stuck === '1'; }).length;
     var v = document.getElementById('verdict');
     v.innerHTML = stuckN
-      ? '<span class="warn">토큰을 안 따라오는 부품 ' + stuckN + '개</span> — 색을 바꿔도 그대로입니다. 어느 부품인지는 눈으로 찾아야 합니다'
+      ? '<span class="warn">토큰을 따라오지 않는 부품 ' + stuckN + '개</span>는 색을 바꿔도 그대로이고, 어느 부품인지는 눈으로 찾아야 합니다'
       : '부품 <b>' + PARTS.length + '개</b>와 패턴이 모두 <b>토큰 하나</b>를 따라 바뀝니다';
     v.dataset.stuck = String(stuckN);
   }

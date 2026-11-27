@@ -1382,7 +1382,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
 
   // 진입과 퇴장 — 나가는 쪽이 더 짧다
   page = await demo('enterexit', 900, 820);
-  if (!(await page.textContent('#ruler')).includes('더 짧다')) fail.push('진퇴: 나갈 때가 더 짧다고 안 적는다');
+  if (!(await page.textContent('#ruler')).includes('더 짧습니다')) fail.push('진퇴: 나갈 때가 더 짧다고 안 적는다');
   await page.locator('#toggle').click(); await page.waitForTimeout(120);
   if (!(await page.textContent('#log')).includes('260ms')) fail.push('진퇴: 들어올 때가 260ms 가 아니다');
   await page.waitForTimeout(380);
@@ -1392,7 +1392,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   await page.waitForTimeout(320);
   if (!await page.locator('#panel').isHidden()) fail.push('진퇴: 다 나갔는데 안 숨는다');
   await page.check('#same'); await page.waitForTimeout(180);
-  if (!(await page.textContent('#ruler')).includes('같다')) fail.push('진퇴: 같게 맞춰도 경고가 없다 (보여주려는 결과)');
+  if (!(await page.textContent('#ruler')).includes('같습니다')) fail.push('진퇴: 같게 맞춰도 경고가 없다 (보여주려는 결과)');
   await page.close();
 
   // 무엇을 움직이나 — 배치를 부르는 속성이 실제로 더 비싸다
@@ -1519,7 +1519,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   await page.locator('#open').click(); await page.waitForTimeout(180);
   if (await page.getAttribute('#histline', 'data-depth') !== '3') fail.push('뒤로: 기록에 넣었는데 안 쌓인다');
   await page.locator('#back').click(); await page.waitForTimeout(180);
-  if (!(await page.textContent('#log')).includes('시트만 닫혔다')) fail.push('뒤로: 시트만 닫히지 않는다');
+  if (!(await page.textContent('#log')).includes('시트만 닫혔습니다')) fail.push('뒤로: 시트만 닫히지 않는다');
   if (await page.locator('.layer.l3').count() !== 0) fail.push('뒤로: 시트가 화면에 남아 있다');
   await page.locator('#reset').click(); await page.waitForTimeout(180);
   await page.uncheck('#push'); await page.waitForTimeout(140);
@@ -1528,7 +1528,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   await page.locator('#back').click(); await page.waitForTimeout(180);
   if (await page.locator('.layer.l3').count() !== 1)
     fail.push('뒤로: 기록 밖 시트인데 뒤로가 닫아 버린다 (보여주려는 결과)');
-  if (!(await page.textContent('#log')).includes('그 아래 화면이 사라졌다')) fail.push('뒤로: 엉뚱한 것이 사라졌다고 안 알린다');
+  if (!(await page.textContent('#log')).includes('그 아래 화면이 사라졌습니다')) fail.push('뒤로: 엉뚱한 것이 사라졌다고 안 알린다');
   await page.close();
 
   // 화면 밀도 — 배율을 올리면 1배짜리 그림이 늘어난다
@@ -1789,7 +1789,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   if (!(await page.textContent('#mock')).includes('모두 끝내셨어요')) fail.push('빈문구: 다 끝낸 것을 좋은 소식으로 안 쓴다');
   if (await page.getAttribute('#mock', 'data-act') !== '0') fail.push('빈문구: 다 끝냈는데 버튼이 남아 있다');
   await page.locator('#pick button').nth(2).click(); await page.waitForTimeout(240);
-  if (!(await page.textContent('#note')).includes('없는 것과 못 보는 것은 다르다')) fail.push('빈문구: 권한 없음을 안 가른다');
+  if (!(await page.textContent('#note')).includes('없는 것과 볼 수 없는 것은 다릅니다')) fail.push('빈문구: 권한 없음을 안 가른다');
   await page.close();
 
   // 자리글 — 레이블로 쓰면 치는 순간 이름이 사라진다
@@ -1827,7 +1827,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   await page.locator('#ago').fill('7'); await page.dispatchEvent('#ago', 'input'); await page.waitForTimeout(240);
   if (await page.getAttribute('#verdict', 'data-mode') !== 'abs')
     fail.push('날짜: 오래됐는데도 상대 시간을 권한다 (보여주려는 결과)');
-  if (!(await page.textContent('#verdict')).includes('언제인지 알 수 없다')) fail.push('날짜: 쓸모없어졌다고 안 알린다');
+  if (!(await page.textContent('#verdict')).includes('언제인지 알 수 없습니다')) fail.push('날짜: 쓸모없어졌다고 안 알린다');
   await page.locator('#ago').fill('0'); await page.dispatchEvent('#ago', 'input'); await page.waitForTimeout(240);
   if (await page.getAttribute('#verdict', 'data-rel') !== '방금') fail.push('날짜: 1분 안을 ‘방금’으로 안 쓴다');
   await page.close();
@@ -1867,7 +1867,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   if (!(await page.textContent('#fid')).includes('모란상회')) fail.push('와이어: 시안에 진짜 내용이 없다');
   if (!(await page.textContent('#bad')).includes('구조를 바꾸자')) fail.push('와이어: 시안에서 막을 질문을 안 적는다');
   await page.locator('#pick button').nth(3).click(); await page.waitForTimeout(240);
-  if (!(await page.textContent('#note')).includes('아직 코드가 아니다')) fail.push('와이어: 프로토타입에 꼬리표가 없다');
+  if (!(await page.textContent('#note')).includes('아직 코드가 아닙니다')) fail.push('와이어: 프로토타입에 꼬리표가 없다');
   await page.close();
 
   // 디자인 시스템 — 토큰 하나를 바꾸면 전부 따라온다
@@ -1931,7 +1931,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   if (!(+(await page.getAttribute('#body', 'data-hot')) >= 1)) fail.push('프로토: 이어 둔 자리가 없다');
   if (!(+(await page.getAttribute('#body', 'data-dead')) >= 1)) fail.push('프로토: 안 이어 둔 자리가 없다');
   await page.locator('.dead').first().click(); await page.waitForTimeout(240);
-  if (!(await page.textContent('#log')).includes('아무 일도 안 일어난다'))
+  if (!(await page.textContent('#log')).includes('아무 일도 일어나지 않습니다'))
     fail.push('프로토: 안 이어 둔 데를 눌러도 알려 주지 않는다 (보여주려는 결과)');
   await page.locator('.hotspot').first().click(); await page.waitForTimeout(240);
   if (!(await page.textContent('#title')).includes('모란상회')) fail.push('프로토: 이어 둔 자리가 안 움직인다');
@@ -1957,10 +1957,10 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   if (await page.locator('.exp__row').count() !== 4) fail.push('에셋: 네 가지를 안 견준다');
   await page.selectOption('#kind', 'photo'); await page.waitForTimeout(240);
   if (await page.getAttribute('#verdict', 'data-pick') !== 'WebP 2x') fail.push('에셋: 사진에 WebP 를 안 고른다');
-  if (!(await page.textContent('.exp__row[data-k="SVG"]')).includes('만들 수 없다'))
+  if (!(await page.textContent('.exp__row[data-k="SVG"]')).includes('만들 수 없음'))
     fail.push('에셋: 사진을 SVG 로 만들 수 있다고 한다');
   await page.selectOption('#kind', 'illust'); await page.waitForTimeout(240);
-  if (!(await page.textContent('#note')).includes('늘 작은 것은 아니다'))
+  if (!(await page.textContent('#note')).includes('늘 작은 것은 아닙니다'))
     fail.push('에셋: SVG 가 늘 작다고 한다 (보여주려는 결과)');
   await page.close();
 
@@ -1989,7 +1989,7 @@ const url = f => BASE ? new URL(f, BASE).href : 'file://' + path.join(ROOT, f);
   await page.locator('#back').click(); await page.waitForTimeout(420);
   await page.uncheck('#shared'); await page.waitForTimeout(220);
   await page.locator('#go').click(); await page.waitForTimeout(420);
-  if (!(await page.textContent('#log')).includes('관계가 안 보인다'))
+  if (!(await page.textContent('#log')).includes('관계가 보이지 않습니다'))
     fail.push('공유전환: 꺼도 관계가 보인다고 한다 (보여주려는 결과)');
   await page.close();
 

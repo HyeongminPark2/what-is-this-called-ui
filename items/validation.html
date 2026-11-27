@@ -77,7 +77,7 @@
         <p>데이터를 다루는 화면을 설계할 때는 '건수가 늘면 어떻게 되나'부터 따져야 합니다. 아래 네 가지를 물어보면 이 부의 항목들이 서로 어떻게 다른지 드러납니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 다루나</th><th>건수가 늘면</th><th>주소에 담나</th><th>서버가 할 일</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 다루는가</th><th>건수가 늘면 어떻게 하는가</th><th>상태를 주소에 담는가</th><th>서버가 맡는 일</th></tr></thead>
           <tbody>
             <tr><td>데이터 테이블</td><td>여러 열의 <b>행들</b></td><td>쪽을 나눈다</td><td><b>담는다</b>(정렬·쪽)</td><td>페이징 · 정렬</td></tr>
             <tr><td>필터와 패싯</td><td>거르는 <b>조건</b></td><td>조건이 늘어난다</td><td><b>담는다</b></td><td>조건별 개수 세기</td></tr>
@@ -87,7 +87,7 @@
             <tr><td>일괄 선택</td><td><b>고른 것들</b></td><td>'전체'가 모호해진다</td><td>안 담는다</td><td>묶음 처리 · 되돌리기</td></tr>
             <tr><td>가상 스크롤</td><td><b>긴 목록</b></td><td><b>이 기법으로 푼다</b></td><td>안 담는다</td><td>커서 페이징</td></tr>
             <tr><td>차트 고르기</td><td>숫자들의 <b>관계</b></td><td>점이 뭉친다</td><td>담기도 한다</td><td>집계 · 구간 나누기</td></tr>
-            <tr><td>내보내기</td><td><b>파일</b>로 꺼내기</td><td>그 자리에서 못 준다</td><td>담기도 한다</td><td><b>비동기 작업</b></td></tr>
+            <tr><td>내보내기</td><td><b>파일</b>로 꺼내기</td><td>그 자리에서 바로 주지 못한다</td><td>담기도 한다</td><td><b>비동기 작업</b></td></tr>
             <tr><td>날짜 범위</td><td><b>기간</b> 고르기</td><td class="none">해당 없음</td><td><b>담는다</b></td><td>경계 시각 맞추기</td></tr>
           </tbody>
         </table>
@@ -104,25 +104,25 @@
             <div class="shot">
               <div style="width:100%;max-width:160px;display:grid;gap:2px"><span style="font-size:9px;color:var(--fg-muted)">사업자번호</span><div style="border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:4px 7px;font-size:10.5px;color:var(--fg-muted)">&nbsp;</div><span style="font-size:8.5px;color:var(--fg-muted)">- 없이 10자리</span></div>
             </div>
-            <figcaption>치기 전<span>입력 규칙을 <b>미리</b> 알려 줍니다. 틀린 뒤에 알려 주는 것보다 낫습니다</span></figcaption>
+            <figcaption>입력하기 전<span>입력 규칙을 <b>미리</b> 알려 줍니다. 틀린 뒤에 알려 주는 것보다 낫습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:160px;display:grid;gap:2px"><span style="font-size:9px;color:var(--fg-muted)">사업자번호</span><div style="border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:4px 7px;font-size:10.5px;">124</div></div>
             </div>
-            <figcaption>치는 중<span>아직 다 입력하지 않았으므로 <b>아무것도 표시하지 않습니다</b></span></figcaption>
+            <figcaption>입력하는 중<span>아직 다 입력하지 않았으므로 <b>아무것도 표시하지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:160px;display:grid;gap:2px"><span style="font-size:9px;color:var(--fg-muted)">사업자번호</span><div style="border:1px solid var(--danger);border-radius:5px;background:var(--surface);padding:4px 7px;font-size:10.5px;">124</div><span style="font-size:8.5px;color:var(--danger)">✕ 10자리를 채워 주세요</span></div>
             </div>
-            <figcaption>떠날 때<span>칸을 벗어나는 시점에 오류를 알립니다. 검사 시점은 이것을 기본으로 삼습니다</span></figcaption>
+            <figcaption>칸을 떠날 때<span>칸을 벗어나는 시점에 오류를 알립니다. 검사 시점은 이것을 기본으로 삼습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:160px;display:grid;gap:2px"><span style="font-size:9px;color:var(--fg-muted)">사업자번호</span><div style="border:1px solid var(--accent);border-radius:5px;background:var(--surface);padding:4px 7px;font-size:10.5px;">1248100998</div><span style="font-size:8.5px;color:var(--accent)">✓ 확인됨</span></div>
             </div>
-            <figcaption>고쳐짐<span>한번 틀린 칸은 사용자가 <b>고치는 즉시</b> 오류 표시를 풉니다</span></figcaption>
+            <figcaption>틀린 값을 고쳤을 때<span>한번 틀린 칸은 사용자가 <b>고치는 즉시</b> 오류 표시를 풉니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -134,7 +134,7 @@
             <div class="shot">
               <div style="width:100%;max-width:160px;display:grid;gap:2px"><span style="font-size:9px;color:var(--fg-muted)">사업자번호</span><div style="border:1px solid var(--danger);border-radius:5px;background:var(--surface);padding:4px 7px;font-size:10.5px;">1248100998</div><span style="font-size:8.5px;color:var(--danger)">✕ 이미 등록된 번호입니다</span></div>
             </div>
-            <figcaption>서버가 거절<span>브라우저에서는 잡을 수 없는 오류입니다. 다른 오류와 <b>같은 자리</b>에 같은 모양으로 붙입니다</span></figcaption>
+            <figcaption>서버가 값을 거절했을 때<span>브라우저에서는 잡을 수 없는 오류입니다. 다른 오류와 <b>같은 자리</b>에 같은 모양으로 붙입니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -146,21 +146,21 @@
             <div class="anat" role="img" aria-label="입력 검증의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">치는 동안엔 가만둔다 — 다 치기 전에 틀렸다고 하지 않는다</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">칸을 떠날 때(blur) 검사한다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">치는 동안에는 다 치기 전이라 틀렸다고 하지 않음</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">칸을 떠날 때(blur) 검사함</div>
                   <div class="pin-out" data-pin="3" style="max-width:220px"><div style="width:100%;max-width:220px;display:grid;gap:2px"><span style="font-size:9px;color:var(--fg-muted)">사업자번호</span><div style="border:1px solid var(--danger);border-radius:5px;background:var(--surface);padding:4px 7px;font-size:10.5px;">124</div><span style="font-size:8.5px;color:var(--danger)">✕ 10자리를 채워 주세요</span></div></div>
                   <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">aria-invalid="true" + aria-describedby="no-err"</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">한번 틀린 칸은 <b>고치는 즉시</b> 다시 검사한다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">제출하면 <b>첫 오류 칸으로 초점</b>을 옮긴다</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">한번 틀린 칸은 <b>고치는 즉시</b> 다시 검사함</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">제출하면 <b>첫 오류 칸으로 초점</b>을 옮김</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>치는 중엔 조용히 <em>on input: 안 함</em></b><span>두 글자만 쳤는데 칸이 빨개지면 사용자는 <b>재촉받는다고</b> 느낍니다</span></li>
+            <li><b>치는 중에는 표시하지 않기 <em>on input: 안 함</em></b><span>두 글자만 쳤는데 칸이 빨개지면 사용자는 <b>재촉받는다고</b> 느낍니다</span></li>
             <li><b>떠날 때 검사 <em>on blur</em></b><span>칸을 벗어나는 때를 입력을 마친 시점으로 보고, 이때 검사하는 것을 기본으로 삼습니다</span></li>
             <li><b>메시지는 칸 밑 <em>같은 자리</em></b><span>메시지가 칸에서 멀리 떨어져 있으면 <b>어느 칸에 대한 말인지</b> 알기 어렵습니다</span></li>
-            <li><b>기계에게 알리기 <em>aria-invalid / describedby</em></b><span>빨간 테두리는 <b>눈으로만</b> 알 수 있으므로 스크린 리더에도 틀렸음을 알립니다</span></li>
+            <li><b>스크린 리더에 알리기 <em>aria-invalid / describedby</em></b><span>빨간 테두리는 <b>눈으로만</b> 알 수 있으므로 스크린 리더에도 틀렸음을 알립니다</span></li>
             <li><b>고치면 즉시 풀기 <em>re-validate on input</em></b><span>한번 틀린 칸에만 적용합니다. 이미 틀린 칸은 칠 때마다 검사해도 사용자가 거슬려 하지 않습니다</span></li>
             <li><b>제출하면 초점 이동 <em>focus first error</em></b><span>오류 칸이 화면 밖에 있으면 제출을 눌러도 <b>아무 일도 일어나지 않은 것</b>처럼 보이므로 첫 오류 칸으로 포커스를 옮깁니다</span></li>
           </ol>
@@ -177,7 +177,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>입력 검증을 쓰는 경우</h3>
+            <h3>입력 검증이 필요한 경우</h3>
             <ul>
               <li>번호 자릿수, 날짜, 전자우편처럼 <b>형식이 정해진</b> 값을 받을 때</li>
               <li>중복, 잔액, 권한처럼 <b>서버만 알 수 있는</b> 조건을 확인할 때</li>
@@ -185,7 +185,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>입력 검증을 쓰지 않는 경우</h3>
+            <h3>입력 검증에서 피할 것</h3>
             <ul>
               <li>입력하는 도중에 칸을 빨갛게 표시할 때. <b>다 치기 전에는 틀렸다고 하지 않습니다</b></li>
               <li>'올바른 값을 입력하세요'처럼 막연하게 알릴 때. <b>무엇이 어떻게</b> 틀렸는지 적습니다</li>
@@ -194,7 +194,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>입력 검증 대신 다른 것을 써야 하는 경우</b> — 오류를 보여 주는 방법은 <a href="../items/error.html">오류 메시지</a>, 확인만 받으려면 <a href="../items/dialog.html">다이얼로그</a>, 처리 결과를 알리려면 <a href="../items/toast.html">토스트</a>를 봅니다.</p>
+        <p style="margin:var(--s4) 0 0"><b>입력 검증과 함께 보면 좋은 항목</b> — 검사 결과를 화면에 어떻게 보여 줄지는 <a href="../items/error.html">오류 메시지</a>에서 다룹니다. 값을 검사하지 않고 확인만 받으려면 <a href="../items/dialog.html">다이얼로그</a>를, 처리 결과를 알리려면 <a href="../items/toast.html">토스트</a>를 봅니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -204,7 +204,7 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:2px"><span style="font-size:9px;color:var(--fg-muted)">사업자번호</span><div style="border:1px solid var(--danger);border-radius:5px;background:var(--surface);padding:4px 7px;font-size:10.5px;">124</div><span style="font-size:8.5px;color:var(--danger)">✕ 10자리를 채워 주세요</span></div>
             </div>
-            <figcaption><b>칸 밑에</b>가장 흔하게 쓰고, 어느 칸의 오류인지 헷갈릴 일이 가장 적은 방식입니다</figcaption>
+            <figcaption><b>칸 바로 밑에 메시지 붙이기</b>가장 흔하게 쓰고, 어느 칸의 오류인지 헷갈릴 일이 가장 적은 방식입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -214,19 +214,19 @@
                 <span style="color:var(--accent);text-decoration:underline;display:block">계좌 — 은행을 고르세요</span>
               </div>
             </div>
-            <figcaption><b>맨 위 요약</b>긴 폼에서 씁니다. 요약의 각 줄을 <b>누르면 해당 칸으로</b> 갈 수 있어야 합니다</figcaption>
+            <figcaption><b>폼 맨 위에 오류 요약 보여 주기</b>긴 폼에서 씁니다. 요약의 각 줄을 <b>누르면 해당 칸으로</b> 갈 수 있어야 합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:2px"><span style="font-size:9px;color:var(--fg-muted)">비밀번호</span><div style="border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:4px 7px;font-size:10.5px;">••••••</div><span style="font-size:8.5px;color:var(--fg-muted)">8자 이상 · 숫자 포함</span></div>
             </div>
-            <figcaption><b>미리 알려 주기</b><b>틀리기 전에</b> 입력 규칙을 보여 주는 편이 언제나 낫습니다</figcaption>
+            <figcaption><b>입력 규칙 미리 알려 주기</b><b>틀리기 전에</b> 입력 규칙을 보여 주는 편이 언제나 낫습니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">검증이 꼭 갖출 것</span></h2>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">검증을 만들 때 꼭 갖출 것</span></h2>
         <p>칸에 <code>aria-invalid</code>를 달아 값이 틀렸음을 알리고, <code>aria-describedby</code>로 <b>무엇이</b> 틀렸는지 적은 메시지를 연결합니다.</p>
 <pre class="code">&lt;<span class="t">label</span> <span class="a">for</span>=<span class="s">"no"</span>&gt;사업자번호&lt;/<span class="t">label</span>&gt;
 &lt;<span class="t">input</span> <span class="a">id</span>=<span class="s">"no"</span> <span class="a">inputmode</span>=<span class="s">"numeric"</span>
@@ -241,12 +241,12 @@ input.addEventListener(<span class="s">'input'</span>, () =&gt; { <span class="k
 form.querySelector(<span class="s">'[aria-invalid="true"]'</span>)?.focus();</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td><code>aria-invalid="true"</code></td><td>스크린 리더가 '잘못된 값'이라고 읽습니다. 값을 고치면 속성을 <b>지웁니다</b></td></tr>
             <tr><td><code>aria-describedby</code></td><td>메시지를 칸에 연결합니다. 칸에 포커스가 가면 메시지까지 함께 읽습니다</td></tr>
-            <tr><td>제출 뒤 <kbd>Tab</kbd> 없이</td><td>제출하면 첫 오류 칸으로 <b>포커스를 옮깁니다.</b> 옮기지 않으면 사용자가 어느 칸이 문제인지 직접 찾아야 합니다</td></tr>
-            <tr><td>색 + 글자</td><td>빨간 테두리에 <b>✕ 표시와 문장</b>을 함께 붙입니다. 색만으로는 알리지 않습니다</td></tr>
+            <tr><td>제출한 뒤 <kbd>Tab</kbd> 없이 오류 칸으로</td><td>제출하면 첫 오류 칸으로 <b>포커스를 옮깁니다.</b> 옮기지 않으면 사용자가 어느 칸이 문제인지 직접 찾아야 합니다</td></tr>
+            <tr><td>색과 글자로 함께 알리기</td><td>빨간 테두리에 <b>✕ 표시와 문장</b>을 함께 붙입니다. 색만으로는 알리지 않습니다</td></tr>
             <tr><td><code>required</code>·<code>pattern</code></td><td>브라우저가 알아서 제출을 막아 주지만, 메시지가 <b>영어</b>로 나올 수 있습니다</td></tr>
             <tr><td><code>novalidate</code></td><td>메시지를 직접 그리려면 이 속성으로 브라우저 기본 말풍선을 끕니다</td></tr>
           </tbody>
@@ -259,11 +259,11 @@ form.querySelector(<span class="s">'[aria-invalid="true"]'</span>)?.focus();</pr
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>서버가 최종 판단</th><td>브라우저 검사는 사용자를 돕는 <b>안내</b>입니다. <code>curl</code> 명령 한 줄로 요청을 보내면 브라우저 검사를 모두 건너뛸 수 있으므로 서버가 최종 판단을 내립니다.</td></tr>
-            <tr><th>같은 규칙을 두 곳에 쓰지 않는다</th><td>화면과 서버가 규칙을 따로 가지고 있으면 '화면은 통과했는데 서버가 거절'하는 일이 생깁니다. 규칙을 <b>한 곳에 적고</b> 화면과 서버가 함께 쓰게 합니다.</td></tr>
-            <tr><th>오류는 칸 이름과 함께</th><td><code>{"field":"no","message":"10자리여야 합니다"}</code>처럼 보냅니다. 문장만 보내면 화면이 그 메시지를 어느 칸에 붙여야 할지 알 수 없습니다.</td></tr>
-            <tr><th>중복 확인은 경합한다</th><td>'쓸 수 있는 번호'라고 확인한 뒤 저장하기 전까지 다른 사람이 그 번호를 먼저 등록할 수 있습니다. 그래서 <b>저장할 때 다시</b> 확인하고, DB에도 유일 제약을 겁니다.</td></tr>
-            <tr><th>확인 요청을 아낀다</th><td>글자를 칠 때마다 서버에 물으면 요청이 한꺼번에 많이 몰립니다. <a href="search.html">검색</a>에서처럼 디바운스를 겁니다.</td></tr>
+            <tr><th>최종 판단은 서버에서 하기</th><td>브라우저 검사는 사용자를 돕는 <b>안내</b>입니다. <code>curl</code> 명령 한 줄로 요청을 보내면 브라우저 검사를 모두 건너뛸 수 있으므로 서버가 최종 판단을 내립니다.</td></tr>
+            <tr><th>같은 규칙을 두 곳에 따로 적지 않기</th><td>화면과 서버가 규칙을 따로 가지고 있으면 '화면은 통과했는데 서버가 거절'하는 일이 생깁니다. 규칙을 <b>한 곳에 적고</b> 화면과 서버가 함께 쓰게 합니다.</td></tr>
+            <tr><th>오류를 칸 이름과 함께 보내기</th><td><code>{"field":"no","message":"10자리여야 합니다"}</code>처럼 보냅니다. 문장만 보내면 화면이 그 메시지를 어느 칸에 붙여야 할지 알 수 없습니다.</td></tr>
+            <tr><th>중복 확인과 저장 사이의 경합</th><td>'쓸 수 있는 번호'라고 확인한 뒤 저장하기 전까지 다른 사람이 그 번호를 먼저 등록할 수 있습니다. 그래서 <b>저장할 때 다시</b> 확인하고, DB에도 유일 제약을 겁니다.</td></tr>
+            <tr><th>서버 확인 요청 줄이기</th><td>글자를 칠 때마다 서버에 물으면 요청이 한꺼번에 많이 몰립니다. <a href="search.html">검색</a>에서처럼 디바운스를 겁니다.</td></tr>
           </tbody>
         </table>
         </div>

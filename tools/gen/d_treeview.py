@@ -24,12 +24,12 @@ def tree(items, w="152px", note="", ok=None):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">role="tree" — 목록이 아니라 트리다</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">treeitem + aria-level — 몇 단인지</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--accent)">aria-expanded — 폈나 접었나</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">꺾쇠(▸ ▾) — 자식이 있다는 신호</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--danger)">들여쓰기 — 깊어질수록 <b>이름 자리를 먹는다</b></div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">tabindex 는 하나만 0 — 나머지는 -1</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">role="tree"로 트리임을 알림</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">treeitem과 aria-level로 몇 단인지 알림</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--accent)">aria-expanded로 펼침 여부를 알림</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">꺾쇠(▸ ▾)는 자식이 있다는 표시</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--danger)">들여쓰기가 깊어질수록 <b>이름 자리가 줄어듦</b></div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">tabindex는 하나만 0, 나머지는 -1</div>
                 </div>
               </div>'''
 
@@ -61,30 +61,30 @@ D = dict(
   axes=ax("트리뷰"),
   oneline="<b>깊이가 세 단, 가지가 스무 개</b>를 넘으면 트리만으로는 원하는 항목을 찾기 어려우므로 검색을 함께 붙입니다.",
   states=states([
-    (tree([(0, "▸", "의류", False), (0, "▸", "생활용품", False), (0, "▸", "식품", False)], "152px", "다 접힘", True),
-     "접힘", "최상위 가지만 보여서 <b>한눈에</b> 전체 구성이 보입니다"),
+    (tree([(0, "▸", "의류", False), (0, "▸", "생활용품", False), (0, "▸", "식품", False)], "152px", "모두 접힘", True),
+     "모두 접혀 있을 때", "최상위 가지만 보여서 <b>한눈에</b> 전체 구성이 보입니다"),
     (tree([(0, "▾", "의류", False), (1, "▸", "아우터", True), (1, "▸", "상의", False), (0, "▸", "생활용품", False)], "152px", "한 가지만 폄", True),
-     "폄", "지금 보고 있는 가지만 펼쳐 둡니다"),
-    (tree([(0, "▾", "의류", False), (1, "▾", "상의", False), (2, "▾", "티셔츠", False), (3, "", "반팔 티…", False)], "152px", "이름이 잘렸다", False),
-     "너무 깊음", "<b>들여쓰기가</b> 폭을 차지해서 이름이 잘립니다"),
-    (tree([(0, "▾", "의류", False), (1, "▸", "아우터", False), (1, "▸", "상의", True), (1, "▸", "하의", False)], "152px", "고른 줄이 밝다", True),
-     "고름", "고른 줄은 배경을 밝히고 <code>aria-selected</code>로 알립니다"),
+     "한 가지만 펼쳤을 때", "지금 보고 있는 가지만 펼쳐 둡니다"),
+    (tree([(0, "▾", "의류", False), (1, "▾", "상의", False), (2, "▾", "티셔츠", False), (3, "", "반팔 티…", False)], "152px", "이름이 잘림", False),
+     "너무 깊이 펼쳤을 때", "<b>들여쓰기가</b> 폭을 차지해서 이름이 잘립니다"),
+    (tree([(0, "▾", "의류", False), (1, "▸", "아우터", False), (1, "▸", "상의", True), (1, "▸", "하의", False)], "152px", "고른 줄이 밝음", True),
+     "한 줄을 골랐을 때", "고른 줄은 배경을 밝히고 <code>aria-selected</code>로 알립니다"),
     (one(txt('<span style="display:block;font-size:8.5px;color:var(--fg-muted)">⌨ ↓ ↑ 로 오르내리고</span>'
-             '<span style="display:block;font-size:8.5px;color:var(--fg-muted)">→ 로 펴고 ← 로 접는다</span>'),
-         "키보드", True, "Tab 은 트리 전체에 한 번만 멈춘다", "152px"),
-     "키보드", "트리 안에서는 <b>화살표 키</b>로 움직입니다"),
+             '<span style="display:block;font-size:8.5px;color:var(--fg-muted)">→로 펴고 ←로 접음</span>'),
+         "키보드", True, "Tab은 트리 전체에서 한 번만 멈춤", "152px"),
+     "키보드로 움직일 때", "트리 안에서는 <b>화살표 키</b>로 움직입니다"),
     (one(txt('<span style="display:block;font-size:8.5px;color:var(--fg-muted)">가지 184개</span>'
-             '<span style="display:block;font-size:8.5px;color:var(--danger);margin-top:2px">굴려도 못 찾는다</span>'),
-         "너무 많음", False, "검색이 필요하다", "152px"),
-     "가지가 많음", "가지가 많으면 트리만으로는 원하는 항목을 <b>찾기 어렵습니다</b>"),
+             '<span style="display:block;font-size:8.5px;color:var(--danger);margin-top:2px">스크롤해도 찾기 어려움</span>'),
+         "너무 많음", False, "검색이 필요함", "152px"),
+     "가지가 너무 많을 때", "가지가 많으면 트리만으로는 원하는 항목을 <b>찾기 어렵습니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("<code>role=\"tree\"</code>", "목록이 아니다", "스크린 리더가 <b>트리</b>라고 읽어 줍니다"),
+    ("<code>role=\"tree\"</code>", "트리 역할", "스크린 리더가 <b>트리</b>라고 읽어 줍니다"),
     ("<code>treeitem</code>", "+ <code>aria-level</code>", "항목이 <b>몇 단</b>에 있는지 알립니다"),
-    ("<code>aria-expanded</code>", "폈나 접었나", "꺾쇠 모양이 보여 주는 펼침 상태를 <b>스크린 리더에도</b> 알립니다"),
+    ("<code>aria-expanded</code>", "펼침 상태", "꺾쇠 모양이 보여 주는 펼침 상태를 <b>스크린 리더에도</b> 알립니다"),
     ("꺾쇠", "▸ ▾", "자식 항목이 있다는 표시입니다"),
-    ("들여쓰기", "폭을 먹는다", "깊이 × 들여쓰기 폭만큼 <b>이름을 적을 자리가 줄어듭니다</b>"),
+    ("들여쓰기", "폭을 차지함", "깊이 × 들여쓰기 폭만큼 <b>이름을 적을 자리가 줄어듭니다</b>"),
     ("<code>tabindex</code>", "하나만 0", "<kbd>Tab</kbd>을 누르면 트리 안에서는 <b>한 번만</b> 멈춥니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -105,17 +105,17 @@ D = dict(
     "트리를 <b>폰 화면에</b> 그대로 올릴 때. 들여쓰기가 좁은 화면 폭을 대부분 차지합니다",
     "펴고 접은 상태를 <b>기억하지 않을</b> 때. 다른 화면에 갔다 돌아오면 가지를 처음부터 다시 펼쳐야 합니다",
   ]),
-  instead='자리로서의 옆 띠는 <a href="sidebar.html">사이드바</a>, 한 줄기만이면 <a href="breadcrumb.html">브레드크럼</a>, 찾기가 주 목적이면 <a href="search.html">검색</a>, 좁은 화면에서는 <a href="drawer.html">드로어</a>.',
+  instead='화면 옆에 늘 붙어 있는 메뉴 띠가 필요하면 <a href="sidebar.html">사이드바</a>를 쓰고, 지금 위치까지 이어진 한 줄기만 보여 주면 되는 경우에는 <a href="breadcrumb.html">브레드크럼</a>이 맞습니다. 항목을 찾는 것이 주된 목적이면 <a href="search.html">검색</a>을 쓰고, 좁은 화면에서는 <a href="drawer.html">드로어</a>를 씁니다.',
   cases=cases([
     (tree([(0, "▾", "src", False), (1, "", "app.js", True), (1, "▸", "lib", False)], "150px", "", True),
-     "파일 트리", "사용자에게 가장 익숙한 트리입니다"),
+     "파일과 폴더 보여 주기", "사용자에게 가장 익숙한 트리입니다"),
     (tree([(0, "▾", "의류", False), (1, "", "아우터", False), (1, "", "상의", False)], "150px", "", True),
-     "분류 고르기", "깊이는 <b>두 단</b>이면 충분합니다"),
+     "상품 분류 고르기", "깊이는 <b>두 단</b>이면 충분합니다"),
     (one(txt('<span style="display:block;font-size:8.5px">🔍 반팔</span>'
              '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">의류 › 상의 › 티셔츠 ›</span>'
              '<span style="display:block;font-size:8.5px;color:var(--accent)">반팔 티셔츠</span>'),
-         "검색과 함께", True, "찾으면 그 가지까지 펴 준다", "150px"),
-     "검색과 함께", "가지가 많으면 트리보다 <b>검색이 주된 찾기 수단</b>이 됩니다"),
+         "검색과 함께", True, "찾으면 그 가지까지 펼쳐 줌", "150px"),
+     "검색으로 찾고 가지 펼치기", "가지가 많으면 트리보다 <b>검색이 주된 찾기 수단</b>이 됩니다"),
   ]),
   code_lede="목록 태그에 ARIA 역할을 붙여 만듭니다. <code>&lt;ul&gt;</code>을 중첩한 구조가 그대로 트리의 계층이 됩니다.",
   code='''&lt;<span class="t">ul</span> <span class="a">role</span>=<span class="s">"tree"</span> <span class="a">aria-label</span>=<span class="s">"분류"</span>&gt;
@@ -136,12 +136,12 @@ D = dict(
     ("←", "펼쳐져 있으면 접고, 이미 접혀 있으면 <b>부모</b>로 갑니다"),
     ("Home · End", "트리의 <b>첫 줄이나 마지막 줄</b>로 갑니다"),
     ("Tab", "트리 전체에서 <b>한 번만</b> 멈춥니다"),
-    ("글자 키", "누른 글자로 시작하는 <b>다음 줄</b>로 갑니다. 긴 트리에서 특히 쓸모가 있습니다"),
+    ("글자 키를 누르면", "누른 글자로 시작하는 <b>다음 줄</b>로 갑니다. 긴 트리에서 특히 쓸모가 있습니다"),
   ]),
   backend=rows([
-    ("한 번에 다 주지 않는다", "가지가 수천 개면 처음부터 전부 보내지 않고, 사용자가 가지를 <b>펼 때마다</b> 그 가지의 자식만 받아 옵니다(lazy)."),
-    ("자식이 있는지", "응답에 <code>has_children: true</code>를 함께 담아 주면 화면이 <b>꺾쇠를 그릴지</b> 바로 정할 수 있습니다. 이 값이 없으면 가지를 펼쳐 본 뒤에야 자식이 있는지 알 수 있습니다."),
-    ("경로", "<code>path: [\"의류\",\"상의\"]</code>처럼 경로를 담아 주면 <b>그 가지까지 펼친 상태로</b> 화면을 열 수 있습니다."),
+    ("펼칠 때마다 자식만 받아 오기", "가지가 수천 개면 처음부터 전부 보내지 않고, 사용자가 가지를 <b>펼 때마다</b> 그 가지의 자식만 받아 옵니다(lazy)."),
+    ("자식이 있는지 함께 알려 주기", "응답에 <code>has_children: true</code>를 함께 담아 주면 화면이 <b>꺾쇠를 그릴지</b> 바로 정할 수 있습니다. 이 값이 없으면 가지를 펼쳐 본 뒤에야 자식이 있는지 알 수 있습니다."),
+    ("경로를 담아 가지를 펼친 채 열기", "<code>path: [\"의류\",\"상의\"]</code>처럼 경로를 담아 주면 <b>그 가지까지 펼친 상태로</b> 화면을 열 수 있습니다."),
   ]),
   plat_lede="트리뷰는 <b>PC 화면에서 쓰는 부품</b>이라서 폰에서는 거의 쓰지 않습니다.",
   plats=plats([
@@ -153,7 +153,7 @@ D = dict(
                 <div style="position:absolute;left:5px;right:5px;top:28px;height:8px;border-radius:2px;background:var(--accent-soft)"></div>
                 <div style="position:absolute;left:12px;right:5px;top:40px;height:8px;border-radius:2px;background:var(--accent-soft)"></div></div></div>''',
      "SwiftUI의 <code>OutlineGroup</code>으로 만듭니다. 아이폰에서는 거의 쓰지 않고 <b>아이패드와 맥</b>에서 씁니다."),
-    ("안드로이드", "없다",
+    ("안드로이드", "정해진 부품 없음",
      '''              <div class="phone" role="img" aria-label="안드로이드 계층 화면 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:28px;height:8px;border-radius:2px;background:var(--accent-soft)"></div>
                 <div style="position:absolute;left:5px;right:5px;top:40px;height:8px;border-radius:2px;background:var(--accent-soft)"></div></div></div>''',

@@ -19,12 +19,12 @@
 <body>
 <div class="bar">
   <b>미디어 오브젝트</b>
-  <label>붙이는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>그림을 붙이는 방법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="flex">flex (요즘 방식)</option>
     <option value="float">float (옛 방식)</option>
   </select></label>
-  <label>칸 폭 <input type="range" id="w" min="200" max="400" step="20" value="360" style="width:96px"><span class="ruler" id="wv"></span></label>
-  <label><input type="checkbox" id="col"> 좁으면 위아래로</label>
+  <label>묶음 칸의 폭 <input type="range" id="w" min="200" max="400" step="20" value="360" style="width:96px"><span class="ruler" id="wv"></span></label>
+  <label><input type="checkbox" id="col"> 좁으면 그림과 글을 위아래로 쌓기</label>
 </div>
 
 <div class="pad">
@@ -77,9 +77,9 @@
     var squeezed = want !== null && img.width < want - 0.5;
 
     var rd = document.getElementById('read');
-    rd.innerHTML = (col ? '위아래' : '좌우') + ' · 칸 <b>' + w + 'px</b> · 그림 <b>' + Math.round(img.width) + 'px</b>' +
+    rd.innerHTML = (col ? '위아래로 배치' : '좌우로 배치') + ' · 칸 <b>' + w + 'px</b> · 그림 <b>' + Math.round(img.width) + 'px</b>' +
       (squeezed ? ' <span class="warn">(그림이 찌그러졌습니다)</span>' : '') +
-      '<br>글이 그림 밑으로 돌아 들어감 <b>' + (wrapped ? '그렇다' : '아니다') + '</b>' +
+      '<br>글이 그림 밑까지 흘러내렸는지 <b>' + (wrapped ? '흘러내림' : '흘러내리지 않음') + '</b>' +
       (wrapped ? ' <span class="warn">(글이 한 단으로 놓이지 않았습니다)</span>' : '');
     rd.dataset.wrapped = wrapped ? '1' : '0';
     rd.dataset.imgw = String(Math.round(img.width));

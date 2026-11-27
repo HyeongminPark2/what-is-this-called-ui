@@ -15,9 +15,9 @@ ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2)
                   </div>
                   <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">display: grid; place-items: center</div>
                   <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">display: flex; align-items + justify-content</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">margin-inline: auto   — 가로만</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">margin-inline: auto   가로만 맞춤</div>
                   <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">position: absolute + translate(-50%, -50%)</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">text-align: center   — 글에만. 세로는 못 맞춘다</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">text-align: center   글만 옮기고 세로는 못 맞춤</div>
                 </div>
               </div>'''
 
@@ -47,28 +47,28 @@ D = dict(
   ]),
   axes=ax("가운데 맞추기"),
   oneline="외울 것은 <b>부모에 <code>display: grid; place-items: center</code></b>를 주는 방법 하나입니다. 이 한 줄로 가로와 세로를 함께 맞출 수 있습니다.",
-  s4_title="방법", s4_hint="되는 범위가 다 다르다",
+  s4_title="가운데에 놓는 방법", s4_hint="방법마다 맞출 수 있는 범위",
   states=states([
-    (ctr(), "place-items", "<b>그리드 한 줄</b>로 가로·세로를 함께 맞추며, 자식이 몇 개든 상관없습니다"),
-    (ctr(box_style="display:flex;align-items:center;justify-content:center"), "flex ×2", "두 줄이 필요하지만 가장 많이 쓰는 방법입니다"),
+    (ctr(), "그리드의 <code>place-items</code>로 맞출 때", "<b>그리드 한 줄</b>로 가로·세로를 함께 맞추며, 자식이 몇 개든 상관없습니다"),
+    (ctr(box_style="display:flex;align-items:center;justify-content:center"), "플렉스 정렬 두 줄로 맞출 때", "두 줄이 필요하지만 가장 많이 쓰는 방법입니다"),
     (ctr(inner_style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)", box_style=""),
-     "absolute", "<b>흐름에서 빠지기</b> 때문에 부모 크기에 영향을 주지 못합니다"),
-    (ctr(inner_style="margin:24px auto", box_style="display:flow-root"), "margin: auto", "<b>가로만</b> 맞추고 세로는 맞추지 못합니다"),
-    (ctr(inner_style="display:inline-grid", box_style="text-align:center;padding-top:24px"), "text-align", "<b>글만</b> 가운데로 옮기고 블록은 움직이지 않습니다"),
+     "<code>absolute</code>로 띄워서 맞출 때", "<b>흐름에서 빠지기</b> 때문에 부모 크기에 영향을 주지 못합니다"),
+    (ctr(inner_style="margin:24px auto", box_style="display:flow-root"), "<code>margin: auto</code>로 맞출 때", "<b>가로만</b> 맞추고 세로는 맞추지 못합니다"),
+    (ctr(inner_style="display:inline-grid", box_style="text-align:center;padding-top:24px"), "<code>text-align</code>으로 맞출 때", "<b>글만</b> 가운데로 옮기고 블록은 움직이지 않습니다"),
     ('''              <div style="width:100%;max-width:150px;height:76px;background:var(--surface);border:1px dashed var(--line-strong);border-radius:6px;display:grid;place-items:center;gap:4px">
                 <span style="display:grid;place-items:center;width:52px;height:22px;border-radius:5px;background:var(--accent);color:#fff;font-size:10px;font-weight:700">하나</span>
                 <span style="display:grid;place-items:center;width:52px;height:22px;border-radius:5px;background:var(--accent-soft);color:var(--accent);font-size:10px;font-weight:700">둘</span>
               </div>''',
-     "자식 여럿", "<code>place-items</code>는 자식이 <b>몇 개든</b> 가운데로 모읍니다"),
+     "자식이 여럿일 때", "<code>place-items</code>는 자식이 <b>몇 개든</b> 가운데로 모읍니다"),
   ]),
   anat=ANAT,
   pins=pins([
     ("가운데에 놓인 것", "centered item", "자식 하나일 수도, 여럿일 수도 있습니다. 가운데 위치는 <b>자식이 아니라 부모가 정합니다</b>"),
     ("그리드 방법", "place-items: center", "<b>한 줄로 가로·세로를</b> 함께 맞춥니다. 외울 것은 이것 하나면 됩니다"),
     ("플렉스 방법", "align-items + justify-content", "두 줄을 적어야 하고, 주축·교차축 개념을 알아야 해서 한 번 더 생각하게 됩니다"),
-    ("가로만", "margin-inline: auto", "블록의 <b>가로</b> 가운데만 맞춥니다. 세로도 맞출 수 있다고 생각하는 것이 가장 흔한 착각입니다"),
-    ("흐름에서 빼기", "absolute + translate", "부모 크기에 영향을 주지 못하기 때문에 <b>겹쳐 놓을 때만</b> 씁니다"),
-    ("글만", "text-align: center", "글줄만 가운데로 옮기고, 상자 자체는 제자리에 있습니다"),
+    ("마진 방법", "margin-inline: auto", "블록의 <b>가로</b> 가운데만 맞춥니다. 세로도 맞출 수 있다고 생각하는 것이 가장 흔한 착각입니다"),
+    ("절대 위치 방법", "absolute + translate", "부모 크기에 영향을 주지 못하기 때문에 <b>겹쳐 놓을 때만</b> 씁니다"),
+    ("글 정렬 방법", "text-align: center", "글줄만 가운데로 옮기고, 상자 자체는 제자리에 있습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           '세로 가운데가 안 맞는다'는 문제는 대부분 <b><code>margin: auto</code>와 <code>text-align</code>을
@@ -85,25 +85,25 @@ D = dict(
     "<code>position: absolute</code>로 가운데에 놓으면서 부모가 자식 높이만큼 커지길 기대할 때. 자식이 <b>흐름에서 빠지므로</b> 부모 높이가 0이 됩니다",
     "<code>vertical-align</code>으로 블록을 옮기려 할 때. 이 속성으로는 블록이 움직이지 않습니다",
   ]),
-  instead='여럿을 줄 세우며 가운데면 <a href="flex.html">플렉스</a>, 판을 짜면 <a href="grid.html">그리드</a>, 화면 가운데 띄우면 <a href="../items/modal.html">모달</a>.',
+  instead='여러 요소를 한 줄로 세우면서 가운데에 모으려면 <a href="flex.html">플렉스</a>를, 판 전체를 칸으로 나눠야 하면 <a href="grid.html">그리드</a>를 씁니다. 화면 한가운데에 창을 띄우는 일이라면 <a href="../items/modal.html">모달</a>을 봅니다.',
   cases=cases([
     ('''              <div style="width:100%;max-width:170px;height:92px;background:var(--surface);border:1px solid var(--line);border-radius:8px;display:grid;place-items:center;gap:5px;text-align:center">
                 <span style="width:26px;height:26px;border-radius:99px;background:var(--bg)"></span>
                 <span style="font-size:11px;font-weight:700">아직 정산이 없습니다</span>
                 <span style="font-size:9.5px;color:var(--fg-muted)">첫 정산을 올려 보세요</span>
               </div>''',
-     "빈 상태", "<code>place-items: center</code> 한 줄로 맞추며, <b>자식이 셋이어도 그대로</b> 가운데에 모입니다"),
+     "빈 상태 안내를 가운데에 놓기", "<code>place-items: center</code> 한 줄로 맞추며, <b>자식이 셋이어도 그대로</b> 가운데에 모입니다"),
     ('''              <div style="width:100%;max-width:170px;height:92px;background:var(--surface);border:1px solid var(--line);border-radius:8px;display:grid;place-items:center">
                 <span class="spn" style="width:22px;height:22px"></span>
               </div>''',
-     "로딩", "가운데 맞추기를 가장 간단하게 쓰는 자리입니다"),
+     "로딩 스피너를 가운데에 놓기", "가운데 맞추기를 가장 간단하게 쓰는 자리입니다"),
     ('''              <div style="width:100%;max-width:170px;display:inline-flex;align-items:center;justify-content:center;gap:5px;background:var(--accent);color:#fff;border-radius:7px;padding:9px 14px;font-size:11.5px;font-weight:700">
                 <span style="width:12px;height:12px;border-radius:3px;background:rgba(255,255,255,.7)"></span> 저장하기
               </div>''',
-     "아이콘 + 글자", "버튼 안에서도 아이콘과 글자를 가운데에 맞춰야 하는데, 이때는 <b>플렉스로 가운데</b>를 맞춥니다"),
+     "버튼 안 아이콘과 글자 맞추기", "버튼 안에서도 아이콘과 글자를 가운데에 맞춰야 하는데, 이때는 <b>플렉스로 가운데</b>를 맞춥니다"),
   ]),
-  s8_title="최소 코드와 규칙", s8_hint="외울 것은 한 줄",
-  keys_heads="<th>규칙</th><th>지켜야 하는 것</th>",
+  s8_title="최소 코드와 규칙", s8_hint="외워 둘 한 줄과 지킬 규칙",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법</th>",
   code_lede="다섯 가지를 다 외울 필요는 없습니다. <b>한 줄</b>만 외우고 나머지는 이런 방법도 있다는 정도로 알아 두면 됩니다.",
   code='''<span class="c">/* 대부분 이것 하나로 된다. 가로·세로를 함께 맞춘다 */</span>
 <span class="t">.center</span> { <span class="a">display</span>: grid; <span class="a">place-items</span>: center; }
@@ -118,17 +118,17 @@ D = dict(
 <span class="t">.overlay</span> { <span class="a">position</span>: absolute; <span class="a">left</span>: <span class="a">50%</span>; <span class="a">top</span>: <span class="a">50%</span>;
             <span class="a">transform</span>: <span class="t">translate</span>(-<span class="a">50%</span>, -<span class="a">50%</span>); }''',
   keys=kbd([
-    ("부모가 정한다", "가운데 놓기는 <b>자식이 아니라 부모</b>에 설정합니다. 자식만 고쳐서는 세로 가운데를 맞출 수 없습니다"),
-    ("<code>place-items: center</code>", "한 줄로 가로·세로를 맞추며, 자식이 몇 개든 상관없습니다"),
-    ("<code>margin: auto</code>는 가로만", "세로 가운데에는 쓸 수 없는데, 쓸 수 있다고 생각하는 것이 <b>가장 흔한 착각</b>입니다"),
-    ("<code>text-align</code>은 글만", "글만 옮기고 상자 자체는 움직이지 않습니다"),
-    ("읽는 글은 가운데 정렬하지 않는다", "줄 시작 위치가 들쭉날쭉해져서 다음 줄의 시작을 찾기 어렵습니다"),
-    ("<code>absolute</code>는 마지막 수단", "부모 높이에 영향을 주지 못해서 <b>부모 높이가 0</b>이 되는 일이 생깁니다"),
+    ("가운데 위치는 부모에서 정하기", "가운데 놓기는 <b>자식이 아니라 부모</b>에 설정합니다. 자식만 고쳐서는 세로 가운데를 맞출 수 없습니다"),
+    ("<code>place-items: center</code> 한 줄 외워 두기", "한 줄로 가로·세로를 맞추며, 자식이 몇 개든 상관없습니다"),
+    ("<code>margin: auto</code>는 가로만 맞춘다는 점 기억하기", "세로 가운데에는 쓸 수 없는데, 쓸 수 있다고 생각하는 것이 <b>가장 흔한 착각</b>입니다"),
+    ("<code>text-align</code>은 글만 옮긴다는 점 기억하기", "글만 옮기고 상자 자체는 움직이지 않습니다"),
+    ("읽는 글은 가운데 정렬하지 않기", "줄 시작 위치가 들쭉날쭉해져서 다음 줄의 시작을 찾기 어렵습니다"),
+    ("<code>absolute</code>는 다른 방법이 안 될 때만 쓰기", "부모 높이에 영향을 주지 못해서 <b>부모 높이가 0</b>이 되는 일이 생깁니다"),
   ]),
   backend=rows([
-    ("가운데 놓기 = 부모의 책임", "자식에게는 아무 값도 주지 않아도 됩니다. <b>부모 설정 하나로 모든 자식</b>이 가운데로 모이기 때문에, 공통 레이아웃 컴포넌트로 빼 두기 좋습니다."),
-    ("빈 상태와 로딩", "<a href=\"../items/empty.html\">빈 상태</a>와 <a href=\"../items/spinner.html\">스피너</a>는 거의 항상 가운데에 놓입니다. <b>같은 래퍼</b> 컴포넌트를 돌려쓰면 화면마다 위치가 다르게 보이는 일이 없어집니다."),
-    ("부모에 높이가 있어야 한다", "부모 높이가 내용 높이와 같으면 가운데에 놓아도 제자리와 구별되지 않습니다. 그래서 부모에 <code>min-height</code>를 먼저 줘야 합니다."),
+    ("가운데 위치를 부모가 맡는 구조", "자식에게는 아무 값도 주지 않아도 됩니다. <b>부모 설정 하나로 모든 자식</b>이 가운데로 모이기 때문에, 공통 레이아웃 컴포넌트로 빼 두기 좋습니다."),
+    ("빈 상태와 로딩에 같은 래퍼 쓰기", "<a href=\"../items/empty.html\">빈 상태</a>와 <a href=\"../items/spinner.html\">스피너</a>는 거의 항상 가운데에 놓입니다. <b>같은 래퍼</b> 컴포넌트를 돌려쓰면 화면마다 위치가 다르게 보이는 일이 없어집니다."),
+    ("부모 높이를 먼저 정해 두기", "부모 높이가 내용 높이와 같으면 가운데에 놓아도 제자리와 구별되지 않습니다. 그래서 부모에 <code>min-height</code>를 먼저 줘야 합니다."),
   ]),
   plat_lede="세 플랫폼 모두 가운데 위치를 부모가 정한다는 점이 같습니다.",
   plats=plats([

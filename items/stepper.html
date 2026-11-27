@@ -52,7 +52,7 @@
         <div class="note" style="margin-bottom:0">
           <p>단계 이름은 <b>잘리면 안 됩니다</b>. 데모는 칸마다 이름 글자 전체의 폭과 실제로 보이는 폭을 비교해서
           이름이 잘린 단계가 몇 개인지 셉니다. 가로 배치 그대로 폭을 줄이면 단계 이름부터 잘리고,
-          '좁으면 세로로'를 켜면 같은 폭에서도 이름이 잘리지 않습니다.<br>
+          '좁으면 세로로 늘어놓기'를 켜면 같은 폭에서도 이름이 잘리지 않습니다.<br>
           <b>끝낸 단계는 눌러서 되돌아갈 수 있어야</b> 합니다. 이 기능을 끄면 끝낸 단계를 눌러도 이동하지 않는데,
           그러면 배송지를 잘못 적은 사용자가 처음부터 다시 해야 합니다.</p>
         </div>
@@ -77,20 +77,20 @@
         <p>길 안내 부품은 모두 누르면 다른 곳으로 옮겨 간다는 점이 같습니다. 그래서 아래 네 가지를 물어보면 서로 구별할 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>자리</th><th>데려가는 곳</th><th>지금 위치</th><th>감당하는 개수</th></tr></thead>
+          <thead><tr><th></th><th>화면에 놓이는 자리</th><th>누르면 데려가는 곳</th><th>지금 위치를 알리는 방법</th><th>담을 수 있는 항목 수</th></tr></thead>
           <tbody>
-            <tr><td>앱바 · 헤더</td><td>화면 위</td><td>전역 · 상위</td><td>제목으로</td><td class="none">해당 없음</td></tr>
-            <tr><td>사이드바 내비게이션</td><td>화면 옆</td><td>전역</td><td>강조로</td><td>10~20</td></tr>
-            <tr><td>바텀 탭바</td><td>화면 아래</td><td>전역</td><td>아이콘 강조</td><td><b>3~5</b></td></tr>
+            <tr><td>앱바 · 헤더</td><td>화면 위</td><td>전역 또는 상위 화면</td><td>제목으로</td><td class="none">해당 없음</td></tr>
+            <tr><td>사이드바 내비게이션</td><td>화면 옆</td><td>전역</td><td>항목 강조로</td><td>10~20</td></tr>
+            <tr><td>바텀 탭바</td><td>화면 아래</td><td>전역</td><td>아이콘 강조로</td><td><b>3~5</b></td></tr>
             <tr><td>탭</td><td>내용 위</td><td><b>같은 화면 안</b></td><td>밑줄로</td><td>2~6</td></tr>
-            <tr><td>브레드크럼</td><td>내용 위</td><td>상위로</td><td><b>계층 전체</b></td><td>3~5단계</td></tr>
+            <tr><td>브레드크럼</td><td>내용 위</td><td>상위 단계</td><td><b>계층 전체</b>를 보여 줌</td><td>3~5단계</td></tr>
             <tr><td>페이지네이션</td><td>목록 아래</td><td>같은 목록의 다른 쪽</td><td>쪽 번호로</td><td>제한 없음</td></tr>
-            <tr><td>무한 스크롤</td><td>목록 끝</td><td>같은 목록 이어서</td><td class="none">안 보여 준다</td><td>제한 없음</td></tr>
+            <tr><td>무한 스크롤</td><td>목록 끝</td><td>같은 목록의 다음 묶음</td><td>보여 주지 않음</td><td>제한 없음</td></tr>
             <tr class="me"><td><b>스테퍼</b></td><td>내용 위 · 옆</td><td><b>같은 흐름</b>의 다음 단계</td><td>번호와 완료 표시로</td><td>3~5단계</td></tr>
             <tr><td>트리뷰</td><td>화면 옆</td><td>계층 <b>아래로</b></td><td>펼친 가지로</td><td>깊이 3단까지</td></tr>
-            <tr><td>앵커 내비</td><td>내용 옆</td><td><b>같은 문서 안</b></td><td>보는 절을 밝혀</td><td>5~12</td></tr>
-            <tr><td>뒤로가기</td><td>화면 왼쪽 위</td><td>바로 <b>앞 화면</b></td><td class="none">안 보여 준다</td><td>하나</td></tr>
-            <tr><td>메가 메뉴</td><td>앱바 아래</td><td>전역 · 여러 갈래</td><td>열린 갈래로</td><td>20~60</td></tr>
+            <tr><td>앵커 내비</td><td>내용 옆</td><td><b>같은 문서 안</b></td><td>보는 절을 강조해</td><td>5~12</td></tr>
+            <tr><td>뒤로가기</td><td>화면 왼쪽 위</td><td>바로 <b>앞 화면</b></td><td>보여 주지 않음</td><td>하나</td></tr>
+            <tr><td>메가 메뉴</td><td>앱바 아래</td><td>전역, 여러 분류</td><td>열린 분류로</td><td>20~60</td></tr>
           </tbody>
         </table>
         </div>
@@ -104,39 +104,39 @@
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;align-items:flex-start;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">장바구니</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:2px solid var(--accent);color:var(--accent);font-size:8px;font-weight:700">●</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">배송지</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">결제</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">확인</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">1단계 끝, 2단계 중</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;align-items:flex-start;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">장바구니</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:2px solid var(--accent);color:var(--accent);font-size:8px;font-weight:700">●</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">배송지</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">결제</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">확인</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">1단계 끝, 2단계 진행 중</span></div>
             </div>
-            <figcaption>진행 중<span>끝난 단계와 <b>지금 단계</b>가 다르게 보입니다</span></figcaption>
+            <figcaption>단계를 진행하는 중<span>끝난 단계와 <b>지금 단계</b>가 다르게 보입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;align-items:flex-start;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">장바구니</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">배송지</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">결제</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">확인</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">다 끝났다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;align-items:flex-start;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">장바구니</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">배송지</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">결제</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">확인</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">모두 끝남</span></div>
             </div>
-            <figcaption>완료<span>모든 단계를 마치면 <b>결과 화면</b>으로 넘어갑니다</span></figcaption>
+            <figcaption>모든 단계를 마쳤을 때<span>모든 단계를 마치면 <b>결과 화면</b>으로 넘어갑니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;align-items:flex-start;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px"><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">장바구니…</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:2px solid var(--accent);color:var(--accent);font-size:8px;font-weight:700">●</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">배…</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">결…</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">확…</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">이름이 잘렸다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;align-items:flex-start;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px"><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">장바구니…</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:2px solid var(--accent);color:var(--accent);font-size:8px;font-weight:700">●</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">배…</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">결…</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">확…</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">이름이 잘림</span></div>
             </div>
-            <figcaption>좁은 화면<span>화면이 좁아지면 <b>가로 배치에서 단계 이름부터</b> 잘립니다</span></figcaption>
+            <figcaption>좁은 화면에 가로로 둘 때<span>화면이 좁아지면 <b>가로 배치에서 단계 이름부터</b> 잘립니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:5px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:flex;align-items:center;gap:5px"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:8.5px;color:var(--accent)">장바구니 확인</span></span><span style="display:flex;align-items:center;gap:5px"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:2px solid var(--accent);color:var(--accent);font-size:8px;font-weight:700">●</span><span style="font-size:8.5px;color:var(--accent)">배송지 입력</span></span><span style="display:flex;align-items:center;gap:5px"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:8.5px;color:var(--fg-muted)">결제 수단</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">세로로 두면 온전하다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:5px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:flex;align-items:center;gap:5px"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:8.5px;color:var(--accent)">장바구니 확인</span></span><span style="display:flex;align-items:center;gap:5px"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:2px solid var(--accent);color:var(--accent);font-size:8px;font-weight:700">●</span><span style="font-size:8.5px;color:var(--accent)">배송지 입력</span></span><span style="display:flex;align-items:center;gap:5px"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:8.5px;color:var(--fg-muted)">결제 수단</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">세로로 두면 이름이 다 보임</span></div>
             </div>
-            <figcaption>세로로<span>폰에서는 <b>단계를 세로로 늘어놓는 편</b>이 낫습니다</span></figcaption>
+            <figcaption>단계를 세로로 늘어놓을 때<span>폰에서는 <b>단계를 세로로 늘어놓는 편</b>이 낫습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">되돌아가기</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:9px;color:var(--danger)">배송지를 다시 적어 주세요</span><span style="display:block;font-size:8.5px;color:var(--fg-muted);margin-top:3px">2단계로 돌아감 · 적은 값은 그대로</span></span></div></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">되돌아가기</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:9px;color:var(--danger)">배송지를 다시 적어 주세요</span><span style="display:block;font-size:8.5px;color:var(--fg-muted);margin-top:3px">2단계로 돌아가도 적은 값은 그대로</span></span></div></div>
             </div>
-            <figcaption>되돌아가기<span>앞 단계로 돌아가도 <b>이미 적은 값은 지우지 않습니다</b></span></figcaption>
+            <figcaption>앞 단계로 되돌아갈 때<span>앞 단계로 돌아가도 <b>이미 적은 값은 지우지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;align-items:flex-start;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px"><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">장바구니</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">배송지</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">결제</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">확인</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">지금이 어디인지 모른다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:4px;align-items:flex-start;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px"><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">장바구니</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">배송지</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">결제</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">확인</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">지금 단계를 알 수 없음</span></div>
             </div>
-            <figcaption>지금을 안 알림<span>지금 단계를 <b>색만</b>으로 표시하면 알아보기 어렵습니다</span></figcaption>
+            <figcaption>지금 단계를 알리지 않을 때<span>지금 단계를 <b>색만</b>으로 표시하면 알아보기 어렵습니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -148,23 +148,23 @@
             <div class="anat" role="img" aria-label="스테퍼의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">번호 또는 ✓ — 끝났는지 한눈에</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">지금 단계 — 색 + aria-current="step"</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">단계 이름 — <b>잘리면 안 된다</b></div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">적은 값 요약 — '모란상회'</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--accent)">끝낸 단계는 <b>눌러서 되돌아간다</b></div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">좁으면 가로가 먼저 무너진다 — 세로로</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">번호나 ✓로 끝났는지 한눈에 보임</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">지금 단계는 색과 aria-current="step"</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">단계 이름은 <b>잘리면 안 됨</b></div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">적은 값을 '모란상회'처럼 요약</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--accent)">끝낸 단계는 <b>눌러서 되돌아감</b></div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">좁으면 가로 배치가 깨지므로 세로로</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>번호 · ✓ <em>끝났는지</em></b><span>단계 번호를 보면 <b>몇 단계가 남았는지</b> 알 수 있습니다</span></li>
+            <li><b>번호 · ✓ <em>끝났는지 표시</em></b><span>단계 번호를 보면 <b>몇 단계가 남았는지</b> 알 수 있습니다</span></li>
             <li><b>지금 단계 <em>색 + <code>aria-current</code></em></b><span>스크린 리더 사용자도 알 수 있도록 <b>소리로도</b> 전해져야 합니다</span></li>
             <li><b>단계 이름 <em>잘리면 안 됨</em></b><span>자리가 모자라면 <b>이름을 짧게</b> 고칩니다</span></li>
             <li><b>적은 값 <em>요약</em></b><span>앞 단계에서 적은 값을 보여 줘서 되돌아갈지 판단할 수 있게 합니다</span></li>
-            <li><b>되돌아가기 <em>끝낸 단계만</em></b><span>아직 안 간 뒤 단계로는 <b>건너뛰지 못하게</b> 막습니다</span></li>
-            <li><b>좁은 화면 <em>세로로</em></b><span>가로 스테퍼는 <b>390px 폭에서 이름이 잘리고 배치가 깨집니다</b></span></li>
+            <li><b>되돌아가기 <em>끝낸 단계로만</em></b><span>아직 안 간 뒤 단계로는 <b>건너뛰지 못하게</b> 막습니다</span></li>
+            <li><b>좁은 화면 <em>세로로 배치</em></b><span>가로 스테퍼는 <b>390px 폭에서 이름이 잘리고 배치가 깨집니다</b></span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -196,7 +196,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>스테퍼 대신 다른 것을 써야 하는 경우</b> — 기계가 하는 일의 진척은 <a href="progress.html">프로그레스 바</a>, 순서 없는 묶음은 <a href="tabs.html">탭</a>, 계층은 <a href="breadcrumb.html">브레드크럼</a>, 흐름 전체 설계는 <a href="checkout.html">결제 흐름</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>스테퍼 대신 다른 것을 써야 하는 경우</b> — 기계가 하는 일이 얼마나 진행됐는지 보여 주려면 <a href="progress.html">프로그레스 바</a>를 쓰고, 순서 없이 내용 묶음을 바꿔 보여 주려면 <a href="tabs.html">탭</a>을 씁니다. 계층을 보여 주는 데는 <a href="breadcrumb.html">브레드크럼</a>이 맞고, 흐름 전체를 어떻게 짤지는 <a href="checkout.html">결제 흐름</a> 항목에서 다룹니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -206,19 +206,19 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:flex;gap:4px;align-items:flex-start;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">장바구니</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:2px solid var(--accent);color:var(--accent);font-size:8px;font-weight:700">●</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">배송지</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">결제</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">확인</span></span></div></div>
             </div>
-            <figcaption><b>결제 흐름</b>스테퍼를 가장 흔하게 쓰는 곳입니다</figcaption>
+            <figcaption><b>결제 단계 보여 주기</b>스테퍼를 가장 흔하게 쓰는 곳입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:flex;gap:4px;align-items:flex-start;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px"><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;background:var(--accent);color:#fff;font-size:8px">✓</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">계정</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:2px solid var(--accent);color:var(--accent);font-size:8px;font-weight:700">●</span><span style="font-size:7.5px;color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">사업자</span></span><span style="display:grid;gap:3px;justify-items:center;min-width:0;flex:1 1 0"><span style="display:grid;place-items:center;width:17px;height:17px;border-radius:999px;border:1px solid var(--line);color:var(--fg-muted);font-size:8px">·</span><span style="font-size:7.5px;color:var(--fg-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">정산 계좌</span></span></div></div>
             </div>
-            <figcaption><b>가입 · 심사</b>적어 내야 할 서류가 여러 장일 때 씁니다</figcaption>
+            <figcaption><b>가입과 심사 서류 나눠 받기</b>적어 내야 할 서류가 여러 장일 때 씁니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">글로 줄임</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:9px">2 / 4 단계</span><span style="display:block;font-size:8.5px;color:var(--fg-muted);margin-top:2px">배송지 입력</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">폰에서 쓰는 가장 작은 꼴</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">글 한 줄로 줄임</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:9px">2 / 4 단계</span><span style="display:block;font-size:8.5px;color:var(--fg-muted);margin-top:2px">배송지 입력</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">폰에서 쓰는 가장 작은 형태</span></div>
             </div>
-            <figcaption><b>폰</b>단계 띠 대신 <b>글 한 줄</b>로 보여 줘도 충분합니다</figcaption>
+            <figcaption><b>폰에서 글 한 줄로 줄이기</b>단계 띠 대신 <b>글 한 줄</b>로 보여 줘도 충분합니다</figcaption>
           </figure>
         </div>
       </section>
@@ -239,14 +239,14 @@
 }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td>Tab</td><td>끝낸 단계의 링크만 포커스를 받고, <b>아직 안 간 단계는 포커스를 받지 않습니다</b></td></tr>
             <tr><td>Enter</td><td>포커스가 있는 단계로 돌아갑니다</td></tr>
             <tr><td><code>aria-current="step"</code></td><td>지금 단계에 답니다. 한 페이지에 <b>하나만</b> 있어야 합니다</td></tr>
             <tr><td><code>&lt;ol&gt;</code></td><td>단계에 순서가 있다는 정보가 스크린 리더에서 <b>소리로</b> 전해집니다</td></tr>
             <tr><td><code>aria-disabled</code></td><td>아직 갈 수 없는 단계에 붙입니다. 포커스는 받지만 눌러도 <b>이동하지 않습니다</b></td></tr>
-            <tr><td>확인하는 법</td><td><kbd>Tab</kbd>으로 단계를 돌면서 <b>아직 안 간 단계가 포커스를 받는지</b> 확인합니다</td></tr>
+            <tr><td>제대로 됐는지 확인하는 방법</td><td><kbd>Tab</kbd>으로 단계를 돌면서 <b>아직 안 간 단계가 포커스를 받는지</b> 확인합니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -257,9 +257,9 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>단계마다 저장</th><td>입력 내용을 마지막 단계에서 한 번에 보내면 <b>중간에 연결이 끊기거나 창을 닫았을 때</b> 적은 내용이 모두 사라집니다. 단계마다 임시 저장해 두면 사용자가 나중에 돌아와 이어서 할 수 있습니다.</td></tr>
-            <tr><th>초안 id</th><td>첫 단계에서 <code>draft_id</code>를 받아 두고, 이후 단계에서는 그 초안에 값을 채워 넣습니다.</td></tr>
-            <tr><th>검증은 단계마다</th><td>단계마다 그 단계의 입력 칸만 검사해서 결과를 돌려줍니다. 마지막에 모든 오류를 한꺼번에 돌려주면 사용자는 <b>어느 단계로 돌아가야 하는지</b> 알 수 없습니다.</td></tr>
+            <tr><th>단계마다 임시 저장하기</th><td>입력 내용을 마지막 단계에서 한 번에 보내면 <b>중간에 연결이 끊기거나 창을 닫았을 때</b> 적은 내용이 모두 사라집니다. 단계마다 임시 저장해 두면 사용자가 나중에 돌아와 이어서 할 수 있습니다.</td></tr>
+            <tr><th>초안 id로 단계 잇기</th><td>첫 단계에서 <code>draft_id</code>를 받아 두고, 이후 단계에서는 그 초안에 값을 채워 넣습니다.</td></tr>
+            <tr><th>단계마다 입력 검증하기</th><td>단계마다 그 단계의 입력 칸만 검사해서 결과를 돌려줍니다. 마지막에 모든 오류를 한꺼번에 돌려주면 사용자는 <b>어느 단계로 돌아가야 하는지</b> 알 수 없습니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -277,7 +277,7 @@
             <footer>정해진 부품이 없어서 <code>&lt;ol&gt;</code>에 <code>aria-current</code>를 붙여 직접 만듭니다.</footer>
           </div>
           <div class="plat">
-            <header><b>iOS</b><span>없다 — 화면 전환</span></header>
+            <header><b>iOS</b><span>부품 없이 화면 전환</span></header>
             <div class="shot">
               <div class="phone" role="img" aria-label="iOS 단계 화면 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:26px;font-size:5px;color:var(--fg-muted);text-align:center">2 / 4</div>

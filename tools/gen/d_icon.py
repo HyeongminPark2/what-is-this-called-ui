@@ -19,12 +19,12 @@ def ic(glyph, label, note="", ok=None, w="152px", withText=False):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">현실의 물건을 그린 것 — 돋보기 · 휴지통</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--danger)">배워야 아는 것 — 톱니바퀴 · 점 셋 · 햄버거</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">aria-hidden="true" — 그림은 안 읽는다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">이름은 <b>버튼 쪽</b>에 — aria-label</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">currentColor — 글자색을 따라간다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--accent)">글자를 같이 적으면 둘 다 풀린다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">현실의 물건을 그린 것(돋보기, 휴지통)</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--danger)">배워야 아는 것(톱니바퀴, 점 셋, 햄버거)</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">aria-hidden="true"로 그림은 읽지 않음</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">이름은 <b>버튼 쪽</b>에 aria-label로 붙임</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">currentColor로 글자색을 따라감</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--accent)">글자를 함께 적으면 두 문제가 함께 풀림</div>
                 </div>
               </div>'''
 
@@ -50,27 +50,28 @@ D = dict(
     ("자주 잘못 부르는 이름",
      "<b>아이콘 크기</b> — <a href=\"iconsize.html\">아이콘 크기</a>는 아이콘을 몇 가지 크기 <b>단</b>으로 나눠 쓸지 정하는 규칙을 다룹니다.<br>"
      "<b>아이콘 글꼴</b> — <a href=\"iconfont.html\">아이콘 글꼴</a>은 아이콘 그림을 <b>글자로</b> 다루는 방식을 가리킵니다.<br>"
-     "<b>이미지</b> — 작게 줄인 사진은  <a href=\"thumbnail.html\">썸네일</a>이라고 부르고, 아이콘은 뜻을 나타내는 <b>기호</b>입니다."),
+     "<b>이미지</b> — 작게 줄인 사진은 <a href=\"thumbnail.html\">썸네일</a>이라고 부르고, 아이콘은 뜻을 나타내는 <b>기호</b>입니다."),
   ]),
   axes=ax("아이콘"),
   oneline="<b>아이콘만 두고 싶다면 그 아이콘이 글자 없이도 뜻이 통하는지 먼저 확인하세요.</b> 대부분의 아이콘은 글자 없이는 뜻이 통하지 않습니다.",
+  s4_title="아이콘의 종류", s4_hint="뜻이 통하는 정도와 이름에 따라 나눈 모습",
   states=states([
-    (ic("🔍", "검색", "현실의 돋보기", True), "통하는 그림", "<b>거의 모든 사람이</b> 뜻을 압니다"),
-    (ic("🗑", "삭제", "휴지통", True), "통하는 그림", "그림의 뜻이 <b>그대로</b> 통합니다"),
-    (ic("⚙", "설정", "톱니바퀴가 왜 설정인가", False), "배워야 아는 그림", "톱니바퀴가 설정을 뜻하는 것은 <b>관습</b>일 뿐입니다"),
-    (ic("⋯", "더 보기", "점 셋은 그림이 아니다", False), "배워야 아는 그림", "점 세 개라는 모양 자체에는 <b>뜻이 없습니다</b>"),
-    (ic("⚙", "설정", "글자를 적었다", True, "152px", True), "글자와 함께", "글자를 함께 적으면 <b>누구에게나</b> 뜻이 통합니다"),
-    (ic("⋯", "더 보기", "이름이 없다 — 소리로 아무것도 안 들린다", False),
-     "이름 없음", "스크린 리더가 <b>읽을 이름이 없습니다</b>"),
+    (ic("🔍", "검색", "현실의 돋보기", True), "보자마자 뜻이 통하는 돋보기", "<b>거의 모든 사람이</b> 뜻을 압니다"),
+    (ic("🗑", "삭제", "휴지통", True), "보자마자 뜻이 통하는 휴지통", "그림의 뜻이 <b>그대로</b> 통합니다"),
+    (ic("⚙", "설정", "설정이라는 뜻은 관습임", False), "배워야 뜻을 아는 톱니바퀴", "톱니바퀴가 설정을 뜻하는 것은 <b>관습</b>일 뿐입니다"),
+    (ic("⋯", "더 보기", "점 셋 모양에는 뜻이 없음", False), "배워야 뜻을 아는 점 세 개", "점 세 개라는 모양 자체에는 <b>뜻이 없습니다</b>"),
+    (ic("⚙", "설정", "글자를 함께 적음", True, "152px", True), "글자를 함께 적었을 때", "글자를 함께 적으면 <b>누구에게나</b> 뜻이 통합니다"),
+    (ic("⋯", "더 보기", "이름이 없어 스크린 리더가 읽을 말이 없음", False),
+     "이름을 붙이지 않았을 때", "스크린 리더가 <b>읽을 이름이 없습니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("통하는 그림", "현실의 물건", "돋보기 · 휴지통 · 더하기"),
-    ("배워야 아는 그림", "관습", "톱니바퀴 · 점 셋 · 햄버거"),
-    ("<code>aria-hidden</code>", "그림은 안 읽음", "이름이 <b>두 번</b> 읽히지 않게 합니다"),
-    ("이름", "버튼 쪽에", "<code>aria-label</code>"),
-    ("<code>currentColor</code>", "색이 따라옴", "호버·비활성 상태의 색이 저절로 따라 바뀝니다"),
-    ("글자", "같이 적기", "<b>뜻과 이름</b>이 한꺼번에 해결됩니다"),
+    ("통하는 그림", "현실의 물건을 그린 것", "돋보기, 휴지통, 더하기처럼 보자마자 뜻이 통하는 그림입니다"),
+    ("배워야 아는 그림", "관습으로 뜻이 정해진 것", "톱니바퀴, 점 세 개, 햄버거처럼 뜻을 배워야 아는 그림입니다"),
+    ("<code>aria-hidden</code>", "그림을 읽지 않게 하는 속성", "이름이 <b>두 번</b> 읽히지 않게 합니다"),
+    ("이름", "버튼 쪽에 붙이는 것", "아이콘만 있는 버튼에는 <code>aria-label</code>로 이름을 붙입니다"),
+    ("<code>currentColor</code>", "글자색을 따라가는 색", "호버·비활성 상태의 색이 저절로 따라 바뀝니다"),
+    ("글자", "아이콘 옆에 함께 적는 것", "<b>뜻과 이름</b>이 한꺼번에 해결됩니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           '아이콘만 두면 깔끔하다'는 말은 그 아이콘의 뜻을 <b>이미 아는 사람</b>에게만 맞습니다.
@@ -81,6 +82,8 @@ D = dict(
           한 화면에서는 <b>한 묶음</b>의 아이콘만 쓰세요.
           선 굵기와 모서리 처리가 다른 그림을 섞으면,
           무엇이 문제인지 딱 집어 말하기는 어려워도 화면이 <b>어수선해 보입니다</b>.</p>''',
+  do_title="아이콘을 쓸 때 지킬 것", dont_title="아이콘을 쓸 때 피할 것",
+  instead_title="관련 주제는 다른 항목에서 다룹니다",
   do=ul([
     "자주 쓰는 동작에는 <b>글자를 같이</b> 적기",
     "아이콘만 둘 때는 <b><code>aria-label</code></b> 붙이기",
@@ -90,14 +93,16 @@ D = dict(
     "배워야 아는 그림을 <b>글자 없이</b> 혼자 두기",
     "그림과 버튼에 <b>둘 다</b> 이름을 붙이기. 이름이 두 번 읽힙니다",
     "여러 묶음을 섞어 쓰기. 선 <b>굵기가 달라서</b> 섞은 티가 납니다",
-    "아이콘으로만 <b>상태</b> 알리기.  <a href=\"statecolor.html\">상태 색</a>과 마찬가지로 글도 함께 둡니다",
+    "아이콘으로만 <b>상태</b> 알리기. <a href=\"statecolor.html\">상태 색</a>과 마찬가지로 글도 함께 둡니다",
   ]),
-  instead='크기 단은 <a href="iconsize.html">아이콘 크기</a>, 글자로 다루면 <a href="iconfont.html">아이콘 글꼴</a>, 사진은 <a href="thumbnail.html">썸네일</a>, 이름 붙이기는 <a href="name.html">이름 붙이기</a>.',
+  instead='아이콘을 몇 가지 크기 단으로 나눠 쓸지는 <a href="iconsize.html">아이콘 크기</a>에서, 아이콘을 글자로 다루는 방식은 <a href="iconfont.html">아이콘 글꼴</a>에서 다룹니다. 작게 줄인 사진은 <a href="thumbnail.html">썸네일</a> 항목을 보고, 버튼에 이름을 붙이는 방법은 <a href="name.html">이름 붙이기</a>에서 자세히 설명합니다.',
   cases=cases([
-    (ic("🔍", "검색", "", True), "검색 단추", "누구나 아는 그림이라 글자 없이 <b>아이콘만</b> 두어도 됩니다"),
-    (ic("⚙", "설정", "", True, "150px", True), "설정", "배워야 아는 그림이라 <b>글자와 함께</b> 둡니다"),
-    (ic("✓", "완료", "", True, "150px", True), "상태 표시", "색만 쓰지 않고 <b>모양과 글</b>로도 상태를 알립니다"),
+    (ic("🔍", "검색", "", True), "검색 단추를 아이콘만으로 두기", "누구나 아는 그림이라 글자 없이 <b>아이콘만</b> 두어도 됩니다"),
+    (ic("⚙", "설정", "", True, "150px", True), "설정 단추에 글자 함께 적기", "배워야 아는 그림이라 <b>글자와 함께</b> 둡니다"),
+    (ic("✓", "완료", "", True, "150px", True), "모양과 글로 상태 알리기", "색만 쓰지 않고 <b>모양과 글</b>로도 상태를 알립니다"),
   ]),
+  s8_title="최소 마크업과 규칙",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법</th>",
   code_lede="그림은 스크린 리더가 읽지 않게 숨기고, <b>이름은 버튼에</b> 답니다. 버튼에 글자가 있으면 그 글자가 이름이 되므로 이름을 따로 붙이지 않습니다.",
   code='''<span class="c">&lt;!-- 아이콘만 있으면 버튼에 이름을 붙인다 --&gt;</span>
 &lt;<span class="t">button</span> <span class="a">aria-label</span>=<span class="s">"검색"</span>&gt;
@@ -112,16 +117,16 @@ D = dict(
 <span class="c">/* currentColor 를 쓰면 색을 따로 적지 않아도 된다 */</span>
 svg { <span class="a">display</span>: block; <span class="a">stroke</span>: currentColor; }''',
   keys=kbd([
-    ("<code>aria-hidden=\"true\"</code>", "스크린 리더가 그림을 <b>읽지 않게</b> 합니다"),
-    ("<code>aria-label</code>", "아이콘만 있는 버튼에는 <b>반드시</b> 붙입니다"),
-    ("둘 다 금지", "그림과 버튼에 <b>모두</b> 이름을 붙이면 이름이 두 번 읽힙니다"),
-    ("<code>title</code>", "툴팁으로 뜨지만 <b>터치 화면에서는 보이지 않습니다</b>"),
-    ("<code>currentColor</code>", "<code>:hover</code>나 <code>[disabled]</code> 상태에서 글자색이 바뀌면 아이콘 색도 따라 바뀝니다"),
-    ("확인하는 법", "화면을 끄고 스크린 리더 <b>소리만</b> 들으며 단추마다 이름이 들리는지 확인합니다"),
+    ("그림에 <code>aria-hidden=\"true\"</code> 붙이기", "스크린 리더가 그림을 <b>읽지 않게</b> 합니다"),
+    ("버튼에 <code>aria-label</code> 붙이기", "아이콘만 있는 버튼에는 <b>반드시</b> 붙입니다"),
+    ("그림과 버튼에 이름을 겹쳐 붙이지 않기", "그림과 버튼에 <b>모두</b> 이름을 붙이면 이름이 두 번 읽힙니다"),
+    ("<code>title</code>로 툴팁 띄우기", "툴팁으로 뜨지만 <b>터치 화면에서는 보이지 않습니다</b>"),
+    ("색은 <code>currentColor</code>로 받기", "<code>:hover</code>나 <code>[disabled]</code> 상태에서 글자색이 바뀌면 아이콘 색도 따라 바뀝니다"),
+    ("확인하는 방법", "화면을 끄고 스크린 리더 <b>소리만</b> 들으며 단추마다 이름이 들리는지 확인합니다"),
   ]),
   backend=rows([
-    ("아이콘 이름을 주고받지 않는다", "서버는 <code>status: \"pending\"</code> 같은 <b>뜻</b>을 보내고, 어떤 그림을 쓸지는 화면이 정합니다."),
-    ("쓰는 쪽이 고른다", "같은 상태라도 목록에서는 점으로, 상세 화면에서는 띠로 보여 줄 수 있습니다. 그런데 서버가 그림까지 정해서 보내면 화면마다 다르게 보여 줄 수 없게 됩니다."),
+    ("서버는 그림 대신 뜻을 보내기", "서버는 <code>status: \"pending\"</code> 같은 <b>뜻</b>을 보내고, 어떤 그림을 쓸지는 화면이 정합니다."),
+    ("그림은 화면 쪽에서 고르기", "같은 상태라도 목록에서는 점으로, 상세 화면에서는 띠로 보여 줄 수 있습니다. 그런데 서버가 그림까지 정해서 보내면 화면마다 다르게 보여 줄 수 없게 됩니다."),
   ]),
   plat_lede="플랫폼마다 쓰는 아이콘 <b>묶음</b>이 따로 있습니다.",
   plats=plats([

@@ -77,15 +77,15 @@
         <p>겹쳐 뜨는 부품들은 모양만 보고는 구별하기 어렵지만, 아래 네 가지를 따져 보면 어느 부품인지 가려낼 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>뒤를 막나</th><th>포커스를 가두나</th><th>배경 스크롤</th><th>어디서 뜨나</th></tr></thead>
+          <thead><tr><th></th><th>뒤쪽 화면을 막는가</th><th>포커스를 안에 가두는가</th><th>뒤쪽 화면의 스크롤은</th><th>화면 어디에서 뜨는가</th></tr></thead>
           <tbody>
             <tr><td>모달</td><td>막는다</td><td>가둔다</td><td>잠긴다</td><td>가운데</td></tr>
-            <tr><td>다이얼로그(비모달)</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로</td><td>가운데 · 띄워 둠</td></tr>
-            <tr><td>바텀시트</td><td>막거나 안 막는다</td><td>막을 때만</td><td>막을 때만</td><td>아래에서</td></tr>
-            <tr><td>드로어</td><td>보통 막는다</td><td>가둔다</td><td>잠긴다</td><td>옆에서</td></tr>
-            <tr><td>팝오버</td><td class="none">안 막는다</td><td>가두기도 한다</td><td class="none">그대로</td><td>누른 것 옆에</td></tr>
-            <tr><td>툴팁</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로</td><td>가리킨 것 옆에</td></tr>
-            <tr><td>토스트</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로</td><td>구석 · 저절로 사라짐</td></tr>
+            <tr><td>다이얼로그(비모달)</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로 움직인다</td><td>가운데에 띄워 둔 채</td></tr>
+            <tr><td>바텀시트</td><td>막을 때도 있다</td><td>뒤를 막을 때만</td><td>뒤를 막을 때만</td><td>아래에서 올라옴</td></tr>
+            <tr><td>드로어</td><td>보통 막는다</td><td>가둔다</td><td>잠긴다</td><td>옆에서 밀려 나옴</td></tr>
+            <tr><td>팝오버</td><td class="none">안 막는다</td><td>가두기도 한다</td><td class="none">그대로 움직인다</td><td>누른 것 옆</td></tr>
+            <tr><td>툴팁</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로 움직인다</td><td>가리킨 것 옆</td></tr>
+            <tr><td>토스트</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로 움직인다</td><td>구석에 떴다 저절로 사라짐</td></tr>
           </tbody>
         </table>
         </div>
@@ -99,39 +99,39 @@
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding:6px"><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">목록 — 작은 그림들</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding:6px"><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">목록에는 작은 그림만</span></div>
             </div>
-            <figcaption>닫힘<span>목록에 <b>작은 그림</b>만 보입니다</span></figcaption>
+            <figcaption>닫혀 있을 때<span>목록에 <b>작은 그림</b>만 보입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;inset:0;background:color-mix(in srgb, var(--fg) 55%, transparent)"></span><span style="position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:66%;aspect-ratio:4/3;border-radius:4px;background:var(--accent-soft);display:grid;place-items:center;font-size:7.5px;color:var(--accent)">영수증 3</span><span style="position:absolute;right:4px;top:4px;width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">✕</span><span style="position:absolute;left:4px;top:48%;transform:translateY(-50%);width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">‹</span><span style="position:absolute;right:4px;top:48%;transform:translateY(-50%);width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">›</span><span style="position:absolute;left:0;right:0;bottom:4px;text-align:center;color:#fff;font-size:6.5px">3 / 8</span></div><span style="font-size:8.5px;color:var(--fg-muted)">뒤를 덮고 그림만 보인다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;inset:0;background:color-mix(in srgb, var(--fg) 55%, transparent)"></span><span style="position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:66%;aspect-ratio:4/3;border-radius:4px;background:var(--accent-soft);display:grid;place-items:center;font-size:7.5px;color:var(--accent)">영수증 3</span><span style="position:absolute;right:4px;top:4px;width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">✕</span><span style="position:absolute;left:4px;top:48%;transform:translateY(-50%);width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">‹</span><span style="position:absolute;right:4px;top:48%;transform:translateY(-50%);width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">›</span><span style="position:absolute;left:0;right:0;bottom:4px;text-align:center;color:#fff;font-size:6.5px">3 / 8</span></div><span style="font-size:8.5px;color:var(--fg-muted)">뒤를 덮고 그림만 보임</span></div>
             </div>
-            <figcaption>열림<span><b>어두운 가림막</b>으로 뒤를 덮습니다</span></figcaption>
+            <figcaption>그림을 열었을 때<span><b>어두운 가림막</b>으로 뒤를 덮습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;inset:0;background:color-mix(in srgb, var(--fg) 55%, transparent)"></span><span style="position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:66%;aspect-ratio:4/3;border-radius:4px;background:var(--accent-soft);display:grid;place-items:center;font-size:7.5px;color:var(--accent)">영수증 3</span><span style="position:absolute;right:4px;top:4px;width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">✕</span><span style="position:absolute;left:4px;top:48%;transform:translateY(-50%);width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">‹</span><span style="position:absolute;right:4px;top:48%;transform:translateY(-50%);width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">›</span><span style="position:absolute;left:0;right:0;bottom:4px;text-align:center;color:#fff;font-size:6.5px">3 / 8</span></div><span style="font-size:8.5px;color:var(--fg-muted)">앞뒤로 넘긴다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;inset:0;background:color-mix(in srgb, var(--fg) 55%, transparent)"></span><span style="position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:66%;aspect-ratio:4/3;border-radius:4px;background:var(--accent-soft);display:grid;place-items:center;font-size:7.5px;color:var(--accent)">영수증 3</span><span style="position:absolute;right:4px;top:4px;width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">✕</span><span style="position:absolute;left:4px;top:48%;transform:translateY(-50%);width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">‹</span><span style="position:absolute;right:4px;top:48%;transform:translateY(-50%);width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">›</span><span style="position:absolute;left:0;right:0;bottom:4px;text-align:center;color:#fff;font-size:6.5px">3 / 8</span></div><span style="font-size:8.5px;color:var(--fg-muted)">앞뒤로 넘김</span></div>
             </div>
-            <figcaption>여러 장<span><b>← →</b> 버튼과 몇 번째 그림인지를 보여 줍니다</span></figcaption>
+            <figcaption>여러 장을 넘길 때<span><b>← →</b> 버튼과 몇 번째 그림인지를 보여 줍니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;inset:0;background:color-mix(in srgb, var(--fg) 55%, transparent)"></span><span style="position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:66%;aspect-ratio:4/3;border-radius:4px;background:var(--accent-soft);display:grid;place-items:center;font-size:7.5px;color:var(--accent)">영수증 3</span><span style="position:absolute;right:4px;top:4px;width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">✕</span></div><span style="font-size:8.5px;color:var(--fg-muted)">한 장뿐이면 화살표를 안 둔다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;inset:0;background:color-mix(in srgb, var(--fg) 55%, transparent)"></span><span style="position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:66%;aspect-ratio:4/3;border-radius:4px;background:var(--accent-soft);display:grid;place-items:center;font-size:7.5px;color:var(--accent)">영수증 3</span><span style="position:absolute;right:4px;top:4px;width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">✕</span></div><span style="font-size:8.5px;color:var(--fg-muted)">한 장뿐이면 화살표를 두지 않음</span></div>
             </div>
-            <figcaption>한 장<span><b>넘길 그림이 없으니</b> 화살표를 두지 않습니다</span></figcaption>
+            <figcaption>그림이 한 장뿐일 때<span><b>넘길 그림이 없으니</b> 화살표를 두지 않습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">닫은 뒤</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--fg-muted)">닫았다</span><span style="display:block;font-size:8px;margin-top:2px">초점이 <b>눌렀던 칸</b>으로</span></span></div></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">닫은 뒤</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--fg-muted)">닫음</span><span style="display:block;font-size:8px;margin-top:2px">초점이 <b>눌렀던 칸</b>으로 돌아감</span></span></div></div>
             </div>
-            <figcaption>닫은 뒤<span>눌렀던 칸으로 <b>초점을 돌려줍니다</b></span></figcaption>
+            <figcaption>닫은 뒤의 초점<span>눌렀던 칸으로 <b>초점을 돌려줍니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">주소</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:7.5px;font-family:var(--mono)">/receipts?photo=3</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">링크로 보낼 수 있다</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">뒤로가기로도 닫힌다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">주소</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:7.5px;font-family:var(--mono)">/receipts?photo=3</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">링크로 보낼 수 있음</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">뒤로가기로도 닫힘</span></div>
             </div>
-            <figcaption>주소에 남김<span>주소를 보내면 같은 그림을 <b>공유할 수 있습니다</b></span></figcaption>
+            <figcaption>주소에 남겼을 때<span>주소를 보내면 같은 그림을 <b>공유할 수 있습니다</b></span></figcaption>
           </figure>
         </div>
       </section>
@@ -143,22 +143,22 @@
             <div class="anat" role="img" aria-label="라이트박스의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">어두운 가림막 — 그림에 눈이 가게</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">어두운 가림막으로 그림을 돋보이게 함</div>
                   <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">닫기(✕) · ← → · 몇 번째인지</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--accent)">닫으면 눌렀던 칸으로 초점이 돌아간다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--accent)">주소에 남긴다 — 링크로 보낼 수 있다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">Esc · 가림막 · ✕ — 닫는 길 셋</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">작은 그림을 억지로 늘리지 않는다</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--accent)">닫으면 눌렀던 칸으로 초점이 돌아감</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--accent)">주소에 남겨 링크로 보낼 수 있음</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">Esc · 가림막 · ✕ 세 가지로 닫음</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">작은 그림을 억지로 늘리지 않음</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>가림막 <em>어둡게</em></b><span>뒤 화면을 어둡게 덮어 <b>그림에 눈이 가게</b> 합니다</span></li>
+            <li><b>가림막 <em>어둡게 덮음</em></b><span>뒤 화면을 어둡게 덮어 <b>그림에 눈이 가게</b> 합니다</span></li>
             <li><b>조작 <em>✕ · ← → · 몇/몇</em></b><span>마우스나 손가락으로도, 키보드로도 <b>모두</b> 다룰 수 있어야 합니다</span></li>
-            <li><b>초점 <em>돌려주기</em></b><span>닫으면 눌렀던 칸으로 초점을 돌려줍니다</span></li>
-            <li><b>주소 <em>남기기</em></b><span>주소에 남겨 두면 <b>링크로</b> 보낼 수 있습니다</span></li>
-            <li><b>닫는 길 <em>셋</em></b><span>Esc, 가림막, ✕ 세 가지로 닫을 수 있습니다</span></li>
+            <li><b>초점 <em>닫을 때 돌려주기</em></b><span>닫으면 눌렀던 칸으로 초점을 돌려줍니다</span></li>
+            <li><b>주소 <em>주소에 남기기</em></b><span>주소에 남겨 두면 <b>링크로</b> 보낼 수 있습니다</span></li>
+            <li><b>닫는 방법 <em>세 가지</em></b><span>Esc, 가림막, ✕ 세 가지로 닫을 수 있습니다</span></li>
             <li><b>크기 <em>원본까지만</em></b><span>작은 그림을 원본보다 <b>억지로</b> 늘리지 않습니다</span></li>
           </ol>
         </div>
@@ -176,7 +176,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>라이트박스를 쓰는 경우</h3>
+            <h3>라이트박스를 만들 때 지킬 것</h3>
             <ul>
               <li>닫으면 <b>눌렀던 칸</b>으로 초점 돌려주기</li>
               <li><b>주소에 남겨</b> 링크 공유와 뒤로가기 닫기가 되게 하기</li>
@@ -184,7 +184,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>라이트박스를 쓰지 않는 경우</h3>
+            <h3>라이트박스를 만들 때 피할 것</h3>
             <ul>
               <li>초점을 <b>가두지 않기</b>. Tab을 누르면 초점이 뒤 화면의 링크로 나갑니다</li>
               <li>Esc로 <b>닫히지 않게</b> 두기</li>
@@ -193,7 +193,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>라이트박스 대신 다른 것을 써야 하는 경우</b> — 더 넓은 겹침은 <a href="modal.html">모달</a>, 작은 그림은 <a href="thumbnail.html">썸네일</a>, 이어 붙는 움직임은 <a href="sharedelement.html">공유 요소 전환</a>, 전체 화면이면 <a href="fullscreen.html">전체 화면 레이어</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>라이트박스 대신 다른 것을 써야 하는 경우</b> — 그림이 아닌 내용을 겹쳐 띄우려면 <a href="modal.html">모달</a>을 쓰고, 목록에 작게 보여 주는 그림은 <a href="thumbnail.html">썸네일</a>에서 다룹니다. 작은 그림이 커지며 이어지는 움직임은 <a href="sharedelement.html">공유 요소 전환</a>을 보고, 화면 전체를 덮어야 하면 <a href="fullscreen.html">전체 화면 레이어</a>를 씁니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -203,19 +203,19 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;inset:0;background:color-mix(in srgb, var(--fg) 55%, transparent)"></span><span style="position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:66%;aspect-ratio:4/3;border-radius:4px;background:var(--accent-soft);display:grid;place-items:center;font-size:7.5px;color:var(--accent)">영수증 3</span><span style="position:absolute;right:4px;top:4px;width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">✕</span><span style="position:absolute;left:4px;top:48%;transform:translateY(-50%);width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">‹</span><span style="position:absolute;right:4px;top:48%;transform:translateY(-50%);width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">›</span><span style="position:absolute;left:0;right:0;bottom:4px;text-align:center;color:#fff;font-size:6.5px">3 / 8</span></div></div>
             </div>
-            <figcaption><b>영수증 보기</b><b>여러 장</b>을 넘겨 봅니다</figcaption>
+            <figcaption><b>영수증 여러 장 넘겨 보기</b><b>여러 장</b>을 넘겨 봅니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;inset:0;background:color-mix(in srgb, var(--fg) 55%, transparent)"></span><span style="position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:66%;aspect-ratio:4/3;border-radius:4px;background:var(--accent-soft);display:grid;place-items:center;font-size:7.5px;color:var(--accent)">영수증 3</span><span style="position:absolute;right:4px;top:4px;width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">✕</span></div></div>
             </div>
-            <figcaption><b>증빙 한 장</b>한 장뿐이라 <b>화살표 없이</b> 보여 줍니다</figcaption>
+            <figcaption><b>증빙 한 장만 크게 보기</b>한 장뿐이라 <b>화살표 없이</b> 보여 줍니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding:6px"><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span><span style="aspect-ratio:4/3;border-radius:3px;background:var(--accent-soft)"></span></span></div></div>
             </div>
-            <figcaption><b>사진첩</b>목록에서 <b>골라 엽니다</b></figcaption>
+            <figcaption><b>사진첩에서 골라 열기</b>목록에서 <b>골라 엽니다</b></figcaption>
           </figure>
         </div>
       </section>
@@ -240,14 +240,14 @@
 lb.addEventListener(<span class="s">'close'</span>, () =&gt; last &amp;&amp; last.focus());   <span class="c">// 초점 돌려주기</span></pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td>Esc</td><td>라이트박스를 닫습니다. <code>&lt;dialog&gt;</code>를 쓰면 <b>저절로</b> 됩니다</td></tr>
             <tr><td>← →</td><td>앞뒤 그림으로 넘깁니다. 이 키는 <b>직접</b> 붙여야 합니다</td></tr>
             <tr><td>Tab</td><td>초점이 라이트박스 안에 <b>갇혀</b> 밖으로 나가지 않습니다</td></tr>
-            <tr><td>초점</td><td>열면 <b>닫기</b> 버튼으로, 닫으면 <b>눌렀던 칸</b>으로 옮깁니다</td></tr>
+            <tr><td>열고 닫을 때의 초점</td><td>열면 <b>닫기</b> 버튼으로, 닫으면 <b>눌렀던 칸</b>으로 옮깁니다</td></tr>
             <tr><td><code>alt</code></td><td>크게 보는 그림에도 <b>설명이 필요</b>합니다</td></tr>
-            <tr><td>확인하는 법</td><td>세 번째 그림을 Tab으로 찾아 열었다 닫은 뒤 <b>초점이 어디에 있는지</b> 봅니다</td></tr>
+            <tr><td>확인하는 방법</td><td>세 번째 그림을 Tab으로 찾아 열었다 닫은 뒤 <b>초점이 어디에 있는지</b> 봅니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -258,9 +258,9 @@ lb.addEventListener(<span class="s">'close'</span>, () =&gt; last &amp;&amp; las
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>큰 그림은 따로</th><td>목록에는 작은 그림을, 라이트박스에는 <b>큰 그림</b>을 따로 내려 줍니다.</td></tr>
-            <tr><th>이웃 그림</th><td>지금 보는 그림의 <b>앞뒤 한 장씩</b>을 미리 받아 두면 넘길 때 기다리지 않습니다.</td></tr>
-            <tr><th>원본 크기</th><td>그림의 원본 <code>width</code>·<code>height</code>를 함께 내려 주면 원본보다 <b>억지로 늘리는 것</b>을 막을 수 있습니다.</td></tr>
+            <tr><th>큰 그림은 따로 내려 주기</th><td>목록에는 작은 그림을, 라이트박스에는 <b>큰 그림</b>을 따로 내려 줍니다.</td></tr>
+            <tr><th>앞뒤 그림 미리 받아 두기</th><td>지금 보는 그림의 <b>앞뒤 한 장씩</b>을 미리 받아 두면 넘길 때 기다리지 않습니다.</td></tr>
+            <tr><th>원본 크기 함께 내려 주기</th><td>그림의 원본 <code>width</code>·<code>height</code>를 함께 내려 주면 원본보다 <b>억지로 늘리는 것</b>을 막을 수 있습니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -271,7 +271,7 @@ lb.addEventListener(<span class="s">'close'</span>, () =&gt; last &amp;&amp; las
         <p>라이트박스는 <b>어느 플랫폼에서나 생김새가 같고</b>, 폰에서는 손짓 조작이 더해집니다.</p>
         <div class="platforms">
           <div class="plat">
-            <header><b>웹</b><span>&lt;dialog&gt; 또는 직접</span></header>
+            <header><b>웹</b><span>&lt;dialog&gt; 또는 직접 만듦</span></header>
             <div class="shot">
               <div style="width:100%;max-width:110px;display:grid;gap:5px"><div style="position:relative;height:72px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="position:absolute;inset:0;background:color-mix(in srgb, var(--fg) 55%, transparent)"></span><span style="position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);width:66%;aspect-ratio:4/3;border-radius:4px;background:var(--accent-soft);display:grid;place-items:center;font-size:7.5px;color:var(--accent)">영수증 3</span><span style="position:absolute;right:4px;top:4px;width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">✕</span><span style="position:absolute;left:4px;top:48%;transform:translateY(-50%);width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">‹</span><span style="position:absolute;right:4px;top:48%;transform:translateY(-50%);width:12px;height:12px;border-radius:999px;background:rgba(0,0,0,.4);color:#fff;font-size:7px;display:grid;place-items:center">›</span><span style="position:absolute;left:0;right:0;bottom:4px;text-align:center;color:#fff;font-size:6.5px">3 / 8</span></div></div>
             </div>

@@ -50,7 +50,7 @@
           <iframe src="../demos/truncate.html" title="말줄임 실물 예시"></iframe>
         </div>
         <div class="note" style="margin-bottom:0">
-          <p><b>한 줄</b>, <b>여러 줄</b>, <b>흐려서 끊기</b>, 세 가지 방식을 나란히 두었습니다.
+          <p><b>한 줄로 줄이기</b>, <b>여러 줄까지 보여 주기</b>, <b>끝을 흐리게 지우기</b>, 세 가지 방식을 나란히 두었습니다.
           줄 수 막대를 움직이면 상자 높이가 따라 바뀝니다.<br>
           아래에는 <code>scrollWidth</code>·<code>scrollHeight</code> 값을 재서 <b>지금 글이 잘렸는지</b>를 보여 줍니다.
           이 값을 쓰면 <b>잘렸을 때만</b> 툴팁을 붙일 수 있습니다. 잘리지 않은 글에 툴팁이 뜨면 같은 내용을 한 번 더 보여 주는 셈이라 거슬립니다.</p>
@@ -76,18 +76,18 @@
         <p>글자를 다루는 항목들은 값 하나를 바꾸면 글 전체가 함께 바뀐다는 점이 같습니다. 서로 구별하려면 아래 네 가지를 물어보면 됩니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 바꾸나</th><th>한글에서 다른 점</th><th>안 지키면</th><th>고르는 단위</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 바꾸는가</th><th>한글에서 다른 점</th><th>지키지 않으면 생기는 일</th><th>값을 고르는 단위</th></tr></thead>
           <tbody>
-            <tr><td>글자 굵기</td><td>글자의 <b>두께</b></td><td>쓸 수 있는 굵기가 적다</td><td>단이 다 비슷해 보인다</td><td>400·500·700</td></tr>
-            <tr><td>행간</td><td><b>줄 사이</b></td><td><b>받침 때문에 더 넓게</b></td><td>글이 한 덩어리로 뭉친다</td><td>배수(1.6~1.8)</td></tr>
-            <tr><td>자간</td><td><b>글자 사이</b></td><td>조금만 벌려도 흩어진다</td><td>글자가 닿거나 흩어진다</td><td>em</td></tr>
-            <tr><td>한글 조판</td><td><b>줄바꿈 규칙</b></td><td><b>이 항목이 통째로 한글 문제</b></td><td>어절이 한가운데서 쪼개진다</td><td>속성</td></tr>
-            <tr><td>숫자 꼴</td><td>숫자의 <b>너비</b></td><td>기능 없는 글꼴이 많다</td><td>자릿수가 흔들린다</td><td>켜고 끔</td></tr>
-            <tr class="me"><td><b>말줄임</b></td><td>넘친 글의 <b>끝</b></td><td>같다</td><td>뒷말이 그냥 사라진다</td><td>줄 수</td></tr>
-            <tr><td>웹폰트</td><td><b>글꼴 파일</b></td><td><b>파일이 수십 배 크다</b></td><td>글이 늦게 뜨거나 튄다</td><td>굵기당 한 벌</td></tr>
-            <tr><td>글자 위계</td><td>읽는 <b>순서</b></td><td>같다</td><td>어디부터 읽을지 모른다</td><td>크기·굵기·색</td></tr>
-            <tr><td>대소문자</td><td><b>영어 글자</b>의 꼴</td><td>한국어에는 <b>없다</b></td><td>줄 안에서 결이 어긋난다</td><td>자리마다</td></tr>
-            <tr><td>아이콘 글꼴</td><td>그림을 <b>글자 자리</b>에</td><td>같다(글꼴 문제)</td><td>못 받으면 네모가 남는다</td><td>묶음째</td></tr>
+            <tr><td>글자 굵기</td><td>글자의 <b>두께</b></td><td>쓸 수 있는 굵기가 적습니다</td><td>단끼리 다 비슷해 보입니다</td><td>400·500·700</td></tr>
+            <tr><td>행간</td><td><b>줄 사이</b></td><td><b>받침 때문에 더 넓게</b> 잡습니다</td><td>글이 한 덩어리로 뭉쳐 보입니다</td><td>배수(1.6~1.8)</td></tr>
+            <tr><td>자간</td><td><b>글자 사이</b></td><td>조금만 벌려도 흩어져 보입니다</td><td>글자가 닿거나 흩어집니다</td><td>em</td></tr>
+            <tr><td>한글 조판</td><td><b>줄바꿈 규칙</b></td><td><b>항목 전체가 한글 문제를 다룹니다</b></td><td>어절 한가운데서 줄이 넘어갑니다</td><td>CSS 속성 값</td></tr>
+            <tr><td>숫자 꼴</td><td>숫자의 <b>너비</b></td><td>기능이 없는 글꼴이 많습니다</td><td>자릿수가 흔들립니다</td><td>기능을 켜고 끄기</td></tr>
+            <tr class="me"><td><b>말줄임</b></td><td>넘친 글의 <b>끝</b></td><td>영문과 같습니다</td><td>뒷말이 아무 표시 없이 사라집니다</td><td>줄 수</td></tr>
+            <tr><td>웹폰트</td><td><b>글꼴 파일</b></td><td><b>파일이 수십 배 큽니다</b></td><td>글이 늦게 뜨거나 모양이 바뀌며 밀립니다</td><td>굵기마다 파일 한 벌</td></tr>
+            <tr><td>글자 위계</td><td>읽는 <b>순서</b></td><td>영문과 같습니다</td><td>어디부터 읽을지 알 수 없습니다</td><td>크기·굵기·색</td></tr>
+            <tr><td>대소문자</td><td><b>영어 글자</b>의 꼴</td><td>한국어에는 <b>대소문자가 없습니다</b></td><td>한 줄 안에서 두 언어의 모양이 어긋납니다</td><td>쓰는 자리마다 정함</td></tr>
+            <tr><td>아이콘 글꼴</td><td>그림을 <b>글자 자리</b>에</td><td>영문과 같습니다(글꼴 문제)</td><td>글꼴을 못 받으면 네모가 남습니다</td><td>글꼴 묶음 하나</td></tr>
           </tbody>
         </table>
         </div>
@@ -97,38 +97,38 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 갈래<span class="hint">자르는 방법마다 주는 느낌이 다르다</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 글을 줄이는 여러 방법<span class="hint">방법마다 달라지는 모습</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:160px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:8px;font-size:11px;line-height:1.7;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">환불 확인 요청 — 카드 승인 취소가 늦어져 고객이 두 번 문의했고 담당자가 바뀌면서 한 번 더 늦어진 건입니다.</div><div style="font-family:var(--mono);font-size:10px;color:var(--fg-muted);text-align:center;margin-top:6px">한 줄</div>
             </div>
-            <figcaption>한 줄<span>끝에 <code>…</code>이 붙습니다. <b>목록 제목에 기본으로</b> 쓰는 방식입니다</span></figcaption>
+            <figcaption>한 줄로 줄일 때<span>끝에 <code>…</code>이 붙습니다. <b>목록 제목에 기본으로</b> 쓰는 방식입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:160px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:8px;font-size:11px;line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">환불 확인 요청 — 카드 승인 취소가 늦어져 고객이 두 번 문의했고 담당자가 바뀌면서 한 번 더 늦어진 건입니다.</div><div style="font-family:var(--mono);font-size:10px;color:var(--fg-muted);text-align:center;margin-top:6px">두 줄</div>
             </div>
-            <figcaption>여러 줄<span><code>-webkit-line-clamp</code>로 보여 줄 줄 수를 정합니다</span></figcaption>
+            <figcaption>여러 줄까지 보여 줄 때<span><code>-webkit-line-clamp</code>로 보여 줄 줄 수를 정합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:160px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:8px;font-size:11px;line-height:1.7;max-height:38px;overflow:hidden;position:relative">환불 확인 요청 — 카드 승인 취소가 늦어져 고객이 두 번 문의했고 담당자가 바뀌면서 한 번 더 늦어진 건입니다.</div><div style="font-family:var(--mono);font-size:10px;color:var(--fg-muted);text-align:center;margin-top:6px">흐려서 끊기</div>
             </div>
-            <figcaption>페이드<span><code>…</code> 없이 끝을 흐리게 해서 <b>뒤에 글이 더 있다는 것</b>만 알려 줍니다</span></figcaption>
+            <figcaption>끝을 흐리게 지울 때<span><code>…</code> 없이 끝을 흐리게 해서 <b>뒤에 글이 더 있다는 것</b>만 알려 줍니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:160px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:8px;font-size:11px;line-height:1.7;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">환불 확인 요청</div><div style="font-family:var(--mono);font-size:10px;color:var(--fg-muted);text-align:center;margin-top:6px">안 잘림</div>
             </div>
-            <figcaption>안 잘림<span>글이 짧으면 아무 변화가 없습니다. 이때는 <b>툴팁도 붙이지 않습니다</b></span></figcaption>
+            <figcaption>글이 짧아 잘리지 않을 때<span>글이 짧으면 아무 변화가 없습니다. 이때는 <b>툴팁도 붙이지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:160px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:8px;font-size:11px;line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">환불 확인 요청 — 카드 승인 취소가 늦어져 고객이 두 번 문의했고 담당자가 바뀌면서 한 번 더 늦어진 건입니다.</div><div style="font-family:var(--mono);font-size:10px;color:var(--fg-muted);text-align:center;margin-top:6px">+ 더 보기</div>
               <div style="text-align:center;margin-top:4px"><span style="font-size:10px;color:var(--accent);text-decoration:underline">더 보기</span></div>
             </div>
-            <figcaption>더 보기<span>잘린 글을 <b>펼쳐 볼 수 있게</b> 합니다. 사용자가 전체를 가장 쉽게 볼 수 있는 방법입니다</span></figcaption>
+            <figcaption>더 보기로 펼치게 할 때<span>잘린 글을 <b>펼쳐 볼 수 있게</b> 합니다. 사용자가 전체를 가장 쉽게 볼 수 있는 방법입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -152,8 +152,8 @@
                   <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">overflow: hidden</div>
                   <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">text-overflow: ellipsis</div>
                   <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">white-space: nowrap</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">-webkit-line-clamp: 2   — 여러 줄</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">scrollWidth &gt; clientWidth   — 잘렸는지 아는 법</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">-webkit-line-clamp: 2   여러 줄 말줄임</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">scrollWidth &gt; clientWidth   잘렸는지 알아내는 비교</div>
                 </div>
               </div>
             </div>
@@ -195,7 +195,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>말줄임 대신 다른 것을 써야 하는 경우</b> — 넘침 자체의 처리는 <a href="../items/overflow.html">넘침</a>, 줄이 안 줄어들면 <a href="../items/flex.html">플렉스</a>의 <code>min-width: 0</code>, 전체를 띄우려면 <a href="../items/tooltip.html">툴팁</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>말줄임과 이어지는 주제를 다루는 항목</b> — 칸을 넘친 내용 전체를 어떻게 처리할지는 <a href="../items/overflow.html">넘침</a>에서 다룹니다. 플렉스 안에서 글이 줄어들지 않으면 <a href="../items/flex.html">플렉스</a> 항목의 <code>min-width: 0</code>을 보고, 잘린 글 전체를 띄워 보여 주려면 <a href="../items/tooltip.html">툴팁</a>을 씁니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -209,13 +209,13 @@
                 <span style="font-size:10px;color:var(--fg-muted);flex:none">₩48,000</span>
               </div>
             </div>
-            <figcaption><b>목록 제목</b>한 줄 말줄임에 <code>min-width: 0</code>을 더해서 <b>뒤쪽 값이 밀려나지 않습니다</b></figcaption>
+            <figcaption><b>목록 제목을 한 줄로 줄이기</b>한 줄 말줄임에 <code>min-width: 0</code>을 더해서 <b>뒤쪽 값이 밀려나지 않습니다</b></figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:190px;border:1px solid var(--line);border-radius:5px;background:var(--surface);padding:8px;font-size:11px;line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">환불 확인 요청 — 카드 승인 취소가 늦어져 고객이 두 번 문의했고 담당자가 바뀌면서 한 번 더 늦어진 건입니다.</div>
             </div>
-            <figcaption><b>카드 설명</b>두 줄까지만 보여 주므로 <b>카드 높이가 고르게</b> 맞습니다</figcaption>
+            <figcaption><b>카드 설명을 두 줄로 맞추기</b>두 줄까지만 보여 주므로 <b>카드 높이가 고르게</b> 맞습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -224,13 +224,13 @@
                 <span style="font-size:10.5px;color:var(--accent);text-decoration:underline;justify-self:start">더 보기</span>
               </div>
             </div>
-            <figcaption><b>더 보기</b>글이 잘렸을 때<b>만</b> 더 보기 버튼을 보여 줍니다</figcaption>
+            <figcaption><b>잘린 글에 더 보기 붙이기</b>글이 잘렸을 때<b>만</b> 더 보기 버튼을 보여 줍니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">세 속성이 한 세트</span></h2>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">한 세트로 적는 세 속성</span></h2>
         <p>한 줄 말줄임에는 <b>세 속성</b>이 필요하고 플렉스 자식이면 한 줄을 더 적습니다. 여러 줄 말줄임에는 <b>네 속성</b>이 필요합니다.</p>
 <pre class="code"><span class="c">/* 한 줄 */</span>
 <span class="t">.title</span> {
@@ -252,14 +252,14 @@
 <span class="t">if</span> (el.scrollWidth &gt; el.clientWidth) el.title = el.textContent;</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>규칙</th><th>지켜야 하는 것</th></tr></thead>
+          <thead><tr><th>지킬 규칙</th><th>지키는 방법</th></tr></thead>
           <tbody>
-            <tr><td>세 속성이 한 세트</td><td>하나라도 빠지면 <code>…</code>이 나오지 않습니다</td></tr>
-            <tr><td><code>min-width: 0</code></td><td>플렉스·그리드 자식에서는 <b>이 줄이 없으면 말줄임이 적용되지 않습니다</b></td></tr>
-            <tr><td>잘렸을 때만 툴팁</td><td><code>scrollWidth &gt; clientWidth</code>로 잘렸는지 확인한 뒤에 붙입니다</td></tr>
-            <tr><td>전체를 볼 길을 준다</td><td>툴팁, 상세 화면, 더 보기 가운데 하나는 둡니다. <b>그런 방법이 없으면 잘린 정보는 아무도 볼 수 없습니다</b></td></tr>
-            <tr><td>글자 수로 자르지 않는다</td><td>어디서 자를지는 화면 폭에 맡깁니다. 서버에서 글자 수로 자르면 <b>넓은 화면에서도 글이 짧게 잘립니다</b></td></tr>
-            <tr><td>끝이 중요하면 가운데를</td><td>파일명이나 코드는 앞뒤를 남기고 <b>가운데를 지웁니다</b></td></tr>
+            <tr><td>세 속성을 한 세트로 적기</td><td>하나라도 빠지면 <code>…</code>이 나오지 않습니다</td></tr>
+            <tr><td><code>min-width: 0</code> 더하기</td><td>플렉스·그리드 자식에서는 <b>이 줄이 없으면 말줄임이 적용되지 않습니다</b></td></tr>
+            <tr><td>잘렸을 때만 툴팁 붙이기</td><td><code>scrollWidth &gt; clientWidth</code>로 잘렸는지 확인한 뒤에 붙입니다</td></tr>
+            <tr><td>전체를 볼 방법 남기기</td><td>툴팁, 상세 화면, 더 보기 가운데 하나는 둡니다. <b>그런 방법이 없으면 잘린 정보는 아무도 볼 수 없습니다</b></td></tr>
+            <tr><td>글자 수로 자르지 않기</td><td>어디서 자를지는 화면 폭에 맡깁니다. 서버에서 글자 수로 자르면 <b>넓은 화면에서도 글이 짧게 잘립니다</b></td></tr>
+            <tr><td>끝이 중요하면 가운데 지우기</td><td>파일명이나 코드는 앞뒤를 남기고 <b>가운데를 지웁니다</b></td></tr>
           </tbody>
         </table>
         </div>
@@ -270,10 +270,10 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>자르기는 화면에서</th><td>서버가 글을 미리 자르면 <b>툴팁에도 전체를 보여 줄 수 없습니다.</b> 그래서 전체를 보내고 화면에서 줄이는 편이 낫고, 서버에서는 글이 아주 길 때만 자릅니다.</td></tr>
-            <tr><th>가장 긴 값으로 테스트</th><td>개발 중에 쓰는 짧은 더미 데이터로는 말줄임 문제가 <b>드러나지 않습니다.</b> 그래서 운영 데이터에서 가장 긴 값으로 화면을 한 번 그려 봅니다.</td></tr>
-            <tr><th>검색 결과 하이라이트</th><td>글을 자른 뒤에 하이라이트를 넣으면 <b>찾은 낱말이 잘린 부분에 들어가 보이지 않을</b> 수 있습니다. 그래서 찾은 자리 앞뒤를 남기고 자르는 처리가 따로 필요합니다.</td></tr>
-            <tr><th>접근성</th><td>화면에서 잘린 글도 DOM에는 전체가 들어 있어서 스크린 리더는 <b>전체를 읽습니다</b>. 그래서 같은 내용을 <code>title</code>로 한 번 더 붙이면 두 번 읽힙니다.</td></tr>
+            <tr><th>글은 화면에서 자르기</th><td>서버가 글을 미리 자르면 <b>툴팁에도 전체를 보여 줄 수 없습니다.</b> 그래서 전체를 보내고 화면에서 줄이는 편이 낫고, 서버에서는 글이 아주 길 때만 자릅니다.</td></tr>
+            <tr><th>가장 긴 값으로 화면 확인하기</th><td>개발 중에 쓰는 짧은 더미 데이터로는 말줄임 문제가 <b>드러나지 않습니다.</b> 그래서 운영 데이터에서 가장 긴 값으로 화면을 한 번 그려 봅니다.</td></tr>
+            <tr><th>검색 결과 하이라이트가 잘리는 문제</th><td>글을 자른 뒤에 하이라이트를 넣으면 <b>찾은 낱말이 잘린 부분에 들어가 보이지 않을</b> 수 있습니다. 그래서 찾은 자리 앞뒤를 남기고 자르는 처리가 따로 필요합니다.</td></tr>
+            <tr><th>스크린 리더가 읽는 내용</th><td>화면에서 잘린 글도 DOM에는 전체가 들어 있어서 스크린 리더는 <b>전체를 읽습니다</b>. 그래서 같은 내용을 <code>title</code>로 한 번 더 붙이면 두 번 읽힙니다.</td></tr>
           </tbody>
         </table>
         </div>

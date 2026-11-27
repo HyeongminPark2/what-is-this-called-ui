@@ -15,12 +15,12 @@ def fm(shown, raw, label="", note="", ok=None, w="152px"):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">보이는 값 — 하이픈·공백이 들어간 꼴</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">보낼 값 — 숫자만 남긴다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--accent)">붙여넣은 기호는 알아서 걸러낸다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">서식을 넣을 때 커서가 맨 뒤로 튀기 쉽다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">자릿수를 다 채우면 다음 칸으로 넘기기도 한다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">지우기(Backspace)에서 기호를 건너뛴다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">보이는 값에는 하이픈·공백이 들어감</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">보낼 값에는 숫자만 남김</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--accent)">붙여넣은 기호는 알아서 걸러 냄</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">서식을 넣을 때 커서가 맨 뒤로 튀기 쉬움</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">자릿수를 다 채우면 다음 칸으로 넘기기도 함</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">지울 때(Backspace) 기호를 건너뜀</div>
                 </div>
               </div>'''
 
@@ -50,26 +50,26 @@ D = dict(
   axes=ax("자동 서식 입력"),
   oneline="<b>보이는 값과 보낼 값을 나누세요.</b> 하이픈 같은 서식은 화면에서만 붙이고, 서버에는 숫자만 보냅니다.",
   states=states([
-    (fm("123-45-67890", "1234567890", "", "서식이 들어갔다", True), "기본", "칸에는 서식이 든 <b>보이는 값</b>이, 서버에는 숫자만 든 보낼 값이 갑니다"),
-    (fm("123-45-678", "123456780", "", "아직 덜 찼다", None), "치는 중", "몇 자리를 쳤는지 <b>세어 보여 줍니다</b>"),
-    (fm("123-45-67890 (주)", "12345678900", "", "기호가 그대로 들어갔다", False),
-     "안 걸러냄", "기호가 섞인 값을 보내면 <b>서버가 거절합니다</b>"),
-    (fm("1234 5678 9012 3456", "1234567890123456", "", "카드는 네 자리씩", True),
-     "다른 꼴", "서식은 번호 <b>종류마다</b> 다릅니다"),
+    (fm("123-45-67890", "1234567890", "", "서식이 들어감", True), "다 쳤을 때", "칸에는 서식이 든 <b>보이는 값</b>이, 서버에는 숫자만 든 보낼 값이 갑니다"),
+    (fm("123-45-678", "123456780", "", "아직 자릿수가 덜 참", None), "치는 중일 때", "몇 자리를 쳤는지 <b>세어 보여 줍니다</b>"),
+    (fm("123-45-67890 (주)", "12345678900", "", "기호가 그대로 들어감", False),
+     "붙여넣은 기호를 걸러 내지 않았을 때", "기호가 섞인 값을 보내면 <b>서버가 거절합니다</b>"),
+    (fm("1234 5678 9012 3456", "1234567890123456", "", "카드번호는 네 자리씩 끊음", True),
+     "번호 종류가 다를 때", "서식은 번호 <b>종류마다</b> 다릅니다"),
     (one(txt('<span style="display:block;font-size:8px">123-45-6|7890</span>'
-             '<span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">커서가 맨 뒤로 튀면 못 고친다</span>'),
+             '<span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">커서가 맨 뒤로 튀면 고칠 수 없음</span>'),
          "커서 튐", False, "", "152px"),
-     "커서 튐", "커서가 맨 뒤로 튀어서 <b>가운데 글자를 고칠 수 없습니다</b>"),
-    (fm("010-1234-5678", "01012345678", "", "앞의 0 이 살아 있다", True),
-     "앞의 0", "<b><code>text</code></b> 칸이라서 앞의 0이 사라지지 않습니다"),
+     "커서가 맨 뒤로 튀었을 때", "커서가 맨 뒤로 튀어서 <b>가운데 글자를 고칠 수 없습니다</b>"),
+    (fm("010-1234-5678", "01012345678", "", "앞의 0이 지워지지 않음", True),
+     "맨 앞이 0인 번호", "<b><code>text</code></b> 칸이라서 앞의 0이 사라지지 않습니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("보이는 값", "서식 포함", "하이픈이나 공백을 넣어 읽기 쉽게 보여 줍니다"),
-    ("보낼 값", "숫자만", "보내기 전에 <b>화면에서</b> 서식 글자를 지웁니다"),
-    ("붙여넣기", "걸러내기", "붙여넣은 값에 섞인 공백·괄호·점을 걸러 냅니다"),
-    ("커서", "튀기 쉬움", "서식을 넣은 뒤 <b>커서 앞에 있던 숫자 개수</b>를 기준으로 커서를 되돌립니다"),
-    ("오토 탭", "다 채우면", "자릿수를 다 채우면 다음 칸으로 넘어갑니다"),
+    ("보이는 값", "서식이 들어간 모양", "하이픈이나 공백을 넣어 읽기 쉽게 보여 줍니다"),
+    ("보낼 값", "숫자만 남긴 값", "보내기 전에 <b>화면에서</b> 서식 글자를 지웁니다"),
+    ("붙여넣기", "기호 걸러 내기", "붙여넣은 값에 섞인 공백·괄호·점을 걸러 냅니다"),
+    ("커서", "튀지 않게 되돌리기", "서식을 넣은 뒤 <b>커서 앞에 있던 숫자 개수</b>를 기준으로 커서를 되돌립니다"),
+    ("오토 탭", "다 채우면 다음 칸으로", "자릿수를 다 채우면 다음 칸으로 넘어갑니다"),
     ("Backspace", "기호 건너뛰기", "지울 때 하이픈에서 <b>멈추지 않게</b> 합니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -93,11 +93,11 @@ D = dict(
     "<code>type=\"number\"</code> 칸에 서식 넣기. 하이픈이 들어가면 <b>값이 사라집니다</b>",
     "자리글로 서식을 흉내 내기. 사용자가 치기 시작하면 <b>안내가 사라집니다</b>",
   ]),
-  instead='서식 없는 숫자는 <a href="numberinput.html">숫자 입력</a>, 값이 맞는지 확인하는 일은 <a href="validation.html">입력 검증</a>, 칸 안팎의 안내 글은 <a href="placeholder.html">자리글과 헬퍼 텍스트</a>, 오류 문구는 <a href="errortext.html">오류 문구</a>.',
+  instead='하이픈 같은 서식 없이 숫자만 받으면 되는 칸에는 <a href="numberinput.html">숫자 입력</a>을 씁니다. 값이 맞는지 확인하는 일은 <a href="validation.html">입력 검증</a>에서, 칸 안팎에 적는 안내 글은 <a href="placeholder.html">자리글과 헬퍼 텍스트</a>에서, 값이 틀렸을 때 보여 줄 문구는 <a href="errortext.html">오류 문구</a>에서 다룹니다.',
   cases=cases([
-    (fm("123-45-67890", "1234567890", "", "", True, "150px"), "사업자번호", "<b>세 자리씩</b> 끊어 하이픈을 넣습니다"),
-    (fm("010-1234-5678", "01012345678", "", "", True, "150px"), "전화번호", "맨 앞의 0이 <b>사라지지 않아야</b> 합니다"),
-    (fm("1234 5678 9012 3456", "1234567890123456", "", "", True, "150px"), "카드번호", "<b>네 자리씩</b> 끊어 공백을 넣습니다"),
+    (fm("123-45-67890", "1234567890", "", "", True, "150px"), "사업자번호 받기", "<b>세 자리씩</b> 끊어 하이픈을 넣습니다"),
+    (fm("010-1234-5678", "01012345678", "", "", True, "150px"), "전화번호 받기", "맨 앞의 0이 <b>사라지지 않아야</b> 합니다"),
+    (fm("1234 5678 9012 3456", "1234567890123456", "", "", True, "150px"), "카드번호 받기", "<b>네 자리씩</b> 끊어 공백을 넣습니다"),
   ]),
   code_lede="칸의 값에서 숫자만 뽑아 서식을 다시 입힌 뒤, <b>커서를 원래 자리로 되돌립니다</b>.",
   code='''<span class="t">const</span> digits = s =&gt; s.replace(/[^\\d]/g, <span class="s">''</span>);
@@ -119,22 +119,22 @@ input.addEventListener(<span class="s">'input'</span>, () =&gt; {
   keys=kbd([
     ("<code>inputmode=\"numeric\"</code>", "폰에서 <b>숫자 자판</b>이 뜹니다"),
     ("Backspace", "하이픈에서 <b>멈추지 않도록</b> 한 칸 더 지웁니다"),
-    ("붙여넣기", "<code>paste</code> 이벤트에서 <b>기호를 걸러</b> 냅니다"),
+    ("붙여넣을 때", "<code>paste</code> 이벤트에서 <b>기호를 걸러</b> 냅니다"),
     ("<code>autocomplete</code>", "<code>tel</code>·<code>cc-number</code>처럼 칸에 들어갈 값의 <b>종류를 적어</b> 둡니다"),
     ("<code>maxlength</code>", "하이픈 같은 서식 글자까지 세기 때문에 <b>넉넉하게</b> 둡니다"),
-    ("확인하는 법", "가운데 한 글자를 고쳐 보고 <b>커서가 튀는지</b> 확인합니다"),
+    ("확인하는 방법", "가운데 한 글자를 고쳐 보고 <b>커서가 튀는지</b> 확인합니다"),
   ]),
   backend=rows([
-    ("숫자만 받는다", "서버에는 <code>\"123-45-67890\"</code>이 아니라 <code>\"1234567890\"</code>으로 보냅니다."),
-    ("관대하게 받기", "화면에서 숫자만 보내더라도, 서버는 <b>기호가 섞인 값이 와도</b> 걸러서 받는 편이 안전합니다."),
-    ("검증은 서버에서", "사업자번호 체크섬 같은 검사는 <b>서버에서</b> 해야 결과를 믿을 수 있습니다."),
+    ("서버에는 숫자만 보내기", "서버에는 <code>\"123-45-67890\"</code>이 아니라 <code>\"1234567890\"</code>으로 보냅니다."),
+    ("서버는 기호가 섞인 값도 걸러서 받기", "화면에서 숫자만 보내더라도, 서버는 <b>기호가 섞인 값이 와도</b> 걸러서 받는 편이 안전합니다."),
+    ("번호가 맞는지는 서버에서 검사하기", "사업자번호 체크섬 같은 검사는 <b>서버에서</b> 해야 결과를 믿을 수 있습니다."),
   ]),
   plat_lede="자동 서식 입력은 어느 플랫폼에서든 <b>직접 만드는 경우</b>가 대부분입니다.",
   plats=plats([
-    ("웹", "직접 만듦",
+    ("웹", "직접 만들어 씀",
      fm("123-45-67890", "1234567890", "", "", True, "110px"),
      "표준 마스크 기능이 없어서 직접 만들어야 하고, 그때마다 <b>커서 처리</b>가 까다롭습니다."),
-    ("iOS", "직접 만듦",
+    ("iOS", "직접 만들어 씀",
      '''              <div class="phone" role="img" aria-label="iOS 서식 입력 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:26px;height:10px;border-radius:3px;border:1px solid var(--line)"></div>
                 <div style="position:absolute;left:8px;top:29px;font-size:5px;font-family:var(--mono)">123-45-6789</div></div></div>''',

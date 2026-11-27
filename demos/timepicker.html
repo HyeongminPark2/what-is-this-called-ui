@@ -25,7 +25,7 @@
 <body>
 <div class="bar">
   <b>시간 선택기</b>
-  <label>간격 <select class="sel" id="step" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>목록 간격 <select class="sel" id="step" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="60">1시간</option>
     <option value="30" selected>30분</option>
     <option value="10">10분</option>
@@ -90,11 +90,11 @@
 
     var rd = document.getElementById('read');
     rd.innerHTML = '고른 시간 <b>' + hhmm(sel) + '</b> · 같은 시간을 오전오후로 적으면 <b>' + ampm(sel) + '</b>' +
-      '<br>간격 <b>' + step + '분</b> · 목록에 든 줄 <b>' + rows.length + '줄</b>' +
-      (rows.length > 200 ? ' <span class="warn">— 굴려서 찾기 어렵습니다</span>' : '') +
-      '<br>막힌 줄 <b>' + blocked + '줄</b>' + (biz ? ' (영업 시간 밖)' : ' <span class="warn">— 고를 수 없는 시간도 눌립니다</span>') +
-      '<br>표기 <b>' + (h24 ? '24시간제' : '오전/오후') + '</b>' +
-      (h24 ? '' : ' <span class="warn">— 12시가 낮인지 밤인지 헷갈립니다</span>') +
+      '<br>간격이 <b>' + step + '분</b>이면 목록에 <b>' + rows.length + '줄</b>이 듭니다' +
+      (rows.length > 200 ? ' <span class="warn">줄이 너무 많아 굴려서 찾기 어렵습니다</span>' : '') +
+      '<br>막아 둔 줄 <b>' + blocked + '줄</b>' + (biz ? ' (영업 시간 밖)' : ' <span class="warn">막기를 꺼서 고를 수 없는 시간도 눌립니다</span>') +
+      '<br>지금 표기는 <b>' + (h24 ? '24시간제' : '오전/오후') + '</b>입니다' +
+      (h24 ? '' : ' <span class="warn">이렇게 적으면 12시가 낮인지 밤인지 헷갈립니다</span>') +
       (why ? '<br>' + why : '');
     rd.dataset.sel = hhmm(sel);
     rd.dataset.rows = String(rows.length);

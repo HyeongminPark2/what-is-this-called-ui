@@ -11,12 +11,12 @@ def scroller(rowstxt, note="", w="160px", h="62px"):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">바깥 상자 — 높이가 정해져 있고 여기서 굴린다</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">받침대 height = 20000 × 36px — 막대 길이를 만든다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">바깥 상자는 높이가 정해져 있고 여기서 스크롤함</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">받침대 height = 20000 × 36px로 막대 길이를 만듦</div>
                   <div class="pin-out" data-pin="3" style="max-width:230px">''' + scroller(['… 9,980', '… 9,981', '… 9,982', '… 9,983'], "", "230px", "60px").strip() + '''</div>
                   <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">실제로 그린 것은 12줄뿐</div>
                   <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">transform: translateY(첫 줄 번호 × 36px)</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">줄 높이가 제각각이면 이 계산이 전부 무너진다</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">줄 높이가 제각각이면 이 계산이 전부 어긋남</div>
                 </div>
               </div>'''
 
@@ -48,14 +48,14 @@ D = dict(
   oneline="가상 스크롤은 다른 방법이 통하지 않을 때 꺼내는 <b>마지막 수단</b>입니다. 줄 수를 줄이거나 쪽을 나눠서 해결된다면 언제나 그쪽이 낫습니다.",
   s4_title="상태", s4_hint="줄이 늘어날 때 일어나는 일",
   states=states([
-    (scroller(['모란상회', '한빛아웃도어', '새벽상사', '대림유통'], "200줄 — 그냥 다 그려도 된다"),
-     "작은 목록", "<b>가상 스크롤이 필요 없습니다.</b> 넣으면 코드만 복잡해집니다"),
-    (scroller(['… 1', '… 2', '… 3', '… 4'], "20,000줄 전부 그림 — 멈칫한다"),
-     "큰 목록을 그냥", "노드가 2만 개 만들어져서 처음 그릴 때 <b>화면이 잠시 멈춥니다</b>"),
-    (scroller(['… 9,980', '… 9,981', '… 9,982', '… 9,983'], "보이는 12줄만 — 노드 12개"),
-     "가상 스크롤", "스크롤 막대 길이는 같고 <b>그린 줄만 줄어듭니다</b>"),
-    (scroller(['…', '<span class="skl" style="height:8px;width:60%;display:inline-block"></span>', '<span class="skl" style="height:8px;width:45%;display:inline-block"></span>', '…'], "빠르게 굴리면 빈 줄이 스친다"),
-     "빨리 굴릴 때", "새 줄을 그리기 전에 <b>빈 자리</b>가 잠깐 보입니다. 이 자리는 뼈대로 채웁니다"),
+    (scroller(['모란상회', '한빛아웃도어', '새벽상사', '대림유통'], "200줄이면 그냥 다 그려도 됨"),
+     "줄이 몇백 개인 작은 목록", "<b>가상 스크롤이 필요 없습니다.</b> 넣으면 코드만 복잡해집니다"),
+    (scroller(['… 1', '… 2', '… 3', '… 4'], "20,000줄을 다 그려 잠시 멈춤"),
+     "큰 목록을 전부 그렸을 때", "노드가 2만 개 만들어져서 처음 그릴 때 <b>화면이 잠시 멈춥니다</b>"),
+    (scroller(['… 9,980', '… 9,981', '… 9,982', '… 9,983'], "보이는 12줄만 그려 노드 12개"),
+     "가상 스크롤을 켰을 때", "스크롤 막대 길이는 같고 <b>그린 줄만 줄어듭니다</b>"),
+    (scroller(['…', '<span class="skl" style="height:8px;width:60%;display:inline-block"></span>', '<span class="skl" style="height:8px;width:45%;display:inline-block"></span>', '…'], "빠르게 굴리면 빈 줄이 잠깐 보임"),
+     "빠르게 스크롤할 때", "새 줄을 그리기 전에 <b>빈 자리</b>가 잠깐 보입니다. 이 자리는 뼈대로 채웁니다"),
     ('''              <div style="width:100%;max-width:160px">
                 <div style="height:62px;border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden">
                   <div style="height:14px;padding:0 7px;font-size:9.5px;line-height:14px;border-bottom:1px solid var(--line)">짧은 줄</div>
@@ -63,11 +63,11 @@ D = dict(
                   <div style="height:14px;padding:0 7px;font-size:9.5px;line-height:14px;border-bottom:1px solid var(--line)">짧은 줄</div>
                   <div style="height:14px;padding:0 7px;font-size:9.5px;line-height:14px">…</div>
                 </div>
-                <span style="display:block;font-size:8.5px;color:var(--fg-muted);margin-top:3px">높이가 제각각 — 계산이 어긋난다</span>
+                <span style="display:block;font-size:8.5px;color:var(--fg-muted);margin-top:3px">높이가 제각각이라 계산이 어긋남</span>
               </div>''',
      "줄 높이가 다를 때", "줄마다 높이를 <b>재야 합니다.</b> 그래서 구현하기가 몇 배 어려워집니다"),
-    (scroller(['… 19,998', '… 19,999', '… 20,000', ''], "끝에 다다름 — 더 받을 것이 있나"),
-     "끝", "<a href=\"../items/infinite.html\">무한 스크롤</a>과 함께 쓰면 여기서 다음 묶음을 받습니다"),
+    (scroller(['… 19,998', '… 19,999', '… 20,000', ''], "끝에 다다르면 더 받을지 확인"),
+     "목록 끝에 다다랐을 때", "<a href=\"../items/infinite.html\">무한 스크롤</a>과 함께 쓰면 여기서 다음 묶음을 받습니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -95,16 +95,16 @@ D = dict(
     "줄 높이가 제각각인데 직접 만들려고 할 때. 이 경우에는 <b>라이브러리를 씁니다</b>",
     "쪽을 나눌 수 있을 때. <a href=\"../items/pagination.html\">페이지네이션</a>이 만들기 쉽고 사용자도 쓰기 편합니다",
   ]),
-  instead='쪽으로 끊어도 되면 <a href="../items/pagination.html">페이지네이션</a>, 이어서 받아야 하면 <a href="../items/infinite.html">무한 스크롤</a>, 줄이 적으면 일반 <a href="table.html">데이터 테이블</a>을 씁니다.',
+  instead='목록을 쪽으로 끊어 보여 줘도 되면 <a href="../items/pagination.html">페이지네이션</a>을 쓰고, 스크롤하는 대로 데이터를 이어서 받아야 하면 <a href="../items/infinite.html">무한 스크롤</a>이 맞습니다. 줄이 몇백 개 정도라면 평범한 <a href="table.html">데이터 테이블</a>로 전부 그려도 됩니다.',
   cases=cases([
     (scroller(['10:21:08 OK', '10:21:09 OK', '10:21:09 WARN', '10:21:10 OK'], "", "150px"),
-     "로그 보기", "줄 높이가 같고 줄이 수만 개라서 <b>가상 스크롤이 가장 잘 맞습니다</b>"),
+     "로그 화면에 쓰기", "줄 높이가 같고 줄이 수만 개라서 <b>가상 스크롤이 가장 잘 맞습니다</b>"),
     (scroller(['삼성전자 71,200', 'SK하이닉스 183,000', 'NAVER 192,400', '카카오 38,650'], "", "150px"),
-     "시세 표", "줄이 많고 값이 <b>자주 바뀝니다</b>. 보이지 않는 줄은 화면을 고칠 필요가 없어서 이득이 큽니다"),
-    (scroller(['모란상회', '한빛아웃도어', '새벽상사'], "120줄 — 이건 그냥 그린다", "150px"),
-     "이건 안 쓴다", "몇백 줄짜리 목록에 가상 스크롤을 넣으면 얻는 것 없이 찾기·인쇄 같은 기능만 <b>잃습니다</b>"),
+     "시세 표에 쓰기", "줄이 많고 값이 <b>자주 바뀝니다</b>. 보이지 않는 줄은 화면을 고칠 필요가 없어서 이득이 큽니다"),
+    (scroller(['모란상회', '한빛아웃도어', '새벽상사'], "120줄이라 그냥 다 그림", "150px"),
+     "몇백 줄짜리 목록에는 쓰지 않기", "몇백 줄짜리 목록에 가상 스크롤을 넣으면 얻는 것 없이 찾기·인쇄 같은 기능만 <b>잃습니다</b>"),
   ]),
-  s8_title="최소 마크업과 키보드", s8_hint="가상 스크롤이 꼭 갖출 것",
+  s8_title="최소 마크업과 키보드", s8_hint="가상 스크롤을 만들 때 꼭 갖출 것",
   code_lede="받침대로 전체 길이를 만들고, 보이는 구간만 그린 뒤 <code>transform</code>으로 그 자리까지 내려 둡니다.",
   code='''&lt;<span class="t">div</span> <span class="a">class</span>=<span class="s">"scroller"</span> <span class="a">role</span>=<span class="s">"list"</span>
      <span class="a">aria-label</span>=<span class="s">"정산 20,000건"</span>&gt;
@@ -125,17 +125,17 @@ scroller.onscroll = () =&gt; {
   keys=kbd([
     ("<kbd>PageDown</kbd>·<kbd>Home</kbd>·<kbd>End</kbd>", "브라우저 기본 스크롤이 그대로 동작해야 합니다. 키 입력을 <b>직접 가로채지 않습니다</b>"),
     ("<kbd>Tab</kbd>", "그리지 않은 줄로는 포커스가 갈 수 없습니다. <b>포커스가 있던 줄을 지우면</b> 포커스가 <code>&lt;body&gt;</code>로 넘어갑니다"),
-    ("<code>role=\"list\"</code> + 건수", "'20,000건'처럼 전체 건수를 레이블에 적습니다. 그러지 않으면 스크린 리더가 그려진 12줄만 읽어서 사용자는 열두 건뿐이라고 생각합니다"),
+    ("<code>role=\"list\"</code>에 전체 건수 적기", "'20,000건'처럼 전체 건수를 레이블에 적습니다. 그러지 않으면 스크린 리더가 그려진 12줄만 읽어서 사용자는 열두 건뿐이라고 생각합니다"),
     ("<code>aria-setsize</code>·<code>aria-posinset</code>", "줄마다 '20,000개 중 9,981번째'처럼 전체에서 몇 번째인지 알립니다"),
-    ("<kbd>Ctrl</kbd>+<kbd>F</kbd> 는 안 된다", "브라우저 찾기 기능은 그리지 않은 줄을 찾지 못하므로 <b>검색 칸을 따로</b> 둡니다"),
-    ("인쇄", "화면에 보이는 열몇 줄만 인쇄됩니다. 인쇄가 필요하면 <b>별도 내보내기</b>를 만듭니다"),
+    ("<kbd>Ctrl</kbd>+<kbd>F</kbd>로 찾지 못하는 문제", "브라우저 찾기 기능은 그리지 않은 줄을 찾지 못하므로 <b>검색 칸을 따로</b> 둡니다"),
+    ("인쇄할 때", "화면에 보이는 열몇 줄만 인쇄됩니다. 인쇄가 필요하면 <b>별도 내보내기</b>를 만듭니다"),
   ]),
   backend=rows([
-    ("2만 건을 한 번에 보내지 않는다", "그리는 줄은 줄었어도 서버에서 <b>받는 데이터 양은 그대로</b>입니다. 응답이 5MB라면 받는 동안 느린 것은 여전합니다."),
+    ("2만 건을 한 번에 보내지 않기", "그리는 줄은 줄었어도 서버에서 <b>받는 데이터 양은 그대로</b>입니다. 응답이 5MB라면 받는 동안 느린 것은 여전합니다."),
     ("커서 페이징", "<code>OFFSET 19000</code>을 쓰면 데이터베이스가 앞의 19,000줄을 읽어 세고 버립니다. 그래서 받은 <b>마지막 줄의 키</b>를 기준으로 다음 묶음을 받는 편이 빠릅니다."),
-    ("중간으로 뛰면", "스크롤 막대를 끌어 목록 한가운데로 가면 그 구간을 <b>따로 요청</b>해야 합니다. 이런 요청은 커서 방식과 잘 맞지 않아서, 중간으로 뛰는 것을 허용할지에 따라 설계가 달라집니다."),
-    ("전체 건수", "받침대 높이를 정하려면 <b>전체 줄 수</b>가 필요합니다. <code>COUNT(*)</code>가 오래 걸리면 어림수로 높이를 잡고, 목록 끝에 다다랐을 때 실제 줄 수로 고칩니다."),
-    ("줄이 바뀌면", "보이지 않는 줄의 데이터가 서버에서 바뀌어도 화면은 알 수 없습니다. 그래서 <b>언제 다시 받을지</b> 정해 둡니다."),
+    ("목록 중간으로 건너뛸 때", "스크롤 막대를 끌어 목록 한가운데로 가면 그 구간을 <b>따로 요청</b>해야 합니다. 이런 요청은 커서 방식과 잘 맞지 않아서, 중간으로 뛰는 것을 허용할지에 따라 설계가 달라집니다."),
+    ("받침대 높이에 필요한 전체 건수", "받침대 높이를 정하려면 <b>전체 줄 수</b>가 필요합니다. <code>COUNT(*)</code>가 오래 걸리면 어림수로 높이를 잡고, 목록 끝에 다다랐을 때 실제 줄 수로 고칩니다."),
+    ("보이지 않는 줄의 데이터가 바뀔 때", "보이지 않는 줄의 데이터가 서버에서 바뀌어도 화면은 알 수 없습니다. 그래서 <b>언제 다시 받을지</b> 정해 둡니다."),
   ]),
   plat_lede="<b>iOS와 안드로이드는 처음부터 목록 부품이 이 방식으로 동작</b>하고, 웹만 직접 만들어야 합니다.",
   plats=plats([

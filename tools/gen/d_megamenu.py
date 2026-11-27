@@ -29,12 +29,12 @@ def menu(open_i, cols, w="152px", note="", ok=None, heads=("의류", "생활용�
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">머리글자 — 갈래 대여섯 개</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">패널 — 여러 단을 한 번에 펼친다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">머리글자는 분류 대여섯 개</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">패널은 여러 단을 한 번에 펼침</div>
                   <div class="pin-out" data-pin="3" style="color:var(--accent)">열기 100ms · 닫기 300ms 늦추기</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">대각선 — 옆 머리글자를 스치면 바뀐다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">aria-expanded — 열렸는지 알린다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">Esc 로 닫고 머리글자로 초점이 돌아온다</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">대각선으로 가다 옆 머리글자를 스치면 바뀜</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">aria-expanded로 열렸는지 알림</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">Esc로 닫으면 포커스가 머리글자로 돌아옴</div>
                 </div>
               </div>'''
 
@@ -66,19 +66,19 @@ D = dict(
   axes=ax("메가 메뉴"),
   oneline="대각선 문제는 열기 100ms, 닫기 300ms <b>두 가지 지연만으로 대부분 해결됩니다</b>. 그래도 해결되지 않으면 눌러야 열리게 하세요.",
   states=states([
-    (menu(-1, None, "152px", "닫혀 있다", True), "닫힘", "머리글자만 보입니다"),
-    (menu(0, [("아우터", ["패딩", "코트"]), ("상의", ["티셔츠", "셔츠"]), ("하의", ["청바지"])], "152px", "한 갈래가 펼쳐졌다", True),
-     "열림", "한 분류 안의 <b>여러 단을 한 번에</b> 보여 줍니다"),
-    (menu(1, [("주방", ["냄비"]), ("욕실", ["수건"]), ("청소", ["세제"])], "152px", "옆으로 스쳐 바뀌었다", False),
-     "대각선 사고", "옆 머리글자를 지나가면서 메뉴가 바뀌어 <b>가려던 항목이 사라집니다</b>"),
-    (menu(0, [("아우터", ["패딩", "코트"]), ("상의", ["티셔츠"]), ("하의", ["청바지"])], "152px", "지연 덕에 안 바뀐다", True),
-     "지연 켬", "옆 머리글자를 잠깐 지나가도 <b>메뉴가 바뀌지 않습니다</b>"),
-    (menu(0, [("아우터", ["패딩", "코트"]), ("상의", ["티셔츠"]), ("하의", ["청바지"])], "152px", "눌러서 열었다 — 터치에서도 같다", True),
-     "눌러야 열림", "마우스 이동과 상관없이 열리므로 <b>가장 안전합니다</b>"),
+    (menu(-1, None, "152px", "닫혀 있음", True), "닫혀 있을 때", "머리글자만 보입니다"),
+    (menu(0, [("아우터", ["패딩", "코트"]), ("상의", ["티셔츠", "셔츠"]), ("하의", ["청바지"])], "152px", "한 분류가 펼쳐짐", True),
+     "한 분류를 펼쳤을 때", "한 분류 안의 <b>여러 단을 한 번에</b> 보여 줍니다"),
+    (menu(1, [("주방", ["냄비"]), ("욕실", ["수건"]), ("청소", ["세제"])], "152px", "옆 머리글자를 스쳐 바뀜", False),
+     "대각선으로 가다 메뉴가 바뀔 때", "옆 머리글자를 지나가면서 메뉴가 바뀌어 <b>가려던 항목이 사라집니다</b>"),
+    (menu(0, [("아우터", ["패딩", "코트"]), ("상의", ["티셔츠"]), ("하의", ["청바지"])], "152px", "늦춰 둬서 바뀌지 않음", True),
+     "열기와 닫기를 늦췄을 때", "옆 머리글자를 잠깐 지나가도 <b>메뉴가 바뀌지 않습니다</b>"),
+    (menu(0, [("아우터", ["패딩", "코트"]), ("상의", ["티셔츠"]), ("하의", ["청바지"])], "152px", "눌러서 열어 터치에서도 똑같음", True),
+     "눌러야 열리게 했을 때", "마우스 이동과 상관없이 열리므로 <b>가장 안전합니다</b>"),
     (one(txt('<span style="display:block;font-size:8.5px">☰ 전체 분류</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">폰에서는 드로어로 바꾼다</span>'),
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">폰에서는 드로어로 바꿈</span>'),
          "폰", True, "", "152px"),
-     "폰", "폰 화면에는 메가 메뉴를 펼칠 <b>자리가 없습니다</b>"),
+     "폰 화면에서", "폰 화면에는 메가 메뉴를 펼칠 <b>자리가 없습니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -86,7 +86,7 @@ D = dict(
     ("패널", "여러 단", "한 분류 안의 항목을 <b>한 번에</b> 보여 줍니다"),
     ("지연", "100 / 300ms", "대각선 문제를 <b>가장 적은 품으로</b> 고치는 방법입니다"),
     ("대각선", "스치면 바뀜", "마우스가 목표 항목까지 <b>직선으로 움직이는 것</b>이 원인입니다"),
-    ("<code>aria-expanded</code>", "열렸는지", "메뉴가 열렸는지를 스크린 리더에도 알립니다"),
+    ("<code>aria-expanded</code>", "열림 여부", "메뉴가 열렸는지를 스크린 리더에도 알립니다"),
     ("Esc", "닫고 돌아오기", "메뉴를 닫고 포커스를 <b>머리글자</b>로 되돌립니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -108,17 +108,17 @@ D = dict(
     "머리글자를 <b>여덟 개</b> 넘게 둘 때",
     "패널이 <b>화면 밖까지</b> 넘어갈 때. 오른쪽 끝 분류가 잘립니다",
   ]),
-  instead='작게 뜨면 <a href="popover.html">팝오버</a>, 늘 보이면 <a href="sidebar.html">사이드바</a>, 폰에서는 <a href="drawer.html">드로어</a>, 찾기가 목적이면 <a href="search.html">검색</a>.',
+  instead='작은 판 하나만 띄우면 되는 경우에는 <a href="popover.html">팝오버</a>를 쓰고, 메뉴가 늘 보여야 하면 <a href="sidebar.html">사이드바</a>를 씁니다. 폰에서는 <a href="drawer.html">드로어</a>로 바꾸고, 원하는 항목을 찾는 것이 주된 목적이면 <a href="search.html">검색</a>을 둡니다.',
   cases=cases([
     (menu(0, [("아우터", ["패딩"]), ("상의", ["티셔츠"]), ("하의", ["청바지"])], "150px", "", True),
-     "쇼핑몰", "분류가 많아서 메가 메뉴를 <b>가장 많이 쓰는 곳</b>입니다"),
+     "쇼핑몰의 상품 분류", "분류가 많아서 메가 메뉴를 <b>가장 많이 쓰는 곳</b>입니다"),
     (menu(0, [("제품", ["요금제"]), ("문서", ["시작하기"]), ("회사", ["채용"])], "150px", "", True),
-     "기업 사이트", "분류 수가 적어도 <b>깊이</b>가 있으면 씁니다"),
+     "기업 사이트의 깊은 메뉴", "분류 수가 적어도 <b>깊이</b>가 있으면 씁니다"),
     (one(txt('<span style="display:block;font-size:8.5px">☰ 전체 분류</span>'
              '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">의류 ›</span>'
              '<span style="display:block;font-size:8px;color:var(--fg-muted)">생활용품 ›</span>'),
-         "폰", True, "드로어로 바꾼다", "150px"),
-     "폰", "폰에서는 <b>드로어</b>가 메가 메뉴를 대신합니다"),
+         "폰", True, "드로어로 바꿈", "150px"),
+     "폰에서 드로어로 바꾸기", "폰에서는 <b>드로어</b>가 메가 메뉴를 대신합니다"),
   ]),
   code_lede="호버로 열더라도 <b>누르면 열리는 방법</b>을 함께 둡니다. 그래서 머리글자는 <code>&lt;button&gt;</code>으로 만듭니다.",
   code='''&lt;<span class="t">nav</span> <span class="a">aria-label</span>=<span class="s">"전체 분류"</span>&gt;
@@ -146,25 +146,25 @@ nav.addEventListener(<span class="s">'pointerleave'</span>, () =&gt; {
     ("← →", "머리글자 사이를 옮겨 다닙니다(<code>role=\"menubar\"</code>를 쓸 때)"),
     ("Esc", "메뉴를 닫고 포커스를 <b>머리글자로</b> 되돌립니다"),
     ("<code>aria-expanded</code>", "메뉴가 열렸는지 알리며, <b>머리글자 쪽에</b> 붙입니다"),
-    ("확인하는 법", "마우스를 쓰지 않고 <b><kbd>Tab</kbd>만으로</b> 셋째 분류의 넷째 항목까지 가 봅니다"),
+    ("제대로 됐는지 확인하는 방법", "마우스를 쓰지 않고 <b><kbd>Tab</kbd>만으로</b> 셋째 분류의 넷째 항목까지 가 봅니다"),
   ]),
   backend=rows([
-    ("분류는 한 번에", "메뉴에 쓰는 분류는 거의 바뀌지 않으므로 <b>한 번 받아서 캐시</b>해 둡니다. 머리글자에 마우스를 올릴 때마다 요청하면 메뉴가 늦게 열립니다."),
-    ("깊이를 미리 줄여", "메가 메뉴는 보통 <b>두 단</b>까지만 펼칩니다. 서버가 세 단까지 내려 주면 화면에서 셋째 단을 따로 접어야 하므로, 서버에서 미리 두 단으로 줄여 보냅니다."),
-    ("인기 갈래", "분류별 클릭 수 데이터가 있으면 많이 찾는 분류를 <b>맨 앞 칸</b>에 올릴 수 있습니다. 데이터가 없으면 미리 정해 둔 순서대로 보여 줍니다."),
+    ("분류를 한 번 받아 캐시하기", "메뉴에 쓰는 분류는 거의 바뀌지 않으므로 <b>한 번 받아서 캐시</b>해 둡니다. 머리글자에 마우스를 올릴 때마다 요청하면 메뉴가 늦게 열립니다."),
+    ("서버에서 깊이를 미리 줄이기", "메가 메뉴는 보통 <b>두 단</b>까지만 펼칩니다. 서버가 세 단까지 내려 주면 화면에서 셋째 단을 따로 접어야 하므로, 서버에서 미리 두 단으로 줄여 보냅니다."),
+    ("많이 찾는 분류를 앞에 두기", "분류별 클릭 수 데이터가 있으면 많이 찾는 분류를 <b>맨 앞 칸</b>에 올릴 수 있습니다. 데이터가 없으면 미리 정해 둔 순서대로 보여 줍니다."),
   ]),
   plat_lede="메가 메뉴는 <b>데스크톱 웹에서 쓰는 부품</b>이라서 모바일 지침에서는 다루지 않습니다.",
   plats=plats([
     ("웹", "직접 만듦",
      menu(0, [("아우터", ["패딩"]), ("상의", ["티셔츠"])], "110px", "", True),
      "정해진 부품이 없어서 지연과 키보드 동작을 <b>모두 직접</b> 구현합니다."),
-    ("iOS", "없다 — 드릴다운",
+    ("iOS", "부품 없이 드릴다운",
      '''              <div class="phone" role="img" aria-label="iOS 한 단씩 들어가는 화면 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:28px;height:9px;border-radius:2px;background:var(--accent-soft)"></div>
                 <div style="position:absolute;left:5px;right:5px;top:41px;height:9px;border-radius:2px;background:var(--accent-soft)"></div>
                 <div style="position:absolute;right:7px;top:30px;font-size:5px;color:var(--fg-muted)">›</div></div></div>''',
      "한 단씩 <b>새 화면으로 넘어가며</b> 들어갑니다. 앞 화면으로는 ‹ 버튼으로 돌아옵니다."),
-    ("안드로이드", "없다 — 드로어",
+    ("안드로이드", "부품 없이 드로어",
      '''              <div class="phone" role="img" aria-label="안드로이드 드로어 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:0;top:20px;bottom:0;width:30px;background:var(--surface);border-right:1px solid var(--line)"></div>
                 <div style="position:absolute;left:3px;top:28px;width:24px;height:6px;border-radius:2px;background:var(--accent-soft)"></div>

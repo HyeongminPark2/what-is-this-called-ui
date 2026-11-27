@@ -3,21 +3,21 @@ from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
 
 SAFE = table(
-  ["언제 멈추나", "되돌릴 수 있나", "몇 번 멈추나", "되돌릴 수 없는 일에"],
-  [["되돌리기", "<b>안 멈춘다</b>", "몇 초 안에 가능", "0번", "안 맞는다"],
-   ["되묻기", "<b>하기 전에</b>", "되묻는 순간에만", "<b>할 때마다</b>", "맞는다"],
-   ["이름 적어 확인", "하기 전에", "아니오를 고르면", "할 때마다", "<b>가장 센 확인</b>"],
-   ["유예 기간", "안 멈춘다", "<b>며칠 동안</b>", "0번", "계정 삭제 같은 일"]],
+  ["사용자를 언제 멈춰 세우는가", "언제 되돌릴 수 있는가", "몇 번 멈춰 세우는가", "되돌릴 수 없는 일에 맞는가"],
+  [["되돌리기", "<b>멈춰 세우지 않음</b>", "몇 초 안에만 가능", "0번", "맞지 않음"],
+   ["되묻기", "<b>실행하기 전에</b>", "되묻는 순간에만", "<b>실행할 때마다</b>", "맞음"],
+   ["이름 적어 확인", "실행하기 전에", "'아니오'를 고르면", "실행할 때마다", "<b>가장 강한 확인 방법</b>"],
+   ["유예 기간", "멈춰 세우지 않음", "<b>며칠 동안</b>", "0번", "계정 삭제 같은 일에 맞음"]],
   me="되돌리기")
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">무엇을 했는지 — '영수증을 지웠습니다'</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">되돌리기 — 한 번 누르면 끝</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">남은 시간 — 5초 안팎</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">창이 닫히면 되돌릴 수 없다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">role="status" — 소리로도 알린다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">되돌릴 수 없는 일에는 되묻기를 쓴다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">'영수증을 지웠습니다'처럼 한 일을 적음</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">되돌리기는 한 번만 누르면 됨</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">남은 시간은 5초 안팎</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">띠가 닫히면 되돌릴 수 없음</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">role="status"를 달아 소리로도 알림</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">되돌릴 수 없는 일에는 되묻기를 씀</div>
                 </div>
               </div>'''
 
@@ -62,30 +62,30 @@ D = dict(
   oneline="<b>되돌릴 수 있는 일이라면 미리 묻지 않습니다.</b> 실행하기 전에 되물어야 하는 것은 되돌릴 수 없는 일뿐입니다.",
   s4_title="상태", s4_hint="시간이 지나면 닫히는 되돌리기 띠",
   states=states([
-    (bar("영수증을 지웠습니다", "되돌리기", "5초", "152px", "눌리면 돌아온다", True),
-     "뜬 직후", "<b>5초</b> 안에 되돌리기를 누를 수 있습니다"),
-    (bar("영수증을 지웠습니다", "되돌리기", "1초", "152px", "곧 닫힌다", None),
-     "끝나 갈 때", "남은 시간을 <b>보여 줍니다</b>"),
-    (bar("영수증이 돌아왔습니다", "", "", "152px", "되돌렸다", True),
+    (bar("영수증을 지웠습니다", "되돌리기", "5초", "152px", "누르면 돌아옴", True),
+     "띠가 뜬 직후", "<b>5초</b> 안에 되돌리기를 누를 수 있습니다"),
+    (bar("영수증을 지웠습니다", "되돌리기", "1초", "152px", "곧 닫힘", None),
+     "남은 시간이 끝나 갈 때", "남은 시간을 <b>보여 줍니다</b>"),
+    (bar("영수증이 돌아왔습니다", "", "", "152px", "되돌림", True),
      "되돌린 뒤", "지운 것이 <b>돌아왔다고</b> 알립니다"),
-    (one(txt('<span style="display:block;font-size:8.5px;color:var(--fg-muted)">띠가 사라졌다</span>'
-             '<span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">이제는 못 되돌린다</span>'),
+    (one(txt('<span style="display:block;font-size:8.5px;color:var(--fg-muted)">띠가 사라짐</span>'
+             '<span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">이제는 되돌릴 수 없음</span>'),
          "시간이 끝남", False, "", "152px"),
-     "창이 닫힘", "띠가 닫히면 <b>더는 되돌릴 수 없습니다</b>"),
-    (bar("3개를 지웠습니다", "되돌리기", "5초", "152px", "묶어서 하나로", True),
-     "여러 개", "여러 개를 지워도 띠를 <b>쌓지 않고</b> 하나로 묶습니다"),
+     "띠가 닫힌 뒤", "띠가 닫히면 <b>더는 되돌릴 수 없습니다</b>"),
+    (bar("3개를 지웠습니다", "되돌리기", "5초", "152px", "하나로 묶어 띄움", True),
+     "여러 개를 지웠을 때", "여러 개를 지워도 띠를 <b>쌓지 않고</b> 하나로 묶습니다"),
     (one(txt('<span style="display:block;font-size:8.5px">정말 지울까요?</span>'
              '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">취소 · 지우기</span>'),
          "되묻기", None, "되돌릴 수 없는 일에만", "152px"),
-     "되묻기", "지울 <b>때마다</b> 사용자를 멈춰 세웁니다"),
+     "되묻기를 쓸 때", "지울 <b>때마다</b> 사용자를 멈춰 세웁니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("무엇을 했는지", "한 줄", "'영수증을 지웠습니다'처럼 방금 한 일을 한 줄로 적습니다"),
-    ("되돌리기", "한 번", "한 번 누르면 되돌아가게 하고, 두 단계로 만들지 않습니다"),
+    ("무엇을 했는지", "한 줄로 적음", "'영수증을 지웠습니다'처럼 방금 한 일을 한 줄로 적습니다"),
+    ("되돌리기", "한 번만 누름", "한 번 누르면 되돌아가게 하고, 두 단계로 만들지 않습니다"),
     ("남은 시간", "5초 안팎", "남은 시간을 <b>보여 주면</b> 사용자가 덜 불안해합니다"),
-    ("창이 닫힘", "끝", "띠가 닫힌 뒤에는 <b>되돌릴 방법이 없습니다</b>"),
-    ("<code>role=\"status\"</code>", "소리로", "스크린 리더로 띠가 떴다는 것을 알립니다"),
+    ("띠가 닫히는 때", "되돌리기 끝", "띠가 닫힌 뒤에는 <b>되돌릴 방법이 없습니다</b>"),
+    ("<code>role=\"status\"</code>", "소리로도 알림", "스크린 리더로 띠가 떴다는 것을 알립니다"),
     ("되묻기", "되돌릴 수 없을 때", "되돌릴 수 없는 일에만 씁니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -109,16 +109,16 @@ D = dict(
     "띠를 <b>쌓아</b> 띄울 때. 셋을 지우면 띠 셋이 떠서 화면을 덮습니다",
     "<b>스크린 리더로 알리지 않을 때</b>. 화면을 보지 못하는 사용자는 띠가 떴는지도 모릅니다",
   ]),
-  instead='되돌릴 수 없는 일은 <a href="destructive.html">위험한 동작</a>, 띠 부품 자체는 <a href="toast.html">토스트</a>, 며칠 두는 것은 휴지통(소프트 삭제), 보내기 전 확인은 <a href="dialog.html">다이얼로그</a>.',
+  instead='되돌릴 수 없는 일에는 <a href="destructive.html">위험한 동작</a>에서 다루는 되묻기를 쓰고, 띠 부품 자체는 <a href="toast.html">토스트</a> 항목에서 다룹니다. 지운 것을 며칠 동안 남겨 두려면 휴지통(소프트 삭제)을 쓰고, 보내기 전에 확인을 받아야 하면 <a href="dialog.html">다이얼로그</a>를 씁니다.',
   cases=cases([
     (bar("메일을 보냈습니다", "보내기 취소", "5초", "150px", "", True),
-     "메일 보내기", "메일을 <b>보낸 뒤</b>에도 잠깐 동안 무를 수 있습니다"),
+     "보낸 메일 되돌리기", "메일을 <b>보낸 뒤</b>에도 잠깐 동안 무를 수 있습니다"),
     (bar("1건을 보관함으로", "되돌리기", "5초", "150px", "", True),
-     "보관", "보관은 다시 꺼내기 쉬운 일이라 되돌리기가 <b>가장 잘 맞습니다</b>"),
+     "보관함으로 옮긴 것 되돌리기", "보관은 다시 꺼내기 쉬운 일이라 되돌리기가 <b>가장 잘 맞습니다</b>"),
     (one(txt('<span style="display:block;font-size:8.5px">계정을 지우면 30일 뒤 삭제됩니다</span>'
              '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">그 안에는 되살릴 수 있습니다</span>'),
          "유예 기간", True, "", "150px"),
-     "계정 삭제", "되돌릴 수 있는 기간을 <b>며칠</b> 둡니다"),
+     "계정 삭제에 유예 기간 두기", "되돌릴 수 있는 기간을 <b>며칠</b> 둡니다"),
   ]),
   s8_title="최소 마크업과 키보드", s8_hint="구현할 때 지킬 최소 규칙",
   code_lede="띠는 <code>role=\"status\"</code>로 알리고, 되돌리기는 <b>평범한 버튼</b>으로 만듭니다.",
@@ -140,16 +140,16 @@ undoBtn.onclick = <span class="t">async</span> () =&gt; {
   keys=kbd([
     ("<code>role=\"status\"</code>", "스크린 리더가 <b>읽던 내용을 마친 뒤</b> 띠가 떴다고 읽어 줍니다"),
     ("Tab", "Tab으로 띠의 되돌리기 버튼까지 <b>갈 수 있어야</b> 합니다"),
-    ("초점 옮기기", "띠로 초점을 <b>가져가지는 않습니다</b>. 초점을 가져가면 사용자가 하던 일이 끊깁니다"),
+    ("띠로 초점을 옮길지", "띠로 초점을 <b>가져가지는 않습니다</b>. 초점을 가져가면 사용자가 하던 일이 끊깁니다"),
     ("Ctrl + Z", "글 편집기라면 되돌리기 버튼과 <b>같은 동작</b>으로 묶어 둡니다"),
-    ("시간", "5초는 키보드 사용자에게 <b>짧습니다</b>. 시간을 멈추는 버튼을 두거나 시간을 늘립니다"),
-    ("확인하는 법", "마우스를 쓰지 않고 <b>Tab만으로</b> 되돌려 봅니다"),
+    ("띠가 떠 있는 시간", "5초는 키보드 사용자에게 <b>짧습니다</b>. 시간을 멈추는 버튼을 두거나 시간을 늘립니다"),
+    ("확인하는 방법", "마우스를 쓰지 않고 <b>Tab만으로</b> 되돌려 봅니다"),
   ]),
   backend=rows([
-    ("바로 지우지 않는다", "처음에는 <b>지웠다는 표시만 해 두고</b> 몇 초 뒤에 실제로 지웁니다. 되돌리기 요청은 그 사이에 들어옵니다."),
-    ("되돌리기 열쇠", "지울 때 <code>undo_token</code>을 돌려주면 되돌리기 요청이 왔을 때 <b>무엇을 되살릴지</b>가 분명해집니다."),
-    ("여러 개", "여러 개를 묶어서 지웠다면 <b>묶음 단위</b>로 되살려야 합니다. 하나씩 되살리면 순서가 꼬입니다."),
-    ("유예 기간", "계정이나 프로젝트처럼 큰 것을 지울 때는 유예 기간을 <b>며칠</b> 둡니다. 그동안은 데이터를 지우지 않고 목록에서만 숨깁니다."),
+    ("바로 지우지 않고 표시만 해 두기", "처음에는 <b>지웠다는 표시만 해 두고</b> 몇 초 뒤에 실제로 지웁니다. 되돌리기 요청은 그 사이에 들어옵니다."),
+    ("되돌리기 토큰 돌려주기", "지울 때 <code>undo_token</code>을 돌려주면 되돌리기 요청이 왔을 때 <b>무엇을 되살릴지</b>가 분명해집니다."),
+    ("여러 개를 묶어 지웠을 때", "여러 개를 묶어서 지웠다면 <b>묶음 단위</b>로 되살려야 합니다. 하나씩 되살리면 순서가 꼬입니다."),
+    ("큰 것에는 유예 기간 두기", "계정이나 프로젝트처럼 큰 것을 지울 때는 유예 기간을 <b>며칠</b> 둡니다. 그동안은 데이터를 지우지 않고 목록에서만 숨깁니다."),
   ]),
   plat_lede="세 플랫폼 가운데 <b>안드로이드가 되돌리기를 가장 적극적으로</b> 씁니다.",
   plats=plats([

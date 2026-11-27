@@ -87,7 +87,7 @@
   function pick(i) {
     if (i < 0 || !shown[i]) return;
     q.value = shown[i].nm;
-    out.innerHTML = '고른 값 — <b>' + shown[i].nm + '</b> (' + shown[i].id + ')';
+    out.innerHTML = '고른 값은 <b>' + shown[i].nm + '</b>(' + shown[i].id + ')입니다.';
     hide(); q.focus();
   }
 
@@ -104,7 +104,7 @@
       e.preventDefault();
       if (shown.length) return pick(at);
       if (free.checked && q.value.trim()) {       // 목록에 없는 값도 받는 모드
-        out.innerHTML = '고른 값 — <b>' + q.value.trim() + '</b> (새로 적은 값)';
+        out.innerHTML = '고른 값은 목록에 없어 새로 적은 <b>' + q.value.trim() + '</b>입니다.';
         hide();
       }
     } else if (e.key === 'Escape') { hide(); }

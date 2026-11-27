@@ -27,17 +27,19 @@ def row(btns, label, note="", ok=None, w="152px"):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">주 버튼 — 한 화면에 하나</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">보조 버튼 — 테두리만</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">텍스트 버튼 — 가장 약하게</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">위험한 동작 — 빨갛되 주 버튼으로 두지 않는다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">자리 — 주 동작을 늘 같은 쪽에</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">진한 버튼이 둘이면 둘 다 안 읽힌다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">주 버튼은 한 화면에 하나만</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">보조 버튼은 테두리만 그림</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">텍스트 버튼은 가장 약하게 표시</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">위험한 동작은 빨갛게 하되 주 버튼으로 두지 않음</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">주 동작은 늘 같은 쪽에 둠</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">진한 버튼이 둘이면 주 동작을 알 수 없음</div>
                 </div>
               </div>'''
 
 D = dict(
   slug="buttonlevel", ko="버튼 위계", en="Button hierarchy",
+  s4_title="버튼 배치", s4_hint="버튼을 늘어놓는 방식에 따라 달라지는 위계",
+  do_title="버튼 위계를 잡을 때 지킬 것", dont_title="버튼 위계를 잡을 때 피할 것", instead_title="함께 보면 좋은 항목",
   desc="버튼을 주 · 보조 · 텍스트 · 위험 네 단계로 나누는 규칙과, 진한 버튼을 하나만 두는 이유를 보여 주는 항목입니다.",
   lede="버튼 위계는 화면에서 <b>사용자의 눈이 어느 버튼으로 먼저 가는지</b>를 정하는 일입니다. 진한 버튼이 둘이면 어느 쪽으로도 눈이 먼저 가지 않아서 <b>둘 다 주 동작으로 읽히지 않습니다</b>.",
   live_note='''        <div class="note" style="margin-bottom:0">
@@ -63,27 +65,27 @@ D = dict(
   axes=ax("버튼 위계"),
   oneline="<b>한 화면에 진한 버튼은 하나만 둡니다.</b> 진한 버튼을 둘 쓰고 싶다면 그중 하나를 보조 버튼으로 내립니다.",
   states=states([
-    (row([btn('저장'), btn('취소', 'ghost')], "", "주 하나 · 보조 하나", True),
-     "기본", "<b>하나만</b> 진합니다"),
-    (row([btn('저장'), btn('임시 저장'), btn('취소', 'ghost')], "", "둘 다 진하다", False),
-     "주가 둘", "주 동작이 <b>어느 쪽인지</b> 알 수 없습니다"),
-    (row([btn('저장'), btn('취소', 'ghost'), btn('지우기', 'danger-ghost')], "", "위험한 것은 약하게", True),
-     "위험한 동작", "<b>빨갛되 약하게</b> 표시합니다"),
-    (row([btn('지우기', 'danger'), btn('취소', 'ghost')], "", "되묻는 창에서만 이렇게", None),
-     "확인 창", "되묻는 창 안에서는 <b>지우기가 주 버튼</b>입니다"),
-    (row([btn('저장'), btn('취소', 'text'), btn('도움말', 'text')], "", "덜 중요한 것은 글자만", True),
-     "텍스트 버튼", "<b>가장 약하게</b> 보입니다"),
-    (row([btn('취소', 'ghost'), btn('저장')], "", "주 동작이 오른쪽", True),
-     "자리", "주 동작의 자리를 한쪽으로 <b>고정</b>합니다"),
+    (row([btn('저장'), btn('취소', 'ghost')], "", "주 버튼 하나와 보조 하나", True),
+     "주 버튼 하나와 보조 버튼 하나", "<b>하나만</b> 진합니다"),
+    (row([btn('저장'), btn('임시 저장'), btn('취소', 'ghost')], "", "둘 다 진함", False),
+     "주 버튼이 둘일 때", "주 동작이 <b>어느 쪽인지</b> 알 수 없습니다"),
+    (row([btn('저장'), btn('취소', 'ghost'), btn('지우기', 'danger-ghost')], "", "위험한 동작은 약하게", True),
+     "위험한 동작이 함께 있을 때", "<b>빨갛되 약하게</b> 표시합니다"),
+    (row([btn('지우기', 'danger'), btn('취소', 'ghost')], "", "되묻는 창에서만 이렇게 둠", None),
+     "되묻는 확인 창 안에서", "되묻는 창 안에서는 <b>지우기가 주 버튼</b>입니다"),
+    (row([btn('저장'), btn('취소', 'text'), btn('도움말', 'text')], "", "덜 중요한 동작은 글자로만", True),
+     "덜 중요한 동작에 텍스트 버튼", "<b>가장 약하게</b> 보입니다"),
+    (row([btn('취소', 'ghost'), btn('저장')], "", "주 동작을 오른쪽에 둠", True),
+     "주 동작의 자리 고정하기", "주 동작의 자리를 한쪽으로 <b>고정</b>합니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("주 버튼", "하나", "한 화면에 <b>하나만</b> 둡니다"),
-    ("보조 버튼", "테두리만", "주 동작과 함께 놓이는 동작에 씁니다"),
-    ("텍스트 버튼", "가장 약하게", "덜 중요한 동작에 씁니다"),
-    ("위험한 동작", "빨갛되 약하게", "<b>주 버튼으로</b> 두지 않습니다"),
-    ("자리", "늘 같은 쪽", "화면마다 자리가 바뀌면 사용자가 <b>헷갈립니다</b>"),
-    ("둘이면", "안 읽힌다", "둘 중 하나를 보조 버튼으로 <b>내립니다</b>"),
+    ("주 버튼", "한 화면에 하나", "한 화면에 <b>하나만</b> 둡니다"),
+    ("보조 버튼", "테두리만 그림", "주 동작과 함께 놓이는 동작에 씁니다"),
+    ("텍스트 버튼", "가장 약한 단계", "덜 중요한 동작에 씁니다"),
+    ("위험한 동작", "빨간색이지만 약한 세기", "<b>주 버튼으로</b> 두지 않습니다"),
+    ("주 동작의 자리", "늘 같은 쪽", "화면마다 자리가 바뀌면 사용자가 <b>헷갈립니다</b>"),
+    ("진한 버튼이 둘일 때", "주 동작이 드러나지 않음", "둘 중 하나를 보조 버튼으로 <b>내립니다</b>"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           '둘 다 중요하니 둘 다 진하게' 두는 것이 가장 흔한 실수입니다.
@@ -95,8 +97,8 @@ D = dict(
           그렇게 해도 되는 곳은 <b>되묻는 창 안</b>뿐입니다.
           목록이나 상세 화면에서는 '지우기'가 가장 눈에 띄면 안 됩니다.</p>''',
   do=ul([
-    "한 화면에 <b>진한 버튼 하나</b>",
-    "위험한 동작은 <b>빨갛되 약하게</b>",
+    "한 화면에는 <b>진한 버튼을 하나만</b> 두기",
+    "위험한 동작은 <b>빨간색으로 하되 약하게</b> 표시하기",
     "주 동작의 <b>좌우 자리</b>를 서비스 안에서 고정하기",
   ]),
   dont=ul([
@@ -105,11 +107,11 @@ D = dict(
     "'지우기'를 <b>주 버튼</b>으로 두기(확인 창 제외)",
     "화면마다 <b>자리를 바꾸기</b>",
   ]),
-  instead='뜻이 다른 것은 <a href="linkbutton.html">링크와 버튼</a>, 갈래가 붙으면 <a href="splitbutton.html">분할 버튼</a>, 되돌릴 수 없는 일은 <a href="destructive.html">위험한 동작</a>, 색 자체는 <a href="statecolor.html">상태 색</a>.',
+  instead='이동과 동작처럼 뜻을 가르는 문제는 <a href="linkbutton.html">링크와 버튼</a>에서, 버튼에 다른 동작 갈래가 붙는 경우는 <a href="splitbutton.html">분할 버튼</a>에서 다룹니다. 되돌릴 수 없는 일을 다루는 방법은 <a href="destructive.html">위험한 동작</a>, 버튼 색 자체를 정하는 기준은 <a href="statecolor.html">상태 색</a> 항목에 있습니다.',
   cases=cases([
-    (row([btn('저장'), btn('취소', 'ghost')], "", "", True, "150px"), "폼", "<b>저장 버튼 하나</b>만 진하게 둡니다"),
-    (row([btn('결제하기')], "", "", True, "150px"), "결제", "결제하기 버튼 <b>하나만</b> 둡니다"),
-    (row([btn('지우기', 'danger'), btn('취소', 'ghost')], "", "", None, "150px"), "되묻는 창", "되묻는 창에서는 <b>지우기가 주 버튼</b>입니다"),
+    (row([btn('저장'), btn('취소', 'ghost')], "", "", True, "150px"), "폼에서 저장하기", "<b>저장 버튼 하나</b>만 진하게 둡니다"),
+    (row([btn('결제하기')], "", "", True, "150px"), "결제 화면", "결제하기 버튼 <b>하나만</b> 둡니다"),
+    (row([btn('지우기', 'danger'), btn('취소', 'ghost')], "", "", None, "150px"), "지우기 전에 되묻는 창", "되묻는 창에서는 <b>지우기가 주 버튼</b>입니다"),
   ]),
   code_lede="버튼의 세기는 <b>클래스 하나</b>로 나눕니다. 색을 버튼마다 따로 적지 않습니다.",
   code='''&lt;<span class="t">button</span> <span class="a">class</span>=<span class="s">"btn btn--primary"</span>&gt;저장&lt;/<span class="t">button</span>&gt;
@@ -129,15 +131,15 @@ D = dict(
     ("<code>type=\"button\"</code>", "폼 안에서는 꼭 적어 둡니다. 적지 않으면 버튼을 눌렀을 때 폼이 <b>제출</b>됩니다"),
     ("<code>autofocus</code>", "쓰지 않습니다. 사용자가 보던 곳에서 초점을 <b>가져가 버립니다</b>"),
     ("<code>44px</code>", "세기를 낮춰도 <b>크기는 줄이지 않습니다</b>"),
-    ("확인하는 법", "화면을 흑백으로 바꿔도 <b>어느 것이 주 버튼인지</b> 보인다면 위계를 잘 나눈 것입니다"),
+    ("위계를 확인하는 방법", "화면을 흑백으로 바꿔도 <b>어느 것이 주 버튼인지</b> 보인다면 위계를 잘 나눈 것입니다"),
   ]),
   backend=rows([
-    ("할 수 있는지", "사용자에게 권한이 없으면 <b>단추를 아예 지웁니다</b>. 흐리게만 두면 사용자가 '왜 안 되나'를 묻게 됩니다."),
-    ("두 번 누름", "주 버튼은 요청을 보내는 동안 <b>잠가</b> 두어 두 번 눌리지 않게 합니다. 이 처리는 <a href=\"success.html\">성공 확인</a>과 함께 설계합니다."),
+    ("사용자에게 권한이 있는지", "사용자에게 권한이 없으면 <b>단추를 아예 지웁니다</b>. 흐리게만 두면 사용자가 '왜 안 되나'를 묻게 됩니다."),
+    ("두 번 눌리지 않게 막기", "주 버튼은 요청을 보내는 동안 <b>잠가</b> 두어 두 번 눌리지 않게 합니다. 이 처리는 <a href=\"success.html\">성공 확인</a>과 함께 설계합니다."),
   ]),
   plat_lede="플랫폼이 달라도 <b>버튼의 세기를 나누는 방식</b>은 같고, 단계의 이름만 다릅니다.",
   plats=plats([
-    ("웹", "클래스로",
+    ("웹", "CSS 클래스로 구분",
      row([btn('저장'), btn('취소', 'ghost')], "", "", True, "110px"),
      "표준으로 정해진 이름이 없어서 팀마다 다르게 부르므로, 팀 안에서 이름을 <b>먼저 정해 두는</b> 편이 낫습니다."),
     ("iOS", "borderedProminent 등",

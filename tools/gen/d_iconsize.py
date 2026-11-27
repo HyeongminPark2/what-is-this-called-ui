@@ -20,9 +20,9 @@ ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2)
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:11px">
                   <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">viewBox="0 0 24 24"<span style="color:var(--fg-faint)"> ← 그린 좌표계</span></div>
                   <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">width · height<span style="color:var(--fg-faint)"> ← 화면에서의 크기</span></div>
-                  <div class="pin-out" data-pin="3" style="color:var(--danger)">stroke-width 는 <b>같이 줄어든다</b></div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">stroke="currentColor"<span style="color:var(--fg-faint)"> ← 글자색을 따라간다</span></div>
-                  <div class="pin-out" data-pin="5" style="color:var(--danger)">인라인 SVG 는 <b>베이스라인</b>에 앉는다</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--danger)">stroke-width도 <b>같이 줄어듦</b></div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">stroke="currentColor"<span style="color:var(--fg-faint)"> ← 글자색을 따라감</span></div>
+                  <div class="pin-out" data-pin="5" style="color:var(--danger)">인라인 SVG는 <b>베이스라인</b>에 놓임</div>
                   <div class="pin-out" data-pin="6" style="color:var(--accent)">누르는 자리는 44px<span style="color:var(--fg-faint)"> ← 그림 크기와 별개</span></div>
                 </div>
               </div>'''
@@ -53,14 +53,14 @@ D = dict(
   ]),
   axes=ax("아이콘 크기"),
   oneline="아이콘 크기는 16 · 20 · 24, <b>세 단이면 충분합니다</b>. 그리고 누르는 자리는 그림 크기와 상관없이 언제나 44px입니다.",
-  s4_title="단", s4_hint="자리마다 쓰는 크기",
+  s4_title="아이콘 크기 단계별 쓰는 자리", s4_hint="자리마다 쓰는 크기",
   states=states([
-    (ic(12, "12px", "거의 안 쓴다", False, "1.5"), "너무 작다", "선 굵기가 <b>1px 아래</b>로 줄어 흐려 보입니다"),
-    (ic(16, "16px", "본문 속 · 칩"), "1단", "본문 글 안에 섞어 씁니다"),
-    (ic(20, "20px", "목록 · 버튼"), "2단", "<b>가장 많이</b> 씁니다"),
-    (ic(24, "24px", "앱바 · 바텀탭"), "3단", "글자 없이 아이콘만 놓이는 자리에 씁니다"),
-    (ic(32, "32px", "빈 상태 · 안내"), "큰 단", "아이콘이라기보다 그림에 가깝게 씁니다"),
-    (ic(12, "12px", "굵기를 되돌림", True, "3"), "굵기 고정", "크기가 작아도 선이 <b>1.5px로</b> 그려집니다"),
+    (ic(12, "12px", "거의 쓰지 않음", False, "1.5"), "너무 작은 12px", "선 굵기가 <b>1px 아래</b>로 줄어 흐려 보입니다"),
+    (ic(16, "16px", "본문 속 · 칩"), "1단, 본문 속 16px", "본문 글 안에 섞어 씁니다"),
+    (ic(20, "20px", "목록 · 버튼"), "2단, 목록과 버튼의 20px", "<b>가장 많이</b> 씁니다"),
+    (ic(24, "24px", "앱바 · 바텀탭"), "3단, 아이콘만 놓이는 24px", "글자 없이 아이콘만 놓이는 자리에 씁니다"),
+    (ic(32, "32px", "빈 상태 · 안내"), "큰 단, 그림에 가까운 32px", "아이콘이라기보다 그림에 가깝게 씁니다"),
+    (ic(12, "12px", "굵기를 되돌림", True, "3"), "선 굵기를 고정했을 때", "크기가 작아도 선이 <b>1.5px로</b> 그려집니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -78,6 +78,8 @@ D = dict(
           해결 방법은 두 가지로, 크기마다 <b>선 굵기를 원래대로 되돌리거나</b>
           아예 <b>크기별로 다시 그린</b> 그림을 쓰는 것입니다.
           뒤의 방법이 광학 크기인데, 작은 아이콘일수록 획을 덜어 내서 더 또렷하게 보이도록 그립니다.</p>''',
+  do_title="아이콘 크기를 정할 때 지킬 것",
+  dont_title="아이콘 크기를 정할 때 피할 것",
   do=ul([
     "크기를 <b>16 · 20 · 24</b> 세 단으로 두기",
     "SVG에 <code>display: block</code>을 주어 <b>베이스라인 어긋남</b> 막기",
@@ -89,13 +91,15 @@ D = dict(
     "같은 줄에 <b>굵기가 다른</b> 아이콘 섞기",
     "아이콘만 두고 <b>이름을 붙이지 않기</b>. 스크린 리더로는 이 버튼이 무엇인지 알 수 없습니다",
   ]),
-  instead='누르는 넓이는 <a href="touchtarget.html">터치 타깃</a>, 글자로 다루는 법은 <a href="iconfont.html">아이콘 글꼴</a>, 이름 붙이기는 <a href="name.html">이름 붙이기</a>.',
+  instead_title="함께 보면 좋은 항목",
+  instead='누르는 넓이는 <a href="touchtarget.html">터치 타깃</a> 항목에서, 아이콘을 글자로 다루는 방식은 <a href="iconfont.html">아이콘 글꼴</a> 항목에서 다룹니다. 아이콘 버튼에 이름을 붙이는 방법은 <a href="name.html">이름 붙이기</a> 항목을 봅니다.',
   cases=cases([
-    (ic(20, "목록 20px", "", True), "목록", "목록 줄 높이에 맞춥니다"),
-    (ic(24, "앱바 24px", "", True), "앱바", "글자 없이 아이콘만 놓이므로 <b>크게</b> 씁니다"),
-    (ic(16, "버튼 속 16px", "", True), "버튼 속", "버튼 글자보다 <b>살짝 작게</b> 씁니다"),
+    (ic(20, "목록 20px", "", True), "목록에 20px 아이콘 쓰기", "목록 줄 높이에 맞춥니다"),
+    (ic(24, "앱바 24px", "", True), "앱바에 24px 아이콘 쓰기", "글자 없이 아이콘만 놓이므로 <b>크게</b> 씁니다"),
+    (ic(16, "버튼 속 16px", "", True), "버튼 글자 옆에 16px 아이콘 쓰기", "버튼 글자보다 <b>살짝 작게</b> 씁니다"),
   ]),
-  s8_title="최소 코드와 규칙", s8_hint="아이콘 크기를 코드로 옮기는 법",
+  s8_title="최소 코드와 지킬 규칙", s8_hint="아이콘 크기를 코드로 옮기는 방법",
+  keys_heads="<th>속성과 값</th><th>쓰면 일어나는 일</th>",
   code_lede="크기는 정해 둔 단에서 고르고, 선 굵기는 크기에 맞춰 원래대로 되돌립니다.",
   code='''<span class="c">/* 세 단이면 거의 모든 자리에 충분하다 */</span>
 :root { --icon-1: <span class="a">16px</span>; --icon-2: <span class="a">20px</span>; --icon-3: <span class="a">24px</span>; }
@@ -117,11 +121,11 @@ svg { <span class="a">display</span>: block; }
     ("<code>currentColor</code>", "호버나 비활성 상태에서 글자색이 바뀌면 아이콘 <b>색도 저절로</b> 바뀝니다"),
     ("<code>vector-effect</code>", "<code>non-scaling-stroke</code>를 주면 크기를 바꿔도 선 굵기가 그대로 유지됩니다"),
     ("1em", "아이콘이 글자 크기를 따라가게 하는 방법입니다. 다만 <b>줄 높이</b>와는 다른 값이니 주의합니다"),
-    ("확인하는 법", "크기가 다른 두 아이콘을 <b>나란히 놓고</b> 선 굵기가 같아 보이는지 봅니다"),
+    ("확인하는 방법", "크기가 다른 두 아이콘을 <b>나란히 놓고</b> 선 굵기가 같아 보이는지 봅니다"),
   ]),
   backend=rows([
-    ("서버와는 상관없다", "아이콘 파일은 화면 쪽에 두는 자산입니다. 다만 어떤 아이콘을 보여 줄지 가르는 <b>상태 이름</b>은 서버가 정합니다."),
-    ("상태 이름", "서버가 <code>status: \"pending\"</code>처럼 상태 <b>이름</b>을 보내면 화면이 거기에 맞는 아이콘을 고릅니다. 아이콘 파일명을 직접 주고받지는 않습니다."),
+    ("화면 쪽에 두는 아이콘 파일", "아이콘 파일은 화면 쪽에 두는 자산입니다. 다만 어떤 아이콘을 보여 줄지 가르는 <b>상태 이름</b>은 서버가 정합니다."),
+    ("서버는 상태 이름만 보내기", "서버가 <code>status: \"pending\"</code>처럼 상태 <b>이름</b>을 보내면 화면이 거기에 맞는 아이콘을 고릅니다. 아이콘 파일명을 직접 주고받지는 않습니다."),
   ]),
   plat_lede="<b>기본 단</b>이 플랫폼마다 다릅니다.",
   plats=plats([

@@ -29,8 +29,8 @@
 
 <div class="bar">
   <b>배리언트와 프롭</b>
-  <label><input type="checkbox" id="p3" checked> 상태 (켜짐/꺼짐)</label>
-  <label><input type="checkbox" id="p4"> 아이콘 자리 (앞/뒤/없음)</label>
+  <label><input type="checkbox" id="p3" checked> 상태 축 더하기 (켜짐/꺼짐)</label>
+  <label><input type="checkbox" id="p4"> 아이콘 자리 축 더하기 (앞/뒤/없음)</label>
 </div>
 
 <div class="pad">
@@ -66,7 +66,7 @@
     if (useIcon) axes.push('아이콘 ' + icons.length);
 
     var c = document.getElementById('count');
-    c.innerHTML = '축 ' + axes.length + '개 (' + axes.join(' × ') + ') → 칸 <b>' + total + '개</b>';
+    c.innerHTML = '축 ' + axes.length + '개(' + axes.join(' × ') + ')를 곱하면 칸이 <b>' + total + '개</b>입니다';
     c.dataset.total = String(total);
     c.dataset.axes = String(axes.length);
 
@@ -92,8 +92,8 @@
 
     var n = document.getElementById('note');
     n.innerHTML = total > 20
-      ? '<span class="warn">' + total + '칸</span> — 손으로 만들 수는 있지만 <b>고칠 때마다 ' + total + '번</b> 손대야 합니다. 축을 줄이거나 부품을 쪼개세요'
-      : '<b>' + total + '칸</b> — 아직은 손으로 다룰 만한 수입니다';
+      ? '<span class="warn">' + total + '칸</span>은 손으로 만들 수는 있지만 <b>고칠 때마다 ' + total + '번</b> 손대야 합니다. 축을 줄이거나 부품을 쪼개세요'
+      : '<b>' + total + '칸</b>은 아직 손으로 다룰 만한 수입니다';
   }
 
   document.getElementById('p3').addEventListener('change', draw);

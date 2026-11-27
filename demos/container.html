@@ -28,7 +28,7 @@
 <div class="pad">
   <div class="cont">
     <div class="cont__inner" id="inner">
-      <p>글줄이 너무 길면 눈이 다음 줄의 첫 글자를 못 찾습니다. 한 줄을 다 읽고 왼쪽으로 돌아올 때
+      <p>글줄이 너무 길면 다음 줄의 첫 글자를 찾기 어렵습니다. 한 줄을 다 읽고 왼쪽으로 돌아올 때
       한 줄 아래가 아니라 같은 줄이나 두 줄 아래로 떨어지는 일이 생기기 때문입니다. 그래서 읽는 글에는
       가로 길이에 상한을 겁니다. 한글은 한 글자가 영문보다 넓어서 영문 기준보다 조금 짧게 잡습니다.
       이 글상자의 너비를 바꿔 가며 어디서 읽기가 불편해지는지 직접 보세요.</p>
@@ -70,8 +70,8 @@
       probe.remove();
       var n = Math.round(w / cw);
       var good = n >= 40 && n <= 80;
-      meter.innerHTML = '글상자 ' + Math.round(w) + 'px · 한 줄에 약 <b>' + n + '자</b> ' +
-        (good ? '<span class="okline">읽기 좋은 범위</span>'
+      meter.innerHTML = '글상자 너비 ' + Math.round(w) + 'px, 한 줄에 약 <b>' + n + '자</b>라서 ' +
+        (good ? '<span class="okline">읽기 좋은 범위입니다</span>'
               : '<span class="warnline">' + (n > 80 ? '너무 깁니다' : '너무 짧습니다') + '</span>');
     });
   }

@@ -18,9 +18,9 @@
 <body>
 <div class="bar">
   <b>버튼 위계</b>
-  <label>주 버튼 수 <input type="range" id="n" min="1" max="4" step="1" value="1" style="width:84px"><span class="ruler" id="nv"></span></label>
-  <label><input type="checkbox" id="danger"> 위험한 동작을 주 버튼으로</label>
-  <label><input type="checkbox" id="order" checked> 주 동작을 오른쪽에</label>
+  <label>주 버튼의 개수 <input type="range" id="n" min="1" max="4" step="1" value="1" style="width:84px"><span class="ruler" id="nv"></span></label>
+  <label><input type="checkbox" id="danger"> 위험한 동작을 주 버튼으로 두기</label>
+  <label><input type="checkbox" id="order" checked> 주 동작을 오른쪽에 두기</label>
 </div>
 
 <div class="pad">
@@ -71,7 +71,7 @@
 
     document.getElementById('row').classList.toggle('many', n > 1);
 
-    // 가장 진한 버튼이 몇 개인가 — 바탕이 칠해진 것을 센다
+    // 가장 진한 버튼이 몇 개인지 센다. 바탕이 칠해진 것만 센다
     var filled = [].slice.call(document.querySelectorAll('#row button')).filter(function (b) {
       var bg = getComputedStyle(b).backgroundColor;
       var m = bg.match(/[\d.]+/g) || [];
@@ -80,11 +80,11 @@
     }).length;
 
     var rd = document.getElementById('read');
-    rd.innerHTML = '가장 진한 버튼 <b>' + filled + '개</b>' +
-      (filled > 1 ? ' <span class="warn">— 어느 것이 주 동작인지 알 수 없습니다</span>' : '') +
-      '<br>위험한 동작이 <b>' + (dangerMain ? '주 버튼' : '약한 버튼') + '</b>' +
-      (dangerMain ? ' <span class="warn">— 실수로 누르기 쉽습니다</span>' : '') +
-      '<br>주 동작이 <b>' + (rightMain ? '오른쪽' : '왼쪽') + '</b>에 있습니다';
+    rd.innerHTML = '가장 진한 버튼은 <b>' + filled + '개</b>입니다.' +
+      (filled > 1 ? ' <span class="warn">진한 버튼이 여럿이라 어느 것이 주 동작인지 알 수 없습니다.</span>' : '') +
+      '<br>위험한 동작은 <b>' + (dangerMain ? '주 버튼' : '약한 버튼') + '</b>으로 두었습니다.' +
+      (dangerMain ? ' <span class="warn">가장 눈에 띄는 자리라 실수로 누르기 쉽습니다.</span>' : '') +
+      '<br>주 동작은 <b>' + (rightMain ? '오른쪽' : '왼쪽') + '</b>에 있습니다.';
     rd.dataset.filled = String(filled);
     rd.dataset.dangermain = dangerMain ? '1' : '0';
     rd.dataset.right = rightMain ? '1' : '0';

@@ -77,10 +77,10 @@
         <p>토큰은 눈에 보이는 부품이 아니라 값을 어떻게 쓸지 <b>정해 둔 규칙</b>입니다. 그래서 생김새 대신 아래 네 가지를 물어보면 토큰끼리 무엇이 다른지 가려집니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하나</th><th>몇 단이 좋나</th><th>바꾸면 어디가 바뀌나</th><th>틀렸을 때 증상</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 정하는가</th><th>몇 단으로 두면 좋은가</th><th>값을 바꾸면 어디가 바뀌는가</th><th>잘못 정했을 때 나타나는 증상</th></tr></thead>
           <tbody>
             <tr><td>색 토큰</td><td>색의 <b>쓰임</b></td><td>쓰임 10여 개</td><td>브랜드 색 전체</td><td>같은 파랑이 화면마다 조금씩 다릅니다</td></tr>
-            <tr><td>다크 모드</td><td><b>두 벌</b>의 값</td><td>2벌(+고대비)</td><td>화면 전체의 바탕과 글자</td><td>어두운 화면에 흰 상자 하나만 남아 눈이 부십니다</td></tr>
+            <tr><td>다크 모드</td><td><b>두 벌</b>의 값</td><td>2벌, 고대비까지 두면 3벌</td><td>화면 전체의 바탕과 글자</td><td>어두운 화면에 흰 상자 하나만 남아 눈이 부십니다</td></tr>
             <tr><td>타입 스케일</td><td>글자 크기 <b>단계</b></td><td>6~8단</td><td>제목과 본문의 크기</td><td>무엇이 더 중요한지 알아보기 어렵습니다</td></tr>
             <tr><td>간격 체계</td><td>여백의 <b>단위</b></td><td>6~8단(4·8의 배수)</td><td>모든 패딩과 줄 간격</td><td>딱 집어 말하기 어렵지만 어수선해 보입니다</td></tr>
             <tr><td>고도</td><td>그림자의 <b>세기</b></td><td>4~5단</td><td>떠 있는 부품들</td><td>무엇이 위에 있는지 알 수 없습니다</td></tr>
@@ -89,7 +89,7 @@
             <tr><td>테두리와 구분선</td><td><b>가르는 선</b></td><td>선 1~2종</td><td>목록 · 카드 · 표</td><td>선이 두 겹이 되고 화면이 어수선해집니다</td></tr>
             <tr><td>불투명도</td><td><b>흐린 정도</b></td><td>2~3단</td><td>비활성 · 가림막 · 흐린 글</td><td>글이 잘 읽히지 않고 z-index가 적용되지 않습니다</td></tr>
             <tr><td>아이콘 크기</td><td>그림의 <b>크기</b></td><td>3~4단(16·20·24)</td><td>버튼 · 목록 · 앱바</td><td>선이 흐리고 글자와 가운데가 맞지 않습니다</td></tr>
-            <tr><td>상태 색</td><td>성공 · 주의 · 오류 · 정보</td><td>4가지 × 3자리</td><td>알림 · 배지 · 입력 오류</td><td>색을 구별하지 못하면 상태를 알 수 없습니다</td></tr>
+            <tr><td>상태 색</td><td>성공 · 주의 · 오류 · 정보</td><td>4가지, 색마다 3자리</td><td>알림 · 배지 · 입력 오류</td><td>색을 구별하지 못하면 상태를 알 수 없습니다</td></tr>
             <tr><td>토큰 이름 짓기</td><td>이름의 <b>규칙</b></td><td>층 3겹</td><td>토큰 전부</td><td>이름과 값이 어긋나 어느 토큰을 고쳐야 할지 알 수 없습니다</td></tr>
           </tbody>
         </table>
@@ -100,43 +100,43 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 단<span class="hint">단마다 쓰는 부품</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 모서리 단계별 쓰는 부품<span class="hint">단마다 그 둥글기를 주는 부품</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:block;width:110px;height:44px;background:var(--accent-soft);border:1px solid var(--line);border-radius:0"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">0</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">표 · 전폭 띠</span></div>
             </div>
-            <figcaption>0단<span>화면 끝에 붙는 것은 <b>각지게</b> 둡니다</span></figcaption>
+            <figcaption>0단, 각진 모서리<span>화면 끝에 붙는 것은 <b>각지게</b> 둡니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:block;width:110px;height:44px;background:var(--accent-soft);border:1px solid var(--line);border-radius:4px"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">4px</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">칩 · 배지</span></div>
             </div>
-            <figcaption>1단<span>모서리만 살짝 둥글립니다</span></figcaption>
+            <figcaption>1단, 살짝 둥근 모서리<span>모서리만 살짝 둥글립니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:block;width:110px;height:44px;background:var(--accent-soft);border:1px solid var(--line);border-radius:8px"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">8px</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">버튼 · 입력칸</span></div>
             </div>
-            <figcaption>2단<span>가장 자주 쓰는 값입니다</span></figcaption>
+            <figcaption>2단, 가장 흔한 둥글기<span>가장 자주 쓰는 값입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:block;width:110px;height:44px;background:var(--accent-soft);border:1px solid var(--line);border-radius:12px"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">12px</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">카드</span></div>
             </div>
-            <figcaption>3단<span>내용 덩어리가 <b>한 장</b>의 카드로 읽힙니다</span></figcaption>
+            <figcaption>3단, 카드 모서리<span>내용 덩어리가 <b>한 장</b>의 카드로 읽힙니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:block;width:110px;height:44px;background:var(--accent-soft);border:1px solid var(--line);border-radius:16px"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">16px</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">시트 · 모달</span></div>
             </div>
-            <figcaption>4단<span>위쪽 두 모서리에만 주기도 합니다</span></figcaption>
+            <figcaption>4단, 큰 면의 모서리<span>위쪽 두 모서리에만 주기도 합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:block;width:110px;height:30px;background:var(--accent-soft);border:1px solid var(--line);border-radius:999px"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">999px</span><span style="font-size:10.5px;color:var(--fg-faint);text-align:center">알약 · 아바타</span></div>
             </div>
-            <figcaption>끝단<span>값이 <b>높이의 절반</b>을 넘으면 더 둥글어지지 않습니다</span></figcaption>
+            <figcaption>끝단, 알약과 원<span>값이 <b>높이의 절반</b>을 넘으면 더 둥글어지지 않습니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -180,7 +180,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>모서리를 쓰는 경우</h3>
+            <h3>모서리 값을 정할 때 지킬 것</h3>
             <ul>
               <li>둥글기를 <b>토큰 네댓 개</b>로 정해 두고 그 토큰만 쓰기</li>
               <li>겹친 상자는 <b>안쪽 = 바깥 − 여백</b>으로 계산하기</li>
@@ -188,7 +188,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>모서리를 쓰지 않는 경우</h3>
+            <h3>모서리 값을 정할 때 피할 것</h3>
             <ul>
               <li>자리마다 <code>6px</code>·<code>7px</code>을 직접 적기. 화면마다 둥글기가 <b>조금씩 달라집니다</b></li>
               <li>둥근 카드 안에 그림을 넣고 <code>overflow</code>를 걸지 않기. 그림이 모서리 밖으로 튀어나옵니다</li>
@@ -197,7 +197,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>모서리 대신 다른 것을 써야 하는 경우</b> — 선 자체는 <a href="border.html">테두리와 구분선</a>, 떠 있는 느낌은 <a href="elevation.html">고도</a>, 값 이름은 <a href="tokenname.html">토큰 이름 짓기</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>모서리와 함께 보면 좋은 항목</b> — 선을 긋는 방법은 <a href="border.html">테두리와 구분선</a> 항목에서, 떠 있는 느낌을 내는 방법은 <a href="elevation.html">고도</a> 항목에서 다룹니다. 모서리 토큰의 이름을 정하는 방법은 <a href="tokenname.html">토큰 이름 짓기</a> 항목을 봅니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -207,25 +207,25 @@
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:block;width:104px;height:40px;background:var(--accent-soft);border:1px solid var(--accent);border-radius:12px"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">카드 12px</span></div>
             </div>
-            <figcaption><b>카드</b>카드는 3단 하나로 통일합니다</figcaption>
+            <figcaption><b>카드 모서리를 한 단으로 맞추기</b>카드는 3단 하나로 통일합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:block;width:104px;height:26px;background:var(--accent-soft);border:1px solid var(--accent);border-radius:999px"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">칩 999px</span></div>
             </div>
-            <figcaption><b>칩 · 필터</b>알약 모양으로 <b>누를 수 있는 것</b>임을 알립니다</figcaption>
+            <figcaption><b>칩과 필터를 알약 모양으로 만들기</b>알약 모양으로 <b>누를 수 있는 것</b>임을 알립니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
-              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:block;width:104px;height:40px;background:var(--accent-soft);border:1px solid var(--accent);border-radius:16px 16px 0 0"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">시트 위만</span></div>
+              <div style="display:grid;gap:6px;justify-items:center;padding:4px 0"><span style="display:block;width:104px;height:40px;background:var(--accent-soft);border:1px solid var(--accent);border-radius:16px 16px 0 0"></span><span style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">시트 위쪽만</span></div>
             </div>
-            <figcaption><b>바텀시트</b><b>위쪽 두 모서리만</b> 둥글립니다</figcaption>
+            <figcaption><b>바텀시트의 위쪽 모서리만 둥글리기</b><b>위쪽 두 모서리만</b> 둥글립니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 규칙<span class="hint">모서리를 코드로 옮기는 법</span></h2>
+        <h2 class="slot-label"><span class="n">8</span> 최소 코드와 지킬 규칙<span class="hint">모서리를 코드로 옮기는 방법</span></h2>
         <p>단은 토큰으로 정해 두고, 상자가 겹칠 때만 공식으로 안쪽 값을 구합니다.</p>
 <pre class="code"><span class="c">/* 네댓 단이면 화면 전체에 충분하다 */</span>
 :root {
@@ -244,14 +244,14 @@
 .pill { <span class="a">border-radius</span>: <span class="a">50%</span>; }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>값과 속성</th><th>쓰면 일어나는 일</th></tr></thead>
           <tbody>
             <tr><td><code>999px</code></td><td>짧은 변의 절반에서 더 커지지 않으므로, 가로세로 비율과 상관없이 <b>알약</b> 모양이 됩니다</td></tr>
             <tr><td><code>50%</code></td><td>가로세로 비율을 따라가므로 정사각형에서만 <b>원</b>이 됩니다</td></tr>
             <tr><td><code>overflow: hidden</code></td><td>자식을 카드 모양대로 자릅니다. 대신 카드 밖으로 나가는 <b>그림자와 툴팁도</b> 함께 잘립니다</td></tr>
-            <tr><td>네 값 따로</td><td><code>16px 16px 0 0</code>처럼 네 값을 따로 주면 위쪽 두 모서리만 둥글립니다</td></tr>
+            <tr><td>네 모서리 값을 따로 주기</td><td><code>16px 16px 0 0</code>처럼 네 값을 따로 주면 위쪽 두 모서리만 둥글립니다</td></tr>
             <tr><td><code>calc()</code></td><td>안쪽 값은 <b>손으로 적지 말고</b> 바깥 값에서 여백을 빼서 구합니다</td></tr>
-            <tr><td>확인하는 법</td><td>개발자 도구에서 두 모서리를 <b>함께 확대</b>해 곡선이 나란한지 봅니다</td></tr>
+            <tr><td>확인하는 방법</td><td>개발자 도구에서 두 모서리를 <b>함께 확대</b>해 곡선이 나란한지 봅니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -262,8 +262,8 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>서버와는 상관없다</th><td>모서리는 전부 CSS 값입니다. 다만 <b>이미지 자체를 둥글게</b> 잘라 보내 달라는 요청이 가끔 오는데, 모양은 화면 쪽에서 정하는 편이 낫습니다.</td></tr>
-            <tr><th>아바타</th><td>서버는 이미지를 <b>정사각형</b>으로 잘라 주고, 화면에서 동그랗게 만듭니다. 그래야 같은 이미지를 자리마다 다른 모양으로 쓸 수 있습니다.</td></tr>
+            <tr><th>서버와 관계없는 CSS 값</th><td>모서리는 전부 CSS 값입니다. 다만 <b>이미지 자체를 둥글게</b> 잘라 보내 달라는 요청이 가끔 오는데, 모양은 화면 쪽에서 정하는 편이 낫습니다.</td></tr>
+            <tr><th>아바타 이미지를 자르는 쪽</th><td>서버는 이미지를 <b>정사각형</b>으로 잘라 주고, 화면에서 동그랗게 만듭니다. 그래야 같은 이미지를 자리마다 다른 모양으로 쓸 수 있습니다.</td></tr>
           </tbody>
         </table>
         </div>

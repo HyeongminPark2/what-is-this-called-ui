@@ -38,12 +38,12 @@ def fs(kind, label, note="", ok=None, w="152px"):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">화면을 다 덮는다 — 가림막이 안 보인다</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">닫기(✕)이지 뒤로가기가 아니다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">제목 — 무엇을 하는 중인지</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">주 동작은 오른쪽 위 — 저장 · 완료</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--accent)">기록에 넣으면 시스템 백으로도 닫힌다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">화면처럼 보이지만 화면이 아니다 — 뒤가 남아 있다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">화면을 다 덮어 가림막이 보이지 않음</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">뒤로가기가 아니라 닫기(✕)를 둠</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">제목으로 무엇을 하는 중인지 알림</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">저장 · 완료 같은 주 동작은 오른쪽 위에</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--accent)">기록에 넣으면 시스템 백으로도 닫힘</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">새 화면처럼 보여도 뒤 화면이 남아 있음</div>
                 </div>
               </div>'''
 
@@ -75,30 +75,30 @@ D = dict(
   axes=axis_table("전체 화면 레이어"),
   oneline="같은 내용이라도 화면 폭에 따라 <b>폰에서는 전체 화면으로, PC에서는 모달로</b> 바꿔 띄웁니다.",
   states=states([
-    (fs("none", "", "평소 — 목록", True), "닫힘", "레이어를 열기 전, 뒤에 있던 목록 화면입니다"),
-    (fs("full", "", "화면을 다 덮는다", True), "전체 화면", "<b>폰처럼 좁은 화면에서</b> 맞는 방식입니다"),
-    (fs("modal", "", "가림막 위에 작게", True), "모달", "<b>PC처럼 넓은 화면에서</b> 맞는 방식입니다"),
-    (one(txt('<span style="display:block;font-size:8px;color:var(--danger)">폰인데 모달</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">내용 칸이 더 좁아진다</span>'),
-         "폭을 안 따짐", False, "", "152px"),
-     "폰에 모달", "폰에 모달을 띄우면 둘레 여백 때문에 내용 <b>칸이 더 좁아집니다</b>"),
+    (fs("none", "", "평소에 보는 목록", True), "레이어를 열기 전", "레이어를 열기 전, 뒤에 있던 목록 화면입니다"),
+    (fs("full", "", "화면을 다 덮음", True), "전체 화면으로 띄웠을 때", "<b>폰처럼 좁은 화면에서</b> 맞는 방식입니다"),
+    (fs("modal", "", "가림막 위에 작게", True), "모달로 띄웠을 때", "<b>PC처럼 넓은 화면에서</b> 맞는 방식입니다"),
+    (one(txt('<span style="display:block;font-size:8px;color:var(--danger)">폰에서 모달로 띄움</span>'
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">내용 칸이 더 좁아짐</span>'),
+         "폭을 따지지 않음", False, "", "152px"),
+     "폰에서 모달로 띄웠을 때", "폰에 모달을 띄우면 둘레 여백 때문에 내용 <b>칸이 더 좁아집니다</b>"),
     (one(txt('<span style="display:block;font-size:8px">✕ 닫기 · 저장</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">‹ 뒤로가 아니다</span>'),
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">‹ 뒤로 단추는 두지 않음</span>'),
          "머리 줄", True, "", "152px"),
-     "닫기 vs 뒤로", "화면 위를 덮고 올라온 레이어이므로 <b>✕가 맞습니다</b>"),
+     "닫기 단추와 뒤로 단추 고르기", "화면 위를 덮고 올라온 레이어이므로 <b>✕가 맞습니다</b>"),
     (one(txt('<span style="display:block;font-size:8px">시스템 백</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">기록에 넣으면 이것으로도 닫힌다</span>'),
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">기록에 넣으면 이것으로도 닫힘</span>'),
          "기록", True, "", "152px"),
-     "시스템 백", "폰 사용자는 <b>시스템 백으로도 닫히기를</b> 기대합니다"),
+     "시스템 백을 눌렀을 때", "폰 사용자는 <b>시스템 백으로도 닫히기를</b> 기대합니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("다 덮음", "가림막 없음", "화면을 다 덮어서 뒤의 화면이 <b>보이지 않습니다</b>"),
+    ("덮는 범위", "화면 전체, 가림막 없음", "화면을 다 덮어서 뒤의 화면이 <b>보이지 않습니다</b>"),
     ("닫기", "✕", "<b>뒤로가기(‹)가 아니라</b> 닫기 단추(✕)를 둡니다"),
-    ("제목", "무엇을 하는 중", "'새 가게 등록'처럼 지금 무엇을 하는 중인지 적습니다"),
+    ("제목", "무엇을 하는 중인지", "'새 가게 등록'처럼 지금 무엇을 하는 중인지 적습니다"),
     ("주 동작", "오른쪽 위", "저장이나 완료 같은 주 동작은 오른쪽 위에 둡니다"),
-    ("기록", "넣어 두기", "열 때 기록에 한 칸을 넣어 두면 <b>시스템 백</b>으로도 닫힙니다"),
-    ("화면 아님", "뒤가 남음", "뒤의 화면이 그대로 남아 있어서 닫으면 그 화면으로 <b>돌아옵니다</b>"),
+    ("기록", "기록에 넣어 두기", "열 때 기록에 한 칸을 넣어 두면 <b>시스템 백</b>으로도 닫힙니다"),
+    ("뒤에 남은 화면", "닫으면 돌아옴", "뒤의 화면이 그대로 남아 있어서 닫으면 그 화면으로 <b>돌아옵니다</b>"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <b>✕와 ‹ 중 무엇을 둘지</b> 자주 헷갈리는데,
@@ -108,6 +108,8 @@ D = dict(
           폰 사용자는 <b>시스템 백</b>을 눌러도 레이어가 닫히기를 기대합니다.
           그런데 레이어를 기록에 넣지 않으면 시스템 백이 레이어를 닫는 대신 <b>그 뒤의 화면까지</b> 벗어나 버립니다.
           레이어를 열 때 기록에 한 칸을 넣어 두면 시스템 백이 레이어만 닫기 때문에 이 문제가 생기지 않습니다.</p>''',
+  do_title="전체 화면 레이어를 만들 때 지킬 것",
+  dont_title="전체 화면 레이어를 만들 때 피할 것",
   do=ul([
     "화면이 <b>좁으면 전체 화면, 넓으면 모달</b>로 바꾸기",
     "<b>✕(닫기)</b>를 쓰고 주 동작은 오른쪽 위에 두기",
@@ -119,11 +121,11 @@ D = dict(
     "기록에 넣지 않기. <b>시스템 백을 누르면 뒤의 화면까지</b> 벗어납니다",
     "레이어 안에서 전체 화면을 또 띄우기. 레이어가 <b>겹치면 빠져나오는 길</b>이 복잡해집니다",
   ]),
-  instead='가림막 위에 작게 뜨면 <a href="modal.html">모달</a>, 아래에서 올라오면 <a href="sheet.html">바텀시트</a>, 진짜 화면 전환이면 주소를 바꾸고, 뒤로가기 처리는 <a href="systemback.html">시스템 백</a>.',
+  instead='가림막 위에 작게 띄우려면 <a href="modal.html">모달</a>을 쓰고, 화면 아래에서 올라오게 하려면 <a href="sheet.html">바텀시트</a>가 맞습니다. 실제로 화면을 바꾸는 것이라면 레이어 대신 주소를 바꾸고, 뒤로가기 처리는 <a href="systemback.html">시스템 백</a>에서 다룹니다.',
   cases=cases([
-    (fs("full", "", "", True, "150px"), "새로 만들기", "입력 칸이 <b>여러 개</b>인 등록 화면에 씁니다"),
-    (fs("full", "", "", True, "150px"), "긴 폼", "모달에 <b>다 들어가지 않는</b> 긴 내용에 씁니다"),
-    (fs("modal", "", "", True, "150px"), "PC 에서 같은 일", "넓은 화면에서는 같은 내용이 <b>모달</b>로 바뀝니다"),
+    (fs("full", "", "", True, "150px"), "입력 칸이 많은 등록 화면", "입력 칸이 <b>여러 개</b>인 등록 화면에 씁니다"),
+    (fs("full", "", "", True, "150px"), "모달에 다 들어가지 않는 긴 폼", "모달에 <b>다 들어가지 않는</b> 긴 내용에 씁니다"),
+    (fs("modal", "", "", True, "150px"), "PC에서는 같은 내용을 모달로", "넓은 화면에서는 같은 내용이 <b>모달</b>로 바뀝니다"),
   ]),
   code_lede="마크업은 <code>&lt;dialog&gt;</code> 하나를 그대로 쓰고, 화면 폭에 따라 <b>CSS로만</b> 모양을 바꿉니다.",
   code='''&lt;<span class="t">dialog</span> <span class="a">id</span>=<span class="s">"editor"</span> <span class="a">aria-label</span>=<span class="s">"새 가게 등록"</span>&gt;
@@ -144,14 +146,14 @@ dialog { <span class="a">width</span>: min(<span class="a">520px</span>, <span c
   keys=kbd([
     ("Esc", "레이어를 닫습니다. 이때 적던 내용은 <b>저장되지 않습니다</b>"),
     ("Tab", "초점이 레이어 밖으로 나가지 않고 <b>안에서만</b> 돕니다"),
-    ("초점", "열면 초점을 <b>닫기 단추나 첫 입력 칸</b>으로 옮기고, 닫으면 레이어를 <b>부른 자리</b>로 돌려놓습니다"),
+    ("열고 닫을 때의 초점", "열면 초점을 <b>닫기 단추나 첫 입력 칸</b>으로 옮기고, 닫으면 레이어를 <b>부른 자리</b>로 돌려놓습니다"),
     ("<code>aria-modal=\"true\"</code>", "보조 기술에 뒤의 화면은 <b>읽히지 않는다</b>고 알립니다"),
     ("<code>100dvh</code>", "폰에서 주소창이 숨어도 레이어 높이가 <b>흔들리지 않습니다</b>"),
-    ("확인하는 법", "폰 폭에서 레이어를 열고 <b>시스템 백</b>을 눌러 레이어만 닫히는지 확인합니다"),
+    ("확인하는 방법", "폰 폭에서 레이어를 열고 <b>시스템 백</b>을 눌러 레이어만 닫히는지 확인합니다"),
   ]),
   backend=rows([
-    ("초안 저장", "폼이 길면 <b>중간 저장</b>을 두어, 레이어가 닫혀도 적던 내용이 사라지지 않게 합니다."),
-    ("닫을 때 확인", "사용자가 적은 내용이 있으면 <b>그냥 닫지 않고</b> 닫을지 한 번 묻습니다. <a href=\"destructive.html\">위험한 동작</a>을 확인받는 것과 같은 이유입니다."),
+    ("적던 내용을 초안으로 저장하기", "폼이 길면 <b>중간 저장</b>을 두어, 레이어가 닫혀도 적던 내용이 사라지지 않게 합니다."),
+    ("닫기 전에 한 번 묻기", "사용자가 적은 내용이 있으면 <b>그냥 닫지 않고</b> 닫을지 한 번 묻습니다. <a href=\"destructive.html\">위험한 동작</a>을 확인받는 것과 같은 이유입니다."),
   ]),
   plat_lede="폰에서는 모달보다 <b>전체 화면 레이어가 기본</b>입니다.",
   plats=plats([

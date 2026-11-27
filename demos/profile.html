@@ -21,7 +21,7 @@
   <label>보는 사람 <select class="sel" id="who" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="me">나 자신</option>
     <option value="team">같은 팀</option>
-    <option value="stranger" selected>남</option>
+    <option value="stranger" selected>다른 사람</option>
   </select></label>
   <label><input type="checkbox" id="all"> 모든 칸을 다 보여 주기</label>
 </div>
@@ -88,7 +88,7 @@
     }).join('');
 
     var rd = document.getElementById('read');
-    rd.innerHTML = '보이는 칸 <b>' + shown + '개</b> · 새면 안 되는 칸 <b>' + leak + '개</b>' +
+    rd.innerHTML = '보이는 칸 <b>' + shown + '개</b> · 보이면 안 되는데 드러난 칸 <b>' + leak + '개</b>' +
       (leak ? ' <span class="warn">(남에게 보이면 안 되는 값입니다)</span>' : '') +
       '<br>주 동작 <b>' + act.textContent + '</b>';
     rd.dataset.shown = String(shown);

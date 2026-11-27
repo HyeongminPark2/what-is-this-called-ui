@@ -18,12 +18,12 @@
 <body>
 <div class="bar">
   <b>여러 개 고르기</b>
-  <label>보이는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>고른 것을 보여 주는 방법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="token" selected>고른 것을 알약으로</option>
     <option value="count">몇 개인지 숫자로</option>
     <option value="native">기본 multiple 셀렉트</option>
   </select></label>
-  <label>최대 보일 알약 <input type="range" id="max" min="1" max="6" step="1" value="3" style="width:76px"><span class="ruler" id="maxv"></span></label>
+  <label>한 번에 보일 알약 수 <input type="range" id="max" min="1" max="6" step="1" value="3" style="width:76px"><span class="ruler" id="maxv"></span></label>
 </div>
 
 <div class="pad">
@@ -40,7 +40,7 @@
   여러 개를 고르게 하면 <b>고른 것을 어떻게 보여 줄지</b>를 정해야 합니다.
   고른 것을 알약으로 늘어놓으면 <b>무엇을 골랐는지</b> 한눈에 보이지만 줄 수가 늘어납니다.
   데모가 <b>고른 것 칸의 높이</b>를 재서 적어 줍니다.<br>
-  '<b>최대 보일 알약</b>'을 줄이면 넘치는 알약이 <code>+N</code>으로 접힙니다. 개수만 숫자로 보여 주면
+  '<b>한 번에 보일 알약 수</b>'를 줄이면 넘치는 알약이 <code>+N</code>으로 접힙니다. 개수만 숫자로 보여 주면
   높이는 변하지 않지만 <b>무엇을 골랐는지 알 수 없습니다</b>.<br>
   브라우저 기본 <code>multiple</code> 셀렉트는 <b>Ctrl을 누른 채</b> 눌러야 여러 개가 골라집니다.
   이 방법을 모르는 사람이 많아서 실제로는 거의 쓰지 않고, 체크박스 목록으로 만드는 편이 훨씬 알아보기 쉽습니다.
@@ -89,11 +89,11 @@
     var visible = k === 'token' ? Math.min(list.length, max) : (k === 'count' ? 0 : list.length);
 
     var rd = document.getElementById('read');
-    rd.innerHTML = '고른 곳 <b>' + list.length + '곳</b> · 보이는 법 <b>' +
+    rd.innerHTML = '고른 곳 <b>' + list.length + '곳</b> · 보여 주는 방법 <b>' +
       ({ token: '알약', count: '숫자', native: '기본 셀렉트' }[k]) + '</b>' +
       '<br>고른 것 칸 높이 <b>' + h + 'px</b>' +
       '<br>이름이 보이는 것 <b>' + visible + '개</b>' +
-      (k === 'count' ? ' <span class="warn">— 무엇을 골랐는지 알 수 없습니다</span>' : '') +
+      (k === 'count' ? ' <span class="warn">숫자만 보여서 무엇을 골랐는지 알 수 없습니다</span>' : '') +
       (k === 'native' ? '<br><span class="warn">Ctrl을 누른 채 눌러야 여러 개가 골라집니다</span>' : '') +
       (why ? '<br>' + why : '');
     rd.dataset.n = String(list.length);

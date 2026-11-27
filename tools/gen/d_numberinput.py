@@ -20,12 +20,12 @@ def ni(val, unit="원", label="", note="", ok=None, w="152px", inside=False, spi
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">text + inputmode="numeric" — 안전한 기본</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--danger)">type="number" — 휠로 값이 바뀐다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--danger)">쉼표를 넣으면 값이 빈 문자열이 된다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">단위는 칸 밖에 — 값만 깨끗하게</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">숫자는 오른쪽 맞춤 · tabular-nums</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">세어서 쓰지 않는 숫자는 text 로</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">text + inputmode="numeric"이 안전한 기본</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--danger)">type="number"는 휠로 값이 바뀜</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--danger)">쉼표를 넣으면 값이 빈 문자열이 됨</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">단위는 칸 밖에 두어 값만 남김</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">숫자는 오른쪽 맞춤에 tabular-nums</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">세어서 쓰지 않는 숫자는 text로 받음</div>
                 </div>
               </div>'''
 
@@ -56,24 +56,24 @@ D = dict(
   axes=ax("숫자 입력"),
   oneline="<b>세어서 쓰지 않는 숫자는 <code>text</code> 칸으로 받으세요.</b> 돈, 전화번호, 카드번호가 여기에 해당합니다.",
   states=states([
-    (ni("1,284,000", "원", "", "쉼표가 보이고 값은 깨끗하다", True), "<code>text</code> + inputmode", "쉼표를 보여 주면서 값도 지킬 수 있는 <b>안전한 기본</b>입니다"),
-    (ni("1284000", "원", "", "스피너가 붙는다", None, "152px", False, True), "<code>type=number</code>", "스피너 화살표가 붙는데 <b>너무 작아서</b> 누르기 어렵습니다"),
-    (ni("(빈 값)", "원", "", "쉼표를 넣으면 값이 사라진다", False, "152px", False, True), "쉼표를 넣으면", "값이 <b>빈 문자열</b>이 됩니다"),
-    (ni("1,284,000 원", "", "", "값과 단위가 섞였다", False, "152px", True), "단위가 칸 안에", "값에 단위 글자가 섞여서 <b>숫자만 뽑기 번거롭습니다</b>"),
-    (ni("1,284,000", "원", "", "오른쪽 맞춤 · 자릿수 고정", True), "맞춤", "값이 바뀌어도 <b>자릿수 위치가 흔들리지 않습니다</b>"),
-    (one(txt('<span style="display:block;font-size:8px;color:var(--danger)">굴리다 값이 바뀌었다</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">type=number 의 기본 동작</span>'),
+    (ni("1,284,000", "원", "", "쉼표가 보여도 값은 숫자만 남음", True), "<code>text</code> + inputmode로 받을 때", "쉼표를 보여 주면서 값도 지킬 수 있는 <b>안전한 기본</b>입니다"),
+    (ni("1284000", "원", "", "스피너 화살표가 붙음", None, "152px", False, True), "<code>type=number</code>로 받을 때", "스피너 화살표가 붙는데 <b>너무 작아서</b> 누르기 어렵습니다"),
+    (ni("(빈 값)", "원", "", "쉼표를 넣으면 값이 사라짐", False, "152px", False, True), "<code>type=number</code>에 쉼표를 넣었을 때", "값이 <b>빈 문자열</b>이 됩니다"),
+    (ni("1,284,000 원", "", "", "값과 단위가 섞임", False, "152px", True), "단위를 칸 안에 넣었을 때", "값에 단위 글자가 섞여서 <b>숫자만 뽑기 번거롭습니다</b>"),
+    (ni("1,284,000", "원", "", "오른쪽 맞춤에 자릿수 고정", True), "숫자를 오른쪽으로 맞췄을 때", "값이 바뀌어도 <b>자릿수 위치가 흔들리지 않습니다</b>"),
+    (one(txt('<span style="display:block;font-size:8px;color:var(--danger)">굴리다가 값이 바뀜</span>'
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">type=number의 기본 동작</span>'),
          "휠", False, "", "152px"),
-     "휠", "칸 위에서 <b>스크롤하다가</b> 값이 바뀝니다"),
+     "칸 위에서 휠을 굴렸을 때", "칸 위에서 <b>스크롤하다가</b> 값이 바뀝니다"),
   ]),
   anat=ANAT,
   pins=pins([
     ("<code>text</code> + inputmode", "안전한 기본", "<code>number</code>와 <b>똑같이</b> 폰에서 숫자 자판이 뜹니다"),
-    ("<code>type=number</code>", "휠 사고", "칸 위에서 스크롤하다가 값이 바뀝니다"),
+    ("<code>type=number</code>", "휠로 값이 바뀜", "칸 위에서 스크롤하다가 값이 바뀝니다"),
     ("쉼표", "값이 사라짐", "<code>number</code> 칸에 쉼표를 넣으면 값이 <b>빈 문자열</b>이 됩니다"),
     ("단위", "칸 밖에", "단위를 칸 밖에 두어야 칸에 <b>숫자 값만</b> 남습니다"),
-    ("맞춤", "오른쪽 · tabular", "오른쪽으로 맞추고 숫자 폭을 고정해 자릿수가 <b>흔들리지 않게</b> 합니다"),
-    ("세어 쓰는 숫자", "<code>number</code> 도 괜찮다", "수량이나 나이처럼 세어서 쓰는 수에는 <code>number</code>를 써도 됩니다"),
+    ("맞춤", "오른쪽 맞춤과 tabular-nums", "오른쪽으로 맞추고 숫자 폭을 고정해 자릿수가 <b>흔들리지 않게</b> 합니다"),
+    ("세어 쓰는 숫자", "<code>number</code>를 써도 됨", "수량이나 나이처럼 세어서 쓰는 수에는 <code>number</code>를 써도 됩니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           수량이나 나이처럼 <b>세어서 쓰는 작은 수</b>에는 <code>type="number"</code>의 화살표와 범위 검사가 편리합니다.
@@ -93,11 +93,11 @@ D = dict(
     "단위를 <b>칸 안에</b> 넣기",
     "휠로 값이 바뀌게 두기. 화면을 스크롤하다가 값이 <b>바뀌어 버립니다</b>",
   ]),
-  instead='− ＋ 단추가 붙으면 <a href="quantity.html">수량 스테퍼</a>, 하이픈이 들어가면 <a href="formatted.html">자동 서식 입력</a>, 범위 안에서 고르면 <a href="slider.html">슬라이더</a>, 숫자를 화면에 적는 형식은 <a href="numbertext.html">숫자와 단위 쓰기</a>.',
+  instead='칸 양옆에 − ＋ 단추를 붙여 하나씩 고치게 하려면 <a href="quantity.html">수량 스테퍼</a>를, 치는 동안 하이픈을 넣어 주어야 하면 <a href="formatted.html">자동 서식 입력</a>을 씁니다. 정해진 범위 안에서 고르게 하려면 <a href="slider.html">슬라이더</a>가 맞고, 숫자를 화면에 어떤 형식으로 적을지는 <a href="numbertext.html">숫자와 단위 쓰기</a>에서 다룹니다.',
   cases=cases([
-    (ni("1,284,000", "원", "", "", True, "150px"), "금액", "쉼표가 들어가므로 <b><code>text</code></b> 칸이 맞습니다"),
-    (ni("3", "개", "", "", True, "150px", False, True), "수량", "세어서 쓰는 작은 수라서 <code>number</code>를 써도 괜찮습니다"),
-    (ni("010-1234-5678", "", "", "", True, "150px"), "전화번호", "숫자로 이루어져 있지만 계산하는 <b>수가 아닙니다</b>"),
+    (ni("1,284,000", "원", "", "", True, "150px"), "금액 받기", "쉼표가 들어가므로 <b><code>text</code></b> 칸이 맞습니다"),
+    (ni("3", "개", "", "", True, "150px", False, True), "수량 받기", "세어서 쓰는 작은 수라서 <code>number</code>를 써도 괜찮습니다"),
+    (ni("010-1234-5678", "", "", "", True, "150px"), "전화번호 받기", "숫자로 이루어져 있지만 계산하는 <b>수가 아닙니다</b>"),
   ]),
   code_lede="세어서 쓰지 않는 숫자는 <code>text</code> 칸으로 받고, 값을 읽을 때 숫자만 뽑아 씁니다.",
   code='''<span class="c">&lt;!-- 돈 · 전화번호 · 카드번호처럼 계산하지 않는 숫자 --&gt;</span>
@@ -119,12 +119,12 @@ el.addEventListener(<span class="s">'wheel'</span>, e =&gt; el === document.acti
     ("↑ ↓", "<code>type=number</code> 칸에서만 값이 바뀝니다"),
     ("<code>pattern</code>", "<code>text</code> 칸에서도 <b>형식 검사</b>를 걸 수 있습니다"),
     ("<code>autocomplete=\"off\"</code>", "금액 칸에 전에 넣었던 <b>옛 값</b>이 뜨지 않게 합니다"),
-    ("확인하는 법", "칸에 커서를 두고 <b>휠을 굴려</b> 값이 바뀌는지 봅니다"),
+    ("확인하는 방법", "칸에 커서를 두고 <b>휠을 굴려</b> 값이 바뀌는지 봅니다"),
   ]),
   backend=rows([
-    ("숫자만 받는다", "서버에는 <code>\"1,284,000\"</code>이 아니라 <code>1284000</code>으로 보냅니다. 쉼표 같은 서식은 화면에서 붙입니다."),
-    ("돈은 정수로", "금액을 소수점 실수로 다루면 <b>반올림 오차</b>가 생기기 때문에, 원 단위 정수나 문자열로 다루는 편이 안전합니다."),
-    ("범위", "서버가 <code>min</code>·<code>max</code>를 내려 주면 화면에서 범위 밖의 값을 <b>미리 막을 수</b> 있습니다."),
+    ("서버에는 숫자만 보내기", "서버에는 <code>\"1,284,000\"</code>이 아니라 <code>1284000</code>으로 보냅니다. 쉼표 같은 서식은 화면에서 붙입니다."),
+    ("금액은 정수로 다루기", "금액을 소수점 실수로 다루면 <b>반올림 오차</b>가 생기기 때문에, 원 단위 정수나 문자열로 다루는 편이 안전합니다."),
+    ("값의 범위를 서버가 알려 주기", "서버가 <code>min</code>·<code>max</code>를 내려 주면 화면에서 범위 밖의 값을 <b>미리 막을 수</b> 있습니다."),
   ]),
   plat_lede="<b>숫자 자판</b>을 띄우는 방법은 플랫폼마다 다릅니다.",
   plats=plats([

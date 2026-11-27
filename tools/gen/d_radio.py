@@ -43,12 +43,12 @@ D = dict(
   axes=ax("라디오 그룹"),
   oneline="라디오는 <b>선택지를 모두 보여 주면서 하나만</b> 고르게 하는 부품입니다. 선택지를 다 보여 줄 자리가 없으면 셀렉트를, 여럿을 고르게 하려면 체크박스를 씁니다.",
   states=states([
-    (mini('<div style="margin-top:12px;padding:0 6px;display:grid;gap:4px"><div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1.5px solid var(--line-strong);border-radius:50%"></span><span style="font-size:6.5px">매일</span></div><div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1.5px solid var(--line-strong);border-radius:50%"></span><span style="font-size:6.5px">주 1회</span></div></div>', bars="", label="아직 안 고른 상태"), "안 고름", "기본값을 함부로 넣지 않습니다. 사용자가 <b>직접 고르게 하는 것</b>이 목적이라면 비워 둡니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px;display:grid;gap:4px"><div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1.5px solid var(--accent);border-radius:50%;display:grid;place-items:center"><span style="width:4px;height:4px;border-radius:50%;background:var(--accent)"></span></span><span style="font-size:6.5px">매일</span></div><div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1.5px solid var(--line-strong);border-radius:50%"></span><span style="font-size:6.5px">주 1회</span></div></div>', bars="", label="하나 고른 상태"), "고름", "하나를 켜면 나머지는 저절로 꺼집니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1.5px solid var(--accent);border-radius:50%;box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent)"></span><span style="font-size:6.5px">주 1회</span></div>', bars="", label="포커스"), "포커스", "그룹 안에서는 화살표 키로 옮기고, 옮기면 바로 그 값이 골라집니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:4px;align-items:center;opacity:.45"><span style="width:9px;height:9px;border:1.5px solid var(--line-strong);border-radius:50%"></span><span style="font-size:6.5px">발행하지 않음</span></div><div style="position:absolute;left:6px;bottom:6px;font-size:5.5px;color:var(--fg-muted)">사업자만 고를 수 있음</div>', bars="", label="비활성 선택지"), "비활성 선택지", "선택지 하나만 고르지 못하게 막을 때는 <b>그 이유를 바로 옆에</b> 적습니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px"><div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1.5px solid var(--danger);border-radius:50%"></span><span style="font-size:6.5px">매일</span></div><div style="font-size:5.5px;color:var(--danger);font-weight:700;margin-top:3px">주기를 골라 주세요</div></div>', bars="", label="필수인데 안 고름"), "필수인데 안 고름", "에러 메시지는 칸마다 붙이지 않고 <b>그룹 아래</b>에 하나만 띄웁니다"),
-    (mini('<div style="margin-top:8px;padding:0 6px;display:grid;gap:3px"><div style="border:1px solid var(--accent);background:var(--accent-soft);border-radius:3px;padding:3px 4px;font-size:5.5px;display:flex;gap:3px"><span style="width:7px;height:7px;border:1.5px solid var(--accent);border-radius:50%"></span>주 1회</div><div style="border:1px solid var(--line-strong);border-radius:3px;padding:3px 4px;font-size:5.5px;display:flex;gap:3px"><span style="width:7px;height:7px;border:1.5px solid var(--line-strong);border-radius:50%"></span>월 1회</div></div>', bars="", label="카드형 라디오"), "카드형", "설명이 길면 선택지 둘레에 테두리를 둘러 누를 수 있는 영역을 넓힙니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:grid;gap:4px"><div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1.5px solid var(--line-strong);border-radius:50%"></span><span style="font-size:6.5px">매일</span></div><div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1.5px solid var(--line-strong);border-radius:50%"></span><span style="font-size:6.5px">주 1회</span></div></div>', bars="", label="아직 안 고른 상태"), "아직 고르지 않았을 때", "기본값을 함부로 넣지 않습니다. 사용자가 <b>직접 고르게 하는 것</b>이 목적이라면 비워 둡니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:grid;gap:4px"><div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1.5px solid var(--accent);border-radius:50%;display:grid;place-items:center"><span style="width:4px;height:4px;border-radius:50%;background:var(--accent)"></span></span><span style="font-size:6.5px">매일</span></div><div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1.5px solid var(--line-strong);border-radius:50%"></span><span style="font-size:6.5px">주 1회</span></div></div>', bars="", label="하나 고른 상태"), "하나를 골랐을 때", "하나를 켜면 나머지는 저절로 꺼집니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1.5px solid var(--accent);border-radius:50%;box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent)"></span><span style="font-size:6.5px">주 1회</span></div>', bars="", label="포커스"), "포커스를 받았을 때", "그룹 안에서는 화살표 키로 옮기고, 옮기면 바로 그 값이 골라집니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:4px;align-items:center;opacity:.45"><span style="width:9px;height:9px;border:1.5px solid var(--line-strong);border-radius:50%"></span><span style="font-size:6.5px">발행하지 않음</span></div><div style="position:absolute;left:6px;bottom:6px;font-size:5.5px;color:var(--fg-muted)">사업자만 고를 수 있음</div>', bars="", label="비활성 선택지"), "고를 수 없는 선택지가 있을 때", "선택지 하나만 고르지 못하게 막을 때는 <b>그 이유를 바로 옆에</b> 적습니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px"><div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1.5px solid var(--danger);border-radius:50%"></span><span style="font-size:6.5px">매일</span></div><div style="font-size:5.5px;color:var(--danger);font-weight:700;margin-top:3px">주기를 골라 주세요</div></div>', bars="", label="필수인데 안 고름"), "필수인데 고르지 않았을 때", "에러 메시지는 칸마다 붙이지 않고 <b>그룹 아래</b>에 하나만 띄웁니다"),
+    (mini('<div style="margin-top:8px;padding:0 6px;display:grid;gap:3px"><div style="border:1px solid var(--accent);background:var(--accent-soft);border-radius:3px;padding:3px 4px;font-size:5.5px;display:flex;gap:3px"><span style="width:7px;height:7px;border:1.5px solid var(--accent);border-radius:50%"></span>주 1회</div><div style="border:1px solid var(--line-strong);border-radius:3px;padding:3px 4px;font-size:5.5px;display:flex;gap:3px"><span style="width:7px;height:7px;border:1.5px solid var(--line-strong);border-radius:50%"></span>월 1회</div></div>', bars="", label="카드형 라디오"), "카드형으로 그렸을 때", "설명이 길면 선택지 둘레에 테두리를 둘러 누를 수 있는 영역을 넓힙니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -74,14 +74,14 @@ D = dict(
     "누르는 즉시 적용될 때. 세그먼티드 컨트롤이 더 알맞습니다",
     "선택지가 둘뿐이고 켜고 끄는 뜻일 때. 스위치나 체크박스 하나로 충분합니다",
   ]),
-  instead='여럿이면 <a href="checkbox.html">체크박스</a>, 많으면 <a href="select.html">셀렉트</a>·<a href="combobox.html">콤보박스</a>, 즉시 적용이면 <a href="segmented.html">세그먼티드</a>나 <a href="switch.html">스위치</a>.',
+  instead='여러 개를 고르게 하려면 <a href="checkbox.html">체크박스</a>를 쓰고, 선택지가 많으면 <a href="select.html">셀렉트</a>나 <a href="combobox.html">콤보박스</a>를 씁니다. 누르는 즉시 적용되는 값이면 <a href="segmented.html">세그먼티드</a> 컨트롤이나 <a href="switch.html">스위치</a>가 맞습니다.',
   cases=cases([
     (mini('<div style="margin-top:10px;padding:0 6px;display:grid;gap:4px"><div style="display:flex;gap:4px;align-items:center"><span style="width:8px;height:8px;border:1.5px solid var(--accent);border-radius:50%;display:grid;place-items:center"><span style="width:3px;height:3px;border-radius:50%;background:var(--accent)"></span></span><span style="font-size:6px">자동 발행</span></div><div style="display:flex;gap:4px;align-items:center"><span style="width:8px;height:8px;border:1.5px solid var(--line-strong);border-radius:50%"></span><span style="font-size:6px">직접 발행</span></div></div>', bars="", tall=False, label="기본 라디오 재현"),
-     "기본", "설명이 짧을 때 쓰며, 선택지를 세로로 쌓습니다"),
+     "선택지를 세로로 쌓은 기본형", "설명이 짧을 때 쓰며, 선택지를 세로로 쌓습니다"),
     (mini('<div style="margin-top:8px;padding:0 6px;display:grid;gap:3px"><div style="border:1px solid var(--accent);background:var(--accent-soft);border-radius:3px;padding:3px 4px;font-size:5.5px"><b>주 1회</b><div style="color:var(--fg-muted);font-size:5px">수수료 0.8%</div></div><div style="border:1px solid var(--line-strong);border-radius:3px;padding:3px 4px;font-size:5.5px"><b>월 1회</b><div style="color:var(--fg-muted);font-size:5px">수수료 0.5%</div></div></div>', bars="", tall=False, label="카드형 라디오 재현"),
-     "카드형", "요금제 고르기처럼 선택지마다 설명이 길 때 씁니다"),
+     "설명이 긴 선택지를 카드로 묶기", "요금제 고르기처럼 선택지마다 설명이 길 때 씁니다"),
     (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:3px"><span style="flex:1;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:2px;display:flex;gap:1px"><span style="flex:1;background:var(--accent);color:#fff;border-radius:99px;font-size:5px;text-align:center;padding:2px 0">매일</span><span style="flex:1;font-size:5px;text-align:center;padding:2px 0;color:var(--fg-muted)">주</span><span style="flex:1;font-size:5px;text-align:center;padding:2px 0;color:var(--fg-muted)">월</span></span></div>', bars="", tall=False, label="세그먼티드로 바꾼 재현"),
-     "세그먼티드로", "같은 라디오 그룹을 가로로 붙여 놓은 모양입니다. 누르는 즉시 적용할 때 씁니다"),
+     "세그먼티드 컨트롤로 바꾼 모양", "같은 라디오 그룹을 가로로 붙여 놓은 모양입니다. 누르는 즉시 적용할 때 씁니다"),
   ]),
   code_lede="라디오 버튼에 같은 <code>name</code>을 주면 브라우저가 알아서 한 그룹으로 묶고 화살표 키 조작까지 처리해 줍니다. 반면 라디오를 직접 만들면 이 규칙을 모두 다시 구현해야 합니다.",
   code='''&lt;<span class="t">fieldset</span>&gt;
@@ -99,13 +99,13 @@ form.querySelectorAll(<span class="s">'[name=cycle]'</span>).forEach(r =&gt; r.c
     ("<kbd>Tab</kbd>", "그룹 전체를 <b>한 칸</b>으로 보고 지나갑니다. 아직 고르지 않은 그룹이면 첫 칸으로 들어갑니다"),
     ("<kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd>", "그룹 안에서 선택을 옮기며, <b>옮기는 즉시 그 값이 골라집니다</b>"),
     ("<kbd>Space</kbd>", "짚고 있는 선택지를 고릅니다"),
-    ("라벨 누름", "<code>&lt;label&gt;</code>로 감싸 두면 글자를 눌러도 골라집니다"),
-    ("그룹 제목", "<code>&lt;legend&gt;</code>가 있어야 스크린 리더가 '무엇을 고르는지'부터 읽어 줍니다"),
+    ("라벨을 눌렀을 때", "<code>&lt;label&gt;</code>로 감싸 두면 글자를 눌러도 골라집니다"),
+    ("그룹 제목을 달았을 때", "<code>&lt;legend&gt;</code>가 있어야 스크린 리더가 '무엇을 고르는지'부터 읽어 줍니다"),
   ]),
   backend=rows([
-    ("라디오 = 열거형", "라디오 값은 정해진 집합 가운데 하나입니다. 그래서 서버에서도 <code>enum</code>으로 받고, <b>목록에 없는 값은 거절</b>해야 합니다."),
-    ("기본값의 무게", "기본값을 미리 켜 두면 사용자 대부분이 그대로 보냅니다. 그래서 서버가 받은 값이 편의를 위해 둔 기본값인지, <b>사용자가 확인하지 않고 넘긴 값</b>인지 구별할 수 없습니다. 돈이나 권한이 걸린 선택이면 비워 둡니다."),
-    ("안 고름이 없다", "라디오는 한 번 고르면 '없음'으로 돌아갈 수 없습니다. '없음'에도 뜻이 있다면 그것을 <b>선택지로 넣어야</b> 하고, 그러면 서버에도 그 값을 받을 자리가 필요합니다."),
+    ("라디오 값은 정해진 열거형", "라디오 값은 정해진 집합 가운데 하나입니다. 그래서 서버에서도 <code>enum</code>으로 받고, <b>목록에 없는 값은 거절</b>해야 합니다."),
+    ("기본값을 미리 켜 둘 때의 문제", "기본값을 미리 켜 두면 사용자 대부분이 그대로 보냅니다. 그래서 서버가 받은 값이 편의를 위해 둔 기본값인지, <b>사용자가 확인하지 않고 넘긴 값</b>인지 구별할 수 없습니다. 돈이나 권한이 걸린 선택이면 비워 둡니다."),
+    ("고르지 않은 상태로 돌아갈 수 없는 점", "라디오는 한 번 고르면 '없음'으로 돌아갈 수 없습니다. '없음'에도 뜻이 있다면 그것을 <b>선택지로 넣어야</b> 하고, 그러면 서버에도 그 값을 받을 자리가 필요합니다."),
     ("선택지가 바뀔 때", "선택지가 바뀌면 예전에 저장된 값이 지금 목록에는 없을 수 있습니다. 이때 화면이 <b>아무것도 고르지 않은 것</b>처럼 보이지 않도록, 지난 값을 어떻게 보여 줄지 정해야 합니다."),
   ]),
   plat_lede="라디오는 플랫폼이 달라도 이름과 쓰임이 잘 통하는 편입니다.",
@@ -124,6 +124,6 @@ form.querySelectorAll(<span class="s">'[name=cycle]'</span>).forEach(r =&gt; r.c
   siblings=siblings("radio"),
   related='''        <li><span class="na"><b>요금제 비교</b><em>13부</em></span></li>
         <li><a href="../items/error.html"><b>에러 상태</b><em>8부</em></a></li>
-        <li><span class="na"><b>폼 설계</b><em>10부</em></span></li>
+        <li><a href="form.html"><b>폼 설계</b><em>10부</em></a></li>
         <li><span class="na"><b>포커스 순서</b><em>12부</em></span></li>''',
 )

@@ -24,15 +24,15 @@
 
 <div class="bar">
   <b>지속 시간</b>
-  <label>길이 <input type="range" id="ms" class="ui-range" min="0" max="1200" step="20" value="200" style="width:190px"> <span class="ruler" id="msv">200ms</span></label>
-  <button class="ui-btn" id="run">다시</button>
+  <label>지속 시간 <input type="range" id="ms" class="ui-range" min="0" max="1200" step="20" value="200" style="width:190px"> <span class="ruler" id="msv">200ms</span></label>
+  <button class="ui-btn" id="run">다시 재생</button>
 </div>
 
 <div class="pad">
   <div class="trk" id="trk"></div>
   <p class="ruler" id="verdict"></p>
   <table class="dur">
-    <thead><tr><th>움직이는 것</th><th>자리 이동</th><th>알맞은 길이</th></tr></thead>
+    <thead><tr><th>움직이는 요소</th><th>움직이는 거리</th><th>알맞은 길이</th></tr></thead>
     <tbody id="tbl"></tbody>
   </table>
 </div>
@@ -48,10 +48,10 @@
 <script>
 (function () {
   var ROWS = [
-    ['툴팁 · 색 바뀜',   '거의 없음',   '100ms',  80,  140],
-    ['드롭다운 · 토글',  '짧다',        '150ms',  120, 220],
-    ['모달 · 시트 열기', '화면 절반',   '250ms',  200, 320],
-    ['화면 전체 전환',   '화면 하나',   '350ms',  300, 420]
+    ['툴팁 · 색 바뀜',   '거의 움직이지 않음',   '100ms',  80,  140],
+    ['드롭다운 · 토글',  '짧은 거리',        '150ms',  120, 220],
+    ['모달 · 시트 열기', '화면의 절반쯤',   '250ms',  200, 320],
+    ['화면 전체 전환',   '화면 하나 전체',   '350ms',  300, 420]
   ];
   var trk = document.getElementById('trk');
   trk.innerHTML = '<div class="trk__row"><span class="trk__name">같은 거리</span>' +
@@ -71,11 +71,11 @@
     ball.style.transform = 'translateX(' + far + 'px)';
 
     var v = document.getElementById('verdict'), msg;
-    if (d === 0) msg = '<span class="warn">0ms — 순간이동. 어디서 왔는지 알 수 없다</span>';
-    else if (d < 100) msg = '<span class="warn">' + d + 'ms — 너무 빨라 깜빡인 것처럼 보인다</span>';
-    else if (d <= 400) msg = '<b>' + d + 'ms</b> — 알맞다. 대부분의 UI 가 이 사이에 있다';
-    else if (d <= 700) msg = '<span class="warn">' + d + 'ms — 한 번은 멋있고 열 번째는 답답하다</span>';
-    else msg = '<span class="warn">' + d + 'ms — 기다리게 된다. 애니메이션이 일을 막고 있다</span>';
+    if (d === 0) msg = '<span class="warn">0ms에서는 순간이동하듯 바뀌어 어디서 왔는지 알 수 없습니다</span>';
+    else if (d < 100) msg = '<span class="warn">' + d + 'ms는 너무 빨라서 깜빡인 것처럼 보입니다</span>';
+    else if (d <= 400) msg = '<b>' + d + 'ms</b>는 알맞다고 볼 수 있는 길이입니다. 대부분의 UI가 이 범위에 있습니다';
+    else if (d <= 700) msg = '<span class="warn">' + d + 'ms는 처음 볼 때는 멋있어도 열 번째 볼 때는 답답합니다</span>';
+    else msg = '<span class="warn">' + d + 'ms면 사용자가 기다리게 됩니다. 애니메이션이 끝날 때까지 다음 조작을 할 수 없습니다</span>';
     v.innerHTML = msg;
 
     [].forEach.call(document.querySelectorAll('#tbl tr'), function (tr, i) {

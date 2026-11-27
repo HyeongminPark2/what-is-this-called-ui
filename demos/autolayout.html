@@ -37,7 +37,7 @@
     <div class="al__code" id="code"></div>
   </div>
   <table class="map">
-    <thead><tr><th>피그마에서 부르는 말</th><th>CSS 에서는</th><th>뜻</th></tr></thead>
+    <thead><tr><th>피그마에서 부르는 말</th><th>CSS 속성</th><th>뜻</th></tr></thead>
     <tbody id="tbl"></tbody>
   </table>
 </div>
@@ -53,16 +53,16 @@
 <script>
 (function () {
   var MAP = [
-    ['오토 레이아웃', 'display: flex', '자식들을 한 방향으로 줄 세운다'],
-    ['가로 / 세로', 'flex-direction: row / column', '어느 방향으로 쌓나'],
+    ['오토 레이아웃', 'display: flex', '자식을 한 방향으로 줄 세움'],
+    ['가로 / 세로', 'flex-direction: row / column', '자식을 쌓는 방향'],
     ['간격 (gap)', 'gap', '자식 사이의 빈틈'],
     ['패딩', 'padding', '상자 안쪽 여백'],
     ['정렬', 'align-items / justify-content', '가로축·세로축 맞춤'],
-    ['채우기 (Fill)', 'flex: 1', '남은 자리를 다 쓴다'],
-    ['감싸기 (Hug)', 'width: fit-content', '내용만큼만 차지한다'],
-    ['고정 (Fixed)', 'width: 120px', '값을 박아 둔다'],
-    ['줄바꿈', 'flex-wrap: wrap', '넘치면 다음 줄로'],
-    ['절대 위치', 'position: absolute', '오토 레이아웃에서 빼낸다']
+    ['채우기 (Fill)', 'flex: 1', '남은 자리를 모두 씀'],
+    ['감싸기 (Hug)', 'width: fit-content', '내용만큼만 차지함'],
+    ['고정 (Fixed)', 'width: 120px', '크기를 값으로 정해 둠'],
+    ['줄바꿈', 'flex-wrap: wrap', '넘치는 자식을 다음 줄로 보냄'],
+    ['절대 위치', 'position: absolute', '오토 레이아웃 흐름에서 빼냄']
   ];
 
   function draw() {

@@ -20,11 +20,11 @@ def rowbox(style, label, note="", ok=None, n=3, zebra=False, gap=""):
 ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:11px">
                   <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">--line: 테두리와 구분선의 <b>한 가지 색</b></div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">1px<span style="color:var(--fg-faint)"> ← 거의 늘 이 굵기다</span></div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">1px<span style="color:var(--fg-faint)"> ← 거의 늘 이 굵기</span></div>
                   <div class="pin-out" data-pin="3" style="color:var(--danger)">맞닿으면 1 + 1 = <b>2px</b> 이음선</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--accent)">border-box<span style="color:var(--fg-faint)"> ← 선이 폭 안에 들어간다</span></div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">outline<span style="color:var(--fg-faint)"> ← 자리를 안 차지한다</span></div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">바탕색 차이<span style="color:var(--fg-faint)"> ← 선 없이 가르는 법</span></div>
+                  <div class="pin-out" data-pin="4" style="color:var(--accent)">border-box<span style="color:var(--fg-faint)"> ← 선이 폭 안에 들어감</span></div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">outline<span style="color:var(--fg-faint)"> ← 자리를 차지하지 않음</span></div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">바탕색 차이<span style="color:var(--fg-faint)"> ← 선 없이 가르는 방법</span></div>
                 </div>
               </div>'''
 
@@ -55,23 +55,23 @@ D = dict(
   ]),
   axes=ax("테두리와 구분선"),
   oneline="선을 긋기 전에 <b>여백만으로 나눌 수 있는지</b> 먼저 보세요. 선은 여백만으로 구역이 나뉘지 않을 때만 씁니다.",
-  s4_title="가르는 법", s4_hint="눈에 강하게 띄는 것부터 약한 것까지",
+  s4_title="칸을 가르는 방법", s4_hint="눈에 강하게 띄는 것부터 약한 것까지",
   states=states([
     (rowbox("border:1px solid var(--line);margin-bottom:-1px", "줄마다 테두리", "이음선 2px", False),
-     "테두리", "<b>가장 강하게</b> 나뉩니다. 맞닿은 자리에서 선이 두 겹이 됩니다"),
+     "줄마다 테두리 두르기", "<b>가장 강하게</b> 나뉩니다. 맞닿은 자리에서 선이 두 겹이 됩니다"),
     (rowbox("border-top:1px solid var(--line)", "구분선만", "선 하나", True),
-     "구분선", "목록의 <b>기본값</b>으로 삼기 좋습니다"),
-    (rowbox("", "바탕색 차이", "선이 없다", True, 3, zebra=True),
-     "바탕색", "줄이 많을 때 <b>가장 깔끔해 보입니다</b>"),
-    (rowbox("", "여백만", "선도 색도 없다", None, 3, gap="margin-bottom:7px;"),
-     "여백", "선이나 색 없이도 덩어리가 <b>저절로</b> 나뉘어 보입니다"),
+     "구분선만 긋기", "목록의 <b>기본값</b>으로 삼기 좋습니다"),
+    (rowbox("", "바탕색 차이", "선 없음", True, 3, zebra=True),
+     "바탕색을 번갈아 칠하기", "줄이 많을 때 <b>가장 깔끔해 보입니다</b>"),
+    (rowbox("", "여백만", "선도 색도 없음", None, 3, gap="margin-bottom:7px;"),
+     "여백만으로 나누기", "선이나 색 없이도 덩어리가 <b>저절로</b> 나뉘어 보입니다"),
     (one(txt('<span style="display:block;border:1px solid var(--line);border-radius:5px;padding:5px 7px;font-size:9px">모란상회</span>'
              '<span style="display:block;height:7px"></span>'
              '<span style="display:block;border:1px solid var(--line);border-radius:5px;padding:5px 7px;font-size:9px">새벽상사</span>'),
-         "떼어 놓기", True, "사이를 벌리면 이음선이 안 생긴다", "116px"),
-     "카드로", "테두리를 쓰되 카드끼리 <b>붙이지 않습니다</b>"),
-    (rowbox("border:1px solid var(--line);box-sizing:content-box;width:100%", "content-box", "폭을 넘는다", False, 2),
-     "<code>content-box</code>", "테두리 두께가 <b>폭에 더해집니다</b>"),
+         "떼어 놓기", True, "사이를 벌려 이음선이 안 생김", "116px"),
+     "카드로 떼어 놓기", "테두리를 쓰되 카드끼리 <b>붙이지 않습니다</b>"),
+    (rowbox("border:1px solid var(--line);box-sizing:content-box;width:100%", "content-box", "폭을 넘음", False, 2),
+     "<code>content-box</code>로 둘 때", "테두리 두께가 <b>폭에 더해집니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -88,6 +88,8 @@ D = dict(
           예를 들어 카드마다 테두리를 두르는 대신 바탕색만 바꿔도 구역은 충분히 나뉩니다.<br>
           선 색은 <b>한 가지면 됩니다</b>. 진한 선과 흐린 선을 섞으면 보는 사람에게
           '왜 여기만 진하지' 하는 의문이 생기는데, 그 차이에 정해 둔 이유가 없다면 실수로 들어간 것입니다.</p>''',
+  do_title="테두리와 구분선을 쓸 때 지킬 것",
+  dont_title="테두리와 구분선을 쓸 때 피할 것",
   do=ul([
     "선 색을 <b><code>--line</code> 하나</b>로 두기",
     "목록은 <b>구분선</b>으로, 떨어진 덩어리는 <b>테두리</b>로 나누기",
@@ -99,15 +101,17 @@ D = dict(
     "모양만 내려고 <code>&lt;hr&gt;</code>로 선 긋기. <b>내용이 바뀐다</b>는 뜻이 함께 전달됩니다",
     "<code>outline</code>을 꾸미는 데 쓰기. <b>포커스 테</b>와 헷갈립니다",
   ]),
-  instead='모양은 <a href="radius.html">모서리</a>, 높이는 <a href="elevation.html">고도</a>, 포커스 테는 <a href="focus.html">초점</a>, 선 대신 쓰는 여백은 <a href="spacing.html">간격 체계</a>.',
+  instead_title="함께 보면 좋은 항목",
+  instead='상자의 모양은 <a href="radius.html">모서리</a> 항목에서, 높이는 <a href="elevation.html">고도</a> 항목에서 다룹니다. 포커스 테는 <a href="focus.html">초점</a> 항목에서, 선 대신 여백으로 나누는 방법은 <a href="spacing.html">간격 체계</a> 항목에서 설명합니다.',
   cases=cases([
-    (rowbox("border-top:1px solid var(--line)", "목록", "", True), "목록", "줄 사이에 구분선 하나만 둡니다"),
+    (rowbox("border-top:1px solid var(--line)", "목록", "", True), "목록 줄 사이에 구분선 긋기", "줄 사이에 구분선 하나만 둡니다"),
     (rowbox("", "표", "", True, 3, zebra=True),
-     "표", "<b>줄무늬</b>가 선보다 덜 어수선합니다"),
-    (code(['input {', '  border: 1px solid', '    var(--line);', '}'], "116px", "입력칸은 테두리가 있어야 칸으로 읽힌다", True),
-     "입력칸", "입력칸에는 <b>테두리가 필요</b>합니다. 테두리가 있어야 입력하는 칸으로 읽히기 때문입니다"),
+     "표에 줄무늬 쓰기", "<b>줄무늬</b>가 선보다 덜 어수선합니다"),
+    (code(['input {', '  border: 1px solid', '    var(--line);', '}'], "116px", "입력칸은 테두리가 있어야 칸으로 읽힘", True),
+     "입력칸에 테두리 두르기", "입력칸에는 <b>테두리가 필요</b>합니다. 테두리가 있어야 입력하는 칸으로 읽히기 때문입니다"),
   ]),
-  s8_title="최소 코드와 규칙", s8_hint="선을 코드로 옮기는 법",
+  s8_title="최소 코드와 지킬 규칙", s8_hint="선을 코드로 옮기는 방법",
+  keys_heads="<th>값과 속성</th><th>쓰면 일어나는 일</th>",
   code_lede="전역에 <code>border-box</code>를 적용하고, 선 색은 하나로 통일합니다.",
   code='''<span class="c">/* 이 한 줄로 테두리 때문에 치수가 넘치는 문제를 막는다 */</span>
 *, *::before, *::after { <span class="a">box-sizing</span>: border-box; }
@@ -128,12 +132,12 @@ D = dict(
     ("<code>outline-offset</code>", "포커스 테를 바깥으로 띄워 <b>테두리와 겹치지 않게</b> 합니다"),
     ("0.5px", "레티나 화면에서만 그려지고, 지원하지 않는 기기에서는 <b>0px로 처리되어 사라집니다</b>"),
     ("<code>border-box</code>", "폭과 높이에 테두리와 안쪽 여백이 <b>포함</b>됩니다"),
-    ("확인하는 법", "줄 두 개를 맞붙여 두고 <b>이음선 자리를 확대</b>해 봅니다"),
+    ("확인하는 방법", "줄 두 개를 맞붙여 두고 <b>이음선 자리를 확대</b>해 봅니다"),
   ]),
   backend=rows([
-    ("서버와는 상관없다", "선은 전부 화면 쪽에서 정합니다. 다만 데이터의 <b>줄 수</b>에 따라 알맞은 가르는 법이 달라집니다."),
-    ("줄이 많을 때", "수십 줄이 오면 테두리보다 <b>줄무늬</b>가 읽기 편합니다. 그래서 데이터가 몇 줄쯤 올지 미리 물어 두면 좋습니다."),
-    ("빈 목록", "줄이 하나도 없으면 구분선만 남아 <b>이상한 금</b>이 보입니다. 이때는 목록 대신 <a href=\"empty.html\">빈 상태</a> 화면을 보여 줍니다."),
+    ("서버와 관계없는 화면 쪽 값", "선은 전부 화면 쪽에서 정합니다. 다만 데이터의 <b>줄 수</b>에 따라 알맞은 가르는 법이 달라집니다."),
+    ("줄이 많을 때 가르는 방법", "수십 줄이 오면 테두리보다 <b>줄무늬</b>가 읽기 편합니다. 그래서 데이터가 몇 줄쯤 올지 미리 물어 두면 좋습니다."),
+    ("목록이 비었을 때 남는 선", "줄이 하나도 없으면 구분선만 남아 <b>이상한 금</b>이 보입니다. 이때는 목록 대신 <a href=\"empty.html\">빈 상태</a> 화면을 보여 줍니다."),
   ]),
   plat_lede="<b>얇은 선</b>을 그리는 방식이 플랫폼마다 다릅니다.",
   plats=plats([

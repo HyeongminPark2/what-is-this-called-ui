@@ -61,7 +61,7 @@
   function show() {
     var c = form.querySelector('[name=cycle]:checked');
     var t = form.querySelector('[name=tax]:checked');
-    out.innerHTML = '고른 값 — 주기 <b>' + (c ? c.value : '아직 없음') + '</b> · 세금계산서 <b>' + t.value + '</b>';
+    out.innerHTML = '지금 고른 값은 주기 <b>' + (c ? c.value : '아직 고르지 않음') + '</b>, 세금계산서 <b>' + t.value + '</b>입니다.';
   }
   form.addEventListener('change', function () { err.hidden = true; show(); });
   form.addEventListener('submit', function (e) {

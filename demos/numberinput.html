@@ -22,8 +22,8 @@
     <option value="text" selected>text + inputmode="numeric"</option>
     <option value="number">type="number"</option>
   </select></label>
-  <label><input type="checkbox" id="comma" checked> 세 자리마다 쉼표</label>
-  <label><input type="checkbox" id="unit" checked> 단위를 칸 밖에</label>
+  <label><input type="checkbox" id="comma" checked> 세 자리마다 쉼표 넣기</label>
+  <label><input type="checkbox" id="unit" checked> 단위를 칸 밖에 두기</label>
 </div>
 
 <div class="pad">
@@ -91,10 +91,10 @@
     var rd = document.getElementById('read');
     rd.innerHTML = '칸 종류 <b>' + (k === 'number' ? 'type="number"' : 'text + inputmode') + '</b>' +
       '<br>칸에 보이는 글자 <b>‘' + shown + '’</b>' +
-      '<br>숫자로 읽은 값 <b>' + (parsed || '(없음)') + '</b>' +
-      (k === 'number' && shown === '' && parsed === '' ? ' <span class="warn">— 쉼표를 넣으면 값이 사라집니다</span>' : '') +
-      '<br>단위를 <b>' + (unitInside ? '칸 안에' : '칸 밖에') + '</b>' +
-      (unitInside ? ' <span class="warn">— 단위가 값과 섞입니다</span>' : '') +
+      '<br>숫자로 읽은 값 <b>' + (parsed || '(읽은 값 없음)') + '</b>' +
+      (k === 'number' && shown === '' && parsed === '' ? ' <span class="warn">쉼표를 넣으면 이렇게 값이 사라집니다</span>' : '') +
+      '<br>단위를 <b>' + (unitInside ? '칸 안에' : '칸 밖에') + '</b> 두었습니다' +
+      (unitInside ? ' <span class="warn">그래서 단위가 값과 섞입니다</span>' : '') +
       (why ? '<br>' + why : '');
     rd.dataset.kind = k;
     rd.dataset.shown = shown;
@@ -116,7 +116,7 @@
     el.addEventListener('wheel', function () {
       if (this.type === 'number') {
         document.getElementById('log').innerHTML =
-          '<span class="warn">휠을 굴려서 값이 바뀌었습니다</span> — 화면을 스크롤하다가 숫자가 바뀔 수 있습니다';
+          '<span class="warn">휠을 굴려서 값이 바뀌었습니다</span>. 화면을 스크롤하다가도 숫자가 이렇게 바뀔 수 있습니다';
         setTimeout(function () { draw(''); }, 10);
       }
     });

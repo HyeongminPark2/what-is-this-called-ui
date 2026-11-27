@@ -67,7 +67,7 @@
         var done = function () {
           panel.innerHTML = saved;
           panel.removeAttribute('aria-busy');
-          log.textContent = ms + 'ms 만에 끝났습니다 · 스피너는 ' + (shown ? '띄웠습니다' : '안 띄웠습니다 (0.3초 안에 끝남)');
+          log.textContent = ms + 'ms 만에 끝났습니다. ' + (shown ? '0.3초를 넘겨서 스피너를 띄웠습니다' : '0.3초 안에 끝나서 스피너는 안 띄웠습니다');
         };
         if (!shown) return done();
         // 한번 띄웠으면 깜빡이지 않도록 최소 0.5초는 둔다

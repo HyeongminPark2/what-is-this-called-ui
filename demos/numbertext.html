@@ -25,8 +25,8 @@
 
 <div class="bar">
   <b>숫자와 단위 쓰기</b>
-  <label>값 <input class="ui-input" id="n" type="text" inputmode="numeric" value="1284000" style="width:150px;min-height:34px;font-size:13px"></label>
-  <label>자리 <select class="sel" id="where" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>적을 값 <input class="ui-input" id="n" type="text" inputmode="numeric" value="1284000" style="width:150px;min-height:34px;font-size:13px"></label>
+  <label>놓일 자리 <select class="sel" id="where" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="table">표 안</option>
     <option value="stat">요약 타일</option>
     <option value="sentence">문장 속</option>
@@ -35,8 +35,8 @@
 
 <div class="pad">
   <div class="sec">
-    <h3>같은 값, 다른 자리</h3>
-    <table class="nm"><thead><tr><th>쓰는 법</th><th>보이는 모습</th><th>맞는 자리</th></tr></thead>
+    <h3>같은 값을 자리에 따라 다르게 적기</h3>
+    <table class="nm"><thead><tr><th>표기 방법</th><th>보이는 모습</th><th>어울리는 자리</th></tr></thead>
       <tbody id="tbl"></tbody></table>
     <p class="ruler" id="verdict"></p>
   </div>
@@ -73,9 +73,9 @@
     var ROWS = [
       ['자릿수 끊기', comma(n) + '원', where === 'table', '표 · 금액 입력 · 영수증'],
       ['만 단위로 줄이기', korShort(n) + ' 원', where === 'stat', '요약 타일 · 차트 눈금'],
-      ['읽는 대로', korShort(n) + ' 원쯤', where === 'sentence', '문장 속 · 안내문'],
-      ['단위 없이', comma(n), false, '<span style="color:var(--danger)">맞는 자리가 없습니다. 원인지 건인지 알 수 없습니다</span>'],
-      ['영어식 줄임', (n / 1e6).toFixed(2) + 'M', false, '한국어 화면에서는 끊어 읽는 단위가 달라 맞지 않습니다']
+      ['읽는 대로 적기', korShort(n) + ' 원쯤', where === 'sentence', '문장 속 · 안내문'],
+      ['단위 없이 적기', comma(n), false, '<span style="color:var(--danger)">맞는 자리가 없습니다. 원인지 건인지 알 수 없습니다</span>'],
+      ['영어식으로 줄이기', (n / 1e6).toFixed(2) + 'M', false, '한국어 화면에서는 끊어 읽는 단위가 달라 맞지 않습니다']
     ];
 
     document.getElementById('tbl').innerHTML = ROWS.map(function (r) {
@@ -89,15 +89,15 @@
     v.dataset.pick = pickRow[0];
 
     document.getElementById('edge').innerHTML = [
-      ['0건', '‘0건’ 이라고 적는다', true, '‘검색 결과가 없습니다’ 같은 문구와 함께 씁니다. <b>빈칸이나 ‘-’로 두지 않습니다</b>'],
-      ['1건', '‘1건’ 그대로', true, '한국어에는 복수형이 없어서 <b>영어처럼 s를 붙일 일이 없습니다</b>'],
-      ['99+', '‘99+’ 로 끊는다', true, '배지처럼 자리가 좁을 때 씁니다. <b>어디서 끊을지</b> 미리 정해 둡니다'],
-      ['33.333%', '‘33.3%’ 로 반올림', true, '소수점은 보통 <b>한 자리까지</b> 적습니다. 다만 비율을 모두 더하면 100이 안 될 수 있습니다'],
-      ['0.5%', '‘0.5%’ 를 ‘1%’ 로', false, '작은 값을 올려 버리면 <b>0 이 아닌 것이 0 처럼</b> 보인다'],
-      ['-3,000원', '‘-3,000원’', false, '빼는 돈은 <b>‘3,000원 차감’</b>처럼 말로 적는 편이 덜 헷갈립니다']
+      ['0건', '‘0건’이라고 적기', true, '‘검색 결과가 없습니다’ 같은 문구와 함께 씁니다. <b>빈칸이나 ‘-’로 두지 않습니다</b>'],
+      ['1건', '‘1건’도 그대로 적기', true, '한국어에는 복수형이 없어서 <b>영어처럼 s를 붙일 일이 없습니다</b>'],
+      ['99+', '‘99+’로 줄여 적기', true, '배지처럼 자리가 좁을 때 씁니다. <b>어디서 끊을지</b> 미리 정해 둡니다'],
+      ['33.333%', '‘33.3%’로 반올림하기', true, '소수점은 보통 <b>한 자리까지</b> 적습니다. 다만 비율을 모두 더하면 100이 안 될 수 있습니다'],
+      ['0.5%', '‘0.5%’를 ‘1%’로 올리기', false, '작은 값을 올려 버리면 <b>0이 아닌 것이 0처럼</b> 보입니다'],
+      ['-3,000원', '‘-3,000원’으로 적기', false, '빼는 돈은 <b>‘3,000원 차감’</b>처럼 말로 적는 편이 덜 헷갈립니다']
     ].map(function (e) {
       return '<div class="verd__row ' + (e[2] ? 'ok' : 'no') + '"><span class="t"><b>' + e[0] + '</b> → ' + e[1] + '</span>' +
-        '<span class="v">' + (e[2] ? '이렇게' : '주의') + '</span>' +
+        '<span class="v">' + (e[2] ? '이렇게 적기' : '주의할 것') + '</span>' +
         '<span class="verd__why">' + e[3] + '</span></div>';
     }).join('');
   }

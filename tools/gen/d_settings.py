@@ -30,12 +30,12 @@ def box(inner, w="152px", head="설정", foot=""):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">스위치 = 바로 적용 · 체크박스 = 저장 버튼</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">스위치는 바로 적용, 체크박스는 저장 버튼과 함께</div>
                   <div class="pin-out" data-pin="2" style="max-width:220px">''' + box(row('새 정산 알림', sw(True), '정산이 들어오면'), "220px").strip() + '''</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">묶음 이름 — 알림 · 화면 · 계정</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">줄마다 한 줄 설명 — 켜면 무슨 일이 나는가</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">스무 줄이 넘으면 검색이 묶음보다 빠르다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">위험 구역은 맨 아래 따로 — 빨간 테두리로 가둔다</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">알림 · 화면 · 계정처럼 묶음에 이름 붙임</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">줄마다 켜면 무슨 일이 생기는지 한 줄 설명</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">스무 줄이 넘으면 검색이 묶음보다 빠름</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">위험 구역은 맨 아래에 빨간 테두리로 따로 둠</div>
                 </div>
               </div>'''
 
@@ -64,34 +64,37 @@ D = dict(
   ]),
   axes=ax("설정 화면"),
   oneline="<b>저장 버튼이 있으면 체크박스를, 없으면 스위치를 씁니다.</b> 부품과 저장 방식이 어긋나면 사용자는 값이 저장됐는지 끝내 확신할 수 없습니다.",
-  s4_title="상태", s4_hint="저장됐는지 알 수 있나",
+  do_title="설정 화면으로 만들면 좋은 경우",
+  dont_title="설정 화면을 잘못 만드는 경우",
+  instead_title="상황에 따라 함께 볼 항목",
+  s4_title="설정 화면의 상태", s4_hint="저장됐는지 알 수 있는가",
   states=states([
     (box(row('새 정산 알림', sw(True), '정산이 들어오면 알려 줍니다') + row('주간 요약 메일', sw(False), '월요일 아침에 한 번')),
-     "바로 적용", "스위치를 쓰고, <b>저장 버튼은 두지 않습니다</b>"),
+     "바로 적용하는 방식", "스위치를 쓰고, <b>저장 버튼은 두지 않습니다</b>"),
     (box(row('새 정산 알림', cb(True)) + row('주간 요약 메일', cb(False)), "152px", "설정", "저장 · 되돌리기"),
-     "저장 버튼 방식", "체크박스를 쓰고, 저장을 <b>누르기 전에는</b> 값이 바뀌지 않습니다"),
+     "저장 버튼을 누르는 방식", "체크박스를 쓰고, 저장을 <b>누르기 전에는</b> 값이 바뀌지 않습니다"),
     (box(row('새 정산 알림', cb(False), '', True) + row('주간 요약 메일', cb(False)), "152px", "설정", "2개 바뀜 — 저장하지 않았습니다"),
-     "바꿨지만 저장 전", "<b>바뀐 줄</b>에 표시를 붙입니다"),
+     "바꿨지만 아직 저장하지 않았을 때", "<b>바뀐 줄</b>에 표시를 붙입니다"),
     (box(row('새 정산 알림', sw(True)) + row('주간 요약 메일', sw(False)), "152px", "설정 · 검색: 알림"),
-     "검색으로 찾기", "설정이 스무 줄을 넘으면 묶음을 훑는 것보다 <b>검색이 빠릅니다</b>"),
+     "검색으로 설정 찾기", "설정이 스무 줄을 넘으면 묶음을 훑는 것보다 <b>검색이 빠릅니다</b>"),
     (box('<div style="font-size:8px;color:var(--fg-muted);padding:4px 0">알림</div>' + row('새 정산 알림', sw(True))
          + '<div style="font-size:8px;color:var(--fg-muted);padding:4px 0;margin-top:4px">계정</div>' + row('2단계 인증', sw(True))),
-     "묶어 두기", "<b>성격이 같은 것</b>끼리 묶고 묶음에 이름을 붙입니다"),
+     "성격별로 묶어 두기", "<b>성격이 같은 것</b>끼리 묶고 묶음에 이름을 붙입니다"),
     ('''              <div style="width:100%;max-width:152px;border:1px solid var(--danger);border-radius:6px;padding:7px;display:grid;gap:4px">
                 <span style="font-size:9px;font-weight:700;color:var(--danger)">위험 구역</span>
                 <span style="font-size:8px;color:var(--fg-muted)">계정을 지우면 되돌릴 수 없습니다</span>
                 <span style="justify-self:start;border:1px solid var(--danger);color:var(--danger);border-radius:4px;padding:2px 7px;font-size:8.5px">계정 삭제</span>
               </div>''',
-     "위험 구역", "<b>맨 아래에 따로</b> 떼어 두어 실수로 누르지 않게 합니다"),
+     "위험 구역을 따로 둔 모습", "<b>맨 아래에 따로</b> 떼어 두어 실수로 누르지 않게 합니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("약속", "스위치 ↔ 체크박스", "<b>바로 적용할지, 저장 버튼을 쓸지</b>를 가장 먼저 정합니다"),
-    ("줄", "이름 + 한 줄 설명", "켰을 때 <b>무슨 일이 일어나는지</b> 적습니다"),
+    ("저장 방식", "스위치 ↔ 체크박스", "<b>바로 적용할지, 저장 버튼을 쓸지</b>를 가장 먼저 정합니다"),
+    ("설정 줄", "이름 + 한 줄 설명", "켰을 때 <b>무슨 일이 일어나는지</b> 적습니다"),
     ("묶음", "알림 · 화면 · 계정", "성격이 같은 것끼리 모아 <b>이름을 붙입니다</b>"),
     ("설명", "작게, 늘 보이게", "작은 글씨로 늘 보이게 둡니다. 툴팁에 숨기면 <a href=\"hover.html\">폰에서 볼 수 없습니다</a>"),
-    ("검색", "스무 줄 넘으면", "설정이 스무 줄을 넘으면 묶음을 잘 짜 두어도 <b>검색으로 찾는 편이 더 빠릅니다</b>"),
-    ("위험 구역", "맨 아래, 따로", "되돌릴 수 없는 항목만 모으고, 누르면 <a href=\"destructive.html\">위험한 동작</a>의 확인 흐름으로 이어집니다"),
+    ("검색", "스무 줄이 넘을 때", "설정이 스무 줄을 넘으면 묶음을 잘 짜 두어도 <b>검색으로 찾는 편이 더 빠릅니다</b>"),
+    ("위험 구역", "맨 아래에 따로", "되돌릴 수 없는 항목만 모으고, 누르면 <a href=\"destructive.html\">위험한 동작</a>의 확인 흐름으로 이어집니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           가장 흔한 사고는 <b>두 방식을 섞는 것</b>입니다.
@@ -112,19 +115,20 @@ D = dict(
     "기본값 없이 비워 둘 때. 기본값을 정해 <b>무엇이 보통인지</b> 알려 줍니다",
     "계정 삭제를 다른 항목들 사이에 끼워 둘 때",
   ]),
-  instead='한 번 보내고 끝이면 <a href="form.html">폼 설계</a>, 켜고 끄는 부품 자체는 <a href="../items/switch.html">스위치</a>·<a href="../items/checkbox.html">체크박스</a>, 지우는 흐름은 <a href="destructive.html">위험한 동작</a>.',
+  instead='한 번 보내고 끝나는 입력이라면 설정 화면이 아니라 <a href="form.html">폼 설계</a>를 따릅니다. 켜고 끄는 부품 자체는 <a href="../items/switch.html">스위치</a>와 <a href="../items/checkbox.html">체크박스</a>에서, 무언가를 지우는 흐름은 <a href="destructive.html">위험한 동작</a>에서 다룹니다.',
   cases=cases([
     (box(row('다크 모드 따라가기', sw(True), '기기 설정을 따릅니다'), "150px"),
-     "바로 적용", "<b>스위치 하나에 설명 한 줄</b>을 단, 가장 흔한 형태입니다"),
+     "스위치로 바로 적용하기", "<b>스위치 하나에 설명 한 줄</b>을 단, 가장 흔한 형태입니다"),
     (box(row('표시 이름', cb(False), '다른 사람에게 보입니다'), "150px", "프로필", "저장"),
-     "저장 버튼 방식", "<b>여러 칸을 한 번에</b> 바꿀 때 씁니다"),
+     "여러 칸을 바꾸고 한 번에 저장하기", "<b>여러 칸을 한 번에</b> 바꿀 때 씁니다"),
     ('''              <div style="width:100%;max-width:150px;display:grid;gap:4px">
                 <div style="border:1px solid var(--line);border-radius:999px;padding:3px 8px;font-size:9px;color:var(--fg-muted)">🔍 설정 검색</div>
                 <span style="font-size:8.5px;color:var(--fg-muted)">‘알림’ → 4개</span>
               </div>''',
-     "설정 검색", "어느 묶음에 무엇이 있는지 <b>외우지 못한 사람</b>도 바로 찾을 수 있습니다"),
+     "설정 안에서 검색하기", "어느 묶음에 무엇이 있는지 <b>외우지 못한 사람</b>도 바로 찾을 수 있습니다"),
   ]),
   s8_title="최소 마크업과 키보드", s8_hint="구현할 때 지킬 최소 규칙",
+  keys_heads="<th>키와 마크업</th><th>처리하는 방법</th>",
   code_lede="묶음은 <code>&lt;fieldset&gt;</code>으로, 바로 적용되는 항목은 <code>role=\"switch\"</code>로 적습니다.",
   code='''&lt;<span class="t">fieldset</span>&gt;
   &lt;<span class="t">legend</span>&gt;알림&lt;/<span class="t">legend</span>&gt;
@@ -147,22 +151,22 @@ window.addEventListener(<span class="s">'beforeunload'</span>, e =&gt; { <span c
     ("<code>aria-describedby</code>", "줄 밑의 설명을 항목과 연결합니다. 연결하지 않으면 <b>이름만</b> 읽힙니다"),
     ("<code>&lt;fieldset&gt;&lt;legend&gt;</code>", "'알림 묶음, 새 정산 알림 스위치'처럼 묶음 이름이 함께 읽힙니다"),
     ("<code>role=\"status\"</code>", "바로 적용 방식이면 <b>저장됐다는 알림</b>이 필요합니다. 색만 바뀌면 화면을 보지 않는 사람은 알 수 없습니다"),
-    ("저장 전 이탈", "<code>beforeunload</code>로 묻습니다. 다만 <a href=\"systemback.html\">뒤로가기</a>에는 통하지 않을 수 있어서 직접 확인 창을 띄웁니다"),
-    ("위험 구역", "<b>Tab으로 쉽게 닿는 자리</b>에 두지 않고 맨 아래에 둡니다"),
+    ("저장하기 전에 화면을 떠날 때", "<code>beforeunload</code>로 묻습니다. 다만 <a href=\"systemback.html\">뒤로가기</a>에는 통하지 않을 수 있어서 직접 확인 창을 띄웁니다"),
+    ("위험 구역을 둘 자리", "<b>Tab으로 쉽게 닿는 자리</b>에 두지 않고 맨 아래에 둡니다"),
   ]),
   backend=rows([
-    ("바로 적용은 요청이 잦다", "스위치를 넘길 때마다 요청이 가므로, 요청을 <b>묶어 보내거나</b> 짧게 디바운스합니다."),
-    ("실패했을 때 되돌린다", "요청이 실패했는데 스위치가 켜진 채로 남으면 화면이 <b>실제와 다른 상태</b>를 보여 주게 됩니다. 그래서 <a href=\"../items/optimistic.html\">낙관적 UI</a>처럼 실패하면 원래대로 되돌리는 처리가 필요합니다."),
-    ("기본값은 서버가 쥔다", "'아직 안 고른 것'과 '꺼 둔 것'은 다릅니다. <b>null과 false</b>로 둘을 구별해 두면 나중에 기본값을 바꿀 때 사용자가 직접 끈 값은 건드리지 않을 수 있습니다."),
-    ("설정이 늘어난다", "설정이 늘 때마다 테이블에 칸을 하나씩 더하면 저장 구조가 금방 넓어집니다. 그래서 <b>키-값</b> 형태로 저장하는 편이 오래 버팁니다."),
-    ("기기별 설정", "다크 모드처럼 <b>기기마다 달라야</b> 하는 설정은 계정이 아니라 기기에 저장합니다."),
+    ("바로 적용 방식의 잦은 요청 줄이기", "스위치를 넘길 때마다 요청이 가므로, 요청을 <b>묶어 보내거나</b> 짧게 디바운스합니다."),
+    ("요청이 실패하면 스위치 되돌리기", "요청이 실패했는데 스위치가 켜진 채로 남으면 화면이 <b>실제와 다른 상태</b>를 보여 주게 됩니다. 그래서 <a href=\"../items/optimistic.html\">낙관적 UI</a>처럼 실패하면 원래대로 되돌리는 처리가 필요합니다."),
+    ("기본값은 서버에서 관리하기", "'아직 안 고른 것'과 '꺼 둔 것'은 다릅니다. <b>null과 false</b>로 둘을 구별해 두면 나중에 기본값을 바꿀 때 사용자가 직접 끈 값은 건드리지 않을 수 있습니다."),
+    ("늘어나는 설정은 키-값으로 저장하기", "설정이 늘 때마다 테이블에 칸을 하나씩 더하면 저장 구조가 금방 넓어집니다. 그래서 <b>키-값</b> 형태로 저장하는 편이 오래 버팁니다."),
+    ("기기마다 다른 설정은 기기에 저장하기", "다크 모드처럼 <b>기기마다 달라야</b> 하는 설정은 계정이 아니라 기기에 저장합니다."),
   ]),
   plat_lede="플랫폼마다 설정 화면에서 <b>스위치를 쓰는지, 체크박스를 쓰는지</b>의 관례가 다릅니다.",
   plats=plats([
-    ("웹", "둘 다 쓴다",
+    ("웹", "둘 다 씀",
      box(row('알림', cb(True)), "112px", "설정", "저장"),
      "저장 버튼이 있는 화면이 많아서 <b>체크박스</b>도 흔하게 씁니다. 한 화면에서 둘을 섞지만 않으면 됩니다."),
-    ("iOS", "거의 스위치",
+    ("iOS", "대부분 스위치",
      '''              <div class="phone" role="img" aria-label="iOS 설정 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:30px;display:flex;align-items:center;font-size:6px"><span style="flex:1">알림</span><span style="width:14px;height:8px;border-radius:999px;background:var(--accent)"></span></div></div></div>''',
      "설정 앱이 전부 스위치로 되어 있어서 <b>저장 버튼을 거의 쓰지 않습니다.</b> 앱도 그 관례를 따르는 편이 자연스럽습니다."),

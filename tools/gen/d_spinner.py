@@ -3,11 +3,11 @@ from parts import *
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
 
 WAIT = table(
-  ["끝나는 때를 아나", "들어올 자리를 잡나", "사용자가 기다리나", "화면이 덜컥거리나"],
-  [["스피너", "모른다", "안 잡는다", "기다린다", "덜컥거린다"],
-   ["스켈레톤", "모른다", "잡는다", "기다린다", "안 덜컥거린다"],
-   ["프로그레스 바", "안다", "잡기도 한다", "기다린다", "안 덜컥거린다"],
-   ["낙관적 UI", "해당 없음", "잡는다", "안 기다린다", "안 덜컥거린다"]],
+  ["끝나는 때를 아는가", "들어올 내용의 자리를 미리 잡는가", "사용자가 기다려야 하는가", "내용이 들어올 때 화면이 덜컥거리는가"],
+  [["스피너", "모름", "잡지 않음", "기다림", "덜컥거림"],
+   ["스켈레톤", "모름", "잡아 둠", "기다림", "덜컥거리지 않음"],
+   ["프로그레스 바", "알고 있음", "잡기도 함", "기다림", "덜컥거리지 않음"],
+   ["낙관적 UI", "해당 없음", "잡아 둠", "기다리지 않음", "덜컥거리지 않음"]],
   me="스피너")
 
 ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2);padding:10px">
@@ -41,12 +41,12 @@ D = dict(
   axes=WAIT,
   oneline="스피너는 기다리는 동안 <b>알려 줄 정보가 없을 때</b> 씁니다. 들어올 내용의 모양을 알면 스켈레톤이, 끝나는 때를 알면 프로그레스 바가 더 알맞습니다.",
   states=states([
-    (mini('<div style="margin-top:14px;text-align:center;font-size:8px;color:var(--fg-faint)">아무 표시 없음</div>', bars="684", label="0.3초 안에는 아무 표시가 없다"), "0 ~ 0.3초", "<b>아무것도 띄우지 않습니다.</b> 이 사이에 끝나는 일에 스피너를 띄우면 깜빡임만 남습니다"),
-    (mini('<div style="position:absolute;inset:0;display:grid;place-items:center"><span class="spn spn--sm"></span></div>', bars="", label="스피너가 떠 있는 모습"), "0.3초 ~", "0.3초가 지나면 그때 띄우고, 띄운 뒤에는 최소 0.5초 동안 둡니다"),
-    (mini('<div style="position:absolute;inset:0;display:grid;place-items:center;gap:5px"><span class="spn spn--sm"></span><span style="font-size:7.5px;color:var(--fg-muted)">불러오는 중…</span></div>', bars="", label="문구가 붙은 스피너"), "문구를 붙인 것", "무엇을 기다리는지 적어 주면 사용자가 훨씬 덜 답답해합니다"),
-    (mini('<div style="margin-top:9px"><span class="mini__btn" style="opacity:.75">저장 중…</span></div>', bars="486", label="버튼 안의 작은 스피너"), "버튼 안", "사용자가 누른 버튼 자리에서 돌고, 버튼이 두 번 눌리는 것도 함께 막습니다"),
-    (mini('<div style="position:absolute;inset:0;display:grid;place-items:center;gap:5px"><span class="spn spn--sm"></span><span style="font-size:7px;color:var(--fg-muted)">조금 오래 걸리고 있습니다</span></div>', bars="", label="오래 걸릴 때 문구가 바뀐 모습"), "10초 넘김", "문구를 바꿔 줍니다. 같은 화면이 10초 넘게 그대로면 사용자는 화면이 멈춘 줄 압니다"),
-    (mini('<div style="position:absolute;inset:0;display:grid;place-items:center;gap:4px;padding:8px"><span style="font-size:8px;color:var(--danger);font-weight:700">불러오지 못했습니다</span><span class="mini__btn" style="font-size:7.5px;padding:2px 6px">다시 시도</span></div>', bars="", label="실패로 끝난 모습"), "실패로 끝남", "스피너가 <b>끝없이 돌게 두면 안 됩니다.</b> 실패했을 때 실패 화면으로 바뀌는 경로를 반드시 둡니다"),
+    (mini('<div style="margin-top:14px;text-align:center;font-size:8px;color:var(--fg-faint)">아무것도 띄우지 않음</div>', bars="684", label="0.3초 안에는 아무 표시도 없음"), "0.3초가 지나기 전", "<b>아무것도 띄우지 않습니다.</b> 이 사이에 끝나는 일에 스피너를 띄우면 깜빡임만 남습니다"),
+    (mini('<div style="position:absolute;inset:0;display:grid;place-items:center"><span class="spn spn--sm"></span></div>', bars="", label="스피너가 떠 있는 모습"), "0.3초가 지난 뒤", "0.3초가 지나면 그때 띄우고, 띄운 뒤에는 최소 0.5초 동안 둡니다"),
+    (mini('<div style="position:absolute;inset:0;display:grid;place-items:center;gap:5px"><span class="spn spn--sm"></span><span style="font-size:7.5px;color:var(--fg-muted)">불러오는 중…</span></div>', bars="", label="문구가 붙은 스피너"), "안내 문구를 붙였을 때", "무엇을 기다리는지 적어 주면 사용자가 훨씬 덜 답답해합니다"),
+    (mini('<div style="margin-top:9px"><span class="mini__btn" style="opacity:.75">저장 중…</span></div>', bars="486", label="버튼 안의 작은 스피너"), "버튼 안에서 돌 때", "사용자가 누른 버튼 자리에서 돌고, 버튼이 두 번 눌리는 것도 함께 막습니다"),
+    (mini('<div style="position:absolute;inset:0;display:grid;place-items:center;gap:5px"><span class="spn spn--sm"></span><span style="font-size:7px;color:var(--fg-muted)">조금 오래 걸리고 있습니다</span></div>', bars="", label="오래 걸릴 때 문구가 바뀐 모습"), "10초를 넘겼을 때", "문구를 바꿔 줍니다. 같은 화면이 10초 넘게 그대로면 사용자는 화면이 멈춘 줄 압니다"),
+    (mini('<div style="position:absolute;inset:0;display:grid;place-items:center;gap:4px;padding:8px"><span style="font-size:8px;color:var(--danger);font-weight:700">불러오지 못했습니다</span><span class="mini__btn" style="font-size:7.5px;padding:2px 6px">다시 시도</span></div>', bars="", label="실패로 끝난 모습"), "실패로 끝났을 때", "스피너가 <b>끝없이 돌게 두면 안 됩니다.</b> 실패했을 때 실패 화면으로 바뀌는 경로를 반드시 둡니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -69,14 +69,14 @@ D = dict(
     "퍼센트를 알 수 있는 업로드를 기다릴 때. 프로그레스 바를 씁니다",
     "화면 전체를 스피너로 덮을 때. 내용이 들어올 자리를 잡아 두지 않았기 때문에 내용이 들어오는 순간 화면이 덜컥거립니다",
   ]),
-  instead='들어올 모양을 알면 <a href="skeleton.html">스켈레톤</a>, 끝나는 때를 알면 <a href="progress.html">프로그레스 바</a>, 기다림 자체를 없앨 수 있으면 <a href="optimistic.html">낙관적 UI</a>.',
+  instead='들어올 내용의 모양을 알면 <a href="skeleton.html">스켈레톤</a>을 쓰고, 끝나는 때를 알면 <a href="progress.html">프로그레스 바</a>를 씁니다. 기다림 자체를 없앨 수 있다면 <a href="optimistic.html">낙관적 UI</a>가 더 낫습니다.',
   cases=cases([
     (mini('<div style="position:absolute;inset:0;display:grid;place-items:center;gap:5px"><span class="spn spn--sm"></span><span style="font-size:7.5px;color:var(--fg-muted)">불러오는 중…</span></div>', bars="", tall=False, label="영역 스피너 재현"),
-     "영역 안", "화면의 한 칸만 바뀔 때 씁니다. 나머지 화면은 기다리는 동안에도 그대로 쓸 수 있습니다"),
+     "화면의 한 영역만 불러오기", "화면의 한 칸만 바뀔 때 씁니다. 나머지 화면은 기다리는 동안에도 그대로 쓸 수 있습니다"),
     (mini('<div style="margin-top:12px;text-align:center"><span class="mini__btn" style="opacity:.75">저장 중…</span></div>', bars="486", tall=False, label="버튼 안 스피너 재현"),
-     "버튼 안", "누른 버튼 자리에서 돌고, 그동안 버튼이 두 번 눌리지 않습니다"),
+     "버튼을 누른 뒤 처리 기다리기", "누른 버튼 자리에서 돌고, 그동안 버튼이 두 번 눌리지 않습니다"),
     (mini('<div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--line)"><i style="display:block;height:100%;width:38%;background:var(--accent)"></i></div>', bars="684", tall=False, label="맨 위 얇은 띠 재현"),
-     "꼭대기 띠", "화면을 전환할 때 흔히 씁니다. 화면 맨 위의 얇은 띠라서 내용이 들어갈 자리를 차지하지 않습니다"),
+     "화면 전환을 맨 위 띠로 알리기", "화면을 전환할 때 흔히 씁니다. 화면 맨 위의 얇은 띠라서 내용이 들어갈 자리를 차지하지 않습니다"),
   ]),
   code_lede="도는 모양은 CSS 한 줄로 만들 수 있습니다. 정작 신경 써야 하는 부분은 <b>언제 띄우고 언제 치울지</b>입니다.",
   code='''&lt;<span class="t">div</span> <span class="a">id</span>=<span class="s">"panel"</span> <span class="a">aria-busy</span>=<span class="s">"true"</span>&gt;
@@ -94,18 +94,19 @@ D = dict(
 
 <span class="c">/* 움직임을 줄여 달라는 설정은 지킨다 */</span>
 @media (prefers-reduced-motion: reduce) <span class="a">{</span> .spn <span class="a">{</span> <span class="t">animation-duration</span>: 2.4s; <span class="a">}</span> <span class="a">}</span>''',
+  keys_heads="<th>상황</th><th>그때 일어나야 하는 일</th>",
   keys=kbd([
-    ("포커스", "스피너가 <b>포커스를 가져가지 않게 합니다.</b> 포커스를 가져가면 사용자가 하던 입력이 끊깁니다"),
-    ("스크린 리더", "<code>aria-busy=\"true\"</code>를 내용이 바뀌는 영역에 걸고, 안내 문구는 <code>role=\"status\"</code>로 알립니다"),
+    ("포커스를 다룰 때", "스피너가 <b>포커스를 가져가지 않게 합니다.</b> 포커스를 가져가면 사용자가 하던 입력이 끊깁니다"),
+    ("스크린 리더로 읽을 때", "<code>aria-busy=\"true\"</code>를 내용이 바뀌는 영역에 걸고, 안내 문구는 <code>role=\"status\"</code>로 알립니다"),
     ("끝났을 때", "<code>aria-busy</code>를 지웁니다. 바뀐 내용 쪽으로 포커스를 옮길지는 화면에 맞게 따로 정합니다"),
-    ("움직임 줄이기", "<code>prefers-reduced-motion</code>이 켜져 있으면 천천히 돌리거나 움직이지 않는 표시로 바꿉니다"),
-    ("실패", "스피너가 돌다가 그대로 멈추면 안 되고, <b>실패 화면으로 바뀌어야</b> 합니다"),
+    ("움직임 줄이기 설정이 켜져 있을 때", "<code>prefers-reduced-motion</code>이 켜져 있으면 천천히 돌리거나 움직이지 않는 표시로 바꿉니다"),
+    ("불러오기에 실패했을 때", "스피너가 돌다가 그대로 멈추면 안 되고, <b>실패 화면으로 바뀌어야</b> 합니다"),
   ]),
   backend=rows([
-    ("스피너 = 진행률 없는 폴링", "스피너는 응답이 올 때까지 진행 정보를 하나도 받지 못한 상태를 나타냅니다. 서버가 진행률을 알려 줄 수 있다면 그 값을 받아 <b>프로그레스 바로 바꾸는 편</b>이 언제나 낫습니다."),
-    ("지연 = 디바운스", "0.3초 안에 끝날 일에는 표시를 띄우지 않습니다. 짧은 요청까지 일일이 로그로 남기지 않는 것처럼, 금방 끝나는 일에는 표시를 아끼는 셈입니다."),
-    ("최소 표시 시간 = 안정화", "깜빡임을 막으려고 스피너를 치우는 시점을 일부러 늦춥니다. 지표가 요동칠 때 일정한 시간 창을 두고 평균을 내서 값을 안정시키는 것과 같은 방법입니다."),
-    ("타임아웃", "스피너 자체는 끝없이 돌 수 있기 때문에 요청 쪽에 시간 상한을 두어야 합니다. 상한이 없으면 응답이 오지 않을 때 사용자는 <b>멈춘 화면</b>을 계속 보게 됩니다."),
+    ("진행률 없이 응답만 기다리는 상태", "스피너는 응답이 올 때까지 진행 정보를 하나도 받지 못한 상태를 나타냅니다. 서버가 진행률을 알려 줄 수 있다면 그 값을 받아 <b>프로그레스 바로 바꾸는 편</b>이 언제나 낫습니다."),
+    ("지연은 디바운스와 같은 원리", "0.3초 안에 끝날 일에는 표시를 띄우지 않습니다. 짧은 요청까지 일일이 로그로 남기지 않는 것처럼, 금방 끝나는 일에는 표시를 아끼는 셈입니다."),
+    ("최소 표시 시간으로 깜빡임 막기", "깜빡임을 막으려고 스피너를 치우는 시점을 일부러 늦춥니다. 지표가 요동칠 때 일정한 시간 창을 두고 평균을 내서 값을 안정시키는 것과 같은 방법입니다."),
+    ("요청 쪽에 시간 상한 두기", "스피너 자체는 끝없이 돌 수 있기 때문에 요청 쪽에 시간 상한을 두어야 합니다. 상한이 없으면 응답이 오지 않을 때 사용자는 <b>멈춘 화면</b>을 계속 보게 됩니다."),
   ]),
   plat_lede="스피너는 플랫폼마다 모양도 다르고 부르는 이름도 다릅니다.",
   plats=plats([
@@ -122,7 +123,7 @@ D = dict(
   plat_note="안드로이드에서는 스피너와 프로그레스 바가 <b>같은 부품의 두 모드</b>(결정형과 비결정형)입니다. 게다가 안드로이드에는 <b>Spinner라는 이름의 전혀 다른 부품</b>이 따로 있는데, 이 부품은 <b>셀렉트(드롭다운)</b>입니다. 그래서 안드로이드에서 \"스피너 넣어 주세요\"라고 하면 선택 상자를 넣어 달라는 말로 알아듣습니다.",
   siblings=siblings("spinner"),
   related='''        <li><span class="na"><b>레이아웃 시프트</b><em>1부</em></span></li>
-        <li><span class="na"><b>모션 줄이기</b><em>9부</em></span></li>
-        <li><span class="na"><b>라이브 리전</b><em>12부</em></span></li>
+        <li><a href="reducedmotion.html"><b>모션 줄이기</b><em>9부</em></a></li>
+        <li><a href="live.html"><b>라이브 리전</b><em>12부</em></a></li>
         <li><a href="../index.html#toc"><b>한 화면의 다섯 얼굴</b><em>8부</em></a></li>''',
 )

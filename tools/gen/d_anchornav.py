@@ -21,11 +21,11 @@ def toc(items, w="152px", note="", ok=None):
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
                   <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">&lt;nav aria-label="이 문서 안에서"&gt;</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">href="#s3" — 같은 문서 안의 자리</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--accent)">aria-current="true" — 지금 보는 절</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">scroll-margin-top — 고정 머리만큼 떼기</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">position: sticky — 굴려도 따라온다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">IntersectionObserver — 보는 절을 고른다</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">href="#s3"는 같은 문서 안의 자리</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--accent)">aria-current="true"로 보는 절 표시</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">scroll-margin-top으로 고정 머리만큼 띄움</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">position: sticky로 스크롤해도 따라옴</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">IntersectionObserver로 보는 절을 고름</div>
                 </div>
               </div>'''
 
@@ -58,32 +58,32 @@ D = dict(
   oneline="<b>문서가 스크롤되며 이동하는 과정이 보이게 하세요.</b> 화면이 한 번에 바뀌면 문서의 어디로 왔는지 알기 어렵습니다.",
   states=states([
     (toc([("정산 주기", True), ("수수료", False), ("세금계산서", False), ("환불", False)], "152px", "첫 절을 보는 중", True),
-     "맨 위", "문서 맨 위에서는 첫 항목이 강조됩니다"),
-    (toc([("정산 주기", False), ("수수료", False), ("세금계산서", True), ("환불", False)], "152px", "굴리면 따라 바뀐다", True),
-     "굴리는 중", "스크롤하는 동안 <b>지금 보는 절</b>이 강조됩니다"),
+     "문서 맨 위에 있을 때", "문서 맨 위에서는 첫 항목이 강조됩니다"),
+    (toc([("정산 주기", False), ("수수료", False), ("세금계산서", True), ("환불", False)], "152px", "스크롤하면 따라 바뀜", True),
+     "문서를 스크롤하는 중", "스크롤하는 동안 <b>지금 보는 절</b>이 강조됩니다"),
     (one(txt('<span style="display:block;font-size:8px;color:var(--fg-muted);background:var(--accent-soft);padding:3px 5px;border-radius:3px">고정 머리</span>'
-             '<span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">▲ 제목이 이 밑에 숨었다</span>'
+             '<span style="display:block;font-size:8px;color:var(--danger);margin-top:2px">▲ 제목이 이 밑에 가려짐</span>'
              '<span style="display:block;font-size:8.5px;margin-top:3px">매주 수요일에 지난주 매출을…</span>'),
-         "가려짐", False, "scroll-margin-top 이 없다", "152px"),
-     "머리에 가려짐", "고정 머리에 가려 <b>절 제목이 보이지 않습니다</b>"),
+         "가려짐", False, "scroll-margin-top이 없음", "152px"),
+     "고정 머리에 제목이 가려질 때", "고정 머리에 가려 <b>절 제목이 보이지 않습니다</b>"),
     (one(txt('<span style="display:block;font-size:8px;color:var(--fg-muted);background:var(--accent-soft);padding:3px 5px;border-radius:3px">고정 머리</span>'
              '<span style="display:block;font-size:8.5px;font-weight:700;margin-top:4px">세금계산서</span>'
              '<span style="display:block;font-size:8.5px;color:var(--fg-muted)">매달 1일에 지난달 몫을…</span>'),
-         "제대로", True, "머리 높이만큼 떼어 놓았다", "152px"),
-     "<code>scroll-margin-top</code>", "머리 높이만큼 여유를 둬서 <b>제목이 보입니다</b>"),
-    (toc([("정산 주기", False), ("수수료", False), ("세금계산서", False), ("환불", False)], "152px", "어디쯤인지 모른다", False),
-     "안 밝힘", "지금 위치를 알 수 없어서 목차가 <b>제 역할을 하지 못합니다</b>"),
+         "제대로 보임", True, "머리 높이만큼 띄워 둠", "152px"),
+     "<code>scroll-margin-top</code>을 줬을 때", "머리 높이만큼 여유를 둬서 <b>제목이 보입니다</b>"),
+    (toc([("정산 주기", False), ("수수료", False), ("세금계산서", False), ("환불", False)], "152px", "어디쯤인지 알 수 없음", False),
+     "보는 절을 표시하지 않을 때", "지금 위치를 알 수 없어서 목차가 <b>제 역할을 하지 못합니다</b>"),
     (toc([("정산", False), ("수수료", False), ("세금", False), ("환불", False), ("문의", False),
-          ("기타", False), ("약관", False), ("부록", False)], "152px", "너무 많다", False),
-     "항목이 많음", "항목이 <b>열두 개</b>를 넘으면 목차를 한눈에 읽기 어렵습니다"),
+          ("기타", False), ("약관", False), ("부록", False)], "152px", "항목이 너무 많음", False),
+     "항목이 너무 많을 때", "항목이 <b>열두 개</b>를 넘으면 목차를 한눈에 읽기 어렵습니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("<code>&lt;nav&gt;</code>", "이름을 붙인다", "한 화면에 <b>nav가 여러 개</b> 있으므로 이름을 붙여 구별합니다"),
+    ("<code>&lt;nav&gt;</code>", "이름 붙이기", "한 화면에 <b>nav가 여러 개</b> 있으므로 이름을 붙여 구별합니다"),
     ("<code>href=\"#s3\"</code>", "같은 문서", "주소에 남기 때문에 그 절을 링크로 <b>공유할 수 있습니다</b>"),
     ("<code>aria-current</code>", "보는 절", "지금 보는 절을 색뿐 아니라 <b>소리로도</b> 알립니다"),
-    ("<code>scroll-margin-top</code>", "머리만큼 떼기", "제목이 가려지는 문제를 CSS <b>한 줄로</b> 고칩니다"),
-    ("<code>sticky</code>", "따라온다", "스크롤해도 목차가 <b>화면에서 사라지지 않습니다</b>"),
+    ("<code>scroll-margin-top</code>", "머리 높이만큼 띄우기", "제목이 가려지는 문제를 CSS <b>한 줄로</b> 고칩니다"),
+    ("<code>sticky</code>", "스크롤해도 따라옴", "스크롤해도 목차가 <b>화면에서 사라지지 않습니다</b>"),
     ("관찰자", "보는 절 고르기", "<code>IntersectionObserver</code>로 지금 화면에 걸린 절을 찾습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -105,16 +105,16 @@ D = dict(
     "<code>behavior: smooth</code>를 <b>늘</b> 켜 둘 때. 모션 줄이기를 켠 사용자에게는 끕니다",
     "목차를 <b>본문 폭 안</b>에 끼워 넣을 때. 폰에서는 목차를 접어 둡니다",
   ]),
-  instead='다른 화면으로 가면 <a href="sidebar.html">사이드바</a>, 내용을 갈아 끼우면 <a href="tabs.html">탭</a>, 위로 가면 <a href="breadcrumb.html">브레드크럼</a>, 따라붙는 동작은 <a href="sticky.html">스티키</a>.',
+  instead='다른 화면으로 옮겨 가야 하면 <a href="sidebar.html">사이드바</a>를 쓰고, 보이는 내용을 갈아 끼우려면 <a href="tabs.html">탭</a>을 씁니다. 계층의 위 단계로 올라가는 길은 <a href="breadcrumb.html">브레드크럼</a>이 맡고, 스크롤해도 화면에 따라붙게 만드는 방법은 <a href="sticky.html">스티키</a> 항목에서 다룹니다.',
   cases=cases([
     (toc([("설치", False), ("설정", True), ("API", False)], "150px", "", True),
-     "문서 사이트", "목차를 화면 오른쪽에 <b>붙여</b> 둡니다"),
+     "문서 사이트 오른쪽에 목차 붙이기", "목차를 화면 오른쪽에 <b>붙여</b> 둡니다"),
     (toc([("요약", False), ("상세", True), ("환불 규정", False)], "150px", "", True),
-     "긴 약관", "지금 읽고 있는 절을 <b>표시</b>해 줍니다"),
+     "긴 약관에서 읽는 절 표시하기", "지금 읽고 있는 절을 <b>표시</b>해 줍니다"),
     (one(txt('<span style="display:block;font-size:8.5px;border:1px solid var(--line);border-radius:4px;padding:3px 6px">목차 ▾</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">폰에서는 접어 둔다</span>'),
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">폰에서는 접어 둠</span>'),
          "폰", True, "", "150px"),
-     "폰", "목차를 <b>접어 두었다가</b> 누르면 펼칩니다"),
+     "폰에서 목차 접어 두기", "목차를 <b>접어 두었다가</b> 누르면 펼칩니다"),
   ]),
   code_lede="마크업은 평범한 링크이고, 제목 가림과 부드러운 스크롤은 CSS 두 줄로 처리합니다.",
   code='''&lt;<span class="t">nav</span> <span class="a">aria-label</span>=<span class="s">"이 문서 안에서"</span>&gt;
@@ -133,29 +133,29 @@ D = dict(
 }''',
   keys=kbd([
     ("Tab · Enter", "평범한 링크이므로 키보드 조작을 위해 <b>따로 붙일 것이 없습니다</b>"),
-    ("뛴 뒤 초점", "브라우저가 그 절로 <b>포커스도</b> 옮깁니다. 그래서 키보드 사용자가 다음에 <kbd>Tab</kbd>을 누르면 그 절에서부터 이어집니다"),
+    ("절로 이동한 뒤의 포커스", "브라우저가 그 절로 <b>포커스도</b> 옮깁니다. 그래서 키보드 사용자가 다음에 <kbd>Tab</kbd>을 누르면 그 절에서부터 이어집니다"),
     ("<code>tabindex=\"-1\"</code>", "제목이 포커스를 받지 못하면 붙여 둡니다"),
     ("<code>aria-current=\"true\"</code>", "지금 보는 절에 답니다. 값은 <code>page</code>가 아니라 <code>true</code>입니다"),
     ("<code>:target</code>", "이동한 절을 CSS로 <b>잠깐 강조할</b> 수 있습니다"),
-    ("확인하는 법", "이동한 다음 <b><kbd>Tab</kbd>을 한 번</b> 눌러 포커스가 어디로 가는지 확인합니다"),
+    ("제대로 됐는지 확인하는 방법", "이동한 다음 <b><kbd>Tab</kbd>을 한 번</b> 눌러 포커스가 어디로 가는지 확인합니다"),
   ]),
   backend=rows([
-    ("서버와는 상관없다", "주소에서 <code>#</code> 뒤 부분은 서버로 보내지 않기 때문에, 앵커 이동은 모두 브라우저 안에서 처리됩니다."),
-    ("절 id 를 고정", "문서를 새로 낼 때마다 id가 바뀌면 <b>다른 사람이 공유해 둔 링크로 들어와도 그 절로 이동하지 않습니다</b>. 그래서 id는 제목 글자에서 만들지 말고 <b>바뀌지 않는 키</b>로 만듭니다."),
-    ("긴 문서", "절마다 데이터를 따로 받아 오는 구조라면 <b>이동하기 전에 그 절의 내용을 이미 받았는지</b> 확인해야 합니다."),
+    ("서버를 거치지 않는 이동", "주소에서 <code>#</code> 뒤 부분은 서버로 보내지 않기 때문에, 앵커 이동은 모두 브라우저 안에서 처리됩니다."),
+    ("절 id를 바뀌지 않게 두기", "문서를 새로 낼 때마다 id가 바뀌면 <b>다른 사람이 공유해 둔 링크로 들어와도 그 절로 이동하지 않습니다</b>. 그래서 id는 제목 글자에서 만들지 말고 <b>바뀌지 않는 키</b>로 만듭니다."),
+    ("절마다 따로 받는 긴 문서", "절마다 데이터를 따로 받아 오는 구조라면 <b>이동하기 전에 그 절의 내용을 이미 받았는지</b> 확인해야 합니다."),
   ]),
   plat_lede="앵커 내비는 <b>웹 문서에서 쓰는 부품</b>이라서 앱에는 대응하는 부품이 거의 없습니다.",
   plats=plats([
     ("웹", "#앵커",
      toc([("수수료", True), ("환불", False)], "110px", "", True),
      "이동한 위치가 주소에 남아서 링크로 <b>공유할 수 있다는</b> 점이 웹만의 장점입니다."),
-    ("iOS", "없다 — 섹션 인덱스",
+    ("iOS", "목차 대신 섹션 인덱스",
      '''              <div class="phone" role="img" aria-label="iOS 색인 띠 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;right:3px;top:26px;display:grid;gap:2px;font-size:4px;color:var(--accent)">
                   <span>ㄱ</span><span>ㄴ</span><span>ㄷ</span><span>ㄹ</span></div>
                 <div style="position:absolute;left:5px;right:14px;top:28px;height:8px;border-radius:2px;background:var(--accent-soft)"></div></div></div>''',
      "목차 대신 화면 오른쪽 가장자리에 <b>색인 띠</b>(sectionIndexTitles)를 둡니다. 가나다 같은 글자를 눌러 그 글자로 시작하는 절로 이동하는 방식입니다."),
-    ("안드로이드", "없다",
+    ("안드로이드", "정해진 부품 없음",
      '''              <div class="phone" role="img" aria-label="안드로이드 긴 글 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:26px;height:7px;border-radius:2px;background:var(--accent-soft)"></div>
                 <div style="position:absolute;left:5px;right:5px;top:38px;height:7px;border-radius:2px;background:var(--accent-soft)"></div></div></div>''',

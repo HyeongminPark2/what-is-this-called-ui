@@ -26,8 +26,8 @@ ANAT = '''              <div class="anat--wide" style="background:var(--bg);bord
                   <div class="pin-out" data-pin="2" style="font-size:18px;font-weight:800;line-height:1.3">정산 요청 #4821</div>
                   <div class="pin-out" data-pin="3" style="font-size:12px;color:var(--fg-muted)">모란상회 · 홍길동이 11월 7일에 올림</div>
                   <div class="pin-out" data-pin="4" style="font-size:12.5px;line-height:1.75;max-width:250px">수수료를 뺀 ₩1,245,480이 등록하신 계좌로 입금됩니다.</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">크기 · 굵기 · 색   — 도구는 셋뿐</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">h1~h6   — 보이는 크기와 별개인 구조</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">크기 · 굵기 · 색   위계를 만드는 세 도구</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">h1~h6   보이는 크기와 따로 정하는 구조</div>
                 </div>
               </div>'''
 
@@ -57,20 +57,20 @@ D = dict(
   ]),
   axes=ax("글자 위계"),
   oneline="위계를 만드는 도구는 <b>크기·굵기·색 셋뿐</b>입니다. 하나를 크게 바꾸는 것보다 셋을 조금씩 함께 바꾸는 편이 늘 낫습니다.",
-  s4_title="도구", s4_hint="하나씩 빼 보면 어느 층이 흐려지는지 보인다",
+  s4_title="도구를 하나씩 뺐을 때의 위계", s4_hint="빠진 도구에 따라 흐려지는 층",
   states=states([
-    (hi(label="셋 다"), "셋 다", "크기와 굵기, 색을 모두 써서 <b>읽는 순서가 잘 보입니다</b>"),
-    (hi(no_color=True, label="색 없이"), "색 없이", "<b>층이 가장 많이 줄어듭니다.</b> 보조 글이 본문과 같은 진하기가 됩니다"),
-    (hi(no_size=True, label="크기 없이"), "크기 없이", "굵기와 색만으로도 <b>층이 꽤 잘 구별됩니다</b>"),
-    (hi(no_weight=True, label="굵기 없이"), "굵기 없이", "제목이 <b>덜 또렷해집니다</b>"),
-    (hi(flat=True, label="전부 같게"), "전부 같게", "<b>어디부터 읽어야 할지 알 수 없습니다</b>"),
+    (hi(label="셋 다"), "세 도구를 모두 쓸 때", "크기와 굵기, 색을 모두 써서 <b>읽는 순서가 잘 보입니다</b>"),
+    (hi(no_color=True, label="색 없이"), "색을 뺐을 때", "<b>층이 가장 많이 줄어듭니다.</b> 보조 글이 본문과 같은 진하기가 됩니다"),
+    (hi(no_size=True, label="크기 없이"), "크기를 뺐을 때", "굵기와 색만으로도 <b>층이 꽤 잘 구별됩니다</b>"),
+    (hi(no_weight=True, label="굵기 없이"), "굵기를 뺐을 때", "제목이 <b>덜 또렷해집니다</b>"),
+    (hi(flat=True, label="전부 같게"), "모든 글을 같게 했을 때", "<b>어디부터 읽어야 할지 알 수 없습니다</b>"),
     ('''              <div style="width:100%;max-width:160px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:9px;display:grid;gap:3px">
                 <span style="font-size:15px;font-weight:800;line-height:1.3">정산 요청 #4821</span>
                 <span style="font-size:14px;font-weight:800;color:var(--danger)">확인 필요</span>
                 <span style="font-size:14px;font-weight:800;color:var(--accent)">새 메시지</span>
                 <span style="font-size:13px;font-weight:700">모란상회</span>
               </div>''',
-     "다 강조하면", "<b>모든 글을 강조하면 어느 것도 눈에 띄지 않습니다.</b> 한 화면에서 가장 강조할 글은 하나로 정합니다"),
+     "모든 글을 강조했을 때", "<b>모든 글을 강조하면 어느 것도 눈에 띄지 않습니다.</b> 한 화면에서 가장 강조할 글은 하나로 정합니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -78,7 +78,7 @@ D = dict(
     ("제목", "title", "가장 크고 굵게 써서 <b>이 덩어리가 무엇인지</b> 알려 줍니다"),
     ("부제·보조 글", "supporting text", "작고 흐리게 씁니다. <b>색을 한 단계 연하게</b> 해서 본문보다 덜 중요해 보이게 합니다"),
     ("본문", "body", "실제로 읽는 글입니다. 크기는 보통이고 <b>행간을 넓게</b> 잡습니다"),
-    ("도구 셋", "size · weight · color", "<b>위계를 만드는 도구는 이 셋이 전부입니다.</b> 셋을 조금씩 함께 쓰는 편이 낫습니다"),
+    ("세 가지 도구", "size · weight · color", "<b>위계를 만드는 도구는 이 셋이 전부입니다.</b> 셋을 조금씩 함께 쓰는 편이 낫습니다"),
     ("문서 구조", "h1~h6", "보이는 크기와 <b>따로</b> 정합니다. 스크린 리더 사용자는 이 제목 단계를 따라 화면을 훑습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -97,24 +97,26 @@ D = dict(
     "보이는 크기 때문에 <code>h1~h6</code> 단계를 고를 때",
     "색<b>만으로</b> 위계를 만들 때. 색을 구별하지 못하는 사람에게는 모든 글이 같아 보입니다",
   ]),
-  instead='글자 크기 단계 자체는 <a href="../items/typescale.html">타입 스케일</a>, 굵기 단은 <a href="weight.html">글자 굵기</a>, 색 쓰임은 <a href="../items/color.html">색 토큰</a>.',
+  do_title="글자 위계를 세워야 하는 경우", dont_title="글자 위계를 세울 때 피할 것",
+  instead_title="글자 위계와 이어지는 주제를 다루는 항목",
+  instead='글자 크기 단계를 정하는 방법은 <a href="../items/typescale.html">타입 스케일</a>에서, 굵기 단계는 <a href="weight.html">글자 굵기</a>에서 다룹니다. 색을 쓰임별로 나누는 방법은 <a href="../items/color.html">색 토큰</a>을 보세요.',
   cases=cases([
-    (hi(w="190px"), "카드 안", "꼬리표, 제목, 보조 글, 본문, 이렇게 <b>네 층</b>이면 충분합니다"),
+    (hi(w="190px"), "카드 안을 네 층으로 나누기", "꼬리표, 제목, 보조 글, 본문, 이렇게 <b>네 층</b>이면 충분합니다"),
     ('''              <div style="width:100%;max-width:190px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:9px;display:grid;gap:2px">
                 <span style="font-size:10px;color:var(--fg-muted)">이번 주 매출</span>
                 <span style="font-size:22px;font-weight:800;line-height:1.1;font-variant-numeric:tabular-nums">₩1,284,000</span>
                 <span style="font-size:11px;font-weight:700;color:#1f8a4c">▲ 12.4% <span style="font-weight:400;color:var(--fg-muted)">지난주 대비</span></span>
               </div>''',
-     "스탯 타일", "<b>숫자를 가장 크게</b> 보여 주고, 라벨은 작고 흐리게 둡니다"),
+     "스탯 타일에서 숫자 돋보이게 하기", "<b>숫자를 가장 크게</b> 보여 주고, 라벨은 작고 흐리게 둡니다"),
     ('''              <div style="width:100%;max-width:190px;display:grid;gap:5px">
                 <span style="font-size:14px;font-weight:800">정산 안내</span>
                 <span style="font-size:11.5px;line-height:1.75;color:var(--fg-muted)">승인되면 영업일 기준 2일 안에 입금됩니다. 계좌가 바뀌면 다시 확인해야 합니다.</span>
                 <span style="font-size:11px;color:var(--accent);text-decoration:underline">자세히 보기</span>
               </div>''',
-     "안내 글", "<b>제목, 본문, 링크</b> 세 층으로 나누고, 링크만 색으로 구별합니다"),
+     "안내 글을 세 층으로 나누기", "<b>제목, 본문, 링크</b> 세 층으로 나누고, 링크만 색으로 구별합니다"),
   ]),
-  s8_title="최소 코드와 규칙", s8_hint="도구는 셋뿐",
-  keys_heads="<th>규칙</th><th>지켜야 하는 것</th>",
+  s8_title="최소 코드와 규칙", s8_hint="구조는 HTML로, 모습은 CSS로 정하기",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법</th>",
   code_lede="보이는 크기와 <b>문서 구조</b>는 따로 정합니다. 크기에 맞춰 제목 태그를 고르면 화면 모양과 문서 구조가 모두 어긋납니다.",
   code='''<span class="c">&lt;!-- 구조는 순서대로 --&gt;</span>
 &lt;<span class="t">article</span>&gt;
@@ -129,18 +131,18 @@ D = dict(
 <span class="t">.title</span>   { <span class="a">font-size</span>: <span class="a">20px</span>; <span class="a">font-weight</span>: <span class="a">800</span>; <span class="a">line-height</span>: <span class="a">1.3</span>; }
 <span class="t">.meta</span>    { <span class="a">font-size</span>: <span class="a">13px</span>; <span class="a">color</span>: <span class="t">var</span>(<span class="a">--fg-muted</span>); }''',
   keys=kbd([
-    ("도구는 셋", "크기와 굵기, 색을 <b>조금씩 함께</b> 쓰는 편이 하나를 크게 바꾸는 것보다 낫습니다"),
-    ("층은 네댓 개", "그보다 많으면 층끼리 구별되지 않습니다"),
-    ("색만으로 하지 않는다", "색을 구별하지 못하면 <b>색으로 만든 층은 모두 사라집니다</b>"),
-    ("<code>h1~h6</code>은 구조", "제목 단계를 건너뛰지 않고, 보이는 크기는 CSS로 따로 정합니다"),
-    ("주인공은 하나", "한 화면에서 가장 큰 글자는 하나만 둡니다. <b>둘이면 어느 쪽도 눈에 띄지 않습니다</b>"),
-    ("굵기를 먼저 써 본다", "크기를 키우기 전에 굵기부터 바꿔 봅니다. 굵기는 바꿔도 <b>줄 높이가 흔들리지 않습니다</b>"),
+    ("세 도구를 조금씩 함께 쓰기", "크기와 굵기, 색을 <b>조금씩 함께</b> 쓰는 편이 하나를 크게 바꾸는 것보다 낫습니다"),
+    ("층은 네댓 개까지만", "그보다 많으면 층끼리 구별되지 않습니다"),
+    ("색만으로 위계를 만들지 않기", "색을 구별하지 못하면 <b>색으로 만든 층은 모두 사라집니다</b>"),
+    ("<code>h1~h6</code>은 구조에 맞춰 쓰기", "제목 단계를 건너뛰지 않고, 보이는 크기는 CSS로 따로 정합니다"),
+    ("가장 큰 글자는 하나만 두기", "한 화면에서 가장 큰 글자는 하나만 둡니다. <b>둘이면 어느 쪽도 눈에 띄지 않습니다</b>"),
+    ("크기보다 굵기를 먼저 바꿔 보기", "크기를 키우기 전에 굵기부터 바꿔 봅니다. 굵기는 바꿔도 <b>줄 높이가 흔들리지 않습니다</b>"),
   ]),
   backend=rows([
-    ("위계 = 응답의 중요도", "API가 돌려준 필드 가운데 <b>무엇이 제목이고 무엇이 메타 정보인지</b>는 화면에서 정합니다. 이 결정을 컴포넌트 하나에 모아 두면 화면마다 위계가 달라지지 않습니다."),
+    ("응답 필드의 중요도는 화면에서 정하기", "API가 돌려준 필드 가운데 <b>무엇이 제목이고 무엇이 메타 정보인지</b>는 화면에서 정합니다. 이 결정을 컴포넌트 하나에 모아 두면 화면마다 위계가 달라지지 않습니다."),
     ("제목이 비었을 때", "제목이 빈 값이면 가장 눈에 띄어야 할 자리가 비어서 위계가 성립하지 않습니다. 그래서 '이름 없는 요청 #4821' 같은 <b>대체 문구</b>를 정해 둡니다."),
-    ("검색·SEO", "<code>h1</code>이 없거나 여러 개면 검색 엔진이 <b>문서의 주제</b>를 제대로 파악하지 못합니다. 그래서 <code>h1</code>은 페이지마다 하나만 둡니다."),
-    ("번역", "번역하면 글 길이가 달라져 제목이 두 줄이 되기도 합니다. 그래서 <b>두 줄짜리 제목</b>을 넣어도 레이아웃이 깨지지 않는지 확인합니다."),
+    ("검색 엔진이 읽는 h1", "<code>h1</code>이 없거나 여러 개면 검색 엔진이 <b>문서의 주제</b>를 제대로 파악하지 못합니다. 그래서 <code>h1</code>은 페이지마다 하나만 둡니다."),
+    ("번역으로 길어진 제목", "번역하면 글 길이가 달라져 제목이 두 줄이 되기도 합니다. 그래서 <b>두 줄짜리 제목</b>을 넣어도 레이아웃이 깨지지 않는지 확인합니다."),
   ]),
   plat_lede="세 플랫폼 모두 글자 단계에 <b>이름</b>을 붙여 쓰고, 그 이름이 곧 위계를 나타냅니다.",
   plats=plats([

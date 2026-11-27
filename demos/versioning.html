@@ -19,7 +19,7 @@
 <div class="bar">
   <b>버전 관리</b>
   <label>이름 짓는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
-    <option value="good">무엇이 바뀌었는지</option>
+    <option value="good">날짜와 바뀐 내용</option>
     <option value="num">v1 · v2 · v3</option>
     <option value="final">final · 진짜final</option>
   </select></label>
@@ -59,8 +59,8 @@
   };
   var NOTE = {
     good: '<b>무엇이 바뀌었는지</b>가 남아서 나중에도 왜 바꿨는지 알 수 있습니다',
-    num: '<span class="warn">v3과 v4가 무엇이 다른지 알 수 없습니다</span> — 파일을 열어 봐야 압니다',
-    final: '<span class="warn">어느 것이 지금 것인지 알 수 없습니다</span> — 가장 흔하면서 가장 나쁜 방식입니다'
+    num: '<span class="warn">v3과 v4가 무엇이 다른지 이름으로는 알 수 없어서</span> 파일을 열어 봐야 합니다',
+    final: '<span class="warn">어느 것이 지금 것인지 알 수 없습니다.</span> 가장 흔하면서 가장 나쁜 방식입니다'
   };
 
   function draw() {
@@ -78,8 +78,8 @@
 
     var v = document.getElementById('verdict');
     v.innerHTML = k === 'good'
-      ? '<b>' + rows.length + '개</b> — 이름만 보고도 <b>무엇이 바뀌었는지</b> 알 수 있습니다'
-      : '<span class="warn">' + rows.length + '개 — 이름만 보고는 아무것도 알 수 없습니다</span>';
+      ? '버전 <b>' + rows.length + '개</b> 모두 이름만 보고도 <b>무엇이 바뀌었는지</b> 알 수 있습니다'
+      : '<span class="warn">버전 ' + rows.length + '개 모두 이름만 보고는 아무것도 알 수 없습니다</span>';
     v.dataset.k = k;
     v.dataset.n = String(rows.length);
     document.getElementById('note').innerHTML = NOTE[k];

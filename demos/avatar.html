@@ -24,7 +24,7 @@
 
 <div class="bar">
   <b>아바타</b>
-  <label><input type="checkbox" id="broken"> 사진이 깨진 상태로</label>
+  <label><input type="checkbox" id="broken"> 사진이 깨진 상태로 보기</label>
   <label>겹쳐 보일 사람 수
     <input type="range" id="n" class="sld" min="2" max="9" value="3" style="width:110px">
     <output id="no">3</output>
@@ -33,7 +33,7 @@
 
 <div class="pad">
   <section>
-    <h4>크기</h4>
+    <h4>자리에 따른 크기</h4>
     <div class="row">
       <span class="u"><span class="av av--xs" id="s-xs">길동</span><span class="cap">22px · 목록 안</span></span>
       <span class="u"><span class="av av--sm">길동</span><span class="cap">28px · 줄 앞</span></span>
@@ -43,17 +43,17 @@
   </section>
 
   <section>
-    <h4>갈래</h4>
+    <h4>아바타의 종류</h4>
     <div class="row">
       <span class="u"><span class="av av--lg av--img" id="photo"><i></i></span><span class="cap">사진</span></span>
       <span class="u"><span class="av av--lg">길동</span><span class="cap">이니셜</span></span>
-      <span class="u"><span class="av av--lg av--sq">모란</span><span class="cap">사각 · 조직</span></span>
+      <span class="u"><span class="av av--lg av--sq">모란</span><span class="cap">조직용 사각형</span></span>
       <span class="u"><span class="av-wrap"><span class="av av--lg">철수</span><span class="av-dot" title="접속 중"></span></span><span class="cap">상태 점</span></span>
     </div>
   </section>
 
   <section>
-    <h4>겹쳐 보이기</h4>
+    <h4>여러 사람을 겹쳐 보이기</h4>
     <div class="av-stack" id="stack" role="img" aria-label=""></div>
     <p style="font-size:12.5px;color:var(--fg-muted);margin:var(--s3) 0 0" id="who"></p>
   </section>
@@ -61,7 +61,7 @@
 
 <p class="hint">
   아바타는 <b>사람이나 조직 하나를 가리키는 작은 그림</b>입니다. 화면을 꾸미려고 두는 것이 아니라 누구인지 알려 주려고 둡니다.<br>
-  <b>사진이 깨진 상태로</b>를 켜 보세요. 사진은 지워졌거나, 불러오는 데 오래 걸리거나, 애초에 올린 적이 없어서
+  <b>사진이 깨진 상태로 보기</b>를 켜 보세요. 사진은 지워졌거나, 불러오는 데 오래 걸리거나, 애초에 올린 적이 없어서
   <b>언제든 못 불러올 수 있습니다</b>. 그래서 아바타의 기본값은 사진이 아니라 <b>이니셜</b>이고, 사진은 그 위에 덮어 둡니다.
   사진이 깨졌을 때 깨진 그림 아이콘이 보인다면 이니셜과 사진의 순서가 뒤집혀 있는 것입니다.<br>
   여러 사람을 겹쳐 보일 때는 <b>세 명쯤까지만</b> 보여 주고 나머지는 <code>+N</code>으로 줄입니다. 겹친 그림을

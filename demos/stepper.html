@@ -19,12 +19,12 @@
 <body>
 <div class="bar">
   <b>스테퍼</b>
-  <label>폭 <select class="sel" id="w" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>스테퍼 폭 <select class="sel" id="w" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="420">420px</option>
     <option value="320">320px</option>
     <option value="260">260px</option>
   </select></label>
-  <label><input type="checkbox" id="col"> 좁으면 세로로</label>
+  <label><input type="checkbox" id="col"> 좁으면 세로로 늘어놓기</label>
   <label><input type="checkbox" id="free" checked> 끝낸 단계로 되돌아가기</label>
 </div>
 
@@ -39,7 +39,7 @@
 <p class="hint">
   단계 이름은 <b>잘리면 안 됩니다</b>. 데모는 칸마다 <b>이름 글자 전체의 폭과 실제로 보이는 폭</b>을 비교해서
   이름이 잘린 단계가 몇 개인지 셉니다. 가로 배치 그대로 폭을 줄이면 단계 이름부터 잘리고,
-  '좁으면 세로로'를 켜면 같은 폭에서도 이름이 잘리지 않습니다.<br>
+  '좁으면 세로로 늘어놓기'를 켜면 같은 폭에서도 이름이 잘리지 않습니다.<br>
   <b>끝낸 단계는 눌러서 되돌아갈 수 있어야</b> 합니다. 이 기능을 끄면 끝낸 단계를 눌러도 이동하지 않는데,
   그러면 배송지를 잘못 적은 사용자가 처음부터 다시 해야 합니다.<br>
   지금 단계는 색뿐 아니라 <code>aria-current="step"</code>으로도 알립니다.
@@ -86,7 +86,7 @@
     });
 
     var rd = document.getElementById('read');
-    rd.innerHTML = (col ? '세로' : '가로') + ' · 칸 <b>' + w + 'px</b> · 이름이 잘린 단계 <b>' + over + '개</b>' +
+    rd.innerHTML = (col ? '세로 배치' : '가로 배치') + ' · 칸 폭 <b>' + w + 'px</b> · 이름이 잘린 단계 <b>' + over + '개</b>' +
       (over ? ' <span class="warn">· 이름을 읽을 수 없습니다</span>' : '') +
       '<br>지금 단계 <b>' + STEPS[cur][0] + '</b> · 되돌아갈 수 있는 단계 <b>' +
       (free ? cur : 0) + '개</b>';

@@ -21,7 +21,7 @@
 
 <div class="bar">
   <b>스프링</b>
-  <label>튕김 <input type="range" id="b" class="ui-range" min="0" max="80" step="4" value="28" style="width:150px"> <span class="ruler" id="bv">28</span></label>
+  <label>튕김 정도 <input type="range" id="b" class="ui-range" min="0" max="80" step="4" value="28" style="width:150px"> <span class="ruler" id="bv">28</span></label>
   <button class="ui-btn" id="run">던지기</button>
 </div>
 
@@ -69,10 +69,10 @@
       '<line class="ref" x1="0" y1="36" x2="140" y2="36"/>' +
       '<path class="path" d="' + springPath(b) + '"/>';
     document.getElementById('ruler').innerHTML = b === 0
-      ? '튕김 <b>0</b> — 지나치지 않는다. ease-out 과 거의 같다'
+      ? '튕김이 <b>0</b>일 때는 목표를 지나치지 않는다는 점에서 ease-out과 거의 같습니다'
       : (b > 56
-        ? '튕김 <span class="warn">' + b + ' — 글자가 읽히기 전에 또 움직인다</span>'
-        : '튕김 <b>' + b + '</b> — 목표를 지나쳤다 돌아온다');
+        ? '튕김이 <span class="warn">' + b + '일 때는 글자가 읽히기 전에 또 움직입니다</span>'
+        : '튕김이 <b>' + b + '</b>일 때는 목표를 지나쳤다가 돌아옵니다');
   }
 
   function run() {

@@ -21,11 +21,11 @@ MARK = '<b style="background:var(--warn-soft);border-radius:2px;padding:0 1px">�
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="max-width:220px">''' + qbox('모란').strip() + '''</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">‘모란’ · 승인됨 · 6건 — 무엇으로 찾았는지 다시 적는다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">?q=모란&amp;f=승인됨&amp;page=2 — 주소에 담는다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">굴린 자리를 기억했다 돌아올 때 되살린다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">0건이면 조건을 지울 길과 다른 질의를 준다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">돌아왔더니 빈 화면 — 가장 흔한 민원</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">‘모란’ · 승인됨 · 6건처럼 찾은 조건을 다시 적음</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">?q=모란&amp;f=승인됨&amp;page=2처럼 주소에 담음</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">굴린 자리를 기억했다가 돌아올 때 되살림</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">0건이면 조건 지우기와 다른 질의를 제안함</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">돌아왔을 때 빈 화면이 가장 흔한 민원</div>
                 </div>
               </div>'''
 
@@ -54,33 +54,36 @@ D = dict(
   ]),
   axes=ax("검색 결과 화면"),
   oneline="<b>검색 상태를 주소에 담으세요.</b> 주소에 담으면 공유·새로고침·뒤로가기가 한꺼번에 해결되지만, 담지 않으면 세 가지 모두 제대로 동작하지 않습니다.",
-  s4_title="상태", s4_hint="왕복이 되는가",
+  do_title="검색 결과 화면으로 만들면 좋은 경우",
+  dont_title="검색 결과 화면을 잘못 만드는 경우",
+  instead_title="함께 보면 좋은 항목",
+  s4_title="결과 화면의 상태", s4_hint="들어갔다 돌아오는 왕복이 매끄러운가",
   states=states([
     (scr(qbox('모란') + '<span style="font-size:8.5px;color:var(--fg-muted)">‘모란’ · <b>6건</b></span>' + res([MARK + '상회 신길역점', MARK + '김밥 가산점'])),
-     "결과 있음", "<b>무엇으로 찾았는지</b>와 건수를 다시 적어 줍니다"),
+     "결과가 있을 때", "<b>무엇으로 찾았는지</b>와 건수를 다시 적어 줍니다"),
     (scr(qbox('모란') + '<div style="display:flex;gap:3px"><span style="background:var(--accent);color:#fff;border-radius:999px;padding:1px 6px;font-size:8px">승인됨 ✕</span></div>'
          '<span style="font-size:8.5px;color:var(--fg-muted)">‘모란’ · 승인됨 · <b>3건</b></span>' + res([MARK + '상회 신길역점'])),
-     "조건이 걸림", "걸어 둔 <a href=\"filter.html\">필터</a>가 <b>칩</b>으로 보입니다"),
+     "필터 조건을 걸었을 때", "걸어 둔 <a href=\"filter.html\">필터</a>가 <b>칩</b>으로 보입니다"),
     (scr(qbox('모란닭강정') + '<div style="border:1px dashed var(--line);border-radius:5px;padding:8px;text-align:center;font-size:8.5px;color:var(--fg-muted)">맞는 것이 없습니다<br><span style="color:var(--accent)">‘모란’으로 넓혀 보기</span></div>'),
-     "0건", "<b>입력한 글자를 그대로 적고</b> 검색 범위를 넓힐 방법을 알려 줍니다"),
+     "결과가 0건일 때", "<b>입력한 글자를 그대로 적고</b> 검색 범위를 넓힐 방법을 알려 줍니다"),
     (scr(qbox('모란') + '<span style="font-size:8.5px;color:var(--fg-muted)">불러오는 중…</span>'
          '<div style="display:grid;gap:4px"><span class="skl" style="height:9px"></span><span class="skl" style="height:9px;width:70%"></span></div>'),
-     "불러오는 중", "새 결과가 올 때까지 <b>이전 결과를 지우지 않습니다</b>"),
+     "새 결과를 불러오는 중", "새 결과가 올 때까지 <b>이전 결과를 지우지 않습니다</b>"),
     (scr('<span style="font-size:9.5px;font-weight:700">모란상회 신길역점</span>'
          '<span style="font-size:8.5px;color:var(--fg-muted)">1,284,000원 · 승인됨</span>'
          '<span style="font-size:9px;color:var(--accent)">← 결과로 돌아가기</span>', "152px", "상세"),
-     "들어갔을 때", "결과로 <b>돌아가는 링크</b>가 화면 안에도 있어야 합니다"),
-    (scr(qbox('') + '<span style="font-size:8.5px;color:var(--danger)">질의를 잃었다 — 처음부터 다시</span>', "152px"),
-     "돌아왔는데 빈 화면", "검색 상태를 <b>주소에 담지 않았을 때</b> 생기는 일입니다"),
+     "결과 하나에 들어갔을 때", "결과로 <b>돌아가는 링크</b>가 화면 안에도 있어야 합니다"),
+    (scr(qbox('') + '<span style="font-size:8.5px;color:var(--danger)">질의를 잃어 처음부터 다시 찾음</span>', "152px"),
+     "돌아왔는데 빈 화면이 뜰 때", "검색 상태를 <b>주소에 담지 않았을 때</b> 생기는 일입니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("질의 상자", "친 글자 그대로", "입력한 글자가 결과 화면에도 <b>남아 있어야</b> 고쳐서 다시 찾을 수 있습니다"),
+    ("질의 상자", "입력한 글자 그대로", "입력한 글자가 결과 화면에도 <b>남아 있어야</b> 고쳐서 다시 찾을 수 있습니다"),
     ("요약 줄", "‘모란’ · 승인됨 · 6건", "<b>무엇으로 찾아 몇 건</b>이 나왔는지 적습니다. 0건일 때 특히 중요합니다"),
     ("주소", "?q=&f=&page=", "상태를 주소에 담으면 <b>공유 · 새로고침 · 뒤로가기</b>가 한꺼번에 해결됩니다"),
     ("굴린 자리", "복원", "돌아왔을 때 <b>보던 줄</b>부터 이어서 볼 수 있게 합니다"),
-    ("0건의 길", "넓히기 · 지우기", "결과가 없을 때도 다음에 할 일을 보여 줘서 사용자가 멈추지 않게 합니다"),
-    ("안 담았을 때", "빈 화면", "사용자가 <b>처음부터 다시</b> 찾아야 해서 가장 흔한 민원이 됩니다"),
+    ("0건일 때 안내", "넓히기 · 지우기", "결과가 없을 때도 다음에 할 일을 보여 줘서 사용자가 멈추지 않게 합니다"),
+    ("상태를 잃은 화면", "빈 화면", "사용자가 <b>처음부터 다시</b> 찾아야 해서 가장 흔한 민원이 됩니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <b>굴린 자리를 복원하는 일은 생각보다 까다롭습니다.</b>
@@ -101,19 +104,20 @@ D = dict(
     "돌아온 사용자를 <b>맨 위로</b> 보낼 때",
     "입력한 글자를 결과 화면에서 지울 때. 검색어를 고쳐서 다시 찾을 수 없게 됩니다",
   ]),
-  instead='입력칸과 응답 처리는 <a href="search.html">검색</a>, 조건 고르기는 <a href="filter.html">필터와 패싯</a>, 줄이 아주 많으면 <a href="virtual.html">가상 스크롤</a>.',
+  instead='검색 입력칸과 응답 처리는 <a href="search.html">검색</a>에서, 조건을 고르는 부품은 <a href="filter.html">필터와 패싯</a>에서 다룹니다. 결과 줄이 아주 많으면 <a href="virtual.html">가상 스크롤</a>도 함께 봅니다.',
   cases=cases([
     (scr(qbox('모란') + '<span style="font-size:8.5px;color:var(--fg-muted)">6건 · 관련도순</span>' + res([MARK + '상회 신길역점']), "150px"),
-     "건수와 순서", "결과를 <b>무엇을 기준으로</b> 정렬했는지 적어 둡니다"),
+     "건수와 정렬 기준 알려 주기", "결과를 <b>무엇을 기준으로</b> 정렬했는지 적어 둡니다"),
     ('''              <div style="width:100%;max-width:150px;font-family:var(--mono);font-size:9px;color:var(--accent);word-break:break-all">
                 /search?q=모란&amp;f=승인됨&amp;page=2
               </div>''',
-     "주소에 담기", "주소 한 줄에 상태를 담으면 <b>공유·새로고침·뒤로가기</b>가 모두 해결됩니다"),
+     "검색 상태를 주소에 담기", "주소 한 줄에 상태를 담으면 <b>공유·새로고침·뒤로가기</b>가 모두 해결됩니다"),
     (scr(qbox('모란닭강정') + '<span style="font-size:8.5px;color:var(--fg-muted)">이렇게 찾아보세요</span>'
          '<span style="font-size:9px;color:var(--accent)">모란 · 닭강정 · 모란상회</span>', "150px"),
-     "0건의 다음 수", "범위를 넓힌 질의를 <b>눌러서</b> 바로 검색할 수 있게 합니다"),
+     "0건일 때 다른 검색어 제안하기", "범위를 넓힌 질의를 <b>눌러서</b> 바로 검색할 수 있게 합니다"),
   ]),
   s8_title="최소 마크업과 키보드", s8_hint="구현할 때 지킬 최소 규칙",
+  keys_heads="<th>키와 마크업</th><th>처리하는 방법</th>",
   code_lede="검색 상태를 주소에 담고, 돌아왔을 때는 목록을 <b>그린 뒤에</b> 스크롤 위치를 되살립니다.",
   code='''&lt;<span class="t">form</span> <span class="a">role</span>=<span class="s">"search"</span> <span class="a">action</span>=<span class="s">"/search"</span>&gt;
   &lt;<span class="t">label</span> <span class="a">for</span>=<span class="s">"q"</span> <span class="a">class</span>=<span class="s">"sr-only"</span>&gt;가맹점 검색&lt;/<span class="t">label</span>&gt;
@@ -135,17 +139,17 @@ list.scrollTop = +sessionStorage.getItem(<span class="s">'pos'</span>) || <span 
   keys=kbd([
     ("<code>role=\"search\"</code>", "검색 영역을 하나의 구역으로 알립니다. 스크린 리더 사용자가 그 구역으로 바로 건너뛸 수 있습니다"),
     ("<code>role=\"status\"</code>", "'6건'처럼 건수를 알립니다. 소리 없이 <b>결과만 바뀌면</b> 화면을 눈으로 보지 않는 사람은 바뀐 줄 모릅니다"),
-    ("<code>&lt;ol&gt;</code>로 적는다", "결과는 순서에 뜻이 있으므로 순서 있는 목록으로 적습니다. 스크린 리더가 '6개 중 2번째'처럼 읽어 줍니다"),
+    ("결과를 <code>&lt;ol&gt;</code>로 적기", "결과는 순서에 뜻이 있으므로 순서 있는 목록으로 적습니다. 스크린 리더가 '6개 중 2번째'처럼 읽어 줍니다"),
     ("<code>replaceState</code>와 <code>pushState</code>", "조건만 바뀌었을 때는 방문 기록을 쌓지 않고 <b>갈아끼웁니다</b>(<a href=\"systemback.html\">시스템 백</a>)"),
     ("<code>scrollRestoration</code>", "브라우저 기본 복원과 직접 만든 복원이 함께 돌면 <b>서로 위치를 덮어쓸 수</b> 있으므로 하나만 씁니다"),
-    ("초점", "상세 화면에서 돌아오면 <b>눌렀던 줄</b>로 초점을 되돌립니다. 되돌리지 않으면 Tab을 처음부터 다시 눌러야 합니다"),
+    ("초점을 되돌릴 자리", "상세 화면에서 돌아오면 <b>눌렀던 줄</b>로 초점을 되돌립니다. 되돌리지 않으면 Tab을 처음부터 다시 눌러야 합니다"),
   ]),
   backend=rows([
-    ("조건을 주소에서 읽는다", "서버가 <code>?q=</code>·<code>?page=</code>를 그대로 받아 화면을 그리면, <b>공유한 링크를 연 사람도 같은 화면</b>을 봅니다."),
-    ("허용 목록으로", "<code>sort</code>·<code>f</code> 값을 그대로 질의에 넣지 않고, 허용한 값인지 확인한 뒤에 씁니다. <a href=\"table.html\">데이터 테이블</a>과 같은 주입 문제가 생기기 때문입니다."),
-    ("같은 값의 순서", "정렬 값이 같은 줄들의 순서가 요청마다 달라지면 <b>쪽을 넘길 때 같은 줄이 두 번</b> 나옵니다. 그래서 ID를 2차 정렬 기준으로 붙입니다."),
-    ("건수는 비싸다", "큰 표에서는 <code>COUNT(*)</code>가 느립니다. 그래서 건수를 <b>'100+ 건'</b>으로 적거나 커서 방식으로 바꿉니다."),
-    ("빈 질의", "<code>?q=</code>가 비었을 때 전체를 돌려줄지, 아무것도 돌려주지 않을지 <b>미리 정해 둡니다</b>. 정해 두지 않으면 빈 질의가 들어올 때마다 전체 조회가 돌아 서버에 큰 부하가 걸립니다."),
+    ("검색 조건을 주소에서 읽기", "서버가 <code>?q=</code>·<code>?page=</code>를 그대로 받아 화면을 그리면, <b>공유한 링크를 연 사람도 같은 화면</b>을 봅니다."),
+    ("정렬·필터 값은 허용 목록으로 거르기", "<code>sort</code>·<code>f</code> 값을 그대로 질의에 넣지 않고, 허용한 값인지 확인한 뒤에 씁니다. <a href=\"table.html\">데이터 테이블</a>과 같은 주입 문제가 생기기 때문입니다."),
+    ("정렬 값이 같은 줄의 순서 고정하기", "정렬 값이 같은 줄들의 순서가 요청마다 달라지면 <b>쪽을 넘길 때 같은 줄이 두 번</b> 나옵니다. 그래서 ID를 2차 정렬 기준으로 붙입니다."),
+    ("건수를 세는 비용이 큼", "큰 표에서는 <code>COUNT(*)</code>가 느립니다. 그래서 건수를 <b>'100+ 건'</b>으로 적거나 커서 방식으로 바꿉니다."),
+    ("검색어 없이 요청이 왔을 때", "<code>?q=</code>가 비었을 때 전체를 돌려줄지, 아무것도 돌려주지 않을지 <b>미리 정해 둡니다</b>. 정해 두지 않으면 빈 질의가 들어올 때마다 전체 조회가 돌아 서버에 큰 부하가 걸립니다."),
   ]),
   plat_lede="결과 화면으로 <b>돌아오는 방식</b>이 플랫폼마다 다릅니다.",
   plats=plats([

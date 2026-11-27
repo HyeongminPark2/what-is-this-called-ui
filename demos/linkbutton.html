@@ -18,9 +18,9 @@
 <body>
 <div class="bar">
   <b>링크와 버튼</b>
-  <label>무엇으로 만들까 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>무엇으로 만들지 고르기 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="right" selected>뜻에 맞게</option>
-    <option value="divlink">div 에 onclick 으로</option>
+    <option value="divlink">div 에 onclick 을 달아서</option>
     <option value="swap">서로 바꿔서</option>
   </select></label>
   <button class="ui-btn ui-btn--ghost" id="tab">Tab 으로 훑어보기</button>
@@ -45,10 +45,10 @@
 (function () {
   // [이름, 이동인가, 설명]
   var ITEMS = [
-    ['주문 상세 보기', true, '주소가 바뀐다'],
-    ['영수증 내려받기', true, '파일 주소로 간다'],
-    ['저장', false, '그 자리에서 일이 일어난다'],
-    ['정산 다시 계산', false, '그 자리에서 일이 일어난다']
+    ['주문 상세 보기', true, '누르면 주소가 바뀜'],
+    ['영수증 내려받기', true, '파일 주소로 이동함'],
+    ['저장', false, '그 자리에서 일이 일어남'],
+    ['정산 다시 계산', false, '그 자리에서 일이 일어남']
   ];
 
   function kindOf(isNav) {
@@ -77,13 +77,13 @@
     var newtab = document.querySelectorAll('.lkb a[href]').length;
     var wrong = document.querySelectorAll('.lkb__r.bad').length;
     var rd = document.getElementById('read');
-    rd.innerHTML = '만든 법 <b>' +
-      ({ right: '뜻에 맞게', divlink: 'div + onclick', swap: '서로 바꿔서' }[k]) + '</b>' +
-      '<br>초점을 받을 수 있는 줄 <b>' + focusable + ' / ' + ITEMS.length + '</b>' +
-      (focusable < ITEMS.length ? ' <span class="warn">— 키보드로 갈 수 없습니다</span>' : '') +
-      '<br>새 탭으로 열리는 줄 <b>' + newtab + '개</b>' +
-      (k === 'swap' ? ' <span class="warn">— 저장이 새 탭에서 열립니다</span>' : '') +
-      '<br>뜻과 안 맞는 줄 <b>' + wrong + '개</b>' +
+    rd.innerHTML = '지금은 <b>' +
+      ({ right: '뜻에 맞게', divlink: 'div 에 onclick 을 달아서', swap: '서로 바꿔서' }[k]) + '</b> 만들었습니다.' +
+      '<br>초점을 받을 수 있는 줄은 <b>' + ITEMS.length + '줄 중 ' + focusable + '줄</b>입니다.' +
+      (focusable < ITEMS.length ? ' <span class="warn">나머지 줄은 키보드로 갈 수 없습니다.</span>' : '') +
+      '<br>새 탭으로 열리는 줄은 <b>' + newtab + '개</b>입니다.' +
+      (k === 'swap' ? ' <span class="warn">저장 버튼까지 새 탭에서 열립니다.</span>' : '') +
+      '<br>뜻과 맞지 않는 줄은 <b>' + wrong + '개</b>입니다.' +
       (why ? '<br>' + why : '');
     rd.dataset.focusable = String(focusable);
     rd.dataset.newtab = String(newtab);
@@ -96,7 +96,7 @@
     if (!r) return;
     e.preventDefault();
     var it = ITEMS[+r.dataset.i];
-    document.getElementById('log').innerHTML = it[1] ? '<b>' + it[0] + '</b> — 주소를 바꿔 이동했습니다' : '<b>' + it[0] + '</b> — 그 자리에서 일이 일어났습니다';
+    document.getElementById('log').innerHTML = it[1] ? '<b>' + it[0] + '</b> 줄을 누르자 다른 주소로 이동했습니다' : '<b>' + it[0] + '</b> 줄을 누르자 그 자리에서 일이 일어났습니다';
   });
 
   document.getElementById('tab').addEventListener('click', function () {
@@ -109,7 +109,7 @@
     }
     (function step() {
       if (i >= els.length) {
-        document.getElementById('log').innerHTML = 'Tab 이 <b>' + seen.length + '번</b> 멈췄습니다 — ' + seen.join(' → ');
+        document.getElementById('log').innerHTML = 'Tab 이 <b>' + seen.length + '번</b> 멈췄습니다. 멈춘 차례는 ' + seen.join(' → ') + '입니다.';
         document.getElementById('read').dataset.seen = String(seen.length);
         return;
       }

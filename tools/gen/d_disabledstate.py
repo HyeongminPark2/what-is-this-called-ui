@@ -30,12 +30,12 @@ def fd(val, kind, note="", ok=None, w="152px", tag=""):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">disabled — 초점이 건너뛴다</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--danger)">disabled — 값이 폼에 안 실린다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--accent)">readonly — 읽히고 복사되고 실린다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--accent)">aria-disabled — 눌리지만 안 먹는다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">왜 못 고치는지를 글로 적는다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">흐린 글자는 대비비가 모자라기 쉽다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">disabled면 초점이 건너뜀</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--danger)">disabled면 값이 폼에 안 실림</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--accent)">readonly는 읽히고 복사되고 실림</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--accent)">aria-disabled는 눌리지만 동작은 안 함</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">왜 못 고치는지를 글로 적음</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">흐린 글자는 대비비가 모자라기 쉬움</div>
                 </div>
               </div>'''
 
@@ -66,20 +66,20 @@ D = dict(
   axes=ax("비활성과 읽기 전용"),
   oneline="<b>값을 서버로 보내야 하면 <code>readonly</code>를 쓰세요.</b> <code>disabled</code>인 칸의 값은 폼을 보낼 때 빠집니다.",
   states=states([
-    (fd("모란상회", "on", "고칠 수 있다", True, "152px", "보통"), "보통", "값을 <b>고칠 수 있고 폼과 함께 보냅니다</b>"),
-    (fd("123-45-67890", "off", "값이 안 간다", False, "152px", "disabled"), "비활성", "폼을 보낼 때 값이 <b>빠집니다</b>"),
-    (fd("123-45-67890", "ro", "읽히고 복사되고 간다", True, "152px", "readonly"), "읽기 전용", "고칠 수는 없지만 <b>값은 서버로 갑니다</b>"),
-    (fd("저장", "btn-off", "왜 안 되는지 모른다", False, "152px", "disabled"), "비활성 단추", "왜 안 눌리는지 <b>이유를 알 수 없습니다</b>"),
-    (fd("저장", "btn-soft", "누르면 이유를 말해 준다", True, "152px", "aria-disabled"), "부드러운 비활성", "누르면 안 되는 <b>이유를 알려 줍니다</b>"),
-    (fd("123-45-67890", "faint", "대비비 2.1:1 — 안 보인다", False), "너무 흐림", "대비비가 모자라 <b>글자를 읽을 수 없습니다</b>"),
+    (fd("모란상회", "on", "고칠 수 있음", True, "152px", "보통"), "평소 상태", "값을 <b>고칠 수 있고 폼과 함께 보냅니다</b>"),
+    (fd("123-45-67890", "off", "값이 서버로 안 감", False, "152px", "disabled"), "비활성 칸", "폼을 보낼 때 값이 <b>빠집니다</b>"),
+    (fd("123-45-67890", "ro", "읽히고 복사되고 서버로 감", True, "152px", "readonly"), "읽기 전용 칸", "고칠 수는 없지만 <b>값은 서버로 갑니다</b>"),
+    (fd("저장", "btn-off", "왜 안 되는지 모름", False, "152px", "disabled"), "비활성 단추", "왜 안 눌리는지 <b>이유를 알 수 없습니다</b>"),
+    (fd("저장", "btn-soft", "누르면 이유를 알려 줌", True, "152px", "aria-disabled"), "부드러운 비활성 단추", "누르면 안 되는 <b>이유를 알려 줍니다</b>"),
+    (fd("123-45-67890", "faint", "대비비 2.1:1이라 안 보임", False), "너무 흐리게 그렸을 때", "대비비가 모자라 <b>글자를 읽을 수 없습니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
     ("disabled", "초점 건너뜀", "초점이 가지 않아 화면 낭독기로 <b>읽을 수 없습니다</b>"),
-    ("폼 전송", "안 실림", "값이 서버로 가지 않는 문제가 <b>대부분 여기서</b> 생깁니다"),
+    ("폼 전송", "값이 안 실림", "값이 서버로 가지 않는 문제가 <b>대부분 여기서</b> 생깁니다"),
     ("readonly", "읽힘 · 복사 · 전송", "못 고치게 할 때는 <b>대개 이 속성</b>이 맞습니다"),
-    ("aria-disabled", "눌림 · 안 먹음", "눌렀을 때 <b>이유를</b> 알려 줄 수 있습니다"),
-    ("이유", "글로", "'왜 안 되는지'를 글로 적어 둡니다"),
+    ("aria-disabled", "눌리지만 동작은 안 함", "눌렀을 때 <b>이유를</b> 알려 줄 수 있습니다"),
+    ("이유", "글로 적기", "'왜 안 되는지'를 글로 적어 둡니다"),
     ("대비", "흐린 글자", "흐리게 그리면 대비비가 4.5:1 <b>아래</b>로 떨어지기 쉽습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -101,11 +101,11 @@ D = dict(
     "<b>너무 흐리게</b> 두기. 칸에 무엇이 적혔는지 읽을 수 없습니다",
     "<b>권한 없음</b>을 알려야 할 자리에 비활성 쓰기",
   ]),
-  instead='권한이 없어서 안 되는 이유를 알려야 하면 <a href="permission.html">권한 없음</a>, 불러오기를 기다리는 중이면 <a href="skeleton.html">스켈레톤</a>, 조건이 갖춰져야 열리는 내용이면 <a href="accordion.html">아코디언</a>, 흐린 글자가 읽히는지 따지는 일은 <a href="contrast.html">명도 대비</a>.',
+  instead='권한이 없어서 안 된다는 이유를 알려야 하면 <a href="permission.html">권한 없음</a>을 보고, 불러오기를 기다리는 중이라면 칸을 끄지 말고 <a href="skeleton.html">스켈레톤</a>을 보여 줍니다. 조건이 갖춰져야 열리는 내용은 <a href="accordion.html">아코디언</a>으로 접어 둘 수 있고, 흐리게 그린 글자가 읽히는지는 <a href="contrast.html">명도 대비</a>에서 따져 봅니다.',
   cases=cases([
-    (fd("123-45-67890", "ro", "", True, "148px", "readonly"), "못 고치는 값", "고칠 수는 없어도 서버로 <b>보내야</b> 하는 값입니다"),
-    (fd("저장", "btn-soft", "", True, "148px", "aria-disabled"), "조건이 안 찬 단추", "누르면 아직 안 되는 <b>이유</b>를 알려 줍니다"),
-    (fd("예전 메뉴", "off", "", None, "148px", "disabled"), "정말 없는 선택지", "보낼 <b>값도 없으므로</b> <code>disabled</code>를 써도 됩니다"),
+    (fd("123-45-67890", "ro", "", True, "148px", "readonly"), "못 고치지만 보내야 하는 값", "고칠 수는 없어도 서버로 <b>보내야</b> 하는 값입니다"),
+    (fd("저장", "btn-soft", "", True, "148px", "aria-disabled"), "조건이 아직 갖춰지지 않은 단추", "누르면 아직 안 되는 <b>이유</b>를 알려 줍니다"),
+    (fd("예전 메뉴", "off", "", None, "148px", "disabled"), "더는 고를 수 없는 선택지", "보낼 <b>값도 없으므로</b> <code>disabled</code>를 써도 됩니다"),
   ]),
   code_lede="세 방법은 속성 이름만 다른 것이 아니라, 폼을 보낼 때 <b>값이 실리는지</b>도 다릅니다.",
   code='''<span class="c">&lt;!-- 값이 서버로 가야 하면 readonly --&gt;</span>
@@ -123,12 +123,12 @@ D = dict(
     ("<code>readonly</code>", "<b>초점이 갑니다</b>. 화면 낭독기로 읽히고 복사도 됩니다"),
     ("<code>aria-disabled</code>", "<b>초점이 가고 눌리기도</b> 하므로, 동작은 코드로 막고 이유를 띄웁니다"),
     ("<code>inert</code>", "한 영역 <b>전체</b>를 통째로 끕니다. 모달 뒤에 깔린 화면처럼 잠시 손대지 못하게 할 곳에 씁니다"),
-    ("확인하는 법", "Tab만으로 훑어보며 <b>못 고치는 칸의 값을 읽을 수 있는지</b> 확인합니다"),
+    ("확인하는 방법", "Tab만으로 훑어보며 <b>못 고치는 칸의 값을 읽을 수 있는지</b> 확인합니다"),
   ]),
   backend=rows([
-    ("폼 전송", "<code>disabled</code>인 칸은 <b>요청에 아예 들어가지 않습니다</b>. 그래서 서버는 '값을 보내지 않은 경우'와 '빈 값을 보낸 경우'를 구별해야 합니다."),
-    ("서버도 막기", "화면에서 못 고치게 했더라도 요청은 얼마든지 조작할 수 있으므로, <b>서버에서도</b> 그 칸의 값을 무시하거나 막습니다."),
-    ("이유를 내려 주기", "<code>{editable: false, reason: \"고객센터에서만 변경\"}</code>처럼 <b>왜 고칠 수 없는지</b>를 함께 내려 주면 화면에 그 이유를 적을 수 있습니다."),
+    ("disabled인 칸은 요청에서 빠짐", "<code>disabled</code>인 칸은 <b>요청에 아예 들어가지 않습니다</b>. 그래서 서버는 '값을 보내지 않은 경우'와 '빈 값을 보낸 경우'를 구별해야 합니다."),
+    ("서버에서도 값 바꾸기를 막기", "화면에서 못 고치게 했더라도 요청은 얼마든지 조작할 수 있으므로, <b>서버에서도</b> 그 칸의 값을 무시하거나 막습니다."),
+    ("고칠 수 없는 이유를 서버가 알려 주기", "<code>{editable: false, reason: \"고객센터에서만 변경\"}</code>처럼 <b>왜 고칠 수 없는지</b>를 함께 내려 주면 화면에 그 이유를 적을 수 있습니다."),
   ]),
   plat_lede="세 플랫폼 모두 <b>비활성</b> 상태는 있지만, <b>읽기 전용</b>을 다루는 방식은 플랫폼마다 다릅니다.",
   plats=plats([

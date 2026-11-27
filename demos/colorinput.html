@@ -19,7 +19,7 @@
 <body>
 <div class="bar">
   <b>색 고르기</b>
-  <label>고르는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>색을 고르는 방법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="preset" selected>정해 둔 색에서 고르기</option>
     <option value="free">아무 색이나 고르기</option>
   </select></label>
@@ -34,7 +34,7 @@
       <input type="color" id="pick" value="#1f6feb" style="width:34px;height:32px;padding:0;border:1px solid var(--line);border-radius:var(--r1);background:var(--surface)" aria-label="색 고르기">
     </div>
     <div class="clr__pre" id="pre"></div>
-    <div class="prev" id="prev">이 색 위의 흰 글자 — 버튼에 쓰면 이렇게 보입니다</div>
+    <div class="prev" id="prev">이 색을 버튼에 쓰면 흰 글자가 이렇게 보입니다</div>
   </div>
   <p class="ruler" id="read"></p>
   <p class="ruler" id="log"></p>
@@ -90,12 +90,12 @@
 
     var choices = k === 'preset' ? PRESET.length : 16777216;
     var rd = document.getElementById('read');
-    rd.innerHTML = '고른 색 <b>' + hex + '</b>' + (ok ? '' : ' <span class="warn">— 색 코드로 읽지 못했습니다</span>') +
-      '<br>흰 글자 대비비 <b>' + cr.toFixed(2) + ':1</b>' +
-      (pass ? ' — 통과' : ' <span class="warn">— 4.5:1 미달</span>') +
-      (guard && !pass ? ' · <span class="warn">막았습니다</span>' : '') +
-      '<br>고를 수 있는 가짓수 <b>' + (k === 'preset' ? choices + '가지' : '1,600만 가지') + '</b>' +
-      (k === 'free' ? ' <span class="warn">— 쓸 수 없는 색이 훨씬 많습니다</span>' : '') +
+    rd.innerHTML = '고른 색 <b>' + hex + '</b>' + (ok ? '' : ' <span class="warn">색 코드로 읽지 못했습니다</span>') +
+      '<br>흰 글자를 올렸을 때 대비비 <b>' + cr.toFixed(2) + ':1</b>' +
+      (pass ? '로 4.5:1 기준을 통과합니다' : ' <span class="warn">4.5:1 기준에 미달합니다</span>') +
+      (guard && !pass ? ' · <span class="warn">그래서 고르지 못하게 막았습니다</span>' : '') +
+      '<br>고를 수 있는 색 <b>' + (k === 'preset' ? choices + '가지' : '1,600만 가지') + '</b>' +
+      (k === 'free' ? ' <span class="warn">이 가운데 쓸 수 없는 색이 훨씬 많습니다</span>' : '') +
       (why ? '<br>' + why : '');
     rd.dataset.hex = hex;
     rd.dataset.cr = cr.toFixed(2);

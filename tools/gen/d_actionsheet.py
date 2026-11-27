@@ -26,12 +26,12 @@ def sheet(items, label, note="", ok=None, w="152px", sep=True, cancel=True):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">가림막 — 뒤를 막는다</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">아래에서 올라온다 — 손가락이 닿는 자리</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">무엇에 대한 일인지 — 제목이나 파일 이름</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">위험한 항목은 빨갛게 · 맨 아래에</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--accent)">취소는 한 칸 떼어 둔다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">절반을 넘게 덮으면 화면 한 장이 낫다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">가림막이 뒤 화면을 막음</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">손가락이 닿는 아래쪽에서 올라옴</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">제목이나 파일 이름으로 대상을 밝힘</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">위험한 항목은 빨간 글자로 맨 아래에</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--accent)">취소는 한 칸 떼어 둠</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">절반을 넘게 덮으면 화면 한 장으로 만듦</div>
                 </div>
               </div>'''
 
@@ -62,32 +62,32 @@ D = dict(
   axes=axis_table("액션 시트"),
   oneline="액션 시트에는 <b>동작을 셋에서 다섯 개 두는 것이 알맞습니다.</b> 그보다 많으면 시트가 화면을 너무 많이 덮기 때문에 화면 한 장으로 만듭니다.",
   states=states([
-    (sheet([("영수증 다시 보내기", False), ("이름 바꾸기", False), ("지우기", True)], "", "셋 — 알맞다", True),
-     "알맞은 수", "<b>셋에서 다섯</b>"),
+    (sheet([("영수증 다시 보내기", False), ("이름 바꾸기", False), ("지우기", True)], "", "셋이면 알맞음", True),
+     "동작 수가 알맞을 때", "<b>셋에서 다섯 개</b>가 알맞습니다"),
     (sheet([("열기", False), ("이름 바꾸기", False), ("복사", False), ("보관", False),
-            ("공유", False), ("지우기", True)], "", "절반을 넘게 덮는다", False),
-     "너무 많음", "<b>화면 한 장</b>으로 만드는 편이 낫습니다"),
-    (sheet([("영수증 다시 보내기", False), ("지우기", True)], "", "위험한 것이 맨 아래", True),
-     "위험한 항목", "<b>빨갛게 · 맨 아래</b>"),
-    (sheet([("영수증 다시 보내기", False), ("지우기", True)], "", "취소가 목록에 붙었다", False, "152px", False),
-     "취소가 붙음", "취소를 <b>실수로 누르기 쉽습니다</b>"),
+            ("공유", False), ("지우기", True)], "", "화면 절반을 넘게 덮음", False),
+     "동작이 너무 많을 때", "<b>화면 한 장</b>으로 만드는 편이 낫습니다"),
+    (sheet([("영수증 다시 보내기", False), ("지우기", True)], "", "위험한 항목이 맨 아래", True),
+     "위험한 항목을 둘 자리", "<b>빨간 글자로 맨 아래</b>에 둡니다"),
+    (sheet([("영수증 다시 보내기", False), ("지우기", True)], "", "취소가 목록에 붙어 있음", False, "152px", False),
+     "취소가 목록에 붙어 있을 때", "취소를 <b>실수로 누르기 쉽습니다</b>"),
     (one(txt('<span style="display:block;font-size:8.5px">정말 지울까요?</span>'
              '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:3px">취소 · 지우기</span>'),
-         "되묻기", None, "되돌릴 수 없으면 한 번 더", "152px"),
-     "되돌릴 수 없는 일", "<b>한 번 더</b> 묻습니다"),
-    (one(txt('<span style="display:block;font-size:8.5px;color:var(--fg-muted)">가림막을 눌렀다</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">아무 일도 안 일어난다</span>'),
-         "닫기", True, "가림막·Esc·취소 — 셋 다 닫는다", "152px"),
-     "닫기", "가림막, Esc, 취소 세 가지로 <b>닫을 수 있습니다</b>"),
+         "되묻기", None, "되돌릴 수 없으면 한 번 더 물음", "152px"),
+     "되돌릴 수 없는 일을 고를 때", "<b>한 번 더</b> 묻습니다"),
+    (one(txt('<span style="display:block;font-size:8.5px;color:var(--fg-muted)">가림막을 누름</span>'
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">아무 일도 일어나지 않음</span>'),
+         "닫기", True, "가림막·Esc·취소 모두로 닫음", "152px"),
+     "시트를 닫는 방법", "가림막, Esc, 취소 세 가지로 <b>닫을 수 있습니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("가림막", "뒤를 막음", "시트 뒤의 화면은 <b>누를 수 없습니다</b>"),
-    ("아래에서", "손 가까이", "폰을 쥔 손의 <b>엄지</b>가 닿는 자리입니다"),
-    ("제목", "무엇에 대한 일", "파일 이름이나 한 줄 설명을 적습니다"),
-    ("위험한 항목", "빨갛게·맨 아래", "손가락이 <b>먼저 닿지 않는</b> 자리에 둡니다"),
-    ("취소", "떼어 둠", "목록과 한 칸 띄워 둡니다"),
-    ("크기", "절반까지", "화면 절반을 넘으면 <b>화면 한 장</b>으로 만듭니다"),
+    ("가림막", "뒤 화면을 막음", "시트 뒤의 화면은 <b>누를 수 없습니다</b>"),
+    ("올라오는 위치", "엄지가 닿는 아래쪽", "폰을 쥔 손의 <b>엄지</b>가 닿는 자리입니다"),
+    ("제목", "무엇에 대한 일인지", "파일 이름이나 한 줄 설명을 적습니다"),
+    ("위험한 항목", "빨간 글자로 맨 아래", "손가락이 <b>먼저 닿지 않는</b> 자리에 둡니다"),
+    ("취소", "목록과 떼어 둠", "목록과 한 칸 띄워 둡니다"),
+    ("크기", "화면 절반까지", "화면 절반을 넘으면 <b>화면 한 장</b>으로 만듭니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           위험한 항목을 <b>맨 아래</b>에 두는 것은 iOS 지침이 정해 둔 규칙입니다.
@@ -98,6 +98,8 @@ D = dict(
           <b>모달 바텀시트</b> 안에 목록을 넣어 같은 역할을 하게 합니다.
           안드로이드 쪽에는 위험한 항목을 맨 아래에 두는 규칙이 없어서,
           두 플랫폼을 함께 만들 때는 항목 <b>차례가 서로 달라질 수 있습니다</b>.</p>''',
+  do_title="액션 시트를 알맞게 쓰는 경우",
+  dont_title="액션 시트를 잘못 쓰는 경우",
   do=ul([
     "동작이 <b>셋에서 다섯</b> 개일 때",
     "위험한 항목을 <b>빨갛게, 맨 아래</b>에 둘 때",
@@ -112,11 +114,11 @@ D = dict(
   instead='동작 목록이 아닌 다른 내용을 담으려면 <a href="sheet.html">바텀시트</a>, 단추 옆에 붙여 띄우려면 <a href="menu.html">드롭다운 메뉴</a>, 묻고 답을 받으려면 <a href="dialog.html">다이얼로그</a>, 누른 자리에 띄우려면 <a href="contextmenu.html">컨텍스트 메뉴</a>를 씁니다.',
   cases=cases([
     (sheet([("영수증 보내기", False), ("이름 바꾸기", False), ("지우기", True)], "", "", True),
-     "파일 하나", "액션 시트를 <b>가장 흔하게</b> 쓰는 자리입니다"),
+     "파일 하나에 할 일 고르기", "액션 시트를 <b>가장 흔하게</b> 쓰는 자리입니다"),
     (sheet([("사진 찍기", False), ("앨범에서 고르기", False)], "", "", True),
-     "사진 올리기", "고를 수 있는 방법이 둘뿐일 때도 씁니다"),
+     "사진을 올릴 방법 고르기", "고를 수 있는 방법이 둘뿐일 때도 씁니다"),
     (sheet([("카드로", False), ("계좌이체로", False), ("간편결제로", False)], "", "", True),
-     "결제 수단", "동작뿐 아니라 <b>값을 고를 때</b>도 씁니다"),
+     "결제 수단 고르기", "동작뿐 아니라 <b>값을 고를 때</b>도 씁니다"),
   ]),
   code_lede="구조는 바텀시트와 같고, 안에 동작 목록이 들어간다는 점만 다릅니다.",
   code='''&lt;<span class="t">div</span> <span class="a">class</span>=<span class="s">"scrim"</span>&gt;&lt;/<span class="t">div</span>&gt;
@@ -137,12 +139,12 @@ D = dict(
     ("Tab", "포커스가 시트 안에서만 돌고 <b>뒤 화면으로 나가지 않습니다</b>"),
     ("<code>aria-modal=\"true\"</code>", "시트 뒤의 화면은 <b>읽지 않는다</b>고 스크린 리더에 알립니다"),
     ("<code>aria-label</code>", "<b>무엇에 대한</b> 시트인지 적습니다"),
-    ("초점", "열면 <b>첫 항목</b>으로, 닫으면 시트를 <b>부른 자리</b>로 옮깁니다"),
-    ("세이프 에어리어", "맨 아래 취소 버튼이 <b>홈 바에 가리지 않게</b> 띄웁니다"),
+    ("열고 닫을 때의 초점", "열면 <b>첫 항목</b>으로, 닫으면 시트를 <b>부른 자리</b>로 옮깁니다"),
+    ("화면 아래 세이프 에어리어", "맨 아래 취소 버튼이 <b>홈 바에 가리지 않게</b> 띄웁니다"),
   ]),
   backend=rows([
-    ("할 수 있는 일이 다르다", "줄마다 권한이 다르면 <code>can_delete</code> 같은 값을 보고 할 수 없는 <b>항목은 목록에서 뺍니다</b>. 흐리게 남겨 두지 않습니다."),
-    ("되돌릴 수 있나", "지운 것을 <a href=\"undo.html\">되돌리기</a>로 무를 수 있는지에 따라 <b>한 번 더 물을지</b>가 정해집니다."),
+    ("줄마다 할 수 있는 일이 다름", "줄마다 권한이 다르면 <code>can_delete</code> 같은 값을 보고 할 수 없는 <b>항목은 목록에서 뺍니다</b>. 흐리게 남겨 두지 않습니다."),
+    ("되돌릴 수 있는지에 따라 달라지는 확인", "지운 것을 <a href=\"undo.html\">되돌리기</a>로 무를 수 있는지에 따라 <b>한 번 더 물을지</b>가 정해집니다."),
   ]),
   plat_lede="액션 시트는 <b>iOS에서 온 부품</b>이라서 iOS 지침의 규칙이 가장 자세합니다.",
   plats=plats([

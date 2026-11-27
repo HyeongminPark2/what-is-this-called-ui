@@ -32,12 +32,12 @@ def hist(items, cur, w="152px", note="", ok=None):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">뒤로(기록) — history.back(), 들어온 길로</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">위로(상위) — 늘 부모 화면으로</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--danger)">링크로 바로 들어오면 기록에 앞이 없다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">이름을 적는다 — '‹ 주문 목록'</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">&lt;a href&gt; 로 둔다 — 새 탭으로도 열린다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">닫기와 섞지 않는다 — 뜻이 다르다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">뒤로(기록)는 history.back()으로 왔던 길로</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">위로(상위)는 늘 부모 화면으로 감</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--danger)">링크로 바로 들어오면 기록에 앞 화면이 없음</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">'‹ 주문 목록'처럼 이름을 적음</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">&lt;a href&gt;로 두면 새 탭으로도 열림</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">뜻이 다른 닫기와 섞지 않음</div>
                 </div>
               </div>'''
 
@@ -70,26 +70,26 @@ D = dict(
   axes=ax("뒤로가기"),
   oneline="<b>단추 하나에는 동작 하나만 맡기세요.</b> '뒤로'라고 적었으면 방문 기록대로 돌아가고, '목록으로'라고 적었으면 늘 목록으로 가야 합니다.",
   states=states([
-    (bar("주문 목록", "주문 상세", "목록에서 눌러 들어왔다", True),
-     "목록에서", "목록에서 들어왔으면 뒤로와 위로가 <b>같은 곳으로 갑니다</b>"),
-    (bar("검색 결과", "주문 상세", "검색에서 눌러 들어왔다"),
-     "검색에서", "검색에서 들어왔으면 뒤로는 <b>검색 결과</b>로 갑니다"),
-    (bar("", "주문 상세", "기록에 앞 화면이 없다", False, "152px", True),
-     "링크로 바로", "방문 기록에 앞 화면이 없어서 뒤로는 <b>갈 곳이 없습니다</b>"),
+    (bar("주문 목록", "주문 상세", "목록에서 눌러 들어옴", True),
+     "목록에서 들어왔을 때", "목록에서 들어왔으면 뒤로와 위로가 <b>같은 곳으로 갑니다</b>"),
+    (bar("검색 결과", "주문 상세", "검색에서 눌러 들어옴"),
+     "검색에서 들어왔을 때", "검색에서 들어왔으면 뒤로는 <b>검색 결과</b>로 갑니다"),
+    (bar("", "주문 상세", "기록에 앞 화면이 없음", False, "152px", True),
+     "링크로 바로 들어왔을 때", "방문 기록에 앞 화면이 없어서 뒤로는 <b>갈 곳이 없습니다</b>"),
     (bar("주문 목록", "주문 상세", "기록과 상관없이 상위로", True),
-     "위로", "어디서 들어왔든 <b>늘 같은 곳</b>으로 갑니다"),
+     "위로 단추를 둘 때", "어디서 들어왔든 <b>늘 같은 곳</b>으로 갑니다"),
     (hist(["홈", "주문 목록", "주문 상세"], 2, "152px", "기록 세 칸", True),
-     "기록", "뒤로는 <b>이 방문 기록</b>을 한 칸씩 되돌립니다"),
-    (hist(["주문 상세"], 0, "152px", "기록 한 칸 — 되감을 것이 없다", False),
-     "기록 한 칸", "링크나 새 탭으로 들어오면 기록이 한 칸뿐입니다"),
+     "방문 기록이 쌓인 모습", "뒤로는 <b>이 방문 기록</b>을 한 칸씩 되돌립니다"),
+    (hist(["주문 상세"], 0, "152px", "기록이 한 칸뿐이라 돌아갈 곳 없음", False),
+     "기록이 한 칸뿐일 때", "링크나 새 탭으로 들어오면 기록이 한 칸뿐입니다"),
   ]),
   anat=ANAT,
   pins=pins([
     ("뒤로(기록)", "<code>history.back()</code>", "<b>들어온 길</b>을 따라 되돌아갑니다"),
     ("위로(상위)", "부모 화면", "어디서 들어왔든 <b>늘 같은 곳</b>으로 갑니다"),
     ("기록이 빈 경우", "링크로 들어옴", "뒤로를 눌러도 <b>갈 곳이 없습니다</b>"),
-    ("이름을 적는다", "'‹ 주문 목록'", "누르기 전에 어디로 가는지 <b>미리</b> 알려 줍니다"),
-    ("<code>&lt;a href&gt;</code>", "링크로", "새 탭으로 열기와 마우스 가운데 버튼 클릭을 <b>따로 구현하지 않아도</b> 그대로 쓸 수 있습니다"),
+    ("이름 적기", "'‹ 주문 목록'", "누르기 전에 어디로 가는지 <b>미리</b> 알려 줍니다"),
+    ("<code>&lt;a href&gt;</code>", "링크로 두기", "새 탭으로 열기와 마우스 가운데 버튼 클릭을 <b>따로 구현하지 않아도</b> 그대로 쓸 수 있습니다"),
     ("닫기와 구별", "뜻이 다름", "두 동작을 <b>섞어 쓰면</b> 사용자는 어느 단추가 무엇을 할지 예측할 수 없습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -111,15 +111,15 @@ D = dict(
     "닫기 자리에 뒤로를 둘 때. 사용자는 누르면 <b>모달만 사라질 거라고</b> 생각합니다",
     "폰에서 <b>시스템 백과 다른 곳</b>으로 보낼 때",
   ]),
-  instead='OS 쪽 동작은 <a href="systemback.html">시스템 백</a>, 계층 전체를 보이려면 <a href="breadcrumb.html">브레드크럼</a>, 부품만 치우는 것은 <a href="modal.html">모달</a>의 닫기, 되돌리기는 <a href="destructive.html">위험한 동작</a>.',
+  instead='OS가 처리하는 뒤로 동작은 <a href="systemback.html">시스템 백</a> 항목에서 다루고, 계층 전체를 보여 주려면 <a href="breadcrumb.html">브레드크럼</a>을 씁니다. 위에 뜬 부품만 치우려면 <a href="modal.html">모달</a>의 닫기 단추를 두고, 하던 일을 되돌리는 방법은 <a href="destructive.html">위험한 동작</a> 항목에서 다룹니다.',
   cases=cases([
-    (bar("주문 목록", "주문 상세", "", True), "상세 화면", "돌아갈 화면의 <b>이름을 적습니다</b>"),
-    (bar("설정", "알림 설정", "", True), "설정 하위", "계층이 뚜렷하면 <b>위로</b>를 씁니다"),
+    (bar("주문 목록", "주문 상세", "", True), "상세 화면에서 목록으로 돌아가기", "돌아갈 화면의 <b>이름을 적습니다</b>"),
+    (bar("설정", "알림 설정", "", True), "설정 하위 화면에서 위로 가기", "계층이 뚜렷하면 <b>위로</b>를 씁니다"),
     (one(txt('<span style="display:flex;align-items:center;gap:5px;font-size:8.5px">'
              '<span style="color:var(--fg-muted)">✕</span><span style="font-weight:700">새 주문</span></span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:4px">덮고 올라온 화면은 닫기다</span>'),
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:4px">덮고 올라온 화면에는 닫기</span>'),
          "닫기", True, "", "150px"),
-     "덮고 올라온 화면", "아래 화면을 덮고 올라온 화면에는 뒤로가 아니라 <b>닫기</b>를 둡니다"),
+     "덮고 올라온 화면 닫기", "아래 화면을 덮고 올라온 화면에는 뒤로가 아니라 <b>닫기</b>를 둡니다"),
   ]),
   code_lede="대부분은 링크로 두는 것이 맞습니다. <code>history.back()</code>으로 방문 기록을 쓸 때만 기록이 빈 경우를 따로 처리합니다.",
   code='''<span class="c">&lt;!-- 대부분 이 방식이 맞다. 새 탭으로도 열리고, 기록이 비어도 간다 --&gt;</span>
@@ -139,12 +139,12 @@ D = dict(
     ("<code>aria-hidden</code>", "‹ 같은 기호는 읽지 않게 하고 <b>'주문 목록'</b>만 읽게 합니다"),
     ("Esc", "뒤로가 아니라 <b>닫기</b> 동작에 연결합니다"),
     ("<code>rel=\"up\"</code>", "링크의 뜻을 적어 두는 표시일 뿐이라서 <b>동작은 바뀌지 않습니다</b>"),
-    ("확인하는 법", "새 탭에서 상세 화면 주소를 <b>직접 연 뒤</b> 단추를 눌러 봅니다"),
+    ("제대로 됐는지 확인하는 방법", "새 탭에서 상세 화면 주소를 <b>직접 연 뒤</b> 단추를 눌러 봅니다"),
   ]),
   backend=rows([
-    ("상위 주소를 같이", "응답에 <code>parent_url</code>이나 <code>category_id</code>가 있으면 화면이 <b>위로</b> 단추를 만들 수 있습니다. 이 값이 없으면 화면이 상위 화면을 짐작해야 합니다."),
-    ("들어온 길", "주소에 <code>?from=search</code> 같은 표시를 붙여 두면 <b>돌아갈 곳</b>을 정확히 알 수 있습니다. 다만 그만큼 주소가 길고 복잡해집니다."),
-    ("목록 상태", "목록으로 되돌아갈 때 <b>쪽 번호와 필터, 스크롤 위치</b>를 되살리려면 이 상태가 주소에 들어 있어야 합니다."),
+    ("상위 주소를 응답에 함께 담기", "응답에 <code>parent_url</code>이나 <code>category_id</code>가 있으면 화면이 <b>위로</b> 단추를 만들 수 있습니다. 이 값이 없으면 화면이 상위 화면을 짐작해야 합니다."),
+    ("들어온 길을 주소에 남기기", "주소에 <code>?from=search</code> 같은 표시를 붙여 두면 <b>돌아갈 곳</b>을 정확히 알 수 있습니다. 다만 그만큼 주소가 길고 복잡해집니다."),
+    ("돌아갈 목록의 상태 되살리기", "목록으로 되돌아갈 때 <b>쪽 번호와 필터, 스크롤 위치</b>를 되살리려면 이 상태가 주소에 들어 있어야 합니다."),
   ]),
   plat_lede="이 항목은 <b>안드로이드가 뒤로와 위로를 나눠</b> 둔 데서 출발합니다.",
   plats=plats([
@@ -156,7 +156,7 @@ D = dict(
                 <div style="position:absolute;left:4px;top:24px;font-size:6px;color:var(--accent)">‹ 주문</div>
                 <div style="position:absolute;left:5px;right:5px;top:36px;height:8px;border-radius:2px;background:var(--accent-soft)"></div></div></div>''',
      "왼쪽 위 ‹ 옆에 <b>앞 화면 이름</b>이 붙습니다. 화면 왼쪽 가장자리에서 밀어도 같은 동작을 합니다."),
-    ("안드로이드", "Up ← + 시스템 백",
+    ("안드로이드", "Up ←와 시스템 백",
      '''              <div class="phone" role="img" aria-label="안드로이드 위로 단추 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:4px;top:24px;font-size:7px;color:var(--fg)">←</div>
                 <div style="position:absolute;left:5px;right:5px;top:36px;height:8px;border-radius:2px;background:var(--accent-soft)"></div></div></div>''',

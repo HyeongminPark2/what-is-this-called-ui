@@ -20,12 +20,12 @@ def q(v, label, note="", ok=None, w="152px", minus=True, plus=True, size=22, ro=
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">− · ＋ — 한두 번 고칠 때 빠르다</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">가운데 칸 — 쳐서도 넣을 수 있어야 한다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--danger)">1에서 − · 최대에서 ＋ 는 꺼져 있다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">단추는 44px — 손가락이 닿아야 한다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">값이 바뀌면 소리로도 알린다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">0 으로 내리면 빼기인가 — 미리 정한다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">− · ＋는 한두 번 고칠 때 빠름</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">가운데 칸에는 쳐서도 넣을 수 있어야 함</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--danger)">1에서 −, 최대에서 ＋는 꺼 둠</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">단추는 손가락에 맞게 44px 이상</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">값이 바뀌면 소리로도 알림</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">0으로 내리면 빼는지 미리 정해 둠</div>
                 </div>
               </div>'''
 
@@ -54,21 +54,21 @@ D = dict(
   axes=ax("수량 스테퍼"),
   oneline="<b>가운데 칸을 잠그지 마세요.</b> 단추로는 하나씩만 바뀌기 때문에, 큰 수를 넣으려면 가운데 칸에 쳐서 넣는 수밖에 없습니다.",
   states=states([
-    (q("1", "", "1에서 − 는 꺼져 있다", True, "152px", False, True), "최소값", "더 줄일 수 없으므로 <b>−가 꺼집니다</b>"),
-    (q("3", "", "둘 다 눌린다", True), "보통", "두 단추가 모두 눌리고, 가운데 칸에도 <b>쳐서 넣을 수 있습니다</b>"),
-    (q("99", "", "최대에서 ＋ 가 꺼진다", True, "152px", True, False), "최대값", "더 늘릴 수 없으므로 <b>＋가 꺼집니다</b>"),
-    (q("24", "", "칸이 잠겨 있다", False, "152px", True, True, 22, True), "칸이 잠김", "단추로만 고쳐야 해서 <b>큰 수를 넣기 어렵습니다</b>"),
-    (q("3", "", "단추가 24px — 손가락이 안 닿는다", False, "152px", True, True, 13), "작은 단추", "<b>44px에 못 미쳐서</b> 손가락으로 누르기 어렵습니다"),
-    (q("0", "", "0 이면 빼는 것인가", None, "152px", False, True), "0 으로", "0이 빼기를 뜻하는지 <b>미리 정해</b> 둡니다"),
+    (q("1", "", "1에서는 −가 꺼짐", True, "152px", False, True), "최소값에 닿았을 때", "더 줄일 수 없으므로 <b>−가 꺼집니다</b>"),
+    (q("3", "", "두 단추가 모두 눌림", True), "평소 상태", "두 단추가 모두 눌리고, 가운데 칸에도 <b>쳐서 넣을 수 있습니다</b>"),
+    (q("99", "", "최대에서는 ＋가 꺼짐", True, "152px", True, False), "최대값에 닿았을 때", "더 늘릴 수 없으므로 <b>＋가 꺼집니다</b>"),
+    (q("24", "", "가운데 칸이 잠김", False, "152px", True, True, 22, True), "가운데 칸을 잠갔을 때", "단추로만 고쳐야 해서 <b>큰 수를 넣기 어렵습니다</b>"),
+    (q("3", "", "단추가 24px라 누르기 어려움", False, "152px", True, True, 13), "단추가 너무 작을 때", "<b>44px에 못 미쳐서</b> 손가락으로 누르기 어렵습니다"),
+    (q("0", "", "0이면 빼는 것인지 정해 둠", None, "152px", False, True), "0으로 내렸을 때", "0이 빼기를 뜻하는지 <b>미리 정해</b> 둡니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("− · ＋", "한두 번", "한두 번 고칠 때 씁니다. 그보다 많이 바꿀 때는 <b>쳐서 넣는 편이</b> 빠릅니다"),
-    ("가운데 칸", "쳐서 넣기", "큰 수를 넣을 수 있도록 <b>잠그지 않습니다</b>"),
-    ("끝값", "꺼짐", "1에서는 −를, 최대에서는 ＋를 끕니다"),
-    ("크기", "44px", "손가락으로 정확히 누를 수 있도록 44px 이상으로 둡니다"),
-    ("소리", "값 바뀜 알림", "<code>aria-live</code>나 <code>role=\"status\"</code>로 바뀐 값을 읽어 줍니다"),
-    ("0", "빼기인가", "0으로 내렸을 때 어떻게 할지 <b>미리 정합니다</b>"),
+    ("− · ＋", "한두 번 고칠 때", "한두 번 고칠 때 씁니다. 그보다 많이 바꿀 때는 <b>쳐서 넣는 편이</b> 빠릅니다"),
+    ("가운데 칸", "쳐서 넣는 자리", "큰 수를 넣을 수 있도록 <b>잠그지 않습니다</b>"),
+    ("끝값", "단추 끄기", "1에서는 −를, 최대에서는 ＋를 끕니다"),
+    ("크기", "44px 이상", "손가락으로 정확히 누를 수 있도록 44px 이상으로 둡니다"),
+    ("소리", "바뀐 값 알리기", "<code>aria-live</code>나 <code>role=\"status\"</code>로 바뀐 값을 읽어 줍니다"),
+    ("0", "빼기인지 정하기", "0으로 내렸을 때 어떻게 할지 <b>미리 정합니다</b>"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <b>0으로 내렸을 때</b> 어떻게 할지 정해 두지 않으면 사용자가 원하지 않은 결과가 생깁니다.
@@ -90,11 +90,11 @@ D = dict(
     "0이 되었을 때 <b>안내 없이</b> 상품을 빼기",
     "단추를 <b>작게</b> 만들기. 손가락으로 정확히 누르기 어렵습니다",
   ]),
-  instead='단추 없이 칸만 두려면 <a href="numberinput.html">숫자 입력</a>, 범위 안에서 고르면 <a href="slider.html">슬라이더</a>, 흐름의 단계를 보여 주려면 <a href="stepper.html">스테퍼</a>, 단추 크기 규칙은 <a href="touchtarget.html">터치 타깃</a>.',
+  instead='−·＋ 단추 없이 칸만 두려면 <a href="numberinput.html">숫자 입력</a>을 쓰고, 정해진 범위 안에서 값을 고르게 하려면 <a href="slider.html">슬라이더</a>를 씁니다. 수가 아니라 흐름의 단계를 보여 주려는 것이라면 <a href="stepper.html">스테퍼</a>가 맞습니다. 단추 크기를 얼마로 잡을지는 <a href="touchtarget.html">터치 타깃</a>에서 다룹니다.',
   cases=cases([
-    (q("2", "", "", True, "150px"), "장바구니", "수량을 <b>한두 번</b>만 고치는 경우가 많습니다"),
-    (q("1", "", "", True, "150px", False, True), "인원수", "최소값을 1명으로 두고 1에서는 −를 끕니다"),
-    (q("12", "", "", True, "150px"), "묶음 수량", "큰 수는 가운데 칸에 <b>쳐서</b> 넣습니다"),
+    (q("2", "", "", True, "150px"), "장바구니 수량 고치기", "수량을 <b>한두 번</b>만 고치는 경우가 많습니다"),
+    (q("1", "", "", True, "150px", False, True), "예약 인원수 고르기", "최소값을 1명으로 두고 1에서는 −를 끕니다"),
+    (q("12", "", "", True, "150px"), "묶음 수량 넣기", "큰 수는 가운데 칸에 <b>쳐서</b> 넣습니다"),
   ]),
   code_lede="입력 칸 하나와 단추 두 개로 만듭니다. 끝값에서는 단추를 <code>aria-disabled</code>로 두고 왜 안 눌리는지 알려 줍니다.",
   code='''&lt;<span class="t">div</span> <span class="a">class</span>=<span class="s">"qty"</span>&gt;
@@ -113,16 +113,16 @@ D = dict(
     ("<code>aria-label</code>", "−와 ＋ 단추가 <b>무엇을 하는지</b> 적습니다"),
     ("<code>role=\"status\"</code>", "바뀐 값을 <b>소리로</b> 알립니다"),
     ("<code>aria-disabled</code>", "<code>disabled</code>와 달리 <b>초점을 받기</b> 때문에 이유를 알려 줄 수 있습니다"),
-    ("확인하는 법", "화면을 끄고 ＋를 눌러 <b>바뀐 값이 들리는지</b> 확인합니다"),
+    ("확인하는 방법", "화면을 끄고 ＋를 눌러 <b>바뀐 값이 들리는지</b> 확인합니다"),
   ]),
   backend=rows([
-    ("최대 수량", "재고나 구매 한도가 있으면 서버가 최대 수량을 내려 줘야 화면이 끝값에서 <b>＋를 끌 수</b> 있습니다."),
-    ("0 의 뜻", "수량 0이 '빼기'인지 '0개 주문'인지 <b>API에서 정해</b> 두어야 화면도 그 뜻에 맞춰 동작할 수 있습니다."),
-    ("빠른 연타", "＋를 연달아 누를 때마다 요청을 보내면 서버로 요청이 몰립니다. 그래서 <b>디바운스</b>를 두거나 마지막 값만 보냅니다."),
+    ("최대 수량을 서버가 알려 주기", "재고나 구매 한도가 있으면 서버가 최대 수량을 내려 줘야 화면이 끝값에서 <b>＋를 끌 수</b> 있습니다."),
+    ("수량 0의 뜻을 API에서 정하기", "수량 0이 '빼기'인지 '0개 주문'인지 <b>API에서 정해</b> 두어야 화면도 그 뜻에 맞춰 동작할 수 있습니다."),
+    ("＋를 빠르게 연달아 누를 때", "＋를 연달아 누를 때마다 요청을 보내면 서버로 요청이 몰립니다. 그래서 <b>디바운스</b>를 두거나 마지막 값만 보냅니다."),
   ]),
   plat_lede="어느 플랫폼에서나 단추를 <b>작게 만들고 싶어지는</b> 부품이라서 크기를 따로 챙겨야 합니다.",
   plats=plats([
-    ("웹", "직접 만듦",
+    ("웹", "직접 만들어 씀",
      q("2", "", "", True, "110px"),
      "<code>type=\"number\"</code>에 붙는 화살표는 <b>너무 작아서</b> 보통 직접 만듭니다."),
     ("iOS", "Stepper",
@@ -130,7 +130,7 @@ D = dict(
                 <div style="position:absolute;left:5px;top:28px;font-size:6px">수량</div>
                 <div style="position:absolute;right:5px;top:26px;width:26px;height:11px;border-radius:4px;background:var(--bg);border:1px solid var(--line)"></div></div></div>''',
      "정식 부품이 있습니다. 다만 <b>입력 칸이 없어서</b> 큰 수를 넣는 데는 맞지 않습니다."),
-    ("안드로이드", "직접 만듦",
+    ("안드로이드", "직접 만들어 씀",
      '''              <div class="phone" role="img" aria-label="안드로이드 수량 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;top:26px;width:34px;height:12px;border-radius:4px;border:1px solid var(--line)"></div></div></div>''',
      "지침에 정해진 부품이 없어서 생김새가 <b>앱마다 다릅니다</b>. 단추 크기만은 48dp를 지킵니다."),

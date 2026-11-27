@@ -34,14 +34,14 @@
 
 <div class="pad">
   <div class="screen" id="screen"></div>
-  <p class="ruler">기록 <span id="histline"></span></p>
+  <p class="ruler">뒤로가기 기록에 쌓인 화면 <span id="histline"></span></p>
   <p class="ruler" id="log"></p>
 </div>
 
 <p class="hint">
   폰에는 <b>OS가 제공하는 뒤로가기</b>가 있습니다. 안드로이드는 버튼이나 제스처, 아이폰은 가장자리 쓸기,
   웹은 브라우저의 ← 버튼이 뒤로가기 역할을 하고, 사용자는 <b>이 뒤로가기로 모달도 닫으려고 합니다.</b><br>
-  <b>기록에 넣기</b>를 끄고 시트를 연 뒤 뒤로를 눌러 보세요. 시트는 그대로 남고
+  <b>모달을 뒤로가기 기록에 넣기</b>를 끄고 시트를 연 뒤 ← 뒤로를 눌러 보세요. 시트는 그대로 남고
   <b>그 아래 앱 화면이 통째로 뒤로 갑니다.</b> 사용자가 쓰던 화면을 잃게 되므로, 사용자가 가장 싫어하는 실수입니다.
 </p>
 
@@ -56,7 +56,7 @@
 
   function draw() {
     if (left) {
-      screen.innerHTML = '<div class="exit">앱을 나갔습니다<br><span style="font-size:11px;opacity:.7">쓰던 화면을 잃었다</span></div>';
+      screen.innerHTML = '<div class="exit">앱을 나갔습니다<br><span style="font-size:11px;opacity:.7">쓰던 화면을 잃었습니다</span></div>';
     } else {
       var h = '';
       if (has('목록')) h += '<div class="layer l1"><h4>정산 목록</h4><p>128건</p></div>';
@@ -66,12 +66,12 @@
     }
     var hist = left ? [] : layers.filter(function (l) { return l.inHistory; });
     document.getElementById('histline').innerHTML =
-      (left ? '<span class="e top">바깥</span>' :
+      (left ? '<span class="e top">앱 바깥</span>' :
         hist.map(function (e, i) {
           return '<span class="e' + (i === hist.length - 1 ? ' top' : '') + '">' + e.name + '</span>';
         }).join('') +
         layers.filter(function (l) { return !l.inHistory; })
-          .map(function (e) { return '<span class="e gone">' + e.name + ' (기록 밖)</span>'; }).join(''));
+          .map(function (e) { return '<span class="e gone">' + e.name + ' (기록에 없음)</span>'; }).join(''));
     document.getElementById('open').disabled = left || has('시트');
     document.getElementById('histline').dataset.depth = String(hist.length);
   }
@@ -82,33 +82,33 @@
     var pushed = document.getElementById('push').checked;
     layers.push({ name: '시트', inHistory: pushed });
     log(pushed
-      ? '시트를 열며 <b>기록을 하나 쌓았다</b>'
-      : '시트를 열었지만 <span class="warn">기록은 그대로다</span>');
+      ? '시트를 열면서 <b>기록을 하나 쌓았습니다</b>'
+      : '시트를 열었지만 <span class="warn">기록은 그대로입니다</span>');
     draw();
   });
 
   document.getElementById('back').addEventListener('click', function () {
-    if (left) { log('이미 나갔다'); return; }
+    if (left) { log('이미 앱을 나간 상태입니다'); return; }
     // OS 는 화면이 아니라 기록을 하나 뺀다
     var hist = layers.filter(function (l) { return l.inHistory; });
     if (hist.length <= 1) {
       left = true;
       log(has('시트') && !layers[layers.length - 1].inHistory
-        ? '뒤로 — <span class="warn">시트는 그대로인데 앱을 나갔다</span>'
-        : '뒤로 — 첫 화면이라 <b>앱을 나갔다</b>');
+        ? '뒤로가기를 누르자 <span class="warn">시트는 그대로인데 앱을 나갔습니다</span>'
+        : '첫 화면에서 뒤로가기를 눌러 <b>앱을 나갔습니다</b>');
       draw(); return;
     }
     var top = hist[hist.length - 1];
     layers.splice(layers.indexOf(top), 1);
-    if (top.name === '시트') log('뒤로 — <b>시트만 닫혔다</b>');
-    else if (has('시트')) log('뒤로 — <span class="warn">시트는 그대로인데 그 아래 화면이 사라졌다</span>');
-    else log('뒤로 — 한 화면 전으로');
+    if (top.name === '시트') log('뒤로가기를 누르자 <b>시트만 닫혔습니다</b>');
+    else if (has('시트')) log('뒤로가기를 누르자 <span class="warn">시트는 그대로인데 그 아래 화면이 사라졌습니다</span>');
+    else log('뒤로가기를 눌러 한 화면 전으로 돌아갔습니다');
     draw();
   });
 
   document.getElementById('reset').addEventListener('click', function () {
     layers = [{ name: '목록', inHistory: true }, { name: '상세', inHistory: true }];
-    left = false; log('처음부터'); draw();
+    left = false; log('처음 상태로 되돌렸습니다'); draw();
   });
 
   layers = [{ name: '목록', inHistory: true }, { name: '상세', inHistory: true }];

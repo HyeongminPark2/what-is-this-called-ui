@@ -52,7 +52,7 @@
         <div class="note" style="margin-bottom:0">
           <p>아래에 <b>스크린 리더의 구역 목록</b>이 나옵니다. 스크린 리더 사용자는 이 목록을 띄워 놓고
           '내비게이션'이나 '메인' 같은 구역으로 바로 건너뜁니다.<br>
-          <b>전부 div 로 바꾸기</b>를 켜 보세요. 화면은 똑같은데 <b>구역 목록이 모두 비어 버려서</b>,
+          <b>모든 구역을 div로 바꾸기</b>를 켜 보세요. 화면은 똑같은데 <b>구역 목록이 모두 비어 버려서</b>,
           페이지를 처음부터 끝까지 순서대로 읽는 방법밖에 남지 않습니다.</p>
         </div>
       </section>
@@ -76,18 +76,18 @@
         <p>접근성은 눈으로는 보이지 않는 부분까지 챙기는 일입니다. 아래 네 가지를 물어보면 이 부의 항목들이 서로 어떻게 다른지 가를 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 돕나</th><th>눈으로 보이나</th><th>안 하면 누가 막히나</th><th>어떻게 확인하나</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 돕는가</th><th>화면에 눈으로 보이는가</th><th>챙기지 않으면 누가 막히는가</th><th>어떻게 확인하는가</th></tr></thead>
           <tbody>
-            <tr><td>포커스</td><td><b>지금 어디인지</b></td><td><b>보여야 한다</b></td><td>키보드만 쓰는 사람</td><td>Tab 을 눌러 본다</td></tr>
-            <tr><td>포커스 트랩</td><td>모달 안에 가두기</td><td>안 보인다</td><td>키보드·스크린 리더</td><td>모달에서 Tab 을 돌려 본다</td></tr>
-            <tr><td>키보드 조작</td><td>마우스 없이 <b>전부</b></td><td>안 보인다</td><td>마우스를 못 쓰는 사람</td><td>마우스를 치우고 해 본다</td></tr>
-            <tr><td>이름 붙이기</td><td>뭐라고 <b>부르나</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>접근성 트리를 본다</td></tr>
-            <tr><td>스크린 리더가 읽는 것</td><td>역할 · 이름 · <b>상태</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>직접 들어 본다</td></tr>
-            <tr><td>라이브 리전</td><td><b>저절로 바뀐 것</b></td><td>안 보인다</td><td>화면을 못 보는 사람</td><td>바꿔 놓고 들어 본다</td></tr>
-            <tr><td>대비비</td><td>글자가 <b>읽히나</b></td><td><b>보인다</b></td><td>저시력 · 밝은 곳 · 싼 화면</td><td><b>재 본다</b>(숫자로 나온다)</td></tr>
-            <tr class="me"><td><b>시맨틱 태그</b></td><td>화면의 <b>구조</b></td><td>안 보인다</td><td><b>거의 모두</b></td><td>구역 목록을 열어 본다</td></tr>
-            <tr><td>대체 텍스트</td><td>그림의 <b>뜻</b></td><td>안 보인다</td><td>눈으로 안 보는 사람</td><td>이미지를 끄고 읽어 본다</td></tr>
-            <tr><td>확대와 글자 크기</td><td><b>키웠을 때</b>도 쓰이나</td><td>안 보인다</td><td>저시력 사용자</td><td>200%로 키워 본다</td></tr>
+            <tr><td>포커스</td><td><b>지금 어디에 있는지</b> 보여 주기</td><td><b>보여야 함</b></td><td>키보드만 쓰는 사람</td><td>Tab을 눌러 보기</td></tr>
+            <tr><td>포커스 트랩</td><td>포커스를 모달 안에 가두기</td><td>보이지 않음</td><td>키보드나 스크린 리더 사용자</td><td>모달을 열고 Tab을 계속 눌러 보기</td></tr>
+            <tr><td>키보드 조작</td><td>마우스 없이 <b>모든 기능</b> 쓰기</td><td>보이지 않음</td><td>마우스를 못 쓰는 사람</td><td>마우스를 치우고 써 보기</td></tr>
+            <tr><td>이름 붙이기</td><td>요소를 뭐라고 <b>부르는지</b> 정하기</td><td>보이지 않음</td><td>화면을 못 보는 사람</td><td>접근성 트리를 살펴보기</td></tr>
+            <tr><td>스크린 리더가 읽는 것</td><td>역할 · 이름 · <b>상태</b> 전하기</td><td>보이지 않음</td><td>화면을 못 보는 사람</td><td>스크린 리더로 직접 들어 보기</td></tr>
+            <tr><td>라이브 리전</td><td><b>저절로 바뀐 내용</b> 알리기</td><td>보이지 않음</td><td>화면을 못 보는 사람</td><td>내용을 바꾼 뒤 들어 보기</td></tr>
+            <tr><td>대비비</td><td>글자가 <b>잘 읽히는지</b> 따지기</td><td><b>보임</b></td><td>저시력 사용자, 햇빛 아래나 값싼 화면으로 보는 사람</td><td><b>도구로 재 보기</b>(숫자로 나옴)</td></tr>
+            <tr class="me"><td><b>시맨틱 태그</b></td><td>화면의 <b>구조</b> 알리기</td><td>보이지 않음</td><td><b>거의 모든 사용자</b></td><td>구역 목록을 열어 보기</td></tr>
+            <tr><td>대체 텍스트</td><td>그림의 <b>뜻</b> 전하기</td><td>보이지 않음</td><td>화면을 눈으로 보지 않는 사람</td><td>이미지를 끄고 읽어 보기</td></tr>
+            <tr><td>확대와 글자 크기</td><td><b>키웠을 때</b>도 쓸 수 있는지 따지기</td><td>보이지 않음</td><td>저시력 사용자</td><td>200%로 키워 보기</td></tr>
           </tbody>
         </table>
         </div>
@@ -97,7 +97,7 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 갈래<span class="hint">태그 하나가 주는 것</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 태그별로 생기는 구조<span class="hint">태그 하나를 쓰면 저절로 생기는 역할과 구조</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -156,10 +156,10 @@
                 <div style="padding-left:26px;display:grid;gap:13px">
                   <div class="pin-out" data-pin="1" style="max-width:230px;border:1px dashed var(--line-strong);border-radius:6px;padding:7px 9px"><span style="font-family:var(--mono);font-size:10px;color:var(--accent);display:block">&lt;header&gt;</span><span style="font-size:11px">로고와 검색</span></div>
                   <div class="pin-out" data-pin="2" style="max-width:230px;border:1px dashed var(--line-strong);border-radius:6px;padding:7px 9px"><span style="font-family:var(--mono);font-size:10px;color:var(--accent);display:block">&lt;nav&gt;</span><span style="font-size:11px">홈 · 정산 · 설정</span></div>
-                  <div class="pin-out" data-pin="3" style="max-width:230px;border:1px dashed var(--line-strong);border-radius:6px;padding:7px 9px"><span style="font-family:var(--mono);font-size:10px;color:var(--accent);display:block">&lt;main&gt;</span><span style="font-size:11px">정산 목록 — 화면에 하나만</span></div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">h1 → h2 → h3   — 건너뛰지 않는다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">ul · ol   — "항목 12개" 가 읽힌다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">div 로만 쌓으면 구역 목록이 빈다</div>
+                  <div class="pin-out" data-pin="3" style="max-width:230px;border:1px dashed var(--line-strong);border-radius:6px;padding:7px 9px"><span style="font-family:var(--mono);font-size:10px;color:var(--accent);display:block">&lt;main&gt;</span><span style="font-size:11px">정산 목록(화면에 하나만 둠)</span></div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">h1 → h2 → h3   — 단계를 건너뛰지 않음</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">ul · ol   — "항목 12개"처럼 개수가 읽힘</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">div로만 쌓으면 구역 목록이 비어 버림</div>
                 </div>
               </div>
             </div>
@@ -170,7 +170,7 @@
             <li><b>메인 <em>&lt;main&gt;</em></b><span>그 화면의 본문입니다. <b>하나만</b> 두고, 건너뛰기 링크를 누르면 이곳으로 옵니다</span></li>
             <li><b>제목 구조 <em>h1 ~ h6</em></b><span>제목 단계는 <b>건너뛰지 않습니다.</b> 화면에 보이는 크기는 CSS로 따로 정합니다</span></li>
             <li><b>목록 <em>&lt;ul&gt; · &lt;ol&gt;</em></b><span>'항목 12개'처럼 개수가 저절로 읽힙니다. <code>&lt;div&gt;</code>로 쌓으면 몇 건인지 알 수 없습니다</span></li>
-            <li><b>div 만 쌓기 <em>&lt;div&gt;</em></b><span><b>구역 목록이 비어 버려서</b> 처음부터 끝까지 순서대로 읽는 수밖에 없습니다</span></li>
+            <li><b>div로만 쌓은 화면 <em>&lt;div&gt;</em></b><span><b>구역 목록이 비어 버려서</b> 처음부터 끝까지 순서대로 읽는 수밖에 없습니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -193,7 +193,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>시맨틱 태그를 쓰지 않는 경우</h3>
+            <h3>시맨틱 태그를 빠뜨리거나 잘못 쓰는 경우</h3>
             <ul>
               <li>화면을 <b>전부 <code>&lt;div&gt;</code></b>로 쌓을 때</li>
               <li>한 화면에 <code>&lt;main&gt;</code>을 여러 개 둘 때</li>
@@ -202,7 +202,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>시맨틱 태그 대신 다른 것을 써야 하는 경우</b> — 키보드로 되는지는 <a href="keyboard.html">키보드 조작</a>, 역할·상태는 <a href="screenreader.html">스크린 리더가 읽는 것</a>, 보이는 위계는 <a href="../items/hierarchy.html">글자 위계</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>시맨틱 태그와 이어지는 주제는 다른 항목에서 다룹니다</b> — 요소를 키보드로 쓸 수 있는지는 <a href="keyboard.html">키보드 조작</a>에서, 역할과 상태가 어떻게 읽히는지는 <a href="screenreader.html">스크린 리더가 읽는 것</a>에서 다룹니다. 눈으로 보이는 제목의 크기 차이는 <a href="../items/hierarchy.html">글자 위계</a>를 보세요.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -214,33 +214,33 @@
                 <div style="width:100%;max-width:100%;border:1px dashed var(--line-strong);border-radius:5px;padding:7px 9px"><span style="font-family:var(--mono);font-size:9.5px;color:var(--accent);display:block;margin-bottom:2px">&lt;header&gt;</span><span style="font-size:11px">로고 · 검색</span></div><div style="width:100%;max-width:100%;border:1px dashed var(--line-strong);border-radius:5px;padding:7px 9px"><span style="font-family:var(--mono);font-size:9.5px;color:var(--accent);display:block;margin-bottom:2px">&lt;nav&gt;</span><span style="font-size:11px">홈 · 정산 · 설정</span></div><div style="width:100%;max-width:100%;border:1px dashed var(--line-strong);border-radius:5px;padding:7px 9px"><span style="font-family:var(--mono);font-size:9.5px;color:var(--accent);display:block;margin-bottom:2px">&lt;main&gt;</span><span style="font-size:11px">정산 목록</span></div>
               </div>
             </div>
-            <figcaption><b>화면 뼈대</b>header, nav, main 세 가지만 있어도 <b>구역 목록이 생깁니다</b></figcaption>
+            <figcaption><b>화면의 큰 구역 나누기</b>header, nav, main 세 가지만 있어도 <b>구역 목록이 생깁니다</b></figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:190px;display:grid;gap:4px">
                 <span style="font-family:var(--mono);font-size:9.5px;color:var(--accent)">&lt;nav aria-label="주 메뉴"&gt;</span>
                 <span style="font-family:var(--mono);font-size:9.5px;color:var(--accent)">&lt;nav aria-label="빵부스러기"&gt;</span>
-                <span style="font-size:10.5px;color:var(--fg-muted)">둘 다 '내비게이션'이면 구별이 안 된다</span>
+                <span style="font-size:10.5px;color:var(--fg-muted)">둘 다 '내비게이션'이면 구별할 수 없음</span>
               </div>
             </div>
-            <figcaption><b>nav 가 여럿</b>구역 목록에서 구별할 수 있도록 <b>각각 이름</b>을 붙입니다</figcaption>
+            <figcaption><b>nav가 여러 개일 때 이름 붙이기</b>구역 목록에서 구별할 수 있도록 <b>각각 이름</b>을 붙입니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:190px;display:grid;gap:4px">
                 <span style="font-family:var(--mono);font-size:9.5px;color:var(--danger)">&lt;div onclick&gt;저장&lt;/div&gt;</span>
                 <span style="font-family:var(--mono);font-size:9.5px;color:#1f8a4c">&lt;button&gt;저장&lt;/button&gt;</span>
-                <span style="font-size:10.5px;color:var(--fg-muted)">아래 한 줄이 다섯 가지를 대신한다</span>
+                <span style="font-size:10.5px;color:var(--fg-muted)">아래 한 줄로 다섯 가지가 해결됨</span>
               </div>
             </div>
-            <figcaption><b>버튼</b><b>button 태그 하나로</b> 역할, 포커스, Enter, Space, 비활성 처리가 모두 들어옵니다</figcaption>
+            <figcaption><b>버튼을 button 태그로 만들기</b><b>button 태그 하나로</b> 역할, 포커스, Enter, Space, 비활성 처리가 모두 들어옵니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 규칙<span class="hint">태그부터 고른다</span></h2>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 규칙<span class="hint">CSS보다 태그를 먼저 고르는 규칙</span></h2>
         <p>화면의 틀을 잡을 때는 <b>태그부터</b> 고르고, CSS는 그다음에 씁니다.</p>
 <pre class="code">&lt;<span class="t">body</span>&gt;
   &lt;<span class="t">a</span> <span class="a">href</span>=<span class="s">"#main"</span> <span class="a">class</span>=<span class="s">"skip"</span>&gt;본문으로 건너뛰기&lt;/<span class="t">a</span>&gt;
@@ -260,14 +260,14 @@
 &lt;/<span class="t">body</span>&gt;</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>규칙</th><th>지켜야 하는 것</th></tr></thead>
+          <thead><tr><th>지킬 규칙</th><th>지키는 방법</th></tr></thead>
           <tbody>
-            <tr><td>태그부터 고른다</td><td>알맞은 태그를 쓰면 <b>역할, 동작, 구조</b>가 한꺼번에 들어옵니다</td></tr>
-            <tr><td><code>&lt;main&gt;</code>은 하나</td><td>건너뛰기 링크를 누르면 도착하는 곳이므로 하나만 둡니다</td></tr>
-            <tr><td>제목을 건너뛰지 않는다</td><td>h1, h2, h3 순서로 내려갑니다. 화면에 보이는 크기는 CSS로 따로 정합니다</td></tr>
-            <tr><td><code>&lt;nav&gt;</code>가 여럿이면 이름</td><td><code>aria-label</code>로 이름을 붙여 서로 구별합니다</td></tr>
-            <tr><td><code>&lt;section&gt;</code>에는 이름</td><td>이름이 없는 section은 <b>div와 같습니다</b></td></tr>
-            <tr><td>배치에 <code>&lt;table&gt;</code>을 안 쓴다</td><td>배치용 표도 스크린 리더는 '표, 3열 5행'으로 읽습니다</td></tr>
+            <tr><td>태그부터 고르기</td><td>알맞은 태그를 쓰면 <b>역할, 동작, 구조</b>가 한꺼번에 들어옵니다</td></tr>
+            <tr><td><code>&lt;main&gt;</code>은 하나만 두기</td><td>건너뛰기 링크를 누르면 도착하는 곳이므로 하나만 둡니다</td></tr>
+            <tr><td>제목 단계를 건너뛰지 않기</td><td>h1, h2, h3 순서로 내려갑니다. 화면에 보이는 크기는 CSS로 따로 정합니다</td></tr>
+            <tr><td><code>&lt;nav&gt;</code>가 여럿이면 이름 붙이기</td><td><code>aria-label</code>로 이름을 붙여 서로 구별합니다</td></tr>
+            <tr><td><code>&lt;section&gt;</code>에는 이름 붙이기</td><td>이름이 없는 section은 <b>div와 같습니다</b></td></tr>
+            <tr><td>배치용으로 <code>&lt;table&gt;</code>을 쓰지 않기</td><td>배치용 표도 스크린 리더는 '표, 3열 5행'으로 읽습니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -278,10 +278,10 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>템플릿에서 한 번</th><td>레이아웃 컴포넌트에 <code>&lt;header&gt;</code>와 <code>&lt;main&gt;</code>을 넣어 두면 그 레이아웃을 쓰는 <b>모든 화면에 구역이 저절로</b> 생깁니다.</td></tr>
-            <tr><th>제목 단계는 화면이 정한다</th><td>같은 컴포넌트라도 어떤 화면에서는 <code>h2</code>, 어떤 화면에서는 <code>h3</code>이 되어야 합니다. 그래서 <b>제목 단계를 props로</b> 받도록 설계하는 경우가 많습니다.</td></tr>
-            <tr><th>SEO 와 겹친다</th><td>문서 구조가 또렷하면 검색 엔진도 페이지를 잘 읽기 때문에, <b>한 번의 작업으로 접근성과 검색 노출을 함께</b> 챙길 수 있습니다.</td></tr>
-            <tr><th>자동 검사</th><td>랜드마크가 있는지, <code>h1</code>이 몇 개인지, 제목 단계를 건너뛰었는지는 <b>모두 자동 검사로</b> 찾을 수 있어서 CI에 넣기 쉽습니다.</td></tr>
+            <tr><th>레이아웃 템플릿에 한 번 넣기</th><td>레이아웃 컴포넌트에 <code>&lt;header&gt;</code>와 <code>&lt;main&gt;</code>을 넣어 두면 그 레이아웃을 쓰는 <b>모든 화면에 구역이 저절로</b> 생깁니다.</td></tr>
+            <tr><th>제목 단계를 화면에서 정하기</th><td>같은 컴포넌트라도 어떤 화면에서는 <code>h2</code>, 어떤 화면에서는 <code>h3</code>이 되어야 합니다. 그래서 <b>제목 단계를 props로</b> 받도록 설계하는 경우가 많습니다.</td></tr>
+            <tr><th>검색 노출에도 도움이 됨</th><td>문서 구조가 또렷하면 검색 엔진도 페이지를 잘 읽기 때문에, <b>한 번의 작업으로 접근성과 검색 노출을 함께</b> 챙길 수 있습니다.</td></tr>
+            <tr><th>문서 구조 자동 검사</th><td>랜드마크가 있는지, <code>h1</code>이 몇 개인지, 제목 단계를 건너뛰었는지는 <b>모두 자동 검사로</b> 찾을 수 있어서 CI에 넣기 쉽습니다.</td></tr>
           </tbody>
         </table>
         </div>

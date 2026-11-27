@@ -52,7 +52,7 @@
         <div class="note" style="margin-bottom:0">
           <p>칸 폭을 좁히면서 <b>어떤 값이 넘치는지</b> 보세요. 넘친 줄은 빨갛게 표시됩니다.<br>
           <code>width: 300px</code>은 줄어들지 않아서 넘치고, <code>max-width: 300px</code>은 칸과 함께 줄어듭니다.
-          글을 <b>안 끊기는 긴 낱말</b>로 바꾸면 더 많은 값이 칸을 넘칩니다.</p>
+          글을 <b>끊기지 않는 긴 낱말</b>로 바꾸면 더 많은 값이 칸을 넘칩니다.</p>
         </div>
       </section>
 
@@ -75,22 +75,22 @@
         <p>뼈대는 눈에 보이지 않지만 <b>모든 화면의 배치</b>를 정합니다. 아래 네 가지를 물어 보면 서로 갈립니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 정하나</th><th>방향</th><th>넘치면</th><th>누가 값을 정하나</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 정하는가</th><th>어느 방향에 작용하는가</th><th>넘치면 어떻게 되는가</th><th>누가 값을 정하는가</th></tr></thead>
           <tbody>
-            <tr><td>박스 모델</td><td><b>상자 한 개</b>의 크기</td><td class="none">해당 없음</td><td>밖으로 삐져나온다</td><td>내가</td></tr>
-            <tr><td>플렉스</td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나온다</td><td>나 + 내용</td></tr>
-            <tr><td>그리드</td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗는다</td><td>나 + 내용</td></tr>
-            <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>나</td></tr>
-            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목이 정한다</b></td><td>나</td></tr>
-            <tr><td>스티키</td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 간다</td><td>나</td></tr>
-            <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남는다</td><td>나</td></tr>
-            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 안 눌린다</td><td><b>OS가</b></td></tr>
-            <tr><td>포지션</td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 안 차지한다</td><td>기준이 되는 조상</td></tr>
-            <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안이 잘린다</td><td>비를 적은 쪽</td></tr>
-            <tr><td>스크롤 동작</td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥까지 밀린다</td><td>굴리는 상자</td></tr>
-            <tr class="me"><td><b>크기 정하기</b></td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나간다</td><td>내용 또는 적은 값</td></tr>
-            <tr><td>여백 붕괴</td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어든다</td><td>큰 쪽 하나</td></tr>
-            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab이 어긋난다</td><td>마크업 순서</td></tr>
+            <tr><td>박스 모델</td><td><b>상자 한 개</b>의 크기</td><td class="none">해당 없음</td><td>밖으로 삐져나옴</td><td>요소 자신</td></tr>
+            <tr><td>플렉스</td><td>한 줄에 <b>늘어놓기</b></td><td>한 방향</td><td>줄을 넘기거나 삐져나옴</td><td>요소 자신과 내용</td></tr>
+            <tr><td>그리드</td><td>판을 <b>칸으로 나누기</b></td><td>두 방향</td><td>칸끼리 자리를 빼앗음</td><td>요소 자신과 내용</td></tr>
+            <tr><td>가운데 맞추기</td><td>자식의 <b>자리</b></td><td>두 방향</td><td class="none">해당 없음</td><td>요소 자신</td></tr>
+            <tr><td>넘침</td><td>넘친 것을 <b>어떻게 할지</b></td><td class="none">해당 없음</td><td><b>이 항목에서 정함</b></td><td>요소 자신</td></tr>
+            <tr><td>스티키</td><td>굴릴 때의 <b>자리</b></td><td>세로(보통)</td><td>부모 밖으로는 못 나감</td><td>요소 자신</td></tr>
+            <tr><td>컨테이너와 최대 폭</td><td>내용의 <b>최대 폭</b></td><td>가로</td><td>양옆 여백만 남음</td><td>요소 자신</td></tr>
+            <tr><td>세이프 에어리어</td><td><b>쓰면 안 되는</b> 가장자리</td><td>네 방향</td><td>가려지거나 눌리지 않음</td><td><b>OS</b></td></tr>
+            <tr><td>포지션</td><td><b>어디에</b> 놓이나</td><td>흐름 · 조상 · 화면</td><td>자리를 차지하지 않음</td><td>기준이 되는 조상</td></tr>
+            <tr><td>종횡비</td><td>폭에 따른 <b>높이</b></td><td>가로와 세로의 비</td><td>안쪽 내용이 잘림</td><td>비를 적은 쪽</td></tr>
+            <tr><td>스크롤 동작</td><td><b>어떻게</b> 굴리나</td><td>세로 · 가로</td><td>바깥 페이지까지 밀림</td><td>스크롤되는 상자</td></tr>
+            <tr class="me"><td><b>크기 정하기</b></td><td><b>얼마나</b> 넓은가</td><td>가로</td><td>칸 밖으로 나감</td><td>내용 또는 적은 값</td></tr>
+            <tr><td>여백 붕괴</td><td><b>사이</b>가 얼마인가</td><td>세로만</td><td>겹쳐서 줄어듦</td><td>둘 중 큰 여백</td></tr>
+            <tr><td>보이는 순서와 읽는 순서</td><td><b>차례</b></td><td>가로 · 세로</td><td>눈과 Tab 차례가 어긋남</td><td>마크업 순서</td></tr>
           </tbody>
         </table>
         </div>
@@ -100,43 +100,43 @@
       </section>
 
       <section class="slot" id="s4">
-        <h2 class="slot-label"><span class="n">4</span> 값별로<span class="hint">좁아지면 어떻게 되나</span></h2>
+        <h2 class="slot-label"><span class="n">4</span> 크기를 정하는 여섯 가지 값<span class="hint">칸이 좁아질 때 값마다 달라지는 결과</span></h2>
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">width: 300px</span><div style="border:1px dashed var(--line-strong);border-radius:5px;padding:4px;overflow:hidden"><span style="display:block;box-sizing:border-box;background:var(--accent-soft);border:1px solid var(--danger);border-radius:4px;padding:4px 6px;font-size:9px;width:300px">정산 내역</span></div><span style="font-size:8.5px;color:var(--fg-muted)">안 줄어 넘친다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">width: 300px</span><div style="border:1px dashed var(--line-strong);border-radius:5px;padding:4px;overflow:hidden"><span style="display:block;box-sizing:border-box;background:var(--accent-soft);border:1px solid var(--danger);border-radius:4px;padding:4px 6px;font-size:9px;width:300px">정산 내역</span></div><span style="font-size:8.5px;color:var(--fg-muted)">줄어들지 않아 넘침</span></div>
             </div>
-            <figcaption>width<span>칸 폭을 <b>무시하고</b> 넘칩니다</span></figcaption>
+            <figcaption><code>width</code>로 고정할 때<span>칸 폭을 <b>무시하고</b> 넘칩니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">max-width: 300px</span><div style="border:1px dashed var(--line-strong);border-radius:5px;padding:4px;overflow:hidden"><span style="display:block;box-sizing:border-box;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:9px;max-width:300px">정산 내역을 모아 보여 줍니다</span></div><span style="font-size:8.5px;color:var(--fg-muted)">같이 줄어든다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">max-width: 300px</span><div style="border:1px dashed var(--line-strong);border-radius:5px;padding:4px;overflow:hidden"><span style="display:block;box-sizing:border-box;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:9px;max-width:300px">정산 내역을 모아 보여 줍니다</span></div><span style="font-size:8.5px;color:var(--fg-muted)">칸과 함께 줄어듦</span></div>
             </div>
-            <figcaption>max-width<span><b>대부분 이쪽</b>이 맞습니다</span></figcaption>
+            <figcaption><code>max-width</code>로 상한만 둘 때<span><b>대부분 이쪽</b>이 맞습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">min-content</span><div style="border:1px dashed var(--line-strong);border-radius:5px;padding:4px;overflow:hidden"><span style="display:block;box-sizing:border-box;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:9px;width:min-content">정산 내역을 모아</span></div><span style="font-size:8.5px;color:var(--fg-muted)">가장 긴 낱말만큼</span></div>
             </div>
-            <figcaption>min-content<span>줄이 자주 바뀌어 <b>세로로 길어집니다</b></span></figcaption>
+            <figcaption><code>min-content</code>로 둘 때<span>줄이 자주 바뀌어 <b>세로로 길어집니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">max-content</span><div style="border:1px dashed var(--line-strong);border-radius:5px;padding:4px;overflow:hidden"><span style="display:block;box-sizing:border-box;background:var(--accent-soft);border:1px solid var(--danger);border-radius:4px;padding:4px 6px;font-size:9px;width:max-content">정산 내역을 모아 보여 줍니다</span></div><span style="font-size:8.5px;color:var(--fg-muted)">안 끊고 한 줄로</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">max-content</span><div style="border:1px dashed var(--line-strong);border-radius:5px;padding:4px;overflow:hidden"><span style="display:block;box-sizing:border-box;background:var(--accent-soft);border:1px solid var(--danger);border-radius:4px;padding:4px 6px;font-size:9px;width:max-content">정산 내역을 모아 보여 줍니다</span></div><span style="font-size:8.5px;color:var(--fg-muted)">끊지 않고 한 줄로</span></div>
             </div>
-            <figcaption>max-content<span>줄을 바꾸지 않아서 <b>칸을 넘기 쉽습니다</b></span></figcaption>
+            <figcaption><code>max-content</code>로 둘 때<span>줄을 바꾸지 않아서 <b>칸을 넘기 쉽습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">fit-content</span><div style="border:1px dashed var(--line-strong);border-radius:5px;padding:4px;overflow:hidden"><span style="display:block;box-sizing:border-box;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:9px;width:fit-content">정산 내역</span></div><span style="font-size:8.5px;color:var(--fg-muted)">둘 사이 — 칸이 허락하는 만큼</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">fit-content</span><div style="border:1px dashed var(--line-strong);border-radius:5px;padding:4px;overflow:hidden"><span style="display:block;box-sizing:border-box;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:9px;width:fit-content">정산 내역</span></div><span style="font-size:8.5px;color:var(--fg-muted)">내용만큼 쓰되 칸 안에서</span></div>
             </div>
-            <figcaption>fit-content<span><b>내용만큼</b> 차지하되 <b>칸을 넘지는 않습니다</b></span></figcaption>
+            <figcaption><code>fit-content</code>로 둘 때<span><b>내용만큼</b> 차지하되 <b>칸을 넘지는 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:4px"><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">clamp(80px, 50%, 300px)</span><div style="border:1px dashed var(--line-strong);border-radius:5px;padding:4px;overflow:hidden"><span style="display:block;box-sizing:border-box;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:9px;width:clamp(80px, 50%, 300px)">정산 내역</span></div><span style="font-size:8.5px;color:var(--fg-muted)">최소·기본·최대를 한 줄로</span></div>
             </div>
-            <figcaption>clamp()<span>최소·기본·최대 세 값을 <b>한 줄에</b> 적습니다</span></figcaption>
+            <figcaption><code>clamp()</code>로 범위를 줄 때<span>최소·기본·최대 세 값을 <b>한 줄에</b> 적습니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -148,22 +148,22 @@
             <div class="anat" role="img" aria-label="크기 정하기의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">width — 안 줄어든다. 칸이 좁아지면 넘친다</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">max-width — 좁아지면 같이 줄어든다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">min-content — 가장 긴 낱말만큼</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">max-content — 안 끊고 한 줄로</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">fit-content — 둘 사이, 칸이 허락하는 만큼</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">clamp(최소, 기본, 최대) — 한 줄로</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">width   줄어들지 않아 좁은 칸에서 넘침</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">max-width   칸이 좁아지면 함께 줄어듦</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">min-content   가장 긴 낱말만큼</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">max-content   끊지 않고 한 줄로</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">fit-content   내용만큼 쓰되 칸은 넘지 않음</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">clamp(최소, 기본, 최대)   세 값을 한 줄로</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>width <em>안 줄어든다</em></b><span>칸이 좁아지면 <b>넘칩니다</b></span></li>
-            <li><b>max-width <em>같이 줄어든다</em></b><span>반응형 화면에서 <b>기본으로 쓰는 값</b>입니다</span></li>
+            <li><b>width <em>줄어들지 않음</em></b><span>칸이 좁아지면 <b>넘칩니다</b></span></li>
+            <li><b>max-width <em>함께 줄어듦</em></b><span>반응형 화면에서 <b>기본으로 쓰는 값</b>입니다</span></li>
             <li><b>min-content <em>가장 긴 낱말</em></b><span>더는 줄일 수 없는 폭입니다</span></li>
-            <li><b>max-content <em>한 줄로</em></b><span>칸을 <b>넘기 쉬워서</b> 표 칸 정도에만 씁니다</span></li>
-            <li><b>fit-content <em>둘 사이</em></b><span>내용만큼 쓰되 <b>칸을 넘지 않습니다</b></span></li>
+            <li><b>max-content <em>줄을 바꾸지 않음</em></b><span>칸을 <b>넘기 쉬워서</b> 표 칸 정도에만 씁니다</span></li>
+            <li><b>fit-content <em>내용만큼, 칸 안에서</em></b><span>내용만큼 쓰되 <b>칸을 넘지 않습니다</b></span></li>
             <li><b>clamp() <em>최소·기본·최대</em></b><span><b>한 줄로</b> 세 값을 적습니다</span></li>
           </ol>
         </div>
@@ -182,7 +182,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>크기 정하기를 쓰는 경우</h3>
+            <h3>상황에 맞는 크기 값 고르기</h3>
             <ul>
               <li>폭을 정할 때. <b>대부분 <code>max-width</code></b>로 적습니다</li>
               <li>버튼이나 칩처럼 내용만큼만 차지해야 할 때. <code>fit-content</code>를 씁니다</li>
@@ -190,7 +190,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>크기 정하기를 쓰지 않는 경우</h3>
+            <h3>크기를 정할 때 피할 것</h3>
             <ul>
               <li><code>width</code>로 폭을 고정할 때. <b>좁은 화면에서 넘칩니다</b></li>
               <li><code>max-content</code>를 본문에 쓸 때. 글이 줄을 바꾸지 않고 한 줄로 늘어납니다</li>
@@ -199,7 +199,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>크기 정하기 대신 다른 것을 써야 하는 경우</b> — 폭에 따른 높이는 <a href="aspectratio.html">종횡비</a>, 글줄 길이는 <a href="../items/container.html">컨테이너</a>, 넘칠 때 처리는 <a href="../items/overflow.html">넘침</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>크기 정하기와 함께 보면 좋은 항목</b> — 폭에 맞춰 높이를 정하는 방법은 <a href="aspectratio.html">종횡비</a>에서, 읽기 좋은 글줄 길이는 <a href="../items/container.html">컨테이너</a>에서 다룹니다. 내용이 넘쳤을 때 어떻게 처리할지는 <a href="../items/overflow.html">넘침</a>에서 봅니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -207,21 +207,21 @@
         <div class="cases">
           <figure class="case" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:4px"><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">max-width: 68ch</span><div style="border:1px dashed var(--line-strong);border-radius:5px;padding:4px;overflow:hidden"><span style="display:block;box-sizing:border-box;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:9px;max-width:68ch">읽기 좋은 글줄 길이</span></div><span style="font-size:8.5px;color:var(--fg-muted)">글줄은 ch 로</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:4px"><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">max-width: 68ch</span><div style="border:1px dashed var(--line-strong);border-radius:5px;padding:4px;overflow:hidden"><span style="display:block;box-sizing:border-box;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:9px;max-width:68ch">읽기 좋은 글줄 길이</span></div><span style="font-size:8.5px;color:var(--fg-muted)">글줄은 ch로</span></div>
             </div>
-            <figcaption><b>본문</b>자세한 내용은 <a href="../items/container.html">컨테이너</a>에서 다룹니다</figcaption>
+            <figcaption><b>본문 글줄 길이 정하기</b>자세한 내용은 <a href="../items/container.html">컨테이너</a>에서 다룹니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:4px"><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">fit-content</span><div style="border:1px dashed var(--line-strong);border-radius:5px;padding:4px;overflow:hidden"><span style="display:block;box-sizing:border-box;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:9px;width:fit-content">저장</span></div><span style="font-size:8.5px;color:var(--fg-muted)">내용만큼</span></div>
             </div>
-            <figcaption><b>버튼·칩</b><b>글자 길이만큼만</b> 차지합니다</figcaption>
+            <figcaption><b>버튼·칩을 글자 길이만큼 두기</b><b>글자 길이만큼만</b> 차지합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:150px;display:grid;gap:4px"><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">clamp(16px, 4vw, 40px)</span><div style="border:1px dashed var(--line-strong);border-radius:5px;padding:4px;overflow:hidden"><span style="display:block;box-sizing:border-box;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:9px;width:clamp(16px, 4vw, 40px);min-height:16px"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">폭에 따라 커지되 상한이 있다</span></div>
+              <div style="width:100%;max-width:150px;display:grid;gap:4px"><span style="font-family:var(--mono);font-size:8.5px;color:var(--fg-muted)">clamp(16px, 4vw, 40px)</span><div style="border:1px dashed var(--line-strong);border-radius:5px;padding:4px;overflow:hidden"><span style="display:block;box-sizing:border-box;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px;padding:4px 6px;font-size:9px;width:clamp(16px, 4vw, 40px);min-height:16px"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">폭에 따라 커지되 상한이 있음</span></div>
             </div>
-            <figcaption><b>여백·아이콘</b>폭에 따라 늘리되 <b>상한을 둡니다</b></figcaption>
+            <figcaption><b>여백·아이콘을 폭에 맞춰 늘리기</b>폭에 따라 늘리되 <b>상한을 둡니다</b></figcaption>
           </figure>
         </div>
       </section>
@@ -245,14 +245,14 @@
 .row &gt; * { <span class="a">min-width</span>: <span class="a">0</span>; }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>지킬 규칙</th><th>지키는 방법</th></tr></thead>
           <tbody>
-            <tr><td><code>box-sizing: border-box</code></td><td>테두리와 패딩을 크기에 넣습니다. <b>넣지 않으면 계산이 어긋납니다</b></td></tr>
-            <tr><td><code>min-width: 0</code></td><td>플렉스·그리드 자식의 <b>숨은 최소 크기</b>를 풉니다</td></tr>
-            <tr><td><code>ch</code> 단위</td><td>글자 폭을 기준으로 하기 때문에 <b>글줄 길이</b>를 정하기에 알맞습니다</td></tr>
-            <tr><td><code>clamp()</code>의 가운데</td><td><code>vw</code>만 쓰면 <a href="textzoom.html">글자를 키워도</a> 커지지 않으므로 <code>rem</code>을 섞습니다</td></tr>
-            <tr><td>높이는 <code>min-height</code></td><td>높이를 고정하면 글이 커질 때 <b>잘립니다</b></td></tr>
-            <tr><td><code>max-content</code>와 스크린 리더</td><td>글이 한 줄로 늘어나 <b>가로 스크롤</b>이 생기면 화면을 확대한 사람이 읽기 어렵습니다</td></tr>
+            <tr><td><code>box-sizing: border-box</code> 쓰기</td><td>테두리와 패딩을 크기에 넣습니다. <b>넣지 않으면 계산이 어긋납니다</b></td></tr>
+            <tr><td>플렉스·그리드 자식에 <code>min-width: 0</code> 주기</td><td>플렉스·그리드 자식의 <b>숨은 최소 크기</b>를 풉니다</td></tr>
+            <tr><td>글줄 길이는 <code>ch</code> 단위로 정하기</td><td>글자 폭을 기준으로 하기 때문에 <b>글줄 길이</b>를 정하기에 알맞습니다</td></tr>
+            <tr><td><code>clamp()</code>의 가운데 값에 <code>rem</code> 섞기</td><td><code>vw</code>만 쓰면 <a href="textzoom.html">글자를 키워도</a> 커지지 않으므로 <code>rem</code>을 섞습니다</td></tr>
+            <tr><td>높이는 <code>min-height</code>로 주기</td><td>높이를 고정하면 글이 커질 때 <b>잘립니다</b></td></tr>
+            <tr><td><code>max-content</code>로 가로 스크롤을 만들지 않기</td><td>글이 한 줄로 늘어나 <b>가로 스크롤</b>이 생기면 화면을 확대한 사람이 읽기 어렵습니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -263,8 +263,8 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>글 길이가 크기를 정한다</th><td>시안은 보통 짧은 글로 그려지기 때문에, <b>가장 긴 실제 값</b>으로 한 번 채워 보면 어디가 깨지는지 보입니다.</td></tr>
-            <tr><th>번역</th><td>같은 뜻이라도 언어마다 글 길이가 다르기 때문에, <code>width</code>로 고정해 두면 <b>다른 언어에서 레이아웃이 깨집니다</b>.</td></tr>
+            <tr><th>가장 긴 실제 값으로 확인하기</th><td>시안은 보통 짧은 글로 그려지기 때문에, <b>가장 긴 실제 값</b>으로 한 번 채워 보면 어디가 깨지는지 보입니다.</td></tr>
+            <tr><th>번역하면 달라지는 글 길이</th><td>같은 뜻이라도 언어마다 글 길이가 다르기 때문에, <code>width</code>로 고정해 두면 <b>다른 언어에서 레이아웃이 깨집니다</b>.</td></tr>
           </tbody>
         </table>
         </div>

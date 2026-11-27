@@ -22,7 +22,7 @@
 
 <div class="bar">
   <b>스티키</b>
-  <label><input type="checkbox" id="broken"> 안 먹게 만들어 보기</label>
+  <label><input type="checkbox" id="broken"> 스티키가 작동하지 않게 만들어 보기</label>
   <span style="font-size:13px;color:var(--fg-muted)">아래 목록을 스크롤해 보세요</span>
 </div>
 
@@ -64,8 +64,8 @@
     var ok = pos === 'sticky';
     why.className = 'why ' + (ok ? 'ok' : 'no');
     why.textContent = ok
-      ? 'position: sticky · top: 0 — 스크롤해도 머리말이 붙어 있습니다'
-      : 'position: ' + pos + ' — 붙지 않습니다. 스크롤하면 머리말이 그냥 올라갑니다';
+      ? 'position: sticky와 top: 0을 함께 주어서 스크롤해도 머리말이 붙어 있습니다'
+      : 'position: ' + pos + '일 때는 붙지 않습니다. 스크롤하면 머리말이 그냥 올라갑니다';
   }
   document.getElementById('broken').addEventListener('change', function () {
     stk.classList.toggle('is-broken', this.checked);

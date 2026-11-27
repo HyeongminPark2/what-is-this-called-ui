@@ -50,10 +50,10 @@
 (function () {
   // [열쇠, 이름, 설명, 볼 수 있는 사람 어림]
   var SCOPES = [
-    ['me', '나만', '아무도 못 본다', 1],
-    ['named', '고른 사람만', '홍길동 · 김철수 — 이름을 적어 넣는다', 3],
+    ['me', '나만', '아무도 못 봄', 1],
+    ['named', '고른 사람만', '홍길동 · 김철수처럼 이름을 적어 넣음', 3],
     ['org', '모란상회 구성원', '로그인한 사내 사람이면 누구나', 48],
-    ['any', '링크 있는 누구나', '로그인 없이 열린다 · 검색에는 안 잡힌다', 9999]
+    ['any', '링크 있는 누구나', '로그인 없이 열림 · 검색에는 안 잡힘', 9999]
   ];
   var cur = 'named';
   var copied = 0;
@@ -80,7 +80,7 @@
     var outside = cur === 'any';
     var w = document.getElementById('warn');
     w.hidden = !outside;
-    w.textContent = '⚠ 사내 밖으로도 열립니다 — 링크가 전달되면 막을 수 없습니다';
+    w.textContent = '⚠ 사내 밖으로도 열려서, 링크가 전달되면 막을 수 없습니다';
 
     var rd = document.getElementById('read');
     rd.innerHTML = '범위 <b>' + s[1] + '</b> · 볼 수 있는 사람 <b>' +

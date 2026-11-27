@@ -8,12 +8,12 @@ def row(txt, tag, ok=None, note="", w="152px"):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">일주일 안 — 3시간 전 · 어제 · 5일 전</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">올해 안 — 11월 7일(금) 오전 9:12</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">해를 넘기면 — 2025년 3월 2일(일)</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">&lt;time datetime="2026-11-14T09:12"&gt; — 기계용</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">요일을 적는다 — 날짜만으로는 감이 안 온다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">‘8개월 전’ — 언제인지 알 수 없다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">일주일 안은 3시간 전 · 어제 · 5일 전</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">올해 안은 11월 7일(금) 오전 9:12</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">해를 넘기면 2025년 3월 2일(일)</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">&lt;time datetime="2026-11-14T09:12"&gt;는 기계용</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">날짜만으로는 언제쯤인지 알기 어려워 요일을 적음</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">‘8개월 전’만으로는 언제인지 알 수 없음</div>
                 </div>
               </div>'''
 
@@ -42,14 +42,14 @@ D = dict(
   ]),
   axes=ax("날짜와 시간 쓰기"),
   oneline="<b>일주일 안이면 상대 시간, 일주일을 넘으면 절대 시간으로 적습니다.</b> 화면에 보이는 글자와 기계가 읽는 <code>datetime</code> 속성은 따로 둡니다.",
-  s4_title="얼마나 지났나", s4_hint="같은 시각, 다른 표기",
+  s4_title="지난 시간에 따른 표기", s4_hint="얼마나 지났는지에 따라 달라지는 표기",
   states=states([
-    (row('방금', "1분 안", True, "초를 적지 않는다"), "방금", "'37초 전'은 필요 이상으로 <b>자세합니다</b>"),
-    (row('3시간 전', "하루 안", True, "상대 시간이 읽기 쉽다"), "오늘", "<b>알림·댓글</b>에 잘 맞습니다"),
-    (row('어제 오후 4:20', "하루 전", True, "‘1일 전’보다 ‘어제’"), "어제", "평소 <b>사람이 쓰는 말</b>로 적습니다"),
-    (row('11월 7일(금) 오전 9:12', "올해 안", True, "해는 생략하고 요일을 넣는다"), "이번 해", "요일이 있으면 언제쯤인지 <b>쉽게 떠올릴 수 있습니다</b>"),
-    (row('2025년 3월 2일(일)', "해를 넘김", True, "해까지 적는다"), "지난해", "<b>계약·영수증</b>은 언제나 이 형식으로 적습니다"),
-    (row('8개월 전', "오래된 것", False, "언제인지 알 수 없다"), "상대 시간을 계속 쓰면", "언제인지 알 수 없어서 <b>쓸모가 없어집니다</b>"),
+    (row('방금', "1분 안", True, "초는 적지 않음"), "1분이 안 지났을 때", "'37초 전'은 필요 이상으로 <b>자세합니다</b>"),
+    (row('3시간 전', "하루 안", True, "상대 시간이 읽기 쉬움"), "오늘 있었던 일", "<b>알림·댓글</b>에 잘 맞습니다"),
+    (row('어제 오후 4:20', "하루 전", True, "‘1일 전’보다 ‘어제’"), "어제 있었던 일", "평소 <b>사람이 쓰는 말</b>로 적습니다"),
+    (row('11월 7일(금) 오전 9:12', "올해 안", True, "해는 빼고 요일을 넣음"), "올해 안의 일", "요일이 있으면 언제쯤인지 <b>쉽게 떠올릴 수 있습니다</b>"),
+    (row('2025년 3월 2일(일)', "해를 넘김", True, "해까지 적음"), "해를 넘긴 일", "<b>계약·영수증</b>은 언제나 이 형식으로 적습니다"),
+    (row('8개월 전', "오래된 것", False, "언제인지 알 수 없음"), "오래된 일에도 상대 시간을 쓰면", "언제인지 알 수 없어서 <b>쓸모가 없어집니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -74,17 +74,19 @@ D = dict(
     "올해 안이면 <b>해를 생략</b>하고 요일을 넣기",
     "화면 글자는 상대 시간으로, <code>datetime</code>·<code>title</code>에는 <b>절대</b> 시간으로 적기",
   ]),
+  do_title="날짜와 시간을 적을 때 지킬 것", dont_title="날짜와 시간을 적을 때 피할 것",
+  instead_title="날짜와 시간 쓰기와 함께 보면 좋은 항목",
   dont=ul([
     "오래된 일에 상대 시간을 쓸 때. <b>‘8개월 전’</b>만으로는 언제인지 알 수 없습니다",
     "<code>2026-11-14T09:12:00Z</code>처럼 기계용 형식을 그대로 보여 줄 때",
     "요일을 뺄 때. <b>평일인지 주말인지</b> 알기 어렵습니다",
     "보는 사람의 시간대로 바꾸지 않을 때. <b>날짜가 하루 어긋날</b> 수 있습니다",
   ]),
-  instead='자릿수를 맞추는 조판은 <a href="../items/numerals.html">숫자 꼴</a>, 금액은 <a href="numbertext.html">숫자와 단위</a>, 기간을 고르는 부품은 날짜 선택기.',
+  instead='숫자의 자릿수를 맞추는 조판은 <a href="../items/numerals.html">숫자 꼴</a>에서, 금액을 적는 법은 <a href="numbertext.html">숫자와 단위</a>에서 다룹니다. 기간을 고르게 하는 입력 부품은 날짜 선택기입니다.',
   cases=cases([
-    (one('모란상회 <b>3분 전</b>', "알림 목록", True, "최근 것뿐이라 상대 시간이 맞는다"), "알림", "<a href=\"notifications.html\">알림 센터</a>에서 씁니다"),
-    (one('2026년 11월 7일(금) ~ 11월 13일(목)', "정산 기간", True, "해까지 적고 요일을 넣는다"), "기간", "날짜 <b>경계가 중요한</b> 화면입니다"),
-    (one('<span style="font-family:var(--mono)">2026.11.07</span>', "표 안", True, "자리가 좁을 때"), "표", "<a href=\"table.html\">데이터 테이블</a>에서는 자릿수를 맞춰 적습니다"),
+    (one('모란상회 <b>3분 전</b>', "알림 목록", True, "최근 것뿐이라 상대 시간이 맞음"), "알림 목록의 시각", "<a href=\"notifications.html\">알림 센터</a>에서 씁니다"),
+    (one('2026년 11월 7일(금) ~ 11월 13일(목)', "정산 기간", True, "해까지 적고 요일을 넣음"), "정산 기간 적기", "날짜 <b>경계가 중요한</b> 화면입니다"),
+    (one('<span style="font-family:var(--mono)">2026.11.07</span>', "표 안", True, "자리가 좁을 때"), "표 안의 날짜", "<a href=\"table.html\">데이터 테이블</a>에서는 자릿수를 맞춰 적습니다"),
   ]),
   s8_title="최소 마크업과 규칙", s8_hint="코드로 옮길 때 지킬 것",
   code_lede="<code>&lt;time&gt;</code>의 속성에는 기계가 읽을 값을, 안쪽 글자에는 사람이 읽을 표기를 적습니다.",
@@ -99,20 +101,21 @@ rtf.format(-<span class="a">1</span>, <span class="s">'day'</span>);        <spa
   dateStyle: <span class="s">'long'</span>, timeStyle: <span class="s">'short'</span>,
   timeZone: <span class="s">'Asia/Seoul'</span>
 }).format(d);                   <span class="c">// '2026년 11월 14일 오전 9:12'</span>''',
+  keys_heads="<th>지킬 규칙과 마크업</th><th>지키는 방법과 이유</th>",
   keys=kbd([
     ("<code>&lt;time datetime&gt;</code>", "보조기기와 검색 엔진은 이 속성 값을 읽으므로, 화면에 보이는 <b>글자는 사람이 읽기 좋게</b> 자유롭게 적어도 됩니다"),
     ("<code>numeric: 'auto'</code>", "이 옵션을 켜면 '1일 전'이 <b>'어제'</b>로 바뀌어 평소 쓰는 말에 가까워집니다"),
-    ("<code>title</code>에 정확한 시각", "상대 시간에 마우스를 올리면 정확히 <b>언제인지</b> 볼 수 있습니다. 다만 <a href=\"hover.html\">폰에서는 보이지 않습니다</a>"),
-    ("저절로 안 바뀐다", "'3분 전'은 화면을 <b>그린 시점</b>을 기준으로 계산한 값입니다. 오래 켜 두는 화면에서는 주기적으로 갱신하거나 절대 시간으로 적습니다"),
-    ("<code>timeZone</code>을 적는다", "적지 않으면 <b>기기 설정</b>을 따르므로, 기준 시간대가 정해진 화면에서는 직접 적어 줍니다"),
-    ("<code>Intl</code>을 쓴다", "날짜 계산을 직접 만들면 <b>윤년·서머타임·달력</b> 차이를 처리하다가 틀리기 쉽습니다"),
+    ("<code>title</code>에 정확한 시각 넣기", "상대 시간에 마우스를 올리면 정확히 <b>언제인지</b> 볼 수 있습니다. 다만 <a href=\"hover.html\">폰에서는 보이지 않습니다</a>"),
+    ("상대 시간 갱신하기", "'3분 전'은 화면을 <b>그린 시점</b>을 기준으로 계산한 값입니다. 오래 켜 두는 화면에서는 주기적으로 갱신하거나 절대 시간으로 적습니다"),
+    ("<code>timeZone</code>을 적기", "적지 않으면 <b>기기 설정</b>을 따르므로, 기준 시간대가 정해진 화면에서는 직접 적어 줍니다"),
+    ("<code>Intl</code>을 쓰기", "날짜 계산을 직접 만들면 <b>윤년·서머타임·달력</b> 차이를 처리하다가 틀리기 쉽습니다"),
   ]),
   backend=rows([
-    ("서버는 UTC 로", "저장할 때도 보낼 때도 <b>시간대 정보가 들어간 형식</b>(ISO 8601)을 씁니다. 'YYYY-MM-DD HH:mm'만 보내면 받는 쪽은 어느 시간대의 시각인지 알 수 없습니다."),
-    ("화면이 바꾼다", "보는 사람의 시간대로 바꾸는 것은 <b>화면 쪽 일</b>입니다. 서버가 미리 바꿔 보내면 같은 응답이라도 사람마다 따로 캐시해야 합니다."),
-    ("날짜 경계", "'11월 7일 정산'이 시간대에 따라 누군가에게는 6일이 될 수 있으므로, <b>기준 시간대</b>를 정하고 화면에도 적어 둡니다."),
-    ("상대 시간을 서버가 만들지 않는다", "서버가 '3분 전'을 계산해 보내면, 응답이 캐시된 뒤로는 <b>캐시된 순간</b>을 기준으로 한 값이 바뀌지 않고 그대로 보입니다."),
-    ("정렬 키", "정렬은 표시용 글자가 아니라 <b>원래 값</b>으로 합니다. '어제'와 '3시간 전' 같은 글자로는 순서를 정할 수 없습니다."),
+    ("서버는 UTC로 저장하고 보내기", "저장할 때도 보낼 때도 <b>시간대 정보가 들어간 형식</b>(ISO 8601)을 씁니다. 'YYYY-MM-DD HH:mm'만 보내면 받는 쪽은 어느 시간대의 시각인지 알 수 없습니다."),
+    ("시간대 변환은 화면에서 하기", "보는 사람의 시간대로 바꾸는 것은 <b>화면 쪽 일</b>입니다. 서버가 미리 바꿔 보내면 같은 응답이라도 사람마다 따로 캐시해야 합니다."),
+    ("날짜 경계의 기준 시간대 정하기", "'11월 7일 정산'이 시간대에 따라 누군가에게는 6일이 될 수 있으므로, <b>기준 시간대</b>를 정하고 화면에도 적어 둡니다."),
+    ("상대 시간을 서버가 만들지 않기", "서버가 '3분 전'을 계산해 보내면, 응답이 캐시된 뒤로는 <b>캐시된 순간</b>을 기준으로 한 값이 바뀌지 않고 그대로 보입니다."),
+    ("정렬은 원래 값으로 하기", "정렬은 표시용 글자가 아니라 <b>원래 값</b>으로 합니다. '어제'와 '3시간 전' 같은 글자로는 순서를 정할 수 없습니다."),
   ]),
   plat_lede="세 플랫폼 모두 날짜와 시간을 <b>언어에 맞게 적어 주는 기능</b>이 있습니다.",
   plats=plats([

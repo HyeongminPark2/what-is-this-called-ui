@@ -37,15 +37,15 @@ ANAT = '''              <div class="anat--wide" style="background:var(--bg);bord
                   </div>
                   <div class="pin-out" data-pin="2" style="display:flex;align-items:center;gap:9px;font-size:11px;color:var(--fg-muted)">
                     <span style="display:block;width:44px;height:13px;border-radius:3px;background:color-mix(in srgb,var(--danger) 45%,transparent);flex:none"></span>
-                    <span>위 — 노치가 가져가는 두께</span>
+                    <span>위는 노치가 차지하는 두께</span>
                   </div>
                   <div class="pin-out" data-pin="3" style="display:flex;align-items:center;gap:9px;font-size:11px;color:var(--fg-muted)">
                     <span style="display:block;width:44px;height:10px;border-radius:3px;background:color-mix(in srgb,var(--danger) 45%,transparent);flex:none"></span>
-                    <span>아래 — 홈 막대가 가져가는 두께</span>
+                    <span>아래는 홈 막대가 차지하는 두께</span>
                   </div>
                   <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">env(safe-area-inset-top)</div>
                   <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">env(safe-area-inset-bottom)</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">viewport-fit=cover   — 없으면 값이 늘 0</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">viewport-fit=cover   없으면 값이 늘 0</div>
                 </div>
               </div>'''
 
@@ -77,34 +77,37 @@ D = dict(
   ]),
   axes=ax("세이프 에어리어"),
   oneline="세이프 에어리어는 <b>개발자가 정하는 값이 아니라 OS에 물어보는 값</b>입니다. 숫자로 고정해 두면 그 값과 맞지 않는 기기에서 화면이 깨집니다.",
-  s4_title="갈래", s4_hint="기기와 방향마다 다르다",
+  s4_title="화면 모양에 따라 챙길 자리", s4_hint="기기와 화면 방향마다 달라지는 인셋",
+  do_title="세이프 에어리어를 챙겨야 하는 경우",
+  dont_title="세이프 에어리어를 다룰 때 피할 것",
+  instead_title="세이프 에어리어와 함께 보면 좋은 항목",
   states=states([
     (ph(BAND_T + BAND_B + bar("모란상회") + bar("홈 · 정산 · 설정", False), "안 챙긴 화면"),
-     "안 챙김", "글자가 <b>노치와 홈 막대에 겹칩니다</b>"),
+     "인셋을 챙기지 않았을 때", "글자가 <b>노치와 홈 막대에 겹칩니다</b>"),
     (ph(BAND_T + BAND_B + bar("모란상회", True, "padding-top:14px") + bar("홈 · 정산 · 설정", False, "padding-bottom:11px"), "챙긴 화면"),
-     "챙김", "바 자체는 화면 끝까지 두고, <b>내용만</b> 안쪽으로 밉니다"),
+     "인셋을 챙겼을 때", "바 자체는 화면 끝까지 두고, <b>내용만</b> 안쪽으로 밉니다"),
     (ph(BAND_T + bar("모란상회", True, "padding-top:14px"), "위만 있는 화면", "140px"),
-     "위만", "꼬리말이 없으면 위쪽만 챙기면 됩니다"),
+     "위쪽만 챙기면 될 때", "꼬리말이 없으면 위쪽만 챙기면 됩니다"),
     ('''              <div style="position:relative;width:140px;height:80px;border-radius:12px;background:var(--ink-900);padding:4px;margin:0 auto">
                 <div style="position:relative;height:100%;border-radius:9px;background:var(--surface);overflow:hidden">
                   <span style="position:absolute;top:0;bottom:0;left:0;width:11px;background:color-mix(in srgb,var(--danger) 18%,transparent)"></span>
                   <span style="position:absolute;top:0;bottom:0;right:0;width:11px;background:color-mix(in srgb,var(--danger) 18%,transparent)"></span>
                   <span style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:0;height:0"></span>
                   <span style="position:absolute;left:0;top:50%;transform:translateY(-50%);width:9px;height:30px;background:var(--ink-900);border-radius:0 6px 6px 0"></span>
-                  <span style="position:absolute;left:14px;top:9px;font-size:7.5px;color:var(--fg-muted)">가로로 돌리면 좌우에도 생긴다</span>
+                  <span style="position:absolute;left:14px;top:9px;font-size:7.5px;color:var(--fg-muted)">가로로 돌리면 좌우에도 생김</span>
                 </div>
               </div>''',
-     "가로 화면", "인셋이 <b>좌우에도</b> 생겨서, 위아래만 챙기면 가로 화면에서 깨집니다"),
+     "가로로 돌렸을 때", "인셋이 <b>좌우에도</b> 생겨서, 위아래만 챙기면 가로 화면에서 깨집니다"),
     (ph(BAND_B + bar("저장하기", False, "padding-bottom:11px"), "키보드가 올라온 화면", "140px"),
-     "붙박이 버튼", "화면 아래 버튼은 <b>홈 막대와 가장 자주 겹칩니다</b>"),
+     "아래에 버튼을 붙였을 때", "화면 아래 버튼은 <b>홈 막대와 가장 자주 겹칩니다</b>"),
     ('''              <div style="position:relative;width:86px;height:140px;border-radius:14px;background:var(--ink-900);padding:4px;margin:0 auto">
                 <div style="position:relative;height:100%;border-radius:11px;background:var(--surface);overflow:hidden">
                   <span style="position:absolute;left:0;right:0;top:0;height:28px;background:repeating-linear-gradient(135deg,var(--ink-100) 0 5px,var(--ink-050) 5px 10px)"></span>
                   <span style="position:absolute;left:50%;top:0;transform:translateX(-50%);width:34px;height:9px;background:var(--ink-900);border-radius:0 0 6px 6px;z-index:5"></span>
-                  <span style="position:absolute;left:4px;top:32px;font-size:7px;color:var(--fg-muted)">사진은 끝까지</span>
+                  <span style="position:absolute;left:4px;top:32px;font-size:7px;color:var(--fg-muted)">사진은 끝까지 채움</span>
                 </div>
               </div>''',
-     "배경은 끝까지", "사진과 배경색은 <b>노치 뒤까지</b> 채우고 글자만 안쪽에 둡니다"),
+     "배경을 끝까지 채울 때", "사진과 배경색은 <b>노치 뒤까지</b> 채우고 글자만 안쪽에 둡니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -132,17 +135,17 @@ D = dict(
     "바의 <b>배경까지</b> 안쪽으로 밀 때. 화면 가장자리에 흰 띠가 남습니다",
     "<code>viewport-fit=cover</code> 없이 <code>env()</code> 값을 쓰려 할 때",
   ]),
-  instead='아래 붙박이 줄 자체는 <a href="../items/bottomnav.html">바텀 탭바</a>, 위는 <a href="../items/appbar.html">앱바</a>, 스크롤할 때 붙여 두는 일은 <a href="sticky.html">스티키</a>.',
+  instead='화면 아래에 붙는 탭바 자체는 <a href="../items/bottomnav.html">바텀 탭바</a>에서, 위쪽 바는 <a href="../items/appbar.html">앱바</a>에서 다룹니다. 스크롤하는 동안 요소를 한자리에 붙여 두는 방법은 <a href="sticky.html">스티키</a>에서 봅니다.',
   cases=cases([
     (ph(BAND_B + bar("홈 · 정산 · 설정", False, "padding-bottom:11px"), "탭바 재현", "140px"),
-     "바텀 탭바", "홈 막대와 가장 자주 겹치는 자리입니다. <b>아이콘이 홈 막대에 닿으면 눌리지 않습니다</b>"),
+     "바텀 탭바를 홈 막대 위로 올리기", "홈 막대와 가장 자주 겹치는 자리입니다. <b>아이콘이 홈 막대에 닿으면 눌리지 않습니다</b>"),
     (ph(BAND_B + bar("저장하기", False, "padding-bottom:11px"), "저장 바 재현", "140px"),
-     "붙박이 저장 바", "긴 폼 아래에 붙인 버튼도 탭바와 같은 문제를 겪습니다"),
+     "폼 아래 저장 바를 홈 막대 위로 올리기", "긴 폼 아래에 붙인 버튼도 탭바와 같은 문제를 겪습니다"),
     (ph(BAND_T + bar("← 상세", True, "padding-top:14px"), "상단 바 재현", "140px"),
-     "상단 바", "뒤로가기 버튼이 <b>노치에 가려 눌리지 않는</b> 일이 흔합니다"),
+     "상단 바를 노치 아래로 내리기", "뒤로가기 버튼이 <b>노치에 가려 눌리지 않는</b> 일이 흔합니다"),
   ]),
-  s8_title="최소 코드와 규칙", s8_hint="두 줄이면 끝난다",
-  keys_heads="<th>규칙</th><th>지켜야 하는 것</th>",
+  s8_title="최소 코드와 규칙", s8_hint="메타 태그 한 줄과 패딩 한 줄",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법</th>",
   code_lede="<code>&lt;meta&gt;</code> 한 줄과 <code>padding</code> 한 줄이면 되는데, <b>메타 태그를 먼저</b> 적어야 합니다.",
   code='''<span class="c">&lt;!-- 이 줄이 없으면 env( )가 항상 0이다 --&gt;</span>
 &lt;<span class="t">meta</span> <span class="a">name</span>=<span class="s">"viewport"</span>
@@ -162,18 +165,18 @@ D = dict(
   <span class="a">padding-inline</span>: <span class="t">max</span>(<span class="a">16px</span>, <span class="t">env</span>(safe-area-inset-left));
 }''',
   keys=kbd([
-    ("<code>viewport-fit=cover</code> 먼저", "이 한 줄이 없으면 <code>env()</code>가 <b>모두 0</b>이 됩니다. env가 작동하지 않는 가장 흔한 원인입니다"),
-    ("<code>max()</code>와 함께 쓴다", "노치 없는 기기에서 0이 와도 <b>최소 여백</b>이 남게 합니다"),
-    ("배경은 끝까지", "바의 <b>배경은 화면 끝까지</b> 두고 안의 내용만 밉니다. 배경까지 밀면 가장자리에 띠가 생깁니다"),
-    ("좌우도 챙긴다", "가로로 돌리면 <code>left</code>·<code>right</code>에 값이 생깁니다"),
-    ("숫자를 못 박지 않는다", "44px·34px 같은 값은 <b>특정 기기에서만</b> 맞습니다"),
-    ("터치 자리로 확인한다", "눈으로는 가려지지 않은 것 같아도 <b>눌리지 않는</b> 경우가 있으므로 실기기로 눌러 봅니다"),
+    ("<code>viewport-fit=cover</code>부터 적기", "이 한 줄이 없으면 <code>env()</code>가 <b>모두 0</b>이 됩니다. env가 작동하지 않는 가장 흔한 원인입니다"),
+    ("<code>max()</code>로 최소 여백 함께 주기", "노치 없는 기기에서 0이 와도 <b>최소 여백</b>이 남게 합니다"),
+    ("바 배경은 화면 끝까지 두기", "바의 <b>배경은 화면 끝까지</b> 두고 안의 내용만 밉니다. 배경까지 밀면 가장자리에 띠가 생깁니다"),
+    ("가로 화면의 좌우 인셋도 챙기기", "가로로 돌리면 <code>left</code>·<code>right</code>에 값이 생깁니다"),
+    ("인셋을 숫자로 고정하지 않기", "44px·34px 같은 값은 <b>특정 기기에서만</b> 맞습니다"),
+    ("실기기에서 눌러 보며 확인하기", "눈으로는 가려지지 않은 것 같아도 <b>눌리지 않는</b> 경우가 있으므로 실기기로 눌러 봅니다"),
   ]),
   backend=rows([
-    ("서버가 할 일은 없다", "세이프 에어리어는 화면에서만 처리하는 일입니다. 다만 <b>웹앱을 홈 화면에 설치</b>해 쓰는 경우라면 매니페스트의 <code>display: standalone</code>과 함께 생각해야 합니다."),
-    ("기기 목록으로 테스트", "노치 있는 기기, 노치 없는 기기, 가로 화면 <b>세 가지</b>가 최소한의 테스트 조합입니다. 브라우저 개발자 도구의 기기 에뮬레이션으로도 문제를 상당 부분 잡을 수 있습니다."),
+    ("화면에서만 처리하는 일", "세이프 에어리어는 화면에서만 처리하는 일입니다. 다만 <b>웹앱을 홈 화면에 설치</b>해 쓰는 경우라면 매니페스트의 <code>display: standalone</code>과 함께 생각해야 합니다."),
+    ("테스트할 기기 조합", "노치 있는 기기, 노치 없는 기기, 가로 화면 <b>세 가지</b>가 최소한의 테스트 조합입니다. 브라우저 개발자 도구의 기기 에뮬레이션으로도 문제를 상당 부분 잡을 수 있습니다."),
     ("키보드가 올라올 때", "입력칸에 포커스가 가면 키보드가 올라와 화면이 줄어듭니다. 그래서 아래 붙박이 버튼은 <b>키보드 위로 올라오게</b> 따로 처리해야 합니다."),
-    ("스크린샷 자동 검사", "글자 상자가 인셋 영역과 겹치는지는 좌표로 잴 수 있기 때문에, 실기기 없이도 <b>회귀를 막을</b> 수 있습니다."),
+    ("스크린샷으로 자동 검사하기", "글자 상자가 인셋 영역과 겹치는지는 좌표로 잴 수 있기 때문에, 실기기 없이도 <b>회귀를 막을</b> 수 있습니다."),
   ]),
   plat_lede="OS가 인셋 값을 알려 준다는 점은 같고, 이름과 기본값이 다릅니다.",
   plats=plats([
@@ -192,5 +195,5 @@ D = dict(
   related='''        <li><a href="../items/bottomnav.html"><b>바텀 탭바</b><em>7부</em></a></li>
         <li><a href="../items/appbar.html"><b>앱바 · 헤더</b><em>7부</em></a></li>
         <li><a href="../items/sheet.html"><b>바텀시트</b><em>6부</em></a></li>
-        <li><span class="na"><b>터치 타깃</b><em>11부</em></span></li>''',
+        <li><a href="touchtarget.html"><b>터치 타깃</b><em>11부</em></a></li>''',
 )

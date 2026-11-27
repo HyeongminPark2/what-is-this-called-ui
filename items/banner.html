@@ -52,7 +52,7 @@
         <div class="note" style="margin-bottom:0">
           <p>배너가 여러 개 쌓이면 그만큼 화면 자리를 차지합니다. 배너 수를 늘려 보면
           데모가 <b>배너가 화면의 몇 %를 차지하는지</b> 재서 적어 줍니다.<br>
-          <b>닫을 수 있게</b>를 끄면 배너를 치울 방법이 없어 계속 남습니다. 또 닫은 배너를 <b>기억하지 않으면</b>
+          <b>배너를 닫을 수 있게 하기</b>를 끄면 배너를 치울 방법이 없어 계속 남습니다. 또 닫은 배너를 <b>기억하지 않으면</b>
           새로 고칠 때마다 다시 뜨는데, 데모가 그렇게 다시 뜬 개수를 세어 보여 줍니다.<br>
           배너는 <b>화면 전체에 해당하는 사정</b>을 알리는 데 씁니다. 입력 칸 하나의 오류는
           <a href="inlinealert.html">인라인 얼럿</a>으로 알립니다.</p>
@@ -78,15 +78,15 @@
         <p>겹쳐 뜨는 부품들은 모양만 보고는 구별하기 어렵지만, 아래 네 가지를 따져 보면 어느 부품인지 가려낼 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>뒤를 막나</th><th>포커스를 가두나</th><th>배경 스크롤</th><th>어디서 뜨나</th></tr></thead>
+          <thead><tr><th></th><th>뒤쪽 화면을 막는가</th><th>포커스를 안에 가두는가</th><th>뒤쪽 화면의 스크롤은</th><th>화면 어디에서 뜨는가</th></tr></thead>
           <tbody>
             <tr><td>모달</td><td>막는다</td><td>가둔다</td><td>잠긴다</td><td>가운데</td></tr>
-            <tr><td>다이얼로그(비모달)</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로</td><td>가운데 · 띄워 둠</td></tr>
-            <tr><td>바텀시트</td><td>막거나 안 막는다</td><td>막을 때만</td><td>막을 때만</td><td>아래에서</td></tr>
-            <tr><td>드로어</td><td>보통 막는다</td><td>가둔다</td><td>잠긴다</td><td>옆에서</td></tr>
-            <tr><td>팝오버</td><td class="none">안 막는다</td><td>가두기도 한다</td><td class="none">그대로</td><td>누른 것 옆에</td></tr>
-            <tr><td>툴팁</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로</td><td>가리킨 것 옆에</td></tr>
-            <tr><td>토스트</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로</td><td>구석 · 저절로 사라짐</td></tr>
+            <tr><td>다이얼로그(비모달)</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로 움직인다</td><td>가운데에 띄워 둔 채</td></tr>
+            <tr><td>바텀시트</td><td>막을 때도 있다</td><td>뒤를 막을 때만</td><td>뒤를 막을 때만</td><td>아래에서 올라옴</td></tr>
+            <tr><td>드로어</td><td>보통 막는다</td><td>가둔다</td><td>잠긴다</td><td>옆에서 밀려 나옴</td></tr>
+            <tr><td>팝오버</td><td class="none">안 막는다</td><td>가두기도 한다</td><td class="none">그대로 움직인다</td><td>누른 것 옆</td></tr>
+            <tr><td>툴팁</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로 움직인다</td><td>가리킨 것 옆</td></tr>
+            <tr><td>토스트</td><td class="none">안 막는다</td><td class="none">안 가둔다</td><td class="none">그대로 움직인다</td><td>구석에 떴다 저절로 사라짐</td></tr>
           </tbody>
         </table>
         </div>
@@ -100,39 +100,39 @@
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">11월 15일 02:00~04:00 점검</span><span style="margin-left:auto;opacity:.7">✕</span></span><span style="display:grid;gap:3px;padding:5px 6px"><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:70%;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:85%;border-radius:2px;background:var(--bg)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">하나 — 알맞다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">11월 15일 02:00~04:00 점검</span><span style="margin-left:auto;opacity:.7">✕</span></span><span style="display:grid;gap:3px;padding:5px 6px"><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:70%;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:85%;border-radius:2px;background:var(--bg)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">하나면 알맞음</span></div>
             </div>
-            <figcaption>하나<span>사용자가 <b>읽습니다</b></span></figcaption>
+            <figcaption>배너가 하나일 때<span>사용자가 <b>읽습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">점검 안내</span><span style="margin-left:auto;opacity:.7">✕</span></span><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #0969da 10%, var(--surface));color:#0969da;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">새 정산 방식 안내</span><span style="margin-left:auto;opacity:.7">✕</span></span><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">사업자 정보 갱신</span><span style="margin-left:auto;opacity:.7">✕</span></span><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #0969da 10%, var(--surface));color:#0969da;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">새 버전 안내</span><span style="margin-left:auto;opacity:.7">✕</span></span><span style="display:grid;gap:3px;padding:5px 6px"><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:70%;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:85%;border-radius:2px;background:var(--bg)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">내용보다 알림이 크다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">점검 안내</span><span style="margin-left:auto;opacity:.7">✕</span></span><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #0969da 10%, var(--surface));color:#0969da;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">새 정산 방식 안내</span><span style="margin-left:auto;opacity:.7">✕</span></span><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">사업자 정보 갱신</span><span style="margin-left:auto;opacity:.7">✕</span></span><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #0969da 10%, var(--surface));color:#0969da;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">새 버전 안내</span><span style="margin-left:auto;opacity:.7">✕</span></span><span style="display:grid;gap:3px;padding:5px 6px"><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:70%;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:85%;border-radius:2px;background:var(--bg)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">내용보다 알림이 큼</span></div>
             </div>
-            <figcaption>쌓임<span>여러 개가 쌓이면 <b>어느 것도 읽지 않습니다</b></span></figcaption>
+            <figcaption>여러 개가 쌓였을 때<span>여러 개가 쌓이면 <b>어느 것도 읽지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">사업자 정보가 만료됐습니다 — 갱신하기</span><span style="margin-left:auto;opacity:.7">✕</span></span><span style="display:grid;gap:3px;padding:5px 6px"><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:70%;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:85%;border-radius:2px;background:var(--bg)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">할 일이 붙어 있다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">사업자 정보가 만료됐습니다 — 갱신하기</span><span style="margin-left:auto;opacity:.7">✕</span></span><span style="display:grid;gap:3px;padding:5px 6px"><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:70%;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:85%;border-radius:2px;background:var(--bg)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">할 일이 붙어 있음</span></div>
             </div>
-            <figcaption>할 일과 함께<span>사용자가 <b>무엇을 해야 하는지</b> 적습니다</span></figcaption>
+            <figcaption>할 일을 함께 붙였을 때<span>사용자가 <b>무엇을 해야 하는지</b> 적습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">점검 안내</span></span><span style="display:grid;gap:3px;padding:5px 6px"><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:70%;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:85%;border-radius:2px;background:var(--bg)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">닫을 수 없다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">점검 안내</span></span><span style="display:grid;gap:3px;padding:5px 6px"><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:70%;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:85%;border-radius:2px;background:var(--bg)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">닫을 수 없음</span></div>
             </div>
-            <figcaption>닫기 없음<span>치울 수 없어서 <b>계속 남습니다</b></span></figcaption>
+            <figcaption>닫기 버튼이 없을 때<span>치울 수 없어서 <b>계속 남습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, var(--danger) 10%, var(--surface));color:var(--danger);border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">결제가 실패해 서비스가 멈췄습니다</span></span><span style="display:grid;gap:3px;padding:5px 6px"><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:70%;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:85%;border-radius:2px;background:var(--bg)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">닫으면 안 되는 것도 있다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, var(--danger) 10%, var(--surface));color:var(--danger);border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">결제가 실패해 서비스가 멈췄습니다</span></span><span style="display:grid;gap:3px;padding:5px 6px"><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:70%;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:85%;border-radius:2px;background:var(--bg)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">닫으면 안 되는 배너도 있음</span></div>
             </div>
-            <figcaption>막는 사정<span>서비스가 멈춘 상황처럼 닫으면 안 되는 배너에는 <b>닫기를 두지 않습니다</b></span></figcaption>
+            <figcaption>서비스가 멈춘 사정을 알릴 때<span>서비스가 멈춘 상황처럼 닫으면 안 되는 배너에는 <b>닫기를 두지 않습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:grid;gap:3px;padding:5px 6px"><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:70%;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:85%;border-radius:2px;background:var(--bg)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">다 읽고 치웠다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:grid;gap:3px;padding:5px 6px"><span style="display:block;height:5px;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:70%;border-radius:2px;background:var(--bg)"></span><span style="display:block;height:5px;width:85%;border-radius:2px;background:var(--bg)"></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">다 읽고 치움</span></div>
             </div>
-            <figcaption>다 치움<span>배너를 다 닫으면 화면에 <b>내용만</b> 남습니다</span></figcaption>
+            <figcaption>배너를 다 치웠을 때<span>배너를 다 닫으면 화면에 <b>내용만</b> 남습니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -144,22 +144,22 @@
             <div class="anat" role="img" aria-label="배너의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">화면 꼭대기 — 자리를 차지한다(안 뜬다)</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">사라지지 않는다 — 읽고 치울 때까지</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">할 일 하나 — '갱신하기'</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--accent)">닫을 수 있어야 한다 · 닫은 것은 기억한다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--danger)">쌓이면 내용보다 알림이 커진다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">화면 전체에 걸린 사정만 — 칸 하나는 인라인 얼럿</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">화면 꼭대기에 떠 있지 않고 자리를 차지함</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">읽고 치울 때까지 사라지지 않음</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">'갱신하기' 같은 할 일 하나를 붙임</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--accent)">닫을 수 있고, 닫은 배너는 기억해 둠</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--danger)">쌓이면 내용보다 알림이 더 커짐</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">화면 전체의 사정만, 칸 하나는 인라인 얼럿으로</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>자리 <em>꼭대기</em></b><span>화면 위에 <b>떠 있지 않고</b> 본문 위쪽 자리를 차지합니다</span></li>
-            <li><b>안 사라짐 <em>치울 때까지</em></b><span>저절로 사라지는 토스트와 <b>반대</b>입니다</span></li>
-            <li><b>할 일 <em>하나</em></b><span>'갱신하기'처럼 할 일 하나를 붙입니다</span></li>
-            <li><b>닫기 <em>있어야 함</em></b><span>사용자가 닫은 배너는 <b>기억</b>해 둡니다</span></li>
-            <li><b>쌓임 <em>위험</em></b><span>두 개가 쌓이면 <b>둘 다</b> 읽지 않습니다</span></li>
+            <li><b>자리 <em>화면 꼭대기</em></b><span>화면 위에 <b>떠 있지 않고</b> 본문 위쪽 자리를 차지합니다</span></li>
+            <li><b>남아 있는 시간 <em>치울 때까지</em></b><span>저절로 사라지는 토스트와 <b>반대</b>입니다</span></li>
+            <li><b>할 일 <em>하나만 붙임</em></b><span>'갱신하기'처럼 할 일 하나를 붙입니다</span></li>
+            <li><b>닫기 <em>꼭 둠</em></b><span>사용자가 닫은 배너는 <b>기억</b>해 둡니다</span></li>
+            <li><b>쌓임 <em>읽지 않게 됨</em></b><span>두 개가 쌓이면 <b>둘 다</b> 읽지 않습니다</span></li>
             <li><b>범위 <em>화면 전체</em></b><span>입력 칸 하나의 사정은 <b>인라인 얼럿</b>으로 알립니다</span></li>
           </ol>
         </div>
@@ -177,7 +177,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>배너를 쓰는 경우</h3>
+            <h3>배너를 알맞게 쓰는 경우</h3>
             <ul>
               <li>한 번에 <b>하나만</b> 띄울 때</li>
               <li><b>닫을 수 있게</b> 하고, 닫은 배너를 기억해 둘 때</li>
@@ -185,7 +185,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>배너를 쓰지 않는 경우</h3>
+            <h3>배너를 잘못 쓰는 경우</h3>
             <ul>
               <li>배너를 여러 개 <b>쌓을</b> 때. 두 개가 쌓이면 사용자는 둘 다 읽지 않습니다</li>
               <li>닫기 버튼을 <b>두지 않을</b> 때(서비스가 멈춘 경우는 예외)</li>
@@ -204,19 +204,19 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">11월 15일 02:00~04:00 점검</span><span style="margin-left:auto;opacity:.7">✕</span></span></div></div>
             </div>
-            <figcaption><b>점검 안내</b>정해진 <b>기간</b> 동안만 해당하는 사정을 알립니다</figcaption>
+            <figcaption><b>정해진 기간의 점검 알리기</b>정해진 <b>기간</b> 동안만 해당하는 사정을 알립니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #9a6700 14%, var(--surface));color:#9a6700;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">사업자 정보 갱신이 필요합니다</span><span style="margin-left:auto;opacity:.7">✕</span></span></div></div>
             </div>
-            <figcaption><b>할 일 알림</b>사용자가 처리하지 않으면 <b>서비스를 쓸 수 없게 되는</b> 일을 알립니다</figcaption>
+            <figcaption><b>사용자가 처리할 일 알리기</b>사용자가 처리하지 않으면 <b>서비스를 쓸 수 없게 되는</b> 일을 알립니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:4px;align-items:center;padding:3px 6px;font-size:7.5px;background:color-mix(in srgb, #0969da 10%, var(--surface));color:#0969da;border-bottom:1px solid var(--line)"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">새 버전이 나왔습니다 — 새로 고침</span><span style="margin-left:auto;opacity:.7">✕</span></span></div></div>
             </div>
-            <figcaption><b>버전 안내</b>급하지 않은 소식이라 <b>눈에 덜 띄는 색</b>으로 띄웁니다</figcaption>
+            <figcaption><b>새 버전 소식 알리기</b>급하지 않은 소식이라 <b>눈에 덜 띄는 색</b>으로 띄웁니다</figcaption>
           </figure>
         </div>
       </section>
@@ -238,14 +238,14 @@ closeBtn.onclick = () =&gt; {
 };</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td><code>role="status"</code></td><td>배너가 뜨면 스크린 리더가 <b>읽던 말을 마친 뒤</b> 배너를 읽어 줍니다</td></tr>
             <tr><td>Tab</td><td>배너 안의 링크와 닫기 버튼으로 <b>포커스를 옮길 수 있어야</b> 합니다</td></tr>
             <tr><td><code>aria-label</code></td><td>✕ 버튼에 <b>무엇을 닫는지</b> 적습니다</td></tr>
-            <tr><td>초점</td><td>배너가 떠도 <b>초점을 옮기지 않습니다</b>. 초점이 옮겨 가면 하던 일이 끊깁니다</td></tr>
-            <tr><td>차례</td><td>마크업에서 <b>본문보다 먼저</b> 둬야 스크린 리더도 배너를 먼저 읽습니다</td></tr>
-            <tr><td>확인하는 법</td><td>배너를 닫고 <b>새로 고침</b>한 뒤 다시 뜨는지 봅니다</td></tr>
+            <tr><td>배너가 뜰 때의 초점</td><td>배너가 떠도 <b>초점을 옮기지 않습니다</b>. 초점이 옮겨 가면 하던 일이 끊깁니다</td></tr>
+            <tr><td>마크업 안에서의 차례</td><td>마크업에서 <b>본문보다 먼저</b> 둬야 스크린 리더도 배너를 먼저 읽습니다</td></tr>
+            <tr><td>확인하는 방법</td><td>배너를 닫고 <b>새로 고침</b>한 뒤 다시 뜨는지 봅니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -256,9 +256,9 @@ closeBtn.onclick = () =&gt; {
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>언제까지</th><td><code>expires_at</code> 값을 두면 그 시각에 배너가 <b>저절로 내려가기</b> 때문에, 누군가 잊지 않고 직접 지울 필요가 없습니다.</td></tr>
-            <tr><th>누구에게</th><td>'사업자 정보 만료' 같은 배너는 해당하는 사용자에게만 띄웁니다. <b>모두에게</b> 띄우면 대부분의 사용자에게는 쓸모없는 띠가 됩니다.</td></tr>
-            <tr><th>닫음 기록</th><td>닫은 기록을 계정별로 저장하면 <b>다른 기기에서도</b> 그 배너가 다시 뜨지 않습니다.</td></tr>
+            <tr><th>언제까지 띄울지 정하기</th><td><code>expires_at</code> 값을 두면 그 시각에 배너가 <b>저절로 내려가기</b> 때문에, 누군가 잊지 않고 직접 지울 필요가 없습니다.</td></tr>
+            <tr><th>누구에게 띄울지 정하기</th><td>'사업자 정보 만료' 같은 배너는 해당하는 사용자에게만 띄웁니다. <b>모두에게</b> 띄우면 대부분의 사용자에게는 쓸모없는 띠가 됩니다.</td></tr>
+            <tr><th>닫은 기록을 계정별로 저장하기</th><td>닫은 기록을 계정별로 저장하면 <b>다른 기기에서도</b> 그 배너가 다시 뜨지 않습니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -276,7 +276,7 @@ closeBtn.onclick = () =&gt; {
             <footer>쿠키 동의 띠와 공지 띠로 익숙한 부품입니다. 웹에서는 배너가 <b>쉽게 쌓이는</b> 편입니다.</footer>
           </div>
           <div class="plat">
-            <header><b>iOS</b><span>없다</span></header>
+            <header><b>iOS</b><span>정식 부품 없음</span></header>
             <div class="shot">
               <div class="phone" role="img" aria-label="iOS 상단 알림 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:4px;right:4px;top:20px;height:9px;border-radius:3px;background:color-mix(in srgb,#9a6700 25%,transparent)"></div>
@@ -285,7 +285,7 @@ closeBtn.onclick = () =&gt; {
             <footer>정식 부품이 없습니다. 중요한 사정은 <b>화면 내용 안에</b> 섞어 넣는 방식을 권합니다.</footer>
           </div>
           <div class="plat">
-            <header><b>안드로이드</b><span>M2 Banner (M3 에서 뺌)</span></header>
+            <header><b>안드로이드</b><span>M2 Banner (M3에서 뺌)</span></header>
             <div class="shot">
               <div class="phone" role="img" aria-label="안드로이드 배너 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:0;right:0;top:20px;height:12px;background:color-mix(in srgb,#9a6700 20%,transparent)"></div>

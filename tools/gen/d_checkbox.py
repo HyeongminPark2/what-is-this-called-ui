@@ -44,12 +44,12 @@ D = dict(
   axes=ax("체크박스"),
   oneline="체크박스는 <b>여러 항목을 각각</b> 고르는 부품이고, <b>저장을 눌러야</b> 적용됩니다. 누르는 즉시 적용되면 스위치, 하나만 고르면 라디오입니다.",
   states=states([
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1px solid var(--line-strong);border-radius:2px"></span><span style="font-size:6.5px">정산 확정</span></div>', bars="", label="꺼진 체크박스"), "끔", "빈 네모입니다. 테두리가 또렷해야 그 자리에 체크박스가 있는 줄 압니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;background:var(--accent);border-radius:2px;display:grid;place-items:center;color:#fff;font-size:6px;font-weight:800">✓</span><span style="font-size:6.5px">정산 확정</span></div>', bars="", label="켜진 체크박스"), "켬", "체크 표시가 나타납니다. 색만 바꿔서 알리지 않습니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1px solid var(--line-strong);border-radius:2px"></span><span style="font-size:6.5px">정산 확정</span></div>', bars="", label="꺼진 체크박스"), "꺼져 있을 때", "빈 네모입니다. 테두리가 또렷해야 그 자리에 체크박스가 있는 줄 압니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;background:var(--accent);border-radius:2px;display:grid;place-items:center;color:#fff;font-size:6px;font-weight:800">✓</span><span style="font-size:6.5px">정산 확정</span></div>', bars="", label="켜진 체크박스"), "켜져 있을 때", "체크 표시가 나타납니다. 색만 바꿔서 알리지 않습니다"),
     (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;background:var(--accent);border-radius:2px;display:grid;place-items:center;color:#fff;font-size:7px;font-weight:800">–</span><span style="font-size:6.5px">전체 선택</span></div>', bars="", label="중간 상태"), "중간 상태", "아래 항목이 일부만 켜졌을 때의 모습으로, <b>체크박스에만 있는</b> 세 번째 상태입니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1px solid var(--accent);border-radius:2px;box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent)"></span><span style="font-size:6.5px">정산 확정</span></div>', bars="", label="포커스"), "포커스", "키보드로 포커스가 왔을 때의 모습입니다. 포커스 링을 지우지 않습니다"),
-    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:4px;align-items:center;opacity:.45"><span style="width:9px;height:9px;background:var(--accent);border-radius:2px;display:grid;place-items:center;color:#fff;font-size:6px;font-weight:800">✓</span><span style="font-size:6.5px">보안 경고</span></div><div style="position:absolute;left:6px;bottom:6px;font-size:5.5px;color:var(--fg-muted)">끌 수 없음 — 이유를 적을 것</div>', bars="", label="비활성"), "비활성", "켠 채로 끄지 못하게 막아 두는 경우가 많은데, 그럴 때는 <b>왜 끌 수 없는지 적습니다</b>"),
-    (mini('<div style="margin-top:12px;padding:0 6px"><div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1px solid var(--danger);border-radius:2px"></span><span style="font-size:6.5px">약관에 동의</span></div><div style="font-size:5.5px;color:var(--danger);font-weight:700;margin-top:3px">동의해야 저장됩니다</div></div>', bars="", label="필수 미동의"), "필수인데 안 켬", "약관 동의처럼 꼭 켜야 하는 항목을 켜지 않은 상태입니다. 에러 메시지는 그 항목 바로 아래에 띄웁니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1px solid var(--accent);border-radius:2px;box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 25%,transparent)"></span><span style="font-size:6.5px">정산 확정</span></div>', bars="", label="포커스"), "포커스를 받았을 때", "키보드로 포커스가 왔을 때의 모습입니다. 포커스 링을 지우지 않습니다"),
+    (mini('<div style="margin-top:12px;padding:0 6px;display:flex;gap:4px;align-items:center;opacity:.45"><span style="width:9px;height:9px;background:var(--accent);border-radius:2px;display:grid;place-items:center;color:#fff;font-size:6px;font-weight:800">✓</span><span style="font-size:6.5px">보안 경고</span></div><div style="position:absolute;left:6px;bottom:6px;font-size:5.5px;color:var(--fg-muted)">끌 수 없는 이유를 적어 둠</div>', bars="", label="비활성"), "비활성일 때", "켠 채로 끄지 못하게 막아 두는 경우가 많은데, 그럴 때는 <b>왜 끌 수 없는지 적습니다</b>"),
+    (mini('<div style="margin-top:12px;padding:0 6px"><div style="display:flex;gap:4px;align-items:center"><span style="width:9px;height:9px;border:1px solid var(--danger);border-radius:2px"></span><span style="font-size:6.5px">약관에 동의</span></div><div style="font-size:5.5px;color:var(--danger);font-weight:700;margin-top:3px">동의해야 저장됩니다</div></div>', bars="", label="필수 미동의"), "필수 항목을 켜지 않았을 때", "약관 동의처럼 꼭 켜야 하는 항목을 켜지 않은 상태입니다. 에러 메시지는 그 항목 바로 아래에 띄웁니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -75,14 +75,14 @@ D = dict(
     "선택지가 열 개 넘게 늘어설 때. 콤보박스를 쓰거나 목록을 접어 둡니다",
     "라벨 없이 칸만 둘 때. 무엇을 켜는 칸인지 알 수 없습니다",
   ]),
-  instead='하나만 고르면 <a href="radio.html">라디오</a>, 즉시 적용이면 <a href="switch.html">스위치</a>, 둘셋 중 하나면 <a href="segmented.html">세그먼티드</a>, 많으면 <a href="combobox.html">콤보박스</a>.',
+  instead='하나만 골라야 하면 <a href="radio.html">라디오</a>를 쓰고, 누르는 즉시 적용되는 설정이면 <a href="switch.html">스위치</a>를 씁니다. 두세 개 가운데 하나를 고르는 값이면 <a href="segmented.html">세그먼티드</a> 컨트롤이 맞고, 선택지가 많으면 <a href="combobox.html">콤보박스</a>로 걸러서 고르게 합니다.',
   cases=cases([
     (mini('<div style="margin-top:10px;padding:0 6px;display:grid;gap:4px"><div style="display:flex;gap:4px;align-items:center"><span style="width:8px;height:8px;background:var(--accent);border-radius:2px"></span><span style="font-size:6px">정산 확정</span></div><div style="display:flex;gap:4px;align-items:center"><span style="width:8px;height:8px;border:1px solid var(--line-strong);border-radius:2px"></span><span style="font-size:6px">입금 완료</span></div></div>', bars="", tall=False, label="목록형 체크박스 재현"),
-     "목록형", "가장 흔한 모습으로, 설정 화면에서 자주 봅니다"),
+     "한 줄에 하나씩 놓은 목록형", "가장 흔한 모습으로, 설정 화면에서 자주 봅니다"),
     (mini('<div style="margin-top:8px;padding:0 6px;display:grid;gap:3px"><div style="border:1px solid var(--accent);background:var(--accent-soft);border-radius:3px;padding:3px 4px;font-size:5.5px;display:flex;gap:3px"><span style="width:7px;height:7px;background:var(--accent);border-radius:2px"></span>이용약관 동의</div><div style="border:1px solid var(--line-strong);border-radius:3px;padding:3px 4px;font-size:5.5px;display:flex;gap:3px"><span style="width:7px;height:7px;border:1px solid var(--line-strong);border-radius:2px"></span>마케팅 수신</div></div>', bars="", tall=False, label="박스형 체크박스 재현"),
-     "박스형", "항목 둘레에 테두리를 둘러 누를 수 있는 영역을 넓힙니다. 손가락으로 쓰는 화면에 알맞습니다"),
+     "테두리를 두른 박스형", "항목 둘레에 테두리를 둘러 누를 수 있는 영역을 넓힙니다. 손가락으로 쓰는 화면에 알맞습니다"),
     (mini('<div style="margin-top:8px;padding:0 6px;display:grid;gap:4px"><div style="display:flex;gap:4px;align-items:center"><span style="width:8px;height:8px;background:var(--accent);border-radius:2px;display:grid;place-items:center;color:#fff;font-size:6px;font-weight:800">–</span><span style="font-size:6px;font-weight:700">전체</span></div><div style="padding-left:12px;display:grid;gap:3px"><div style="display:flex;gap:4px;align-items:center"><span style="width:8px;height:8px;background:var(--accent);border-radius:2px"></span><span style="font-size:5.5px">정산 확정</span></div><div style="display:flex;gap:4px;align-items:center"><span style="width:8px;height:8px;border:1px solid var(--line-strong);border-radius:2px"></span><span style="font-size:5.5px">입금 완료</span></div></div></div>', bars="", tall=False, label="부모 자식 체크박스 재현"),
-     "부모 · 자식", "표의 전체 선택 칸이 대표적인 예입니다. 중간 상태가 꼭 필요한 곳입니다"),
+     "전체 선택과 하위 항목", "표의 전체 선택 칸이 대표적인 예입니다. 중간 상태가 꼭 필요한 곳입니다"),
   ]),
   code_lede="네이티브 <code>&lt;input type=\"checkbox\"&gt;</code>를 쓰면 키보드 조작과 스크린 리더 지원을 따로 만들지 않아도 됩니다. 색은 <code>accent-color</code> 한 줄로 바꿉니다.",
   code='''&lt;<span class="t">fieldset</span>&gt;
@@ -101,15 +101,15 @@ input[type=checkbox] <span class="a">{</span> <span class="t">accent-color</span
   keys=kbd([
     ("<kbd>Space</kbd>", "켜고 끕니다. <kbd>Enter</kbd>로는 <b>켜지지 않고</b> 폼이 제출됩니다"),
     ("<kbd>Tab</kbd>", "체크박스 <b>칸마다 한 번씩</b> 멈춥니다. 라디오 그룹 전체에서 한 번만 멈추는 것과 다릅니다"),
-    ("라벨 누름", "<code>&lt;label&gt;</code>로 감싸 두면 글자를 눌러도 켜집니다"),
-    ("그룹", "<code>&lt;fieldset&gt;</code>+<code>&lt;legend&gt;</code>로 묶으면 스크린 리더가 묶음 제목을 먼저 읽습니다"),
-    ("중간 상태", "스크린 리더가 '부분 선택'으로 읽습니다. 모양만 바꾸지 말고 스크린 리더도 이 상태를 읽을 수 있게 해야 합니다"),
+    ("라벨을 눌렀을 때", "<code>&lt;label&gt;</code>로 감싸 두면 글자를 눌러도 켜집니다"),
+    ("여러 칸을 묶을 때", "<code>&lt;fieldset&gt;</code>+<code>&lt;legend&gt;</code>로 묶으면 스크린 리더가 묶음 제목을 먼저 읽습니다"),
+    ("중간 상태를 읽을 때", "스크린 리더가 '부분 선택'으로 읽습니다. 모양만 바꾸지 말고 스크린 리더도 이 상태를 읽을 수 있게 해야 합니다"),
   ]),
   backend=rows([
-    ("체크박스 = 비트 집합", "체크박스 묶음은 서로 독립인 불리언 여러 개입니다. 폼으로 보내면 <b>켜진 항목만</b> 전송되고 꺼진 항목은 키 자체가 오지 않으므로, 서버는 키가 없으면 꺼진 것으로 읽어야 합니다."),
-    ("중간 상태는 값이 아니다", "중간 상태인 칸은 보낼 때 꺼진 것으로 처리됩니다. <b>화면에서만 쓰는 표시</b>이므로, 서버에 '일부 선택'을 알려야 한다면 따로 설계해야 합니다."),
-    ("전체 선택 = 범위 연산", "화면에 보이는 줄만 켜는 것과 조건에 맞는 <b>전부</b>를 켜는 것은 서버에 전혀 다른 요청입니다. 예를 들어 10,000건을 '전부 선택'했다면 ID를 모두 보낼지, 검색 조건을 보낼지 정해야 합니다."),
-    ("약관 동의 = 감사 기록", "사용자가 언제 어떤 판본의 약관에 동의했는지 기록으로 남겨야 합니다. 그래서 약관 동의 체크는 불리언 하나가 아니라 <b>이력</b>으로 저장합니다."),
+    ("서로 독립인 불리언 여러 개", "체크박스 묶음은 서로 독립인 불리언 여러 개입니다. 폼으로 보내면 <b>켜진 항목만</b> 전송되고 꺼진 항목은 키 자체가 오지 않으므로, 서버는 키가 없으면 꺼진 것으로 읽어야 합니다."),
+    ("중간 상태는 화면에만 있는 표시", "중간 상태인 칸은 보낼 때 꺼진 것으로 처리됩니다. <b>화면에서만 쓰는 표시</b>이므로, 서버에 '일부 선택'을 알려야 한다면 따로 설계해야 합니다."),
+    ("전체 선택은 범위를 정하는 요청", "화면에 보이는 줄만 켜는 것과 조건에 맞는 <b>전부</b>를 켜는 것은 서버에 전혀 다른 요청입니다. 예를 들어 10,000건을 '전부 선택'했다면 ID를 모두 보낼지, 검색 조건을 보낼지 정해야 합니다."),
+    ("약관 동의는 이력으로 남기기", "사용자가 언제 어떤 판본의 약관에 동의했는지 기록으로 남겨야 합니다. 그래서 약관 동의 체크는 불리언 하나가 아니라 <b>이력</b>으로 저장합니다."),
   ]),
   plat_lede="플랫폼마다 모양은 조금씩 달라도 쓰임과 이름은 거의 같습니다.",
   plats=plats([
@@ -126,7 +126,7 @@ input[type=checkbox] <span class="a">{</span> <span class="t">accent-color</span
   plat_note="iOS 에는 체크박스가 거의 없습니다. 그래서 \"체크박스로 해 주세요\"라는 요청은 iOS 에서 <b>스위치나 체크마크 목록</b>으로 바뀌는데, 스위치로 바꾸면 누르는 즉시 적용되므로 <b>저장 버튼이 할 일이 없어집니다</b>. iOS 화면을 그릴 때는 저장 버튼을 남길지, 즉시 적용으로 바꿀지를 함께 정해야 합니다.",
   siblings=siblings("checkbox"),
   related='''        <li><span class="na"><b>데이터 테이블(행 선택)</b><em>10부</em></span></li>
-        <li><span class="na"><b>필터와 패싯</b><em>10부</em></span></li>
+        <li><a href="filter.html"><b>필터와 패싯</b><em>10부</em></a></li>
         <li><a href="../items/error.html"><b>에러 상태</b><em>8부</em></a></li>
-        <li><span class="na"><b>터치 타깃</b><em>11부</em></span></li>''',
+        <li><a href="touchtarget.html"><b>터치 타깃</b><em>11부</em></a></li>''',
 )

@@ -19,8 +19,8 @@
 
 <div class="bar">
   <b>제스처</b>
-  <label><input type="checkbox" id="vel" checked> 속도도 본다</label>
-  <label><input type="checkbox" id="follow" checked> 손가락을 따라간다</label>
+  <label><input type="checkbox" id="vel" checked> 내리는 속도도 함께 보기</label>
+  <label><input type="checkbox" id="follow" checked> 손가락을 따라 움직이기</label>
   <button class="ui-btn ui-btn--ghost" id="reset">되돌리기</button>
 </div>
 
@@ -39,9 +39,9 @@
 <p class="hint">
   시트를 아래로 끌어 보세요. 조금 끌었다 놓으면 <b>제자리로 돌아오고</b>,
   <b>절반 넘게</b> 끌거나 <b>빠르게 튕기면</b> 닫힙니다.<br>
-  <b>속도도 본다</b>를 끄면 끈 거리만으로 판단하기 때문에 짧게 탁 튕겨 닫는 동작이 듣지 않고,
+  <b>내리는 속도도 함께 보기</b>를 끄면 끈 거리만으로 판단하기 때문에 짧게 탁 튕겨 닫는 동작이 듣지 않고,
   닫으려면 끝까지 끌어야 하는 시트가 됩니다.<br>
-  <b>손가락을 따라간다</b>를 끄면 끄는 동안에는 시트가 움직이지 않다가 손을 놓는 순간에만 움직입니다.
+  <b>손가락을 따라 움직이기</b>를 끄면 끄는 동안에는 시트가 움직이지 않다가 손을 놓는 순간에만 움직입니다.
   규칙은 같은데도 <b>내가 조작하고 있다는 느낌</b>이 사라집니다.
 </p>
 
@@ -87,13 +87,13 @@
     var fling = document.getElementById('vel').checked && v > 0.5;
     if (far || fling) {
       set(H, true);
-      log.innerHTML = '닫음 — ' + (fling && !far ? '<b>빠르게 튕겨서</b>(속도 ' + v.toFixed(2) + ')' : '<b>절반을 넘겨서</b>');
-      show(' → <b>닫힘</b>');
+      log.innerHTML = (fling && !far ? '<b>빠르게 튕겨서</b>(속도 ' + v.toFixed(2) + ') 닫음' : '<b>절반을 넘겨서</b> 닫음');
+      show(' · 결과는 <b>닫힘</b>');
     } else {
       set(0, true);
-      log.innerHTML = '제자리로 — ' +
-        (v > 0.5 ? '<span class="warn">빠르게 튕겼는데도 거리만 봐서 안 닫힌다</span>' : '절반을 못 넘겼다');
-      show(' → 제자리');
+      log.innerHTML =
+        (v > 0.5 ? '<span class="warn">빠르게 튕겼는데도 거리만 보기 때문에 닫히지 않고</span> 제자리로 돌아옴' : '절반을 넘기지 못해 제자리로 돌아옴');
+      show(' · 결과는 제자리로 돌아옴');
     }
   }
   sheet.addEventListener('pointerup', end);

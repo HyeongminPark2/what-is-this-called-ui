@@ -20,9 +20,9 @@
 
 <div class="bar">
   <b>컴포넌트와 인스턴스</b>
-  <label>마스터 글자 <input class="ui-input" id="label" value="저장" style="width:110px;min-height:32px;font-size:13px"></label>
-  <label>모서리 <input type="range" id="r" class="ui-range" min="0" max="20" step="2" value="6" style="width:100px"></label>
-  <button class="ui-btn ui-btn--ghost" id="reset">처음부터</button>
+  <label>마스터의 글자 <input class="ui-input" id="label" value="저장" style="width:110px;min-height:32px;font-size:13px"></label>
+  <label>모서리 둥글기 <input type="range" id="r" class="ui-range" min="0" max="20" step="2" value="6" style="width:100px"></label>
+  <button class="ui-btn ui-btn--ghost" id="reset">처음 상태로 되돌리기</button>
 </div>
 
 <div class="pad">
@@ -69,7 +69,7 @@
     var n = Object.keys(detached).length;
     var v = document.getElementById('verdict');
     v.innerHTML = n
-      ? '<span class="warn">떼어낸 것 ' + n + '개</span> — 마스터를 고쳐도 바뀌지 않습니다'
+      ? '<span class="warn">떼어낸 인스턴스 ' + n + '개</span>는 마스터를 고쳐도 바뀌지 않습니다'
       : '인스턴스 <b>' + (N - 1) + '개</b>가 마스터 하나를 따라 바뀝니다';
     v.dataset.det = String(n);
   }

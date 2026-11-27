@@ -15,12 +15,12 @@ def tgt(seen, hit, note, warn=False, w="152px"):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">보이는 아이콘 — 24px 여도 된다</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">눌리는 넓이 — 44 × 44px 이상</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">가운데 맞춤 — 아이콘은 그대로 두고 여백만 키운다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">이웃과의 간격 8px — 원이 안 겹치게</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">화면 가장자리 16px — 쓸기 제스처와 안 다투게</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">손가락 끝 약 9mm — 화면에서 44px 남짓</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">보이는 아이콘은 24px여도 됨</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">눌리는 넓이는 44 × 44px 이상</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">아이콘은 가운데 그대로 두고 여백만 키움</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">이웃과 8px 띄워 원이 겹치지 않게</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">가장자리에서 16px 띄워 쓸기 제스처를 피함</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">손가락 끝 약 9mm는 화면에서 44px 남짓</div>
                 </div>
               </div>'''
 
@@ -50,13 +50,16 @@ D = dict(
   ]),
   axes=ax("터치 타깃"),
   oneline="<b>보이는 크기와 눌리는 넓이를 따로 두세요.</b> 아이콘은 24px로 두고 눌리는 넓이만 44px로 잡으면, 작은 버튼이 잘 안 눌리는 문제는 대부분 해결됩니다.",
-  s4_title="크기별로", s4_hint="원 안에 네모가 들어가나",
+  s4_title="크기별로 비교한 누르는 넓이", s4_hint="손가락 원보다 네모가 넓은지 비교",
+  do_title="터치 타깃을 챙겨야 하는 경우",
+  dont_title="터치 타깃을 잘못 다루는 경우",
+  instead_title="누를 것이 많아 넓이를 확보하기 어려운 경우",
   states=states([
-    (tgt(20, 20, "보이는 20 · 눌리는 20 ✕", True), "20px", "<b>옆의 것이 눌립니다.</b> 가장 흔하게 일어나는 실수입니다"),
-    (tgt(24, 24, "보이는 24 · 눌리는 24 ✕", True), "24px", "마우스로는 누를 수 있지만 <b>손가락으로는 정확히 누르기 어렵습니다</b>"),
-    (tgt(24, 44, "보이는 24 · 눌리는 44 ✓"), "24 + 여백", "<b>권장하는 방식입니다.</b> 아이콘은 그대로 두고 여백으로 넓이를 채웁니다"),
-    (tgt(44, 44, "보이는 44 · 눌리는 44 ✓"), "44px", "iOS의 최소 크기입니다. 보이는 크기까지 키우면 <b>버튼이 커 보입니다</b>"),
-    (tgt(48, 48, "보이는 48 · 눌리는 48 ✓"), "48px", "안드로이드의 최소 크기입니다. 주 동작 버튼에 알맞습니다"),
+    (tgt(20, 20, "보이는 20 · 눌리는 20 ✕", True), "20px짜리 버튼", "<b>옆의 것이 눌립니다.</b> 가장 흔하게 일어나는 실수입니다"),
+    (tgt(24, 24, "보이는 24 · 눌리는 24 ✕", True), "24px짜리 버튼", "마우스로는 누를 수 있지만 <b>손가락으로는 정확히 누르기 어렵습니다</b>"),
+    (tgt(24, 44, "보이는 24 · 눌리는 44 ✓"), "24px에 여백을 더한 버튼", "<b>권장하는 방식입니다.</b> 아이콘은 그대로 두고 여백으로 넓이를 채웁니다"),
+    (tgt(44, 44, "보이는 44 · 눌리는 44 ✓"), "44px짜리 버튼", "iOS의 최소 크기입니다. 보이는 크기까지 키우면 <b>버튼이 커 보입니다</b>"),
+    (tgt(48, 48, "보이는 48 · 눌리는 48 ✓"), "48px짜리 버튼", "안드로이드의 최소 크기입니다. 주 동작 버튼에 알맞습니다"),
     ('''              <div style="width:100%;max-width:152px;display:grid;gap:5px;justify-items:center">
                 <div style="display:flex">
                   <span style="position:relative;width:44px;height:44px;display:grid;place-items:center">
@@ -66,18 +69,18 @@ D = dict(
                     <span style="position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:2px dashed var(--danger)"></span>
                     <span style="width:26px;height:26px;border-radius:5px;background:var(--accent)"></span></span>
                 </div>
-                <span style="font-family:var(--mono);font-size:9px;color:var(--danger)">간격 0 — 원이 겹친다</span>
+                <span style="font-family:var(--mono);font-size:9px;color:var(--danger)">간격이 0이라 원이 겹침</span>
               </div>''',
-     "붙여 놓으면", "크기가 충분해도 둘 사이 <b>가운데를 누르면</b> 어느 쪽이 눌릴지 알 수 없습니다"),
+     "버튼을 간격 없이 붙였을 때", "크기가 충분해도 둘 사이 <b>가운데를 누르면</b> 어느 쪽이 눌릴지 알 수 없습니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("보이는 것", "아이콘 24px", "작아도 됩니다. 아이콘이 <b>작아야 화면이 깔끔</b>합니다"),
+    ("보이는 아이콘", "아이콘 24px", "작아도 됩니다. 아이콘이 <b>작아야 화면이 깔끔</b>합니다"),
     ("눌리는 넓이", "44 × 44px", "투명한 여백으로 넓히기 때문에 <b>눈에는 보이지 않습니다</b>"),
     ("가운데 맞춤", "place-items: center", "아이콘을 키우지 않고 <b>아이콘을 감싼 상자를 키운</b> 뒤 아이콘을 가운데에 놓습니다"),
     ("이웃과의 간격", "8px 이상", "붙여 두면 둘 사이 가운데를 눌렀을 때 <b>어느 쪽이 눌릴지 알 수 없습니다</b>"),
     ("가장자리", "16px 안쪽", "가장자리에 너무 붙으면 누르려던 동작이 <b>OS의 쓸기 제스처</b>로 처리될 수 있습니다"),
-    ("기준", "약 9mm", "손가락 끝의 평균 너비로, 화면에서는 44~48px 남짓입니다"),
+    ("손가락 끝 너비", "약 9mm", "손가락 끝의 평균 너비로, 화면에서는 44~48px 남짓입니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <b>WCAG 2.2의 기준(24 × 24px)과 OS의 기준(44~48px)은 서로 다릅니다.</b>
@@ -102,21 +105,22 @@ D = dict(
                 <div style="display:flex;align-items:center;gap:6px;padding:9px 8px;font-size:10px;background:var(--accent-soft)">
                   <span style="flex:1">모란상회</span><span style="color:var(--fg-muted)">›</span></div>
               </div>''',
-     "줄 전체를 누르게", "가장 쉬운 방법입니다. 줄 높이만으로 <b>44px을 저절로</b> 넘습니다"),
+     "줄 전체를 누르게 하기", "가장 쉬운 방법입니다. 줄 높이만으로 <b>44px을 저절로</b> 넘습니다"),
     ('''              <div style="width:100%;max-width:152px;font-family:var(--mono);font-size:9px;color:var(--fg-muted);display:grid;gap:2px">
                 <span>.icon-btn::before {</span>
                 <span>&nbsp;&nbsp;<span style="color:var(--accent)">content: ""; position: absolute;</span></span>
                 <span>&nbsp;&nbsp;<span style="color:var(--accent)">inset: -10px;</span></span>
                 <span>}</span>
               </div>''',
-     "배치를 안 건드리고", "<code>::before</code>로 눌리는 범위만 넓히기 때문에 <b>간격은 그대로</b>입니다"),
+     "배치를 건드리지 않고 넓히기", "<code>::before</code>로 눌리는 범위만 넓히기 때문에 <b>간격은 그대로</b>입니다"),
     ('''              <div style="width:100%;max-width:152px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px;display:flex;gap:10px;justify-content:flex-end">
                 <span style="width:30px;height:30px;border-radius:5px;background:var(--bg);display:grid;place-items:center;font-size:11px">✎</span>
                 <span style="width:30px;height:30px;border-radius:5px;background:var(--bg);display:grid;place-items:center;font-size:11px">🗑</span>
               </div>''',
-     "표 안의 아이콘", "터치 타깃을 <b>가장 자주 빠뜨리는 자리입니다.</b> 아이콘 사이 간격을 넉넉히 둡니다"),
+     "표 안의 아이콘 버튼 챙기기", "터치 타깃을 <b>가장 자주 빠뜨리는 자리입니다.</b> 아이콘 사이 간격을 넉넉히 둡니다"),
   ]),
-  s8_title="최소 코드와 규칙", s8_hint="빠뜨리기 쉬운 설정까지",
+  s8_title="최소 코드와 지킬 규칙", s8_hint="빠뜨리기 쉬운 설정까지 담은 규칙",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법과 까닭</th>",
   code_lede="아이콘의 보이는 크기는 그대로 두고 <b>아이콘을 감싼 상자만</b> 키웁니다.",
   code='''.icon-btn {
   <span class="a">min-width</span>: <span class="a">44px</span>; <span class="a">min-height</span>: <span class="a">44px</span>;   <span class="c">/* 눌리는 넓이 */</span>
@@ -132,22 +136,22 @@ D = dict(
 <span class="c">/* 손가락 기기에서만 키우고 싶다면 */</span>
 @media (pointer: coarse) { .icon-btn { <span class="a">min-width</span>: <span class="a">48px</span>; <span class="a">min-height</span>: <span class="a">48px</span>; } }''',
   keys=kbd([
-    ("<code>min-width</code>·<code>min-height</code>", "<code>width</code>로 크기를 고정하면 글자가 길어질 때 상자 밖으로 넘칩니다"),
-    ("<code>&lt;button&gt;</code>에 <code>aria-label</code>", "아이콘만 있는 버튼은 스크린 리더가 읽을 <b>이름이 없습니다</b>. <a href=\"../items/name.html\">이름 붙이기</a>로 이름을 달아 줍니다"),
-    ("초점 테두리도 같이 커진다", "상자를 키우면 <a href=\"../items/focus.html\">포커스</a> 테두리가 아이콘에서 멀어지므로 <code>outline-offset</code>으로 안쪽으로 당깁니다"),
-    ("<code>@media (pointer: coarse)</code>", "손가락으로 쓰는 기기에서만 크기를 키울 수 있습니다. <b>PC에서는 작게 둬도 됩니다</b>"),
+    ("<code>min-width</code>·<code>min-height</code>로 크기 잡기", "<code>width</code>로 크기를 고정하면 글자가 길어질 때 상자 밖으로 넘칩니다"),
+    ("<code>&lt;button&gt;</code>에 <code>aria-label</code> 달기", "아이콘만 있는 버튼은 스크린 리더가 읽을 <b>이름이 없습니다</b>. <a href=\"../items/name.html\">이름 붙이기</a>로 이름을 달아 줍니다"),
+    ("포커스 테두리 위치 맞추기", "상자를 키우면 <a href=\"../items/focus.html\">포커스</a> 테두리가 아이콘에서 멀어지므로 <code>outline-offset</code>으로 안쪽으로 당깁니다"),
+    ("<code>@media (pointer: coarse)</code>로 가르기", "손가락으로 쓰는 기기에서만 크기를 키울 수 있습니다. <b>PC에서는 작게 둬도 됩니다</b>"),
     ("<code>::before</code>로 넓힐 때", "부모에 <code>position: relative</code>가 있어야 하고, <code>overflow:hidden</code>이 걸려 있으면 넓힌 범위가 잘립니다"),
-    ("<kbd>Tab</kbd> 순서", "눌리는 범위를 넓혀도 <b>Tab 순서는 바뀌지 않습니다</b>. 눈에 보이는 차례와 맞는지는 따로 확인합니다"),
+    ("<kbd>Tab</kbd> 순서 확인하기", "눌리는 범위를 넓혀도 <b>Tab 순서는 바뀌지 않습니다</b>. 눈에 보이는 차례와 맞는지는 따로 확인합니다"),
   ]),
   backend=rows([
-    ("잘못 눌린 요청", "버튼이 작으면 <b>옆의 것이 눌립니다.</b> '지우려다 보내 버렸다' 같은 민원이 들어와도, 서버 로그에는 정상 요청으로만 남습니다."),
-    ("되돌릴 길", "실수로 눌리기 쉬운 동작일수록 <a href=\"../items/toast.html\">되돌리기</a>를 마련해 두어야 합니다."),
-    ("두 번 눌림", "손가락이 미끄러지면 버튼이 두 번 눌리기 쉽기 때문에, 서버에서 <b>같은 요청을 한 번만</b> 처리하도록 막아 두어야 합니다."),
+    ("잘못 눌려 들어온 요청", "버튼이 작으면 <b>옆의 것이 눌립니다.</b> '지우려다 보내 버렸다' 같은 민원이 들어와도, 서버 로그에는 정상 요청으로만 남습니다."),
+    ("실수를 되돌리는 기능", "실수로 눌리기 쉬운 동작일수록 <a href=\"../items/toast.html\">되돌리기</a>를 마련해 두어야 합니다."),
+    ("두 번 눌린 요청 막기", "손가락이 미끄러지면 버튼이 두 번 눌리기 쉽기 때문에, 서버에서 <b>같은 요청을 한 번만</b> 처리하도록 막아 두어야 합니다."),
   ]),
   plat_lede="원리는 같고 최소 크기를 적은 숫자만 <b>44 · 48 · 24</b>로 다릅니다.",
   plats=plats([
     ("웹", "WCAG 2.2",
-     tgt(24, 44, "24 보이고 44 눌린다", False, "110px"),
+     tgt(24, 44, "24로 보이고 44로 눌림", False, "110px"),
      "최소 <b>24 × 24px</b>이고, 크기가 모자라면 간격으로 대신할 수 있습니다. 이 값은 실무 기준으로 쓰기에는 느슨해서 44px을 쓰는 경우가 많습니다."),
     ("iOS", "44 × 44pt",
      '''              <div class="phone" role="img" aria-label="iOS 터치 타깃 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">

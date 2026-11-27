@@ -21,7 +21,7 @@
 <div class="bar">
   <b>브레이크포인트</b>
   <label>화면 폭 <input type="range" id="w" class="ui-range" min="320" max="1280" step="10" value="390" style="width:220px"> <span class="ruler" id="wv">390px</span></label>
-  <label><input type="checkbox" id="bad"> 잘못 잡은 기준으로</label>
+  <label><input type="checkbox" id="bad"> 기기 폭을 기준으로 끊기</label>
 </div>
 
 <div class="pad">
@@ -45,7 +45,7 @@
 
 <p class="hint">
   막대를 끌어 폭을 바꿔 보세요. 단을 바꾸는 기준은 <b>기기 이름이 아니라 내용이 깨지는 지점</b>입니다.<br>
-  <b>잘못 잡은 기준으로</b>를 켜면 흔히 쓰는 '아이폰·아이패드' 폭(375 / 768 / 1024)에 맞춰 끊는데,
+  <b>기기 폭을 기준으로 끊기</b>를 켜면 흔히 쓰는 '아이폰·아이패드' 폭(375 / 768 / 1024)에서 단을 바꾸는데,
   그러면 390px 폰에서부터 두 단이 되어 <b>가게 이름이 두 줄로 접힙니다.</b>
   아래 숫자는 어림한 값이 아니라 <b>실제로 접힌 칸의 수를 센 결과</b>입니다.
   새 기기는 계속 나오고 브라우저 창은 어떤 폭으로든 열릴 수 있기 때문에, 단을 바꾸는 기준은
@@ -81,12 +81,12 @@
     }).length;
 
     var msg = wrapped
-      ? '칸 하나 <span class="warn">' + col + 'px · 가게 이름이 두 줄로 접힌 칸 ' + wrapped + '개</span>'
+      ? '칸 하나의 폭 <span class="warn">' + col + 'px · 가게 이름이 두 줄로 접힌 칸 ' + wrapped + '개</span>'
       : (col > 420
-        ? '칸 하나 <b>' + col + 'px</b> · 칸이 넓어서 한 단을 더 넣을 수 있습니다'
-        : '칸 하나 <b>' + col + 'px</b> · 가게 이름이 한 줄에 들어갑니다');
+        ? '칸 하나의 폭 <b>' + col + 'px</b> · 칸이 넓어서 한 단을 더 넣을 수 있습니다'
+        : '칸 하나의 폭 <b>' + col + 'px</b> · 가게 이름이 한 줄에 들어갑니다');
     var rl = document.getElementById('ruler');
-    rl.innerHTML = msg + ' · 기준 ' + (useBad ? '<span class="warn">375 / 768 / 1024 (기기 폭)</span>' : '<b>560 / 900 / 1180 (내용이 깨지는 폭)</b>');
+    rl.innerHTML = msg + ' · 단을 바꾸는 기준 ' + (useBad ? '<span class="warn">375 / 768 / 1024 (기기 폭)</span>' : '<b>560 / 900 / 1180 (내용이 깨지는 폭)</b>');
     rl.dataset.col = String(col);
     rl.dataset.cols = String(r[1]);
     rl.dataset.wrapped = String(wrapped);

@@ -49,25 +49,25 @@ D = dict(
   ]),
   axes=ax("카드"),
   oneline="카드는 상품 하나, 글 하나처럼 <b>하나로 셀 수 있는 것</b>을 묶습니다. 상자 안에 든 것이 모두 같은 한 건에 딸린 것이 아니라면, 그 상자는 카드가 아니라 화면을 나눈 구역입니다.",
-  s4_title="상태", s4_hint="그림 한 장으로는 못 배운다",
+  s4_title="상태", s4_hint="상태마다 달라지는 카드 모습",
   states=states([
-    (minicard("무선 이어폰 2세대", "₩129,000"), "기본", "사진과 제목, 메타 정보로 짜는 가장 흔한 구성입니다"),
+    (minicard("무선 이어폰 2세대", "₩129,000"), "기본 구성", "사진과 제목, 메타 정보로 짜는 가장 흔한 구성입니다"),
     (minicard("무선 이어폰 2세대", "₩129,000", extra="box-shadow:0 6px 16px rgba(20,22,26,.14);transform:translateY(-2px)"),
-     "호버", "카드가 살짝 <b>떠오르거나</b> 테두리가 진해져서, 누를 수 있다는 것을 알려 줍니다"),
+     "마우스를 올렸을 때", "카드가 살짝 <b>떠오르거나</b> 테두리가 진해져서, 누를 수 있다는 것을 알려 줍니다"),
     (minicard("무선 이어폰 2세대", "₩129,000", extra="outline:2px solid var(--accent);outline-offset:2px"),
-     "포커스", "키보드로 카드에 왔을 때의 모습입니다. 호버와 <b>같은 모양이면 안 됩니다</b>"),
+     "키보드로 포커스가 왔을 때", "키보드로 카드에 왔을 때의 모습입니다. 호버와 <b>같은 모양이면 안 됩니다</b>"),
     ('''              <div style="width:100%;max-width:150px;border:1px solid var(--line);border-radius:9px;background:var(--surface);overflow:hidden">
                 <span class="skl" style="display:block;aspect-ratio:4/3;border-radius:0"></span>
                 <div style="padding:9px;display:grid;gap:5px"><span class="skl" style="height:9px;width:80%"></span><span class="skl" style="height:8px;width:50%"></span></div>
               </div>''',
-     "로딩", "실제 카드와 <b>같은 높이의</b> 뼈대를 먼저 보여 줍니다. 높이가 다르면 내용이 들어오는 순간 화면이 위아래로 밀립니다"),
+     "내용을 불러오는 중", "실제 카드와 <b>같은 높이의</b> 뼈대를 먼저 보여 줍니다. 높이가 다르면 내용이 들어오는 순간 화면이 위아래로 밀립니다"),
     (minicard("무선 이어폰 2세대 블루투스 5.3 노이즈 캔슬링 케이스 포함", "₩129,000"),
-     "긴 제목", "카드 높이는 데이터 길이에 따라 달라지므로, 제목이 길 때 카드를 <b>늘어나게 둘지 잘라 낼지</b> 미리 정해 둡니다"),
+     "제목이 길 때", "카드 높이는 데이터 길이에 따라 달라지므로, 제목이 길 때 카드를 <b>늘어나게 둘지 잘라 낼지</b> 미리 정해 둡니다"),
     ('''              <div style="width:100%;max-width:150px;border:1px dashed var(--line-strong);border-radius:9px;background:var(--surface);display:grid;place-items:center;padding:18px 9px;gap:5px;text-align:center">
                 <span style="font-size:15px;color:var(--fg-faint)">+</span>
                 <span style="font-size:10.5px;color:var(--fg-muted)">상품 추가</span>
               </div>''',
-     "빈 카드", "새 항목을 만드는 자리입니다. 테두리를 <b>점선</b>으로 그려 아직 아무것도 없다는 것을 보여 줍니다"),
+     "새 카드를 추가하는 자리", "새 항목을 만드는 자리입니다. 테두리를 <b>점선</b>으로 그려 아직 아무것도 없다는 것을 보여 줍니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -93,12 +93,12 @@ D = dict(
     "건수가 아주 많을 때. 카드는 자리를 많이 차지해서 한 화면에 몇 장밖에 들어가지 않습니다",
     "화면의 모든 것을 카드에 넣을 때. <b>모든 것을 카드로 묶으면 무엇끼리 묶였는지 구별되지 않습니다</b>",
   ]),
-  instead='줄 세워 비교하려면 <a href="listitem.html">리스트 아이템</a>, 숫자 하나면 <a href="stat.html">스탯 타일</a>, 표로 다룰 양이면 데이터 테이블(10부).',
+  instead='여러 건을 줄 세워 비교해야 하면 <a href="listitem.html">리스트 아이템</a>을 쓰고, 보여 줄 것이 숫자 하나뿐이면 <a href="stat.html">스탯 타일</a>이 맞습니다. 표로 다뤄야 할 만큼 양이 많으면 데이터 테이블(10부)을 씁니다.',
   cases=cases([
     (minicard("무선 이어폰 2세대", "모란상회 · ₩129,000", foot='<span style="font-size:10px;color:#e8a33d">★ 4.3 <span style="color:var(--fg-muted)">(1,284)</span></span>', w="160px"),
-     "상품 카드", "사진이 크고 값이 또렷하게 보입니다. <b>별점과 리뷰 수</b>도 거의 늘 함께 붙습니다"),
+     "쇼핑몰에서 상품 보여 주기", "사진이 크고 값이 또렷하게 보입니다. <b>별점과 리뷰 수</b>도 거의 늘 함께 붙습니다"),
     (minicard("정산 요청 #4821", "11월 1일 ~ 11월 7일 · ₩1,284,000", foot='<span class="bdg bdg--warn" style="height:16px;padding:0 6px;font-size:9px">검토 중</span>', media=False, w="160px"),
-     "업무 카드", "사진이 없고, 사진 대신 <b>상태 배지</b>가 눈에 띄는 자리를 차지합니다"),
+     "업무의 처리 상태 보여 주기", "사진이 없고, 사진 대신 <b>상태 배지</b>가 눈에 띄는 자리를 차지합니다"),
     ('''              <div style="width:100%;max-width:160px;display:flex;border:1px solid var(--line);border-radius:9px;background:var(--surface);overflow:hidden">
                 <span style="width:52px;flex:none;background:repeating-linear-gradient(135deg,var(--ink-100) 0 7px,var(--ink-050) 7px 14px)"></span>
                 <span style="padding:9px;display:grid;gap:3px;min-width:0">
@@ -106,7 +106,7 @@ D = dict(
                   <span style="font-size:10.5px;color:var(--fg-muted)">₩58,000</span>
                 </span>
               </div>''',
-     "가로형 카드", "좁은 화면에서 씁니다. 사진이 왼쪽으로 가면서 <b>리스트 아이템과 거의 구별되지 않습니다</b>"),
+     "좁은 화면에 가로형으로 놓기", "좁은 화면에서 씁니다. 사진이 왼쪽으로 가면서 <b>리스트 아이템과 거의 구별되지 않습니다</b>"),
   ]),
   s8_title="최소 마크업과 키보드",
   code_lede="카드에는 따로 정해진 역할(role)이 없어서 <b>어떤 태그로 감싸느냐</b>로 의미가 정해집니다. 목록 안의 한 건이면 <code>&lt;li&gt;</code>, 기사처럼 혼자 완결된 글이면 <code>&lt;article&gt;</code>으로 감쌉니다.",
@@ -126,15 +126,15 @@ D = dict(
   keys=kbd([
     ("<kbd>Tab</kbd>", "포커스가 카드마다 <b>한 번</b>만 멈추는 것이 좋습니다. 카드 안에 링크가 셋이면 세 번 멈춥니다"),
     ("<kbd>Enter</kbd>", "카드가 가리키는 주된 화면으로 이동합니다"),
-    ("안의 버튼", "<code>event.stopPropagation()</code>을 쓰거나 링크 영역을 넓히는 방식으로 버튼과 카드의 <b>눌림이 겹치지 않게 합니다</b>"),
-    ("제목", "<code>h2</code>~<code>h4</code> 제목 태그로 두면 스크린 리더 사용자가 제목만 골라 들으며 목록을 넘길 수 있습니다"),
-    ("사진", "사진에 전할 뜻이 있으면 <code>alt</code>를 쓰고, 제목이 이미 같은 내용을 알려 주면 <b>비워 둡니다</b>"),
+    ("카드 안의 버튼을 누를 때", "<code>event.stopPropagation()</code>을 쓰거나 링크 영역을 넓히는 방식으로 버튼과 카드의 <b>눌림이 겹치지 않게 합니다</b>"),
+    ("카드 제목을 적을 때", "<code>h2</code>~<code>h4</code> 제목 태그로 두면 스크린 리더 사용자가 제목만 골라 들으며 목록을 넘길 수 있습니다"),
+    ("카드 사진의 대체 텍스트", "사진에 전할 뜻이 있으면 <code>alt</code>를 쓰고, 제목이 이미 같은 내용을 알려 주면 <b>비워 둡니다</b>"),
   ]),
   backend=rows([
-    ("카드 하나 = 응답 한 건", "목록 API가 돌려주는 한 줄이 카드 한 장이 됩니다. 카드에 보이는 값은 <b>모두 그 한 줄 안에</b> 들어 있어야 하는데, 카드마다 값을 따로 요청하면 카드가 20장일 때 요청도 20번 나가기 때문입니다."),
-    ("사진 비율", "사용자가 올리는 사진은 가로세로 비율이 제각각이라서, 서버에서 <b>미리 잘라</b> 두거나 화면에서 <code>object-fit: cover</code>로 비율을 맞춥니다. 비율을 맞추지 않으면 사진마다 카드 높이가 달라집니다."),
-    ("글 길이", "제목 길이는 <b>데이터에 따라 정해집니다.</b> 그래서 실제 데이터 중 가장 긴 값으로 카드를 한 번 그려 보아야 하고, 그러지 않으면 운영 중에 레이아웃이 깨집니다. 긴 제목을 서버에서 자를지 화면에서 자를지도 미리 정해 둡니다."),
-    ("카드 수", "한 화면에 카드가 20장이면 사진도 20장을 받아야 합니다. 그래서 화면에 보일 때 사진을 받는 지연 로딩(<code>loading=\"lazy\"</code>)을 쓰는지, 작은 썸네일을 쓰는지에 따라 <b>첫 화면이 뜨는 속도</b>가 크게 달라집니다."),
+    ("카드 한 장은 응답 한 건", "목록 API가 돌려주는 한 줄이 카드 한 장이 됩니다. 카드에 보이는 값은 <b>모두 그 한 줄 안에</b> 들어 있어야 하는데, 카드마다 값을 따로 요청하면 카드가 20장일 때 요청도 20번 나가기 때문입니다."),
+    ("사진 비율 맞추기", "사용자가 올리는 사진은 가로세로 비율이 제각각이라서, 서버에서 <b>미리 잘라</b> 두거나 화면에서 <code>object-fit: cover</code>로 비율을 맞춥니다. 비율을 맞추지 않으면 사진마다 카드 높이가 달라집니다."),
+    ("가장 긴 제목에 대비하기", "제목 길이는 <b>데이터에 따라 정해집니다.</b> 그래서 실제 데이터 중 가장 긴 값으로 카드를 한 번 그려 보아야 하고, 그러지 않으면 운영 중에 레이아웃이 깨집니다. 긴 제목을 서버에서 자를지 화면에서 자를지도 미리 정해 둡니다."),
+    ("카드 수만큼 늘어나는 사진 요청", "한 화면에 카드가 20장이면 사진도 20장을 받아야 합니다. 그래서 화면에 보일 때 사진을 받는 지연 로딩(<code>loading=\"lazy\"</code>)을 쓰는지, 작은 썸네일을 쓰는지에 따라 <b>첫 화면이 뜨는 속도</b>가 크게 달라집니다."),
   ]),
   plat_lede="세 플랫폼 모두 '카드'라는 말을 쓰지만, 그림자와 모서리의 기본값이 다릅니다.",
   plats=plats([
@@ -161,5 +161,5 @@ D = dict(
   related='''        <li><a href="../items/skeleton.html"><b>스켈레톤</b><em>8부</em></a></li>
         <li><a href="../items/elevation.html"><b>고도</b><em>2부</em></a></li>
         <li><a href="../items/spacing.html"><b>간격 체계</b><em>2부</em></a></li>
-        <li><span class="na"><b>데이터 테이블</b><em>10부</em></span></li>''',
+        <li><a href="table.html"><b>데이터 테이블</b><em>10부</em></a></li>''',
 )

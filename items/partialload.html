@@ -78,12 +78,12 @@
         <p>기다림을 보여 주는 방법들을 모았습니다. 아래 네 가지를 물어보면 방법마다 차이가 드러납니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 가리나</th><th>하던 일이 끊기나</th><th>초점이 남나</th><th>쓰기 쉬운가</th></tr></thead>
+          <thead><tr><th></th><th>기다리는 동안 무엇을 가리는가</th><th>사용자가 하던 일이 끊기는가</th><th>초점이 그대로 남는가</th><th>구현하기 쉬운가</th></tr></thead>
           <tbody>
-            <tr><td>전체 스피너</td><td><b>화면 전부</b></td><td>끊긴다</td><td>날아간다</td><td>가장 쉽다</td></tr>
-            <tr class="me"><td><b>부분 로딩</b></td><td><b>바뀌는 곳만</b></td><td>안 끊긴다</td><td>남는다</td><td>손이 더 간다</td></tr>
-            <tr><td>버튼 안 표시</td><td>그 단추만</td><td>안 끊긴다</td><td>남는다</td><td>쉽다</td></tr>
-            <tr><td><a href="skeleton.html">스켈레톤</a></td><td>들어올 자리</td><td>처음에만</td><td class="none">해당 없음</td><td>쉽다</td></tr>
+            <tr><td>전체 스피너</td><td><b>화면 전부</b></td><td>끊김</td><td>사라짐</td><td>가장 쉬움</td></tr>
+            <tr class="me"><td><b>부분 로딩</b></td><td><b>바뀌는 곳만</b></td><td>끊기지 않음</td><td>남음</td><td>손이 더 감</td></tr>
+            <tr><td>버튼 안 표시</td><td>누른 버튼만</td><td>끊기지 않음</td><td>남음</td><td>쉬움</td></tr>
+            <tr><td><a href="skeleton.html">스켈레톤</a></td><td>들어올 내용의 자리</td><td>처음 그릴 때만</td><td class="none">해당 없음</td><td>쉬움</td></tr>
           </tbody>
         </table>
         </div>
@@ -99,37 +99,37 @@
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:5px;align-items:center;padding:4px 6px;border-bottom:1px solid var(--line);font-size:8px"><span style="font-weight:700">정산 목록</span><span style="margin-left:auto;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;color:var(--fg)">모란</span></span><span style="display:grid;padding:3px 0"><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>모란상회</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 대기</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>한빛아웃도어</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 대기</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>새벽상사</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 완료</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">평소</span></div>
             </div>
-            <figcaption>평소<span>모든 줄을 읽을 수 있습니다</span></figcaption>
+            <figcaption>평소 상태<span>모든 줄을 읽을 수 있습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:5px;align-items:center;padding:4px 6px;border-bottom:1px solid var(--line);font-size:8px"><span style="font-weight:700">정산 목록</span><span style="margin-left:auto;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;color:var(--fg)">모란</span></span><span style="display:grid;padding:3px 0"><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;opacity:.45;"><span>모란상회</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">바꾸는 중…</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>한빛아웃도어</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 대기</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>새벽상사</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 완료</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">그 줄만 흐려졌다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:5px;align-items:center;padding:4px 6px;border-bottom:1px solid var(--line);font-size:8px"><span style="font-weight:700">정산 목록</span><span style="margin-left:auto;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;color:var(--fg)">모란</span></span><span style="display:grid;padding:3px 0"><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;opacity:.45;"><span>모란상회</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">바꾸는 중…</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>한빛아웃도어</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 대기</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>새벽상사</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 완료</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">그 줄만 흐려짐</span></div>
             </div>
-            <figcaption>부분 로딩<span>바뀌는 줄만 흐려지고 <b>나머지는 그대로</b> 보입니다</span></figcaption>
+            <figcaption>바뀌는 줄만 흐리게 할 때<span>바뀌는 줄만 흐려지고 <b>나머지는 그대로</b> 보입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:5px;align-items:center;padding:4px 6px;border-bottom:1px solid var(--line);font-size:8px"><span style="font-weight:700">정산 목록</span><span style="margin-left:auto;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;color:var(--fg)">모란</span></span><span style="display:grid;padding:3px 0"><span style="display:grid;place-items:center;min-height:42px;font-size:8px;color:var(--fg-muted)">불러오는 중…</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">화면이 통째로 가려졌다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:5px;align-items:center;padding:4px 6px;border-bottom:1px solid var(--line);font-size:8px"><span style="font-weight:700">정산 목록</span><span style="margin-left:auto;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;color:var(--fg)">모란</span></span><span style="display:grid;padding:3px 0"><span style="display:grid;place-items:center;min-height:42px;font-size:8px;color:var(--fg-muted)">불러오는 중…</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">화면이 통째로 가려짐</span></div>
             </div>
-            <figcaption>전체 스피너<span><b>바뀌지 않는 부분까지</b> 가립니다</span></figcaption>
+            <figcaption>전체 스피너로 가릴 때<span><b>바뀌지 않는 부분까지</b> 가립니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">단추 안 표시</span><span style="font-size:10px;line-height:1.55"><span style="display:flex;gap:5px;align-items:center;font-size:8.5px"><span style="border:1px solid var(--accent);border-radius:4px;padding:2px 7px;color:var(--accent)">○ 저장 중…</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">그 단추만 기다린다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">버튼 안 표시</span><span style="font-size:10px;line-height:1.55"><span style="display:flex;gap:5px;align-items:center;font-size:8.5px"><span style="border:1px solid var(--accent);border-radius:4px;padding:2px 7px;color:var(--accent)">○ 저장 중…</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">그 버튼만 기다림</span></div>
             </div>
-            <figcaption>단추 안<span>기다림을 표시하는 범위가 <b>가장 좁습니다</b></span></figcaption>
+            <figcaption>버튼 안에만 표시할 때<span>기다림을 표시하는 범위가 <b>가장 좁습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:5px;align-items:center;padding:4px 6px;border-bottom:1px solid var(--line);font-size:8px"><span style="font-weight:700">정산 목록</span><span style="margin-left:auto;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;color:var(--fg-faint)">검색</span></span><span style="display:grid;padding:3px 0"><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>모란상회</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 대기</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>한빛아웃도어</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 대기</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>새벽상사</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 완료</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">검색 칸이 새로 만들어졌다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:5px;align-items:center;padding:4px 6px;border-bottom:1px solid var(--line);font-size:8px"><span style="font-weight:700">정산 목록</span><span style="margin-left:auto;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;color:var(--fg-faint)">검색</span></span><span style="display:grid;padding:3px 0"><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>모란상회</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 대기</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>한빛아웃도어</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 대기</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>새벽상사</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 완료</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">검색 칸이 새로 만들어짐</span></div>
             </div>
-            <figcaption>전체를 갈아 끼움<span>검색 칸이 새로 만들어져서 <b>치던 글이 사라집니다</b></span></figcaption>
+            <figcaption>화면 전체를 새로 만들 때<span>검색 칸이 새로 만들어져서 <b>치던 글이 사라집니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:5px;align-items:center;padding:4px 6px;border-bottom:1px solid var(--line);font-size:8px"><span style="font-weight:700">정산 목록</span><span style="margin-left:auto;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;color:var(--fg)">모란</span></span><span style="display:grid;padding:3px 0"><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;opacity:.45;"><span>모란상회</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">바꾸는 중…</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>한빛아웃도어</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 대기</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>새벽상사</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 완료</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">aria-busy 로 알린다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:5px;align-items:center;padding:4px 6px;border-bottom:1px solid var(--line);font-size:8px"><span style="font-weight:700">정산 목록</span><span style="margin-left:auto;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;color:var(--fg)">모란</span></span><span style="display:grid;padding:3px 0"><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;opacity:.45;"><span>모란상회</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">바꾸는 중…</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>한빛아웃도어</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 대기</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>새벽상사</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 완료</span></span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">aria-busy로 알림</span></div>
             </div>
-            <figcaption>소리로 알림<span>스크린 리더에 그 줄이 <b>바뀌는 중</b>이라고 알립니다</span></figcaption>
+            <figcaption>스크린 리더에 알릴 때<span>스크린 리더에 그 줄이 <b>바뀌는 중</b>이라고 알립니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -141,23 +141,23 @@
             <div class="anat" role="img" aria-label="부분 로딩의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">바뀌는 곳만 다시 그린다</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">그 줄만 흐리게 — 나머지는 읽을 수 있다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--danger)">전체를 다시 그리면 입력칸이 새로 만들어진다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">초점과 치던 글이 함께 날아간다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">단추 안 표시 — 그 단추만 기다린다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">aria-busy — 바뀌는 중임을 알린다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">바뀌는 곳만 다시 그림</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">그 줄만 흐려져 나머지는 계속 읽을 수 있음</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--danger)">전체를 다시 그리면 입력칸이 새로 만들어짐</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">초점과 치던 글이 함께 사라짐</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">버튼 안에 표시해 그 버튼만 기다림</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">aria-busy로 바뀌는 중임을 알림</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>바뀌는 곳만 <em>다시 그리기</em></b><span>데이터가 바뀐 <b>그 줄</b>만 다시 그립니다</span></li>
-            <li><b>흐리게 <em>그 줄만</em></b><span>기다리는 줄만 흐리게 하므로 나머지는 <b>계속 읽을 수 있습니다</b></span></li>
-            <li><b>전체 교체 <em>위험</em></b><span>전체를 다시 그리면 입력칸이 <b>새로 만들어집니다</b></span></li>
-            <li><b>초점 <em>날아감</em></b><span>입력칸이 새로 만들어지면 초점과 치던 글이 <b>함께</b> 사라집니다</span></li>
-            <li><b>단추 안 <em>가장 좁게</em></b><span>누른 버튼만 기다리는 상태로 둡니다</span></li>
-            <li><b><code>aria-busy</code> <em>소리로</em></b><span>스크린 리더에 그 자리가 바뀌는 중임을 알립니다</span></li>
+            <li><b>바뀌는 줄 <em>다시 그리기</em></b><span>데이터가 바뀐 <b>그 줄</b>만 다시 그립니다</span></li>
+            <li><b>흐려진 줄 <em>그 줄만 흐림</em></b><span>기다리는 줄만 흐리게 하므로 나머지는 <b>계속 읽을 수 있습니다</b></span></li>
+            <li><b>전체 교체 <em>피해야 할 방식</em></b><span>전체를 다시 그리면 입력칸이 <b>새로 만들어집니다</b></span></li>
+            <li><b>초점 <em>치던 글과 함께 사라짐</em></b><span>입력칸이 새로 만들어지면 초점과 치던 글이 <b>함께</b> 사라집니다</span></li>
+            <li><b>버튼 안 표시 <em>가장 좁은 범위</em></b><span>누른 버튼만 기다리는 상태로 둡니다</span></li>
+            <li><b><code>aria-busy</code> <em>스크린 리더에 알림</em></b><span>스크린 리더에 그 자리가 바뀌는 중임을 알립니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -192,7 +192,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>부분 로딩 대신 다른 것을 써야 하는 경우</b> — 처음 그릴 때는 <a href="skeleton.html">스켈레톤</a>, 안 기다리게 하려면 <a href="optimistic.html">낙관적 UI</a>, 얼마나 남았는지는 <a href="progress.html">프로그레스 바</a>, 끝을 모르면 <a href="spinner.html">스피너</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>부분 로딩 대신 다른 것을 써야 하는 경우</b> — 화면을 처음 그릴 때는 <a href="skeleton.html">스켈레톤</a>으로 자리를 잡아 두고, 사용자를 아예 기다리지 않게 하려면 <a href="optimistic.html">낙관적 UI</a>를 씁니다. 얼마나 남았는지 알려 줄 수 있으면 <a href="progress.html">프로그레스 바</a>를, 끝나는 때를 모르면 <a href="spinner.html">스피너</a>를 씁니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -202,19 +202,19 @@
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:5px;align-items:center;padding:4px 6px;border-bottom:1px solid var(--line);font-size:8px"><span style="font-weight:700">정산 목록</span><span style="margin-left:auto;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;color:var(--fg)">모란</span></span><span style="display:grid;padding:3px 0"><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;opacity:.45;"><span>모란상회</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">바꾸는 중…</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>한빛아웃도어</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 대기</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>새벽상사</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 완료</span></span></span></div></div>
             </div>
-            <figcaption><b>줄 상태 바꾸기</b>상태를 바꾼 <b>그 줄만</b> 다시 그립니다</figcaption>
+            <figcaption><b>목록에서 한 줄의 상태 바꾸기</b>상태를 바꾼 <b>그 줄만</b> 다시 그립니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">보내기</span><span style="font-size:10px;line-height:1.55"><span style="display:flex;gap:5px;align-items:center;font-size:8.5px"><span style="border:1px solid var(--accent);border-radius:4px;padding:2px 7px;color:var(--accent)">○ 보내는 중…</span></span></span></div></div>
             </div>
-            <figcaption><b>폼 보내기</b>보내는 중이라는 표시를 <b>버튼 안</b>에 둡니다</figcaption>
+            <figcaption><b>폼을 보내는 동안 버튼만 기다리게 하기</b>보내는 중이라는 표시를 <b>버튼 안</b>에 둡니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);overflow:hidden"><span style="display:flex;gap:5px;align-items:center;padding:4px 6px;border-bottom:1px solid var(--line);font-size:8px"><span style="font-weight:700">정산 목록</span><span style="margin-left:auto;border:1px solid var(--line);border-radius:3px;padding:1px 5px;font-size:7px;color:var(--fg)">모란</span></span><span style="display:grid;padding:3px 0"><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>모란상회</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 대기</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>한빛아웃도어</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 대기</span></span><span style="display:flex;gap:5px;padding:3px 6px;font-size:8px;"><span>새벽상사</span><span style="margin-left:auto;font-family:var(--mono);font-size:7px;color:var(--fg-muted)">정산 완료</span></span></span></div></div>
             </div>
-            <figcaption><b>검색 결과</b>검색 칸은 그대로 두고 <b>결과 목록만</b> 바꿉니다</figcaption>
+            <figcaption><b>검색 결과 목록만 바꾸기</b>검색 칸은 그대로 두고 <b>결과 목록만</b> 바꿉니다</figcaption>
           </figure>
         </div>
       </section>
@@ -238,14 +238,14 @@ row.removeAttribute(<span class="s">'aria-busy'</span>);
 list.innerHTML = rows.map(renderRow).join(<span class="s">''</span>);</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td><code>aria-busy</code></td><td>그 자리가 <b>바뀌는 중</b>임을 알립니다</td></tr>
-            <tr><td>초점</td><td>다시 그린 뒤 초점을 <b>원래 있던 자리</b>로 되돌려 줍니다</td></tr>
+            <tr><td>다시 그린 뒤의 초점</td><td>다시 그린 뒤 초점을 <b>원래 있던 자리</b>로 되돌려 줍니다</td></tr>
             <tr><td><code>aria-live</code></td><td>결과만 짧게 알립니다. <b>진행 중</b>이라는 사실은 읽히지 않습니다</td></tr>
-            <tr><td>단추 잠금</td><td><code>disabled</code>를 쓰면 버튼이 초점을 잃으므로, <code>aria-disabled</code>를 써서 <b>초점을 그대로 둡니다</b></td></tr>
-            <tr><td>열쇠</td><td><code>key</code>에 <b>순서 번호</b>를 쓰지 않습니다</td></tr>
-            <tr><td>확인하는 법</td><td>입력칸에 글을 치다가 갱신을 일으킨 뒤 <b>글이 남아 있는지</b> 봅니다</td></tr>
+            <tr><td>버튼을 잠글 때</td><td><code>disabled</code>를 쓰면 버튼이 초점을 잃으므로, <code>aria-disabled</code>를 써서 <b>초점을 그대로 둡니다</b></td></tr>
+            <tr><td>목록의 열쇠(key)</td><td><code>key</code>에 <b>순서 번호</b>를 쓰지 않습니다</td></tr>
+            <tr><td>확인하는 방법</td><td>입력칸에 글을 치다가 갱신을 일으킨 뒤 <b>글이 남아 있는지</b> 봅니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -256,9 +256,9 @@ list.innerHTML = rows.map(renderRow).join(<span class="s">''</span>);</pre>
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>바뀐 것만 돌려준다</th><td>줄 하나를 바꿨다면 응답에 <b>그 줄만</b> 담으면 되고, 목록 전체를 다시 보낼 필요는 없습니다.</td></tr>
-            <tr><th>열쇠</th><td>응답에 줄의 <code>id</code>가 있어야 화면이 <b>어느 줄을 고칠지</b> 압니다.</td></tr>
-            <tr><th>버전</th><td>응답에 <code>updated_at</code>이 있으면 이미 더 새 값을 받은 뒤에 <b>늦게 도착한 옛 응답</b>을 가려내 버릴 수 있습니다.</td></tr>
+            <tr><th>바뀐 줄만 응답에 담기</th><td>줄 하나를 바꿨다면 응답에 <b>그 줄만</b> 담으면 되고, 목록 전체를 다시 보낼 필요는 없습니다.</td></tr>
+            <tr><th>응답에 줄의 id 담기</th><td>응답에 줄의 <code>id</code>가 있어야 화면이 <b>어느 줄을 고칠지</b> 압니다.</td></tr>
+            <tr><th>늦게 온 응답을 가려낼 버전 값</th><td>응답에 <code>updated_at</code>이 있으면 이미 더 새 값을 받은 뒤에 <b>늦게 도착한 옛 응답</b>을 가려내 버릴 수 있습니다.</td></tr>
           </tbody>
         </table>
         </div>

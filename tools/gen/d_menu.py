@@ -27,12 +27,12 @@ def mn(items, label, note="", ok=None, w="152px", up=False, trigger="더 보기 
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">단추 — aria-haspopup · aria-expanded</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">단추에 aria-haspopup · aria-expanded</div>
                   <div class="pin-out" data-pin="2" style="color:var(--accent)">동작 목록이면 menu / menuitem</div>
                   <div class="pin-out" data-pin="3" style="color:var(--accent)">값 고르기면 listbox / option</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">단축키는 오른쪽에 적는다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--danger)">자리가 없으면 위로 뒤집는다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">닫으면 초점이 단추로 돌아온다</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">단축키는 오른쪽에 적음</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--danger)">자리가 없으면 위로 뒤집음</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">닫으면 초점이 단추로 돌아옴</div>
                 </div>
               </div>'''
 
@@ -66,31 +66,31 @@ D = dict(
   states=states([
     (mn([("이름 바꾸기", "", True, False), ("복사본 만들기", "⌘D", False, False),
          ("SEP", "", False, False), ("지우기", "⌫", False, True)], "", "동작 목록", True),
-     "메뉴", "항목을 <b>누르면 일이</b> 일어납니다"),
+     "동작을 고르는 메뉴", "항목을 <b>누르면 일이</b> 일어납니다"),
     (mn([("매주 수요일", "", True, False), ("매달 1일", "", False, False), ("매달 15일", "", False, False)],
         "", "값 고르기", True, "152px", False, "매주 수요일 ▾"),
-     "셀렉트", "항목을 누르면 <b>값이 정해질</b> 뿐입니다"),
-    (mn([("이름 바꾸기", "", True, False), ("지우기", "", False, True)], "", "자리가 없어 위로 뒤집었다", True, "152px", True),
-     "위로 뒤집음", "위로 열었기 때문에 메뉴가 <b>잘리지 않습니다</b>"),
-    (one(txt('<span style="display:block;font-size:8px;color:var(--danger)">아래로만 열었다</span>'
+     "값을 고르는 셀렉트", "항목을 누르면 <b>값이 정해질</b> 뿐입니다"),
+    (mn([("이름 바꾸기", "", True, False), ("지우기", "", False, True)], "", "자리가 없어 위로 뒤집음", True, "152px", True),
+     "위로 뒤집어 열었을 때", "위로 열었기 때문에 메뉴가 <b>잘리지 않습니다</b>"),
+    (one(txt('<span style="display:block;font-size:8px;color:var(--danger)">아래로만 열었음</span>'
              '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">화면 밖으로 32px 삐져나감</span>'),
-         "안 뒤집음", False, "", "152px"),
-     "안 뒤집음", "아래로만 열어서 화면 끝에서 <b>잘립니다</b>"),
-    (mn([("이름 바꾸기", "F2", True, False), ("복사", "⌘C", False, False)], "", "단축키를 가르친다", True),
-     "단축키 표시", "단축키를 적어 두면 <b>다음에는 메뉴를 열지 않고</b> 바로 실행할 수 있습니다"),
-    (one(txt('<span style="display:block;font-size:8px;color:var(--fg-muted)">Esc 로 닫았다</span>'
-             '<span style="display:block;font-size:8px;margin-top:2px">초점이 <b>단추</b>로 돌아왔다</span>'),
+         "뒤집지 않음", False, "", "152px"),
+     "뒤집지 않았을 때", "아래로만 열어서 화면 끝에서 <b>잘립니다</b>"),
+    (mn([("이름 바꾸기", "F2", True, False), ("복사", "⌘C", False, False)], "", "단축키를 알려 줌", True),
+     "단축키를 함께 적었을 때", "단축키를 적어 두면 <b>다음에는 메뉴를 열지 않고</b> 바로 실행할 수 있습니다"),
+    (one(txt('<span style="display:block;font-size:8px;color:var(--fg-muted)">Esc로 닫음</span>'
+             '<span style="display:block;font-size:8px;margin-top:2px">초점이 <b>단추</b>로 돌아옴</span>'),
          "닫기", True, "", "152px"),
-     "닫은 뒤", "초점이 <b>단추로</b> 돌아갑니다"),
+     "메뉴를 닫은 뒤", "초점이 <b>단추로</b> 돌아갑니다"),
   ]),
   anat=ANAT,
   pins=pins([
     ("단추", "<code>aria-haspopup</code>", "단추를 누르면 무엇이 열리는지 알립니다"),
     ("동작 목록", "<code>menu/menuitem</code>", "누르면 <b>일이</b> 일어나는 목록입니다"),
     ("값 고르기", "<code>listbox/option</code>", "누르면 <b>값이</b> 정해지는 목록입니다"),
-    ("단축키", "오른쪽", "단축키를 <b>익히게 하는</b> 자리입니다"),
-    ("뒤집기", "자리가 없으면", "메뉴가 <b>잘리지 않게</b> 위로 엽니다"),
-    ("닫은 뒤", "단추로", "초점을 단추로 <b>돌려줍니다</b>"),
+    ("단축키", "오른쪽에 적음", "단축키를 <b>익히게 하는</b> 자리입니다"),
+    ("뒤집기", "자리가 없으면 위로", "메뉴가 <b>잘리지 않게</b> 위로 엽니다"),
+    ("닫은 뒤", "초점을 단추로", "초점을 단추로 <b>돌려줍니다</b>"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           메뉴와 셀렉트를 가르는 질문은 <b>항목을 누르면 무슨 일이 일어나는가</b> 하나입니다.
@@ -101,6 +101,8 @@ D = dict(
           메뉴는 Enter로 항목을 실행하고 닫히지만,
           셀렉트는 고른 값이 <b>표시로 남아야</b> 합니다.
           그래서 어느 쪽인지부터 정하지 않으면 두 동작 중 어느 것도 제대로 만들 수 없습니다.</p>''',
+  do_title="드롭다운 메뉴를 만들 때 지킬 것",
+  dont_title="드롭다운 메뉴를 만들 때 피할 것",
   do=ul([
     "<b>누르면 일이 일어나면</b> 메뉴로, 값만 정해지면 셀렉트로 만들기",
     "자리가 없으면 <b>위로 뒤집기</b>",
@@ -112,14 +114,14 @@ D = dict(
     "메뉴에 <b>입력칸</b> 넣기. 입력칸이 들어가면 메뉴가 아니라 <a href=\"popover.html\">팝오버</a>입니다",
     "항목을 <b>열다섯 개</b> 넘게 두기. 항목을 묶거나 <a href=\"commandpalette.html\">팔레트</a>로 옮깁니다",
   ]),
-  instead='값을 고르면 <a href="select.html">셀렉트</a>, 아무 내용이나 담으면 <a href="popover.html">팝오버</a>, 오른쪽 눌러 열면 <a href="contextmenu.html">컨텍스트 메뉴</a>, 아래에서 올라오면 <a href="actionsheet.html">액션 시트</a>.',
+  instead='항목을 눌러 값만 정하는 목록이면 <a href="select.html">셀렉트</a>를 쓰고, 동작 목록이 아닌 다른 내용까지 담으려면 <a href="popover.html">팝오버</a>가 맞습니다. 마우스 오른쪽 버튼으로 누른 자리에 띄우려면 <a href="contextmenu.html">컨텍스트 메뉴</a>를, 화면 아래에서 올라오게 하려면 <a href="actionsheet.html">액션 시트</a>를 씁니다.',
   cases=cases([
     (mn([("이름 바꾸기", "", True, False), ("지우기", "", False, True)], "", "", True, "150px", False, "⋯"),
-     "줄의 더 보기", "줄마다 붙는 <b>케밥 메뉴</b>입니다"),
+     "줄마다 붙는 더 보기 메뉴", "줄마다 붙는 <b>케밥 메뉴</b>입니다"),
     (mn([("CSV 로", "", True, False), ("엑셀로", "", False, False)], "", "", True, "150px", False, "내보내기 ▾"),
-     "스플릿 버튼", "주 동작 옆에 <b>다른 방식</b>을 고르는 메뉴를 붙입니다"),
+     "주 동작 옆에 붙인 스플릿 버튼", "주 동작 옆에 <b>다른 방식</b>을 고르는 메뉴를 붙입니다"),
     (mn([("매주 수요일", "", True, False), ("매달 1일", "", False, False)], "", "", True, "150px", False, "매주 수요일 ▾"),
-     "값 고르기", "생김새는 같아도 이것은 <b>셀렉트</b>입니다"),
+     "생김새만 같은 값 고르기", "생김새는 같아도 이것은 <b>셀렉트</b>입니다"),
   ]),
   code_lede="동작 목록이면 <code>menu</code> 역할을, 값 고르기면 <code>listbox</code> 역할을 쓰고, 마크업은 이 역할에 따라 달라집니다.",
   code='''<span class="c">&lt;!-- 동작 목록 — 누르면 일이 일어난다 --&gt;</span>
@@ -140,12 +142,12 @@ menu.addEventListener(<span class="s">'close'</span>, () =&gt; trigger.focus());
     ("↑ ↓", "항목 사이를 옮깁니다. 이때는 <b>Tab이 아니라</b> 화살표 키를 씁니다"),
     ("Home · End", "<b>처음 항목과 마지막 항목</b>으로 옮깁니다"),
     ("Esc", "메뉴를 닫고 초점을 <b>단추로</b> 돌려보냅니다"),
-    ("글자 키", "그 글자로 시작하는 항목으로 옮깁니다. 항목이 많은 <b>긴 메뉴</b>에서 특히 쓸모가 있습니다"),
-    ("확인하는 법", "Tab을 눌러 초점이 <b>메뉴 밖으로 나가지 않는지</b> 봅니다"),
+    ("글자 키를 누를 때", "그 글자로 시작하는 항목으로 옮깁니다. 항목이 많은 <b>긴 메뉴</b>에서 특히 쓸모가 있습니다"),
+    ("확인하는 방법", "Tab을 눌러 초점이 <b>메뉴 밖으로 나가지 않는지</b> 봅니다"),
   ]),
   backend=rows([
-    ("할 수 있는 일", "사용자 권한으로 할 수 없는 동작은 <b>목록에서 항목을 뺍니다</b>. 흐리게만 두면 사용자가 '왜 안 되나' 하고 묻게 됩니다."),
-    ("동작의 결과", "메뉴 항목을 누르면 보통 서버로 요청이 나갑니다. 그래서 <a href=\"undo.html\">되돌리기</a>를 붙일지 미리 정해 둡니다."),
+    ("권한에 따라 빼는 항목", "사용자 권한으로 할 수 없는 동작은 <b>목록에서 항목을 뺍니다</b>. 흐리게만 두면 사용자가 '왜 안 되나' 하고 묻게 됩니다."),
+    ("항목을 누른 뒤의 서버 요청", "메뉴 항목을 누르면 보통 서버로 요청이 나갑니다. 그래서 <a href=\"undo.html\">되돌리기</a>를 붙일지 미리 정해 둡니다."),
   ]),
   plat_lede="플랫폼마다 메뉴의 <b>이름과 역할</b>이 또렷하게 나뉘어 있습니다.",
   plats=plats([

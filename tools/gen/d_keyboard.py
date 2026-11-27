@@ -15,11 +15,11 @@ def row(tag, ok_focus, ok_key, note, w="168px"):
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:15px">
                   <div class="pin-out" data-pin="1" style="display:inline-block;background:var(--accent);color:#fff;border-radius:6px;padding:8px 14px;font-size:12.5px;font-weight:700;justify-self:start">저장하기</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">&lt;button&gt;   — 포커스·Enter·Space 가 공짜</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">&lt;div onclick&gt;   — 키보드로 아예 못 간다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">tabindex="0" + role="button"   — 갈 수는 있다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">keydown: Enter · Space   — 직접 짜야 한다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">화살표 · Esc · Home/End   — 부품마다 약속이 있다</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">&lt;button&gt;   — 포커스·Enter·Space를 기본 제공</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">&lt;div onclick&gt;   — 키보드로는 갈 수 없음</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">tabindex="0" + role="button"   — 포커스는 갈 수 있음</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">keydown: Enter · Space   — 직접 짜야 함</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">화살표 · Esc · Home/End   — 부품마다 정해진 키가 있음</div>
                 </div>
               </div>'''
 
@@ -48,23 +48,23 @@ D = dict(
   ]),
   axes=ax("키보드 조작"),
   oneline="<b>누르는 것은 <code>&lt;button&gt;</code>으로, 다른 곳으로 이동하는 것은 <code>&lt;a href&gt;</code>로</b> 만듭니다. 같은 동작을 div로 만들면 브라우저가 해 주던 다섯 가지를 직접 짜야 합니다.",
-  s4_title="갈래", s4_hint="같은 모양, 다른 속",
+  s4_title="태그에 따라 달라지는 키보드 동작", s4_hint="모양이 같은 버튼이 태그마다 다르게 동작하는 모습",
   states=states([
-    (row("&lt;button&gt;", True, True, "공짜로 다 된다"), "진짜 버튼", "<b>포커스, Enter, Space, 비활성 처리</b>가 모두 기본으로 들어 있습니다"),
-    (row("&lt;div onclick&gt;", False, False, "키보드로 못 간다"), "div + onclick", "<b>Tab을 눌러도 포커스가 건너뜁니다.</b> 마우스로만 쓸 수 있습니다"),
-    (row("div + tabindex", True, False, "갈 수는 있다"), "+ tabindex", "포커스는 가지만 <b>Enter나 Space에 반응하지 않습니다.</b> 키 처리를 직접 짜야 합니다"),
-    (row("+ keydown", True, True, "겨우 비슷해졌다"), "+ 키 처리", "키 처리까지 더해야 겨우 버튼처럼 동작합니다. 처음부터 <b>button을 쓰면 이 작업이 필요 없습니다</b>"),
-    (row("&lt;a&gt; (href 없음)", False, False, "링크가 아니다"), "href 없는 a", "<code>href</code>가 없는 <code>&lt;a&gt;</code>는 <b>포커스를 받지 못합니다</b>"),
-    (row("&lt;button disabled&gt;", False, False, "일부러 뺀 것"), "비활성", "포커스를 <b>일부러</b> 받지 않게 한 것이므로 올바른 동작입니다"),
+    (row("&lt;button&gt;", True, True, "기본으로 모두 됨"), "button 태그로 만든 버튼", "<b>포커스, Enter, Space, 비활성 처리</b>가 모두 기본으로 들어 있습니다"),
+    (row("&lt;div onclick&gt;", False, False, "키보드로 갈 수 없음"), "div에 onclick만 건 버튼", "<b>Tab을 눌러도 포커스가 건너뜁니다.</b> 마우스로만 쓸 수 있습니다"),
+    (row("div + tabindex", True, False, "포커스만 갈 수 있음"), "div에 tabindex를 더한 버튼", "포커스는 가지만 <b>Enter나 Space에 반응하지 않습니다.</b> 키 처리를 직접 짜야 합니다"),
+    (row("+ keydown", True, True, "이제야 버튼과 비슷함"), "키 처리까지 더한 div 버튼", "키 처리까지 더해야 겨우 버튼처럼 동작합니다. 처음부터 <b>button을 쓰면 이 작업이 필요 없습니다</b>"),
+    (row("&lt;a&gt; (href 없음)", False, False, "href가 없어 링크가 아님"), "href가 없는 a 태그", "<code>href</code>가 없는 <code>&lt;a&gt;</code>는 <b>포커스를 받지 못합니다</b>"),
+    (row("&lt;button disabled&gt;", False, False, "일부러 뺀 것"), "비활성으로 만든 button", "포커스를 <b>일부러</b> 받지 않게 한 것이므로 올바른 동작입니다"),
   ]),
   anat=ANAT,
   pins=pins([
     ("누를 것", "button", "<b>원래 태그를 쓰면</b> 아래 다섯 줄에 적힌 동작을 브라우저가 모두 처리합니다"),
     ("태그가 주는 것", "&lt;button&gt;", "포커스 순서, Enter, Space, 역할, 비활성 처리를 기본으로 제공합니다"),
-    ("div 로 만들면", "&lt;div onclick&gt;", "<b>Tab으로 포커스가 아예 가지 않아서</b> 마우스로만 쓸 수 있습니다"),
+    ("div로 만든 버튼", "&lt;div onclick&gt;", "<b>Tab으로 포커스가 아예 가지 않아서</b> 마우스로만 쓸 수 있습니다"),
     ("순서에 넣기", "tabindex=\"0\" + role", "포커스가 갈 수는 있게 되지만, <b>키로 누를 수는 아직 없습니다</b>"),
     ("키 처리", "keydown", "Enter와 Space 입력을 <b>직접</b> 받아서 click 이벤트를 일으켜야 합니다"),
-    ("부품별 약속", "화살표 · Esc · Home/End", "탭, 라디오, 메뉴처럼 부품마다 <b>정해진 키 동작</b>이 있습니다"),
+    ("부품별 키 동작", "화살표 · Esc · Home/End", "탭, 라디오, 메뉴처럼 부품마다 <b>정해진 키 동작</b>이 있습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <code>&lt;div&gt;</code>로 버튼을 만들면 <code>tabindex</code>, <code>role</code>, Enter, Space, 비활성 처리까지
@@ -83,23 +83,26 @@ D = dict(
     "호버로만 열리는 메뉴나 드래그로만 되는 정렬처럼 마우스로만 할 수 있는 동작만 둘 때",
     "<code>tabindex</code>에 1 이상의 값을 줄 때",
   ]),
-  instead='어디 있는지 보이게 하려면 <a href="focus.html">포커스</a>, 모달 안에 가두려면 <a href="focustrap.html">포커스 트랩</a>, 태그 고르기는 <a href="semantics.html">시맨틱 태그</a>.',
+  do_title="키보드 조작을 확인해야 하는 경우",
+  dont_title="키보드 조작을 망가뜨리는 실수",
+  instead_title="키보드 조작과 이어지는 주제는 다른 항목에서 다룹니다",
+  instead='포커스가 어디 있는지 보이게 하는 방법은 <a href="focus.html">포커스</a>에서, 모달 안에 포커스를 가두는 방법은 <a href="focustrap.html">포커스 트랩</a>에서 다룹니다. 어떤 태그를 골라야 하는지는 <a href="semantics.html">시맨틱 태그</a>를 보세요.',
   cases=cases([
-    (row("&lt;button&gt;", True, True, "", "190px"), "버튼", "<b>button 태그 하나로</b> 키보드 조작이 모두 해결됩니다"),
+    (row("&lt;button&gt;", True, True, "", "190px"), "버튼을 button 태그로 만들기", "<b>button 태그 하나로</b> 키보드 조작이 모두 해결됩니다"),
     ('''              <div style="width:100%;max-width:190px;display:flex;gap:10px;border-bottom:1px solid var(--line);padding-bottom:4px">
                 <span style="font-size:11px;color:var(--accent);font-weight:700;border-bottom:2px solid var(--accent);padding-bottom:4px;margin-bottom:-5px">개요</span>
                 <span style="font-size:11px;color:var(--fg-muted)">거래</span>
                 <span style="font-size:11px;color:var(--fg-muted)">정산</span>
               </div>
-              <div style="font-family:var(--mono);font-size:10px;color:var(--fg-muted);margin-top:7px;text-align:center">Tab 한 번 + ← → 로 이동</div>''',
-     "탭", "<b>로빙 탭인덱스</b>(roving tabindex)를 씁니다. 탭 줄 전체를 Tab 한 번으로 지나가고, 줄 안에서는 화살표 키로 옮겨 다닙니다"),
+              <div style="font-family:var(--mono);font-size:10px;color:var(--fg-muted);margin-top:7px;text-align:center">Tab으로 들어와 ← →로 이동</div>''',
+     "탭 줄 안에서 화살표로 옮겨 다니기", "<b>로빙 탭인덱스</b>(roving tabindex)를 씁니다. 탭 줄 전체를 Tab 한 번으로 지나가고, 줄 안에서는 화살표 키로 옮겨 다닙니다"),
     ('''              <div style="width:100%;max-width:190px;display:grid;gap:5px">
                 <span style="border:1px solid var(--line-strong);border-radius:5px;padding:6px 9px;font-size:11px">서울특별시</span>
                 <span style="font-size:10px;color:var(--fg-muted);font-family:var(--mono)">↑↓ 이동 · Enter 고르기 · Esc 닫기</span>
               </div>''',
-     "콤보박스", "콤보박스처럼 부품마다 <b>정해진 키 동작</b>이 있습니다"),
+     "콤보박스에 정해진 키 동작", "콤보박스처럼 부품마다 <b>정해진 키 동작</b>이 있습니다"),
   ]),
-  s8_title="최소 마크업과 키보드", s8_hint="원래 태그를 쓰면 기본으로 따라온다",
+  s8_title="최소 마크업과 키보드", s8_hint="원래 태그를 쓰면 저절로 지켜지는 규칙",
   code_lede="가장 간단한 해결책은 <b>태그를 button으로 바꾸는 것</b>입니다. 그래도 div로 만들어야 한다면 필요한 코드를 아래에 적어 두었습니다.",
   code='''<span class="c">&lt;!-- 이 한 줄이면 된다 --&gt;</span>
 &lt;<span class="t">button</span> <span class="a">type</span>=<span class="s">"button"</span>&gt;저장하기&lt;/<span class="t">button</span>&gt;
@@ -123,10 +126,10 @@ el.addEventListener(<span class="s">'keydown'</span>, (e) =&gt; {
     ("<kbd>Home</kbd><kbd>End</kbd>", "목록의 처음이나 끝으로 갑니다"),
   ]),
   backend=rows([
-    ("테스트가 가장 쉽다", "접근성 항목 가운데 <b>직접 확인하기가 가장 쉽습니다</b>. 마우스를 치우고 화면을 끝까지 써 보면 되므로 따로 도구나 지식이 필요 없습니다."),
-    ("자동 검사", "Playwright로 <kbd>Tab</kbd>을 눌러 가며 <code>activeElement</code>를 기록하면, 누를 수는 있는데 Tab으로 포커스가 가지 않는 요소를 <b>CI에서</b> 찾아낼 수 있습니다."),
-    ("컴포넌트 라이브러리", "부품을 직접 만들기 전에 <b>키 동작이 이미 구현된 라이브러리</b>를 찾는 편이 대개 낫습니다. 콤보박스 하나에만 키 처리 코드가 열 줄 넘게 들어가기 때문입니다."),
-    ("드래그로만 되는 것", "순서 바꾸기를 드래그로만 만들면 <b>키보드로는 순서를 아예 바꿀 수 없으므로</b>, '위로/아래로' 버튼을 함께 둡니다."),
+    ("가장 확인하기 쉬운 접근성 항목", "접근성 항목 가운데 <b>직접 확인하기가 가장 쉽습니다</b>. 마우스를 치우고 화면을 끝까지 써 보면 되므로 따로 도구나 지식이 필요 없습니다."),
+    ("Tab이 가지 않는 요소 자동 검사", "Playwright로 <kbd>Tab</kbd>을 눌러 가며 <code>activeElement</code>를 기록하면, 누를 수는 있는데 Tab으로 포커스가 가지 않는 요소를 <b>CI에서</b> 찾아낼 수 있습니다."),
+    ("키 동작이 구현된 라이브러리 쓰기", "부품을 직접 만들기 전에 <b>키 동작이 이미 구현된 라이브러리</b>를 찾는 편이 대개 낫습니다. 콤보박스 하나에만 키 처리 코드가 열 줄 넘게 들어가기 때문입니다."),
+    ("드래그로만 되는 순서 바꾸기", "순서 바꾸기를 드래그로만 만들면 <b>키보드로는 순서를 아예 바꿀 수 없으므로</b>, '위로/아래로' 버튼을 함께 둡니다."),
   ]),
   plat_lede="iOS와 안드로이드에는 <b>키보드 말고도</b> 다른 조작 수단이 있어서 챙겨야 할 범위가 더 넓습니다.",
   plats=plats([

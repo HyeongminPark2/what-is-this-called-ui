@@ -34,12 +34,12 @@ def cc(tips, label, note="", ok=None, w="152px", skip=True, hole=True):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">한 번에 하나만 짚는다</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">구멍 — 짚는 것만 밝게 남긴다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">몇 번째인지 — 1 / 4</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--accent)">건너뛸 길 — 없으면 갇힌다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--danger)">한 번만 띄운다 — 본 사람에게 또 띄우지 않는다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">같은 설명을 도움말에도 남긴다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">한 번에 하나만 짚음</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">구멍을 뚫어 짚는 곳만 밝게 남김</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">몇 번째인지 1 / 4로 보여 줌</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--accent)">건너뛰기가 없으면 못 빠져나감</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--danger)">한 번 본 사람에게는 다시 띄우지 않음</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--fg-muted)">같은 설명을 도움말에도 남김</div>
                 </div>
               </div>'''
 
@@ -71,21 +71,21 @@ D = dict(
   axes=axis_table("코치마크"),
   oneline="코치마크는 <b>한 번에 하나씩, 모두 합쳐 셋까지</b>만 띄웁니다. 그보다 많으면 사람들이 끝까지 읽지 않습니다.",
   states=states([
-    (cc([(16, 26, '여기서 내보내요', '엑셀로 받을 수 있습니다')], "", "하나만 짚는다", True),
-     "하나", "한 곳만 짚으면 말풍선이 <b>읽힙니다</b>"),
+    (cc([(16, 26, '여기서 내보내요', '엑셀로 받을 수 있습니다')], "", "하나만 짚음", True),
+     "한 곳만 짚었을 때", "한 곳만 짚으면 말풍선이 <b>읽힙니다</b>"),
     (cc([(10, 24, '내보내기', '엑셀로'), (66, 24, '필터', '좁혀 보기'),
-         (10, 48, '도움말', '막히면 여기')], "", "셋을 한꺼번에 — 아무것도 안 읽는다", False, "152px", True, False),
-     "여럿", "세 곳을 한꺼번에 짚으면 <b>어느 것도 읽지 않습니다</b>"),
-    (cc([(16, 26, '여기서 내보내요', '1 / 4')], "", "몇 번째인지 보인다", True),
-     "몇 번째", "1 / 4처럼 적어 두면 <b>얼마나 남았는지</b> 알 수 있습니다"),
-    (cc([(16, 26, '여기서 내보내요', '엑셀로')], "", "건너뛸 길이 없다", False, "152px", False),
-     "건너뛰기 없음", "'다음'만 있으면 안내가 끝날 때까지 <b>빠져나갈 수 없습니다</b>"),
+         (10, 48, '도움말', '막히면 여기')], "", "셋을 한꺼번에 띄우면 아무것도 안 읽음", False, "152px", True, False),
+     "여러 곳을 한꺼번에 짚었을 때", "세 곳을 한꺼번에 짚으면 <b>어느 것도 읽지 않습니다</b>"),
+    (cc([(16, 26, '여기서 내보내요', '1 / 4')], "", "몇 번째인지 보임", True),
+     "몇 번째인지 보여 줄 때", "1 / 4처럼 적어 두면 <b>얼마나 남았는지</b> 알 수 있습니다"),
+    (cc([(16, 26, '여기서 내보내요', '엑셀로')], "", "건너뛸 길이 없음", False, "152px", False),
+     "건너뛰기가 없을 때", "'다음'만 있으면 안내가 끝날 때까지 <b>빠져나갈 수 없습니다</b>"),
     (one(txt('<span style="display:block;font-size:8px;color:var(--fg-muted)">이미 본 사람</span>'
-             '<span style="display:block;font-size:8px;margin-top:2px">다시 안 띄운다</span>'),
+             '<span style="display:block;font-size:8px;margin-top:2px">다시 띄우지 않음</span>'),
          "본 적 있음", True, "", "152px"),
-     "두 번째부터", "이미 본 사람에게는 <b>다시 띄우지 않습니다</b>"),
+     "두 번째로 들어왔을 때", "이미 본 사람에게는 <b>다시 띄우지 않습니다</b>"),
     (one(txt('<span style="display:block;font-size:8px">도움말 › 내보내기</span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">같은 설명이 여기에도 있다</span>'),
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">같은 설명이 여기에도 있음</span>'),
          "도움말", True, "", "152px"),
      "나중에 찾을 때", "같은 설명을 <b>도움말</b>에 남겨 둡니다"),
   ]),
@@ -94,9 +94,9 @@ D = dict(
     ("하나씩", "한 번에 하나", "말풍선이 한꺼번에 둘만 떠도 사람들이 <b>읽지 않습니다</b>"),
     ("구멍", "짚는 것만 밝게", "짚는 곳만 밝게 남기면 어디를 설명하는지 <b>분명해집니다</b>"),
     ("몇 번째", "1 / 4", "전체 가운데 몇 번째인지 보여 주면 얼마나 남았는지 알 수 있습니다"),
-    ("건너뛰기", "있어야 함", "건너뛰기가 없으면 안내가 끝날 때까지 <b>빠져나갈 수 없습니다</b>"),
-    ("한 번만", "본 뒤엔 안 띄움", "본 적이 있는지 <b>기억</b>해 두고 다시 띄우지 않습니다"),
-    ("도움말", "같은 설명", "나중에 다시 <b>찾을 수 있게</b> 도움말에도 같은 설명을 둡니다"),
+    ("건너뛰기", "늘 둠", "건너뛰기가 없으면 안내가 끝날 때까지 <b>빠져나갈 수 없습니다</b>"),
+    ("한 번만", "본 뒤에는 띄우지 않음", "본 적이 있는지 <b>기억</b>해 두고 다시 띄우지 않습니다"),
+    ("도움말", "같은 설명을 남김", "나중에 다시 <b>찾을 수 있게</b> 도움말에도 같은 설명을 둡니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           코치마크는 <b>만드는 쪽은 편하지만 쓰는 쪽은 불편한</b> 대표적인 부품입니다.
@@ -106,6 +106,8 @@ D = dict(
           <b>화면만으로는 알기 어려운 이유</b>를 찾아보는 것이 좋습니다.
           단추 이름이 모호하거나, 단추가 엉뚱한 자리에 있거나, 빈 상태 화면에 아무 안내가 없는 경우가 많습니다.
           이런 원인을 고치면 코치마크로 설명을 덧붙일 필요가 없어집니다.</p>''',
+  do_title="코치마크를 만들 때 지킬 것",
+  dont_title="코치마크를 만들 때 피할 것",
   do=ul([
     "<b>한 번에 하나씩</b>, 모두 합쳐 셋까지만 띄우기",
     "<b>건너뛸 길</b>을 늘 두기",
@@ -117,17 +119,17 @@ D = dict(
     "이미 본 사람에게 <b>또</b> 띄우기",
     "화면을 고치는 대신 <b>설명을 덧붙이기</b>",
   ]),
-  instead='가리켜야 뜨면 <a href="tooltip.html">툴팁</a>, 흐름 전체는 <a href="onboarding.html">온보딩</a>, 빈 화면에서 가르치면 <a href="empty.html">빈 상태</a>, 기능이 많으면 <a href="commandpalette.html">커맨드 팔레트</a>.',
+  instead='사용자가 가리켰을 때만 설명을 띄우려면 <a href="tooltip.html">툴팁</a>을 쓰고, 처음 쓰는 흐름 전체를 안내하려면 <a href="onboarding.html">온보딩</a>이 맞습니다. 아무것도 없는 빈 화면에서 할 일을 알려 주려면 <a href="empty.html">빈 상태</a>를 쓰고, 기능이 많아 찾기 어렵다면 <a href="commandpalette.html">커맨드 팔레트</a>를 둡니다.',
   cases=cases([
-    (cc([(16, 26, '여기서 내보내요', '1 / 2')], "", "", True, "150px"), "새 기능", "새로 생긴 기능 <b>하나만</b> 짚어 알립니다"),
+    (cc([(16, 26, '여기서 내보내요', '1 / 2')], "", "", True, "150px"), "새로 생긴 기능 알리기", "새로 생긴 기능 <b>하나만</b> 짚어 알립니다"),
     (one(txt('<span style="display:block;font-size:8px">내보내기 <span style="color:var(--accent)">●</span></span>'
-             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">점 하나로도 충분할 때가 있다</span>'),
+             '<span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">점 하나로도 충분할 때가 있음</span>'),
          "힌트 점", True, "", "150px"),
-     "작은 알림", "말풍선 없이 <b>점 하나</b>만 찍어도 충분할 때가 있습니다"),
+     "점 하나로 새 기능 알리기", "말풍선 없이 <b>점 하나</b>만 찍어도 충분할 때가 있습니다"),
     (one(txt('<span style="display:block;font-size:8px">아직 정산이 없습니다</span>'
              '<span style="display:block;font-size:8px;color:var(--accent);margin-top:2px">첫 가게 등록하기 ›</span>'),
-         "빈 상태로", True, "설명 대신 할 일을 준다", "150px"),
-     "빈 화면", "설명을 띄우기보다 할 일을 보여 주는 <a href=\"empty.html\">빈 상태</a>가 더 낫습니다"),
+         "빈 상태로", True, "설명 대신 할 일을 보여 줌", "150px"),
+     "빈 화면에서 할 일 보여 주기", "설명을 띄우기보다 할 일을 보여 주는 <a href=\"empty.html\">빈 상태</a>가 더 낫습니다"),
   ]),
   code_lede="말풍선에는 <code>role=\"dialog\"</code>를 붙이고, 사용자가 투어를 <b>본 적이 있는지</b> 꼭 저장해 둡니다.",
   code='''&lt;<span class="t">div</span> <span class="a">class</span>=<span class="s">"coach"</span> <span class="a">role</span>=<span class="s">"dialog"</span> <span class="a">aria-label</span>=<span class="s">"여기서 내보내요"</span>&gt;
@@ -147,15 +149,15 @@ D = dict(
   keys=kbd([
     ("Esc", "<b>건너뛰기</b>를 누른 것과 같이 투어를 끝냅니다"),
     ("Tab", "초점이 말풍선 안에서만 돌아서 <b>건너뛰기와 다음</b> 두 단추 사이를 오갑니다"),
-    ("초점", "투어를 열면 초점을 <b>말풍선</b>으로 옮기고, 끝나면 <b>짚던 요소</b>로 돌려놓습니다"),
+    ("투어를 열고 닫을 때의 초점", "투어를 열면 초점을 <b>말풍선</b>으로 옮기고, 끝나면 <b>짚던 요소</b>로 돌려놓습니다"),
     ("<code>aria-describedby</code>", "짚는 요소와 말풍선을 이 속성으로 <b>연결해</b> 둘 수도 있습니다"),
-    ("모션", "<a href=\"reducedmotion.html\">모션 줄이기</a>를 켠 사람에게는 <b>움직임을 끕니다</b>"),
-    ("확인하는 법", "Esc 키만으로 <b>빠져나갈 수 있는지</b> 확인합니다"),
+    ("모션 줄이기를 켰을 때", "<a href=\"reducedmotion.html\">모션 줄이기</a>를 켠 사람에게는 <b>움직임을 끕니다</b>"),
+    ("확인하는 방법", "Esc 키만으로 <b>빠져나갈 수 있는지</b> 확인합니다"),
   ]),
   backend=rows([
-    ("본 적이 있나", "본 적이 있다는 기록을 계정에 저장하면 <b>다른 기기에서도</b> 다시 뜨지 않습니다. 반면 브라우저 저장소에만 저장하면 기기를 바꿀 때마다 또 뜹니다."),
-    ("투어 버전", "<code>tour:v2</code>처럼 저장하는 이름에 버전을 붙여 두면, 기능이 바뀌었을 때 <b>바뀐 기능만</b> 다시 안내할 수 있습니다."),
-    ("누구에게", "이미 그 기능을 써 본 사람에게는 <b>안 띄우는</b> 것이 맞습니다."),
+    ("본 적이 있다는 기록을 두는 곳", "본 적이 있다는 기록을 계정에 저장하면 <b>다른 기기에서도</b> 다시 뜨지 않습니다. 반면 브라우저 저장소에만 저장하면 기기를 바꿀 때마다 또 뜹니다."),
+    ("저장하는 이름에 투어 버전 붙이기", "<code>tour:v2</code>처럼 저장하는 이름에 버전을 붙여 두면, 기능이 바뀌었을 때 <b>바뀐 기능만</b> 다시 안내할 수 있습니다."),
+    ("누구에게 띄울지 정하기", "이미 그 기능을 써 본 사람에게는 <b>안 띄우는</b> 것이 맞습니다."),
   ]),
   plat_lede="코치마크는 대개 <b>정식 부품이 없어서</b> 직접 만듭니다.",
   plats=plats([
@@ -166,7 +168,7 @@ D = dict(
      '''              <div class="phone" role="img" aria-label="iOS 팁 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:30px;height:16px;border-radius:4px;background:var(--fg);opacity:.9"></div></div></div>''',
      "팁을 <b>언제, 몇 번 띄울지</b>까지 OS가 규칙으로 관리해 줍니다(iOS 17 이상)."),
-    ("안드로이드", "Tooltip · 직접",
+    ("안드로이드", "Tooltip 또는 직접 만듦",
      '''              <div class="phone" role="img" aria-label="안드로이드 팁 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:30px;height:14px;border-radius:4px;background:var(--fg);opacity:.9"></div></div></div>''',
      "정식 부품이 드물어서 대개 직접 만들고, 짚는 곳만 밝게 남기는 효과도 직접 그립니다."),

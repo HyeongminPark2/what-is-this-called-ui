@@ -18,10 +18,10 @@
 <body>
 <div class="bar">
   <b>비활성과 읽기 전용</b>
-  <label>왜 못 고치나 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>칸을 못 고치게 하는 방법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="disabled" selected>disabled (비활성)</option>
     <option value="readonly">readonly (읽기 전용)</option>
-    <option value="aria">aria-disabled (눌리지만 안 먹음)</option>
+    <option value="aria">aria-disabled (눌리지만 동작하지 않음)</option>
   </select></label>
   <button class="ui-btn ui-btn--ghost" id="tab">Tab 으로 훑어보기</button>
   <button class="ui-btn ui-btn--ghost" id="submit">보내 보기</button>
@@ -73,12 +73,12 @@
     var rd = document.getElementById('read');
     var focusable = FIELDS.filter(function (id) { return !document.getElementById(id).disabled; }).length;
     var submitted = FIELDS.filter(function (id) { return !document.getElementById(id).disabled; }).length;
-    rd.innerHTML = '지금 <b>' + ({ disabled: 'disabled', readonly: 'readonly', aria: 'aria-disabled' }[k]) + '</b>' +
+    rd.innerHTML = '지금 쓰는 방법은 <b>' + ({ disabled: 'disabled', readonly: 'readonly', aria: 'aria-disabled' }[k]) + '</b>입니다' +
       '<br>초점을 받을 수 있는 칸 <b>' + focusable + ' / 3</b>' +
-      (focusable < 3 ? ' <span class="warn">— 초점이 건너뜁니다</span>' : '') +
+      (focusable < 3 ? ' <span class="warn">나머지 칸은 초점이 건너뜁니다</span>' : '') +
       '<br>보낼 때 실리는 칸 <b>' + submitted + ' / 3</b>' +
-      (submitted < 3 ? ' <span class="warn">— 값이 서버로 가지 않습니다</span>' : '') +
-      '<br>왜 못 고치는지 <b>' + (k === 'aria' ? '적혀 있습니다' : '적혀 있습니다') + '</b>' +
+      (submitted < 3 ? ' <span class="warn">나머지 칸의 값은 서버로 가지 않습니다</span>' : '') +
+      '<br>왜 못 고치는지는 칸 옆에 <b>' + (k === 'aria' ? '적혀 있습니다' : '적혀 있습니다') + '</b>' +
       (why ? '<br>' + why : '');
     rd.dataset.kind = k;
     rd.dataset.focusable = String(focusable);
@@ -91,7 +91,7 @@
     var seen = [], i = 0;
     (function step() {
       if (i >= els.length) {
-        document.getElementById('log').innerHTML = 'Tab이 <b>' + seen.length + '번</b> 멈췄습니다 — ' + seen.join(' → ');
+        document.getElementById('log').innerHTML = 'Tab이 <b>' + seen.length + '번</b> 멈췄습니다(' + seen.join(' → ') + ')';
         document.getElementById('read').dataset.seen = String(seen.length);
         return;
       }
@@ -105,9 +105,9 @@
   document.getElementById('submit').addEventListener('click', function () {
     var sent = FIELDS.filter(function (id) { return !document.getElementById(id).disabled; })
       .map(function (id) { return document.getElementById(id).value; });
-    document.getElementById('log').innerHTML = '보낸 값 <b>' + sent.length + '개</b> — ' +
-      sent.map(function (v) { return '‘' + v + '’'; }).join(', ') +
-      (sent.length < 3 ? ' <span class="warn">· 사업자번호·계좌가 빠졌습니다</span>' : '');
+    document.getElementById('log').innerHTML = '값 <b>' + sent.length + '개</b>를 보냈습니다(' +
+      sent.map(function (v) { return '‘' + v + '’'; }).join(', ') + ')' +
+      (sent.length < 3 ? ' <span class="warn">사업자번호와 계좌는 빠졌습니다</span>' : '');
     document.getElementById('read').dataset.sent = String(sent.length);
   });
 

@@ -37,12 +37,12 @@ def al(kind, text, label, note="", ok=None, w="152px", field=None, after=False):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">뜨지 않는다 — 흐름 안에 자리를 차지한다</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">틀린 칸 바로 아래 — 거리가 0에 가깝다</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--accent)">aria-describedby 로 칸과 묶는다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">role="alert" — 오류는 그 자리에서 읽는다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">치우지 않아도 된다 — 고치면 사라진다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">맨 위에 모으면 어느 칸인지 찾아 내려가야 한다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">뜨지 않고 흐름 안에 자리를 차지함</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">틀린 칸 바로 아래라 거리가 0에 가까움</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--accent)">aria-describedby로 칸과 묶음</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">role="alert"면 오류를 바로 읽어 줌</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">고치면 사라져서 치울 필요가 없음</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">맨 위에 모으면 어느 칸인지 찾아 내려가야 함</div>
                 </div>
               </div>'''
 
@@ -73,29 +73,29 @@ D = dict(
   axes=axis_table("인라인 얼럿"),
   oneline="인라인 얼럿은 <b>틀린 칸 바로 아래에 붙이는 것이 가장 좋습니다.</b> 칸에서 멀어질수록 사용자가 어느 칸이 틀렸는지 찾아 내려가야 하기 때문입니다.",
   states=states([
-    (al("err", "사업자번호는 10자리입니다", "", "거리 0에 가깝다", True, "152px", "사업자번호"),
-     "칸 바로 아래", "틀린 칸과 <b>가장 가깝습니다</b>"),
-    (al("err", "고쳐야 할 칸이 2개 있습니다", "", "어느 칸인지 찾아 내려가야 한다", None, "152px", "사업자번호", True),
-     "맨 위에 모음", "고칠 칸이 <b>몇 개인지</b> 한눈에 보입니다"),
-    (al("warn", "이 계좌는 정산일에 확인이 한 번 더 필요합니다", "", "막지는 않는다", None),
-     "주의", "확인하고 <b>넘어갈 수</b> 있습니다"),
-    (al("info", "정산은 매주 수요일에 보냅니다", "", "그냥 알린다", True),
-     "안내", "<b>오류가 아니라</b> 알아 둘 내용을 알립니다"),
-    (al("err", "사업자번호를 확인해 주세요", "", "칸과 안 묶였다", False),
-     "칸과 안 묶임", "<b>스크린 리더로 들으면</b> 어느 칸의 메시지인지 알 수 없습니다"),
-    (one(txt('<span style="display:block;font-size:8px;color:var(--fg-muted)">고쳤더니 사라졌다</span>'
-             '<span style="display:block;font-size:8px;margin-top:2px">치울 필요가 없다</span>'),
+    (al("err", "사업자번호는 10자리입니다", "", "거리가 0에 가까움", True, "152px", "사업자번호"),
+     "틀린 칸 바로 아래에 붙였을 때", "틀린 칸과 <b>가장 가깝습니다</b>"),
+    (al("err", "고쳐야 할 칸이 2개 있습니다", "", "어느 칸인지 찾아 내려가야 함", None, "152px", "사업자번호", True),
+     "맨 위에 모았을 때", "고칠 칸이 <b>몇 개인지</b> 한눈에 보입니다"),
+    (al("warn", "이 계좌는 정산일에 확인이 한 번 더 필요합니다", "", "하던 일을 막지 않음", None),
+     "주의를 줄 때", "확인하고 <b>넘어갈 수</b> 있습니다"),
+    (al("info", "정산은 매주 수요일에 보냅니다", "", "알리기만 함", True),
+     "안내만 할 때", "<b>오류가 아니라</b> 알아 둘 내용을 알립니다"),
+    (al("err", "사업자번호를 확인해 주세요", "", "칸과 묶이지 않음", False),
+     "칸과 묶지 않았을 때", "<b>스크린 리더로 들으면</b> 어느 칸의 메시지인지 알 수 없습니다"),
+    (one(txt('<span style="display:block;font-size:8px;color:var(--fg-muted)">고치자 사라짐</span>'
+             '<span style="display:block;font-size:8px;margin-top:2px">치울 필요가 없음</span>'),
          "고친 뒤", True, "", "152px"),
-     "고친 뒤", "칸을 고치면 <b>저절로</b> 사라집니다"),
+     "값을 고친 뒤", "칸을 고치면 <b>저절로</b> 사라집니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("안 뜬다", "흐름 안", "화면 위에 뜨지 않고 흐름 안에서 자리를 <b>차지합니다</b>"),
+    ("놓이는 방식", "뜨지 않고 흐름 안", "화면 위에 뜨지 않고 흐름 안에서 자리를 <b>차지합니다</b>"),
     ("자리", "칸 바로 아래", "틀린 칸과의 거리가 <b>0에 가깝습니다</b>"),
     ("<code>aria-describedby</code>", "칸과 묶기", "스크린 리더로 들어도 <b>어느 칸의 메시지인지</b> 알 수 있습니다"),
-    ("<code>role=\"alert\"</code>", "오류만", "오류가 생기면 스크린 리더가 <b>바로 읽어 줍니다</b>"),
-    ("치우기", "필요 없음", "칸을 고치면 <b>저절로</b> 사라집니다"),
-    ("맨 위에 모으기", "멀다", "어느 칸인지 <b>찾아 내려가야</b> 합니다"),
+    ("<code>role=\"alert\"</code>", "오류에만 씀", "오류가 생기면 스크린 리더가 <b>바로 읽어 줍니다</b>"),
+    ("치우기", "치울 필요 없음", "칸을 고치면 <b>저절로</b> 사라집니다"),
+    ("맨 위에 모으기", "칸에서 멀어짐", "어느 칸인지 <b>찾아 내려가야</b> 합니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           칸이 열 개를 넘는 긴 폼에서는 맨 위 요약과 칸 아래 메시지를 <b>함께</b> 쓰는 것이 좋습니다.
@@ -107,6 +107,8 @@ D = dict(
           그래서 오류에는 맞지만 단순한 안내에 쓰기에는 지나칩니다.
           안내에는 <code>role="status"</code>를 쓰거나, 역할을 주지 않고
           <code>aria-describedby</code>로 칸에 묶기만 해도 됩니다.</p>''',
+  do_title="인라인 얼럿을 알맞게 쓰는 경우",
+  dont_title="인라인 얼럿을 잘못 쓰는 경우",
   do=ul([
     "메시지를 <b>틀린 칸 바로 아래</b>에 붙일 때",
     "<code>aria-describedby</code>로 메시지를 <b>칸과 묶을</b> 때",
@@ -120,9 +122,9 @@ D = dict(
   ]),
   instead='화면 전체에 해당하는 사정이면 <a href="banner.html">배너</a>, 잠깐 떴다 사라져도 되는 알림이면 <a href="toast.html">토스트</a>, 마우스를 올렸을 때만 보여 주려면 <a href="tooltip.html">툴팁</a>을 씁니다. 입력값을 검사하는 규칙은 <a href="validation.html">입력 검증</a>에서 다룹니다.',
   cases=cases([
-    (al("err", "10자리로 적어 주세요", "", "", True, "150px", "사업자번호"), "입력 오류", "인라인 얼럿을 <b>가장 흔하게</b> 쓰는 자리입니다"),
-    (al("warn", "이 설정은 다음 정산부터 적용됩니다", "", "", None, "150px"), "주의", "하던 일을 막지 않고 주의할 점만 알립니다"),
-    (al("info", "정산 주기를 바꾸면 이번 주는 그대로입니다", "", "", True, "150px"), "안내", "설정을 바꾸기 전에 결과를 <b>미리</b> 알립니다"),
+    (al("err", "10자리로 적어 주세요", "", "", True, "150px", "사업자번호"), "입력 오류 알리기", "인라인 얼럿을 <b>가장 흔하게</b> 쓰는 자리입니다"),
+    (al("warn", "이 설정은 다음 정산부터 적용됩니다", "", "", None, "150px"), "주의할 점 알리기", "하던 일을 막지 않고 주의할 점만 알립니다"),
+    (al("info", "정산 주기를 바꾸면 이번 주는 그대로입니다", "", "", True, "150px"), "바꾼 결과 미리 알리기", "설정을 바꾸기 전에 결과를 <b>미리</b> 알립니다"),
   ]),
   code_lede="칸과 메시지는 <code>aria-describedby</code>로 묶고, <code>role=\"alert\"</code>는 오류 메시지에만 붙입니다.",
   code='''&lt;<span class="t">label</span> <span class="a">for</span>=<span class="s">"biz"</span>&gt;사업자번호&lt;/<span class="t">label</span>&gt;
@@ -139,21 +141,21 @@ D = dict(
     ("<code>aria-describedby</code>", "스크린 리더가 칸을 읽을 때 <b>오류 이유도 함께</b> 읽어 줍니다"),
     ("<code>aria-invalid</code>", "그 칸의 값이 <b>틀렸다</b>고 알립니다"),
     ("<code>role=\"alert\"</code>", "오류에만 씁니다. 안내에 쓰기에는 <b>지나칩니다</b>"),
-    ("초점", "제출했는데 오류가 있으면 <b>첫 번째 틀린 칸</b>으로 초점을 옮깁니다"),
-    ("요약 목록", "맨 위 요약의 각 줄은 <b>해당 칸으로 가는 링크</b>로 만듭니다"),
-    ("확인하는 법", "Tab으로 칸에 들어가 스크린 리더가 <b>오류 이유를 읽는지</b> 확인합니다"),
+    ("제출한 뒤의 초점", "제출했는데 오류가 있으면 <b>첫 번째 틀린 칸</b>으로 초점을 옮깁니다"),
+    ("맨 위 요약 목록", "맨 위 요약의 각 줄은 <b>해당 칸으로 가는 링크</b>로 만듭니다"),
+    ("확인하는 방법", "Tab으로 칸에 들어가 스크린 리더가 <b>오류 이유를 읽는지</b> 확인합니다"),
   ]),
   backend=rows([
-    ("칸마다 돌려준다", "<code>{field: \"biz_no\", message: \"10자리\"}</code>처럼 오류 응답에 <b>어느 칸의 오류인지</b> 들어 있어야 화면이 메시지를 붙일 자리를 알 수 있습니다."),
-    ("사람이 읽을 말로", "응답에 <code>ERR_INVALID_FORMAT</code> 같은 코드만 오면 화면 쪽에서 사용자에게 보여 줄 문장을 따로 만들어야 합니다."),
-    ("여러 개", "오류를 한 번에 모두 돌려주면 사용자가 <b>한 번에 고칠</b> 수 있습니다. 하나씩 돌려주면 고치고 다시 제출하는 왕복이 늘어납니다."),
+    ("오류를 칸마다 나눠 돌려주기", "<code>{field: \"biz_no\", message: \"10자리\"}</code>처럼 오류 응답에 <b>어느 칸의 오류인지</b> 들어 있어야 화면이 메시지를 붙일 자리를 알 수 있습니다."),
+    ("사람이 읽을 문장으로 돌려주기", "응답에 <code>ERR_INVALID_FORMAT</code> 같은 코드만 오면 화면 쪽에서 사용자에게 보여 줄 문장을 따로 만들어야 합니다."),
+    ("여러 오류를 한 번에 돌려주기", "오류를 한 번에 모두 돌려주면 사용자가 <b>한 번에 고칠</b> 수 있습니다. 하나씩 돌려주면 고치고 다시 제출하는 왕복이 늘어납니다."),
   ]),
   plat_lede="<b>폼이 있는 화면이면</b> 플랫폼과 상관없이 거의 같은 모양으로 씁니다.",
   plats=plats([
-    ("웹", "칸 아래 글",
+    ("웹", "칸 아래에 적는 글",
      al("err", "10자리로", "", "", True, "110px", "사업자번호"),
      "칸과 메시지를 <code>aria-describedby</code>로 묶는 것이 <b>웹의 표준</b> 방식입니다."),
-    ("iOS", "칸 아래 글",
+    ("iOS", "칸 아래에 적는 글",
      '''              <div class="phone" role="img" aria-label="iOS 칸 오류 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:26px;height:9px;border-radius:3px;border:1px solid var(--danger)"></div>
                 <div style="position:absolute;left:5px;right:5px;top:38px;height:5px;border-radius:2px;background:color-mix(in srgb,var(--danger) 35%,transparent)"></div></div></div>''',

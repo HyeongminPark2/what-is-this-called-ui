@@ -23,8 +23,8 @@
 <div class="bar">
   <b>라이브 리전</b>
   <button type="button" class="ui-btn ui-btn--ghost ui-btn--sm" data-go="none">조용히 바꾸기</button>
-  <button type="button" class="ui-btn ui-btn--ghost ui-btn--sm" data-go="polite">status 로 알리기</button>
-  <button type="button" class="ui-btn ui-btn--ghost ui-btn--sm" data-go="assertive">alert 로 끊고 알리기</button>
+  <button type="button" class="ui-btn ui-btn--ghost ui-btn--sm" data-go="polite">status로 기다렸다가 알리기</button>
+  <button type="button" class="ui-btn ui-btn--ghost ui-btn--sm" data-go="assertive">alert로 말을 끊고 알리기</button>
 </div>
 
 <div class="pad a11y">
@@ -51,8 +51,8 @@
   <b>라이브 리전</b>을 두면 리전 안의 글이 바뀔 때 스크린 리더가 <b>읽던 말을 마친 뒤</b> 바뀐 내용을 읽어 줍니다.<br>
   <b>조용히 바꾸기</b>를 눌러 보세요. 화면의 숫자는 바뀌는데 아래 기록에는 아무것도 남지 않습니다.
   화면을 보지 못하는 사람은 <b>무엇이 바뀌었는지 전혀 알 수 없습니다</b>.<br>
-  <code>role="status"</code>(= <code>aria-live="polite"</code>)는 <b>읽던 말을 마친 뒤</b> 알리고,
-  <code>role="alert"</code>(= <code>assertive</code>)는 <b>읽던 말을 끊고</b> 바로 알립니다.
+  <code>role="status"</code>(<code>aria-live="polite"</code>와 같음)는 <b>읽던 말을 마친 뒤</b> 알리고,
+  <code>role="alert"</code>(<code>assertive</code>와 같음)는 <b>읽던 말을 끊고</b> 바로 알립니다.
   말이 끊기면 사용자가 불편하기 때문에 alert는 오류나 연결 끊김처럼 <b>정말 급한 내용</b>에만 씁니다.<br>
   <b>리전은 처음부터 빈 채로 화면에 두어야</b> 합니다. 알릴 때가 되어서야 리전을 새로 만들면 스크린 리더가 읽지 않는데,
   이것이 가장 흔한 실수입니다.
@@ -80,7 +80,7 @@
       var kind = b.dataset.go;
       if (kind === 'none') {
         document.getElementById('r-none').textContent = '정산 ' + n + '건';
-        lines.push('<span class="none">(아무 말도 안 함 — 화면만 바뀜)</span>');
+        lines.push('<span class="none">(화면만 바뀌고 아무 말도 안 함)</span>');
         if (lines.length > 6) lines.shift();
         feed.innerHTML = lines.join('<br>');
       } else {

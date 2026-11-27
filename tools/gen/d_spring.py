@@ -24,11 +24,11 @@ def curve(bounce, w="140px", label=""):
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="max-width:160px">''' + curve(28, "160px", "스프링 곡선").strip() + '''</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">점선 = 목표 — 한 번 지나친다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">뻣뻣함(stiffness) — 얼마나 세게 당기나</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">감쇠(damping) — 얼마나 빨리 잦아드나</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">끌던 속도를 그대로 이어받는다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">끝나는 때가 정해져 있지 않다</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">점선인 목표를 한 번 지나침</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">뻣뻣함(stiffness)은 당기는 힘의 세기</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">감쇠(damping)는 흔들림이 잦아드는 빠르기</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">끌던 속도를 그대로 이어받음</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">끝나는 때가 정해져 있지 않음</div>
                 </div>
               </div>'''
 
@@ -58,17 +58,17 @@ D = dict(
   ]),
   axes=ax("스프링"),
   oneline="<b>끌어서 다루는 것</b>에는 스프링을, <b>순서대로 이어지는 연출</b>에는 곡선을 씁니다. 끝나는 시점을 알아야 하는 곳에는 스프링이 맞지 않습니다.",
-  s4_title="튕김별로", s4_hint="목표를 얼마나 지나치나",
+  s4_title="튕김 정도에 따른 차이", s4_hint="튕김에 따라 목표를 지나치는 정도",
   states=states([
-    (curve(0, "140px", "튕김 없음"), "튕김 0", "목표를 지나치지 않아서 <b>ease-out과 거의 같습니다</b>"),
-    (curve(16, "140px", "약한 튕김"), "약하게", "살짝 지나쳤다가 바로 멈춥니다. <b>가장 무난한 설정</b>입니다"),
-    (curve(36, "140px", "보통 튕김"), "보통", "두어 번 흔들립니다. <b>끌어서 넘기는 것</b>에 맞습니다"),
-    (curve(64, "140px", "강한 튕김"), "세게", "오래 흔들려서 <b>글자를 읽기 어렵습니다</b>"),
-    (curve(88, "140px", "지나친 튕김"), "너무 세게", "여러 번 크게 튀어서 <b>장난감 같은 느낌</b>이 납니다"),
+    (curve(0, "140px", "튕김 없음"), "튕김이 0일 때", "목표를 지나치지 않아서 <b>ease-out과 거의 같습니다</b>"),
+    (curve(16, "140px", "약한 튕김"), "튕김이 약할 때", "살짝 지나쳤다가 바로 멈춥니다. <b>가장 무난한 설정</b>입니다"),
+    (curve(36, "140px", "보통 튕김"), "튕김이 보통일 때", "두어 번 흔들립니다. <b>끌어서 넘기는 것</b>에 맞습니다"),
+    (curve(64, "140px", "강한 튕김"), "튕김이 셀 때", "오래 흔들려서 <b>글자를 읽기 어렵습니다</b>"),
+    (curve(88, "140px", "지나친 튕김"), "튕김이 지나치게 셀 때", "여러 번 크게 튀어서 <b>장난감 같은 느낌</b>이 납니다"),
     ('''              <div style="width:100%;max-width:140px;height:72px;border:1px solid var(--line);border-radius:6px;background:var(--bg);display:grid;place-items:center">
-                <span style="font-size:9.5px;color:var(--fg-muted)">모션 줄이기 — 튕김 없음</span>
+                <span style="font-size:9.5px;color:var(--fg-muted)">모션 줄이기에서는 튕김 없음</span>
               </div>''',
-     "줄이기에서", "<b>목표를 지나치지 않게</b> 0으로 둡니다. 흔들림이 가장 어지럽기 때문입니다"),
+     "모션 줄이기를 켰을 때", "<b>목표를 지나치지 않게</b> 0으로 둡니다. 흔들림이 가장 어지럽기 때문입니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -77,7 +77,7 @@ D = dict(
     ("뻣뻣함", "stiffness", "값이 클수록 목표 쪽으로 <b>빨리</b> 당겨지고, 작으면 느리게 늘어집니다"),
     ("감쇠", "damping", "값이 클수록 흔들림이 <b>빨리 잦아들고</b>, 작으면 오래 흔들립니다"),
     ("이어받는 속도", "initial velocity", "끌던 손가락의 속도를 그대로 이어받습니다. <b>스프링을 쓰는 가장 큰 이유</b>입니다"),
-    ("끝", "정해져 있지 않다", "목표에 충분히 가까워지면 계산을 멈춥니다. 그래서 <b>몇 ms가 걸릴지 미리 알 수 없습니다</b>"),
+    ("끝나는 때", "정해져 있지 않음", "목표에 충분히 가까워지면 계산을 멈춥니다. 그래서 <b>몇 ms가 걸릴지 미리 알 수 없습니다</b>"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           스프링을 쓰는 이유는 보기 좋아서라기보다 <b>끌던 속도를 이어받을 수 있기</b> 때문입니다.
@@ -85,6 +85,7 @@ D = dict(
           천천히 밀면 천천히 자리를 잡습니다. 손의 속도와 화면의 움직임을 이렇게 이어 주는 일은 <b>길이가 정해진 곡선으로는 할 수 없습니다</b>.
           반대로 <b>끝나는 시점을 알아야 하는</b> 곳에는 스프링이 맞지 않습니다.
           '애니메이션이 끝나면 다음 애니메이션 시작'처럼 이어 붙이는 연출은 길이가 정해진 곡선으로 만드는 편이 쉽습니다.</p>''',
+  instead_title="스프링 대신 쓰거나 함께 볼 것",
   do=ul([
     "시트, 카드 넘기기, 당겨서 새로고침처럼 <b>끌어서 다루는 것</b>을 만들 때",
     "손을 뗀 뒤에 <b>이어지는 움직임</b>을 만들 때",
@@ -96,23 +97,23 @@ D = dict(
     "세 번 넘게 흔들리게 할 때. 대부분 과합니다",
     "<a href=\"reducedmotion.html\">모션 줄이기</a>를 켠 사람에게 보여 줄 때. 움직임 가운데 <b>흔들림이 가장 어지럽습니다</b>",
   ]),
-  instead='길이를 알아야 하면 <a href="easing.html">이징 곡선</a>, 손가락을 따라가는 규칙은 <a href="gesture.html">제스처</a>, 여러 줄이 차례로 들어오게 하려면 <a href="stagger.html">차례로 들어오기</a>.',
+  instead='움직임이 끝나는 시점을 알아야 하면 <a href="easing.html">이징 곡선</a>을 씁니다. 손가락을 따라가는 규칙은 <a href="gesture.html">제스처</a>에서, 여러 줄이 차례로 들어오게 하는 방법은 <a href="stagger.html">차례로 들어오기</a>에서 다룹니다.',
   cases=cases([
     ('''              <div style="width:100%;max-width:150px;display:grid;gap:4px">
                 <div style="height:28px;border-radius:7px;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;font-size:9.5px;transform:scale(.96)">눌린 버튼</div>
-                <span style="font-size:9px;color:var(--fg-muted)">0.96 → 1 로 돌아온다</span>
+                <span style="font-size:9px;color:var(--fg-muted)">0.96에서 1로 돌아옴</span>
               </div>''',
-     "누르는 느낌", "움직임을 아주 작게 줍니다. <b>뻣뻣함을 크게 해서 거의 흔들리지 않게</b> 합니다"),
+     "버튼을 누르는 느낌 내기", "움직임을 아주 작게 줍니다. <b>뻣뻣함을 크게 해서 거의 흔들리지 않게</b> 합니다"),
     ('''              <div style="width:100%;max-width:150px;height:62px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden">
                 <div style="position:absolute;left:0;right:0;bottom:-6px;height:58%;background:var(--surface);border-top:1px solid var(--line);border-radius:6px 6px 0 0"></div>
               </div>''',
-     "끌어 올리는 시트", "손가락의 속도를 <b>그대로 이어받습니다</b>"),
+     "끌어 올린 시트에 속도 이어 주기", "손가락의 속도를 <b>그대로 이어받습니다</b>"),
     ('''              <div style="width:100%;max-width:150px;display:flex;gap:4px;overflow:hidden">
                 <span style="flex:none;width:52px;height:46px;border-radius:6px;background:var(--surface);border:1px solid var(--line)"></span>
                 <span style="flex:none;width:52px;height:46px;border-radius:6px;background:var(--surface);border:1px solid var(--line)"></span>
                 <span style="flex:none;width:52px;height:46px;border-radius:6px;background:var(--bg);border:1px dashed var(--line)"></span>
               </div>''',
-     "카드 넘기기", "손을 놓는 순간의 <b>속도로</b> 움직여 다음 칸에 맞춰 멈춥니다"),
+     "카드를 넘겨 다음 칸에 멈추기", "손을 놓는 순간의 <b>속도로</b> 움직여 다음 칸에 맞춰 멈춥니다"),
   ]),
   s8_title="최소 코드와 규칙", s8_hint="구현할 때 지킬 최소 규칙",
   code_lede="웹에는 표준 스프링이 없어서 <b>매 프레임 직접 계산</b>하거나 라이브러리를 씁니다.",
@@ -131,18 +132,19 @@ D = dict(
     <span class="k">else</span> el.style.transform = <span class="s">`translateY(${</span>to<span class="s">}px)`</span>;
   })(last);
 }''',
+  keys_heads="<th>알아 둘 규칙</th><th>자세한 내용</th>",
   keys=kbd([
-    ("표준이 없다", "CSS에는 스프링이 없습니다. 대신 <code>linear()</code>로 스프링 <b>곡선을 점으로 찍어 옮기는</b> 방법이 생겼습니다"),
-    ("끝을 끊는 조건", "목표까지 거리와 속도가 <b>둘 다</b> 작아졌을 때 멈춥니다. 하나만 보면 제대로 멈추지 않습니다"),
-    ("<code>dt</code>에 상한을 둔다", "탭을 다시 열면 <code>dt</code>가 몇 초로 커져서 요소가 <b>한 번에 멀리 튀어 나갑니다</b>"),
-    ("이어받는 속도", "<code>pointerup</code> 직전 몇 프레임의 평균 속도를 씁니다. 마지막 한 프레임만 쓰면 값이 <b>튀기 쉽습니다</b>"),
+    ("웹 표준에 스프링이 없는 점", "CSS에는 스프링이 없습니다. 대신 <code>linear()</code>로 스프링 <b>곡선을 점으로 찍어 옮기는</b> 방법이 생겼습니다"),
+    ("계산을 멈추는 조건", "목표까지 거리와 속도가 <b>둘 다</b> 작아졌을 때 멈춥니다. 하나만 보면 제대로 멈추지 않습니다"),
+    ("<code>dt</code>에 상한 두기", "탭을 다시 열면 <code>dt</code>가 몇 초로 커져서 요소가 <b>한 번에 멀리 튀어 나갑니다</b>"),
+    ("이어받을 속도 구하기", "<code>pointerup</code> 직전 몇 프레임의 평균 속도를 씁니다. 마지막 한 프레임만 쓰면 값이 <b>튀기 쉽습니다</b>"),
     ("<code>prefers-reduced-motion</code>", "목표를 지나치지 않게 튕김을 0으로 내리거나, 움직임 없이 바로 끝 값으로 보냅니다"),
-    ("초점·읽기", "스프링이 끝나기를 기다렸다가 초점을 옮기지 않습니다. <b>언제 끝날지 알 수 없기</b> 때문입니다"),
+    ("초점을 옮기는 때", "스프링이 끝나기를 기다렸다가 초점을 옮기지 않습니다. <b>언제 끝날지 알 수 없기</b> 때문입니다"),
   ]),
   backend=rows([
-    ("서버와는 상관없다", "모두 화면 쪽에서 계산합니다. 다만 <b>매 프레임 실행되는 코드</b>라서 느린 기기에서는 다른 작업이 늦어집니다."),
-    ("끝을 기다려 요청하지 않는다", "끝나는 시점이 정해져 있지 않기 때문에, 움직임이 멈추기를 기다렸다가 저장하면 저장이 <b>언제 시작될지 알 수 없습니다</b>."),
-    ("탭이 쉬면 멈춘다", "<code>requestAnimationFrame</code>은 배경 탭에서 멈춥니다. 그래서 탭으로 돌아오면 요소를 <b>끝 값으로 바로</b> 보냅니다."),
+    ("화면 쪽에서만 하는 계산", "모두 화면 쪽에서 계산합니다. 다만 <b>매 프레임 실행되는 코드</b>라서 느린 기기에서는 다른 작업이 늦어집니다."),
+    ("멈추기를 기다려 요청하지 않기", "끝나는 시점이 정해져 있지 않기 때문에, 움직임이 멈추기를 기다렸다가 저장하면 저장이 <b>언제 시작될지 알 수 없습니다</b>."),
+    ("배경 탭에서 멈추는 계산", "<code>requestAnimationFrame</code>은 배경 탭에서 멈춥니다. 그래서 탭으로 돌아오면 요소를 <b>끝 값으로 바로</b> 보냅니다."),
   ]),
   plat_lede="앱 플랫폼에서는 <b>스프링이 기본</b>이고, 웹에서만 직접 만들어야 합니다.",
   plats=plats([

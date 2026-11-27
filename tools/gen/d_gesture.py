@@ -14,12 +14,12 @@ def sheetbox(top, note="", w="150px", h="76px", warn=False):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">pointerdown — 잡는다 (setPointerCapture)</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">pointerdown에서 잡음 (setPointerCapture)</div>
                   <div class="pin-out" data-pin="2" style="max-width:220px">''' + sheetbox("40%", "", "220px", "64px").strip() + '''</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">끄는 동안 손가락을 그대로 따라간다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">문턱 — 절반을 넘겼나</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">속도 — 빠르게 튕겼나 (0.5px/ms)</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">touch-action 을 안 적으면 브라우저가 먼저 가져간다</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">끄는 동안 손가락을 그대로 따라감</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">문턱은 절반을 넘겼는지</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">속도는 빠르게 튕겼는지 (0.5px/ms)</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">touch-action을 안 적으면 브라우저가 먼저 가져감</div>
                 </div>
               </div>'''
 
@@ -31,8 +31,8 @@ D = dict(
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>시트를 아래로 끌어 보세요. 조금 끌었다 놓으면 <b>제자리로</b> 돌아오고, 절반을 넘기거나
           <b>빠르게 튕기면</b> 닫힙니다.<br>
-          <b>속도도 본다</b>를 끄면 짧게 탁 튕겨 닫는 동작이 듣지 않습니다.
-          <b>손가락을 따라간다</b>를 끄면 규칙은 같은데도 <b>내가 조작하고 있다는 느낌</b>이 사라지는데,
+          <b>내리는 속도도 함께 보기</b>를 끄면 짧게 탁 튕겨 닫는 동작이 듣지 않습니다.
+          <b>손가락을 따라 움직이기</b>를 끄면 규칙은 같은데도 <b>내가 조작하고 있다는 느낌</b>이 사라지는데,
           이것으로 제스처에서 따라가기가 왜 중요한지 알 수 있습니다.</p>
         </div>''',
   names=rows([
@@ -49,14 +49,14 @@ D = dict(
   ]),
   axes=ax("제스처"),
   oneline="<b>끄는 동안 손가락을 따라가지 않으면 제스처라고 할 수 없습니다.</b> 또 끈 거리만 보고 판단하면 끝까지 끌어야만 닫히는 조작이 되므로 <b>속도도</b> 함께 봅니다.",
-  s4_title="끄는 네 토막", s4_hint="손을 떼기 전과 뒤",
+  s4_title="끌어 닫는 동안의 단계", s4_hint="손을 떼기 전과 뗀 뒤의 모습",
   states=states([
-    (sheetbox("28%", "잡기 전 — 제자리"), "쉬는 중", "손잡이(그립)가 <b>끌 수 있다</b>는 것을 알려 줍니다"),
-    (sheetbox("44%", "끄는 중 — 손가락을 따라간다"), "끄는 중", "손가락을 <b>1:1로 따라갑니다.</b> 제스처에서 가장 중요한 부분입니다"),
-    (sheetbox("34%", "조금 끌고 놓음 → 제자리"), "문턱 못 넘음", "<b>제자리로 돌아옵니다.</b> 사용자가 마음을 바꿀 수 있도록 되돌릴 방법이 늘 있어야 합니다"),
-    (sheetbox("72%", "절반 넘김 → 닫힘"), "문턱 넘음", "끈 거리로 판단합니다. 흔히 <b>절반</b>을 기준으로 씁니다"),
-    (sheetbox("40%", "빠르게 튕김 → 닫힘"), "빠르게 튕김", "끈 거리가 짧아도 <b>속도가 빠르면</b> 닫습니다"),
-    (sheetbox("28%", "끝까지 끌어야만 닫힌다", "150px", "76px", True), "속도를 안 볼 때", "짧게 튕겨도 닫히지 않아서 <b>답답합니다</b>"),
+    (sheetbox("28%", "잡기 전이라 제자리"), "잡기 전 평소 상태", "손잡이(그립)가 <b>끌 수 있다</b>는 것을 알려 줍니다"),
+    (sheetbox("44%", "끄는 동안 손가락을 따라감"), "끌고 있는 동안", "손가락을 <b>1:1로 따라갑니다.</b> 제스처에서 가장 중요한 부분입니다"),
+    (sheetbox("34%", "조금 끌고 놓으면 제자리로"), "문턱을 넘기지 못했을 때", "<b>제자리로 돌아옵니다.</b> 사용자가 마음을 바꿀 수 있도록 되돌릴 방법이 늘 있어야 합니다"),
+    (sheetbox("72%", "절반을 넘기면 닫힘"), "문턱을 넘겼을 때", "끈 거리로 판단합니다. 흔히 <b>절반</b>을 기준으로 씁니다"),
+    (sheetbox("40%", "빠르게 튕기면 닫힘"), "빠르게 튕겼을 때", "끈 거리가 짧아도 <b>속도가 빠르면</b> 닫습니다"),
+    (sheetbox("28%", "끝까지 끌어야만 닫힘", "150px", "76px", True), "속도를 보지 않을 때", "짧게 튕겨도 닫히지 않아서 <b>답답합니다</b>"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -65,7 +65,7 @@ D = dict(
     ("놓기", "pointerup", "손을 놓은 이 시점에 <b>처음으로</b> 애니메이션이 나옵니다"),
     ("문턱", "절반", "끈 거리로 판단합니다. 문턱이 너무 작으면 <b>실수로 닫힙니다</b>"),
     ("속도", "0.5px/ms", "짧게 튕겨도 닫히게 합니다. <b>거리만 보면 답답</b>합니다"),
-    ("브라우저와의 자리 다툼", "touch-action", "이 속성을 적지 않으면 <b>브라우저 스크롤이 먼저</b> 입력을 가져갑니다"),
+    ("브라우저 스크롤과 겹치는 입력", "touch-action", "이 속성을 적지 않으면 <b>브라우저 스크롤이 먼저</b> 입력을 가져갑니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <b>제스처는 화면에 보이지 않습니다.</b> 예를 들어 쓸어넘겨 지우기는 화면 어디에도 표시가 없고,
@@ -73,6 +73,7 @@ D = dict(
           그래서 제스처로 할 수 있는 일은 <b>반드시 버튼으로도</b> 할 수 있어야 합니다.
           시트에는 닫기 버튼과 <kbd>Esc</kbd>를, 쓸어넘겨 지우기에는 메뉴 안의 '삭제'를 함께 둡니다.
           제스처는 자주 하는 일을 <b>빨리 하는 방법</b>일 뿐, 그 일을 하는 유일한 방법이 되어서는 안 됩니다.</p>''',
+  instead_title="제스처와 함께 볼 것",
   do=ul([
     "시트, 카드 넘기기, 당겨서 새로고침처럼 <b>손으로 다루는 느낌</b>이 필요할 때",
     "자주 하는 동작을 <b>빨리 하는 방법</b>을 줄 때",
@@ -84,14 +85,14 @@ D = dict(
     "브라우저 스크롤과 <b>같은 방향</b>으로 끄는 제스처를 만들 때",
     "PC에서 끌어야만 할 수 있는 일을 만들 때. <b>마우스로 끌기는 불편</b>합니다",
   ]),
-  instead='손을 놓은 뒤의 움직임은 <a href="spring.html">스프링</a>, 들어오고 나가는 움직임의 짝은 <a href="enterexit.html">진입과 퇴장</a>, 같은 일을 버튼으로 하는 방법은 <a href="../items/sheet.html">바텀시트</a>·<a href="../items/dialog.html">다이얼로그</a>.',
+  instead='손을 놓은 뒤에 이어지는 움직임은 <a href="spring.html">스프링</a>에서, 들어오고 나가는 움직임을 짝짓는 방법은 <a href="enterexit.html">진입과 퇴장</a>에서 다룹니다. 같은 일을 버튼으로 하는 방법은 <a href="../items/sheet.html">바텀시트</a>와 <a href="../items/dialog.html">다이얼로그</a> 항목에 있습니다.',
   cases=cases([
-    (sheetbox("44%", "", "150px"), "끌어 닫는 시트", "가장 흔한 제스처입니다. <b>손잡이</b>가 끌 수 있다는 것을 알려 줍니다"),
+    (sheetbox("44%", "", "150px"), "시트를 끌어 닫기", "가장 흔한 제스처입니다. <b>손잡이</b>가 끌 수 있다는 것을 알려 줍니다"),
     ('''              <div style="width:100%;max-width:150px;position:relative;height:40px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--danger)">
                 <div style="position:absolute;inset:0 32% 0 0;background:var(--surface);display:flex;align-items:center;padding:0 7px;font-size:9.5px">모란상회</div>
                 <span style="position:absolute;right:8px;top:12px;font-size:9px;color:#fff">삭제</span>
               </div>''',
-     "쓸어넘겨 지우기", "<b>되돌리기</b>를 함께 제공해야 쓸 수 있습니다"),
+     "줄을 쓸어넘겨 지우기", "<b>되돌리기</b>를 함께 제공해야 쓸 수 있습니다"),
     ('''              <div style="width:100%;max-width:150px;height:56px;position:relative;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden">
                 <span style="position:absolute;left:50%;top:8px;transform:translateX(-50%);width:16px;height:16px;border-radius:50%;border:2px solid var(--line);border-top-color:var(--accent)"></span>
                 <div style="position:absolute;left:0;right:0;top:30px;bottom:0;background:var(--surface);border-top:1px solid var(--line)"></div>
@@ -117,19 +118,20 @@ sheet.addEventListener(<span class="s">'pointermove'</span>, e =&gt; {
 sheet.addEventListener(<span class="s">'pointerup'</span>, () =&gt; {
   (y &gt; H / <span class="a">2</span> || v &gt; <span class="a">0.5</span>) ? close() : snapBack();   <span class="c">// 거리 또는 속도</span>
 });''',
+  keys_heads="<th>알아 둘 규칙</th><th>자세한 내용</th>",
   keys=kbd([
     ("<code>touch-action</code>", "<code>none</code>이나 <code>pan-y</code>를 적습니다. 적지 않으면 <b>브라우저가 먼저</b> 입력을 가져갑니다"),
     ("<code>setPointerCapture</code>", "손가락이 상자 밖으로 나가도 이벤트가 계속 옵니다. <b>걸지 않으면 중간에 끊깁니다</b>"),
     ("<code>pointercancel</code>", "전화가 오거나 브라우저가 입력을 가로채면 이 이벤트가 옵니다. 이때는 <b>제자리로 되돌려야</b> 합니다"),
-    ("키보드 길을 반드시", "<kbd>Esc</kbd>로 닫기와 <b>닫기 버튼</b>을 둡니다. 제스처는 키보드로 대신할 수 없습니다"),
+    ("키보드로 닫는 방법 꼭 두기", "<kbd>Esc</kbd>로 닫기와 <b>닫기 버튼</b>을 둡니다. 제스처는 키보드로 대신할 수 없습니다"),
     ("<code>user-select: none</code>", "끄는 동안 글자가 선택되어 파랗게 칠해지는 것을 막습니다"),
-    ("<a href=\"reducedmotion.html\">모션 줄이기</a>", "따라가기는 <b>그대로 둡니다</b>. 사용자의 손가락이 만든 움직임이라 멀미를 일으키지 않기 때문입니다"),
+    ("<a href=\"reducedmotion.html\">모션 줄이기</a>를 켰을 때", "따라가기는 <b>그대로 둡니다</b>. 사용자의 손가락이 만든 움직임이라 멀미를 일으키지 않기 때문입니다"),
   ]),
   backend=rows([
-    ("쓸어서 지우기는 되돌릴 수 있어야", "실수가 잦은 조작이라 <b>바로 지우지 않고</b> 되돌릴 시간을 둡니다. 보통 5초쯤 기다렸다가 실제 삭제 요청을 보냅니다."),
-    ("당겨서 새로고침이 연타된다", "몇 번을 당겨도 요청은 <b>하나만</b> 나가게 막습니다. 그러지 않으면 같은 요청이 여러 번 연달아 갑니다."),
-    ("끄는 중에는 요청하지 않는다", "손을 떼기 전까지는 <b>아무것도 확정되지 않았기</b> 때문에, 끄는 도중의 값으로 서버에 요청하지 않습니다."),
-    ("끊긴 제스처", "앱이 배경으로 가면 <code>pointercancel</code>만 오고 <code>pointerup</code>은 오지 않습니다. 그래서 제스처가 끊겼을 때는 <b>되돌리는 쪽</b>을 기본으로 둡니다."),
+    ("쓸어서 지운 것을 되돌릴 수 있게 하기", "실수가 잦은 조작이라 <b>바로 지우지 않고</b> 되돌릴 시간을 둡니다. 보통 5초쯤 기다렸다가 실제 삭제 요청을 보냅니다."),
+    ("당겨서 새로고침을 여러 번 했을 때", "몇 번을 당겨도 요청은 <b>하나만</b> 나가게 막습니다. 그러지 않으면 같은 요청이 여러 번 연달아 갑니다."),
+    ("끄는 도중에는 요청하지 않기", "손을 떼기 전까지는 <b>아무것도 확정되지 않았기</b> 때문에, 끄는 도중의 값으로 서버에 요청하지 않습니다."),
+    ("제스처가 중간에 끊겼을 때", "앱이 배경으로 가면 <code>pointercancel</code>만 오고 <code>pointerup</code>은 오지 않습니다. 그래서 제스처가 끊겼을 때는 <b>되돌리는 쪽</b>을 기본으로 둡니다."),
   ]),
   plat_lede="폰에서는 제스처가 기본 조작이지만, <b>PC에서는 보조 수단</b>입니다.",
   plats=plats([

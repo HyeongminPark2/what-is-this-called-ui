@@ -26,7 +26,7 @@
 
 <div class="pad">
   <section>
-    <h4>필터 칩 — 눌러서 거른다</h4>
+    <h4>눌러서 목록을 거르는 필터 칩</h4>
     <div class="chips" id="filters" role="group" aria-label="상태로 거르기">
       <button type="button" class="chip" aria-pressed="true" data-f="all">전체</button>
       <button type="button" class="chip" aria-pressed="false" data-f="wait">검토 중</button>
@@ -37,7 +37,7 @@
   </section>
 
   <section>
-    <h4>입력 칩 — 넣은 것을 떼어 낸다</h4>
+    <h4>넣은 값을 떼어 낼 수 있는 입력 칩</h4>
     <label for="tagin" style="font-size:13px;color:var(--fg-muted);display:block;margin-bottom:6px">받는 사람</label>
     <div class="f-in" id="box">
       <span class="chips" id="tags"></span>
@@ -47,7 +47,7 @@
   </section>
 
   <section>
-    <h4>표시 칩 — 누를 수 없는 것</h4>
+    <h4>누를 수 없는 표시 칩</h4>
     <div class="chips">
       <span class="chip chip--static">#정산</span>
       <span class="chip chip--static">#11월</span>
@@ -86,7 +86,7 @@
       return '<span class="chip" data-i="' + i + '">' + t +
         '<button type="button" class="chip__x" data-del="' + i + '" aria-label="' + t + ' 빼기">×</button></span>';
     }).join('');
-    count.textContent = '지금 ' + TAGS.length + '명';
+    count.textContent = '지금 ' + TAGS.length + '명이 들어 있습니다.';
   }
 
   tags.addEventListener('click', function (e) {

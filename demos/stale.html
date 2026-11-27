@@ -19,10 +19,10 @@
 <div class="bar">
   <b>오래된 데이터</b>
   <label>다시 받는 동안 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
-    <option value="keep" selected>옛 값을 그대로 보인다</option>
-    <option value="blank">비우고 스피너를 띄운다</option>
+    <option value="keep" selected>옛 값을 그대로 보여 주기</option>
+    <option value="blank">화면을 비우고 스피너 띄우기</option>
   </select></label>
-  <label><input type="checkbox" id="asof" checked> 언제 숫자인지 적기</label>
+  <label><input type="checkbox" id="asof" checked> 기준 시각 적기</label>
   <button class="ui-btn" id="go">새로 받기</button>
 </div>
 
@@ -70,7 +70,7 @@
     rd.innerHTML = '값 <b>' + VALUES[idx] + '</b> · ' + (ageMin === 0 ? '방금' : ageMin + '분 전') + ' 기준' +
       '<br>숫자가 사라져 있던 시간 <b>' + blankMs + 'ms</b>' +
       (blankMs > 0 ? ' <span class="warn">(그동안 아무것도 읽을 수 없습니다)</span>' : '') +
-      '<br>언제 숫자인지 적기 <b>' + (asofOn ? '켬' : '끔') + '</b>' +
+      '<br>기준 시각 적기 <b>' + (asofOn ? '켬' : '끔') + '</b>' +
       (!asofOn ? ' <span class="warn">(방금 받은 값처럼 보입니다)</span>' : '') +
       (why ? '<br>' + why : '');
     rd.dataset.blank = String(blankMs);

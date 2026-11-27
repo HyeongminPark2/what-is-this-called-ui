@@ -20,7 +20,7 @@
   <b>여러 줄 입력</b>
   <label><input type="checkbox" id="grow" checked> 내용만큼 늘어나기</label>
   <label><input type="checkbox" id="count" checked> 남은 글자 수 보이기</label>
-  <label><input type="checkbox" id="hard"> 넘치면 아예 못 치게</label>
+  <label><input type="checkbox" id="hard"> 넘치면 아예 못 치게 막기</label>
   <label><input type="checkbox" id="enter"> Enter 로 보내기</label>
 </div>
 
@@ -38,7 +38,7 @@
 
 <p class="hint">
   여러 줄 칸을 만들 때 가장 자주 틀리는 부분은 글이 <b>넘쳤을 때</b>의 처리입니다.
-  '<b>160자짜리 글 붙여넣기</b>'를 눌러 보세요. '아예 못 치게'를 켜 두면
+  '<b>160자짜리 글 붙여넣기</b>'를 눌러 보세요. '넘치면 아예 못 치게 막기'를 켜 두면
   <b>붙여넣은 글이 아무 안내 없이 잘리고</b>, 데모가 <b>잘려 나간 글자 수</b>를 세어 적어 줍니다.
   한도를 넘더라도 <b>글은 그대로 두고 빨갛게 알리는</b> 편이 사용자가 고치기 쉽습니다.<br>
   <b>내용만큼 늘어나기</b>를 켜면 줄이 늘 때 칸도 함께 커지고, 데모가 지금 높이를 재서 적어 줍니다.
@@ -76,12 +76,12 @@
     var h = Math.round(t.getBoundingClientRect().height);
     var rd = document.getElementById('read');
     rd.innerHTML = '친 글자 <b>' + len + ' / ' + LIMIT + '</b>' +
-      (left < 0 ? ' <span class="warn">— ' + (-left) + '자 넘음</span>' : '') +
-      '<br>칸 높이 <b>' + h + 'px</b> · ' + (grow ? '내용만큼 늘어납니다' : '<b>고정</b>') +
+      (left < 0 ? ' <span class="warn">한도보다 ' + (-left) + '자 넘었습니다</span>' : '') +
+      '<br>칸 높이 <b>' + h + 'px</b> · ' + (grow ? '내용만큼 늘어납니다' : '<b>높이가 고정되어 있습니다</b>') +
       '<br>잘려 나간 글자 <b>' + cut + '자</b>' +
-      (cut ? ' <span class="warn">— 아무 안내 없이 사라졌습니다</span>' : '') +
-      '<br>Enter 로 보내기 <b>' + (document.getElementById('enter').checked ? '켬' : '끔') + '</b>' +
-      (document.getElementById('enter').checked ? ' <span class="warn">— 줄바꿈을 할 수 없습니다</span>' : '') +
+      (cut ? ' <span class="warn">아무 안내 없이 사라졌습니다</span>' : '') +
+      '<br>Enter로 보내기는 <b>' + (document.getElementById('enter').checked ? '켜져' : '꺼져') + '</b> 있습니다' +
+      (document.getElementById('enter').checked ? ' <span class="warn">그래서 Enter로 줄바꿈을 할 수 없습니다</span>' : '') +
       (sent ? ' · 보낸 횟수 ' + sent : '') +
       (why ? '<br>' + why : '');
     rd.dataset.len = String(len);

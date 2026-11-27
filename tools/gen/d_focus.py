@@ -10,10 +10,10 @@ def btn(style="", label="저장", w=""):
 ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:15px;justify-items:start">
                   <div class="pin-out" data-pin="1" style="display:inline-block;padding:8px 14px;border-radius:6px;border:1px solid var(--line-strong);background:var(--surface);font-size:12.5px;outline:2px solid var(--accent);outline-offset:2px">저장하기</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">:focus-visible   — 키보드로 왔을 때만</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">outline-offset   — 글자에 안 붙게 띄운다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">outline: none   — 지우면 키보드로 못 쓴다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">tabindex="0" / "-1"   — 순서에 넣기 / 빼기</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">:focus-visible   — 키보드로 왔을 때만 그림</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">outline-offset   — 글자에 붙지 않게 띄움</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">outline: none   — 지우면 키보드로 쓸 수 없음</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">tabindex="0" / "-1"   — 순서에 넣기 / 순서에서 빼기</div>
                   <div class="pin-out" data-pin="6" style="display:inline-block;background:var(--accent);color:#fff;border-radius:5px;padding:5px 10px;font-size:11px;font-weight:700">본문으로 건너뛰기</div>
                 </div>
               </div>'''
@@ -45,14 +45,14 @@ D = dict(
   ]),
   axes=ax("포커스"),
   oneline="포커스 테두리는 키보드로 화면을 쓰는 사람에게 <b>지금 어느 요소에 있는지</b> 알려 주는 표시입니다. 이 테두리를 지우면 키보드만 쓰는 사람은 어느 요소를 누르게 될지 모르는 채로 화면을 다뤄야 합니다.",
-  s4_title="상태", s4_hint="같은 버튼, 다른 표시",
+  s4_title="상태", s4_hint="같은 버튼이 상태마다 달리 보이는 모습",
   states=states([
-    (btn(), "평소", "아무 표시도 없습니다"),
-    (btn("background:var(--bg)"), "호버", "<b>마우스</b>를 올려 둔 상태입니다"),
-    (btn("outline:2px solid var(--accent);outline-offset:2px"), "포커스", "<b>키보드</b>가 가리키는 상태입니다. 테두리가 또렷하게 보여야 합니다"),
-    (btn("outline:1px dotted var(--line-strong)"), "희미한 테두리", "테두리가 있기는 하지만 너무 흐려서 <b>잘 보이지 않습니다.</b> 사용자에게는 테두리가 없는 것과 거의 같습니다"),
-    (btn(""), "지운 테두리", "<code>outline: none</code>으로 테두리를 지운 상태입니다. 포커스가 <b>어디 있는지 알 수 없습니다</b>"),
-    (btn("outline:2px solid var(--accent);outline-offset:2px;opacity:.45"), "비활성",
+    (btn(), "평소 상태", "아무 표시도 없습니다"),
+    (btn("background:var(--bg)"), "마우스를 올렸을 때", "<b>마우스</b>를 올려 둔 상태입니다"),
+    (btn("outline:2px solid var(--accent);outline-offset:2px"), "키보드로 포커스가 왔을 때", "<b>키보드</b>가 가리키는 상태입니다. 테두리가 또렷하게 보여야 합니다"),
+    (btn("outline:1px dotted var(--line-strong)"), "테두리가 너무 흐릴 때", "테두리가 있기는 하지만 너무 흐려서 <b>잘 보이지 않습니다.</b> 사용자에게는 테두리가 없는 것과 거의 같습니다"),
+    (btn(""), "테두리를 지웠을 때", "<code>outline: none</code>으로 테두리를 지운 상태입니다. 포커스가 <b>어디 있는지 알 수 없습니다</b>"),
+    (btn("outline:2px solid var(--accent);outline-offset:2px;opacity:.45"), "비활성 버튼일 때",
      "비활성 버튼은 <b>포커스를 받지 않습니다.</b> 포커스를 받으면 사용자는 버튼이 왜 눌리지 않는지 알 수 없기 때문입니다"),
   ]),
   anat=ANAT,
@@ -81,19 +81,22 @@ D = dict(
     "<code>tabindex</code>에 <b>1 이상</b>의 값을 줄 때. 화면에 보이는 순서와 포커스 순서가 어긋납니다",
     "비활성 요소에 포커스를 줄 때. 사용자는 그 요소가 왜 눌리지 않는지 알 수 없습니다",
   ]),
-  instead='모달 안에 가두는 일은 <a href="focustrap.html">포커스 트랩</a>, 키로 눌리는지는 <a href="keyboard.html">키보드 조작</a>, 이름은 <a href="name.html">이름 붙이기</a>.',
+  do_title="포커스를 챙겨야 하는 경우",
+  dont_title="포커스를 다룰 때 하지 말아야 할 것",
+  instead_title="포커스와 이어지는 주제는 다른 항목에서 다룹니다",
+  instead='모달 안에 포커스를 가두는 방법은 <a href="focustrap.html">포커스 트랩</a>에서, 요소를 키보드로 누를 수 있는지는 <a href="keyboard.html">키보드 조작</a>에서 다룹니다. 요소에 붙이는 이름은 <a href="name.html">이름 붙이기</a>를 보세요.',
   cases=cases([
     (btn("outline:2px solid var(--accent);outline-offset:2px", "저장하기"),
-     "버튼", "포커스 테두리가 가장 흔하게 쓰이는 자리입니다. 테두리 <b>두께가 2px 이상</b>이어야 잘 보입니다"),
+     "버튼에 포커스 테두리 그리기", "포커스 테두리가 가장 흔하게 쓰이는 자리입니다. 테두리 <b>두께가 2px 이상</b>이어야 잘 보입니다"),
     ('''              <div style="width:100%;max-width:180px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:8px;outline:2px solid var(--accent);outline-offset:-2px">
                 <span style="font-size:11.5px;font-weight:600">정산 요청 #4821</span>
               </div>''',
-     "목록의 줄", "테두리를 줄의 <b>안쪽</b>에 그립니다. 바깥쪽에 그리면 테두리가 위아래 줄을 덮기 때문입니다"),
+     "목록의 줄에는 테두리를 안쪽에 그리기", "테두리를 줄의 <b>안쪽</b>에 그립니다. 바깥쪽에 그리면 테두리가 위아래 줄을 덮기 때문입니다"),
     ('''              <div style="width:100%;max-width:180px;display:grid;gap:5px">
                 <span style="background:var(--accent);color:#fff;border-radius:5px;padding:5px 10px;font-size:11px;font-weight:700;justify-self:start">본문으로 건너뛰기</span>
-                <span style="font-size:10.5px;color:var(--fg-muted)">평소엔 숨어 있다</span>
+                <span style="font-size:10.5px;color:var(--fg-muted)">평소에는 숨어 있음</span>
               </div>''',
-     "건너뛰기 링크", "처음 Tab을 누를 때만 나타나고, 누르면 <b>메뉴 전체를 건너뛰고</b> 본문으로 갑니다"),
+     "건너뛰기 링크로 메뉴 건너뛰기", "처음 Tab을 누를 때만 나타나고, 누르면 <b>메뉴 전체를 건너뛰고</b> 본문으로 갑니다"),
   ]),
   s8_title="최소 코드와 키보드", s8_hint="구현할 때 지킬 최소 규칙",
   code_lede="브라우저의 기본 테두리는 <b>지우지 말고 원하는 모양으로 바꿔 그립니다.</b> 그리고 <code>:focus-visible</code>로 키보드 포커스일 때만 그리도록 조건을 좁힙니다.",
@@ -120,10 +123,10 @@ D = dict(
     ("<code>:focus-within</code>", "<b>자식 요소</b>에 포커스가 있을 때 부모 요소의 모양을 바꿉니다"),
   ]),
   backend=rows([
-    ("순서는 DOM 순서다", "Tab 순서는 DOM 순서를 따르기 때문에 <code>order</code>나 <code>grid-area</code>로 <b>보이는 자리를 바꿔도 Tab 순서는 바뀌지 않습니다.</b> 그래서 서버가 내려주는 순서대로 DOM을 그리는 쪽이 안전합니다."),
-    ("화면이 바뀐 뒤", "목록을 다시 그리거나 라우팅으로 화면을 바꾸면 <b>포커스가 body로 돌아갑니다.</b> 이때 포커스를 새 화면의 제목으로 옮겨 줘야 사용자가 어느 화면으로 왔는지 알 수 있습니다."),
-    ("지운 줄의 포커스", "포커스가 있던 항목을 지우면 포커스도 함께 사라지므로, 포커스를 <b>다음 줄이나 목록 자체</b>로 옮깁니다. <a href=\"../items/chip.html\">칩</a>에서 다룬 것과 같은 문제입니다."),
-    ("자동 검사", "Playwright로 <kbd>Tab</kbd>을 눌러 가며 <code>document.activeElement</code>를 기록하면 <b>포커스 순서와 테두리를 CI에서</b> 확인할 수 있습니다."),
+    ("Tab 순서는 DOM 순서를 따름", "Tab 순서는 DOM 순서를 따르기 때문에 <code>order</code>나 <code>grid-area</code>로 <b>보이는 자리를 바꿔도 Tab 순서는 바뀌지 않습니다.</b> 그래서 서버가 내려주는 순서대로 DOM을 그리는 쪽이 안전합니다."),
+    ("화면이 바뀐 뒤 포커스 옮기기", "목록을 다시 그리거나 라우팅으로 화면을 바꾸면 <b>포커스가 body로 돌아갑니다.</b> 이때 포커스를 새 화면의 제목으로 옮겨 줘야 사용자가 어느 화면으로 왔는지 알 수 있습니다."),
+    ("포커스가 있던 줄을 지웠을 때", "포커스가 있던 항목을 지우면 포커스도 함께 사라지므로, 포커스를 <b>다음 줄이나 목록 자체</b>로 옮깁니다. <a href=\"../items/chip.html\">칩</a>에서 다룬 것과 같은 문제입니다."),
+    ("포커스 순서 자동 검사", "Playwright로 <kbd>Tab</kbd>을 눌러 가며 <code>document.activeElement</code>를 기록하면 <b>포커스 순서와 테두리를 CI에서</b> 확인할 수 있습니다."),
   ]),
   plat_lede="iOS와 안드로이드에는 <b>키보드 말고도</b> 포커스를 옮기는 방법이 더 있습니다.",
   plats=plats([

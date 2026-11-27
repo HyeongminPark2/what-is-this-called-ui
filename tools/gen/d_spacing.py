@@ -39,7 +39,7 @@ D = dict(
   axes_lede="토큰은 눈에 보이는 부품이 아니라 값을 어떻게 쓸지 <b>정해 둔 규칙</b>입니다. 그래서 생김새 대신 아래 네 가지를 물어보면 토큰끼리 무엇이 다른지 가려집니다.",
   live_note='''        <div class="note" style="margin-bottom:0">
           <p><b>8px 격자 보기</b>를 켜면 8px마다 가로줄이 그어집니다. 여백이 모두 8의 배수라서 테두리와 글줄이 격자선에 딱 맞습니다.<br>
-          <b>눈대중 값으로</b>를 켜면 7, 13, 19 같은 값이 섞이는데, 어디가 틀렸는지 한눈에 짚기는 어렵지만 <b>화면 전체가 어수선해 보입니다</b>.
+          <b>눈대중 값으로 바꾸기</b>를 켜면 7, 13, 19 같은 값이 섞이는데, 어디가 틀렸는지 한눈에 짚기는 어렵지만 <b>화면 전체가 어수선해 보입니다</b>.
           간격 체계는 이렇게 값이 조금씩 어긋나서 생기는 어수선함을 막으려고 씁니다.</p>
         </div>''',
   names=rows([
@@ -56,14 +56,14 @@ D = dict(
   ]),
   axes=ax("간격 체계"),
   oneline="간격 체계는 <b>쓸 수 있는 여백 값의 개수를 줄이는 일</b>입니다. 고를 수 있는 여백이 여섯 개뿐이면 값을 고르는 고민이 줄고, 화면마다 여백이 조금씩 어긋나는 일도 없어집니다.",
-  s4_title="단", s4_hint="단마다 쓰는 자리",
+  s4_title="여백 단계별 쓰는 자리", s4_hint="단마다 여백을 넣는 자리",
   states=states([
-    (box(4, "space-1 · 4px", "아이콘과 글자 사이"), "4px", "아이콘과 글자처럼 <b>붙어 있어야</b> 하는 것 사이에 씁니다. 이보다 줄이면 서로 닿아 보입니다"),
-    (box(8, "space-2 · 8px", "한 묶음 안의 줄 사이"), "8px", "제목과 부제처럼 <b>같은 덩어리</b> 안의 요소 사이에 씁니다"),
-    (box(16, "space-4 · 16px", "카드 안쪽 여백"), "16px", "가장 많이 쓰는 단이라 기본값으로 삼습니다"),
-    (box(24, "space-6 · 24px", "묶음과 묶음 사이"), "24px", "이 정도부터는 <b>다른 덩어리</b>로 읽힙니다"),
-    (box(40, "space-10 · 40px", "구역 사이"), "40px", "화면 안에서 큰 구역을 나눌 때 씁니다"),
-    (box(64, "space-16 · 64px", "화면 위아래"), "64px+", "PC 화면의 위아래에 두는 큰 여백입니다. 폰에서는 절반쯤으로 줄입니다"),
+    (box(4, "space-1 · 4px", "아이콘과 글자 사이"), "4px 가장 좁은 간격", "아이콘과 글자처럼 <b>붙어 있어야</b> 하는 것 사이에 씁니다. 이보다 줄이면 서로 닿아 보입니다"),
+    (box(8, "space-2 · 8px", "한 묶음 안의 줄 사이"), "8px 묶음 안 간격", "제목과 부제처럼 <b>같은 덩어리</b> 안의 요소 사이에 씁니다"),
+    (box(16, "space-4 · 16px", "카드 안쪽 여백"), "16px 기본 여백", "가장 많이 쓰는 단이라 기본값으로 삼습니다"),
+    (box(24, "space-6 · 24px", "묶음과 묶음 사이"), "24px 묶음 사이 간격", "이 정도부터는 <b>다른 덩어리</b>로 읽힙니다"),
+    (box(40, "space-10 · 40px", "구역 사이"), "40px 구역 사이 간격", "화면 안에서 큰 구역을 나눌 때 씁니다"),
+    (box(64, "space-16 · 64px", "화면 위아래"), "64px 이상 화면 위아래 여백", "PC 화면의 위아래에 두는 큰 여백입니다. 폰에서는 절반쯤으로 줄입니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -88,27 +88,28 @@ D = dict(
     "사진이나 아이콘의 <b>시각 중심</b>을 맞출 때. 이때는 숫자로 잰 가운데보다 눈으로 본 가운데가 더 정확합니다",
     "단을 2·4·6·8·10·12…처럼 너무 촘촘히 둘 때. 고를 수 있는 값이 너무 많아져서 아무 값이나 쓰는 것과 다르지 않게 됩니다",
   ]),
-  instead='글줄 사이 간격은 <a href="typescale.html">타입 스케일</a>에서 글자 크기와 함께 정하고, 화면을 열로 나누는 일은 레이아웃 그리드(1부)에서 다룹니다.',
+  instead_title="간격 체계와 함께 보면 좋은 항목",
+  instead='글줄 사이 간격은 <a href="typescale.html">타입 스케일</a>에서 글자 크기와 함께 정하고, 화면을 열로 나누는 방법은 1부의 레이아웃 그리드 항목에서 다룹니다.',
   cases=cases([
     ('''              <div style="display:grid;gap:16px;width:100%;max-width:220px">
                 <div style="display:grid;gap:4px"><span style="font-size:11px;color:var(--fg-muted)">예금주</span><span style="border:1px solid var(--line-strong);border-radius:7px;padding:7px 9px;font-size:12px">홍길동</span></div>
                 <div style="display:grid;gap:4px"><span style="font-size:11px;color:var(--fg-muted)">계좌번호</span><span style="border:1px solid var(--line-strong);border-radius:7px;padding:7px 9px;font-size:12px">110-***-****21</span></div>
               </div>''',
-     "라벨과 입력창", "라벨과 입력창 사이는 <b>4px</b>, 필드와 필드 사이는 <b>16px</b>로 두면 라벨이 어느 입력창의 것인지 헷갈리지 않습니다"),
+     "라벨과 입력창을 한 묶음으로 보이기", "라벨과 입력창 사이는 <b>4px</b>, 필드와 필드 사이는 <b>16px</b>로 두면 라벨이 어느 입력창의 것인지 헷갈리지 않습니다"),
     ('''              <div style="display:grid;gap:4px;width:100%;max-width:220px">
                 <div style="display:grid;gap:12px"><span style="font-size:11px;color:var(--fg-muted)">예금주</span><span style="border:1px solid var(--line-strong);border-radius:7px;padding:7px 9px;font-size:12px">홍길동</span></div>
                 <div style="display:grid;gap:12px"><span style="font-size:11px;color:var(--fg-muted)">계좌번호</span><span style="border:1px solid var(--line-strong);border-radius:7px;padding:7px 9px;font-size:12px">110-***-****21</span></div>
-                <div style="font-size:11px;color:var(--danger);margin-top:4px">라벨이 아래 입력창에 붙어 보인다</div>
+                <div style="font-size:11px;color:var(--danger);margin-top:4px">라벨이 아래 입력창에 붙어 보임</div>
               </div>''',
-     "뒤집힌 간격", "묶음 안 간격이 묶음 사이 간격보다 넓으면 라벨이 아래 입력창과 묶여서 <b>묶음이 한 칸씩 밀려</b> 읽힙니다"),
+     "묶음 안 간격을 더 넓게 잡은 실패", "묶음 안 간격이 묶음 사이 간격보다 넓으면 라벨이 아래 입력창과 묶여서 <b>묶음이 한 칸씩 밀려</b> 읽힙니다"),
     ('''              <div style="display:grid;gap:8px;width:100%;max-width:220px">
                 <div style="display:flex;gap:8px"><span style="flex:1;height:30px;border-radius:6px;background:var(--bg);border:1px solid var(--line)"></span><span style="flex:1;height:30px;border-radius:6px;background:var(--bg);border:1px solid var(--line)"></span><span style="flex:1;height:30px;border-radius:6px;background:var(--bg);border:1px solid var(--line)"></span></div>
                 <div style="font-size:11px;color:var(--fg-muted);font-family:var(--mono)">gap: 8px · padding: 16px</div>
               </div>''',
-     "카드 그리드", "카드 사이 간격(gap)은 카드 안쪽 여백(padding)보다 <b>좁거나 같게</b> 둡니다"),
+     "카드 사이 간격과 안쪽 여백 맞추기", "카드 사이 간격(gap)은 카드 안쪽 여백(padding)보다 <b>좁거나 같게</b> 둡니다"),
   ]),
-  s8_title="최소 코드와 규칙", s8_hint="간격을 코드로 옮기는 법",
-  keys_heads="<th>규칙</th><th>지켜야 하는 것</th>",
+  s8_title="최소 코드와 지킬 규칙", s8_hint="간격을 코드로 옮기는 방법",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법과 이유</th>",
   code_lede="코드에서는 단을 숫자 대신 <b>이름</b>으로 부릅니다. <code>16px</code> 대신 <code>--space-4</code>를 써 두면 나중에 여백 전체를 한 번에 좁히거나 넓힐 수 있습니다.",
   code='''<span class="t">:root</span> {
   <span class="a">--space-1</span>: <span class="s">4px</span>;    <span class="a">--space-2</span>: <span class="s">8px</span>;
@@ -128,17 +129,17 @@ D = dict(
   <span class="t">.card</span> { <span class="a">padding</span>: <span class="t">var</span>(<span class="a">--space-3</span>); }
 }''',
   keys=kbd([
-    ("8의 배수를 기본으로", "4px은 아이콘과 글자 사이처럼 작은 간격에만 쓰고, 나머지는 8·16·24·40을 씁니다"),
-    ("묶음 안 &lt; 묶음 사이", "묶음 안 간격은 늘 묶음 사이 간격보다 좁아야 합니다. <b>간격 규칙에서 가장 중요한 조건</b>으로, 이 관계가 뒤집히면 묶음이 한 칸씩 밀려 읽힙니다"),
-    ("한 방향으로만 민다", "마진을 위아래 양쪽에 주면 두 마진이 겹쳐 하나가 되거나(<b>마진 겹침</b>) 두 배로 벌어집니다. 그래서 <code>gap</code>을 먼저 씁니다"),
-    ("폰에서는 한 단 줄인다", "PC에서 40px이던 간격은 폰에서 24px로 줄입니다. 이때 새 값을 만들지 않고 정해 둔 단 가운데서 바꿔 고릅니다"),
-    ("터치 자리는 간격이 아니다", "버튼끼리 떼어 두는 간격과 별개로, 버튼마다 <b>44px 이상</b>의 누를 자리가 있어야 합니다"),
+    ("8의 배수를 기본으로 쓰기", "4px은 아이콘과 글자 사이처럼 작은 간격에만 쓰고, 나머지는 8·16·24·40을 씁니다"),
+    ("묶음 안 간격을 묶음 사이보다 좁게 두기", "묶음 안 간격은 늘 묶음 사이 간격보다 좁아야 합니다. <b>간격 규칙에서 가장 중요한 조건</b>으로, 이 관계가 뒤집히면 묶음이 한 칸씩 밀려 읽힙니다"),
+    ("여백은 한 방향으로만 주기", "마진을 위아래 양쪽에 주면 두 마진이 겹쳐 하나가 되거나(<b>마진 겹침</b>) 두 배로 벌어집니다. 그래서 <code>gap</code>을 먼저 씁니다"),
+    ("폰에서는 한 단 줄이기", "PC에서 40px이던 간격은 폰에서 24px로 줄입니다. 이때 새 값을 만들지 않고 정해 둔 단 가운데서 바꿔 고릅니다"),
+    ("누를 자리는 간격과 따로 확보하기", "버튼끼리 떼어 두는 간격과 별개로, 버튼마다 <b>44px 이상</b>의 누를 자리가 있어야 합니다"),
   ]),
   backend=rows([
-    ("간격 토큰 = 열거형", "아무 정수나 받지 않고 <b>정해진 값만</b> 받도록 하는 열거형과 같습니다. 타입으로 막아 두면 23px 같은 값이 끼어들 수 없습니다."),
-    ("디자인 도구와 맞추기", "피그마의 오토 레이아웃에도 같은 단을 씁니다. 디자이너와 개발자가 <b>같은 이름</b>으로 이야기하면 \"여기 조금만 띄워 주세요\" 대신 \"space-4로 해 주세요\"처럼 정확하게 요청할 수 있습니다."),
-    ("목록 성능", "줄마다 여백이 다르면 줄 높이를 미리 알 수 없어서 <b>가상 스크롤</b>을 쓸 수 없습니다. 모든 줄이 같은 단을 쓰면 줄 높이가 고정되므로 수만 줄도 그릴 수 있습니다."),
-    ("빈 값 처리", "데이터가 없어 요소가 빠지면 <code>gap</code>은 그 자리만큼 저절로 줄어들지만 <code>margin</code>은 그대로 남습니다. 목록 화면에 생기는 이상한 빈칸은 대부분 이렇게 남은 마진 때문입니다."),
+    ("열거형과 같은 역할", "아무 정수나 받지 않고 <b>정해진 값만</b> 받도록 하는 열거형과 같습니다. 타입으로 막아 두면 23px 같은 값이 끼어들 수 없습니다."),
+    ("디자인 도구와 같은 이름 쓰기", "피그마의 오토 레이아웃에도 같은 단을 씁니다. 디자이너와 개발자가 <b>같은 이름</b>으로 이야기하면 \"여기 조금만 띄워 주세요\" 대신 \"space-4로 해 주세요\"처럼 정확하게 요청할 수 있습니다."),
+    ("여백이 목록 성능에 주는 영향", "줄마다 여백이 다르면 줄 높이를 미리 알 수 없어서 <b>가상 스크롤</b>을 쓸 수 없습니다. 모든 줄이 같은 단을 쓰면 줄 높이가 고정되므로 수만 줄도 그릴 수 있습니다."),
+    ("데이터가 빠진 자리의 여백", "데이터가 없어 요소가 빠지면 <code>gap</code>은 그 자리만큼 저절로 줄어들지만 <code>margin</code>은 그대로 남습니다. 목록 화면에 생기는 이상한 빈칸은 대부분 이렇게 남은 마진 때문입니다."),
   ]),
   plat_lede="플랫폼마다 단위는 다르지만, 여백을 배수로 정해 둔다는 생각은 같습니다.",
   plats=plats([
@@ -155,7 +156,7 @@ D = dict(
   plat_note="<b>px과 pt, dp는 서로 다른 단위입니다.</b> 그래서 시안에 '16'이라고만 적혀 있으면 어느 단위인지 반드시 확인하세요. 같은 16이라도 iOS의 16pt는 고해상도 기기에서 실제 픽셀 32~48개에 해당합니다. 앱 쪽에 웹 시안을 그대로 넘기면 여백이 <b>세 배로</b> 벌어진 화면이 나올 수 있습니다.",
   siblings=siblings("spacing"),
   related='''        <li><a href="../items/field.html"><b>텍스트 필드</b><em>4부</em></a></li>
-        <li><span class="na"><b>박스 모델</b><em>1부</em></span></li>
-        <li><span class="na"><b>그리드와 거터</b><em>1부</em></span></li>
-        <li><span class="na"><b>터치 타깃</b><em>11부</em></span></li>''',
+        <li><a href="box.html"><b>박스 모델</b><em>1부</em></a></li>
+        <li><a href="grid.html"><b>그리드와 거터</b><em>1부</em></a></li>
+        <li><a href="touchtarget.html"><b>터치 타깃</b><em>11부</em></a></li>''',
 )

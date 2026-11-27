@@ -75,7 +75,7 @@
         <p>데이터를 다루는 화면을 설계할 때는 '건수가 늘면 어떻게 되나'부터 따져야 합니다. 아래 네 가지를 물어보면 이 부의 항목들이 서로 어떻게 다른지 드러납니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>무엇을 다루나</th><th>건수가 늘면</th><th>주소에 담나</th><th>서버가 할 일</th></tr></thead>
+          <thead><tr><th></th><th>무엇을 다루는가</th><th>건수가 늘면 어떻게 하는가</th><th>상태를 주소에 담는가</th><th>서버가 맡는 일</th></tr></thead>
           <tbody>
             <tr><td>데이터 테이블</td><td>여러 열의 <b>행들</b></td><td>쪽을 나눈다</td><td><b>담는다</b>(정렬·쪽)</td><td>페이징 · 정렬</td></tr>
             <tr class="me"><td><b>필터와 패싯</b></td><td>거르는 <b>조건</b></td><td>조건이 늘어난다</td><td><b>담는다</b></td><td>조건별 개수 세기</td></tr>
@@ -85,7 +85,7 @@
             <tr><td>일괄 선택</td><td><b>고른 것들</b></td><td>'전체'가 모호해진다</td><td>안 담는다</td><td>묶음 처리 · 되돌리기</td></tr>
             <tr><td>가상 스크롤</td><td><b>긴 목록</b></td><td><b>이 기법으로 푼다</b></td><td>안 담는다</td><td>커서 페이징</td></tr>
             <tr><td>차트 고르기</td><td>숫자들의 <b>관계</b></td><td>점이 뭉친다</td><td>담기도 한다</td><td>집계 · 구간 나누기</td></tr>
-            <tr><td>내보내기</td><td><b>파일</b>로 꺼내기</td><td>그 자리에서 못 준다</td><td>담기도 한다</td><td><b>비동기 작업</b></td></tr>
+            <tr><td>내보내기</td><td><b>파일</b>로 꺼내기</td><td>그 자리에서 바로 주지 못한다</td><td>담기도 한다</td><td><b>비동기 작업</b></td></tr>
             <tr><td>날짜 범위</td><td><b>기간</b> 고르기</td><td class="none">해당 없음</td><td><b>담는다</b></td><td>경계 시각 맞추기</td></tr>
           </tbody>
         </table>
@@ -108,19 +108,19 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px 8px;display:grid;gap:1px"><span style="font-size:9px;font-weight:700;color:var(--fg-muted);margin-bottom:2px">상태</span><label style="display:flex;align-items:center;gap:5px;font-size:10px;padding:2px 0"><span style="width:9px;height:9px;border:1px solid var(--line);border-radius:2px;background:var(--accent);border-color:var(--accent)"></span><span style="flex:1;min-width:0">승인됨</span><span style="color:var(--fg-muted);font-variant-numeric:tabular-nums">128</span></label><label style="display:flex;align-items:center;gap:5px;font-size:10px;padding:2px 0"><span style="width:9px;height:9px;border:1px solid var(--line);border-radius:2px;"></span><span style="flex:1;min-width:0">대기</span><span style="color:var(--fg-muted);font-variant-numeric:tabular-nums">14</span></label><label style="display:flex;align-items:center;gap:5px;font-size:10px;padding:2px 0"><span style="width:9px;height:9px;border:1px solid var(--line);border-radius:2px;"></span><span style="flex:1;min-width:0">반려</span><span style="color:var(--fg-muted);font-variant-numeric:tabular-nums">3</span></label></div>
             </div>
-            <figcaption>하나 고름<span>결과가 줄어들고, 고른 조건이 <b>칩</b>으로 나타납니다</span></figcaption>
+            <figcaption>조건을 하나 골랐을 때<span>결과가 줄어들고, 고른 조건이 <b>칩</b>으로 나타납니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px 8px;display:grid;gap:1px"><span style="font-size:9px;font-weight:700;color:var(--fg-muted);margin-bottom:2px">상태</span><label style="display:flex;align-items:center;gap:5px;font-size:10px;padding:2px 0"><span style="width:9px;height:9px;border:1px solid var(--line);border-radius:2px;background:var(--accent);border-color:var(--accent)"></span><span style="flex:1;min-width:0">승인됨</span><span style="color:var(--fg-muted);font-variant-numeric:tabular-nums">128</span></label><label style="display:flex;align-items:center;gap:5px;font-size:10px;padding:2px 0"><span style="width:9px;height:9px;border:1px solid var(--line);border-radius:2px;background:var(--accent);border-color:var(--accent)"></span><span style="flex:1;min-width:0">대기</span><span style="color:var(--fg-muted);font-variant-numeric:tabular-nums">14</span></label><label style="display:flex;align-items:center;gap:5px;font-size:10px;padding:2px 0"><span style="width:9px;height:9px;border:1px solid var(--line);border-radius:2px;"></span><span style="flex:1;min-width:0">반려</span><span style="color:var(--fg-muted);font-variant-numeric:tabular-nums">3</span></label></div>
             </div>
-            <figcaption>같은 묶음에 둘<span><b>OR</b>로 걸려서 두 조건의 결과가 모두 보입니다. AND로 걸면 0건이 됩니다</span></figcaption>
+            <figcaption>같은 묶음에서 둘을 골랐을 때<span><b>OR</b>로 걸려서 두 조건의 결과가 모두 보입니다. AND로 걸면 0건이 됩니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px 8px;display:grid;gap:1px"><span style="font-size:9px;font-weight:700;color:var(--fg-muted);margin-bottom:2px">상태</span><label style="display:flex;align-items:center;gap:5px;font-size:10px;padding:2px 0"><span style="width:9px;height:9px;border:1px solid var(--line);border-radius:2px;"></span><span style="flex:1;min-width:0">승인됨</span><span style="color:var(--fg-muted);font-variant-numeric:tabular-nums">128</span></label><label style="display:flex;align-items:center;gap:5px;font-size:10px;padding:2px 0"><span style="width:9px;height:9px;border:1px solid var(--line);border-radius:2px;"></span><span style="flex:1;min-width:0">대기</span><span style="color:var(--fg-muted);font-variant-numeric:tabular-nums">0</span></label><label style="display:flex;align-items:center;gap:5px;font-size:10px;padding:2px 0"><span style="width:9px;height:9px;border:1px solid var(--line);border-radius:2px;"></span><span style="flex:1;min-width:0">반려</span><span style="color:var(--fg-muted);font-variant-numeric:tabular-nums">0</span></label></div>
             </div>
-            <figcaption>0건짜리<span><b>흐리게</b> 표시하거나 숨깁니다. 눌렀을 때 빈 화면이 나오는 조건을 눌러 보게 두지 않습니다</span></figcaption>
+            <figcaption>결과가 0건인 조건<span><b>흐리게</b> 표시하거나 숨깁니다. 눌렀을 때 빈 화면이 나오는 조건을 눌러 보게 두지 않습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -129,7 +129,7 @@
                 <span style="font-size:9.5px;color:var(--accent)">모두 지우기</span>
               </div>
             </div>
-            <figcaption>칩으로 요약<span>조건 목록이 접혀 있어도 <b>어떤 조건이 걸렸는지</b> 보입니다</span></figcaption>
+            <figcaption>고른 조건을 칩으로 모아 보일 때<span>조건 목록이 접혀 있어도 <b>어떤 조건이 걸렸는지</b> 보입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
@@ -138,7 +138,7 @@
                 <span style="font-size:9.5px;color:var(--accent)">조건 지우기</span>
               </div>
             </div>
-            <figcaption>0건<span>결과가 없다고만 하지 말고 <b>어느 조건을 풀면 결과가 나오는지</b>까지 알려 주면 더 좋습니다</span></figcaption>
+            <figcaption>거른 결과가 0건일 때<span>결과가 없다고만 하지 말고 <b>어느 조건을 풀면 결과가 나오는지</b>까지 알려 주면 더 좋습니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -152,9 +152,9 @@
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="display:flex;gap:5px;flex-wrap:wrap"><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:999px;font-size:9.5px;background:var(--accent);color:#fff">승인됨 ✕</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:999px;font-size:9.5px;background:var(--accent);color:#fff">11월 ✕</span><span style="font-size:9.5px;color:var(--accent);align-self:center">모두 지우기</span></div>
                   <div class="pin-out" data-pin="2" style="max-width:190px"><div style="width:100%;max-width:190px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px 8px;display:grid;gap:1px"><span style="font-size:9px;font-weight:700;color:var(--fg-muted);margin-bottom:2px">상태</span><label style="display:flex;align-items:center;gap:5px;font-size:10px;padding:2px 0"><span style="width:9px;height:9px;border:1px solid var(--line);border-radius:2px;background:var(--accent);border-color:var(--accent)"></span><span style="flex:1;min-width:0">승인됨</span><span style="color:var(--fg-muted);font-variant-numeric:tabular-nums">128</span></label><label style="display:flex;align-items:center;gap:5px;font-size:10px;padding:2px 0"><span style="width:9px;height:9px;border:1px solid var(--line);border-radius:2px;"></span><span style="flex:1;min-width:0">대기</span><span style="color:var(--fg-muted);font-variant-numeric:tabular-nums">14</span></label><label style="display:flex;align-items:center;gap:5px;font-size:10px;padding:2px 0"><span style="width:9px;height:9px;border:1px solid var(--line);border-radius:2px;"></span><span style="flex:1;min-width:0">반려</span><span style="color:var(--fg-muted);font-variant-numeric:tabular-nums">0</span></label></div></div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">같은 묶음 안은 OR — 승인됨 <b>또는</b> 대기</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">묶음끼리는 AND — 상태 <b>그리고</b> 기간</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">반려 0건 — 눌러도 아무것도 안 나온다</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">같은 묶음 안은 OR로, 승인됨 <b>또는</b> 대기</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">묶음끼리는 AND로, 상태 <b>그리고</b> 기간</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">반려는 0건이라 눌러도 결과가 없음</div>
                   <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">?status=approved&amp;month=11</div>
                 </div>
               </div>
@@ -197,7 +197,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>필터와 패싯 대신 다른 것을 써야 하는 경우</b> — 자유롭게 입력하는 글자면 <a href="search.html">검색</a>, 하나만 고르면 <a href="../items/tabs.html">탭</a>을 쓰고, 조건이 복잡하면 <a href="../items/drawer.html">드로어</a>에 담습니다.</p>
+        <p style="margin:var(--s4) 0 0"><b>필터와 패싯 대신 다른 것을 써야 하는 경우</b> — 사용자가 글자를 자유롭게 입력해야 하면 <a href="search.html">검색</a>을 쓰고, 값을 하나만 고르면 되는 경우에는 <a href="../items/tabs.html">탭</a>이 맞습니다. 조건이 많고 복잡하면 <a href="../items/drawer.html">드로어</a>에 담아 필요할 때 엽니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -207,13 +207,13 @@
             <div class="shot">
               <div style="width:100%;max-width:150px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:7px 8px;display:grid;gap:1px"><span style="font-size:9px;font-weight:700;color:var(--fg-muted);margin-bottom:2px">상태</span><label style="display:flex;align-items:center;gap:5px;font-size:10px;padding:2px 0"><span style="width:9px;height:9px;border:1px solid var(--line);border-radius:2px;background:var(--accent);border-color:var(--accent)"></span><span style="flex:1;min-width:0">승인됨</span><span style="color:var(--fg-muted);font-variant-numeric:tabular-nums">128</span></label><label style="display:flex;align-items:center;gap:5px;font-size:10px;padding:2px 0"><span style="width:9px;height:9px;border:1px solid var(--line);border-radius:2px;"></span><span style="flex:1;min-width:0">대기</span><span style="color:var(--fg-muted);font-variant-numeric:tabular-nums">14</span></label><label style="display:flex;align-items:center;gap:5px;font-size:10px;padding:2px 0"><span style="width:9px;height:9px;border:1px solid var(--line);border-radius:2px;"></span><span style="flex:1;min-width:0">반려</span><span style="color:var(--fg-muted);font-variant-numeric:tabular-nums">3</span></label></div>
             </div>
-            <figcaption><b>왼쪽 패싯</b>PC에서 가장 흔한 배치로, 조건 목록이 늘 펼쳐져 있습니다</figcaption>
+            <figcaption><b>왼쪽에 조건 목록을 펼쳐 두기</b>PC에서 가장 흔한 배치로, 조건 목록이 늘 펼쳐져 있습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:170px;display:flex;gap:4px;flex-wrap:wrap"><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:999px;font-size:9.5px;background:var(--bg);border:1px solid var(--line);color:var(--fg-muted)">상태 ▾</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:999px;font-size:9.5px;background:var(--bg);border:1px solid var(--line);color:var(--fg-muted)">기간 ▾</span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:999px;font-size:9.5px;background:var(--bg);border:1px solid var(--line);color:var(--fg-muted)">지역 ▾</span></div>
             </div>
-            <figcaption><b>가로 드롭다운</b>조건이 적을 때 씁니다. 드롭다운을 <b>열어 조건을 고르면 닫힙니다</b></figcaption>
+            <figcaption><b>조건을 가로 드롭다운으로 늘어놓기</b>조건이 적을 때 씁니다. 드롭다운을 <b>열어 조건을 고르면 닫힙니다</b></figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
@@ -222,13 +222,13 @@
                 <div style="position:absolute;left:0;right:0;bottom:0;height:46%;background:var(--surface);border-top:1px solid var(--line);border-radius:8px 8px 0 0;padding:6px"><div style="width:22px;height:2px;background:var(--line);border-radius:2px;margin:0 auto 5px"></div><div style="font-size:6px">상태 · 기간 · 지역</div></div>
               </div></div>
             </div>
-            <figcaption><b>폰은 시트로</b><a href="../items/drawer.html">바텀 시트</a>를 열어 조건을 고른 뒤 <b>'적용'</b>을 눌러 닫습니다</figcaption>
+            <figcaption><b>폰에서 시트를 열어 조건 고르기</b><a href="../items/drawer.html">바텀 시트</a>를 열어 조건을 고른 뒤 <b>'적용'</b>을 눌러 닫습니다</figcaption>
           </figure>
         </div>
       </section>
 
       <section class="slot" id="s8">
-        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">필터가 꼭 갖출 것</span></h2>
+        <h2 class="slot-label"><span class="n">8</span> 최소 마크업과 키보드<span class="hint">필터를 만들 때 꼭 갖출 것</span></h2>
         <p>조건 묶음은 <code>&lt;fieldset&gt;</code>으로 묶고, 결과 개수는 <code>aria-live</code>로 알립니다.</p>
 <pre class="code">&lt;<span class="t">fieldset</span>&gt;
   &lt;<span class="t">legend</span>&gt;상태&lt;/<span class="t">legend</span>&gt;
@@ -241,14 +241,14 @@
 &lt;<span class="t">p</span> <span class="a">role</span>=<span class="s">"status"</span>&gt;128건&lt;/<span class="t">p</span>&gt;   <span class="c">&lt;!-- 결과가 바뀌면 읽어 준다 --&gt;</span></pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td><kbd>Tab</kbd></td><td>조건 하나하나로 옮겨 갑니다. 체크박스는 <kbd>Space</kbd>로 켭니다</td></tr>
             <tr><td><code>&lt;fieldset&gt;&lt;legend&gt;</code></td><td>스크린 리더가 '상태 묶음, 승인됨 체크박스'처럼 읽습니다. 묶음 이름이 없으면 무엇에 대한 조건인지 알 수 없습니다</td></tr>
             <tr><td><code>role="status"</code></td><td>'128건'처럼 결과 개수가 바뀐 것을 <b>하던 일을 끊지 않고</b> 알립니다. <code>alert</code>는 읽던 내용을 끊고 바로 읽어서 이 용도에는 지나칩니다</td></tr>
-            <tr><td>0건은 <code>disabled</code></td><td>눌러도 결과가 없는 조건은 탭 순서에서 빠지는 편이 낫습니다</td></tr>
-            <tr><td>칩의 ✕</td><td><code>&lt;button aria-label="승인됨 조건 지우기"&gt;</code>처럼 이름을 붙입니다. ✕만 있으면 무엇을 지우는 버튼인지 알 수 없습니다</td></tr>
-            <tr><td>주소를 바꾼다</td><td><code>history.replaceState</code>로 바꿉니다. 조건을 바꿀 때마다 방문 기록을 쌓으면 뒤로가기를 조건 수만큼 눌러야 필터 화면을 벗어날 수 있습니다</td></tr>
+            <tr><td>0건인 조건은 <code>disabled</code>로 두기</td><td>눌러도 결과가 없는 조건은 탭 순서에서 빠지는 편이 낫습니다</td></tr>
+            <tr><td>칩의 ✕ 버튼에 이름 붙이기</td><td><code>&lt;button aria-label="승인됨 조건 지우기"&gt;</code>처럼 이름을 붙입니다. ✕만 있으면 무엇을 지우는 버튼인지 알 수 없습니다</td></tr>
+            <tr><td>조건이 바뀔 때 주소를 고치는 방법</td><td><code>history.replaceState</code>로 바꿉니다. 조건을 바꿀 때마다 방문 기록을 쌓으면 뒤로가기를 조건 수만큼 눌러야 필터 화면을 벗어날 수 있습니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -259,11 +259,11 @@
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>개수는 한 번에</th><td>조건마다 <code>COUNT</code>를 따로 보내면 조건이 열 개일 때 요청도 열 번 갑니다. 그래서 한 번의 <b>집계 질의</b>(facet aggregation)로 모든 개수를 함께 받아 옵니다.</td></tr>
-            <tr><th>개수의 기준</th><td>'승인됨 128'은 <b>다른 조건을 적용한 뒤</b>에 센 숫자여야 합니다. 전체 데이터를 기준으로 세면 그 조건을 눌렀을 때 나오는 건수와 숫자가 맞지 않습니다.</td></tr>
-            <tr><th>같은 축은 제외하고 센다</th><td>상태 묶음의 개수를 셀 때는 <b>상태 조건만 빼고</b> 나머지 조건을 적용해 셉니다. 상태 조건까지 넣고 세면 이미 고른 값 말고는 모두 0건으로 나옵니다.</td></tr>
-            <tr><th>조건 값은 허용 목록으로</th><td><code>?status=</code> 값을 그대로 질의에 넘기면 주입 공격을 당할 수 있습니다. 미리 정해 둔 값만 받습니다.</td></tr>
-            <tr><th>색인</th><td>자주 거르는 열에 색인이 없으면 조건을 더할수록 질의가 느려집니다. 패싯이 많다면 데이터베이스 대신 <b>검색 엔진</b>(Elasticsearch 등)으로 옮기는 편이 낫습니다.</td></tr>
+            <tr><th>조건별 개수는 한 번에 받기</th><td>조건마다 <code>COUNT</code>를 따로 보내면 조건이 열 개일 때 요청도 열 번 갑니다. 그래서 한 번의 <b>집계 질의</b>(facet aggregation)로 모든 개수를 함께 받아 옵니다.</td></tr>
+            <tr><th>개수를 세는 기준</th><td>'승인됨 128'은 <b>다른 조건을 적용한 뒤</b>에 센 숫자여야 합니다. 전체 데이터를 기준으로 세면 그 조건을 눌렀을 때 나오는 건수와 숫자가 맞지 않습니다.</td></tr>
+            <tr><th>같은 묶음의 조건은 빼고 세기</th><td>상태 묶음의 개수를 셀 때는 <b>상태 조건만 빼고</b> 나머지 조건을 적용해 셉니다. 상태 조건까지 넣고 세면 이미 고른 값 말고는 모두 0건으로 나옵니다.</td></tr>
+            <tr><th>조건 값은 허용 목록으로 받기</th><td><code>?status=</code> 값을 그대로 질의에 넘기면 주입 공격을 당할 수 있습니다. 미리 정해 둔 값만 받습니다.</td></tr>
+            <tr><th>자주 거르는 열의 색인</th><td>자주 거르는 열에 색인이 없으면 조건을 더할수록 질의가 느려집니다. 패싯이 많다면 데이터베이스 대신 <b>검색 엔진</b>(Elasticsearch 등)으로 옮기는 편이 낫습니다.</td></tr>
           </tbody>
         </table>
         </div>

@@ -35,11 +35,11 @@ ANAT = '''              <div class="anat--wide" style="background:var(--bg);bord
                       </span>
                     </div>
                   </div></div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">showModal( )   — 브라우저가 가둔다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">열 때 안으로 — 첫 요소에 focus( )</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">닫을 때 — 부른 버튼으로 돌려준다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">Esc 로 닫힌다</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">show( ) · 직접 만든 모달   — 밖으로 샌다</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">showModal( )   — 브라우저가 포커스를 가둠</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">열 때 첫 요소에 focus( )로 옮김</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">닫을 때 모달을 연 버튼으로 돌려줌</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">Esc로 닫힘</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">show( ) · 직접 만든 모달   — 포커스가 밖으로 나감</div>
                 </div>
               </div>'''
 
@@ -68,30 +68,30 @@ D = dict(
   ]),
   axes=ax("포커스 트랩"),
   oneline="포커스 트랩은 <b>세 가지 규칙을 함께</b> 지켜야 합니다. 모달을 열 때 포커스를 모달 안으로 옮기고, 열려 있는 동안에는 모달 안에서만 돌게 하고, 닫을 때는 모달을 연 버튼으로 돌려줍니다.",
-  s4_title="상태", s4_hint="열고 돌고 닫는 세 순간",
+  s4_title="포커스가 있어야 할 자리", s4_hint="모달을 열기 전부터 닫은 뒤까지",
   states=states([
-    (scene(BG), "열기 전", "배경 버튼에 포커스가 있습니다"),
+    (scene(BG), "모달을 열기 전", "배경 버튼에 포커스가 있습니다"),
     (scene(BG + modal("outline:2px solid var(--accent);outline-offset:2px")),
-     "열 때", "포커스를 <b>모달 안으로</b> 옮깁니다. 옮기지 않으면 포커스가 body에 남습니다"),
-    (scene(BG + modal()), "도는 동안", "Tab을 누르면 포커스가 <b>모달 안에서만</b> 돕니다"),
+     "모달을 열 때", "포커스를 <b>모달 안으로</b> 옮깁니다. 옮기지 않으면 포커스가 body에 남습니다"),
+    (scene(BG + modal()), "모달이 열려 있는 동안", "Tab을 누르면 포커스가 <b>모달 안에서만</b> 돕니다"),
     (scene('<div style="position:absolute;left:8px;top:8px;display:flex;gap:5px">'
            '<span style="border:1px solid var(--line-strong);border-radius:4px;padding:3px 7px;font-size:9px;outline:2px solid var(--accent);outline-offset:1px">배경 1</span>'
            '<span style="border:1px solid var(--line-strong);border-radius:4px;padding:3px 7px;font-size:9px">배경 2</span></div>' + modal()),
-     "샜을 때", "포커스가 <b>가림막 뒤</b>의 배경 버튼에 가 있지만, 가려져 있어서 눈으로는 보이지 않습니다"),
+     "포커스가 모달 밖으로 나갔을 때", "포커스가 <b>가림막 뒤</b>의 배경 버튼에 가 있지만, 가려져 있어서 눈으로는 보이지 않습니다"),
     (scene('<div style="position:absolute;left:8px;top:8px;display:flex;gap:5px">'
            '<span style="border:1px solid var(--line-strong);border-radius:4px;padding:3px 7px;font-size:9px">배경 1</span>'
            '<span style="background:var(--accent);color:#fff;border-radius:4px;padding:3px 7px;font-size:9px;outline:2px solid var(--accent);outline-offset:2px">열기</span></div>'),
-     "닫은 뒤", "포커스가 <b>모달을 연 버튼</b>으로 돌아옵니다. 돌려주지 않으면 포커스가 페이지 맨 위로 가 버립니다"),
+     "모달을 닫은 뒤", "포커스가 <b>모달을 연 버튼</b>으로 돌아옵니다. 돌려주지 않으면 포커스가 페이지 맨 위로 가 버립니다"),
     (scene(BG + modal() + '<span style="position:absolute;right:7px;top:7px;font-size:8.5px;background:var(--ink-900);color:#fff;border-radius:3px;padding:2px 5px">Esc</span>'),
-     "Esc", "<kbd>Esc</kbd>를 누르면 모달이 <b>반드시 닫혀야</b> 합니다. 포커스가 갇힌 채 빠져나갈 방법이 없으면 가두지 않은 것보다 더 나쁩니다"),
+     "Esc를 눌렀을 때", "<kbd>Esc</kbd>를 누르면 모달이 <b>반드시 닫혀야</b> 합니다. 포커스가 갇힌 채 빠져나갈 방법이 없으면 가두지 않은 것보다 더 나쁩니다"),
   ]),
   anat=ANAT,
   pins=pins([
     ("모달과 배경", "dialog + backdrop", "가림막 뒤의 배경은 <b>보이지도 눌리지도 않아야</b> 합니다"),
     ("가두기", "showModal()", "<b>브라우저가 알아서</b> 포커스를 가두고 배경을 <code>inert</code> 상태로 만듭니다"),
-    ("열 때", "focus()", "포커스를 모달 안의 <b>첫 요소</b>로 보냅니다. 보내지 않으면 포커스가 body에 남습니다"),
-    ("닫을 때", "복원", "포커스를 <b>모달을 연 버튼</b>으로 돌려줍니다. 돌려주지 않으면 포커스가 화면 맨 위로 가 버립니다"),
-    ("Esc", "cancel", "모달을 닫을 방법이 반드시 있어야 합니다. <code>&lt;dialog&gt;</code>는 따로 코드를 쓰지 않아도 Esc로 닫힙니다"),
+    ("열 때 포커스 옮기기", "focus()", "포커스를 모달 안의 <b>첫 요소</b>로 보냅니다. 보내지 않으면 포커스가 body에 남습니다"),
+    ("닫을 때 포커스 돌려주기", "복원", "포커스를 <b>모달을 연 버튼</b>으로 돌려줍니다. 돌려주지 않으면 포커스가 화면 맨 위로 가 버립니다"),
+    ("Esc로 닫기", "cancel", "모달을 닫을 방법이 반드시 있어야 합니다. <code>&lt;dialog&gt;</code>는 따로 코드를 쓰지 않아도 Esc로 닫힙니다"),
     ("직접 만든 모달", "div + position:fixed", "포커스가 모달 밖으로 빠져나가는 일은 <b>대부분 직접 만든 모달에서</b> 생깁니다. 가능하면 직접 만들지 않습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -110,18 +110,19 @@ D = dict(
     "모달을 닫은 뒤 포커스를 <b>돌려주지 않을</b> 때",
     "모달을 직접 만들면서 <code>inert</code>를 빠뜨릴 때",
   ]),
-  instead='뒤를 안 막으면 <a href="../items/popover.html">팝오버</a>·<a href="../items/dialog.html">다이얼로그</a>, 부품 자체는 <a href="../items/modal.html">모달</a>, 테두리는 <a href="focus.html">포커스</a>.',
+  dont_title="포커스 트랩을 쓰지 않거나 잘못 쓰는 경우",
+  instead='뒤쪽 화면을 막지 않는 부품이라면 포커스를 가두지 않는 <a href="../items/popover.html">팝오버</a>나 <a href="../items/dialog.html">다이얼로그</a>를 씁니다. 모달이라는 부품 자체는 <a href="../items/modal.html">모달</a> 항목에서, 포커스 테두리는 <a href="focus.html">포커스</a> 항목에서 다룹니다.',
   cases=cases([
-    (scene(BG + modal(), "190px"), "확인 모달", "포커스 트랩이 가장 흔하게 쓰이는 자리입니다. <code>showModal()</code> 한 줄이면 됩니다"),
+    (scene(BG + modal(), "190px"), "확인 모달에서 포커스 가두기", "포커스 트랩이 가장 흔하게 쓰이는 자리입니다. <code>showModal()</code> 한 줄이면 됩니다"),
     (scene('<div style="position:absolute;inset:0;background:rgba(14,16,20,.45)"></div>'
            '<div style="position:absolute;left:0;right:0;bottom:0;background:var(--surface);border-radius:8px 8px 0 0;padding:9px">'
            '<span style="display:block;width:26px;height:3px;border-radius:99px;background:var(--line-strong);margin:0 auto 6px"></span>'
            '<span style="font-size:10px;font-weight:700">정렬 기준</span></div>', "190px"),
-     "바텀시트", "바텀시트도 뒤의 화면을 막는다면 모달과 <b>똑같이 포커스를 가둬야</b> 합니다"),
+     "뒤를 막는 바텀시트에서 가두기", "바텀시트도 뒤의 화면을 막는다면 모달과 <b>똑같이 포커스를 가둬야</b> 합니다"),
     (scene('<div style="position:absolute;inset:0;background:var(--surface)"></div>'
            '<div style="position:absolute;left:9px;top:9px;font-size:10px;font-weight:700">전체 화면 메뉴</div>'
            '<div style="position:absolute;right:9px;top:8px;font-size:11px">×</div>', "190px"),
-     "전체 화면 메뉴", "폰에서 흔히 쓰는 메뉴입니다. <b>배경이 아예 보이지 않더라도</b> 포커스를 가둬야 합니다"),
+     "전체 화면 메뉴에서 가두기", "폰에서 흔히 쓰는 메뉴입니다. <b>배경이 아예 보이지 않더라도</b> 포커스를 가둬야 합니다"),
   ]),
   s8_title="최소 마크업과 키보드", s8_hint="구현할 때 지킬 최소 규칙",
   code_lede="포커스를 직접 가두지 말고 <b>브라우저에 맡깁니다</b>. 그러면 직접 적을 코드는 포커스를 옮기는 두 줄뿐입니다.",
@@ -144,15 +145,15 @@ dlg.addEventListener(<span class="s">'close'</span>, () =&gt; openBtn.focus());
     ("<kbd>Tab</kbd>", "포커스가 모달 <b>안에서만</b> 돕니다. 마지막 요소 다음에는 첫 번째 요소로 갑니다"),
     ("<kbd>Shift</kbd>+<kbd>Tab</kbd>", "거꾸로 돕니다. 첫 번째 요소 앞에서는 마지막 요소로 갑니다"),
     ("<kbd>Esc</kbd>", "모달이 <b>반드시 닫혀야 합니다.</b> <code>&lt;dialog&gt;</code>는 기본으로 닫힙니다"),
-    ("열 때", "모달 안의 첫 요소에 <code>.focus()</code>를 호출합니다. 제목에 <code>tabindex=\"-1\"</code>을 주고 제목으로 포커스를 보내기도 합니다"),
-    ("닫을 때", "포커스를 <b>모달을 연 버튼</b>으로 돌려줍니다. 그 버튼이 사라졌다면 가장 가까운 요소로 보냅니다"),
+    ("모달을 열 때", "모달 안의 첫 요소에 <code>.focus()</code>를 호출합니다. 제목에 <code>tabindex=\"-1\"</code>을 주고 제목으로 포커스를 보내기도 합니다"),
+    ("모달을 닫을 때", "포커스를 <b>모달을 연 버튼</b>으로 돌려줍니다. 그 버튼이 사라졌다면 가장 가까운 요소로 보냅니다"),
     ("<code>inert</code>", "모달을 직접 만들 때는 배경에 <code>inert</code>를 걸어야 배경이 <b>스크린 리더에도</b> 읽히지 않습니다"),
   ]),
   backend=rows([
     ("모달을 라우팅으로 열 때", "주소가 바뀌면서 모달이 열린다면 <b>뒤로가기를 눌렀을 때 모달이 닫히는지</b>까지 정해야 합니다. 모달이 닫힌 뒤 포커스를 어디로 돌려줄지도 함께 정합니다."),
     ("모달 안에서 화면이 바뀌면", "모달 안에서 다음 단계로 넘어가면 이전 단계의 요소와 함께 포커스가 사라지므로, 포커스를 <b>새 단계의 제목</b>으로 옮겨 줘야 합니다."),
-    ("여러 겹의 모달", "모달 위에 모달을 열면 포커스 가두기가 겹칩니다. <code>&lt;dialog&gt;</code>는 최상위 레이어에 차례로 쌓이므로 브라우저가 알아서 처리하지만, 모달을 직접 만들었다면 겹친 순서를 <b>직접 관리</b>해야 합니다."),
-    ("자동 검사", "모달을 열고 <kbd>Tab</kbd>을 20번 눌러 보면서 <b>모달 밖 요소에 포커스가 가는지</b> 확인하면 됩니다. 이 검사는 CI에서도 돌릴 수 있습니다."),
+    ("모달 위에 모달을 열 때", "모달 위에 모달을 열면 포커스 가두기가 겹칩니다. <code>&lt;dialog&gt;</code>는 최상위 레이어에 차례로 쌓이므로 브라우저가 알아서 처리하지만, 모달을 직접 만들었다면 겹친 순서를 <b>직접 관리</b>해야 합니다."),
+    ("포커스가 새는지 자동 검사", "모달을 열고 <kbd>Tab</kbd>을 20번 눌러 보면서 <b>모달 밖 요소에 포커스가 가는지</b> 확인하면 됩니다. 이 검사는 CI에서도 돌릴 수 있습니다."),
   ]),
   plat_lede="iOS와 안드로이드는 모달을 열면 <b>기본으로 포커스를 가둬</b> 줍니다.",
   plats=plats([

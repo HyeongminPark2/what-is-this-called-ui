@@ -28,7 +28,7 @@
   <div id="ctx"></div>
   <div class="verd" id="list"></div>
   <div class="try">
-    <input class="ui-input" id="mine" placeholder="직접 써 보기 — 예: 초대 보내기">
+    <input class="ui-input" id="mine" placeholder="버튼 문구를 직접 써 보세요(예: 초대 보내기)">
     <span class="ruler" id="myverd"></span>
   </div>
 </div>
@@ -68,7 +68,7 @@
     var words = t.split(/\s+/).length;
     if (words > 3) { ok = false; why.push(words + '어절이라 버튼이 아니라 문장입니다'); }
     if (/[.!]$/.test(t)) { ok = false; why.push('마침표를 찍지 않습니다'); }
-    if (ok) why.push(words + '어절 · 동사 있음');
+    if (ok) why.push(words + '어절이고 동사가 있습니다');
     return { ok: ok, why: why };
   }
 
@@ -93,8 +93,8 @@
   document.getElementById('mine').addEventListener('input', function () {
     var j = judge(this.value);
     document.getElementById('myverd').innerHTML = !this.value.trim() ? ''
-      : (j.ok ? '<b>좋음</b> — ' + j.why.join(' · ')
-              : '<span class="warn">고칠 것</span> — ' + j.why.join(' · '));
+      : (j.ok ? '<b>좋은 문구입니다.</b> ' + j.why.join(' · ')
+              : '<span class="warn">고칠 곳이 있습니다.</span> ' + j.why.join(' · '));
     document.getElementById('myverd').dataset.ok = j.ok ? '1' : '0';
   });
   document.getElementById('blind').addEventListener('change', draw);

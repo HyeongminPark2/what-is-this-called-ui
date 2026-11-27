@@ -17,12 +17,12 @@ IF = '<i style="display:block;background:var(--accent);border-radius:3px;min-hei
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">오토 레이아웃 = display: flex</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">가로 · 세로 = flex-direction: row · column</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">간격 = gap · 패딩 = padding</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">채우기(Fill) = flex: 1</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">감싸기(Hug) = width: fit-content</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">절대 위치 = position: absolute — 흐름에서 뺀다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">오토 레이아웃은 display: flex</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">가로 · 세로는 flex-direction: row · column</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">간격은 gap, 패딩은 padding</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">채우기(Fill)는 flex: 1</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">감싸기(Hug)는 width: fit-content</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">절대 위치는 position: absolute로 흐름에서 뺌</div>
                 </div>
               </div>'''
 
@@ -51,7 +51,7 @@ D = dict(
   ]),
   axes=ax("오토 레이아웃"),
   oneline="<b>대응표 한 장만 있으면 시안의 말을 CSS로 바로 옮길 수 있습니다.</b> 채우기는 <code>flex: 1</code>, 감싸기는 <code>fit-content</code>, 간격은 <code>gap</code>입니다.",
-  s4_title="설정별로", s4_hint="CSS 로는 무엇인가",
+  s4_title="설정마다 대응하는 CSS", s4_hint="시안의 설정을 CSS로 옮기면",
   states=states([
     (box('gap:6px', I + I + I, "152px", "flex-direction: row"), "가로", "<code>row</code>에 해당하며, 플렉스의 기본값입니다"),
     (box('flex-direction:column;gap:6px', I + I + I, "152px", "flex-direction: column"), "세로", "<code>column</code>에 해당합니다"),
@@ -78,6 +78,8 @@ D = dict(
           절대 위치로 늘어놓은 시안은 개발자가 <b>구조를 다시 생각해서</b> 만들어야 합니다.
           \"이 시안 오토 레이아웃으로 되어 있나요\"라는 질문으로
           개발 일정을 가늠할 수 있는 것도 이 때문입니다.</p>''',
+  do_title="오토 레이아웃 대응표가 쓸모 있는 경우",
+  dont_title="오토 레이아웃을 코드로 옮길 때 피할 것",
   do=ul([
     "시안의 묶음을 <b>그대로 마크업</b>으로 옮길 때",
     "<b>대응표</b>를 옆에 두고 디자이너와 이야기할 때",
@@ -89,13 +91,14 @@ D = dict(
     "간격을 <code>margin</code>으로 줄 때. <code>gap</code>을 써야 배치가 덜 깨집니다",
     "'알아서 되게' 해 달라는 말로 넘어갈 때. <b>Fill인지 Hug인지</b> 물어봐야 합니다",
   ]),
-  instead='두 방향이 필요하면 <a href="../items/grid.html">그리드</a>, 한 방향이면 <a href="../items/flex.html">플렉스</a>, 간격 값은 <a href="../items/spacing.html">간격 체계</a>.',
+  instead_title="관련 주제는 다른 항목에서 다룹니다",
+  instead='가로와 세로 두 방향으로 배치해야 하면 <a href="../items/grid.html">그리드</a>를, 한 방향이면 <a href="../items/flex.html">플렉스</a> 항목을 보세요. 간격 값을 정하는 방법은 <a href="../items/spacing.html">간격 체계</a>에서 다룹니다.',
   cases=cases([
-    (box('gap:6px;align-items:center', I + IF + I, "150px", "아이콘 · 글 · 버튼"), "줄 하나", "<b>가운데 칸만 Fill</b>로 두는 것이 가장 흔한 형태입니다"),
-    (box('flex-direction:column;gap:5px', I + I, "150px", "세로로 쌓기"), "카드 안", "제목과 설명, 버튼을 세로로 쌓습니다"),
-    (box('gap:6px;flex-wrap:wrap', I + I + I + I + I, "150px", "넘치면 다음 줄"), "칩 묶음", "칩이 넘치면 다음 줄로 내려가야 하므로 <b>Wrap</b>이 필요합니다"),
+    (box('gap:6px;align-items:center', I + IF + I, "150px", "아이콘 · 글 · 버튼"), "한 줄에 아이콘·글·버튼 놓기", "<b>가운데 칸만 Fill</b>로 두는 것이 가장 흔한 형태입니다"),
+    (box('flex-direction:column;gap:5px', I + I, "150px", "세로로 쌓기"), "카드 안을 세로로 쌓기", "제목과 설명, 버튼을 세로로 쌓습니다"),
+    (box('gap:6px;flex-wrap:wrap', I + I + I + I + I, "150px", "넘치면 다음 줄로 내려감"), "넘치는 칩을 다음 줄로 보내기", "칩이 넘치면 다음 줄로 내려가야 하므로 <b>Wrap</b>이 필요합니다"),
   ]),
-  s8_title="대응표", s8_hint="시안의 말과 CSS 짝짓기",
+  s8_title="시안과 CSS 대응표", s8_hint="시안의 말과 CSS 짝짓기",
   code_lede="시안 도구에서 부르는 이름과 CSS 속성을 짝지어 두면 다음과 같습니다.",
   code='''<span class="c">/* 오토 레이아웃 = 플렉스 */</span>
 .frame {
@@ -112,17 +115,18 @@ D = dict(
 .child-hug  { <span class="a">width</span>: fit-content; }      <span class="c">/* 감싸기 (Hug) */</span>
 .child-fix  { <span class="a">width</span>: <span class="a">120px</span>; }           <span class="c">/* 고정 (Fixed) */</span>
 .badge      { <span class="a">position</span>: absolute; }       <span class="c">/* 절대 위치 */</span>''',
+  keys_heads="<th>지킬 규칙</th><th>그렇게 하는 이유</th>",
   keys=kbd([
-    ("<code>min-width: 0</code>을 잊지 않는다", "<b>Fill</b>로 둔 칸에 <code>min-width: 0</code>이 없으면 긴 글이 들어갔을 때 칸 밖으로 넘칩니다(<a href=\"../items/flex.html\">플렉스</a> 참고)"),
-    ("<code>gap</code>이 <code>margin</code>보다 낫다", "첫 칸과 마지막 칸을 따로 처리할 필요가 없고, 줄바꿈이 일어나도 간격이 깨지지 않습니다"),
-    ("순서가 곧 <b>읽는 순서</b>", "<code>order</code>나 <code>row-reverse</code>로 보이는 순서만 바꾸면 <b>키보드로 옮겨 가는 순서와 어긋납니다</b>"),
+    ("Fill 칸에 <code>min-width: 0</code> 넣기", "<b>Fill</b>로 둔 칸에 <code>min-width: 0</code>이 없으면 긴 글이 들어갔을 때 칸 밖으로 넘칩니다(<a href=\"../items/flex.html\">플렉스</a> 참고)"),
+    ("<code>margin</code> 대신 <code>gap</code> 쓰기", "첫 칸과 마지막 칸을 따로 처리할 필요가 없고, 줄바꿈이 일어나도 간격이 깨지지 않습니다"),
+    ("보이는 순서와 <b>읽는 순서</b> 맞추기", "<code>order</code>나 <code>row-reverse</code>로 보이는 순서만 바꾸면 <b>키보드로 옮겨 가는 순서와 어긋납니다</b>"),
     ("<code>position: absolute</code>", "배치 흐름에서 빠지므로 <b>자리를 차지하지 않습니다</b>. 배지나 닫기 버튼에 씁니다"),
-    ("터치 타깃", "간격을 좁게 잡으면 <a href=\"touchtarget.html\">손가락이 옆 버튼까지 누르게 됩니다</a>"),
-    ("반응형", "같은 오토 레이아웃이라도 화면 폭에 따라 <b>방향이 바뀌어야</b> 할 때가 있습니다(<a href=\"breakpoint.html\">브레이크포인트</a> 참고)"),
+    ("터치 타깃 넓이 지키기", "간격을 좁게 잡으면 <a href=\"touchtarget.html\">손가락이 옆 버튼까지 누르게 됩니다</a>"),
+    ("화면 폭에 따라 방향 바꾸기", "같은 오토 레이아웃이라도 화면 폭에 따라 <b>방향이 바뀌어야</b> 할 때가 있습니다(<a href=\"breakpoint.html\">브레이크포인트</a> 참고)"),
   ]),
   backend=rows([
-    ("구조가 곧 마크업", "시안에서 상자를 묶은 방식이 코드의 <code>&lt;div&gt;</code> 묶음과 겹치기 때문에, <b>오토 레이아웃으로 짜인 시안</b>을 받으면 개발이 빨라집니다."),
-    ("데이터 길이", "시안은 대개 짧은 글로 그려져 있습니다. 실제 데이터의 <b>길이</b>로 한 번 채워 보면 어느 칸을 Fill로, 어느 칸을 Hug로 둬야 하는지 드러납니다."),
+    ("시안 구조를 마크업으로 옮기기", "시안에서 상자를 묶은 방식이 코드의 <code>&lt;div&gt;</code> 묶음과 겹치기 때문에, <b>오토 레이아웃으로 짜인 시안</b>을 받으면 개발이 빨라집니다."),
+    ("실제 데이터 길이로 채워 보기", "시안은 대개 짧은 글로 그려져 있습니다. 실제 데이터의 <b>길이</b>로 한 번 채워 보면 어느 칸을 Fill로, 어느 칸을 Hug로 둬야 하는지 드러납니다."),
   ]),
   plat_lede="자식을 <b>한 방향으로 줄 세우는</b> 배치 방식은 어느 플랫폼에나 있습니다.",
   plats=plats([

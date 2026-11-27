@@ -9,12 +9,12 @@ def num(txt, tag, ok=None, note="", w="152px"):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">표 안 — 1,284,000원. 자릿수를 맞춘다</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">요약 타일 — 128만 원. 크게 줄여 읽힌다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">단위를 꼭 붙인다 — 원인가 건인가</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">0건 · 1건 — 그대로 적는다. 복수형이 없다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">소수점은 한 자리까지 — 33.3%</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">1.28M — 한국어는 만 단위로 끊어 읽는다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">표 안에서는 1,284,000원처럼 자릿수를 맞춤</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">요약 타일에서는 128만 원처럼 줄여 적음</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">원인지 건인지 알도록 단위를 꼭 붙임</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">복수형이 없어 0건 · 1건도 그대로 적음</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">소수점은 33.3%처럼 한 자리까지</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">한국어는 만 단위로 끊어 읽으므로 1.28M은 맞지 않음</div>
                 </div>
               </div>'''
 
@@ -44,14 +44,14 @@ D = dict(
   ]),
   axes=ax("숫자와 단위 쓰기"),
   oneline="<b>숫자에는 단위를 꼭 붙이고, 놓이는 자리에 맞게 끊어 적으세요.</b> 큰 수를 줄일 때 한국어에서는 K·M 대신 <b>만·억</b>을 씁니다.",
-  s4_title="자리별로", s4_hint="같은 값, 다른 표기",
+  s4_title="놓이는 자리별 숫자 표기", s4_hint="같은 값을 자리에 맞게 다르게 적기",
   states=states([
-    (num('1,284,000원', "표 안", True, "자릿수를 맞춰 세로로 견준다"), "표", "<a href=\"../items/numerals.html\">등폭 숫자</a>와 함께 씁니다"),
-    (num('128만 원', "요약 타일", True, "크게 줄여 한눈에 읽힌다"), "요약", "<a href=\"../items/stat.html\">스탯</a>에서 씁니다"),
-    (num('약 128만 원', "문장 속", True, "읽는 대로 적는다"), "문장", "쉼표로 끊은 긴 숫자를 문장에 넣으면 <b>잘 읽히지 않습니다</b>"),
-    (num('1,284,000', "단위 없이", False, "원인지 건인지 모른다"), "단위 빠짐", "<b>가장 흔한 실수</b>입니다"),
-    (num('1.28M', "영어식 줄임", False, "한국어는 만 단위로 끊어 읽는다"), "K · M", "읽는 사람이 만 단위로 <b>한 번 더 계산</b>해야 합니다"),
-    (num('0건', "없을 때", True, "빈칸이나 ‘-’ 로 두지 않는다"), "0", "<a href=\"emptytext.html\">빈 상태 문구</a>와 함께 씁니다"),
+    (num('1,284,000원', "표 안", True, "자릿수를 맞춰 세로로 견줌"), "표 안의 금액", "<a href=\"../items/numerals.html\">등폭 숫자</a>와 함께 씁니다"),
+    (num('128만 원', "요약 타일", True, "크게 줄여 한눈에 읽힘"), "요약 타일의 금액", "<a href=\"../items/stat.html\">스탯</a>에서 씁니다"),
+    (num('약 128만 원', "문장 속", True, "읽는 대로 적음"), "문장 속의 금액", "쉼표로 끊은 긴 숫자를 문장에 넣으면 <b>잘 읽히지 않습니다</b>"),
+    (num('1,284,000', "단위 없이", False, "원인지 건인지 알 수 없음"), "단위를 빠뜨린 숫자", "<b>가장 흔한 실수</b>입니다"),
+    (num('1.28M', "영어식 줄임", False, "한국어는 만 단위로 끊어 읽음"), "K · M으로 줄인 숫자", "읽는 사람이 만 단위로 <b>한 번 더 계산</b>해야 합니다"),
+    (num('0건', "없을 때", True, "빈칸이나 ‘-’로 두지 않음"), "0건일 때", "<a href=\"emptytext.html\">빈 상태 문구</a>와 함께 씁니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -60,7 +60,7 @@ D = dict(
     ("단위", "원 · 건 · %", "<b>반드시 붙입니다.</b> 단위가 없으면 무엇을 센 숫자인지 알 수 없습니다"),
     ("건수", "0건 · 1건", "한국어에는 <b>복수형이 없으므로</b> 0건도 1건도 그대로 적습니다"),
     ("소수점", "한 자리까지", "33.3%처럼 한 자리까지 적습니다. 자릿수를 더 적으면 <b>틀린 인상</b>을 줍니다"),
-    ("K · M", "쓰지 않는다", "한국어는 <b>만·억</b> 단위로 끊어 적습니다"),
+    ("K · M", "쓰지 않음", "한국어는 <b>만·억</b> 단위로 끊어 적습니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <b>비율을 하나씩 반올림하면 합계가 맞지 않을 수 있습니다.</b>
@@ -76,18 +76,20 @@ D = dict(
     "표에서는 자릿수를 맞추고 <b>오른쪽 정렬</b>하기",
     "요약에서는 <b>만·억</b>으로 줄이기",
   ]),
+  do_title="숫자와 단위를 적을 때 지킬 것", dont_title="숫자와 단위를 적을 때 피할 것",
+  instead_title="숫자와 단위 쓰기와 함께 보면 좋은 항목",
   dont=ul([
     "단위 없이 숫자만 적을 때. <b>무엇을 센 숫자인지 알 수 없습니다</b>",
     "<b>K · M</b>으로 줄일 때. 한국어 독자는 만 단위로 한 번 더 계산해야 합니다",
     "0을 ‘-’나 빈칸으로 둘 때. <b>0건이라고 적습니다</b>",
     "작은 값을 0으로 반올림할 때. 그 항목이 <b>없는 것처럼</b> 보입니다",
   ]),
-  instead='글자의 생김새는 <a href="../items/numerals.html">숫자 꼴</a>, 요약 한 칸은 <a href="../items/stat.html">스탯</a>, 비율 그림은 <a href="chart.html">차트 고르기</a>.',
+  instead='숫자 글자의 생김새는 <a href="../items/numerals.html">숫자 꼴</a>에서, 요약 숫자 하나를 크게 보여 주는 칸은 <a href="../items/stat.html">스탯</a>에서, 비율을 그림으로 보여 주는 방법은 <a href="chart.html">차트 고르기</a>에서 다룹니다.',
   cases=cases([
     (num('9,827,500원<br>1,284,000원<br>&nbsp;&nbsp;&nbsp;11,100원', "표", True, "오른쪽 정렬 + 등폭 숫자"),
      "표 안의 금액", "금액을 <b>세로로 견주어 보는</b> 자리입니다"),
-    (num('24.7억', "요약 타일", True, "큰 글자로 줄여 읽힌다"), "요약 타일", "줄여 적어도 됩니다. <b>정확한 값은 표에</b> 따로 있습니다"),
-    (num('33.3% · 33.3% · 33.4%', "비율", True, "합이 100이 되게 맞췄다"), "구성비", "각각 반올림하면 <b>합이 100이 되지 않을 수</b> 있어 맞춰 줍니다"),
+    (num('24.7억', "요약 타일", True, "큰 글자로 줄여 읽힘"), "요약 타일의 큰 금액", "줄여 적어도 됩니다. <b>정확한 값은 표에</b> 따로 있습니다"),
+    (num('33.3% · 33.3% · 33.4%', "비율", True, "합이 100이 되게 맞춤"), "구성비의 반올림 맞추기", "각각 반올림하면 <b>합이 100이 되지 않을 수</b> 있어 맞춰 줍니다"),
   ]),
   s8_title="최소 코드와 규칙", s8_hint="코드로 옮길 때 지킬 것",
   code_lede="<code>Intl.NumberFormat</code>은 언어와 화폐에 맞는 표기를 함께 처리합니다.",
@@ -104,20 +106,21 @@ D = dict(
 
 <span class="c">/* 표에서는 오른쪽 정렬 + 등폭 숫자 */</span>
 <span class="t">td</span>.num { <span class="a">text-align</span>: right; <span class="a">font-variant-numeric</span>: tabular-nums; }''',
+  keys_heads="<th>지킬 규칙과 마크업</th><th>지키는 방법과 이유</th>",
   keys=kbd([
     ("<code>Intl.NumberFormat</code>", "쉼표·화폐·퍼센트를 언어에 맞춰 적어 주므로 <b>쉼표를 직접 찍지 않습니다</b>"),
     ("<code>notation: 'compact'</code>", "영어로는 <code>1.2M</code>, 한국어로는 <code>128만</code>처럼 줄여 줍니다. 다만 고르는 <b>단위가 화면에 맞지 않을 때</b>가 있어 직접 만들어 쓰기도 합니다"),
     ("<code>tabular-nums</code>", "표에서 숫자 폭을 같게 해 자릿수를 맞춥니다(<a href=\"../items/numerals.html\">숫자 꼴</a>)"),
-    ("스크린 리더", "<code>1,284,000</code>은 '백이십팔만 사천'으로 읽히는데, <b>단위가 없으면</b> 듣는 사람은 무엇을 센 숫자인지 알 수 없습니다"),
+    ("스크린 리더로 읽을 때", "<code>1,284,000</code>은 '백이십팔만 사천'으로 읽히는데, <b>단위가 없으면</b> 듣는 사람은 무엇을 센 숫자인지 알 수 없습니다"),
     ("<code>&lt;bdi&gt;</code>", "여러 언어가 섞인 줄에서 숫자의 표시 방향이 뒤집히는 것을 막습니다"),
-    ("입력칸에는 쉼표를 넣지 않는다", "<code>type=\"text\"</code>에 <code>inputmode=\"numeric\"</code>을 붙여 받고, <b>보낼 때 숫자로</b> 바꿉니다"),
+    ("입력칸에는 쉼표를 넣지 않기", "<code>type=\"text\"</code>에 <code>inputmode=\"numeric\"</code>을 붙여 받고, <b>보낼 때 숫자로</b> 바꿉니다"),
   ]),
   backend=rows([
-    ("돈은 정수로", "원 단위 금액은 <b>소수점 없는 정수</b>로 다룹니다. 부동소수점으로 계산하면 0.1 + 0.2 같은 간단한 덧셈도 정확히 맞지 않기 때문입니다."),
-    ("반올림을 한곳에서", "화면과 서버가 각자 반올림하면 <b>합계가 서로 어긋나므로</b>, 반올림을 어디서 할지 정해 둡니다."),
-    ("단위를 함께 보낸다", "<code>{\"amount\":1284000,\"currency\":\"KRW\"}</code>처럼 금액과 단위를 함께 보냅니다. 숫자만 오면 화면이 단위를 <b>짐작</b>해야 합니다."),
-    ("집계값의 자릿수", "평균이나 비율은 소수점 <b>몇 자리까지</b> 보낼지 정해 둡니다. 정하지 않으면 화면마다 다른 자릿수로 보입니다."),
-    ("큰 수", "자바스크립트는 아주 큰 정수를 <b>정확히 다루지 못하므로</b> ID는 문자열로 보냅니다."),
+    ("돈은 정수로 다루기", "원 단위 금액은 <b>소수점 없는 정수</b>로 다룹니다. 부동소수점으로 계산하면 0.1 + 0.2 같은 간단한 덧셈도 정확히 맞지 않기 때문입니다."),
+    ("반올림은 한곳에서 하기", "화면과 서버가 각자 반올림하면 <b>합계가 서로 어긋나므로</b>, 반올림을 어디서 할지 정해 둡니다."),
+    ("단위를 함께 보내기", "<code>{\"amount\":1284000,\"currency\":\"KRW\"}</code>처럼 금액과 단위를 함께 보냅니다. 숫자만 오면 화면이 단위를 <b>짐작</b>해야 합니다."),
+    ("집계값의 자릿수 정하기", "평균이나 비율은 소수점 <b>몇 자리까지</b> 보낼지 정해 둡니다. 정하지 않으면 화면마다 다른 자릿수로 보입니다."),
+    ("큰 정수 ID는 문자열로 보내기", "자바스크립트는 아주 큰 정수를 <b>정확히 다루지 못하므로</b> ID는 문자열로 보냅니다."),
   ]),
   plat_lede="큰 수를 <b>만·억으로 끊는 것</b>은 한국어 화면에서만 따로 챙겨야 하는 일입니다.",
   plats=plats([

@@ -44,12 +44,12 @@ D = dict(
   axes=axis_table("토스트"),
   oneline="토스트인지 아닌지는 <b>저절로 사라지느냐</b>로 가릅니다. 사용자가 닫지 않아도 없어지기 때문에 <b>못 읽고 지나가도 되는 말만</b> 담을 수 있습니다.",
   states=states([
-    (mini(trigger(), bars="486", label="토스트가 없는 목록 화면"), "없음", "트리거만 보입니다"),
-    (mini(toast("지웠습니다", "", "transform:translateY(8px);opacity:.45"), bars="486", label="토스트가 올라오는 중"), "진입 중", "0.2초 동안 아래에서 떠오릅니다"),
-    (mini(toast("“회고 초안”을 지웠습니다"), bars="486", label="토스트가 표시된 모습"), "표시", "메시지와 되돌리기 버튼 하나를 보여 줍니다"),
-    (mini('<div class="mini__toast" style="bottom:22px;left:30px;opacity:.5">앞서 지운 것</div>' + toast("또 지웠습니다"), bars="486", label="토스트 두 개가 쌓인 모습"), "쌓임", "여러 건을 큐로 다루고, 보통 3개까지만 쌓습니다"),
-    (mini(toast("“회고 초안”을 지웠습니다") + '<div style="position:absolute;right:8px;bottom:30px;font-size:8px;color:var(--accent);font-weight:800">⏸ 멈춤</div>', bars="486", label="마우스를 올려 타이머가 멈춘 모습"), "타이머 정지", "마우스를 올려 두는 동안에는 사라지지 않아서 읽을 시간이 생깁니다"),
-    (mini(toast("지웠습니다", "되돌리기", "opacity:.35;transform:translateY(5px)"), bars="486", label="토스트가 사라지는 중"), "퇴장", "토스트가 사라진 뒤에도 작업 결과는 화면에 남아 있어야 합니다"),
+    (mini(trigger(), bars="486", label="토스트가 없는 목록 화면"), "토스트가 없을 때", "트리거만 보입니다"),
+    (mini(toast("지웠습니다", "", "transform:translateY(8px);opacity:.45"), bars="486", label="토스트가 올라오는 중"), "아래에서 떠오르는 중", "0.2초 동안 아래에서 떠오릅니다"),
+    (mini(toast("“회고 초안”을 지웠습니다"), bars="486", label="토스트가 표시된 모습"), "화면에 떠 있을 때", "메시지와 되돌리기 버튼 하나를 보여 줍니다"),
+    (mini('<div class="mini__toast" style="bottom:22px;left:30px;opacity:.5">앞서 지운 것</div>' + toast("또 지웠습니다"), bars="486", label="토스트 두 개가 쌓인 모습"), "여러 개가 쌓였을 때", "여러 건을 큐로 다루고, 보통 3개까지만 쌓습니다"),
+    (mini(toast("“회고 초안”을 지웠습니다") + '<div style="position:absolute;right:8px;bottom:30px;font-size:8px;color:var(--accent);font-weight:800">⏸ 멈춤</div>', bars="486", label="마우스를 올려 타이머가 멈춘 모습"), "마우스를 올려 타이머를 멈췄을 때", "마우스를 올려 두는 동안에는 사라지지 않아서 읽을 시간이 생깁니다"),
+    (mini(toast("지웠습니다", "되돌리기", "opacity:.35;transform:translateY(5px)"), bars="486", label="토스트가 사라지는 중"), "사라지는 중", "토스트가 사라진 뒤에도 작업 결과는 화면에 남아 있어야 합니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -75,14 +75,14 @@ D = dict(
     "긴 글이나 링크 여러 개를 담을 때. 다 읽기 전에 사라집니다",
     "중요한 정보를 토스트<b>에만</b> 담을 때. 토스트가 사라지면 다시 볼 방법이 없습니다",
   ]),
-  instead='꼭 읽어야 하면 <a href="../index.html#toc">인라인 얼럿·배너</a>, 답을 받아야 하면 <a href="modal.html">모달</a>, 누른 것 옆에 붙어야 하면 <a href="popover.html">팝오버</a>. <em style="color:var(--fg-muted);font-style:normal">(링크 없는 것은 아직 안 쓴 항목)</em>',
+  instead='사용자가 꼭 읽어야 하는 내용이면 <a href="inlinealert.html">인라인 얼럿</a>이나 <a href="banner.html">배너</a>를 쓰고, 사용자의 답을 받아야 하면 <a href="modal.html">모달</a>을 씁니다. 누른 요소 바로 옆에 붙어 떠야 하면 <a href="popover.html">팝오버</a>가 맞습니다.',
   cases=cases([
     (mini(toast("“회고 초안”을 지웠습니다"), bars="684", tall=False, label="되돌리기 토스트 재현"),
-     "되돌리기 토스트", "토스트를 가장 쓸모 있게 쓰는 형태입니다. 되돌릴 수 있으니 확인 모달을 띄우지 않아도 됩니다"),
+     "지운 뒤 되돌리기 버튼 주기", "토스트를 가장 쓸모 있게 쓰는 형태입니다. 되돌릴 수 있으니 확인 모달을 띄우지 않아도 됩니다"),
     (mini('<div class="mini__toast" style="bottom:22px;left:30px;opacity:.55">2건 지웠습니다</div>' + toast("3건 지웠습니다"), bars="684", tall=False, label="쌓인 토스트 재현"),
-     "쌓임", "같은 작업을 빠르게 여러 번 하면 토스트가 포개지므로 쌓이는 개수에 상한을 둡니다"),
+     "빠르게 여러 번 지워 쌓일 때", "같은 작업을 빠르게 여러 번 하면 토스트가 포개지므로 쌓이는 개수에 상한을 둡니다"),
     (mini('<div class="mini__toast" style="background:#7a211c;left:18px"><span style="color:#ffb3ae">✕</span> 보내지 못했습니다<b style="color:#ffd2ce">다시 시도</b></div>', bars="684", tall=False, label="에러 토스트 재현"),
-     "에러", "실패를 알리는 토스트는 저절로 사라지지 않게 두는 편이 안전합니다"),
+     "보내기 실패 알리기", "실패를 알리는 토스트는 저절로 사라지지 않게 두는 편이 안전합니다"),
   ]),
   code_lede="토스트는 포커스를 가져가지 않습니다. 포커스가 옮겨 가면 사용자가 하던 입력이 끊기기 때문입니다. 그 대신 스크린 리더에게는 <b>라이브 리전</b>으로 새 토스트를 알립니다.",
   code='''<span class="c">&lt;!-- 토스트가 쌓이는 자리는 페이지에 하나만 둔다 --&gt;</span>
@@ -100,15 +100,15 @@ undoBtn.addEventListener(<span class="s">'click'</span>, () =&gt; cancelPendingD
   keys=kbd([
     ("<kbd>Tab</kbd>", "토스트가 떠도 포커스가 토스트로 <b>곧바로 옮겨 가지 않습니다</b>. 포커스를 가져가면 하던 입력이 끊기기 때문입니다"),
     ("<kbd>Esc</kbd>", "포커스가 토스트 안에 있을 때 토스트를 닫습니다"),
-    ("마우스 올림", "타이머가 멈추고, 마우스를 치우면 남은 시간부터 다시 줄어듭니다"),
-    ("스크린 리더", "<code>aria-live=\"polite\"</code>로 두면 읽던 말을 끊지 않고 이어서 읽습니다. <code>assertive</code>는 읽던 말을 끊기 때문에 에러에만 씁니다"),
-    ("표시 시간", "글자 수가 많을수록 길게 띄웁니다. 액션이 붙으면 최소 5초, 짧은 글도 4초 아래로는 내리지 않습니다"),
+    ("마우스를 올렸을 때", "타이머가 멈추고, 마우스를 치우면 남은 시간부터 다시 줄어듭니다"),
+    ("스크린 리더로 읽을 때", "<code>aria-live=\"polite\"</code>로 두면 읽던 말을 끊지 않고 이어서 읽습니다. <code>assertive</code>는 읽던 말을 끊기 때문에 에러에만 씁니다"),
+    ("화면에 띄워 두는 시간", "글자 수가 많을수록 길게 띄웁니다. 액션이 붙으면 최소 5초, 짧은 글도 4초 아래로는 내리지 않습니다"),
   ]),
   backend=rows([
-    ("토스트 = fire-and-forget", "토스트는 보내고 나면 잊는 이벤트처럼 사용자가 받았는지 확인하지 않습니다. 그래서 <b>꼭 전달돼야 하는 내용은 토스트에 담으면 안 됩니다.</b>"),
-    ("되돌리기 = 지연 커밋", "화면에는 '지웠습니다'라고 띄우지만 <b>실제 삭제는 5초 미룹니다.</b> soft delete와 보류 큐를 함께 쓰는 방식으로, 되돌리기를 누르면 큐에서 빼고 누르지 않으면 5초 뒤에 커밋합니다."),
-    ("쌓임 = 큐", "짧은 시간에 여러 건이 들어오면 토스트가 포개지기 때문에 상한(보통 3개)과 오래된 것을 밀어내는 정책이 필요합니다. 로그에 레이트 리밋을 거는 것과 같은 문제입니다."),
-    ("at-most-once", "토스트는 '최대 한 번' 전달하는 방식이라서 사용자가 못 읽어도 다시 띄우지 않습니다. 반드시 읽혀야 하는 내용이라면 배너나 목록처럼 화면에 남는 통로를 따로 둡니다."),
+    ("보내고 잊는 fire-and-forget 이벤트와 같음", "토스트는 보내고 나면 잊는 이벤트처럼 사용자가 받았는지 확인하지 않습니다. 그래서 <b>꼭 전달돼야 하는 내용은 토스트에 담으면 안 됩니다.</b>"),
+    ("되돌리기는 커밋을 미루는 방식", "화면에는 '지웠습니다'라고 띄우지만 <b>실제 삭제는 5초 미룹니다.</b> soft delete와 보류 큐를 함께 쓰는 방식으로, 되돌리기를 누르면 큐에서 빼고 누르지 않으면 5초 뒤에 커밋합니다."),
+    ("쌓이는 토스트는 큐로 관리", "짧은 시간에 여러 건이 들어오면 토스트가 포개지기 때문에 상한(보통 3개)과 오래된 것을 밀어내는 정책이 필요합니다. 로그에 레이트 리밋을 거는 것과 같은 문제입니다."),
+    ("최대 한 번만 전달하는 at-most-once", "토스트는 '최대 한 번' 전달하는 방식이라서 사용자가 못 읽어도 다시 띄우지 않습니다. 반드시 읽혀야 하는 내용이라면 배너나 목록처럼 화면에 남는 통로를 따로 둡니다."),
   ]),
   plat_lede="토스트는 플랫폼마다 부르는 이름이 특히 많이 엇갈리는 부품입니다. 안드로이드에서는 '토스트'가 아예 다른 것을 가리킵니다.",
   plats=plats([
@@ -124,8 +124,8 @@ undoBtn.addEventListener(<span class="s">'click'</span>, () =&gt; cancelPendingD
   ]),
   plat_note="안드로이드에는 <b>Toast라는 다른 API</b>가 따로 있는데, 액션을 붙일 수 없고 포커스도 받지 못하는 더 단순한 시스템 알림입니다. 그래서 안드로이드 개발자에게 \"토스트에 되돌리기 붙여 주세요\"라고 하면 \"그건 스낵바\"라는 답이 돌아옵니다.",
   siblings=siblings("toast"),
-  related='''        <li><span class="na"><b>라이브 리전</b><em>12부</em></span></li>
-        <li><span class="na"><b>되돌리기</b><em>8부</em></span></li>
+  related='''        <li><a href="live.html"><b>라이브 리전</b><em>12부</em></a></li>
+        <li><a href="undo.html"><b>되돌리기</b><em>8부</em></a></li>
         <li><span class="na"><b>확인 요청의 수준</b><em>8부</em></span></li>
         <li><span class="na"><b>에러 4단</b><em>8부</em></span></li>''',
 )

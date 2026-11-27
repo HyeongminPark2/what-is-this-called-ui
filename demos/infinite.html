@@ -22,7 +22,7 @@
 
 <div class="bar">
   <b>피드</b>
-  <label><input type="checkbox" id="manual"> 저절로 말고 <b>더 보기</b> 버튼으로</label>
+  <label><input type="checkbox" id="manual"> 저절로 불러오지 않고 <b>더 보기</b> 버튼으로 불러오기</label>
 </div>
 
 <div class="scroll" id="scroll">
@@ -67,7 +67,7 @@
   }
 
   function sync() {
-    cnt.textContent = loaded + '건 불러옴' + (loaded < TOTAL ? ' · 전부 몇 건인지는 모름' : ' · 끝');
+    cnt.textContent = loaded + '건 불러옴' + (loaded < TOTAL ? ' · 전체 건수는 알 수 없음' : ' · 목록 끝에 닿음');
     if (loaded >= TOTAL) {
       tail.innerHTML = '<p class="nav-end">여기까지입니다</p>';
       note.textContent = '';

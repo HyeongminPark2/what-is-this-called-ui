@@ -5,12 +5,12 @@ from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
-                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">핫스팟 — 눌리는 자리. 이것만 이어 둔다</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">나머지는 그림 — 눌러도 아무 일이 없다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">이어 둔 화면 수 — 세 장 · 다섯 장</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">데이터는 고정 — 치거나 고를 수 없다</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">무엇을 시험하려는 흐름인가</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">진짜 같을수록 “다 된 거죠?”가 돌아온다</div>
+                  <div class="pin-out" data-pin="1" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">핫스팟은 눌리는 자리로, 여기만 이어 둠</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">나머지는 그림이라 눌러도 아무 일이 없음</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">이어 두는 화면은 세 장이나 다섯 장 정도</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">데이터가 고정되어 치거나 고를 수 없음</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">무엇을 시험하려는 흐름인지 먼저 정함</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">진짜 같을수록 “다 된 거죠?”라는 말이 나옴</div>
                 </div>
               </div>'''
 
@@ -39,26 +39,26 @@ D = dict(
   ]),
   axes=ax("프로토타입"),
   oneline="프로토타입으로 <b>무엇을 물어보려는지</b>를 먼저 정하세요. 물을 것이 정해지면 이어 둘 화면도 몇 장으로 줄어듭니다.",
-  s4_title="무엇이 되고 무엇이 안 되나", s4_hint="그림과 만들어진 것 사이",
+  s4_title="프로토타입으로 할 수 있는 것과 없는 것", s4_hint="그림과 실제 제품의 차이",
   states=states([
     (card('<span style="font-size:9px">목록 → 상세 → 내보내기</span>'
-          '<span style="font-size:8.5px;color:var(--accent)">세 장을 이어 뒀다</span>', "152px", "흐름을 시험할 수 있다", True),
-     "되는 것 — 흐름", "화면을 넘겨 가다 <b>막히는 곳</b>을 찾을 수 있습니다"),
+          '<span style="font-size:8.5px;color:var(--accent)">세 장을 이어 둠</span>', "152px", "흐름을 시험할 수 있음", True),
+     "화면 흐름 시험하기", "화면을 넘겨 가다 <b>막히는 곳</b>을 찾을 수 있습니다"),
     (card('<span style="font-size:9px">버튼을 누르면 다음 화면</span>'
-          '<span style="font-size:8.5px;color:var(--accent)">연결해 둔 자리만</span>', "152px", "이어 둔 자리만 눌린다", True),
-     "되는 것 — 자리", "사용자가 <b>어디를 누르는지</b> 알 수 있습니다"),
+          '<span style="font-size:8.5px;color:var(--accent)">연결해 둔 자리만</span>', "152px", "이어 둔 자리만 눌림", True),
+     "누르는 자리 알아보기", "사용자가 <b>어디를 누르는지</b> 알 수 있습니다"),
     (card('<span style="font-size:9px">검색칸에 글자 치기</span>'
-          '<span style="font-size:8.5px;color:var(--danger)">칠 수 없다 — 그림이다</span>', "152px", "입력은 대부분 안 된다", False),
-     "안 되는 것 — 입력", "<b>데이터가 고정</b>되어 있어서 글자를 치거나 값을 고를 수 없습니다"),
+          '<span style="font-size:8.5px;color:var(--danger)">그림이라 칠 수 없음</span>', "152px", "입력은 대부분 안 됨", False),
+     "글자 입력은 할 수 없음", "<b>데이터가 고정</b>되어 있어서 글자를 치거나 값을 고를 수 없습니다"),
     (card('<span style="font-size:9px">목록이 128건일 때</span>'
-          '<span style="font-size:8.5px;color:var(--danger)">세 줄만 그려 뒀다</span>', "152px", "진짜 데이터가 아니다", False),
-     "안 되는 것 — 양", "그려 둔 몇 줄만 있으니 데이터가 <b>많아지면 어떻게 되는지</b> 알 수 없습니다"),
+          '<span style="font-size:8.5px;color:var(--danger)">세 줄만 그려 둠</span>', "152px", "진짜 데이터가 아님", False),
+     "데이터 양은 볼 수 없음", "그려 둔 몇 줄만 있으니 데이터가 <b>많아지면 어떻게 되는지</b> 알 수 없습니다"),
     (card('<span style="font-size:9px">응답이 2초 걸릴 때</span>'
-          '<span style="font-size:8.5px;color:var(--danger)">바로 넘어간다</span>', "152px", "기다림이 없다", False),
-     "안 되는 것 — 속도", "누르면 바로 넘어가므로 <b>로딩이나 실패</b> 화면이 보이지 않습니다"),
+          '<span style="font-size:8.5px;color:var(--danger)">바로 넘어감</span>', "152px", "기다리는 시간이 없음", False),
+     "속도는 알 수 없음", "누르면 바로 넘어가므로 <b>로딩이나 실패</b> 화면이 보이지 않습니다"),
     (card('<span style="font-size:9px;font-weight:700">“거의 다 된 거죠?”</span>'
-          '<span style="font-size:8.5px;color:var(--fg-muted)">가장 자주 돌아오는 말</span>', "152px", "진짜 같을수록 심해진다", False),
-     "오해", "다 만든 것으로 오해하지 않도록 <b>그림이라는 표시를 붙여</b> 둡니다"),
+          '<span style="font-size:8.5px;color:var(--fg-muted)">가장 자주 돌아오는 말</span>', "152px", "진짜 같을수록 오해가 커짐", False),
+     "완성품으로 오해받기 쉬움", "다 만든 것으로 오해하지 않도록 <b>그림이라는 표시를 붙여</b> 둡니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -66,8 +66,8 @@ D = dict(
     ("나머지", "그림", "핫스팟 밖은 그림이라 눌러도 <b>아무 일이 일어나지 않습니다</b>"),
     ("이어 둔 화면", "세 장 · 다섯 장", "물어볼 흐름에 필요한 화면만 잇고, 전부 이을 필요는 없습니다"),
     ("데이터", "고정", "값이 고정되어 있어서 글자를 치거나 항목을 고를 수 없습니다"),
-    ("목적", "무엇을 묻나", "<b>무엇을 물을지 정해야</b> 화면을 몇 장 만들지가 정해집니다"),
-    ("오해", "다 된 줄 안다", "그림이라는 <b>표시</b>를 화면에 붙여 둡니다"),
+    ("목적", "무엇을 물을지", "<b>무엇을 물을지 정해야</b> 화면을 몇 장 만들지가 정해집니다"),
+    ("오해", "완성품으로 오해", "그림이라는 <b>표시</b>를 화면에 붙여 둡니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <b>프로토타입은 무언가를 물어보려고 만드는 그림입니다.</b>
@@ -76,6 +76,7 @@ D = dict(
           반대로 '전부 눌리게' 만들려고 하면 만드는 데만 몇 주가 걸리고,
           그렇게 공들인 뒤에는 <b>고치기가 아까워서</b> 시험 결과를 반영하지 못하게 됩니다.
           그래서 시험이 끝나면 <b>버려도 아깝지 않을 만큼만 만드는 것</b>이 요령입니다.</p>''',
+  dont_title="프로토타입을 만들거나 보여 줄 때 피할 것",
   do=ul([
     "사용자가 어디서 막히는지 <b>흐름</b>을 시험할 때",
     "사람을 앉혀 놓고 <b>써 보게</b> 할 때",
@@ -87,17 +88,18 @@ D = dict(
     "완성물처럼 보고할 때. 그림이라는 <b>표시</b>를 붙여 둡니다",
     "프로토타입을 보고 <b>성능</b>을 이야기할 때",
   ]),
-  instead='그림 단계는 <a href="wireframe.html">와이어프레임과 목업과 시안</a>, 넘기는 일은 <a href="handoff.html">핸드오프</a>, 진짜 움직임은 <a href="easing.html">이징</a>·<a href="duration.html">지속 시간</a>.',
+  instead_title="관련 주제는 다른 항목에서 다룹니다",
+  instead='그림의 단계 구분은 <a href="wireframe.html">와이어프레임과 목업과 시안</a>에서, 시안을 개발 쪽에 넘기는 일은 <a href="handoff.html">핸드오프</a>에서 다룹니다. 실제 화면의 움직임은 <a href="easing.html">이징</a>과 <a href="duration.html">지속 시간</a> 항목을 보세요.',
   cases=cases([
     (card('<span style="font-size:9px">가입 → 인증 → 첫 화면</span>'
-          '<span style="font-size:8.5px;color:var(--accent)">어디서 멈추나</span>', "150px"),
-     "흐름 시험", "<a href=\"onboarding.html\">온보딩</a> 흐름을 시험할 때 가장 쓸모가 큽니다"),
+          '<span style="font-size:8.5px;color:var(--accent)">어디서 멈추는지</span>', "150px"),
+     "가입 흐름에서 막히는 곳 찾기", "<a href=\"onboarding.html\">온보딩</a> 흐름을 시험할 때 가장 쓸모가 큽니다"),
     (card('<span style="font-size:9px">시트가 올라오는 모습</span>'
-          '<span style="font-size:8.5px;color:var(--accent)">말로는 설명이 안 된다</span>', "150px"),
+          '<span style="font-size:8.5px;color:var(--accent)">말로는 설명하기 어려움</span>', "150px"),
      "움직임 보여 주기", "<a href=\"enterexit.html\">진입과 퇴장</a> 움직임을 디자이너와 개발자가 합의할 때 씁니다"),
     (card('<span style="font-size:9px;color:var(--danger)">전 화면 전부 연결</span>'
-          '<span style="font-size:8.5px;color:var(--fg-muted)">만드는 데 몇 주</span>', "150px"),
-     "과한 경우", "<b>버려도 아깝지 않을 만큼</b>만 만듭니다"),
+          '<span style="font-size:8.5px;color:var(--fg-muted)">만드는 데만 몇 주 걸림</span>', "150px"),
+     "모든 화면을 이어 버린 경우", "<b>버려도 아깝지 않을 만큼</b>만 만듭니다"),
   ]),
   s8_title="주고받을 때의 규칙", s8_hint="되는 것과 안 되는 것 적기",
   code_lede="프로토타입을 넘길 때는 그 안에서 <b>무엇이 되고 무엇이 안 되는지</b>를 함께 적어 보냅니다.",
@@ -113,29 +115,30 @@ D = dict(
 
 <span class="c"># 화면 안에도 한 줄 적어 두면 오해가 준다</span>
 &lt;<span class="t">div</span> <span class="a">class</span>=<span class="s">"proto-stamp"</span>&gt;이 화면은 그림입니다&lt;/<span class="t">div</span>&gt;''',
+  keys_heads="<th>지킬 규칙</th><th>그렇게 하는 이유</th>",
   keys=kbd([
-    ("꼬리표를 <b>화면 안에</b>", "말로만 전하면 그 말을 듣지 못한 다음 사람은 모릅니다"),
-    ("안 되는 것을 <b>목록으로</b>", "'대충 눌러 보세요'라고 넘기는 것보다 오해가 훨씬 적습니다"),
-    ("키보드는 거의 안 된다", "핫스팟은 <b>마우스로 누르는 자리</b>라서 Tab으로 옮겨 다닐 수 없으므로 접근성 시험에는 쓸 수 없습니다"),
-    ("스크린 리더로도 못 본다", "그림이라서 스크린 리더가 <b>읽을 것이 없습니다</b>. 접근성은 코드 단계에서 확인합니다"),
-    ("진짜 글을 넣는다", "Lorem ipsum 같은 가짜 글로는 글이 길어질 때 생기는 <b>길이 문제</b>가 드러나지 않습니다"),
-    ("버전", "시험한 날짜와 그때 <b>무엇을 물었는지</b>를 함께 남깁니다"),
+    ("꼬리표는 <b>화면 안에</b> 붙이기", "말로만 전하면 그 말을 듣지 못한 다음 사람은 모릅니다"),
+    ("안 되는 것을 <b>목록으로</b> 적기", "'대충 눌러 보세요'라고 넘기는 것보다 오해가 훨씬 적습니다"),
+    ("키보드로는 거의 쓸 수 없음", "핫스팟은 <b>마우스로 누르는 자리</b>라서 Tab으로 옮겨 다닐 수 없으므로 접근성 시험에는 쓸 수 없습니다"),
+    ("스크린 리더로도 읽을 수 없음", "그림이라서 스크린 리더가 <b>읽을 것이 없습니다</b>. 접근성은 코드 단계에서 확인합니다"),
+    ("진짜 글 넣기", "Lorem ipsum 같은 가짜 글로는 글이 길어질 때 생기는 <b>길이 문제</b>가 드러나지 않습니다"),
+    ("시험 기록 남기기", "시험한 날짜와 그때 <b>무엇을 물었는지</b>를 함께 남깁니다"),
   ]),
   backend=rows([
-    ("프로토타입은 성능을 안 보여 준다", "프로토타입에서 누르자마자 다음 화면이 뜨는 것은 미리 그려 둔 <b>그림을 바꿔 보여 주기 때문</b>입니다. 실제 서비스에서는 그 사이에 서버와 요청이 오가므로 기다리는 시간이 생깁니다."),
-    ("없는 화면이 드러난다", "화면을 흐름대로 이어 보면 <b>로딩, 빈 화면, 실패</b> 화면이 빠져 있다는 것이 드러납니다. 빈 화면에 넣을 글은 <a href=\"emptytext.html\">빈 상태 문구</a> 항목을 참고하세요."),
-    ("데이터 모양을 미리 본다", "화면마다 어떤 값이 필요한지가 흐름을 따라가며 드러나기 때문에, 프로토타입 단계에서 <b>API 설계</b>를 미리 시작할 수 있습니다."),
+    ("프로토타입으로는 알 수 없는 성능", "프로토타입에서 누르자마자 다음 화면이 뜨는 것은 미리 그려 둔 <b>그림을 바꿔 보여 주기 때문</b>입니다. 실제 서비스에서는 그 사이에 서버와 요청이 오가므로 기다리는 시간이 생깁니다."),
+    ("빠진 화면 찾아내기", "화면을 흐름대로 이어 보면 <b>로딩, 빈 화면, 실패</b> 화면이 빠져 있다는 것이 드러납니다. 빈 화면에 넣을 글은 <a href=\"emptytext.html\">빈 상태 문구</a> 항목을 참고하세요."),
+    ("필요한 데이터 미리 정리하기", "화면마다 어떤 값이 필요한지가 흐름을 따라가며 드러나기 때문에, 프로토타입 단계에서 <b>API 설계</b>를 미리 시작할 수 있습니다."),
   ]),
   plat_lede="플랫폼마다 만드는 도구는 달라도, 프로토타입이 화면을 <b>이어 둔 그림</b>이라는 점은 같습니다.",
   plats=plats([
-    ("웹", "HTML 로도 만든다",
-     card('<span style="font-size:8.5px">세 화면을 링크로</span>', "110px"),
+    ("웹", "HTML로 만들기도 함",
+     card('<span style="font-size:8.5px">세 화면을 링크로 이음</span>', "110px"),
      "HTML 코드로 만들면 <b>실제 입력과 반응형 배치</b>까지 확인할 수 있지만, 들인 품이 큰 만큼 버리기도 아까워집니다."),
-    ("iOS", "같은 방식",
+    ("iOS", "웹과 같은 방식",
      '''              <div class="phone" role="img" aria-label="iOS 프로토타입 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:30px;height:10px;border:1px dashed var(--accent);border-radius:3px"></div></div></div>''',
      "실제 기기에 올려 보면 버튼의 <b>터치 크기</b>가 충분한지 드러납니다(<a href=\"touchtarget.html\">터치 타깃</a> 참고)."),
-    ("안드로이드", "같은 방식",
+    ("안드로이드", "웹과 같은 방식",
      '''              <div class="phone" role="img" aria-label="안드로이드 프로토타입 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:30px;height:10px;border:1px dashed var(--accent);border-radius:3px"></div></div></div>''',
      "기기마다 화면 폭이 달라서 <b>한 가지 폭으로만</b> 만든 프로토타입은 다른 기기에서 금방 어긋납니다."),

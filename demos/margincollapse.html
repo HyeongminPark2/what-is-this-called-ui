@@ -18,12 +18,12 @@
 <body>
 <div class="bar">
   <b>여백 붕괴</b>
-  <label>붙이는 법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
-    <option value="margin">margin 으로 (붕괴한다)</option>
-    <option value="flex">flex + gap</option>
-    <option value="padding">부모에 padding</option>
+  <label>여백을 주는 방법 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="margin">margin으로 주기 (붕괴함)</option>
+    <option value="flex">flex 안에서 margin 주기</option>
+    <option value="padding">부모에 padding 주기</option>
   </select></label>
-  <label>아래 24 / 위 16</label>
+  <label>위 상자는 24px, 아래 상자는 16px</label>
 </div>
 
 <div class="pad">
@@ -47,16 +47,16 @@
     var stage = document.getElementById('stage');
     var inner;
     if (k === 'margin') {
-      inner = '<div class="mc__a" style="margin-bottom:24px">위 상자 — margin-bottom: 24px</div>' +
-              '<div class="mc__b" style="margin-top:16px">아래 상자 — margin-top: 16px</div>';
+      inner = '<div class="mc__a" style="margin-bottom:24px">위 상자 (margin-bottom: 24px)</div>' +
+              '<div class="mc__b" style="margin-top:16px">아래 상자 (margin-top: 16px)</div>';
       stage.style.cssText = '';
     } else if (k === 'flex') {
-      inner = '<div class="mc__a" style="margin-bottom:24px">위 상자 — margin-bottom: 24px</div>' +
-              '<div class="mc__b" style="margin-top:16px">아래 상자 — margin-top: 16px</div>';
+      inner = '<div class="mc__a" style="margin-bottom:24px">위 상자 (margin-bottom: 24px)</div>' +
+              '<div class="mc__b" style="margin-top:16px">아래 상자 (margin-top: 16px)</div>';
       stage.style.cssText = 'display:flex;flex-direction:column;';
     } else {
-      inner = '<div class="mc__a" style="margin-bottom:24px">위 상자 — margin-bottom: 24px</div>' +
-              '<div class="mc__b" style="margin-top:16px">아래 상자 — margin-top: 16px</div>';
+      inner = '<div class="mc__a" style="margin-bottom:24px">위 상자 (margin-bottom: 24px)</div>' +
+              '<div class="mc__b" style="margin-top:16px">아래 상자 (margin-top: 16px)</div>';
       stage.style.cssText = 'padding:1px;';
     }
     stage.innerHTML = inner;
@@ -67,15 +67,15 @@
       var gap = Math.round(b.top - a.bottom);
       var r = document.getElementById('read');
       var collapsed = gap < 40;
-      r.innerHTML = '적은 값 24 + 16 = <b>40px</b> · 실제 간격 <b>' + gap + 'px</b>' +
-        (collapsed ? ' <span class="warn">— 겹쳤다</span>' : ' — 겹치지 않았다');
+      r.innerHTML = '적은 값을 더하면 <b>40px</b>이고 실제 간격은 <b>' + gap + 'px</b>입니다.' +
+        (collapsed ? ' <span class="warn">여백이 겹쳤습니다</span>' : ' 여백이 겹치지 않았습니다');
       r.dataset.gap = String(gap);
       r.dataset.collapsed = collapsed ? '1' : '0';
 
       document.getElementById('note').innerHTML = {
-        margin: '<span class="warn">세로 여백이 겹쳐 큰 쪽만 남았습니다</span>. 더한 값이 나오지 않습니다',
+        margin: '<span class="warn">세로 여백이 겹쳐 큰 쪽만 남았습니다</span>. 그래서 두 값을 더한 간격이 나오지 않습니다',
         flex: 'flex 안에서는 여백이 <b>겹치지 않아서</b> 적은 값이 그대로 나옵니다',
-        padding: '부모에 padding이 생기면 <b>붕괴가 멈춥니다</b>. 예고 없이 간격이 바뀌는 원인이 됩니다'
+        padding: '부모에 padding이 생기면 <b>붕괴가 멈추기</b> 때문에, 코드를 건드리지 않은 것 같은데 간격이 바뀌는 원인이 됩니다'
       }[k];
     });
   }

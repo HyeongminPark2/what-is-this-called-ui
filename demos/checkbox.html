@@ -72,8 +72,8 @@
     var on = kids.filter(function (k) { return k.checked; }).length;
     all.checked = on === kids.length;
     all.indeterminate = on > 0 && on < kids.length;   // 세 번째 상태
-    out.innerHTML = '켜진 항목 <b>' + on + ' / ' + kids.length + '</b>' +
-      (all.indeterminate ? ' · 전체 선택은 <b>중간 상태</b>' : '');
+    out.innerHTML = '켜진 항목은 <b>' + kids.length + '개 중 ' + on + '개</b>입니다.' +
+      (all.indeterminate ? ' 일부만 켜져 있어서 전체 선택 칸은 <b>중간 상태</b>입니다.' : '');
   }
   all.addEventListener('change', function () {
     kids.forEach(function (k) { if (!k.disabled) k.checked = all.checked; });

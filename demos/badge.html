@@ -35,14 +35,14 @@
   <section>
     <h4>숫자 배지</h4>
     <div class="row">
-      <span class="u"><span class="bdg-anchor"><span class="ic" aria-hidden="true">✉</span><span class="bdg" id="b-num"></span></span><span class="cap">개수를 말한다</span></span>
-      <span class="u"><span class="bdg-anchor"><span class="ic" aria-hidden="true">🔔</span><span class="bdg bdg--dot" id="b-dot"></span></span><span class="cap">있다/없다만 말한다</span></span>
+      <span class="u"><span class="bdg-anchor"><span class="ic" aria-hidden="true">✉</span><span class="bdg" id="b-num"></span></span><span class="cap">몇 건인지 알림</span></span>
+      <span class="u"><span class="bdg-anchor"><span class="ic" aria-hidden="true">🔔</span><span class="bdg bdg--dot" id="b-dot"></span></span><span class="cap">있는지 없는지만 알림</span></span>
     </div>
-    <p class="read" style="margin:var(--s3) 0 0">스크린 리더가 읽는 말 — <span id="say"></span></p>
+    <p class="read" style="margin:var(--s3) 0 0">스크린 리더가 읽는 말은 <span id="say"></span></p>
   </section>
 
   <section>
-    <h4>라벨 배지 — 상태를 한 낱말로</h4>
+    <h4>상태를 한 낱말로 알리는 라벨 배지</h4>
     <div class="row">
       <span class="bdg bdg--ok" style="height:20px;padding:0 8px">승인됨</span>
       <span class="bdg bdg--warn" style="height:20px;padding:0 8px">검토 중</span>
@@ -53,7 +53,7 @@
   </section>
 
   <section>
-    <h4>목록 안에서</h4>
+    <h4>목록 줄에 붙은 배지</h4>
     <ul class="ui-list" style="max-width:420px">
       <li><span class="li li--two">
         <span class="av av--sm" aria-hidden="true">길동</span>
@@ -91,7 +91,7 @@
     num.textContent = label;
     num.hidden = (n === 0);                 // 0건이면 배지를 없앤다
     dot.hidden = (n === 0);
-    var words = n === 0 ? '읽지 않음 없음' : '읽지 않음 ' + n + '건';
+    var words = n === 0 ? '읽지 않은 메일 없음' : '읽지 않음 ' + n + '건';
     anchorNum.setAttribute('aria-label', '메일 — ' + words);
     anchorDot.setAttribute('aria-label', '알림 — ' + (n === 0 ? '새 알림 없음' : '새 알림 있음'));
     say.textContent = '"' + words + '"' + (n > 99 ? '  (화면에는 99+로 보이지만 읽히는 말은 ' + n + '건)' : '');

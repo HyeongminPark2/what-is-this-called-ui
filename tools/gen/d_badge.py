@@ -22,11 +22,11 @@ ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2)
                       <span style="display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:var(--surface);font-size:15px">✉</span>
                       <span style="position:absolute;top:-6px;right:-8px;min-width:18px;height:18px;padding:0 5px;border-radius:99px;background:var(--danger);color:#fff;font-size:10.5px;font-weight:800;display:grid;place-items:center;line-height:1">3</span>
                     </span>
-                    <span style="font-size:11px;color:var(--fg-muted)">배지는 <b style="color:var(--fg)">혼자 서지 않는다</b> — 늘 무엇에 붙는다</span>
+                    <span style="font-size:11px;color:var(--fg-muted)">배지는 <b style="color:var(--fg)">혼자 놓이지 않고</b> 늘 무언가에 붙음</span>
                   </div>
                   <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">top: -6px;  right: -8px</div>
                   <div class="pin-out" data-pin="3" style="display:flex;align-items:center;gap:9px;font-size:11px;color:var(--fg-muted)">
-                    <span class="bdg" style="height:18px;padding:0 6px;font-size:10px">99+</span><span>세 자리가 되면 이렇게 줄인다</span>
+                    <span class="bdg" style="height:18px;padding:0 6px;font-size:10px">99+</span><span>세 자리가 되면 이렇게 줄임</span>
                   </div>
                   <div class="pin-out" data-pin="4" style="display:flex;align-items:center;gap:9px;font-size:11px;color:var(--fg-muted)">
                     <span class="bdg bdg--ok" style="height:19px;padding:0 8px;font-size:10.5px">승인됨</span><span>한 낱말짜리 라벨 배지</span>
@@ -61,16 +61,16 @@ D = dict(
   ]),
   axes=ax("배지"),
   oneline="배지는 늘 다른 요소에 <b>붙어 있습니다</b>. 따로 떨어져 놓여 있고 누를 수도 있다면 그건 배지가 아니라 <a href=\"chip.html\">칩</a>입니다.",
-  s4_title="갈래", s4_hint="같은 모양이 다른 일을 한다",
+  s4_title="배지의 종류", s4_hint="종류마다 알리는 내용",
   states=states([
     (anchor('<span style="position:absolute;top:-3px;right:-3px;width:9px;height:9px;border-radius:99px;'
             'background:var(--danger);box-shadow:0 0 0 2px var(--bg);display:block"></span>', '🔔'),
-     "점", "새 소식이 <b>있는지 없는지</b>만 알립니다. 개수를 셀 수 없을 때 씁니다"),
-    (anchor(num('3')), "숫자", "몇 건인지 알립니다. <b>개수를 셀 수 있을 때만</b> 씁니다"),
-    (anchor(num('99+')), "넘침", "세 자리 숫자는 <b>99+</b>로 줄입니다. 줄이지 않으면 배지가 길어져 아이콘을 밀어냅니다"),
-    (lab("승인됨", "bdg--ok"), "라벨 — 좋음", "상태를 한 낱말로 보여 줍니다. <b>초록은 처리가 끝난 것</b>을 뜻합니다"),
-    (lab("검토 중", "bdg--warn"), "라벨 — 진행", "아직 결정이 나지 않은 상태입니다"),
-    (lab("거절됨", ""), "라벨 — 나쁨", "<b>색만으로 뜻을 전하지 않습니다</b>. 색이 없어도 글자만으로 상태를 알 수 있습니다"),
+     "있고 없음만 알리는 점", "새 소식이 <b>있는지 없는지</b>만 알립니다. 개수를 셀 수 없을 때 씁니다"),
+    (anchor(num('3')), "건수를 알리는 숫자", "몇 건인지 알립니다. <b>개수를 셀 수 있을 때만</b> 씁니다"),
+    (anchor(num('99+')), "숫자가 세 자리를 넘을 때", "세 자리 숫자는 <b>99+</b>로 줄입니다. 줄이지 않으면 배지가 길어져 아이콘을 밀어냅니다"),
+    (lab("승인됨", "bdg--ok"), "처리가 끝난 상태의 라벨", "상태를 한 낱말로 보여 줍니다. <b>초록은 처리가 끝난 것</b>을 뜻합니다"),
+    (lab("검토 중", "bdg--warn"), "진행 중인 상태의 라벨", "아직 결정이 나지 않은 상태입니다"),
+    (lab("거절됨", ""), "거절된 상태의 라벨", "<b>색만으로 뜻을 전하지 않습니다</b>. 색이 없어도 글자만으로 상태를 알 수 있습니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -95,26 +95,26 @@ D = dict(
     "0건을 '0'으로 보여 줄 때. 알릴 것이 <b>없으면 배지를 없애야</b> 합니다",
     "색만으로 뜻을 전할 때. 빨강과 초록은 색맹인 사람에게 같은 회색으로 보입니다",
   ]),
-  instead='눌러서 거르면 <a href="chip.html">칩</a>, 떠서 알리고 사라지면 <a href="../items/toast.html">토스트</a>, 진행 정도면 <a href="../items/progress.html">프로그레스 바</a>.',
+  instead='눌러서 목록을 걸러야 하면 <a href="chip.html">칩</a>을 쓰고, 잠깐 떠서 알린 뒤 사라져야 하면 <a href="../items/toast.html">토스트</a>를 씁니다. 일이 얼마나 진행됐는지 보여 주려면 <a href="../items/progress.html">프로그레스 바</a>가 맞습니다.',
   cases=cases([
     ('''              <div style="display:flex;gap:18px;align-items:center">''' +
      anchor(num('3'), '✉').replace('              <div style="display:grid;place-items:center">', '<span>').replace('</div>', '</span>') + '''</div>''',
-     "안 읽은 메일", "배지를 가장 흔히 보는 자리로, 아이콘 오른쪽 위에 붙습니다"),
+     "안 읽은 메일 수 알리기", "배지를 가장 흔히 보는 자리로, 아이콘 오른쪽 위에 붙습니다"),
     ('''              <div style="width:100%;max-width:190px;border:1px solid var(--line);border-radius:8px;background:var(--surface);display:flex;align-items:center;gap:7px;padding:8px 9px">
                 <span style="width:22px;height:22px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-size:9px;font-weight:700;display:grid;place-items:center;flex:none">길동</span>
                 <span style="flex:1;min-width:0;font-size:11.5px;font-weight:600">정산 요청 #4821</span>
                 <span class="bdg bdg--warn" style="height:18px;padding:0 7px;font-size:10px;flex:none">검토 중</span>
               </div>''',
-     "줄 끝의 상태", "목록의 각 건이 <b>지금 어느 단계에 있는지</b>를 한 낱말로 보여 줍니다"),
+     "목록 줄 끝에 상태 보여 주기", "목록의 각 건이 <b>지금 어느 단계에 있는지</b>를 한 낱말로 보여 줍니다"),
     ('''              <div style="display:flex;gap:14px;border-bottom:1px solid var(--line);padding-bottom:5px;width:100%;max-width:190px">
                 <span style="font-size:11px;color:var(--accent);font-weight:700;border-bottom:2px solid var(--accent);padding-bottom:4px;margin-bottom:-6px">전체</span>
                 <span style="font-size:11px;color:var(--fg-muted);display:flex;align-items:center;gap:4px">문의
                   <span class="bdg" style="height:15px;min-width:15px;padding:0 4px;font-size:9px">3</span></span>
               </div>''',
-     "탭 위의 숫자", "<b>아직 열어 보지 않은 탭</b>에 몇 건이 있는지 알려 줍니다"),
+     "탭에 새로 온 건수 알리기", "<b>아직 열어 보지 않은 탭</b>에 몇 건이 있는지 알려 줍니다"),
   ]),
   s8_title="최소 마크업과 규칙",
-  keys_heads="<th>규칙</th><th>지켜야 하는 것</th>",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법</th>",
   code_lede="배지에는 따로 정해진 역할(role)이 없습니다. 그래서 스크린 리더가 읽을 말은 배지가 아니라 <b>배지가 붙는 앵커에 적어 두는 것</b>이 중요합니다.",
   code='''&lt;<span class="t">a</span> <span class="a">href</span>=<span class="s">"/inbox"</span> <span class="a">class</span>=<span class="s">"anchor"</span>
    <span class="a">aria-label</span>=<span class="s">"메일 — 읽지 않음 3건"</span>&gt;
@@ -130,18 +130,18 @@ D = dict(
 badge.textContent = n &gt; <span class="a">99</span> ? <span class="s">'99+'</span> : n;
 badge.hidden = (n === <span class="a">0</span>);''',
   keys=kbd([
-    ("앵커에 <code>position: relative</code>", "빠지면 배지가 <b>화면 구석</b>에 가서 붙습니다. 배지 관련 제보 가운데 가장 많습니다"),
-    ("<code>overflow: hidden</code>을 조심", "모서리 밖으로 나간 배지가 <b>잘립니다</b>. 앵커 대신 안쪽 요소가 모서리를 깎도록 바꿉니다"),
-    ("0이면 없앤다", "<code>hidden</code>을 주되, <code>display</code> 값이 <code>hidden</code>보다 우선해서 배지가 그대로 보이지 않는지 확인합니다"),
-    ("99+ 로 줄인다", "배지가 길어지면 앵커를 밀어냅니다. <b>글자 수보다 배지 폭</b>이 늘어나는 것이 문제입니다"),
-    ("말은 앵커가 갖는다", "배지 자체는 <code>aria-hidden</code>으로 숨기고, 읽힐 말은 앵커의 <code>aria-label</code>에 적습니다"),
-    ("실시간이면 <code>aria-live</code>", "숫자가 저절로 바뀌는 자리라면 <code>polite</code>로 알립니다. 다만 너무 자주 바뀌면 스크린 리더가 계속 읽어서 번거롭습니다"),
+    ("앵커에 <code>position: relative</code> 주기", "빠지면 배지가 <b>화면 구석</b>에 가서 붙습니다. 배지 관련 제보 가운데 가장 많습니다"),
+    ("<code>overflow: hidden</code>에 잘리지 않게 하기", "모서리 밖으로 나간 배지가 <b>잘립니다</b>. 앵커 대신 안쪽 요소가 모서리를 깎도록 바꿉니다"),
+    ("0건이면 배지 없애기", "<code>hidden</code>을 주되, <code>display</code> 값이 <code>hidden</code>보다 우선해서 배지가 그대로 보이지 않는지 확인합니다"),
+    ("세 자리 숫자는 99+로 줄이기", "배지가 길어지면 앵커를 밀어냅니다. <b>글자 수보다 배지 폭</b>이 늘어나는 것이 문제입니다"),
+    ("읽힐 말은 앵커에 적기", "배지 자체는 <code>aria-hidden</code>으로 숨기고, 읽힐 말은 앵커의 <code>aria-label</code>에 적습니다"),
+    ("숫자가 저절로 바뀌면 <code>aria-live</code> 쓰기", "숫자가 저절로 바뀌는 자리라면 <code>polite</code>로 알립니다. 다만 너무 자주 바뀌면 스크린 리더가 계속 읽어서 번거롭습니다"),
   ]),
   backend=rows([
-    ("개수는 어디서 오나", "배지 숫자는 보통 <b>개수만 따로 세는 API</b>에서 받습니다. 목록을 모두 받아 화면에서 세면 느리고, 목록이 100건을 넘으면 받은 만큼만 세게 되어 숫자가 틀립니다. 그래서 <code>unread_count</code> 값 하나를 돌려주는 쪽이 낫습니다."),
-    ("99+ 로 줄이는 이유", "화면에 99+까지만 보여 준다면 정확한 수가 필요 없으므로 <b>세는 비용도 줄일 수 있습니다.</b> 'COUNT(*) LIMIT 100' 처럼 100까지만 세고 멈추는 질의가 전체를 세는 질의보다 훨씬 가볍습니다."),
-    ("언제 줄어드나", "읽음 처리와 배지 숫자가 줄어드는 시점 사이에 <b>시차</b>가 생기면 '읽었는데 배지가 안 없어져요'라는 문의가 들어옵니다. 그래서 화면에서 먼저 숫자를 줄이고(<a href=\"../items/optimistic.html\">낙관적 UI</a>) 서버 응답이 오면 그 값으로 맞춥니다."),
-    ("밀어 주기", "웹소켓이나 푸시로 서버가 숫자를 보내 주면 새로고침하지 않아도 배지가 바뀝니다. 다만 변경을 <b>짧은 사이에 연달아 보내면</b> 숫자가 깜빡이는 것처럼 보이므로, 여러 변경을 묶어서 보냅니다."),
+    ("배지 숫자를 받아 오는 곳", "배지 숫자는 보통 <b>개수만 따로 세는 API</b>에서 받습니다. 목록을 모두 받아 화면에서 세면 느리고, 목록이 100건을 넘으면 받은 만큼만 세게 되어 숫자가 틀립니다. 그래서 <code>unread_count</code> 값 하나를 돌려주는 쪽이 낫습니다."),
+    ("99+로 줄이면 가벼워지는 세기", "화면에 99+까지만 보여 준다면 정확한 수가 필요 없으므로 <b>세는 비용도 줄일 수 있습니다.</b> 'COUNT(*) LIMIT 100' 처럼 100까지만 세고 멈추는 질의가 전체를 세는 질의보다 훨씬 가볍습니다."),
+    ("읽은 뒤 숫자가 줄어드는 시점", "읽음 처리와 배지 숫자가 줄어드는 시점 사이에 <b>시차</b>가 생기면 '읽었는데 배지가 안 없어져요'라는 문의가 들어옵니다. 그래서 화면에서 먼저 숫자를 줄이고(<a href=\"../items/optimistic.html\">낙관적 UI</a>) 서버 응답이 오면 그 값으로 맞춥니다."),
+    ("서버가 숫자를 밀어 줄 때", "웹소켓이나 푸시로 서버가 숫자를 보내 주면 새로고침하지 않아도 배지가 바뀝니다. 다만 변경을 <b>짧은 사이에 연달아 보내면</b> 숫자가 깜빡이는 것처럼 보이므로, 여러 변경을 묶어서 보냅니다."),
   ]),
   plat_lede="iOS와 안드로이드에서는 배지가 <b>OS 기능</b>이기도 합니다. 홈 화면의 앱 아이콘 위에 붙는 숫자가 그것입니다.",
   plats=plats([
@@ -170,5 +170,5 @@ badge.hidden = (n === <span class="a">0</span>);''',
   related='''        <li><a href="../items/chip.html"><b>칩</b><em>5부</em></a></li>
         <li><a href="../items/bottomnav.html"><b>바텀 탭바</b><em>7부</em></a></li>
         <li><a href="../items/optimistic.html"><b>낙관적 UI</b><em>8부</em></a></li>
-        <li><span class="na"><b>알림 센터</b><em>13부</em></span></li>''',
+        <li><a href="notifications.html"><b>알림 센터</b><em>13부</em></a></li>''',
 )

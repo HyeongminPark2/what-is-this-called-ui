@@ -3,21 +3,21 @@ from _tx import one, code, txt, mono
 from tmpl import siblings, states, cases, pins, plats, rows, ul, kbd, table
 
 OFF = table(
-  ["쓴 것이 남나", "읽기는 되나", "언제 나가나", "사용자가 아나"],
-  [["쌓아 두기", "<b>남는다</b>", "받아 둔 것은 된다", "연결되면 저절로", "띠로 알린다"],
-   ["못 누르게 막기", "해당 없음", "된다", "다시 눌러야", "<b>단추가 꺼져 있다</b>"],
-   ["그때마다 실패", "<b>사라진다</b>", "된다", "다시 써야", "오류만 뜬다"],
-   ["아무 대비 없음", "사라진다", "<b>안 된다</b>", "—", "화면이 빈다"]],
+  ["끊긴 동안 쓴 내용이 남는가", "끊긴 동안 읽을 수 있는가", "쓴 내용은 언제 서버로 가는가", "사용자가 상황을 알 수 있는가"],
+  [["쌓아 두기", "<b>남음</b>", "받아 둔 것은 읽을 수 있음", "연결되면 저절로 보냄", "띠로 알림"],
+   ["못 누르게 막기", "해당 없음", "읽을 수 있음", "연결된 뒤 다시 눌러야 함", "<b>버튼이 꺼져 있어 알 수 있음</b>"],
+   ["그때마다 실패", "<b>사라짐</b>", "읽을 수 있음", "다시 써서 보내야 함", "오류만 뜸"],
+   ["아무 대비 없음", "사라짐", "<b>읽을 수 없음</b>", "보낼 것이 없음", "빈 화면만 보임"]],
   me="오프라인")
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">끊김 띠 — 화면 꼭대기에 한 줄</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">쓴 것은 쌓아 둔다 — 사라지지 않게</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">쌓인 것이 몇 건인지 보인다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">읽기는 되게 — 받아 둔 것은 보여 준다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--accent)">연결되면 저절로 나가고 알린다</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">그때마다 실패하면 쓴 글이 사라진다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">끊김 띠는 화면 맨 위에 한 줄로</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">쓴 내용은 사라지지 않게 쌓아 둠</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">쌓인 작업이 몇 건인지 보여 줌</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">받아 둔 내용은 계속 읽을 수 있게 둠</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--accent)">연결되면 저절로 보내고 알림</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">그때마다 실패하면 쓴 글이 사라짐</div>
                 </div>
               </div>'''
 
@@ -69,35 +69,35 @@ D = dict(
   ]),
   axes=OFF,
   oneline="오프라인 처리에서는 <b>사용자가 쓴 내용을 절대로 잃지 않게</b> 하는 것이 먼저입니다. 서버로 보내는 일은 연결된 뒤에 해도 됩니다.",
-  s4_title="상태", s4_hint="방식마다 다른, 쓴 내용이 남는지 여부",
+  s4_title="상태", s4_hint="방식에 따라 쓴 내용이 남는지 사라지는지",
   states=states([
-    (scr("● 연결됨", "on", '<span style="display:block;font-size:8px;color:var(--fg-muted)">바로 보낸다</span>',
+    (scr("● 연결됨", "on", '<span style="display:block;font-size:8px;color:var(--fg-muted)">바로 보냄</span>',
          "", "평소", True),
-     "연결됨", "평소처럼 바로 보냅니다"),
-    (scr("● 연결이 끊겼습니다 — 쌓아 뒀다가 보냅니다", "off", q(["메모 1", "메모 2"]), "", "2건이 기다린다", True),
-     "끊김 · 쌓아 둠", "쓴 내용을 쌓아 두므로 <b>사라지지 않습니다</b>"),
+     "연결되어 있을 때", "평소처럼 바로 보냅니다"),
+    (scr("● 연결이 끊겼습니다 — 쌓아 뒀다가 보냅니다", "off", q(["메모 1", "메모 2"]), "", "2건이 기다리는 중", True),
+     "끊긴 동안 쌓아 둘 때", "쓴 내용을 쌓아 두므로 <b>사라지지 않습니다</b>"),
     (scr("● 연결됨 — 쌓인 2건을 보내는 중", "on",
-         '<span style="display:block;font-size:8px;color:var(--fg-muted)">저절로 나간다</span>', "", "복구", True),
-     "다시 연결", "쌓아 둔 작업이 <b>저절로</b> 나갑니다"),
+         '<span style="display:block;font-size:8px;color:var(--fg-muted)">저절로 보냄</span>', "", "복구됨", True),
+     "다시 연결됐을 때", "쌓아 둔 작업이 <b>저절로</b> 나갑니다"),
     (scr("● 연결이 끊겼습니다", "off",
          '<span style="display:block;border:1px solid var(--line);border-radius:4px;padding:2px 6px;'
-         'font-size:7.5px;color:var(--fg-faint);text-align:center">메모 저장 (꺼짐)</span>', "", "아예 못 누른다", None),
-     "막기", "<b>헛수고는 없지만</b> 끊긴 동안에는 쓸 수 없습니다"),
+         'font-size:7.5px;color:var(--fg-faint);text-align:center">메모 저장 (꺼짐)</span>', "", "아예 누를 수 없음", None),
+     "버튼을 막아 둘 때", "<b>헛수고는 없지만</b> 끊긴 동안에는 쓸 수 없습니다"),
     (scr("● 보내지 못했습니다", "err",
-         '<span style="display:block;font-size:8px;color:var(--danger)">쓴 글이 사라졌다</span>', "", "가장 나쁜 쪽", False),
-     "그때마다 실패", "사용자가 <b>쓴 내용을 잃습니다</b>"),
+         '<span style="display:block;font-size:8px;color:var(--danger)">쓴 글이 사라짐</span>', "", "가장 나쁜 방식", False),
+     "누를 때마다 실패할 때", "사용자가 <b>쓴 내용을 잃습니다</b>"),
     (scr("● 연결이 끊겼습니다", "off",
-         '<span style="display:block;font-size:8px">받아 둔 목록은 볼 수 있다</span>', "", "읽기는 된다", True),
-     "읽기", "연결이 <b>끊겨도</b> 받아 둔 목록은 보입니다"),
+         '<span style="display:block;font-size:8px">받아 둔 목록은 볼 수 있음</span>', "", "읽기는 됨", True),
+     "끊긴 동안 읽을 때", "연결이 <b>끊겨도</b> 받아 둔 목록은 보입니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("끊김 띠", "꼭대기 한 줄", "보내기가 <b>왜 안 되는지</b> 알립니다"),
-    ("쌓아 두기", "쓴 것", "쓴 내용이 <b>사라지지 않게</b> 쌓아 둡니다"),
-    ("몇 건인지", "보이기", "보내기를 기다리는 작업이 있다는 것을 알립니다"),
-    ("읽기", "되게 두기", "이미 받아 둔 내용은 보여 줍니다"),
-    ("다시 연결", "저절로", "쌓인 작업을 보낸 뒤 보냈다고 <b>알립니다</b>"),
-    ("그때마다 실패", "가장 나쁨", "누를 때마다 실패하면 <b>쓴 글이 사라집니다</b>"),
+    ("끊김 띠", "맨 위 한 줄", "보내기가 <b>왜 안 되는지</b> 알립니다"),
+    ("쌓아 두기", "쓴 내용", "쓴 내용이 <b>사라지지 않게</b> 쌓아 둡니다"),
+    ("쌓인 건수", "건수 표시", "보내기를 기다리는 작업이 있다는 것을 알립니다"),
+    ("읽기", "끊겨도 허용", "이미 받아 둔 내용은 보여 줍니다"),
+    ("다시 연결", "저절로 보냄", "쌓인 작업을 보낸 뒤 보냈다고 <b>알립니다</b>"),
+    ("그때마다 실패", "쓴 글이 사라짐", "누를 때마다 실패하면 <b>쓴 글이 사라집니다</b>"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           <b>연결이 있는지 없는지</b>는 생각보다 판단하기 어렵습니다.
@@ -119,14 +119,15 @@ D = dict(
     "연결이 끊겼다고 <b>읽기까지</b> 막을 때",
     "쌓인 작업을 <b>순서 없이</b> 한꺼번에 보낼 때",
   ]),
-  instead='연결은 되는데 실패하면 <a href="retry.html">재시도</a>, 실패 화면은 <a href="error.html">에러 상태</a>, 기다리는 표시는 <a href="spinner.html">스피너</a>, 문구는 <a href="errortext.html">오류 문구</a>.',
+  instead='연결은 되어 있는데 요청이 실패하는 경우는 <a href="retry.html">재시도</a> 항목에서, 실패 화면은 <a href="error.html">에러 상태</a> 항목에서 다룹니다. 기다리는 동안 보여 줄 표시는 <a href="spinner.html">스피너</a>에, 실패를 알리는 문구는 <a href="errortext.html">오류 문구</a>에 정리되어 있습니다.',
+  do_title="연결이 끊겼을 때 지킬 것", dont_title="연결이 끊겼을 때 피할 것", instead_title="함께 보면 좋은 항목",
   cases=cases([
-    (scr("● 연결이 끊겼습니다", "off", q(["메모 1"]), "", "", True), "메모 앱", "끊긴 동안 쓴 메모를 <b>쌓아 둡니다</b>"),
+    (scr("● 연결이 끊겼습니다", "off", q(["메모 1"]), "", "", True), "끊긴 동안 쓴 메모 쌓아 두기", "끊긴 동안 쓴 메모를 <b>쌓아 둡니다</b>"),
     (scr("", "on", '<span style="display:block;font-size:8px">받아 둔 목록 12건</span>', "", "", True),
-     "목록 보기", "연결이 <b>끊겨도</b> 받아 둔 목록을 읽을 수 있습니다"),
+     "끊긴 동안 받아 둔 목록 읽기", "연결이 <b>끊겨도</b> 받아 둔 목록을 읽을 수 있습니다"),
     (scr("● 연결이 끊겨 결제를 시작할 수 없습니다", "off",
          '<span style="display:block;font-size:7.5px;color:var(--fg-muted)">연결되면 다시 눌러 주세요</span>', "", "", None),
-     "결제", "결제는 <b>쌓아 두었다가 나중에 보내면 안 되는</b> 일입니다"),
+     "결제는 쌓아 두지 않고 막기", "결제는 <b>쌓아 두었다가 나중에 보내면 안 되는</b> 일입니다"),
   ]),
   s8_title="최소 코드와 규칙", s8_hint="구현할 때 지킬 최소 규칙",
   code_lede="요청이 실패하면 그것을 신호로 삼아 작업을 쌓아 두고, 연결되면 <b>순서대로</b> 보냅니다.",
@@ -152,17 +153,17 @@ D = dict(
 });''',
   keys=kbd([
     ("<code>role=\"status\"</code>", "연결 끊김과 복구를 <b>스크린 리더로도</b> 알립니다"),
-    ("단추 잠금", "버튼을 막는다면 <b>왜 꺼졌는지</b>도 함께 적습니다"),
+    ("버튼을 막을 때", "버튼을 막는다면 <b>왜 꺼졌는지</b>도 함께 적습니다"),
     ("<code>online</code>·<code>offline</code>", "브라우저가 보내 주는 신호지만 <b>정확하지는 않습니다</b>"),
     ("<code>navigator.onLine</code>", "'랜선이 꽂혔다'는 것만 알 뿐 <b>인터넷이 실제로 되는지는 모릅니다</b>"),
-    ("서비스 워커", "탭이 닫혀도 쌓인 작업을 <b>나중에</b> 보낼 수 있게 해 줍니다"),
-    ("확인하는 법", "개발자 도구에서 네트워크를 <b>Offline</b>으로 바꾸고 직접 써 봅니다"),
+    ("서비스 워커를 쓸 때", "탭이 닫혀도 쌓인 작업을 <b>나중에</b> 보낼 수 있게 해 줍니다"),
+    ("확인하는 방법", "개발자 도구에서 네트워크를 <b>Offline</b>으로 바꾸고 직접 써 봅니다"),
   ]),
   backend=rows([
-    ("멱등 키", "쌓아 둔 작업을 보내다 보면 같은 요청이 <b>두 번 가는 일</b>이 생기는데, 멱등 키가 있으면 서버가 한 번만 처리합니다."),
-    ("차례", "작업에 <code>created_at</code>이나 순번이 있어야 <b>만든 뒤 고친</b> 순서가 지켜집니다."),
-    ("충돌", "끊긴 동안 다른 사람이 같은 항목을 고쳤다면 <b>어느 쪽 변경을 남길지</b> 정해야 합니다."),
-    ("읽기 캐시", "목록 응답에 <code>ETag</code>가 있으면 <b>바뀐 것만</b> 받아 올 수 있습니다."),
+    ("멱등 키로 중복 전송 막기", "쌓아 둔 작업을 보내다 보면 같은 요청이 <b>두 번 가는 일</b>이 생기는데, 멱등 키가 있으면 서버가 한 번만 처리합니다."),
+    ("쌓인 작업의 순서 지키기", "작업에 <code>created_at</code>이나 순번이 있어야 <b>만든 뒤 고친</b> 순서가 지켜집니다."),
+    ("끊긴 동안 생긴 충돌 정리하기", "끊긴 동안 다른 사람이 같은 항목을 고쳤다면 <b>어느 쪽 변경을 남길지</b> 정해야 합니다."),
+    ("읽기 캐시를 바뀐 것만 갱신하기", "목록 응답에 <code>ETag</code>가 있으면 <b>바뀐 것만</b> 받아 올 수 있습니다."),
   ]),
   plat_lede="오프라인 대비는 웹보다 <b>네이티브 앱 쪽이 훨씬 잘 갖춰져</b> 있습니다.",
   plats=plats([

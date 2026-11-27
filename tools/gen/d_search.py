@@ -20,10 +20,10 @@ MARK = '<b style="background:var(--warn-soft);border-radius:2px;padding:0 1px">�
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="max-width:220px">''' + field('모란').strip() + '''</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">입력이 멈추고 300ms — 그제야 보낸다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">늦게 온 '모'의 답이 '모란'의 답을 덮는다</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">입력이 멈추고 300ms 뒤에야 보냄</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">늦게 온 '모'의 답이 '모란'의 답을 덮어씀</div>
                   <div class="pin-out" data-pin="4" style="max-width:220px">''' + res(['<b style="background:var(--warn-soft)">모란</b>상회', '<b style="background:var(--warn-soft)">모란</b>동 지점']).strip() + '''</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">role="status" — "3건 찾음"</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">role="status"로 "3건 찾음" 알림</div>
                   <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">?q=%EB%AA%A8%EB%9E%80</div>
                 </div>
               </div>'''
@@ -55,17 +55,17 @@ D = dict(
   oneline="검색에서 가장 중요한 일은 <b>지금 입력한 글자와 지금 보이는 결과를 서로 맞게 유지하는 것</b>입니다. 둘이 어긋나면 사용자는 화면의 결과가 어떤 글자로 찾은 것인지 알 수 없어서 결과를 믿지 못하게 됩니다.",
   s4_title="상태", s4_hint="여섯 가지 상태를 모두 만들어야 합니다",
   states=states([
-    (box(field('가맹점 이름이나 번호', True)), "비었을 때", "<b>무엇으로 찾을 수 있는지</b> 알려 줍니다"),
+    (box(field('가맹점 이름이나 번호', True)), "입력칸이 비었을 때", "<b>무엇으로 찾을 수 있는지</b> 알려 줍니다"),
     (box(field('모') + res(['<span class="skl" style="height:8px;width:60%;display:block"></span>', '<span class="skl" style="height:8px;width:45%;display:block"></span>'])),
-     "찾는 중", "<b>이전 결과를 지우지 않습니다.</b> 지웠다가 새 결과를 그리면 화면이 깜빡입니다"),
+     "결과를 찾는 중", "<b>이전 결과를 지우지 않습니다.</b> 지웠다가 새 결과를 그리면 화면이 깜빡입니다"),
     (box(field('모란') + res([MARK + '상회', MARK + '동 지점'])),
-     "결과 있음", "<b>일치한 글자를 강조</b>해서 각 결과가 왜 검색되었는지 보여 줍니다"),
+     "결과가 있을 때", "<b>일치한 글자를 강조</b>해서 각 결과가 왜 검색되었는지 보여 줍니다"),
     (box(field('모란닭강정') + '<div style="margin-top:4px;border:1px dashed var(--line);border-radius:6px;padding:10px 8px;text-align:center;font-size:9.5px;color:var(--fg-muted)">\'모란닭강정\'에 맞는 것이 없습니다<br><span style="color:var(--accent)">\'모란\'으로 다시 찾기</span></div>'),
-     "빈 결과", "<b>입력한 글자를 그대로 적고</b>, 다르게 찾아볼 방법을 제안합니다"),
+     "맞는 결과가 없을 때", "<b>입력한 글자를 그대로 적고</b>, 다르게 찾아볼 방법을 제안합니다"),
     (box(field('모란') + '<div style="margin-top:4px;border:1px solid var(--danger);border-radius:6px;padding:8px;font-size:9.5px;color:var(--danger)">잠시 문제가 있었습니다 · <span style="text-decoration:underline">다시 시도</span></div>'),
-     "실패", "요청이 실패했을 때는 빈 결과와 <b>다르게</b> 보여야 합니다"),
+     "요청이 실패했을 때", "요청이 실패했을 때는 빈 결과와 <b>다르게</b> 보여야 합니다"),
     (box(field('모란 ✕') + res(['최근: 모란상회', '최근: 한빛아웃도어'])),
-     "최근 기록", "입력을 지우는 버튼(<b>✕</b>)과 <b>최근 검색어</b>를 함께 둡니다"),
+     "최근 검색어를 보여 줄 때", "입력을 지우는 버튼(<b>✕</b>)과 <b>최근 검색어</b>를 함께 둡니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -93,16 +93,16 @@ D = dict(
     "글자를 칠 때마다 요청을 보낼 때. <b>디바운스</b>를 겁니다",
     "찾는 동안 이전 결과를 지울 때. 화면만 깜빡이고 얻는 것이 없습니다",
   ]),
-  instead='고를 값이 정해져 있으면 <a href="filter.html">필터</a>, 값 하나를 고르는 입력이면 <a href="../items/select.html">셀렉트</a>, 기능을 찾는 것이면 명령 팔레트를 씁니다.',
+  instead='고를 값이 미리 정해져 있으면 <a href="filter.html">필터</a>를 쓰고, 값 하나를 골라 넣는 입력이면 <a href="../items/select.html">셀렉트</a>가 맞습니다. 데이터가 아니라 기능을 찾게 하려면 명령 팔레트를 둡니다.',
   cases=cases([
     (box(field('모란') + res([MARK + '상회', MARK + '동 지점']), "150px"),
-     "자동완성", "글자를 치는 대로 후보가 뜨고, <b>후보를 하나 고르면 끝납니다</b>"),
+     "자동완성으로 후보 하나 고르기", "글자를 치는 대로 후보가 뜨고, <b>후보를 하나 고르면 끝납니다</b>"),
     (box(field('모란') + '<div style="margin-top:4px;font-size:9.5px;color:var(--fg-muted)">3건 · 관련도순</div>' + res([MARK + '상회 · 승인됨']), "150px"),
-     "결과 목록", "<b>결과 건수와 정렬 순서</b>를 적고, 검색어를 주소에 담습니다"),
+     "결과 목록 화면 보여 주기", "<b>결과 건수와 정렬 순서</b>를 적고, 검색어를 주소에 담습니다"),
     (box('<div style="border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:6px"><div style="font-size:9px;color:var(--fg-muted);margin-bottom:3px">⌘K</div><div style="font-size:10px">정산 내보내기</div><div style="font-size:10px;color:var(--fg-muted)">가맹점 추가</div></div>', "150px"),
-     "명령 팔레트", "데이터가 아니라 <b>기능</b>을 찾는 도구라서 데이터 검색과는 성격이 다릅니다"),
+     "명령 팔레트로 기능 찾기", "데이터가 아니라 <b>기능</b>을 찾는 도구라서 데이터 검색과는 성격이 다릅니다"),
   ]),
-  s8_title="최소 마크업과 키보드", s8_hint="검색이 꼭 갖출 것",
+  s8_title="최소 마크업과 키보드", s8_hint="검색을 만들 때 꼭 갖출 것",
   code_lede="입력칸에는 레이블을, 결과 개수에는 <code>role=\"status\"</code>를 답니다.",
   code='''&lt;<span class="t">label</span> <span class="a">for</span>=<span class="s">"q"</span> <span class="a">class</span>=<span class="s">"sr-only"</span>&gt;가맹점 검색&lt;/<span class="t">label</span>&gt;
 &lt;<span class="t">input</span> <span class="a">id</span>=<span class="s">"q"</span> <span class="a">type</span>=<span class="s">"search"</span> <span class="a">placeholder</span>=<span class="s">"가맹점 이름이나 번호"</span>&gt;
@@ -120,18 +120,18 @@ D = dict(
 }''',
   keys=kbd([
     ("<code>type=\"search\"</code>", "폰 키보드의 입력 키가 '검색'으로 바뀌고, 브라우저가 ✕ 버튼을 붙여 줍니다"),
-    ("레이블을 붙인다", "<b>플레이스홀더는 레이블을 대신하지 못합니다.</b> 글자를 치면 사라지기 때문에 무엇을 입력하는 칸인지 잊게 됩니다"),
+    ("입력칸에 레이블 붙이기", "<b>플레이스홀더는 레이블을 대신하지 못합니다.</b> 글자를 치면 사라지기 때문에 무엇을 입력하는 칸인지 잊게 됩니다"),
     ("<kbd>Esc</kbd>", "후보 목록을 닫거나 입력한 글자를 지웁니다. 두 번 누르면 칸을 비웁니다"),
     ("<kbd>↑</kbd><kbd>↓</kbd>", "후보가 떠 있으면 후보 사이를 오르내립니다. <code>aria-activedescendant</code>를 써서 <b>포커스는 입력칸에 둔 채</b> 움직입니다"),
     ("<code>role=\"status\"</code>", "'3건 찾음'처럼 결과 개수를 알립니다. 목록만 바뀌면 화면을 보지 않는 사람은 결과가 바뀐 것을 알 수 없습니다"),
     ("<code>&lt;mark&gt;</code>", "일치한 글자를 표시합니다. 색만으로 구분하지 않습니다"),
   ]),
   backend=rows([
-    ("<code>LIKE '%모란%'</code>는 색인을 못 쓴다", "검색어 앞에 <code>%</code>가 붙으면 색인을 쓰지 못해 테이블 전체를 훑습니다. 그래서 건수가 늘어나는 만큼 검색도 느려집니다."),
-    ("한국어는 조각내기가 다르다", "'모란상회'를 '모란'으로 찾으려면 글자를 <b>형태소</b>나 <b>n-gram</b> 단위로 쪼개 색인해야 합니다. 띄어쓰기를 기준으로 쪼개면 '모란상회'가 한 덩어리로 색인되어 '모란'으로는 찾을 수 없습니다."),
-    ("빈 질의를 막는다", "검색어가 한두 자이면 거의 모든 데이터가 결과로 나옵니다. 그래서 <b>두 자 이상</b>일 때부터 요청을 보내거나, 서버에서 짧은 검색어를 거릅니다."),
-    ("요청이 몰린다", "디바운스를 걸지 않으면 한 사람이 10자를 칠 때 요청이 10번 옵니다. 같은 검색어 요청이 몰릴 때를 대비해 <b>서버에도</b> 짧은 캐시를 둡니다."),
-    ("순위", "'관련도순'으로 정렬하려면 따로 할 일이 많습니다. 검색어가 어느 필드의 어디에서 일치했는지 따져 점수를 매겨야 하는데, 이 단계부터는 데이터베이스만으로 버거워 검색 엔진이 필요해집니다."),
+    ("<code>LIKE '%모란%'</code>가 색인을 못 쓰는 문제", "검색어 앞에 <code>%</code>가 붙으면 색인을 쓰지 못해 테이블 전체를 훑습니다. 그래서 건수가 늘어나는 만큼 검색도 느려집니다."),
+    ("한국어 검색어를 쪼개 색인하는 방법", "'모란상회'를 '모란'으로 찾으려면 글자를 <b>형태소</b>나 <b>n-gram</b> 단위로 쪼개 색인해야 합니다. 띄어쓰기를 기준으로 쪼개면 '모란상회'가 한 덩어리로 색인되어 '모란'으로는 찾을 수 없습니다."),
+    ("너무 짧은 검색어 막기", "검색어가 한두 자이면 거의 모든 데이터가 결과로 나옵니다. 그래서 <b>두 자 이상</b>일 때부터 요청을 보내거나, 서버에서 짧은 검색어를 거릅니다."),
+    ("같은 검색 요청이 몰릴 때", "디바운스를 걸지 않으면 한 사람이 10자를 칠 때 요청이 10번 옵니다. 같은 검색어 요청이 몰릴 때를 대비해 <b>서버에도</b> 짧은 캐시를 둡니다."),
+    ("관련도순으로 순위 매기기", "'관련도순'으로 정렬하려면 따로 할 일이 많습니다. 검색어가 어느 필드의 어디에서 일치했는지 따져 점수를 매겨야 하는데, 이 단계부터는 데이터베이스만으로 버거워 검색 엔진이 필요해집니다."),
   ]),
   plat_lede="세 플랫폼 모두 검색칸을 <b>둥근 입력칸에 돋보기를 붙인 모양</b>으로 만듭니다.",
   plats=plats([

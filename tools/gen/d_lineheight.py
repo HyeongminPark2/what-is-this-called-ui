@@ -16,8 +16,8 @@ ANAT = '''              <div class="anat--wide" style="background:var(--bg);bord
                   <div class="pin-out" data-pin="1" style="max-width:240px;border:1px dashed var(--line-strong);border-radius:6px;padding:9px;background:var(--surface);background-image:repeating-linear-gradient(to bottom,color-mix(in srgb,var(--accent) 16%,transparent) 0 1px,transparent 1px 24px);background-position:0 9px">
                     <p style="margin:0;font-size:13px;line-height:24px;max-width:none">행간은 글줄 사이의 거리입니다. 한글은 받침이 있어 글자가 아래로 길기 때문에 영문과 같은 값을 쓰면 답답해 보입니다.</p>
                   </div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">line-height: 1.8   — 배수로 적는다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">line-height: 28px   — 못 박으면 글자가 커졌을 때 겹친다</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">line-height: 1.8   배수로 적은 값</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">line-height: 28px   고정값이라 글자가 커지면 줄이 겹침</div>
                   <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">줄 높이 − 글자 크기 = 실제 틈</div>
                   <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">제목 1.2~1.3 · 본문 1.6~1.8</div>
                   <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">한글은 영문 기준보다 한 단계 넓게</div>
@@ -49,20 +49,20 @@ D = dict(
   ]),
   axes=ax("행간"),
   oneline="행간은 <b>단위 없이 배수로</b> 적습니다. 그래야 글자 크기가 바뀌어도 줄 높이가 같은 비율로 따라 바뀝니다.",
-  s4_title="값", s4_hint="같은 글, 다른 행간",
+  s4_title="행간 값에 따른 차이", s4_hint="같은 글을 행간만 바꿔 본 모습",
   states=states([
-    (lh(1.0, "1.0", "줄이 엉긴다"), "1.0", "윗줄과 아랫줄이 <b>거의 닿아서</b> 읽기 어렵습니다"),
-    (lh(1.3, "1.3", "제목용"), "1.3", "<b>큰 글자</b>에 맞는 값입니다. 본문에 쓰면 줄이 빽빽해 보입니다"),
-    (lh(1.7, "1.7", "본문용"), "1.7", "<b>한글 본문의 기본값</b>으로, 영문 기준보다 한 단계 넓습니다"),
-    (lh(2.4, "2.4", "흩어진다"), "2.4", "줄 사이가 너무 벌어져 <b>한 문단으로 읽히지 않습니다</b>"),
-    (lh(1.7, "1.7 · 10px", "작은 글자", 9.5), "작은 글자", "글자가 작을수록 <b>더 넓게</b> 잡습니다. 같은 배수라도 글자가 작으면 실제 틈이 좁기 때문입니다"),
-    (lh(1.3, "1.3 · 20px", "큰 글자", 18), "큰 글자", "글자가 클수록 <b>좁게</b> 잡습니다. 넓게 두면 제목 줄 사이가 벌어져 한 덩어리로 보이지 않습니다"),
+    (lh(1.0, "1.0", "줄이 거의 닿음"), "1.0으로 너무 좁을 때", "윗줄과 아랫줄이 <b>거의 닿아서</b> 읽기 어렵습니다"),
+    (lh(1.3, "1.3", "제목용"), "1.3으로 제목에 맞출 때", "<b>큰 글자</b>에 맞는 값입니다. 본문에 쓰면 줄이 빽빽해 보입니다"),
+    (lh(1.7, "1.7", "본문용"), "1.7로 본문에 맞출 때", "<b>한글 본문의 기본값</b>으로, 영문 기준보다 한 단계 넓습니다"),
+    (lh(2.4, "2.4", "줄이 흩어져 보임"), "2.4로 너무 넓을 때", "줄 사이가 너무 벌어져 <b>한 문단으로 읽히지 않습니다</b>"),
+    (lh(1.7, "1.7 · 10px", "작은 글자", 9.5), "글자가 작을 때", "글자가 작을수록 <b>더 넓게</b> 잡습니다. 같은 배수라도 글자가 작으면 실제 틈이 좁기 때문입니다"),
+    (lh(1.3, "1.3 · 20px", "큰 글자", 18), "글자가 클 때", "글자가 클수록 <b>좁게</b> 잡습니다. 넓게 두면 제목 줄 사이가 벌어져 한 덩어리로 보이지 않습니다"),
   ]),
   anat=ANAT,
   pins=pins([
     ("문단", "paragraph", "행간을 적용하는 단위입니다. 줄 격자를 겹쳐 보면 각 줄이 어느 높이에 놓이는지 보입니다"),
     ("배수로 적기", "line-height: 1.8", "<b>단위 없이</b> 적습니다. 그러면 글자 크기가 바뀔 때 줄 높이도 따라 바뀝니다"),
-    ("못 박기", "line-height: 28px", "글자만 커지고 줄 높이는 그대로라 <b>줄이 겹칩니다.</b> 그래서 쓰지 않습니다"),
+    ("고정값으로 적기", "line-height: 28px", "글자만 커지고 줄 높이는 그대로라 <b>줄이 겹칩니다.</b> 그래서 쓰지 않습니다"),
     ("실제 틈", "line-height − font-size", "눈에 보이는 줄 사이 빈 공간입니다. 같은 배수라도 <b>글자가 작으면 틈도 좁습니다</b>"),
     ("범위", "1.2~1.8", "제목은 1.2~1.3, 본문은 1.6~1.8을 씁니다. <b>글자가 크면 좁게, 작으면 넓게</b> 잡습니다"),
     ("한글 보정", "+0.1~0.2", "한글은 받침 때문에 글자가 아래로 길어서, 영문 기준보다 <b>한 단계 더</b> 넓힙니다"),
@@ -82,18 +82,19 @@ D = dict(
     "행간을 늘려 문단을 나눌 때. 문단 사이는 <code>margin</code>으로 띄웁니다",
     "버튼이나 한 줄짜리 라벨에 1.8을 줄 때. 글은 한 줄인데 <b>상자만 커집니다</b>",
   ]),
-  instead='글자 크기 단과 함께 묶으려면 <a href="../items/typescale.html">타입 스케일</a>, 줄바꿈은 <a href="hangul.html">한글 조판</a>, 문단 사이는 <a href="../items/spacing.html">간격 체계</a>.',
+  instead_title="행간과 이어지는 주제를 다루는 항목",
+  instead='글자 크기 단계와 행간을 한 묶음으로 정하려면 <a href="../items/typescale.html">타입 스케일</a>을 봅니다. 줄을 어디서 바꾸는지는 <a href="hangul.html">한글 조판</a>에서, 문단 사이를 띄우는 값은 <a href="../items/spacing.html">간격 체계</a>에서 다룹니다.',
   cases=cases([
-    (lh(1.75, "본문 1.75", "", 11.5, "180px"), "읽는 글", "가장 많이 쓰는 값으로, <b>한글은 1.7~1.8</b>을 씁니다"),
-    (lh(1.3, "제목 1.3", "", 16, "180px"), "제목", "큰 글자는 행간을 좁게 잡아서 여러 줄이 <b>한 덩어리로 보이게</b> 합니다"),
+    (lh(1.75, "본문 1.75", "", 11.5, "180px"), "긴 글을 읽는 본문", "가장 많이 쓰는 값으로, <b>한글은 1.7~1.8</b>을 씁니다"),
+    (lh(1.3, "제목 1.3", "", 16, "180px"), "여러 줄 제목을 한 덩어리로 보이기", "큰 글자는 행간을 좁게 잡아서 여러 줄이 <b>한 덩어리로 보이게</b> 합니다"),
     ('''              <div style="width:100%;max-width:180px;display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;border-radius:7px;padding:9px 14px;font-size:12px;font-weight:700;line-height:1.2">
                 저장하기
               </div>
               <div style="font-family:var(--mono);font-size:10px;color:var(--fg-muted);margin-top:6px;text-align:center">line-height: 1.2</div>''',
-     "버튼", "한 줄짜리 글은 행간을 <b>좁게</b> 잡습니다. 넓히면 버튼 상자만 커집니다"),
+     "한 줄짜리 버튼 글자", "한 줄짜리 글은 행간을 <b>좁게</b> 잡습니다. 넓히면 버튼 상자만 커집니다"),
   ]),
   s8_title="최소 코드와 규칙", s8_hint="행간을 적는 규칙",
-  keys_heads="<th>규칙</th><th>지켜야 하는 것</th>",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법</th>",
   code_lede="행간은 단위 없는 숫자 하나로 적습니다. 이것만 지키면 나머지는 자리마다 알맞은 범위를 고르는 일입니다.",
   code='''<span class="t">body</span> { <span class="a">line-height</span>: <span class="a">1.7</span>; }   <span class="c">/* 단위 없이 적으면 비율이 내려간다 */</span>
 
@@ -109,18 +110,18 @@ D = dict(
 <span class="c">/* 이렇게 쓰지 않는다. 자식에서 줄이 겹친다 */</span>
 <span class="t">body</span> { <span class="a">line-height</span>: <span class="a">1.5em</span>; }''',
   keys=kbd([
-    ("단위 없이 적는다", "<code>1.7</code>처럼 적습니다. <code>em</code>이나 <code>px</code>을 붙이면 <b>자식에서 줄이 겹칩니다</b>"),
-    ("크면 좁게, 작으면 넓게", "제목은 1.2~1.3, 본문은 1.6~1.8로 두고, 아주 작은 글은 더 넓게 잡습니다"),
-    ("한글은 한 단계 더", "영문이 1.5에서 편하게 읽히면 한글은 1.7을 씁니다. <b>받침만큼 더</b> 넓히는 것입니다"),
-    ("크기와 묶어 둔다", "토큰에 <code>--text-lg</code>와 <code>--lh-lg</code>를 짝으로 둡니다"),
-    ("한 줄짜리는 1.2", "버튼, 칩, 배지에 씁니다. 넓히면 <b>상자만 커집니다</b>"),
-    ("문단 사이는 margin", "행간을 늘려 문단을 나누려 하면 문단 안의 줄 간격까지 벌어져 <b>행간과 문단 간격이 둘 다 어긋납니다</b>"),
+    ("단위 없이 배수로 적기", "<code>1.7</code>처럼 적습니다. <code>em</code>이나 <code>px</code>을 붙이면 <b>자식에서 줄이 겹칩니다</b>"),
+    ("글자가 크면 좁게, 작으면 넓게 잡기", "제목은 1.2~1.3, 본문은 1.6~1.8로 두고, 아주 작은 글은 더 넓게 잡습니다"),
+    ("한글은 한 단계 더 넓히기", "영문이 1.5에서 편하게 읽히면 한글은 1.7을 씁니다. <b>받침만큼 더</b> 넓히는 것입니다"),
+    ("글자 크기와 짝지어 두기", "토큰에 <code>--text-lg</code>와 <code>--lh-lg</code>를 짝으로 둡니다"),
+    ("한 줄짜리 글은 1.2로", "버튼, 칩, 배지에 씁니다. 넓히면 <b>상자만 커집니다</b>"),
+    ("문단 사이는 margin으로 띄우기", "행간을 늘려 문단을 나누려 하면 문단 안의 줄 간격까지 벌어져 <b>행간과 문단 간격이 둘 다 어긋납니다</b>"),
   ]),
   backend=rows([
-    ("행간은 높이를 바꾼다", "같은 글이라도 행간이 0.2 커지면 목록 한 줄의 높이가 달라집니다. 그래서 <b>가상 스크롤의 줄 높이</b>를 미리 계산해 두었다면 행간을 바꿀 때 그 값도 같이 고쳐야 합니다."),
-    ("줄 수 예측", "'세 줄까지만 보여 주기'를 서버에서 글자 수로 자르면 줄 수가 맞지 않습니다. 줄 수는 <b>폭·글꼴·행간</b>이 함께 정하기 때문에, 화면에서 <a href=\"truncate.html\">말줄임</a>으로 처리합니다."),
-    ("메일 HTML", "메일 클라이언트는 적어 둔 행간을 자기 기본값으로 덮어쓰기도 합니다. 그래서 행간을 <b>인라인 스타일</b>로 적고, 그래도 값이 무시될 수 있다고 보고 만듭니다."),
-    ("PDF·인쇄", "화면용 1.7은 인쇄하면 줄 사이가 성기게 보이기 때문에, 인쇄용 스타일에서는 행간을 <b>조금 좁혀</b> 둡니다."),
+    ("행간에 따라 바뀌는 목록 줄 높이", "같은 글이라도 행간이 0.2 커지면 목록 한 줄의 높이가 달라집니다. 그래서 <b>가상 스크롤의 줄 높이</b>를 미리 계산해 두었다면 행간을 바꿀 때 그 값도 같이 고쳐야 합니다."),
+    ("서버에서 줄 수를 맞추기 어려운 이유", "'세 줄까지만 보여 주기'를 서버에서 글자 수로 자르면 줄 수가 맞지 않습니다. 줄 수는 <b>폭·글꼴·행간</b>이 함께 정하기 때문에, 화면에서 <a href=\"truncate.html\">말줄임</a>으로 처리합니다."),
+    ("메일 HTML에서 행간 적기", "메일 클라이언트는 적어 둔 행간을 자기 기본값으로 덮어쓰기도 합니다. 그래서 행간을 <b>인라인 스타일</b>로 적고, 그래도 값이 무시될 수 있다고 보고 만듭니다."),
+    ("PDF와 인쇄에 쓰는 행간", "화면용 1.7은 인쇄하면 줄 사이가 성기게 보이기 때문에, 인쇄용 스타일에서는 행간을 <b>조금 좁혀</b> 둡니다."),
   ]),
   plat_lede="두 OS는 웹과 달리 <b>줄 간격을 더하는 방식</b>을 쓰기 때문에 계산이 다릅니다.",
   plats=plats([

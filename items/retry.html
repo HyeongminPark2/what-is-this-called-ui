@@ -78,12 +78,12 @@
         <p>요청을 다시 보내는 방법들을 모았습니다. 아래 네 가지를 물어보면 방법마다 차이가 드러납니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>누가 다시 보내나</th><th>간격</th><th>서버에 주는 부담</th><th>언제 쓰나</th></tr></thead>
+          <thead><tr><th></th><th>누가 다시 보내는가</th><th>다시 보내는 간격</th><th>서버에 주는 부담</th><th>언제 쓰는가</th></tr></thead>
           <tbody>
-            <tr><td>바로바로</td><td>기계</td><td><b>거의 없음</b></td><td><b>가장 크다</b></td><td>쓰지 않는다</td></tr>
-            <tr><td>같은 간격</td><td>기계</td><td>1초 · 1초 · 1초</td><td>중간</td><td>짧게 끊길 때</td></tr>
-            <tr class="me"><td><b>지수 백오프</b></td><td>기계</td><td><b>1 · 2 · 4 · 8초</b></td><td><b>작다</b></td><td>거의 늘 이쪽</td></tr>
-            <tr><td>사람이 누르기</td><td><b>사람</b></td><td>사람 마음</td><td>가장 작다</td><td>자동이 실패한 뒤</td></tr>
+            <tr><td>바로바로</td><td>앱이 자동으로</td><td><b>거의 없음</b></td><td><b>가장 큼</b></td><td>쓰지 않음</td></tr>
+            <tr><td>같은 간격</td><td>앱이 자동으로</td><td>1초 · 1초 · 1초</td><td>중간</td><td>연결이 잠깐씩 끊길 때</td></tr>
+            <tr class="me"><td><b>지수 백오프</b></td><td>앱이 자동으로</td><td><b>1 · 2 · 4 · 8초</b></td><td><b>작음</b></td><td>거의 모든 경우</td></tr>
+            <tr><td>사용자가 직접 누르기</td><td><b>사용자</b></td><td>사용자가 누를 때마다</td><td>가장 작음</td><td>자동 재시도가 실패한 뒤</td></tr>
           </tbody>
         </table>
         </div>
@@ -97,39 +97,39 @@
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:3px;align-items:flex-end;height:30px;border-bottom:1px solid var(--line);border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:4px 6px"><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">짧은 시간에 수십 번</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:3px;align-items:flex-end;height:30px;border-bottom:1px solid var(--line);border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:4px 6px"><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:8px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">짧은 시간에 수십 번 보냄</span></div>
             </div>
-            <figcaption>쉬지 않음<span><b>서버 부하를 더 키웁니다</b></span></figcaption>
+            <figcaption>쉬지 않고 다시 보낼 때<span><b>서버 부하를 더 키웁니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:3px;align-items:flex-end;height:30px;border-bottom:1px solid var(--line);border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:4px 6px"><span style="display:block;width:5px;height:10px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:10px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:10px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:10px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:10px;border-radius:1px;background:var(--accent)"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">1초마다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:3px;align-items:flex-end;height:30px;border-bottom:1px solid var(--line);border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:4px 6px"><span style="display:block;width:5px;height:10px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:10px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:10px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:10px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:10px;border-radius:1px;background:var(--accent)"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">1초마다 보냄</span></div>
             </div>
-            <figcaption>같은 간격<span>연결이 잠깐씩 짧게 끊길 때만 씁니다</span></figcaption>
+            <figcaption>같은 간격으로 보낼 때<span>연결이 잠깐씩 짧게 끊길 때만 씁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:3px;align-items:flex-end;height:30px;border-bottom:1px solid var(--line);border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:4px 6px"><span style="display:block;width:5px;height:6px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:11px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:18px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:26px;border-radius:1px;background:var(--accent)"></span></div><span style="font-size:8.5px;color:var(--fg-muted)">1 · 2 · 4초 뒤 성공</span></div>
             </div>
-            <figcaption>지수 백오프<span><b>대부분의 경우</b>에 씁니다</span></figcaption>
+            <figcaption>간격을 두 배씩 늘릴 때<span><b>대부분의 경우</b>에 씁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">사람에게</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8.5px">3번째 시도 중…</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">4초 뒤 다시 시도합니다</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">몇 번째인지, 언제 다시인지</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">사용자에게 보여 줌</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8.5px">3번째 시도 중…</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">4초 뒤 다시 시도합니다</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">몇 번째인지, 언제 다시 보내는지</span></div>
             </div>
-            <figcaption>보여 주기<span>재시도를 <b>사용자 모르게</b> 돌리지 않습니다</span></figcaption>
+            <figcaption>재시도 중임을 보여 줄 때<span>재시도를 <b>사용자 모르게</b> 돌리지 않습니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">끝내 실패</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8.5px;color:var(--danger)">보내지 못했습니다</span><span style="display:block;font-size:8px;color:var(--accent);margin-top:3px">다시 시도 ›</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">사람에게 단추를 넘긴다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">끝내 실패</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8.5px;color:var(--danger)">보내지 못했습니다</span><span style="display:block;font-size:8px;color:var(--accent);margin-top:3px">다시 시도 ›</span></span></div><span style="font-size:8.5px;color:var(--fg-muted)">사용자에게 버튼을 넘김</span></div>
             </div>
-            <figcaption>포기<span>자동 재시도를 멈추고 사용자에게 다시 시도 <b>버튼</b>을 줍니다</span></figcaption>
+            <figcaption>자동 재시도를 멈출 때<span>자동 재시도를 멈추고 사용자에게 다시 시도 <b>버튼</b>을 줍니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--danger)">위험</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--danger)">결제를 세 번 보냈다</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">멱등 키가 없으면 세 번 결제된다</span></span></div></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--danger)">위험</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--danger)">결제를 세 번 보냄</span><span style="display:block;font-size:8px;color:var(--fg-muted);margin-top:2px">멱등 키가 없으면 세 번 결제됨</span></span></div></div>
             </div>
-            <figcaption>멱등하지 않은 요청<span>멱등 키 없이 <b>다시 보내면 안 됩니다</b></span></figcaption>
+            <figcaption>멱등하지 않은 요청을 다시 보낼 때<span>멱등 키 없이 <b>다시 보내면 안 됩니다</b></span></figcaption>
           </figure>
         </div>
       </section>
@@ -141,23 +141,23 @@
             <div class="anat" role="img" aria-label="재시도의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">간격을 두 배씩 — 1 · 2 · 4 · 8초</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">흔들기(jitter) — 다 같이 몰리지 않게</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">최대 횟수 — 다섯 번쯤에서 멈춘다</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">다시 보내도 되는 요청인지 먼저 본다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">사람에게 보여 준다 — 몇 번째, 언제 다시</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--accent)">끝내 실패하면 다시 시도 단추를 준다</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">간격을 1 · 2 · 4 · 8초로 두 배씩 늘림</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">흔들기(jitter)로 요청이 몰리지 않게 함</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">다섯 번쯤 실패하면 자동 재시도를 멈춤</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">다시 보내도 되는 요청인지 먼저 확인함</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">몇 번째 시도인지, 언제 다시 보내는지 보여 줌</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--accent)">끝내 실패하면 다시 시도 버튼을 줌</div>
                 </div>
               </div>
             </div>
           </div>
           <ol class="pin-list">
-            <li><b>간격 <em>두 배씩</em></b><span>1 · 2 · 4 · 8초로 간격을 늘립니다</span></li>
+            <li><b>간격 <em>두 배씩 늘림</em></b><span>1 · 2 · 4 · 8초로 간격을 늘립니다</span></li>
             <li><b>흔들기 <em>무작위 섞기</em></b><span>간격에 무작위 값을 섞어 여러 기기의 요청이 <b>한꺼번에 몰리지</b> 않게 합니다</span></li>
             <li><b>최대 횟수 <em>다섯 번쯤</em></b><span>다섯 번쯤 실패하면 자동 재시도를 멈추고 사용자에게 넘깁니다</span></li>
-            <li><b>다시 보내도 되나 <em>먼저 확인</em></b><span>다시 보내도 되는 요청인지 먼저 확인합니다. <b>결제는 멱등 키 없이 다시 보내면 안 됩니다</b></span></li>
-            <li><b>보여 주기 <em>몇 번째 · 언제</em></b><span>몇 번째 시도인지, 언제 다시 보내는지 보여 줍니다</span></li>
-            <li><b>포기 <em>단추</em></b><span>다시 시도할지는 <b>사용자가</b> 정하게 합니다</span></li>
+            <li><b>다시 보내도 되는지 확인 <em>보내기 전에 확인</em></b><span>다시 보내도 되는 요청인지 먼저 확인합니다. <b>결제는 멱등 키 없이 다시 보내면 안 됩니다</b></span></li>
+            <li><b>진행 상황 표시 <em>몇 번째 시도인지와 다음 시각</em></b><span>몇 번째 시도인지, 언제 다시 보내는지 보여 줍니다</span></li>
+            <li><b>자동 재시도 중단 <em>다시 시도 버튼</em></b><span>다시 시도할지는 <b>사용자가</b> 정하게 합니다</span></li>
           </ol>
         </div>
         <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -175,7 +175,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>재시도를 쓰는 경우</h3>
+            <h3>재시도를 구현할 때 지킬 것</h3>
             <ul>
               <li>재시도를 구현할 때. <b>지수 백오프에 흔들기</b>를 더한 방식을 기본으로 씁니다</li>
               <li>요청을 다시 보내기 전. 다시 보내도 되는 요청인지 <b>먼저</b> 확인합니다</li>
@@ -183,7 +183,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>재시도를 쓰지 않는 경우</h3>
+            <h3>재시도에서 피할 것</h3>
             <ul>
               <li>쉬지 않고 다시 보낼 때. <b>서버 부하를 더 키웁니다</b></li>
               <li>결제나 전송 요청을 <b>멱등 키 없이</b> 다시 보낼 때</li>
@@ -192,7 +192,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>재시도 대신 다른 것을 써야 하는 경우</b> — 연결이 아예 없으면 <a href="offline.html">오프라인</a>, 실패 화면은 <a href="error.html">에러 상태</a>, 기다림 표시는 <a href="spinner.html">스피너</a>, 문구는 <a href="errortext.html">오류 문구</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>함께 보면 좋은 항목</b> — 연결이 아예 없을 때의 처리는 <a href="offline.html">오프라인</a> 항목에서, 실패 화면은 <a href="error.html">에러 상태</a> 항목에서 다룹니다. 기다리는 동안 보여 줄 표시는 <a href="spinner.html">스피너</a>에, 실패를 알리는 문구는 <a href="errortext.html">오류 문구</a>에 정리되어 있습니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -202,19 +202,19 @@
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:flex;gap:3px;align-items:flex-end;height:30px;border-bottom:1px solid var(--line);border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:4px 6px"><span style="display:block;width:5px;height:6px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:11px;border-radius:1px;background:color-mix(in srgb, var(--danger) 45%, transparent)"></span><span style="display:block;width:5px;height:18px;border-radius:1px;background:var(--accent)"></span></div></div>
             </div>
-            <figcaption><b>목록 받기</b>사용자에게 따로 묻지 않고 뒤에서 다시 받아 옵니다</figcaption>
+            <figcaption><b>목록을 뒤에서 다시 받아 오기</b>사용자에게 따로 묻지 않고 뒤에서 다시 받아 옵니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">폼 보내기</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8.5px;color:var(--danger)">보내지 못했습니다</span><span style="display:block;font-size:8px;color:var(--accent);margin-top:3px">다시 시도 ›</span></span></div></div>
             </div>
-            <figcaption><b>폼 보내기</b>다시 보낼지는 <b>사용자에게</b> 맡깁니다</figcaption>
+            <figcaption><b>폼을 다시 보낼지 사용자에게 맡기기</b>다시 보낼지는 <b>사용자에게</b> 맡깁니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:7px;display:grid;gap:4px"><span style="font-size:8px;font-weight:700;color:var(--accent)">결제</span><span style="font-size:10px;line-height:1.55"><span style="display:block;font-size:8px;color:var(--fg-muted)">Idempotency-Key: 9fa3…</span><span style="display:block;font-size:8px;margin-top:2px">두 번 와도 한 번만 처리</span></span></div></div>
             </div>
-            <figcaption><b>결제</b>다시 보낼 때는 반드시 <b>멱등 키</b>를 붙입니다</figcaption>
+            <figcaption><b>결제 요청에 멱등 키 붙이기</b>다시 보낼 때는 반드시 <b>멱등 키</b>를 붙입니다</figcaption>
           </figure>
         </div>
       </section>
@@ -239,14 +239,14 @@
 fetch(<span class="s">'/pay'</span>, { headers: { <span class="s">'Idempotency-Key'</span>: orderKey } });</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td><code>role="status"</code></td><td>'3번째 시도 중'을 <b>스크린 리더로도</b> 알립니다</td></tr>
-            <tr><td>다시 시도 단추</td><td>자동 재시도를 멈춘 뒤에는 <b>초점을 받을 수 있는</b> 다시 시도 버튼을 둡니다</td></tr>
+            <tr><td>다시 시도 버튼을 둘 때</td><td>자동 재시도를 멈춘 뒤에는 <b>초점을 받을 수 있는</b> 다시 시도 버튼을 둡니다</td></tr>
             <tr><td><code>aria-busy</code></td><td>다시 받아 오는 동안 그 자리에 붙입니다</td></tr>
             <tr><td>428 · 429 · 503</td><td><b>다시 보내도 되는</b> 응답 코드입니다</td></tr>
             <tr><td>400 · 401 · 404</td><td>다시 보내도 <b>똑같이 실패</b>하므로 재시도하지 않습니다</td></tr>
-            <tr><td>확인하는 법</td><td>네트워크를 끊었다 다시 켠 뒤 요청을 <b>몇 번 보냈는지</b> 셉니다</td></tr>
+            <tr><td>확인하는 방법</td><td>네트워크를 끊었다 다시 켠 뒤 요청을 <b>몇 번 보냈는지</b> 셉니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -257,10 +257,10 @@ fetch(<span class="s">'/pay'</span>, { headers: { <span class="s">'Idempotency-K
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th><code>Retry-After</code></th><td>서버가 이 헤더로 <b>언제 다시 보내라</b>고 알려 주면 화면에서 간격을 짐작할 필요가 없습니다.</td></tr>
-            <tr><th>멱등 키</th><td>서버는 같은 키가 붙은 요청을 두 번 받으면 다시 처리하지 않고 <b>처음 결과</b>를 그대로 돌려줍니다.</td></tr>
-            <tr><th>어떤 오류인지</th><td><code>429</code>(요청이 너무 잦음)는 기다렸다가 다시 보내면 되지만 <code>400</code>(잘못된 요청)은 다시 보내도 실패하므로, 두 오류는 <b>전혀 다르게 대응</b>해야 합니다.</td></tr>
-            <tr><th>서킷 브레이커</th><td>실패가 연달아 쌓이면 <b>잠시 요청 자체를 끊어서</b> 서버가 복구될 시간을 줍니다.</td></tr>
+            <tr><th><code>Retry-After</code> 헤더로 간격 알려 주기</th><td>서버가 이 헤더로 <b>언제 다시 보내라</b>고 알려 주면 화면에서 간격을 짐작할 필요가 없습니다.</td></tr>
+            <tr><th>멱등 키로 중복 처리 막기</th><td>서버는 같은 키가 붙은 요청을 두 번 받으면 다시 처리하지 않고 <b>처음 결과</b>를 그대로 돌려줍니다.</td></tr>
+            <tr><th>오류 종류에 따라 다르게 대응하기</th><td><code>429</code>(요청이 너무 잦음)는 기다렸다가 다시 보내면 되지만 <code>400</code>(잘못된 요청)은 다시 보내도 실패하므로, 두 오류는 <b>전혀 다르게 대응</b>해야 합니다.</td></tr>
+            <tr><th>서킷 브레이커로 요청 잠시 끊기</th><td>실패가 연달아 쌓이면 <b>잠시 요청 자체를 끊어서</b> 서버가 복구될 시간을 줍니다.</td></tr>
           </tbody>
         </table>
         </div>

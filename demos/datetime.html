@@ -26,13 +26,13 @@
 
 <div class="bar">
   <b>날짜와 시간 쓰기</b>
-  <label>얼마나 지났나 <input type="range" id="ago" class="ui-range" min="0" max="8" step="1" value="2" style="width:160px"> <span class="ruler" id="agov"></span></label>
+  <label>지난 시간 <input type="range" id="ago" class="ui-range" min="0" max="8" step="1" value="2" style="width:160px"> <span class="ruler" id="agov"></span></label>
 </div>
 
 <div class="pad">
   <p class="ruler" id="base"></p>
   <div class="scroll-x"><table class="dt">
-    <thead><tr><th>쓰는 법</th><th>보이는 모습</th><th>맞는 자리</th></tr></thead>
+    <thead><tr><th>표기 방법</th><th>보이는 모습</th><th>어울리는 자리</th></tr></thead>
     <tbody id="tbl"></tbody>
   </table></div>
   <p class="ruler" id="verdict"></p>
@@ -97,10 +97,10 @@
 
     var ROWS = [
       ['상대 시간', rel(ms), days < 7, '방금 일어난 일 · 알림 · 댓글'],
-      ['이번 해 생략', absShort + ' ' + clock, days >= 7 && days < 320, '올해 안의 기록 · 목록'],
+      ['올해는 해를 빼고 적기', absShort + ' ' + clock, days >= 7 && days < 320, '올해 안의 기록 · 목록'],
       ['해까지 적기', abs + ' ' + clock, days >= 320, '해를 넘긴 것 · 계약 · 영수증'],
-      ['기계용 ISO', iso, false, '<code>datetime</code> 속성 · API · 정렬 키'],
-      ['숫자만', iso.slice(0, 10).replace(/-/g, '.'), false, '표 안처럼 자리가 좁을 때']
+      ['기계용 ISO 형식', iso, false, '<code>datetime</code> 속성 · API · 정렬 키'],
+      ['숫자로만 적기', iso.slice(0, 10).replace(/-/g, '.'), false, '표 안처럼 자리가 좁을 때']
     ];
 
     document.getElementById('tbl').innerHTML = ROWS.map(function (r) {
@@ -111,7 +111,7 @@
     var v = document.getElementById('verdict');
     v.innerHTML = days < 7
       ? '이 간격에서는 <b>' + rel(ms) + '</b>처럼 상대 시간으로 적어야 읽기 쉽습니다. 정확한 시각은 <code>title</code>에 넣습니다'
-      : '<span class="warn">‘' + rel(ms) + '’로는 언제인지 알 수 없다</span>. 이때는 ' +
+      : '<span class="warn">‘' + rel(ms) + '’만으로는 언제인지 알 수 없습니다</span>. 이때는 ' +
         '<b>' + (days >= 320 ? abs : absShort) + '</b>처럼 절대 시간으로 적습니다';
     v.dataset.rel = rel(ms);
     v.dataset.mode = days < 7 ? 'rel' : 'abs';

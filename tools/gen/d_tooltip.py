@@ -68,7 +68,7 @@ D = dict(
     "안에 링크나 버튼을 넣을 때. 마우스를 옮기는 사이에 툴팁이 사라져 누를 수 없으니 팝오버를 씁니다",
     "버튼에 이미 적힌 글자를 툴팁으로 한 번 더 보여 줄 때",
   ]),
-  instead='안에 누를 것이 들어가야 하면 <a href="popover.html">팝오버</a>를 쓰고, 꼭 읽혀야 하는 내용이면 화면에 직접 적거나 <a href="../index.html#toc">헬퍼 텍스트</a>로 보여 줍니다. 작업 결과를 알리는 용도라면 <a href="toast.html">토스트</a>가 맞습니다.',
+  instead='안에 누를 것이 들어가야 하면 <a href="popover.html">팝오버</a>를 쓰고, 꼭 읽혀야 하는 내용이면 화면에 직접 적거나 <a href="placeholder.html">헬퍼 텍스트</a>로 보여 줍니다. 작업 결과를 알리는 용도라면 <a href="toast.html">토스트</a>가 맞습니다.',
   cases=cases([
     (mini('<div style="margin-top:10px;display:flex;gap:4px;justify-content:center"><span class="mini__trigger">↺</span><span class="mini__trigger">↻</span><span class="mini__trigger">⇪</span></div>' + tip("되돌리기", "left:12px;top:12px"), bars="684", tall=False, label="아이콘 버튼 툴팁 재현"),
      "아이콘 버튼의 이름 알려 주기", "툴팁을 가장 흔하게 쓰는 자리입니다. 아이콘만으로는 버튼 이름을 알기 어렵기 때문입니다"),
@@ -116,8 +116,8 @@ btn.addEventListener(<span class="s">'focus'</span>, show);
   ]),
   plat_note="\"툴팁으로 설명 넣어 주세요\"라는 요청은 데스크톱 화면에서만 의미가 있습니다. 모바일에서는 그렇게 넣은 설명이 <b>아무에게도 보이지 않기</b> 때문입니다. 꼭 읽혀야 하는 내용이라면 화면에 직접 적거나, 누를 수 있는 ⓘ 버튼을 두고 누르면 팝오버로 설명을 띄우는 방식으로 바꿔야 합니다.",
   siblings=siblings("tooltip"),
-  related='''        <li><span class="na"><b>헬퍼 텍스트</b><em>4부</em></span></li>
-        <li><span class="na"><b>비활성 · 숨김 · 읽기 전용</b><em>8부</em></span></li>
-        <li><span class="na"><b>말줄임</b><em>3부</em></span></li>
-        <li><span class="na"><b>호버가 없는 세계</b><em>11부</em></span></li>''',
+  related='''        <li><a href="placeholder.html"><b>헬퍼 텍스트</b><em>14부</em></a></li>
+        <li><a href="disabledstate.html"><b>비활성 · 숨김 · 읽기 전용</b><em>4부</em></a></li>
+        <li><a href="truncate.html"><b>말줄임</b><em>3부</em></a></li>
+        <li><a href="hover.html"><b>호버가 없는 세계</b><em>11부</em></a></li>''',
 )

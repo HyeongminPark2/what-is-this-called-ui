@@ -13,12 +13,12 @@ def cont(inner_w="60%", w="170px", label="", mark=""):
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:15px">
                   <div class="pin-out" data-pin="1" style="max-width:250px;background:var(--surface);border:1px dashed var(--line-strong);border-radius:7px;padding:9px">
-                    <div class="pin-out" data-pin="2" style="max-width:160px;margin-inline:auto;background:var(--accent-soft);border:1px dashed var(--accent);border-radius:5px;padding:8px;font-size:10.5px;line-height:1.8;color:var(--accent);margin-left:26px">글줄이 너무 길면 눈이 다음 줄의 첫 글자를 못 찾습니다.</div>
+                    <div class="pin-out" data-pin="2" style="max-width:160px;margin-inline:auto;background:var(--accent-soft);border:1px dashed var(--accent);border-radius:5px;padding:8px;font-size:10.5px;line-height:1.8;color:var(--accent);margin-left:26px">글줄이 너무 길면 다음 줄의 첫 글자를 찾기 어렵습니다.</div>
                   </div>
                   <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">max-width: 65ch</div>
                   <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">margin-inline: auto</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">padding-inline: 16px   — 좁은 화면의 양옆</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">width: 1200px   — 좁은 화면에서 가로 스크롤</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">padding-inline: 16px   좁은 화면의 양옆 여백</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">width: 1200px   좁은 화면에서 가로 스크롤이 생김</div>
                 </div>
               </div>'''
 
@@ -50,25 +50,26 @@ D = dict(
   ]),
   axes=ax("컨테이너와 최대 폭"),
   oneline="컨테이너는 내용 폭이 <b>일정한 값보다 넓어지지 않게</b> 막는 칸입니다. <code>width</code>로 폭을 고정하면 좁은 화면에서 레이아웃이 깨지지만, <code>max-width</code>로 상한만 걸면 좁은 화면에서는 알아서 줄어듭니다.",
-  s4_title="상태", s4_hint="화면 폭이 바뀌면 달라진다",
+  s4_title="화면 폭에 따른 모습", s4_hint="화면 폭과 상한에 따라 달라지는 칸의 너비",
+  instead_title="컨테이너와 함께 보면 좋은 항목",
   states=states([
-    (cont("100%", "170px", "넓은 화면에서 상한에 걸린 모습", "max-width 에서 멈춤"), "넓은 화면", "폭이 <b>상한에서 멈추고</b> 양옆에 여백이 남습니다"),
-    (cont("100%", "120px", "좁아지면 상한은 아무 일도 안 한다", "폭을 다 쓴다"), "좁은 화면", "화면이 상한보다 좁아서 상한이 걸리지 않고, <b>양옆 패딩만</b> 남습니다"),
-    (cont("100%", "170px", "상한이 없으면 끝까지 늘어나 읽기 힘들어집니다. 눈이 다음 줄을 못 찾습니다.", "상한 없음"), "상한 없음", "글줄이 길어져서 <b>다음 줄의 시작을 찾기 어렵습니다</b>"),
+    (cont("100%", "170px", "넓은 화면에서 상한에 걸린 모습", "max-width에서 멈춤"), "넓은 화면에서", "폭이 <b>상한에서 멈추고</b> 양옆에 여백이 남습니다"),
+    (cont("100%", "120px", "좁아지면 상한이 걸리지 않음", "폭을 모두 씀"), "좁은 화면에서", "화면이 상한보다 좁아서 상한이 걸리지 않고, <b>양옆 패딩만</b> 남습니다"),
+    (cont("100%", "170px", "상한이 없으면 끝까지 늘어나 읽기 힘들어집니다. 다음 줄의 시작을 찾기 어렵습니다.", "상한 없음"), "상한을 걸지 않았을 때", "글줄이 길어져서 <b>다음 줄의 시작을 찾기 어렵습니다</b>"),
     ('''              <div style="width:100%;max-width:170px;background:var(--bg);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;overflow-x:auto">
-                <div style="width:230px;background:var(--warn-soft);border:1px dashed var(--warn);border-radius:4px;padding:6px;font-size:9.5px;color:var(--warn)">width: 230px 로 못 박음</div>
+                <div style="width:230px;background:var(--warn-soft);border:1px dashed var(--warn);border-radius:4px;padding:6px;font-size:9.5px;color:var(--warn)">width: 230px로 고정함</div>
               </div>''',
-     "width 로 못 박기", "<b>좁은 화면에서 가로 스크롤</b>이 생깁니다. 거의 항상 잘못된 선택입니다"),
+     "<code>width</code>로 폭을 고정했을 때", "<b>좁은 화면에서 가로 스크롤</b>이 생깁니다. 거의 항상 잘못된 선택입니다"),
     ('''              <div style="width:100%;max-width:170px;background:var(--bg);border:1px dashed var(--line-strong);border-radius:6px;padding:7px;display:grid;gap:5px">
                 <div style="background:var(--accent-soft);border:1px dashed var(--accent);border-radius:4px;padding:5px;font-size:9px;color:var(--accent);text-align:center">읽는 글 · 65ch</div>
-                <div style="background:var(--bg);border:1px dashed var(--line-strong);border-radius:4px;padding:5px;font-size:9px;color:var(--fg-muted);text-align:center">표 · 더 넓게</div>
+                <div style="background:var(--bg);border:1px dashed var(--line-strong);border-radius:4px;padding:5px;font-size:9px;color:var(--fg-muted);text-align:center">표는 더 넓게</div>
               </div>''',
-     "두 겹 상한", "읽는 글은 좁게, <b>표나 그리드는 넓게</b> 잡습니다. 상한이 하나일 필요는 없습니다"),
+     "상한을 두 겹으로 둘 때", "읽는 글은 좁게, <b>표나 그리드는 넓게</b> 잡습니다. 상한이 하나일 필요는 없습니다"),
     ('''              <div style="width:100%;max-width:170px;background:var(--bg);border:1px dashed var(--line-strong);border-radius:6px;padding:7px">
-                <div style="background:var(--accent-soft);border:1px dashed var(--accent);border-radius:4px;padding:6px;font-size:9.5px;color:var(--accent)">가운데 칸 안의 사진만 끝까지</div>
+                <div style="background:var(--accent-soft);border:1px dashed var(--accent);border-radius:4px;padding:6px;font-size:9.5px;color:var(--accent)">사진만 칸 밖 끝까지 넓힘</div>
                 <div style="margin:5px -7px 0;height:22px;background:repeating-linear-gradient(135deg,var(--ink-100) 0 6px,var(--ink-050) 6px 12px);border-radius:2px"></div>
               </div>''',
-     "밖으로 빼기", "사진이나 배경만 <b>상한을 넘겨</b> 화면 끝까지 넓히는 기법입니다"),
+     "사진만 상한 밖으로 넓힐 때", "사진이나 배경만 <b>상한을 넘겨</b> 화면 끝까지 넓히는 기법입니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -77,7 +78,7 @@ D = dict(
     ("최대 폭", "max-width", "칸이 이 값보다 넓어지지 않게 막습니다. 읽는 글은 <code>65ch</code> 정도로 잡습니다"),
     ("가운데 두기", "margin-inline: auto", "남은 자리를 양옆에 똑같이 나눕니다. <b>가로 방향에만</b> 작동합니다"),
     ("양옆 패딩", "padding-inline", "좁은 화면에서 글이 <b>가장자리에 붙지 않게</b> 합니다. 빠뜨리기 쉬운 줄입니다"),
-    ("못 박힌 폭", "width (쓰지 않는다)", "<code>width: 1200px</code>은 좁은 화면에서 <b>가로 스크롤</b>을 만듭니다"),
+    ("고정된 폭", "width (쓰지 않음)", "<code>width: 1200px</code>은 좁은 화면에서 <b>가로 스크롤</b>을 만듭니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           상한은 <b>하나일 필요가 없습니다.</b> 읽는 글은 65ch 정도로 좁게, 카드 그리드나 표는
@@ -99,10 +100,10 @@ D = dict(
     ('''              <div style="width:100%;max-width:190px;background:var(--bg);border-radius:6px;padding:6px">
                 <div style="background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:7px;max-width:140px;margin-inline:auto">
                   <span style="font-size:10.5px;font-weight:700;display:block">기사 제목</span>
-                  <span style="font-size:9.5px;color:var(--fg-muted);line-height:1.7">본문이 65ch 를 넘지 않습니다.</span>
+                  <span style="font-size:9.5px;color:var(--fg-muted);line-height:1.7">본문이 65ch를 넘지 않습니다.</span>
                 </div>
               </div>''',
-     "읽는 글", "상한을 <code>65ch</code>로 잡으면 <b>글꼴이 커질 때 상한도 함께</b> 커집니다"),
+     "읽는 글의 폭 제한하기", "상한을 <code>65ch</code>로 잡으면 <b>글꼴이 커질 때 상한도 함께</b> 커집니다"),
     ('''              <div style="width:100%;max-width:190px;background:var(--bg);border-radius:6px;padding:6px">
                 <div style="max-width:175px;margin-inline:auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px">
                   <span style="background:var(--surface);border:1px solid var(--line);border-radius:4px;height:26px"></span>
@@ -110,17 +111,17 @@ D = dict(
                   <span style="background:var(--surface);border:1px solid var(--line);border-radius:4px;height:26px"></span>
                 </div>
               </div>''',
-     "카드 그리드", "같은 페이지 안에서도 카드 그리드는 <b>상한을 더 넓게</b> 잡습니다"),
+     "카드 그리드는 더 넓게 잡기", "같은 페이지 안에서도 카드 그리드는 <b>상한을 더 넓게</b> 잡습니다"),
     ('''              <div style="width:100%;max-width:190px;border-radius:6px;overflow:hidden">
                 <div style="height:24px;background:repeating-linear-gradient(135deg,var(--ink-100) 0 6px,var(--ink-050) 6px 12px)"></div>
                 <div style="background:var(--bg);padding:6px">
-                  <div style="max-width:130px;margin-inline:auto;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:6px;font-size:9.5px">내용만 가둔다</div>
+                  <div style="max-width:130px;margin-inline:auto;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:6px;font-size:9.5px">내용만 가둠</div>
                 </div>
               </div>''',
-     "배경은 끝까지", "<b>배경은 화면 전체에 깔고 내용만 가운데</b> 칸에 둡니다. 가장 흔한 짜임입니다"),
+     "배경은 끝까지 깔고 내용만 가두기", "<b>배경은 화면 전체에 깔고 내용만 가운데</b> 칸에 둡니다. 가장 흔한 짜임입니다"),
   ]),
-  s8_title="최소 코드와 규칙", s8_hint="사이트의 뼈대 두 줄",
-  keys_heads="<th>규칙</th><th>지켜야 하는 것</th>",
+  s8_title="최소 코드와 규칙", s8_hint="사이트 뼈대를 만드는 두 줄과 지킬 규칙",
+  keys_heads="<th>지킬 규칙</th><th>지키는 방법</th>",
   code_lede="대부분의 사이트 스타일시트에는 <b>이 네 줄</b>이 들어 있습니다.",
   code='''<span class="t">.container</span> {
   <span class="a">max-width</span>: <span class="a">1200px</span>;        <span class="c">/* width가 아니다 */</span>
@@ -137,18 +138,18 @@ D = dict(
 <span class="c">/* 안에서 하나만 끝까지 내보내기 */</span>
 <span class="t">.full-bleed</span> { <span class="a">margin-inline</span>: <span class="t">calc</span>(<span class="a">50%</span> - <span class="a">50vw</span>); }''',
   keys=kbd([
-    ("<code>max-width</code>를 쓴다", "<code>width</code>로 폭을 고정하면 <b>좁은 화면에서 가로 스크롤</b>이 생깁니다"),
-    ("양옆 패딩을 잊지 않는다", "패딩이 없으면 폰에서 글이 <b>화면 가장자리에 닿습니다</b>"),
-    ("읽는 글은 <code>ch</code>로", "ch로 적으면 글꼴 크기가 바뀔 때 상한도 함께 바뀌지만, px로 적으면 따라 바뀌지 않습니다"),
-    ("상한은 여러 겹", "글은 좁게, 표와 그리드는 넓게 잡고 <b>상한을 하나로 통일하지 않습니다</b>"),
-    ("배경은 가두지 않는다", "배경색과 배경 이미지는 화면 전체에 깔고, <b>내용만</b> 컨테이너 안에 둡니다"),
-    ("<code>margin-inline</code>", "<code>margin: 0 auto</code>보다 뜻이 분명하고, 글 방향이 바뀌어도 맞게 동작합니다"),
+    ("폭은 <code>max-width</code>로 제한하기", "<code>width</code>로 폭을 고정하면 <b>좁은 화면에서 가로 스크롤</b>이 생깁니다"),
+    ("양옆 패딩 빠뜨리지 않기", "패딩이 없으면 폰에서 글이 <b>화면 가장자리에 닿습니다</b>"),
+    ("읽는 글의 상한은 <code>ch</code>로 적기", "ch로 적으면 글꼴 크기가 바뀔 때 상한도 함께 바뀌지만, px로 적으면 따라 바뀌지 않습니다"),
+    ("내용에 따라 상한을 여러 겹 두기", "글은 좁게, 표와 그리드는 넓게 잡고 <b>상한을 하나로 통일하지 않습니다</b>"),
+    ("배경은 컨테이너에 가두지 않기", "배경색과 배경 이미지는 화면 전체에 깔고, <b>내용만</b> 컨테이너 안에 둡니다"),
+    ("가운데 두기는 <code>margin-inline</code>으로", "<code>margin: 0 auto</code>보다 뜻이 분명하고, 글 방향이 바뀌어도 맞게 동작합니다"),
   ]),
   backend=rows([
-    ("컨테이너 = 레이아웃의 상수", "컨테이너 폭 값 하나가 <b>모든 화면</b>에 적용됩니다. 그래서 이 값을 <code>--container</code> 같은 토큰으로 빼 두면 나중에 한 번에 바꿀 수 있습니다."),
-    ("글 길이와 읽기", "한 줄 45~75자는 조판에서 오래 써 온 경험칙입니다. 한글은 한 글자가 영문보다 넓어서 <b>영문 기준보다 조금 짧게</b> 잡습니다."),
-    ("이메일·PDF", "메일은 폭을 <b>600px</b>로 고정하는 것이 관례라서, 웹의 컨테이너 값을 그대로 쓰면 내용이 잘립니다."),
-    ("사진 크기", "컨테이너 폭이 1200px 이면 <b>2400px 짜리</b>를 보낼 필요가 없습니다. 상한을 알면 내려줄 크기도 정해집니다."),
+    ("모든 화면에 함께 쓰는 값 하나", "컨테이너 폭 값 하나가 <b>모든 화면</b>에 적용됩니다. 그래서 이 값을 <code>--container</code> 같은 토큰으로 빼 두면 나중에 한 번에 바꿀 수 있습니다."),
+    ("글줄 길이와 읽기 편한 정도", "한 줄 45~75자는 조판에서 오래 써 온 경험칙입니다. 한글은 한 글자가 영문보다 넓어서 <b>영문 기준보다 조금 짧게</b> 잡습니다."),
+    ("이메일과 PDF의 폭", "메일은 폭을 <b>600px</b>로 고정하는 것이 관례라서, 웹의 컨테이너 값을 그대로 쓰면 내용이 잘립니다."),
+    ("내려 줄 사진 크기 정하기", "컨테이너 폭이 1200px이면 <b>2400px짜리</b>를 보낼 필요가 없습니다. 상한을 알면 내려줄 크기도 정해집니다."),
   ]),
   plat_lede="앱은 화면 폭이 크게 달라지지 않아서 상한을 덜 쓰고, 태블릿에서만 필요해집니다.",
   plats=plats([
@@ -167,5 +168,5 @@ D = dict(
   related='''        <li><a href="../items/typescale.html"><b>타입 스케일</b><em>2부</em></a></li>
         <li><a href="../items/grid.html"><b>그리드</b><em>1부</em></a></li>
         <li><a href="../items/center.html"><b>가운데 맞추기</b><em>1부</em></a></li>
-        <li><span class="na"><b>브레이크포인트</b><em>11부</em></span></li>''',
+        <li><a href="breakpoint.html"><b>브레이크포인트</b><em>11부</em></a></li>''',
 )

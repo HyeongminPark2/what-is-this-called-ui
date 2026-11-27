@@ -21,7 +21,7 @@
   <b>폰 키보드가 올라올 때</b>
   <button class="ui-btn" id="tap">입력칸 누르기</button>
   <button class="ui-btn ui-btn--ghost" id="close">키보드 내리기</button>
-  <label><input type="checkbox" id="follow"> visualViewport 로 따라 올리기</label>
+  <label><input type="checkbox" id="follow"> visualViewport로 버튼을 키보드 위로 올리기</label>
 </div>
 
 <div class="pad">
@@ -48,7 +48,7 @@
   <b>화면의 절반</b>을 덮기 때문에, 아래쪽 칸들이 모두 키보드 뒤로 가려집니다.<br>
   기본 상태에서는 <b>저장 버튼도 키보드 뒤에 가려져서</b> 글자를 다 쳐도 저장할 방법이 없습니다.
   폰에서 가장 자주 들어오는 민원 가운데 하나입니다.<br>
-  <b>visualViewport 로 따라 올리기</b>를 켜면 바닥에 붙은 버튼이 <b>키보드 위로</b> 올라옵니다.
+  <b>visualViewport로 버튼을 키보드 위로 올리기</b>를 켜면 바닥에 붙은 버튼이 <b>키보드 위로</b> 올라옵니다.
   <code>position: fixed</code>로 붙인 요소는 키보드가 올라와도 위치가 바뀌지 않기 때문에, 이렇게 직접 올려 줘야 합니다.
 </p>
 
@@ -76,9 +76,9 @@
     var hidden = ctaBox.bottom > kbdTop + 0.5;
     var r = document.getElementById('read');
     r.innerHTML = !open
-      ? '키보드 내려감 · 보이는 높이 <b>' + bodyH + 'px</b>'
-      : '키보드 올라옴 · 보이는 높이 <b>' + (bodyH - kh) + 'px</b> · 저장 버튼 ' +
-        (hidden ? '<span class="warn">가려짐</span>' : '<b>보임</b>');
+      ? '키보드가 내려가 있을 때 보이는 높이 <b>' + bodyH + 'px</b>'
+      : '키보드가 올라와 보이는 높이가 <b>' + (bodyH - kh) + 'px</b>로 줄었고, 저장 버튼은 ' +
+        (hidden ? '<span class="warn">가려졌습니다</span>' : '<b>보입니다</b>');
     r.dataset.hidden = hidden ? '1' : '0';
     r.dataset.open = open ? '1' : '0';
 

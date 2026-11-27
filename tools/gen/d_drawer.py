@@ -38,12 +38,12 @@ D = dict(
   axes=axis_table("드로어"),
   oneline="드로어인지 아닌지는 <b>옆에서 밀려 나오느냐</b>로 정해집니다. 같은 판이라도 늘 보이면 사이드바이고, 숨어 있다가 나오면 드로어입니다.",
   states=states([
-    (mini(trigger("☰ 메뉴"), bars="684", label="드로어가 닫힌 화면"), "닫힘", "☰ 버튼만 보입니다"),
-    (mini(drawer("메일", ["받은 메일", "보낸 메일"]).replace('class="mini__drawer"', 'class="mini__drawer" style="transform:translateX(-45%)"'), bars="684", label="드로어가 밀려 나오는 중"), "밀려 나오는 중", "0.25초 동안 옆에서 밀려 들어옵니다"),
-    (mini(drawer("메일", ["받은 메일", "보낸 메일", "임시 보관"]), bars="684", label="드로어가 열린 모습"), "열림 · 막음", "뒤쪽 화면이 어두워지고 클릭할 수 없게 됩니다"),
-    (mini('<div class="mini__drawer" style="box-shadow:none;border-right:1px solid var(--line);width:46%;background:var(--bg)"><b>메일</b><i class="on">받은 메일</i><i>보낸 메일</i><i>임시 보관</i></div>', bars="68", label="넓은 화면에서 고정된 모습"), "고정", "화면이 넓어지면 늘 보이는 <b>사이드바</b>가 되고, 뒤쪽 화면을 막지 않습니다"),
-    (mini('<div class="mini__drawer" style="box-shadow:none;border-right:1px solid var(--line);width:20%;background:var(--bg);padding:7px 4px"><div style="width:11px;height:11px;border-radius:3px;background:var(--accent);margin:0 auto 6px"></div><div style="width:11px;height:11px;border-radius:3px;background:var(--line-strong);margin:0 auto 6px"></div><div style="width:11px;height:11px;border-radius:3px;background:var(--line-strong);margin:0 auto"></div></div>', bars="68", label="아이콘만 남은 레일 모습"), "레일", "아이콘만 남기고 폭을 좁힌 상태입니다. 자리를 아끼면서도 각 화면으로 가는 버튼은 남겨 둡니다"),
-    (mini(drawer("필터", ["상태", "기간", "금액"], side="right"), bars="684", label="오른쪽에서 나온 드로어"), "오른쪽", "내비게이션은 왼쪽에, 지금 보는 내용에 대한 <b>보조 작업</b>은 오른쪽에 두는 것이 관례입니다"),
+    (mini(trigger("☰ 메뉴"), bars="684", label="드로어가 닫힌 화면"), "닫혀 있을 때", "☰ 버튼만 보입니다"),
+    (mini(drawer("메일", ["받은 메일", "보낸 메일"]).replace('class="mini__drawer"', 'class="mini__drawer" style="transform:translateX(-45%)"'), bars="684", label="드로어가 밀려 나오는 중"), "옆에서 밀려 나오는 중", "0.25초 동안 옆에서 밀려 들어옵니다"),
+    (mini(drawer("메일", ["받은 메일", "보낸 메일", "임시 보관"]), bars="684", label="드로어가 열린 모습"), "열려서 뒤를 막았을 때", "뒤쪽 화면이 어두워지고 클릭할 수 없게 됩니다"),
+    (mini('<div class="mini__drawer" style="box-shadow:none;border-right:1px solid var(--line);width:46%;background:var(--bg)"><b>메일</b><i class="on">받은 메일</i><i>보낸 메일</i><i>임시 보관</i></div>', bars="68", label="넓은 화면에서 고정된 모습"), "넓은 화면에 고정했을 때", "화면이 넓어지면 늘 보이는 <b>사이드바</b>가 되고, 뒤쪽 화면을 막지 않습니다"),
+    (mini('<div class="mini__drawer" style="box-shadow:none;border-right:1px solid var(--line);width:20%;background:var(--bg);padding:7px 4px"><div style="width:11px;height:11px;border-radius:3px;background:var(--accent);margin:0 auto 6px"></div><div style="width:11px;height:11px;border-radius:3px;background:var(--line-strong);margin:0 auto 6px"></div><div style="width:11px;height:11px;border-radius:3px;background:var(--line-strong);margin:0 auto"></div></div>', bars="68", label="아이콘만 남은 레일 모습"), "아이콘만 남긴 레일", "아이콘만 남기고 폭을 좁힌 상태입니다. 자리를 아끼면서도 각 화면으로 가는 버튼은 남겨 둡니다"),
+    (mini(drawer("필터", ["상태", "기간", "금액"], side="right"), bars="684", label="오른쪽에서 나온 드로어"), "오른쪽에서 열 때", "내비게이션은 왼쪽에, 지금 보는 내용에 대한 <b>보조 작업</b>은 오른쪽에 두는 것이 관례입니다"),
   ]),
   anat=ANAT,
   pins=pins([
@@ -68,14 +68,14 @@ D = dict(
     "넓은 화면에서 늘 필요한 내용일 때. 접어 두지 말고 사이드바로 고정합니다",
     "iOS에서 왼쪽 드로어를 쓸 때. 화면 왼쪽 가장자리에서 밀어 뒤로 가는 시스템 동작과 부딪칩니다",
   ]),
-  instead='짧은 확인이면 <a href="modal.html">모달</a>, 손가락으로 고르는 것이면 <a href="sheet.html">바텀시트</a>, 누른 것 옆에 붙어야 하면 <a href="popover.html">팝오버</a>.',
+  instead='짧게 한 번 확인받는 일이라면 <a href="modal.html">모달</a>을 쓰고, 손가락으로 선택지를 고르게 할 때는 <a href="sheet.html">바텀시트</a>가 맞습니다. 누른 요소 바로 옆에 붙어 떠야 하면 <a href="popover.html">팝오버</a>를 씁니다.',
   cases=cases([
     (mini(drawer("메일", ["받은 메일", "보낸 메일", "임시 보관"]), bars="684", tall=False, label="모바일 내비 드로어 재현"),
-     "내비 드로어", "좁은 화면에서 사이드바를 접어 둔 것으로, 왼쪽에 두는 것이 관례입니다"),
+     "좁은 화면에서 내비게이션 접어 두기", "좁은 화면에서 사이드바를 접어 둔 것으로, 왼쪽에 두는 것이 관례입니다"),
     (mini(drawer("필터", ["상태 · 전체", "기간 · 오늘"], side="right"), bars="684", tall=False, label="필터 드로어 재현"),
-     "필터 드로어", "목록을 보면서 조건을 바꿀 수 있게 오른쪽에서 나옵니다"),
+     "목록 옆에서 필터 바꾸기", "목록을 보면서 조건을 바꿀 수 있게 오른쪽에서 나옵니다"),
     (mini('<div class="mini__drawer" style="left:auto;right:0;width:66%;border-radius:6px 0 0 6px"><b>TX-8812</b><i>모란상회 · ₩48,000</i><i>승인 14:02</i><i style="margin-top:6px;color:var(--accent);font-weight:700">환불하기</i></div>', bars="684", tall=False, label="상세 편집 드로어 재현"),
-     "상세 패널", "목록에서 한 건을 열어 고칩니다. 목록 화면을 떠나지 않으므로 뒤로 돌아갈 필요가 없습니다"),
+     "목록을 떠나지 않고 한 건 고치기", "목록에서 한 건을 열어 고칩니다. 목록 화면을 떠나지 않으므로 뒤로 돌아갈 필요가 없습니다"),
   ]),
   code_lede="드로어도 바텀시트와 같은 <code>&lt;dialog&gt;</code> 요소로 만들고, <code>margin</code>과 높이만 다르게 줍니다. 화면 옆에 붙이고 높이를 꽉 채우면 드로어가 됩니다.",
   code='''&lt;<span class="t">button</span> <span class="a">aria-expanded</span>=<span class="s">"false"</span> <span class="a">aria-controls</span>=<span class="s">"drawer"</span>&gt;☰&lt;/<span class="t">button</span>&gt;
@@ -93,14 +93,14 @@ btn.setAttribute(<span class="s">'aria-expanded'</span>, <span class="s">'true'<
   keys=kbd([
     ("<kbd>Esc</kbd>", "드로어가 닫힙니다"),
     ("<kbd>Tab</kbd>", "임시 드로어에서는 포커스가 드로어 안에서만 돌고, 고정 드로어에서는 포커스를 가두지 않습니다"),
-    ("링크 누름", "드로어가 닫힙니다. 닫지 않으면 드로어가 이동한 화면을 가립니다"),
-    ("여는 버튼", "드로어가 열리고 닫힐 때마다 <code>aria-expanded</code> 값도 함께 바꿉니다"),
-    ("닫힐 때", "포커스가 ☰ 버튼으로 돌아갑니다"),
+    ("안의 링크를 눌렀을 때", "드로어가 닫힙니다. 닫지 않으면 드로어가 이동한 화면을 가립니다"),
+    ("여는 버튼의 상태", "드로어가 열리고 닫힐 때마다 <code>aria-expanded</code> 값도 함께 바꿉니다"),
+    ("드로어가 닫힐 때", "포커스가 ☰ 버튼으로 돌아갑니다"),
   ]),
   backend=rows([
-    ("열림 상태를 URL 에", "열림 상태를 <code>?panel=filters</code>처럼 주소에 담으면 <b>뒤로가기로 드로어를 닫을 수 있고</b>, 열린 상태 그대로 링크로 공유할 수도 있습니다. 상태를 어디에 둘지 고르는 문제라서 세션과 토큰 가운데 무엇을 쓸지 정하는 것과 비슷합니다."),
-    ("보조 리소스", "드로어 내용은 주 화면과 다른 리소스인 경우가 많습니다. 그래서 주 화면 응답에 함께 넣지 말고 드로어를 열 때 따로 가져오면 첫 화면이 빨리 뜹니다."),
-    ("임시 vs 고정 = 같은 데이터, 다른 표시", "임시 드로어와 고정 드로어는 화면 폭에 따라 모양만 바뀔 뿐 데이터는 같습니다. 그러므로 서버 응답을 두 가지로 나눌 필요가 없습니다."),
+    ("열림 상태를 URL에 담기", "열림 상태를 <code>?panel=filters</code>처럼 주소에 담으면 <b>뒤로가기로 드로어를 닫을 수 있고</b>, 열린 상태 그대로 링크로 공유할 수도 있습니다. 상태를 어디에 둘지 고르는 문제라서 세션과 토큰 가운데 무엇을 쓸지 정하는 것과 비슷합니다."),
+    ("주 화면과 따로 불러오는 보조 리소스", "드로어 내용은 주 화면과 다른 리소스인 경우가 많습니다. 그래서 주 화면 응답에 함께 넣지 말고 드로어를 열 때 따로 가져오면 첫 화면이 빨리 뜹니다."),
+    ("임시와 고정은 데이터가 같고 표시만 다름", "임시 드로어와 고정 드로어는 화면 폭에 따라 모양만 바뀔 뿐 데이터는 같습니다. 그러므로 서버 응답을 두 가지로 나눌 필요가 없습니다."),
   ]),
   plat_lede="드로어는 안드로이드에서 자리 잡은 이름이라 iOS에는 이에 대응하는 표준 부품이 없습니다.",
   plats=plats([
@@ -116,8 +116,8 @@ btn.setAttribute(<span class="s">'aria-expanded'</span>, <span class="s">'true'<
   ]),
   plat_note="\"드로어 넣어 주세요\"라는 말은 안드로이드 개발자에게는 바로 통하지만, iOS에는 드로어라는 부품이 없어서 통하지 않습니다. 그래서 보조 내비게이션처럼 역할로 말하고, iOS에서는 <b>탭 바나 시트</b> 가운데 무엇으로 바꿀지 함께 정해야 합니다.",
   siblings=siblings("drawer"),
-  related='''        <li><span class="na"><b>사이드바 내비게이션</b><em>7부</em></span></li>
-        <li><span class="na"><b>브레이크포인트</b><em>11부</em></span></li>
-        <li><span class="na"><b>포커스 트랩</b><em>12부</em></span></li>
-        <li><span class="na"><b>시스템 백</b><em>11부</em></span></li>''',
+  related='''        <li><a href="sidebar.html"><b>사이드바 내비게이션</b><em>7부</em></a></li>
+        <li><a href="breakpoint.html"><b>브레이크포인트</b><em>11부</em></a></li>
+        <li><a href="focustrap.html"><b>포커스 트랩</b><em>12부</em></a></li>
+        <li><a href="systemback.html"><b>시스템 백</b><em>11부</em></a></li>''',
 )

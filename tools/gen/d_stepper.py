@@ -37,12 +37,12 @@ def steps(marks, w="152px", note="", ok=None, col=False):
 
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">번호 또는 ✓ — 끝났는지 한눈에</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--accent)">지금 단계 — 색 + aria-current="step"</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">단계 이름 — <b>잘리면 안 된다</b></div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">적은 값 요약 — '모란상회'</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--accent)">끝낸 단계는 <b>눌러서 되돌아간다</b></div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">좁으면 가로가 먼저 무너진다 — 세로로</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">번호나 ✓로 끝났는지 한눈에 보임</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--accent)">지금 단계는 색과 aria-current="step"</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">단계 이름은 <b>잘리면 안 됨</b></div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">적은 값을 '모란상회'처럼 요약</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--accent)">끝낸 단계는 <b>눌러서 되돌아감</b></div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">좁으면 가로 배치가 깨지므로 세로로</div>
                 </div>
               </div>'''
 
@@ -54,7 +54,7 @@ D = dict(
   live_note='''        <div class="note" style="margin-bottom:0">
           <p>단계 이름은 <b>잘리면 안 됩니다</b>. 데모는 칸마다 이름 글자 전체의 폭과 실제로 보이는 폭을 비교해서
           이름이 잘린 단계가 몇 개인지 셉니다. 가로 배치 그대로 폭을 줄이면 단계 이름부터 잘리고,
-          '좁으면 세로로'를 켜면 같은 폭에서도 이름이 잘리지 않습니다.<br>
+          '좁으면 세로로 늘어놓기'를 켜면 같은 폭에서도 이름이 잘리지 않습니다.<br>
           <b>끝낸 단계는 눌러서 되돌아갈 수 있어야</b> 합니다. 이 기능을 끄면 끝낸 단계를 눌러도 이동하지 않는데,
           그러면 배송지를 잘못 적은 사용자가 처음부터 다시 해야 합니다.</p>
         </div>''',
@@ -74,29 +74,29 @@ D = dict(
   axes=ax("스테퍼"),
   oneline="단계가 <b>셋을 넘으면 정말 그만큼 나눠야 하는지 다시 따져 봅니다.</b> 단계를 늘리기 전에 한 화면에 담을 수 있는지부터 확인합니다.",
   states=states([
-    (steps([("장바구니", "done"), ("배송지", "now"), ("결제", ""), ("확인", "")], "152px", "1단계 끝, 2단계 중", True),
-     "진행 중", "끝난 단계와 <b>지금 단계</b>가 다르게 보입니다"),
-    (steps([("장바구니", "done"), ("배송지", "done"), ("결제", "done"), ("확인", "done")], "152px", "다 끝났다", True),
-     "완료", "모든 단계를 마치면 <b>결과 화면</b>으로 넘어갑니다"),
-    (steps([("장바구니…", "done"), ("배…", "now"), ("결…", ""), ("확…", "")], "152px", "이름이 잘렸다", False),
-     "좁은 화면", "화면이 좁아지면 <b>가로 배치에서 단계 이름부터</b> 잘립니다"),
-    (steps([("장바구니 확인", "done"), ("배송지 입력", "now"), ("결제 수단", "")], "152px", "세로로 두면 온전하다", True, True),
-     "세로로", "폰에서는 <b>단계를 세로로 늘어놓는 편</b>이 낫습니다"),
+    (steps([("장바구니", "done"), ("배송지", "now"), ("결제", ""), ("확인", "")], "152px", "1단계 끝, 2단계 진행 중", True),
+     "단계를 진행하는 중", "끝난 단계와 <b>지금 단계</b>가 다르게 보입니다"),
+    (steps([("장바구니", "done"), ("배송지", "done"), ("결제", "done"), ("확인", "done")], "152px", "모두 끝남", True),
+     "모든 단계를 마쳤을 때", "모든 단계를 마치면 <b>결과 화면</b>으로 넘어갑니다"),
+    (steps([("장바구니…", "done"), ("배…", "now"), ("결…", ""), ("확…", "")], "152px", "이름이 잘림", False),
+     "좁은 화면에 가로로 둘 때", "화면이 좁아지면 <b>가로 배치에서 단계 이름부터</b> 잘립니다"),
+    (steps([("장바구니 확인", "done"), ("배송지 입력", "now"), ("결제 수단", "")], "152px", "세로로 두면 이름이 다 보임", True, True),
+     "단계를 세로로 늘어놓을 때", "폰에서는 <b>단계를 세로로 늘어놓는 편</b>이 낫습니다"),
     (one(txt('<span style="display:block;font-size:9px;color:var(--danger)">배송지를 다시 적어 주세요</span>'
-             '<span style="display:block;font-size:8.5px;color:var(--fg-muted);margin-top:3px">2단계로 돌아감 · 적은 값은 그대로</span>'),
+             '<span style="display:block;font-size:8.5px;color:var(--fg-muted);margin-top:3px">2단계로 돌아가도 적은 값은 그대로</span>'),
          "되돌아가기", True, "", "152px"),
-     "되돌아가기", "앞 단계로 돌아가도 <b>이미 적은 값은 지우지 않습니다</b>"),
-    (steps([("장바구니", "done"), ("배송지", ""), ("결제", ""), ("확인", "")], "152px", "지금이 어디인지 모른다", False),
-     "지금을 안 알림", "지금 단계를 <b>색만</b>으로 표시하면 알아보기 어렵습니다"),
+     "앞 단계로 되돌아갈 때", "앞 단계로 돌아가도 <b>이미 적은 값은 지우지 않습니다</b>"),
+    (steps([("장바구니", "done"), ("배송지", ""), ("결제", ""), ("확인", "")], "152px", "지금 단계를 알 수 없음", False),
+     "지금 단계를 알리지 않을 때", "지금 단계를 <b>색만</b>으로 표시하면 알아보기 어렵습니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("번호 · ✓", "끝났는지", "단계 번호를 보면 <b>몇 단계가 남았는지</b> 알 수 있습니다"),
+    ("번호 · ✓", "끝났는지 표시", "단계 번호를 보면 <b>몇 단계가 남았는지</b> 알 수 있습니다"),
     ("지금 단계", "색 + <code>aria-current</code>", "스크린 리더 사용자도 알 수 있도록 <b>소리로도</b> 전해져야 합니다"),
     ("단계 이름", "잘리면 안 됨", "자리가 모자라면 <b>이름을 짧게</b> 고칩니다"),
     ("적은 값", "요약", "앞 단계에서 적은 값을 보여 줘서 되돌아갈지 판단할 수 있게 합니다"),
-    ("되돌아가기", "끝낸 단계만", "아직 안 간 뒤 단계로는 <b>건너뛰지 못하게</b> 막습니다"),
-    ("좁은 화면", "세로로", "가로 스테퍼는 <b>390px 폭에서 이름이 잘리고 배치가 깨집니다</b>"),
+    ("되돌아가기", "끝낸 단계로만", "아직 안 간 뒤 단계로는 <b>건너뛰지 못하게</b> 막습니다"),
+    ("좁은 화면", "세로로 배치", "가로 스테퍼는 <b>390px 폭에서 이름이 잘리고 배치가 깨집니다</b>"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           스테퍼를 붙이기 전에 먼저 <b>정말 단계를 나눠야 하는지</b> 따져 봐야 합니다.
@@ -115,16 +115,16 @@ D = dict(
     "단계 이름을 '1단계 · 2단계'로 둘 때. 이름에는 그 단계에서 <b>무엇을 하는지</b>를 적습니다",
     "지금 단계를 <b>색으로만</b> 알릴 때",
   ]),
-  instead='기계가 하는 일의 진척은 <a href="progress.html">프로그레스 바</a>, 순서 없는 묶음은 <a href="tabs.html">탭</a>, 계층은 <a href="breadcrumb.html">브레드크럼</a>, 흐름 전체 설계는 <a href="checkout.html">결제 흐름</a>.',
+  instead='기계가 하는 일이 얼마나 진행됐는지 보여 주려면 <a href="progress.html">프로그레스 바</a>를 쓰고, 순서 없이 내용 묶음을 바꿔 보여 주려면 <a href="tabs.html">탭</a>을 씁니다. 계층을 보여 주는 데는 <a href="breadcrumb.html">브레드크럼</a>이 맞고, 흐름 전체를 어떻게 짤지는 <a href="checkout.html">결제 흐름</a> 항목에서 다룹니다.',
   cases=cases([
     (steps([("장바구니", "done"), ("배송지", "now"), ("결제", ""), ("확인", "")], "150px", "", True),
-     "결제 흐름", "스테퍼를 가장 흔하게 쓰는 곳입니다"),
+     "결제 단계 보여 주기", "스테퍼를 가장 흔하게 쓰는 곳입니다"),
     (steps([("계정", "done"), ("사업자", "now"), ("정산 계좌", "")], "150px", "", True),
-     "가입 · 심사", "적어 내야 할 서류가 여러 장일 때 씁니다"),
+     "가입과 심사 서류 나눠 받기", "적어 내야 할 서류가 여러 장일 때 씁니다"),
     (one(txt('<span style="display:block;font-size:9px">2 / 4 단계</span>'
              '<span style="display:block;font-size:8.5px;color:var(--fg-muted);margin-top:2px">배송지 입력</span>'),
-         "글로 줄임", True, "폰에서 쓰는 가장 작은 꼴", "150px"),
-     "폰", "단계 띠 대신 <b>글 한 줄</b>로 보여 줘도 충분합니다"),
+         "글 한 줄로 줄임", True, "폰에서 쓰는 가장 작은 형태", "150px"),
+     "폰에서 글 한 줄로 줄이기", "단계 띠 대신 <b>글 한 줄</b>로 보여 줘도 충분합니다"),
   ]),
   code_lede="단계는 순서가 있는 목록이므로 <code>&lt;ol&gt;</code>로 적고, 지금 단계에만 <code>aria-current</code>를 달아 알립니다.",
   code='''&lt;<span class="t">ol</span> <span class="a">class</span>=<span class="s">"stepper"</span>&gt;
@@ -144,19 +144,19 @@ D = dict(
     ("<code>aria-current=\"step\"</code>", "지금 단계에 답니다. 한 페이지에 <b>하나만</b> 있어야 합니다"),
     ("<code>&lt;ol&gt;</code>", "단계에 순서가 있다는 정보가 스크린 리더에서 <b>소리로</b> 전해집니다"),
     ("<code>aria-disabled</code>", "아직 갈 수 없는 단계에 붙입니다. 포커스는 받지만 눌러도 <b>이동하지 않습니다</b>"),
-    ("확인하는 법", "<kbd>Tab</kbd>으로 단계를 돌면서 <b>아직 안 간 단계가 포커스를 받는지</b> 확인합니다"),
+    ("제대로 됐는지 확인하는 방법", "<kbd>Tab</kbd>으로 단계를 돌면서 <b>아직 안 간 단계가 포커스를 받는지</b> 확인합니다"),
   ]),
   backend=rows([
-    ("단계마다 저장", "입력 내용을 마지막 단계에서 한 번에 보내면 <b>중간에 연결이 끊기거나 창을 닫았을 때</b> 적은 내용이 모두 사라집니다. 단계마다 임시 저장해 두면 사용자가 나중에 돌아와 이어서 할 수 있습니다."),
-    ("초안 id", "첫 단계에서 <code>draft_id</code>를 받아 두고, 이후 단계에서는 그 초안에 값을 채워 넣습니다."),
-    ("검증은 단계마다", "단계마다 그 단계의 입력 칸만 검사해서 결과를 돌려줍니다. 마지막에 모든 오류를 한꺼번에 돌려주면 사용자는 <b>어느 단계로 돌아가야 하는지</b> 알 수 없습니다."),
+    ("단계마다 임시 저장하기", "입력 내용을 마지막 단계에서 한 번에 보내면 <b>중간에 연결이 끊기거나 창을 닫았을 때</b> 적은 내용이 모두 사라집니다. 단계마다 임시 저장해 두면 사용자가 나중에 돌아와 이어서 할 수 있습니다."),
+    ("초안 id로 단계 잇기", "첫 단계에서 <code>draft_id</code>를 받아 두고, 이후 단계에서는 그 초안에 값을 채워 넣습니다."),
+    ("단계마다 입력 검증하기", "단계마다 그 단계의 입력 칸만 검사해서 결과를 돌려줍니다. 마지막에 모든 오류를 한꺼번에 돌려주면 사용자는 <b>어느 단계로 돌아가야 하는지</b> 알 수 없습니다."),
   ]),
   plat_lede="웹과 안드로이드에서는 <b>스테퍼를 쓰지만</b>, iOS에는 스테퍼 부품이 없습니다.",
   plats=plats([
     ("웹", "직접 만듦",
      steps([("장바구니", "done"), ("배송지", "now"), ("결제", "")], "110px", "", True),
      "정해진 부품이 없어서 <code>&lt;ol&gt;</code>에 <code>aria-current</code>를 붙여 직접 만듭니다."),
-    ("iOS", "없다 — 화면 전환",
+    ("iOS", "부품 없이 화면 전환",
      '''              <div class="phone" role="img" aria-label="iOS 단계 화면 재현"><span class="phone__notch"></span><span class="phone__home"></span><div class="phone__screen">
                 <div style="position:absolute;left:5px;right:5px;top:26px;font-size:5px;color:var(--fg-muted);text-align:center">2 / 4</div>
                 <div style="position:absolute;left:5px;right:5px;top:36px;height:9px;border-radius:3px;background:var(--accent-soft)"></div>

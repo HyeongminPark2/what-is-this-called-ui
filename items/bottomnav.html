@@ -75,20 +75,20 @@
         <p>겹쳐 뜨는 부품들은 모양만 보고는 구별하기 어렵지만, 아래 네 가지를 따져 보면 어느 부품인지 가려낼 수 있습니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>자리</th><th>데려가는 곳</th><th>지금 위치</th><th>감당하는 개수</th></tr></thead>
+          <thead><tr><th></th><th>화면에 놓이는 자리</th><th>누르면 데려가는 곳</th><th>지금 위치를 알리는 방법</th><th>담을 수 있는 항목 수</th></tr></thead>
           <tbody>
-            <tr><td>앱바 · 헤더</td><td>화면 위</td><td>전역 · 상위</td><td>제목으로</td><td class="none">해당 없음</td></tr>
-            <tr><td>사이드바 내비게이션</td><td>화면 옆</td><td>전역</td><td>강조로</td><td>10~20</td></tr>
-            <tr class="me"><td><b>바텀 탭바</b></td><td>화면 아래</td><td>전역</td><td>아이콘 강조</td><td><b>3~5</b></td></tr>
+            <tr><td>앱바 · 헤더</td><td>화면 위</td><td>전역 또는 상위 화면</td><td>제목으로</td><td class="none">해당 없음</td></tr>
+            <tr><td>사이드바 내비게이션</td><td>화면 옆</td><td>전역</td><td>항목 강조로</td><td>10~20</td></tr>
+            <tr class="me"><td><b>바텀 탭바</b></td><td>화면 아래</td><td>전역</td><td>아이콘 강조로</td><td><b>3~5</b></td></tr>
             <tr><td>탭</td><td>내용 위</td><td><b>같은 화면 안</b></td><td>밑줄로</td><td>2~6</td></tr>
-            <tr><td>브레드크럼</td><td>내용 위</td><td>상위로</td><td><b>계층 전체</b></td><td>3~5단계</td></tr>
+            <tr><td>브레드크럼</td><td>내용 위</td><td>상위 단계</td><td><b>계층 전체</b>를 보여 줌</td><td>3~5단계</td></tr>
             <tr><td>페이지네이션</td><td>목록 아래</td><td>같은 목록의 다른 쪽</td><td>쪽 번호로</td><td>제한 없음</td></tr>
-            <tr><td>무한 스크롤</td><td>목록 끝</td><td>같은 목록 이어서</td><td class="none">안 보여 준다</td><td>제한 없음</td></tr>
+            <tr><td>무한 스크롤</td><td>목록 끝</td><td>같은 목록의 다음 묶음</td><td>보여 주지 않음</td><td>제한 없음</td></tr>
             <tr><td>스테퍼</td><td>내용 위 · 옆</td><td><b>같은 흐름</b>의 다음 단계</td><td>번호와 완료 표시로</td><td>3~5단계</td></tr>
             <tr><td>트리뷰</td><td>화면 옆</td><td>계층 <b>아래로</b></td><td>펼친 가지로</td><td>깊이 3단까지</td></tr>
-            <tr><td>앵커 내비</td><td>내용 옆</td><td><b>같은 문서 안</b></td><td>보는 절을 밝혀</td><td>5~12</td></tr>
-            <tr><td>뒤로가기</td><td>화면 왼쪽 위</td><td>바로 <b>앞 화면</b></td><td class="none">안 보여 준다</td><td>하나</td></tr>
-            <tr><td>메가 메뉴</td><td>앱바 아래</td><td>전역 · 여러 갈래</td><td>열린 갈래로</td><td>20~60</td></tr>
+            <tr><td>앵커 내비</td><td>내용 옆</td><td><b>같은 문서 안</b></td><td>보는 절을 강조해</td><td>5~12</td></tr>
+            <tr><td>뒤로가기</td><td>화면 왼쪽 위</td><td>바로 <b>앞 화면</b></td><td>보여 주지 않음</td><td>하나</td></tr>
+            <tr><td>메가 메뉴</td><td>앱바 아래</td><td>전역, 여러 분류</td><td>열린 분류로</td><td>20~60</td></tr>
           </tbody>
         </table>
         </div>
@@ -104,37 +104,37 @@
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="기본 탭바"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div style="position:absolute;left:0;right:0;bottom:0;display:flex;border-top:1px solid var(--line);padding:3px 2px 5px"><span style="flex:1;text-align:center"><span style="display:block;width:8px;height:8px;border-radius:2px;background:var(--accent);margin:0 auto 1px"></span><span style="font-size:4.5px;color:var(--accent);font-weight:700">거래</span></span><span style="flex:1;text-align:center"><span style="display:block;width:8px;height:8px;border-radius:2px;background:var(--line-strong);margin:0 auto 1px"></span><span style="font-size:4.5px;color:var(--fg-muted)">정산</span></span></div></div>
             </div>
-            <figcaption>기본<span>고른 칸만 색이 다릅니다. 탭바는 <b>늘 한 칸이 골라져 있습니다</b></span></figcaption>
+            <figcaption>가장 흔한 기본 모습<span>고른 칸만 색이 다릅니다. 탭바는 <b>늘 한 칸이 골라져 있습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="배지가 붙은 탭바"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div style="position:absolute;left:0;right:0;bottom:0;display:flex;border-top:1px solid var(--line);padding:3px 2px 5px"><span style="flex:1;text-align:center"><span style="display:block;width:8px;height:8px;border-radius:2px;background:var(--line-strong);margin:0 auto 1px;position:relative"><span style="position:absolute;top:-2px;right:-3px;background:var(--danger);color:#fff;border-radius:99px;font-size:3.5px;padding:0 2px">3</span></span><span style="font-size:4.5px;color:var(--fg-muted)">정산</span></span><span style="flex:1;text-align:center"><span style="display:block;width:8px;height:8px;border-radius:2px;background:var(--accent);margin:0 auto 1px"></span><span style="font-size:4.5px;color:var(--accent);font-weight:700">거래</span></span></div></div>
             </div>
-            <figcaption>배지<span>처리할 것이 몇 건인지 보여 줍니다. 건수를 보여 줄 필요가 없으면 점만 찍기도 합니다</span></figcaption>
+            <figcaption>처리할 건수를 붙일 때<span>처리할 것이 몇 건인지 보여 줍니다. 건수를 보여 줄 필요가 없으면 점만 찍기도 합니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div class="mini mini--tall" role="img" aria-label="칸이 너무 많은 탭바"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div style="position:absolute;left:0;right:0;bottom:0;display:flex;border-top:1px solid var(--line);padding:3px 1px 5px"><span style="flex:1;text-align:center;font-size:4px;color:var(--fg-muted);overflow:hidden">홈</span><span style="flex:1;text-align:center;font-size:4px;color:var(--fg-muted);overflow:hidden">거래</span><span style="flex:1;text-align:center;font-size:4px;color:var(--fg-muted);overflow:hidden">정산</span><span style="flex:1;text-align:center;font-size:4px;color:var(--fg-muted);overflow:hidden">가맹…</span><span style="flex:1;text-align:center;font-size:4px;color:var(--fg-muted);overflow:hidden">내정…</span><span style="flex:1;text-align:center;font-size:4px;color:var(--fg-muted);overflow:hidden">더보…</span></div><div style="position:absolute;left:5px;bottom:18px;font-size:4.5px;color:var(--danger);font-weight:700">여섯 — 글자가 잘림</div></div>
+              <div class="mini mini--tall" role="img" aria-label="칸이 너무 많은 탭바"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div style="position:absolute;left:0;right:0;bottom:0;display:flex;border-top:1px solid var(--line);padding:3px 1px 5px"><span style="flex:1;text-align:center;font-size:4px;color:var(--fg-muted);overflow:hidden">홈</span><span style="flex:1;text-align:center;font-size:4px;color:var(--fg-muted);overflow:hidden">거래</span><span style="flex:1;text-align:center;font-size:4px;color:var(--fg-muted);overflow:hidden">정산</span><span style="flex:1;text-align:center;font-size:4px;color:var(--fg-muted);overflow:hidden">가맹…</span><span style="flex:1;text-align:center;font-size:4px;color:var(--fg-muted);overflow:hidden">내정…</span><span style="flex:1;text-align:center;font-size:4px;color:var(--fg-muted);overflow:hidden">더보…</span></div><div style="position:absolute;left:5px;bottom:18px;font-size:4.5px;color:var(--danger);font-weight:700">여섯 칸이면 글자가 잘림</div></div>
             </div>
-            <figcaption>너무 많음<span>다섯 칸을 넘기면 글자가 잘립니다. 이럴 때는 <b>앱 구조를 다시 짜야 합니다</b></span></figcaption>
+            <figcaption>칸이 너무 많을 때<span>다섯 칸을 넘기면 글자가 잘립니다. 이럴 때는 <b>앱 구조를 다시 짜야 합니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div class="mini mini--tall" role="img" aria-label="같은 탭을 다시 누른 모습"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div style="position:absolute;left:0;right:0;bottom:0;display:flex;border-top:1px solid var(--line);padding:3px 2px 5px"><span style="flex:1;text-align:center"><span style="display:block;width:8px;height:8px;border-radius:2px;background:var(--accent);margin:0 auto 1px"></span><span style="font-size:4.5px;color:var(--accent);font-weight:700">거래</span></span></div><div style="position:absolute;left:5px;bottom:18px;font-size:4.5px;color:var(--accent);font-weight:700">같은 탭 → 맨 위로</div></div>
+              <div class="mini mini--tall" role="img" aria-label="같은 탭을 다시 누른 모습"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div style="position:absolute;left:0;right:0;bottom:0;display:flex;border-top:1px solid var(--line);padding:3px 2px 5px"><span style="flex:1;text-align:center"><span style="display:block;width:8px;height:8px;border-radius:2px;background:var(--accent);margin:0 auto 1px"></span><span style="font-size:4.5px;color:var(--accent);font-weight:700">거래</span></span></div><div style="position:absolute;left:5px;bottom:18px;font-size:4.5px;color:var(--accent);font-weight:700">다시 누르면 맨 위로</div></div>
             </div>
-            <figcaption>같은 탭 다시<span>지금 탭을 다시 누르면 <b>목록 맨 위로 올라갑니다.</b> 한 번 더 누르면 그 탭의 첫 화면으로 돌아갑니다</span></figcaption>
+            <figcaption>같은 탭을 다시 눌렀을 때<span>지금 탭을 다시 누르면 <b>목록 맨 위로 올라갑니다.</b> 한 번 더 누르면 그 탭의 첫 화면으로 돌아갑니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div class="mini mini--tall" role="img" aria-label="탭바를 감춘 모습"><div class="mini__bg"></div><div style="position:absolute;left:0;right:0;bottom:0;display:flex;border-top:1px solid var(--line);padding:3px 2px 5px;transform:translateY(100%)"></div><div class="mini__bg"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div></div><div style="position:absolute;left:5px;bottom:6px;font-size:4.5px;color:var(--fg-muted)">몰입 화면 — 탭바를 감춤</div></div>
+              <div class="mini mini--tall" role="img" aria-label="탭바를 감춘 모습"><div class="mini__bg"></div><div style="position:absolute;left:0;right:0;bottom:0;display:flex;border-top:1px solid var(--line);padding:3px 2px 5px;transform:translateY(100%)"></div><div class="mini__bg"><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w60"></div></div><div style="position:absolute;left:5px;bottom:6px;font-size:4.5px;color:var(--fg-muted)">몰입 화면이라 탭바를 감춤</div></div>
             </div>
-            <figcaption>감춤<span>영상이나 지도처럼 화면 전체를 쓰는 몰입 화면에서는 탭바를 감춥니다. 이때도 <b>원래 화면으로 돌아갈 버튼</b>은 꼭 남깁니다</span></figcaption>
+            <figcaption>몰입 화면에서 감출 때<span>영상이나 지도처럼 화면 전체를 쓰는 몰입 화면에서는 탭바를 감춥니다. 이때도 <b>원래 화면으로 돌아갈 버튼</b>은 꼭 남깁니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
               <div class="mini mini--tall" role="img" aria-label="넓은 화면에서 레일이 된 모습"><div class="mini__bg"></div><div style="position:absolute;left:0;top:0;bottom:0;width:22%;border-right:1px solid var(--line);padding:5px 2px"><div style="width:8px;height:8px;border-radius:2px;background:var(--accent);margin:0 auto 1px"></div><div style="font-size:4px;text-align:center;color:var(--accent)">거래</div><div style="width:8px;height:8px;border-radius:2px;background:var(--line-strong);margin:5px auto 1px"></div><div style="font-size:4px;text-align:center;color:var(--fg-muted)">정산</div></div></div>
             </div>
-            <figcaption>넓은 화면<span>같은 항목이 <b>레일</b>이 되어 화면 옆에 세로로 섭니다. 화면이 더 넓으면 사이드바로 바뀝니다</span></figcaption>
+            <figcaption>넓은 화면에서<span>같은 항목이 <b>레일</b>이 되어 화면 옆에 세로로 섭니다. 화면이 더 넓으면 사이드바로 바뀝니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -196,7 +196,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>바텀 탭바 대신 다른 것을 써야 하는 경우</b> — 넓은 화면이면 <a href="sidebar.html">사이드바</a>, 한 화면 안이면 <a href="tabs.html">탭</a>, 주 동작이면 FAB(5부), 숨겨도 되는 길이면 <a href="drawer.html">드로어</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>바텀 탭바 대신 다른 것을 써야 하는 경우</b> — 넓은 화면에서는 같은 항목을 <a href="sidebar.html">사이드바</a>로 보여 주고, 한 화면 안에서 내용만 바꾸려면 <a href="tabs.html">탭</a>을 씁니다. 글쓰기 같은 주요 동작은 FAB(5부)에 두고, 늘 보일 필요가 없는 길은 <a href="drawer.html">드로어</a>에 넣습니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -206,19 +206,19 @@
             <div class="shot">
               <div class="mini" role="img" aria-label="세 칸 탭바 재현"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div style="position:absolute;left:0;right:0;bottom:0;display:flex;border-top:1px solid var(--line);padding:3px 2px 5px"><span style="flex:1;text-align:center"><span style="display:block;width:8px;height:8px;border-radius:2px;background:var(--accent);margin:0 auto 1px"></span><span style="font-size:4.5px;color:var(--accent);font-weight:700">홈</span></span><span style="flex:1;text-align:center"><span style="display:block;width:8px;height:8px;border-radius:2px;background:var(--line-strong);margin:0 auto 1px"></span><span style="font-size:4.5px;color:var(--fg-muted)">검색</span></span><span style="flex:1;text-align:center"><span style="display:block;width:8px;height:8px;border-radius:2px;background:var(--line-strong);margin:0 auto 1px"></span><span style="font-size:4.5px;color:var(--fg-muted)">내 정보</span></span></div></div>
             </div>
-            <figcaption><b>세 칸</b>가장 안전한 칸 수입니다. 칸이 넓어서 글자가 잘릴 일이 없습니다</figcaption>
+            <figcaption><b>세 칸으로 나누기</b>가장 안전한 칸 수입니다. 칸이 넓어서 글자가 잘릴 일이 없습니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div class="mini" role="img" aria-label="가운데 동작 버튼 재현"><div class="mini__bg"><div class="mini__bar mini__bar--w60"></div><div class="mini__bar mini__bar--w80"></div><div class="mini__bar mini__bar--w40"></div></div><div style="position:absolute;left:0;right:0;bottom:0;display:flex;border-top:1px solid var(--line);padding:3px 2px 5px"><span style="flex:1;text-align:center"><span style="display:block;width:8px;height:8px;border-radius:2px;background:var(--line-strong);margin:0 auto 1px"></span><span style="font-size:4.5px;color:var(--fg-muted)">홈</span></span><span style="flex:1;text-align:center"><span style="display:block;width:12px;height:12px;border-radius:50%;background:var(--accent);margin:-6px auto 1px;color:#fff;font-size:7px;line-height:12px">＋</span></span><span style="flex:1;text-align:center"><span style="display:block;width:8px;height:8px;border-radius:2px;background:var(--line-strong);margin:0 auto 1px"></span><span style="font-size:4.5px;color:var(--fg-muted)">내 정보</span></span></div></div>
             </div>
-            <figcaption><b>가운데 동작</b>글쓰기 같은 주요 동작을 가운데 칸에 둡니다. 다른 화면으로 가는 탭이 아니라 <b>동작 버튼</b>이므로 다른 칸과 모양을 다르게 합니다</figcaption>
+            <figcaption><b>가운데 칸에 주요 동작 두기</b>글쓰기 같은 주요 동작을 가운데 칸에 둡니다. 다른 화면으로 가는 탭이 아니라 <b>동작 버튼</b>이므로 다른 칸과 모양을 다르게 합니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div class="mini" role="img" aria-label="레일 재현"><div class="mini__bg"></div><div style="position:absolute;left:0;top:0;bottom:0;width:22%;border-right:1px solid var(--line);padding:5px 2px"><div style="width:8px;height:8px;border-radius:2px;background:var(--accent);margin:0 auto 1px"></div><div style="font-size:4px;text-align:center;color:var(--accent)">홈</div><div style="width:8px;height:8px;border-radius:2px;background:var(--line-strong);margin:5px auto 1px"></div><div style="font-size:4px;text-align:center;color:var(--fg-muted)">검색</div></div></div>
             </div>
-            <figcaption><b>레일</b>태블릿 폭에서는 같은 항목이 화면 옆에 세로로 섭니다</figcaption>
+            <figcaption><b>태블릿에서 레일로 바꾸기</b>태블릿 폭에서는 같은 항목이 화면 옆에 세로로 섭니다</figcaption>
           </figure>
         </div>
       </section>
@@ -243,12 +243,12 @@ body.scrollTop = pos[next] || <span class="a">0</span>;
 <span class="t">padding-bottom</span>: <span class="a">calc</span>(10px + env(safe-area-inset-bottom));</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td><code>aria-current</code></td><td>지금 탭에 <code>"page"</code> 값을 답니다. 색만으로는 스크린 리더에 전해지지 않습니다</td></tr>
-            <tr><td>아이콘</td><td><code>aria-hidden</code>으로 스크린 리더에서 숨기고, <b>이름 글자를 읽게</b> 합니다</td></tr>
-            <tr><td>누르는 영역</td><td>48px 이상으로 잡습니다. 화면 아래 끝에 붙어 있어서 손가락으로 누르기 쉬운 자리이기도 합니다</td></tr>
-            <tr><td>배지</td><td>숫자만 읽히지 않도록 '읽지 않음 3건'처럼 <b>무슨 숫자인지까지</b> 라벨에 담습니다</td></tr>
+            <tr><td>탭의 아이콘</td><td><code>aria-hidden</code>으로 스크린 리더에서 숨기고, <b>이름 글자를 읽게</b> 합니다</td></tr>
+            <tr><td>누르는 영역의 크기</td><td>48px 이상으로 잡습니다. 화면 아래 끝에 붙어 있어서 손가락으로 누르기 쉬운 자리이기도 합니다</td></tr>
+            <tr><td>배지 숫자를 읽어 줄 때</td><td>숫자만 읽히지 않도록 '읽지 않음 3건'처럼 <b>무슨 숫자인지까지</b> 라벨에 담습니다</td></tr>
             <tr><td><kbd>Tab</kbd></td><td>칸마다 포커스가 한 번씩 거쳐 갑니다. 보통 서너 번이면 지나가서 부담이 적습니다</td></tr>
           </tbody>
         </table>
@@ -260,10 +260,10 @@ body.scrollTop = pos[next] || <span class="a">0</span>;
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>탭 = 독립된 스택</th><td>탭마다 자기 화면 기록과 스크롤 위치를 따로 저장합니다. 모든 탭을 전역 스택 하나로 다루면 <b>탭을 옮길 때마다 그 탭의 첫 화면으로</b> 돌아가서 불편해집니다.</td></tr>
-            <tr><th>배지 = 폴링 또는 푸시</th><td>배지 숫자는 모든 화면에 떠 있어서 자주 갱신해야 합니다. 폴링으로 받으면 요청 주기를, 푸시로 받으면 연결을 관리해야 하는데, 어느 쪽이든 <b>가장 자주 호출되는 API</b>가 되기 쉽습니다.</td></tr>
-            <tr><th>첫 탭 = 첫 질의</th><td>앱을 열면 첫 탭의 데이터가 곧바로 필요합니다. 나머지 탭의 데이터는 그 탭을 <b>열 때</b> 요청하고, 탭을 자주 오가는 앱이면 캐시를 둡니다.</td></tr>
-            <tr><th>갈래 수 = 제품 구조</th><td>탭이 여섯 개로 늘어나는 것은 대개 화면 설계의 문제가 아닙니다. <b>제품이 무엇을 하는 서비스인지</b>가 흐려졌을 때 이런 일이 생깁니다.</td></tr>
+            <tr><th>탭마다 따로 두는 화면 기록</th><td>탭마다 자기 화면 기록과 스크롤 위치를 따로 저장합니다. 모든 탭을 전역 스택 하나로 다루면 <b>탭을 옮길 때마다 그 탭의 첫 화면으로</b> 돌아가서 불편해집니다.</td></tr>
+            <tr><th>배지 숫자를 폴링이나 푸시로 받기</th><td>배지 숫자는 모든 화면에 떠 있어서 자주 갱신해야 합니다. 폴링으로 받으면 요청 주기를, 푸시로 받으면 연결을 관리해야 하는데, 어느 쪽이든 <b>가장 자주 호출되는 API</b>가 되기 쉽습니다.</td></tr>
+            <tr><th>앱을 열 때 첫 탭부터 요청하기</th><td>앱을 열면 첫 탭의 데이터가 곧바로 필요합니다. 나머지 탭의 데이터는 그 탭을 <b>열 때</b> 요청하고, 탭을 자주 오가는 앱이면 캐시를 둡니다.</td></tr>
+            <tr><th>탭 수에 드러나는 제품 구조</th><td>탭이 여섯 개로 늘어나는 것은 대개 화면 설계의 문제가 아닙니다. <b>제품이 무엇을 하는 서비스인지</b>가 흐려졌을 때 이런 일이 생깁니다.</td></tr>
           </tbody>
         </table>
         </div>
@@ -321,8 +321,8 @@ body.scrollTop = pos[next] || <span class="a">0</span>;
       <ol>
         <li><a href="../items/tabs.html"><b>탭</b><em>7부</em></a></li>
         <li><span class="na"><b>FAB</b><em>5부</em></span></li>
-        <li><span class="na"><b>세이프 에어리어</b><em>11부</em></span></li>
-        <li><span class="na"><b>배지</b><em>5부</em></span></li>
+        <li><a href="safearea.html"><b>세이프 에어리어</b><em>1부</em></a></li>
+        <li><a href="badge.html"><b>배지</b><em>5부</em></a></li>
       </ol>
       <p style="font-size:12.5px;color:var(--fg-muted)">회색으로 표시한 이름은 아직 따로 카드를 쓰지 않은 항목입니다.</p>
     </aside>

@@ -106,7 +106,7 @@
 
     var n = cur.filter(function (v, i) { return v !== saved[i]; }).length;
     var d = document.getElementById('dirty');
-    d.textContent = n ? n + '개 바뀜 — 저장하지 않았습니다' : '바뀐 것 없음';
+    d.textContent = n ? n + '개를 바꿨지만 아직 저장하지 않았습니다' : '바뀐 것 없음';
     d.dataset.n = String(n);
     document.getElementById('list').dataset.rows = String(idx.length);
   }

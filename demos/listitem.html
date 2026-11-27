@@ -29,7 +29,7 @@
       <option value="three">세 줄</option>
     </select>
   </label>
-  <label><input type="checkbox" id="wrap"> 자르지 말고 접기</label>
+  <label><input type="checkbox" id="wrap"> 긴 글을 자르지 말고 접기</label>
 </div>
 
 <div class="pad">
@@ -43,7 +43,7 @@
   <b>세로로 훑어 비교하기</b> 좋도록 줄을 가지런히 맞춰 둔다는 점이 다릅니다.<br>
   한 줄은 늘 세 자리로 나뉩니다. <b>앞</b>에는 아바타·아이콘·체크박스, <b>가운데</b>에는 제목과 보조 글,
   <b>뒤</b>에는 값·꺾쇠·스위치가 들어갑니다. 가운데 자리만 늘어나고 앞뒤 자리는 폭이 고정되어 있습니다.<br>
-  <b>자르지 말고 접기</b>를 켜 보세요. 글이 모두 보이는 대신 줄마다 높이가 달라집니다.
+  <b>긴 글을 자르지 말고 접기</b>를 켜 보세요. 글이 모두 보이는 대신 줄마다 높이가 달라집니다.
   목록에서는 보통 <b>자르는 쪽</b>을 고르는데, 줄 높이가 일정해야 세로로 훑어 읽기 쉽기 때문입니다.
 </p>
 
@@ -74,7 +74,7 @@
 
   list.addEventListener('click', function (e) {
     var b = e.target.closest('[data-t]');
-    if (b) log.innerHTML = '열기: <b>' + b.dataset.t + '</b>';
+    if (b) log.innerHTML = '<b>' + b.dataset.t + '</b> 줄을 열었습니다';
   });
   document.getElementById('lines').addEventListener('change', draw);
   document.getElementById('wrap').addEventListener('change', draw);

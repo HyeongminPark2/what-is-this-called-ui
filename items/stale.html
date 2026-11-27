@@ -77,12 +77,12 @@
         <p>데이터를 다시 받는 동안 화면에 보여 주는 방법들을 모았습니다. 아래 네 가지를 물어보면 방법마다 차이가 드러납니다.</p>
         <div class="scroll-x">
         <table class="grid axes">
-          <thead><tr><th></th><th>다시 받는 동안</th><th>언제 숫자인지</th><th>틀린 값을 보일 위험</th><th>쓸 만한 자리</th></tr></thead>
+          <thead><tr><th></th><th>다시 받는 동안 읽을 수 있는가</th><th>기준 시각을 적어야 하는가</th><th>틀린 값을 보일 위험</th><th>쓰기 알맞은 자리</th></tr></thead>
           <tbody>
-            <tr><td>옛 값을 보임</td><td><b>읽을 수 있다</b></td><td>적어야 한다</td><td>있다 — 그래서 적는다</td><td>목록 · 대시보드</td></tr>
-            <tr><td>비우고 스피너</td><td><b>아무것도 못 읽는다</b></td><td>필요 없다</td><td class="none">없다</td><td>처음 들어올 때</td></tr>
-            <tr><td><a href="skeleton.html">스켈레톤</a></td><td>자리만 보인다</td><td>필요 없다</td><td class="none">없다</td><td>처음 들어올 때</td></tr>
-            <tr><td>옛 값 + 흐리게</td><td>읽을 수 있다</td><td>적어야 한다</td><td>작다 — 바뀌는 중이 보인다</td><td><b>거의 늘 이쪽</b></td></tr>
+            <tr><td>옛 값을 보임</td><td><b>읽을 수 있음</b></td><td>적어야 함</td><td>있어서 기준 시각을 적음</td><td>목록 · 대시보드</td></tr>
+            <tr><td>비우고 스피너</td><td><b>아무것도 읽을 수 없음</b></td><td>필요 없음</td><td class="none">없음</td><td>처음 들어올 때</td></tr>
+            <tr><td><a href="skeleton.html">스켈레톤</a></td><td>자리만 보임</td><td>필요 없음</td><td class="none">없음</td><td>처음 들어올 때</td></tr>
+            <tr><td>옛 값을 흐리게 보임</td><td>읽을 수 있음</td><td>적어야 함</td><td>바뀌는 중임이 보여 작음</td><td><b>거의 모든 경우</b></td></tr>
           </tbody>
         </table>
         </div>
@@ -96,39 +96,39 @@
         <div class="states">
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:2px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-size:7.5px;color:var(--fg-muted)">이번 주 정산액</span><span style="display:block;font-size:15px;font-weight:700;">1,284만</span><span style="font-size:7.5px;color:var(--fg-muted)">방금 기준</span></div><span style="font-size:8.5px;color:var(--fg-muted)">막 받았다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:2px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-size:7.5px;color:var(--fg-muted)">이번 주 정산액</span><span style="display:block;font-size:15px;font-weight:700;">1,284만</span><span style="font-size:7.5px;color:var(--fg-muted)">방금 기준</span></div><span style="font-size:8.5px;color:var(--fg-muted)">막 받은 값</span></div>
             </div>
-            <figcaption>막 받음<span><b>가장 좋은</b> 상태입니다</span></figcaption>
+            <figcaption>값을 막 받았을 때<span><b>가장 좋은</b> 상태입니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:2px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-size:7.5px;color:var(--fg-muted)">이번 주 정산액</span><span style="display:block;font-size:15px;font-weight:700;">1,284만</span><span style="font-size:7.5px;color:#9a6700">3분 전 기준</span></div><span style="font-size:8.5px;color:var(--fg-muted)">묵었지만 읽힌다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:2px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-size:7.5px;color:var(--fg-muted)">이번 주 정산액</span><span style="display:block;font-size:15px;font-weight:700;">1,284만</span><span style="font-size:7.5px;color:#9a6700">3분 전 기준</span></div><span style="font-size:8.5px;color:var(--fg-muted)">오래됐지만 읽힘</span></div>
             </div>
-            <figcaption>묵음<span>시간이 지난 값이지만 <b>읽을 수 있습니다</b></span></figcaption>
+            <figcaption>시간이 조금 지났을 때<span>시간이 지난 값이지만 <b>읽을 수 있습니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:2px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-size:7.5px;color:var(--fg-muted)">이번 주 정산액</span><span style="display:block;font-size:15px;font-weight:700;color:var(--fg-muted);opacity:.55;">1,284만</span><span style="font-size:7.5px;color:var(--fg-muted)">다시 받는 중…</span></div><span style="font-size:8.5px;color:var(--fg-muted)">흐리게 — 바뀌는 중</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:2px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-size:7.5px;color:var(--fg-muted)">이번 주 정산액</span><span style="display:block;font-size:15px;font-weight:700;color:var(--fg-muted);opacity:.55;">1,284만</span><span style="font-size:7.5px;color:var(--fg-muted)">다시 받는 중…</span></div><span style="font-size:8.5px;color:var(--fg-muted)">흐려져 바뀌는 중임을 알림</span></div>
             </div>
-            <figcaption>다시 받는 중<span><b>옛 값을 흐리게</b> 보여 줍니다</span></figcaption>
+            <figcaption>새 값을 다시 받는 중<span><b>옛 값을 흐리게</b> 보여 줍니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:2px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-size:7.5px;color:var(--fg-muted)">이번 주 정산액</span><span style="display:grid;place-items:center;min-height:26px;font-size:8px;color:var(--fg-muted)">불러오는 중…</span></div><span style="font-size:8.5px;color:var(--fg-muted)">그동안 아무것도 못 읽는다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:2px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-size:7.5px;color:var(--fg-muted)">이번 주 정산액</span><span style="display:grid;place-items:center;min-height:26px;font-size:8px;color:var(--fg-muted)">불러오는 중…</span></div><span style="font-size:8.5px;color:var(--fg-muted)">그동안 아무것도 읽을 수 없음</span></div>
             </div>
-            <figcaption>비우고 스피너<span>다시 받는 동안 <b>빈 화면</b>이 됩니다</span></figcaption>
+            <figcaption>화면을 비우고 스피너를 띄울 때<span>다시 받는 동안 <b>빈 화면</b>이 됩니다</span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:2px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-size:7.5px;color:var(--fg-muted)">이번 주 정산액</span><span style="display:block;font-size:15px;font-weight:700;">1,284만</span></div><span style="font-size:8.5px;color:var(--fg-muted)">방금 값인 줄 안다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:2px;border:1px solid var(--danger);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-size:7.5px;color:var(--fg-muted)">이번 주 정산액</span><span style="display:block;font-size:15px;font-weight:700;">1,284만</span></div><span style="font-size:8.5px;color:var(--fg-muted)">방금 받은 값으로 오해함</span></div>
             </div>
-            <figcaption>기준 시각 없음<span>옛 값이 <b>방금 받은 값처럼 보입니다</b></span></figcaption>
+            <figcaption>기준 시각을 적지 않았을 때<span>옛 값이 <b>방금 받은 값처럼 보입니다</b></span></figcaption>
           </figure>
           <figure class="state" style="margin:0">
             <div class="shot">
-              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:2px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-size:7.5px;color:var(--fg-muted)">이번 주 정산액</span><span style="display:block;font-size:15px;font-weight:700;">1,284만</span><span style="font-size:7.5px;color:#9a6700">1시간 전 기준 · 새로 고침 ›</span></div><span style="font-size:8.5px;color:var(--fg-muted)">너무 묵으면 권한다</span></div>
+              <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:2px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-size:7.5px;color:var(--fg-muted)">이번 주 정산액</span><span style="display:block;font-size:15px;font-weight:700;">1,284만</span><span style="font-size:7.5px;color:#9a6700">1시간 전 기준 · 새로 고침 ›</span></div><span style="font-size:8.5px;color:var(--fg-muted)">새로 고침을 권함</span></div>
             </div>
-            <figcaption>너무 묵음<span>사용자에게 <b>새로 받으라고</b> 권합니다</span></figcaption>
+            <figcaption>값이 너무 오래됐을 때<span>사용자에게 <b>새로 받으라고</b> 권합니다</span></figcaption>
           </figure>
         </div>
       </section>
@@ -140,11 +140,11 @@
             <div class="anat" role="img" aria-label="오래된 데이터의 부분마다 번호를 붙인 그림. 오른쪽 목록에 번호마다 이름이 있습니다.">
               <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:10.5px">
-                  <div class="pin-out" data-pin="1" style="color:var(--accent)">옛 값을 그대로 둔다 — 빈 화면을 안 만든다</div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">언제 숫자인지 — '3분 전 기준'</div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">다시 받는 중에는 흐리게</div>
-                  <div class="pin-out" data-pin="4" style="color:var(--danger)">적지 않으면 방금 값인 줄 안다</div>
-                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">새로 고침 단추 — 사람이 직접 부를 길</div>
+                  <div class="pin-out" data-pin="1" style="color:var(--accent)">옛 값을 그대로 두어 빈 화면이 생기지 않음</div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">'3분 전 기준'처럼 기준 시각을 적음</div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">다시 받는 중에는 흐리게 표시</div>
+                  <div class="pin-out" data-pin="4" style="color:var(--danger)">기준을 적지 않으면 방금 값으로 오해함</div>
+                  <div class="pin-out" data-pin="5" style="color:var(--fg-muted)">사용자가 직접 누르는 새로 고침 버튼</div>
                   <div class="pin-out" data-pin="6" style="color:var(--danger)">돈 · 재고처럼 틀리면 안 되는 값은 예외</div>
                 </div>
               </div>
@@ -153,9 +153,9 @@
           <ol class="pin-list">
             <li><b>옛 값 <em>그대로 둠</em></b><span>옛 값을 그대로 두어 <b>빈 화면</b>이 생기지 않게 합니다</span></li>
             <li><b>기준 시각 <em>'3분 전'</em></b><span>값이 언제 기준인지 <b>반드시</b> 적습니다</span></li>
-            <li><b>흐리게 <em>다시 받는 중</em></b><span>값이 바뀌는 중임을 알립니다</span></li>
-            <li><b>안 적으면 <em>거짓말</em></b><span>기준 시각을 적지 않으면 사용자는 <b>방금 받은 값인 줄</b> 압니다</span></li>
-            <li><b>새로 고침 <em>사람이 부를 길</em></b><span>자동 갱신을 기다리기 싫을 때 사용자가 직접 누릅니다</span></li>
+            <li><b>흐린 표시 <em>다시 받는 중</em></b><span>값이 바뀌는 중임을 알립니다</span></li>
+            <li><b>기준 시각이 빠진 값 <em>방금 값으로 오해</em></b><span>기준 시각을 적지 않으면 사용자는 <b>방금 받은 값인 줄</b> 압니다</span></li>
+            <li><b>새로 고침 <em>사용자가 직접 누름</em></b><span>자동 갱신을 기다리기 싫을 때 사용자가 직접 누릅니다</span></li>
             <li><b>예외 <em>돈 · 재고</em></b><span>돈이나 재고처럼 <b>틀리면 안 되는</b> 값에는 이 방식을 쓰지 않습니다</span></li>
           </ol>
         </div>
@@ -174,7 +174,7 @@
         <h2 class="slot-label"><span class="n">6</span> 쓸 때 / 안 쓸 때</h2>
         <div class="twoup">
           <div class="do">
-            <h3>오래된 데이터를 쓰는 경우</h3>
+            <h3>옛 값을 보여 줄 때 지킬 것</h3>
             <ul>
               <li>데이터를 다시 받는 동안 <b>옛 값을 그대로</b> 둘 때</li>
               <li>숫자 옆에 <b>'○분 전 기준'</b>을 적을 때</li>
@@ -182,7 +182,7 @@
             </ul>
           </div>
           <div class="dont">
-            <h3>오래된 데이터를 쓰지 않는 경우</h3>
+            <h3>옛 값을 보여 줄 때 피할 것</h3>
             <ul>
               <li>다시 받을 때마다 <b>화면을 비울 때</b>. 화면이 깜빡이고 스크롤 위치가 튑니다</li>
               <li>기준 시각을 <b>적지 않을 때</b>. 사용자가 방금 받은 값인 줄 압니다</li>
@@ -191,7 +191,7 @@
             </ul>
           </div>
         </div>
-        <p style="margin:var(--s4) 0 0"><b>오래된 데이터 대신 다른 것을 써야 하는 경우</b> — 처음 그릴 때는 <a href="skeleton.html">스켈레톤</a>, 앞으로 될 값은 <a href="optimistic.html">낙관적 UI</a>, 연결이 없으면 <a href="offline.html">오프라인</a>, 바뀌는 자리만 고치려면 <a href="partialload.html">부분 로딩</a>.</p>
+        <p style="margin:var(--s4) 0 0"><b>옛 값 대신 다른 방법을 써야 하는 경우</b> — 화면을 처음 그릴 때는 <a href="skeleton.html">스켈레톤</a>으로 자리를 잡고, 앞으로 바뀔 값을 미리 보여 주려면 <a href="optimistic.html">낙관적 UI</a>를 씁니다. 연결이 아예 없을 때는 <a href="offline.html">오프라인</a> 항목을, 바뀌는 자리만 고치려면 <a href="partialload.html">부분 로딩</a> 항목을 봅니다.</p>
       </section>
 
       <section class="slot" id="s7">
@@ -201,19 +201,19 @@
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:2px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-size:7.5px;color:var(--fg-muted)">이번 주 정산액</span><span style="display:block;font-size:15px;font-weight:700;">1,284만</span><span style="font-size:7.5px;color:#9a6700">3분 전 기준</span></div></div>
             </div>
-            <figcaption><b>대시보드</b><b>대략 맞으면</b> 되는 값이라 옛 값을 보여 줘도 됩니다</figcaption>
+            <figcaption><b>대시보드에 옛 값 보여 주기</b><b>대략 맞으면</b> 되는 값이라 옛 값을 보여 줘도 됩니다</figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:152px;display:grid;gap:5px"><div style="display:grid;gap:2px;border:1px solid var(--accent);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-size:7.5px;color:var(--fg-muted)">이번 주 정산액</span><span style="display:block;font-size:15px;font-weight:700;">12건</span><span style="font-size:7.5px;color:var(--fg-muted)">방금 기준</span></div></div>
             </div>
-            <figcaption><b>목록</b>옛 값을 그대로 두므로 스크롤 위치가 <b>튀지 않습니다</b></figcaption>
+            <figcaption><b>목록을 다시 받는 동안 그대로 두기</b>옛 값을 그대로 두므로 스크롤 위치가 <b>튀지 않습니다</b></figcaption>
           </figure>
           <figure class="case" style="margin:0">
             <div class="shot">
               <div style="width:100%;max-width:150px;display:grid;gap:5px"><div style="display:grid;gap:2px;border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:6px 8px"><span style="font-size:7.5px;color:var(--fg-muted)">이번 주 정산액</span><span style="display:grid;place-items:center;min-height:26px;font-size:8px;color:var(--fg-muted)">불러오는 중…</span><span style="font-size:7.5px;color:var(--fg-muted)">확인 중…</span></div></div>
             </div>
-            <figcaption><b>재고 · 잔액</b><b>옛 값을 보여 주면 안 되는</b> 값입니다</figcaption>
+            <figcaption><b>재고와 잔액은 확인 중으로 표시하기</b><b>옛 값을 보여 주면 안 되는</b> 값입니다</figcaption>
           </figure>
         </div>
       </section>
@@ -237,14 +237,14 @@ state.loading = <span class="t">false</span>;
 [aria-busy="true"] { <span class="a">opacity</span>: <span class="a">.55</span>; <span class="a">transition</span>: opacity <span class="a">.15s</span>; }</pre>
         <div class="scroll-x">
         <table class="grid kbd-table">
-          <thead><tr><th>키와 동작</th><th>그때 일어나야 하는 일</th></tr></thead>
+          <thead><tr><th>키와 마크업</th><th>그때 일어나야 하는 일</th></tr></thead>
           <tbody>
             <tr><td><code>aria-busy</code></td><td>다시 받는 중이라는 표시를 값이 있는 <b>그 자리에</b> 붙입니다</td></tr>
             <tr><td><code>&lt;time datetime&gt;</code></td><td>기준 시각을 <b>프로그램도 읽을 수 있게</b> 적습니다</td></tr>
             <tr><td><code>aria-live</code></td><td>숫자가 저절로 바뀌는 자리에 쓸 때는 조심합니다. 값이 바뀔 때마다 스크린 리더가 <b>계속 읽어 줍니다</b></td></tr>
-            <tr><td>새로 고침 단추</td><td>자동 갱신만 믿지 말고 <b>사용자가 직접 새로 받을 수 있는</b> 버튼을 둡니다</td></tr>
-            <tr><td>초점</td><td>다시 받아도 <b>초점이 사라지지 않게</b> 합니다</td></tr>
-            <tr><td>확인하는 법</td><td>네트워크 속도를 느리게 설정하고 <b>빈 화면이 생기는지</b> 봅니다</td></tr>
+            <tr><td>새로 고침 버튼을 둘 때</td><td>자동 갱신만 믿지 말고 <b>사용자가 직접 새로 받을 수 있는</b> 버튼을 둡니다</td></tr>
+            <tr><td>다시 받은 뒤의 초점</td><td>다시 받아도 <b>초점이 사라지지 않게</b> 합니다</td></tr>
+            <tr><td>확인하는 방법</td><td>네트워크 속도를 느리게 설정하고 <b>빈 화면이 생기는지</b> 봅니다</td></tr>
           </tbody>
         </table>
         </div>
@@ -255,10 +255,10 @@ state.loading = <span class="t">false</span>;
         <div class="scroll-x">
         <table class="grid">
           <tbody>
-            <tr><th>기준 시각을 같이</th><td>응답에 <code>as_of</code>가 있어야 화면에 <b>'3분 전'</b>을 적을 수 있습니다.</td></tr>
-            <tr><th>얼마나 묵어도 되나</th><td>서버가 <code>max-age</code>를 정해 주면 화면이 <b>언제 새로 받아야 할지</b> 알 수 있습니다.</td></tr>
-            <tr><th><code>ETag</code></th><td>값이 바뀌지 않았으면 서버가 <b>304</b>로 답해 본문을 다시 보내지 않으므로 통신량이 줄어듭니다.</td></tr>
-            <tr><th>정확해야 하는 값</th><td>재고나 잔액 응답에는 <b>캐시하지 말라</b>는 지시를 적어 주는 편이 안전합니다.</td></tr>
+            <tr><th>응답에 기준 시각 담기</th><td>응답에 <code>as_of</code>가 있어야 화면에 <b>'3분 전'</b>을 적을 수 있습니다.</td></tr>
+            <tr><th>값을 얼마나 오래 써도 되는지 정하기</th><td>서버가 <code>max-age</code>를 정해 주면 화면이 <b>언제 새로 받아야 할지</b> 알 수 있습니다.</td></tr>
+            <tr><th><code>ETag</code>로 통신량 줄이기</th><td>값이 바뀌지 않았으면 서버가 <b>304</b>로 답해 본문을 다시 보내지 않으므로 통신량이 줄어듭니다.</td></tr>
+            <tr><th>정확해야 하는 값은 캐시 막기</th><td>재고나 잔액 응답에는 <b>캐시하지 말라</b>는 지시를 적어 주는 편이 안전합니다.</td></tr>
           </tbody>
         </table>
         </div>

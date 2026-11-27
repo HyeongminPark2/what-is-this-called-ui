@@ -19,12 +19,12 @@ def alert(c, mark, text, label, note="", ok=None, cues=True):
 
 ANAT = '''              <div style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px;font-family:var(--mono);font-size:11px">
-                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">--color-success<span style="color:var(--fg-faint)"> ← 끝났다 · 맞다</span></div>
-                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">--color-warning<span style="color:var(--fg-faint)"> ← 되지만 봐 달라</span></div>
-                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">--color-danger<span style="color:var(--fg-faint)"> ← 안 됐다 · 지운다</span></div>
-                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">--color-info<span style="color:var(--fg-faint)"> ← 그냥 알린다</span></div>
+                  <div class="pin-out" data-pin="1" style="color:var(--fg-muted)">--color-success<span style="color:var(--fg-faint)"> ← 끝남 · 맞음</span></div>
+                  <div class="pin-out" data-pin="2" style="color:var(--fg-muted)">--color-warning<span style="color:var(--fg-faint)"> ← 되지만 확인 필요</span></div>
+                  <div class="pin-out" data-pin="3" style="color:var(--fg-muted)">--color-danger<span style="color:var(--fg-faint)"> ← 실패함 · 지움</span></div>
+                  <div class="pin-out" data-pin="4" style="color:var(--fg-muted)">--color-info<span style="color:var(--fg-faint)"> ← 안내만 함</span></div>
                   <div class="pin-out" data-pin="5" style="color:var(--accent)">각각 <b>바탕 · 글 · 테두리</b> 세 자리</div>
-                  <div class="pin-out" data-pin="6" style="color:var(--danger)">색만으로는 <b>못 가르는 사람</b>이 있다</div>
+                  <div class="pin-out" data-pin="6" style="color:var(--danger)">색만으로는 <b>구별하지 못하는 사람</b>도 있음</div>
                 </div>
               </div>'''
 
@@ -50,29 +50,29 @@ D = dict(
      "색 하나를 세 자리에 그대로 쓰면 <b>대비비가 맞지 않기</b> 때문입니다."),
     ("자주 잘못 부르는 이름",
      "<b>브랜드 색</b> — <a href=\"color.html\">색 토큰</a>의 주된 색은 <b>어느 브랜드인지</b>를 나타내고, 상태 색은 <b>무슨 일이 생겼는지</b>를 나타냅니다.<br>"
-     "<b>빨강 = 삭제</b> — 빨강은 <b>되돌릴 수 없는 일</b>을 나타내는 색이지, 삭제에만 쓰는 색이 아닙니다.<br>"
-     "<b>초록 = 켜짐</b> — <a href=\"switch.html\">스위치</a>가 켜진 상태에는 보통 <b>주된 색</b>을 씁니다."),
+     "<b>빨강은 삭제 색</b> — 빨강은 <b>되돌릴 수 없는 일</b>을 나타내는 색이지, 삭제에만 쓰는 색이 아닙니다.<br>"
+     "<b>초록은 켜짐 색</b> — <a href=\"switch.html\">스위치</a>가 켜진 상태에는 보통 <b>주된 색</b>을 씁니다."),
   ]),
   axes=ax("상태 색"),
   oneline="<b>색은 두 번째 단서로 써야 합니다.</b> 모양이나 말로 먼저 상태를 알리고, 색은 같은 내용을 한 번 더 보여 주는 데 씁니다.",
-  s4_title="네 색", s4_hint="무슨 일이 생겼는지 알리는 색",
+  s4_title="상태를 알리는 네 가지 색", s4_hint="무슨 일이 생겼는지 알리는 색",
   states=states([
-    (alert("#1a7f37", "✓", "정산이 들어왔습니다", "success", "끝났다 · 맞다", True), "성공", "사용자가 더 <b>할 일이 없습니다</b>"),
-    (alert("#9a6700", "!", "정산이 하루 밀렸습니다", "warning", "되지만 봐 달라"), "주의", "진행을 막지는 않습니다"),
-    (alert("#cf222e", "✕", "계좌가 맞지 않습니다", "danger", "안 됐다 · 지운다"), "오류", "문제를 <b>고쳐야</b> 다음으로 넘어갈 수 있습니다"),
-    (alert("#0969da", "i", "다음 정산은 금요일", "info", "그냥 알린다"), "정보", "상태가 아니라 안내를 전합니다"),
+    (alert("#1a7f37", "✓", "정산이 들어왔습니다", "success", "끝남 · 맞음", True), "성공을 알릴 때", "사용자가 더 <b>할 일이 없습니다</b>"),
+    (alert("#9a6700", "!", "정산이 하루 밀렸습니다", "warning", "되지만 확인 필요"), "주의를 줄 때", "진행을 막지는 않습니다"),
+    (alert("#cf222e", "✕", "계좌가 맞지 않습니다", "danger", "실패함 · 지움"), "오류를 알릴 때", "문제를 <b>고쳐야</b> 다음으로 넘어갈 수 있습니다"),
+    (alert("#0969da", "i", "다음 정산은 금요일", "info", "안내만 함"), "안내를 전할 때", "상태가 아니라 안내를 전합니다"),
     (alert("#1a7f37", "", "정산이 들어왔습니다", "색만", "단서가 하나뿐", False, False),
-     "색만", "<b>색을 구별하지 못하면</b> 상태를 알 수 없습니다"),
-    (alert("#8a8f99", "·", "불러오는 중입니다", "neutral", "아직 모른다"), "중립", "결과가 <b>아직</b> 나오지 않았습니다"),
+     "색만으로 알릴 때", "<b>색을 구별하지 못하면</b> 상태를 알 수 없습니다"),
+    (alert("#8a8f99", "·", "불러오는 중입니다", "neutral", "결과를 아직 모름"), "결과를 기다리는 중립 상태", "결과가 <b>아직</b> 나오지 않았습니다"),
   ]),
   anat=ANAT,
   pins=pins([
-    ("성공", "끝났다", "더 할 일이 <b>없다</b>는 뜻입니다"),
-    ("주의", "봐 달라", "진행을 막지는 <b>않습니다</b>"),
-    ("오류", "안 됐다", "문제를 <b>고쳐야</b> 넘어갈 수 있습니다"),
-    ("정보", "알린다", "상태가 아니라 <b>안내</b>를 전합니다"),
-    ("세 자리", "바탕·글·테두리", "같은 색을 세 자리에 <b>그대로 쓰면</b> 대비비가 맞지 않습니다"),
-    ("색만", "위험하다", "색 옆에 <b>모양과 말</b>을 함께 둡니다"),
+    ("성공", "success", "더 할 일이 <b>없다</b>는 뜻입니다"),
+    ("주의", "warning", "진행을 막지는 <b>않습니다</b>"),
+    ("오류", "danger · error", "문제를 <b>고쳐야</b> 넘어갈 수 있습니다"),
+    ("정보", "info", "상태가 아니라 <b>안내</b>를 전합니다"),
+    ("세 자리", "bg · fg · border", "같은 색을 세 자리에 <b>그대로 쓰면</b> 대비비가 맞지 않습니다"),
+    ("색만", "color only", "색 옆에 <b>모양과 말</b>을 함께 둡니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
           남성 스무 명 가운데 한 명쯤이 <b>적록 색각</b>입니다.
@@ -83,6 +83,8 @@ D = dict(
           ✓와 ✕는 색을 구별하지 못해도 모양이 다르기 때문입니다.
           여기에 '승인됨' · '실패' 같은 <b>말</b>까지 붙이면
           스크린 리더로 듣는 사람에게도 상태가 전해집니다.</p>''',
+  do_title="상태 색을 쓸 때 지킬 것",
+  dont_title="상태 색을 쓸 때 피할 것",
   do=ul([
     "색마다 <b>바탕 · 글 · 테두리</b> 세 값을 따로 두기",
     "색 옆에 ✓ · ! · ✕ 같은 <b>모양</b>을 두기",
@@ -94,13 +96,15 @@ D = dict(
     "상태 색을 <b>브랜드 색</b>으로 쓰기. 그 색이 상태를 뜻하는지 장식인지 가릴 수 없게 됩니다",
     "주의와 오류를 <b>섞어 쓰기</b>. 사용자가 둘을 구별하지 못해 결국 둘 다 대수롭지 않게 넘깁니다",
   ]),
-  instead='색 체계 전체는 <a href="color.html">색 토큰</a>, 읽히는 밝기는 <a href="contrast.html">대비비</a>, 오류 문구는 <a href="errortext.html">오류 문구</a>, 알림 부품은 <a href="toast.html">토스트</a>.',
+  instead_title="함께 보면 좋은 항목",
+  instead='색 체계 전체는 <a href="color.html">색 토큰</a> 항목에서, 글이 읽히는 밝기는 <a href="contrast.html">대비비</a> 항목에서 다룹니다. 오류를 알리는 글은 <a href="errortext.html">오류 문구</a> 항목에서, 알림을 띄우는 부품은 <a href="toast.html">토스트</a> 항목에서 설명합니다.',
   cases=cases([
-    (alert("#cf222e", "✕", "계좌 번호를 확인해 주세요", "입력 오류", "", True), "입력 오류", "틀린 입력칸 옆에 <b>붙여서</b> 보여 줍니다"),
-    (alert("#1a7f37", "✓", "저장했습니다", "토스트", "", True), "저장 확인", "짧게 떴다가 사라집니다"),
-    (alert("#9a6700", "!", "3건이 기한을 넘겼습니다", "배지", "", True), "배지", "숫자와 <b>함께</b> 씁니다"),
+    (alert("#cf222e", "✕", "계좌 번호를 확인해 주세요", "입력 오류", "", True), "입력 오류를 입력칸 옆에 알리기", "틀린 입력칸 옆에 <b>붙여서</b> 보여 줍니다"),
+    (alert("#1a7f37", "✓", "저장했습니다", "토스트", "", True), "저장했다고 잠깐 알리기", "짧게 떴다가 사라집니다"),
+    (alert("#9a6700", "!", "3건이 기한을 넘겼습니다", "배지", "", True), "배지에 숫자와 함께 쓰기", "숫자와 <b>함께</b> 씁니다"),
   ]),
-  s8_title="최소 코드와 규칙", s8_hint="상태 색을 코드로 옮기는 법",
+  s8_title="최소 코드와 지킬 규칙", s8_hint="상태 색을 코드로 옮기는 방법",
+  keys_heads="<th>속성과 기준</th><th>쓰면 일어나는 일</th>",
   code_lede="색마다 세 자리의 값을 두고, 마크업에는 <b>모양과 말</b>을 함께 넣습니다.",
   code='''<span class="c">/* 색 하나에 세 자리 값을 둔다 */</span>
 :root {
@@ -123,12 +127,12 @@ D = dict(
     ("<code>aria-invalid</code>", "틀린 입력칸에 붙입니다. 색과는 <b>별도로</b> 오류 상태가 전해집니다"),
     ("<code>aria-hidden</code>", "✓·✕ 같은 기호는 <b>읽지 않게</b> 하고, 상태는 말로 따로 적습니다"),
     ("대비비 4.5:1", "상태를 알리는 글자도 <b>본문과 같은 기준</b>을 지킵니다"),
-    ("확인하는 법", "화면을 <b>흑백으로</b> 바꿔도 상태가 읽히는지 봅니다"),
+    ("확인하는 방법", "화면을 <b>흑백으로</b> 바꿔도 상태가 읽히는지 봅니다"),
   ]),
   backend=rows([
-    ("상태는 <b>이름</b>으로", "서버가 <code>status: \"failed\"</code>처럼 상태 이름을 보내면 화면이 색과 모양을 고릅니다. 서버는 색 코드나 문구를 보내지 않습니다."),
-    ("이유를 같이", "<code>reason: \"account_mismatch\"</code>처럼 이유까지 보내면 화면에 <b>무엇을 고쳐야 하는지</b>까지 적을 수 있습니다."),
-    ("가짓수를 좁게", "상태가 열 가지로 늘어나면 색이 모자랍니다. 그래서 상태는 <b>네 갈래로 묶어</b> 보내고, 자세한 내용은 글로 적습니다."),
+    ("상태는 <b>이름</b>으로 보내기", "서버가 <code>status: \"failed\"</code>처럼 상태 이름을 보내면 화면이 색과 모양을 고릅니다. 서버는 색 코드나 문구를 보내지 않습니다."),
+    ("상태의 이유도 함께 보내기", "<code>reason: \"account_mismatch\"</code>처럼 이유까지 보내면 화면에 <b>무엇을 고쳐야 하는지</b>까지 적을 수 있습니다."),
+    ("상태 가짓수를 네 갈래로 묶기", "상태가 열 가지로 늘어나면 색이 모자랍니다. 그래서 상태는 <b>네 갈래로 묶어</b> 보내고, 자세한 내용은 글로 적습니다."),
   ]),
   plat_lede="네 가지 색을 쓴다는 틀은 같지만, 플랫폼마다 <b>쓰는 색조</b>가 조금씩 다릅니다.",
   plats=plats([

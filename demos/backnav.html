@@ -18,12 +18,12 @@
 <body>
 <div class="bar">
   <b>뒤로가기</b>
-  <label>들어온 길 <select class="sel" id="path" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>이 화면에 들어온 길 <select class="sel" id="path" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="list">목록에서 눌러서</option>
     <option value="search">검색 결과에서</option>
     <option value="link">받은 링크로 바로</option>
   </select></label>
-  <label>단추가 하는 일 <select class="sel" id="kind" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+  <label>뒤로 단추가 하는 일 <select class="sel" id="kind" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
     <option value="back">뒤로(기록)</option>
     <option value="up">위로(상위)</option>
   </select></label>
@@ -80,7 +80,7 @@
     }).join('');
 
     var rd = document.getElementById('read');
-    rd.innerHTML = '기록 <b>' + st.length + '칸</b> · 단추는 <b>' + (kind === 'back' ? '뒤로(기록)' : '위로(상위)') + '</b>' +
+    rd.innerHTML = '방문 기록 <b>' + st.length + '칸</b> · 단추는 <b>' + (kind === 'back' ? '뒤로(기록)' : '위로(상위)') + '</b>' +
       '<br>누르면 가는 곳 <b>' + (dead ? '없음' : dest) + '</b>' +
       (dead ? ' <span class="warn">· 링크로 바로 들어오면 방문 기록에 앞 화면이 없습니다</span>' : '') +
       (kind === 'back' && prev && prev !== UP ? ' <span class="warn">· 상위 화면이 아니라 들어온 길로 돌아갑니다</span>' : '');

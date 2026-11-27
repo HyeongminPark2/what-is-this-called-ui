@@ -22,11 +22,11 @@ PIPE = lambda a, b, c, d: step('스타일', a) + step('배치', b) + step('칠�
 ANAT = '''              <div class="anat--wide" style="background:var(--bg);border-radius:var(--r2);padding:18px 10px 16px 0">
                 <div style="padding-left:26px;display:grid;gap:14px">
                   <div class="pin-out" data-pin="1" style="max-width:230px;display:flex;gap:3px">''' + PIPE(1, 0, 0, 1) + '''</div>
-                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">transform · opacity — 배치도 칠하기도 건너뛴다</div>
-                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--warn)">color · box-shadow — 다시 칠한다</div>
-                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">left · width · margin — 배치부터 다시</div>
-                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">한 프레임에 쓸 수 있는 시간 = 16.7ms</div>
-                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">쓰고 바로 읽으면 그 자리에서 배치가 돈다</div>
+                  <div class="pin-out" data-pin="2" style="font-family:var(--mono);font-size:10.5px;color:var(--accent)">transform과 opacity는 배치와 칠하기를 건너뜀</div>
+                  <div class="pin-out" data-pin="3" style="font-family:var(--mono);font-size:10.5px;color:var(--warn)">color와 box-shadow는 다시 칠함</div>
+                  <div class="pin-out" data-pin="4" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">left·width·margin은 배치부터 다시 함</div>
+                  <div class="pin-out" data-pin="5" style="font-family:var(--mono);font-size:10.5px;color:var(--fg-muted)">한 프레임에 쓸 수 있는 시간은 16.7ms</div>
+                  <div class="pin-out" data-pin="6" style="font-family:var(--mono);font-size:10.5px;color:var(--danger)">쓰고 바로 읽으면 그 자리에서 배치를 계산함</div>
                 </div>
               </div>'''
 
@@ -56,22 +56,22 @@ D = dict(
   ]),
   axes=ax("무엇을 움직이나"),
   oneline="<b>자리를 옮길 때는 <code>transform</code>, 나타나거나 사라질 때는 <code>opacity</code></b>를 씁니다. 이 두 속성으로 만들 수 없는 움직임이라면 대개 움직임 설계를 다시 보는 편이 빠릅니다.",
-  s4_title="속성별 비용", s4_hint="어느 단계부터 다시 하나",
+  s4_title="속성마다 다른 비용", s4_hint="속성을 바꿨을 때 어느 단계부터 다시 하는지",
   states=states([
-    (band("transform", PIPE(1, 0, 0, 1), "배치 · 칠하기 건너뜀 — 가장 싸다"), "자리 옮기기", "<code>translate</code>·<code>scale</code>·<code>rotate</code>로 자리와 크기, 각도를 바꿉니다"),
-    (band("opacity", PIPE(1, 0, 0, 1), "같은 길. 투명도만 바꾼다"), "사라지기", "<b>페이드</b> 효과에 쓰는 속성입니다"),
-    (band("color · background", PIPE(1, 0, 3, 1), "다시 칠한다 — 중간", 2), "색 바뀜", "자리는 그대로지만 픽셀은 다시 칠합니다"),
-    (band("box-shadow · filter", PIPE(1, 0, 3, 1), "넓은 영역을 다시 칠한다", 2), "그림자 · 흐림", "다시 칠하는 면적이 넓어서 생각보다 비용이 큽니다"),
-    (band("left · top · margin", PIPE(1, 2, 2, 1), "배치부터 전부 다시 — 가장 비싸다", True), "자리 바꾸기", "<b>같은 결과를 transform으로</b> 낼 수 있습니다"),
-    (band("width · height · font-size", PIPE(1, 2, 2, 1), "형제들 자리까지 흔든다", True), "크기 바꾸기", "<b>scale</b>로 대신할 수 있는지 먼저 따져 봅니다"),
+    (band("transform", PIPE(1, 0, 0, 1), "배치와 칠하기를 건너뛰어 가장 쌈"), "transform으로 자리 옮기기", "<code>translate</code>·<code>scale</code>·<code>rotate</code>로 자리와 크기, 각도를 바꿉니다"),
+    (band("opacity", PIPE(1, 0, 0, 1), "투명도만 바꿔 같은 단계를 거침"), "opacity로 사라지게 하기", "<b>페이드</b> 효과에 쓰는 속성입니다"),
+    (band("color · background", PIPE(1, 0, 3, 1), "다시 칠해서 비용은 중간", 2), "색을 바꿀 때", "자리는 그대로지만 픽셀은 다시 칠합니다"),
+    (band("box-shadow · filter", PIPE(1, 0, 3, 1), "넓은 영역을 다시 칠함", 2), "그림자나 흐림을 바꿀 때", "다시 칠하는 면적이 넓어서 생각보다 비용이 큽니다"),
+    (band("left · top · margin", PIPE(1, 2, 2, 1), "배치부터 다시 해서 가장 비쌈", True), "left·top으로 자리 바꾸기", "<b>같은 결과를 transform으로</b> 낼 수 있습니다"),
+    (band("width · height · font-size", PIPE(1, 2, 2, 1), "옆 요소 자리까지 다시 계산함", True), "width·height로 크기 바꾸기", "<b>scale</b>로 대신할 수 있는지 먼저 따져 봅니다"),
   ]),
   anat=ANAT,
   pins=pins([
     ("네 단계", "스타일 → 배치 → 칠하기 → 합치기", "뒤 단계일수록 비용이 적습니다. 속성을 바꿨을 때 <b>어느 단계부터 다시 하느냐</b>가 비용을 정합니다"),
-    ("가장 싼 둘", "transform · opacity", "스타일만 바꾸고 배치와 칠하기를 건너뛰어 <b>바로 합치기</b>로 갑니다"),
-    ("중간", "색 · 그림자", "자리는 그대로지만 <b>다시 칠해야</b> 합니다"),
-    ("가장 비싼 것", "left · width · margin", "그 줄 전체, 때로는 문서 전체의 자리를 <b>다시 계산합니다</b>"),
-    ("예산", "16.7ms", "60fps 기준으로 한 프레임에 쓸 수 있는 시간입니다. 여기서 <b>브라우저가 쓰는 시간도</b> 빼야 합니다"),
+    ("비용이 가장 적은 두 속성", "transform · opacity", "스타일만 바꾸고 배치와 칠하기를 건너뛰어 <b>바로 합치기</b>로 갑니다"),
+    ("비용이 중간인 속성", "색 · 그림자", "자리는 그대로지만 <b>다시 칠해야</b> 합니다"),
+    ("비용이 가장 큰 속성", "left · width · margin", "그 줄 전체, 때로는 문서 전체의 자리를 <b>다시 계산합니다</b>"),
+    ("한 프레임 예산", "16.7ms", "60fps 기준으로 한 프레임에 쓸 수 있는 시간입니다. 여기서 <b>브라우저가 쓰는 시간도</b> 빼야 합니다"),
     ("쓰고 바로 읽기", "layout thrashing", "<code>el.style.width=…; el.offsetWidth</code>처럼 쓰고 바로 읽으면 그 줄에서 배치 계산이 <b>즉시</b> 일어납니다"),
   ]),
   anat_note='''        <p style="font-size:13px;color:var(--fg-muted);margin:var(--s3) 0 0">
@@ -80,6 +80,9 @@ D = dict(
           브라우저는 정확한 값을 돌려주려고 <b>그 자리에서 배치를 다시</b> 계산합니다.
           그래서 요소가 100개면 배치 계산도 100번 일어납니다.
           반면 <b>읽을 값을 먼저 다 읽고 쓸 값을 나중에 다 쓰면</b> 배치 계산은 한 번으로 끝납니다.</p>''',
+  do_title="비용이 적은 속성으로 움직이는 방법",
+  dont_title="움직임을 만들 때 피할 속성과 습관",
+  instead_title="속성을 바꿔도 화면이 무거울 때 살펴볼 것",
   do=ul([
     "자리를 옮길 때. <code>transform: translate()</code>를 씁니다",
     "크기를 바꿀 때. <code>scale()</code>로 대신할 수 있는지 먼저 봅니다",
@@ -92,26 +95,26 @@ D = dict(
     "반복문 안에서 값을 <b>쓰고 바로 읽을</b> 때",
     "<code>will-change</code>를 아무 데나 걸 때. 레이어가 늘어나면 그만큼 <b>메모리를 씁니다</b>",
   ]),
-  instead='긴 목록이 무거우면 <a href="virtual.html">가상 스크롤</a>, 그림이 무거우면 그림 크기 줄이기, 애니메이션이 많으면 <a href="reducedmotion.html">모션 줄이기</a>부터.',
+  instead='긴 목록 때문에 무거우면 <a href="virtual.html">가상 스크롤</a>을 쓰고, 그림이 무거우면 그림 크기를 줄입니다. 애니메이션이 많아서 무겁다면 <a href="reducedmotion.html">모션 줄이기</a>부터 살펴봅니다.',
   cases=cases([
     ('''              <div style="width:100%;max-width:152px;font-family:var(--mono);font-size:9px;display:grid;gap:3px">
                 <span style="color:var(--danger)">left: 0 → 200px</span>
                 <span style="color:var(--accent)">transform: translateX(200px)</span>
-                <span style="color:var(--fg-muted)">같은 결과, 다른 값</span>
+                <span style="color:var(--fg-muted)">결과는 같고 비용만 다름</span>
               </div>''',
-     "자리 옮김", "결과가 같으면 <b>비용이 적은 쪽</b>을 고릅니다"),
+     "자리를 옮길 때 속성 고르기", "결과가 같으면 <b>비용이 적은 쪽</b>을 고릅니다"),
     ('''              <div style="width:100%;max-width:152px;font-family:var(--mono);font-size:9px;display:grid;gap:3px">
-                <span style="color:var(--danger)">height: 0 → auto <span style="color:var(--fg-muted)">(안 된다)</span></span>
+                <span style="color:var(--danger)">height: 0 → auto <span style="color:var(--fg-muted)">(전환 안 됨)</span></span>
                 <span style="color:var(--accent)">grid-template-rows: 0fr → 1fr</span>
               </div>''',
-     "펼치기", "높이를 <code>auto</code>로 두면 전환이 되지 않아서 오랫동안 우회하는 방법을 썼습니다. 요즘은 <b>격자 비율</b>을 바꿔서 펼칩니다"),
+     "높이를 펼치는 방법", "높이를 <code>auto</code>로 두면 전환이 되지 않아서 오랫동안 우회하는 방법을 썼습니다. 요즘은 <b>격자 비율</b>을 바꿔서 펼칩니다"),
     ('''              <div style="width:100%;max-width:152px;font-family:var(--mono);font-size:9px;display:grid;gap:3px">
                 <span style="color:var(--fg-muted)">// 읽기를 먼저</span>
                 <span>const ws = els.map(e =&gt; e.offsetWidth);</span>
                 <span style="color:var(--fg-muted)">// 쓰기를 나중에</span>
                 <span>els.forEach((e,i) =&gt; e.style.transform = …);</span>
               </div>''',
-     "읽기와 쓰기 가르기", "배치 계산이 <b>100번에서 한 번</b>으로 줄어듭니다"),
+     "읽기와 쓰기를 나눠 하기", "배치 계산이 <b>100번에서 한 번</b>으로 줄어듭니다"),
   ]),
   s8_title="최소 코드와 규칙", s8_hint="구현할 때 지킬 최소 규칙",
   code_lede="움직임은 <code>transform</code>과 <code>opacity</code>로 적고, 값을 읽는 코드와 쓰는 코드를 나눕니다.",
@@ -127,19 +130,20 @@ D = dict(
 <span class="c">// 읽기를 먼저, 쓰기를 나중에</span>
 <span class="k">const</span> tops = items.map(el =&gt; el.getBoundingClientRect().top);   <span class="c">// 읽기</span>
 items.forEach((el, i) =&gt; { el.style.transform = <span class="s">`translateY(${</span>tops[i]<span class="s">}px)`</span>; });  <span class="c">// 쓰기</span>''',
+  keys_heads="<th>알아 둘 규칙</th><th>자세한 내용</th>",
   keys=kbd([
-    ("<code>will-change</code>는 <b>미리</b>, 그리고 <b>치운다</b>", "움직이기 직전에 켜고 움직임이 끝나면 지웁니다. 늘 켜 두면 레이어가 계속 쌓입니다"),
-    ("<code>transform</code>은 <b>새 기준</b>을 만든다", "자식 요소의 <code>position:fixed</code>가 화면이 아니라 <b>이 상자</b>를 기준으로 자리를 잡습니다"),
-    ("<code>opacity</code>도 쌓임 맥락을 만든다", "<a href=\"../items/zindex.html\">z-index</a>가 듣지 않을 때 흔히 이것이 원인입니다"),
+    ("<code>will-change</code>는 <b>미리</b> 켜고 <b>끝나면</b> 지우기", "움직이기 직전에 켜고 움직임이 끝나면 지웁니다. 늘 켜 두면 레이어가 계속 쌓입니다"),
+    ("<code>transform</code>이 만드는 <b>새 기준</b>", "자식 요소의 <code>position:fixed</code>가 화면이 아니라 <b>이 상자</b>를 기준으로 자리를 잡습니다"),
+    ("<code>opacity</code>가 만드는 쌓임 맥락", "<a href=\"../items/zindex.html\">z-index</a>가 듣지 않을 때 흔히 이것이 원인입니다"),
     ("<code>content-visibility: auto</code>", "화면 밖에 있는 덩어리는 그리지 않습니다. 긴 문서에서 효과가 큽니다"),
     ("<code>@media (prefers-reduced-motion)</code>", "비용이 큰 애니메이션일수록 <b>모션 줄이기 설정에서 먼저</b> 끕니다"),
-    ("재는 법", "개발자 도구의 성능 탭에서 <b>보라색(배치)·초록색(칠하기)</b> 띠가 얼마나 긴지 봅니다"),
+    ("비용을 재는 방법", "개발자 도구의 성능 탭에서 <b>보라색(배치)·초록색(칠하기)</b> 띠가 얼마나 긴지 봅니다"),
   ]),
   backend=rows([
-    ("느린 쪽이 어디인지", "화면이 버벅일 때 원인은 서버일 수도 있고 화면을 그리는 쪽일 수도 있습니다. <b>응답 시간과 프레임 시간</b>을 따로 재야 어느 쪽인지 가릴 수 있습니다."),
-    ("한 번에 밀어 넣는 양", "서버가 2,000건을 한 번에 보내면 화면을 그리는 동안 브라우저가 멈춥니다. 그래서 <b>페이지를 나눠 받거나</b> <a href=\"virtual.html\">가상 스크롤</a>을 씁니다."),
-    ("이미지 크기", "원본 2000px 이미지를 100px 자리에 넣으면 칠하는 비용이 커집니다. 이미지는 <b>서버에서 줄여</b> 보냅니다."),
-    ("실사용자 측정", "개발자가 쓰는 기기는 대개 빠릅니다. <b>INP</b> 같은 실사용자 지표를 모아 보면 느린 기기에서 실제로 얼마나 걸리는지 알 수 있습니다."),
+    ("느린 쪽이 서버인지 화면인지 가리기", "화면이 버벅일 때 원인은 서버일 수도 있고 화면을 그리는 쪽일 수도 있습니다. <b>응답 시간과 프레임 시간</b>을 따로 재야 어느 쪽인지 가릴 수 있습니다."),
+    ("한 번에 보내는 데이터 양", "서버가 2,000건을 한 번에 보내면 화면을 그리는 동안 브라우저가 멈춥니다. 그래서 <b>페이지를 나눠 받거나</b> <a href=\"virtual.html\">가상 스크롤</a>을 씁니다."),
+    ("이미지를 서버에서 줄여 보내기", "원본 2000px 이미지를 100px 자리에 넣으면 칠하는 비용이 커집니다. 이미지는 <b>서버에서 줄여</b> 보냅니다."),
+    ("실제 사용자 기기에서 재기", "개발자가 쓰는 기기는 대개 빠릅니다. <b>INP</b> 같은 실사용자 지표를 모아 보면 느린 기기에서 실제로 얼마나 걸리는지 알 수 있습니다."),
   ]),
   plat_lede="플랫폼이 달라도 <b>자리를 다시 계산하게 하지 않는다</b>는 규칙은 같습니다.",
   plats=plats([

@@ -18,8 +18,8 @@
 <body>
 <div class="bar">
   <b>포지션</b>
-  <label>값 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
-    <option value="static">static (기본)</option>
+  <label>position 값 <select class="sel" id="k" style="width:auto;min-height:32px;padding:5px 28px 5px 9px;font-size:12.5px">
+    <option value="static">static (기본값)</option>
     <option value="relative">relative</option>
     <option value="absolute">absolute</option>
     <option value="fixed">fixed</option>
@@ -33,7 +33,7 @@
     <div class="pos__inner">
       <div class="pos__flow">앞 줄</div>
       <div class="pos__anchor" id="anchor">
-        <span style="font-size:11px;color:var(--fg-muted)" id="anchortag">조상 상자 — position: static</span>
+        <span style="font-size:11px;color:var(--fg-muted)" id="anchortag">조상 상자 (position: static)</span>
         <div id="slot"></div>
       </div>
       <div class="pos__flow">뒷 줄</div>
@@ -71,11 +71,11 @@
     var anc = document.getElementById('anc').checked;
     var anchor = document.getElementById('anchor');
     anchor.style.position = anc ? 'relative' : 'static';
-    document.getElementById('anchortag').textContent = '조상 상자 — position: ' + (anc ? 'relative' : 'static');
+    document.getElementById('anchortag').textContent = '조상 상자 (position: ' + (anc ? 'relative' : 'static') + ')';
 
     var out = '';
     var flows = k === 'absolute' || k === 'fixed';
-    if (flows) out += '<div class="pos__ghost">자리를 안 차지한다</div>';
+    if (flows) out += '<div class="pos__ghost">자리를 차지하지 않음</div>';
     out += '<div class="pos__box" id="box">' + k + '</div>';
     document.getElementById('slot').innerHTML = out;
 
@@ -87,9 +87,9 @@
 
     var r = document.getElementById('read');
     var base = (k === 'absolute')
-      ? (anc ? '가까운 조상 (relative 가 걸림)' : '더 위의 조상 — 여기서는 페이지')
-      : (k === 'fixed' ? '화면(뷰포트)' : (k === 'sticky' ? '굴림 상자' : '흐름'));
-    r.innerHTML = '자리를 차지하나 <b>' + (flows ? '아니오' : '예') + '</b> · 기준은 <b>' + base + '</b>';
+      ? (anc ? 'relative가 걸린 가까운 조상' : '더 위의 조상인 페이지')
+      : (k === 'fixed' ? '화면(뷰포트)' : (k === 'sticky' ? '스크롤되는 상자' : '문서 흐름'));
+    r.innerHTML = '자리를 <b>' + (flows ? '차지하지 않고' : '차지하고') + '</b>, 기준이 되는 것은 <b>' + base + '</b>입니다';
     r.dataset.flow = flows ? '0' : '1';
     r.dataset.base = base;
     document.getElementById('note').innerHTML = NOTE[k];
